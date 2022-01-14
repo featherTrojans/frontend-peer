@@ -117,7 +117,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
                 index: currentIndex + 1,
                 animated: true,
               });
-              // console.log("Right index", currentIndex);
+            //   console.log("Right index", currentIndex);
             } else {
               navigation.replace("Login");
             }
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   dot: {
     marginBottom: 10,
-    height: 10,
+    height: 8,
     borderRadius: 1000,
     marginRight: 10,
   },
