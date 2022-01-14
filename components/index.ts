@@ -1,6 +1,6 @@
-// import Onboarding from "./Onboarding";
 
-/// I will exporting each of the component in this files
+import Eachboarding from "./EachOnboarding"
+
 export {
-    // Onboarding
+    Eachboarding
 }

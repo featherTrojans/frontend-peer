@@ -27,18 +27,18 @@ const Tabs = () => (
   </BottomTab.Navigator>
 );
 
-const Auth = () => {
-  <AuthStack.Navigator 
-  initialRouteName="Login"
-  screenOptions={{
-    headerShown: false
-  }}
-  >
-    <AuthStack.Screen name="Login" component={Login} />
-    <AuthStack.Screen name="Signup" component={Signup} />
-    <AuthStack.Screen name="Verification" component={Verification} />
-  </AuthStack.Navigator>;
-};
+// const Auth = () => {
+//   <AuthStack.Navigator 
+//   initialRouteName="Login"
+//   screenOptions={{
+//     headerShown: false
+//   }}
+//   >
+//     <AuthStack.Screen name="Login" component={Login} />
+//     <AuthStack.Screen name="Signup" component={Signup} />
+//     <AuthStack.Screen name="Verification" component={Verification} />
+//   </AuthStack.Navigator>;
+// };
 
 const RootNavigator = () => (
   <AppStack.Navigator

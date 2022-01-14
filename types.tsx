@@ -4,6 +4,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 
 import { StackScreenProps } from '@react-navigation/stack';
+import EachOnboarding from './components/EachOnboarding';
 
 declare global {
   namespace ReactNavigation {
@@ -44,3 +45,5 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
   BottomTabScreenProps<RootTabParamList, Screen>,
   StackScreenProps<RootStackParamList>
 >;
+
+
