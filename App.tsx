@@ -1,22 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
+
+import MainNavigation from './navigation';
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  let [fontsLoaded] = useFonts({
+    GTlight: require("./assets/fonts/GTWalsheimPro-Light.ttf"),
+    GTregular: require("./assets/fonts/GTWalsheimPro-Regular.ttf"),
+    GTmedium: require("./assets/fonts/GTWalsheimPro-Medium.ttf"),
+    GTbold: require("./assets/fonts/GTWalsheimPro-Bold.ttf"),
+  });
 
-  if (!isLoadingComplete) {
-    return null;
+  if (!fontsLoaded) {
+    return <AppLoading />;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+       <MainNavigation />
     );
   }
 }
