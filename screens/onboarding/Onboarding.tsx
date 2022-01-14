@@ -64,17 +64,16 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
       {/* Footer--Dots and the nxet button */}
       <View
         style={{
-          flex: 1,
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
+          paddingHorizontal: 32
         }}
       >
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            
           }}
         >
           {onboardingdatas.map((item, index) => {
@@ -82,7 +81,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
 
             const dotColor = dotPosition.interpolate({
               inputRange: [index - 1, index, index + 1],
-              outputRange: [COLORS.grey3, COLORS.blue1, COLORS.grey3],
+              outputRange: [COLORS.grey3, COLORS.blue6, COLORS.grey3],
               extrapolate: "clamp",
             });
             const dotOpacity = dotPosition.interpolate({
@@ -90,12 +89,17 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
               outputRange: [0.2, 1, 0.2],
               extrapolate: "clamp",
             });
+            const dotWidth = dotPosition.interpolate({
+              inputRange: [index - 1, index, index + 1],
+              outputRange: [8, 20, 8],
+              extrapolate: "clamp",
+            });
             return (
               <Animated.View
                 key={index}
                 style={[
                   styles.dot,
-                  { backgroundColor: dotColor, opacity: dotOpacity },
+                  { backgroundColor: dotColor, opacity: dotOpacity, width: dotWidth },
                 ]}
               />
             );
@@ -103,35 +107,32 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
         </View>
 
         <TouchableOpacity
-        activeOpacity={0.6}
-        style={[styles.nextStart]}
-        onPress={() => {
-          let currentIndex = Math.ceil(Number(scrollX._value / SIZES.width));
-          if (currentIndex < onboardingdatas.length - 1) {
-            // Scroll to the next item
-            flatListRef?.current?.scrollToIndex({
-              index: currentIndex + 1,
-              animated: true,
-            });
-            // console.log("Right index", currentIndex);
-          } else {
-            navigation.replace("Login");
-          }
-        }}
-      >
-        <Text
-          style={{
-            color: COLORS.black,
-            fontSize: 15,
-            ...FONTS.bold,
+          activeOpacity={0.4}
+          style={[styles.nextStart]}
+          onPress={() => {
+            let currentIndex = Math.ceil(Number(scrollX._value / SIZES.width));
+            if (currentIndex < onboardingdatas.length - 1) {
+              // Scroll to the next item
+              flatListRef?.current?.scrollToIndex({
+                index: currentIndex + 1,
+                animated: true,
+              });
+              // console.log("Right index", currentIndex);
+            } else {
+              navigation.replace("Login");
+            }
           }}
         >
-          {viewIndex < onboardingdatas.length - 1 ? "Next" : "Start"}
-        </Text>
-      </TouchableOpacity>
-      </View>
+          {viewIndex < onboardingdatas.length - 1 ? (
+            <Text style={{color: COLORS.black, ...FONTS.bold,paddingHorizontal: 41, paddingVertical: 21,  }}>Next</Text>
+          ) : (
+              <View style={{paddingHorizontal: 41, paddingVertical: 21, backgroundColor: COLORS.black, borderRadius: 10}}>
 
-      
+                  <Text style={{color: COLORS.white, ...FONTS.bold, }}>Get Started</Text>
+              </View>
+          )}
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -141,13 +142,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     paddingVertical: 27,
-     },
+  },
   dot: {
     marginBottom: 10,
-    width: 10,
     height: 10,
     borderRadius: 1000,
-    marginRight: 10
+    marginRight: 10,
   },
   nextStart: {
     justifyContent: "center",
