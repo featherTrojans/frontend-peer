@@ -74,6 +74,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
+            
           }}
         >
           {onboardingdatas.map((item, index) => {
