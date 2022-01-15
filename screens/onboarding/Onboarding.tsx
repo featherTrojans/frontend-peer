@@ -38,7 +38,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
           alignItems: "flex-end",
           marginRight: 27,
         }}
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => navigation.navigate("Login")} //Change this in the next page
       >
         <Text style={{ ...FONTS.bold, fontSize: 14 }}>Skip</Text>
       </TouchableOpacity>
