@@ -1,17 +1,21 @@
-import React, { useRef, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  FlatList,
-  Animated,
-  StatusBar,
-} from "react-native";
+import { useRef, useState } from "react";
+import { FlatList, Animated, StatusBar } from "react-native";
 import { OnboardingScreenNavigationProps } from "../../types";
-import { COLORS, FONTS, SIZES } from "../../constants";
+import { COLORS, SIZES } from "../../constants";
 import onboardingdatas from "../../onboardingdatas";
-import EachOnboarding from "../../components/EachOnboarding";
+import EachOnboarding from "../../components/onboarding-component/OnBoardingComponent";
+import {
+  DotFlexRow,
+  FlexRow,
+  GetStartedBtn,
+  GetStartedContainer,
+  GetStartedText,
+  LoginBtn,
+  NextText,
+  OnboardingContainer,
+  OnboardingFlatlist,
+  SkipText,
+} from "./Onboarding.styles";
 
 const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
@@ -26,24 +30,32 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     setViewIndex(viewableItems[0]?.index);
   });
 
-  return (
-    <View style={styles.container}>
-      <StatusBar />
-      <TouchableOpacity
-        activeOpacity={0.6}
-        style={{
-          marginTop: 8,
-          marginBottom: 32,
-          justifyContent: "flex-end",
-          alignItems: "flex-end",
-          marginRight: 27,
-        }}
-        onPress={() => navigation.navigate("Login")} //Change this in the next page
-      >
-        <Text style={{ ...FONTS.bold, fontSize: 14 }}>Skip</Text>
-      </TouchableOpacity>
+  const navigateToLogin = () => {
+    navigation.navigate("Login");
+  };
 
-      <Animated.FlatList
+  const scrollTo = () => {
+    let currentIndex = Math.ceil(Number(scrollX._value / SIZES.width));
+    if (currentIndex < onboardingdatas.length - 1) {
+      // Scroll to the next item
+      flatListRef?.current?.scrollToIndex({
+        index: currentIndex + 1,
+        animated: true,
+      });
+      //   console.log("Right index", currentIndex);
+    } else {
+      navigation.replace("Login");
+    }
+  };
+
+  return (
+    <OnboardingContainer>
+      <StatusBar />
+      <LoginBtn activeOpacity={0.6} onPress={navigateToLogin}>
+        <SkipText>Skip</SkipText>
+      </LoginBtn>
+
+      <OnboardingFlatlist
         ref={flatListRef}
         horizontal
         pagingEnabled
@@ -56,26 +68,14 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
           { useNativeDriver: false }
         )}
         bounces={false}
-        keyExtractor={(item) => item.header}
+        keyExtractor={(item: { header: any }) => item.header}
         data={onboardingdatas}
-        renderItem={({ item, index }) => <EachOnboarding item={item} />}
+        renderItem={({ item }: any) => <EachOnboarding item={item} />}
       />
 
       {/* Footer--Dots and the nxet button */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingHorizontal: 32
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
+      <FlexRow>
+        <DotFlexRow>
           {onboardingdatas.map((item, index) => {
             const dotPosition = Animated.divide(scrollX, SIZES.width);
 
@@ -97,64 +97,32 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
             return (
               <Animated.View
                 key={index}
-                style={[
-                  styles.dot,
-                  { backgroundColor: dotColor, opacity: dotOpacity, width: dotWidth },
-                ]}
+                style={{
+                  marginBottom: 10,
+                  height: 8,
+                  borderRadius: 1000,
+                  marginRight: 10,
+                  backgroundColor: dotColor,
+                  opacity: dotOpacity,
+                  width: dotWidth,
+                }}
               />
             );
           })}
-        </View>
+        </DotFlexRow>
 
-        <TouchableOpacity
-          activeOpacity={0.4}
-          style={[styles.nextStart]}
-          onPress={() => {
-            let currentIndex = Math.ceil(Number(scrollX._value / SIZES.width));
-            if (currentIndex < onboardingdatas.length - 1) {
-              // Scroll to the next item
-              flatListRef?.current?.scrollToIndex({
-                index: currentIndex + 1,
-                animated: true,
-              });
-            //   console.log("Right index", currentIndex);
-            } else {
-              navigation.replace("Login");
-            }
-          }}
-        >
+        <GetStartedBtn activeOpacity={0.4} onPress={scrollTo}>
           {viewIndex < onboardingdatas.length - 1 ? (
-            <Text style={{color: COLORS.black, ...FONTS.bold,paddingHorizontal: 41, paddingVertical: 21,  }}>Next</Text>
+            <NextText>Next</NextText>
           ) : (
-              <View style={{paddingHorizontal: 41, paddingVertical: 21, backgroundColor: COLORS.black, borderRadius: 10}}>
-
-                  <Text style={{color: COLORS.white, ...FONTS.bold, }}>Get Started</Text>
-              </View>
+            <GetStartedContainer>
+              <GetStartedText>Get Started</GetStartedText>
+            </GetStartedContainer>
           )}
-        </TouchableOpacity>
-      </View>
-    </View>
+        </GetStartedBtn>
+      </FlexRow>
+    </OnboardingContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.white,
-    paddingVertical: 27,
-  },
-  dot: {
-    marginBottom: 10,
-    height: 8,
-    borderRadius: 1000,
-    marginRight: 10,
-  },
-  nextStart: {
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    borderRadius: 1000,
-  },
-});
 
 export default Onboarding;

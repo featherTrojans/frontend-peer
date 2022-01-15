@@ -1,14 +1,14 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from "react-native";
+import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const Verification = () => {
-    return (
-        <View>
-            <Text>This is the  verification</Text>
-        </View>
-    )
-}
+  return (
+    <VerificationContainer>
+      <VerificationText>This is the verification</VerificationText>
+    </VerificationContainer>
+  );
+};
 
-export default Verification
+export default Verification;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
