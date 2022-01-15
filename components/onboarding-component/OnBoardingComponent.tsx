@@ -3,7 +3,7 @@ import {
   ImageContainer,
   InformationText,
   OnboardingComponentContainer,
-} from "./OnboardingComponent.styles";
+} from "./OnBoardingComponent.styles";
 
 export type EachOnboardingTypes = {
   item: {
