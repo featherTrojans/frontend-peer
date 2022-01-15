@@ -11,7 +11,8 @@ import {
 import { OnboardingScreenNavigationProps } from "../../types";
 import { COLORS, FONTS, SIZES } from "../../constants";
 import onboardingdatas from "../../onboardingdatas";
-import EachOnboarding from "../../components/EachOnboarding";
+import EachOnboarding from "../../components/onboarding-component/OnBoardingComponent";
+import { LoginBtn, OnboardingContainer, OnboardingFlatlist, SkipText } from "./Onboarding.styles";
 
 const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
@@ -26,24 +27,18 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     setViewIndex(viewableItems[0]?.index);
   });
 
-  return (
-    <View style={styles.container}>
-      <StatusBar />
-      <TouchableOpacity
-        activeOpacity={0.6}
-        style={{
-          marginTop: 8,
-          marginBottom: 32,
-          justifyContent: "flex-end",
-          alignItems: "flex-end",
-          marginRight: 27,
-        }}
-        onPress={() => navigation.navigate("Login")}
-      >
-        <Text style={{ ...FONTS.bold, fontSize: 14 }}>Skip</Text>
-      </TouchableOpacity>
+  const navigateToLogin = () => {
+    navigation.navigate("Login");
+  };
 
-      <Animated.FlatList
+  return (
+    <OnboardingContainer>
+      <StatusBar />
+      <LoginBtn activeOpacity={0.6} onPress={navigateToLogin}>
+        <SkipText>Skip</SkipText>
+      </LoginBtn>
+
+      <OnboardingFlatlist
         ref={flatListRef}
         horizontal
         pagingEnabled
@@ -56,9 +51,9 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
           { useNativeDriver: false }
         )}
         bounces={false}
-        keyExtractor={(item) => item.header}
+        keyExtractor={(item: { header: any; }) => item.header}
         data={onboardingdatas}
-        renderItem={({ item, index }) => <EachOnboarding item={item} />}
+        renderItem={({ item }) => <EachOnboarding item={item} />}
       />
 
       {/* Footer--Dots and the nxet button */}
@@ -67,7 +62,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          paddingHorizontal: 32
+          paddingHorizontal: 32,
         }}
       >
         <View
@@ -99,7 +94,11 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
                 key={index}
                 style={[
                   styles.dot,
-                  { backgroundColor: dotColor, opacity: dotOpacity, width: dotWidth },
+                  {
+                    backgroundColor: dotColor,
+                    opacity: dotOpacity,
+                    width: dotWidth,
+                  },
                 ]}
               />
             );
@@ -117,23 +116,40 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
                 index: currentIndex + 1,
                 animated: true,
               });
-            //   console.log("Right index", currentIndex);
+              //   console.log("Right index", currentIndex);
             } else {
               navigation.replace("Login");
             }
           }}
         >
           {viewIndex < onboardingdatas.length - 1 ? (
-            <Text style={{color: COLORS.black, ...FONTS.bold,paddingHorizontal: 41, paddingVertical: 21,  }}>Next</Text>
+            <Text
+              style={{
+                color: COLORS.black,
+                ...FONTS.bold,
+                paddingHorizontal: 41,
+                paddingVertical: 21,
+              }}
+            >
+              Next
+            </Text>
           ) : (
-              <View style={{paddingHorizontal: 41, paddingVertical: 21, backgroundColor: COLORS.black, borderRadius: 10}}>
-
-                  <Text style={{color: COLORS.white, ...FONTS.bold, }}>Get Started</Text>
-              </View>
+            <View
+              style={{
+                paddingHorizontal: 41,
+                paddingVertical: 21,
+                backgroundColor: COLORS.black,
+                borderRadius: 10,
+              }}
+            >
+              <Text style={{ color: COLORS.white, ...FONTS.bold }}>
+                Get Started
+              </Text>
+            </View>
           )}
         </TouchableOpacity>
       </View>
-    </View>
+    </OnboardingContainer>
   );
 };
 
