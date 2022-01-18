@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
-import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../constants";
+import { COLORS, FONTS, icons, SIZES, fontsize } from "../../../constants";
 
 const { Smile } = icons;
 

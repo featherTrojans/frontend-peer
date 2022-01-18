@@ -4,6 +4,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { JustifyBetween } from "../../../global/styles";
 import { Input, Personal, Securepin, Security, } from "../../../components";
 
+
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
 const Signup = ({navigation}: any) => {
