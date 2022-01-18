@@ -9,8 +9,9 @@ import {
   RootTabScreenProps,
   RootAuthStackParamList,
 } from "../types";
-import { Onboarding, Login, Signup, Verification } from "../screens";
+import { Onboarding, Login, Signup, Verification, Setup, Welcome } from "../screens";
 import { AppState } from "react-native";
+import { Personal } from "../components";
 
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -46,7 +47,7 @@ const RootNavigator = () => (
       headerShown: false,
     }}
   >
-    <AppStack.Screen name="Onboarding" component={Onboarding} />
+    <AppStack.Screen name="Onboarding" component={Welcome} />
     <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Signup" component={Signup} />
     <AppStack.Screen name="Verification" component={Verification} />

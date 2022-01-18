@@ -4,7 +4,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 
 import { StackScreenProps } from '@react-navigation/stack';
-import EachOnboarding from './components/EachOnboarding';
+// import EachOnboarding from './components/EachOnboarding';
 
 declare global {
   namespace ReactNavigation {

@@ -31,7 +31,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   });
 
   const navigateToLogin = () => {
-    navigation.navigate("Login");
+    navigation.replace("Login");
   };
 
   const scrollTo = () => {
@@ -44,7 +44,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
       });
       //   console.log("Right index", currentIndex);
     } else {
-      navigation.replace("Login");
+      navigation.replace("Signup");
     }
   };
 
@@ -68,7 +68,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
           { useNativeDriver: false }
         )}
         bounces={false}
-        keyExtractor={(item: { header: any }) => item.header}
+        keyExtractor={(item: any) => item.header}
         data={onboardingdatas}
         renderItem={({ item }: any) => <EachOnboarding item={item} />}
       />
