@@ -16,20 +16,40 @@ export const COLORS = {
   blue6: "#003AD6",
   blue7: "#001757",
 
+
+  lightBlue: "#F2F5FF",
+
   grey1: "#f0f0f0",
   grey2: "#707070",
   grey3: "#d6d6d6",
   grey4: "#cecccc",
   grey5: "#8D8D8D",
   grey6: "#B9B9B9",
+  
 
   yellow1: "#FF9D00",
+  yellow2: "#FFC84B",
+  green1: "#00C9AA",
+  green2: "#25DBA3",
+  pink1: "#E00070",
 
+
+  checkBorder: "#A5A5A5",
   black: "#000000",
+  borderColor: "#EDEDED",
+  lineColor: `rgba(112, 112, 112, .1)`,
+  lineColor2: `rgba(112, 112, 112, .3)`,
+  lineColor3: `rgba(112, 112, 112, .5)`,
+  halfBlack: `rgba(0, 0, 0, .5)`,
   placeHolder: `rgba(225, 225, 225, 1)`,
+  iconBg: `rgba(225, 225, 225, .05)`,
   animatedLine: `rgba(225, 225, 225, .7)`,
   inputBorderColor: `rgba(225, 225, 225, .5)`,
   inputBorderColorDark: "#E6E6E6",
+  withdraw: "#41D5E2",
+  deposit: "#25DBA3",
+  transfer: "#FFC100",
+  paybills: "#4D53E0"
 };
 
 export const SIZES = {
@@ -48,26 +68,50 @@ export const FONTS = {
 };
 
 export const fontsize = {
-  bsmall: {
-    fontSize: RFValue(16),
+  
+  bbsmall: {
+    fontSize: 18,
   },
+  bsmall: {
+    fontSize: 16,
+  },
+
+  bmsmall: {
+    fontSize: 15,
+  },
+
   small: {
-    fontSize: RFValue(14),
+    fontSize: 14,
   },
   smaller: {
-    fontSize: RFValue(13),
+    fontSize: 13,
   },
   smallest: {
-    fontSize: RFValue(12),
+    fontSize: 12,
+  },
+  xsmallest: {
+    fontSize: 11,
+  },
+  xxsmallest: {
+    fontSize: 10,
   },
   medium: {
-    fontSize: RFValue(20),
+    fontSize: 20,
+  },
+  xmedium: {
+    fontSize: 21,
+  },
+  bmedium: {
+    fontSize: 24,
+  },
+  bxmedium: {
+    fontSize: 28,
   },
   big: {
-    fontSize: RFValue(30),
+    fontSize: 30,
   },
   bigger:{
-    fontSize: RFValue(38),
+    fontSize: 38,
   }
 };
 

@@ -1,11 +1,16 @@
 import Input from "./Input/Input";
-import Personal from "./Signup/Personal";
-import Securepin from "./Signup/Securepin";
-import Security from "./Signup/Security";
+import Sendingandreceive from "./Send&Receive/Sendingandreceive";
+import Service from "./Service/Service";
+import Tab from "./Tab/Tab";
+import Transactionhistory from "./Transactionshistory/Transactionhistory";
+import Viewbalance from "./Viewbalance/Viewbalance";
+
 
 export {
     Input,
-    Personal,
-    Security,
-    Securepin
+    Tab,
+    Service,
+    Transactionhistory,
+    Viewbalance,
+    Sendingandreceive
 }

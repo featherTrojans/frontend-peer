@@ -21,10 +21,21 @@ export type RootStackParamList = {
   // Auth: NavigatorScreenParams<RootAuthStackParamList> | undefined;
   Login: undefined,
   Signup: undefined,
+  Personal: undefined,
+  Security: undefined,
+  Securepin: undefined,
+  Setup: undefined,
+  Welcome: undefined,
   Verification: undefined
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   
 };
+
+
+
+export type RootTransactionScreen = {
+  verification: undefined;
+}
 
 export type RootAuthStackParamList ={
   Login: undefined,
@@ -36,6 +47,7 @@ export type RootTabParamList = {
   Home: undefined;
   History: undefined;
   Transactions: undefined;
+  Chats: undefined;
   Settings: undefined;
 };
 

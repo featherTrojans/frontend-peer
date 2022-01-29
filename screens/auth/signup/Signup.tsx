@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect} from "react";
 import { View, Text, StyleSheet, StatusBar, ScrollView, FlatList, Animated } from "react-native";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { JustifyBetween } from "../../../global/styles";
-import { Input, Personal, Securepin, Security, } from "../../../components";
+// import { Input, Personal, Securepin, Security, } from "../../../components";
 
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
@@ -50,9 +50,9 @@ useEffect(() => {
           { useNativeDriver: false }
         )}
     >
-      <Personal navigation={navigation}/>
+      {/* <Personal navigation={navigation}/>
       <Security />
-      <Securepin />
+      <Securepin /> */}
   
     </ScrollView>
   );

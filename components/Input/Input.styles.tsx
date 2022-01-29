@@ -1,16 +1,30 @@
-import styled from "styled-components/native";
-import { COLORS } from "../../constants";
+import { StyleSheet } from "react-native";
+import { COLORS, FONTS, fontsize} from "../../constants";
 
 
-// export const InputContainer = styled.View`
-// flexDirection: row;
-// borderWidth: 1;
-// borderColor: ${COLORS.white};
-// height: 62;
-// borderRadius: 10;
-// justifyContent: "center";
-// alignItems: "center";
-// paddingHorizontal: 20;
-
-
-// `
+export const styles = StyleSheet.create({
+    inputContainer: {
+      height: 62,
+      flexDirection: "row",
+      alignItems: "center",
+      borderWidth: 0.5,
+      paddingHorizontal: 20,
+      borderRadius: 10,
+      borderColor: COLORS.inputBorderColorDark,
+      backgroundColor: COLORS.white,
+    },
+    textInput: {
+      flex: 1,
+      borderColor: COLORS.white,
+      color: COLORS.black,
+      ...FONTS.light,
+      ...fontsize.small,
+      paddingLeft: 12.5,
+    },
+    inputiconwrapper: {
+      borderRightWidth: 1,
+      borderColor: COLORS.black,
+      paddingRight: 12,
+    },
+  });
+  

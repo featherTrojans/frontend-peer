@@ -31,7 +31,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   });
 
   const navigateToLogin = () => {
-    navigation.replace("Login");
+    navigation.replace("Personal");
   };
 
   const scrollTo = () => {
@@ -44,7 +44,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
       });
       //   console.log("Right index", currentIndex);
     } else {
-      navigation.replace("Signup");
+      navigation.replace("Personal");
     }
   };
 

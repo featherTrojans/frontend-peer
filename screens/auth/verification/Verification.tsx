@@ -1,10 +1,10 @@
-import { StyleSheet, View, Text, TextInput, ScrollView } from "react-native";
+import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const { Cancelicon } = icons;
 
-const Verification = () => {
+const Verification = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* Closeicon */}
@@ -50,9 +50,9 @@ const Verification = () => {
 
       {/* Submit button */}
       <View style={{flex: 1, justifyContent: 'flex-end'}}>
-        <View style={{height: 62, backgroundColor: COLORS.blue6, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginBottom: 80}}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("Security")} style={{height: 62, backgroundColor: COLORS.blue6, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginBottom: 80}}>
           <Text style={{...fontsize.smallest, ...FONTS.bold, color: COLORS.white}}>SUBMIT</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -2,19 +2,19 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   StatusBar,
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
-import { Input } from "../index";
-import { COLORS, FONTS, fontsize, icons, SIZES } from "../../constants";
-import { JustifyBetween } from "../../global/styles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Input } from "../../../../components/index";
+import {  FONTS,icons, } from "../../../../constants";
+import { JustifyBetween } from "../../../../global/styles";
+import { styles } from "./Personal.styles";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
-const Personal = ({navigation}: any) => {
+const Personal = ({navigation}) => {
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -45,13 +45,13 @@ const Personal = ({navigation}: any) => {
 
         {/* Proceed Btn */}
         <View style={styles.bottomContainer}>
-          <TouchableOpacity style={styles.proceedBtn} activeOpacity={0.8}>
+          <TouchableOpacity style={styles.proceedBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Verification")}>
             <Text style={styles.proceedText}>PROCEED</Text>
           </TouchableOpacity>
           {/* Have an account */}
           <View style={styles.bottomTextContainer}>
             <Text style={styles.bottomText}>Have an account yet?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")} activeOpacity={0.8}>
 
             <Text style={[styles.bottomText, { ...FONTS.bold }]}>Login</Text>
             </TouchableOpacity>
@@ -64,59 +64,59 @@ const Personal = ({navigation}: any) => {
 
 export default Personal;
 
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    width: SIZES.width,
-    height: SIZES.height,
-    backgroundColor: COLORS.white,
-    paddingHorizontal: 25,
-    paddingTop: 25,
-  },
-  header: {
-    ...fontsize.big,
-    ...FONTS.bold,
-    color: COLORS.black,
-  },
-  topDots: {
-    width: 8,
-    height: 8,
-    backgroundColor: COLORS.grey1,
-    borderRadius: 16,
-  },
-  subText: { 
-    color: COLORS.grey5, 
-    ...fontsize.medium, 
-    ...FONTS.regular 
-  },
-  proceedBtn: {
-    backgroundColor: COLORS.blue6,
-    justifyContent: "center",
-    alignItems: "center",
-    height: 62,
-    borderRadius: 10,
-  },
-  proceedText: {
-    color: COLORS.white,
-    ...fontsize.smallest,
-    ...FONTS.bold,
-  },
-  bottomContainer:{
-    flex: 1, 
-    justifyContent: "flex-end", 
-    marginBottom: 80
-  },
-  bottomTextContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 28,
-  },
-  bottomText: {
-    ...fontsize.small,
-    ...FONTS.regular,
-    color: COLORS.black,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     // flex: 1,
+//     width: SIZES.width,
+//     height: SIZES.height,
+//     backgroundColor: COLORS.white,
+//     paddingHorizontal: 25,
+//     paddingTop: 25,
+//   },
+//   header: {
+//     ...fontsize.big,
+//     ...FONTS.bold,
+//     color: COLORS.black,
+//   },
+//   topDots: {
+//     width: 8,
+//     height: 8,
+//     backgroundColor: COLORS.grey1,
+//     borderRadius: 16,
+//   },
+//   subText: { 
+//     color: COLORS.grey5, 
+//     ...fontsize.medium, 
+//     ...FONTS.regular 
+//   },
+//   proceedBtn: {
+//     backgroundColor: COLORS.blue6,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     height: 62,
+//     borderRadius: 10,
+//   },
+//   proceedText: {
+//     color: COLORS.white,
+//     ...fontsize.smallest,
+//     ...FONTS.bold,
+//   },
+//   bottomContainer:{
+//     flex: 1, 
+//     justifyContent: "flex-end", 
+//     marginBottom: 80
+//   },
+//   bottomTextContainer: {
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     marginTop: 28,
+//   },
+//   bottomText: {
+//     ...fontsize.small,
+//     ...FONTS.regular,
+//     color: COLORS.black,
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
