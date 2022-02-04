@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 
+import { AuthProvider } from './context/AuthContext';
 import MainNavigation from './navigation';
 
 export default function App() {
@@ -18,7 +19,9 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
+      <AuthProvider>
        <MainNavigation />
+      </AuthProvider>
     );
   }
 }
