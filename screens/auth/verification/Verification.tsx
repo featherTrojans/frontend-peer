@@ -1,16 +1,30 @@
+import {useState} from "react"
 import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const { Cancelicon } = icons;
 
 const Verification = ({navigation}) => {
+  const [vericode, setVericode] = useState({1:"",2: "",3: "",4: "",5: "",6:"",7:""})
+  
+  const handleSubmit = async ()=>{
+    const code =  Object.values(vericode).join("")
+    try{
+      const response = await axiosCustom.post("auth/verify/code",{code});
+      console.log(response)
+      navigation.navigate("Security")
+    }catch(err){
+      console.log(err.response)
+    }
+  }
   return (
     <View style={styles.container}>
       {/* Closeicon */}
-      <View style={styles.cancelIcon}>
+      <TouchableOpacity style={styles.cancelIcon} onPress={()=>navigation.goBack()}>
         <Cancelicon />
-      </View>
+      </TouchableOpacity>
 
       {/* OTP Message information */}
       <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 25, }}>
@@ -50,7 +64,7 @@ const Verification = ({navigation}) => {
 
       {/* Submit button */}
       <View style={{flex: 1, justifyContent: 'flex-end'}}>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("Security")} style={{height: 62, backgroundColor: COLORS.blue6, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginBottom: 80}}>
+        <TouchableOpacity activeOpacity={0.8} onPress={handleSubmit} style={{height: 62, backgroundColor: COLORS.blue6, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginBottom: 80}}>
           <Text style={{...fontsize.smallest, ...FONTS.bold, color: COLORS.white}}>SUBMIT</Text>
         </TouchableOpacity>
       </View>

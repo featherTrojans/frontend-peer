@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
   View,
   Text,
@@ -10,11 +10,30 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Input } from "../../../../components/index";
 import {  FONTS,icons, } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
 const Personal = ({navigation}) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const handleSubmit = async()=>{
+    try{
+      //send the request
+      const data = {firstName,lastName,email,phoneNumber}
+      const response = await axiosCustom.post("auth/signup",data)
+      //store data in context
+      console.log(response)
+      navigation.navigate("Verification")
+    }catch(err){
+      // error handling
+      console.log(err.response)
+    }
+  }
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -38,14 +57,14 @@ const Personal = ({navigation}) => {
           </Text>
         </View>
         {/* Input */}
-        <Input placeholder="Firstname" icon={<Usericondark />} />
-        <Input placeholder="Lastname" icon={<Usericondark />} />
-        <Input placeholder="Email Address" icon={<Envelopeicon />} />
-        <Input placeholder="Phone Number" icon={<Phoneicon />} />
+        <Input placeholder="Firstname" value={firstName} onchange={setFirstName} icon={<Usericondark />} />
+        <Input placeholder="Lastname" value={lastName} onchange={setLastName} icon={<Usericondark />} />
+        <Input placeholder="Email Address" value={email} onchange={setEmail} icon={<Envelopeicon />} />
+        <Input placeholder="Phone Number" value={phoneNumber} onchange={setPhoneNumber} icon={<Phoneicon />} />
 
         {/* Proceed Btn */}
         <View style={styles.bottomContainer}>
-          <TouchableOpacity style={styles.proceedBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Verification")}>
+          <TouchableOpacity style={styles.proceedBtn} activeOpacity={0.8} onPress={handleSubmit}>
             <Text style={styles.proceedText}>PROCEED</Text>
           </TouchableOpacity>
           {/* Have an account */}
