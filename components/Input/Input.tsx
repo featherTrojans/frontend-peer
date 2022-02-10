@@ -10,7 +10,7 @@ import { styles } from "./Input.styles";
 
 const { Eyeicon, Usericondark } = icons;
 
-const Input = ({icon, placeholder, password}: {icon: ReactNode, placeholder: string, password?: boolean}) => {
+const Input = ({icon, placeholder, password, value, onchange}: {icon: ReactNode, placeholder: string, password?: boolean, value:string,onchange:(e:any)=>{}}) => {
   return (
     <View style={[styles.inputContainer, { marginBottom: 15 }]}>
     <View style={styles.inputiconwrapper}>
@@ -19,6 +19,8 @@ const Input = ({icon, placeholder, password}: {icon: ReactNode, placeholder: str
     <TextInput
       style={styles.textInput}
       placeholder={placeholder}
+      value={value}
+      onChangeText={e=>onchange(e)}
       placeholderTextColor={COLORS.placeHolder}
       underlineColorAndroid="transparent"
       secureTextEntry={password ? true : false}

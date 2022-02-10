@@ -134,6 +134,7 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
+    initialRouteName="Securepin"
   >
     <AppStack.Screen name="Onboarding" component={Verification} />
     <AppStack.Screen name="Login" component={Login} />

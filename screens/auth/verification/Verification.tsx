@@ -1,38 +1,33 @@
-import { useRef, useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  ScrollView,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
-import OTPInputView from "@twotalltotems/react-native-otp-input";
+import {useState} from "react"
+import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
+import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const { Cancelicon } = icons;
 
-
-
-const Verification = ({ navigation }) => {
-
-
-  const [otpCode, setOtpCode ] = useState<number>()
- 
-
-
-  // useEffect(() => {
-  // }, [])
-
+const Verification = ({navigation}) => {
+  const [vericode, setVericode] = useState({1:"",2: "",3: "",4: "",5: "",6:"",7:""})
+  const [otpCode, setOtpCode] = useState<number>()
+  
+  const handleSubmit = async ()=>{
+    const code =  Object.values(vericode).join("")
+    try{
+      const response = await axiosCustom.post("auth/verify/code",{code});
+      console.log(response)
+      navigation.navigate("Security")
+    }catch(err){
+      console.log(err.response)
+    }
+  }
   return (
     <View style={styles.container}>
       {/* Closeicon */}
-      <View style={styles.cancelIcon}>
+      <TouchableOpacity style={styles.cancelIcon} onPress={()=>navigation.goBack()}>
         <Cancelicon />
-      </View>
+      </TouchableOpacity>
 
       {/* OTP Message information */}
       <View style={styles.otpTextContainer}>
