@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -9,9 +9,23 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { COLORS, SIZES, fontsize, FONTS } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Securepin.styles";
 
 const Securepin = ({ navigation }) => {
+  const [veriPin,setVeriPin] = useState({1:"",2:"",3:"",4:""});
+
+  const handleSubmit = async()=>{
+    try{
+      const pin = Object.values(veriPin).join("")
+      const response = await axiosCustom.post("/auth/pin/set",{pin})
+      console.log(response)
+      navigation.navigate("Setup")
+    }catch(err){
+      console.log(err.response)
+    }
+  }
+
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -80,7 +94,7 @@ const Securepin = ({ navigation }) => {
         <TouchableOpacity
           style={[styles.proceedBtn, { marginBottom: 80 }]}
           activeOpacity={0.8}
-          onPress={() => navigation.navigate("Setup")}
+          onPress={handleSubmit}
         >
           <Text style={styles.proceedText}>PROCEED</Text>
         </TouchableOpacity>
