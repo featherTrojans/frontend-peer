@@ -1,10 +1,32 @@
-import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
+import { useRef, useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+import OTPInputView from "@twotalltotems/react-native-otp-input";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
-import { VerificationContainer, VerificationText } from "./Verification.styles";
+import { styles } from "./Verification.styles";
+// import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const { Cancelicon } = icons;
 
-const Verification = ({navigation}) => {
+
+
+const Verification = ({ navigation }) => {
+
+
+  const [otpCode, setOtpCode ] = useState<number>()
+ 
+
+
+  // useEffect(() => {
+  // }, [])
+
   return (
     <View style={styles.container}>
       {/* Closeicon */}
@@ -13,45 +35,56 @@ const Verification = ({navigation}) => {
       </View>
 
       {/* OTP Message information */}
-      <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 25, }}>
-        <Text style={{textAlign: 'center', ...FONTS.regular, color: COLORS.black, ...fontsize.bsmall}}>
+      <View style={styles.otpTextContainer}>
+        <Text style={styles.otpMainText}>
           An OTP has been sent to you via SMS to your phone number -
-          <Text style={{...FONTS.medium}}>08033211658</Text>, and to your email -{" "}
-          <Text  style={{...FONTS.medium}}>seth@feather.africa</Text>
+          <Text style={styles.otpSubText}>08033211658</Text>, and to your email
+          - <Text style={styles.otpSubText}>seth@feather.africa</Text>
         </Text>
       </View>
 
       {/* Verification input */}
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 28}}>
-        <TextInput style={styles.otpInput}/>
-        <TextInput style={styles.otpInput}/>
-        <TextInput style={styles.otpInput}/>
-        <TextInput style={styles.otpInput}/>
-        <TextInput style={styles.otpInput}/>
-        <TextInput style={styles.otpInput}/>
+
+      <View style={styles.otpInputContainer}>
+        <OTPInputView
+          style={styles.otpInputContainer}
+          pinCount={6}
+          autoFocusOnLoad
+          codeInputFieldStyle={styles.otpInput}
+          codeInputHighlightStyle={styles.otpInputActive}
+          onCodeFilled={(code) => {
+            //You can access the code value here or calll any function to get it, ADD Types too
+            console.log(`Here is the code ${code}`);
+            setOtpCode(parseInt(code))
+          }}
+        />
       </View>
 
       {/* Resend sms duration */}
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={styles.resendAndDuration}>
         <View>
-          <Text style={{...fontsize.small, ...FONTS.medium}}>Resend sms in</Text>
+          <Text style={styles.resendText}>Resend sms in</Text>
         </View>
         <View>
-          <Text style={{...fontsize.small, ...FONTS.regular}}>00 : 30s</Text>
+          <Text style={styles.duration}>00 : 30s</Text>
         </View>
       </View>
 
       {/* Dashedline */}
-      <View style={{height: .5, backgroundColor: COLORS.grey2, marginBottom: 19, marginTop: 24}}/>
+      <View style={styles.dashedLine} />
       {/* Change number text */}
       <View>
-        <Text style={{color: COLORS.grey5, ...fontsize.small, ...FONTS.medium}}>Change Number?</Text>
+        <Text style={styles.changeNumber}>Change Number?</Text>
       </View>
 
       {/* Submit button */}
-      <View style={{flex: 1, justifyContent: 'flex-end'}}>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("Security")} style={{height: 62, backgroundColor: COLORS.blue6, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginBottom: 80}}>
-          <Text style={{...fontsize.smallest, ...FONTS.bold, color: COLORS.white}}>SUBMIT</Text>
+      <View style={styles.btnContainer}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("Security")}
+          style={styles.btnBg}
+        >
+          <Text style={styles.btnText}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -59,23 +92,3 @@ const Verification = ({navigation}) => {
 };
 
 export default Verification;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 25,
-    paddingTop: 36,
-    backgroundColor: COLORS.white,
-  },
-  cancelIcon: {
-    marginBottom: 36,
-  },
-  otpInput: {
-    width: 51, 
-    height: 66, 
-    borderRadius: 13, 
-    borderColor: COLORS.grey6, 
-    borderWidth: 1, 
-    backgroundColor: COLORS.white
-  }
-});

@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     marginBottom: 30,
     ...fontsize.bsmall,
     ...FONTS.medium,
+    color: COLORS.blue6
   },
   subheaderText: {
     marginBottom: 45,

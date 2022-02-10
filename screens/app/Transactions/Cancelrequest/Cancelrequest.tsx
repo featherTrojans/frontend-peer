@@ -45,7 +45,10 @@ const Cancelrequest = () => {
                 setChecked(!checked);
               }}
               textStyle={styles.checkboxText}
-            />
+              style={{
+                alignItems: 'flex-start'
+              }}
+            />  
           </View>
         ))}
       </View>

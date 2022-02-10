@@ -48,6 +48,7 @@ const AuthStack = createStackNavigator<RootAuthStackParamList>();
 
 const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings } = icons;
 
+
 // const Auth = () => {
 //   <AuthStack.Navigator
 //   initialRouteName="Login"
@@ -126,13 +127,15 @@ const Tabs = () => (
 
 
 
+
+
 const RootNavigator = () => (
   <AppStack.Navigator
     screenOptions={{
       headerShown: false,
     }}
   >
-    <AppStack.Screen name="Onboarding" component={Onboarding} />
+    <AppStack.Screen name="Onboarding" component={Verification} />
     <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Verification" component={Verification} />
@@ -143,6 +146,8 @@ const RootNavigator = () => (
     <AppStack.Screen name="Root" component={Tabs} />
   </AppStack.Navigator>
 );
+
+
 
 export default function MainNavigation() {
   return (

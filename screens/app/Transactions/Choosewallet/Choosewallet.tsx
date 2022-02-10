@@ -36,7 +36,7 @@ const Choosewallet = () => {
         <View style={styles.walletTypeContainer}>
           {/* Image */}
           <View>
-            <People />
+            <Debitcard />
           </View>
           <View style={styles.walletTypeInfoContainer}>
             <View style={styles.walletTopSection}>

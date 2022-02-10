@@ -17,8 +17,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Stac
 >;
 
 export type RootStackParamList = {
-  Onboarding: undefined,
-  // Auth: NavigatorScreenParams<RootAuthStackParamList> | undefined;
+  Onboarding: undefined;
   Login: undefined,
   Signup: undefined,
   Personal: undefined,
@@ -34,7 +33,7 @@ export type RootStackParamList = {
 
 
 export type RootTransactionScreen = {
-  verification: undefined;
+  Verification: undefined;
 }
 
 export type RootAuthStackParamList ={
