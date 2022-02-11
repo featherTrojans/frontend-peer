@@ -10,19 +10,35 @@ import { styles } from "./Input.styles";
 
 const { Eyeicon, Usericondark } = icons;
 
-const Input = ({icon, placeholder, password, value, onchange}: {icon: ReactNode, placeholder: string, password?: boolean, value:string,onchange:(e:any)=>{}}) => {
+type inputProps = {
+  icon: ReactNode, 
+  placeholder: string, 
+  password?: boolean, 
+  name: string,
+  formikProps: any,
+
+}
+
+const Input = ({icon, placeholder, password, formikProps, name, ...rest}: inputProps) => {
+
+  const { handleBlur, errors, touched, handleChange } = formikProps;
+
+  const borderColor = errors[name] && touched[name] ?  COLORS.errorBorder :  COLORS.inputBorderColorDark
+
+
   return (
-    <View style={[styles.inputContainer, { marginBottom: 15 }]}>
+    <View style={[styles.inputContainer, { marginBottom: 15, borderColor: borderColor }]}>
     <View style={styles.inputiconwrapper}>
       {icon}
     </View>
     <TextInput
       style={styles.textInput}
       placeholder={placeholder}
-      value={value}
-      onChangeText={e=>onchange(e)}
+      onChangeText={handleChange(name)}
       placeholderTextColor={COLORS.placeHolder}
       underlineColorAndroid="transparent"
+      onBlur={handleBlur(name)}
+      {...rest}
       secureTextEntry={password ? true : false}
     />
   </View>

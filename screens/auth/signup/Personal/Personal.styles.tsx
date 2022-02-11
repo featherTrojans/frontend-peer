@@ -24,6 +24,12 @@ export const styles = StyleSheet.create({
       backgroundColor: COLORS.grey1,
       borderRadius: 16,
     },
+    activeDot: {
+      width: 19,
+      height: 8,
+      backgroundColor: COLORS.blue6,
+      borderRadius: 4,
+    },
     subText: { 
       color: COLORS.grey5, 
       ...fontsize.medium, 

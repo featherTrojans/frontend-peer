@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
       borderWidth: 0.5,
       paddingHorizontal: 20,
       borderRadius: 10,
-      borderColor: COLORS.inputBorderColorDark,
       backgroundColor: COLORS.white,
     },
     textInput: {

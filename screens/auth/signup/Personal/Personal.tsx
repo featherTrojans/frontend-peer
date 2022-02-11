@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,33 +7,61 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Formik } from "formik";
+import * as Yup from "yup"
 import { Input } from "../../../../components/index";
-import {  FONTS,icons, } from "../../../../constants";
+import { FONTS, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
-const Personal = ({navigation}) => {
+
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+const validationSchema = Yup.object().shape({
+  firstName: Yup
+  .string()
+  .label('First Name')
+  .required(),
+  lastName: Yup
+  .string()
+  .label('Last Name')
+  .required(),
+  email:  Yup
+  .string()
+  .label("Email")
+  .email()
+  .required(),
+  phoneNumber: Yup
+  .string()
+  .label("Phone Number")
+  .matches(phoneRegExp, 'This is not a valid phone number')
+})
+
+
+
+const Personal = ({ navigation }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const handleSubmit = async()=>{
-    try{
+  const handleSubmitData = async () => {
+    try {
       //send the request
-      const data = {firstName,lastName,email,phoneNumber}
-      const response = await axiosCustom.post("auth/signup",data)
+      const data = { firstName, lastName, email, phoneNumber };
+      const response = await axiosCustom.post("auth/signup", data);
       //store data in context
-      console.log(response)
-      navigation.navigate("Verification")
-    }catch(err){
+      console.log(response);
+      navigation.navigate("Verification");
+    } catch (err) {
       // error handling
-      console.log(err.response)
+      console.log(err.response);
     }
-  }
+  };
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -45,37 +73,92 @@ const Personal = ({navigation}) => {
             <Text style={styles.header}>Get Started.</Text>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <View style={[styles.topDots, { marginRight: 10 }]} />
+            <View style={[styles.activeDot, { marginRight: 10 }]} />
             <View style={[styles.topDots, { marginRight: 10 }]} />
             <View style={styles.topDots} />
           </View>
         </JustifyBetween>
         {/* personal */}
         <View style={{ marginBottom: 40 }}>
-          <Text style={styles.subText}>
-            Personal
-          </Text>
+          <Text style={styles.subText}>Personal</Text>
         </View>
-        {/* Input */}
-        <Input placeholder="Firstname" value={firstName} onchange={setFirstName} icon={<Usericondark />} />
-        <Input placeholder="Lastname" value={lastName} onchange={setLastName} icon={<Usericondark />} />
-        <Input placeholder="Email Address" value={email} onchange={setEmail} icon={<Envelopeicon />} />
-        <Input placeholder="Phone Number" value={phoneNumber} onchange={setPhoneNumber} icon={<Phoneicon />} />
 
-        {/* Proceed Btn */}
-        <View style={styles.bottomContainer}>
-          <TouchableOpacity style={styles.proceedBtn} activeOpacity={0.8} onPress={handleSubmit}>
-            <Text style={styles.proceedText}>PROCEED</Text>
-          </TouchableOpacity>
-          {/* Have an account */}
-          <View style={styles.bottomTextContainer}>
-            <Text style={styles.bottomText}>Have an account yet?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")} activeOpacity={0.8}>
+        <Formik
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            email: "",
+            phoneNumber: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values) => {
+            console.log(values);
+            //You want to call handleSubmitData here and pass in the values
+          }}
+        >
+          {(formikProps) => {
 
-            <Text style={[styles.bottomText, { ...FONTS.bold }]}>Login</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+          const { isSubmitting, isValid, handleBlur, errors, touched, handleChange, handleSubmit } = formikProps;
+
+
+            return (
+              <React.Fragment>
+                {/* Input */}
+                <Input
+                  placeholder="Firstname"
+                  name="firstName"
+                  formikProps={formikProps}
+                  icon={<Usericondark />}
+                />
+
+                <Input
+                  placeholder="Lastname"
+                  name="lastName"
+                  formikProps={formikProps}
+                  icon={<Usericondark />}
+                />
+
+                <Input
+                  placeholder="Email Address"
+                  name="email"
+                  formikProps={formikProps}
+                  icon={<Envelopeicon />}
+                />
+
+                <Input
+                  placeholder="Phone Number"
+                  name="phoneNumber"
+                  formikProps={formikProps}
+                  icon={<Phoneicon />}
+                />
+
+                {/* Proceed Btn */}
+                <View style={styles.bottomContainer}>
+                  <TouchableOpacity
+                    style={styles.proceedBtn}
+                    activeOpacity={0.8}
+                    onPress={handleSubmit}
+                  >
+                    <Text style={styles.proceedText}>PROCEED</Text>
+                  </TouchableOpacity>
+
+                  {/* Have an account */}
+                  <View style={styles.bottomTextContainer}>
+                    <Text style={styles.bottomText}>Have an account yet?</Text>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Login")}
+                      activeOpacity={0.8}
+                    >
+                      <Text style={[styles.bottomText, { ...FONTS.bold }]}>
+                        Login
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </React.Fragment>
+            );
+          }}
+        </Formik>
       </View>
     </KeyboardAwareScrollView>
   );
@@ -103,10 +186,10 @@ export default Personal;
 //     backgroundColor: COLORS.grey1,
 //     borderRadius: 16,
 //   },
-//   subText: { 
-//     color: COLORS.grey5, 
-//     ...fontsize.medium, 
-//     ...FONTS.regular 
+//   subText: {
+//     color: COLORS.grey5,
+//     ...fontsize.medium,
+//     ...FONTS.regular
 //   },
 //   proceedBtn: {
 //     backgroundColor: COLORS.blue6,
@@ -121,8 +204,8 @@ export default Personal;
 //     ...FONTS.bold,
 //   },
 //   bottomContainer:{
-//     flex: 1, 
-//     justifyContent: "flex-end", 
+//     flex: 1,
+//     justifyContent: "flex-end",
 //     marginBottom: 80
 //   },
 //   bottomTextContainer: {

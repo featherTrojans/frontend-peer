@@ -37,7 +37,7 @@ const Securepin = ({ navigation }) => {
           <View style={{ flexDirection: "row" }}>
             <View style={[styles.topDots, { marginRight: 10 }]} />
             <View style={[styles.topDots, { marginRight: 10 }]} />
-            <View style={styles.topDots} />
+            <View style={styles.activeDot} />
           </View>
         </JustifyBetween>
         <View style={{ marginBottom: 40 }}>

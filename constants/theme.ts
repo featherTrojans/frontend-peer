@@ -35,6 +35,7 @@ export const COLORS = {
 
 
   checkBorder: "#A5A5A5",
+  errorBorder: `rgba(224, 0, 0, .5)`,
   black: "#000000",
   borderColor: "#EDEDED",
   lineColor: `rgba(112, 112, 112, .1)`,
