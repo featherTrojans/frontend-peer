@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -13,18 +13,40 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Securepin.styles";
 
 const Securepin = ({ navigation }) => {
-  const [veriPin,setVeriPin] = useState({1:"",2:"",3:"",4:""});
+  const [veriPin, setVeriPin] = useState({ 1: "", 2: "", 3: "", 4: "" });
 
-  const handleSubmit = async()=>{
-    try{
-      const pin = Object.values(veriPin).join("")
-      const response = await axiosCustom.post("/auth/pin/set",{pin})
-      console.log(response)
-      navigation.navigate("Setup")
-    }catch(err){
-      console.log(err.response)
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9","", "0"];
+
+  const [amount, setAmount] = useState([]);
+
+  const handleSubmit = async () => {
+    try {
+      const pin = Object.values(veriPin).join("");
+      const response = await axiosCustom.post("/auth/pin/set", { pin });
+      console.log(response);
+      navigation.navigate("Setup");
+    } catch (err) {
+      console.log(err.response);
     }
-  }
+  };
+
+  const handleSetAmount = (value: string) => {
+    // console.log(value)
+    setAmount([...amount, value]);
+    console.log(amount);
+  };
+
+  const NumberBtn = ({ children }: { children: string }) => {
+    return (
+      <TouchableOpacity
+        style={styles.numberBtn}
+        activeOpacity={0.8}
+        onPress={() => handleSetAmount(children)}
+      >
+        <Text>{children}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <KeyboardAwareScrollView>
@@ -54,43 +76,17 @@ const Securepin = ({ navigation }) => {
         </View>
 
         <View style={styles.numberBtnContainer}>
-          <View style={styles.numberBtn}>
-            <Text>1</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>2</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>3</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>4</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>5</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>6</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>7</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>8</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>9</Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text></Text>
-          </View>
-          <View style={styles.numberBtn}>
-            <Text>0</Text>
-          </View>
+          {numbers.map((number, index) => {
+            return (
+              <NumberBtn key={index}>{number}</NumberBtn>
+            )
+          })}
+
           <View style={styles.numberBtn}>
             <Text>X</Text>
           </View>
         </View>
+
         <TouchableOpacity
           style={[styles.proceedBtn, { marginBottom: 80 }]}
           activeOpacity={0.8}
