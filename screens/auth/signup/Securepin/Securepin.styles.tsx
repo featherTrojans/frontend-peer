@@ -54,6 +54,20 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  pinView:{
+    width: 50,
+    height: 60,
+    borderColor: COLORS.blue7,
+    borderWidth: 1,
+    borderRadius: 13,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  pinText:{
+    ...fontsize.big,
+  },
   proceedBtn: {
     backgroundColor: COLORS.blue6,
     justifyContent: "center",

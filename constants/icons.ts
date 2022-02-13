@@ -49,6 +49,7 @@ import Directionarrow from "../assets/icons/Directionarrow";
 import Smallcancel from "../assets/icons/Smallcancel";
 import Smallcomment from "../assets/icons/Smallcomment";
 import Smallphone from "../assets/icons/Smallphone";
+import SecureDot from "../assets/icons/SecureDot";
 
 // Receiverimage
 
@@ -109,4 +110,5 @@ export default {
   Smallcancel,
   Smallcomment,
   Smallphone,
+  SecureDot,
 };
