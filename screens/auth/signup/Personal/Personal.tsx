@@ -15,7 +15,7 @@ import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
 
-const { Usericondark, Phoneicon, Envelopeicon } = icons;
+const { Usericondark, Phoneicon, Envelopeicon, Cancelicon } = icons;
 
 
 
@@ -44,28 +44,21 @@ const validationSchema = Yup.object().shape({
 
 
 const Personal = ({ navigation }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-
+ 
   const handleSubmitData = async () => {
-    try {
-      //send the request
-      const data = { firstName, lastName, email, phoneNumber };
-      const response = await axiosCustom.post("auth/signup", data);
-      //store data in context
-      console.log(response);
-      navigation.navigate("Verification");
-    } catch (err) {
-      // error handling
-      console.log(err.response);
-    }
+
   };
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
         <StatusBar />
+        
+        {/* ERROR PAGE */}
+        {/* <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>Oops, error creating your account, email already in use</Text>
+          <Cancelicon />
+        </View> */}
+
         {/* <Text>Sign up page</Text> */}
         {/* Get Started and dots */}
         <JustifyBetween style={{ marginBottom: 10 }}>
@@ -91,16 +84,24 @@ const Personal = ({ navigation }) => {
             phoneNumber: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
+          onSubmit={async (values,{setSubmitting}) => {
             console.log(values);
+            try {
+              //send the request
+              const response = await axiosCustom.post("auth/signup", values);
+              //store data in context
+              console.log(response);
+              navigation.navigate("Verification");
+            } catch (err) {
+              // error handling
+              console.log(err.response);
+            }
             //You want to call handleSubmitData here and pass in the values
           }}
         >
           {(formikProps) => {
 
           const { isSubmitting, isValid, handleBlur, errors, touched, handleChange, handleSubmit } = formikProps;
-
-
             return (
               <React.Fragment>
                 {/* Input */}
@@ -138,16 +139,21 @@ const Personal = ({ navigation }) => {
                     style={styles.proceedBtn}
                     activeOpacity={0.8}
                     onPress={handleSubmit}
+                    disabled={isSubmitting}
                   >
-                    <Text style={styles.proceedText}>PROCEED</Text>
+                    <Text style={styles.proceedText}>
+                      {isSubmitting?"loading ...":"PROCEED"}
+                    </Text>
                   </TouchableOpacity>
 
                   {/* Have an account */}
                   <View style={styles.bottomTextContainer}>
                     <Text style={styles.bottomText}>Have an account yet?</Text>
+                    
                     <TouchableOpacity
                       onPress={() => navigation.navigate("Login")}
                       activeOpacity={0.8}
+                      
                     >
                       <Text style={[styles.bottomText, { ...FONTS.bold }]}>
                         Login

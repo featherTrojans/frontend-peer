@@ -57,6 +57,7 @@ import Depositicon from "../assets/icons/Depositicon";
 
 
 
+import SecureDot from "../assets/icons/SecureDot";
 
 // Receiverimage
 
@@ -122,6 +123,7 @@ export default {
   Logoavatar,
   Upgradenowarrow,
   Withdrawicon,
-  Depositicon
+  Depositicon,
   
+  SecureDot,
 };

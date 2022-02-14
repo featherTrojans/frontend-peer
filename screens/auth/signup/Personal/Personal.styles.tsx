@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
 
@@ -65,4 +65,27 @@ export const styles = StyleSheet.create({
       alignItems: "center",
       justifyContent: "center",
     },
+
+    errorContainer:{
+      backgroundColor:"#E00000",
+      paddingVertical: 18,
+      paddingHorizontal: 24,
+      borderRadius: 10,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      position: "absolute",
+      top:20,
+      left:0,
+      // width: Dimensions.get("screen").width,
+      width: "100%",
+      marginHorizontal:25,
+      zIndex:1
+    },
+    errorText:{
+      color: "#fff",
+      fontSize: 14,
+      maxWidth: 240,
+      lineHeight:20
+    }
   });
