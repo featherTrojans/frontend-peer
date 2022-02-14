@@ -7,6 +7,8 @@ import { styles } from "./Transactions.styles";
 const { Cryingicon } = icons;
 
 const Transactions = () => {
+
+  
   const DATA = [
     {
       time: "Today",

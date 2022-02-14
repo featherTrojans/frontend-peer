@@ -1,3 +1,5 @@
+import Backheader from "./Backheader/Backheader";
+import Iconwithdatas from "./Iconwithdatas/Iconwithdatas";
 import Input from "./Input/Input";
 import Sendingandreceive from "./Send&Receive/Sendingandreceive";
 import Service from "./Service/Service";
@@ -12,5 +14,7 @@ export {
     Service,
     Transactionhistory,
     Viewbalance,
-    Sendingandreceive
+    Sendingandreceive,
+    Backheader,
+    Iconwithdatas
 }

@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
   },
   optionDetails: {
     flexDirection: "row",
+    alignItems: 'center'
   },
   optionTextContainer: {
     marginLeft: 15,
@@ -34,9 +35,12 @@ export const styles = StyleSheet.create({
     ...fontsize.bmsmall,
     ...FONTS.medium,
     color: COLORS.black,
+    lineHeight: 27
   },
   optionAbout: {
     ...fontsize.smallest,
     ...FONTS.regular,
+    // lineHeight: 27
+
   },
 });

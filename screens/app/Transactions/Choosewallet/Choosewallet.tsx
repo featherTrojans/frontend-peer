@@ -17,6 +17,55 @@ const Choosewallet = () => {
         <View style={styles.walletTypeContainer}>
           {/* Image */}
           <View>
+            <Debitcard />
+          </View>
+          <View style={styles.walletTypeInfoContainer}>
+            <View style={styles.walletTopSection}>
+              <Text style={styles.walletTopText}>
+              Debit card, Bank or USSD
+              </Text>
+              <Forwardarrow />
+            </View>
+            <View
+              style={{
+                marginTop: 8,
+              }}
+            >
+              <Text style={styles.walletBottomText2}>
+                Secured by{" "}
+                <Text style={styles.walletBottomText2sub}>Paystack.</Text>
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.walletTypeContainer}>
+          {/* Image */}
+          <View>
+            <Debitcard />
+          </View>
+          <View style={styles.walletTypeInfoContainer}>
+            <View style={styles.walletTopSection}>
+              <Text style={styles.walletTopText}>
+              Feather Agents
+              </Text>
+              <Forwardarrow />
+            </View>
+            <View
+              style={{
+                marginTop: 8,
+              }}
+            >
+              <Text style={styles.walletBottomText2}>
+                Secured by{" "}
+                <Text style={styles.walletBottomText2sub}>Feather Africa, Inc.</Text>
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.walletTypeContainer}>
+          {/* Image */}
+          <View>
             <People />
           </View>
           <View style={styles.walletTypeInfoContainer}>
@@ -33,30 +82,6 @@ const Choosewallet = () => {
         </View>
 
         {/* Second Block */}
-        <View style={styles.walletTypeContainer}>
-          {/* Image */}
-          <View>
-            <Debitcard />
-          </View>
-          <View style={styles.walletTypeInfoContainer}>
-            <View style={styles.walletTopSection}>
-              <Text style={styles.walletTopText}>
-                Request from family & Friends
-              </Text>
-              <Forwardarrow />
-            </View>
-            <View
-              style={{
-                marginTop: 8,
-              }}
-            >
-              <Text style={styles.walletBottomText2}>
-                Secured by{" "}
-                <Text style={styles.walletBottomText2sub}>Paystack.</Text>
-              </Text>
-            </View>
-          </View>
-        </View>
       </View>
     </View>
   );

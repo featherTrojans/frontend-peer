@@ -49,6 +49,14 @@ import Directionarrow from "../assets/icons/Directionarrow";
 import Smallcancel from "../assets/icons/Smallcancel";
 import Smallcomment from "../assets/icons/Smallcomment";
 import Smallphone from "../assets/icons/Smallphone";
+import Useravatar from "../assets/icons/Useravatar";
+import Logoavatar from "../assets/icons/Logoavatar";
+import Upgradenowarrow from "../assets/icons/Upgradenowarrow";
+import Withdrawicon from "../assets/icons/Withdrawicon";
+import Depositicon from "../assets/icons/Depositicon";
+
+
+
 
 // Receiverimage
 
@@ -109,4 +117,11 @@ export default {
   Smallcancel,
   Smallcomment,
   Smallphone,
+
+  Useravatar,
+  Logoavatar,
+  Upgradenowarrow,
+  Withdrawicon,
+  Depositicon
+  
 };
