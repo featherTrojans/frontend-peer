@@ -15,6 +15,8 @@ import History from "./app/History/History";
 import Transactions from "./app/Transactions/Transactions";
 import Chats from "./app/Chats/Chats";
 import Settings from "./app/Settings/Settings";
+import Notifications from "./app/Notifications/Notifications";
+
 
 // These are the transactions sub screens
 import Withdraw from "./app/Transactions/Withdraw/Withdraw";
@@ -33,6 +35,8 @@ import Accepetedrequest from "./app/Transactions/Acceptedrequest/Accepetedreques
 import Personal from "./auth/signup/Personal/Personal";
 import Security from "./auth/signup/Security/Security";
 import Securepin from "./auth/signup/Securepin/Securepin";
+import Newtransactions from "./app/Newtransactions/Newtransactions";
+
 
 export {
   Onboarding,
@@ -45,6 +49,7 @@ export {
   History,
   Transactions,
   Chats,
+  Notifications,
   Settings,
   Withdraw,
   Transfercash,
@@ -62,4 +67,5 @@ export {
   Personal,
   Security,
   Securepin,
+  Newtransactions
 };

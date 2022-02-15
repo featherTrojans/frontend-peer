@@ -36,6 +36,8 @@ import {
   Personal,
   Security,
   Securepin,
+  Notifications,
+  Newtransactions,
 } from "../screens";
 import { AppState } from "react-native";
 import { Tab  } from "../components";
@@ -135,9 +137,9 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Deposit"
+    // initialRouteName=""
   >
-    <AppStack.Screen name="Onboarding" component={Securepin} />
+    <AppStack.Screen name="Onboarding" component={Newtransactions} />
     <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Verification" component={Verification} />
