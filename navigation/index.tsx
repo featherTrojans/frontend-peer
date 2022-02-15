@@ -40,6 +40,7 @@ import {
 import { AppState } from "react-native";
 import { Tab  } from "../components";
 import { icons } from "../constants";
+import Deposit from "../screens/app/Deposit/Deposit";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
@@ -134,7 +135,7 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Securepin"
+    initialRouteName="Deposit"
   >
     <AppStack.Screen name="Onboarding" component={Securepin} />
     <AppStack.Screen name="Login" component={Login} />
@@ -145,6 +146,9 @@ const RootNavigator = () => (
     <AppStack.Screen name="Setup" component={Setup} />
     <AppStack.Screen name="Welcome" component={Welcome} />
     <AppStack.Screen name="Root" component={Tabs} />
+    <AppStack.Screen name="Deposit" component={Deposit} options={{
+      headerShown: true
+    }}/>
   </AppStack.Navigator>
 );
 
