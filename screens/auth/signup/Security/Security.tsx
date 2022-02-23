@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -14,10 +14,12 @@ import { FONTS, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Security.styles";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const { Lockicondark } = icons;
 
-const Security = ({ navigation }) => {
+const Security = ({ route, navigation }) => {
+  const {token} =  route.params;
   const validationSchema = Yup.object().shape({
     password: Yup
     .string()
@@ -75,8 +77,18 @@ const Security = ({ navigation }) => {
             confirmPassword: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
+          onSubmit={async (values,{setSubmitting}) => {
             console.log(values);
+            try {
+              //send the request
+              const response = await axiosCustom.put("auth/password/set", {password:values.password},{headers:{token:token}});
+              //store data in context
+              console.log(response)
+              navigation.navigate("Securepin",{token:response?.data?.data?.token});
+            } catch (err) {
+              // error handling
+              console.log(err.response);
+            }
             //You want to call handleSubmitData here and pass in the values
           }}
         >
@@ -113,16 +125,16 @@ const Security = ({ navigation }) => {
                   <TouchableOpacity
                     style={styles.proceedBtn}
                     activeOpacity={0.8}
-                    onPress={() => navigation.navigate("Securepin")}
+                    onPress={handleSubmit}
                   >
-                    <Text style={styles.proceedText}>PROCEED</Text>
+                    <Text style={styles.proceedText}>{isSubmitting?"loading ...":"PROCEED"}</Text>
                   </TouchableOpacity>
                   {/* Have an account */}
                   <View style={styles.bottomTextContainer}>
-                    <Text style={styles.bottomText}>Have an account yet?</Text>
+                    <Text style={styles.bottomText}>Have an account yet? </Text>
                     <TouchableOpacity
                       activeOpacity={0.8}
-                      onPress={handleSubmit}
+                      onPress={() => navigation.navigate("Login")}
                     >
                       <Text style={[styles.bottomText, { ...FONTS.bold }]}>
                         Login

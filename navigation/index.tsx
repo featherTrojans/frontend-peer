@@ -19,7 +19,7 @@ import {
   Home,
   History,
   Transactions,
-  Chats,
+  // Chats,
   Settings,
   Withdraw,
   Requestnew,
@@ -45,6 +45,7 @@ import {
 import { AppState } from "react-native";
 import { Tab  } from "../components";
 import { icons } from "../constants";
+import Deposit from "../screens/app/Deposit/Deposit";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
@@ -141,11 +142,12 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    // initialRouteName=""
-  >
-    <AppStack.Screen name="Onboarding" component={Accepetedrequest} />
-    <AppStack.Screen name="Login" component={Login} />
+    // initialRouteName="Welcome"
+    >
+    <AppStack.Screen name="Onboarding" component={Onboarding} />
     <AppStack.Screen name="Personal" component={Personal} />
+    <AppStack.Screen name="Deposit" component={Deposit} />
+    <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Verification" component={Verification} />
     <AppStack.Screen name="Security" component={Security} />
     <AppStack.Screen name="Securepin" component={Securepin} />
@@ -156,7 +158,7 @@ const RootNavigator = () => (
 );
 
 
-
+ 
 export default function MainNavigation() {
   return (
     <NavigationContainer>

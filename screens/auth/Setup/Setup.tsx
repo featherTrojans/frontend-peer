@@ -13,6 +13,7 @@ import { icons } from "../../../constants";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "./Setup.styles";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 
 const { At, Usericondark } = icons;
 
@@ -20,7 +21,8 @@ const validationSchema = Yup.object().shape({
   username: Yup.string().label("Username").required(),
 });
 
-const Setup = ({ navigation }) => {
+const Setup = ({route, navigation }) => {
+  const {token} = route.params
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -44,9 +46,15 @@ const Setup = ({ navigation }) => {
             username: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
+          onSubmit={ async (values) => {
             console.log(values);
-            //You want to call handleSubmitData here and pass in the values
+            try{
+              const response = await axiosCustom.put("/auth/username/set",{newUsername:values.username},{headers:{token:token}})
+              console.log(response)
+              navigation.navigate("Welcome")
+            }catch(err){
+              console.log(err.response)
+            }
           }}
         >
           {(formikProps) => {
@@ -70,9 +78,9 @@ const Setup = ({ navigation }) => {
                   <TouchableOpacity
                     style={styles.continueBtn}
                     activeOpacity={0.8}
-                    onPress={() => navigation.navigate("Welcome")}
+                    onPress={handleSubmit}
                   >
-                    <Text style={styles.continueText}>CONTINUE</Text>
+                    <Text style={styles.continueText}>{isSubmitting?"loading ...":"CONTINUE"}</Text>
                   </TouchableOpacity>
                 </View>
               </React.Fragment>

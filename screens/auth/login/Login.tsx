@@ -8,11 +8,25 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import { Formik } from "formik";
+import * as Yup from "yup"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Input } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 
 const { Logo, Eyeicon, Usericon, Lock } = icons;
+
+const validationSchema = Yup.object().shape({
+  username: Yup
+  .string()
+  .label('username')
+  .required(),
+  password: Yup
+  .string()
+  .label('password')
+  .required()
+})
 
 const Login = ({ navigation }: any) => {
   return (
@@ -24,47 +38,77 @@ const Login = ({ navigation }: any) => {
         </View>
 
         {/* Form */}
+        <Formik 
+          initialValues={{
+            username:"",
+            password:""
+          }}
+          validationSchema={validationSchema}
+          onSubmit={async (values)=>{
+            try{
+              const response = await axiosCustom.post("/auth/signin",{username:values.username,password:values.password})
+              //store token in ASYNC STORAGE
+              //store in context
+              console.log(response)
+              navigation.navigate("welcome")
+            }catch(err){
+              console.log(err.response)
+            }
+            console.log(values);
+          }}
+        >
+          {
+            (formikProps)=>{
+              const { isSubmitting, isValid, handleBlur, errors, touched, handleChange, handleSubmit } = formikProps;
+              return(<>
+                {/* Phone or tag input */}
+                  <View style={[styles.inputContainer, { marginBottom: 15 }]}>
+                  <View style={styles.inputiconwrapper}>
+                    <Usericon />
+                  </View>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Enter your phone or feather tag"
+                    placeholderTextColor={COLORS.white}
+                    underlineColorAndroid="transparent"
+                    onChangeText={handleChange("username")}
+                    onBlur={handleBlur("username")}
+                  />
+                </View>
 
-        {/* Phone or tag input */}
-        <View style={[styles.inputContainer, { marginBottom: 15 }]}>
-          <View style={styles.inputiconwrapper}>
-            <Usericon />
-          </View>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Enter your phone or feather tag"
-            placeholderTextColor={COLORS.white}
-            underlineColorAndroid="transparent"
-          />
-        </View>
+                {/* Password input */}
+                <View style={styles.inputContainer}>
+                  <View style={styles.inputiconwrapper}>
+                    <Lock />
+                  </View>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Enter your password"
+                    placeholderTextColor={COLORS.white}
+                    secureTextEntry
+                    underlineColorAndroid="transparent"
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                  />
+                  <View>
+                    <Eyeicon />
+                  </View>
+                </View>
+                {/* Bottom text */}
+                <JustifyBetween style={{ marginTop: 30, marginBottom: 70 }}>
+                  <Text style={styles.biometrics}>Use Biometrics</Text>
+                  <Text style={styles.forgetPassword}>Forgot Password?</Text>
+                </JustifyBetween>
 
-        {/* Password input */}
-        <View style={styles.inputContainer}>
-          <View style={styles.inputiconwrapper}>
-            <Lock />
-          </View>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Enter your password"
-            placeholderTextColor={COLORS.white}
-            secureTextEntry
-            underlineColorAndroid="transparent"
-          />
-          <View>
-            <Eyeicon />
-          </View>
-        </View>
-
-        {/* Bottom text */}
-        <JustifyBetween style={{ marginTop: 30, marginBottom: 70 }}>
-          <Text style={styles.biometrics}>Use Biometrics</Text>
-          <Text style={styles.forgetPassword}>Forgot Password?</Text>
-        </JustifyBetween>
-
-        {/* Login btn */}
-        <View style={styles.loginbtn}>
-          <Text style={styles.loginbtnText}>Log in</Text>
-        </View>
+                {/* Login btn */}
+                <TouchableOpacity onPress={handleSubmit} style={styles.loginbtn}>
+                  <Text style={styles.loginbtnText}>Log in</Text>
+                </TouchableOpacity>
+              </>
+              )
+            }
+          }
+        </Formik>
 
         <View style={styles.haveanaccount}>
           <Text style={styles.haveaccounttext}>
