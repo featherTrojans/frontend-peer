@@ -13,10 +13,9 @@ import Welcome from "./auth/welcome/Welcome";
 import Home from "./app/Home/Home";
 import History from "./app/History/History";
 import Transactions from "./app/Transactions/Transactions";
-import Chats from "./app/Chats/Chats";
+// import Chats from "./app/Chats/Chats";
 import Settings from "./app/Settings/Settings";
 import Notifications from "./app/Notifications/Notifications";
-
 
 // These are the transactions sub screens
 import Withdraw from "./app/Transactions/Withdraw/Withdraw";
@@ -37,6 +36,9 @@ import Security from "./auth/signup/Security/Security";
 import Securepin from "./auth/signup/Securepin/Securepin";
 import Newtransactions from "./app/Newtransactions/Newtransactions";
 
+import Usersearch from "./app/Chats/Usersearch/Usersearch";
+import Chatsdm from "./app/Chats/Chatsdm/Chatsdm";
+import Chatshome from "./app/Chats/Chatshome/Chatshome";
 
 export {
   Onboarding,
@@ -48,7 +50,6 @@ export {
   Home,
   History,
   Transactions,
-  Chats,
   Notifications,
   Settings,
   Withdraw,
@@ -67,5 +68,10 @@ export {
   Personal,
   Security,
   Securepin,
-  Newtransactions
+  Newtransactions,
+
+
+  Chatsdm,
+  Chatshome,
+  Usersearch,
 };

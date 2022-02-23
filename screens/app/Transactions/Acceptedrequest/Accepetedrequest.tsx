@@ -8,7 +8,7 @@ import { styles } from "./Acceptedrequest.styles";
 const { Locationmap } = images;
 const { Directionarrow, Smallcancel, Smallcomment, Smallphone } = icons;
 
-const reasons = [
+const reasons = [ 
   "1. It is advisable that you meet-up in an open or public place.",
   "2. Ensure that the cash given to you is certified as “in good condition” by you.",
   "3. Make sure you complete payment as soon as cash is received.",

@@ -55,9 +55,8 @@ import Upgradenowarrow from "../assets/icons/Upgradenowarrow";
 import Withdrawicon from "../assets/icons/Withdrawicon";
 import Depositicon from "../assets/icons/Depositicon";
 
-
-
 import SecureDot from "../assets/icons/SecureDot";
+import Chatsearchicon from "../assets/icons/Chatsearchicon";
 
 // Receiverimage
 
@@ -124,6 +123,7 @@ export default {
   Upgradenowarrow,
   Withdrawicon,
   Depositicon,
-  
+
   SecureDot,
+  Chatsearchicon,
 };

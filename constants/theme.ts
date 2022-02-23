@@ -25,6 +25,7 @@ export const COLORS = {
   grey4: "#cecccc",
   grey5: "#8D8D8D",
   grey6: "#B9B9B9",
+  grey7: "#333333",
   
 
   yellow1: "#FF9D00",
@@ -38,11 +39,13 @@ export const COLORS = {
   errorBorder: `rgba(224, 0, 0, .5)`,
   black: "#000000",
   borderColor: "#EDEDED",
+  borderColor2: `rgba(112, 112, 112, .2)`,
   lineColor: `rgba(112, 112, 112, .1)`,
   lineColor2: `rgba(112, 112, 112, .3)`,
   lineColor3: `rgba(112, 112, 112, .5)`,
   halfBlack: `rgba(0, 0, 0, .5)`,
   placeHolder: `rgba(225, 225, 225, 1)`,
+  placeHolder2: `rgba(51, 51, 51, .4)`,
   iconBg: `rgba(225, 225, 225, .05)`,
   animatedLine: `rgba(225, 225, 225, .7)`,
   inputBorderColor: `rgba(225, 225, 225, .5)`,
