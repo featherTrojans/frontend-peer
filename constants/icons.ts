@@ -54,7 +54,9 @@ import Logoavatar from "../assets/icons/Logoavatar";
 import Upgradenowarrow from "../assets/icons/Upgradenowarrow";
 import Withdrawicon from "../assets/icons/Withdrawicon";
 import Depositicon from "../assets/icons/Depositicon";
-
+import SadEmoji from "../assets/icons/SadEmoji";
+import TransferIcon from "../assets/icons/TransferIcon";
+import Location from "../assets/icons/Location";
 
 
 import SecureDot from "../assets/icons/SecureDot";
@@ -126,4 +128,8 @@ export default {
   Depositicon,
   
   SecureDot,
+  SadEmoji,
+  TransferIcon,
+  Location
+
 };

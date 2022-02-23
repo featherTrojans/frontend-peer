@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, {useContext } from "react";
 import {
   View,
   Text,
   StatusBar,
   TouchableOpacity,
   TouchableHighlight,
+  Alert
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
@@ -14,6 +15,7 @@ import { FONTS, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const { Usericondark, Phoneicon, Envelopeicon, Cancelicon } = icons;
 
@@ -44,12 +46,10 @@ const validationSchema = Yup.object().shape({
 
 
 const Personal = ({ navigation }) => {
- 
-  const handleSubmitData = async () => {
-
-  };
+  const {setAuthData} = useContext(AuthContext)
+  console.log("what the heck")
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView> 
       <View style={styles.container}>
         <StatusBar />
         
@@ -85,16 +85,21 @@ const Personal = ({ navigation }) => {
           }}
           validationSchema={validationSchema}
           onSubmit={async (values,{setSubmitting}) => {
-            console.log(values);
             try {
               //send the request
               const response = await axiosCustom.post("auth/signup", values);
               //store data in context
               console.log(response);
-              navigation.navigate("Verification");
+              // setAuthData(response?.data?.data)
+              navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:"wregwsds"});
             } catch (err) {
-              // error handling
               console.log(err.response);
+              if(err.response){
+                if(!err?.response?.data?.data?.isVerified){
+                  return navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:null})
+                }
+              }
+              Alert.alert("help o","User Details already exists")
             }
             //You want to call handleSubmitData here and pass in the values
           }}

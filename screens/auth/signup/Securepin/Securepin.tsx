@@ -15,21 +15,24 @@ import { styles } from "./Securepin.styles";
 
 
 const {SecureDot} = icons
-const Securepin = ({ navigation }) => {
-
+const Securepin = ({route, navigation }) => {
+  const {token} = route.params
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9","", "0"];
-
+  const [loading, setLoading] = useState<boolean>(false)
   const [amount, setAmount] = useState<string[]>([]);
 
   console.log(amount);
   const handleSubmit = async () => {
+    setLoading(true)
     try {
       const pin = amount.join("");
-      const response = await axiosCustom.post("/auth/pin/set", { pin });
+      const response = await axiosCustom.put("/auth/pin/set", { pin},{headers:{token:token}});
       console.log(response);
-      navigation.navigate("Setup");
+      navigation.navigate("Setup",{token:response?.data?.data?.token});
     } catch (err) {
       console.log(err.response);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -113,7 +116,7 @@ const Securepin = ({ navigation }) => {
           onPress={handleSubmit}
           disabled={amount.length !== 4}
         >
-          <Text style={styles.proceedText}>PROCEED</Text>
+          <Text style={styles.proceedText}>{loading?"loading...":"PROCEED"}</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAwareScrollView>

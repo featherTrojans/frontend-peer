@@ -1,27 +1,43 @@
-import {useState} from "react"
+import {useState, useContext} from "react"
 import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const { Cancelicon } = icons;
 
-const Verification = ({navigation}) => {
-  const [vericode, setVericode] = useState({1:"",2: "",3: "",4: "",5: "",6:"",7:""})
-  const [otpCode, setOtpCode] = useState<number>()
-  
+const Verification = ({route,navigation}) => {
+  const {email, phoneNumber, token} = route.params
+  const [loading, setLoading] = useState<boolean>(false)
+  const [otpCode, setOtpCode] = useState<any>("")
+  const [tokenn, setToken] = useState<string|null>(token)
+
   const handleSubmit = async ()=>{
-    const code =  Object.values(vericode).join("")
+    setLoading(true)
     try{
-      const response = await axiosCustom.post("auth/verify/code",{code});
+      const response = await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
       console.log(response)
-      navigation.navigate("Security")
+      navigation.navigate("Security",{token:tokenn})
     }catch(err){
       console.log(err.response)
+    }finally{
+      setLoading(false)
     }
   }
+
+  const handleResendOTP = async () => {
+    try{
+      const response = await axiosCustom.post("auth/resend/code",{email});
+      setToken(response?.data?.data?.token)
+      console.log(response)
+    }catch(err){
+      console.log(err.response)
+    }finally{}
+  }
+
   return (
     <View style={styles.container}>
       {/* Closeicon */}
@@ -32,34 +48,34 @@ const Verification = ({navigation}) => {
       {/* OTP Message information */}
       <View style={styles.otpTextContainer}>
         <Text style={styles.otpMainText}>
-          An OTP has been sent to you via SMS to your phone number -
-          <Text style={styles.otpSubText}>08033211658</Text>, and to your email
-          - <Text style={styles.otpSubText}>seth@feather.africa</Text>
+          An OTP has been sent to you via SMS to your phone number - <Text style={styles.otpSubText}>{phoneNumber}</Text>, and to your email
+          - <Text style={styles.otpSubText}>{email}</Text>
         </Text>
       </View>
 
       {/* Verification input */}
 
       <View style={styles.otpInputContainer}>
-        <OTPInputView
+        {/* <OTPInputView
           style={styles.otpInputContainer}
           pinCount={6}
           autoFocusOnLoad
           codeInputFieldStyle={styles.otpInput}
           codeInputHighlightStyle={styles.otpInputActive}
           onCodeFilled={(code) => {
-            //You can access the code value here or calll any function to get it, ADD Types too
+            // You can access the code value here or calll any function to get it, ADD Types too
             console.log(`Here is the code ${code}`);
             setOtpCode(parseInt(code))
           }}
-        />
+        /> */}
+        <TextInput keyboardType="number-pad" value={otpCode} onChangeText={(text)=> setOtpCode(text)} />
       </View>
 
       {/* Resend sms duration */}
       <View style={styles.resendAndDuration}>
-        <View>
+        <TouchableOpacity onPress={handleResendOTP}>
           <Text style={styles.resendText}>Resend sms in</Text>
-        </View>
+        </TouchableOpacity>
         <View>
           <Text style={styles.duration}>00 : 30s</Text>
         </View>
@@ -76,10 +92,11 @@ const Verification = ({navigation}) => {
       <View style={styles.btnContainer}>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => navigation.navigate("Security")}
+          onPress={handleSubmit}
           style={styles.btnBg}
+          disabled={loading}
         >
-          <Text style={styles.btnText}>SUBMIT</Text>
+          <Text style={styles.btnText}>{loading?"loading...":"SUBMIT"}</Text>
         </TouchableOpacity>
       </View>
     </View>

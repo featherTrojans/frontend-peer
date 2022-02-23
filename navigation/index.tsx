@@ -137,25 +137,23 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    // initialRouteName=""
-  >
-    <AppStack.Screen name="Onboarding" component={Newtransactions} />
-    <AppStack.Screen name="Login" component={Login} />
+    // initialRouteName="Welcome"
+    >
+    <AppStack.Screen name="Onboarding" component={Onboarding} />
     <AppStack.Screen name="Personal" component={Personal} />
+    <AppStack.Screen name="Deposit" component={Deposit} />
+    <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Verification" component={Verification} />
     <AppStack.Screen name="Security" component={Security} />
     <AppStack.Screen name="Securepin" component={Securepin} />
     <AppStack.Screen name="Setup" component={Setup} />
     <AppStack.Screen name="Welcome" component={Welcome} />
     <AppStack.Screen name="Root" component={Tabs} />
-    <AppStack.Screen name="Deposit" component={Deposit} options={{
-      headerShown: true
-    }}/>
   </AppStack.Navigator>
 );
 
 
-
+ 
 export default function MainNavigation() {
   return (
     <NavigationContainer>
