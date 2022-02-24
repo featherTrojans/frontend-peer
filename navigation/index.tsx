@@ -73,7 +73,7 @@ const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings } = icons;
 
 const Tabs = () => (
   <BottomTab.Navigator
-    initialRouteName="Home"
+    initialRouteName="Transactions"
     screenOptions={{
       headerShown: false,
       

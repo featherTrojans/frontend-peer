@@ -9,7 +9,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Input } from "../../../../components/index";
+import { Input, Loader } from "../../../../components/index";
 import { FONTS, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
@@ -112,7 +112,7 @@ const Security = ({ route, navigation }) => {
                   icon={<Lockicondark />}
                   password
                 />
-
+                  {isSubmitting && <Loader />}
                 <Input
                   placeholder="Confirm Password"
                   name="confirmPassword"
@@ -127,7 +127,7 @@ const Security = ({ route, navigation }) => {
                     activeOpacity={0.8}
                     onPress={handleSubmit}
                   >
-                    <Text style={styles.proceedText}>{isSubmitting?"loading ...":"PROCEED"}</Text>
+                    <Text style={styles.proceedText}>PROCEED</Text>
                   </TouchableOpacity>
                   {/* Have an account */}
                   <View style={styles.bottomTextContainer}>

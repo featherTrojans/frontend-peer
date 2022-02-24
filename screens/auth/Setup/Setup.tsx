@@ -8,9 +8,8 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Input } from "../../../components";
+import { Input, Loader } from "../../../components";
 import { icons } from "../../../constants";
-
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "./Setup.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
@@ -20,6 +19,12 @@ const { At, Usericondark } = icons;
 const validationSchema = Yup.object().shape({
   username: Yup.string().label("Username").required(),
 });
+
+const setAuthorizationToken = (token:string)=>{
+  if (token){
+    axiosCustom.defaults.headers.common["token"] = token
+  }
+}
 
 const Setup = ({route, navigation }) => {
   const {token} = route.params
@@ -51,6 +56,7 @@ const Setup = ({route, navigation }) => {
             try{
               const response = await axiosCustom.put("/auth/username/set",{newUsername:values.username},{headers:{token:token}})
               console.log(response)
+              setAuthorizationToken(response.data.data.token)
               navigation.navigate("Welcome")
             }catch(err){
               console.log(err.response)
@@ -58,10 +64,10 @@ const Setup = ({route, navigation }) => {
           }}
         >
           {(formikProps) => {
-            const { isSubmitting, isValid, handleBlur, errors, handleSubmit } =
-              formikProps;
+            const { isSubmitting, isValid, handleBlur, errors, handleSubmit } = formikProps;
             return (
               <React.Fragment>
+                {isSubmitting && <Loader />}
                 <Input
                   placeholder="feather2923"
                   formikProps={formikProps}
@@ -80,7 +86,7 @@ const Setup = ({route, navigation }) => {
                     activeOpacity={0.8}
                     onPress={handleSubmit}
                   >
-                    <Text style={styles.continueText}>{isSubmitting?"loading ...":"CONTINUE"}</Text>
+                    <Text style={styles.continueText}>CONTINUE</Text>
                   </TouchableOpacity>
                 </View>
               </React.Fragment>

@@ -5,6 +5,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
+import { Loader } from "../../../components";
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const { Cancelicon } = icons;
@@ -29,18 +30,22 @@ const Verification = ({route,navigation}) => {
   }
 
   const handleResendOTP = async () => {
+    setLoading(true)
     try{
       const response = await axiosCustom.post("auth/resend/code",{email});
       setToken(response?.data?.data?.token)
       console.log(response)
     }catch(err){
       console.log(err.response)
-    }finally{}
+    }finally{
+      setLoading(false)
+    }
   }
 
   return (
     <View style={styles.container}>
       {/* Closeicon */}
+      {loading && <Loader />}
       <TouchableOpacity style={styles.cancelIcon} onPress={()=>navigation.goBack()}>
         <Cancelicon />
       </TouchableOpacity>
@@ -96,7 +101,7 @@ const Verification = ({route,navigation}) => {
           style={styles.btnBg}
           disabled={loading}
         >
-          <Text style={styles.btnText}>{loading?"loading...":"SUBMIT"}</Text>
+          <Text style={styles.btnText}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
     </View>

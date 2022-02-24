@@ -8,6 +8,7 @@ import {
   TouchableNativeFeedback,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Loader } from "../../../../components";
 import { COLORS, SIZES, fontsize, FONTS, icons } from "../../../../constants";
 
 import { JustifyBetween } from "../../../../global/styles";
@@ -66,6 +67,7 @@ const Securepin = ({route, navigation }) => {
 
   return (
     <KeyboardAwareScrollView>
+      {loading && <Loader />}
       <View style={styles.container}>
         <JustifyBetween style={{ marginBottom: 10 }}>
           <View>
@@ -115,7 +117,7 @@ const Securepin = ({route, navigation }) => {
           onPress={handleSubmit}
           disabled={amount.length !== 4}
         >
-          <Text style={styles.proceedText}>{loading?"loading...":"PROCEED"}</Text>
+          <Text style={styles.proceedText}>PROCEED</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAwareScrollView>

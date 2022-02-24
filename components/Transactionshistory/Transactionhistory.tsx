@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Transactionhistory.styles";
 
@@ -7,6 +7,11 @@ const { Arrowin, Arrowout } = icons;
 
 const History = ({ data }: any) => {
   const { direction, description, to, amount } = data;
+
+  // useEffect(()=>{
+
+  // },[]);
+
 
   const priceColor = direction === "in" ? COLORS.green1 : COLORS.pink1;
   const circleColor = direction === "in" ? COLORS.green2 : COLORS.pink1;
