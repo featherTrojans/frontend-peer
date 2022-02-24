@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {
   StyleSheet,
   Text,
@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { Service, Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { AuthContext } from "../../../context/AuthContext";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Home.styles";
 
 const {
@@ -185,6 +187,20 @@ const walletOptions = [
 ];
 
 const Home = () => {
+  const {token} = useContext(AuthContext)
+  const [info, setInfo] = useState();
+
+  useEffect(()=>{
+    getDashboardData()
+  },[])
+  const getDashboardData = async ()=>{
+    try{
+      const response = await axiosCustom.get("/dashboard",{headers:{token:token}})
+      setInfo(response?.data?.data)
+    }catch(err){
+      console.log(err.response);
+    }
+  }
   const EmptyComponent = () => {
     return (
       <View style={styles.emptyContainer}>

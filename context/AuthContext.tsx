@@ -1,13 +1,14 @@
 import React, {createContext, FC, useState} from "react";
 import {View, Text} from "react-native"
 
-const AuthContext = createContext<{authdata:any,setAuthData:any}|{}>({});
+const AuthContext = createContext<{authdata:any,setAuthData:any,token:string,setToken:any}|{}>({});
 
 
 const AuthProvider:FC = ({children}) =>{
     const [authdata, setAuthData] = useState({})
+    const [token,setToken] = useState("")
     return (
-        <AuthContext.Provider value={{authdata,setAuthData}}>
+        <AuthContext.Provider value={{authdata,setAuthData,token,setToken}}>
             
             {children}
         </AuthContext.Provider>
