@@ -14,19 +14,12 @@ import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Securepin.styles";
 
-<<<<<<< HEAD
-const { SecureDot } = icons;
-const Securepin = ({ navigation }) => {
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
-
-=======
 
 const {SecureDot} = icons
 const Securepin = ({route, navigation }) => {
   const {token} = route.params
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9","", "0"];
   const [loading, setLoading] = useState<boolean>(false)
->>>>>>> c9d39dabf1fd754528e7fc04fe6f4b11d352685c
   const [amount, setAmount] = useState<string[]>([]);
 
   console.log(amount);
@@ -38,13 +31,9 @@ const Securepin = ({route, navigation }) => {
       console.log(response);
       navigation.navigate("Setup",{token:response?.data?.data?.token});
     } catch (err) {
-<<<<<<< HEAD
-      console.log(err.response);  
-=======
       console.log(err.response);
     }finally{
       setLoading(false)
->>>>>>> c9d39dabf1fd754528e7fc04fe6f4b11d352685c
     }
   };
 

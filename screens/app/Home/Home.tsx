@@ -186,19 +186,24 @@ const walletOptions = [
   },
 ];
 
-const Home = () => {
-  const {token} = useContext(AuthContext)
-  const [info, setInfo] = useState();
 
+const Home = () => {
+  const {setAuthData} = useContext(AuthContext)
+  const [info, setInfo] = useState({});
+  const [loading, setLoading] = useState(false)
   useEffect(()=>{
     getDashboardData()
   },[])
   const getDashboardData = async ()=>{
+    setLoading(true)
     try{
-      const response = await axiosCustom.get("/dashboard",{headers:{token:token}})
+      const response = await axiosCustom.get("/dashboard")
       setInfo(response?.data?.data)
+      setAuthData(response?.data?.data)
     }catch(err){
       console.log(err.response);
+    }finally{
+      setLoading(false)
     }
   }
   const EmptyComponent = () => {
@@ -225,8 +230,8 @@ const Home = () => {
         <View style={styles.profileContainer}>
           <Profilepics />
           <View style={styles.profileNameContainer}>
-            <Text style={styles.profileName}>Jumoke Randle</Text>
-            <Text style={styles.profileUsername}>@jumokedtigress</Text>
+            <Text style={styles.profileName}>{info?.fullName}</Text>
+            <Text style={styles.profileUsername}>@{info?.username}</Text>
           </View>
         </View>
         <View>
@@ -239,7 +244,7 @@ const Home = () => {
       {/* Start of the block */}
       {/*  */}
       <View style={styles.walletBlock}>
-        <Viewbalance />
+        <Viewbalance/>
         <View style={styles.walletOptionsContainer}>
           {walletOptions.map(
             ({ icon, title }: { icon: JSX.Element; title: string }) => (

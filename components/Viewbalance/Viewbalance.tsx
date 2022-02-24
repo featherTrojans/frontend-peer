@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React,{useContext} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Viewbalance.styles";
+import { AuthContext } from "../../context/AuthContext";
 
 const { Eyecrossed, Arrowright } = icons;
 
 const Viewbalance = () => {
+  const {authdata} = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       {/* Top part of the block */}
@@ -24,7 +27,7 @@ const Viewbalance = () => {
         {/* Left text */}
         <View>
           <Text style={styles.balanceText}>Balance</Text>
-          <Text style={styles.balanceAmount}>NGN 3,895,800.35</Text>
+          <Text style={styles.balanceAmount}>NGN {authdata?.walletBal}</Text>
         </View>
 
         {/* Eye icon */}

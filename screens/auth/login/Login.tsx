@@ -17,6 +17,12 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 
 const { Logo, Eyeicon, Usericon, Lock } = icons;
 
+const setAuthorizationToken = (token:string)=>{
+  if (token){
+    axiosCustom.defaults.headers.common["token"] = token
+  }
+}
+
 const validationSchema = Yup.object().shape({
   username: Yup
   .string()
@@ -50,7 +56,8 @@ const Login = ({ navigation }: any) => {
               //store token in ASYNC STORAGE
               //store in context
               console.log(response)
-              navigation.navigate("welcome")
+              setAuthorizationToken(response.data.data.token)
+              navigation.navigate("Welcome")
             }catch(err){
               console.log(err.response)
             }
