@@ -15,7 +15,7 @@ import { Input } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 
-const { Logo, Eyeicon, Usericon, Lock } = icons;
+const { Logo,Newlogo, Eyeicon, Usericon, Lock } = icons;
 
 const setAuthorizationToken = (token:string)=>{
   if (token){
@@ -40,7 +40,7 @@ const Login = ({ navigation }: any) => {
       <View style={styles.container}>
         {/* Logo */}
         <View style={styles.logoWrapper}>
-          <Logo />
+          <Newlogo />
         </View>
 
         {/* Form */}

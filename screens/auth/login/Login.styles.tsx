@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     width: SIZES.width - 50,
     marginVertical: 140,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   inputContainer: {
     height: 62,

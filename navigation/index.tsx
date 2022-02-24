@@ -43,7 +43,7 @@ import {
   Usersearch,
 } from "../screens";
 import { AppState } from "react-native";
-import { Tab  } from "../components";
+import { Loader, Tab  } from "../components";
 import { icons } from "../constants";
 import Deposit from "../screens/app/Deposit/Deposit";
 const AppStack = createStackNavigator<RootStackParamList>();
@@ -142,9 +142,9 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Login"
+    // initialRouteName="Login"
     >
-    <AppStack.Screen name="Onboarding" component={Onboarding} />
+    <AppStack.Screen name="Onboarding" component={Loader} />
     <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Deposit" component={Deposit} />
     <AppStack.Screen name="Login" component={Login} />
