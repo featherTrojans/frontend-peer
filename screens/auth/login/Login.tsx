@@ -11,7 +11,7 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Input } from "../../../components";
+import { Input, Loader } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 
@@ -68,6 +68,7 @@ const Login = ({ navigation }: any) => {
             (formikProps)=>{
               const { isSubmitting, isValid, handleBlur, errors, touched, handleChange, handleSubmit } = formikProps;
               return(<>
+              {isSubmitting && <Loader />}
                 {/* Phone or tag input */}
                   <View style={[styles.inputContainer, { marginBottom: 15 }]}>
                   <View style={styles.inputiconwrapper}>

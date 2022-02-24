@@ -142,10 +142,10 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Welcome"
+    // initialRouteName="Welcome"
     >
-    <AppStack.Screen name="Onboarding" component={Loader} />
     <AppStack.Screen name="Personal" component={Personal} />
+    <AppStack.Screen name="Onboarding" component={Onboarding} />
     <AppStack.Screen name="Deposit" component={Deposit} />
     <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Verification" component={Verification} />

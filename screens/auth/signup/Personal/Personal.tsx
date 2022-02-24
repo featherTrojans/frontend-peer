@@ -10,7 +10,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 import * as Yup from "yup"
-import { Input } from "../../../../components/index";
+import { Input, Loader } from "../../../../components/index";
 import { FONTS, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
@@ -99,7 +99,7 @@ const Personal = ({ navigation }) => {
                   return navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:null})
                 }
               }
-              Alert.alert("help o","User Details already exists")
+              // Alert.alert("help o","User Details already exists")
             }
             //You want to call handleSubmitData here and pass in the values
           }}
@@ -109,6 +109,7 @@ const Personal = ({ navigation }) => {
           const { isSubmitting, isValid, handleBlur, errors, touched, handleChange, handleSubmit } = formikProps;
             return (
               <React.Fragment>
+                {isSubmitting && <Loader />}
                 {/* Input */}
                 <Input
                   placeholder="Firstname"
@@ -147,7 +148,7 @@ const Personal = ({ navigation }) => {
                     disabled={isSubmitting}
                   >
                     <Text style={styles.proceedText}>
-                      {isSubmitting?"loading ...":"PROCEED"}
+                      PROCEED
                     </Text>
                   </TouchableOpacity>
 
