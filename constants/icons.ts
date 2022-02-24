@@ -1,4 +1,5 @@
 import Logo from "../assets/icons/Logo";
+import Newlogo from "../assets/icons/Newlogo";
 import Eyeicon from "../assets/icons/Eyeicon";
 import Usericon from "../assets/icons/Usericon";
 import Lock from "../assets/icons/Lock";
@@ -62,10 +63,12 @@ import Location from "../assets/icons/Location";
 import SecureDot from "../assets/icons/SecureDot";
 import Chatsearchicon from "../assets/icons/Chatsearchicon";
 
+
 // Receiverimage
 
 export default {
   Logo,
+  Newlogo,
   Eyeicon,
   Lock,
   Usericon,
