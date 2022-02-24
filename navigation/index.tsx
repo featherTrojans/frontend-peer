@@ -114,7 +114,7 @@ const Tabs = () => (
     />
     <BottomTab.Screen
       name="Chats"
-      component={Summary}
+      component={Chatshome}
       options={{
         tabBarButton: (props) => (
           <Tab label="Chats" {...props} icon={<Tabchats focused={props.accessibilityState?.selected}/>} />
@@ -142,9 +142,9 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    // initialRouteName="Welcome"
+    initialRouteName="Onboarding"
     >
-    <AppStack.Screen name="Onboarding" component={Loader} />
+    <AppStack.Screen name="Onboarding" component={Onboarding} />
     <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Deposit" component={Deposit} />
     <AppStack.Screen name="Login" component={Login} />
