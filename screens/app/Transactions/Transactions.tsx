@@ -192,8 +192,8 @@ const Transactions = () => {
 
         <FlatList
           style={{ paddingTop: 10 }}
-          // data={formatData(DATA)}
-          data={[]}
+          data={formatData(DATA)}
+          // data={[]}
           renderItem={({ item }: any) => (
             <Transactionhistory date={item.time} datas={item.data} />
           )}

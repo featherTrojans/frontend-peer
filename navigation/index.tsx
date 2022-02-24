@@ -73,7 +73,7 @@ const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings } = icons;
 
 const Tabs = () => (
   <BottomTab.Navigator
-    initialRouteName="Transactions"
+    initialRouteName="Home"
     screenOptions={{
       headerShown: false,
       
@@ -144,8 +144,8 @@ const RootNavigator = () => (
     }}
     // initialRouteName="Welcome"
     >
-    <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Onboarding" component={Onboarding} />
+    <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Deposit" component={Deposit} />
     <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Verification" component={Verification} />
