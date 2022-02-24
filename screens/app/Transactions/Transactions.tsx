@@ -1,7 +1,9 @@
-import React from "react";
+import React,{ useEffect, useState} from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Transactionhistory } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import axiosCustom from "../../../httpRequests/axiosCustom";
+import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Transactions.styles";
 
 const { Cryingicon } = icons;
@@ -9,145 +11,128 @@ const { Cryingicon } = icons;
 const Transactions = () => {
 
   
-  const DATA = [
+  const DATA =  [
     {
-      time: "Today",
-      data: [
-        {
-          direction: "in",
-          title: "Wallet Funding",
-          to: "Primary Wallet",
-          price: 13400,
-        },
-        {
-          direction: "out",
-          title: "Funds Transfer",
-          to: "@destiny_child007",
-          price: 53600,
-        },
-        {
-          direction: "out",
-          title: "Funds Transfer",
-          to: "@destiny_child007",
-          price: 53600,
-        },
-        {
-          direction: "out",
-          title: "Funds Transfer",
-          to: "@destiny_child007",
-          price: 53600,
-        },
-      ],
+        "transId": "WZsOkF2oWw",
+        "initialBal": "2570",
+        "amount": "150",
+        "finalBal": "2420",
+        "description": "#150 transferred to OBA",
+        "from": "EZEKO",
+        "to": "OBA",
+        "direction": "out",
+        "createdAt": "2022-02-15T16:51:40.000Z"
     },
     {
-      time: "Yesterday",
-      data: [
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-        {
-          direction: "out",
-          title: "Funds Sending",
-          to: "@destiny_child",
-          price: 53600,
-        },
-      ],
+        "transId": "JFox9iGSKJ",
+        "initialBal": "2420",
+        "amount": "150",
+        "finalBal": "2570",
+        "description": "#150 transferred from EZEKO",
+        "from": "EZEKO",
+        "to": "EZEKO",
+        "direction": "in",
+        "createdAt": "2022-01-31T23:56:07.000Z"
     },
     {
-      time: "12-22-2022",
-      data: [
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-        {
-          direction: "out",
-          title: "Funds Sending",
-          to: "@destiny_child",
-          price: 53600,
-        },
-      ],
+        "transId": "FnF7XtyXrb",
+        "initialBal": "2570",
+        "amount": "150",
+        "finalBal": "2420",
+        "description": "#150 transferred to EZEKO",
+        "from": "EZEKO",
+        "to": "EZEKO",
+        "direction": "out",
+        "createdAt": "2022-01-31T23:56:00.000Z"
     },
     {
-      time: "19-02-2022",
-      data: [
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-        {
-          direction: "out",
-          title: "Funds Sending",
-          to: "@destiny_child",
-          price: 53600,
-        },
-      ],
+        "transId": "eZx81A14GE",
+        "initialBal": "2420",
+        "amount": "150",
+        "finalBal": "2570",
+        "description": "#150 transferred from EZEKO",
+        "from": "EZEKO",
+        "to": "EZEKO",
+        "direction": "in",
+        "createdAt": "2022-01-31T23:54:40.000Z"
     },
     {
-      time: "13-07-2021",
-      data: [
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-        {
-          direction: "out",
-          title: "Funds Sending",
-          to: "@destiny_child",
-          price: 53600,
-        },
-      ],
+        "transId": "QLkpxlyiSL",
+        "initialBal": "2570",
+        "amount": "150",
+        "finalBal": "2420",
+        "description": "#150 transferred to EZEKO",
+        "from": "EZEKO",
+        "to": "EZEKO",
+        "direction": "out",
+        "createdAt": "2022-01-31T23:54:39.000Z"
     },
     {
-      time: "23-10-2021",
-      data: [
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-      ],
+        "transId": "LdJexVcIIW",
+        "initialBal": "2420",
+        "amount": "150",
+        "finalBal": "2570",
+        "description": "#150 transferred from EZEKO",
+        "from": "EZEKO",
+        "to": "EZEKO",
+        "direction": "in",
+        "createdAt": "2022-01-31T23:52:49.000Z"
     },
     {
-      time: "04-11-2021",
-      data: [
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-        {
-          direction: "in",
-          title: "Spending",
-          to: "Primar",
-          price: 13400,
-        },
-      ],
+        "transId": "ZKkReMvndj",
+        "initialBal": "2570",
+        "amount": "150",
+        "finalBal": "2420",
+        "description": "#150 transferred to EZEKO",
+        "from": "EZEKO",
+        "to": "EZEKO",
+        "direction": "out",
+        "createdAt": "2022-01-31T23:52:48.000Z"
     },
-  ];
+    {
+        "transId": "hntKES0Ew1",
+        "initialBal": "2420",
+        "amount": "150",
+        "finalBal": "2270",
+        "description": "#150 transferred to EZEKO",
+        "from": "EZEKO",
+        "to": "EZEKO",
+        "direction": "out",
+        "createdAt": "2022-01-31T23:51:08.000Z"
+    },
+    {
+        "transId": "O3O0PLHc9b",
+        "initialBal": "2420",
+        "amount": "150",
+        "finalBal": "2570",
+        "description": "#150 transferred from EZEKO",
+        "from": "EZEKO",
+        "to": "EZEKO",
+        "direction": "in",
+        "createdAt": "2022-01-31T23:51:08.000Z"
+    },
+    {
+        "transId": "Z39zYR741W",
+        "initialBal": "2570",
+        "amount": "150",
+        "finalBal": "2420",
+        "description": "#150 transferred to ELON",
+        "from": "EZEKO",
+        "to": "ELON",
+        "direction": "out",
+        "createdAt": "2022-01-31T23:50:27.000Z"
+    },
+    {
+        "transId": "lirXTEm7Zs",
+        "initialBal": "2720",
+        "amount": "150",
+        "finalBal": "2570",
+        "description": "#150 transferred to ELON",
+        "from": "EZEKO",
+        "to": "ELON",
+        "direction": "out",
+        "createdAt": "2022-01-31T23:48:07.000Z"
+    }]
 
   const EmptyComponent = () => {
     return (
@@ -165,6 +150,25 @@ const Transactions = () => {
   };
 
   const Listheader = () => {
+    const [transactions, setTransations] = useState();
+    const [loading, setLoading] = useState(false);
+
+    useEffect(()=>{
+        getAllTransactions()
+    },[])
+
+    const getAllTransactions = async () =>{
+      try{
+        setLoading(true)
+        const response = await axiosCustom.get("/transactions");
+        setTransations(response?.data?.data?.transactions)
+      }catch(err){
+        console.log(err.response)
+      }finally{
+        setLoading(true)
+      }
+    }
+
     return (
       <View style={styles.listHeaderContainer}>
         <View>
@@ -188,7 +192,8 @@ const Transactions = () => {
 
         <FlatList
           style={{ paddingTop: 10 }}
-          data={DATA}
+          // data={formatData(DATA)}
+          data={[]}
           renderItem={({ item }: any) => (
             <Transactionhistory date={item.time} datas={item.data} />
           )}

@@ -243,7 +243,7 @@ const Home = () => {
 
         <FlatList
           contentContainerStyle={DATA.length === 0 && styles.centerEmptySet}
-          data={formatData(info?.transactions || [])}
+          data={formatData(info?.transactions)}
           renderItem={({ item }: any) => (
             <Transactionhistory date={item.time} datas={item.data} />
           )}
