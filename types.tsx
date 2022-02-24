@@ -21,6 +21,7 @@ export type RootStackParamList = {
   Login: undefined,
   Signup: undefined,
   Personal: undefined,
+  Deposit: undefined,
   Security: undefined,
   Securepin: undefined,
   Setup: undefined,

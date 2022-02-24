@@ -19,7 +19,7 @@ import {
   Home,
   History,
   Transactions,
-  Chats,
+  // Chats,
   Settings,
   Withdraw,
   Requestnew,
@@ -38,6 +38,9 @@ import {
   Securepin,
   Notifications,
   Newtransactions,
+  Chatshome,
+  Chatsdm,
+  Usersearch,
 } from "../screens";
 import { AppState } from "react-native";
 import { Tab  } from "../components";
@@ -46,6 +49,8 @@ import Deposit from "../screens/app/Deposit/Deposit";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
+
+
 
 
 

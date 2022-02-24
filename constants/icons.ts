@@ -54,12 +54,16 @@ import Logoavatar from "../assets/icons/Logoavatar";
 import Upgradenowarrow from "../assets/icons/Upgradenowarrow";
 import Withdrawicon from "../assets/icons/Withdrawicon";
 import Depositicon from "../assets/icons/Depositicon";
+<<<<<<< HEAD
+=======
 import SadEmoji from "../assets/icons/SadEmoji";
 import TransferIcon from "../assets/icons/TransferIcon";
 import Location from "../assets/icons/Location";
 
+>>>>>>> c9d39dabf1fd754528e7fc04fe6f4b11d352685c
 
 import SecureDot from "../assets/icons/SecureDot";
+import Chatsearchicon from "../assets/icons/Chatsearchicon";
 
 // Receiverimage
 
@@ -126,10 +130,14 @@ export default {
   Upgradenowarrow,
   Withdrawicon,
   Depositicon,
-  
+
   SecureDot,
+<<<<<<< HEAD
+  Chatsearchicon,
+=======
   SadEmoji,
   TransferIcon,
   Location
 
+>>>>>>> c9d39dabf1fd754528e7fc04fe6f4b11d352685c
 };

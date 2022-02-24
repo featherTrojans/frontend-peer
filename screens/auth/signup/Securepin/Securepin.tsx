@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  TouchableNativeFeedback,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { COLORS, SIZES, fontsize, FONTS, icons } from "../../../../constants";
@@ -13,12 +14,19 @@ import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Securepin.styles";
 
+<<<<<<< HEAD
+const { SecureDot } = icons;
+const Securepin = ({ navigation }) => {
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
+
+=======
 
 const {SecureDot} = icons
 const Securepin = ({route, navigation }) => {
   const {token} = route.params
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9","", "0"];
   const [loading, setLoading] = useState<boolean>(false)
+>>>>>>> c9d39dabf1fd754528e7fc04fe6f4b11d352685c
   const [amount, setAmount] = useState<string[]>([]);
 
   console.log(amount);
@@ -30,26 +38,30 @@ const Securepin = ({route, navigation }) => {
       console.log(response);
       navigation.navigate("Setup",{token:response?.data?.data?.token});
     } catch (err) {
+<<<<<<< HEAD
+      console.log(err.response);  
+=======
       console.log(err.response);
     }finally{
       setLoading(false)
+>>>>>>> c9d39dabf1fd754528e7fc04fe6f4b11d352685c
     }
   };
 
   const handleSetAmount = (value: string) => {
     // console.log(value)
-    if(amount.length < 4){
-      setAmount(oldamount=>[...oldamount,value]);
+    if (amount.length < 4) {
+      setAmount((oldamount) => [...oldamount, value]);
     }
   };
-  const handleRemoveAmount = ()=>{
-    if(amount.length > 0){
-      const newdata = [...amount]
-      newdata.pop()
+  const handleRemoveAmount = () => {
+    if (amount.length > 0) {
+      const newdata = [...amount];
+      newdata.pop();
       setAmount(newdata);
       console.log(newdata);
     }
-  }
+  };
 
   const NumberBtn = ({ children }: { children: string }) => {
     return (
@@ -83,10 +95,10 @@ const Securepin = ({route, navigation }) => {
 
         <View style={styles.pinContainer}>
           <View style={styles.pinInputContainer}>
-            <View style={styles.pinView}>{amount[0] && <SecureDot/>}</View>
-            <View style={styles.pinView}>{amount[1] && <SecureDot/>}</View>
-            <View style={styles.pinView}>{amount[2] && <SecureDot/>}</View>
-            <View style={styles.pinView}>{amount[3] && <SecureDot/>}</View>
+            <View style={styles.pinView}>{amount[0] && <SecureDot />}</View>
+            <View style={styles.pinView}>{amount[1] && <SecureDot />}</View>
+            <View style={styles.pinView}>{amount[2] && <SecureDot />}</View>
+            <View style={styles.pinView}>{amount[3] && <SecureDot />}</View>
             {/* <TextInput style={styles.pinInput} />
             <TextInput style={styles.pinInput} />
             <TextInput style={styles.pinInput} />
@@ -96,16 +108,14 @@ const Securepin = ({route, navigation }) => {
 
         <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
-            return (
-              <NumberBtn key={index}>{number}</NumberBtn>
-            )
+            return <NumberBtn key={index}>{number}</NumberBtn>;
           })}
 
-        <TouchableOpacity
-          style={styles.numberBtn}
-          activeOpacity={0.8}
-          onPress={() => handleRemoveAmount()}
-              >
+          <TouchableOpacity
+            style={styles.numberBtn}
+            activeOpacity={0.8}
+            onPress={() => handleRemoveAmount()}
+          >
             <Text>X</Text>
           </TouchableOpacity>
         </View>
