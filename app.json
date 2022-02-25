@@ -22,6 +22,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "feather.peer",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"

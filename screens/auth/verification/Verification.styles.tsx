@@ -38,10 +38,10 @@ export const styles = StyleSheet.create({
     borderColor: COLORS.grey6,
     borderWidth: 1,
     backgroundColor: COLORS.white,
-    textAlign: 'center',
+    textAlign: "center",
     ...fontsize.bxmedium,
     ...FONTS.regular,
-    color: COLORS.black
+    color: COLORS.black,
   },
   otpInputActive: {
     borderColor: COLORS.blue6,
@@ -86,4 +86,19 @@ export const styles = StyleSheet.create({
     ...FONTS.bold,
     color: COLORS.white,
   },
+
+
+
+
+  // The textinput replacing the otp input for now
+  cutstomOtpInput: {
+    width: "100%",
+    height: 60,
+    borderColor: COLORS.grey2,
+    borderWidth: .5,
+    padding: 10
+  }
+
+
+
 });
