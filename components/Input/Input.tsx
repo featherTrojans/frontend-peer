@@ -21,6 +21,25 @@ type inputProps = {
 
 const Input = ({icon, placeholder, password, formikProps, name, ...rest}: inputProps) => {
 
+  if(formikProps === undefined){
+    return (
+      <View style={[styles.inputContainer, { marginBottom: 15, borderColor:  COLORS.inputBorderColorDark }]}>
+    <View style={styles.inputiconwrapper}>
+      {icon}
+    </View>
+    <TextInput
+      style={styles.textInput}
+      placeholder={placeholder}
+      placeholderTextColor={COLORS.placeHolder}
+      underlineColorAndroid="transparent"
+      
+
+      {...rest}
+      secureTextEntry={password ? true : false}
+    />
+  </View>
+    )
+  }
   const { handleBlur, errors, touched, handleChange } = formikProps;
 
   const borderColor = errors[name] && touched[name] ?  COLORS.errorBorder :  COLORS.inputBorderColorDark

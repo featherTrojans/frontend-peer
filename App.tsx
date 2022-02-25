@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import { ToastProvider } from 'react-native-toast-notifications'
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 
@@ -19,9 +19,11 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <AuthProvider>
-       <MainNavigation />
-      </AuthProvider>
+      <ToastProvider>
+        <AuthProvider>
+        <MainNavigation />
+        </AuthProvider>
+      </ToastProvider>
     );
   }
 }

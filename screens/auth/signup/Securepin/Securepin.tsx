@@ -39,7 +39,6 @@ const Securepin = ({route, navigation }) => {
   };
 
   const handleSetAmount = (value: string) => {
-    // console.log(value)
     if (amount.length < 4) {
       setAmount((oldamount) => [...oldamount, value]);
     }

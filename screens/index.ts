@@ -35,6 +35,7 @@ import Personal from "./auth/signup/Personal/Personal";
 import Security from "./auth/signup/Security/Security";
 import Securepin from "./auth/signup/Securepin/Securepin";
 import Newtransactions from "./app/Newtransactions/Newtransactions";
+import TransferInput from "./app/TransferInput/TransferInput";
 
 import Usersearch from "./app/Chats/Usersearch/Usersearch";
 import Chatsdm from "./app/Chats/Chatsdm/Chatsdm";
@@ -69,7 +70,7 @@ export {
   Security,
   Securepin,
   Newtransactions,
-
+  TransferInput,
 
   Chatsdm,
   Chatshome,

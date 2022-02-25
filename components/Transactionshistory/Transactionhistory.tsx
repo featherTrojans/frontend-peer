@@ -6,7 +6,7 @@ import { styles } from "./Transactionhistory.styles";
 const { Arrowin, Arrowout } = icons;
 
 const History = ({ data }: any) => {
-  const { direction, description, to, amount } = data;
+  const { direction, description, to, amount, from } = data;
 
   // useEffect(()=>{
 
@@ -16,6 +16,7 @@ const History = ({ data }: any) => {
   const priceColor = direction === "in" ? COLORS.green1 : COLORS.pink1;
   const circleColor = direction === "in" ? COLORS.green2 : COLORS.pink1;
   const transactionType = direction === "in" ? "From" : "To";
+  const transactionValue = direction === "in" ? from : to;
   const amountSign = direction === "in" ? "+" : "-";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
   return (
@@ -27,7 +28,7 @@ const History = ({ data }: any) => {
         <View>
           <Text style={styles.title}>{description}</Text>
           <Text style={styles.transactionType}>
-            {transactionType} : {to}
+            {transactionType} : {transactionValue}
           </Text>
         </View>
       </View>

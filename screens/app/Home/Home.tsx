@@ -8,6 +8,7 @@ import {
   ScrollView,
   FlatList,
   SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 import { Service, Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
@@ -137,23 +138,28 @@ const walletOptions = [
   {
     icon: <Withdraw />,
     title: "Withdraw",
+    link:"Withdraw"
   },
   {
     icon: <Deposit />,
     title: "Deposit",
+    link:"Deposit"
   },
   {
     icon: <Transfer />,
     title: "Transfer",
-  },
+    link:"Transfercash"
+  }, 
   {
     icon: <Paybills />,
     title: "Paybills",
+    link:"Choosewallet"
   },
 ];
 
 
-const Home = () => {
+const Home = ({navigation}) => {
+  console.log(navigation)
   const {setAuthData} = useContext(AuthContext)
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false)
@@ -213,14 +219,14 @@ const Home = () => {
         <Viewbalance/>
         <View style={styles.walletOptionsContainer}>
           {walletOptions.map(
-            ({ icon, title }: { icon: JSX.Element; title: string }) => (
-              <View style={styles.optionContainer}>
+            ({ icon, title,link }: { icon: JSX.Element; title: string , link:string}) => (
+              <TouchableOpacity onPress={()=>navigation.navigate(link)} style={styles.optionContainer}>
                 <View style={styles.optionIconBg}>
                   {/* Icon will be inside this */}
                   {icon}
                 </View>
                 <Text style={styles.optionTitle}>{title}</Text>
-              </View>
+              </TouchableOpacity>
             )
           )}
         </View>

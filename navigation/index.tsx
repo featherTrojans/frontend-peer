@@ -40,6 +40,7 @@ import {
   Newtransactions,
   Chatshome,
   Chatsdm,
+  TransferInput,
   Usersearch,
 } from "../screens";
 import { AppState } from "react-native";
@@ -142,18 +143,43 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Onboarding"
+    initialRouteName="Root"
     >
     <AppStack.Screen name="Onboarding" component={Onboarding} />
     <AppStack.Screen name="Personal" component={Personal} />
-    <AppStack.Screen name="Deposit" component={Deposit} />
-    <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Verification" component={Verification} />
     <AppStack.Screen name="Security" component={Security} />
     <AppStack.Screen name="Securepin" component={Securepin} />
     <AppStack.Screen name="Setup" component={Setup} />
+    <AppStack.Screen name="Login" component={Login} />
     <AppStack.Screen name="Welcome" component={Welcome} />
     <AppStack.Screen name="Root" component={Tabs} />
+    {/* SCREEN FOR AUTH */}
+    <AppStack.Screen name="Withdraw" component={Withdraw} />
+    <AppStack.Screen name="Transfercash" component={Transfercash} />
+    <AppStack.Screen name="Deposit" component={Deposit} />
+
+    {/* Transfer FLOW */}
+    <AppStack.Screen name="Getdetails" component={Getdetails} />
+    <AppStack.Screen name="Bankaccount" component={Bankaccount} />
+    
+    
+    {/* TRANSACTIONS */}
+    <AppStack.Screen name="Newtransactions" component={Newtransactions} />
+    {/* WITHDRAW */}
+    <AppStack.Screen name="Summary" component={Summary} />
+
+    {/* HOME NOTIFICATIONS */}
+    <AppStack.Screen name="Notifications" component={Notifications} />
+    {/* WALLET FUNDING */}
+    <AppStack.Screen name="Addcash" component={Addcash} />
+    <AppStack.Screen name="Choosewallet" component={Choosewallet} />
+    
+    <AppStack.Screen name="Pendingrequest" component={Pendingrequest} />
+    <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
+    <AppStack.Screen name="TransferInput" component={TransferInput} />
+    
+
   </AppStack.Navigator>
 );
 

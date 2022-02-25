@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     paddingHorizontal: 15,
-    paddingTop: 20,
+    paddingVertical: 20,
   },
   backArrow: {
     flexDirection: "row",
@@ -24,5 +24,21 @@ export const styles = StyleSheet.create({
   },
   mainText: {
     ...fontsize.bsmall,
+  },
+  btnBg: {
+    paddingTop: 22,
+    paddingBottom: 24,
+    backgroundColor: COLORS.blue6,
+    alignSelf: "stretch",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    width:"100%"
+  },
+  btnText: {
+    color: COLORS.white,
+    textTransform: "uppercase",
+    ...fontsize.smallest,
+    ...FONTS.bold,
   },
 });

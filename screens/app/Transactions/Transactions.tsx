@@ -8,7 +8,6 @@ import { styles } from "./Transactions.styles";
 
 const { Cryingicon } = icons;
 
-const Transactions = () => {
 
   
   const DATA =  [
@@ -79,50 +78,6 @@ const Transactions = () => {
         "createdAt": "2022-01-31T23:52:49.000Z"
     },
     {
-        "transId": "ZKkReMvndj",
-        "initialBal": "2570",
-        "amount": "150",
-        "finalBal": "2420",
-        "description": "#150 transferred to EZEKO",
-        "from": "EZEKO",
-        "to": "EZEKO",
-        "direction": "out",
-        "createdAt": "2022-01-31T23:52:48.000Z"
-    },
-    {
-        "transId": "hntKES0Ew1",
-        "initialBal": "2420",
-        "amount": "150",
-        "finalBal": "2270",
-        "description": "#150 transferred to EZEKO",
-        "from": "EZEKO",
-        "to": "EZEKO",
-        "direction": "out",
-        "createdAt": "2022-01-31T23:51:08.000Z"
-    },
-    {
-        "transId": "O3O0PLHc9b",
-        "initialBal": "2420",
-        "amount": "150",
-        "finalBal": "2570",
-        "description": "#150 transferred from EZEKO",
-        "from": "EZEKO",
-        "to": "EZEKO",
-        "direction": "in",
-        "createdAt": "2022-01-31T23:51:08.000Z"
-    },
-    {
-        "transId": "Z39zYR741W",
-        "initialBal": "2570",
-        "amount": "150",
-        "finalBal": "2420",
-        "description": "#150 transferred to ELON",
-        "from": "EZEKO",
-        "to": "ELON",
-        "direction": "out",
-        "createdAt": "2022-01-31T23:50:27.000Z"
-    },
-    {
         "transId": "lirXTEm7Zs",
         "initialBal": "2720",
         "amount": "150",
@@ -149,25 +104,25 @@ const Transactions = () => {
     );
   };
 
-  const Listheader = () => {
-    const [transactions, setTransations] = useState();
-    const [loading, setLoading] = useState(false);
+const Transactions = () => {
+  const [transactions, setTransations] = useState();
+  const [loading, setLoading] = useState(false);
 
-    useEffect(()=>{
-        getAllTransactions()
-    },[])
-
-    const getAllTransactions = async () =>{
-      try{
-        setLoading(true)
-        const response = await axiosCustom.get("/transactions");
-        setTransations(response?.data?.data?.transactions)
-      }catch(err){
-        console.log(err.response)
-      }finally{
-        setLoading(true)
-      }
+  useEffect(()=>{
+      getAllTransactions()
+  },[])
+  const getAllTransactions = async () =>{
+    try{
+      setLoading(true)
+      const response = await axiosCustom.get("/transactions");
+      setTransations(response?.data?.data?.transactions)
+    }catch(err){
+      console.log(err.response)
+    }finally{
+      setLoading(true)
     }
+  }
+  const Listheader = () => {
 
     return (
       <View style={styles.listHeaderContainer}>
@@ -192,7 +147,7 @@ const Transactions = () => {
 
         <FlatList
           style={{ paddingTop: 10 }}
-          data={formatData(DATA)}
+          data={formatData(transactions)}
           // data={[]}
           renderItem={({ item }: any) => (
             <Transactionhistory date={item.time} datas={item.data} />
