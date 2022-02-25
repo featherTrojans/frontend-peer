@@ -68,12 +68,12 @@ const Verification = ({route,navigation}) => {
           codeInputFieldStyle={styles.otpInput}
           codeInputHighlightStyle={styles.otpInputActive}
           onCodeFilled={(code) => {
-            // You can access the code value here or calll any function to get it, ADD Types too
+            // You can access the code value here or call any function to get it, ADD Types too
             console.log(`Here is the code ${code}`);
             setOtpCode(parseInt(code))
           }}
         /> */}
-        <TextInput keyboardType="number-pad" value={otpCode} onChangeText={(text)=> setOtpCode(text)} />
+        <TextInput keyboardType="number-pad" value={otpCode} onChangeText={(text)=> setOtpCode(text)} style={styles.cutstomOtpInput} />
       </View>
 
       {/* Resend sms duration */}
