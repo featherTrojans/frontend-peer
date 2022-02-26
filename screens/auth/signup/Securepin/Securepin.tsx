@@ -98,7 +98,7 @@ const Securepin = ({route, navigation }) => {
 
         <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
-            return <NumberBtn key={index}>{number}</NumberBtn>;
+            return <NumberBtn key={index}>{number}</NumberBtn>; 
           })}
 
           <TouchableOpacity

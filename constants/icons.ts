@@ -62,6 +62,8 @@ import Location from "../assets/icons/Location";
 
 import SecureDot from "../assets/icons/SecureDot";
 import Chatsearchicon from "../assets/icons/Chatsearchicon";
+import Copyclipboard from "../assets/icons/Copyclipboard";
+
 
 
 // Receiverimage
@@ -135,6 +137,7 @@ export default {
   Chatsearchicon,
   SadEmoji,
   TransferIcon,
-  Location
+  Location,
+  Copyclipboard
 
 };

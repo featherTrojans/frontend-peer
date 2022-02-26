@@ -1,4 +1,5 @@
 import Backheader from "./Backheader/Backheader";
+import Bottombtn from "./Bottombtn/Bottombtn";
 import Iconwithdatas from "./Iconwithdatas/Iconwithdatas";
 import Input from "./Input/Input";
 import Loader from "./Loader/Loader";
@@ -17,5 +18,6 @@ export {
     Sendingandreceive,
     Backheader,
     Iconwithdatas,
-    Loader
+    Loader,
+    Bottombtn
 }
