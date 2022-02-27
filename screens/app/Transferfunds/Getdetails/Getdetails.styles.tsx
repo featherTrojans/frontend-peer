@@ -6,8 +6,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 15,
-    paddingVertical: 20,
   },
   backArrow: {
     flexDirection: "row",

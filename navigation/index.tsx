@@ -38,9 +38,11 @@ import {
   Accepetedrequest, //This screen has changed too
   
   //Withdraw
-  Requestnew,
+  Requestnew, 
   Availablelisting,
   Withdraw,   ///Requests(pending and accepted)
+  Withdrawpreview,
+  Editmeetup,
   Summary,
   Cancelrequest,
 
@@ -61,6 +63,7 @@ import {
   Chatshome,
   Chatsdm,
   Usersearch,
+  Deposit,
   // Deposit
 } from "../screens";
 
@@ -68,7 +71,6 @@ import {
 import { AppState } from "react-native";
 import { Loader, Tab } from "../components";
 import { icons } from "../constants";
-import Deposit from "../screens/app/Deposit/Deposit";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
@@ -178,7 +180,7 @@ const RootNavigator = () => (
     }}
     // initialRouteName="Root"
   >
-    <AppStack.Screen name="Onboarding" component={Transfercash} />
+    <AppStack.Screen name="Onboarding" component={Editmeetup} />
     <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Verification" component={Verification} />
     <AppStack.Screen name="Security" component={Security} />
@@ -191,7 +193,7 @@ const RootNavigator = () => (
     {/* SCREEN FOR AUTH */}
     <AppStack.Screen name="Withdraw" component={Withdraw} />
     <AppStack.Screen name="Transfercash" component={Transfercash} />
-    <AppStack.Screen name="Deposit" component={Deposit} />
+    {/* <AppStack.Screen name="Deposit" component={Deposit} /> */}
 
     {/* Transfer FLOW */}
     <AppStack.Screen name="Getdetails" component={Getdetails} />

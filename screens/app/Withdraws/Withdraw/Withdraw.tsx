@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { ReactNode, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Viewbalance } from "../../../../components";
+import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
 import { styles } from "./Withdraw.styles";
 
 const {
@@ -155,24 +155,19 @@ const Withdraw = () => {
 
   return (
     <View style={styles.container}>
-      {/* Title with a back arrow */}
-      <View style={styles.backArrow}>
-        <Backarrow />
-        <Text style={styles.backArrowText}>Withdraw</Text>
-      </View>
-      <Viewbalance />
+      <Backheader title="Withdraw" />
 
-      {/* Showing balance and add cash btn */}
-      {/* Empty list crying icons */}
-      {/* Make a request btn */}
-      <View style={{ flex: 1 }}>
-        {REQUEST.length < 1 ? <Emptyrequest /> : <Requestlist />}
-      </View>
-      <View style={styles.btnContainer}>
-        <View style={styles.btnBg}>
-          <Text style={styles.btnText}>NEW TRANSACTION</Text>
+      <View style={{ flex: 1, paddingHorizontal: 15 }}>
+        <Viewbalance />
+        <View style={{ flex: 1 }}>
+          {REQUEST.length < 1 ? <Emptyrequest /> : <Requestlist />}
         </View>
       </View>
+
+      <Bottombtn
+        title="NEW TRANSACTION"
+        onpress={() => console.log("New Transaction clicked")}
+      />
     </View>
   );
 };

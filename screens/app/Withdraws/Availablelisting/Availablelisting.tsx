@@ -104,8 +104,8 @@ const Availablelisting = () => {
     <View style={{ flex: 1 }}>
       <ImageBackground
         source={Mapimage}
-        resizeMode="cover"
-        style={styles.imageContainer}
+          resizeMode="cover"
+          style={styles.imageContainer}
       >
         <View>
           <Backarrow />

@@ -4,6 +4,8 @@ import React from "react";
 import { COLORS, icons } from "../../../../constants";
 import { styles } from "./Transfercash.styles";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
+import { Backheader } from "../../../../components";
+
 
 const { Backarrow, Featherwallet, Bankaccount, Forwardarrow } = icons;
 
@@ -25,12 +27,14 @@ const options = [
 const Transfercash = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.backArrow}>
+
+      <Backheader title="Transfer Cash"/>
+      {/* <View style={styles.backArrow}>
         <Backarrow />
         <Text style={styles.backArrowText}>Transfer Cash</Text>
-      </View>
+      </View> */}
 
-      <View style={{ marginTop: 37 }}>
+      <View style={{ marginTop: 20 }}>
         {options.map(({ icon, type, about, nextscreen }, index) => (
           <TouchableOpacity onPress={()=>navigation.navigate("TransferInput",{nextscreen})} key={index} style={styles.optionContainer}>
             <View style={styles.optionDetails}>

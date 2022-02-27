@@ -3,6 +3,7 @@ import Bottombtn from "./Bottombtn/Bottombtn";
 import Iconwithdatas from "./Iconwithdatas/Iconwithdatas";
 import Input from "./Input/Input";
 import Loader from "./Loader/Loader";
+import Numberbtn from "./Numberbtn/Numberbtn";
 import Sendingandreceive from "./Send&Receive/Sendingandreceive";
 import Service from "./Service/Service";
 import Tab from "./Tab/Tab";
@@ -19,5 +20,6 @@ export {
     Backheader,
     Iconwithdatas,
     Loader,
-    Bottombtn
+    Bottombtn,
+    Numberbtn
 }

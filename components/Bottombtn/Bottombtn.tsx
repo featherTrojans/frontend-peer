@@ -8,12 +8,13 @@ type Props = {
   bg?: string;
   onpress: () => void;
 };
-const Bottombtn = ({ title, bg = COLORS.blue6, onpress }: Props) => {
+const Bottombtn = ({ title, bg = COLORS.blue6, onpress, ...rest }: Props) => {
   return (
     <TouchableOpacity
       style={styles.btnSection}
       activeOpacity={0.8}
       onPress={onpress}
+      {...rest}
     >
       <View style={[styles.btnBg, { backgroundColor: bg }]}>
         <Text style={styles.btnText}>{title}</Text>

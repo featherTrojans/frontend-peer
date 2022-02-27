@@ -1,33 +1,82 @@
-import { StyleSheet, Text, View, TextInput, StatusBar } from "react-native";
-import React from "react";
-import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
-import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { styles } from "./Requestnew.styles";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  TouchableHighlight,
+} from "react-native";
+import {
+  Backheader,
+  Bottombtn,
+  Numberbtn,
+  Viewbalance,
+} from "../../../../components";
+import { COLORS } from "../../../../constants";
+import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
+// import { styles } from "./TransferInput.styles";
 
-const { Backarrow } = icons;
+function Requestnew({ route, navigation }) {
+  // const { nextscreen } = route.params;
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
+  const [amount, setAmount] = useState<string[]>([]);
 
-const Requestnew = () => {
+  const amountFormatter = (value: string) => {
+    return (
+      Number(value)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, "$&,") || "0.00"
+    );
+  };
+
+  const handleRemoveAmount = () => {
+    if (amount.length > 0) {
+      const newdata = [...amount];
+      newdata.pop();
+      setAmount(newdata);
+      console.log(newdata);
+    }
+  };
+  const handleSetAmount = (value: string) => {
+    setAmount((oldamount) => [...oldamount, value]);
+  };
+
   return (
     <View style={styles.container}>
-      <StatusBar />
       <Backheader title="Amount" />
 
-      {/* View balaance component */}
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
 
-        {/* Still have to fix the styling for this section below */}
-        <View style={{ flex: 1, backgroundColor: "red" }}>
-          
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <View style={{ alignItems: "center" }}>
+            <View style={styles.amountcont}>
+              <Text style={styles.amountTxt}>
+                {" "}
+                <Text style={{ color: COLORS.grey5 }}>N</Text>{" "}
+                {amountFormatter(amount.join(""))}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.numberBtnContainer}>
+            {numbers.map((number, index) => {
+              return (
+                <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
+                  {number}
+                </Numberbtn>
+              );
+            })}
+            <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
+          </View>
         </View>
       </View>
+
       <Bottombtn
         title="PROCEED"
-        onpress={() => console.log("Request new withdrawal pressed")}
+        onpress={() => console.log("Request new withdraal clicked")}
       />
     </View>
   );
-};
+}
 
 export default Requestnew;

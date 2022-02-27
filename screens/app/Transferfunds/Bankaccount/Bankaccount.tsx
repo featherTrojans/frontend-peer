@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, FlatList, StatusBar } from "react-native";
+import React, { useState } from "react";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Input } from "../../../../components";
+import { Backheader, Bottombtn, Input } from "../../../../components";
 import { styles } from "./Bankaccount.styles";
 
 const { Backarrow, At } = icons;
@@ -80,50 +81,63 @@ const Saveduser = ({ details }: any) => {
 };
 
 const Bankaccount = () => {
+  const [checked, setChecked] = useState(false);
+
   return (
     <View style={styles.container}>
-      <View style={styles.backArrow}>
-        <Backarrow />
-        <Text style={styles.backArrowText}>Bank Account</Text>
-      </View>
-      <View>
-        <Input icon={<At />} placeholder="N37,580.50" />
-      </View>
+      <StatusBar />
+      <Backheader title="Bank Account" />
 
-      <View style={styles.headerContainer}>
-        <View>
+      <View style={{ flex: 1, paddingHorizontal: 25 }}>
+        <Input icon={<At />} placeholder="N37,580.50" />
+
+        <View style={styles.headerContainer}>
           <Text style={styles.leftHeader}>Saved Accounts</Text>
-        </View>
-        <View>
           <Text style={styles.rightHeader}>See More</Text>
         </View>
-      </View>
 
-      <View style={{ flex: 1 }}>
-        {/* Flatlist container */}
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={16}
-          data={SAVEDACCOUNTS}
-          keyExtractor={(item) => item.name}
-          renderItem={({ item }) => <Saveduser details={item} />}
-        />
-      </View>
-      <View>
+        <View style={{ marginVertical: 35 }}>
+          {/* Flatlist container */}
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            scrollEventThrottle={16}
+            data={SAVEDACCOUNTS}
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => <Saveduser details={item} />}
+          />
+        </View>
+
         <Input icon={<At />} placeholder="--- Select Bank ---" />
         <Input icon={<At />} placeholder="Account Number" />
         <View style={styles.addAccountContainer}>
-          <View style={styles.checkbox} />
-          <Text style={styles.checkText}>Add To Saved Accounts</Text>
+          <BouncyCheckbox
+            size={18}
+            fillColor={COLORS.blue6}
+            unfillColor={COLORS.white}
+            text={"Add To Saved Accounts"}
+            iconStyle={[
+              styles.checkbox,
+              {
+                borderColor: checked ? COLORS.blue6 : COLORS.checkBorder,
+                borderRadius: 5,
+              },
+            ]}
+            onPress={(isChecked: boolean) => {
+              setChecked(!checked);
+            }}
+            textStyle={[styles.checkboxText, { textDecorationLine: "none" }]}
+            style={{
+              alignItems: "center",
+            }}
+          />
         </View>
       </View>
 
-      <View style={styles.btcSection}>
-        <View style={styles.btnBg}>
-          <Text style={styles.btnText}>PROCEED</Text>
-        </View>
-      </View>
+      <Bottombtn
+        title="PROCEED"
+        onpress={() => console.log("Bank accout proceded")}
+      />
     </View>
   );
 };

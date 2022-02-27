@@ -14,18 +14,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingTop: 20,
-    paddingHorizontal: 15,
-  },
-  backArrow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 37,
-  },
-  backArrowText: {
-    ...fontsize.bbsmall,
-    ...FONTS.regular,
-    marginLeft: 21,
+    // paddingHorizontal: 15,
   },
   requestContainer: {
     flex: 1,
@@ -41,24 +30,8 @@ export const styles = StyleSheet.create({
     ...fontsize.bsmall,
     color: COLORS.grey2,
   },
-  btnContainer: {
-    height: 110,
-    backgroundColor: COLORS.white,
-    paddingHorizontal: 25,
-    paddingVertical: 24,
-  },
-  btnBg: {
-    flex: 1,
-    backgroundColor: COLORS.blue6,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  btnText: {
-    ...fontsize.smallest,
-    ...FONTS.bold,
-    color: COLORS.white,
-  },
+
+  
   emptyListContainer: {
     justifyContent: "center",
     alignItems: "center",

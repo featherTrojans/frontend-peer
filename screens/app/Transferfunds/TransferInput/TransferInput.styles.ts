@@ -4,10 +4,7 @@ import { COLORS, FONTS, fontsize } from "../../../../constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor:"gray",
     backgroundColor: COLORS.white,
-    // paddingHorizontal: 15,
-    marginVertical: 20,
   },
   numberBtn: {
     width: 60,

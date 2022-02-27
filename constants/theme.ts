@@ -40,6 +40,7 @@ export const COLORS = {
   black: "#000000",
   borderColor: "#EDEDED",
   borderColor2: `rgba(112, 112, 112, .2)`,
+  borderColor3: `rgba(112, 112, 112, .3)`,
   lineColor: `rgba(112, 112, 112, .1)`,
   lineColor2: `rgba(112, 112, 112, .3)`,
   lineColor3: `rgba(112, 112, 112, .5)`,

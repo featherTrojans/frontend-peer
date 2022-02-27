@@ -6,35 +6,41 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableNativeFeedback,
+  StatusBar,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Loader } from "../../../../components";
+import { Bottombtn, Loader, Numberbtn } from "../../../../components";
+
 import { COLORS, SIZES, fontsize, FONTS, icons } from "../../../../constants";
 
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Securepin.styles";
 
+const { SecureDot } = icons;
+const Securepin = ({ route, navigation }) => {
+  // const { token } = route.params;
 
-const {SecureDot} = icons
-const Securepin = ({route, navigation }) => {
-  const {token} = route.params
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9","", "0"];
-  const [loading, setLoading] = useState<boolean>(false)
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
+  const [loading, setLoading] = useState<boolean>(false);
   const [amount, setAmount] = useState<string[]>([]);
 
   console.log(amount);
   const handleSubmit = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const pin = amount.join("");
-      const response = await axiosCustom.put("/auth/pin/set", { pin},{headers:{token:token}});
+      const response = await axiosCustom.put(
+        "/auth/pin/set",
+        { pin },
+        { headers: { token: token } }
+      );
       console.log(response);
-      navigation.navigate("Setup",{token:response?.data?.data?.token});
+      navigation.navigate("Setup", { token: response?.data?.data?.token });
     } catch (err) {
       console.log(err.response);
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,22 +58,12 @@ const Securepin = ({route, navigation }) => {
     }
   };
 
-  const NumberBtn = ({ children }: { children: string }) => {
-    return (
-      <TouchableOpacity
-        style={styles.numberBtn}
-        activeOpacity={0.8}
-        onPress={() => handleSetAmount(children)}
-      >
-        <Text>{children}</Text>
-      </TouchableOpacity>
-    );
-  };
 
   return (
-    <KeyboardAwareScrollView>
+    <View style={styles.container}>
       {loading && <Loader />}
-      <View style={styles.container}>
+      <StatusBar />
+      <View style={{ paddingHorizontal: 25 }}>
         <JustifyBetween style={{ marginBottom: 10 }}>
           <View>
             <Text style={styles.header}>Set up your </Text>
@@ -89,37 +85,27 @@ const Securepin = ({route, navigation }) => {
             <View style={styles.pinView}>{amount[1] && <SecureDot />}</View>
             <View style={styles.pinView}>{amount[2] && <SecureDot />}</View>
             <View style={styles.pinView}>{amount[3] && <SecureDot />}</View>
-            {/* <TextInput style={styles.pinInput} />
-            <TextInput style={styles.pinInput} />
-            <TextInput style={styles.pinInput} />
-            <TextInput style={styles.pinInput} /> */}
           </View>
         </View>
 
         <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
-            return <NumberBtn key={index}>{number}</NumberBtn>; 
+            return (
+              <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
+                {number}
+              </Numberbtn>
+            );
           })}
 
-          <TouchableOpacity
-            style={styles.numberBtn}
-            activeOpacity={0.8}
-            onPress={() => handleRemoveAmount()}
-          >
-            <Text>X</Text>
-          </TouchableOpacity>
+          <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
-
-        <TouchableOpacity
-          style={[styles.proceedBtn, { marginBottom: 80 }]}
-          activeOpacity={0.8}
-          onPress={handleSubmit}
-          disabled={amount.length !== 4}
-        >
-          <Text style={styles.proceedText}>PROCEED</Text>
-        </TouchableOpacity>
       </View>
-    </KeyboardAwareScrollView>
+      <Bottombtn
+        title="PROCEED"
+        onpress={handleSubmit}
+        disabled={amount.length !== 4}
+      />
+    </View>
   );
 };
 

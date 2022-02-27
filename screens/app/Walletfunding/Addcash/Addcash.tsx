@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "./Addcash.styles";
+import { Bottombtn } from "../../../../components";
+
 
 const { Backarrow } = icons;
 
@@ -17,12 +19,14 @@ const Addcash = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.backArrow}>
+
+      <StatusBar />
+      {/* <View style={styles.backArrow}>
         <Backarrow />
         <Text style={styles.backArrowText}>Add Cash</Text>
-      </View>
+      </View> */}
 
-      <View>
+      <View style={{flex: 1, paddingHorizontal: 15}}>
         {/* This will contain the dropdown to choose the wallet type needed */}
 
         <DropDownPicker
@@ -46,6 +50,8 @@ const Addcash = () => {
           </View>
         )}
       </View>
+      <Bottombtn title="CONTINUE" onpress={() => console.log("Continue to add cash clicked")}/>
+
     </View>
   );
 };

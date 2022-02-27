@@ -5,18 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 15,
     paddingTop: 20,
-  },
-  backArrow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 37,
-  },
-  backArrowText: {
-    marginLeft: 21,
-    ...fontsize.bbsmall,
-    ...FONTS.regular,
   },
   dropDown: {
     height: 62,

@@ -63,6 +63,9 @@ import Location from "../assets/icons/Location";
 import SecureDot from "../assets/icons/SecureDot";
 import Chatsearchicon from "../assets/icons/Chatsearchicon";
 import Copyclipboard from "../assets/icons/Copyclipboard";
+import Editicon from "../assets/icons/Editicon";
+import Meetupdot from "../assets/icons/Meetupdot";
+import Clearinput from "../assets/icons/Clearinput";
 
 
 
@@ -138,6 +141,11 @@ export default {
   SadEmoji,
   TransferIcon,
   Location,
-  Copyclipboard
+  Copyclipboard,
+  Editicon,
+  Meetupdot,
+  Clearinput
+
+  
 
 };

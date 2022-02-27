@@ -6,7 +6,12 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
 } from "react-native";
-import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
+import {
+  Backheader,
+  Bottombtn,
+  Numberbtn,
+  Viewbalance,
+} from "../../../../components";
 import { COLORS } from "../../../../constants";
 import { styles } from "./TransferInput.styles";
 
@@ -15,10 +20,13 @@ function TransferInput({ route, navigation }) {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const [amount, setAmount] = useState<string[]>([]);
 
-
   const amountFormatter = (value: string) => {
-    return (Number(value)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') || "0.00"
-  }
+    return (
+      Number(value)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, "$&,") || "0.00"
+    );
+  };
 
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
@@ -32,26 +40,14 @@ function TransferInput({ route, navigation }) {
     setAmount((oldamount) => [...oldamount, value]);
   };
 
-  const NumberBtn = ({ children }: { children: string }) => {
-    return (
-      <TouchableNativeFeedback
-        style={styles.numberBtn}
-        onPress={() => handleSetAmount(children)}
-        background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, true)}
-      >
-        <View style={styles.numberBtn}>
-          <Text style={styles.numberBtnText}>{children}</Text>
-        </View>
-      </TouchableNativeFeedback>
-    );
-  };
 
   return (
     <View style={styles.container}>
-      <Backheader title="Deposit" />
+      <Backheader title="Enter Amount" />
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
+
         <View style={{ flex: 1, justifyContent: "center" }}>
           <View style={{ alignItems: "center" }}>
             <View style={styles.amountcont}>
@@ -64,22 +60,13 @@ function TransferInput({ route, navigation }) {
           </View>
           <View style={styles.numberBtnContainer}>
             {numbers.map((number, index) => {
-              return <NumberBtn key={index}>{number}</NumberBtn>;
+              return (
+                <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
+                  {number}
+                </Numberbtn>
+              );
             })}
-
-            <TouchableNativeFeedback
-              style={styles.numberBtn}
-              onPress={() => handleRemoveAmount()}
-              // underlayColor={COLORS.lightBlue}
-              background={TouchableNativeFeedback.Ripple(
-                COLORS.lightBlue,
-                true
-              )}
-            >
-              <View style={styles.numberBtn}>
-                <Text>X</Text>
-              </View>
-            </TouchableNativeFeedback>
+            <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
           </View>
         </View>
       </View>
