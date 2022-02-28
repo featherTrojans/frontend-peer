@@ -3,12 +3,12 @@ import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    width: SIZES.width,
-    height: SIZES.height,
+    flex: 1,
+    // width: SIZES.width,
+    // height: SIZES.height,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 25,
     paddingTop: 25,
+    // paddingHorizontal: 25,
     // paddingBottom:40,
   },
   header: {

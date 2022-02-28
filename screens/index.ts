@@ -12,34 +12,58 @@ import Welcome from "./auth/welcome/Welcome";
 // These are the main app screens
 import Home from "./app/Home/Home";
 import History from "./app/History/History";
-import Transactions from "./app/Transactions/Transactions";
+// import Transactions from "./app/Transactions/Transactions";
+import Transactions from "./app/Transactions/Transaction/Transaction";
 // import Chats from "./app/Chats/Chats";
 import Settings from "./app/Settings/Settings";
 import Notifications from "./app/Notifications/Notifications";
 
 // These are the transactions sub screens
-import Withdraw from "./app/Transactions/Withdraw/Withdraw";
-import Transfercash from "./app/Transactions/Transferfunds/Transferfunds/Transfercash";
-import Availablelisting from "./app/Transactions/Availablelisting/Availablelisting";
-import Addcash from "./app/Transactions/Addcash/Addcash";
-import Amount from "./app/Transactions/Amount/Amount";
-import Requestnew from "./app/Transactions/Requestnew/Requestnew";
-import Getdetails from "./app/Transactions/Transferfunds/Getdetails/Getdetails";
-import Bankaccount from "./app/Transactions/Transferfunds/Bankaccount/Bankaccount";
-import Choosewallet from "./app/Transactions/Choosewallet/Choosewallet";
-import Pendingrequest from "./app/Transactions/Pendingrequest/Pendingrequest";
-import Summary from "./app/Transactions/Summary/Summary";
-import Cancelrequest from "./app/Transactions/Cancelrequest/Cancelrequest";
-import Accepetedrequest from "./app/Transactions/Acceptedrequest/Accepetedrequest";
+
+
+import Availablelisting from "./app/Withdraws/Availablelisting/Availablelisting";
+import Addcash from "./app/Walletfunding/Addcash/Addcash";
+
+import Requestnew from "./app/Withdraws/Requestnew/Requestnew";
+import Bankaccount from "./app/Transferfunds/Bankaccount/Bankaccount";
+import Pendingrequest from "../NO/Pendingrequest/Pendingrequest";
+import Summary from "./app/Withdraws/Summary/Summary";
+import Cancelrequest from "./app/Withdraws/Cancelrequest/Cancelrequest";
+import Accepetedrequest from "../NO/Acceptedrequest/Accepetedrequest";
 import Personal from "./auth/signup/Personal/Personal";
 import Security from "./auth/signup/Security/Security";
 import Securepin from "./auth/signup/Securepin/Securepin";
-import Newtransactions from "./app/Newtransactions/Newtransactions";
-import TransferInput from "./app/TransferInput/TransferInput";
+import Newtransactions from "./app/Transactions/Newtransactions/Newtransactions";
+import TransferInput from "./app/Transferfunds/TransferInput/TransferInput";
 
 import Usersearch from "./app/Chats/Usersearch/Usersearch";
 import Chatsdm from "./app/Chats/Chatsdm/Chatsdm";
 import Chatshome from "./app/Chats/Chatshome/Chatshome";
+import Withdraw from "./app/Withdraws/Withdraw/Withdraw";
+import Transfercash from "./app/Transferfunds/Transfercash/Transfercash";
+import Getdetails from "./app/Transferfunds/Getdetails/Getdetails";
+import Choosewallet from "./app/Walletfunding/Choosewallet/Choosewallet";
+import Transactiondetails from "./app/Transactions/Transactiondetails/Transactiondetails";
+import Transactiondispute from "./app/Transactions/Transactiondispute/Transactiondispute";
+import Deposit from "./app/Deposit/Deposit";
+import Withdrawpreview from "./app/Withdraws/Withdrawpreview/Withdrawpreview";
+import Editmeetup from "./app/Withdraws/Editmeetup/Editmeetup";
+import Pendingwithdraw from "./app/Withdraws/Pendingwithdraw/Pendingwithdraw";
+import Acceptedwithdraw from "./app/Withdraws/Acceptedwithdraw/Acceptedwithdraw";
+import Transferpin from "./app/Transferfunds/Transferpin/Transferpin";
+import Canceldeposit from "./app/Deposit/Canceldeposit/Canceldeposit";
+import Pendingdeposit from "./app/Deposit/Pendingdeposit/Pendingdeposit";
+import Accepteddeposit from "./app/Deposit/Accepteddeposit/Accepteddeposit";
+import Depositpin from "./app/Deposit/Depositpin/Depositpin";
+
+
+
+
+
+
+
+
+
 
 export {
   Onboarding,
@@ -47,32 +71,59 @@ export {
   Signup,
   Verification,
   Setup,
-  Welcome,
-  Home,
-  History,
-  Transactions,
-  Notifications,
-  Settings,
-  Withdraw,
-  Transfercash,
-  Addcash,
-  Amount,
-  Requestnew,
-  Availablelisting,
-  Getdetails,
-  Bankaccount,
-  Choosewallet,
-  Pendingrequest,
-  Summary,
-  Cancelrequest,
-  Accepetedrequest,
   Personal,
   Security,
   Securepin,
+  Welcome,
+
+  Home,
+
+
+  Transactions,
   Newtransactions,
+  Transactiondetails,
+  Transactiondispute,
+
+  History,
+  Settings,
+
+  Addcash,
+  Choosewallet,
+
+  Transfercash,
   TransferInput,
+  Getdetails,
+  Bankaccount,
+  Transferpin,
+  
+
+  Notifications,
+
+  Deposit,
+  Pendingdeposit,
+  Accepteddeposit,
+  Depositpin,
+  Canceldeposit,
+
+
+  Requestnew,
+  Availablelisting,
+  Withdraw,
+  Withdrawpreview,
+  Editmeetup,
+  Pendingwithdraw,
+  Acceptedwithdraw,
+  Summary,
+  Cancelrequest,
+
 
   Chatsdm,
   Chatshome,
   Usersearch,
+
+
+  Pendingrequest,
+  Accepetedrequest,
+
+
 };

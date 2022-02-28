@@ -17,7 +17,6 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
 import { AuthContext } from "../../../../context/AuthContext";
 import { useToast } from "react-native-toast-notifications";
-import showerror from "../../../../utils/errorMessage";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
@@ -51,7 +50,15 @@ const Personal = ({ navigation }) => {
   const {setAuthData} = useContext(AuthContext);
   const toast = useToast();
   useEffect(() => {
-    showerror()
+    if(toast.show !== undefined){
+      toast.show("Task finished successfully", {
+        type: "normal",
+        placement: "top",
+        duration: 4000,
+        // offset: 100,
+        animationType: "slide-in",
+      }); 
+    }
   }, [toast]);
 
   console.log("what the heck")

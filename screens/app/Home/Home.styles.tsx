@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
   profileUsername: {
     ...fontsize.bsmall,
     ...FONTS.regular,
+    alignItems: 'center'
   },
 
   walletBlock: {
