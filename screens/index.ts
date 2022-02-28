@@ -55,6 +55,8 @@ import Canceldeposit from "./app/Deposit/Canceldeposit/Canceldeposit";
 import Pendingdeposit from "./app/Deposit/Pendingdeposit/Pendingdeposit";
 import Accepteddeposit from "./app/Deposit/Accepteddeposit/Accepteddeposit";
 import Depositpin from "./app/Deposit/Depositpin/Depositpin";
+import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
+
 
 
 
@@ -100,6 +102,7 @@ export {
   Notifications,
 
   Deposit,
+  Depositupdate,
   Pendingdeposit,
   Accepteddeposit,
   Depositpin,

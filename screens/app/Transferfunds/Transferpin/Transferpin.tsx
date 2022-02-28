@@ -26,38 +26,40 @@ const Transferpin = () => {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <View style={styles.backArrowConteiner}>
-        <Backarrow />
-      </View>
-
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>
-          You are about to send{" "}
-          <Text style={styles.descriptionSubText}>NGN 35,750.00</Text> from your
-          Primary Wallet to @della007 - Adeyemi Adeola Gideon
-        </Text>
-        <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
-      </View>
-
-      <View style={styles.pinContainer}>
-        <View style={styles.pinInputContainer}>
-          <View style={styles.pinView}>{amount[0] && <SecureDot />}</View>
-          <View style={styles.pinView}>{amount[1] && <SecureDot />}</View>
-          <View style={styles.pinView}>{amount[2] && <SecureDot />}</View>
-          <View style={styles.pinView}>{amount[3] && <SecureDot />}</View>
+      <View style={styles.mainContainer}>
+        <View style={styles.backArrowConteiner}>
+          <Backarrow />
         </View>
-      </View>
 
-      <View style={styles.numberBtnContainer}>
-        {numbers.map((number, index) => {
-          return (
-            <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
-              {number}
-            </Numberbtn>
-          );
-        })}
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>
+            You are about to send{" "}
+            <Text style={styles.descriptionSubText}>NGN 35,750.00</Text> from
+            your Primary Wallet to @della007 - Adeyemi Adeola Gideon
+          </Text>
+          <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
+        </View>
 
-        <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
+        <View style={styles.pinContainer}>
+          <View style={styles.pinInputContainer}>
+            <View style={styles.pinView}>{amount[0] && <SecureDot />}</View>
+            <View style={styles.pinView}>{amount[1] && <SecureDot />}</View>
+            <View style={styles.pinView}>{amount[2] && <SecureDot />}</View>
+            <View style={styles.pinView}>{amount[3] && <SecureDot />}</View>
+          </View>
+        </View>
+
+        <View style={styles.numberBtnContainer}>
+          {numbers.map((number, index) => {
+            return (
+              <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
+                {number}
+              </Numberbtn>
+            );
+          })}
+
+          <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
+        </View>
       </View>
     </View>
   );
