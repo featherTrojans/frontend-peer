@@ -74,6 +74,8 @@ import Orangecheckmark from "../assets/icons/Orangecheckmark";
 import Cancelicony from "../assets/icons/Cancelicony";
 import Smsicony from "../assets/icons/Smsicony";
 import Phoneicony from "../assets/icons/Phoneicony";
+import Ratingstar from "../assets/icons/Ratingstar";
+
 
 
 
@@ -165,7 +167,8 @@ export default {
 
   Cancelicony,
   Smsicony,
-  Phoneicony
+  Phoneicony,
+  Ratingstar
   
 
   

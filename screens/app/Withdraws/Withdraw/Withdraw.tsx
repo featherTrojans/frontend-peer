@@ -75,37 +75,19 @@ const Emptyrequest = () => {
 const Requesteeprofile = ({ list }: { list: any }) => {
   const { image, full_name, username, price, status } = list;
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        paddingTop: 19,
-        paddingBottom: 21,
-        paddingLeft: 14,
-        paddingRight: 17,
-        borderRadius: 15,
-        elevation: 3,
-        shadowColor: "rgba(0,0,0,.05)",
-        shadowOffset: { width: 1, height: 3 },
-        shadowOpacity: 0.16,
-        shadowRadius: 20,
-        backgroundColor: COLORS.white,
-      }}
-    >
+    <View style={styles.withdrawProfileContainer}>
       <View style={{ flexDirection: "row" }}>
         {/* Image */}
         {image}
-        <View style={{ marginLeft: 10 }}>
-          <Text style={{ ...fontsize.bsmall, ...FONTS.medium }}>
-            {full_name}
-          </Text>
-          <Text style={{ ...fontsize.bsmall, ...FONTS.regular }}>
-            {username}
-          </Text>
+
+        <View style={styles.namesContainer}>
+          <Text style={styles.withdrawProfileName}>{full_name}</Text>
+          <Text style={styles.withdrawProfileUsername}>{username}</Text>
         </View>
       </View>
-      <View style={{ alignItems: "flex-end", justifyContent: "space-between" }}>
-        <Text style={{ ...fontsize.small, ...FONTS.bold }}>N{price}</Text>
+
+      <View style={styles.priceAndCheck}>
+        <Text style={styles.withdrawProfilePrice}>N{price}</Text>
 
         {status === "accepted" && <Acceptedcheck />}
       </View>
@@ -122,8 +104,6 @@ const Withdraw = () => {
     return (
       <View style={styles.requestContainer}>
         <View style={styles.listHeaderContainer}>
-
-
           <TouchableOpacity onPress={() => setActive("pending")}>
             <Text
               style={[
@@ -145,8 +125,6 @@ const Withdraw = () => {
               Accepted Requests
             </Text>
           </TouchableOpacity>
-
-
         </View>
         <FlatList
           data={REQUESTDATA}

@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
     ...fontsize.bmsmall,
     ...FONTS.bold,
     marginRight: 12,
+    marginLeft: 8
   },
   amountText: {
     ...fontsize.bsmall,
@@ -98,13 +99,12 @@ export const styles = StyleSheet.create({
   },
 
 
-//Make Requesr button
+//Make Request button
 bottomMakeRequestBtn: {
   flex: 1,
   backgroundColor: COLORS.black,
   borderRadius: 10,
   marginRight: 14,
-  // justifyContent: "center",
   paddingHorizontal: 10,
   alignItems: "center",
   flexDirection: 'row'
@@ -114,4 +114,30 @@ requestText: {
   ...FONTS.bold,
   color: COLORS.white,
 },
+
+
+//Receive payment buttons
+
+
+
+//Accept Request btn
+bottomAcceptBtn: {
+  flex: 1,
+  backgroundColor: COLORS.green1,
+  borderRadius: 10,
+  marginRight: 14,
+  justifyContent: "center",
+  alignItems: "center",
+},
+depositAmountBaseCharge: {
+  ...fontsize.small,
+  color: COLORS.green1,
+},
+depositLocationText:{
+  ...fontsize.bmsmall,
+  ...FONTS.regular,
+  marginLeft: 12,
+  marginRight: 100
+},
+
 });

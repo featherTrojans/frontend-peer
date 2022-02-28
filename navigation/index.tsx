@@ -62,7 +62,10 @@ import {
   //Notification
   Notifications,
 
-  Deposit,
+  Deposit, ///Requests(pending and accepted)
+  Pendingdeposit,
+  Accepteddeposit,
+  Depositpin,
   Canceldeposit,
 
 
@@ -187,7 +190,7 @@ const RootNavigator = () => (
     }}
     // initialRouteName="Root"
   >
-    <AppStack.Screen name="Onboarding" component={Withdraw} />
+    <AppStack.Screen name="Onboarding" component={Depositpin} />
     <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Verification" component={Verification} />
     <AppStack.Screen name="Security" component={Security} />

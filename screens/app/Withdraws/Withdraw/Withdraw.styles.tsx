@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     color: COLORS.grey2,
     borderRadius: 14,
     paddingVertical: 18,
-    paddingHorizontal: 26
+    paddingHorizontal: 26,
   },
 
   emptyListContainer: {
@@ -39,4 +39,69 @@ export const styles = StyleSheet.create({
     ...fontsize.bsmall,
     ...FONTS.regular,
   },
+
+  ///Withdraw requestee profile
+
+  withdrawProfileContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: 19,
+    paddingBottom: 21,
+    paddingLeft: 14,
+    paddingRight: 17,
+    borderRadius: 15,
+    elevation: 3,
+    shadowColor: "rgba(0,0,0,.05)",
+    shadowOffset: { width: 1, height: 3 },
+    shadowOpacity: 0.16,
+    shadowRadius: 20,
+    backgroundColor: COLORS.white,
+  },
+  namesContainer: {
+    marginLeft: 20,
+  },
+  withdrawProfileName: {
+    ...fontsize.bsmall,
+    ...FONTS.medium,
+  },
+  withdrawProfileUsername: {
+    ...fontsize.bsmall,
+    ...FONTS.regular,
+  },
+  priceAndCheck: {
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+  },
+  withdrawProfilePrice: {
+    ...fontsize.small,
+    ...FONTS.bold,
+  },
+
+  //Deposit requetee profile
+  depositProfileContainer: {
+    backgroundColor: COLORS.white,
+    paddingBottom: 23,
+    paddingVertical: 20,
+    paddingHorizontal: 14,
+    borderRadius: 15,
+    marginBottom: 10,
+  },
+  depositProfileDetails: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  depositProfileName: {
+    ...fontsize.bsmall,
+    ...FONTS.medium,
+    marginBottom: 3,
+    lineHeight: 27,
+  },
+  depositAmount: { 
+    ...fontsize.small, 
+    ...FONTS.medium 
+  },
+  depositBasecharge:{ 
+    color: COLORS.green1, 
+    ...fontsize.smallest 
+  }
 });

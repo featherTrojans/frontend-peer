@@ -12,14 +12,25 @@ import {
   Iconwithdatas,
   Requesterdetails,
 } from "../../../../components";
-import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
+import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
+//   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
+// styles
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
-const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon } = icons;
+const {
+  Forwardarrow,
+  Meetupdot,
+  Renegotiateicon,
+  Chaticon,
+  Ratingstar,
+  Phoneicony,
+  Smsicony,
+  Cancelicony,
+} = icons;
 const { Locationmap } = images;
 
-const Pendingwithdraw = () => {
+const Accepteddeposit = () => {
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -30,7 +41,7 @@ const Pendingwithdraw = () => {
       >
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
-            {true ? (
+            {false ? (
               <View>
                 <View style={styles.detailsProfile}>
                   <Requesterdetails
@@ -40,8 +51,8 @@ const Pendingwithdraw = () => {
                   />
 
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={styles.numberOfBadge}>203</Text>
-                    <Forwardarrow />
+                    <Ratingstar />
+                    <Text style={styles.numberOfBadge}>3.5</Text>
                   </View>
                 </View>
 
@@ -49,7 +60,7 @@ const Pendingwithdraw = () => {
                   <Text style={styles.amountText}>Amount</Text>
                   <Text style={styles.amountPrice}>
                     NGN 65,000.00{" "}
-                    <Text style={styles.amountBaseCharge}>
+                    <Text style={styles.depositAmountBaseCharge}>
                       + 1,500.00 (Base Charge)
                     </Text>{" "}
                   </Text>
@@ -65,7 +76,10 @@ const Pendingwithdraw = () => {
                       style={{ flexDirection: "row", alignItems: "center" }}
                     >
                       <Meetupdot />
-                      <Text style={styles.locationText}>Forks and Fingers</Text>
+                      <Text style={styles.depositLocationText}>
+                        Forks ‘n’ Fingers, Obafemi Awolowo University Campus,
+                        Ile-Ife{" "}
+                      </Text>
                     </View>
                   </View>
                 </View>
@@ -73,23 +87,36 @@ const Pendingwithdraw = () => {
             ) : (
               <View>
                 <Iconwithdatas
+                  icon={<Phoneicony />}
+                  title="Phone"
+                  details="Phone call to communicate"
+                  onpress={() => console.log("Redirect to Chat")}
+                />
+                <Iconwithdatas
+                  icon={<Smsicony />}
+                  title="SMS"
+                  details="Send a text to communicate"
+                  onpress={() => console.log("Redirect to Negotiate")}
+                />
+                <Iconwithdatas
                   icon={<Chaticon />}
                   title="Chat"
                   details="Discuss conversations via chat"
                   onpress={() => console.log("Redirect to Chat")}
                 />
+
                 <Iconwithdatas
-                  icon={<Renegotiateicon />}
-                  title="Renegotiate Charges "
-                  details="Send in a new charge for this request"
+                  icon={<Cancelicony />}
+                  title="Decline Request "
+                  details="Say no to this transaction"
                   onpress={() => console.log("Redirect to Negotiate")}
                 />
               </View>
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <View style={styles.bottomCancelBtn}>
-                <Text style={styles.cancelText}>CANCEL REQUEST</Text>
+              <View style={styles.bottomAcceptBtn}>
+                <Text style={styles.cancelText}>RECEIVE PAYMENT</Text>
               </View>
               <View style={styles.blackBtn}></View>
             </View>
@@ -100,4 +127,4 @@ const Pendingwithdraw = () => {
   );
 };
 
-export default Pendingwithdraw;
+export default Accepteddeposit;
