@@ -22,26 +22,31 @@ const Newtransactions = () => {
             icon={<Withdrawicon />}
             title="Withdraw"
             details="Get cash from feather users near you."
+            onpress={() => console.log("Redirect to Withdraw")}
           />
           <Iconwithdatas
             icon={<Depositicon />}
             title="Deposit"
             details="Supply cash and earn cashback!"
+            onpress={() => console.log("Redirect to Deposit")}
           />
           <Iconwithdatas
             icon={<Withdrawicon />}
             title="Transfer"
             details="Send cash to feather wallets and bank accounts."
+            onpress={() => console.log("Redirect to Transfer")}
           />
           <Iconwithdatas
             icon={<Withdrawicon />}
             title="Fund Wallet"
             details="Add Cash to your wallets easily"
+            onpress={() => console.log("Redirect to Fund Transfer")}
           />
           <Iconwithdatas
             icon={<Withdrawicon />}
             title="Paybills"
             details="Purchase airtime & data, PayTV Subscriptions…"
+            onpress={() => console.log("Redirect to Paybills")}
           />
         </ScrollView>
 

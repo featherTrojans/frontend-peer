@@ -48,6 +48,13 @@ import Transactiondispute from "./app/Transactions/Transactiondispute/Transactio
 import Deposit from "./app/Deposit/Deposit";
 import Withdrawpreview from "./app/Withdraws/Withdrawpreview/Withdrawpreview";
 import Editmeetup from "./app/Withdraws/Editmeetup/Editmeetup";
+import Pendingwithdraw from "./app/Withdraws/Pendingwithdraw/Pendingwithdraw";
+import Acceptedwithdraw from "./app/Withdraws/Acceptedwithdraw/Acceptedwithdraw";
+import Transferpin from "./app/Transferfunds/Transferpin/Transferpin";
+import Canceldeposit from "./app/Deposit/Canceldeposit/Canceldeposit";
+
+
+
 
 
 
@@ -82,11 +89,13 @@ export {
   TransferInput,
   Getdetails,
   Bankaccount,
+  Transferpin,
   
 
   Notifications,
 
   Deposit,
+  Canceldeposit,
 
 
   Requestnew,
@@ -94,6 +103,8 @@ export {
   Withdraw,
   Withdrawpreview,
   Editmeetup,
+  Pendingwithdraw,
+  Acceptedwithdraw,
   Summary,
   Cancelrequest,
 
@@ -105,5 +116,6 @@ export {
 
   Pendingrequest,
   Accepetedrequest,
+
 
 };

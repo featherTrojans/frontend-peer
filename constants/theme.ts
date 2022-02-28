@@ -33,6 +33,7 @@ export const COLORS = {
   green1: "#00C9AA",
   green2: "#25DBA3",
   pink1: "#E00070",
+  red1: "#E00000",
 
 
   checkBorder: "#A5A5A5",

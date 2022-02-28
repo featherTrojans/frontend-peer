@@ -4,7 +4,7 @@ import { COLORS, FONTS, fontsize } from "../../../../constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 15,
+    // padding: 15,
     paddingTop: 20,
     backgroundColor: COLORS.white,
   },
@@ -12,6 +12,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 38,
+    // paddingLeft: 25
+    paddingHorizontal: 25
   },
   backArrowTextContainer: {
     flex: 1,
@@ -59,6 +61,8 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.lineColor2,
     marginVertical: 18,
   },
+
+
   btnBg: {
     backgroundColor: COLORS.blue6,
     paddingTop: 22,

@@ -43,8 +43,10 @@ import {
   Withdraw,   ///Requests(pending and accepted)
   Withdrawpreview,
   Editmeetup,
-  Summary,
+  Pendingwithdraw,
+  Acceptedwithdraw,
   Cancelrequest,
+  Summary,
 
   //Wallet funding
   Addcash,
@@ -55,17 +57,22 @@ import {
   TransferInput,
   Getdetails, //If Feather
   Bankaccount, //If Bank accout
+  Transferpin,
 
   //Notification
   Notifications,
+
+  Deposit,
+  Canceldeposit,
+
+
 
   //Chats
   Chatshome,
   Chatsdm,
   Usersearch,
-  Deposit,
-  // Deposit
 } from "../screens";
+
 
 
 import { AppState } from "react-native";
@@ -180,7 +187,7 @@ const RootNavigator = () => (
     }}
     // initialRouteName="Root"
   >
-    <AppStack.Screen name="Onboarding" component={Editmeetup} />
+    <AppStack.Screen name="Onboarding" component={Withdraw} />
     <AppStack.Screen name="Personal" component={Personal} />
     <AppStack.Screen name="Verification" component={Verification} />
     <AppStack.Screen name="Security" component={Security} />

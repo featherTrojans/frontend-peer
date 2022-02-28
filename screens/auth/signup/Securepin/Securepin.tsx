@@ -19,7 +19,7 @@ import { styles } from "./Securepin.styles";
 
 const { SecureDot } = icons;
 const Securepin = ({ route, navigation }) => {
-  // const { token } = route.params;
+  const { token } = route.params;
 
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState<boolean>(false);
@@ -99,6 +99,9 @@ const Securepin = ({ route, navigation }) => {
 
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
+
+
+        
       </View>
       <Bottombtn
         title="PROCEED"

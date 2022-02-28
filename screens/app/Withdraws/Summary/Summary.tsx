@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Sendingandreceive } from "../../../../components";
+import { Bottombtn, Sendingandreceive } from "../../../../components";
 import { styles } from "./Summary.styles";
+
 
 const { Backarrow } = icons;
 
@@ -34,7 +35,7 @@ const Summary = () => {
         <View />
       </View>
 
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", justifyContent: 'center' }}>
         {/* Sending and receiver component */}
         <Sendingandreceive />
 
@@ -67,11 +68,12 @@ const Summary = () => {
       </View>
 
       {/* Continue button below */}
-      <View>
+      <Bottombtn title="CONTINUE" onpress={() => console.log("Continue btn clicked")}/>
+      {/* <View>
         <View style={styles.btnBg}>
           <Text style={styles.btnText}>CONTINUE</Text>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

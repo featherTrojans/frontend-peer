@@ -55,6 +55,7 @@ import Logoavatar from "../assets/icons/Logoavatar";
 import Upgradenowarrow from "../assets/icons/Upgradenowarrow";
 import Withdrawicon from "../assets/icons/Withdrawicon";
 import Depositicon from "../assets/icons/Depositicon";
+
 import SadEmoji from "../assets/icons/SadEmoji";
 import TransferIcon from "../assets/icons/TransferIcon";
 import Location from "../assets/icons/Location";
@@ -66,6 +67,18 @@ import Copyclipboard from "../assets/icons/Copyclipboard";
 import Editicon from "../assets/icons/Editicon";
 import Meetupdot from "../assets/icons/Meetupdot";
 import Clearinput from "../assets/icons/Clearinput";
+import Chaticon from "../assets/icons/Chaticon";
+import Renegotiateicon from "../assets/icons/Renegotiateicon";
+import Makerequestarrowright from "../assets/icons/Makerequestarrowright";
+import Orangecheckmark from "../assets/icons/Orangecheckmark";
+import Cancelicony from "../assets/icons/Cancelicony";
+import Smsicony from "../assets/icons/Smsicony";
+import Phoneicony from "../assets/icons/Phoneicony";
+
+
+
+
+
 
 
 
@@ -144,7 +157,16 @@ export default {
   Copyclipboard,
   Editicon,
   Meetupdot,
-  Clearinput
+  Clearinput,
+  Chaticon,
+  Renegotiateicon,
+  Makerequestarrowright,
+  Orangecheckmark,
+
+  Cancelicony,
+  Smsicony,
+  Phoneicony
+  
 
   
 

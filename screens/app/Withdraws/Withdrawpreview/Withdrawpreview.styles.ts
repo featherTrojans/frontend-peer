@@ -24,47 +24,94 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  imageBorder: {
-    width: 55,
-    height: 55,
-    borderColor: COLORS.black,
-    borderWidth: 1,
-    borderRadius: 30,
-    padding: 2,
-  },
-  profileName: {
-    ...fontsize.bsmall,
-    ...FONTS.medium,
-    color: COLORS.black,
-    marginBottom: 3,
-  },
-  distanceDuration: {
-    ...fontsize.small,
-    ...FONTS.regular,
-  },
+
   numberOfBadge: {
     ...fontsize.bmsmall,
     ...FONTS.bold,
-    marginRight: 12
+    marginRight: 12,
   },
   amountText: {
     ...fontsize.bsmall,
     ...FONTS.medium,
   },
-  amountPrice:{
+  amountPrice: {
     ...fontsize.bsmall,
     ...FONTS.medium,
     marginTop: 6,
     marginBottom: 12,
   },
-  amountBaseCharge:{ 
-      ...fontsize.small, 
-      color: COLORS.blue6 
-    },
-    baseChargeNegotiate:{
-        ...fontsize.small,
-        ...FONTS.regular,
-        fontStyle: "italic",
-        color: COLORS.grey2,
-      }
+  amountBaseCharge: {
+    ...fontsize.small,
+    color: COLORS.blue6,
+  },
+  baseChargeNegotiate: {
+    ...fontsize.small,
+    ...FONTS.regular,
+    fontStyle: "italic",
+    color: COLORS.grey2,
+  },
+  meetupContainer: {
+    marginTop: 22
+  },
+  meetUpText:{ 
+    ...fontsize.small, 
+    ...FONTS.regular 
+  },
+  meetupLocationContainer:{
+    marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  locationText:{
+    ...fontsize.bbsmall,
+    ...FONTS.medium,
+    marginLeft: 12,
+  },
+
+
+
+
+
+  ///Cancel Buttons
+  bottomBtnContainer: {
+    marginVertical: 20,
+    flexDirection: "row",
+  },
+  bottomCancelBtn: {
+    flex: 1,
+    backgroundColor: COLORS.red1,
+    borderRadius: 10,
+    marginRight: 14,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cancelText: {
+    ...fontsize.smallest,
+    ...FONTS.bold,
+    color: COLORS.white,
+  },
+  blackBtn: {
+    width: 62,
+    height: 62,
+    backgroundColor: COLORS.black,
+    borderRadius: 10,
+  },
+
+
+//Make Requesr button
+bottomMakeRequestBtn: {
+  flex: 1,
+  backgroundColor: COLORS.black,
+  borderRadius: 10,
+  marginRight: 14,
+  // justifyContent: "center",
+  paddingHorizontal: 10,
+  alignItems: "center",
+  flexDirection: 'row'
+},
+requestText: {
+  ...fontsize.smallest,
+  ...FONTS.bold,
+  color: COLORS.white,
+},
 });

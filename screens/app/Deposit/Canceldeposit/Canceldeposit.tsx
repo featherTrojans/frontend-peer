@@ -2,18 +2,19 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState } from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { styles } from "./Cancelrequest.styles";
+// import { styles } from "./Cancelrequest.styles";
 import { Bottombtn } from "../../../../components";
+import { styles } from "../../Withdraws/Cancelrequest/Cancelrequest.styles";
 
 const { Backarrow } = icons;
-const Cancelrequest = () => {
+const Canceldeposit = () => {
   const [checked, setChecked] = useState(false);
 
   const reasons = [
-    "Mistake request",
-    "The agent didn’t accept my cash request",
-    "Long cash delivery time",
-    "The agent seemed suspicious during the meet-up conversation",
+    "Peer asked me to do so",
+    "Peer wasn’t responsive in progressing this transaction",
+    "Don’t have enough cash again",
+    "Peer seemed suspicious during the meet-up conversation",
     "Cash presented was in bad condition",
   ];
 
@@ -27,7 +28,7 @@ const Cancelrequest = () => {
         </View>
 
         <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>Cancel Request Feedback</Text>
+          <Text style={styles.headerText}>Decline Request Feedback</Text>
           <Text style={styles.subheaderText}>
             Please give us a reason why you want to cancel your request?
           </Text>
@@ -68,4 +69,4 @@ const Cancelrequest = () => {
   );
 };
 
-export default Cancelrequest;
+export default Canceldeposit;

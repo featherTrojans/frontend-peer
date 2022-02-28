@@ -5,11 +5,6 @@ export const styles = StyleSheet.create({
   activeStyles: {
     backgroundColor: COLORS.blue6,
     color: COLORS.white,
-    paddingTop: 15,
-    paddingBottom: 18,
-    paddingLeft: 26,
-    paddingRight: 29,
-    borderRadius: 14,
   },
   container: {
     flex: 1,
@@ -29,9 +24,11 @@ export const styles = StyleSheet.create({
   listHeaderText: {
     ...fontsize.bsmall,
     color: COLORS.grey2,
+    borderRadius: 14,
+    paddingVertical: 18,
+    paddingHorizontal: 26
   },
 
-  
   emptyListContainer: {
     justifyContent: "center",
     alignItems: "center",

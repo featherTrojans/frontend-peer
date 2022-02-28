@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { styles } from "./Withdrawpreview.styles";
 import { COLORS, FONTS, fontsize, images, icons } from "../../../../constants";
-import { Bottombtn } from "../../../../components";
+import { Bottombtn, Requesterdetails } from "../../../../components";
 
 const { Locationmap } = images;
 const { Forwardarrow, Editicon, Meetupdot } = icons;
@@ -24,38 +24,20 @@ const Withdrawpreview = () => {
       >
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
-
-              {/* Confirm meetup text will show after clikcing continue*/}
+            {/* Confirm meetup text will show after clikcing continue*/}
             {/* <Text
               style={{ marginBottom: 26, ...fontsize.bsmall, ...FONTS.medium }}
             >
               Confirm Meetup Point
             </Text> */}
 
-
-
             <View style={styles.detailsProfile}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                {/* Details */}
-                <View style={styles.imageBorder}>
-                  {/* To replace this with the user image */}
-                  <View
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: COLORS.grey4,
-                      borderRadius: 30,
-                    }}
-                  />
-                </View>
+              <Requesterdetails
+                name="Destiny Babalola"
+                distance="3kms"
+                duration={12}
+              />
 
-                <View style={{ marginLeft: 15 }}>
-                  <Text style={styles.profileName}>Destiny Babalola</Text>
-                  <Text style={styles.distanceDuration}>
-                    3 kms away | 12 mins
-                  </Text>
-                </View>
-              </View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 {/* Badge icon */}
                 <Text style={styles.numberOfBadge}>203</Text>
@@ -63,7 +45,6 @@ const Withdrawpreview = () => {
                 <Forwardarrow />
               </View>
             </View>
-
 
             {/* This part will disappear after clicking on continue */}
             <View style={{ marginTop: 20 }}>
@@ -79,21 +60,18 @@ const Withdrawpreview = () => {
               </Text>
             </View>
 
-
             {/* Meetup point will show after clicking the continuee*/}
-            {/* <View>
-                <Text style={{...fontsize.small, ...FONTS.regular}}>Meetup Point</Text>
-                <View style={{marginTop: 20, flexDirection: 'row',  justifyContent: 'space-between'}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <Meetupdot />
-                        <Text style={{...fontsize.bbsmall, ...FONTS.medium, marginLeft: 12}}>Forks and Fingers</Text>
-                    </View>
-                        <Editicon />
+            {/* 
+            <View style={styles.meetupContainer}>
+              <Text style={styles.meetUpText}>Meetup Point</Text>
+              <View style={styles.meetupLocationContainer}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Meetupdot />
+                  <Text style={styles.locationText}>Forks and Fingers</Text>
                 </View>
+                <Editicon />
+              </View>
             </View> */}
-
-
-            
           </View>
           <Bottombtn
             title="CONTINUE"

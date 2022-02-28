@@ -122,6 +122,8 @@ const Withdraw = () => {
     return (
       <View style={styles.requestContainer}>
         <View style={styles.listHeaderContainer}>
+
+
           <TouchableOpacity onPress={() => setActive("pending")}>
             <Text
               style={[
@@ -143,6 +145,8 @@ const Withdraw = () => {
               Accepted Requests
             </Text>
           </TouchableOpacity>
+
+
         </View>
         <FlatList
           data={REQUESTDATA}

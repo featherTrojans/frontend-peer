@@ -5,8 +5,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 15,
-    paddingTop: 20,
+    // paddingHorizontal: 15,
+    // paddingTop: 20,
   },
   headerContainer: {
     marginRight: 45,
@@ -34,6 +34,8 @@ export const styles = StyleSheet.create({
     color: COLORS.black,
     textDecorationLine: "none",
   },
+
+
   cancelBtnContainer: {
     flex: 1,
     justifyContent: "flex-end",

@@ -18,7 +18,7 @@ import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 
 function Requestnew({ route, navigation }) {
   // const { nextscreen } = route.params;
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [amount, setAmount] = useState<string[]>([]);
 
   const amountFormatter = (value: string) => {
