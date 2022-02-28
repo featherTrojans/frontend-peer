@@ -143,7 +143,7 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Root"
+    initialRouteName="Personal"
     >
     <AppStack.Screen name="Onboarding" component={Onboarding} />
     <AppStack.Screen name="Personal" component={Personal} />
@@ -160,6 +160,8 @@ const RootNavigator = () => (
     <AppStack.Screen name="Deposit" component={Deposit} />
 
     {/* Transfer FLOW */}
+
+    <AppStack.Screen name="TransferInput" component={TransferInput} />
     <AppStack.Screen name="Getdetails" component={Getdetails} />
     <AppStack.Screen name="Bankaccount" component={Bankaccount} />
     
@@ -177,7 +179,6 @@ const RootNavigator = () => (
     
     <AppStack.Screen name="Pendingrequest" component={Pendingrequest} />
     <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
-    <AppStack.Screen name="TransferInput" component={TransferInput} />
     
 
   </AppStack.Navigator>

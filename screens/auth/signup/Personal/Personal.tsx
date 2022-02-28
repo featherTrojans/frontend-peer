@@ -1,4 +1,4 @@
-import React, {useContext } from "react";
+import React, {useContext , useEffect} from "react";
 import {
   View,
   Text,
@@ -16,8 +16,10 @@ import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
 import { AuthContext } from "../../../../context/AuthContext";
+import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../../utils/errorMessage";
 
-const { Usericondark, Phoneicon, Envelopeicon, Cancelicon } = icons;
+const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
 
 
@@ -46,7 +48,12 @@ const validationSchema = Yup.object().shape({
 
 
 const Personal = ({ navigation }) => {
-  const {setAuthData} = useContext(AuthContext)
+  const {setAuthData} = useContext(AuthContext);
+  const toast = useToast();
+  useEffect(() => {
+    showerror()
+  }, [toast]);
+
   console.log("what the heck")
   return (
     <KeyboardAwareScrollView> 
@@ -54,10 +61,6 @@ const Personal = ({ navigation }) => {
         <StatusBar />
         
         {/* ERROR PAGE */}
-        {/* <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>Oops, error creating your account, email already in use</Text>
-          <Cancelicon />
-        </View> */}
 
         {/* <Text>Sign up page</Text> */}
         {/* Get Started and dots */}
