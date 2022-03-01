@@ -208,9 +208,9 @@ const Home = ({navigation}: {navigation: any}) => {
             <Text style={styles.profileUsername}>@{info?.username}</Text>
           </View>
         </View>
-        <View>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Notifications")}>
           <Bell />
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/* Wallet info and details */}
@@ -222,7 +222,7 @@ const Home = ({navigation}: {navigation: any}) => {
         <View style={styles.walletOptionsContainer}>
           {walletOptions.map(
             ({ icon, title,link }: { icon: JSX.Element; title: string , link:string}) => (
-              <TouchableOpacity onPress={()=>navigation.navigate(link)} style={styles.optionContainer}>
+              <TouchableOpacity onPress={()=>navigation.navigate(link)} style={styles.optionContainer} activeOpacity={0.8}>
                 <View style={styles.optionIconBg}>
                   {/* Icon will be inside this */}
                   {icon}

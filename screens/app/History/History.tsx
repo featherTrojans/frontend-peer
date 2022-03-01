@@ -1,14 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { styles } from './History.styles'
 
 const History = () => {
     return (
-        <View>
-            <Text>This is the time page</Text>
-        </View>
+        <View style={styles.container}>
+        <Text style={styles.text}>In Progress...</Text>
+    </View>
     )
 }
 
 export default History
 
-const styles = StyleSheet.create({})
+

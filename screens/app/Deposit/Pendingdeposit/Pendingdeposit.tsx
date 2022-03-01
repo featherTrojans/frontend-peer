@@ -4,8 +4,9 @@ import {
     View,
     StatusBar,
     ImageBackground,
+    TouchableOpacity
   } from "react-native";
-  import React from "react";
+  import React, {useState} from "react";
   import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
   import {
     Bottombtn,
@@ -18,10 +19,13 @@ import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
   // import { styles } from './Pendingwithdraw.styles'
   // Bottombtn;
   
-  const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon, Ratingstar, Phoneicony, Smsicony, Cancelicony } = icons;
+  const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon, Ratingstar, Phoneicony, Smsicony, Cancelicony, Dropswitch} = icons;
   const { Locationmap } = images;
   
   const Pendingdeposit = () => {
+
+  const [toggleShow, setToggleShow] = useState(true);
+
     return (
       <View style={styles.container}>
         <StatusBar />
@@ -32,7 +36,7 @@ import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
         >
           <View style={styles.previewContainer}>
             <View style={{ paddingHorizontal: 25 }}>
-              {true ? (
+              {toggleShow ? (
                 <View>
                   <View style={styles.detailsProfile}>
                     <Requesterdetails
@@ -111,7 +115,13 @@ import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
                 <View style={styles.bottomAcceptBtn}>
                   <Text style={styles.cancelText}>ACCEPT REQUEST</Text>
                 </View>
-                <View style={styles.blackBtn}></View>
+                <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.blackBtn}
+                onPress={() => setToggleShow(!toggleShow)}
+              >
+                <Dropswitch />
+              </TouchableOpacity>
               </View>
             </View>
           </View>

@@ -151,7 +151,7 @@ const Withdraw = ({ navigation }) => {
       <Backheader title="Withdraw" />
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
-        <Viewbalance />
+      <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
         <View style={{ flex: 1 }}>
           {REQUEST.length < 1 ? <Emptyrequest /> : <Requestlist />}
         </View>

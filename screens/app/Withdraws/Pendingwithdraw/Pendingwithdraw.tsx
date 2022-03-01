@@ -21,7 +21,7 @@ const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon, Dropswitch } = icons
 const { Locationmap } = images;
 
 const Pendingwithdraw = ({navigation}) => {
-  const [toggleShow, setToggleShow] = useState(false);
+  const [toggleShow, setToggleShow] = useState(true);
 
   return (
     <View style={styles.container}>

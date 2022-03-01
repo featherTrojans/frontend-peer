@@ -30,10 +30,14 @@ import {
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
-  History,
-  Settings,
   Pendingrequest, //This screen has changed
   Accepetedrequest, //This screen has changed too
+
+
+
+
+  History,
+  Settings,
 
   //Withdraw
   Requestnew,
@@ -112,7 +116,7 @@ const Tabs = () => (
     />
     <BottomTab.Screen
       name="History"
-      component={Availablelisting}
+      component={History}
       options={{
         tabBarButton: (props) => (
           <Tab
@@ -176,7 +180,7 @@ const RootNavigator = () => (
   >
     {/* SCREEN FOR AUTH */}
     <AppStack.Group screenOptions={{ presentation: 'modal' }}>
-      <AppStack.Screen name="Onboarding" component={Tabs} />
+      <AppStack.Screen name="Onboarding" component={Onboarding} />
       <AppStack.Screen name="Personal" component={Personal} />
       <AppStack.Screen name="Verification" component={Verification} />
       <AppStack.Screen name="Security" component={Security} />
