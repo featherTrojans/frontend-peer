@@ -4,9 +4,12 @@ import { styles } from "./Transferpin.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn, Loader, Numberbtn } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
+import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../../utils/errorMessage";
 const { Backarrow, SecureDot } = icons;
 
 const Transferpin = ({route, navigation}) => {
+  const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const {amount,username} = route.params
   const [pin, setPin] = useState<string[]>([]);
@@ -34,6 +37,7 @@ const Transferpin = ({route, navigation}) => {
       navigation.navigate("Root")
     }catch(err){
       console.log(err.response)
+      showerror(toast,err)
     }finally{
       setLoading(false)
     }

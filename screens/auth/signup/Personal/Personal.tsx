@@ -49,17 +49,6 @@ const validationSchema = Yup.object().shape({
 const Personal = ({ navigation }) => {
   const {setAuthData} = useContext(AuthContext);
   const toast = useToast();
-  useEffect(() => {
-    if(toast.show !== undefined){
-      toast.show("Task finished successfully", {
-        type: "normal",
-        placement: "top",
-        duration: 4000,
-        // offset: 100,
-        animationType: "slide-in",
-      }); 
-    }
-  }, [toast]);
 
   console.log("what the heck")
   return (

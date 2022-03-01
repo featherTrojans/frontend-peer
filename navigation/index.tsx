@@ -172,7 +172,7 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    // initialRouteName="Root"
+    initialRouteName="Login"
   >
     {/* SCREEN FOR AUTH */}
     <AppStack.Group screenOptions={{ presentation: 'modal' }}>

@@ -61,7 +61,7 @@ const Getdetails = ({ route, navigation }) => {
         </View>
       </View>
 
-      <Bottombtn title="PROCEED" onpress={()=>navigation.navigate("TransferPin",{amount,username})}/>
+      <Bottombtn title="PROCEED" onpress={()=>navigation.navigate("Transferpin",{amount,username})}/>
 
 
     </View>

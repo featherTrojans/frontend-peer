@@ -28,7 +28,6 @@ export default function App() {
       duration={5000} 
       type="normal"  
       animationType="slide-in"
-      offset={100}
       renderToast={(props)=><View style={{
         backgroundColor:"#E00000",
         paddingVertical: 18,
