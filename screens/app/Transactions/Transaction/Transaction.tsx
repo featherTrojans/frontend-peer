@@ -115,6 +115,7 @@ const Transactions = ({navigation}: any) => {
     try {
       setLoading(true);
       const response = await axiosCustom.get("/transactions");
+      console.log(response)
       setTransations(response?.data?.data?.transactions);
     } catch (err) {
       console.log(err.response);

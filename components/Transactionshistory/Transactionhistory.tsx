@@ -2,10 +2,12 @@ import { StyleSheet, Text, View } from "react-native";
 import React,{useState, useEffect} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Transactionhistory.styles";
+import { useNavigation } from '@react-navigation/native';
 
 const { Arrowin, Arrowout } = icons;
 
 const History = ({ data }: any) => {
+  const navigation = useNavigation()
   const { direction, description, to, amount, from } = data;
 
   // useEffect(()=>{
