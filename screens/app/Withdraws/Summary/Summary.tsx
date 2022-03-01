@@ -63,7 +63,7 @@ const Summary = () => {
 
         <View style={styles.tableContainer}>
           <Text style={styles.tableTitle}>Total</Text>
-          <Text style={styles.tableValue}>NGN 35,750.00</Text>
+          <Text style={[styles.tableValue, {color: COLORS.blue6}]}>NGN 35,750.00</Text>
         </View>
       </View>
 

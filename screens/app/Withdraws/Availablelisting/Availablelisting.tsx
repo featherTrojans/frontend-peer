@@ -43,19 +43,19 @@ const USERDATAS = [
   },
   {
     image: <Requestee3 />,
-    name: "Malik Abubarkar",
+    name: "Malik Abu",
     distance: 30,
     noOfBadges: 19,
   },
   {
     image: <Requestee2 />,
-    name: "Oreoluwa Badmus",
+    name: "Oreoluwa Badmus 2",
     distance: 17,
     noOfBadges: 18,
   },
   {
     image: <Requestee1 />,
-    name: "Thomas Uzoechina",
+    name: "Thomas Uzoe",
     distance: 30,
     noOfBadges: 19,
   },
@@ -75,30 +75,33 @@ const USERDATAS = [
 
 const listingtypes = ["peers", "businesses", "agents"];
 
-const Singleuser = ({ profile }: any) => {
-  const { image, name, distance, noOfBadges } = profile;
-  return (
-    <View style={styles.userContainer}>
-      <View style={styles.detailsContainer}>
-        {/* Image */}
-        {image}
-        <View style={styles.infoContainer}>
-          <Text style={styles.userName}>{name}</Text>
-          <View style={styles.otherInfo}>
-            <Text style={styles.distance}>~{distance} Mins away</Text>
-            <View style={styles.smallDot} />
-            <Text style={styles.numberOfBadges}>{noOfBadges} Badges</Text>
+
+
+const Availablelisting = ({navigation}: any) => {
+
+  const Singleuser = ({ profile, onpress }: any) => {
+    const { image, name, distance, noOfBadges } = profile;
+    return (
+      <TouchableOpacity style={styles.userContainer} activeOpacity={0.8} onPress={() => navigation.navigate("Withdrawpreview")} >
+        <View style={styles.detailsContainer}>
+          {/* Image */}
+          {image}
+          <View style={styles.infoContainer}>
+            <Text style={styles.userName}>{name}</Text>
+            <View style={styles.otherInfo}>
+              <Text style={styles.distance}>~{distance} Mins away</Text>
+              <View style={styles.smallDot} />
+              <Text style={styles.numberOfBadges}>{noOfBadges} Badges</Text>
+            </View>
           </View>
         </View>
-      </View>
-      <View>
-        <Forwardarrow />
-      </View>
-    </View>
-  );
-};
+        <View>
+          <Forwardarrow />
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
-const Availablelisting = () => {
   const [active, setActive] = useState("peers");
   return (
     <View style={{ flex: 1 }}>

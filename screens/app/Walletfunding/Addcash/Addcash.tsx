@@ -5,11 +5,12 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "./Addcash.styles";
 import { Bottombtn } from "../../../../components";
+import { NavigationContainer } from "@react-navigation/native";
 
 
 const { Backarrow } = icons;
 
-const Addcash = () => {
+const Addcash = ({navigation}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
@@ -50,7 +51,7 @@ const Addcash = () => {
           </View>
         )}
       </View>
-      <Bottombtn title="CONTINUE" onpress={() => console.log("Continue to add cash clicked")}/>
+      <Bottombtn title="CONTINUE" onpress={() => navigation.navigate('Choosewallet')}/>
 
     </View>
   );

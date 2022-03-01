@@ -151,6 +151,8 @@ const Personal = ({ navigation }) => {
 
                 {/* Proceed Btn */}
                 <View style={styles.bottomContainer}>
+
+                  
                   <TouchableOpacity
                     style={styles.proceedBtn}
                     activeOpacity={0.8}

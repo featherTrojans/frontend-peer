@@ -104,7 +104,7 @@ const EmptyComponent = () => {
   );
 };
 
-const Transactions = () => {
+const Transactions = ({navigation}: any) => {
   const [transactions, setTransations] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -159,7 +159,7 @@ const Transactions = () => {
 
       <Bottombtn
         title="+ NEW TRANSACTIONS"
-        onpress={() => console.log("New Transactions")}
+        onpress={() =>navigation.navigate("Newtransactions")}
       />
     </View>
   );

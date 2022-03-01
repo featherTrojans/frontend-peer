@@ -4,8 +4,9 @@ import {
   View,
   StatusBar,
   ImageBackground,
+  TouchableOpacity
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
 import {
   Bottombtn,
@@ -16,10 +17,12 @@ import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
-const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon } = icons;
+const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon, Dropswitch } = icons;
 const { Locationmap } = images;
 
-const Pendingwithdraw = () => {
+const Pendingwithdraw = ({navigation}) => {
+  const [toggleShow, setToggleShow] = useState(false);
+
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -30,7 +33,7 @@ const Pendingwithdraw = () => {
       >
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
-            {true ? (
+            {toggleShow ? (
               <View>
                 <View style={styles.detailsProfile}>
                   <Requesterdetails
@@ -88,10 +91,16 @@ const Pendingwithdraw = () => {
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <View style={styles.bottomCancelBtn}>
+              <TouchableOpacity style={styles.bottomCancelBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Cancelrequest")}>
                 <Text style={styles.cancelText}>CANCEL REQUEST</Text>
-              </View>
-              <View style={styles.blackBtn}></View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.blackBtn}
+                onPress={() => setToggleShow(!toggleShow)}
+              >
+                <Dropswitch />
+              </TouchableOpacity>
             </View>
           </View>
         </View>

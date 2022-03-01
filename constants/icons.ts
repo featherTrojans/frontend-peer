@@ -78,6 +78,8 @@ import Ratingstar from "../assets/icons/Ratingstar";
 import Accountbalanceicon from "../assets/icons/Accountbalanceicon";
 import Trendingupright from "../assets/icons/Trendingupright";
 import Viewrequesteye from "../assets/icons/Viewrequesteye";
+import Dropswitch from "../assets/icons/Dropswitch";
+
 
 
 
@@ -177,7 +179,8 @@ export default {
   Ratingstar,
   Accountbalanceicon,
   Trendingupright,
-  Viewrequesteye
+  Viewrequesteye,
+  Dropswitch
   
   
 
