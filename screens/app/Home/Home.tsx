@@ -158,7 +158,7 @@ const walletOptions = [
 ];
 
 
-const Home = ({navigation}) => {
+const Home = ({navigation}: {navigation: any}) => {
   console.log(navigation)
   const {setAuthData} = useContext(AuthContext)
   const [info, setInfo] = useState({});
@@ -216,7 +216,7 @@ const Home = ({navigation}) => {
       {/* Start of the block */}
       {/*  */}
       <View style={styles.walletBlock}>
-        <Viewbalance/>
+        <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
         <View style={styles.walletOptionsContainer}>
           {walletOptions.map(
             ({ icon, title,link }: { icon: JSX.Element; title: string , link:string}) => (

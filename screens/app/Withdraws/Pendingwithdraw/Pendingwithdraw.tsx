@@ -4,6 +4,7 @@ import {
   View,
   StatusBar,
   ImageBackground,
+  TouchableOpacity
 } from "react-native";
 import React from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
@@ -19,7 +20,7 @@ import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon } = icons;
 const { Locationmap } = images;
 
-const Pendingwithdraw = () => {
+const Pendingwithdraw = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -88,9 +89,9 @@ const Pendingwithdraw = () => {
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <View style={styles.bottomCancelBtn}>
+              <TouchableOpacity style={styles.bottomCancelBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Cancelrequest")}>
                 <Text style={styles.cancelText}>CANCEL REQUEST</Text>
-              </View>
+              </TouchableOpacity>
               <View style={styles.blackBtn}></View>
             </View>
           </View>

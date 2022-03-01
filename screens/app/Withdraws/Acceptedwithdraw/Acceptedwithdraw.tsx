@@ -40,7 +40,7 @@ const Acceptedwithdraw = () => {
       >
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
-            {false ? (
+            {true ? (
               <View>
                 <View style={styles.detailsProfile}>
                   <Requesterdetails

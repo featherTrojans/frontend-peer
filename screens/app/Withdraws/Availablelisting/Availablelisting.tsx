@@ -43,19 +43,19 @@ const USERDATAS = [
   },
   {
     image: <Requestee3 />,
-    name: "Malik Abubarkar",
+    name: "Malik Abu",
     distance: 30,
     noOfBadges: 19,
   },
   {
     image: <Requestee2 />,
-    name: "Oreoluwa Badmus",
+    name: "Oreoluwa Badmus 2",
     distance: 17,
     noOfBadges: 18,
   },
   {
     image: <Requestee1 />,
-    name: "Thomas Uzoechina",
+    name: "Thomas Uzoe",
     distance: 30,
     noOfBadges: 19,
   },
@@ -75,10 +75,10 @@ const USERDATAS = [
 
 const listingtypes = ["peers", "businesses", "agents"];
 
-const Singleuser = ({ profile }: any) => {
+const Singleuser = ({ profile, onpress }: any) => {
   const { image, name, distance, noOfBadges } = profile;
   return (
-    <View style={styles.userContainer}>
+    <TouchableOpacity style={styles.userContainer} activeOpacity={0.8} onPress={onpress}>
       <View style={styles.detailsContainer}>
         {/* Image */}
         {image}
@@ -94,11 +94,11 @@ const Singleuser = ({ profile }: any) => {
       <View>
         <Forwardarrow />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const Availablelisting = () => {
+const Availablelisting = ({navigation}: any) => {
   const [active, setActive] = useState("peers");
   return (
     <View style={{ flex: 1 }}>
@@ -139,7 +139,7 @@ const Availablelisting = () => {
           <BottomSheetFlatList
             showsVerticalScrollIndicator={false}
             data={USERDATAS}
-            renderItem={({ item }) => <Singleuser profile={item} />}
+            renderItem={({ item }) => <Singleuser profile={item} onpress={navigation.navigate("Withdrawpreview")} />}
             keyExtractor={(item) => item.name}
           />
         </BottomSheet>

@@ -72,10 +72,10 @@ const Emptyrequest = () => {
 };
 
 // Requestee profile
-const Requesteeprofile = ({ list }: { list: any }) => {
+const Requesteeprofile = ({ list, onpress }: any) => {
   const { image, full_name, username, price, status } = list;
   return (
-    <View style={styles.withdrawProfileContainer}>
+    <TouchableOpacity style={styles.withdrawProfileContainer} activeOpacity={0.8} onPress={onpress}>
       <View style={{ flexDirection: "row" }}>
         {/* Image */}
         {image}
@@ -91,11 +91,11 @@ const Requesteeprofile = ({ list }: { list: any }) => {
 
         {status === "accepted" && <Acceptedcheck />}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const Withdraw = () => {
+const Withdraw = ({ navigation }) => {
   const [active, setActive] = useState("pending");
 
   const REQUESTDATA = REQUEST.filter((req) => req.status === active);
@@ -128,7 +128,18 @@ const Withdraw = () => {
         </View>
         <FlatList
           data={REQUESTDATA}
-          renderItem={({ item }) => <Requesteeprofile list={item} />}
+          renderItem={({ item }) => (
+            <Requesteeprofile
+              list={item}
+              onpress={() =>
+                navigation.navigate(
+                  item.status === "pending"
+                    ? "Pendingwithdraw"
+                    : "Acceptedwithdraw"
+                )
+              }
+            />
+          )}
           keyExtractor={(item) => `${item.full_name}`}
         />
       </View>
@@ -147,8 +158,8 @@ const Withdraw = () => {
       </View>
 
       <Bottombtn
-        title="NEW TRANSACTION"
-        onpress={() => console.log("New Transaction clicked")}
+        title="NEW WITHDRAWAL"
+        onpress={() => navigation.navigate("Requestnew")}
       />
     </View>
   );

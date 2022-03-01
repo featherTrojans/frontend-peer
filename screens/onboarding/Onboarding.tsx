@@ -111,7 +111,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
           })}
         </DotFlexRow>
 
-        <GetStartedBtn activeOpacity={0.4} onPress={scrollTo}>
+        <GetStartedBtn activeOpacity={0.8} onPress={scrollTo}>
           {viewIndex < onboardingdatas.length - 1 ? (
             <NextText>Next</NextText>
           ) : (

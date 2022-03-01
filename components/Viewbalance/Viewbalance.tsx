@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, TouchableNativeFeedback } from "react-native";
 import React,{useContext} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Viewbalance.styles";
@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 const { Eyecrossed, Arrowright } = icons;
 
-const Viewbalance = () => {
+const Viewbalance = ({navigate}: any) => {
   const {authdata} = useContext(AuthContext);
 
   return (
@@ -17,10 +17,13 @@ const Viewbalance = () => {
           <Text style={styles.primaryText}>Primary Wallet</Text>
           <View style={styles.underLine} />
         </View>
-        <View style={styles.addCashBg}>
+
+        
+        <TouchableOpacity style={styles.addCashBg} activeOpacity={0.8} onPress={navigate}>
           <Text style={styles.addCashText}>Add Cash</Text>
           <Arrowright />
-        </View>
+        </TouchableOpacity>
+
       </View>
       {/* Bottom part of the block */}
       <View style={styles.bottomContainer}>

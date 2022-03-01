@@ -9,17 +9,16 @@ import {
   RootTabScreenProps,
   RootAuthStackParamList,
 } from "../types";
+
 import {
   Onboarding,
 
   // Auth Screens
   Login,
   Setup,
-
   Personal,
   Security,
   Securepin,
-
   Verification,
   Welcome,
 
@@ -31,16 +30,15 @@ import {
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
-
   History,
   Settings,
   Pendingrequest, //This screen has changed
   Accepetedrequest, //This screen has changed too
-  
+
   //Withdraw
-  Requestnew, 
+  Requestnew,
   Availablelisting,
-  Withdraw,   ///Requests(pending and accepted)
+  Withdraw, ///Requests(pending and accepted)
   Withdrawpreview,
   Editmeetup,
   Pendingwithdraw,
@@ -62,6 +60,7 @@ import {
   //Notification
   Notifications,
 
+  //Deposit
   Deposit, ///Requests(pending and accepted)
   Depositupdate,
   Pendingdeposit,
@@ -69,15 +68,11 @@ import {
   Depositpin,
   Canceldeposit,
 
-
-
   //Chats
   Chatshome,
   Chatsdm,
   Usersearch,
 } from "../screens";
-
-
 
 import { AppState } from "react-native";
 import { Loader, Tab } from "../components";
@@ -87,19 +82,6 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
 
 const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings } = icons;
-
-// const Auth = () => {
-//   <AuthStack.Navigator
-//   initialRouteName="Login"
-//   screenOptions={{
-//     headerShown: false
-//   }}
-//   >
-//     <AuthStack.Screen name="Login" component={Login} />
-//     <AuthStack.Screen name="Signup" component={Signup} />
-//     <AuthStack.Screen name="Verification" component={Verification} />
-//   </AuthStack.Navigator>;
-// };
 
 const Tabs = () => (
   <BottomTab.Navigator
@@ -183,7 +165,7 @@ const Tabs = () => (
     />
   </BottomTab.Navigator>
 );
-      
+
 const RootNavigator = () => (
   <AppStack.Navigator
     screenOptions={{
@@ -191,39 +173,82 @@ const RootNavigator = () => (
     }}
     // initialRouteName="Root"
   >
-    <AppStack.Screen name="Onboarding" component={Depositupdate} />
-    <AppStack.Screen name="Personal" component={Personal} />
-    <AppStack.Screen name="Verification" component={Verification} />
-    <AppStack.Screen name="Security" component={Security} />
-    <AppStack.Screen name="Securepin" component={Securepin} />
-    <AppStack.Screen name="Setup" component={Setup} />
-    <AppStack.Screen name="Login" component={Login} />
-    <AppStack.Screen name="Welcome" component={Welcome} />
-    <AppStack.Screen name="Root" component={Tabs} />
-
     {/* SCREEN FOR AUTH */}
-    <AppStack.Screen name="Withdraw" component={Withdraw} />
-    <AppStack.Screen name="Transfercash" component={Transfercash} />
-    {/* <AppStack.Screen name="Deposit" component={Deposit} /> */}
+    <AppStack.Group screenOptions={{ presentation: 'modal' }}>
+      <AppStack.Screen name="Onboarding" component={Tabs} />
+      <AppStack.Screen name="Personal" component={Personal} />
+      <AppStack.Screen name="Verification" component={Verification} />
+      <AppStack.Screen name="Security" component={Security} />
+      <AppStack.Screen name="Securepin" component={Securepin} />
+      <AppStack.Screen name="Setup" component={Setup} />
+      <AppStack.Screen name="Login" component={Login} />
+      <AppStack.Screen name="Welcome" component={Welcome} />
+      <AppStack.Screen name="Root" component={Tabs} />
+    </AppStack.Group>
 
-    {/* Transfer FLOW */}
-    <AppStack.Screen name="Getdetails" component={Getdetails} />
-    <AppStack.Screen name="Bankaccount" component={Bankaccount} />
 
-    {/* TRANSACTIONS */}
-    <AppStack.Screen name="Newtransactions" component={Newtransactions} />
-    {/* WITHDRAW */}
-    <AppStack.Screen name="Summary" component={Summary} />
+    {/* Transaction Screens*/}
+    <AppStack.Group>
+      <AppStack.Screen name="Transactions" component={Transactions} />
+      <AppStack.Screen name="Newtransactions" component={Newtransactions} />
+      <AppStack.Screen
+        name="Transactiondetails"
+        component={Transactiondetails}
+      />
+      <AppStack.Screen
+        name="Transactiondispute"
+        component={Transactiondispute}
+      />
+    </AppStack.Group>
 
-    {/* HOME NOTIFICATIONS */}
+    {/* Withdraw Screens */}
+    <AppStack.Group>
+      <AppStack.Screen name="Requestnew" component={Requestnew} />
+      <AppStack.Screen name="Availablelisting" component={Availablelisting} />
+      <AppStack.Screen name="Withdraw" component={Withdraw} />
+      <AppStack.Screen name="Withdrawpreview" component={Withdrawpreview} />
+      <AppStack.Screen name="Editmeetup" component={Editmeetup} />
+      <AppStack.Screen name="Pendingwithdraw" component={Pendingwithdraw} />
+      <AppStack.Screen name="Acceptedwithdraw" component={Acceptedwithdraw} />
+      <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
+      <AppStack.Screen name="Summary" component={Summary} />
+    </AppStack.Group>
+
+    {/* Wallet Funding */}
+    <AppStack.Group>
+      <AppStack.Screen name="Addcash" component={Addcash} />
+      <AppStack.Screen name="Choosewallet" component={Choosewallet} />
+    </AppStack.Group>
+
+    {/* Transfer funds screens */}
+    <AppStack.Group>
+      <AppStack.Screen name="Transfercash" component={Transfercash} />
+      <AppStack.Screen name="TransferInput" component={TransferInput} />
+      <AppStack.Screen name="Getdetails" component={Getdetails} />
+      <AppStack.Screen name="Bankaccount" component={Bankaccount} />
+      <AppStack.Screen name="Transferpin" component={Transferpin} />
+    </AppStack.Group>
+
+    {/* Notification Screen */}
     <AppStack.Screen name="Notifications" component={Notifications} />
-    {/* WALLET FUNDING */}
-    <AppStack.Screen name="Addcash" component={Addcash} />
-    <AppStack.Screen name="Choosewallet" component={Choosewallet} />
 
-    <AppStack.Screen name="Pendingrequest" component={Pendingrequest} />
-    <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
-    <AppStack.Screen name="TransferInput" component={TransferInput} />
+    {/* Deposit Screens */}
+    <AppStack.Group>
+      <AppStack.Screen name="Deposit" component={Deposit} />
+      <AppStack.Screen name="Depositupdate" component={Depositupdate} />
+
+      <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
+      <AppStack.Screen name="Accepteddeposit" component={Accepteddeposit} />
+      <AppStack.Screen name="Depositpin" component={Depositpin} />
+      <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
+    </AppStack.Group>
+
+    {/* Chats Screens */}
+    <AppStack.Group>
+      <AppStack.Screen name="Chatshome" component={Chatshome} />
+      <AppStack.Screen name="Chatsdm" component={Chatsdm} />
+      <AppStack.Screen name="Usersearch" component={Usersearch} />
+    </AppStack.Group>
   </AppStack.Navigator>
 );
 

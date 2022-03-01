@@ -1,9 +1,10 @@
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from "@react-navigation/native";
 
-
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-
-import { StackScreenProps } from '@react-navigation/stack';
+import { StackScreenProps } from "@react-navigation/stack";
 // import EachOnboarding from './components/EachOnboarding';
 
 declare global {
@@ -11,37 +12,80 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = StackScreenProps<
-  RootStackParamList,
-  Screen
->;
+export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
+  StackScreenProps<RootStackParamList, Screen>;
 
 export type RootStackParamList = {
   Onboarding: undefined;
-  Login: undefined,
-  Signup: undefined,
-  Personal: undefined,
-  Deposit: undefined,
-  Security: undefined,
-  Securepin: undefined,
-  Setup: undefined,
-  Welcome: undefined,
-  Verification: undefined
+  Personal: undefined;
+  Verification: undefined;
+  Security: undefined;
+  Securepin: undefined;
+  Setup: undefined;
+  Login: undefined;
+  Signup: undefined;
+  Welcome: undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  
+
+  //Transactions
+  Transactions: undefined;
+  Newtransactions: undefined;
+  Transactiondetails: undefined;
+  Transactiondispute: undefined;
+
+  //Withdraw
+  Requestnew: undefined;
+  Availablelisting: undefined;
+  Withdraw: undefined; ///Requests(pending and accepted)
+  Withdrawpreview: undefined;
+  Editmeetup: undefined;
+  Pendingwithdraw: undefined;
+  Acceptedwithdraw: undefined;
+  Cancelrequest: undefined;
+  Summary: undefined;
+
+  //Wallet funding
+  Addcash: undefined;
+  Choosewallet: undefined;
+
+  //Transfer funds
+  Transfercash: undefined;
+  TransferInput: undefined;
+  Getdetails: undefined;
+  Bankaccount: undefined;
+  Transferpin: undefined;
+
+  //Notification
+  Notifications: undefined;
+
+  //Deposit
+  Deposit: undefined;
+  Depositupdate: undefined;
+  Pendingdeposit: undefined;
+  Accepteddeposit: undefined;
+  Depositpin: undefined;
+  Canceldeposit: undefined;
+
+  //Chats
+  Chatshome: undefined;
+  Chatsdm: undefined;
+  Usersearch: undefined;
 };
-
-
 
 export type RootTransactionScreen = {
   Verification: undefined;
-}
+};
 
-export type RootAuthStackParamList ={
-  Login: undefined,
-  Signup: undefined,
-  Verification: undefined
-}
+export type RootAuthStackParamList = {
+  Login: undefined;
+  Signup: undefined;
+  Verification: undefined;
+};
+
+export type RootAddcashParamList = {
+  Addcash: undefined;
+  Choosewallet: undefined;
+};
 
 export type RootTabParamList = {
   Home: undefined;
@@ -51,11 +95,13 @@ export type RootTabParamList = {
   Settings: undefined;
 };
 
-export type OnboardingScreenNavigationProps = StackScreenProps<RootStackParamList, 'Onboarding'>;
-
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  StackScreenProps<RootStackParamList>
+export type OnboardingScreenNavigationProps = StackScreenProps<
+  RootStackParamList,
+  "Onboarding"
 >;
 
-
+export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<RootTabParamList, Screen>,
+    StackScreenProps<RootStackParamList>
+  >;

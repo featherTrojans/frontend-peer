@@ -6,7 +6,7 @@ import { icons } from "../../../../constants";
 
 const { Withdrawicon, Depositicon } = icons;
 
-const Newtransactions = () => {
+const Newtransactions = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -22,19 +22,19 @@ const Newtransactions = () => {
             icon={<Withdrawicon />}
             title="Withdraw"
             details="Get cash from feather users near you."
-            onpress={() => console.log("Redirect to Withdraw")}
+            onpress={() => navigation.navigate("Withdraw")}
           />
           <Iconwithdatas
             icon={<Depositicon />}
             title="Deposit"
             details="Supply cash and earn cashback!"
-            onpress={() => console.log("Redirect to Deposit")}
+            onpress={() => navigation.navigate("Deposit")}
           />
           <Iconwithdatas
             icon={<Withdrawicon />}
             title="Transfer"
             details="Send cash to feather wallets and bank accounts."
-            onpress={() => console.log("Redirect to Transfer")}
+            onpress={() => navigation.navigate("Transfercash")}
           />
           <Iconwithdatas
             icon={<Withdrawicon />}

@@ -73,7 +73,7 @@ function Requestnew({ route, navigation }) {
 
       <Bottombtn
         title="PROCEED"
-        onpress={() => console.log("Request new withdraal clicked")}
+        onpress={() => navigation.navigate("Availablelisting")}
       />
     </View>
   );

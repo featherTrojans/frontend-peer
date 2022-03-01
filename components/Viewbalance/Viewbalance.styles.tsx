@@ -30,6 +30,9 @@ export const styles = StyleSheet.create({
     marginBottom: 13.6,
     marginTop: 13.6,
   },
+
+
+  
   addCashBg: {
     backgroundColor: COLORS.blue7,
     paddingVertical: 12,
@@ -46,6 +49,8 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     marginRight: 17.6,
   },
+
+
 
   //   Bottom part of the container
 

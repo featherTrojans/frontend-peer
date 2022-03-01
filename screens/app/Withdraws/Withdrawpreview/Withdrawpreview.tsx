@@ -4,6 +4,7 @@ import {
   Text,
   View,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { styles } from "./Withdrawpreview.styles";
@@ -13,7 +14,7 @@ import { Bottombtn, Requesterdetails } from "../../../../components";
 const { Locationmap } = images;
 const { Forwardarrow, Editicon, Meetupdot } = icons;
 
-const Withdrawpreview = () => {
+const Withdrawpreview = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -61,7 +62,7 @@ const Withdrawpreview = () => {
             </View>
 
             {/* Meetup point will show after clicking the continuee*/}
-            {/* 
+
             <View style={styles.meetupContainer}>
               <Text style={styles.meetUpText}>Meetup Point</Text>
               <View style={styles.meetupLocationContainer}>
@@ -69,9 +70,12 @@ const Withdrawpreview = () => {
                   <Meetupdot />
                   <Text style={styles.locationText}>Forks and Fingers</Text>
                 </View>
-                <Editicon />
+
+                <TouchableOpacity onPress={() => navigation.navigate("Editmeetup") }>
+                  <Editicon />
+                </TouchableOpacity>
               </View>
-            </View> */}
+            </View>
           </View>
           <Bottombtn
             title="CONTINUE"
