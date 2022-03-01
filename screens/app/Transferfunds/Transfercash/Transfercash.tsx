@@ -20,7 +20,7 @@ const options = [
     icon: <Bankaccount />,
     type: "Bank Account",
     about: "Transfer cash to any bank in Nigeria.",
-    nextscreen:"Getdetails"
+    nextscreen:"Bankaccount"
   },
 ];
 

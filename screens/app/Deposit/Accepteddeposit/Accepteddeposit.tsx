@@ -4,8 +4,9 @@ import {
   View,
   StatusBar,
   ImageBackground,
+  TouchableOpacity
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
 import {
   Bottombtn,
@@ -27,10 +28,13 @@ const {
   Phoneicony,
   Smsicony,
   Cancelicony,
+  Dropswitch
 } = icons;
 const { Locationmap } = images;
 
-const Accepteddeposit = () => {
+const Accepteddeposit = ({navigation}) => {
+  const [toggleShow, setToggleShow] = useState(true);
+
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -41,7 +45,7 @@ const Accepteddeposit = () => {
       >
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
-            {false ? (
+            {toggleShow ? (
               <View>
                 <View style={styles.detailsProfile}>
                   <Requesterdetails
@@ -115,10 +119,16 @@ const Accepteddeposit = () => {
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <View style={styles.bottomAcceptBtn}>
+              <TouchableOpacity style={styles.bottomAcceptBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Depositpin")}>
                 <Text style={styles.cancelText}>RECEIVE PAYMENT</Text>
-              </View>
-              <View style={styles.blackBtn}></View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.blackBtn}
+                onPress={() => setToggleShow(!toggleShow)}
+              >
+                <Dropswitch />
+              </TouchableOpacity>
             </View>
           </View>
         </View>

@@ -80,7 +80,7 @@ const Saveduser = ({ details }: any) => {
   );
 };
 
-const Bankaccount = () => {
+const Bankaccount = ({navigation}) => {
   const [checked, setChecked] = useState(false);
 
   return (
@@ -136,7 +136,7 @@ const Bankaccount = () => {
 
       <Bottombtn
         title="PROCEED"
-        onpress={() => console.log("Bank accout proceded")}
+        onpress={() => navigation.push("Transferpin")}
       />
     </View>
   );

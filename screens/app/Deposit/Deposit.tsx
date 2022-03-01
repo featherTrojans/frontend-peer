@@ -75,11 +75,16 @@ const Emptyrequest = () => {
   );
 };
 
-// Requestee profile
-const Requesteeprofile = ({ list }: { list: any }) => {
+
+const Deposit = ({navigation}) => {
+  const [active, setActive] = useState("pending");
+
+
+  // Requestee profile
+const Requesteeprofile = ({ list, onpress}:  any ) => {
   const { image, full_name, username, price, status, base_charge } = list;
   return (
-    <View style={styles.depositProfileContainer}>
+    <TouchableOpacity style={styles.depositProfileContainer} activeOpacity={0.7} onPress={onpress}>
       <View style={styles.depositProfileDetails}>
         {/* Tro replace this with the user image */}
         <View
@@ -100,12 +105,10 @@ const Requesteeprofile = ({ list }: { list: any }) => {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const Deposit = () => {
-  const [active, setActive] = useState("pending");
 
   const REQUESTDATA = REQUEST.filter((req) => req.status === active);
 
@@ -137,7 +140,13 @@ const Deposit = () => {
         </View>
         <FlatList
           data={REQUESTDATA}
-          renderItem={({ item }) => <Requesteeprofile list={item} />}
+          renderItem={({ item }) => <Requesteeprofile list={item}    onpress={() =>
+            navigation.navigate(
+              item.status === "pending"
+                ? "Pendingdeposit"
+                : "Accepteddeposit"
+            )
+          } />}
           keyExtractor={(item) => `${item.full_name}`}
         />
       </View>
@@ -149,16 +158,16 @@ const Deposit = () => {
       <Backheader title="Deposit" />
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
-        <Viewbalance />
+      <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
         <View style={{ flex: 1 }}>
           {REQUEST.length < 1 ? <Emptyrequest /> : <Requestlist />}
         </View>
       </View>
 
-      <Bottombtn
+      {/* <Bottombtn
         title="NEW DEPOSIT"
         onpress={() => console.log("New Transaction clicked")}
-      />
+      /> */}
     </View>
   );
 };
