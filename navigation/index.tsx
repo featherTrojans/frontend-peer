@@ -12,33 +12,26 @@ import {
 
 import {
   Onboarding,
+
+  // Auth Screens
   Login,
-<<<<<<< HEAD
   Setup,
   Personal,
   Security,
   Securepin,
-=======
-  Signup,
->>>>>>> 70e4e5d16c26ad404148401043c97db654a7498b
   Verification,
-  Setup,
   Welcome,
+
+  //Dashboard Screens
   Home,
-<<<<<<< HEAD
 
   //Transactions
   Transactions,
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
-=======
->>>>>>> 70e4e5d16c26ad404148401043c97db654a7498b
   History,
-  Transactions,
-  // Chats,
   Settings,
-<<<<<<< HEAD
   Pendingrequest, //This screen has changed
   Accepetedrequest, //This screen has changed too
 
@@ -54,30 +47,20 @@ import {
   Summary,
 
   //Wallet funding
-=======
-  Withdraw,
-  Requestnew,
-  Availablelisting,
->>>>>>> 70e4e5d16c26ad404148401043c97db654a7498b
   Addcash,
-  Transfercash,
-  Getdetails,
-  Bankaccount,
   Choosewallet,
-  Pendingrequest,
-  Summary,
-  Cancelrequest,
-  Accepetedrequest,
-  Personal,
-  Security,
-  Securepin,
+
+  //Transfer funds
+  Transfercash,
+  TransferInput,
+  Getdetails, //If Feather
+  Bankaccount, //If Bank accout
+  Transferpin,
+
+  //Notification
   Notifications,
-<<<<<<< HEAD
 
   //Deposit
-=======
-  Newtransactions,
->>>>>>> 70e4e5d16c26ad404148401043c97db654a7498b
   Deposit, ///Requests(pending and accepted)
   Depositupdate,
   Pendingdeposit,
@@ -88,21 +71,15 @@ import {
   //Chats
   Chatshome,
   Chatsdm,
-  TransferInput,
   Usersearch,
-  Transferpin,
 } from "../screens";
+
 import { AppState } from "react-native";
-import { Loader, Tab  } from "../components";
+import { Loader, Tab } from "../components";
 import { icons } from "../constants";
-// import Deposit from "../screens/app/Deposit/Deposit";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
-
-
-
-
 
 const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings } = icons;
 
@@ -111,12 +88,12 @@ const Tabs = () => (
     initialRouteName="Home"
     screenOptions={{
       headerShown: false,
-      
-      tabBarStyle:{
+
+      tabBarStyle: {
         height: 87,
         paddingVertical: 18,
-        paddingHorizontal: 18
-      }
+        paddingHorizontal: 18,
+      },
     }}
   >
     <BottomTab.Screen
@@ -124,8 +101,11 @@ const Tabs = () => (
       component={Home}
       options={{
         tabBarButton: (props) => (
-          
-          <Tab label="Home" {...props} icon={<TabHome focused={props.accessibilityState?.selected}/>} />
+          <Tab
+            label="Home"
+            {...props}
+            icon={<TabHome focused={props.accessibilityState?.selected} />}
+          />
         ),
       }}
     />
@@ -134,16 +114,26 @@ const Tabs = () => (
       component={Availablelisting}
       options={{
         tabBarButton: (props) => (
-          <Tab label="History" {...props} icon={<Tabhistory focused={props.accessibilityState?.selected}/>} />
+          <Tab
+            label="History"
+            {...props}
+            icon={<Tabhistory focused={props.accessibilityState?.selected} />}
+          />
         ),
       }}
     />
     <BottomTab.Screen
       name="Transactions"
-      component={Transactions}  
+      component={Transactions}
       options={{
         tabBarButton: (props) => (
-          <Tab label="Transactions" {...props} icon={<Tabtransactions focused={props.accessibilityState?.selected}/>} />
+          <Tab
+            label="Transactions"
+            {...props}
+            icon={
+              <Tabtransactions focused={props.accessibilityState?.selected} />
+            }
+          />
         ),
       }}
     />
@@ -152,16 +142,24 @@ const Tabs = () => (
       component={Chatshome}
       options={{
         tabBarButton: (props) => (
-          <Tab label="Chats" {...props} icon={<Tabchats focused={props.accessibilityState?.selected}/>} />
+          <Tab
+            label="Chats"
+            {...props}
+            icon={<Tabchats focused={props.accessibilityState?.selected} />}
+          />
         ),
       }}
     />
     <BottomTab.Screen
       name="Settings"
-      component={Accepetedrequest}
+      component={Settings}
       options={{
         tabBarButton: (props) => (
-          <Tab label="Settings" {...props} icon={<Tabsettings focused={props.accessibilityState?.selected}/>} />
+          <Tab
+            label="Settings"
+            {...props}
+            icon={<Tabsettings focused={props.accessibilityState?.selected} />}
+          />
         ),
       }}
     />
@@ -173,7 +171,7 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Login"
+    // initialRouteName="Root"
   >
     {/* SCREEN FOR AUTH */}
     <AppStack.Group screenOptions={{ presentation: 'modal' }}>
@@ -254,8 +252,6 @@ const RootNavigator = () => (
   </AppStack.Navigator>
 );
 
-
- 
 export default function MainNavigation() {
   return (
     <NavigationContainer>
