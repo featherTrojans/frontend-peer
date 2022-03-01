@@ -30,10 +30,14 @@ import {
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
-  History,
-  Settings,
   Pendingrequest, //This screen has changed
   Accepetedrequest, //This screen has changed too
+
+
+
+
+  History,
+  Settings,
 
   //Withdraw
   Requestnew,
@@ -112,7 +116,7 @@ const Tabs = () => (
     />
     <BottomTab.Screen
       name="History"
-      component={Availablelisting}
+      component={History}
       options={{
         tabBarButton: (props) => (
           <Tab

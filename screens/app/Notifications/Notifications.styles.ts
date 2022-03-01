@@ -5,7 +5,7 @@ import { COLORS, FONTS, fontsize } from "../../../constants";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 22,
+        // paddingTop: 22,
         // paddingHorizontal: 15
     },
     listContainer: {

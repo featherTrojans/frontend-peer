@@ -208,9 +208,9 @@ const Home = ({navigation}: {navigation: any}) => {
             <Text style={styles.profileUsername}>@{info?.username}</Text>
           </View>
         </View>
-        <View>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Notifications")}>
           <Bell />
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/* Wallet info and details */}
