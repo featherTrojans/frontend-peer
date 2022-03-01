@@ -3,9 +3,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications'
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-
 import { AuthProvider } from './context/AuthContext';
 import MainNavigation from './navigation';
+import { Text , View} from 'react-native';
+import { TouchableOpacity } from '@gorhom/bottom-sheet';
+import {icons} from "./constants"
+
+const { Cancelicon } = icons;
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -19,7 +23,28 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <ToastProvider>
+      <ToastProvider 
+      placement="top" 
+      duration={5000} 
+      type="normal"  
+      animationType="slide-in"
+      offset={100}
+      renderToast={(props)=><View style={{
+        backgroundColor:"#E00000",
+        paddingVertical: 18,
+        paddingHorizontal: 24,
+        borderRadius: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "80%",
+        marginHorizontal:25,
+      }}>
+        <Text style={{color: "#fff",fontSize: 14,lineHeight:20}}>{props.message}</Text>    
+        <TouchableOpacity onPress={props.onHide}>
+          <Cancelicon />
+        </TouchableOpacity>
+          </View>}>
         <AuthProvider>
         <MainNavigation />
         </AuthProvider>
@@ -27,3 +52,22 @@ export default function App() {
     );
   }
 }
+{/* <View style={{
+      backgroundColor:"#E00000",
+      paddingVertical: 18,
+      paddingHorizontal: 24,
+      borderRadius: 10,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "100%",
+      marginHorizontal:25,
+    }}>
+          <Text style={{
+              color: "#fff",
+              fontSize: 14,
+              maxWidth: 240,
+              lineHeight:20
+            }}>
+              Oops, error creating your account, email already in use</Text>    
+        </View> */}

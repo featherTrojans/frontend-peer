@@ -1,5 +1,6 @@
 import {  styles } from "./Login.styles";
 import { COLORS, icons } from "../../../constants";
+import { useToast } from "react-native-toast-notifications";
 import {
   View,
   Text,
@@ -14,6 +15,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Input, Loader } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
+import showerror from "../../../utils/errorMessage";
 
 const { Logo,Newlogo, Eyeicon, Usericon, Lock } = icons;
 
@@ -35,6 +37,7 @@ const validationSchema = Yup.object().shape({
 })
 
 const Login = ({ navigation }: any) => {
+  const toast = useToast()
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -60,6 +63,7 @@ const Login = ({ navigation }: any) => {
               navigation.navigate("Welcome")
             }catch(err){
               console.log(err.response)
+              showerror(toast,err)
             }
             console.log(values);
           }}

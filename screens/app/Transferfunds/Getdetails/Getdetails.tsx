@@ -61,7 +61,7 @@ const Getdetails = ({ route, navigation }) => {
         </View>
       </View>
 
-      <Bottombtn title="PROCEED" onpress={() => console.log("Proceed to wallet clicked")}/>
+      <Bottombtn title="PROCEED" onpress={()=>navigation.navigate("TransferPin",{amount,username})}/>
 
 
     </View>

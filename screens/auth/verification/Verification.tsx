@@ -6,11 +6,14 @@ import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
 import { Loader } from "../../../components";
+import { useToast } from "react-native-toast-notifications";
+
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const { Cancelicon } = icons;
 
 const Verification = ({route,navigation}) => {
+  const toast = useToast()
   const {email, phoneNumber, token} = route.params
   const [loading, setLoading] = useState<boolean>(false)
   const [otpCode, setOtpCode] = useState<any>("")
