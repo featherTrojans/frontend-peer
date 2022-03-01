@@ -75,30 +75,33 @@ const USERDATAS = [
 
 const listingtypes = ["peers", "businesses", "agents"];
 
-const Singleuser = ({ profile, onpress }: any) => {
-  const { image, name, distance, noOfBadges } = profile;
-  return (
-    <TouchableOpacity style={styles.userContainer} activeOpacity={0.8} onPress={onpress}>
-      <View style={styles.detailsContainer}>
-        {/* Image */}
-        {image}
-        <View style={styles.infoContainer}>
-          <Text style={styles.userName}>{name}</Text>
-          <View style={styles.otherInfo}>
-            <Text style={styles.distance}>~{distance} Mins away</Text>
-            <View style={styles.smallDot} />
-            <Text style={styles.numberOfBadges}>{noOfBadges} Badges</Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        <Forwardarrow />
-      </View>
-    </TouchableOpacity>
-  );
-};
+
 
 const Availablelisting = ({navigation}: any) => {
+
+  const Singleuser = ({ profile, onpress }: any) => {
+    const { image, name, distance, noOfBadges } = profile;
+    return (
+      <TouchableOpacity style={styles.userContainer} activeOpacity={0.8} onPress={() => navigation.navigate("Withdrawpreview")} >
+        <View style={styles.detailsContainer}>
+          {/* Image */}
+          {image}
+          <View style={styles.infoContainer}>
+            <Text style={styles.userName}>{name}</Text>
+            <View style={styles.otherInfo}>
+              <Text style={styles.distance}>~{distance} Mins away</Text>
+              <View style={styles.smallDot} />
+              <Text style={styles.numberOfBadges}>{noOfBadges} Badges</Text>
+            </View>
+          </View>
+        </View>
+        <View>
+          <Forwardarrow />
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   const [active, setActive] = useState("peers");
   return (
     <View style={{ flex: 1 }}>
@@ -139,7 +142,7 @@ const Availablelisting = ({navigation}: any) => {
           <BottomSheetFlatList
             showsVerticalScrollIndicator={false}
             data={USERDATAS}
-            renderItem={({ item }) => <Singleuser profile={item} onpress={navigation.navigate("Withdrawpreview")} />}
+            renderItem={({ item }) => <Singleuser profile={item} />}
             keyExtractor={(item) => item.name}
           />
         </BottomSheet>

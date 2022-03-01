@@ -19,5 +19,6 @@ export const styles = StyleSheet.create({
     ...fontsize.smallest,
     ...FONTS.bold,
     color: COLORS.white,
+    textTransform: 'uppercase'
   },
 });

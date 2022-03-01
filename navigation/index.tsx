@@ -43,6 +43,7 @@ import {
   Editmeetup,
   Pendingwithdraw,
   Acceptedwithdraw,
+  Requestsummary,
   Cancelrequest,
   Summary,
 
@@ -210,6 +211,7 @@ const RootNavigator = () => (
       <AppStack.Screen name="Editmeetup" component={Editmeetup} />
       <AppStack.Screen name="Pendingwithdraw" component={Pendingwithdraw} />
       <AppStack.Screen name="Acceptedwithdraw" component={Acceptedwithdraw} />
+      <AppStack.Screen name="Requestsummary" component={Requestsummary} />
       <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
       <AppStack.Screen name="Summary" component={Summary} />
     </AppStack.Group>

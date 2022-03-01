@@ -181,7 +181,7 @@ const Home = ({navigation}: {navigation: any}) => {
     }
   }
   const EmptyComponent = () => {
-    return (
+  return (
       <View style={styles.emptyContainer}>
         {/* Crying icons */}
         <Cryingicon />

@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     ...fontsize.bmsmall,
     ...FONTS.bold,
     marginRight: 12,
-    marginLeft: 8
+    marginLeft: 8,
   },
   amountText: {
     ...fontsize.bsmall,
@@ -52,26 +52,22 @@ export const styles = StyleSheet.create({
     color: COLORS.grey2,
   },
   meetupContainer: {
-    marginTop: 22
+    marginTop: 22,
   },
-  meetUpText:{ 
-    ...fontsize.small, 
-    ...FONTS.regular 
+  meetUpText: {
+    ...fontsize.small,
+    ...FONTS.regular,
   },
-  meetupLocationContainer:{
+  meetupLocationContainer: {
     marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  locationText:{
+  locationText: {
     ...fontsize.bbsmall,
     ...FONTS.medium,
     marginLeft: 12,
   },
-
-
-
-
 
   ///Cancel Buttons
   bottomBtnContainer: {
@@ -96,48 +92,53 @@ export const styles = StyleSheet.create({
     height: 62,
     backgroundColor: COLORS.black,
     borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
+  //Make Request button
+  bottomMakeRequestBtn: {
+    flex: 1,
+    backgroundColor: COLORS.black,
+    borderRadius: 10,
+    marginRight: 14,
+    paddingHorizontal: 10,
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  requestText: {
+    ...fontsize.smallest,
+    ...FONTS.bold,
+    color: COLORS.white,
+  },
+  makeRequestCircle: {
+    width: 40,
+    height: 40,
+    backgroundColor: COLORS.green2,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
-//Make Request button
-bottomMakeRequestBtn: {
-  flex: 1,
-  backgroundColor: COLORS.black,
-  borderRadius: 10,
-  marginRight: 14,
-  paddingHorizontal: 10,
-  alignItems: "center",
-  flexDirection: 'row'
-},
-requestText: {
-  ...fontsize.smallest,
-  ...FONTS.bold,
-  color: COLORS.white,
-},
+  //Receive payment buttons
 
-
-//Receive payment buttons
-
-
-
-//Accept Request btn
-bottomAcceptBtn: {
-  flex: 1,
-  backgroundColor: COLORS.green1,
-  borderRadius: 10,
-  marginRight: 14,
-  justifyContent: "center",
-  alignItems: "center",
-},
-depositAmountBaseCharge: {
-  ...fontsize.small,
-  color: COLORS.green1,
-},
-depositLocationText:{
-  ...fontsize.bmsmall,
-  ...FONTS.regular,
-  marginLeft: 12,
-  marginRight: 100
-},
-
+  //Accept Request btn
+  bottomAcceptBtn: {
+    flex: 1,
+    backgroundColor: COLORS.green1,
+    borderRadius: 10,
+    marginRight: 14,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  depositAmountBaseCharge: {
+    ...fontsize.small,
+    color: COLORS.green1,
+  },
+  depositLocationText: {
+    ...fontsize.bmsmall,
+    ...FONTS.regular,
+    marginLeft: 12,
+    marginRight: 100,
+  },
 });

@@ -4,8 +4,9 @@ import {
   View,
   StatusBar,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
 import {
   Bottombtn,
@@ -26,10 +27,12 @@ const {
   Cancelicony,
   Makerequestarrowright,
   Orangecheckmark,
+  Dropswitch,
 } = icons;
 const { Locationmap } = images;
 
-const Acceptedwithdraw = () => {
+const Acceptedwithdraw = ({ navigation }) => {
+  const [toggleShow, setToggleShow] = useState(false);
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -40,7 +43,7 @@ const Acceptedwithdraw = () => {
       >
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
-            {true ? (
+            {toggleShow ? (
               <View>
                 <View style={styles.detailsProfile}>
                   <Requesterdetails
@@ -107,23 +110,24 @@ const Acceptedwithdraw = () => {
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <View style={styles.bottomMakeRequestBtn}>
-                <View
-                  style={{
-                    width: 40,
-                    height: 40,
-                    backgroundColor: COLORS.green2,
-                    borderRadius: 20,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+              <TouchableOpacity
+                style={styles.bottomMakeRequestBtn}
+                activeOpacity={0.8}
+                onPress={() => navigation.push("Requestsummary")}
+              >
+                <View style={styles.makeRequestCircle}>
                   <Makerequestarrowright />
                 </View>
                 <View style={{ marginHorizontal: 16 }}></View>
                 <Text style={styles.requestText}>MAKE PAYMENT</Text>
-              </View>
-              <View style={styles.blackBtn}></View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.blackBtn}
+                onPress={() => setToggleShow(!toggleShow)}
+              >
+                <Dropswitch />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
