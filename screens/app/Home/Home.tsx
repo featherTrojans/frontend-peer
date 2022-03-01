@@ -163,10 +163,12 @@ const Home = ({navigation}) => {
   const {setAuthData} = useContext(AuthContext)
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false)
+  console.log("I am mounting again")
   useEffect(()=>{
     getDashboardData()
   },[])
   const getDashboardData = async ()=>{
+    console.log("I am fetching again")
     setLoading(true)
     try{
       const response = await axiosCustom.get("/dashboard")

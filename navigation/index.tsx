@@ -38,15 +38,26 @@ import {
   Securepin,
   Notifications,
   Newtransactions,
+  Deposit, ///Requests(pending and accepted)
+  Depositupdate,
+  Pendingdeposit,
+  Accepteddeposit,
+  Depositpin,
+  Canceldeposit,
+
+
+
+  //Chats
   Chatshome,
   Chatsdm,
   TransferInput,
   Usersearch,
+  Transferpin,
 } from "../screens";
 import { AppState } from "react-native";
 import { Loader, Tab  } from "../components";
 import { icons } from "../constants";
-import Deposit from "../screens/app/Deposit/Deposit";
+// import Deposit from "../screens/app/Deposit/Deposit";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
@@ -143,10 +154,10 @@ const RootNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Personal"
-    >
-    <AppStack.Screen name="Onboarding" component={Onboarding} />
+    initialRouteName="Login"
+  >
     <AppStack.Screen name="Personal" component={Personal} />
+    <AppStack.Screen name="Onboarding" component={Depositupdate} />
     <AppStack.Screen name="Verification" component={Verification} />
     <AppStack.Screen name="Security" component={Security} />
     <AppStack.Screen name="Securepin" component={Securepin} />
@@ -163,9 +174,8 @@ const RootNavigator = () => (
 
     <AppStack.Screen name="TransferInput" component={TransferInput} />
     <AppStack.Screen name="Getdetails" component={Getdetails} />
+    <AppStack.Screen name="TransferPin" component={Transferpin} />
     <AppStack.Screen name="Bankaccount" component={Bankaccount} />
-    
-    
     {/* TRANSACTIONS */}
     <AppStack.Screen name="Newtransactions" component={Newtransactions} />
     {/* WITHDRAW */}

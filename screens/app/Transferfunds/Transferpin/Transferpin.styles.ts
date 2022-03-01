@@ -5,6 +5,11 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
+    // paddingHorizontal: 25,
+  },
+  mainContainer: {
+    flex: 1,
+    backgroundColor: COLORS.white,
     paddingHorizontal: 25,
   },
   backArrowConteiner: {

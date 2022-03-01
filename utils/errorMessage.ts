@@ -1,14 +1,13 @@
 import { useToast } from "react-native-toast-notifications";
-function showerror(){
-    const toast = useToast()
+function showerror(toast:any,err:any){
+  let message:string = err?.response?.data?.message
+    if(message && typeof message ==="string"){
+        message = err.response.data.message
+    }else{
+      message = "unable to perform transaction"
+    }
     if(toast.show !== undefined){
-        toast.show("Task finished successfully", {
-          type: "normal",
-          placement: "top",
-          duration: 4000,
-          offset: 100,
-          animationType: "slide-in",
-        }); 
+      toast.show(message); 
     }
 }
 

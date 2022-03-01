@@ -75,6 +75,12 @@ import Cancelicony from "../assets/icons/Cancelicony";
 import Smsicony from "../assets/icons/Smsicony";
 import Phoneicony from "../assets/icons/Phoneicony";
 import Ratingstar from "../assets/icons/Ratingstar";
+import Accountbalanceicon from "../assets/icons/Accountbalanceicon";
+import Trendingupright from "../assets/icons/Trendingupright";
+import Viewrequesteye from "../assets/icons/Viewrequesteye";
+
+
+
 
 
 
@@ -168,7 +174,11 @@ export default {
   Cancelicony,
   Smsicony,
   Phoneicony,
-  Ratingstar
+  Ratingstar,
+  Accountbalanceicon,
+  Trendingupright,
+  Viewrequesteye
+  
   
 
   

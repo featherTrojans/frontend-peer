@@ -23,7 +23,13 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <ToastProvider  renderToast={(props)=><View style={{
+      <ToastProvider 
+      placement="top" 
+      duration={5000} 
+      type="normal"  
+      animationType="slide-in"
+      offset={100}
+      renderToast={(props)=><View style={{
         backgroundColor:"#E00000",
         paddingVertical: 18,
         paddingHorizontal: 24,

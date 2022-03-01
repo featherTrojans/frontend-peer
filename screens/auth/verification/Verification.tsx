@@ -26,16 +26,7 @@ const Verification = ({route,navigation}) => {
       console.log(response)
       navigation.navigate("Security",{token:tokenn})
     }catch(err){
-      
-      if(toast.show !== undefined){
-        toast.show("Task finished successfully", {
-          type: "normal",
-          placement: "top",
-          duration: 4000,
-          // offset: 100,
-          animationType: "slide-in",
-        }); 
-      }
+      console.log(err.response)
     }finally{
       setLoading(false)
     }
