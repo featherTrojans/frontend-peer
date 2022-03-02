@@ -82,6 +82,7 @@ import {
 import { AppState } from "react-native";
 import { Loader, Tab } from "../components";
 import { icons } from "../constants";
+import WithdrawPin from "../screens/app/Withdraws/WithdrawPin/WithdrawPin";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
@@ -208,16 +209,20 @@ const RootNavigator = () => (
 
     {/* Withdraw Screens */}
     <AppStack.Group>
+      <AppStack.Screen name="Withdraw" component={Withdraw} />
       <AppStack.Screen name="Requestnew" component={Requestnew} />
       <AppStack.Screen name="Availablelisting" component={Availablelisting} />
-      <AppStack.Screen name="Withdraw" component={Withdraw} />
       <AppStack.Screen name="Withdrawpreview" component={Withdrawpreview} />
       <AppStack.Screen name="Editmeetup" component={Editmeetup} />
-      <AppStack.Screen name="Pendingwithdraw" component={Pendingwithdraw} />
+          {/* To Cancel */}
+          {/* cancel requests */}
+      <AppStack.Screen name="Pendingwithdraw" component={Pendingwithdraw} /> 
+      <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
+          {/* TO MaKE AFTER ACCEPTING */}
       <AppStack.Screen name="Acceptedwithdraw" component={Acceptedwithdraw} />
       <AppStack.Screen name="Requestsummary" component={Requestsummary} />
-      <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
       <AppStack.Screen name="Summary" component={Summary} />
+      <AppStack.Screen name="WithdrawPin" component={WithdrawPin} />
     </AppStack.Group>
 
     {/* Wallet Funding */}

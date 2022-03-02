@@ -5,10 +5,11 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
 import { styles } from "./Withdraw.styles";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 
 const {
   Backarrow,
@@ -74,6 +75,29 @@ const Emptyrequest = () => {
 // Requestee profile
 const Requesteeprofile = ({ list, onpress }: any) => {
   const { image, full_name, username, price, status } = list;
+  const [pendingRequests, setPendingRequests] = useState([]);
+  const [acceptedRequests, setAcceptedRequests] = useState([])
+  useEffect(()=>{
+    getPendingRequest();
+    getAcceptedRequest();
+  },[])
+  const getPendingRequest = async ()=>{
+    try{
+        const response = await axiosCustom.get("/request/pending")
+        setPendingRequests(response?.data?.data)
+        
+    }catch(err){
+      console.log(err.response)
+    }
+  }
+  const getAcceptedRequest = async ()=>{
+    try{
+      const response = await axiosCustom.get("/request/accepted")
+      setAcceptedRequests(response?.data?.data)
+    }catch(err){
+      console.log(err.response)
+    }
+  }
   return (
     <TouchableOpacity style={styles.withdrawProfileContainer} activeOpacity={0.8} onPress={onpress}>
       <View style={{ flexDirection: "row" }}>

@@ -1,7 +1,7 @@
 import React,{useState, useCallback} from 'react'
 import axiosCustom from '../httpRequests/axiosCustom';
 
-const debounce = (func,time = 500)=>{
+const debounce = (func,time = 1000)=>{
     let timer;
     return (...args)=>{
         clearTimeout(timer);
@@ -23,7 +23,7 @@ function useDebounce(){
             setUserInfo(response?.data?.data)
         }catch(err){
             console.log(err.response)
-            setUserInfo({})
+            setUserInfo("")
         }finally{
             setLoading(false)
         }

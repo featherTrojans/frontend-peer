@@ -6,17 +6,25 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import { styles } from "./Withdrawpreview.styles";
 import { COLORS, FONTS, fontsize, images, icons } from "../../../../constants";
-import { Bottombtn, Requesterdetails } from "../../../../components";
+import { Bottombtn, Loader, Requesterdetails } from "../../../../components";
+import showerror from "../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 
 const { Locationmap } = images;
 const { Forwardarrow, Editicon, Meetupdot } = icons;
 
-const Withdrawpreview = ({navigation}: any) => {
+const Withdrawpreview = ({navigation, route}: any) => {
+  const toast = useToast()
+  const {userInfo, amount } = route.params
+  const [loading, setLoading] = useState(false)
+ 
   return (
     <View style={styles.container}>
+      {loading && <Loader />}
       <StatusBar />
       <ImageBackground
         source={Locationmap}
@@ -79,7 +87,7 @@ const Withdrawpreview = ({navigation}: any) => {
           </View>
           <Bottombtn
             title="CONTINUE"
-            onpress={() => console.log("Continue btn clicked")}
+            onpress={()=>navigation.navigate("WithdrawPin",{userInfo,amount})}
           />
         </View>
       </ImageBackground>

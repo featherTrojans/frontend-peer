@@ -77,12 +77,17 @@ const listingtypes = ["peers", "businesses", "agents"];
 
 
 
-const Availablelisting = ({navigation}: any) => {
-
+const Availablelisting = ({navigation, route}: any) => {
+  const {amount} = route.params
   const Singleuser = ({ profile, onpress }: any) => {
     const { image, name, distance, noOfBadges } = profile;
     return (
-      <TouchableOpacity style={styles.userContainer} activeOpacity={0.8} onPress={() => navigation.navigate("Withdrawpreview")} >
+      <TouchableOpacity style={styles.userContainer} activeOpacity={0.8}
+       onPress={() => navigation.navigate("Withdrawpreview",{amount,userInfo:{
+         agent: "Afiz global",
+        agentUsername: "afiztech"
+        }})
+        } >
         <View style={styles.detailsContainer}>
           {/* Image */}
           {image}
