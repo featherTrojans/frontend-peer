@@ -9,6 +9,8 @@ import { Text , View} from 'react-native';
 import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import {icons} from "./constants"
 
+import Loader from "./components/Loader/Loader"
+
 const { Cancelicon } = icons;
 
 export default function App() {

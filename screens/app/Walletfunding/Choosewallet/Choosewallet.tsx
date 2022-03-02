@@ -1,13 +1,62 @@
-import { StyleSheet, Text, View, TouchableNativeFeedback } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableNativeFeedback,
+  Platform,
+} from "react-native";
+import React, { useState } from "react";
+import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "./Choosewallet.styles";
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+
 
 const { Backarrow, People, Debitcard, Arrowright, Forwardarrow } = icons;
 
 const Choosewallet = () => {
+  const [isModalVisible, setModalVisible] = useState(true);
+
   return (
     <View style={styles.container}>
+        <Globalmodal
+        showState={isModalVisible}
+        onBgPress={() => setModalVisible(!isModalVisible)}
+        btnFunction={() => console.log("Hellow")}
+        >
+    
+            <View style={{ alignItems: "center" }}>
+              <View
+                style={{
+                  width: 100,
+                  height: 100,
+                  backgroundColor: COLORS.grey1,
+                  borderRadius: 50,
+                }}
+              />
+
+              <Text
+                style={{
+                  textAlign: "center",
+                  marginHorizontal: 40,
+                  marginVertical: 40,
+                  ...fontsize.bsmall,
+                  ...FONTS.regular,
+                }}
+              >
+                You have successfully funded your “PRIMARY WALLET” with{" "}
+                <Text style={{ ...fontsize.bsmall, ...FONTS.bold }}>
+                  NGN 30,500.00
+                </Text>
+              </Text>
+            </View>
+
+            
+        </Globalmodal>
+
+
+
+
       <View style={styles.backArrow}>
         <Backarrow />
         <Text style={styles.backArrowText}>Add Cash</Text>
