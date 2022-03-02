@@ -1,38 +1,37 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import { styles } from "./Getdetails.styles";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { Backheader, Bottombtn, Input, Loader } from "../../../../components";
 import { COLORS, fontsize, icons } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
+import useDebounce from "../../../../utils/debounce";
 
 
 
-const { Backarrow, At } = icons;
+const { Backarrow, At, Check } = icons;
+
+
+
+
 
 const Getdetails = ({ route, navigation }) => {
-  const [loading, setLoading] = useState(false);
+  const [userinfo, getuserinfo, loadbounce] = useDebounce()
+  
   const [username, setUsername] = useState("");
-  const { amount } = route.params;
-  const handleSubmit = async () => {
-    try {
-      setLoading(true);
-      const response = await axiosCustom.post("/transfer", {
-        amount: amount,
-        transferTo: username,
-      });
-      console.log(response);
-    } catch (err) {
-      console.log(err.response);
-    } finally {
-      setLoading(false);
-    }
-  };
-  console.log(amount);
+  // const { amount } = route.params;
+  const amount = "20"
+
+  const handleUsernameChange = (text:string)=>{
+    setUsername(text)
+    // and debound
+    getuserinfo(text)
+  }
+  // console.log(username)
   return (
     <View style={styles.container}>
-      {loading && <Loader />}
+
 
       <Backheader title="Feather Wallet"/>
       
@@ -53,11 +52,20 @@ const Getdetails = ({ route, navigation }) => {
             placeholder="N37,580.50"
           />
           <Input
-            onChangeText={(text) => setUsername(text)}
+            onChangeText={(text) => handleUsernameChange(text)}
             value={username}
             icon={<At />}
             placeholder="Enter Username"
           />
+
+          <View style={styles.namecont}>
+            {
+              loadbounce?<Text>...</Text>:userinfo.fullName?<>
+            <Check />
+            <Text style={styles.name}>{userinfo?.fullName}</Text>
+              </>:null
+            } 
+          </View>
         </View>
       </View>
 

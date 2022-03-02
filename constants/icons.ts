@@ -79,6 +79,7 @@ import Accountbalanceicon from "../assets/icons/Accountbalanceicon";
 import Trendingupright from "../assets/icons/Trendingupright";
 import Viewrequesteye from "../assets/icons/Viewrequesteye";
 import Dropswitch from "../assets/icons/Dropswitch";
+import Check from "../assets/icons/Check";
 
 
 
@@ -180,7 +181,8 @@ export default {
   Accountbalanceicon,
   Trendingupright,
   Viewrequesteye,
-  Dropswitch
+  Dropswitch,
+  Check
   
   
 
