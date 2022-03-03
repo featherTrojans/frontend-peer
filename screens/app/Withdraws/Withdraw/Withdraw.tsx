@@ -74,9 +74,35 @@ const Emptyrequest = () => {
 
 // Requestee profile
 const Requesteeprofile = ({ list, onpress }: any) => {
-  const { image, full_name, username, price, status } = list;
+  const { image, agent, agentUsername, total, status } = list;
+  
+  return (
+    <TouchableOpacity style={styles.withdrawProfileContainer} activeOpacity={0.8} onPress={onpress}>
+      <View style={{ flexDirection: "row" }}>
+        {/* Image */}
+        {image}
+
+        <View style={styles.namesContainer}>
+          <Text style={styles.withdrawProfileName}>{agent}</Text>
+          <Text style={styles.withdrawProfileUsername}>@{agentUsername}</Text>
+        </View>
+      </View>
+
+      <View style={styles.priceAndCheck}>
+        <Text style={styles.withdrawProfilePrice}>N{total}</Text>
+
+        {status === "ACCEPTED" && <Acceptedcheck />}
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+const Withdraw = ({ navigation }) => {
+  const [active, setActive] = useState("pending");
+
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([])
+  console.log(pendingRequests,"PENDING", acceptedRequests, "ACCEPTED")
   useEffect(()=>{
     getPendingRequest();
     getAcceptedRequest();
@@ -98,31 +124,8 @@ const Requesteeprofile = ({ list, onpress }: any) => {
       console.log(err.response)
     }
   }
-  return (
-    <TouchableOpacity style={styles.withdrawProfileContainer} activeOpacity={0.8} onPress={onpress}>
-      <View style={{ flexDirection: "row" }}>
-        {/* Image */}
-        {image}
 
-        <View style={styles.namesContainer}>
-          <Text style={styles.withdrawProfileName}>{full_name}</Text>
-          <Text style={styles.withdrawProfileUsername}>{username}</Text>
-        </View>
-      </View>
-
-      <View style={styles.priceAndCheck}>
-        <Text style={styles.withdrawProfilePrice}>N{price}</Text>
-
-        {status === "accepted" && <Acceptedcheck />}
-      </View>
-    </TouchableOpacity>
-  );
-};
-
-const Withdraw = ({ navigation }) => {
-  const [active, setActive] = useState("pending");
-
-  const REQUESTDATA = REQUEST.filter((req) => req.status === active);
+  const REQUESTDATA = active === "pending" ? pendingRequests: acceptedRequests;
 
   const Requestlist = () => {
     return (
@@ -150,21 +153,16 @@ const Withdraw = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
+        
         <FlatList
           data={REQUESTDATA}
           renderItem={({ item }) => (
             <Requesteeprofile
               list={item}
-              onpress={() =>
-                navigation.navigate(
-                  item.status === "pending"
-                    ? "Pendingwithdraw"
-                    : "Acceptedwithdraw"
-                )
-              }
+              onpress={() =>navigation.navigate(item.status === "PENDING"? "Pendingwithdraw": "Acceptedwithdraw",{requestInfo:item})}
             />
           )}
-          keyExtractor={(item) => `${item.full_name}`}
+          keyExtractor={(item) => `${item.reference}`}
         />
       </View>
     );

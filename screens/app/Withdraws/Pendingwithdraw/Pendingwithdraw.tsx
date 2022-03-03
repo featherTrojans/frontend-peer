@@ -20,7 +20,8 @@ import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon, Dropswitch } = icons;
 const { Locationmap } = images;
 
-const Pendingwithdraw = ({navigation}) => {
+const Pendingwithdraw = ({navigation, route}) => {
+  const {requestInfo} = route.params;
   const [toggleShow, setToggleShow] = useState(true);
 
   return (
@@ -37,7 +38,7 @@ const Pendingwithdraw = ({navigation}) => {
               <View>
                 <View style={styles.detailsProfile}>
                   <Requesterdetails
-                    name="Destiny Babalola"
+                    name={requestInfo.agent}
                     distance="3kms"
                     duration={12}
                   />
@@ -51,9 +52,9 @@ const Pendingwithdraw = ({navigation}) => {
                 <View style={{ marginTop: 20 }}>
                   <Text style={styles.amountText}>Amount</Text>
                   <Text style={styles.amountPrice}>
-                    NGN 65,000.00{" "}
+                    NGN {requestInfo?.amount}{" "}
                     <Text style={styles.amountBaseCharge}>
-                      + 1,500.00 (Base Charge)
+                      + {requestInfo?.charges} (Base Charge)
                     </Text>{" "}
                   </Text>
                   <Text style={styles.baseChargeNegotiate}>
@@ -91,7 +92,7 @@ const Pendingwithdraw = ({navigation}) => {
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <TouchableOpacity style={styles.bottomCancelBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Cancelrequest")}>
+              <TouchableOpacity style={styles.bottomCancelBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Cancelrequest",{reference: requestInfo.reference})}>
                 <Text style={styles.cancelText}>CANCEL REQUEST</Text>
               </TouchableOpacity>
               <TouchableOpacity

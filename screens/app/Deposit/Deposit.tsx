@@ -160,7 +160,7 @@ const Requesteeprofile = ({ list, onpress}:  any ) => {
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
         <View style={{ flex: 1 }}>
-          {REQUEST.length < 1 ? <Emptyrequest /> : <Requestlist />}
+          {REQUEST.length > 1 ? <Emptyrequest /> : <Requestlist />}
         </View>
       </View>
 

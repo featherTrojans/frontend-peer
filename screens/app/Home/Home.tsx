@@ -40,97 +40,7 @@ const DATA = [
       "to": "elon",
       "direction": "out",
       "createdAt": "2022-01-31T22:49:14.000Z"
-  },
-  {
-      "transId": "dvM60YV55m",
-      "initialBal": "3100",
-      "amount": "105",
-      "finalBal": "2995",
-      "description": "#105 transferred to ELON",
-      "from": "EZEKO",
-      "to": "ELON",
-      "direction": "out",
-      "createdAt": "2022-01-31T22:51:30.000Z"
-  },
-  {
-      "transId": "4ljCwmQSXp",
-      "initialBal": "2965",
-      "amount": "5",
-      "finalBal": "2970",
-      "description": "#5 transferred from ELON",
-      "from": "ELON",
-      "to": "EZEKO",
-      "direction": "in",
-      "createdAt": "2022-01-31T23:21:38.000Z"
-  },
-  {
-      "transId": "rOJoN16QP8",
-      "initialBal": "2970",
-      "amount": "5",
-      "finalBal": "2975",
-      "description": "#5 transferred from ELON",
-      "from": "ELON",
-      "to": "EZEKO",
-      "direction": "in",
-      "createdAt": "2022-01-31T23:21:48.000Z"
-  },
-  {
-      "transId": "1czZV0yeXe",
-      "initialBal": "2975",
-      "amount": "15",
-      "finalBal": "2990",
-      "description": "#15 transferred from ELON",
-      "from": "ELON",
-      "to": "EZEKO",
-      "direction": "in",
-      "createdAt": "2022-01-31T23:24:43.000Z"
-  },
-  {
-      "transId": "IZGgBU1jV3",
-      "initialBal": "2990",
-      "amount": "15",
-      "finalBal": "2975",
-      "description": "#15 transferred to EZEKO",
-      "from": "EZEKO",
-      "to": "EZEKO",
-      "direction": "out",
-      "createdAt": "2022-01-31T23:26:01.000Z"
-  },
-  {
-      "transId": "fIjSVjVdyk",
-      "initialBal": "2990",
-      "amount": "15",
-      "finalBal": "3005",
-      "description": "#15 transferred from EZEKO",
-      "from": "EZEKO",
-      "to": "EZEKO",
-      "direction": "in",
-      "createdAt": "2022-01-31T23:26:01.000Z"
-  },
-  {
-      "transId": "mPhgPmLw7g",
-      "initialBal": "3005",
-      "amount": "15",
-      "finalBal": "2990",
-      "description": "#15 transferred to EZEKO",
-      "from": "EZEKO",
-      "to": "EZEKO",
-      "direction": "out",
-      "createdAt": "2022-01-31T23:26:24.000Z"
-  },
-  {
-      "transId": "v901tUJPYt",
-      "initialBal": "3005",
-      "amount": "15",
-      "finalBal": "3020",
-      "description": "#15 transferred from EZEKO",
-      "from": "EZEKO",
-      "to": "EZEKO",
-      "direction": "in",
-      "createdAt": "2022-01-31T23:26:24.000Z"
-  },
-
-]
+  }]
 
 
 
@@ -143,7 +53,7 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
-    link:"Deposit"
+    link:"Depositupdate"
   },
   {
     icon: <Transfer />,
