@@ -3,11 +3,14 @@ import React,{useContext} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Viewbalance.styles";
 import { AuthContext } from "../../context/AuthContext";
+import amountFormatter from "../../utils/formatMoney";
 
 const { Eyecrossed, Arrowright } = icons;
 
 const Viewbalance = ({navigate}: any) => {
   const {authdata} = useContext(AuthContext);
+
+
 
   return (
     <View style={styles.container}>
@@ -30,7 +33,7 @@ const Viewbalance = ({navigate}: any) => {
         {/* Left text */}
         <View>
           <Text style={styles.balanceText}>Balance</Text>
-          <Text style={styles.balanceAmount}>NGN {authdata?.walletBal}</Text>
+          <Text style={styles.balanceAmount}>NGN {amountFormatter(authdata?.walletBal)}</Text>
         </View>
 
         {/* Eye icon */}

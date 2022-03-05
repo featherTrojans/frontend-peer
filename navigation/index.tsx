@@ -67,7 +67,7 @@ import {
 
   //Deposit
   Deposit, ///Requests(pending and accepted)
-  Depositupdate,
+  Depositupdate, ///
   Pendingdeposit,
   Accepteddeposit,
   Depositpin,
@@ -116,7 +116,7 @@ const Tabs = () => (
     />
     <BottomTab.Screen
       name="History"
-      component={History}
+      component={Transactions}
       options={{
         tabBarButton: (props) => (
           <Tab
@@ -180,7 +180,7 @@ const RootNavigator = () => (
   >
     {/* SCREEN FOR AUTH */}
     <AppStack.Group screenOptions={{ presentation: 'modal' }}>
-      <AppStack.Screen name="Onboarding" component={Addcash} />
+      <AppStack.Screen name="Onboarding" component={Onboarding} />
       <AppStack.Screen name="Personal" component={Personal} />
       <AppStack.Screen name="Verification" component={Verification} />
       <AppStack.Screen name="Security" component={Security} />

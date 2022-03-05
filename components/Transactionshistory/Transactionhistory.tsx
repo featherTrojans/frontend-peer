@@ -3,6 +3,8 @@ import React,{useState, useEffect} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Transactionhistory.styles";
 import { useNavigation } from '@react-navigation/native';
+import amountFormatter from "../../utils/formatMoney";
+
 
 const { Arrowin, Arrowout } = icons;
 
@@ -36,7 +38,7 @@ const History = ({ data }: any) => {
       </View>
       <View>
         <Text style={[styles.amount, { color: priceColor }]}>
-          {amountSign} {amount}
+          {amountSign}N{amountFormatter(amount)}
         </Text>
       </View>
     </View>

@@ -113,7 +113,7 @@ const Login = ({ navigation }: any) => {
                 </JustifyBetween>
 
                 {/* Login btn */}
-                <TouchableOpacity onPress={handleSubmit} style={styles.loginbtn}>
+                <TouchableOpacity onPress={handleSubmit} style={styles.loginbtn} >
                   <Text style={styles.loginbtnText}>Log in</Text>
                 </TouchableOpacity>
               </>
@@ -128,7 +128,7 @@ const Login = ({ navigation }: any) => {
           </Text>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("Signup")}
+            onPress={() => navigation.navigate("Personal")}
           >
             <Text style={styles.registerText}>Register</Text>
           </TouchableOpacity>
