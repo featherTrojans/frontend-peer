@@ -19,7 +19,7 @@ import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 function Requestnew({ route, navigation }) {
   // const { nextscreen } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
-  const [amount, setAmount] = useState<string[]>([]);
+  const [amount, setAmount] = useState<string>("");
 
   const amountFormatter = (value: string) => {
     return (
@@ -31,14 +31,19 @@ function Requestnew({ route, navigation }) {
 
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
-      const newdata = [...amount];
-      newdata.pop();
+      const newdata = amount.substring(0, amount.length - 1)
       setAmount(newdata);
       console.log(newdata);
     }
   };
   const handleSetAmount = (value: string) => {
-    setAmount((oldamount) => [...oldamount, value]);
+    setAmount((oldamount) => {
+      let newamount = oldamount.concat(value)
+      if(Number(newamount)){
+        return newamount
+      }
+      return oldamount
+    });
   };
 
   return (
@@ -54,7 +59,7 @@ function Requestnew({ route, navigation }) {
               <Text style={styles.amountTxt}>
                 {" "}
                 <Text style={{ color: COLORS.grey5 }}>N</Text>{" "}
-                {amountFormatter(amount.join(""))}
+                {amountFormatter(amount)}
               </Text>
             </View>
           </View>
@@ -73,7 +78,7 @@ function Requestnew({ route, navigation }) {
 
       <Bottombtn
         title="PROCEED"
-        onpress={() => navigation.navigate("Availablelisting")}
+        onpress={() => navigation.navigate("Availablelisting",{amount})}
       />
     </View>
   );

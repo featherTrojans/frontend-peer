@@ -5,10 +5,11 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
 import { styles } from "./Withdraw.styles";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 
 const {
   Backarrow,
@@ -73,7 +74,8 @@ const Emptyrequest = () => {
 
 // Requestee profile
 const Requesteeprofile = ({ list, onpress }: any) => {
-  const { image, full_name, username, price, status } = list;
+  const { image, agent, agentUsername, total, status } = list;
+  
   return (
     <TouchableOpacity style={styles.withdrawProfileContainer} activeOpacity={0.8} onPress={onpress}>
       <View style={{ flexDirection: "row" }}>
@@ -81,15 +83,15 @@ const Requesteeprofile = ({ list, onpress }: any) => {
         {image}
 
         <View style={styles.namesContainer}>
-          <Text style={styles.withdrawProfileName}>{full_name}</Text>
-          <Text style={styles.withdrawProfileUsername}>{username}</Text>
+          <Text style={styles.withdrawProfileName}>{agent}</Text>
+          <Text style={styles.withdrawProfileUsername}>@{agentUsername}</Text>
         </View>
       </View>
 
       <View style={styles.priceAndCheck}>
-        <Text style={styles.withdrawProfilePrice}>N{price}</Text>
+        <Text style={styles.withdrawProfilePrice}>N{total}</Text>
 
-        {status === "accepted" && <Acceptedcheck />}
+        {status === "ACCEPTED" && <Acceptedcheck />}
       </View>
     </TouchableOpacity>
   );
@@ -98,7 +100,32 @@ const Requesteeprofile = ({ list, onpress }: any) => {
 const Withdraw = ({ navigation }) => {
   const [active, setActive] = useState("pending");
 
-  const REQUESTDATA = REQUEST.filter((req) => req.status === active);
+  const [pendingRequests, setPendingRequests] = useState([]);
+  const [acceptedRequests, setAcceptedRequests] = useState([])
+  console.log(pendingRequests,"PENDING", acceptedRequests, "ACCEPTED")
+  useEffect(()=>{
+    getPendingRequest();
+    getAcceptedRequest();
+  },[])
+  const getPendingRequest = async ()=>{
+    try{
+        const response = await axiosCustom.get("/request/pending")
+        setPendingRequests(response?.data?.data)
+        
+    }catch(err){
+      console.log(err.response)
+    }
+  }
+  const getAcceptedRequest = async ()=>{
+    try{
+      const response = await axiosCustom.get("/request/accepted")
+      setAcceptedRequests(response?.data?.data)
+    }catch(err){
+      console.log(err.response)
+    }
+  }
+
+  const REQUESTDATA = active === "pending" ? pendingRequests: acceptedRequests;
 
   const Requestlist = () => {
     return (
@@ -126,21 +153,16 @@ const Withdraw = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
+        
         <FlatList
           data={REQUESTDATA}
           renderItem={({ item }) => (
             <Requesteeprofile
               list={item}
-              onpress={() =>
-                navigation.navigate(
-                  item.status === "pending"
-                    ? "Pendingwithdraw"
-                    : "Acceptedwithdraw"
-                )
-              }
+              onpress={() =>navigation.navigate(item.status === "PENDING"? "Pendingwithdraw": "Acceptedwithdraw",{requestInfo:item})}
             />
           )}
-          keyExtractor={(item) => `${item.full_name}`}
+          keyExtractor={(item) => `${item.reference}`}
         />
       </View>
     );

@@ -38,7 +38,7 @@ export default function App() {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        width: "80%",
+        width: "90%",
         marginHorizontal:25,
       }}>
         <Text style={{color: "#fff",fontSize: 14,lineHeight:20}}>{props.message}</Text>    

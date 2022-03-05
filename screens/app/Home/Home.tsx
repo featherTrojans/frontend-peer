@@ -31,6 +31,7 @@ const {
 
 const DATA = [
   {
+<<<<<<< HEAD
     transId: "gIdiHOI6hQ",
     initialBal: "3200",
     amount: "100",
@@ -130,6 +131,20 @@ const DATA = [
     createdAt: "2022-01-31T23:26:24.000Z",
   },
 ];
+=======
+      "transId": "gIdiHOI6hQ",
+      "initialBal": "3200",
+      "amount": "100",
+      "finalBal": "3100",
+      "description": "#100 transferred to elon",
+      "from": "EZEKO",
+      "to": "elon",
+      "direction": "out",
+      "createdAt": "2022-01-31T22:49:14.000Z"
+  }]
+
+
+>>>>>>> 1a7e492e2d9a088ad8f9bd2fa37dcced4202f195
 
 const walletOptions = [
   {
@@ -140,7 +155,7 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
-    link: "Deposit",
+    link:"Depositupdate"
   },
   {
     icon: <Transfer />,
