@@ -286,7 +286,7 @@ const RootNavigator = () => (
   >
     {/* SCREEN FOR AUTH */}
     <AppStack.Group screenOptions={{ presentation: "modal" }}>
-      <AppStack.Screen name="Onboarding" component={Tabs} />
+      <AppStack.Screen name="Onboarding" component={Login} />
       <AppStack.Screen name="Personal" component={Personal} />
       <AppStack.Screen name="Verification" component={Verification} />
       <AppStack.Screen name="Security" component={Security} />

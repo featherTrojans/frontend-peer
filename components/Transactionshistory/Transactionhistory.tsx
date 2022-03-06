@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React,{useState, useEffect} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Transactionhistory.styles";
@@ -24,7 +24,11 @@ const History = ({ data }: any) => {
   const amountSign = direction === "in" ? "+" : "-";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
   return (
-    <View style={styles.historyContainer}>
+    <TouchableOpacity 
+    activeOpacity={0.8}
+    style={styles.historyContainer}
+    onPress={() => navigation.navigate("Transactiondetails")}
+    >
       <View style={styles.historyDetailsContainer}>
         <View style={[styles.arrowBg, { backgroundColor: circleColor }]}>
           {Arrow}
@@ -41,7 +45,7 @@ const History = ({ data }: any) => {
           {amountSign}N{amountFormatter(amount)}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

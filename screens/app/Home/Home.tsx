@@ -178,9 +178,9 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <View>
+            <TouchableOpacity onPress={() => navigation.navigate("Transactions")}>
               <Text style={styles.seeAll}>See All</Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
           {/* Flastlist containing the historys */}
