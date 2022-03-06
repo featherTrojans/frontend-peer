@@ -39,5 +39,19 @@ export const styles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.medium,
   },
-
+  dropDown: {
+    height: 62,
+    paddingLeft: 20,
+    borderColor: "#E6E6E6",
+  },
+  dropdowPlaceholder: {
+    color: COLORS.black,
+    ...fontsize.small,
+    ...FONTS.light,
+  },
+  dropDownText: {
+    color: COLORS.black,
+    ...fontsize.small,
+    ...FONTS.light,
+  },
 });
