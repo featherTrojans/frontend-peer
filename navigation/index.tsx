@@ -183,7 +183,7 @@ const Tabs = () => {
 
       <BottomTab.Screen 
       name="Transactions" 
-      component={Transactions} 
+      component={Newtransactions} 
       options={{
         tabBarIcon: ({focused, color, size}) => {
           return(

@@ -129,9 +129,9 @@ const Transactions = ({navigation}: any) => {
         <View>
           <Text style={styles.leftsideHeader}>What you’ve been up to</Text>
         </View>
-        <View>
+        {/* <View>
           <Text style={styles.rightsideHeader}>See All</Text>
-        </View>
+        </View> */}
       </View>
     );
   };

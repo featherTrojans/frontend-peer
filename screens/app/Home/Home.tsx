@@ -123,7 +123,7 @@ const Home = ({ navigation }: { navigation: any }) => {
         <View style={styles.profileContainer}>
           <Profilepics />
           <View style={styles.profileNameContainer}>
-            <Text style={styles.profileName}>Welcome, {nameToShow(info?.fullName)}</Text>
+            <Text style={styles.profileName}>Welcome, {nameToShow(info?.fullName)}✌🏽</Text>
             <Text style={styles.profileUsername}>@{info?.username}</Text>
           </View>
         </View>

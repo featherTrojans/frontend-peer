@@ -23,7 +23,7 @@ const Welcome = ({navigation}) => {
   useEffect(() => {
     progressWidth.value = withTiming(SIZES.width - 214, { duration: 1500 });
     setTimeout(() => {
-      navigation.navigate("Root")
+      navigation.replace("Root")
     }, 1500);
   }, []);
 
