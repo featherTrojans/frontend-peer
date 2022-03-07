@@ -39,5 +39,14 @@ export const styles = StyleSheet.create({
       ...FONTS.bold,
       color: COLORS.white,
     },
+    namecont:{
+      flexDirection: "row",
+      marginLeft: 20,
+      alignItems:"center"
+    },
+    name:{
+      color: "#0034CB",
+      marginLeft: 10
+    }
   });
   
