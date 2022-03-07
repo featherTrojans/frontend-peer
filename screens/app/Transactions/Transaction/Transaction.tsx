@@ -148,6 +148,7 @@ const Transactions = ({navigation}: any) => {
           <FlatList
             style={{ paddingTop: 10 }}
             data={formatData(transactions)}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }: any) => (
               <Transactionhistory date={item.time} datas={item.data} />
             )}

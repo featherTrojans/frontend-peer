@@ -15,6 +15,10 @@ import TabHome from "../assets/icons/TabHome";
 import Tabtransactions from "../assets/icons/Tabtransactions";
 import Tabhistory from "../assets/icons/Tabhistory";
 import Tabsettings from "../assets/icons/Tabsettings";
+import Tabuser from "../assets/icons/Tabuser";
+import Tabplusicon from "../assets/icons/Tabplusicon";
+
+
 
 import Bell from "../assets/icons/Bell";
 import Profilepics from "../assets/icons/Profilepics";
@@ -83,6 +87,9 @@ import Check from "../assets/icons/Check";
 import Newtransfericon from "../assets/icons/Newtransfericon";
 import Fundwalleticon from "../assets/icons/Fundwalleticon";
 import Paybillicon from "../assets/icons/Paybillicon";
+import Passwordhideicon from "../assets/icons/Passwordhideicon";
+
+
 
 
 
@@ -117,6 +124,7 @@ export default {
   Tabtransactions,
   Tabhistory,
   Tabsettings,
+  Tabuser,
 
   Bell,
   Profilepics,
@@ -188,7 +196,9 @@ export default {
   Check,
   Newtransfericon,
   Fundwalleticon,
-  Paybillicon
+  Paybillicon,
+  Passwordhideicon,
+  Tabplusicon
 
 
 

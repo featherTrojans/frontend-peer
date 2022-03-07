@@ -7,16 +7,16 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import amountFormatter from "../../../../utils/formatMoney";
 const { Backarrow, SecureDot } = icons;
 
-const Transferpin = ({route, navigation}) => {
+const TransferpinBank = ({route, navigation}) => {
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
-  const {amount,userinfo} = route.params
+  const {amount,accountInfomation} = route.params
   const [pin, setPin] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
+
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldpin) => [...oldpin, value]);
@@ -34,7 +34,8 @@ const Transferpin = ({route, navigation}) => {
     console.log(pin)
     try{
       setLoading(true);
-      await axiosCustom.post("/transfer",{amount,transferTo:userinfo?.username,userPin:pin.join("")})
+      const response = await axiosCustom.post("/withdraw",{amount,account_code:accountInfomation.account_code,userPin:pin.join("")})
+      console.log(response)
       setShowModal(true)
     }catch(err){
       console.log(err.response)
@@ -47,6 +48,7 @@ const Transferpin = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       {loading && <Loader />}
+      <StatusBar />
       <Globalmodal
       showState={showmodal}
       btnFunction={()=>navigation.navigate("Root")}
@@ -72,7 +74,6 @@ const Transferpin = ({route, navigation}) => {
              >You have successfully transffered NGN {amountFormatter(amount)} to  “@{userinfo?.username} - {userinfo?.fullName} ”</Text>
            </View>
       </Globalmodal>
-      <StatusBar />
       <View style={styles.mainContainer}>
         <View style={styles.backArrowConteiner}>
           <Backarrow />
@@ -82,7 +83,7 @@ const Transferpin = ({route, navigation}) => {
           <Text style={styles.descriptionText}>
             You are about to send{" "}
             <Text style={styles.descriptionSubText}>NGN {amount}</Text> from
-            your Primary Wallet to @{userinfo?.username} - {userinfo?.fullName}
+            your Primary Wallet to {accountInfomation.bank_name} - {accountInfomation.account_name}
           </Text>
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
@@ -113,4 +114,4 @@ const Transferpin = ({route, navigation}) => {
   );
 };
 
-export default Transferpin;
+export default TransferpinBank;

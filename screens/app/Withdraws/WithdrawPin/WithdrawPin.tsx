@@ -2,10 +2,11 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState } from "react";
 import { styles } from "./WithdrewPin.style";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Bottombtn, Loader, Numberbtn } from "../../../../components";
+import { Bottombtn, Loader, Numberbtn, Sendingandreceive } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 const { Backarrow, SecureDot } = icons;
 
 const WithdrawPin = ({ navigation, route}) => {
@@ -14,6 +15,9 @@ const WithdrawPin = ({ navigation, route}) => {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [loading, setLoading] = useState(false)
   const [charges, setCharges] = useState<string>("");
+  const [showmodal, setShowModal] = useState(false);
+  const [shownextmodal, setShowNextModal] = useState(false);
+
 
   
   const amountFormatter = (value: string) => {
@@ -41,17 +45,21 @@ const WithdrawPin = ({ navigation, route}) => {
       return oldamount
     });
   };
+  
   const handleSubmit = async ()=>{
     try{
-      setLoading(true)
+      setLoading(true);
+      setShowModal(false);
       const response = await axiosCustom.post("/request/create",{
         amount:amount,
         charges:charges,
         agent:userInfo.agent,
         agentUsername: userInfo.agentUsername
       })
+
       console.log(response)
-      console.log("Continue btn clicked")
+      setShowNextModal(true)
+      
     }catch(err){
       showerror(toast,err)
     }finally{ 
@@ -61,6 +69,73 @@ const WithdrawPin = ({ navigation, route}) => {
   return (
     <View style={styles.container}>
       {loading && <Loader />}
+
+      <Globalmodal 
+        showState={showmodal}
+        onBgPress={() => setShowModal(!showmodal)}
+        btnFunction={handleSubmit}
+        >
+         <View style={{ alignItems: "center" }}>
+           <Text style={{alignSelf:"flex-start"}}>Request Summary</Text>
+             <View style={{flexDirection:"row",justifyContent:"space-between", marginVertical:20}}>
+               <Sendingandreceive />
+              {/* <View
+                style={{
+                  width: 80,
+                  height: 80,
+                  backgroundColor: COLORS.grey1,
+                  borderRadius: 40,
+                  marginHorizontal:10
+                }}
+                />
+                <View
+                style={{
+                  width: 80,
+                  height: 80,
+                  backgroundColor: COLORS.grey1,
+                  borderRadius: 40,
+                  marginHorizontal:10
+                }}
+              /> */}
+                </View>
+              <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
+                  NGN {amountFormatter(amount)}
+              </Text>
+              <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 15 }}>
+                Withdraw Charges: 
+                <Text style={{...FONTS.bold}}>N {charges}</Text>
+              </Text>
+              <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular,}}>
+                Note that the base charge above can be negotiated by <Text style={{...FONTS.bold}}> {userInfo.agentUsername}</Text>
+              </Text>
+            </View>
+      </Globalmodal>
+      <Globalmodal 
+        showState={shownextmodal}
+        btnFunction={() => navigation.navigate("Home")}
+      >
+        <View style={{ alignItems: "center" }}>
+             <View
+               style={{
+                 width: 100,
+                 height: 100,
+                 backgroundColor: COLORS.grey1,
+                 borderRadius: 50,
+               }}
+             />
+
+             <Text
+               style={{
+                 textAlign: "center",
+                 marginHorizontal: 40,
+                 marginVertical: 40,
+                 ...fontsize.bsmall,
+                 ...FONTS.regular,
+               }}
+             >Your request has been sent, you will be notified once accepted</Text>
+           </View>
+      </Globalmodal>
+
       <StatusBar />
       <View style={styles.mainContainer}>
         <View style={styles.backArrowConteiner}>
@@ -97,7 +172,7 @@ const WithdrawPin = ({ navigation, route}) => {
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
         </View>
-        <Bottombtn title="PROCEED" onpress={handleSubmit}/>
+        <Bottombtn title="PROCEED" onpress={()=>setShowModal(true)}/>
       </View>
     </View>
   );

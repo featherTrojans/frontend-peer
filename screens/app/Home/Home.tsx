@@ -30,19 +30,6 @@ const {
   Cryingicon,
 } = icons;
 
-// const DATA = [
-  // {
-  //     "transId": "gIdiHOI6hQ",
-  //     "initialBal": "3200",
-  //     "amount": "100",
-  //     "finalBal": "3100",
-  //     "description": "#100 transferred to elon",
-  //     "from": "EZEKO",
-  //     "to": "elon",
-  //     "direction": "out",
-  //     "createdAt": "2022-01-31T22:49:14.000Z"
-  // }]
-
 
 
 const walletOptions = [
@@ -69,17 +56,12 @@ const walletOptions = [
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  console.log(navigation);
-  const { setAuthData } = useContext(AuthContext);
-  const [info, setInfo] = useState({});
+  
+  const {setAuthData, authdata } = useContext(AuthContext);
+  // const [info, setInfo] = useState({});
+  const histories = formatData(authdata?.transactions)
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false)
-
-  const histories = formatData(info?.transactions)
-  console.log("I am mounting again");
-
-
- 
 
 
   useEffect(() => {
@@ -92,9 +74,8 @@ const Home = ({ navigation }: { navigation: any }) => {
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
-      setInfo(response?.data?.data);
+      // setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
-      
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -104,7 +85,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   };
 
  
-
   const onRefreshFunc = useCallback(() => {
     setRefreshing(true);
     getDashboardData()
@@ -144,8 +124,8 @@ const Home = ({ navigation }: { navigation: any }) => {
         <View style={styles.profileContainer}>
           <Profilepics />
           <View style={styles.profileNameContainer}>
-            <Text style={styles.profileName}>Welcome, {nameToShow(info?.fullName)}✌🏽</Text>
-            <Text style={styles.profileUsername}>@{info?.username}</Text>
+            <Text style={styles.profileName}>Welcome, {nameToShow(authdata?.fullName)}</Text>
+            <Text style={styles.profileUsername}>@{authdata?.username}</Text>
           </View>
         </View>
         <TouchableOpacity

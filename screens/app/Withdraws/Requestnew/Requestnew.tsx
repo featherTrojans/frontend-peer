@@ -16,8 +16,7 @@ import { COLORS } from "../../../../constants";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 // import { styles } from "./TransferInput.styles";
 
-function Requestnew({ route, navigation }) {
-  // const { nextscreen } = route.params;
+function Requestnew({ navigation }) {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [amount, setAmount] = useState<string>("");
 

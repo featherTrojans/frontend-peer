@@ -4,9 +4,11 @@ import React, { useState, useCallback } from "react";
 import { styles } from "./Getdetails.styles";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { Backheader, Bottombtn, Input, Loader } from "../../../../components";
-import { COLORS, fontsize, icons } from "../../../../constants";
+import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import useDebounce from "../../../../utils/debounce";
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import amountFormatter from "../../../../utils/formatMoney";
 
 
 
@@ -18,23 +20,69 @@ const { Backarrow, At, Check } = icons;
 
 const Getdetails = ({ route, navigation }) => {
   const [userinfo, getuserinfo, loadbounce] = useDebounce()
-  
+  const [showmodal, setShowModal] = useState(false)
   const [username, setUsername] = useState("");
-  // const { amount } = route.params;
-  const amount = "20"
+  const { amount } = route.params;
+  
 
   const handleUsernameChange = (text:string)=>{
     setUsername(text)
     // and debound
     getuserinfo(text)
   }
-  // console.log(username)
+  console.log(userinfo)
   return (
     <View style={styles.container}>
 
 
       <Backheader title="Feather Wallet"/>
-      
+      <Globalmodal
+        showState={showmodal}
+        onBgPress={() => setShowModal(!showmodal)}
+        btnFunction={()=>navigation.navigate("Transferpin",{amount,userinfo})}
+        >
+         <View style={{ alignItems: "center" }}>
+           <Text style={{alignSelf:"flex-start"}}>Transfer Summary</Text>
+             <View style={{flexDirection:"row",justifyContent:"space-between", marginVertical:20}}>
+              <View
+                style={{
+                  width: 100,
+                  height: 100,
+                  backgroundColor: COLORS.grey1,
+                  borderRadius: 50,
+                  marginHorizontal:10
+                }}
+                />
+                <View
+                style={{
+                  width: 100,
+                  height: 100,
+                  backgroundColor: COLORS.grey1,
+                  borderRadius: 50,
+                  marginHorizontal:10
+                }}
+              />
+                </View>
+              <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
+                  NGN {amountFormatter(amount)}
+              </Text>
+              <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 15 }}>
+                Withdraw Charges: 
+                <Text style={{...FONTS.bold}}> + N0.00</Text>
+              </Text>
+              <Text
+                style={{
+                  textAlign: "center",
+                  marginHorizontal: 40,
+                  marginVertical: 40,
+                  ...fontsize.bsmall,
+                  ...FONTS.regular,
+                }}
+              >
+                Are you sure you want to transfer cash to @{userinfo?.username} - {userinfo?.fullName} ?
+              </Text>
+            </View>
+      </Globalmodal>
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <View style={styles.mainTextContainer}>
@@ -69,7 +117,7 @@ const Getdetails = ({ route, navigation }) => {
         </View>
       </View>
 
-      <Bottombtn title="PROCEED" onpress={()=>navigation.navigate("Transferpin",{amount,username})}/>
+      <Bottombtn title="PROCEED" onpress={()=>setShowModal(true)} disabled={userinfo.username === undefined}/>
 
 
     </View>

@@ -19,7 +19,7 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import showerror from "../../../utils/errorMessage";
 import { useState } from "react";
 
-const { Logo,Newlogo, Eyeicon, Usericon, Lock } = icons;
+const { Logo,Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon} = icons;
 
 const setAuthorizationToken = (token:string)=>{
   if (token){
@@ -66,14 +66,14 @@ const Login = ({ navigation }: any) => {
               const response = await axiosCustom.post("/auth/signin",{username:values.username,password:values.password})
               //store token in ASYNC STORAGE
               //store in context
-              console.log(response.data.data.token)
+              
               setAuthorizationToken(response.data.data.token)
               navigation.navigate("Welcome")
             }catch(err){
-              console.log(err.response)
+              
               showerror(toast,err)
             }
-            console.log(values);
+            
           }}
         >
           {
@@ -111,7 +111,7 @@ const Login = ({ navigation }: any) => {
                     onBlur={handleBlur("password")}
                   />
                   <TouchableOpacity onPress={() => setHidePassword(!hidePassword)} activeOpacity={0.8}>
-                    <Eyeicon />
+                    {hidePassword ? <Eyeicon /> : <Passwordhideicon />}
                   </TouchableOpacity>
                 </View>
                 {/* Bottom text */}
@@ -121,7 +121,7 @@ const Login = ({ navigation }: any) => {
                 </JustifyBetween>
 
                 {/* Login btn */}
-                <TouchableOpacity onPress={handleSubmit} style={styles.loginbtn} >
+                <TouchableOpacity onPress={handleSubmit} style={styles.loginbtn}  activeOpacity={0.8}>
                   <Text style={styles.loginbtnText}>Log in</Text>
                 </TouchableOpacity>
               </>

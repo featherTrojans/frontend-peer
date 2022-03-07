@@ -17,6 +17,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
 import { AuthContext } from "../../../../context/AuthContext";
 import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../../utils/errorMessage";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
@@ -50,7 +51,6 @@ const Personal = ({ navigation }) => {
   const {setAuthData} = useContext(AuthContext);
   const toast = useToast();
 
-  console.log("what the heck")
   return (
     <KeyboardAwareScrollView> 
       <View style={styles.container}>
@@ -88,19 +88,17 @@ const Personal = ({ navigation }) => {
               //send the request
               const response = await axiosCustom.post("auth/signup", values);
               //store data in context
-              console.log(response);
               // setAuthData(response?.data?.data)
               navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:"wregwsds"});
             } catch (err) {
-              console.log(err.response);
               if(err.response){
                 if(!err?.response?.data?.data?.isVerified){
                   return navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:null})
                 }
               }
-              // Alert.alert("help o","User Details already exists")
+              showerror(toast,err)
+              
             }
-            //You want to call handleSubmitData here and pass in the values
           }}
         >
           {(formikProps) => {

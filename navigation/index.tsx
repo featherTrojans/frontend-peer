@@ -88,14 +88,15 @@ import {
 } from "../screens";
 
 import { Loader, Tab } from "../components";
-import { icons, SIZES } from "../constants";
+import { COLORS, icons, SIZES } from "../constants";
 import WithdrawPin from "../screens/app/Withdraws/WithdrawPin/WithdrawPin";
+import TransferpinBank from "../screens/app/Transferfunds/Transferpin/TransferPinBank";
 // import Animated from "react-native-reanimated";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
 
-const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings } = icons;
+const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings, Tabuser, Tabplusicon } = icons;
 
 
 function getWidth(){
@@ -136,7 +137,7 @@ const Tabs = () => {
           tabBarIcon: ({focused, color, size}) => {
             return(
               <View style={{
-                position: "absolute",
+                // position: "absolute",
                 // top: "50%"
               }}>
               <TabHome focused={focused}/>
@@ -165,7 +166,7 @@ const Tabs = () => {
               position: "absolute",
               // top: "50%"
             }}>
-            <Tabtransactions focused={focused}/>
+            <Tabhistory focused={focused}/>
           </View>
           )
         }
@@ -188,10 +189,22 @@ const Tabs = () => {
         tabBarIcon: ({focused, color, size}) => {
           return(
             <View style={{
-              position: "absolute",
+              // position: "absolute",
               // top: "50%"
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: COLORS.blue6,
+              padding: 13.4,
+              borderRadius: 50,
+              shadowColor: "#003AD6",
+              shadowOffset: {
+                width: 0,
+                height: 3
+              },
+              shadowOpacity: 0.5,
+              shadowRadius: 20
             }}>
-            <TabHome focused={focused}/>
+            <Tabplusicon />
           </View>
           )
         }
@@ -240,7 +253,7 @@ const Tabs = () => {
               position: "absolute",
               // top: "50%"
             }}>
-            <Tabsettings focused={focused}/>
+            <Tabuser focused={focused}/>
           </View>
           )
         }
@@ -259,14 +272,15 @@ const Tabs = () => {
     </BottomTab.Navigator>
 
     <Animated.View style={{
-      width: getWidth(),
-      height: 2,
+      width: getWidth() - 50,
+      height: 1.5,
       backgroundColor: 'blue',
       position: 'absolute',
-      bottom: 83,
+      bottom: 82,
       // left: 40,
       // borderRadius: '50%'
-      // left: 60,
+      left: 25,
+      // right: 25,
       transform: [
         { translateX: tabOffsetValue}
       ]
@@ -285,8 +299,9 @@ const RootNavigator = () => (
     // initialRouteName="Onboarding"
   >
     {/* SCREEN FOR AUTH */}
-    <AppStack.Group screenOptions={{ presentation: "modal" }}>
-      <AppStack.Screen name="Onboarding" component={Login} />
+    <AppStack.Group screenOptions={{ presentation: 'modal' }}>
+      <AppStack.Screen name="Onboarding" component={Onboarding} />
+      <AppStack.Screen name="AddCash" component={Addcash} />
       <AppStack.Screen name="Personal" component={Personal} />
       <AppStack.Screen name="Verification" component={Verification} />
       <AppStack.Screen name="Security" component={Security} />
@@ -342,6 +357,7 @@ const RootNavigator = () => (
       <AppStack.Screen name="Getdetails" component={Getdetails} />
       <AppStack.Screen name="Bankaccount" component={Bankaccount} />
       <AppStack.Screen name="Transferpin" component={Transferpin} />
+      <AppStack.Screen name="TransferpinBank" component={TransferpinBank} />
     </AppStack.Group>
 
     {/* Notification Screen */}
