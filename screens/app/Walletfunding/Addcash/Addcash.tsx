@@ -15,7 +15,6 @@ const Addcash = ({navigation}) => {
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
     { label: "Primary Wallet", value: "Primary Wallet" },
-    { label: "Bank Account", value: "Bank Account" },
   ]);
 
   return (

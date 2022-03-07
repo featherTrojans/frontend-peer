@@ -24,7 +24,7 @@ const Welcome = ({navigation}) => {
     progressWidth.value = withTiming(SIZES.width - 214, { duration: 1500 });
     setTimeout(() => {
       navigation.replace("Root")
-    }, 1500);
+    }, 2500);
   }, []);
 
   return (
