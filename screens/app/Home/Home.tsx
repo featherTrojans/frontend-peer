@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -29,26 +29,13 @@ const {
   Cryingicon,
 } = icons;
 
-const DATA = [
-  {
-      "transId": "gIdiHOI6hQ",
-      "initialBal": "3200",
-      "amount": "100",
-      "finalBal": "3100",
-      "description": "#100 transferred to elon",
-      "from": "EZEKO",
-      "to": "elon",
-      "direction": "out",
-      "createdAt": "2022-01-31T22:49:14.000Z"
-  }]
-
 
 
 const walletOptions = [
   {
     icon: <Withdraw />,
     title: "Withdraw",
-    link:"Withdraw"
+    link: "Withdraw",
   },
   {
     icon: <Deposit />,
@@ -58,40 +45,41 @@ const walletOptions = [
   {
     icon: <Transfer />,
     title: "Transfer",
-    link:"Transfercash"
-  }, 
+    link: "Transfercash",
+  },
   {
     icon: <Paybills />,
     title: "Paybills",
-    link:"Choosewallet"
+    link: "Choosewallet",
   },
 ];
 
-
-const Home = ({navigation}: {navigation: any}) => {
-  console.log(navigation)
-  const {setAuthData} = useContext(AuthContext)
+const Home = ({ navigation }: { navigation: any }) => {
+  console.log(navigation);
+  const { setAuthData } = useContext(AuthContext);
   const [info, setInfo] = useState({});
-  const [loading, setLoading] = useState(false)
-  console.log("I am mounting again")
-  useEffect(()=>{
-    getDashboardData()
-  },[])
-  const getDashboardData = async ()=>{
-    console.log("I am fetching again")
-    setLoading(true)
-    try{
-      const response = await axiosCustom.get("/dashboard")
-      setInfo(response?.data?.data)
-      setAuthData(response?.data?.data)
-    }catch(err){
+  const [loading, setLoading] = useState(false);
+
+  const histories = formatData(info?.transactions)
+  console.log("I am mounting again");
+  useEffect(() => {
+    getDashboardData();
+  }, []);
+  const getDashboardData = async () => {
+    console.log("I am fetching again");
+    setLoading(true);
+    try {
+      const response = await axiosCustom.get("/dashboard");
+      setInfo(response?.data?.data);
+      setAuthData(response?.data?.data);
+    } catch (err) {
       console.log(err.response);
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
-  }
+  };
   const EmptyComponent = () => {
-  return (
+    return (
       <View style={styles.emptyContainer}>
         {/* Crying icons */}
         <Cryingicon />
@@ -105,20 +93,31 @@ const Home = ({navigation}: {navigation: any}) => {
     );
   };
 
+  const nameToShow = (value: string) => {
+    if(value?.split(' ').length > 1){
+      return value?.split(" ")[1]
+    }
+    else{
+      return value
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
-
         <View style={styles.profileContainer}>
           <Profilepics />
           <View style={styles.profileNameContainer}>
-            <Text style={styles.profileName}>{info?.fullName}</Text>
+            <Text style={styles.profileName}>Welcome, {nameToShow(info?.fullName)}</Text>
             <Text style={styles.profileUsername}>@{info?.username}</Text>
           </View>
         </View>
-        <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Notifications")}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => navigation.navigate("Notifications")}
+        >
           <Bell />
         </TouchableOpacity>
       </View>
@@ -127,48 +126,70 @@ const Home = ({navigation}: {navigation: any}) => {
 
       {/* Start of the block */}
       {/*  */}
-      <View style={styles.walletBlock}>
-        <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
-        <View style={styles.walletOptionsContainer}>
-          {walletOptions.map(
-            ({ icon, title,link }: { icon: JSX.Element; title: string , link:string}) => (
-              <TouchableOpacity onPress={()=>navigation.navigate(link)} style={styles.optionContainer} activeOpacity={0.8}>
-                <View style={styles.optionIconBg}>
-                  {/* Icon will be inside this */}
-                  {icon}
-                </View>
-                <Text style={styles.optionTitle}>{title}</Text>
-              </TouchableOpacity>
-            )
-          )}
-        </View>
-      </View>
 
-      {/* End of the block */}
-
-      {/* Transaction history lists header*/}
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.transactionHeader}>
-          <View>
-            <Text style={styles.transactionHistory}>Transaction History</Text>
+      <ScrollView>
+        <View style={styles.walletBlock}>
+          <Viewbalance navigate={() => navigation.navigate("Addcash")} />
+          <View style={styles.walletOptionsContainer}>
+            {walletOptions.map(
+              ({
+                icon,
+                title,
+                link,
+              }: {
+                icon: JSX.Element;
+                title: string;
+                link: string;
+              }) => (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(link)}
+                  style={styles.optionContainer}
+                  activeOpacity={0.8}
+                >
+                  <View style={styles.optionIconBg}>
+                    {/* Icon will be inside this */}
+                    {icon}
+                  </View>
+                  <Text style={styles.optionTitle}>{title}</Text>
+                </TouchableOpacity>
+              )
+            )}
           </View>
-          <View>
-            <Text style={styles.seeAll}>See All</Text>
-          </View>
         </View>
 
-        {/* Flastlist containing the historys */}
+        {/* End of the block */}
 
-        <FlatList
-          contentContainerStyle={DATA.length === 0 && styles.centerEmptySet}
-          data={formatData(info?.transactions)}
-          renderItem={({ item }: any) => (
-            <Transactionhistory date={item.time} datas={item.data} />
-          )}
-          keyExtractor={(item) => item.time}
-          ListEmptyComponent={<EmptyComponent />}
-        />
-      </SafeAreaView>
+        {/* Transaction history lists header*/}
+        <View style={{ flex: 1 }}>
+          <View style={styles.transactionHeader}>
+            <View>
+              <Text style={styles.transactionHistory}>Transaction History</Text>
+            </View>
+            <TouchableOpacity onPress={() => navigation.navigate("Transactions")}>
+              <Text style={styles.seeAll}>See All</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Flastlist containing the historys */}
+
+          {/* <FlatList
+            contentContainerStyle={DATA.length === 0 && styles.centerEmptySet}
+            // data={formatData(info?.transactions)}
+            data={DATA}
+            renderItem={({ item }: any) => (
+              <Transactionhistory date={item.time} datas={DATA} />
+              // <Transactionhistory date={item.time} datas={item.data} />
+            )}
+            keyExtractor={(item) => item.time}
+            ListEmptyComponent={<EmptyComponent />}
+          /> */}
+
+          {histories.length === 0 ? <EmptyComponent /> : histories.map(history => <Transactionhistory date={history.time} datas={history.data} />)}
+          
+
+        
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -7,15 +7,17 @@ import { Bottombtn, Loader } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 
 const { Backarrow } = icons;
-const Cancelrequest = ({route}) => {
+const Cancelrequest = ({route, navigation}) => {
   const {reference} = route.params
   const toast = useToast()
   const [checked, setChecked] = useState(false);
   const [reason, setReason] = useState("");
   const [loading, setLoading] = useState(false)
-  console.log(reason)
+  const [isModalVisible, setModalVisible] = useState(false)
+  
   const reasons = [
     "Mistake request",
     "The agent didn’t accept my cash request",
@@ -27,7 +29,7 @@ const Cancelrequest = ({route}) => {
   const handleCancelRequest = async ()=>{
     setLoading(true)
     try{
-      const response = await axiosCustom({
+      await axiosCustom({
         method:"DELETE",
         url:"/request/cancel",
         data:{
@@ -35,7 +37,7 @@ const Cancelrequest = ({route}) => {
           reasonForCancel:reason
         }
       })
-      console.log(response)
+      setModalVisible(true)
     }catch(err){
       showerror(toast,err)
     }finally{
@@ -45,6 +47,32 @@ const Cancelrequest = ({route}) => {
   return (
     <View style={styles.container}>
       {loading && <Loader />}
+      <Globalmodal
+       showState={isModalVisible}
+       onBgPress={() => setModalVisible(!isModalVisible)}
+       btnFunction={() => navigation.navigate("Home") }
+       >
+           <View style={{ alignItems: "center" }}>
+             <View
+               style={{
+                 width: 100,
+                 height: 100,
+                 backgroundColor: COLORS.grey1,
+                 borderRadius: 50,
+               }}
+             />
+
+             <Text
+               style={{
+                 textAlign: "center",
+                 marginHorizontal: 40,
+                 marginVertical: 40,
+                 ...fontsize.bsmall,
+                 ...FONTS.regular,
+               }}
+             >Your request has been canceled successfully and your reason submitted </Text>
+           </View>
+      </Globalmodal>
       {/* Back Arrow */}
       <StatusBar />
       <View style={{ flex: 1, paddingHorizontal: 25 }}>
@@ -88,6 +116,7 @@ const Cancelrequest = ({route}) => {
       </View>
 
       <Bottombtn
+        disabled={reason === ""}
         title="CANCEL REQUEST"
         onpress={handleCancelRequest}
       />

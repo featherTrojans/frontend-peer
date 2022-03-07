@@ -1,4 +1,16 @@
-import * as React from "react";
+import React, {useRef} from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  Image,
+  ScrollView,
+  FlatList,
+  SafeAreaView,
+  TouchableOpacity,
+  Animated
+} from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -32,10 +44,6 @@ import {
   Transactiondispute,
   Pendingrequest, //This screen has changed
   Accepetedrequest, //This screen has changed too
-
-
-
-
   History,
   Settings,
 
@@ -67,7 +75,7 @@ import {
 
   //Deposit
   Deposit, ///Requests(pending and accepted)
-  Depositupdate,
+  Depositupdate, ///
   Pendingdeposit,
   Accepteddeposit,
   Depositpin,
@@ -79,105 +87,202 @@ import {
   Usersearch,
 } from "../screens";
 
-import { AppState } from "react-native";
 import { Loader, Tab } from "../components";
-import { icons } from "../constants";
+import { icons, SIZES } from "../constants";
 import WithdrawPin from "../screens/app/Withdraws/WithdrawPin/WithdrawPin";
+// import Animated from "react-native-reanimated";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
 
 const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings } = icons;
 
-const Tabs = () => (
-  <BottomTab.Navigator
-    initialRouteName="Home"
+
+function getWidth(){
+  let width = SIZES.width - 60
+
+  return width/5
+}
+
+
+
+const Tabs = () => {
+
+  const tabOffsetValue = useRef(new Animated.Value(0)).current;
+
+
+
+  return(
+    <>
+    <BottomTab.Navigator 
+    initialRouteName="Home" 
     screenOptions={{
       headerShown: false,
-
-      tabBarStyle: {
-        height: 87,
-        paddingVertical: 18,
-        paddingHorizontal: 18,
-      },
+      tabBarShowLabel: false,
+      tabBarStyle:{
+        backgroundColor: 'white',
+        height: 82, 
+        // paddingHorizontal: 36.5,
+        // paddingVertical: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
     }}
-  >
-    <BottomTab.Screen
-      name="Home"
-      component={Home}
-      options={{
-        tabBarButton: (props) => (
-          <Tab
-            label="Home"
-            {...props}
-            icon={<TabHome focused={props.accessibilityState?.selected} />}
-          />
-        ),
-      }}
-    />
-    <BottomTab.Screen
-      name="History"
-      component={History}
-      options={{
-        tabBarButton: (props) => (
-          <Tab
-            label="History"
-            {...props}
-            icon={<Tabhistory focused={props.accessibilityState?.selected} />}
-          />
-        ),
-      }}
-    />
-    <BottomTab.Screen
-      name="Transactions"
-      component={Transactions}
-      options={{
-        tabBarButton: (props) => (
-          <Tab
-            label="Transactions"
-            {...props}
-            icon={
-              <Tabtransactions focused={props.accessibilityState?.selected} />
+    >
+      <BottomTab.Screen 
+        name="Home" 
+        component={Home} 
+        options={{
+          tabBarIcon: ({focused, color, size}) => {
+            return(
+              <View style={{
+                position: "absolute",
+                // top: "50%"
+              }}>
+              <TabHome focused={focused}/>
+            </View>
+            )
+          }
+        }}
+        listeners={({navigation, route}) => ({
+            tabPress: e => {
+              Animated.spring(tabOffsetValue, {
+                toValue: 0,
+                useNativeDriver: true
+              }).start();
             }
-          />
-        ),
-      }}
-    />
-    <BottomTab.Screen
-      name="Chats"
-      component={Chatshome}
+        })}
+        />
+
+
+      <BottomTab.Screen 
+      name="History" 
+      component={Transactions} 
       options={{
-        tabBarButton: (props) => (
-          <Tab
-            label="Chats"
-            {...props}
-            icon={<Tabchats focused={props.accessibilityState?.selected} />}
-          />
-        ),
+        tabBarIcon: ({focused, color, size}) => {
+          return(
+            <View style={{
+              position: "absolute",
+              // top: "50%"
+            }}>
+            <Tabtransactions focused={focused}/>
+          </View>
+          )
+        }
       }}
-    />
-    <BottomTab.Screen
-      name="Settings"
-      component={Settings}
+      listeners={({navigation, route}) => ({
+        tabPress: e => {
+          Animated.spring(tabOffsetValue, {
+            toValue: getWidth(),
+            useNativeDriver: true
+          }).start();
+        }
+    })}
+      />
+
+
+      <BottomTab.Screen 
+      name="Transactions" 
+      component={Transactions} 
       options={{
-        tabBarButton: (props) => (
-          <Tab
-            label="Settings"
-            {...props}
-            icon={<Tabsettings focused={props.accessibilityState?.selected} />}
-          />
-        ),
+        tabBarIcon: ({focused, color, size}) => {
+          return(
+            <View style={{
+              position: "absolute",
+              // top: "50%"
+            }}>
+            <TabHome focused={focused}/>
+          </View>
+          )
+        }
       }}
-    />
-  </BottomTab.Navigator>
-);
+      listeners={({navigation, route}) => ({
+        tabPress: e => {
+          Animated.spring(tabOffsetValue, {
+            toValue: getWidth() * 2,
+            useNativeDriver: true
+          }).start();
+        }
+    })}
+      />
+      <BottomTab.Screen 
+      name="Chats" 
+      component={Chatshome} 
+      options={{
+        tabBarIcon: ({focused, color, size}) => {
+          return(
+            <View style={{
+              position: "absolute",
+              // top: "50%"
+            }}>
+            <Tabchats focused={focused}/>
+          </View>
+          )
+        }
+      }}
+      listeners={({navigation, route}) => ({
+        tabPress: e => {
+          Animated.spring(tabOffsetValue, {
+            toValue: getWidth() * 3,
+            useNativeDriver: true
+          }).start();
+        }
+    })}
+  
+      />
+      <BottomTab.Screen 
+      name="Settings" 
+      component={Settings} 
+      options={{
+        tabBarIcon: ({focused, color, size}) => {
+          return(
+            <View style={{
+              position: "absolute",
+              // top: "50%"
+            }}>
+            <Tabsettings focused={focused}/>
+          </View>
+          )
+        }
+      }}
+      listeners={({navigation, route}) => ({
+        tabPress: e => {
+          Animated.spring(tabOffsetValue, {
+            toValue: getWidth() * 4,
+            useNativeDriver: true
+          }).start()
+        }
+      })}
+      />
+  
+      
+    </BottomTab.Navigator>
+
+    <Animated.View style={{
+      width: getWidth(),
+      height: 2,
+      backgroundColor: 'blue',
+      position: 'absolute',
+      bottom: 83,
+      // left: 40,
+      // borderRadius: '50%'
+      // left: 60,
+      transform: [
+        { translateX: tabOffsetValue}
+      ]
+    }}>
+
+    </Animated.View>
+    </>
+  )
+};
 
 const RootNavigator = () => (
   <AppStack.Navigator
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Onboarding"
+    // initialRouteName="Onboarding"
   >
     {/* SCREEN FOR AUTH */}
     <AppStack.Group screenOptions={{ presentation: 'modal' }}>
@@ -192,7 +297,6 @@ const RootNavigator = () => (
       <AppStack.Screen name="Welcome" component={Welcome} />
       <AppStack.Screen name="Root" component={Tabs} />
     </AppStack.Group>
-
 
     {/* Transaction Screens*/}
     <AppStack.Group>
@@ -215,11 +319,11 @@ const RootNavigator = () => (
       <AppStack.Screen name="Availablelisting" component={Availablelisting} />
       <AppStack.Screen name="Withdrawpreview" component={Withdrawpreview} />
       <AppStack.Screen name="Editmeetup" component={Editmeetup} />
-          {/* To Cancel */}
-          {/* cancel requests */}
-      <AppStack.Screen name="Pendingwithdraw" component={Pendingwithdraw} /> 
+      {/* To Cancel */}
+      {/* cancel requests */}
+      <AppStack.Screen name="Pendingwithdraw" component={Pendingwithdraw} />
       <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
-          {/* TO MaKE AFTER ACCEPTING */}
+      {/* TO MaKE AFTER ACCEPTING */}
       <AppStack.Screen name="Acceptedwithdraw" component={Acceptedwithdraw} />
       <AppStack.Screen name="Requestsummary" component={Requestsummary} />
       <AppStack.Screen name="Summary" component={Summary} />
@@ -265,9 +369,12 @@ const RootNavigator = () => (
 );
 
 export default function MainNavigation() {
+
   return (
     <NavigationContainer>
       <RootNavigator />
+
+    
     </NavigationContainer>
   );
 }

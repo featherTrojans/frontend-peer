@@ -7,6 +7,7 @@ type Props = {
   title: string;
   bg?: string;
   onpress: () => void;
+  disabled?: boolean | null
 };
 const Bottombtn = ({ title, bg = COLORS.blue6, onpress, ...rest }: Props) => {
   return (

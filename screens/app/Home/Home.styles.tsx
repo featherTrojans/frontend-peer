@@ -5,12 +5,14 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
-    paddingTop: 25,
     backgroundColor: COLORS.white,
+
   },
   headerContainer: {
     justifyContent: "space-between",
     flexDirection: "row",
+    alignItems: 'center',
+    paddingVertical: 10
   },
   profileContainer: {
     flexDirection: "row",
@@ -21,12 +23,13 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   profileName: {
-    ...fontsize.bbsmall,
+    ...fontsize.bsmall,
     ...FONTS.bold,
     marginBottom: 2,
+    textTransform: 'capitalize'
   },
   profileUsername: {
-    ...fontsize.bsmall,
+    ...fontsize.small,
     ...FONTS.regular,
     alignItems: 'center'
   },

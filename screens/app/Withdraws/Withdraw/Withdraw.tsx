@@ -10,6 +10,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
 import { styles } from "./Withdraw.styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
+import amountFormatter from "../../../../utils/formatMoney";
 
 const {
   Backarrow,
@@ -27,36 +28,7 @@ type DataProps = {
   price: string;
 };
 
-const REQUEST = [
-  {
-    image: <Requestee1 />,
-    full_name: "Adgbemi ",
-    username: "@adetiger6",
-    price: 68500,
-    status: "pending",
-  },
-  {
-    image: <Requestee2 />,
-    full_name: "Okikiola ",
-    username: "@gyroscope",
-    price: 63000,
-    status: "pending",
-  },
-  {
-    image: <Requestee3 />,
-    full_name: "Michael",
-    username: "@Toonnibaby",
-    price: 18300,
-    status: "accepted",
-  },
-  {
-    image: <Requestee3 />,
-    full_name: "Michael",
-    username: "@Toonnibaby",
-    price: 18300,
-    status: "pending",
-  },
-];
+
 
 // Component to show when the list is empty
 const Emptyrequest = () => {
@@ -89,7 +61,7 @@ const Requesteeprofile = ({ list, onpress }: any) => {
       </View>
 
       <View style={styles.priceAndCheck}>
-        <Text style={styles.withdrawProfilePrice}>N{total}</Text>
+        <Text style={styles.withdrawProfilePrice}>N{amountFormatter(total)}</Text>
 
         {status === "ACCEPTED" && <Acceptedcheck />}
       </View>
@@ -102,7 +74,7 @@ const Withdraw = ({ navigation }) => {
 
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([])
-  console.log(pendingRequests,"PENDING", acceptedRequests, "ACCEPTED")
+  
   useEffect(()=>{
     getPendingRequest();
     getAcceptedRequest();
@@ -175,7 +147,7 @@ const Withdraw = ({ navigation }) => {
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
         <View style={{ flex: 1 }}>
-          {REQUEST.length < 1 ? <Emptyrequest /> : <Requestlist />}
+          {(pendingRequests.length < 1 && acceptedRequests.length < 1)  ? <Emptyrequest /> : <Requestlist />}
         </View>
       </View>
 

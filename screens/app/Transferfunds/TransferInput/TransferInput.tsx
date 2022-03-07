@@ -13,7 +13,9 @@ import {
   Viewbalance,
 } from "../../../../components";
 import { COLORS } from "../../../../constants";
+import amountFormatter from "../../../../utils/formatMoney";
 import { styles } from "./TransferInput.styles";
+
 
 function TransferInput({ route, navigation }) {
   const { nextscreen } = route.params;
@@ -21,13 +23,13 @@ function TransferInput({ route, navigation }) {
   const [amount, setAmount] = useState<string>("");
   
   console.log(amount,"amount screen") 
-  const amountFormatter = (value: string) => {
-    return (
-      Number(value)
-        .toFixed(2)
-        .replace(/\d(?=(\d{3})+\.)/g, "$&,") || "0.00"
-    );
-  };
+  // const amountFormatter = (value: string) => {
+  //   return (
+  //     Number(value)
+  //       .toFixed(2)
+  //       .replace(/\d(?=(\d{3})+\.)/g, "$&,") || "0.00"
+  //   );
+  // };
 
   const handleRemoveAmount = () => {
     if (amount.length > 0) {

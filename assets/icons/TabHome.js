@@ -2,7 +2,7 @@ import React from "react";
 import Svg, { Path, G } from "react-native-svg";
 
 function TabHome({ focused }) {
-  const fill = focused ? "#fff" : "#bfbfbf";
+  const fill = focused ? "#003AD6" : "#bfbfbf";
   return (
     <Svg
       id="home_1_"

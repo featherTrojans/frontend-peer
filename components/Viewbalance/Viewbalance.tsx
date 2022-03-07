@@ -1,13 +1,18 @@
 import { StyleSheet, Text, View, TouchableOpacity, TouchableNativeFeedback } from "react-native";
-import React,{useContext} from "react";
+import React, { useContext, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Viewbalance.styles";
 import { AuthContext } from "../../context/AuthContext";
+import amountFormatter from "../../utils/formatMoney";
 
 const { Eyecrossed, Arrowright } = icons;
 
-const Viewbalance = ({navigate}: any) => {
-  const {authdata} = useContext(AuthContext);
+const Viewbalance = ({ navigate }: any) => {
+  const { authdata } = useContext(AuthContext);
+
+  const [showAmount, setShowAmount] = useState(true)
+
+
 
   return (
     <View style={styles.container}>
@@ -18,7 +23,7 @@ const Viewbalance = ({navigate}: any) => {
           <View style={styles.underLine} />
         </View>
 
-        
+
         <TouchableOpacity style={styles.addCashBg} activeOpacity={0.8} onPress={navigate}>
           <Text style={styles.addCashText}>Add Cash</Text>
           <Arrowright />
@@ -30,11 +35,15 @@ const Viewbalance = ({navigate}: any) => {
         {/* Left text */}
         <View>
           <Text style={styles.balanceText}>Balance</Text>
-          <Text style={styles.balanceAmount}>NGN {authdata?.walletBal}</Text>
+          {/* <Text style={styles.balanceAmount}>NGN {amountFormatter(authdata?.walletBal)}</Text> */}
+          <Text style={styles.balanceAmount}>NGN  {showAmount ? amountFormatter(authdata?.walletBal) : "******"}</Text>
+
         </View>
 
         {/* Eye icon */}
-        <Eyecrossed />
+        <TouchableOpacity onPress={() => setShowAmount(!showAmount)} activeOpacity={0.8}>
+          <Eyecrossed />
+        </TouchableOpacity>
       </View>
     </View>
   );

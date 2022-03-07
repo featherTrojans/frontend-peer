@@ -140,7 +140,7 @@ const Transactions = ({navigation}: any) => {
     <View style={styles.container}>
       {/* heading */}
       <View style={styles.contentContainer}>
-        <Text style={styles.headerText}>Transactions</Text>
+        <Text style={styles.headerText}>History</Text>
 
         <View style={styles.listContainer}>
           {DATA.length > 0 && <Listheader />}
@@ -157,10 +157,10 @@ const Transactions = ({navigation}: any) => {
         </View>
       </View>
 
-      <Bottombtn
+      {/* <Bottombtn
         title="+ NEW TRANSACTIONS"
         onpress={() =>navigation.navigate("Newtransactions")}
-      />
+      /> */}
     </View>
   );
 };

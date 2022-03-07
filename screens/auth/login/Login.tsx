@@ -1,5 +1,6 @@
 import {  styles } from "./Login.styles";
 import { COLORS, icons } from "../../../constants";
+
 import { useToast } from "react-native-toast-notifications";
 import {
   View,
@@ -16,6 +17,7 @@ import { Input, Loader } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import showerror from "../../../utils/errorMessage";
+import { useState } from "react";
 
 const { Logo,Newlogo, Eyeicon, Usericon, Lock } = icons;
 
@@ -37,6 +39,12 @@ const validationSchema = Yup.object().shape({
 })
 
 const Login = ({ navigation }: any) => {
+
+  const [hidePassword, setHidePassword] = useState(true)
+
+
+
+
   const toast = useToast()
   return (
     <KeyboardAwareScrollView>
@@ -97,14 +105,14 @@ const Login = ({ navigation }: any) => {
                     style={styles.textInput}
                     placeholder="Enter your password"
                     placeholderTextColor={COLORS.white}
-                    secureTextEntry
+                    secureTextEntry={hidePassword}
                     underlineColorAndroid="transparent"
                     onChangeText={handleChange("password")}
                     onBlur={handleBlur("password")}
                   />
-                  <View>
+                  <TouchableOpacity onPress={() => setHidePassword(!hidePassword)} activeOpacity={0.8}>
                     <Eyeicon />
-                  </View>
+                  </TouchableOpacity>
                 </View>
                 {/* Bottom text */}
                 <JustifyBetween style={{ marginTop: 30, marginBottom: 70 }}>
@@ -113,7 +121,7 @@ const Login = ({ navigation }: any) => {
                 </JustifyBetween>
 
                 {/* Login btn */}
-                <TouchableOpacity onPress={handleSubmit} style={styles.loginbtn}>
+                <TouchableOpacity onPress={handleSubmit} style={styles.loginbtn} >
                   <Text style={styles.loginbtnText}>Log in</Text>
                 </TouchableOpacity>
               </>
@@ -128,7 +136,7 @@ const Login = ({ navigation }: any) => {
           </Text>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("Signup")}
+            onPress={() => navigation.navigate("Personal")}
           >
             <Text style={styles.registerText}>Register</Text>
           </TouchableOpacity>
