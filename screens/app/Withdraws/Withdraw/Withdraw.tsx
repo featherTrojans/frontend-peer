@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { ReactNode, useState, useEffect } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
+import { Backheader, Bottombtn, Loader, Viewbalance } from "../../../../components";
 import { styles } from "./Withdraw.styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import amountFormatter from "../../../../utils/formatMoney";
@@ -71,7 +71,7 @@ const Requesteeprofile = ({ list, onpress }: any) => {
 
 const Withdraw = ({ navigation }) => {
   const [active, setActive] = useState("pending");
-
+  const [loading, setLoading] = useState(false);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([])
   
@@ -80,12 +80,15 @@ const Withdraw = ({ navigation }) => {
     getAcceptedRequest();
   },[])
   const getPendingRequest = async ()=>{
+    setLoading(true)
     try{
         const response = await axiosCustom.get("/request/pending")
         setPendingRequests(response?.data?.data)
         
     }catch(err){
       console.log(err.response)
+    }finally{
+      setLoading(false)
     }
   }
   const getAcceptedRequest = async ()=>{
@@ -102,6 +105,7 @@ const Withdraw = ({ navigation }) => {
   const Requestlist = () => {
     return (
       <View style={styles.requestContainer}>
+        
         <View style={styles.listHeaderContainer}>
           <TouchableOpacity onPress={() => setActive("pending")}>
             <Text
@@ -143,7 +147,7 @@ const Withdraw = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Backheader title="Withdraw" />
-
+      {loading && <Loader />}
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
         <View style={{ flex: 1 }}>

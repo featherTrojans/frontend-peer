@@ -1,3 +1,4 @@
+import {useContext} from "react"
 import {  styles } from "./Login.styles";
 import { COLORS, icons } from "../../../constants";
 
@@ -18,6 +19,7 @@ import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import showerror from "../../../utils/errorMessage";
 import { useState } from "react";
+import { AuthContext } from "../../../context/AuthContext";
 
 const { Logo,Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon} = icons;
 
@@ -41,7 +43,7 @@ const validationSchema = Yup.object().shape({
 const Login = ({ navigation }: any) => {
 
   const [hidePassword, setHidePassword] = useState(true)
-
+  const {setToken} = useContext(AuthContext)
 
 
 
@@ -66,8 +68,8 @@ const Login = ({ navigation }: any) => {
               const response = await axiosCustom.post("/auth/signin",{username:values.username,password:values.password})
               //store token in ASYNC STORAGE
               //store in context
-              
               setAuthorizationToken(response.data.data.token)
+              setToken(response.data.data.token)
               navigation.navigate("Welcome")
             }catch(err){
               

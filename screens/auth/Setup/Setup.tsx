@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useContext} from "react";
 import {
   StyleSheet,
   Text,
@@ -13,8 +13,10 @@ import { icons } from "../../../constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "./Setup.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
+import useDebounce from "../../../utils/debounce";
+import { AuthContext } from "../../../context/AuthContext";
 
-const { At, Usericondark } = icons;
+const { At, Usericondark, Check, WrongIcon } = icons;
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().label("Username").required(),
@@ -28,6 +30,33 @@ const setAuthorizationToken = (token:string)=>{
 
 const Setup = ({route, navigation }) => {
   const {token} = route.params
+  const [username, setUsername] = useState("");
+  // const token = ""
+  const [userinfo, getuserinfo, loadbounce,error] = useDebounce(token)
+  const [loading, setLoading] = useState(false)
+  const {setToken} = useContext(AuthContext)
+
+  const handleUsernameChange = (text:string)=>{
+    setUsername(text)
+    // and debound
+    getuserinfo(text)
+  }
+
+  const onSubmit= async () => {
+    setLoading(true)
+    try{
+      const response = await axiosCustom.put("/auth/username/set",{newUsername:username},{headers:{token:token}})
+      console.log(response)
+      setAuthorizationToken(response.data.data.token)
+      setToken(response.data.data.token)
+      navigation.navigate("Welcome")
+    }catch(err){
+      console.log(err.response)
+    }finally{
+      setLoading(false)
+    }
+  }
+
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -46,34 +75,25 @@ const Setup = ({route, navigation }) => {
           </Text>
         </View>
 
-        <Formik
-          initialValues={{
-            username: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={ async (values) => {
-            console.log(values);
-            try{
-              const response = await axiosCustom.put("/auth/username/set",{newUsername:values.username},{headers:{token:token}})
-              console.log(response)
-              setAuthorizationToken(response.data.data.token)
-              navigation.navigate("Welcome")
-            }catch(err){
-              console.log(err.response)
-            }
-          }}
-        >
-          {(formikProps) => {
-            const { isSubmitting, isValid, handleBlur, errors, handleSubmit } = formikProps;
-            return (
-              <React.Fragment>
-                {isSubmitting && <Loader />}
+          
+    
+                {loading && <Loader />}
                 <Input
                   placeholder="feather2923"
-                  formikProps={formikProps}
+                  onChangeText={(text) => handleUsernameChange(text)}
+                  value={username}
                   name="username"
                   icon={<At />}
                 />
+                <View style={styles.namecont}>
+                  {
+                    loadbounce?<Text>...</Text>:userinfo.fullName?<>
+                  <WrongIcon />
+                  <Text style={styles.name}>{username} is not available</Text>
+                    </>:null} 
+                    {error && <><Check /><Text style={styles.name}>{username} is available</Text></>}
+                </View>
+
 
                 <View style={{ flex: 1, justifyContent: "flex-end" }}>
                   {/* Setup later btn */}
@@ -84,15 +104,14 @@ const Setup = ({route, navigation }) => {
                   <TouchableOpacity
                     style={styles.continueBtn}
                     activeOpacity={0.8}
-                    onPress={handleSubmit}
+                    onPress={onSubmit}
                   >
                     <Text style={styles.continueText}>CONTINUE</Text>
                   </TouchableOpacity>
                 </View>
-              </React.Fragment>
-            );
-          }}
-        </Formik>
+          
+          
+        
         {/* Input box */}
       </View>
     </KeyboardAwareScrollView>

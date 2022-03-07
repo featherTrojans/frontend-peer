@@ -12,14 +12,14 @@ import amountFormatter from "../../../../utils/formatMoney";
 
 
 
-const { Backarrow, At, Check } = icons;
+const { Backarrow, At, Check,WrongIcon } = icons;
 
 
 
 
 
 const Getdetails = ({ route, navigation }) => {
-  const [userinfo, getuserinfo, loadbounce] = useDebounce()
+  const [userinfo, getuserinfo, loadbounce,error] = useDebounce()
   const [showmodal, setShowModal] = useState(false)
   const [username, setUsername] = useState("");
   const { amount } = route.params;
@@ -113,6 +113,7 @@ const Getdetails = ({ route, navigation }) => {
             <Text style={styles.name}>{userinfo?.fullName}</Text>
               </>:null
             } 
+             {error && <><WrongIcon /><Text style={styles.name}>{username}</Text></>}
           </View>
         </View>
       </View>

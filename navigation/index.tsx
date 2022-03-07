@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef, useContext} from "react";
 import {
   StyleSheet,
   Text,
@@ -91,6 +91,7 @@ import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 import WithdrawPin from "../screens/app/Withdraws/WithdrawPin/WithdrawPin";
 import TransferpinBank from "../screens/app/Transferfunds/Transferpin/TransferPinBank";
+import { AuthContext } from "../context/AuthContext";
 // import Animated from "react-native-reanimated";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -291,15 +292,18 @@ const Tabs = () => {
   )
 };
 
-const RootNavigator = () => (
+const RootNavigator = () => {
+  const {token} = useContext(AuthContext)
+  return (
   <AppStack.Navigator
     screenOptions={{
       headerShown: false,
     }}
-    // initialRouteName="Onboarding"
-  >
+    initialRouteName="Onboarding"
+    >
     {/* SCREEN FOR AUTH */}
-    <AppStack.Group screenOptions={{ presentation: 'modal' }}>
+    {!token?
+    (<AppStack.Group screenOptions={{ presentation: 'modal' }}>
       <AppStack.Screen name="Onboarding" component={Onboarding} />
       <AppStack.Screen name="AddCash" component={Addcash} />
       <AppStack.Screen name="Personal" component={Personal} />
@@ -308,12 +312,12 @@ const RootNavigator = () => (
       <AppStack.Screen name="Securepin" component={Securepin} />
       <AppStack.Screen name="Setup" component={Setup} />
       <AppStack.Screen name="Login" component={Login} />
-      <AppStack.Screen name="Welcome" component={Welcome} />
-      <AppStack.Screen name="Root" component={Tabs} />
-    </AppStack.Group>
-
+    </AppStack.Group>):
+    (<>
     {/* Transaction Screens*/}
     <AppStack.Group>
+      <AppStack.Screen name="Welcome" component={Welcome} />
+      <AppStack.Screen name="Root" component={Tabs} />
       <AppStack.Screen name="Transactions" component={Transactions} />
       <AppStack.Screen name="Newtransactions" component={Newtransactions} />
       <AppStack.Screen
@@ -380,8 +384,11 @@ const RootNavigator = () => (
       <AppStack.Screen name="Chatsdm" component={Chatsdm} />
       <AppStack.Screen name="Usersearch" component={Usersearch} />
     </AppStack.Group>
+  </>)}
   </AppStack.Navigator>
 );
+
+  }
 
 export default function MainNavigation() {
 

@@ -84,6 +84,7 @@ import Trendingupright from "../assets/icons/Trendingupright";
 import Viewrequesteye from "../assets/icons/Viewrequesteye";
 import Dropswitch from "../assets/icons/Dropswitch";
 import Check from "../assets/icons/Check";
+import WrongIcon from "../assets/icons/WrongIcon";
 import Newtransfericon from "../assets/icons/Newtransfericon";
 import Fundwalleticon from "../assets/icons/Fundwalleticon";
 import Paybillicon from "../assets/icons/Paybillicon";
@@ -194,6 +195,7 @@ export default {
   Viewrequesteye,
   Dropswitch,
   Check,
+  WrongIcon,
   Newtransfericon,
   Fundwalleticon,
   Paybillicon,
