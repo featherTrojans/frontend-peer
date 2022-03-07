@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import {
   StyleSheet,
   Text,
@@ -84,7 +84,7 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   useEffect(() => {
     getDashboardData();
-  }, [refreshing]);
+  }, []);
 
 
   const getDashboardData = async () => {
@@ -103,10 +103,12 @@ const Home = ({ navigation }: { navigation: any }) => {
     }
   };
 
-  const onRefreshFunc = () => {
-    console.log("I just refreshed")
-    setRefreshing(true)
-  }
+ 
+
+  const onRefreshFunc = useCallback(() => {
+    setRefreshing(true);
+    getDashboardData()
+  }, []);
 
   const EmptyComponent = () => {
     return (
@@ -164,6 +166,9 @@ const Home = ({ navigation }: { navigation: any }) => {
          <RefreshControl 
          refreshing={refreshing}
          onRefresh={onRefreshFunc}
+         progressBackgroundColor="white"
+         colors={['#003AD6']}
+         tintColor={'#003AD6'}
          />
        }
       >
