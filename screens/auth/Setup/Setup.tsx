@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useContext} from "react";
 import {
   StyleSheet,
   Text,
@@ -14,6 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { styles } from "./Setup.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import useDebounce from "../../../utils/debounce";
+import { AuthContext } from "../../../context/AuthContext";
 
 const { At, Usericondark, Check, WrongIcon } = icons;
 
@@ -33,7 +34,8 @@ const Setup = ({route, navigation }) => {
   // const token = ""
   const [userinfo, getuserinfo, loadbounce,error] = useDebounce(token)
   const [loading, setLoading] = useState(false)
-  
+  const {setToken} = useContext(AuthContext)
+
   const handleUsernameChange = (text:string)=>{
     setUsername(text)
     // and debound
@@ -46,6 +48,7 @@ const Setup = ({route, navigation }) => {
       const response = await axiosCustom.put("/auth/username/set",{newUsername:username},{headers:{token:token}})
       console.log(response)
       setAuthorizationToken(response.data.data.token)
+      setToken(response.data.data.token)
       navigation.navigate("Welcome")
     }catch(err){
       console.log(err.response)
