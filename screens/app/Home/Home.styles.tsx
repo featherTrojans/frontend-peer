@@ -85,6 +85,7 @@ export const styles = StyleSheet.create({
   seeAll: {
     ...fontsize.small,
     ...FONTS.bold,
+    color: COLORS.blue6
   },
 
   //   EmptyComponent styling

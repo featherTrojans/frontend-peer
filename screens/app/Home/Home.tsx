@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,6 +9,7 @@ import {
   FlatList,
   SafeAreaView,
   TouchableOpacity,
+  RefreshControl,
 } from "react-native";
 import { Service, Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
@@ -56,27 +57,39 @@ const walletOptions = [
 
 const Home = ({ navigation }: { navigation: any }) => {
   
-  const { authdata } = useContext(AuthContext);
-  const [info, setInfo] = useState({});
-  // const [loading, setLoading] = useState(false);
-
+  const {setAuthData, authdata } = useContext(AuthContext);
+  // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions)
-  // useEffect(() => {
-  //   getDashboardData();
-  // }, []);
-  // const getDashboardData = async () => {
-  //   console.log("I am fetching again");
-  //   setLoading(true);
-  //   try {
-  //     const response = await axiosCustom.get("/dashboard");
-  //     setInfo(response?.data?.data);
-  //     setAuthData(response?.data?.data);
-  //   } catch (err) {
-  //     console.log(err.response);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false)
+
+
+  useEffect(() => {
+    getDashboardData();
+  }, []);
+
+
+  const getDashboardData = async () => {
+    console.log("I am fetching again");
+    setLoading(true);
+    try {
+      const response = await axiosCustom.get("/dashboard");
+      // setInfo(response?.data?.data);
+      setAuthData(response?.data?.data);
+    } catch (err) {
+      console.log(err.response);
+    } finally {
+      setLoading(false);
+      setRefreshing(false) 
+    }
+  };
+
+ 
+  const onRefreshFunc = useCallback(() => {
+    setRefreshing(true);
+    getDashboardData()
+  }, []);
+
   const EmptyComponent = () => {
     return (
       <View style={styles.emptyContainer}>
@@ -100,6 +113,8 @@ const Home = ({ navigation }: { navigation: any }) => {
       return value
     }
   }
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -126,7 +141,17 @@ const Home = ({ navigation }: { navigation: any }) => {
       {/* Start of the block */}
       {/*  */}
 
-      <ScrollView>
+      <ScrollView
+       refreshControl={
+         <RefreshControl 
+         refreshing={refreshing}
+         onRefresh={onRefreshFunc}
+         progressBackgroundColor="white"
+         colors={['#003AD6']}
+         tintColor={'#003AD6'}
+         />
+       }
+      >
         <View style={styles.walletBlock}>
           <Viewbalance navigate={() => navigation.navigate("Addcash")} />
           <View style={styles.walletOptionsContainer}>

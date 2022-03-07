@@ -14,22 +14,23 @@ const { Forwardarrow, Withdrawicon } = icons;
 
 type dataProps = {
   icon: ReactElement;
+  iconBg?: string;
   title: string;
   details: string;
   onpress: () => void;
 };
 
-const Iconwithdatas = ({ icon, title, details, onpress }: dataProps) => {
+const Iconwithdatas = ({ icon,iconBg, title, details, onpress }: dataProps) => {
   return (
     <TouchableNativeFeedback
       onPress={onpress}
       background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, false)}
     >
       <View style={styles.container}>
-        <View>
+        <View style={[{ justifyContent: 'center', alignItems: 'center', width: 39, height: 39, borderRadius: 20}, {backgroundColor: iconBg ? iconBg: ''}]}>
           {/* This is for the icon */}
           {icon}
-        </View>
+        </View> 
         {/* Datas */}
         <View style={styles.dataContainer}>
           <View style={styles.topSection}>
