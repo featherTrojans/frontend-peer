@@ -9,6 +9,7 @@ import {
   FlatList,
   SafeAreaView,
   TouchableOpacity,
+  RefreshControl,
 } from "react-native";
 import { Service, Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
@@ -72,12 +73,20 @@ const Home = ({ navigation }: { navigation: any }) => {
   const { setAuthData } = useContext(AuthContext);
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false)
 
   const histories = formatData(info?.transactions)
   console.log("I am mounting again");
+
+
+ 
+
+
   useEffect(() => {
     getDashboardData();
-  }, []);
+  }, [refreshing]);
+
+
   const getDashboardData = async () => {
     console.log("I am fetching again");
     setLoading(true);
@@ -85,12 +94,20 @@ const Home = ({ navigation }: { navigation: any }) => {
       const response = await axiosCustom.get("/dashboard");
       setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
+      
     } catch (err) {
       console.log(err.response);
     } finally {
       setLoading(false);
+      setRefreshing(false) 
     }
   };
+
+  const onRefreshFunc = () => {
+    console.log("I just refreshed")
+    setRefreshing(true)
+  }
+
   const EmptyComponent = () => {
     return (
       <View style={styles.emptyContainer}>
@@ -114,6 +131,8 @@ const Home = ({ navigation }: { navigation: any }) => {
       return value
     }
   }
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -140,7 +159,14 @@ const Home = ({ navigation }: { navigation: any }) => {
       {/* Start of the block */}
       {/*  */}
 
-      <ScrollView>
+      <ScrollView
+       refreshControl={
+         <RefreshControl 
+         refreshing={refreshing}
+         onRefresh={onRefreshFunc}
+         />
+       }
+      >
         <View style={styles.walletBlock}>
           <Viewbalance navigate={() => navigation.navigate("Addcash")} />
           <View style={styles.walletOptionsContainer}>
