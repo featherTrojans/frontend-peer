@@ -10,6 +10,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
+import amountFormatter from "../../../../utils/formatMoney";
 
 const { Backarrow, At } = icons;
 
@@ -124,25 +125,18 @@ const Bankaccount = ({navigation, route}) => {
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(availableBanks);
   const [accountnum, setAccountnum] = useState("")
-
+  const [accountInfomation, setAccountInformation] = useState({})
 
   const handleSubmit = async ()=>{
-    setLoading(true)
-    var data = JSON.stringify({
-      "account_number": "2101014803",
-      "bank_name": "UBA"
-    });
+    setLoading(true);
     try{
       const response = await axiosCustom({
-        method:"get",
+        method:"post",
         url:"/account/get",
-        data:data,
-        headers: { 
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyUEhZTW9RWVZmIiwidXNlcm5hbWUiOiJEVURFIiwiZW1haWwiOiJCQU1JQVlPU0FMSU1AR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJTQUxJTSBBWU9CQU1JIiwiaWF0IjoxNjQ2MzkzMzk4LCJleHAiOjE2NDY0MDA1OTh9.FsCzbmdvcOkaH8tP4T7jYlAUjo5TSFHTZGC1CUATO-o', 
-          'Content-Type': 'application/json'
-        }
+        data:{account_number:accountnum, bank_name:value}
       })
-      console.log(response)
+      setAccountInformation(response?.data?.data)
+      setShowModal(true)
     }catch(err){
       showerror(toast,err)
     }finally{
@@ -159,7 +153,7 @@ const Bankaccount = ({navigation, route}) => {
       <Globalmodal 
         showState={showmodal}
         onBgPress={() => setShowModal(!showmodal)}
-        btnFunction={() => console.log("Hellow")}
+        btnFunction={() => navigation.navigate("TransferpinBank",{amount, accountInfomation})}
         >
          <View style={{ alignItems: "center" }}>
            <Text style={{alignSelf:"flex-start"}}>Transfer Summary</Text>
@@ -184,7 +178,7 @@ const Bankaccount = ({navigation, route}) => {
               />
                 </View>
               <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
-                  NGN {amount}
+                  NGN {amountFormatter(amount)}
               </Text>
               <Text
                 style={{
@@ -195,7 +189,7 @@ const Bankaccount = ({navigation, route}) => {
                   ...FONTS.regular,
                 }}
               >
-                Are you sure you want to transfer cash to GT Bank - Yusuf Feranmi O. ?
+                Are you sure you want to transfer cash to {accountInfomation?.bank_name} - {accountInfomation?.account_name}?
               </Text>
             </View>
       </Globalmodal>

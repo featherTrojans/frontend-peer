@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState } from "react";
 import { styles } from "./WithdrewPin.style";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Bottombtn, Loader, Numberbtn } from "../../../../components";
+import { Bottombtn, Loader, Numberbtn, Sendingandreceive } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
@@ -78,7 +78,8 @@ const WithdrawPin = ({ navigation, route}) => {
          <View style={{ alignItems: "center" }}>
            <Text style={{alignSelf:"flex-start"}}>Request Summary</Text>
              <View style={{flexDirection:"row",justifyContent:"space-between", marginVertical:20}}>
-              <View
+               <Sendingandreceive />
+              {/* <View
                 style={{
                   width: 80,
                   height: 80,
@@ -95,7 +96,7 @@ const WithdrawPin = ({ navigation, route}) => {
                   borderRadius: 40,
                   marginHorizontal:10
                 }}
-              />
+              /> */}
                 </View>
               <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
                   NGN {amountFormatter(amount)}
@@ -111,7 +112,6 @@ const WithdrawPin = ({ navigation, route}) => {
       </Globalmodal>
       <Globalmodal 
         showState={shownextmodal}
-        onBgPress={() => setShowNextModal(!showmodal)}
         btnFunction={() => navigation.navigate("Home")}
       >
         <View style={{ alignItems: "center" }}>

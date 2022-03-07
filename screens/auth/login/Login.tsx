@@ -66,14 +66,14 @@ const Login = ({ navigation }: any) => {
               const response = await axiosCustom.post("/auth/signin",{username:values.username,password:values.password})
               //store token in ASYNC STORAGE
               //store in context
-              console.log(response.data.data.token)
+              
               setAuthorizationToken(response.data.data.token)
               navigation.navigate("Welcome")
             }catch(err){
-              console.log(err.response)
+              
               showerror(toast,err)
             }
-            console.log(values);
+            
           }}
         >
           {

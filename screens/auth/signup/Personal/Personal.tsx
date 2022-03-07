@@ -51,7 +51,6 @@ const Personal = ({ navigation }) => {
   const {setAuthData} = useContext(AuthContext);
   const toast = useToast();
 
-  console.log("what the heck")
   return (
     <KeyboardAwareScrollView> 
       <View style={styles.container}>

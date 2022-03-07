@@ -5,7 +5,7 @@ function showerror(toast:any,err:any){
     if(message && typeof message ==="string"){
         message = err.response.data.message
     }else{
-      message = "unable to perform transaction"
+      message = "unable to perform request, please try again"
     }
     if(toast.show !== undefined){
       toast.show(message); 

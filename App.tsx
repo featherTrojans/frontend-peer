@@ -1,3 +1,4 @@
+import {useRef} from "react";
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications'
@@ -5,7 +6,7 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { AuthProvider } from './context/AuthContext';
 import MainNavigation from './navigation';
-import { Text , View} from 'react-native';
+import { Text , View, AppState} from 'react-native';
 import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import {icons} from "./constants"
 
@@ -13,6 +14,7 @@ const { Cancelicon } = icons;
 
 
 export default function App() {
+  const appState = useRef(AppState.currentState);
   let [fontsLoaded] = useFonts({
     GTlight: require("./assets/fonts/GTWalsheimPro-Light.ttf"),
     GTregular: require("./assets/fonts/GTWalsheimPro-Regular.ttf"),

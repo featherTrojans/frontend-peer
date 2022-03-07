@@ -55,29 +55,28 @@ const walletOptions = [
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  console.log(navigation);
-  const { setAuthData } = useContext(AuthContext);
+  
+  const { authdata } = useContext(AuthContext);
   const [info, setInfo] = useState({});
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  const histories = formatData(info?.transactions)
-  console.log("I am mounting again");
-  useEffect(() => {
-    getDashboardData();
-  }, []);
-  const getDashboardData = async () => {
-    console.log("I am fetching again");
-    setLoading(true);
-    try {
-      const response = await axiosCustom.get("/dashboard");
-      setInfo(response?.data?.data);
-      setAuthData(response?.data?.data);
-    } catch (err) {
-      console.log(err.response);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const histories = formatData(authdata?.transactions)
+  // useEffect(() => {
+  //   getDashboardData();
+  // }, []);
+  // const getDashboardData = async () => {
+  //   console.log("I am fetching again");
+  //   setLoading(true);
+  //   try {
+  //     const response = await axiosCustom.get("/dashboard");
+  //     setInfo(response?.data?.data);
+  //     setAuthData(response?.data?.data);
+  //   } catch (err) {
+  //     console.log(err.response);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const EmptyComponent = () => {
     return (
       <View style={styles.emptyContainer}>
@@ -110,8 +109,8 @@ const Home = ({ navigation }: { navigation: any }) => {
         <View style={styles.profileContainer}>
           <Profilepics />
           <View style={styles.profileNameContainer}>
-            <Text style={styles.profileName}>Welcome, {nameToShow(info?.fullName)}</Text>
-            <Text style={styles.profileUsername}>@{info?.username}</Text>
+            <Text style={styles.profileName}>Welcome, {nameToShow(authdata?.fullName)}</Text>
+            <Text style={styles.profileUsername}>@{authdata?.username}</Text>
           </View>
         </View>
         <TouchableOpacity

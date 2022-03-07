@@ -90,6 +90,7 @@ import {
 import { Loader, Tab } from "../components";
 import { icons, SIZES } from "../constants";
 import WithdrawPin from "../screens/app/Withdraws/WithdrawPin/WithdrawPin";
+import TransferpinBank from "../screens/app/Transferfunds/Transferpin/TransferPinBank";
 // import Animated from "react-native-reanimated";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -343,6 +344,7 @@ const RootNavigator = () => (
       <AppStack.Screen name="Getdetails" component={Getdetails} />
       <AppStack.Screen name="Bankaccount" component={Bankaccount} />
       <AppStack.Screen name="Transferpin" component={Transferpin} />
+      <AppStack.Screen name="TransferpinBank" component={TransferpinBank} />
     </AppStack.Group>
 
     {/* Notification Screen */}
