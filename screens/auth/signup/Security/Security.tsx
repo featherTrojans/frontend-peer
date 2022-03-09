@@ -15,11 +15,14 @@ import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Security.styles";
 import { AuthContext } from "../../../../context/AuthContext";
+import showerror from "../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
 
 const { Lockicondark } = icons;
 
 const Security = ({ route, navigation }) => {
   const {token} =  route.params;
+  const toast = useToast();
   const validationSchema = Yup.object().shape({
     password: Yup
     .string()
@@ -34,22 +37,7 @@ const Security = ({ route, navigation }) => {
       }),
   });
 
-  const [password, setPassword] = useState("");
-  const [comfirmPassword, setConfirmPassword] = useState("");
-
-
   
-  const handleSubmitData = async () => {
-    try {
-      const response = await axiosCustom.post("/auth/password/set", {
-        password,
-      });
-      console.log(response);
-      navigation.navigate("Login");
-    } catch (err) {
-      console.log(err.response);
-    }
-  };
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -87,7 +75,7 @@ const Security = ({ route, navigation }) => {
               navigation.navigate("Securepin",{token:response?.data?.data?.token});
             } catch (err) {
               // error handling
-              console.log(err.response);
+              showerror(toast,err)
             }
             //You want to call handleSubmitData here and pass in the values
           }}
@@ -105,6 +93,7 @@ const Security = ({ route, navigation }) => {
 
             return (
               <React.Fragment>
+                {isSubmitting && <Loader />}
                 <Input
                   placeholder="Password"
                   name="password"

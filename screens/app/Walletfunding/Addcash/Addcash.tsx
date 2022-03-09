@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "./Addcash.styles";
 import { Bottombtn } from "../../../../components";
 import { NavigationContainer } from "@react-navigation/native";
+import { AuthContext } from "../../../../context/AuthContext";
+import amountFormatter from "../../../../utils/formatMoney";
 
 
 const { Backarrow } = icons;
@@ -13,6 +15,7 @@ const { Backarrow } = icons;
 const Addcash = ({navigation}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const {authdata} = useContext(AuthContext)
   const [items, setItems] = useState([
     { label: "Primary Wallet", value: "Primary Wallet" },
   ]);
@@ -46,7 +49,7 @@ const Addcash = ({navigation}) => {
           <View style={styles.balanceContainer}>
             <Text style={styles.balanceText}>Balance :</Text>
             <Text>{"   "}</Text>
-            <Text style={styles.balanceAmount}>NGN 3,895,800.35</Text>
+            <Text style={styles.balanceAmount}>NGN {amountFormatter(authdata.walletBal)}</Text>
           </View>
         )}
       </View>

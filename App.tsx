@@ -6,7 +6,7 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { AuthProvider } from './context/AuthContext';
 import MainNavigation from './navigation';
-import { Text , View, AppState} from 'react-native';
+import { Text , View} from 'react-native';
 import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import {icons} from "./constants"
 
@@ -14,25 +14,6 @@ const { Cancelicon } = icons;
 
 
 export default function App() {
-  const appState = useRef(AppState.currentState);
-  const [appStateVisible, setAppStateVisible] = useState(appState.current);
-  useEffect(() => {
-    const subscription:any = AppState.addEventListener("change", nextAppState => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === "active"
-      ) {
-        console.log("App has come to the foreground!");
-      }
-      appState.current = nextAppState;
-      setAppStateVisible(appState.current);
-      console.log("AppState", appState.current);
-    });
-
-    return () => {
-      subscription.remove();
-    };
-  }, []);
 
 
   let [fontsLoaded] = useFonts({
@@ -48,7 +29,7 @@ export default function App() {
     return (
       <ToastProvider 
       placement="top" 
-      duration={5000} 
+      duration={3000} 
       type="normal"  
       animationType="slide-in"
       renderToast={(props)=><View style={{

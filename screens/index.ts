@@ -64,6 +64,7 @@ import Pendingdeposit from "./app/Deposit/Pendingdeposit/Pendingdeposit";
 import Accepteddeposit from "./app/Deposit/Accepteddeposit/Accepteddeposit";
 import Depositpin from "./app/Deposit/Depositpin/Depositpin";
 import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
+import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 
 
 
@@ -143,6 +144,6 @@ export {
 
   Pendingrequest,
   Accepetedrequest,
-
+  WalletPin
 
 };

@@ -107,5 +107,16 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     marginLeft: 18,
     color: COLORS.white,
-  }
+  },
+  emptyListContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 38
+  },
+  emptyListText: {
+    textAlign: "center",
+    paddingHorizontal: 50,
+    ...fontsize.bsmall,
+    ...FONTS.regular,
+  },
 });
