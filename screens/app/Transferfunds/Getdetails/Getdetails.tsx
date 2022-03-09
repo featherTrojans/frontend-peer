@@ -113,7 +113,7 @@ const Getdetails = ({ route, navigation }) => {
             <Text style={styles.name}>{userinfo?.fullName}</Text>
               </>:null
             } 
-             {error && <><WrongIcon /><Text style={styles.name}>{username}</Text></>}
+             {error && <><WrongIcon /><Text style={styles.name}>{username} does not exist</Text></>}
           </View>
         </View>
       </View>

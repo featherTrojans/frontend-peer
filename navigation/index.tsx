@@ -80,7 +80,7 @@ import {
   Accepteddeposit,
   Depositpin,
   Canceldeposit,
-
+ WalletPin,
   //Chats
   Chatshome,
   Chatsdm,
@@ -92,6 +92,9 @@ import { COLORS, icons, SIZES } from "../constants";
 import WithdrawPin from "../screens/app/Withdraws/WithdrawPin/WithdrawPin";
 import TransferpinBank from "../screens/app/Transferfunds/Transferpin/TransferPinBank";
 import { AuthContext } from "../context/AuthContext";
+import SecurepinAgain from "../screens/auth/signup/Securepin/SecurepinAgain";
+import App from "../App";
+import Map from "../screens/shared/map/Map";
 // import Animated from "react-native-reanimated";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -302,20 +305,22 @@ const RootNavigator = () => {
     initialRouteName="Onboarding"
     >
     {/* SCREEN FOR AUTH */}
+    {/* <AppStack.Screen name="map" component={Map} /> */}
     {!token?
     (<AppStack.Group screenOptions={{ presentation: 'modal' }}>
       <AppStack.Screen name="Onboarding" component={Onboarding} />
-      <AppStack.Screen name="AddCash" component={Addcash} />
       <AppStack.Screen name="Personal" component={Personal} />
       <AppStack.Screen name="Verification" component={Verification} />
       <AppStack.Screen name="Security" component={Security} />
       <AppStack.Screen name="Securepin" component={Securepin} />
+      <AppStack.Screen name="SecurepinAgain" component={SecurepinAgain} />
       <AppStack.Screen name="Setup" component={Setup} />
       <AppStack.Screen name="Login" component={Login} />
     </AppStack.Group>):
     (<>
     {/* Transaction Screens*/}
     <AppStack.Group>
+      <AppStack.Screen name="AddCash" component={Addcash} />
       <AppStack.Screen name="Welcome" component={Welcome} />
       <AppStack.Screen name="Root" component={Tabs} />
       <AppStack.Screen name="Transactions" component={Transactions} />
@@ -352,6 +357,7 @@ const RootNavigator = () => {
     <AppStack.Group>
       <AppStack.Screen name="Addcash" component={Addcash} />
       <AppStack.Screen name="Choosewallet" component={Choosewallet} />
+      <AppStack.Screen name="WalletPin" component={WalletPin} />
     </AppStack.Group>
 
     {/* Transfer funds screens */}

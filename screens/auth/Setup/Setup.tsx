@@ -6,8 +6,6 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import { Formik } from "formik";
-import * as Yup from "yup";
 import { Input, Loader } from "../../../components";
 import { icons } from "../../../constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -15,12 +13,11 @@ import { styles } from "./Setup.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import useDebounce from "../../../utils/debounce";
 import { AuthContext } from "../../../context/AuthContext";
+import showerror from "../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
 
-const { At, Usericondark, Check, WrongIcon } = icons;
+const { At, Check, WrongIcon } = icons;
 
-const validationSchema = Yup.object().shape({
-  username: Yup.string().label("Username").required(),
-});
 
 const setAuthorizationToken = (token:string)=>{
   if (token){
@@ -29,17 +26,20 @@ const setAuthorizationToken = (token:string)=>{
 }
 
 const Setup = ({route, navigation }) => {
-  const {token} = route.params
-  const [username, setUsername] = useState("");
-  // const token = ""
+  const {token,defaultUsername} = route.params;
+  const toast = useToast()
+  const [username, setUsername] = useState(defaultUsername);
   const [userinfo, getuserinfo, loadbounce,error] = useDebounce(token)
   const [loading, setLoading] = useState(false)
   const {setToken} = useContext(AuthContext)
 
   const handleUsernameChange = (text:string)=>{
-    setUsername(text)
+    const textsmall = text.toLowerCase()
+    setUsername(textsmall)
     // and debound
-    getuserinfo(text)
+    if(textsmall.length > 3){
+      getuserinfo(textsmall)
+    }
   }
 
   const onSubmit= async () => {
@@ -51,7 +51,7 @@ const Setup = ({route, navigation }) => {
       setToken(response.data.data.token)
       navigation.navigate("Welcome")
     }catch(err){
-      console.log(err.response)
+      showerror(toast,err)
     }finally{
       setLoading(false)
     }
@@ -73,9 +73,7 @@ const Setup = ({route, navigation }) => {
             We set up a default username for you already, its advisable to
             customise it to your preference.
           </Text>
-        </View>
-
-          
+        </View>      
     
                 {loading && <Loader />}
                 <Input

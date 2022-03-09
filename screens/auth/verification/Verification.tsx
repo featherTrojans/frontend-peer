@@ -1,4 +1,4 @@
-import {useState, useContext} from "react"
+import {useState, useEffect} from "react"
 import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
@@ -7,6 +7,7 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
 import { Loader } from "../../../components";
 import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../utils/errorMessage";
 
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
@@ -14,11 +15,32 @@ const { Cancelicon } = icons;
 
 const Verification = ({route,navigation}) => {
   const toast = useToast()
+  const [time, setTime] = useState<number>(30)
   const {email, phoneNumber, token} = route.params
   const [loading, setLoading] = useState<boolean>(false)
   const [otpCode, setOtpCode] = useState<any>("")
   const [tokenn, setToken] = useState<string|null>(token)
+  const [disable, setDisable] = useState(true)
 
+    
+  console.log(disable)
+  useEffect(() => {
+    const timer = setInterval(()=>{
+      setTime(prevtime =>{
+        if(prevtime < 1 ){
+          setDisable(false);
+          return 0
+        }else{
+          setDisable(true);
+          return prevtime - 1 
+        }
+      })
+    },1000);
+    return ()=>{
+      clearInterval(timer)
+    }
+  }, [])
+  
   const handleSubmit = async ()=>{
     setLoading(true)
     try{
@@ -26,7 +48,7 @@ const Verification = ({route,navigation}) => {
       console.log(response)
       navigation.navigate("Security",{token:tokenn})
     }catch(err){
-      console.log(err.response)
+      showerror(toast, err)
     }finally{
       setLoading(false)
     }
@@ -37,9 +59,10 @@ const Verification = ({route,navigation}) => {
     try{
       const response = await axiosCustom.post("auth/resend/code",{email});
       setToken(response?.data?.data?.token)
-      console.log(response)
+      setDisable(false)
+      setTime(30)
     }catch(err){
-      console.log(err.response)
+      showerror(toast, err)
     }finally{
       setLoading(false)
     }
@@ -52,7 +75,6 @@ const Verification = ({route,navigation}) => {
       <TouchableOpacity style={styles.cancelIcon} onPress={()=>navigation.goBack()}>
         <Cancelicon />
       </TouchableOpacity>
-
       {/* OTP Message information */}
       <View style={styles.otpTextContainer}>
         <Text style={styles.otpMainText}>
@@ -60,9 +82,7 @@ const Verification = ({route,navigation}) => {
           - <Text style={styles.otpSubText}>{email}</Text>
         </Text>
       </View>
-
       {/* Verification input */}
-
       <View style={styles.otpInputContainer}>
         {/* <OTPInputView
           style={styles.otpInputContainer}
@@ -78,23 +98,22 @@ const Verification = ({route,navigation}) => {
         /> */}
         <TextInput keyboardType="number-pad" value={otpCode} onChangeText={(text)=> setOtpCode(text)} style={styles.cutstomOtpInput} />
       </View>
-
       {/* Resend sms duration */}
       <View style={styles.resendAndDuration}>
-        <TouchableOpacity onPress={handleResendOTP}>
+        <TouchableOpacity disabled={disable} onPress={handleResendOTP}>
           <Text style={styles.resendText}>Resend sms in</Text>
         </TouchableOpacity>
         <View>
-          <Text style={styles.duration}>00 : 30s</Text>
+          <Text style={styles.duration}>00 : {time}s</Text>
         </View>
       </View>
 
       {/* Dashedline */}
       <View style={styles.dashedLine} />
       {/* Change number text */}
-      <View>
+      <TouchableOpacity onPress={()=>navigation.goBack()}>
         <Text style={styles.changeNumber}>Change Number?</Text>
-      </View>
+      </TouchableOpacity>
 
       {/* Submit button */}
       <View style={styles.btnContainer}>

@@ -1,9 +1,11 @@
 import { useToast } from "react-native-toast-notifications";
-function showerror(toast:any,err:any){
+function showerror(toast:any,err:any,customeerror?:string){
   console.log(err?.response)
   let message:string = err?.response?.data?.message
     if(message && typeof message ==="string"){
         message = err.response.data.message
+    }else if(customeerror){
+      message = customeerror
     }else{
       message = "unable to perform request, please try again"
     }

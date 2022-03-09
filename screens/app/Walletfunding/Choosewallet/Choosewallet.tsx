@@ -10,12 +10,13 @@ import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "./Choosewallet.styles";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import { TouchableOpacity } from "@gorhom/bottom-sheet";
 
 
 const { Backarrow, People, Debitcard, Arrowright, Forwardarrow } = icons;
 
-const Choosewallet = () => {
-  const [isModalVisible, setModalVisible] = useState(true);
+const Choosewallet = ({navigation}) => {
+  const [isModalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -66,7 +67,7 @@ const Choosewallet = () => {
         <TouchableNativeFeedback
           background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, false)}
         >
-          <View style={styles.walletTypeContainer}>
+          <TouchableOpacity onPress={()=>navigation.navigate("WalletPin")} style={styles.walletTypeContainer}>
             {/* Image */}
             <View>
               <Debitcard />
@@ -89,7 +90,7 @@ const Choosewallet = () => {
                 </Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </TouchableNativeFeedback>
 
         <TouchableNativeFeedback

@@ -17,6 +17,7 @@ import Tabhistory from "../assets/icons/Tabhistory";
 import Tabsettings from "../assets/icons/Tabsettings";
 import Tabuser from "../assets/icons/Tabuser";
 import Tabplusicon from "../assets/icons/Tabplusicon";
+// import MarkerIcon from "../assets/icons/MarkerIcon";
 
 
 
@@ -200,7 +201,8 @@ export default {
   Fundwalleticon,
   Paybillicon,
   Passwordhideicon,
-  Tabplusicon
+  Tabplusicon,
+  // MarkerIcon
 
 
 

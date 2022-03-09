@@ -1,67 +1,40 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  TouchableNativeFeedback,
   StatusBar,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Bottombtn, Loader, Numberbtn } from "../../../../components";
 
-import { COLORS, SIZES, fontsize, FONTS, icons } from "../../../../constants";
+import { icons } from "../../../../constants";
 
 import { JustifyBetween } from "../../../../global/styles";
-import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Securepin.styles";
 
 const { SecureDot } = icons;
 const Securepin = ({ route, navigation }) => {
   const { token } = route.params;
-
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
-  const [loading, setLoading] = useState<boolean>(false);
-  const [amount, setAmount] = useState<string[]>([]);
+  const [pin, setPin] = useState<string[]>([]);
 
-  console.log(amount);
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      const pin = amount.join("");
-      const response = await axiosCustom.put(
-        "/auth/pin/set",
-        { pin },
-        { headers: { token: token } }
-      );
-      console.log(response);
-      navigation.navigate("Setup", { token: response?.data?.data?.token });
-    } catch (err) {
-      console.log(err.response);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSetAmount = (value: string) => {
-    if (amount.length < 4) {
-      setAmount((oldamount) => [...oldamount, value]);
+    if (pin.length < 4) {
+      setPin((oldamount) => [...oldamount, value]);
     }
   };
   const handleRemoveAmount = () => {
-    if (amount.length > 0) {
-      const newdata = [...amount];
+    if (pin.length > 0) {
+      const newdata = [...pin];
       newdata.pop();
-      setAmount(newdata);
+      setPin(newdata);
       console.log(newdata);
     }
   };
 
-
   return (
     <View style={styles.container}>
-      {loading && <Loader />}
       <StatusBar />
       <View style={{ paddingHorizontal: 25 }}>
         <JustifyBetween style={{ marginBottom: 10 }}>
@@ -81,10 +54,10 @@ const Securepin = ({ route, navigation }) => {
 
         <View style={styles.pinContainer}>
           <View style={styles.pinInputContainer}>
-            <View style={styles.pinView}>{amount[0] && <SecureDot />}</View>
-            <View style={styles.pinView}>{amount[1] && <SecureDot />}</View>
-            <View style={styles.pinView}>{amount[2] && <SecureDot />}</View>
-            <View style={styles.pinView}>{amount[3] && <SecureDot />}</View>
+            <View style={styles.pinView}>{pin[0] && <SecureDot />}</View>
+            <View style={styles.pinView}>{pin[1] && <SecureDot />}</View>
+            <View style={styles.pinView}>{pin[2] && <SecureDot />}</View>
+            <View style={styles.pinView}>{pin[3] && <SecureDot />}</View>
           </View>
         </View>
 
@@ -105,8 +78,8 @@ const Securepin = ({ route, navigation }) => {
       </View>
       <Bottombtn
         title="PROCEED"
-        onpress={handleSubmit}
-        disabled={amount.length !== 4}
+        onpress={()=>navigation.navigate("SecurepinAgain",{token,pin})}
+        disabled={pin.length !== 4}
       />
     </View>
   );
