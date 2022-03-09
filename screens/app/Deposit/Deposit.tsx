@@ -6,17 +6,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { ReactNode, useState } from "react";
+import LottieView from "lottie-react-native"
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { Backheader, Bottombtn, Viewbalance } from "../../../components";
 import { styles } from "../Withdraws/Withdraw/Withdraw.styles";
 
 const {
   Backarrow,
-  Cryingicon,
   Requestee1,
   Requestee2,
   Requestee3,
   Acceptedcheck,
+  Cryinganimate
 } = icons;
 
 type DataProps = {
@@ -66,10 +67,10 @@ const Emptyrequest = () => {
   return (
     <View style={styles.emptyListContainer}>
       {/* Crying icons */}
-      <Cryingicon />
+      <LottieView source={Cryinganimate} autoPlay loop style={{width: 190, height: 190}}/>
       {/* Information text */}
       <Text style={styles.emptyListText}>
-        Padi, you have not performed any cash request today, Start Now.
+          Padi, you have not performed any cash deposits today, Start Now.
       </Text>
     </View>
   );

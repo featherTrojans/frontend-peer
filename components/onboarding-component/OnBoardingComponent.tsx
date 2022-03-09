@@ -14,10 +14,11 @@ export type EachOnboardingTypes = {
 };
 
 const OnboardingComponent = ({ item }: EachOnboardingTypes) => {
-  const { header, information } = item;
+  const { header, information, icon } = item;
   return (
     <OnboardingComponentContainer>
-      <ImageContainer />
+      {/* <ImageContainer /> */}
+      {icon}
       <>
         <HeaderText>{header}</HeaderText>
         <InformationText>{information}</InformationText>

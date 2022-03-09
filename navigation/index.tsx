@@ -299,7 +299,7 @@ const RootNavigator = () => {
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Onboarding"
+    // initialRouteName="Onboarding"
     >
     {/* SCREEN FOR AUTH */}
     {!token?

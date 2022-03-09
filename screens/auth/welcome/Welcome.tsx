@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import LottieView from "lottie-react-native"
 import { COLORS, FONTS, icons, SIZES, fontsize } from "../../../constants";
 // 
 import Animated, {
@@ -11,7 +12,7 @@ import { styles } from "./Welcome.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 
-const { Smile } = icons;
+const { Smile, Winkinganimate } = icons;
 
 const Welcome = ({navigation}) => {
   const { setAuthData } = useContext(AuthContext);
@@ -45,8 +46,8 @@ const Welcome = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* Smiling Icon */}
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <Smile />
+      <View style={{ justifyContent: "center", alignItems: "center", marginTop: 42 }}>
+      <LottieView source={Winkinganimate} autoPlay loop style={{width: 194, height: 194}}/>
       </View>
       {/* Welcome text */}
       <View style={styles.welcomeTextContainer}>

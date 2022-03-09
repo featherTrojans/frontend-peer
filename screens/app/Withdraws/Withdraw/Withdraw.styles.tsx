@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
   emptyListContainer: {
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 38
   },
   emptyListText: {
     textAlign: "center",
