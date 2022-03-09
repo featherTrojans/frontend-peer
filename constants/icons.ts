@@ -90,6 +90,24 @@ import Newtransfericon from "../assets/icons/Newtransfericon";
 import Fundwalleticon from "../assets/icons/Fundwalleticon";
 import Paybillicon from "../assets/icons/Paybillicon";
 import Passwordhideicon from "../assets/icons/Passwordhideicon";
+import Defaultuseravatar from "../assets/icons/Defaultuseravatar";
+import Memoji1 from "../assets/icons/Memoji1";
+import Upgradeicon from "../assets/icons/Upgradeicon";
+import Memoji2 from "../assets/icons/Memoji2";
+import Lockicon from "../assets/icons/Lockicon";
+import Shareappicon from "../assets/icons/Shareappicon";
+import Supporticon from "../assets/icons/Supporticon";
+import Feathersmallicon from "../assets/icons/Feathersmallicon";
+
+
+
+///Animated icons
+
+import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json"
+import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.json"
+import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json"
+import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json"
+import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json"
 
 
 
@@ -203,6 +221,31 @@ export default {
   Passwordhideicon,
   Tabplusicon,
   // MarkerIcon
+  Defaultuseravatar,
+  Memoji1,
+  Upgradeicon,
+  Memoji2,
+Lockicon,
+Shareappicon,
+Supporticon,
+Feathersmallicon,
+
+
+//Animated icons
+
+Cryinganimate,
+Winkinganimate,
+Mapanimate,
+Phoneanimate,
+Sittinganimate
+
+
+
+
+
+
+
+
 
 
 

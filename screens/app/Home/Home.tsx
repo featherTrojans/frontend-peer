@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from "react-native";
+import LottieView from "lottie-react-native"
 import { Service, Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
@@ -27,7 +28,7 @@ const {
   Paybills,
   Transfer,
   Deposit,
-  Cryingicon,
+  Cryinganimate,
 } = icons;
 
 
@@ -41,7 +42,7 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
-    link:"Depositupdate"
+    link:"Deposit"
   },
   {
     icon: <Transfer />,
@@ -94,7 +95,7 @@ const Home = ({ navigation }: { navigation: any }) => {
     return (
       <View style={styles.emptyContainer}>
         {/* Crying icons */}
-        <Cryingicon />
+        <LottieView source={Cryinganimate} autoPlay loop style={{width: 190, height: 190}}/>
         <View style={{ marginHorizontal: 50 }}>
           <Text style={styles.emptyText}>
             Padi, you have not performed any transactions yet.{" "}

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import LottieView from "lottie-react-native"
+
 import { Bottombtn, Transactionhistory } from "../../../../components";
 import { COLORS, icons } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
 
+
 import { styles } from "./Transaction.styles";
 
-const { Cryingicon } = icons;
+const { Cryinganimate } = icons;
 
 const DATA = [
   {
@@ -93,7 +96,8 @@ const EmptyComponent = () => {
   return (
     <View style={styles.emptyListContainer}>
       {/* Crying icons */}
-      <Cryingicon />
+      {/* <Cryingicon /> */}
+      <LottieView source={Cryinganimate} autoPlay loop style={{width: 190, height: 190}}/>
       <View style={styles.textContainer}>
         <Text style={styles.emptyContainerText}>
           Padi, you have not performed any transactions yet.{" "}

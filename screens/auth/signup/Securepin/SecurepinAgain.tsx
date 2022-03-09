@@ -21,12 +21,12 @@ const SecurepinAgain = ({ route, navigation }) => {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState<boolean>(false);
   const [amount, setAmount] = useState<string[]>([]);
-
+  console.log(amount.join(""),pin )
   const handleSubmit = async () => {
-    setLoading(true);
-    if(pin !== amount){
-        return showerror(toast,null,"Pin doesn't match")
+    if(pin.join("") !== amount.join("")){
+      return showerror(toast,null,"Pin doesn't match")
     }
+    setLoading(true);
     try {
       const pin = amount.join("");
       const response = await axiosCustom.put(
