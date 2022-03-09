@@ -143,6 +143,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       {/*  */}
 
       <ScrollView
+      showsVerticalScrollIndicator={false}
        refreshControl={
          <RefreshControl 
          refreshing={refreshing}

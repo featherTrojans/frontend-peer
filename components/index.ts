@@ -11,6 +11,7 @@ import Service from "./Service/Service";
 import Tab from "./Tab/Tab";
 import Transactionhistory from "./Transactionshistory/Transactionhistory";
 import Viewbalance from "./Viewbalance/Viewbalance";
+import Inputinsettings from "./Inputinsettings/Inputinsettings";
 
 
 export {
@@ -26,5 +27,6 @@ export {
     Bottombtn,
     Numberbtn,
     Requesterdetails,
-    Priceandcharges
+    Priceandcharges,
+    Inputinsettings
 }

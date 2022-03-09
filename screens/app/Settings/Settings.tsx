@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet, {
   BottomSheetScrollView,
@@ -21,20 +21,27 @@ const {
   Feathersmallicon,
 } = icons;
 
-const Iconwithtitle = ({ bg, icon, title, onpress }) => {
+type IconwithtitleProps = {
+  bg: string,
+  icon: jSX.Element,
+  title: string,
+  onpress: () => void
+}
+
+const Iconwithtitle = ({ bg, icon, title, onpress }: IconwithtitleProps) => {
   return (
-    <View style={[styles.alignedContainer, styles.iconWithTitleContainer]}>
+    <TouchableOpacity style={[styles.alignedContainer, styles.iconWithTitleContainer]} activeOpacity={0.6} onPress={onpress}>
       <View style={styles.alignedContainer}>
         {/* icons */}
         <View style={[styles.iconBg, { backgroundColor: bg }]}>{icon}</View>
         <Text style={styles.iconTitle}>{title}</Text>
       </View>
       <Forwardarrow />
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const Settings = () => {
+const Settings = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -86,13 +93,13 @@ const Settings = () => {
             bg="#CECCCC"
             icon={<Memoji2 />}
             title="My Profile"
-            onpress={() => console.log("My profile")}
+            onpress={() => navigation.navigate("Editprofile")}
           />
           <Iconwithtitle
             bg="#25DBA3"
             icon={<Lockicon />}
             title="Security & Privacy"
-            onpress={() => console.log("My profile")}
+            onpress={() => navigation.navigate("Securityprivacy")}
           />
           <Iconwithtitle
             bg="#FF9D00"

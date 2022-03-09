@@ -44,8 +44,18 @@ import {
   Transactiondispute,
   Pendingrequest, //This screen has changed
   Accepetedrequest, //This screen has changed too
+
+
   History,
+
+
   Settings,
+  Editprofile,
+  Securityprivacy,
+  Changepassword,
+  Changepin,
+
+
 
   //Withdraw
   Requestnew,
@@ -85,8 +95,8 @@ import {
   Chatshome,
   Chatsdm,
   Usersearch,
-} from "../screens";
 
+} from "../screens";
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 import WithdrawPin from "../screens/app/Withdraws/WithdrawPin/WithdrawPin";
@@ -275,7 +285,7 @@ const Tabs = () => {
     <Animated.View style={{
       width: getWidth() - 50,
       height: 1.5,
-      backgroundColor: 'blue',
+      backgroundColor: COLORS.blue6,
       position: 'absolute',
       bottom: 82,
       // left: 40,
@@ -329,6 +339,28 @@ const RootNavigator = () => {
         component={Transactiondispute}
       />
     </AppStack.Group>
+
+
+    {/* Settings,
+  Editprofile,
+  Securityprivacy,
+  Changepassword,
+  Changepin, */}
+
+
+
+  {/* Settings Screens */}
+  <AppStack.Group>
+    <AppStack.Screen name="Editprofile" component={Editprofile}/>
+    <AppStack.Screen name="Securityprivacy" component={Securityprivacy}/>
+    <AppStack.Screen name="Changepassword" component={Changepassword}/>
+    <AppStack.Screen name="Changepin" component={Changepin}/>
+
+
+  </AppStack.Group>
+
+
+
 
     {/* Withdraw Screens */}
     <AppStack.Group>
