@@ -1,9 +1,14 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styles } from "./Depositupdate.styles";
+import moment from "moment"
 import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
 import LottieView from "lottie-react-native"
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
+import { TouchableOpacity } from "@gorhom/bottom-sheet";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import amountFormatter from "../../../../utils/formatMoney";
+import { AuthContext } from "../../../../context/AuthContext";
 const {
   TransferIcon,
   Location,
@@ -26,13 +31,12 @@ const Emptyrequest = () => {
   );
 };
 
-const StatusUpdate = ()=>{
-  return (
-    <View style={styles.container}>
-    <StatusBar />
-    <Backheader title="Deposit" />
-    <Viewbalance />
+const StatusUpdate = ({status, navigation}:any)=>{
+  const { authdata } = useContext(AuthContext);
 
+  return (
+  <>
+    <StatusBar />
     <View style={{ flex: 1 }}>
       <View style={styles.contentContainer}>
         <View style={styles.topSection}>
@@ -41,25 +45,23 @@ const StatusUpdate = ()=>{
           <View>
             <Text style={styles.lastAmountText}>Last Amount Update</Text>
             <Text style={styles.updatedTimeText}>
-              Updated yesterday, 12:33pm
+              Updated {moment(status.time).calendar()}
             </Text>
           </View>
-          <Text style={styles.lastAmountPrice}>NGN 100,000</Text>
+          <Text style={styles.lastAmountPrice}>NGN {amountFormatter(status.amount)}</Text>
         </View>
-
         <View style={styles.horizontalLine} />
-
         <View>
           <View style={styles.locationIconandText}>
             {/* icons */}
             <Location />
-            <Text style={styles.location}>Ajayi-Thompson, Ile-ife, Osun</Text>
+            <Text style={styles.location}>{status.locationText}</Text>
           </View>
           <View style={styles.expirationContainer}>
             <Text style={styles.expirationText}>
-              Expires 21 Mar. 22, 12:33pm
+              Expires {moment(status.time).add(1, 'days').calendar()}
             </Text>
-            <Text style={styles.updateText}>Update</Text>
+            <TouchableOpacity onPress={()=>navigation.navigate("Depositinput")} ><Text style={styles.updateText}>Update</Text></TouchableOpacity>
           </View>
         </View>
       </View>
@@ -71,7 +73,9 @@ const StatusUpdate = ()=>{
             <Accountbalanceicon />
             <Text style={styles.iconTitle}>Balance</Text>
           </View>
-          <Text style={styles.iconValue}>N13,750</Text>
+          <Text style={styles.iconValue}>
+            N {amountFormatter(`${authdata?.walletBal - status?.amount}`)}
+          </Text>
         </View>
 
         <View style={styles.horizontalLine} />
@@ -86,33 +90,48 @@ const StatusUpdate = ()=>{
       </View>
     </View>
 
-    <View style={styles.bottomBtn}>
+    <TouchableOpacity onPress={()=>{navigation.navigate("Deposit")}} style={styles.bottomBtn}>
       <View style={styles.eyeiconBg}>
         <Viewrequesteye />
       </View>
-      <Text style={styles.viewRequestText}>View Cash Requests (15)</Text>
-    </View>
-  </View>
-
+      <Text style={styles.viewRequestText}>View Cash Requests {/*(15)*/}</Text>
+    </TouchableOpacity>
+  </>
   )
 }
 
 const Depositupdate = ({navigation}) => {
+  const [status, setStatus] =  useState<null|{}>(null)
+  useEffect(()=>{
+    getFromStorage()
+  },[])
+  const getFromStorage = async ()=>{
+    try{
+      const jsonValue = await AsyncStorage.getItem("@depositstatus")
+      console.log(jsonValue)
+      if(jsonValue){
+        // check time and reset status if time has pass
+        const parseVal = JSON.parse(jsonValue)
+        setStatus(parseVal)
+      }
+    }catch(err){
+
+    }
+  }
   return (
     <View style={styles.container}>
       <Backheader title="Deposit" />
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
-        <View style={{ flex: 1 }}>
+       {status? <StatusUpdate status={status} navigation={navigation} />:<><View style={{ flex: 1 }}>
           <Emptyrequest /> 
         </View>
-      </View>
-
       <Bottombtn
         title="NEW DEPOSIT"
         onpress={() => navigation.navigate("Depositinput")}
-      />
+        /></>}
+        </View>
     </View>)
 };
 

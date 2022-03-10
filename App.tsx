@@ -9,6 +9,7 @@ import MainNavigation from './navigation';
 import { Text , View} from 'react-native';
 import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import {icons} from "./constants"
+import { LocationProvider } from "./context/LocationContext";
 
 const { Cancelicon } = icons;
 
@@ -42,13 +43,15 @@ export default function App() {
         alignItems: "center",
         width: "90%",
         marginHorizontal:25,}}>
-            <Text style={{color: "#fff",fontSize: 14,lineHeight:20}}>{props.message}</Text>    
-            <TouchableOpacity onPress={props.onHide}>
-                <Cancelicon />
-            </TouchableOpacity>
+        <Text style={{color: "#fff",fontSize: 14,lineHeight:20}}>{props.message}</Text>    
+        <TouchableOpacity onPress={props.onHide}>
+            <Cancelicon />
+        </TouchableOpacity>
         </View>}>
         <AuthProvider>
+          <LocationProvider>
             <MainNavigation />
+          </LocationProvider>
         </AuthProvider>
       </ToastProvider>
     );

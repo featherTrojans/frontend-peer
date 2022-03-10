@@ -65,7 +65,7 @@ const Addcash = ({navigation}) => {
           </View>
         )}
       </View>
-      <Bottombtn title="CONTINUE" onpress={() => navigation.navigate('Choosewallet')}/>
+      <Bottombtn title="CONTINUE" disabled={!value} onpress={() => navigation.navigate('Choosewallet')}/>
 
 
     </View>

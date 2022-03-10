@@ -49,7 +49,11 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
+<<<<<<< HEAD
     link: "Deposit",
+=======
+    link:"Depositupdate"
+>>>>>>> 98ddd872686ead45511cf8c59f82cd6bb8a2b756
   },
   {
     icon: <Transfer />,

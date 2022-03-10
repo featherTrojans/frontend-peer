@@ -102,6 +102,7 @@ import App from "../App";
 import Map from "../screens/shared/map/Map";
 import LockScreen from "../screens/shared/LockScreen/LockScreen";
 import Depositinput from "../screens/app/Deposit/DepositInput/Depositinput";
+import CustomWebView from "../screens/shared/CustomWebView";
 // import Animated from "react-native-reanimated";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -388,6 +389,7 @@ const RootNavigator = () => {
     <AppStack.Group>
       <AppStack.Screen name="Addcash" component={Addcash} />
       <AppStack.Screen name="Choosewallet" component={Choosewallet} />
+      <AppStack.Screen name="WalletPin" component={WalletPin} />
     </AppStack.Group>
 
     {/* Transfer funds screens */}
@@ -405,21 +407,22 @@ const RootNavigator = () => {
 
     {/* Deposit Screens */}
     <AppStack.Group>
-      <AppStack.Screen name="Deposit" component={Deposit} />
       <AppStack.Screen name="Depositupdate" component={Depositupdate} />
-
+      <AppStack.Screen name="Depositinput" component={Depositinput} />
+      <AppStack.Screen name="Deposit" component={Deposit} />
       <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
       <AppStack.Screen name="Accepteddeposit" component={Accepteddeposit} />
       <AppStack.Screen name="Depositpin" component={Depositpin} />
       <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
     </AppStack.Group>
-
     {/* Chats Screens */}
     <AppStack.Group>
       <AppStack.Screen name="Chatshome" component={Chatshome} />
       <AppStack.Screen name="Chatsdm" component={Chatsdm} />
       <AppStack.Screen name="Usersearch" component={Usersearch} />
     </AppStack.Group>
+       <AppStack.Screen name="CustomWebView" component={CustomWebView} />
+
   </>)}
   </AppStack.Navigator>
 );
@@ -447,7 +450,7 @@ export default function MainNavigation() {
     });
 
     return () => {
-      subscription.remove();
+      // subscription.remove();
     };
   }, []);
  
