@@ -127,27 +127,7 @@ const Availablelisting = ({ navigation, route }: any) => {
         snapPoints={["50%", "90%"]}
         style={{ paddingHorizontal: 15 }}
       >
-        {/* <View style={styles.listingTypeContainer}>
-            {listingtypes.map((listingtype, index) => (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  styles.typeBg,
-                  active === listingtype && styles.isActive,
-                ]}
-                onPress={() => setActive(listingtype)}
-              >
-                <Text
-                  style={[
-                    styles.typeText,
-                    active === listingtype && styles.isActiveColor,
-                  ]}
-                >
-                  {listingtype}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View> */}
+       
 
         <View>
           <View>

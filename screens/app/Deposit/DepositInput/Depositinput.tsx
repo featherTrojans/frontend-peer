@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  TouchableHighlight,
 } from "react-native";
 import * as Location from 'expo-location';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useToast } from "react-native-toast-notifications"; 
 import {
   Backheader,
   Bottombtn,
+  Loader,
   Numberbtn,
   Viewbalance,
 } from "../../../../components";
@@ -17,15 +17,17 @@ import { COLORS } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import amountFormatter from "../../../../utils/formatMoney";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
+import showerror from "../../../../utils/errorMessage";
 
 
 
 function Depositinput({ route, navigation }) {
-  const { nextscreen } = route.params;
+  const toast = useToast()
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const [amount, setAmount] = useState<string>("");
   const [coords, setCoords] = useState({});
   const [locationSide, setLocationSide] = useState({});
+  const [loading, setLoading] = useState(false)
   console.log(amount,"amount screen") 
   // const amountFormatter = (value: string) => {
   //   return (
@@ -69,22 +71,32 @@ function Depositinput({ route, navigation }) {
   };
 
   const handleSubmit= async ()=>{
+    setLoading(true)
+    let locationText = `${locationSide.name}, ${locationSide.city}`
     try{
         const response = await axiosCustom.post("/status/create",{
             amount,
             longitude: coords.longitude,
-            lantitude: coords.latitude,
-            locationText: locationSide.city
+            latitude: coords.latitude,
+            locationText:  locationText
         })
+        let asyncval = JSON.stringify({locationText, amount, time: Date.now()})
+        try{
+          await AsyncStorage.setItem("@depositstatus",asyncval)
+        }catch(err){
+          console.log(err)
+        }
         navigation.navigate("Depositupdate")
     }catch(err){
-
+      showerror(toast,err)
+    }finally{
+      setLoading(false)
     }
   }
   return (
     <View style={styles.container}>
       <Backheader title="Enter Amount" />
-
+      {loading && <Loader />}
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
 

@@ -6,6 +6,7 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
 } from "react-native";
+import { WebView } from 'react-native-webview';
 import { useToast } from "react-native-toast-notifications";
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
@@ -23,6 +24,8 @@ import amountFormatter from "../../../../utils/formatMoney";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 
 
+
+
 function WalletPin({ route, navigation }) {
   const toast = useToast()
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
@@ -34,8 +37,10 @@ function WalletPin({ route, navigation }) {
       setLoading(true)
     try{
         const response = await axiosCustom.post("/pay",{amount});
+        console.log(response)
+        navigation.navigate("CustomWebView",{url:response.data.data.authorization_url, reference:response.data.data.reference})
         // Linking.openURL(response.data.data.authorization_url)
-        WebBrowser.openBrowserAsync(response.data.data.authorization_url);
+        // WebBrowser.openBrowserAsync(response.data.data.authorization_url);
         // console.log(response)
     }catch(err){
         showerror(toast,err)
