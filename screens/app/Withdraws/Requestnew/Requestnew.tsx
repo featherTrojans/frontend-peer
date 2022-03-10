@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  TouchableHighlight,
 } from "react-native";
+import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
   Bottombtn,
@@ -13,12 +11,16 @@ import {
   Viewbalance,
 } from "../../../../components";
 import { COLORS } from "../../../../constants";
+import { AuthContext } from "../../../../context/AuthContext";
+import showerror from "../../../../utils/errorMessage";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 // import { styles } from "./TransferInput.styles";
 
 function Requestnew({ navigation }) {
+  const toast = useToast()
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [amount, setAmount] = useState<string>("");
+  const {authdata} = useContext(AuthContext)
 
   const amountFormatter = (value: string) => {
     return (
@@ -44,6 +46,12 @@ function Requestnew({ navigation }) {
       return oldamount
     });
   };
+  const handleNextScreen = ()=>{
+      if(authdata.amount < amount){
+        return showerror(toast, null,"insufficient amount")
+      }
+      navigation.navigate("Availablelisting",{amount})
+  }
 
   return (
     <View style={styles.container}>
@@ -77,7 +85,7 @@ function Requestnew({ navigation }) {
 
       <Bottombtn
         title="PROCEED"
-        onpress={() => navigation.navigate("Availablelisting",{amount})}
+        onpress={handleNextScreen}
       />
     </View>
   );
