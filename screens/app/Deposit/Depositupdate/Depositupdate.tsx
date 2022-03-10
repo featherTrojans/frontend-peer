@@ -4,6 +4,7 @@ import { styles } from "./Depositupdate.styles";
 import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
 import LottieView from "lottie-react-native"
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
+import { TouchableOpacity } from "@gorhom/bottom-sheet";
 const {
   TransferIcon,
   Location,
@@ -86,12 +87,12 @@ const StatusUpdate = ()=>{
       </View>
     </View>
 
-    <View style={styles.bottomBtn}>
+    <TouchableOpacity onPress={()=>{navigation.navigate("Deposit")}} style={styles.bottomBtn}>
       <View style={styles.eyeiconBg}>
         <Viewrequesteye />
       </View>
       <Text style={styles.viewRequestText}>View Cash Requests (15)</Text>
-    </View>
+    </TouchableOpacity>
   </View>
 
   )
@@ -107,12 +108,11 @@ const Depositupdate = ({navigation}) => {
         <View style={{ flex: 1 }}>
           <Emptyrequest /> 
         </View>
-      </View>
-
       <Bottombtn
         title="NEW DEPOSIT"
         onpress={() => navigation.navigate("Depositinput")}
-      />
+        />
+        </View>
     </View>)
 };
 

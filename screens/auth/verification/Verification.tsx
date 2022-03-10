@@ -23,7 +23,6 @@ const Verification = ({route,navigation}) => {
   const [disable, setDisable] = useState(true)
 
     
-  console.log(disable)
   useEffect(() => {
     const timer = setInterval(()=>{
       setTime(prevtime =>{
@@ -41,6 +40,10 @@ const Verification = ({route,navigation}) => {
     }
   }, [])
   
+  useEffect(()=>{
+    handleResendOTP()
+  },[])
+
   const handleSubmit = async ()=>{
     setLoading(true)
     try{
@@ -53,7 +56,6 @@ const Verification = ({route,navigation}) => {
       setLoading(false)
     }
   }
-
   const handleResendOTP = async () => {
     setLoading(true)
     try{
