@@ -1,4 +1,4 @@
-import {useContext} from "react"
+import {useContext, useEffect} from "react"
 import {  styles } from "./Login.styles";
 import { COLORS, icons } from "../../../constants";
 
@@ -10,6 +10,7 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup"
@@ -20,6 +21,7 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import showerror from "../../../utils/errorMessage";
 import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
+import * as LocalAuthentication from 'expo-local-authentication';
 
 const { Logo,Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon} = icons;
 
@@ -44,6 +46,26 @@ const Login = ({ navigation }: any) => {
 
   const [hidePassword, setHidePassword] = useState(true)
   const {setToken} = useContext(AuthContext)
+
+
+  // useEffect(() => {
+  //   login()
+  // })
+
+  // const login = async () => {
+  //   try {
+  //     let results = await LocalAuthentication.authenticateAsync();
+  //     if(results.success) {
+  //       Alert.alert('alert', 'login success')
+  //     } else {
+  //       Alert.alert('alert',  JSON.stringify(results))
+  //     }
+  //   }catch(err) {
+  //     Alert.alert('alert', 'login fail: ' + err)
+  //     console.log(err);
+  //   }
+    
+  // }
 
 
 

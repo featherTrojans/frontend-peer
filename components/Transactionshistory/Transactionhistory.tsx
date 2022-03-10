@@ -4,12 +4,14 @@ import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Transactionhistory.styles";
 import { useNavigation } from '@react-navigation/native';
 import amountFormatter from "../../utils/formatMoney";
+import { customNavigation } from "../../utils/customNavigation";
+
 
 
 const { Arrowin, Arrowout } = icons;
 
 const History = ({ data }: any) => {
-  const navigation = useNavigation()
+  // const navigation = useNavigation()
   const { direction, description, to, amount, from } = data;
 
   // useEffect(()=>{
@@ -27,7 +29,7 @@ const History = ({ data }: any) => {
     <TouchableOpacity 
     activeOpacity={0.8}
     style={styles.historyContainer}
-    onPress={() => navigation.navigate("Transactiondetails")}
+    onPress={() => customNavigation("Transactiondetails", {data: data})}
     >
       <View style={styles.historyDetailsContainer}>
         <View style={[styles.arrowBg, { backgroundColor: circleColor }]}>

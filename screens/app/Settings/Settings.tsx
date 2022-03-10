@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import * as WebBrowser from 'expo-web-browser';
+import * as Linking from 'expo-linking';
 import BottomSheet, {
   BottomSheetScrollView,
   BottomSheetFlatList,
@@ -39,6 +41,14 @@ const Iconwithtitle = ({ bg, icon, title, onpress }: IconwithtitleProps) => {
       <Forwardarrow />
     </TouchableOpacity>
   );
+};
+
+const handleOpenWithWebBrowser = () => {
+  WebBrowser.openBrowserAsync('https://www.feather.africa');
+};
+
+const handleOpenWithLinking = () => {
+  Linking.openURL('https://www.feather.africa');
 };
 
 const Settings = ({navigation}) => {
@@ -111,13 +121,13 @@ const Settings = ({navigation}) => {
             bg="#7600FF"
             icon={<Supporticon />}
             title="Support / Help Desk"
-            onpress={() => console.log("My profile")}
+            onpress={() => handleOpenWithWebBrowser()}
           />
           <Iconwithtitle
             bg="#E6ECFF"
             icon={<Feathersmallicon />}
             title="About Feather"
-            onpress={() => console.log("My profile")}
+            onpress={() => handleOpenWithLinking()}
           />
 
           <View style={styles.horizontalLine} />

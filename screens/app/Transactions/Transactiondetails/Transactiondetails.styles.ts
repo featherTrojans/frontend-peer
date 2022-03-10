@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
 
-
   detailsContainer: {
     paddingHorizontal: 26,
     paddingTop: 20,
@@ -30,6 +29,7 @@ export const styles = StyleSheet.create({
   eachDetailValue: {
     ...fontsize.small,
     ...FONTS.regular,
+    textTransform: "capitalize",
   },
   copyClipboardContainer: {
     marginLeft: 12,

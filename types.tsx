@@ -30,7 +30,7 @@ export type RootStackParamList = {
   //Transactions
   Transactions: undefined;
   Newtransactions: undefined;
-  Transactiondetails: undefined;
+  Transactiondetails: {price: number};
   Transactiondispute: undefined;
 
   //Withdraw

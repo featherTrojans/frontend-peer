@@ -4,13 +4,21 @@ import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize } from "../../../constants";
 import { styles } from "./Globalmodal.styles";
 
+type globalModalProps = {
+  showState: boolean;
+  onBgPress: () => void;
+  children: JSX.Element;
+  btnFunction?: () => void;
+  btnText?: string;
+};
+
 const Globalmodal = ({
   showState,
   onBgPress,
   children,
   btnFunction,
   btnText = "CONTINUE",
-}: any) => {
+}: globalModalProps) => {
   return (
     <Modal
       isVisible={showState}
@@ -22,13 +30,16 @@ const Globalmodal = ({
     >
       <View style={styles.container}>
         {children}
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={btnFunction}
-          style={styles.btnStyle}
-        >
-          <Text style={styles.btnText}>{btnText}</Text>
-        </TouchableOpacity>
+
+        {btnFunction  && (
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={btnFunction}
+            style={styles.btnStyle}
+          >
+            <Text style={styles.btnText}>{btnText}</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </Modal>
   );

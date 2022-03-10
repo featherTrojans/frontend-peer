@@ -7,6 +7,8 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { navigationRef } from "../utils/customNavigation";
+
 
 import {
   RootStackParamList,
@@ -453,7 +455,7 @@ export default function MainNavigation() {
   }, []);
  
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       {token? <LockScreen modal={modal} setModal={setModal}/> : null}
       <RootNavigator />
 
