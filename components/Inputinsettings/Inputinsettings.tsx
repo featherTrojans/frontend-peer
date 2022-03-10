@@ -15,7 +15,7 @@ type InputinsettingsProps = {
 };
 
 const Inputinsettings = ({ label, placeholder, ...rest }: InputinsettingsProps) => {
-  const [showPassword, setShowPassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true);
 
   return (
     <View style={styles.container}>
@@ -26,13 +26,13 @@ const Inputinsettings = ({ label, placeholder, ...rest }: InputinsettingsProps) 
         <TextInput
           style={styles.textInput}
           placeholder={placeholder}
-          secureTextEntry={showPassword}
+          secureTextEntry={hidePassword}
           placeholderTextColor={COLORS.grey9}
             {...rest}
         />
 
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <Text style={styles.showOrHide}>Show</Text>
+        <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
+          <Text style={styles.showOrHide}>{hidePassword ? "Show": "Hide"}</Text>
         </TouchableOpacity>
       </View>
     </View>

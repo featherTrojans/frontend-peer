@@ -73,4 +73,20 @@ export const styles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.medium,
   },
+
+
+  listingType:{
+    ...fontsize.bxmedium,
+    ...FONTS.bold,
+    marginBottom: 23
+  },
+  listingTypeInfo:{
+    ...fontsize.small,
+    ...FONTS.regular,
+    lineHeight: 23
+  },
+  listingTypesText:{
+    ...fontsize.small, ...FONTS.medium,
+    color: COLORS.grey2
+  }
 });
