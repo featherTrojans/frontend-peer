@@ -8,6 +8,7 @@ import { Bottombtn } from "../../../../components";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from "../../../../context/AuthContext";
 import amountFormatter from "../../../../utils/formatMoney";
+import * as SMS from "expo-sms"
 
 
 const { Backarrow } = icons;
@@ -19,6 +20,17 @@ const Addcash = ({navigation}) => {
   const [items, setItems] = useState([
     { label: "Primary Wallet", value: "Primary Wallet" },
   ]);
+
+
+  const sendMessage = async () => {
+      const status = await SMS.sendSMSAsync('08167569588', "Hello")
+      console.log(status)
+  }
+
+
+
+
+
 
   return (
     <View style={styles.container}>
@@ -54,6 +66,7 @@ const Addcash = ({navigation}) => {
         )}
       </View>
       <Bottombtn title="CONTINUE" onpress={() => navigation.navigate('Choosewallet')}/>
+
 
     </View>
   );
