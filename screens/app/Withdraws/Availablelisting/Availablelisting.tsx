@@ -9,12 +9,13 @@ import BottomSheet, {
   BottomSheetScrollView,
   BottomSheetFlatList,
 } from "@gorhom/bottom-sheet";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { images, icons, COLORS, fontsize, FONTS } from "../../../../constants";
 import { styles } from "./Availablelisting.styles";
 import Map from "../../../shared/map/Map";
 import * as Location from "expo-location";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
+import { LocationContext } from "../../../../context/LocationContext";
 
 const { Backarrow, Forwardarrow, Requestee1, Requestee2, Requestee3 } = icons;
 const { Mapimage } = images;
@@ -44,8 +45,7 @@ const listingtypes = ["peers", "businesses", "agents"];
 
 const Availablelisting = ({ navigation, route }: any) => {
   const { amount } = route.params;
-
-  const [coords, setCoords] = useState({});
+  const {setCoords,coords, setDestinationCoords} = useContext(LocationContext)
   const [agents, setAgents] = useState([]);
   const [locationSide, setLocationSide] = useState({});
   const [activeType, setActiveType] = useState('peers')
@@ -59,7 +59,7 @@ const Availablelisting = ({ navigation, route }: any) => {
 
       let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
       setCoords(location.coords);
-      Location.setGoogleApiKey("AIzaSyA4C5Ezt6h_4Po4PX0jrnzrAchAolScS9k");
+      Location.setGoogleApiKey("AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY");
       let locationaddress = await Location.reverseGeocodeAsync(
         location.coords,
         { useGoogleMaps: true }
@@ -83,20 +83,25 @@ const Availablelisting = ({ navigation, route }: any) => {
     }
   };
   const Singleuser = ({ profile, onpress }: any) => {
-    const { fullName, duration } = profile;
+    const { fullName, duration, username } = profile;
+
+
+    const handleAgentSelect = ()=>{
+      // adding Location context
+      setDestinationCoords(profile)
+        navigation.navigate("Withdrawpreview", {
+            amount,
+            userInfo: {
+              agent: fullName,
+              agentUsername: username,
+            },
+          })
+    }
     return (
       <TouchableOpacity
         style={styles.userContainer}
         activeOpacity={0.8}
-        onPress={() =>
-          navigation.navigate("Withdrawpreview", {
-            amount,
-            userInfo: {
-              agent: "Afiz global",
-              agentUsername: "afiztech",
-            },
-          })
-        }
+        onPress={handleAgentSelect}
       >
         <View style={styles.detailsContainer}>
           {/* Image */}
@@ -118,7 +123,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const [active, setActive] = useState("peers");
   return (
     <View style={{ flex: 1 }}>
-      <Map coords={coords} />
+      <Map />
       <View>
         <Backarrow />
       </View>

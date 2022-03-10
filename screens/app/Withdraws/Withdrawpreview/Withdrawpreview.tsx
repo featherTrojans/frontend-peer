@@ -13,6 +13,7 @@ import { Bottombtn, Loader, Requesterdetails } from "../../../../components";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
+import Map from "../../../shared/map/Map";
 
 const { Locationmap } = images;
 const { Forwardarrow, Editicon, Meetupdot } = icons;
@@ -24,13 +25,10 @@ const Withdrawpreview = ({navigation, route}: any) => {
  
   return (
     <View style={styles.container}>
+      <Map />
       {loading && <Loader />}
       <StatusBar />
-      <ImageBackground
-        source={Locationmap}
-        resizeMode="cover"
-        style={{ flex: 1, position: "relative" }}
-      >
+      
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
             {/* Confirm meetup text will show after clikcing continue*/}
@@ -90,7 +88,6 @@ const Withdrawpreview = ({navigation, route}: any) => {
             onpress={()=>navigation.navigate("WithdrawPin",{userInfo,amount})}
           />
         </View>
-      </ImageBackground>
     </View>
   );
 };

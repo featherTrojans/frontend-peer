@@ -46,7 +46,7 @@ function Depositinput({ route, navigation }) {
         }
         let location = await Location.getCurrentPositionAsync({accuracy:6});
         setCoords(location.coords);
-        Location.setGoogleApiKey('AIzaSyA4C5Ezt6h_4Po4PX0jrnzrAchAolScS9k')
+        Location.setGoogleApiKey('AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY')
         let locationaddress = await Location.reverseGeocodeAsync(location.coords,{useGoogleMaps:true})
         console.log(locationaddress);
         setLocationSide(locationaddress[0])    
@@ -86,7 +86,7 @@ function Depositinput({ route, navigation }) {
         }catch(err){
           console.log(err)
         }
-        navigation.navigate("Depositupdate")
+        navigation.navigate("Home")
     }catch(err){
       showerror(toast,err)
     }finally{
