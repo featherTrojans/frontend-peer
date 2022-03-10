@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
-import { COLORS } from "../../constants";
+import { COLORS, FONTS, fontsize } from "../../constants";
+
 
 export const OnboardingContainer = styled.View`
   display: flex;
@@ -17,8 +18,7 @@ export const LoginBtn = styled.TouchableOpacity`
 `;
 
 export const SkipText = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
+${{...fontsize.small, ...FONTS.bold}}
 `;
 
 export const OnboardingFlatlist = styled.FlatList``;
@@ -39,7 +39,8 @@ export const DotContainer = styled.View``;
 
 export const GetStartedText = styled.Text`
   color: ${COLORS.white};
-  font-weight: bold;
+  ${{...fontsize.small, ...FONTS.bold}}
+
 `;
 
 export const GetStartedContainer = styled.View`
@@ -50,9 +51,9 @@ export const GetStartedContainer = styled.View`
 `;
 
 export const NextText = styled.Text`
-  padding-horizontal: 41px;
   padding-vertical: 21px;
-  font-weight: bold;
+${{...fontsize.small, ...FONTS.bold}}
+
 `;
 
 export const GetStartedBtn = styled.TouchableOpacity`

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { FlatList, Animated, StatusBar } from "react-native";
 import { OnboardingScreenNavigationProps } from "../../types";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, FONTS, fontsize, SIZES } from "../../constants";
 import onboardingdatas from "../../onboardingdatas";
 import EachOnboarding from "../../components/onboarding-component/OnBoardingComponent";
 import {
@@ -52,7 +52,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     <OnboardingContainer>
       <StatusBar />
       <LoginBtn activeOpacity={0.6} onPress={navigateToLogin}>
-        <SkipText>Skip</SkipText>
+        <SkipText >Skip</SkipText>
       </LoginBtn>
 
       <OnboardingFlatlist

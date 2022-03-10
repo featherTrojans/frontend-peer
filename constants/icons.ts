@@ -98,6 +98,10 @@ import Lockicon from "../assets/icons/Lockicon";
 import Shareappicon from "../assets/icons/Shareappicon";
 import Supporticon from "../assets/icons/Supporticon";
 import Feathersmallicon from "../assets/icons/Feathersmallicon";
+import Outlinedlock from "../assets/icons/Outlinedlock";
+import Forwardarrowblue from "../assets/icons/Forwardarrowblue";
+import Fingerprinticon from "../assets/icons/Fingerprinticon";
+
 
 
 
@@ -108,6 +112,7 @@ import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.js
 import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json"
 import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json"
 import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json"
+
 
 
 
@@ -229,6 +234,9 @@ Lockicon,
 Shareappicon,
 Supporticon,
 Feathersmallicon,
+Outlinedlock,
+Forwardarrowblue,
+Fingerprinticon,
 
 
 //Animated icons

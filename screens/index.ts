@@ -16,6 +16,13 @@ import History from "./app/History/History";
 import Transactions from "./app/Transactions/Transaction/Transaction";
 // import Chats from "./app/Chats/Chats";
 import Settings from "./app/Settings/Settings";
+import Editprofile from "./app/Settings/Editprofile/Editprofile";
+// import Security from "./app/Settings/Securityandprivacy/Securityprivacy";
+import Securityprivacy from "./app/Settings/Securityandprivacy/Securityprivacy";
+import Changepassword from "./app/Settings/Securityandprivacy/Changepassword/Changepassword";
+import Changepin from "./app/Settings/Securityandprivacy/Changepin/Changepin";
+
+
 import Notifications from "./app/Notifications/Notifications";
 
 // These are the transactions sub screens
@@ -90,7 +97,13 @@ export {
   Transactiondispute,
 
   History,
+
+
   Settings,
+  Editprofile,
+  Securityprivacy,
+  Changepassword,
+  Changepin,
 
   Addcash,
   Choosewallet,

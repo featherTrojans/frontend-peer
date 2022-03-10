@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, FONTS, fontsize, SIZES } from "../../constants";
 
 export const OnboardingComponentContainer = styled.View`
   width: ${SIZES.width}px;
@@ -19,15 +19,15 @@ export const ImageContainer = styled.View`
 `;
 
 export const HeaderText = styled.Text`
-  font-size: 30px;
-  font-weight: bold;
+  ${{...fontsize.big, ...FONTS.bold}}
   text-align: center;
   margin-bottom: 34px;
+  line-height: 35px;
 `;
 
 export const InformationText = styled.Text`
-  font-size: 16px;
-  font-weight: 500;
+ ${{...fontsize.bsmall, ...FONTS.regular}}
   text-align: center;
-  color: #8d8d8d;
+  color: ${COLORS.grey5};
+  line-height: 24px;
 `;
