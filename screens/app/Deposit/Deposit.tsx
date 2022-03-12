@@ -5,11 +5,12 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { ReactNode, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LottieView from "lottie-react-native"
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { Backheader, Bottombtn, Viewbalance } from "../../../components";
 import { styles } from "../Withdraws/Withdraw/Withdraw.styles";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 
 const {
   Backarrow,
@@ -26,41 +27,6 @@ type DataProps = {
   username: string;
   price: string;
 };
-
-const REQUEST = [
-  {
-    image: <Requestee1 />,
-    full_name: "Adegbemi Tosin",
-    username: "@adetiger6",
-    price: 6000,
-    base_charge: 250,
-    status: "pending",
-  },
-  {
-    image: <Requestee2 />,
-    full_name: "Okikiola Omotosho ",
-    username: "@gyroscope",
-    price: 63000,
-    base_charge: 1800,
-    status: "pending",
-  },
-  {
-    image: <Requestee3 />,
-    full_name: "Michael Fowosore",
-    username: "@Toonnibaby",
-    price: 18300,
-    base_charge: 650,
-    status: "accepted",
-  },
-  {
-    image: <Requestee3 />,
-    full_name: "Ayobami Lawal",
-    username: "@Toonnibaby",
-    price: 18300,
-    base_charge: 560,
-    status: "pending",
-  },
-];
 
 // Component to show when the list is empty
 const Emptyrequest = () => {
@@ -79,39 +45,57 @@ const Emptyrequest = () => {
 
 const Deposit = ({navigation}) => {
   const [active, setActive] = useState("pending");
+  const [pending, setPending] = useState([])
+  const [accepted, setAccepted] = useState([])
 
+  useEffect(()=>{
+    getpendingrequest()
+    getacceptedrequest()
+  },[])
+
+  const getpendingrequest = async()=>{
+    try{
+      const response = await axiosCustom.get("/request/depositor/accepted");
+      setPending(response.data.data)
+    }catch(err){}
+  }
+  const getacceptedrequest = async()=>{
+    try{
+      const response = await axiosCustom.get("/request/depositor/accepted");
+      setAccepted(response.data.data)
+    }catch(err){}
+  }
 
   // Requestee profile
-const Requesteeprofile = ({ list, onpress}:  any ) => {
-  const { image, full_name, username, price, status, base_charge } = list;
-  return (
-    <TouchableOpacity style={styles.depositProfileContainer} activeOpacity={0.7} onPress={onpress}>
-      <View style={styles.depositProfileDetails}>
-        {/* Tro replace this with the user image */}
-        <View
-          style={{
-            width: 44,
-            height: 44,
-            borderRadius: 22,
-            backgroundColor: COLORS.grey1,
-          }}
-        />
-        <View style={{ marginLeft: 13 }}>
-          <Text style={styles.depositProfileName}>{full_name}</Text>
-          <Text style={styles.depositAmount}>
-            NGN {price}{" "}
-            <Text style={styles.depositBasecharge}>
-              + NGN {base_charge} Charges
+  const Requesteeprofile = ({ list, onpress}:  any ) => {
+    const { image, full_name, username, price, status, base_charge } = list;
+    return (
+      <TouchableOpacity style={styles.depositProfileContainer} activeOpacity={0.7} onPress={onpress}>
+        <View style={styles.depositProfileDetails}>
+          {/* Tro replace this with the user image */}
+          <View
+            style={{
+              width: 44,
+              height: 44,
+              borderRadius: 22,
+              backgroundColor: COLORS.grey1,
+            }}
+          />
+          <View style={{ marginLeft: 13 }}>
+            <Text style={styles.depositProfileName}>{full_name}</Text>
+            <Text style={styles.depositAmount}>
+              NGN {price}{" "}
+              <Text style={styles.depositBasecharge}>
+                + NGN {base_charge} Charges
+              </Text>
             </Text>
-          </Text>
+          </View>
         </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
+      </TouchableOpacity>
+    );
+  };
 
-
-  const REQUESTDATA = REQUEST.filter((req) => req.status === active);
+  const REQUESTDATA = active === "pending" ? pending : accepted
 
   const Requestlist = () => {
     return (
@@ -161,7 +145,7 @@ const Requesteeprofile = ({ list, onpress}:  any ) => {
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
         <View style={{ flex: 1 }}>
-          {REQUEST.length < 1 ? <Emptyrequest /> : <Requestlist />}
+          {(pending.length < 1 && accepted.length < 1) ? <Emptyrequest /> : <Requestlist />}
         </View>
       </View>
 

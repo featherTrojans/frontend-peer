@@ -74,12 +74,12 @@ function Depositinput({ route, navigation }) {
 
   const handleSubmit= async ()=>{
     setLoading(true)
-    if(authdata.amount < amount){
+    if(authdata?.walletBal < amount){
       return showerror(toast, null, "insufficient amount")
     }
     let locationText = `${locationSide.name}, ${locationSide.city}`
     try{
-        const response = await axiosCustom.post("/status/create",{
+        await axiosCustom.post("/status/create",{
             amount,
             longitude: coords.longitude,
             latitude: coords.latitude,

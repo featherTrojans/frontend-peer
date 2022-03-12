@@ -34,7 +34,8 @@ const Setup = ({route, navigation }) => {
   const {setToken} = useContext(AuthContext)
 
   const handleUsernameChange = (text:string)=>{
-    const textsmall = text.toLowerCase()
+    // const textsmall = text.toLowerCase()
+    const textsmall = text
     setUsername(textsmall)
     // and debound
     if(textsmall.length > 3){

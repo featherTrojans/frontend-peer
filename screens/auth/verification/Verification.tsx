@@ -48,7 +48,6 @@ const Verification = ({route,navigation}) => {
     setLoading(true)
     try{
       const response = await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
-      console.log(response)
       navigation.navigate("Security",{token:tokenn})
     }catch(err){
       showerror(toast, err)

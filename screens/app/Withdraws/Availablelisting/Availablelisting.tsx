@@ -64,27 +64,35 @@ const Availablelisting = ({ navigation, route }: any) => {
         location.coords,
         { useGoogleMaps: true }
       );
-      console.log(locationaddress);
       setLocationSide(locationaddress[0]);
-      await getAllAgents(locationaddress[0].city!, locationaddress[0].region!);
+      await getAllAgents(locationaddress[0].city!, locationaddress[0].name!);
     })();
   }, []);
 
-  const getAllAgents = async (city: string, region: string) => {
+  const getAllAgents = async (city: string, name: string) => {
+    let locationText = `${name}, ${city}`
     try {
       const response = await axiosCustom.post("/status/find", {
         amount: amount,
-        location: "ikeja",
+        location: locationText,
       });
       setAgents(response.data.data);
-      console.log(response);
+      
     } catch (err) {
-      console.log(err.response);
+      // console.log(err.response);
     }
   };
-  const Singleuser = ({ profile, onpress }: any) => {
-    const { fullName, duration, username } = profile;
 
+  // const agentsdata = [{
+  //     fullName: "Ayobami Lawal",
+  //     duration: "1 hr" ,
+  //     username:"dudeth",
+  //     latitude: "9",
+  //     longitude: "-10"
+  // }]
+  
+  const Singleuser = ({ profile }: any) => {
+    const { fullName, duration, username } = profile;
 
     const handleAgentSelect = ()=>{
       // adding Location context
@@ -97,12 +105,15 @@ const Availablelisting = ({ navigation, route }: any) => {
             },
           })
     }
+
     return (
       <TouchableOpacity
         style={styles.userContainer}
         activeOpacity={0.8}
         onPress={handleAgentSelect}
       >
+
+        
         <View style={styles.detailsContainer}>
           {/* Image */}
 

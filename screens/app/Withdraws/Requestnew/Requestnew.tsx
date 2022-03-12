@@ -22,6 +22,7 @@ function Requestnew({ navigation }) {
   const [amount, setAmount] = useState<string>("");
   const {authdata} = useContext(AuthContext)
 
+  
   const amountFormatter = (value: string) => {
     return (
       Number(value)
@@ -29,7 +30,6 @@ function Requestnew({ navigation }) {
         .replace(/\d(?=(\d{3})+\.)/g, "$&,") || "0.00"
     );
   };
-
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
       const newdata = amount.substring(0, amount.length - 1)
@@ -47,19 +47,25 @@ function Requestnew({ navigation }) {
     });
   };
   const handleNextScreen = ()=>{
-      if(authdata.amount < amount){
+      if(authdata?.walletBal < amount){
         return showerror(toast, null,"insufficient amount")
       }
       navigation.navigate("Availablelisting",{amount})
   }
 
+
+
+
+
+
+
+
+
   return (
     <View style={styles.container}>
       <Backheader title="Amount" />
-
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
-
         <View style={{ flex: 1, justifyContent: "center" }}>
           <View style={{ alignItems: "center" }}>
             <View style={styles.amountcont}>
@@ -82,7 +88,6 @@ function Requestnew({ navigation }) {
           </View>
         </View>
       </View>
-
       <Bottombtn
         title="PROCEED"
         onpress={handleNextScreen}

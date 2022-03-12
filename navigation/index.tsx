@@ -363,10 +363,6 @@ const RootNavigator = () => {
 
 
   </AppStack.Group>
-
-
-
-
     {/* Withdraw Screens */}
     <AppStack.Group>
       <AppStack.Screen name="Withdraw" component={Withdraw} />
@@ -438,28 +434,24 @@ export default function MainNavigation() {
   useEffect(() => {
     const subscription:any = AppState.addEventListener("change", nextAppState => {
       if (appState.current.match(/inactive|background/) &&nextAppState === "active") {
-        if ((Date.now() - timer.current) > 300000) {
-            setModal(true) 
-        }
-      }else{
-        appState.current = nextAppState;
-        if(!modal || !token){
-          timer.current = Date.now();
-        }
+        if ((Date.now() - timer.current) > 300000) return setModal(true) 
+        return 
       }
+      appState.current = nextAppState;
+      if(!modal || !token) timer.current = Date.now();
     });
-
     return () => {
-      // subscription.remove();
+      subscription.remove();
     };
   }, []);
  
+
+
+
   return (
     <NavigationContainer ref={navigationRef}>
       {token? <LockScreen modal={modal} setModal={setModal}/> : null}
       <RootNavigator />
-
-    
     </NavigationContainer>
   );
 }
