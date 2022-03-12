@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState } from "react";
+import LottieView from "lottie-react-native"
 import { styles } from "./Transferpin.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn, Loader, Numberbtn } from "../../../../components";
@@ -8,7 +9,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
-const { Backarrow, SecureDot } = icons;
+const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const Transferpin = ({route, navigation}) => {
   const toast = useToast();
@@ -44,6 +45,7 @@ const Transferpin = ({route, navigation}) => {
     }
   }
 
+
   return (
     <View style={styles.container}>
       {loading && <Loader />}
@@ -52,24 +54,20 @@ const Transferpin = ({route, navigation}) => {
       btnFunction={()=>navigation.navigate("Root")}
       >
         <View style={{ alignItems: "center" }}>
-             <View
-               style={{
-                 width: 100,
-                 height: 100,
-                 backgroundColor: COLORS.grey1,
-                 borderRadius: 50,
-               }}
-             />
+        <LottieView source={Successcheckanimate} autoPlay loop={false} style={{width: 148, height: 148}}/>
+
 
              <Text
                style={{
                  textAlign: "center",
                  marginHorizontal: 40,
-                 marginVertical: 40,
+                //  marginVertical: 40,
+                marginTop: 24,
+                marginBottom: 45,
                  ...fontsize.bsmall,
                  ...FONTS.regular,
                }}
-             >You have successfully transffered NGN {amountFormatter(amount)} to  “@{userinfo?.username} - {userinfo?.fullName} ”</Text>
+             >You have successfully transfered NGN {amountFormatter(amount)} to  “@{userinfo?.username} - {userinfo?.fullName} ”</Text>
            </View>
       </Globalmodal>
       <StatusBar />
@@ -82,7 +80,7 @@ const Transferpin = ({route, navigation}) => {
           <Text style={styles.descriptionText}>
             You are about to send{" "}
             <Text style={styles.descriptionSubText}>NGN {amount}</Text> from
-            your Primary Wallet to @{userinfo?.username} - {userinfo?.fullName}
+            your Primary Wallet to @{userinfo?.username} -  <Text style={{textTransform: 'capitalize'}}>{userinfo?.fullName}</Text>
           </Text>
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
@@ -107,8 +105,9 @@ const Transferpin = ({route, navigation}) => {
 
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
-        <Bottombtn title="PROCEED" onpress={handleSubmit}/>
+        
       </View>
+      <Bottombtn title="PROCEED" onpress={handleSubmit}/>
     </View>
   );
 };

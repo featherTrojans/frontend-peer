@@ -22,10 +22,7 @@ const Addcash = ({navigation}) => {
   ]);
 
 
-  const sendMessage = async () => {
-      const status = await SMS.sendSMSAsync('08167569588', "Hello")
-      console.log(status)
-  }
+ 
 
 
 
@@ -65,7 +62,7 @@ const Addcash = ({navigation}) => {
           </View>
         )}
       </View>
-      <Bottombtn title="CONTINUE" disabled={!value} onpress={() => navigation.navigate('Choosewallet')}/>
+      <Bottombtn title="CONTINUE" onpress={() => navigation.navigate('Choosewallet')}/>
 
 
     </View>

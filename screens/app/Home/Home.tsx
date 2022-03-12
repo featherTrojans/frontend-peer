@@ -49,11 +49,7 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
-<<<<<<< HEAD
-    link: "Deposit",
-=======
     link:"Depositupdate"
->>>>>>> 98ddd872686ead45511cf8c59f82cd6bb8a2b756
   },
   {
     icon: <Transfer />,
@@ -104,7 +100,7 @@ const Home = ({ navigation }: { navigation: any }) => {
         // console.log(response);
       });
 
-      welcomeNotifications()
+      // welcomeNotifications()
 
     return () => {
       Notifications.removeNotificationSubscription(
@@ -326,7 +322,7 @@ const Home = ({ navigation }: { navigation: any }) => {
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Transactions")}
+              onPress={() => navigation.push("Transactions")}
             >
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>

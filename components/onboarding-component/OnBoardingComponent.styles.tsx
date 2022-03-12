@@ -4,10 +4,9 @@ import { COLORS, FONTS, fontsize, SIZES } from "../../constants";
 export const OnboardingComponentContainer = styled.View`
   width: ${SIZES.width}px;
   flex: 1;
-  flex: 1;
   justify-content: center;
   align-items: center;
-  padding-horizontal: 23px;
+  padding: 0px 35px;
 `;
 
 export const ImageContainer = styled.View`
@@ -21,8 +20,9 @@ export const ImageContainer = styled.View`
 export const HeaderText = styled.Text`
   ${{...fontsize.big, ...FONTS.bold}}
   text-align: center;
-  margin-bottom: 34px;
+  margin-bottom: 35px;
   line-height: 35px;
+  padding: 0px 15px;
 `;
 
 export const InformationText = styled.Text`
@@ -30,4 +30,5 @@ export const InformationText = styled.Text`
   text-align: center;
   color: ${COLORS.grey5};
   line-height: 24px;
+  padding: 0px 25px;
 `;

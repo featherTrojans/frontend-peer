@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import LottieView from "lottie-react-native"
+import { StyleSheet, Text, View, FlatList, RefreshControl } from "react-native";
+import LottieView from "lottie-react-native";
 
 import { Bottombtn, Transactionhistory } from "../../../../components";
 import { COLORS, icons } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
-
 
 import { styles } from "./Transaction.styles";
 
@@ -97,7 +96,12 @@ const EmptyComponent = () => {
     <View style={styles.emptyListContainer}>
       {/* Crying icons */}
       {/* <Cryingicon /> */}
-      <LottieView source={Cryinganimate} autoPlay loop style={{width: 190, height: 190}}/>
+      <LottieView
+        source={Cryinganimate}
+        autoPlay
+        loop
+        style={{ width: 190, height: 190 }}
+      />
       <View style={styles.textContainer}>
         <Text style={styles.emptyContainerText}>
           Padi, you have not performed any transactions yet.{" "}
@@ -108,25 +112,36 @@ const EmptyComponent = () => {
   );
 };
 
-const Transactions = ({navigation}: any) => {
+const Transactions = ({ navigation }: any) => {
   const [transactions, setTransations] = useState();
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     getAllTransactions();
   }, []);
+
   const getAllTransactions = async () => {
     try {
       setLoading(true);
       const response = await axiosCustom.get("/transactions");
-      console.log(response)
+      // console.log(response);
       setTransations(response?.data?.data?.transactions);
+      console.log(transactions)
+
     } catch (err) {
       console.log(err.response);
     } finally {
       setLoading(true);
+      setRefreshing(false);
     }
   };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getAllTransactions();
+  };
+
   const Listheader = () => {
     return (
       <View style={styles.listHeaderContainer}>
@@ -152,6 +167,17 @@ const Transactions = ({navigation}: any) => {
           <FlatList
             style={{ paddingTop: 10 }}
             data={formatData(transactions)}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                progressBackgroundColor="white"
+                colors={["#003AD6"]}
+                tintColor={"#003AD6"}
+              />
+            }
+            // refreshing={refreshing}
+            // onRefresh={handleRefresh}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }: any) => (
               <Transactionhistory date={item.time} datas={item.data} />

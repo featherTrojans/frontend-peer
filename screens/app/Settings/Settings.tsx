@@ -51,6 +51,8 @@ const handleOpenWithLinking = () => {
   Linking.openURL('https://www.feather.africa');
 };
 
+
+
 const Settings = ({navigation}) => {
   return (
     <View style={styles.container}>
@@ -106,19 +108,19 @@ const Settings = ({navigation}) => {
             onpress={() => navigation.navigate("Editprofile")}
           />
           <Iconwithtitle
-            bg="#25DBA3"
+            bg="#E5FAF6"
             icon={<Lockicon />}
             title="Security & Privacy"
             onpress={() => navigation.navigate("Securityprivacy")}
           />
           <Iconwithtitle
-            bg="#FF9D00"
+            bg="#FFF5E5"
             icon={<Shareappicon />}
             title="Share Feather App"
             onpress={() => console.log("My profile")}
           />
           <Iconwithtitle
-            bg="#7600FF"
+            bg="#F1E5FF"
             icon={<Supporticon />}
             title="Support / Help Desk"
             onpress={() => handleOpenWithWebBrowser()}

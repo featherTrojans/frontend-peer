@@ -5,6 +5,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     // marginBottom: 18,
+    marginBottom: 26, 
+    marginTop: 42
   },
   arrowContainer:{
       marginHorizontal: 30

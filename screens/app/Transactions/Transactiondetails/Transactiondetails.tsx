@@ -1,5 +1,9 @@
-import { StyleSheet, Text, View, StatusBar, ScrollView } from "react-native";
+import { StyleSheet, Text, View, StatusBar, ScrollView, Platform } from "react-native";
 import React, { useEffect, useState } from "react";
+import * as Print from "expo-print"
+import * as MediaLibrary from "expo-media-library";
+import * as Sharing from "expo-sharing";
+import * as FileSystem from 'expo-file-system';
 import moment from "moment";
 import { styles } from "./Transactiondetails.styles";
 import {
@@ -23,12 +27,72 @@ const Transactiondetails = ({ navigation, route }) => {
 
   const { data } = route.params;
 
-  const { amount, createdAt: dateTime, from: sender, to: receiver } = data;
+  const { amount, createdAt: dateTime, from: sender, to: receiver,  transId: transactionRef } = data;
 
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")},  ${dt.format("Do")} ${dt.format(
     "MMM"
   )} '${dt.format("YY")} - ${dt.format("LT")}`;
+
+
+
+
+
+
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pdf Content</title>
+        <style>
+            body {
+                font-size: 16px;
+                color: rgb(255, 196, 0);
+            }
+
+            h1 {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Hello, Welcome to Feather!</h1>
+    </body>
+    </html>
+`;
+
+const shareReceipt = async (html) => {
+  setShowModal(!showModal)
+  const { uri } = await Print.printToFileAsync({ html });
+  Sharing.shareAsync(uri)
+
+}
+
+const createAndSavePDF = async (html) => {
+  try {
+    const { uri } = await Print.printToFileAsync({ html });
+    if (Platform.OS === "ios") {
+      await Sharing.shareAsync(uri);
+    } else {
+      const permission = await MediaLibrary.requestPermissionsAsync();
+
+      if (permission.granted) {
+        console.log(uri)
+      //  const localuri = await FileSystem.downloadAsync("http://gahp.net/wp-content/uploads/2017/09/sample.pdf", FileSystem.documentDirectory + "sample.pdf")
+      //   const asset = await MediaLibrary.createAssetAsync(localuri.toString())
+      // const album = await MediaLibrary.createAlbumAsync("Feather", asset);
+      }
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
 
 
   const reportTransaction = () => {
@@ -50,14 +114,14 @@ const Transactiondetails = ({ navigation, route }) => {
           iconBg="#001757"
           title="Share Receipt"
           details="Share a copy of your transaction."
-          onpress={() => setShowModal(!showModal)}
+          onpress={() => shareReceipt(htmlContent)}
         />
         <Iconwithdatas
           icon={<Downloadreceipt />}
           iconBg="#001757"
           title="Download Receipt"
           details="Generate a .pdf copy of this transaction."
-          onpress={() => console.log("hellow")}
+          onpress={() => createAndSavePDF(htmlContent)}
         />
         <Iconwithdatas
           icon={<Reporttransactions />}
@@ -78,11 +142,11 @@ const Transactiondetails = ({ navigation, route }) => {
           style={{
             justifyContent: "center",
             alignItems: "center",
-            marginTop: 24,
+            marginTop: 4,
           }}
         >
           <Sendingandreceive />
-          <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 26 }}>
+          <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
             NGN {amountFormatter(amount)}
           </Text>
         </View>
@@ -109,7 +173,7 @@ const Transactiondetails = ({ navigation, route }) => {
                     { textTransform: "uppercase" },
                   ]}
                 >
-                  FTH753BU697FK7008
+                  {transactionRef}
                 </Text>
                 <View style={styles.copyClipboardContainer}>
                   <Copyclipboard />

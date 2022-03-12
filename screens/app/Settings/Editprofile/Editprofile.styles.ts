@@ -20,9 +20,9 @@ export const styles = StyleSheet.create({
     color: COLORS.grey8,
   },
   subHeaderContainer: {
-    paddingHorizontal: 37,
+    paddingHorizontal: 30,
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     paddingVertical: 25,
   },
   subheadersText: {

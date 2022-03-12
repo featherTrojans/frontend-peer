@@ -1,3 +1,4 @@
+
 import { useRef, useState } from "react";
 import { FlatList, Animated, StatusBar } from "react-native";
 import { OnboardingScreenNavigationProps } from "../../types";
@@ -52,7 +53,8 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     <OnboardingContainer>
       <StatusBar />
       <LoginBtn activeOpacity={0.6} onPress={navigateToLogin}>
-        <SkipText >Skip</SkipText>
+        {viewIndex < onboardingdatas.length - 1 && <SkipText >Skip</SkipText>}
+        
       </LoginBtn>
 
       <OnboardingFlatlist

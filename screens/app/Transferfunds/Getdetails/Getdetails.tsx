@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import React, { useState, useCallback } from "react";
 
 import { styles } from "./Getdetails.styles";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
-import { Backheader, Bottombtn, Input, Loader } from "../../../../components";
+import { Backheader, Bottombtn, Input, Loader, Sendingandreceive } from "../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import useDebounce from "../../../../utils/debounce";
@@ -42,44 +42,30 @@ const Getdetails = ({ route, navigation }) => {
         btnFunction={()=>navigation.navigate("Transferpin",{amount,userinfo})}
         >
          <View style={{ alignItems: "center" }}>
-           <Text style={{alignSelf:"flex-start"}}>Transfer Summary</Text>
-             <View style={{flexDirection:"row",justifyContent:"space-between", marginVertical:20}}>
-              <View
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: COLORS.grey1,
-                  borderRadius: 50,
-                  marginHorizontal:10
-                }}
-                />
-                <View
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: COLORS.grey1,
-                  borderRadius: 50,
-                  marginHorizontal:10
-                }}
-              />
-                </View>
+           <Text style={{alignSelf:"flex-start", ...fontsize.bsmall, ...FONTS.medium}}>Transfer Summary</Text>
+             
+
+             <Sendingandreceive />
+
+         
+
               <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
                   NGN {amountFormatter(amount)}
               </Text>
-              <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 15 }}>
-                Withdraw Charges: 
+              <Text style={{backgroundColor:COLORS.lightBlue, paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 16 }}>
+                Transfer Charges: 
                 <Text style={{...FONTS.bold}}> + N0.00</Text>
               </Text>
               <Text
                 style={{
                   textAlign: "center",
-                  marginHorizontal: 40,
-                  marginVertical: 40,
+                  marginHorizontal: 25,
+                  marginVertical: 32,
                   ...fontsize.bsmall,
                   ...FONTS.regular,
                 }}
               >
-                Are you sure you want to transfer cash to @{userinfo?.username} - {userinfo?.fullName} ?
+                Are you sure you want to transfer cash to @{userinfo?.username} -  <Text style={{textTransform: 'capitalize'}}>{userinfo?.fullName}</Text>  ?
               </Text>
             </View>
       </Globalmodal>
@@ -108,7 +94,7 @@ const Getdetails = ({ route, navigation }) => {
 
           <View style={styles.namecont}>
             {
-              loadbounce?<Text>...</Text>:userinfo.fullName?<>
+              loadbounce?<ActivityIndicator size={15} color={COLORS.blue6}/> : userinfo.fullName?<>
             <Check />
             <Text style={styles.name}>{userinfo?.fullName}</Text>
               </>:null

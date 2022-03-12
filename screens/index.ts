@@ -68,6 +68,12 @@ import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 
 
 
+//This screen is for testing somne functionalities
+
+import Testings from "./Testings";
+
+
+
 
 
 
@@ -144,6 +150,11 @@ export {
 
   Pendingrequest,
   Accepetedrequest,
-  WalletPin
+  WalletPin,
+
+
+
+
+  Testings
 
 };
