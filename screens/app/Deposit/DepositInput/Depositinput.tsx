@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -18,11 +18,13 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import amountFormatter from "../../../../utils/formatMoney";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 import showerror from "../../../../utils/errorMessage";
+import { AuthContext } from "../../../../context/AuthContext";
 
 
 
 function Depositinput({ route, navigation }) {
-  const toast = useToast()
+  const toast = useToast();
+  const {authdata} = useContext(AuthContext)
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const [amount, setAmount] = useState<string>("");
   const [coords, setCoords] = useState({});
@@ -72,6 +74,9 @@ function Depositinput({ route, navigation }) {
 
   const handleSubmit= async ()=>{
     setLoading(true)
+    if(authdata.amount < amount){
+      return showerror(toast, null, "insufficient amount")
+    }
     let locationText = `${locationSide.name}, ${locationSide.city}`
     try{
         const response = await axiosCustom.post("/status/create",{

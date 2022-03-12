@@ -1,7 +1,7 @@
 import React, {createContext, FC, useState} from "react";
 
 
-const AuthContext = createContext<{authdata:any,setAuthData:any,token:string,setToken:any}|{}>({});
+const AuthContext = createContext<any>({});
 
 
 const AuthProvider:FC = ({children}) =>{
