@@ -14,21 +14,21 @@ const {width, height} = Dimensions.get("screen")
 
 const Map = ({}) => {
    const {coords , destinationCoords} = useContext(LocationContext);
-   const mapRef = useRef()
-    console.log("the map object",mapRef.current)
+   const mapRef = useRef(null)
+    // console.log("the map object",mapRef.current)
    useEffect(() => {
        if(!coords.latitude || !destinationCoords.latitude ) return false
 
        if(mapRef.current){
 
-        //    mapRef?.current?.fitToSuppliedMakers(['peer','agent'],{
-        //        edgePadding:{top:50, right: 50, bottom: 50, left: 50}
-        //     })   
+           mapRef?.current?.fitToSuppliedMarkers(['peer','agent'],{
+               edgePadding:{top:50, right: 50, bottom: 50, left: 50}
+            })   
         }
-        }, [coords, destinationCoords])
+    }, [coords?.latitude, destinationCoords?.latitude])
     return (
         <View style={{position:"absolute", top:0, left:0, width:width, height:height}}>
-            { (coords.latitude && coords.longitude) ?<MapView 
+            <MapView 
                 mapType="mutedStandard"
                 ref={mapRef}
                 style={{flex: 1}}
@@ -40,17 +40,19 @@ const Map = ({}) => {
               
                 //   })}}
                 initialRegion={{
-                    latitude: coords?.latitude,
+                    latitude: coords?.latitude ,
                     longitude: coords?.longitude,
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005,
                 }}>
-                    <Marker
-                    coordinate={{latitude:coords?.latitude, longitude:coords?.longitude}}
-                    title={"Peer"}
-                    description={"Peer"}
-                    identifier="peer"
-                    />
+                    {
+                        coords.latitude && <Marker
+                        coordinate={{latitude:coords?.latitude, longitude:coords?.longitude}}
+                        title={"Peer"}
+                        description={"Peer"}
+                        identifier="peer"
+                        />
+                    }
                     {
                         (coords.latitude && destinationCoords.latitude) && <MapViewDirections
                             origin={coords}
@@ -72,8 +74,7 @@ const Map = ({}) => {
                         />
                     }
                 </MapView>
-                : null
-            }
+               
         </View>
     )
 }

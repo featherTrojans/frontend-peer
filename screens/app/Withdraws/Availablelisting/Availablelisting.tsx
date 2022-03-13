@@ -49,6 +49,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const [agents, setAgents] = useState([]);
   const [locationSide, setLocationSide] = useState({});
   const [activeType, setActiveType] = useState('peers')
+  
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -58,14 +59,15 @@ const Availablelisting = ({ navigation, route }: any) => {
       }
 
       let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
-      setCoords(location.coords);
       Location.setGoogleApiKey("AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY");
       let locationaddress = await Location.reverseGeocodeAsync(
         location.coords,
         { useGoogleMaps: true }
-      );
-      setLocationSide(locationaddress[0]);
-      await getAllAgents(locationaddress[0].city!, locationaddress[0].name!);
+        );
+        setLocationSide(locationaddress[0]);
+        let locationText = `${locationaddress[0].name}, ${locationaddress[0].city}`
+        setCoords({...location.coords,locationText:locationText});
+      getAllAgents(locationaddress[0].city!, locationaddress[0].name!);
     })();
   }, []);
 
@@ -76,20 +78,22 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: amount,
         location: locationText,
       });
+      console.log(response,"success")
       setAgents(response.data.data);
       
     } catch (err) {
-      // console.log(err.response);
+      
     }
   };
 
-  // const agentsdata = [{
-  //     fullName: "Ayobami Lawal",
-  //     duration: "1 hr" ,
-  //     username:"dudeth",
-  //     latitude: "9",
-  //     longitude: "-10"
-  // }]
+  const agentsdata = [{
+      fullName: "Ayobami Lawal",
+      duration: "1 hr" ,
+      username:"dudeth",
+      latitude: "7.487",
+      longitude: "4.53",
+      locationText: "Abeokuta"
+  }]
   
   const Singleuser = ({ profile }: any) => {
     const { fullName, duration, username } = profile;
@@ -99,10 +103,7 @@ const Availablelisting = ({ navigation, route }: any) => {
       setDestinationCoords(profile)
         navigation.navigate("Withdrawpreview", {
             amount,
-            userInfo: {
-              agent: fullName,
-              agentUsername: username,
-            },
+            userInfo: profile,
           })
     }
 
@@ -166,7 +167,7 @@ const Availablelisting = ({ navigation, route }: any) => {
 
         <BottomSheetFlatList
           showsVerticalScrollIndicator={false}
-          data={agents}
+          data={agentsdata}
           renderItem={({ item }) => <Singleuser profile={item} />}
           keyExtractor={(item) => item.reference}
         />

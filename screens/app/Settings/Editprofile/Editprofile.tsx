@@ -64,8 +64,8 @@ const Basicsettings = () => {
 const Personalsettings = () => {
   return (
     <ScrollView
-    showsVerticalScrollIndicator={false}
-    snapToAlignment="center"
+      showsVerticalScrollIndicator={false}
+      snapToAlignment="center"
       contentContainerStyle={{ flex: 1, width: SIZES.width }}
     >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -88,8 +88,8 @@ const Personalsettings = () => {
 const Documentsettings = () => {
   return (
     <ScrollView
-    showsVerticalScrollIndicator={false}
-    snapToAlignment="center"
+      showsVerticalScrollIndicator={false}
+      snapToAlignment="center"
       contentContainerStyle={{ flex: 1, width: SIZES.width }}
     >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -131,10 +131,8 @@ const Documentsettings = () => {
 };
 
 const Editprofile = () => {
-
-
   const singleWidth = () => {
-    let calcWidth =  SIZES.width - 40
+    let calcWidth = SIZES.width;
     return calcWidth / 3;
   };
 
@@ -151,56 +149,71 @@ const Editprofile = () => {
         <View />
       </View>
 
-      <View >
+      <View style={{ position: "relative" }}>
         <View style={styles.subHeaderContainer}>
-          <TouchableOpacity 
-          activeOpacity={0.7}
-          onPress={ () => {
-            Animated.spring(horizontalOffset, {
-              toValue: 0,
-              useNativeDriver: true
-            }).start()
-          }}
+
+
+
+          <TouchableOpacity
+            style={{ width: singleWidth(), backgroundColor: "red" }}
+            activeOpacity={0.7}
+            onPress={() => {
+              Animated.spring(horizontalOffset, {
+                toValue: 0,
+                useNativeDriver: true,
+              }).start();
+            }}
           >
             <Text style={[styles.subheadersText, styles.subheaderActive]}>
               Basic
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+
+
+          <TouchableOpacity
+            style={{ width: singleWidth(), backgroundColor: "red" }}
             activeOpacity={0.7}
-            onPress={ () => {
+            onPress={() => {
               Animated.spring(horizontalOffset, {
                 toValue: singleWidth(),
-                useNativeDriver: true
-              }).start()
+                useNativeDriver: true,
+              }).start();
             }}
-            >
+          >
             <Text style={[styles.subheadersText]}>Personal</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
-          activeOpacity={0.7}
-          onPress={ () => {
-            Animated.spring(horizontalOffset, {
-              toValue: singleWidth() *2 + 30,
-              useNativeDriver: true
-            }).start()
-          }}
+
+
+
+          <TouchableOpacity
+          style={{ width: singleWidth(), backgroundColor: "red" }}
+            activeOpacity={0.7}
+            onPress={() => {
+              Animated.spring(horizontalOffset, {
+                toValue: singleWidth() * 2,
+                useNativeDriver: true,
+              }).start();
+            }}
           >
             <Text style={[styles.subheadersText]}>Documents</Text>
           </TouchableOpacity>
+
+
+
         </View>
 
         <Animated.View
           style={{
             position: "absolute",
-            width: 100,
+            width: singleWidth(),
             height: 1.5,
             backgroundColor: COLORS.blue6,
             marginHorizontal: 22,
-            bottom: 0,            
-            transform: [{ translateX: horizontalOffset }],
+            bottom: 0,
+            left: 0,
+            transform: [{ translateX: horizontalOffset }, { scaleX: 0.8 }],
           }}
         />
       </View>

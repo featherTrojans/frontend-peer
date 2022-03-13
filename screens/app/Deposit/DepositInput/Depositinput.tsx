@@ -30,7 +30,7 @@ function Depositinput({ route, navigation }) {
   const [coords, setCoords] = useState({});
   const [locationSide, setLocationSide] = useState({});
   const [loading, setLoading] = useState(false)
-  console.log(amount,"amount screen") 
+  
   // const amountFormatter = (value: string) => {
   //   return (
   //     Number(value)
@@ -50,7 +50,6 @@ function Depositinput({ route, navigation }) {
         setCoords(location.coords);
         Location.setGoogleApiKey('AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY')
         let locationaddress = await Location.reverseGeocodeAsync(location.coords,{useGoogleMaps:true})
-        console.log(locationaddress);
         setLocationSide(locationaddress[0])    
       })();
 },[]) 
@@ -59,7 +58,7 @@ function Depositinput({ route, navigation }) {
     if (amount.length > 0) {
       const newdata = amount.substring(0, amount.length - 1)
       setAmount(newdata);
-      console.log(newdata);
+      
     }
   };
   const handleSetAmount = (value: string) => {
@@ -78,12 +77,13 @@ function Depositinput({ route, navigation }) {
       return showerror(toast, null, "insufficient amount")
     }
     let locationText = `${locationSide.name}, ${locationSide.city}`
+    
     try{
         await axiosCustom.post("/status/create",{
             amount,
             longitude: coords.longitude,
             latitude: coords.latitude,
-            locationText:  locationText
+            locationText:  locationSide.city
         })
         let asyncval = JSON.stringify({locationText, amount, time: Date.now()})
         try{

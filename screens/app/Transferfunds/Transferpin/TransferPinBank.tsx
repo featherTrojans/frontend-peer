@@ -7,6 +7,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import amountFormatter from "../../../../utils/formatMoney";
 const { Backarrow, SecureDot } = icons;
 
 const TransferpinBank = ({route, navigation}) => {
@@ -27,18 +28,18 @@ const TransferpinBank = ({route, navigation}) => {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
-      console.log(newdata);
+      
     }
   };
   const handleSubmit = async () => {
-    console.log(pin)
+    
     try{
       setLoading(true);
       const response = await axiosCustom.post("/withdraw",{amount,account_code:accountInfomation.account_code,userPin:pin.join("")})
-      console.log(response)
+      
       setShowModal(true)
     }catch(err){
-      console.log(err.response)
+      
       showerror(toast,err)
     }finally{
       setLoading(false)
@@ -71,9 +72,12 @@ const TransferpinBank = ({route, navigation}) => {
                  ...fontsize.bsmall,
                  ...FONTS.regular,
                }}
-             >You have successfully transffered NGN {amountFormatter(amount)} to  “@{userinfo?.username} - {userinfo?.fullName} ”</Text>
+             >You have successfully transffered NGN {amountFormatter(amount)} to  “{accountInfomation.bank_name} -<Text style={{textTransform: 'capitalize'}}>{accountInfomation.account_name}</Text> ”</Text>
            </View>
       </Globalmodal>
+
+
+
       <View style={styles.mainContainer}>
         <View style={styles.backArrowConteiner}>
           <Backarrow />
@@ -83,7 +87,7 @@ const TransferpinBank = ({route, navigation}) => {
           <Text style={styles.descriptionText}>
             You are about to send{" "}
             <Text style={styles.descriptionSubText}>NGN {amount}</Text> from
-            your Primary Wallet to {accountInfomation.bank_name} - {accountInfomation.account_name}
+            your Primary Wallet to {accountInfomation.bank_name} - <Text style={{textTransform: 'capitalize'}}>{accountInfomation.account_name}</Text>
           </Text>
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
@@ -108,8 +112,9 @@ const TransferpinBank = ({route, navigation}) => {
 
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
-        <Bottombtn title="PROCEED" onpress={handleSubmit}/>
+        
       </View>
+      <Bottombtn title="PROCEED" onpress={handleSubmit}/>
     </View>
   );
 };

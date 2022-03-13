@@ -91,6 +91,9 @@ import {
   Chatsdm,
   Usersearch,
 
+
+  Testings,
+
 } from "../screens";
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -112,7 +115,7 @@ const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings, Tabuser, Ta
 
 
 function getWidth(){
-  let width = SIZES.width - 60
+  let width = SIZES.width
 
   return width/5
 }
@@ -284,17 +287,18 @@ const Tabs = () => {
     </BottomTab.Navigator>
 
     <Animated.View style={{
-      width: getWidth() - 50,
+      width: getWidth(),
       height: 1.5,
       backgroundColor: COLORS.blue6,
       position: 'absolute',
       bottom: 82,
       // left: 40,
       // borderRadius: '50%'
-      left: 25,
+      // left: 25,
       // right: 25,
       transform: [
-        { translateX: tabOffsetValue}
+        { translateX: tabOffsetValue},
+        {scaleX: .3}
       ]
     }}>
 

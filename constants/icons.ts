@@ -114,6 +114,7 @@ import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.js
 import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json"
 import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json"
 import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json"
+import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json"
 
 
 
@@ -250,7 +251,8 @@ Cryinganimate,
 Winkinganimate,
 Mapanimate,
 Phoneanimate,
-Sittinganimate
+Sittinganimate,
+Successcheckanimate
 
 
 

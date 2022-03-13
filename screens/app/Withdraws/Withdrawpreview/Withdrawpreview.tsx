@@ -6,7 +6,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { styles } from "./Withdrawpreview.styles";
 import { COLORS, FONTS, fontsize, images, icons } from "../../../../constants";
 import { Bottombtn, Loader, Requesterdetails } from "../../../../components";
@@ -14,6 +14,8 @@ import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import Map from "../../../shared/map/Map";
+import amountFormatter from "../../../../utils/formatMoney";
+import { LocationContext } from "../../../../context/LocationContext";
 
 const { Locationmap } = images;
 const { Forwardarrow, Editicon, Meetupdot } = icons;
@@ -22,8 +24,8 @@ const Withdrawpreview = ({navigation, route}: any) => {
   const toast = useToast()
   const {userInfo, amount } = route.params
   const [loading, setLoading] = useState(false)
- 
-  return (
+  const {coords,destinationCoords} = useContext(LocationContext)
+  return (  
     <View style={styles.container}>
       <Map />
       {loading && <Loader />}
@@ -40,9 +42,9 @@ const Withdrawpreview = ({navigation, route}: any) => {
 
             <View style={styles.detailsProfile}>
               <Requesterdetails
-                name="Destiny Babalola"
-                distance="3kms"
-                duration={12}
+                name={userInfo.agent}
+                distance={userInfo.duration}
+                duration={userInfo.duration}
               />
 
               <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -57,9 +59,9 @@ const Withdrawpreview = ({navigation, route}: any) => {
             <View style={{ marginTop: 20 }}>
               <Text style={styles.amountText}>Amount</Text>
               <Text style={styles.amountPrice}>
-                NGN 65,000.00{" "}
+                NGN {amountFormatter(amount)}
                 <Text style={styles.amountBaseCharge}>
-                  + 1,500.00 (Base Charge)
+                  + 1,50.00 (Base Charge)
                 </Text>{" "}
               </Text>
               <Text style={styles.baseChargeNegotiate}>
@@ -74,7 +76,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
               <View style={styles.meetupLocationContainer}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Meetupdot />
-                  <Text style={styles.locationText}>Forks and Fingers</Text>
+                  <Text style={styles.locationText}>{coords?.locationText}</Text>
                 </View>
 
                 <TouchableOpacity onPress={() => navigation.navigate("Editmeetup") }>
