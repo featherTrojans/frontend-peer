@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState } from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import LottieView from "lottie-react-native"
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "./Cancelrequest.styles";
 import { Bottombtn, Loader } from "../../../../components";
@@ -9,7 +10,7 @@ import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 
-const { Backarrow } = icons;
+const { Backarrow, Successcheckanimate } = icons;
 const Cancelrequest = ({route, navigation}) => {
   const {reference} = route.params
   const toast = useToast()
@@ -53,19 +54,12 @@ const Cancelrequest = ({route, navigation}) => {
        btnFunction={() => navigation.navigate("Home") }
        >
            <View style={{ alignItems: "center" }}>
-             <View
-               style={{
-                 width: 100,
-                 height: 100,
-                 backgroundColor: COLORS.grey1,
-                 borderRadius: 50,
-               }}
-             />
-
+         
+         <LottieView source={Successcheckanimate} style={{width: 148, height: 148, marginBottom: 10}}/>
              <Text
                style={{
                  textAlign: "center",
-                 marginHorizontal: 40,
+                 marginHorizontal: 35,
                  marginVertical: 40,
                  ...fontsize.bsmall,
                  ...FONTS.regular,

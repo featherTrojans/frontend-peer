@@ -50,7 +50,7 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
-    link:"Depositupdate"
+    link: "Depositupdate",
   },
   {
     icon: <Transfer />,
@@ -71,10 +71,10 @@ const Home = ({ navigation }: { navigation: any }) => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   ///States for the push notifications
-  const [expoPushToken, setExpoPushToken] = useState("");
-  const [notification, setNotification] = useState(false);
-  const notificationListener = useRef();
-  const responseListener = useRef();
+  // const [expoPushToken, setExpoPushToken] = useState("");
+  // const [notification, setNotification] = useState(false);
+  // const notificationListener = useRef();
+  // const responseListener = useRef();
 
 
   //setting up websocket
@@ -100,39 +100,25 @@ const Home = ({ navigation }: { navigation: any }) => {
 
 
 
-  Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowAlert: true,
-      shouldPlaySound: false,
-      shouldSetBadge: false,
-    }),
-  });
+  // Notifications.setNotificationHandler({
+  //   handleNotification: async () => ({
+  //     shouldShowAlert: true,
+  //     shouldPlaySound: false,
+  //     shouldSetBadge: false,
+  //   }),
+  // });
 
-  useEffect(() => {
-    registerForPushNotificationsAsync().then((token) =>
-      setExpoPushToken(token)
-    );
+  // const updateMessageToken = async (expoToken: string) => {
+  //   try {
+  //    await  axiosCustom.post("/auth/token/create", { messageToken: expoToken });
+  //     console.log(authdata, "Here is the datas")
+  //   } catch (err) {
+  //     console.log(err.response);
+  //   }
+  // };
 
-    // This listener is fired whenever a notification is received while the app is foregrounded
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
-      });
 
-    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
-    responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
-        // console.log(response);
-      });
 
-      // welcomeNotifications()
-
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
 
   //Instant Notifications
   // async function sendPushNotification(expoPushToken) {
@@ -155,21 +141,20 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   });
   // }
 
-    async function schedulePushNotification() {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: "Welcome to feather! ✌🏽",
-        body: "Hey Paddy, Love to have you here",
-        data: { data: "Learn More about us" },
-      },
-      trigger: { seconds: 5 },
-    });
-  }
+  // async function schedulePushNotification() {
+  //   await Notifications.scheduleNotificationAsync({
+  //     content: {
+  //       title: "Welcome to feather! ✌🏽",
+  //       body: "Hey Paddy, Love to have you here",
+  //       data: { data: "Learn More about us" },
+  //     },
+  //     trigger: { seconds: 5 },
+  //   });
+  // }
 
-  const welcomeNotifications  = async () => {
-    await schedulePushNotification();
-
-  }
+  // const welcomeNotifications = async () => {
+  //   await schedulePushNotification();
+  // };
 
   //Scheduled Notifications
 
@@ -180,42 +165,38 @@ const Home = ({ navigation }: { navigation: any }) => {
   //     await schedulePushNotification();
   //   }}
   // />
-
-
-
-
-
-  async function registerForPushNotificationsAsync() {
-    let token;
-    if (Device.isDevice) {
-      const { status: existingStatus } =
-        await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== "granted") {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
-      }
-      if (finalStatus !== "granted") {
-        console.log("Failed to get push token for push notification!");
-        return;
-      }
-      token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
-    } else {
-      console.log("Must use physical device for Push Notifications");
-    }
-
-    if (Platform.OS === "android") {
-      Notifications.setNotificationChannelAsync("default", {
-        name: "default",
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: "#FF231F7C",
-      });
-    }
-
-    return token;
-  }
+ // const registerForPushNotificationsAsync = async () => {
+    //   let token;
+    //   if (Device.isDevice) {
+    //     const { status: existingStatus } =
+    //       await Notifications.getPermissionsAsync();
+    //     let finalStatus = existingStatus;
+    //     if (existingStatus !== "granted") {
+    //       const { status } = await Notifications.requestPermissionsAsync();
+    //       finalStatus = status;
+    //     }
+    //     if (finalStatus !== "granted") {
+    //       console.log("Failed to get push token for push notification!");
+    //       return;
+    //     }
+    //     token = (await Notifications.getExpoPushTokenAsync()).data;
+    //     console.log(token);
+    //   } else {
+    //     console.log("Must use physical device for Push Notifications");
+    //   }
+  
+    //   if (Platform.OS === "android") {
+    //     Notifications.setNotificationChannelAsync("transactions", {
+    //       name: "trasanctions",
+    //       importance: Notifications.AndroidImportance.MAX,
+    //       vibrationPattern: [0, 250, 250, 250],
+    //       lightColor: "#FF231F7C",
+    //     });
+    //   }
+  
+    //   return token;
+    // }
+  
 
 
   const getDashboardData = async () => {
@@ -342,9 +323,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <TouchableOpacity
-              onPress={() => navigation.push("Transactions")}
-            >
+            <TouchableOpacity onPress={() => navigation.push("Transactions")}>
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>
           </View>
