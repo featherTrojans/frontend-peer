@@ -42,7 +42,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
 
             <View style={styles.detailsProfile}>
               <Requesterdetails
-                name={userInfo.agent}
+                name={userInfo.fullName}
                 distance={userInfo.duration}
                 duration={userInfo.duration}
               />

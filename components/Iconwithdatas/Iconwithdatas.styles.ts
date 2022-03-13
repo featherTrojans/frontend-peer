@@ -9,6 +9,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 17,
     marginBottom: 10,
     borderRadius: 15,
+    
+    
   },
   dataContainer: {
     flex: 1,

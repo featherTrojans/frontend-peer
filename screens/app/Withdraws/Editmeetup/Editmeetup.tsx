@@ -14,7 +14,7 @@ const { Cancelicon, Meetupdot, Clearinput } = icons;
 // predefine the places 
 
 const Editmeetup = ({navigation}) => {
-    const {setDestinationCoords} = useContext(LocationContext)
+    const {setCoords} = useContext(LocationContext)
     return (
         <View style={styles.container}>
             <StatusBar />

@@ -27,6 +27,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
+import { customNavigation } from "../../../utils/customNavigation";
 
 const {
   Profilepics,
@@ -79,7 +80,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   //setting up websocket
   useEffect(()=>{
     const ws = new WebSocket(`wss://feather.com.ng:3300/balance/${authdata.userId}`,"realtime")
-    
     ws.onmessage = (data)=>{
       // i want to update the context
       if(data.data == authdata.walletBal) return
@@ -275,7 +275,7 @@ const Home = ({ navigation }: { navigation: any }) => {
           <Profilepics />
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
-              Welcome, {nameToShow(authdata?.fullName)}
+              Welcome, {nameToShow(authdata?.fullName)}✌🏽
             </Text>
             <Text style={styles.profileUsername}>@{authdata?.username}</Text>
           </View>

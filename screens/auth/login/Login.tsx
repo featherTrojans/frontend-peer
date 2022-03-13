@@ -91,8 +91,8 @@ const Login = ({ navigation }: any) => {
               //store token in ASYNC STORAGE
               //store in context
               setAuthorizationToken(response.data.data.token)
-              setToken(response.data.data.token)
-              navigation.navigate("Welcome")
+              // setToken(response.data.data.token)
+              navigation.navigate("Welcome",{fromm:"login",username:values.username, token:response.data.data.token})
             }catch(err){
               
               showerror(toast,err)

@@ -14,7 +14,10 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 
 const { Smile, Winkinganimate } = icons;
 
-const Welcome = ({navigation}) => {
+
+const Welcome = ({navigation, route}) => {
+  const {fromm,username,token} = route.params
+  const {setToken} = useContext(AuthContext)
   const { setAuthData } = useContext(AuthContext);
   const progressWidth = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
@@ -23,8 +26,18 @@ const Welcome = ({navigation}) => {
     };
   });
 
+
+  const getPeriod = () => {
+    const hour = new Date().getHours();
+    var textMessage = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon": "Good Evening";
+
+    return textMessage
+
+  }
   useEffect(() => {
     getDashboardData();
+    
+    
   }, []);
 
   const getDashboardData = async () => {
@@ -35,11 +48,12 @@ const Welcome = ({navigation}) => {
       console.log(err.response);
     }
   };
-
+  
   useEffect(() => {
     progressWidth.value = withTiming(SIZES.width - 214, { duration: 1500 });
     setTimeout(() => {
-      navigation.replace("Root")
+      setToken(token)
+      // navigation.replace("Root")
     }, 2500);
   }, []);
 
@@ -51,9 +65,14 @@ const Welcome = ({navigation}) => {
       </View>
       {/* Welcome text */}
       <View style={styles.welcomeTextContainer}>
-        <Text style={styles.welcomeText}>
+        {fromm === "setup"?<Text style={styles.welcomeText}>
           welcome on board <Text style={{ color: COLORS.blue6 }}>padi.</Text>
+        </Text>:<><Text style={styles.welcomeText}>
+         {getPeriod()}
         </Text>
+        <Text style={styles.welcomeTextSub}>@{username}</Text>
+        </>
+        }
       </View>
 
       {/* Progress Line */}
@@ -64,8 +83,7 @@ const Welcome = ({navigation}) => {
       {/* Get started text */}
       <View style={styles.getStartedContainer}>
         <Text style={styles.getStartedText}>
-          Yo! we are setting things up for you to get started, this usually
-          takes about one minute.
+          {fromm === "setup"?"Yo! we are setting things up for you to get started, this usually takes about one minute":"Hey welcome back to feather, transact more today, earn more with cash deposits."}
         </Text>
       </View>
     </View>

@@ -49,7 +49,7 @@ const Cancelrequest = ({route, navigation}) => {
       {loading && <Loader />}
       <Globalmodal
        showState={isModalVisible}
-       onBgPress={() => setModalVisible(!isModalVisible)}
+       
        btnFunction={() => navigation.navigate("Home") }
        >
            <View style={{ alignItems: "center" }}>

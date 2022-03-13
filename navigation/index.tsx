@@ -292,10 +292,6 @@ const Tabs = () => {
       backgroundColor: COLORS.blue6,
       position: 'absolute',
       bottom: 82,
-      // left: 40,
-      // borderRadius: '50%'
-      // left: 25,
-      // right: 25,
       transform: [
         { translateX: tabOffsetValue},
         {scaleX: .3}
@@ -331,11 +327,11 @@ const RootNavigator = () => {
       <AppStack.Screen name="SecurepinAgain" component={SecurepinAgain} />
       <AppStack.Screen name="Setup" component={Setup} />
       <AppStack.Screen name="Login" component={Login} />
+      <AppStack.Screen name="Welcome" component={Welcome} />
     </AppStack.Group>):
     (<>
     {/* Transaction Screens*/}
     <AppStack.Group>
-      <AppStack.Screen name="Welcome" component={Welcome} />
       <AppStack.Screen name="Root" component={Tabs} />
       <AppStack.Screen name="Transactions" component={Transactions} />
       <AppStack.Screen name="Newtransactions" component={Newtransactions} />

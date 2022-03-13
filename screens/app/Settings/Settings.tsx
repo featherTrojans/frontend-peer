@@ -134,7 +134,7 @@ const Settings = ({navigation}) => {
 
           <View style={styles.horizontalLine} />
 
-          <View>
+          <View style={{marginLeft: 20}}>
             <Text style={{...fontsize.small, ...FONTS.bold, marginBottom: 35, color: COLORS.pink1}}>Sign Out</Text>
             <Text style={{...fontsize.small, ...FONTS.medium}}>Rate App</Text>
           </View>
