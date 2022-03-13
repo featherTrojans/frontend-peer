@@ -1,23 +1,27 @@
 import React from "react";
-import {TouchableOpacity} from "react-native"
-import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity, TouchableNativeFeedback } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Svg, { G, Path } from "react-native-svg";
+import { COLORS } from "../../constants";
 
 function Backarrow() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={()=>navigation.goBack()}>
+    <TouchableNativeFeedback
+      onPress={() => navigation.goBack()}
+      background={TouchableNativeFeedback.Ripple(COLORS.pink1, false)}
+    >
       <Svg
         xmlns="http://www.w3.org/2000/svg"
         width="9.648"
         height="17.296"
         viewBox="0 0 9.648 17.296"
-        >
+      >
         <G
           id="Icon_feather-arrow-right"
           data-name="Icon feather-arrow-right"
           transform="translate(1 1.414)"
-          >
+        >
           <Path
             id="Path_3975"
             data-name="Path 3975"
@@ -31,7 +35,7 @@ function Backarrow() {
           />
         </G>
       </Svg>
-    </TouchableOpacity>
+    </TouchableNativeFeedback>
   );
 }
 
