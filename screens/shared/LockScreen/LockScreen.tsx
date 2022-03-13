@@ -1,16 +1,21 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from "react-native";
 import {useState} from "react";
 import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize } from "../../../constants";
 import { styles } from "./LockScreen.style";
 import { JustifyBetween } from "../../../global/styles";
 import SecureDot from "../../../assets/icons/SecureDot";
-import { Bottombtn, Numberbtn } from "../../../components";
+import { Bottombtn, Loader, Numberbtn } from "../../../components";
+import axiosCustom from "../../../httpRequests/axiosCustom";
+import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../utils/errorMessage";
 
 const LockScreen = ({modal, setModal}: any) => {
+    const toast = useToast()
     const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
     const [pin, setPin] = useState<string[]>([]);
-    
+    const [loading, setLoading] = useState(false)
+
     const handleSetAmount = (value: string) => {
         if (pin.length < 4) {
           setPin((oldamount) => [...oldamount, value]);
@@ -24,9 +29,18 @@ const LockScreen = ({modal, setModal}: any) => {
           console.log(newdata);
         }
       };
-    const handleSubmit = ()=>{
-      setPin([])
-      setModal(false)
+    const handleSubmit = async ()=>{
+      setLoading(true)
+      try{
+         await axiosCustom.post("/auth/pin/verify",{user_pin: pin})
+        setPin([])
+        setModal(false)
+      }catch(err){
+        showerror(toast,err)
+      }finally{
+        setLoading(false)
+      }
+
     }
   return (
     <Modal
@@ -36,7 +50,9 @@ const LockScreen = ({modal, setModal}: any) => {
       backdropOpacity={0.2}
       style={{ margin: 0, flex:1 }}
     >
-     <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+     
+      {loading && <Loader />}
       <View style={{ paddingHorizontal: 25 }}>
         <JustifyBetween style={{ marginBottom: 10 }}>
           <View>
@@ -82,7 +98,8 @@ const LockScreen = ({modal, setModal}: any) => {
         onpress={handleSubmit}
         disabled={pin.length !== 4}
       />
-    </View>
+    
+    </SafeAreaView>
     </Modal>
   );
 };
