@@ -42,7 +42,7 @@ const Map = ({}) => {
                     {
                         (coords.latitude && destinationCoords.latitude) && <MapViewDirections
                             origin={coords}
-                            ref={}
+                            // ref={}
                             destination={{latitude:Number(destinationCoords.latitude),
                                 longitude:Number(destinationCoords.longitude)}}
                             strokeWidth={4}

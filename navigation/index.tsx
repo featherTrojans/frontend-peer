@@ -292,10 +292,6 @@ const Tabs = () => {
       backgroundColor: COLORS.blue6,
       position: 'absolute',
       bottom: 82,
-      // left: 40,
-      // borderRadius: '50%'
-      // left: 25,
-      // right: 25,
       transform: [
         { translateX: tabOffsetValue},
         {scaleX: .3}

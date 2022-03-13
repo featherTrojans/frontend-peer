@@ -20,15 +20,14 @@ export const styles = StyleSheet.create({
     color: COLORS.grey8,
   },
   subHeaderContainer: {
-    paddingHorizontal: 30,
     flexDirection: "row",
-    // justifyContent: "space-between",
     paddingVertical: 25,
   },
   subheadersText: {
     ...fontsize.smallest,
     ...FONTS.regular,
-    color: COLORS.black
+    color: COLORS.black,
+    textAlign: 'center'
   },
   subheaderActive: {
     color: COLORS.blue6,

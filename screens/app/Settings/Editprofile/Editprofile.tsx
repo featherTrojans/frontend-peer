@@ -7,7 +7,7 @@ import {
   ScrollView,
   Animated,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { styles } from "./Editprofile.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import { Bottombtn } from "../../../../components";
@@ -137,6 +137,33 @@ const Editprofile = () => {
   };
 
   const horizontalOffset = useRef(new Animated.Value(0)).current;
+  const scrolling = useRef(new Animated.Value(0)).current;
+  const [snap, setSnap] = useState(0)
+
+  const ref = useRef<ScrollView>(null);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    ref.current.scrollTo({
+      x: SIZES.width * index,
+      y: 0,
+      animated: true,
+    });
+  }, [index]);
+
+  useEffect(() => {
+    console.log(scrolling)
+  }, [scrolling])
+
+  const animateToIndex = (indexPoint: number) => {
+    setIndex(indexPoint);
+    Animated.spring(horizontalOffset, {
+      toValue: singleWidth() * indexPoint,
+      useNativeDriver: true,
+    }).start();
+  };
+
+
 
   return (
     <View style={styles.container}>
@@ -151,57 +178,35 @@ const Editprofile = () => {
 
       <View style={{ position: "relative" }}>
         <View style={styles.subHeaderContainer}>
-
-
-
           <TouchableOpacity
-            style={{ width: singleWidth(), backgroundColor: "red" }}
-            activeOpacity={0.7}
-            onPress={() => {
-              Animated.spring(horizontalOffset, {
-                toValue: 0,
-                useNativeDriver: true,
-              }).start();
+            style={{
+              width: singleWidth(),
+              justifyContent: "center",
+              alignItems: "center",
             }}
+            activeOpacity={0.7}
+            onPress={() => animateToIndex(0)}
           >
-            <Text style={[styles.subheadersText, styles.subheaderActive]}>
+            <Text style={[styles.subheadersText]}>
               Basic
             </Text>
           </TouchableOpacity>
 
-
-
           <TouchableOpacity
-            style={{ width: singleWidth(), backgroundColor: "red" }}
+            style={{ width: singleWidth() }}
             activeOpacity={0.7}
-            onPress={() => {
-              Animated.spring(horizontalOffset, {
-                toValue: singleWidth(),
-                useNativeDriver: true,
-              }).start();
-            }}
+            onPress={() => animateToIndex(1)}
           >
             <Text style={[styles.subheadersText]}>Personal</Text>
           </TouchableOpacity>
 
-
-
-
           <TouchableOpacity
-          style={{ width: singleWidth(), backgroundColor: "red" }}
+            style={{ width: singleWidth() }}
             activeOpacity={0.7}
-            onPress={() => {
-              Animated.spring(horizontalOffset, {
-                toValue: singleWidth() * 2,
-                useNativeDriver: true,
-              }).start();
-            }}
+            onPress={() => animateToIndex(2)}
           >
             <Text style={[styles.subheadersText]}>Documents</Text>
           </TouchableOpacity>
-
-
-
         </View>
 
         <Animated.View
@@ -210,25 +215,35 @@ const Editprofile = () => {
             width: singleWidth(),
             height: 1.5,
             backgroundColor: COLORS.blue6,
-            marginHorizontal: 22,
             bottom: 0,
             left: 0,
-            transform: [{ translateX: horizontalOffset }, { scaleX: 0.8 }],
+            transform: [{ translateX: horizontalOffset}, { scaleX: 0.8 }],
           }}
         />
       </View>
 
-      <ScrollView
+      <Animated.ScrollView
+        ref={ref}
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled
         scrollEventThrottle={16}
         snapToAlignment="center"
+        // onScroll={Animated.event(
+        //   [{
+        //     nativeEvent: {
+        //       contentOffset: {
+        //         x: horizontalOffset,
+        //       },
+        //     },
+        //   }],
+        //   { useNativeDriver: true },
+        // )}
       >
         <Basicsettings />
         <Personalsettings />
         <Documentsettings />
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   );
 };

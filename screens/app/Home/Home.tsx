@@ -27,6 +27,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
+import { customNavigation } from "../../../utils/customNavigation";
 
 const {
   Profilepics,
@@ -254,7 +255,7 @@ const Home = ({ navigation }: { navigation: any }) => {
           <Profilepics />
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
-              Welcome, {nameToShow(authdata?.fullName)}
+              Welcome, {nameToShow(authdata?.fullName)}✌🏽
             </Text>
             <Text style={styles.profileUsername}>@{authdata?.username}</Text>
           </View>

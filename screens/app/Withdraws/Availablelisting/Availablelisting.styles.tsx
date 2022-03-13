@@ -87,6 +87,8 @@ export const styles = StyleSheet.create({
   },
   listingTypesText:{
     ...fontsize.small, ...FONTS.medium,
-    color: COLORS.grey2
+    color: COLORS.grey2,
+    marginBottom: 10.5,
+    textTransform: 'capitalize'
   }
 });
