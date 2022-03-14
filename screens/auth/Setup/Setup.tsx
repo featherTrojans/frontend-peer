@@ -35,7 +35,8 @@ const Setup = ({route, navigation }) => {
   const {setToken} = useContext(AuthContext)
 
   const handleUsernameChange = (text:string)=>{
-    const textsmall = text.toLowerCase()
+    // const textsmall = text.toLowerCase()
+    const textsmall = text
     setUsername(textsmall)
     // and debound
     if(textsmall.length > 3){
@@ -49,8 +50,8 @@ const Setup = ({route, navigation }) => {
       const response = await axiosCustom.put("/auth/username/set",{newUsername:username},{headers:{token:token}})
       console.log(response)
       setAuthorizationToken(response.data.data.token)
-      setToken(response.data.data.token)
-      navigation.navigate("Welcome")
+      // setToken(response.data.data.token)
+      navigation.navigate("Welcome",{fromm:"setup", username:null,token:response.data.data.token})
     }catch(err){
       showerror(toast,err)
     }finally{

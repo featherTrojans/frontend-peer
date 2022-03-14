@@ -50,11 +50,13 @@ const WithdrawPin = ({ navigation, route}) => {
     try{
       setLoading(true);
       setShowModal(false);
+      console.log(userInfo)
       const response = await axiosCustom.post("/request/create",{
         amount:amount,
         charges:charges,
-        agent:userInfo.agent,
-        agentUsername: userInfo.agentUsername
+        agent:userInfo.username,
+        agentUsername: userInfo.fullName,
+        statusId: userInfo.reference
       })
 
       console.log(response)

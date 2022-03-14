@@ -28,18 +28,18 @@ const TransferpinBank = ({route, navigation}) => {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
-      console.log(newdata);
+      
     }
   };
   const handleSubmit = async () => {
-    console.log(pin)
+    
     try{
       setLoading(true);
       const response = await axiosCustom.post("/withdraw",{amount,account_code:accountInfomation.account_code,userPin:pin.join("")})
-      console.log(response)
+      
       setShowModal(true)
     }catch(err){
-      console.log(err.response)
+      
       showerror(toast,err)
     }finally{
       setLoading(false)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState ,useRef} from "react";
 import { StyleSheet, Text, View, FlatList, RefreshControl, Platform } from "react-native";
 import LottieView from "lottie-react-native";
 import * as Device from "expo-device";
@@ -10,6 +10,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
 
 import { styles } from "./Transaction.styles";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const { Cryinganimate } = icons;
 
@@ -120,6 +121,7 @@ const EmptyComponent = () => {
 };
 
 const Transactions = ({ navigation }: any) => {
+  const { authdata } = useContext(AuthContext);
   const [transactions, setTransations] = useState();
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -202,7 +204,7 @@ const Transactions = ({ navigation }: any) => {
 
   useEffect(() => {
     getAllTransactions();
-  }, []);
+  }, [authdata.walletBal]);
 
   const getAllTransactions = async () => {
     try {

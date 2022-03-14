@@ -1,8 +1,11 @@
 import { StyleSheet, Text, TextInput, View, StatusBar, TextInputComponent } from "react-native";
-import React from "react";
+import React,{useContext} from "react";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { styles } from "./Editmeetup.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
+import { Bottombtn } from "../../../../components";
+import { LocationContext } from "../../../../context/LocationContext";
+import { navigationRef } from "../../../../utils/customNavigation";
 
 const { Cancelicon, Meetupdot, Clearinput } = icons;
 
@@ -10,7 +13,8 @@ const { Cancelicon, Meetupdot, Clearinput } = icons;
 
 // predefine the places 
 
-const Editmeetup = () => {
+const Editmeetup = ({navigation}) => {
+    const {setCoords} = useContext(LocationContext)
     return (
         <View style={styles.container}>
             <StatusBar />
@@ -35,8 +39,13 @@ const Editmeetup = () => {
             placeholder='Search'
             onPress={(data, details = null) => {
                 // 'details' is provided when fetchDetails = true
-                console.log(data, details);
+                setCoords({
+                    latitude:details?.geometry?.location.lat,
+                    longitude:details?.geometry?.location.lng,
+                    locationText: data.description
+                })
             }}
+            fetchDetails={true}
             styles={{
                 textInputContainer:{
                     borderColor: COLORS.borderColor3,
@@ -61,6 +70,10 @@ const Editmeetup = () => {
                 key: 'AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY',
                 language: 'en',
             }}
+            />
+            <Bottombtn 
+                title="Edit meet"
+                onpress={()=>navigation.goBack()}
             />
         </View>
     );

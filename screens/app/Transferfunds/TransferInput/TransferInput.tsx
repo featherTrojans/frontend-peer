@@ -22,7 +22,7 @@ function TransferInput({ route, navigation }) {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const [amount, setAmount] = useState<string>("");
   
-  console.log(amount,"amount screen") 
+  
   // const amountFormatter = (value: string) => {
   //   return (
   //     Number(value)
@@ -35,7 +35,7 @@ function TransferInput({ route, navigation }) {
     if (amount.length > 0) {
       const newdata = amount.substring(0, amount.length - 1)
       setAmount(newdata);
-      console.log(newdata);
+      
     }
   };
   const handleSetAmount = (value: string) => {

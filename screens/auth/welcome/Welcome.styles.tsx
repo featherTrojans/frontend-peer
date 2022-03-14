@@ -21,6 +21,11 @@ export const styles = StyleSheet.create({
       ...fontsize.bigger,
       textAlign: "center",
     },
+    welcomeTextSub:{
+      textAlign: "center",
+      color: COLORS.black,
+      ...FONTS.regular
+    },
     lineBg: {
       marginHorizontal: 82,
       backgroundColor: COLORS.animatedLine,

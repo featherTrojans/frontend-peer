@@ -139,7 +139,7 @@ const Bankaccount = ({ navigation, route }) => {
         data: { account_number: accountnum, bank_name: value },
       });
       setAccountInformation(response?.data?.data);
-      console.log(accountInfomation)
+      
       setShowModal(true);
     } catch (err) {
       showerror(toast, err);
@@ -148,7 +148,7 @@ const Bankaccount = ({ navigation, route }) => {
     }
     // () => navigation.push("Transferpin")
   };
-  console.log(value);
+  
   return (
     <KeyboardAwareScrollView
       style={styles.container}

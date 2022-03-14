@@ -36,11 +36,11 @@ const Transferpin = ({route, navigation}) => {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
-      console.log(newdata);
+      
     }
   };
   const handleSubmit = async () => {
-    console.log(pin)
+    
     try{
       setLoading(true);
       await axiosCustom.post("/transfer",{amount,transferTo:userinfo?.username,userPin:pin.join("")})

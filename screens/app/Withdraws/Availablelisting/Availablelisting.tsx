@@ -73,50 +73,63 @@ const Availablelisting = ({ navigation, route }: any) => {
       }
 
       let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
-      setCoords(location.coords);
       Location.setGoogleApiKey("AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY");
       let locationaddress = await Location.reverseGeocodeAsync(
         location.coords,
         { useGoogleMaps: true }
-      );
-      console.log(locationaddress);
-      setLocationSide(locationaddress[0]);
-      await getAllAgents(locationaddress[0].city!, locationaddress[0].region!);
+        );
+        setLocationSide(locationaddress[0]);
+        let locationText = `${locationaddress[0].name}, ${locationaddress[0].city}`
+        setCoords({...location.coords,locationText:locationText});
+      getAllAgents(locationaddress[0].city!, locationaddress[0].name!);
     })();
   }, []);
 
-  const getAllAgents = async (city: string, region: string) => {
+  const getAllAgents = async (city: string, name: string) => {
+    let locationText = `${name}, ${city}`
     try {
       const response = await axiosCustom.post("/status/find", {
         amount: amount,
-        location: "ikeja",
+        location: locationText,
       });
+      console.log(response,"success")
       setAgents(response.data.data);
-      console.log(response);
+      
     } catch (err) {
-      console.log(err.response);
+      
     }
   };
-  const Singleuser = ({ profile, onpress }: any) => {
+
+  const agentsdata = [{
+      fullName: "Ayobami Lawal",
+      duration: "1 hr" ,
+      username:"dudeth",
+      latitude: "7.487",
+      longitude: "4.53",
+      locationText: "Abeokuta",
+      reference: "alrgULAtOw",
+  }]
+  
+  const Singleuser = ({ profile }: any) => {
     const { fullName, duration, username } = profile;
 
-    const handleAgentSelect = () => {
+    const handleAgentSelect = ()=>{
       // adding Location context
-      setDestinationCoords(profile);
-      navigation.navigate("Withdrawpreview", {
-        amount,
-        userInfo: {
-          agent: fullName,
-          agentUsername: username,
-        },
-      });
-    };
+      setDestinationCoords(profile)
+        navigation.navigate("Withdrawpreview", {
+            amount,
+            userInfo: profile,
+          })
+    }
+
     return (
       <TouchableOpacity
         style={styles.userContainer}
         activeOpacity={0.8}
         onPress={handleAgentSelect}
       >
+
+        
         <View style={styles.detailsContainer}>
           {/* Image */}
 
@@ -206,7 +219,7 @@ const Availablelisting = ({ navigation, route }: any) => {
 
         <BottomSheetFlatList
           showsVerticalScrollIndicator={false}
-          data={agents}
+          data={agentsdata}
           renderItem={({ item }) => <Singleuser profile={item} />}
           keyExtractor={(item) => item.reference}
         />

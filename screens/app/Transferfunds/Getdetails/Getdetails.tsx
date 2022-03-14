@@ -30,7 +30,7 @@ const Getdetails = ({ route, navigation }) => {
     // and debound
     getuserinfo(text)
   }
-  console.log(userinfo)
+  
   return (
     <View style={styles.container}>
 

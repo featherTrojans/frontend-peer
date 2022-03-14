@@ -70,12 +70,35 @@ const Home = ({ navigation }: { navigation: any }) => {
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-
   ///States for the push notifications
   // const [expoPushToken, setExpoPushToken] = useState("");
   // const [notification, setNotification] = useState(false);
   // const notificationListener = useRef();
   // const responseListener = useRef();
+
+
+  //setting up websocket
+  useEffect(()=>{
+    const ws = new WebSocket(`wss://feather.com.ng:3300/balance/${authdata.userId}`,"realtime")
+    ws.onmessage = (data)=>{
+      // i want to update the context
+      if(data.data == authdata.walletBal) return
+      setAuthData({...authdata,walletBal:data.data})
+    }
+
+    return (
+      ws.close()
+    )
+  },[])
+
+  useEffect(() => {
+    getDashboardData();
+  }, [authdata.walletBal]);
+
+
+
+
+
 
   // Notifications.setNotificationHandler({
   //   handleNotification: async () => ({
@@ -175,9 +198,6 @@ const Home = ({ navigation }: { navigation: any }) => {
     // }
   
 
-  useEffect(() => {
-    getDashboardData();
-  }, []);
 
   const getDashboardData = async () => {
     console.log("I am fetching again");

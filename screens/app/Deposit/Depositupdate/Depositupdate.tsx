@@ -110,9 +110,13 @@ const Depositupdate = ({navigation}) => {
       const jsonValue = await AsyncStorage.getItem("@depositstatus")
       console.log(jsonValue)
       if(jsonValue){
-        // check time and reset status if time has pass
         const parseVal = JSON.parse(jsonValue)
-        setStatus(parseVal)
+        // check time and reset status if time has pass
+        if( (parseVal.time + (1000*60*60*24)) > Date.now()  ) {
+          setStatus(parseVal)
+        }else{
+          await AsyncStorage.removeItem("@depositstatus")
+        }
       }
     }catch(err){
 
