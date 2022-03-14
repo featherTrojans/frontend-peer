@@ -25,6 +25,7 @@ const tableDatas = [
 
 const Summary = ({navigation}) => {
   const [showmodal, setShowModal] = useState(false)
+  const [showSuccessmodal, setShowSuccessModal] = useState(false)
   return (
     <View style={styles.container}>
       {/* icon on the left and text in the middle */}
@@ -33,9 +34,28 @@ const Summary = ({navigation}) => {
        showState={showmodal}
        onBgPress={() => setShowModal(!showmodal)}
        >
-        <Text>
-          Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽
-        </Text>
+         <View style={{
+           paddingVertical: 70,
+           paddingHorizontal: 10
+         }}>
+          <Text>
+            Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽
+          </Text>
+         </View>
+      </Globalmodal>
+      <Globalmodal
+       showState={showSuccessmodal}
+       onBgPress={() => setShowSuccessModal(!showmodal)}
+       btnFunction={()=>console.log("dafs")}
+       >
+         <View style={{
+           paddingVertical: 70,
+           paddingHorizontal: 10
+         }}>
+          <Text>
+            Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽
+          </Text>
+         </View>
       </Globalmodal>
       <View style={styles.backArrow}>
         <Backarrow />
