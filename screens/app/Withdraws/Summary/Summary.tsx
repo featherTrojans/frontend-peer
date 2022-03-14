@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn, Sendingandreceive } from "../../../../components";
 import { styles } from "./Summary.styles";
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 
 
 const { Backarrow } = icons;
@@ -22,11 +23,20 @@ const tableDatas = [
   },
 ];
 
-const Summary = () => {
+const Summary = ({navigation}) => {
+  const [showmodal, setShowModal] = useState(false)
   return (
     <View style={styles.container}>
       {/* icon on the left and text in the middle */}
 
+      <Globalmodal
+       showState={showmodal}
+       onBgPress={() => setShowModal(!showmodal)}
+       >
+        <Text>
+          Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽
+        </Text>
+      </Globalmodal>
       <View style={styles.backArrow}>
         <Backarrow />
         <View style={styles.backArrowTextContainer}>

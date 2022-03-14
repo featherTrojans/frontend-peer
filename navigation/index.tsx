@@ -408,7 +408,7 @@ const RootNavigator = () => {
     screenOptions={{
       headerShown: false,
     }}
-    // initialRouteName="Onboarding"
+    initialRouteName="Acceptedwithdraw"
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
     {/* SCREEN FOR AUTH */}

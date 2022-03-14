@@ -32,7 +32,7 @@ const LockScreen = ({modal, setModal}: any) => {
     const handleSubmit = async ()=>{
       setLoading(true)
       try{
-         await axiosCustom.post("/auth/pin/verify",{user_pin: pin})
+         await axiosCustom.post("/auth/pin/verify",{user_pin: pin.join()})
         setPin([])
         setModal(false)
       }catch(err){
