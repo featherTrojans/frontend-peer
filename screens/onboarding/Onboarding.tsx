@@ -53,7 +53,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     <OnboardingContainer>
       <StatusBar />
       <LoginBtn activeOpacity={0.6} onPress={navigateToLogin}>
-        {viewIndex < onboardingdatas.length - 1 && <SkipText >Skip</SkipText>}
+      <SkipText >Skip</SkipText>
         
       </LoginBtn>
 

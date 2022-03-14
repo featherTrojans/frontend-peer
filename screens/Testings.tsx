@@ -6,69 +6,75 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makePhoneCall, sendMessage } from "../utils/userDeviceFunctions";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
+import { usePushNotification } from "../navigation";
+// usePushNotification
+
 
 const Testings = () => {
 
-  async function download2() {
-    const fileUrl ="https://res.cloudinary.com/gyroscope/image/upload/v1607166530/hau3vqkefftkhdaric0b.png";
-    const fileName = `${Date.now()}.png`;
+  const sendPushNotification = usePushNotification()
 
-    FileSystem.downloadAsync(fileUrl, FileSystem.documentDirectory + fileName)
-      .then(({ uri }) => {
-        saveFile(uri);
-        Alert.alert("Finished downloading to ", uri);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
 
-  async function saveFile(filePath) {
-    const albumName = "Feather";
-    const permission = await MediaLibrary.requestPermissionsAsync();
+  // async function download2() {
+  //   const fileUrl ="https://res.cloudinary.com/gyroscope/image/upload/v1607166530/hau3vqkefftkhdaric0b.png";
+  //   const fileName = `${Date.now()}.png`;
 
-    let asset = null;
-    if (permission.granted) {
-      try {
-        asset = await MediaLibrary.createAssetAsync(filePath);
-      } catch (e) {
-        console.error("MediaLibrary.createAssetAsync failed", e);
-      }
+  //   FileSystem.downloadAsync(fileUrl, FileSystem.documentDirectory + fileName)
+  //     .then(({ uri }) => {
+  //       saveFile(uri);
+  //       Alert.alert("Finished downloading to ", uri);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
 
-      if (asset) {
-        try {
-          let album = await MediaLibrary.getAlbumAsync(albumName);
-          if (album) {
-            await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
-          } else {
-            album = await MediaLibrary.createAlbumAsync(
-              albumName,
-              asset,
-              false
-            );
-          }
-          const assetResult = await MediaLibrary.getAssetsAsync({
-            first: 1,
-            album,
-            sortBy: MediaLibrary.SortBy.creationTime,
-          });
-          asset = await assetResult.assets[0];
-        } catch (e) {
-          console.error(" failed", e);
-        }
-      } else {
-        console.error("unable to use MediaLibrary, can not create assets");
-      }
-    }
-  }
+  // async function saveFile(filePath) {
+  //   const albumName = "Feather";
+  //   const permission = await MediaLibrary.requestPermissionsAsync();
+
+  //   let asset = null;
+  //   if (permission.granted) {
+  //     try {
+  //       asset = await MediaLibrary.createAssetAsync(filePath);
+  //     } catch (e) {
+  //       console.error("MediaLibrary.createAssetAsync failed", e);
+  //     }
+
+  //     if (asset) {
+  //       try {
+  //         let album = await MediaLibrary.getAlbumAsync(albumName);
+  //         if (album) {
+  //           await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
+  //         } else {
+  //           album = await MediaLibrary.createAlbumAsync(
+  //             albumName,
+  //             asset,
+  //             false
+  //           );
+  //         }
+  //         const assetResult = await MediaLibrary.getAssetsAsync({
+  //           first: 1,
+  //           album,
+  //           sortBy: MediaLibrary.SortBy.creationTime,
+  //         });
+  //         asset = await assetResult.assets[0];
+  //       } catch (e) {
+  //         console.error(" failed", e);
+  //       }
+  //     } else {
+  //       console.error("unable to use MediaLibrary, can not create assets");
+  //     }
+  //   }
+  // }
 
   return (
     <View style={styles.container}>
-      <Button title="Download invoice & print" onPress={download2}></Button>
+      <Button title="Download invoice & print" onPress={() => sendPushNotification("ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]", "Wallet Funding", "You just got credited 50 Naira", "Newtransactions", )} ></Button>
     </View>
   );
 };

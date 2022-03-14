@@ -7,13 +7,10 @@ import { useNavigation } from "@react-navigation/native";
 const { Backarrow } = icons;
 
 const Backheader = ({ title }: { title: string }) => {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={styles.backArrow}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={{width: 10, height: 10}}>
+      <View style={styles.backArrow}>        
           <Backarrow />
-        </TouchableOpacity>
         <Text style={styles.backArrowText}>{title}</Text>
       </View>
     </View>

@@ -1,13 +1,19 @@
 import React, {useRef, useContext, useState, useEffect} from "react";
+import * as Notification from "expo-notifications";
+import Constants from "expo-constants";
 import {
   View,
   Animated,
-  AppState
+  AppState,
+  Platform,
+  Button,
+  Image,
+  Text
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { navigationRef } from "../utils/customNavigation";
+import { customNavigation, navigationRef } from "../utils/customNavigation";
 
 
 import {
@@ -106,12 +112,101 @@ import Map from "../screens/shared/map/Map";
 import LockScreen from "../screens/shared/LockScreen/LockScreen";
 import Depositinput from "../screens/app/Deposit/DepositInput/Depositinput";
 import CustomWebView from "../screens/shared/CustomWebView";
+import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 // import Animated from "react-native-reanimated";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
 
 const { TabHome, Tabhistory, Tabtransactions, Tabchats, Tabsettings, Tabuser, Tabplusicon } = icons;
+
+
+
+
+
+Notification.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+
+
+export function usePushNotification() {
+  const [expoPushToken, setExpoPushToken] = useState("");
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then((token) =>
+      setExpoPushToken(token)
+    );
+
+    notificationListener.current =
+      Notification.addNotificationReceivedListener((notification) => {
+        setNotification(notification);
+      });
+
+    responseListener.current =
+      Notification.addNotificationResponseReceivedListener((response) => {
+        //   console.log(response);
+        console.log("I just tapped the note", response);
+        const {data} = response.notification.request.content;
+        console.log(data)
+        //   console.log("Here is the data", data.data.takeTo)
+          customNavigation(data.redirectTo,{})
+      });
+
+    return () => {
+      Notification.removeNotificationSubscription(
+        notificationListener.current
+      );
+      Notification.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
+
+  //   const sendSchedulePushNotification = async () => {
+  //     await Notifications.scheduleNotificationAsync({
+  //       content: {
+  //         title: "You've got mail! 📬",
+  //         body: "Here is the notification body",
+  //         data: { data: "goes here", takeTo: "Newtransactions" },
+  //       },
+  //       trigger: { seconds: 5 },
+  //     });
+  //   };
+
+
+
+  //Instant Notifications
+  const sendPushNotification = async (expoMsgToken: string, title: string, body: string, redirectTo: string, channelId?: string) => {
+    const message = {
+      to: expoMsgToken,
+      sound: "default",
+      title: title,
+      body: body,
+      data: { someData: "here is the data", redirectTo: redirectTo },
+      channelId: channelId ? channelId : 'default',
+    };
+
+    await fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Accept-encoding": "gzip, deflate",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(message),
+    });
+  };
+
+  return sendPushNotification;
+}
+
+
+
 
 
 function getWidth(){

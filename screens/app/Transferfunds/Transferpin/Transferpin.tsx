@@ -9,9 +9,17 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
+import { usePushNotification } from "../../../../navigation";
+
+
+
+
+
+
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const Transferpin = ({route, navigation}) => {
+  const sendPushNotification = usePushNotification()
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const {amount,userinfo} = route.params
@@ -36,6 +44,8 @@ const Transferpin = ({route, navigation}) => {
     try{
       setLoading(true);
       await axiosCustom.post("/transfer",{amount,transferTo:userinfo?.username,userPin:pin.join("")})
+      //I am to send a push notification here
+      sendPushNotification("ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]", "Wallet Credit", `Wallet Credit - N${amount} from “@mistascatter23 - Mayowa Olajide” `, "Root")
       setShowModal(true)
     }catch(err){
       console.log(err.response)
@@ -67,7 +77,7 @@ const Transferpin = ({route, navigation}) => {
                  ...fontsize.bsmall,
                  ...FONTS.regular,
                }}
-             >You have successfully transfered NGN {amountFormatter(amount)} to  “@{userinfo?.username} - {userinfo?.fullName} ”</Text>
+             >You have successfully transfered NGN {amountFormatter(amount)} to  “<Text style={{textTransform: 'capitalize'}}>@{userinfo?.username}</Text> - <Text style={{textTransform: 'capitalize'}}> {userinfo?.fullName} </Text>”</Text>
            </View>
       </Globalmodal>
       <StatusBar />

@@ -1,5 +1,7 @@
 import * as SMS from "expo-sms"
-import { Alert } from "react-native"
+import { Alert , Platform} from "react-native"
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 import call from "react-native-phone-call"
 import { useToast } from "react-native-toast-notifications"
 
@@ -26,3 +28,5 @@ export const makePhoneCall = (phoneNumber: string) => {
         console.error
     )
 }
+
+

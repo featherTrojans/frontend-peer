@@ -5,9 +5,10 @@ import {
   View,
   StatusBar,
   TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import { Input, Loader } from "../../../components";
-import { icons } from "../../../constants";
+import { COLORS, icons } from "../../../constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "./Setup.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
@@ -85,7 +86,7 @@ const Setup = ({route, navigation }) => {
                 />
                 <View style={styles.namecont}>
                   {
-                    loadbounce?<Text>...</Text>:userinfo.fullName?<>
+                    loadbounce?<ActivityIndicator size={15} color={COLORS.blue6}/>:userinfo.fullName?<>
                   <WrongIcon />
                   <Text style={styles.name}>{username} is not available</Text>
                     </>:null} 
