@@ -113,6 +113,7 @@ import LockScreen from "../screens/shared/LockScreen/LockScreen";
 import Depositinput from "../screens/app/Deposit/DepositInput/Depositinput";
 import CustomWebView from "../screens/shared/CustomWebView";
 import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
+import axiosCustom from "../httpRequests/axiosCustom";
 // import Animated from "react-native-reanimated";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -139,10 +140,21 @@ export function usePushNotification() {
   const notificationListener = useRef();
   const responseListener = useRef();
 
+  const setMessageToken = async () => {
+    const response = await axiosCustom.post("auth/token/create", {messageToken: expoPushToken})
+    console.log(response.data, "From the response")
+  }
+
   useEffect(() => {
-    registerForPushNotificationsAsync().then((token) =>
+    registerForPushNotificationsAsync()
+    .then((token) => {
       setExpoPushToken(token)
+      setMessageToken()
+      console.log(expoPushToken, 'Token is now available')
+    }
     );
+
+    // console.log(expoPushToken, "This is the token")
 
     notificationListener.current =
       Notification.addNotificationReceivedListener((notification) => {
@@ -202,7 +214,7 @@ export function usePushNotification() {
     });
   };
 
-  return sendPushNotification;
+  return {sendPushNotification: sendPushNotification, expoPushToken: expoPushToken};
 }
 
 
@@ -525,6 +537,7 @@ export default function MainNavigation() {
   const timer = useRef<number>(Date.now())
   const {token} = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
+  const {sendPushNotification, expoPushToken} = usePushNotification()
   
   useEffect(() => {
     const subscription:any = AppState.addEventListener("change", nextAppState => {
@@ -536,9 +549,13 @@ export default function MainNavigation() {
       if(!modal || !token) timer.current = Date.now();
     });
     return () => {
-      subscription.remove();
+      // subscription.remove();
     };
   }, []);
+
+
+
+ 
  
 
 

@@ -13,10 +13,9 @@ import * as MediaLibrary from "expo-media-library";
 import { usePushNotification } from "../navigation";
 // usePushNotification
 
-
 const Testings = () => {
 
-  const sendPushNotification = usePushNotification()
+  const {sendPushNotification, expoPushToken} = usePushNotification()
 
 
   // async function download2() {
@@ -74,7 +73,7 @@ const Testings = () => {
 
   return (
     <View style={styles.container}>
-      <Button title="Download invoice & print" onPress={() => sendPushNotification("ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]", "Wallet Funding", "You just got credited 50 Naira", "Newtransactions", )} ></Button>
+      <Button title="Download invoice & print" onPress={() => sendPushNotification(expoPushToken, "Wallet Funding", "This is the body of the funding", "withdrawals")} ></Button>
     </View>
   );
 };
