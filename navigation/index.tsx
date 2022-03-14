@@ -140,16 +140,12 @@ export function usePushNotification() {
   const notificationListener = useRef();
   const responseListener = useRef();
 
-  const setMessageToken = async () => {
-    const response = await axiosCustom.post("auth/token/create", {messageToken: expoPushToken})
-    console.log(response.data, "From the response")
-  }
+
 
   useEffect(() => {
     registerForPushNotificationsAsync()
     .then((token) => {
       setExpoPushToken(token)
-      setMessageToken()
       console.log(expoPushToken, 'Token is now available')
     }
     );
