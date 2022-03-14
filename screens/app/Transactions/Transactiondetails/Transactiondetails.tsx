@@ -35,6 +35,11 @@ const Transactiondetails = ({ navigation, route }) => {
   )} '${dt.format("YY")} - ${dt.format("LT")}`;
 
 
+  useEffect(() => {
+    console.log(data)
+  })
+
+
 
 
 
