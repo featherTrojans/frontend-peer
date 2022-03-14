@@ -70,134 +70,38 @@ const Home = ({ navigation }: { navigation: any }) => {
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  ///States for the push notifications
-  // const [expoPushToken, setExpoPushToken] = useState("");
-  // const [notification, setNotification] = useState(false);
-  // const notificationListener = useRef();
-  // const responseListener = useRef();
 
+  const setMessageToken = async () => {
+    try {
+      const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
+      console.log(response, "Here is the response data")
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
+
+  useEffect(() => {
+    setMessageToken()
+  })
 
   //setting up websocket
-  useEffect(()=>{
-    const ws = new WebSocket(`wss://feather.com.ng:3300/balance/${authdata.userId}`,"realtime")
-    ws.onmessage = (data)=>{
+  useEffect(() => {
+    const ws = new WebSocket(
+      `wss://feather.com.ng:3300/balance/${authdata.userId}`,
+      "realtime"
+    );
+    ws.onmessage = (data) => {
       // i want to update the context
-      if(data.data == authdata.walletBal) return
-      setAuthData({...authdata,walletBal:data.data})
-    }
+      if (data.data == authdata.walletBal) return;
+      setAuthData({ ...authdata, walletBal: data.data });
+    };
 
-    return (
-      ws.close()
-    )
-  },[])
+    return ws.close();
+  }, []);
 
   useEffect(() => {
     getDashboardData();
   }, [authdata.walletBal]);
-
-
-
-
-
-
-  // Notifications.setNotificationHandler({
-  //   handleNotification: async () => ({
-  //     shouldShowAlert: true,
-  //     shouldPlaySound: false,
-  //     shouldSetBadge: false,
-  //   }),
-  // });
-
-  // const updateMessageToken = async (expoToken: string) => {
-  //   try {
-  //    await  axiosCustom.post("/auth/token/create", { messageToken: expoToken });
-  //     console.log(authdata, "Here is the datas")
-  //   } catch (err) {
-  //     console.log(err.response);
-  //   }
-  // };
-
-
-
-
-  //Instant Notifications
-  // async function sendPushNotification(expoPushToken) {
-  //   const message = {
-  //     to: expoPushToken,
-  //     sound: "default",
-  //     title: "From Feather",
-  //     body: "Testing the push notification",
-  //     data: { someData: "goes here" },
-  //   };
-
-  //   await fetch("https://exp.host/--/api/v2/push/send", {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Accept-encoding": "gzip, deflate",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(message),
-  //   });
-  // }
-
-  // async function schedulePushNotification() {
-  //   await Notifications.scheduleNotificationAsync({
-  //     content: {
-  //       title: "Welcome to feather! ✌🏽",
-  //       body: "Hey Paddy, Love to have you here",
-  //       data: { data: "Learn More about us" },
-  //     },
-  //     trigger: { seconds: 5 },
-  //   });
-  // }
-
-  // const welcomeNotifications = async () => {
-  //   await schedulePushNotification();
-  // };
-
-  //Scheduled Notifications
-
-  //Calling the schedule Notification Sample
-  //   <Button
-  //   title="Press to schedule a notification"
-  //   onPress={async () => {
-  //     await schedulePushNotification();
-  //   }}
-  // />
- // const registerForPushNotificationsAsync = async () => {
-    //   let token;
-    //   if (Device.isDevice) {
-    //     const { status: existingStatus } =
-    //       await Notifications.getPermissionsAsync();
-    //     let finalStatus = existingStatus;
-    //     if (existingStatus !== "granted") {
-    //       const { status } = await Notifications.requestPermissionsAsync();
-    //       finalStatus = status;
-    //     }
-    //     if (finalStatus !== "granted") {
-    //       console.log("Failed to get push token for push notification!");
-    //       return;
-    //     }
-    //     token = (await Notifications.getExpoPushTokenAsync()).data;
-    //     console.log(token);
-    //   } else {
-    //     console.log("Must use physical device for Push Notifications");
-    //   }
-  
-    //   if (Platform.OS === "android") {
-    //     Notifications.setNotificationChannelAsync("transactions", {
-    //       name: "trasanctions",
-    //       importance: Notifications.AndroidImportance.MAX,
-    //       vibrationPattern: [0, 250, 250, 250],
-    //       lightColor: "#FF231F7C",
-    //     });
-    //   }
-  
-    //   return token;
-    // }
-  
-
 
   const getDashboardData = async () => {
     console.log("I am fetching again");
@@ -208,7 +112,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       setAuthData(response?.data?.data);
     } catch (err) {
       console.log(err.response);
-    } finally {
+  } finally {
       setLoading(false);
       setRefreshing(false);
     }
