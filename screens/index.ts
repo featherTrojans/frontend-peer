@@ -66,11 +66,22 @@ import Depositpin from "./app/Deposit/Depositpin/Depositpin";
 import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
 import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 
-
+TransferpinBank
+WithdrawPin
+SecurepinAgain
+CustomWebView
+Depositinput
+LockScreen
 
 //This screen is for testing somne functionalities
 
 import Testings from "./Testings";
+import TransferpinBank from "./app/Transferfunds/Transferpin/TransferPinBank";
+import WithdrawPin from "./app/Withdraws/WithdrawPin/WithdrawPin";
+import SecurepinAgain from "./auth/signup/Securepin/SecurepinAgain";
+import CustomWebView from "./shared/CustomWebView";
+import Depositinput from "./app/Deposit/DepositInput/Depositinput";
+import LockScreen from "./shared/LockScreen/LockScreen";
 
 
 
@@ -156,5 +167,12 @@ export {
 
 
   Testings,
+
+  TransferpinBank,
+WithdrawPin,
+SecurepinAgain,
+CustomWebView,
+Depositinput,
+LockScreen,
 
 };

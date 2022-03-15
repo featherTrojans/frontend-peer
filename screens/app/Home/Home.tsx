@@ -76,13 +76,13 @@ const Home = ({ navigation }: { navigation: any }) => {
       const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
       console.log(response, "Here is the response data")
     } catch (err) {
-      console.log(err.response)
+      console.log(err.response.data)
     }
   }
 
   useEffect(() => {
     setMessageToken()
-  })
+  },[])
 
   //setting up websocket
   useEffect(() => {
@@ -207,6 +207,7 @@ const Home = ({ navigation }: { navigation: any }) => {
                   onPress={() => navigation.navigate(link)}
                   style={styles.optionContainer}
                   activeOpacity={0.8}
+                  key={title}
                 >
                   <View style={styles.optionIconBg}>
                     {/* Icon will be inside this */}
@@ -236,7 +237,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <EmptyComponent />
           ) : (
             histories.map((history) => (
-              <Transactionhistory date={history.time} datas={history.data} />
+              <Transactionhistory date={history.time} datas={history.data}  key={history.time}/>
             ))
           )}
         </View>

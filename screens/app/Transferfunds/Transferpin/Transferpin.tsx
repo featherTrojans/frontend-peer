@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import LottieView from "lottie-react-native"
 import { styles } from "./Transferpin.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
@@ -10,6 +10,7 @@ import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
 import { usePushNotification } from "../../../../navigation";
+import { AuthContext } from "../../../../context/AuthContext";
 
 
 
@@ -26,6 +27,8 @@ const Transferpin = ({route, navigation}) => {
   const [pin, setPin] = useState<string[]>([]);
   const [loading, setLoading] = useState(false)
   const [showmodal, setShowModal] = useState(false);
+  const {messageToken} = useContext(AuthContext)
+
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldpin) => [...oldpin, value]);
@@ -43,9 +46,10 @@ const Transferpin = ({route, navigation}) => {
     
     try{
       setLoading(true);
+      console.log({data: userinfo, userToken: messageToken})
       await axiosCustom.post("/transfer",{amount,transferTo:userinfo?.username,userPin:pin.join("")})
       //I am to send a push notification here
-      sendPushNotification("ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]", "Wallet Credit", `Wallet Credit - N${amount} from “@mistascatter23 - Mayowa Olajide” `, "Root")
+      // sendPushNotification("ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]", "Wallet Credit", `Wallet Credit - N${amount} from “@mistascatter23 - Mayowa Olajide” `, "Root")
       setShowModal(true)
     }catch(err){
       console.log(err.response)
@@ -62,6 +66,7 @@ const Transferpin = ({route, navigation}) => {
       <Globalmodal
       showState={showmodal}
       btnFunction={()=>navigation.navigate("Root")}
+      onBgPress={() => setShowModal(false)}
       >
         <View style={{ alignItems: "center" }}>
         <LottieView source={Successcheckanimate} autoPlay loop={false} style={{width: 148, height: 148}}/>

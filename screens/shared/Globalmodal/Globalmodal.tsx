@@ -25,8 +25,13 @@ const Globalmodal = ({
       coverScreen={true}
       backdropColor="#000"
       backdropOpacity={0.2}
+      animationInTiming={400}
+      backdropTransitionInTiming={200}
+      animationOut={"fadeOut"}
+      animationOutTiming={150}
       style={{ margin: 0, justifyContent: "flex-end" }}
       onBackdropPress={onBgPress}
+      
     >
       <View style={styles.container}>
         {children}
