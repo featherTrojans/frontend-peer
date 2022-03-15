@@ -106,6 +106,7 @@ import {
   CustomWebView,
   Depositinput,
   LockScreen,
+  Testings,
 } from "../screens";
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";

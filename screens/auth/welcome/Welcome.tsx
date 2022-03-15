@@ -17,7 +17,7 @@ const { Smile, Winkinganimate } = icons;
 
 const Welcome = ({navigation, route}) => {
   const {fromm,username,token} = route.params
-  const {setToken} = useContext(AuthContext)
+  const {setToken, authdata} = useContext(AuthContext)
   const { setAuthData } = useContext(AuthContext);
   const progressWidth = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
@@ -27,12 +27,20 @@ const Welcome = ({navigation, route}) => {
   });
 
 
+  const nameToShow = (value: string) => {
+    if (value?.split(" ").length > 1) {
+      return value?.split(" ")[1];
+    } else {
+      return value;
+    }
+  };
+
+
   const getPeriod = () => {
     const hour = new Date().getHours();
     var textMessage = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon": "Good Evening";
 
     return textMessage
-
   }
   useEffect(() => {
     getDashboardData();
@@ -50,11 +58,11 @@ const Welcome = ({navigation, route}) => {
   };
   
   useEffect(() => {
-    progressWidth.value = withTiming(SIZES.width - 214, { duration: 1500 });
+    progressWidth.value = withTiming(SIZES.width - 214, { duration: 3000 });
     setTimeout(() => {
       setToken(token)
-      // navigation.replace("Root")
-    }, 2500);
+      navigation.replace("Root")
+    }, 3500);
   }, []);
 
   return (
@@ -70,7 +78,7 @@ const Welcome = ({navigation, route}) => {
         </Text>:<><Text style={styles.welcomeText}>
          {getPeriod()}
         </Text>
-        <Text style={styles.welcomeTextSub}>@{username}</Text>
+        <Text style={[styles.welcomeTextSub, {marginTop: 16}]}>{nameToShow(authdata.fullName)}</Text>
         </>
         }
       </View>

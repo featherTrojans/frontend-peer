@@ -105,6 +105,7 @@ import Sharereceipt from "../assets/icons/Sharereceipt";
 import Downloadreceipt from "../assets/icons/Downloadreceipt";
 import Reporttransactions from "../assets/icons/Reporttransactions";
 import Onmapicon from "../assets/icons/Onmapicon";
+import Smalluseravatar from "../assets/icons/Smalluseravatar";
 
 
 
@@ -245,7 +246,7 @@ Sharereceipt,
 Downloadreceipt,
 Reporttransactions,
 Onmapicon,
-
+Smalluseravatar,
 
 //Animated icons
 

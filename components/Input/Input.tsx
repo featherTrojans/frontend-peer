@@ -30,7 +30,7 @@ const Input = ({icon, placeholder, password, formikProps, name, ...rest}: inputP
     <TextInput
       style={styles.textInput}
       placeholder={placeholder}
-      placeholderTextColor={COLORS.placeHolder}
+      placeholderTextColor={COLORS.grey2}
       underlineColorAndroid="transparent"
       
 
@@ -54,7 +54,7 @@ const Input = ({icon, placeholder, password, formikProps, name, ...rest}: inputP
       style={styles.textInput}
       placeholder={placeholder}
       onChangeText={handleChange(name)}
-      placeholderTextColor={COLORS.placeHolder}
+      placeholderTextColor={COLORS.grey2}
       underlineColorAndroid="transparent"
       onBlur={handleBlur(name)}
       {...rest}

@@ -71,6 +71,50 @@ const Transactiondetails = ({ navigation, route }) => {
   Clipboard.removeClipboardListener(subscription);
 
 
+
+  const saveFile =  async (filePath:string) => {
+    const albumName = "Feather";
+    const permission = await MediaLibrary.requestPermissionsAsync();
+
+    let asset = null;
+    if (permission.granted) {
+      try {
+        asset = await MediaLibrary.createAssetAsync(filePath);
+      } catch (e) {
+        console.error("MediaLibrary.createAssetAsync failed", e);
+      }
+
+      if (asset) {
+
+
+        try {
+          let album = await MediaLibrary.getAlbumAsync(albumName);
+          if (album) {
+            await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
+          } else {
+            album = await MediaLibrary.createAlbumAsync(
+              albumName,
+              asset,
+              false
+            );
+          }
+          // const assetResult = await MediaLibrary.getAssetsAsync({
+          //   first: 1,
+          //   album,
+          //   sortBy: MediaLibrary.SortBy.creationTime,
+          // });
+          // asset = await assetResult.assets[0];
+
+
+        } catch (e) {
+          console.error(" failed", e);
+        }
+      } else {
+        console.error("unable to use MediaLibrary, can not create assets");
+      }
+    }
+  }
+
   
 
   const htmlContent = `
@@ -103,25 +147,24 @@ const Transactiondetails = ({ navigation, route }) => {
     Sharing.shareAsync(uri);
   };
 
-  const createAndSavePDF = async (html) => {
+  const downloadReceipt = async (html) => {
     try {
       const { uri } = await Print.printToFileAsync({ html });
       if (Platform.OS === "ios") {
         await Sharing.shareAsync(uri);
       } else {
-        const permission = await MediaLibrary.requestPermissionsAsync();
-
-        if (permission.granted) {
-          console.log(uri);
-          //  const localuri = await FileSystem.downloadAsync("http://gahp.net/wp-content/uploads/2017/09/sample.pdf", FileSystem.documentDirectory + "sample.pdf")
-          //   const asset = await MediaLibrary.createAssetAsync(localuri.toString())
-          // const album = await MediaLibrary.createAlbumAsync("Feather", asset);
-        }
+        saveFile(uri);
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+
+
+
+
+
 
   const reportTransaction = () => {
     setShowModal(false);
@@ -150,7 +193,7 @@ const Transactiondetails = ({ navigation, route }) => {
             iconBg="#001757"
             title="Download Receipt"
             details="Generate a .pdf copy of this transaction."
-            onpress={() => createAndSavePDF(htmlContent)}
+            onpress={() => downloadReceipt(htmlContent)}
           />
           <Iconwithdatas
             icon={<Reporttransactions />}
@@ -242,7 +285,7 @@ const Transactiondetails = ({ navigation, route }) => {
             <Text
               style={[styles.eachDetailValue, { textTransform: "uppercase" }]}
             >
-              NGN {amountFormatter(amount)} + NGN 0.00{" "}
+              NGN {amountFormatter(amount)} + NGN 0.00
               <Text style={{ textTransform: "capitalize" }}>Charges</Text>
             </Text>
           </View>

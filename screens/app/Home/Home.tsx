@@ -38,6 +38,7 @@ const {
   Paybills,
   Transfer,
   Deposit,
+  Smalluseravatar,
   Cryinganimate,
 } = icons;
 
@@ -85,6 +86,9 @@ const Home = ({ navigation }: { navigation: any }) => {
     const firstIndex = string.indexOf("[")
     return string.slice(firstIndex+1, -1)
   }
+  useEffect(() => {
+    console.log(authdata, "here is the authdat")
+  }, [])
 
   useEffect(() => {
     // setMessageToken()
@@ -126,7 +130,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   }, [authdata.walletBal]);
 
   const getDashboardData = async () => {
-    console.log("I am fetching again");
+    console.log("I am fetching again from home");
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
@@ -179,7 +183,15 @@ const Home = ({ navigation }: { navigation: any }) => {
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
         <View style={styles.profileContainer}>
-          <Profilepics />
+
+          <View>
+          {/* <Profilepics /> */}
+          {/* <Useravatar /> */}
+          <Smalluseravatar />
+          {/* <Defaultuseravatar /> */}
+          </View>
+
+
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
               Welcome, {nameToShow(authdata?.fullName)}✌🏽
