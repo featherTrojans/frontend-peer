@@ -43,6 +43,40 @@ const Emptyrequest = () => {
 };
 
 
+
+const datass =  [
+  {
+      reference: "J7iyBYrS3O",
+      amount: "200",
+      charges: "100",
+      total: "300",
+      username: "DUDE",
+      full_name: "LAWAL SALIM",
+      status: "PENDING",
+      createdAt: "2022-03-14T21:28:46.000Z",
+      meetup:"Forks ‘n’ Fingers, Obafemi Awolowo University Campus, Ile-Ife"
+  },
+  {
+    reference: "J7iyBYrS3O",
+    amount: "200",
+    charges: "100",
+    total: "300",
+    username: "DUDE",
+    full_name: "LAWAL AYOBAMI",
+    status: "ACTIVATE",
+    createdAt: "2022-03-14T21:28:46.000Z"
+  },
+  {
+    reference: "J7iyBYrS3O",
+    amount: "200",
+    charges: "100",
+    total: "300",
+    username: "DUDE",
+    full_name: "AYOBAMI SALIM",
+    status: "PENDING",
+    createdAt: "2022-03-14T21:28:46.000Z"
+  }
+]
 const Deposit = ({navigation}) => {
   const [active, setActive] = useState("pending");
   const [pending, setPending] = useState([])
@@ -73,7 +107,8 @@ const Deposit = ({navigation}) => {
 
   // Requestee profile
   const Requesteeprofile = ({ list, onpress}:  any ) => {
-    const { image, full_name, username, price, status, base_charge } = list;
+    const {
+      reference, charges,status, full_name, username, amount } = list;
     return (
       <TouchableOpacity style={styles.depositProfileContainer} activeOpacity={0.7} onPress={onpress}>
         <View style={styles.depositProfileDetails}>
@@ -89,9 +124,9 @@ const Deposit = ({navigation}) => {
           <View style={{ marginLeft: 13 }}>
             <Text style={styles.depositProfileName}>{full_name}</Text>
             <Text style={styles.depositAmount}>
-              NGN {price}{" "}
+              NGN {amount}{" "}
               <Text style={styles.depositBasecharge}>
-                + NGN {base_charge} Charges
+                + NGN {charges} Charges
               </Text>
             </Text>
           </View>
@@ -129,15 +164,16 @@ const Deposit = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={REQUESTDATA}
-          renderItem={({ item }) => <Requesteeprofile list={item}    onpress={() =>
-            navigation.navigate(
-              item.status === "pending"
+          data={datass}
+          renderItem={({ item }) => (
+          <Requesteeprofile list={item}    
+          onpress={() =>navigation.navigate(item.status === "PENDING"
                 ? "Pendingdeposit"
-                : "Accepteddeposit"
-            )
-          } />}
-          keyExtractor={(item) => `${item.full_name}`}
+                : "Accepteddeposit",
+                {requestInfo:item})
+          } />)
+        }
+          keyExtractor={(item) => `${item.reference}`}
         />
       </View>
     );
@@ -150,7 +186,7 @@ const Deposit = ({navigation}) => {
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
         <View style={{ flex: 1 }}>
-          {(pending.length < 1 && accepted.length < 1) ? <Emptyrequest /> : <Requestlist />}
+          {(pending.length < 1 && accepted.length > 1) ? <Emptyrequest /> : <Requestlist />}
         </View>
       </View>
 

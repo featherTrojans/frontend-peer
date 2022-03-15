@@ -6,7 +6,7 @@ import {
     ImageBackground,
     TouchableOpacity
   } from "react-native";
-  import React, {useState} from "react";
+  import React, {useContext, useState} from "react";
   import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
   import {
     Bottombtn,
@@ -14,6 +14,8 @@ import {
     Requesterdetails,
   } from "../../../../components";
 import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
+import Map from "../../../shared/map/Map";
+import { LocationContext } from "../../../../context/LocationContext";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
   // import { styles } from './Pendingwithdraw.styles'
@@ -22,25 +24,21 @@ import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
   const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon, Ratingstar, Phoneicony, Smsicony, Cancelicony, Dropswitch} = icons;
   const { Locationmap } = images;
   
-  const Pendingdeposit = () => {
-
-  const [toggleShow, setToggleShow] = useState(true);
-
+  const Pendingdeposit = ({navigation, route}) => {
+    const {requestInfo} = route.params
+    const [toggleShow, setToggleShow] = useState(true);
+    const {coords} = useContext(LocationContext)
     return (
       <View style={styles.container}>
         <StatusBar />
-        <ImageBackground
-          source={Locationmap}
-          resizeMode="cover"
-          style={{ flex: 1, position: "relative" }}
-        >
+        <Map />
           <View style={styles.previewContainer}>
             <View style={{ paddingHorizontal: 25 }}>
               {toggleShow ? (
                 <View>
                   <View style={styles.detailsProfile}>
                     <Requesterdetails
-                      name="Destiny Babalola"
+                      name={requestInfo.full_name}
                       distance="3kms"
                       duration={12}
                     />
@@ -54,9 +52,9 @@ import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
                   <View style={{ marginTop: 20 }}>
                     <Text style={styles.amountText}>Amount</Text>
                     <Text style={styles.amountPrice}>
-                      NGN 65,000.00{" "}
+                      NGN {requestInfo.amount}{" "}
                       <Text style={styles.depositAmountBaseCharge}>
-                        + 1,500.00 (Base Charge)
+                        + {requestInfo.charges} (Base Charge)
                       </Text>{" "}
                     </Text>
                     <Text style={styles.baseChargeNegotiate}>
@@ -71,7 +69,7 @@ import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
                         style={{ flexDirection: "row", alignItems: "center" }}
                       >
                         <Meetupdot />
-                        <Text style={styles.depositLocationText}>Forks ‘n’ Fingers, Obafemi Awolowo University Campus, Ile-Ife </Text>
+                        <Text style={styles.depositLocationText}>{requestInfo.meetup}</Text>
                       </View>
                     </View>
                   </View>
@@ -125,7 +123,6 @@ import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
               </View>
             </View>
           </View>
-        </ImageBackground>
       </View>
     );
   };

@@ -27,11 +27,7 @@ const Pendingwithdraw = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <ImageBackground
-        source={Locationmap}
-        resizeMode="cover"
-        style={{ flex: 1, position: "relative" }}
-      >
+        <Map />
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
             {toggleShow ? (
@@ -105,7 +101,7 @@ const Pendingwithdraw = ({navigation, route}) => {
             </View>
           </View>
         </View>
-      </ImageBackground>
+      
     </View>
   );
 };

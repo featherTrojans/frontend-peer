@@ -408,7 +408,7 @@ const RootNavigator = () => {
     screenOptions={{
       headerShown: false,
     }}
-    // initialRouteName="Onboarding"
+    // initialRouteName="Deposit"
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
     {/* SCREEN FOR AUTH */}
@@ -536,7 +536,7 @@ export default function MainNavigation() {
       if(!modal || !token) timer.current = Date.now();
     });
     return () => {
-      subscription.remove();
+      // subscription.remove();
     };
   }, []);
  
