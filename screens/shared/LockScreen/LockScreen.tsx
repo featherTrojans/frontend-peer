@@ -17,11 +17,36 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../Globalmodal/Globalmodal";
 
-const LockScreen = ({ modal, setModal }: any) => {
-  const toast = useToast();
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
-  const [pin, setPin] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+const LockScreen = ({modal, setModal}: any) => {
+    const toast = useToast()
+    const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
+    const [pin, setPin] = useState<string[]>([]);
+    const [loading, setLoading] = useState(false)
+
+    const handleSetAmount = (value: string) => {
+        if (pin.length < 4) {
+          setPin((oldamount) => [...oldamount, value]);
+        }
+      };
+      const handleRemoveAmount = () => {
+        if (pin.length > 0) {
+          const newdata = [...pin];
+          newdata.pop();
+          setPin(newdata);
+          console.log(newdata);
+        }
+      };
+    const handleSubmit = async ()=>{
+      setLoading(true)
+      try{
+         await axiosCustom.post("/auth/pin/verify",{user_pin: pin.join()})
+        setPin([])
+        setModal(false)
+      }catch(err){
+        showerror(toast,err)
+      }finally{
+        setLoading(false)
+      }
 
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
@@ -101,5 +126,6 @@ const LockScreen = ({ modal, setModal }: any) => {
     </Modal>
   );
 };
+}
 
 export default LockScreen;

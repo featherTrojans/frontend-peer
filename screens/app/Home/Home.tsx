@@ -50,7 +50,7 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
-    link: "Depositupdate",
+    link: "Deposit",
   },
   {
     icon: <Transfer />,
@@ -81,8 +81,23 @@ const Home = ({ navigation }: { navigation: any }) => {
   }
 
   useEffect(() => {
+<<<<<<< HEAD
     setMessageToken()
   },[])
+=======
+    // setMessageToken()
+    sendAnotherToken()
+  },[])
+
+  const sendAnotherToken = async ()=>{
+    try{
+      const response = await axiosCustom.post("/auth/token/create",{messageToken:"adfasfasdaraet"})
+      console.log(response)
+    }catch(err){
+      console.log(err.response.data)
+    }
+  }
+>>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
 
   //setting up websocket
   useEffect(() => {

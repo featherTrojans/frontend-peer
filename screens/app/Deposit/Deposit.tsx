@@ -53,17 +53,22 @@ const Deposit = ({navigation}) => {
     getacceptedrequest()
   },[])
 
+  console.log(pending, accepted)
   const getpendingrequest = async()=>{
     try{
-      const response = await axiosCustom.get("/request/depositor/accepted");
+      const response = await axiosCustom.get("/request/depositor/pending");
       setPending(response.data.data)
-    }catch(err){}
+    }catch(err){
+
+    }
   }
   const getacceptedrequest = async()=>{
     try{
       const response = await axiosCustom.get("/request/depositor/accepted");
       setAccepted(response.data.data)
-    }catch(err){}
+    }catch(err){
+
+    }
   }
 
   // Requestee profile

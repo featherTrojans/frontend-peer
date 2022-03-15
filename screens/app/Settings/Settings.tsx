@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as WebBrowser from 'expo-web-browser';
@@ -9,6 +9,7 @@ import BottomSheet, {
 } from "@gorhom/bottom-sheet";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { styles } from "./Settings.styles";
+import { AuthContext } from "../../../context/AuthContext";
 
 const {
   Defaultuseravatar,
@@ -54,6 +55,8 @@ const handleOpenWithLinking = () => {
 
 
 const Settings = ({navigation}) => {
+  const {authdata} = useContext(AuthContext)
+  console.log(authdata)
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -68,8 +71,8 @@ const Settings = ({navigation}) => {
             <Defaultuseravatar />
           </View>
           {/* name */}
-          <Text style={styles.profileName}>Sarah Jones</Text>
-          <Text style={styles.profileUsername}>@freshsaint</Text>
+          <Text style={styles.profileName}>{authdata.fullName}</Text>
+          <Text style={styles.profileUsername}>@{authdata.username}</Text>
           {/* username */}
         </View>
         <View style={styles.profileExtraContainer}>

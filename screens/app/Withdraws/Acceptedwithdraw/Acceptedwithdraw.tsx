@@ -14,6 +14,7 @@ import {
   Requesterdetails,
 } from "../../../../components";
 import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
+import Map from "../../../shared/map/Map";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -36,11 +37,7 @@ const Acceptedwithdraw = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <ImageBackground
-        source={Locationmap}
-        resizeMode="cover"
-        style={{ flex: 1, position: "relative" }}
-      >
+      <Map />
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
             {toggleShow ? (
@@ -131,7 +128,7 @@ const Acceptedwithdraw = ({ navigation }) => {
             </View>
           </View>
         </View>
-      </ImageBackground>
+      
     </View>
   );
 };

@@ -111,6 +111,20 @@ import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
+<<<<<<< HEAD
+=======
+import SecurepinAgain from "../screens/auth/signup/Securepin/SecurepinAgain";
+import App from "../App";
+import Map from "../screens/shared/map/Map";
+import LockScreen from "../screens/shared/LockScreen/LockScreen";
+import Depositinput from "../screens/app/Deposit/DepositInput/Depositinput";
+import CustomWebView from "../screens/shared/CustomWebView";
+import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
+// import Animated from "react-native-reanimated";
+const AppStack = createStackNavigator<RootStackParamList>();
+const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const AuthStack = createStackNavigator<RootAuthStackParamList>();
+>>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
 
 // import App from "../App";
 import Map from "../screens/shared/map/Map";
@@ -143,6 +157,7 @@ export function usePushNotification() {
   const responseListener = useRef();
 
   useEffect(() => {
+<<<<<<< HEAD
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
       console.log(expoPushToken, "Token is now available");
@@ -152,6 +167,14 @@ export function usePushNotification() {
 
     notificationListener.current = Notification.addNotificationReceivedListener(
       (notification) => {
+=======
+    registerForPushNotificationsAsync().then((token) =>
+      setExpoPushToken(token)
+    );
+
+    notificationListener.current =
+      Notification.addNotificationReceivedListener((notification) => {
+>>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
         setNotification(notification);
       }
     );
@@ -211,10 +234,14 @@ export function usePushNotification() {
     });
   };
 
+<<<<<<< HEAD
   return {
     sendPushNotification: sendPushNotification,
     expoPushToken: expoPushToken,
   };
+=======
+  return sendPushNotification;
+>>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
 }
 
 function getWidth() {
@@ -549,8 +576,12 @@ export default function MainNavigation() {
   const timer = useRef<number>(Date.now());
   const { token } = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
+<<<<<<< HEAD
   // const { sendPushNotification, expoPushToken } = usePushNotification();
 
+=======
+  
+>>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
   useEffect(() => {
     const subscription: any = AppState.addEventListener(
       "change",
@@ -570,6 +601,12 @@ export default function MainNavigation() {
       subscription.remove();
     };
   }, []);
+<<<<<<< HEAD
+=======
+ 
+
+
+>>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
 
   return (
     <NavigationContainer ref={navigationRef}>

@@ -4,6 +4,7 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import BottomSheet, {
   BottomSheetScrollView,
@@ -45,11 +46,11 @@ const listingtypes = ["peers", "agents"];
 
 const Availablelisting = ({ navigation, route }: any) => {
   const { amount } = route.params;
-  const { setCoords, coords, setDestinationCoords } =
-    useContext(LocationContext);
+  const { setCoords, coords, setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([]);
   const [locationSide, setLocationSide] = useState({});
   const [activeType, setActiveType] = useState("peers");
+  const [loading, setLoading] = useState(false);
 
   let height = "10%"
   const checkCurrentHeight = () => {
@@ -66,6 +67,7 @@ const Availablelisting = ({ navigation, route }: any) => {
 
   useEffect(() => {
     (async () => {
+
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         console.log("Permission to access location was denied");
@@ -79,6 +81,7 @@ const Availablelisting = ({ navigation, route }: any) => {
         { useGoogleMaps: true }
         );
         setLocationSide(locationaddress[0]);
+        console.log(locationaddress[0])
         let locationText = `${locationaddress[0].name}, ${locationaddress[0].city}`
         setCoords({...location.coords,locationText:locationText});
       getAllAgents(locationaddress[0].city!, locationaddress[0].name!);
@@ -88,6 +91,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const getAllAgents = async (city: string, name: string) => {
     let locationText = `${name}, ${city}`
     try {
+      setLoading(true);
       const response = await axiosCustom.post("/status/find", {
         amount: amount,
         location: locationText,
@@ -97,6 +101,8 @@ const Availablelisting = ({ navigation, route }: any) => {
       
     } catch (err) {
       
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -122,6 +128,9 @@ const Availablelisting = ({ navigation, route }: any) => {
           })
     }
 
+    if(loading){
+      return <ActivityIndicator />
+    }
     return (
       <TouchableOpacity
         style={styles.userContainer}
@@ -219,7 +228,7 @@ const Availablelisting = ({ navigation, route }: any) => {
 
         <BottomSheetFlatList
           showsVerticalScrollIndicator={false}
-          data={agentsdata}
+          data={agents}
           renderItem={({ item }) => <Singleuser profile={item} />}
           keyExtractor={(item) => item.reference}
         />

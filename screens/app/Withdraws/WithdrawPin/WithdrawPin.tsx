@@ -108,7 +108,7 @@ const WithdrawPin = ({ navigation, route}) => {
                 <Text style={{...FONTS.bold}}>N {charges}</Text>
               </Text>
               <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular,}}>
-                Note that the base charge above can be negotiated by <Text style={{...FONTS.bold}}> {userInfo.agentUsername}</Text>
+                Note that the base charge above can be negotiated by <Text style={{...FONTS.bold}}> {userInfo.username}</Text>
               </Text>
             </View>
       </Globalmodal>

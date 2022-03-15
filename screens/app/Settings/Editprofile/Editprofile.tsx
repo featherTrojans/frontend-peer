@@ -7,33 +7,68 @@ import {
   ScrollView,
   Animated,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Formik } from "formik";
+import * as Yup from "yup"
 import { styles } from "./Editprofile.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
-import { Bottombtn } from "../../../../components";
+import { Bottombtn, Loader } from "../../../../components";
 import Defaultuseravatar from "../../../../assets/icons/Defaultuseravatar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { string } from "yup";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { AuthContext } from "../../../../context/AuthContext";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
+import showerror from "../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
 
 const { Backarrow } = icons;
+
+
+
+const validationSchema = Yup.object().shape({
+  username: Yup.string().label('First Name').required(),
+  firstName: Yup.string().label('First Name').required(),
+  lastName: Yup.string().label('Last Name').required(),
+})
 
 type EditinputProps = {
   label: string;
   value?: string;
+  formikprops?:any;
+  name?:string;
 };
 
-const Editinput = ({ label, value }: EditinputProps) => {
-  return (
-    <View style={{ marginBottom: 30 }}>
+const Editinput = ({ label, value, name,formikprops }: EditinputProps) => {
+  if(formikprops){
+
+    const {values, handleChange, handleBlur} = formikprops
+    return (
+      <View style={{ marginBottom: 30 }}>
       {/* Label */}
       <Text style={styles.labelText}>{label}</Text>
-      <TextInput style={styles.textInput} placeholder={value} />
+      <TextInput 
+        onChangeText={handleChange(name)} 
+        onBlur={handleBlur(name)} 
+        value={values[name]} 
+        style={styles.textInput} 
+        placeholder={value} />
     </View>
   );
+  }
+  return (
+    <View style={{ marginBottom: 30 }}>
+    {/* Label */}
+    <Text style={styles.labelText}>{label}</Text>
+    <TextInput style={styles.textInput} placeholder={value} />
+  </View>
+);
 };
 
 const Basicsettings = () => {
+  const toast = useToast()
+  const {authdata} = useContext(AuthContext)
+  
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -41,27 +76,59 @@ const Basicsettings = () => {
       contentContainerStyle={{ flex: 1, width: SIZES.width }}
     >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.avatarContainer}>
-          <View style={styles.avatarBg}>
-            <Defaultuseravatar />
-          </View>
-          <Text style={styles.avatarText}>Tap to change display picture</Text>
-        </View>
-        <View style={styles.editInputContainer}>
-          <Editinput label="Username" value="@freshsaint" />
-          <Editinput label="Firstname" value="Sarah" />
-          <Editinput label="Lastname" value="Jones" />
-        </View>
-
-        <Bottombtn
-          title="Save changes"
-          onpress={() => console.log("Saved chnages")}
-        />
+        <Formik
+         initialValues={{
+           username: authdata.username,
+           firstName: authdata.fullName.split(" ")[1],
+           lastName: authdata.fullName.split(" ")[0]
+         }}
+         validationSchema={validationSchema}
+         onSubmit={async (values)=>{
+            try{
+                const response = await axiosCustom.put("/profile/update/basic",{
+                  username: values.username,
+                  firstName: values.firstName,
+                  lastName: values.lastName
+                })
+                console.log(response)
+                // send success toast message
+            }catch(err){
+              showerror(toast,err)
+            }
+         }}
+        >
+          {(formikProps)=>{
+            const {isSubmitting, handleSubmit} = formikProps;
+            return(
+              <React.Fragment>
+                {isSubmitting && <Loader />}
+                 <View style={styles.avatarContainer}>
+                  <View style={styles.avatarBg}>
+                    <Defaultuseravatar />
+                  </View>
+                  <Text style={styles.avatarText}>Tap to change display picture</Text>
+                </View>
+                <View style={styles.editInputContainer}>
+                  <Editinput label="Username" name="username" formikprops={formikProps} />
+                  <Editinput label="Firstname" name="firstName" formikprops={formikProps}  />
+                  <Editinput label="Lastname" name="lastName" formikprops={formikProps} />
+                </View>
+                <Bottombtn
+                  title="Save changes"
+                  onpress={handleSubmit}
+                  />
+              </React.Fragment>
+            )
+          }}
+       
+        </Formik>
       </KeyboardAwareScrollView>
     </ScrollView>
   );
 };
 const Personalsettings = () => {
+  const toast = useToast()
+  const {authdata} = useContext(AuthContext)
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -69,17 +136,48 @@ const Personalsettings = () => {
       contentContainerStyle={{ flex: 1, width: SIZES.width }}
     >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.editInputContainer}>
-          <Editinput label="gender" value="-" />
-          <Editinput label="Date of Birth" value="-" />
-          <Editinput label="Address Line 1" value="-" />
-          <Editinput label="Address Line 2" value="-" />
-          <Editinput label="LGA" value="-" />
-        </View>
-        <Bottombtn
-          title="Save changes"
-          onpress={() => console.log("Saved chnages")}
-        />
+      <Formik
+         initialValues={{
+           username: authdata.username,
+           firstName: authdata.fullName.split(" ")[1],
+           lastName: authdata.fullName.split(" ")[0]
+         }}
+         validationSchema={validationSchema}
+         onSubmit={async (values)=>{
+            try{
+                const response = await axiosCustom.put("/profile/update/basic",{
+                  username: values.username,
+                  firstName: values.firstName,
+                  lastName: values.lastName
+                })
+                console.log(response)
+                // send success toast message
+            }catch(err){
+              showerror(toast,err)
+            }
+         }}
+        >{
+          (formikprops)=>{
+            const {isSubmitting, handleSubmit} = formikprops;
+            return(
+              <React.Fragment>
+                { isSubmitting && <Loader/>}
+                <View style={styles.editInputContainer}>
+                  <Editinput  formikprops={formikprops} name="gender" label="gender" value="-" />
+                  <Editinput  formikprops={formikprops} name="dateOfBirth" label="Date of Birth" value="-" />
+                  <Editinput  formikprops={formikprops}  name="address1" label="Address Line 1" value="-" />
+                  <Editinput  formikprops={formikprops}  name="address2" label="Address Line 2" value="-" />
+                  <Editinput  formikprops={formikprops}  name="lga" label="LGA" value="-" />
+                </View>
+                <Bottombtn
+                  title="Save changes"
+                  onpress={handleSubmit}
+                />
+              </React.Fragment>
+            )
+          }
+        }
+        </Formik>
       </KeyboardAwareScrollView>
     </ScrollView>
   );
@@ -131,6 +229,7 @@ const Documentsettings = () => {
 };
 
 const Editprofile = () => {
+  
   const singleWidth = () => {
     let calcWidth = SIZES.width;
     return calcWidth / 3;
