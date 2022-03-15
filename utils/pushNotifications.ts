@@ -1,6 +1,8 @@
 import { Alert , Platform} from "react-native"
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 
 
@@ -19,7 +21,7 @@ export const registerForPushNotificationsAsync = async () => {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    console.log(token, "From the push screen");
   } else {
     console.log('Must use physical device for Push Notifications');
   }

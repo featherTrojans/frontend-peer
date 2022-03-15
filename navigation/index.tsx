@@ -137,7 +137,7 @@ Notification.setNotificationHandler({
 });
 
 export function usePushNotification() {
-  const [expoPushToken, setExpoPushToken] = useState("");
+  const [expoPushToken, setExpoPushToken] = useState<string>();
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
@@ -145,7 +145,7 @@ export function usePushNotification() {
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
-      // console.log(expoPushToken, "Token is now available");
+      console.log(token, "From the index");
     });
 
     // console.log(expoPushToken, "This is the token")
@@ -551,10 +551,15 @@ export default function MainNavigation() {
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
 
+
   useEffect(() => {
     setMessageToken(expoPushToken)
+  }, [token])
 
 
+
+  useEffect(() => {
+  
     const subscription: any = AppState.addEventListener(
       "change",
       (nextAppState) => {
@@ -570,7 +575,7 @@ export default function MainNavigation() {
       }
     );
     return () => {
-      subscription.remove();
+      // subscription.remove();
     };
   }, []);
 

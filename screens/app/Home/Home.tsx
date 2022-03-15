@@ -50,7 +50,7 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
-    link: "Deposit",
+    link: "Depositupdate",
   },
   {
     icon: <Transfer />,
@@ -65,11 +65,12 @@ const walletOptions = [
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  const { setAuthData, authdata, messageToken: token } = useContext(AuthContext);
+  const { setAuthData, authdata, messageToken } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [extractedToken, setExtractedToken] = useState()
 
   // const setMessageToken = async () => {
   //   try {
@@ -80,15 +81,25 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   }
   // }
 
+  const tokenExtractor = (string: any) => {
+    const firstIndex = string.indexOf("[")
+    return string.slice(firstIndex+1, -1)
+  }
+
   useEffect(() => {
     // setMessageToken()
-    console.log(messageToken, "This is my token message")
+    console.log(messageToken, "This is my token messagedstss")
+    if(messageToken){
+     setExtractedToken(tokenExtractor(messageToken))
+    }
+    console.log(extractedToken, 'Extracted token')
+    
     sendAnotherToken()
-  },[])
+  },[extractedToken,messageToken])
 
   const sendAnotherToken = async ()=>{
     try{
-      const response = await axiosCustom.post("/auth/token/create",{messageToken: token})
+      const response = await axiosCustom.post("/auth/token/create",{messageToken: `ExponentPushToken[${extractedToken}]`})
       console.log(response)
     }catch(err){
       console.log(err.response.data)
