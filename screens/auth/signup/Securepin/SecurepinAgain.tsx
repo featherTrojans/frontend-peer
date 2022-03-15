@@ -12,6 +12,7 @@ import {icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { styles } from "./Securepin.styles";
 
 const { SecureDot } = icons;
@@ -21,7 +22,10 @@ const SecurepinAgain = ({ route, navigation }) => {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState<boolean>(false);
   const [amount, setAmount] = useState<string[]>([]);
+  const [showModal, setShowModal] = useState();
   console.log(amount.join(""),pin )
+
+
   const handleSubmit = async () => {
     if(pin.join("") !== amount.join("")){
       return showerror(toast,null,"Pin doesn't match")
@@ -42,6 +46,9 @@ const SecurepinAgain = ({ route, navigation }) => {
     }
   };
 
+
+
+
   const handleSetAmount = (value: string) => {
     if (amount.length < 4) {
       setAmount((oldamount) => [...oldamount, value]);
@@ -61,6 +68,13 @@ const SecurepinAgain = ({ route, navigation }) => {
     <View style={styles.container}>
       {loading && <Loader />}
       <StatusBar />
+
+
+      
+
+
+
+
       <View style={{ paddingHorizontal: 25 }}>
         <JustifyBetween style={{ marginBottom: 10 }}>
           <View>

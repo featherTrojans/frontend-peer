@@ -65,39 +65,35 @@ const walletOptions = [
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  const { setAuthData, authdata } = useContext(AuthContext);
+  const { setAuthData, authdata, messageToken: token } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  const setMessageToken = async () => {
-    try {
-      const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
-      console.log(response, "Here is the response data")
-    } catch (err) {
-      console.log(err.response.data)
-    }
-  }
+  // const setMessageToken = async () => {
+  //   try {
+  //     const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
+  //     console.log(response, "Here is the response data")
+  //   } catch (err) {
+  //     console.log(err.response.data)
+  //   }
+  // }
 
   useEffect(() => {
-<<<<<<< HEAD
-    setMessageToken()
-  },[])
-=======
     // setMessageToken()
+    console.log(messageToken, "This is my token message")
     sendAnotherToken()
   },[])
 
   const sendAnotherToken = async ()=>{
     try{
-      const response = await axiosCustom.post("/auth/token/create",{messageToken:"adfasfasdaraet"})
+      const response = await axiosCustom.post("/auth/token/create",{messageToken: token})
       console.log(response)
     }catch(err){
       console.log(err.response.data)
     }
   }
->>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
 
   //setting up websocket
   useEffect(() => {

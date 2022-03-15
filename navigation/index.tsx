@@ -111,20 +111,6 @@ import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
-<<<<<<< HEAD
-=======
-import SecurepinAgain from "../screens/auth/signup/Securepin/SecurepinAgain";
-import App from "../App";
-import Map from "../screens/shared/map/Map";
-import LockScreen from "../screens/shared/LockScreen/LockScreen";
-import Depositinput from "../screens/app/Deposit/DepositInput/Depositinput";
-import CustomWebView from "../screens/shared/CustomWebView";
-import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
-// import Animated from "react-native-reanimated";
-const AppStack = createStackNavigator<RootStackParamList>();
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
-const AuthStack = createStackNavigator<RootAuthStackParamList>();
->>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
 
 // import App from "../App";
 import Map from "../screens/shared/map/Map";
@@ -157,24 +143,15 @@ export function usePushNotification() {
   const responseListener = useRef();
 
   useEffect(() => {
-<<<<<<< HEAD
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
-      console.log(expoPushToken, "Token is now available");
+      // console.log(expoPushToken, "Token is now available");
     });
 
     // console.log(expoPushToken, "This is the token")
 
     notificationListener.current = Notification.addNotificationReceivedListener(
       (notification) => {
-=======
-    registerForPushNotificationsAsync().then((token) =>
-      setExpoPushToken(token)
-    );
-
-    notificationListener.current =
-      Notification.addNotificationReceivedListener((notification) => {
->>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
         setNotification(notification);
       }
     );
@@ -208,14 +185,14 @@ export function usePushNotification() {
 
   //Instant Notifications
   const sendPushNotification = async (
-    expoMsgToken: string,
+    receiverMsgToken: string,
     title: string,
     body: string,
     redirectTo: string,
     channelId?: string
   ) => {
     const message = {
-      to: expoMsgToken,
+      to: receiverMsgToken,
       sound: "default",
       title: title,
       body: body,
@@ -234,14 +211,10 @@ export function usePushNotification() {
     });
   };
 
-<<<<<<< HEAD
   return {
     sendPushNotification: sendPushNotification,
     expoPushToken: expoPushToken,
   };
-=======
-  return sendPushNotification;
->>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
 }
 
 function getWidth() {
@@ -574,15 +547,14 @@ const RootNavigator = () => {
 export default function MainNavigation() {
   const [modal, setModal] = useState(false);
   const timer = useRef<number>(Date.now());
-  const { token } = useContext(AuthContext);
+  const { token, setMessageToken } = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
-<<<<<<< HEAD
-  // const { sendPushNotification, expoPushToken } = usePushNotification();
+  const { sendPushNotification, expoPushToken } = usePushNotification();
 
-=======
-  
->>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
   useEffect(() => {
+    setMessageToken(expoPushToken)
+
+
     const subscription: any = AppState.addEventListener(
       "change",
       (nextAppState) => {
@@ -601,16 +573,10 @@ export default function MainNavigation() {
       subscription.remove();
     };
   }, []);
-<<<<<<< HEAD
-=======
- 
-
-
->>>>>>> 44afd15e2b3fe3777202cf2d71de195088664fce
 
   return (
     <NavigationContainer ref={navigationRef}>
-      {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
+      {/* {token ? <LockScreen modal={modal} setModal={setModal} /> : null} */}
       <RootNavigator />
     </NavigationContainer>
   );

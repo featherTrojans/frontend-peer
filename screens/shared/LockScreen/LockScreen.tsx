@@ -125,7 +125,7 @@ const LockScreen = ({modal, setModal}: any) => {
       </SafeAreaView>
     </Modal>
   );
-};
-}
+}};
+
 
 export default LockScreen;

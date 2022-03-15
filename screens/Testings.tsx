@@ -10,12 +10,12 @@ import React, { useEffect, useState } from "react";
 import { makePhoneCall, sendMessage } from "../utils/userDeviceFunctions";
 // import * as FileSystem from "expo-file-system";
 // import * as MediaLibrary from "expo-media-library";
-// import { usePushNotification } from "../navigation";
+import { usePushNotification } from "../navigation";
 // usePushNotification
 
 const Testings = () => {
 
-  // const {sendPushNotification, expoPushToken} = usePushNotification()
+  const {sendPushNotification, expoPushToken} = usePushNotification()
 
 
   // async function download2() {
@@ -73,7 +73,7 @@ const Testings = () => {
 
   return (
     <View style={styles.container}>
-      <Button title="Download invoice & print" onPress={() => console.log( "Wallet Funding", "This is the body of the funding", "withdrawals")} ></Button>
+      <Button title="Download invoice & print" onPress={() => sendPushNotification(expoPushToken, "Wallet Funding", "This is the body of the funding", "withdrawals")} ></Button>
     </View>
   );
 };

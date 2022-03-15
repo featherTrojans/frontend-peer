@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState ,useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, Text, View, FlatList, RefreshControl, Platform } from "react-native";
 import LottieView from "lottie-react-native";
 import * as Device from "expo-device";
@@ -10,7 +10,6 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
 
 import { styles } from "./Transaction.styles";
-import { AuthContext } from "../../../../context/AuthContext";
 
 const { Cryinganimate } = icons;
 
@@ -121,7 +120,6 @@ const EmptyComponent = () => {
 };
 
 const Transactions = ({ navigation }: any) => {
-  const { authdata } = useContext(AuthContext);
   const [transactions, setTransations] = useState();
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -132,79 +130,22 @@ const Transactions = ({ navigation }: any) => {
     const notificationListener = useRef();
     const responseListener = useRef();
   
-    // Notifications.setNotificationHandler({
-    //   handleNotification: async () => ({
-    //     shouldShowAlert: true,
-    //     shouldPlaySound: false,
-    //     shouldSetBadge: false,
-    //   }),
-    // });
+
 
 
 
    
-  // useEffect(() => {
-
-  //   registerForPushNotificationsAsync()
-  //   .then((token) => {
-  //     setExpoPushToken(token);
-  //   });
-
-    // This listener is fired whenever a notification is received while the app is foregrounded
-  //   notificationListener.current =
-  //     Notifications.addNotificationReceivedListener((notification) => {
-  //       setNotification(notification);
-  //     });
-
-  //   // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
-  //   responseListener.current =
-  //     Notifications.addNotificationResponseReceivedListener((response) => {
-  //       // console.log(response);
-  //     });
-
-  //   // welcomeNotifications()
-  //   updateMessageToken(expoPushToken)
 
 
 
-  //   return () => {
-  //     Notifications.removeNotificationSubscription(
-  //       notificationListener.current
-  //     );
-  //     Notifications.removeNotificationSubscription(responseListener.current);
-  //   };
-  // }, []);
 
 
-
-    //Instant Notifications
-  // async function sendPushNotification(expoPushToken) {
-
-  //   const message = {
-  //     to: expoPushToken,
-  //     sound: "default",
-  //     title: "From Feather",
-  //     body: "Testing the push notification",
-  //     data: { someData: "goes here" },
-  //     channelId: 'transactions',
-  //   };
-
-  //   await fetch("https://exp.host/--/api/v2/push/send", {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Accept-encoding": "gzip, deflate",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(message),
-  //   });
-  // }
 
 
 
   useEffect(() => {
     getAllTransactions();
-  }, [authdata.walletBal]);
+  }, []);
 
   const getAllTransactions = async () => {
     try {
