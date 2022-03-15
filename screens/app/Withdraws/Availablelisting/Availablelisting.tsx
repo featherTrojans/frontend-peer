@@ -81,6 +81,7 @@ const Availablelisting = ({ navigation, route }: any) => {
         { useGoogleMaps: true }
         );
         setLocationSide(locationaddress[0]);
+        console.log(locationaddress[0])
         let locationText = `${locationaddress[0].name}, ${locationaddress[0].city}`
         setCoords({...location.coords,locationText:locationText});
       getAllAgents(locationaddress[0].city!, locationaddress[0].name!);
