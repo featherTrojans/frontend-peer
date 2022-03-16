@@ -1025,7 +1025,7 @@
     "pirates" "^4.0.0"
     "source-map-support" "^0.5.16"
 
-"@babel/runtime@^7.14.0", "@babel/runtime@^7.15.4", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.14.0", "@babel/runtime@^7.15.4", "@babel/runtime@^7.16.7", "@babel/runtime@^7.8.4":
   "integrity" "sha512-9E9FJowqAsytyOY6LG+1KuueckRL+aQW+mKvXRXnuFGyRAyepJPmEo9vgMfXUA6O9u3IeEdv9MAkppFcaQwogQ=="
   "resolved" "https://registry.npmjs.org/@babel/runtime/-/runtime-7.16.7.tgz"
   "version" "7.16.7"
@@ -7313,6 +7313,13 @@
   "resolved" "https://registry.npmjs.org/pngjs/-/pngjs-5.0.0.tgz"
   "version" "5.0.0"
 
+"polished@^4.1.4":
+  "integrity" "sha512-Nq5Mbza+Auo7N3sQb1QMFaQiDO+4UexWuSGR7Cjb4Sw11SZIJcrrFtiZ+L0jT9MBsUsxDboHVASbCLbE1rnECg=="
+  "resolved" "https://registry.npmjs.org/polished/-/polished-4.1.4.tgz"
+  "version" "4.1.4"
+  dependencies:
+    "@babel/runtime" "^7.16.7"
+
 "posix-character-classes@^0.1.0":
   "integrity" "sha1-AerA/jta9xoqbAL+q7jB/vfgDqs="
   "resolved" "https://registry.npmjs.org/posix-character-classes/-/posix-character-classes-0.1.1.tgz"
@@ -7720,6 +7727,13 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
+"react-native-shadow-2@^6.0.3":
+  "integrity" "sha512-gJP3tEEBvCus/jpclEI1RNKGsl0/nTwFzqFDdmSbqt7tLgDuy8r2oNYdn4hP1WAeT1fTH0EOh9bXDGB5ZfCV0A=="
+  "resolved" "https://registry.npmjs.org/react-native-shadow-2/-/react-native-shadow-2-6.0.3.tgz"
+  "version" "6.0.3"
+  dependencies:
+    "polished" "^4.1.4"
+
 "react-native-skeleton-placeholder@^5.0.0":
   "integrity" "sha512-7sdG+Y2ENEVcxFC9XlpCgHy59XKkxaUyVqDwuAb66hvl7lwFr25uA5kHJ+JuDJ84ptVil5UEowW/2avwhsfoYg=="
   "resolved" "https://registry.npmjs.org/react-native-skeleton-placeholder/-/react-native-skeleton-placeholder-5.0.0.tgz"
@@ -7740,7 +7754,7 @@
     "path-dirname" "^1.0.2"
     "semver" "^5.6.0"
 
-"react-native-svg@>=6.5.1", "react-native-svg@12.1.1":
+"react-native-svg@^12.1.0", "react-native-svg@>=6.5.1", "react-native-svg@12.1.1":
   "integrity" "sha512-NIAJ8jCnXGCqGWXkkJ1GTzO4a3Md5at5sagYV8Vh4MXYnL4z5Rh428Wahjhh+LIjx40EE5xM5YtwyJBqOIba2Q=="
   "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-12.1.1.tgz"
   "version" "12.1.1"

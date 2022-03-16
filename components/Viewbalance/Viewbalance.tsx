@@ -4,13 +4,18 @@ import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Viewbalance.styles";
 import { AuthContext } from "../../context/AuthContext";
 import amountFormatter from "../../utils/formatMoney";
+import { useNavigation } from "@react-navigation/native";
+
 
 const { Eyecrossed, Arrowright } = icons;
 
 const Viewbalance = ({ navigate }: any) => {
-  const { authdata } = useContext(AuthContext);
 
-  const [showAmount, setShowAmount] = useState(true)
+
+  const navigation = useNavigation()
+  const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
+
+  // const [showAmount, setShowAmount] = useState(true)
 
 
 
@@ -24,7 +29,7 @@ const Viewbalance = ({ navigate }: any) => {
         </View>
 
 
-        <TouchableOpacity style={styles.addCashBg} activeOpacity={0.8} onPress={navigate}>
+        <TouchableOpacity style={styles.addCashBg} activeOpacity={0.8} onPress={() => navigation.navigate("Addcash")}>
           <Text style={styles.addCashText}>Add Cash</Text>
           <Arrowright />
         </TouchableOpacity>

@@ -54,7 +54,7 @@ function TransferInput({ route, navigation }) {
       <Backheader title="Enter Amount" />
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
-      <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
+      <Viewbalance />
 
         <View style={{ flex: 1, justifyContent: "center" }}>
           <View style={{ alignItems: "center" }}>

@@ -68,7 +68,7 @@ const Transactiondetails = ({ navigation, route }) => {
   });
 
   
-  Clipboard.removeClipboardListener(subscription);
+  // Clipboard.removeClipboardListener(subscription);
 
 
 

@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     },
     backArrow: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     backArrowText: {
         ...fontsize.xmedium,

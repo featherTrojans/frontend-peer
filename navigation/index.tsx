@@ -107,6 +107,7 @@ import {
   Depositinput,
   LockScreen,
   Testings,
+  Paybills,
 } from "../screens";
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -254,7 +255,6 @@ const Tabs = () => {
                   style={
                     {
                       // position: "absolute",
-                      // top: "50%"
                     }
                   }
                 >
@@ -518,6 +518,8 @@ const RootNavigator = () => {
 
           {/* Notification Screen */}
           <AppStack.Screen name="Notifications" component={Notifications} />
+
+          <AppStack.Screen name="Paybills" component={Paybills} />
 
           {/* Deposit Screens */}
           <AppStack.Group>

@@ -106,6 +106,10 @@ import Downloadreceipt from "../assets/icons/Downloadreceipt";
 import Reporttransactions from "../assets/icons/Reporttransactions";
 import Onmapicon from "../assets/icons/Onmapicon";
 import Smalluseravatar from "../assets/icons/Smalluseravatar";
+import Networklogos from "../assets/icons/Networklogos";
+import Electricitybillsicon from "../assets/icons/Electricitybillsicon";
+import Cablestvicon from "../assets/icons/Cablestvicon";
+
 
 
 
@@ -247,6 +251,9 @@ Downloadreceipt,
 Reporttransactions,
 Onmapicon,
 Smalluseravatar,
+Networklogos,
+Electricitybillsicon,
+Cablestvicon,
 
 //Animated icons
 

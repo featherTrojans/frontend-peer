@@ -153,7 +153,7 @@ const Withdraw = ({ navigation }) => {
       <Backheader title="Withdraw" />
       {loading && <Loader />}
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
-      <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
+      <Viewbalance />
         <View style={{ flex: 1 }}>
           {(pendingRequests.length < 1 && acceptedRequests.length < 1)  ? <Emptyrequest /> : <Requestlist />}
         </View>

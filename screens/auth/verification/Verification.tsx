@@ -1,17 +1,19 @@
 import {useState, useEffect} from "react"
-import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity, StatusBar } from "react-native";
+import LottieView from 'lottie-react-native'
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
-import { Loader } from "../../../components";
+import { Bottombtn, Loader } from "../../../components";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
+import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
-const { Cancelicon } = icons;
+const { Cancelicon, Successcheckanimate } = icons;
 
 const Verification = ({route,navigation}) => {
   const toast = useToast()
@@ -21,6 +23,7 @@ const Verification = ({route,navigation}) => {
   const [otpCode, setOtpCode] = useState<any>("")
   const [tokenn, setToken] = useState<string|null>(token)
   const [disable, setDisable] = useState(true)
+  const [showModal, setShowModal] = useState<boolean>(false)
 
     
   useEffect(() => {
@@ -48,7 +51,8 @@ const Verification = ({route,navigation}) => {
     setLoading(true)
     try{
       const response = await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
-      navigation.navigate("Security",{token:tokenn})
+      // navigation.navigate("Security",{token:tokenn})
+      setShowModal(true)
     }catch(err){
       showerror(toast, err)
     }finally{
@@ -71,7 +75,25 @@ const Verification = ({route,navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar />
       {/* Closeicon */}
+
+      <Globalmodal
+        showState={showModal}
+        onBgPress={() => setShowModal(true)}
+        btnFunction={() => navigation.navigate("Security",{token:tokenn})}
+        btnText="Continue"
+      >
+        <View style={{marginBottom: 50, justifyContent: 'center', alignItems: 'center', marginHorizontal: 85}}>
+            <LottieView source={Successcheckanimate} style={{width: 148, height: 148}} autoPlay loop={false}/>
+            <Text style={{...fontsize.bsmall, ...FONTS.regular, marginTop: 17, textAlign: 'center'}}>Your number has been successfully verified</Text>
+    
+
+        </View>
+      </Globalmodal>
+
+
+
       {loading && <Loader />}
       <TouchableOpacity style={styles.cancelIcon} onPress={()=>navigation.goBack()}>
         <Cancelicon />

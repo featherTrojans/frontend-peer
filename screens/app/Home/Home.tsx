@@ -28,6 +28,8 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
 import { customNavigation } from "../../../utils/customNavigation";
+import { useLinkTo } from '@react-navigation/native';
+
 
 const {
   Profilepics,
@@ -61,7 +63,7 @@ const walletOptions = [
   {
     icon: <Paybills />,
     title: "Paybills",
-    link: "Choosewallet",
+    link: "Paybills",
   },
 ];
 
@@ -72,6 +74,9 @@ const Home = ({ navigation }: { navigation: any }) => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState()
+  const linkTo = useLinkTo();
+
+
 
   // const setMessageToken = async () => {
   //   try {
@@ -225,7 +230,7 @@ const Home = ({ navigation }: { navigation: any }) => {
         }
       >
         <View style={styles.walletBlock}>
-          <Viewbalance navigate={() => navigation.navigate("Addcash")} />
+          <Viewbalance />
           <View style={styles.walletOptionsContainer}>
             {walletOptions.map(
               ({
@@ -262,7 +267,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.push("Transactions")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Root", {screen: "Transactions"})}>
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>
           </View>

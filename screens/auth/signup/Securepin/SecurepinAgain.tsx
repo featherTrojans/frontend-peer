@@ -67,9 +67,9 @@ const SecurepinAgain = ({ route, navigation }) => {
       <StatusBar />
 
       <Globalmodal
-        showState={true}
+        showState={showModal}
         onBgPress={() => setShowModal(true)} // This should not do anything
-        btnFunction={() => navigation.navigate("Setup", {token:result?.data?.token, defaultUsername: result?.data?.data.username})}
+        btnFunction={() => navigation.navigate("Setup", {token: result?.data?.data?.token, defaultUsername: result?.data?.data?.username})}
         btnText="Continue"
       >
         <>

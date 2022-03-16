@@ -148,7 +148,7 @@ const Deposit = ({navigation}) => {
       <Backheader title="Deposit" />
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
-      <Viewbalance navigate={() => navigation.navigate("Addcash")}/>
+      <Viewbalance />
         <View style={{ flex: 1 }}>
           {(pending.length < 1 && accepted.length < 1) ? <Emptyrequest /> : <Requestlist />}
         </View>

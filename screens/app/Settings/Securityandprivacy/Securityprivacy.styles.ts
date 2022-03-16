@@ -10,8 +10,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
-    marginVertical: 25,
-    paddingHorizontal: 22,
+    marginVertical: 20,
+    alignItems: 'center',
+    paddingHorizontal: 7,
+    
+    // backgroundColor: 'red'
   },
   mainHeaderText: {
     ...fontsize.small,
