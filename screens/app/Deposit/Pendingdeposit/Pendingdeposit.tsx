@@ -6,16 +6,21 @@ import {
     ImageBackground,
     TouchableOpacity
   } from "react-native";
-  import React, {useContext, useState} from "react";
+  import React, {useContext, useEffect, useState} from "react";
   import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
   import {
     Bottombtn,
     Iconwithdatas,
+    Loader,
     Requesterdetails,
   } from "../../../../components";
 import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
 import Map from "../../../shared/map/Map";
 import { LocationContext } from "../../../../context/LocationContext";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
+import showerror from "../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
+import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
   // import { styles } from './Pendingwithdraw.styles'
@@ -25,12 +30,42 @@ import { LocationContext } from "../../../../context/LocationContext";
   const { Locationmap } = images;
   
   const Pendingdeposit = ({navigation, route}) => {
+    const toast = useToast()
     const {requestInfo} = route.params
+    const {setCoords, setDestinationCoords} = useContext(LocationContext)
     const [toggleShow, setToggleShow] = useState(true);
-    const {coords} = useContext(LocationContext)
+    const [loading, setLoading] = useState(false)
+    
+    useEffect(()=>{
+      // update both map, meeting point and  Agent point
+      getLocation()
+    }, []);
+  
+    const getLocation = async () => {
+        const {coordinates, address} = await getCurrentLocation()
+        setCoords({...coordinates,locationText:address});
+        // get the other destination
+        const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
+        setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
+    }
+  
+  
+    const handleAcceptRequest = async () =>{
+      setLoading(true)
+      try{
+        await axiosCustom.put(`/request/accept/${requestInfo.reference}`)
+        navigation.navigate("Home")
+      }catch(err){
+        showerror(toast,err)
+      }finally{
+        setLoading(false)
+      }
+    }
+
     return (
       <View style={styles.container}>
         <StatusBar />
+        {loading && <Loader />}
         <Map />
           <View style={styles.previewContainer}>
             <View style={{ paddingHorizontal: 25 }}>
@@ -38,7 +73,7 @@ import { LocationContext } from "../../../../context/LocationContext";
                 <View>
                   <View style={styles.detailsProfile}>
                     <Requesterdetails
-                      name={requestInfo.full_name}
+                      name={requestInfo?.user?.fullName}
                       distance="3kms"
                       duration={12}
                     />
@@ -69,7 +104,7 @@ import { LocationContext } from "../../../../context/LocationContext";
                         style={{ flexDirection: "row", alignItems: "center" }}
                       >
                         <Meetupdot />
-                        <Text style={styles.depositLocationText}>{requestInfo.meetup}</Text>
+                        <Text style={styles.depositLocationText}>{requestInfo.meetupPoint}</Text>
                       </View>
                     </View>
                   </View>
@@ -110,9 +145,9 @@ import { LocationContext } from "../../../../context/LocationContext";
               )}
   
               <View style={styles.bottomBtnContainer}>
-                <View style={styles.bottomAcceptBtn}>
+                <TouchableOpacity style={styles.bottomAcceptBtn} onPress={handleAcceptRequest}>
                   <Text style={styles.cancelText}>ACCEPT REQUEST</Text>
-                </View>
+                </TouchableOpacity>
                 <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.blackBtn}

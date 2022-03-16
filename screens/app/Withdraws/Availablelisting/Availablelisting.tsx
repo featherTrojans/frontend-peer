@@ -17,38 +17,19 @@ import Map from "../../../shared/map/Map";
 import * as Location from "expo-location";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
+import { getCurrentLocation } from "../../../../utils/customLocation";
 
 const { Backarrow, Forwardarrow, Requestee1, Requestee2, Requestee3, Onmapicon } = icons;
 const { Mapimage } = images;
 
-const USERDATAS = [
-  {
-    image: <Requestee1 />,
-    name: "Thomas Uzoechina",
-    distance: 30,
-    noOfBadges: 19,
-  },
-  {
-    image: <Requestee3 />,
-    name: "Malik Abubarkar",
-    distance: 30,
-    noOfBadges: 19,
-  },
-  {
-    image: <Requestee2 />,
-    name: "Oreoluwa Badmus",
-    distance: 17,
-    noOfBadges: 18,
-  },
-];
+
 
 const listingtypes = ["peers", "agents"];
 
 const Availablelisting = ({ navigation, route }: any) => {
   const { amount } = route.params;
-  const { setCoords, coords, setDestinationCoords } = useContext(LocationContext);
+  const { setCoords,setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([]);
-  const [locationSide, setLocationSide] = useState({});
   const [activeType, setActiveType] = useState("peers");
   const [loading, setLoading] = useState(false);
 
@@ -59,75 +40,39 @@ const Availablelisting = ({ navigation, route }: any) => {
     }
   }
 
-
-
-
-
-
-
   useEffect(() => {
-    (async () => {
-
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
-      Location.setGoogleApiKey("AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY");
-      let locationaddress = await Location.reverseGeocodeAsync(
-        location.coords,
-        { useGoogleMaps: true }
-        );
-        setLocationSide(locationaddress[0]);
-        console.log(locationaddress[0])
-        let locationText = `${locationaddress[0].name}, ${locationaddress[0].city}`
-        setCoords({...location.coords,locationText:locationText});
-      getAllAgents(locationaddress[0].city!, locationaddress[0].name!);
-    })();
+    getLocation()
   }, []);
 
-  const getAllAgents = async (city: string, name: string) => {
-    let locationText = `${name}, ${city}`
+  const getLocation = async () => {
+      const {coordinates, address} = await getCurrentLocation()
+      setCoords({...coordinates,locationText:address});
+      getAllAgents(address);
+  }
+
+  const getAllAgents = async (address: string) => {
     try {
       setLoading(true);
       const response = await axiosCustom.post("/status/find", {
         amount: amount,
-        location: locationText,
+        location: address,
       });
-      console.log(response,"success")
+      console.log(response.data,"success")
       setAgents(response.data.data);
-      
     } catch (err) {
       
     }finally{
       setLoading(false)
     }
   };
-
-  const agentsdata = [{
-      fullName: "Ayobami Lawal",
-      duration: "1 hr" ,
-      username:"dudeth",
-      latitude: "7.487",
-      longitude: "4.53",
-      locationText: "Abeokuta",
-      reference: "alrgULAtOw",
-  }]
   
   const Singleuser = ({ profile }: any) => {
-    const { fullName, duration, username } = profile;
-
+    const { fullName, duration } = profile;
     const handleAgentSelect = ()=>{
       // adding Location context
       setDestinationCoords(profile)
-        navigation.navigate("Withdrawpreview", {
-            amount,
-            userInfo: profile,
-          })
+      navigation.navigate("Withdrawpreview", {amount,userInfo: profile})
     }
-
     if(loading){
       return <ActivityIndicator />
     }
@@ -136,12 +81,9 @@ const Availablelisting = ({ navigation, route }: any) => {
         style={styles.userContainer}
         activeOpacity={0.8}
         onPress={handleAgentSelect}
-      >
-
-        
+      >   
         <View style={styles.detailsContainer}>
           {/* Image */}
-
           <View style={styles.infoContainer}>
             <Text style={styles.userName}>{fullName}</Text>
             <View style={styles.otherInfo}>
@@ -187,10 +129,8 @@ const Availablelisting = ({ navigation, route }: any) => {
                 :
                 "Get cash easily from feather agents as well as POS money agents around you, very fast."
             }
-
             </Text>
           </View>
-
           <View style={{ marginVertical: 32, flexDirection: "row", }}>
             {listingtypes.map((listingtype) => {
               const isActive = listingtype === activeType;

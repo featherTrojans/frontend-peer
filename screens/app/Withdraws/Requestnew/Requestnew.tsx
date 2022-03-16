@@ -54,13 +54,6 @@ function Requestnew({ navigation }) {
   }
 
 
-
-
-
-
-
-
-
   return (
     <View style={styles.container}>
       <Backheader title="Amount" />

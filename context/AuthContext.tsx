@@ -7,8 +7,9 @@ const AuthContext = createContext<any>({});
 const AuthProvider:FC = ({children}) =>{
     const [authdata, setAuthData] = useState({})
     const [token,setToken] = useState("")
+    const [messageToken, setMessageToken] = useState("")
     return (
-        <AuthContext.Provider value={{authdata,setAuthData,token,setToken}}>
+        <AuthContext.Provider value={{authdata,setAuthData,token,setToken, messageToken, setMessageToken}}>
             
             {children}
         </AuthContext.Provider>

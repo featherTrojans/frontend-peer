@@ -6,7 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity
 } from "react-native";
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
 import {
   Bottombtn,
@@ -16,6 +16,7 @@ import {
 import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
 import Map from "../../../shared/map/Map";
 import { LocationContext } from "../../../../context/LocationContext";
+import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
 // import { styles } from './Pendingwithdraw.styles'
@@ -36,8 +37,21 @@ const { Locationmap } = images;
 
 const Accepteddeposit = ({navigation, route}) => {
   const {requestInfo} = route.params
+  const {setCoords, setDestinationCoords} = useContext(LocationContext)
   const [toggleShow, setToggleShow] = useState(true);
-  const {coords} = useContext(LocationContext)
+
+  useEffect(()=>{
+    // update both map, meeting point and  Agent point
+    getLocation()
+  }, []);
+
+  const getLocation = async () => {
+      const {coordinates, address} = await getCurrentLocation()
+      setCoords({...coordinates,locationText:address});
+      // get the other destination
+      const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
+      setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
+  }
 
   return (
     <View style={styles.container}>
@@ -49,7 +63,7 @@ const Accepteddeposit = ({navigation, route}) => {
               <View>
                 <View style={styles.detailsProfile}>
                   <Requesterdetails
-                    name="Destiny Babalola"
+                    name={requestInfo?.user?.fullName}
                     distance="3kms"
                     duration={12}
                   />
@@ -118,7 +132,7 @@ const Accepteddeposit = ({navigation, route}) => {
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <TouchableOpacity style={styles.bottomAcceptBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Depositpin")}>
+              <TouchableOpacity style={styles.bottomAcceptBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Depositpin",{requestInfo})}>
                 <Text style={styles.cancelText}>RECEIVE PAYMENT</Text>
               </TouchableOpacity>
               <TouchableOpacity

@@ -6,7 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
 import {
   Bottombtn,
@@ -15,6 +15,8 @@ import {
 } from "../../../../components";
 import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 import Map from "../../../shared/map/Map";
+import { LocationContext } from "../../../../context/LocationContext";
+import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -32,8 +34,25 @@ const {
 } = icons;
 const { Locationmap } = images;
 
-const Acceptedwithdraw = ({ navigation }) => {
+const Acceptedwithdraw = ({ navigation, route }) => {
+  const {requestInfo} = route.params;
+  const {setCoords, setDestinationCoords} = useContext(LocationContext)
   const [toggleShow, setToggleShow] = useState(false);
+
+  useEffect(()=>{
+    // update both map, meeting point and  Agent point
+    getLocation()
+  }, []);
+
+  const getLocation = async () => {
+      const {coordinates, address} = await getCurrentLocation()
+      setCoords({...coordinates,locationText:address});
+      // get the other destination
+      const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
+      setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
+  }
+
+
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -44,7 +63,7 @@ const Acceptedwithdraw = ({ navigation }) => {
               <View>
                 <View style={styles.detailsProfile}>
                   <Requesterdetails
-                    name="Destiny Babalola"
+                    name={requestInfo.agentUsername}
                     distance="3kms"
                     duration={12}
                   />
@@ -55,9 +74,9 @@ const Acceptedwithdraw = ({ navigation }) => {
                 <View style={{ marginTop: 20 }}>
                   <Text style={styles.amountText}>Amount</Text>
                   <Text style={styles.amountPrice}>
-                    NGN 65,000.00{" "}
+                    NGN {requestInfo.amount}{" "}
                     <Text style={styles.amountBaseCharge}>
-                      + 1,500.00 (Base Charge)
+                      + {requestInfo.charges} (Base Charge)
                     </Text>{" "}
                   </Text>
                   <Text style={styles.baseChargeNegotiate}>
@@ -72,7 +91,7 @@ const Acceptedwithdraw = ({ navigation }) => {
                       style={{ flexDirection: "row", alignItems: "center" }}
                     >
                       <Meetupdot />
-                      <Text style={styles.locationText}>Forks and Fingers</Text>
+                      <Text style={styles.locationText}>{requestInfo?.meetupPoint}</Text>
                     </View>
                   </View>
                 </View>

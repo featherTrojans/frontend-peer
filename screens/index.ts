@@ -22,11 +22,9 @@ import Securityprivacy from "./app/Settings/Securityandprivacy/Securityprivacy";
 import Changepassword from "./app/Settings/Securityandprivacy/Changepassword/Changepassword";
 import Changepin from "./app/Settings/Securityandprivacy/Changepin/Changepin";
 
-
 import Notifications from "./app/Notifications/Notifications";
 
 // These are the transactions sub screens
-
 
 import Availablelisting from "./app/Withdraws/Availablelisting/Availablelisting";
 import Addcash from "./app/Walletfunding/Addcash/Addcash";
@@ -71,17 +69,12 @@ import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 //This screen is for testing somne functionalities
 
 import Testings from "./Testings";
-
-
-
-
-
-
-
-
-
-
-
+import TransferpinBank from "./app/Transferfunds/Transferpin/TransferPinBank";
+import WithdrawPin from "./app/Withdraws/WithdrawPin/WithdrawPin";
+import SecurepinAgain from "./auth/signup/Securepin/SecurepinAgain";
+import CustomWebView from "./shared/CustomWebView";
+import Depositinput from "./app/Deposit/DepositInput/Depositinput";
+import LockScreen from "./shared/LockScreen/LockScreen";
 
 export {
   Onboarding,
@@ -93,44 +86,31 @@ export {
   Security,
   Securepin,
   Welcome,
-
   Home,
-
-
   Transactions,
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
-
   History,
-
-
   Settings,
   Editprofile,
   Securityprivacy,
   Changepassword,
   Changepin,
-
   Addcash,
   Choosewallet,
-
   Transfercash,
   TransferInput,
   Getdetails,
   Bankaccount,
   Transferpin,
-  
-
   Notifications,
-
   Deposit,
   Depositupdate,
   Pendingdeposit,
   Accepteddeposit,
   Depositpin,
   Canceldeposit,
-
-
   Requestnew,
   Availablelisting,
   Withdraw,
@@ -141,20 +121,17 @@ export {
   Requestsummary,
   Summary,
   Cancelrequest,
-
-
   Chatsdm,
   Chatshome,
   Usersearch,
-
-
   Pendingrequest,
   Accepetedrequest,
   WalletPin,
-
-
-
-
   Testings,
-
+  TransferpinBank,
+  WithdrawPin,
+  SecurepinAgain,
+  CustomWebView,
+  Depositinput,
+  LockScreen,
 };

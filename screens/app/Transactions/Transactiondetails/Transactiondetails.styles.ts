@@ -39,7 +39,6 @@ export const styles = StyleSheet.create({
   copyClipboardText: {
     ...fontsize.xsmallest,
     ...FONTS.medium,
-    color: COLORS.grey2,
     marginLeft: 5,
   },
 });

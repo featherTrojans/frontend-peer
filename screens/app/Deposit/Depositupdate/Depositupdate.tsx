@@ -9,6 +9,7 @@ import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import amountFormatter from "../../../../utils/formatMoney";
 import { AuthContext } from "../../../../context/AuthContext";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 const {
   TransferIcon,
   Location,
@@ -79,14 +80,13 @@ const StatusUpdate = ({status, navigation}:any)=>{
         </View>
 
         <View style={styles.horizontalLine} />
-        <View style={styles.detailsRow}>
+        {/* <View style={styles.detailsRow}>
           <View style={styles.iconAndTitle}>
-            {/* Icons */}
             <Trendingupright />
             <Text style={styles.iconTitle}>My Earnings last 24hrs</Text>
           </View>
           <Text style={styles.iconValue}>N32,920.00</Text>
-        </View>
+        </View> */}
       </View>
     </View>
 
@@ -101,10 +101,21 @@ const StatusUpdate = ({status, navigation}:any)=>{
 }
 
 const Depositupdate = ({navigation}) => {
+  
   const [status, setStatus] =  useState<null|{}>(null)
   useEffect(()=>{
     getFromStorage()
+    // get Status from the database
+    // getDepositStatus()
   },[])
+  const getDepositStatus = async ()=>{
+    try{
+      const response = await axiosCustom.get("/status/get")
+      console.log(response.data)
+    }catch(err){
+      // maybe show the error
+    }
+  }
   const getFromStorage = async ()=>{
     try{
       const jsonValue = await AsyncStorage.getItem("@depositstatus")
@@ -119,9 +130,12 @@ const Depositupdate = ({navigation}) => {
         }
       }
     }catch(err){
-
     }
   }
+
+
+
+
   return (
     <View style={styles.container}>
       <Backheader title="Deposit" />

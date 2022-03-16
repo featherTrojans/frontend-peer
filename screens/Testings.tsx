@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { makePhoneCall, sendMessage } from "../utils/userDeviceFunctions";
-import * as FileSystem from "expo-file-system";
-import * as MediaLibrary from "expo-media-library";
+// import * as FileSystem from "expo-file-system";
+// import * as MediaLibrary from "expo-media-library";
 import { usePushNotification } from "../navigation";
 // usePushNotification
 

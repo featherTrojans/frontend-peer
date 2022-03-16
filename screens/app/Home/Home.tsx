@@ -50,7 +50,7 @@ const walletOptions = [
   {
     icon: <Deposit />,
     title: "Deposit",
-    link: "Deposit",
+    link: "Depositupdate",
   },
   {
     icon: <Transfer />,
@@ -65,29 +65,30 @@ const walletOptions = [
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  const { setAuthData, authdata } = useContext(AuthContext);
+  const { setAuthData, authdata, messageToken: token } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  const setMessageToken = async () => {
-    try {
-      const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
-      console.log(response, "Here is the response data")
-    } catch (err) {
-      console.log(err.response)
-    }
-  }
+  // const setMessageToken = async () => {
+  //   try {
+  //     const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
+  //     console.log(response, "Here is the response data")
+  //   } catch (err) {
+  //     console.log(err.response.data)
+  //   }
+  // }
 
   useEffect(() => {
     // setMessageToken()
+    console.log(token, "This is my token message")
     sendAnotherToken()
   },[])
 
   const sendAnotherToken = async ()=>{
     try{
-      const response = await axiosCustom.post("/auth/token/create",{messageToken:"adfasfasdaraet"})
+      const response = await axiosCustom.post("/auth/token/create",{messageToken: token})
       console.log(response)
     }catch(err){
       console.log(err.response.data)
@@ -217,6 +218,7 @@ const Home = ({ navigation }: { navigation: any }) => {
                   onPress={() => navigation.navigate(link)}
                   style={styles.optionContainer}
                   activeOpacity={0.8}
+                  key={title}
                 >
                   <View style={styles.optionIconBg}>
                     {/* Icon will be inside this */}
@@ -246,7 +248,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <EmptyComponent />
           ) : (
             histories.map((history) => (
-              <Transactionhistory date={history.time} datas={history.data} />
+              <Transactionhistory date={history.time} datas={history.data}  key={history.time}/>
             ))
           )}
         </View>

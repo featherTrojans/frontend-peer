@@ -91,6 +91,7 @@ const Deposit = ({navigation}) => {
   const getpendingrequest = async()=>{
     try{
       const response = await axiosCustom.get("/request/depositor/pending");
+      console.log(response)
       setPending(response.data.data)
     }catch(err){
 
@@ -108,7 +109,7 @@ const Deposit = ({navigation}) => {
   // Requestee profile
   const Requesteeprofile = ({ list, onpress}:  any ) => {
     const {
-      reference, charges,status, full_name, username, amount } = list;
+      reference, charges,status, full_name, user, amount } = list;
     return (
       <TouchableOpacity style={styles.depositProfileContainer} activeOpacity={0.7} onPress={onpress}>
         <View style={styles.depositProfileDetails}>
@@ -122,7 +123,7 @@ const Deposit = ({navigation}) => {
             }}
           />
           <View style={{ marginLeft: 13 }}>
-            <Text style={styles.depositProfileName}>{full_name}</Text>
+            <Text style={styles.depositProfileName}>{user?.fullName}</Text>
             <Text style={styles.depositAmount}>
               NGN {amount}{" "}
               <Text style={styles.depositBasecharge}>
@@ -164,7 +165,7 @@ const Deposit = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={datass}
+          data={REQUESTDATA}
           renderItem={({ item }) => (
           <Requesteeprofile list={item}    
           onpress={() =>navigation.navigate(item.status === "PENDING"

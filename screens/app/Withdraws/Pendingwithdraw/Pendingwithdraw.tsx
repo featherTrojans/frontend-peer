@@ -6,7 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity
 } from "react-native";
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
 import {
   Bottombtn,
@@ -14,6 +14,9 @@ import {
   Requesterdetails,
 } from "../../../../components";
 import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
+import Map from "../../../shared/map/Map";
+import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
+import { LocationContext } from "../../../../context/LocationContext";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -21,9 +24,24 @@ const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon, Dropswitch } = icons
 const { Locationmap } = images;
 
 const Pendingwithdraw = ({navigation, route}) => {
+  const {setCoords, setDestinationCoords} = useContext(LocationContext)
   const {requestInfo} = route.params;
   const [toggleShow, setToggleShow] = useState(true);
 
+  useEffect(()=>{
+    // update both map, meeting point and  Agent point
+    getLocation()
+  }, []);
+
+  const getLocation = async () => {
+      const {coordinates, address} = await getCurrentLocation()
+      setCoords({...coordinates,locationText:address});
+      // get the other destination
+      const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
+      setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
+  }
+
+  
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -38,7 +56,6 @@ const Pendingwithdraw = ({navigation, route}) => {
                     distance="3kms"
                     duration={12}
                   />
-
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <Text style={styles.numberOfBadge}>203</Text>
                     <Forwardarrow />
@@ -65,7 +82,7 @@ const Pendingwithdraw = ({navigation, route}) => {
                       style={{ flexDirection: "row", alignItems: "center" }}
                     >
                       <Meetupdot />
-                      <Text style={styles.locationText}>Forks and Fingers</Text>
+                      <Text style={styles.locationText}>{requestInfo?.meetupPoint}</Text>
                     </View>
                   </View>
                 </View>

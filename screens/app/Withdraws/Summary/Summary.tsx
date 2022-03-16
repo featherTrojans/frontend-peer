@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn, Sendingandreceive } from "../../../../components";
 import { styles } from "./Summary.styles";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import { AuthContext } from "../../../../context/AuthContext";
+import LottieView from "lottie-react-native"
+import amountFormatter from "../../../../utils/formatMoney";
 
-
-const { Backarrow } = icons;
+const { Backarrow, Successcheckanimate } = icons;
 
 const tableDatas = [
   {
@@ -24,8 +26,23 @@ const tableDatas = [
 ];
 
 const Summary = ({navigation}) => {
+  const {authdata} = useContext(AuthContext)
   const [showmodal, setShowModal] = useState(false)
-  const [showSuccessmodal, setShowSuccessModal] = useState(false)
+  const [showSuccessmodal, setShowSuccessModal] = useState(true)
+  
+  
+  useEffect(() => {
+    const ws = new WebSocket(
+      `wss://locahost:3300/request/${authdata.userId}`,
+      "realtime"
+    );
+    ws.onmessage = (data) => {
+      console.log(data)
+      // setShowSuccessModal(true)
+    };
+
+    return ws.close();
+  }, []);
   return (
     <View style={styles.container}>
       {/* icon on the left and text in the middle */}
@@ -38,7 +55,7 @@ const Summary = ({navigation}) => {
            paddingVertical: 70,
            paddingHorizontal: 10
          }}>
-          <Text>
+          <Text style={{lineHeight: 15, ...FONTS.regular}}>
             Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽
           </Text>
          </View>
@@ -46,16 +63,16 @@ const Summary = ({navigation}) => {
       <Globalmodal
        showState={showSuccessmodal}
        onBgPress={() => setShowSuccessModal(!showmodal)}
-       btnFunction={()=>console.log("dafs")}
+       btnFunction={()=>navigation.navigate("Home")}
        >
-         <View style={{
-           paddingVertical: 70,
-           paddingHorizontal: 10
-         }}>
-          <Text>
-            Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽
-          </Text>
-         </View>
+           <View style={{ alignItems: "center", paddingVertical: 30 }}>
+            <LottieView source={Successcheckanimate} autoPlay loop={false} style={{width: 148, height: 148}}/>
+            <Text style={{marginBottom: 30, ...fontsize.bsmall,
+                 ...FONTS.regular}}>Transaction Succesful</Text>
+            <Text style={{width: "60%", textAlign:"center", ...fontsize.bsmall,
+                 ...FONTS.regular}}>You can dispute this transaction after 24 hours</Text>
+           </View>
+          
       </Globalmodal>
       <View style={styles.backArrow}>
         <Backarrow />
@@ -98,7 +115,7 @@ const Summary = ({navigation}) => {
       </View>
 
       {/* Continue button below */}
-      <Bottombtn title="CONTINUE" onpress={() => console.log("Continue btn clicked")}/>
+      <Bottombtn title="CONTINUE" onpress={() => setShowModal(true)}/>
       {/* <View>
         <View style={styles.btnBg}>
           <Text style={styles.btnText}>CONTINUE</Text>

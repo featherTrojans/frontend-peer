@@ -6,7 +6,7 @@ import { styles } from "./Globalmodal.styles";
 
 type globalModalProps = {
   showState: boolean;
-  onBgPress: () => void;
+  onBgPress?: () => void;
   children: JSX.Element;
   btnFunction?: () => void;
   btnText?: string;
@@ -25,8 +25,13 @@ const Globalmodal = ({
       coverScreen={true}
       backdropColor="#000"
       backdropOpacity={0.2}
+      animationInTiming={400}
+      backdropTransitionInTiming={200}
+      animationOut={"fadeOut"}
+      animationOutTiming={150}
       style={{ margin: 0, justifyContent: "flex-end" }}
       onBackdropPress={onBgPress}
+      
     >
       <View style={styles.container}>
         {children}

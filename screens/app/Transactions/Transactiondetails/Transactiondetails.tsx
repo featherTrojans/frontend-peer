@@ -1,9 +1,18 @@
-import { StyleSheet, Text, View, StatusBar, ScrollView, Platform } from "react-native";
-import React, { useEffect, useState } from "react";
-import * as Print from "expo-print"
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  ScrollView,
+  Platform,
+  TouchableOpacity
+} from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from "expo-file-system";
+import * as Clipboard from "expo-clipboard"
 import moment from "moment";
 import { styles } from "./Transactiondetails.styles";
 import {
@@ -24,25 +33,45 @@ const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions } =
 
 const Transactiondetails = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
+  const [copied, setCopied] = useState(false)
+
+  const copyColor = copied ? COLORS.blue6 : COLORS.grey2 
 
   const { data } = route.params;
 
-  const { amount, createdAt: dateTime, from: sender, to: receiver,  transId: transactionRef } = data;
+  const {
+    amount,
+    createdAt: dateTime,
+    from: sender,
+    to: receiver,
+    transId: transactionRef,
+    location: meetupPoint,
+  } = data;
 
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")},  ${dt.format("Do")} ${dt.format(
     "MMM"
   )} '${dt.format("YY")} - ${dt.format("LT")}`;
 
-
   useEffect(() => {
-    console.log(data)
-  })
+    console.log(data);
+  });
 
 
 
+  const copyToClipboard = (copiedTest: string) => {
+    Clipboard.setString(copiedTest);
+  };  
+  const subscription = Clipboard.addClipboardListener(({ content }: ClipboardEvent) => {
+    setCopied(true)
+    console.log("hellow")
+  });
+
+  
+  Clipboard.removeClipboardListener(subscription);
 
 
+  
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -68,42 +97,36 @@ const Transactiondetails = ({ navigation, route }) => {
     </html>
 `;
 
-const shareReceipt = async (html) => {
-  setShowModal(!showModal)
-  const { uri } = await Print.printToFileAsync({ html });
-  Sharing.shareAsync(uri)
-
-}
-
-const createAndSavePDF = async (html) => {
-  try {
+  const shareReceipt = async (html) => {
+    setShowModal(!showModal);
     const { uri } = await Print.printToFileAsync({ html });
-    if (Platform.OS === "ios") {
-      await Sharing.shareAsync(uri);
-    } else {
-      const permission = await MediaLibrary.requestPermissionsAsync();
+    Sharing.shareAsync(uri);
+  };
 
-      if (permission.granted) {
-        console.log(uri)
-      //  const localuri = await FileSystem.downloadAsync("http://gahp.net/wp-content/uploads/2017/09/sample.pdf", FileSystem.documentDirectory + "sample.pdf")
-      //   const asset = await MediaLibrary.createAssetAsync(localuri.toString())
-      // const album = await MediaLibrary.createAlbumAsync("Feather", asset);
+  const createAndSavePDF = async (html) => {
+    try {
+      const { uri } = await Print.printToFileAsync({ html });
+      if (Platform.OS === "ios") {
+        await Sharing.shareAsync(uri);
+      } else {
+        const permission = await MediaLibrary.requestPermissionsAsync();
+
+        if (permission.granted) {
+          console.log(uri);
+          //  const localuri = await FileSystem.downloadAsync("http://gahp.net/wp-content/uploads/2017/09/sample.pdf", FileSystem.documentDirectory + "sample.pdf")
+          //   const asset = await MediaLibrary.createAssetAsync(localuri.toString())
+          // const album = await MediaLibrary.createAlbumAsync("Feather", asset);
+        }
       }
+    } catch (error) {
+      console.error(error);
     }
-
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-
-
-
+  };
 
   const reportTransaction = () => {
-    setShowModal(false)
-    navigation.navigate("Transactiondispute")
-  }
+    setShowModal(false);
+    navigation.navigate("Transactiondispute");
+  };
 
   // const {price } = route?.params
   return (
@@ -114,27 +137,29 @@ const createAndSavePDF = async (html) => {
         showState={showModal}
         onBgPress={() => setShowModal(!showModal)}
       >
-        <Iconwithdatas
-          icon={<Sharereceipt />}
-          iconBg="#001757"
-          title="Share Receipt"
-          details="Share a copy of your transaction."
-          onpress={() => shareReceipt(htmlContent)}
-        />
-        <Iconwithdatas
-          icon={<Downloadreceipt />}
-          iconBg="#001757"
-          title="Download Receipt"
-          details="Generate a .pdf copy of this transaction."
-          onpress={() => createAndSavePDF(htmlContent)}
-        />
-        <Iconwithdatas
-          icon={<Reporttransactions />}
-          iconBg="#001757"
-          title="Report Transaction"
-          details="Have issues with this transaction?"
-          onpress={() => reportTransaction()}
-        />
+        <>
+          <Iconwithdatas
+            icon={<Sharereceipt />}
+            iconBg="#001757"
+            title="Share Receipt"
+            details="Share a copy of your transaction."
+            onpress={() => shareReceipt(htmlContent)}
+          />
+          <Iconwithdatas
+            icon={<Downloadreceipt />}
+            iconBg="#001757"
+            title="Download Receipt"
+            details="Generate a .pdf copy of this transaction."
+            onpress={() => createAndSavePDF(htmlContent)}
+          />
+          <Iconwithdatas
+            icon={<Reporttransactions />}
+            iconBg="#001757"
+            title="Report Transaction"
+            details="Have issues with this transaction?"
+            onpress={() => reportTransaction()}
+          />
+        </>
       </Globalmodal>
 
       <Backheader title="Details" />
@@ -180,10 +205,10 @@ const createAndSavePDF = async (html) => {
                 >
                   {transactionRef}
                 </Text>
-                <View style={styles.copyClipboardContainer}>
+                <TouchableOpacity style={styles.copyClipboardContainer} onPress={() => copyToClipboard(transactionRef)}>
                   <Copyclipboard />
-                  <Text style={styles.copyClipboardText}>Copy</Text>
-                </View>
+                  <Text style={[styles.copyClipboardText, {color: copyColor}]}>{copied ? "Copied" : "Copy"}</Text>
+                </TouchableOpacity>
               </View>
             </View>
             <View>
@@ -204,17 +229,21 @@ const createAndSavePDF = async (html) => {
             <Text style={styles.eachDetailValue}>{sender}</Text>
           </View>
           <View style={styles.eachDetailContainer}>
-            <View style={styles.eachDetailContainer}>
-              <Text style={styles.eachDetailTitle}>Meetup Point</Text>
-              <Text style={styles.eachDetailValue}>
-                Eric Moore, Ebutte Meta, Lagos
-              </Text>
-            </View>
+            {meetupPoint && (
+              <View style={styles.eachDetailContainer}>
+                <Text style={styles.eachDetailTitle}>{meetupPoint}</Text>
+                <Text style={styles.eachDetailValue}>
+                  Eric Moore, Ebutte Meta, Lagos
+                </Text>
+              </View>
+            )}
+
             <Text style={styles.eachDetailTitle}>Total Amount</Text>
             <Text
               style={[styles.eachDetailValue, { textTransform: "uppercase" }]}
             >
-              NGN {amountFormatter(amount)} + NGN 0.00 <Text style={{textTransform: 'capitalize'}}>Charges</Text>
+              NGN {amountFormatter(amount)} + NGN 0.00{" "}
+              <Text style={{ textTransform: "capitalize" }}>Charges</Text>
             </Text>
           </View>
         </View>

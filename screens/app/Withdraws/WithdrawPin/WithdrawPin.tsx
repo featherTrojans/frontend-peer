@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { styles } from "./WithdrewPin.style";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn, Loader, Numberbtn, Sendingandreceive } from "../../../../components";
@@ -7,10 +7,12 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import { LocationContext } from "../../../../context/LocationContext";
 const { Backarrow, SecureDot } = icons;
 
 const WithdrawPin = ({ navigation, route}) => {
-  const {amount, userInfo} = route.params
+  const {amount, userInfo} = route.params;
+  const {coords} = useContext(LocationContext)
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [loading, setLoading] = useState(false)
@@ -50,13 +52,14 @@ const WithdrawPin = ({ navigation, route}) => {
     try{
       setLoading(true);
       setShowModal(false);
-      console.log(userInfo)
+      console.log(userInfo, coords.locationText)
       const response = await axiosCustom.post("/request/create",{
         amount:amount,
         charges:charges,
         agent:userInfo.username,
         agentUsername: userInfo.fullName,
-        statusId: userInfo.reference
+        statusId: userInfo.reference,
+        meetupPoint: coords.locationText
       })
 
       console.log(response)
@@ -112,7 +115,7 @@ const WithdrawPin = ({ navigation, route}) => {
               </Text>
             </View>
       </Globalmodal>
-      <Globalmodal 
+      <Globalmodal
         showState={shownextmodal}
         btnFunction={() => navigation.navigate("Home")}
       >
