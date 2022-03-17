@@ -14,6 +14,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import amountFormatter from "../../../../utils/formatMoney";
 
 import Cryinganim from "../../../../assets/Lottie/animations/feather_cry_emoji.json"
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const {
   Backarrow,
@@ -152,6 +153,7 @@ const Withdraw = ({ navigation }) => {
     <View style={styles.container}>
       <Backheader title="Withdraw" />
       {loading && <Loader />}
+      <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance />
         <View style={{ flex: 1 }}>

@@ -6,6 +6,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn } from "../../../../components";
 import { LocationContext } from "../../../../context/LocationContext";
 import { navigationRef } from "../../../../utils/customNavigation";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Cancelicon, Meetupdot, Clearinput } = icons;
 
@@ -17,7 +18,7 @@ const Editmeetup = ({navigation}) => {
     const {setCoords} = useContext(LocationContext)
     return (
         <View style={styles.container}>
-            <StatusBar />
+            <Customstatusbar />
             <View
                 style={styles.headerContainer}
             >

@@ -28,6 +28,7 @@ export const FlexRow = styled.View`
   justify-content: space-between;
   align-items: center;
   padding-horizontal: 32px;
+  margin-top: 150px;
 `;
 
 export const DotFlexRow = styled.View`

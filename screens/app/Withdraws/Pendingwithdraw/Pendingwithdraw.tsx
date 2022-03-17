@@ -17,6 +17,7 @@ import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 import Map from "../../../shared/map/Map";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import { LocationContext } from "../../../../context/LocationContext";
+import Customstatusbar from "../../../shared/Customstatusbar";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -44,7 +45,7 @@ const Pendingwithdraw = ({navigation, route}) => {
   
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
         <Map />
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>

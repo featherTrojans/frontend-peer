@@ -9,6 +9,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import useDebounce from "../../../../utils/debounce";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 
 
@@ -36,6 +37,7 @@ const Getdetails = ({ route, navigation }) => {
 
 
       <Backheader title="Feather Wallet"/>
+      <Customstatusbar />
       <Globalmodal
         showState={showmodal}
         onBgPress={() => setShowModal(!showmodal)}

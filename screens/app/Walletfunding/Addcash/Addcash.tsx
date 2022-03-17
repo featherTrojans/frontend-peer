@@ -9,6 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from "../../../../context/AuthContext";
 import amountFormatter from "../../../../utils/formatMoney";
 import * as SMS from "expo-sms"
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 
 const { Backarrow } = icons;
@@ -31,8 +32,7 @@ const Addcash = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-
-      <StatusBar />
+      <Customstatusbar />
       {/* <View style={styles.backArrow}>
         <Backarrow />
         <Text style={styles.backArrowText}>Add Cash</Text>

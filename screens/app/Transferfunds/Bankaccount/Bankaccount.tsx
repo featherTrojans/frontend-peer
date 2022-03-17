@@ -17,6 +17,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import amountFormatter from "../../../../utils/formatMoney";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, At } = icons;
 
@@ -155,7 +156,7 @@ const Bankaccount = ({ navigation, route }) => {
       contentContainerStyle={{ flex: 1 }}
     >
       {loading && <Loader />}
-      <StatusBar />
+      <Customstatusbar />
       <Backheader title="Bank Account" />
       <Globalmodal
         showState={showmodal}

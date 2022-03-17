@@ -22,6 +22,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import amountFormatter from "../../../../utils/formatMoney";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 
 
@@ -70,6 +71,7 @@ function WalletPin({ route, navigation }) {
     <View style={styles.container}>
       <Backheader title="Enter Amount" />
         {loading && <Loader />}
+        <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
 
         <View style={{ flex: 1, justifyContent: "center" }}>

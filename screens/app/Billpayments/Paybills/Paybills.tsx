@@ -4,6 +4,7 @@ import { Backheader } from "../../../../components";
 import { styles } from "./Paybills.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
+import Customstatusbar from "../../../shared/Customstatusbar";
 // import { styles } from './Paybills.styles'
 
 const Paybills = () => {
@@ -11,7 +12,7 @@ const Paybills = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
       <Backheader title="Paybills" />
       <ScrollView
         style={styles.mainContainer}

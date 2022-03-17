@@ -8,12 +8,14 @@ import {
   Sendingandreceive,
 } from "../../../../components";
 import { FONTS, fontsize } from "../../../../constants";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 
 const Requestsummary = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
+
 
       <Backheader title="Request Summary" />
       <View

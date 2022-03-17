@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import amountFormatter from "../../../../utils/formatMoney";
 import { AuthContext } from "../../../../context/AuthContext";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
+import Customstatusbar from "../../../shared/Customstatusbar";
 const {
   TransferIcon,
   Location,
@@ -40,7 +41,7 @@ const Emptyrequest = () => {
 const StatusUpdate = ({ status, navigation }: any) => {
   const { authdata } = useContext(AuthContext);
   return (<>
-      <StatusBar />
+  <Customstatusbar />
       <View style={{ flex: 1 }}>
         <View style={styles.contentContainer}>
           <View style={styles.topSection}>

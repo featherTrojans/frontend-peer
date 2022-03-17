@@ -13,6 +13,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { Backheader } from "../../../../components";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, People, Debitcard, Arrowright, Forwardarrow } = icons;
 
@@ -21,6 +22,8 @@ const Choosewallet = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Customstatusbar />
+
       <Globalmodal
         showState={isModalVisible}
         onBgPress={() => setModalVisible(!isModalVisible)}

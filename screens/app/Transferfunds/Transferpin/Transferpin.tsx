@@ -16,6 +16,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
 import { usePushNotification } from "../../../../navigation";
 import { AuthContext } from "../../../../context/AuthContext";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -73,6 +74,7 @@ const Transferpin = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       {loading && <Loader />}
+      <Customstatusbar />
       <Globalmodal
         showState={showmodal}
         btnFunction={() => navigation.navigate("Root")}
@@ -113,7 +115,6 @@ const Transferpin = ({ route, navigation }) => {
           </Text>
         </View>
       </Globalmodal>
-      <StatusBar />
 
       <Backheader />
       <View style={styles.mainContainer}>

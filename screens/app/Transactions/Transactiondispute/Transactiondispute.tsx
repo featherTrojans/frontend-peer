@@ -14,6 +14,7 @@ import { styles } from "./Transactiondispute.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 
 const {Successcheckanimate} = icons
@@ -30,7 +31,7 @@ const Transactiondispute = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
 
       <Globalmodal
       showState={showModal}

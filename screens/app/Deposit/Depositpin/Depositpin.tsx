@@ -11,6 +11,7 @@ import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import LottieView from "lottie-react-native"
 import amountFormatter from "../../../../utils/formatMoney";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -63,7 +64,7 @@ const Depositpin = ({route, navigation}) => {
   // return (<Text>hi there pin and things and things in between and beyond </Text>)
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
       {loading && <Loader />}
        <Globalmodal
         showState={successModal}

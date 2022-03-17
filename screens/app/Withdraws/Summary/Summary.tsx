@@ -7,6 +7,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { AuthContext } from "../../../../context/AuthContext";
 import LottieView from "lottie-react-native"
 import amountFormatter from "../../../../utils/formatMoney";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, Successcheckanimate } = icons;
 
@@ -46,7 +47,7 @@ const Summary = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* icon on the left and text in the middle */}
-
+        <Customstatusbar />
       <Globalmodal
        showState={showmodal}
        onBgPress={() => setShowModal(!showmodal)}

@@ -10,6 +10,7 @@ import { Bottombtn, Loader, Numberbtn } from "../../../../components";
 import { icons } from "../../../../constants";
 
 import { JustifyBetween } from "../../../../global/styles";
+import Customstatusbar from "../../../shared/Customstatusbar";
 import { styles } from "./Securepin.styles";
 
 const { SecureDot } = icons;
@@ -35,7 +36,7 @@ const Securepin = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
       <View style={{ paddingHorizontal: 25 }}>
         <JustifyBetween style={{ marginBottom: 10 }}>
           <View>

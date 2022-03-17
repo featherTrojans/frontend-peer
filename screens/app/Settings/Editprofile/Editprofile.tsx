@@ -22,6 +22,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow } = icons;
 
@@ -295,7 +296,7 @@ const Editprofile = ({}) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
 
       <View style={styles.mainHeaderContainer}>
         {/* Icons */}

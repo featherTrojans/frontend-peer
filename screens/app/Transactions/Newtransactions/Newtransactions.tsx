@@ -3,6 +3,7 @@ import React from "react";
 import { styles } from "./Newtransactions.styles";
 import { Backheader, Iconwithdatas } from "../../../../components";
 import { icons } from "../../../../constants";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 
 const { Withdrawicon, Depositicon, Eyecrossed, TransferIcon, Newtransfericon,Fundwalleticon, Paybillicon } = icons;
@@ -12,7 +13,7 @@ const { Withdrawicon, Depositicon, Eyecrossed, TransferIcon, Newtransfericon,Fun
 const Newtransactions = ({navigation}: any) => {
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
       <Backheader title="New Transactions" />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <ScrollView style={{ flex: 1 }}>
