@@ -38,7 +38,7 @@ const { Locationmap } = images;
 const Acceptedwithdraw = ({ navigation, route }) => {
   const {requestInfo} = route.params;
   const {setCoords, setDestinationCoords} = useContext(LocationContext)
-  const [toggleShow, setToggleShow] = useState(false);
+  const [toggleShow, setToggleShow] = useState(true);
 
   useEffect(()=>{
     // update both map, meeting point and  Agent point
@@ -130,7 +130,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
               <TouchableOpacity
                 style={styles.bottomMakeRequestBtn}
                 activeOpacity={0.8}
-                onPress={() => navigation.push("Requestsummary")}
+                onPress={() => navigation.push("Requestsummary",{requestInfo})}
               >
                 <View style={styles.makeRequestCircle}>
                   <Makerequestarrowright />

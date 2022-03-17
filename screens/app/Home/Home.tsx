@@ -117,23 +117,23 @@ const Home = ({ navigation }: { navigation: any }) => {
   };
 
   //setting up websocket
-  useEffect(() => {
-    const ws = new WebSocket(
-      `wss://feather.com.ng:3300/balance/${authdata.userId}`,
-      "realtime"
-    );
-    ws.onmessage = (data) => {
-      // i want to update the context
-      if (data.data == authdata.walletBal) return;
-      setAuthData({ ...authdata, walletBal: data.data });
-    };
+  // useEffect(() => {
+  //   const ws = new WebSocket(
+  //     `wss://feather.com.ng:3300/balance/${authdata.userId}`,
+  //     "realtime"
+  //   );
+  //   ws.onmessage = (data) => {
+  //     // i want to update the context
+  //     if (data.data == authdata.walletBal) return;
+  //     setAuthData({ ...authdata, walletBal: data.data });
+  //   };
 
-    return ws.close();
-  }, []);
+  //   return ws.close();
+  // }, []);
 
-  useEffect(() => {
-    getDashboardData();
-  }, [authdata.walletBal]);
+  // useEffect(() => {
+  //   getDashboardData();
+  // }, []);
 
   const getDashboardData = async () => {
     console.log("I am fetching again from home");
@@ -274,11 +274,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Root", { screen: "Transactions" })
-              }
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Root", {screen: "Transactions"})}>
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>
           </View>

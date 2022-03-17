@@ -85,7 +85,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
               <Text style={styles.iconTitle}>Balance</Text>
             </View>
             <Text style={styles.iconValue}>
-              N {amountFormatter(`${authdata?.walletBal - status?.amount}`)}
+              N {amountFormatter(status.amount)}
             </Text>
           </View>
 

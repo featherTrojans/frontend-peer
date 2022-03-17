@@ -12,6 +12,9 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import LottieView from "lottie-react-native"
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import {db} from "../../../../firebase"
+import {doc, updateDoc, } from "firebase/firestore"; 
+
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -49,10 +52,17 @@ const Depositpin = ({route, navigation}) => {
       setPin(newdata);
     }
   };
+  const handlePrepareToTestUpdate = async ()=>{
+    const washingtonRef = doc(db, "withdrawtransfer", requestInfo.reference);
+      await updateDoc(washingtonRef, {
+        status: "approved"
+      });
+  }
   const handleApproveRequest = async ()=>{
     setLoading(true)
     try{
       await axiosCustom.post("/request/approve",{reference:requestInfo.reference, user_pin:pin.join("")})
+      await handlePrepareToTestUpdate()
       //show success message
       setSuccessModal(true)
     }catch(err){
