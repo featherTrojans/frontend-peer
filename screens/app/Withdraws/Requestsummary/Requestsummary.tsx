@@ -10,7 +10,9 @@ import {
 import { FONTS, fontsize } from "../../../../constants";
 
 
-const Requestsummary = ({navigation}) => {
+const Requestsummary = ({navigation, route}) => {
+  const {requestInfo} = route.params
+  console.log(requestInfo);
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -24,7 +26,7 @@ const Requestsummary = ({navigation}) => {
         }}
       >
         <Sendingandreceive />
-        <Priceandcharges />
+        <Priceandcharges amount={requestInfo?.amount} charges={requestInfo?.charges} />
       </View>
 
       <View style={styles.saferulesContainer}>
@@ -40,7 +42,7 @@ const Requestsummary = ({navigation}) => {
       </View>
 
 
-        <Bottombtn title="I Understand, Proceed" onpress={() => navigation.push("Summary")}/>
+        <Bottombtn title="I Understand, Proceed" onpress={() => navigation.push("Summary",{requestInfo})}/>
       
     </View>
   );

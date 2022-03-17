@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
-import * as firebase from "firebase"
+// import * as firebase from "firebase"
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -11,18 +12,20 @@ const firebaseConfig = {
   projectId: "feather-340809",
   storageBucket: "feather-340809.appspot.com",
   messagingSenderId: "310047587893",
-  appId: "1:310047587893:web:2775171187465f4539fb7c"
+  appId: "1:310047587893:web:5327b7c7a46ee23e39fb7c"
 };
 
 // Initialize Firebase
 let app;
 
-if(firebase.apps.length === 0){
-    app = initializeApp(firebaseConfig)
-}else{
-    app = firebase.config()
-}
+// if(firebase.apps.length === 0){
+//     app = initializeApp(firebaseConfig)
+// }else{
+//     app = firebase.config()
+// }
 
-const db = app.firestore();
+app = initializeApp(firebaseConfig)
+
+const db = getFirestore();
 
 export {db}

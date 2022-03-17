@@ -52,11 +52,16 @@ const handleOpenWithLinking = () => {
   Linking.openURL('https://www.feather.africa');
 };
 
-
-
 const Settings = ({navigation}) => {
-  const {authdata} = useContext(AuthContext)
+  
+
+  
+  const {authdata, setToken} = useContext(AuthContext)
   console.log(authdata)
+  
+  const handleSignout = ()=>{
+    setToken("")
+  }
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -138,7 +143,9 @@ const Settings = ({navigation}) => {
           <View style={styles.horizontalLine} />
 
           <View style={{marginLeft: 20}}>
-            <Text style={{...fontsize.small, ...FONTS.bold, marginBottom: 35, color: COLORS.pink1}}>Sign Out</Text>
+            <TouchableOpacity onPress={handleSignout}>
+              <Text style={{...fontsize.small, ...FONTS.bold, marginBottom: 35, color: COLORS.pink1}}>Sign Out</Text>
+            </TouchableOpacity>
             <Text style={{...fontsize.small, ...FONTS.medium}}>Rate App</Text>
           </View>
         </BottomSheetScrollView>

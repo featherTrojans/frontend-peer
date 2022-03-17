@@ -440,7 +440,7 @@ const RootNavigator = () => {
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-      // initialRouteName="Onboarding"
+      // initialRouteName="Summary"
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}

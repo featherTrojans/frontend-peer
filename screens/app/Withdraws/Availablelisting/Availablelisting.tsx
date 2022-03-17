@@ -33,7 +33,6 @@ const Availablelisting = ({ navigation, route }: any) => {
   const [activeType, setActiveType] = useState("peers");
   const [loading, setLoading] = useState(false);
 
-  console.log(agents)
   let height = "10%"
   const checkCurrentHeight = () => {
     if(height == "10%"){

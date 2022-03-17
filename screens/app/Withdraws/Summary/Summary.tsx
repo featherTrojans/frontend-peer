@@ -7,42 +7,69 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { AuthContext } from "../../../../context/AuthContext";
 import LottieView from "lottie-react-native"
 import amountFormatter from "../../../../utils/formatMoney";
+import {db} from "../../../../firebase"
+import {doc, updateDoc,query,where, collection, addDoc, onSnapshot, setDoc } from "firebase/firestore"; 
 
 const { Backarrow, Successcheckanimate } = icons;
 
-const tableDatas = [
-  {
-    title: "Receiver",
-    value: "@suzzy_bcroft",
-  },
-  {
-    title: " Amount",
-    value: "NGN 35,000.00",
-  },
-  {
-    title: "Withdrawal Charge",
-    value: "+ NGN 750",
-  },
-];
 
-const Summary = ({navigation}) => {
+
+const Summary = ({navigation, route}) => {
+  const {requestInfo} = route.params
   const {authdata} = useContext(AuthContext)
   const [showmodal, setShowModal] = useState(false)
   const [showSuccessmodal, setShowSuccessModal] = useState(false)
-  
-  
-  useEffect(() => {
-    const ws = new WebSocket(
-      `wss://locahost:3300/request/${authdata.userId}`,
-      "realtime"
-    );
-    ws.onmessage = (data) => {
-      console.log(data)
-      // setShowSuccessModal(true)
-    };
 
-    return ws.close();
-  }, []);
+  useEffect(()=>{
+    firestoreListener()
+  },[])
+
+  const handleReadyToReceive = async ()=>{
+    // create a document first
+    try {
+      const docRef = await setDoc(doc(db,"withdrawtransfer",requestInfo.reference),{
+        status: "pending"
+      })
+      console.log("Document written with ID: ", docRef);
+      setShowModal(true)
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+  // const handlePrepareToTestUpdate = async ()=>{
+  //   const washingtonRef = doc(db, "withdrawtransfer", "zyx");
+  //     await updateDoc(washingtonRef, {
+  //       status: "approved"
+  //     });
+  // }
+  const firestoreListener = async ()=>{
+    try {
+      const unsub = onSnapshot(doc(db, "withdrawtransfer", requestInfo.reference), (doc) => {
+        // if accepted, show the final modal
+        if(doc?.data()?.status === "approved"){
+          setShowModal(false);
+          setShowSuccessModal(true)
+        }
+        console.log("Current data: ", doc.data());
+    });
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+  
+  // const handlePrepareToReceive = async ()=>{
+  //   // create a document first
+  //   try {
+  //     const docRef = await addDoc(collection(db, "withdrawtransfer"), {
+  //       reference:requestInfo.statusId
+  //       status:"pending"
+  //     });
+  //     console.log("Document written with ID: ", docRef.id);
+  //   } catch (e) {
+  //     console.error("Error adding document: ", e);
+  //   }
+  //   setShowModal(true)
+  // }
   return (
     <View style={styles.container}>
       {/* icon on the left and text in the middle */}
@@ -62,7 +89,7 @@ const Summary = ({navigation}) => {
       </Globalmodal>
       <Globalmodal
        showState={showSuccessmodal}
-       onBgPress={() => setShowSuccessModal(!showmodal)}
+       onBgPress={() => setShowSuccessModal(!showSuccessmodal)}
        btnFunction={()=>navigation.navigate("Home")}
        >
            <View style={{ alignItems: "center", paddingVertical: 30 }}>
@@ -98,24 +125,39 @@ const Summary = ({navigation}) => {
       <View style={styles.tablesContainer}>
         {/* A table showin the transaction details */}
 
-        {tableDatas.map(({ title, value }, index) => (
-          <View key={index}>
+  
+          <View>
             <View style={styles.tableContainer}>
-              <Text style={styles.tableTitle}>{title}</Text>
-              <Text style={styles.tableValue}>{value}</Text>
+              <Text style={styles.tableTitle}>Receiver</Text>
+              <Text style={styles.tableValue}>@{requestInfo?.agentUsername}</Text>
             </View>
             <View style={styles.bottomLine} />
           </View>
-        ))}
+          <View>
+            <View style={styles.tableContainer}>
+              <Text style={styles.tableTitle}>Amount</Text>
+              <Text style={styles.tableValue}>NGN {requestInfo?.amount}</Text>
+            </View>
+            <View style={styles.bottomLine} />
+          </View>
+          <View>
+            <View style={styles.tableContainer}>
+              <Text style={styles.tableTitle}>Withdrawal Charge</Text>
+              <Text style={styles.tableValue}>+ NGN {requestInfo?.charges}</Text>
+            </View>
+            <View style={styles.bottomLine} />
+          </View>
+        
 
         <View style={styles.tableContainer}>
           <Text style={styles.tableTitle}>Total</Text>
-          <Text style={[styles.tableValue, {color: COLORS.blue6}]}>NGN 35,750.00</Text>
+          <Text style={[styles.tableValue, {color: COLORS.blue6}]}>NGN {requestInfo?.total}</Text>
         </View>
       </View>
 
       {/* Continue button below */}
-      <Bottombtn title="CONTINUE" onpress={() => setShowModal(true)}/>
+      <Bottombtn title="CONTINUE" onpress={handleReadyToReceive}/>
+      {/* <Bottombtn title="update" onpress={handlePrepareToTestUpdate}/> */}
       {/* <View>
         <View style={styles.btnBg}>
           <Text style={styles.btnText}>CONTINUE</Text>
