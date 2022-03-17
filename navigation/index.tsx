@@ -19,12 +19,9 @@ import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 // import axiosCustom from "../httpRequests/axiosCustom";÷
 // import Animated from "react-native-reanimated";
 
-
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
-
-
 
 import {
   RootStackParamList,
@@ -116,9 +113,6 @@ import { AuthContext } from "../context/AuthContext";
 
 // import App from "../App";
 import Map from "../screens/shared/map/Map";
-
-
-
 
 const {
   TabHome,
@@ -225,6 +219,42 @@ function getWidth() {
   return width / 5;
 }
 
+const horizontalAnimation = {
+  gestureDirection: "horizontal",
+  cardStyleInterpolator: ({ current, layouts }) => {
+    return {
+      cardStyle: {
+        transform: [
+          {
+            translateX: current.progress.interpolate({
+              inputRange: [0, 1],
+              outputRange: [layouts.screen.width, 0],
+            }),
+          },
+        ],
+      },
+    };
+  },
+};
+
+export const verticalAnimation = {
+  gestureDirection: "vertical",
+  cardStyleInterpolator: ({ current, layouts }) => {
+    return {
+      cardStyle: {
+        transform: [
+          {
+            translateY: current.progress.interpolate({
+              inputRange: [0, 1],
+              outputRange: [layouts.screen.height, 0],
+            }),
+          },
+        ],
+      },
+    };
+  },
+};
+
 const Tabs = () => {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
@@ -315,13 +345,11 @@ const Tabs = () => {
                     backgroundColor: COLORS.blue6,
                     padding: 13.4,
                     borderRadius: 50,
-                    shadowColor: "#003AD6",
-                    shadowOffset: {
-                      width: 0,
-                      height: 3,
-                    },
-                    shadowOpacity: 0.5,
-                    shadowRadius: 20,
+                    shadowColor: COLORS.blue6,
+                    shadowOpacity: 0.3,
+                    shadowOffset: { width: -5, height: -5 },
+                    shadowRadius: 10,
+                    elevation: 10,
                   }}
                 >
                   <Tabplusicon />
@@ -410,16 +438,14 @@ const RootNavigator = () => {
   const { token } = useContext(AuthContext);
 
   return (
-  <AppStack.Navigator
-    screenOptions={{
-      headerShown: false,
-    }}
-    // initialRouteName="Requestsummary"
+    <AppStack.Navigator
+      screenOptions={{ headerShown: false }}
+      // initialRouteName="Onboarding"
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
       {!token ? (
-        <AppStack.Group screenOptions={{ presentation: "modal" }}>
+        <AppStack.Group screenOptions={verticalAnimation}>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Personal" component={Personal} />
           <AppStack.Screen name="Verification" component={Verification} />
@@ -517,8 +543,13 @@ const RootNavigator = () => {
           </AppStack.Group>
 
           {/* Notification Screen */}
-          <AppStack.Screen name="Notifications" component={Notifications} />
+          <AppStack.Screen
+            name="Notifications"
+            component={Notifications}
+            options={horizontalAnimation}
+          />
 
+          {/* Paybills Screen */}
           <AppStack.Screen name="Paybills" component={Paybills} />
 
           {/* Deposit Screens */}
@@ -534,6 +565,7 @@ const RootNavigator = () => {
             <AppStack.Screen name="Depositpin" component={Depositpin} />
             <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
           </AppStack.Group>
+
           {/* Chats Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Chatshome" component={Chatshome} />
@@ -554,15 +586,11 @@ export default function MainNavigation() {
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
 
+  useEffect(() => {
+    setMessageToken(expoPushToken);
+  }, [token]);
 
   useEffect(() => {
-    setMessageToken(expoPushToken)
-  }, [token])
-
-
-
-  useEffect(() => {
-  
     const subscription: any = AppState.addEventListener(
       "change",
       (nextAppState) => {

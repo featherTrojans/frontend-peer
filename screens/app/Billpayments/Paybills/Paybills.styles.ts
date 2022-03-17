@@ -12,28 +12,28 @@ export const styles = StyleSheet.create({
     marginTop: 16,
     marginHorizontal: 15,
   },
-  eachContainer:{
-      paddingLeft: 23, 
-      paddingRight: 30, 
-      paddingTop: 34, 
-      paddingBottom: 32, 
-      marginBottom: 15,
-      borderRadius: 8
-    },
-    topRow:{ 
-        marginBottom: 40, 
-        flexDirection: 'row', 
-        justifyContent: 'space-between' 
-    },
+  eachContainer: {
+    paddingLeft: 23,
+    paddingRight: 30,
+    paddingTop: 34,
+    paddingBottom: 32,
+    marginBottom: 15,
+    borderRadius: 8,
+  },
+  topRow: {
+    marginBottom: 40,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   headers: {
     ...fontsize.bsmall,
     ...FONTS.medium,
     lineHeight: 22,
   },
-  headerInfo:{
-      ...fontsize.small, 
-      ...FONTS.regular, 
-      lineHeight: 21, 
-      color: COLORS.grey2
-    }
+  headerInfo: {
+    ...fontsize.small,
+    ...FONTS.regular,
+    lineHeight: 21,
+    color: COLORS.grey2,
+  },
 });

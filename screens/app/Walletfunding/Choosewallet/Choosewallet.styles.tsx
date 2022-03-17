@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
-
+import { Shadow } from "../../../../constants/theme";
 export const styles = StyleSheet.create({
   container: {
     // paddingHorizontal: 15,
@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 17,
     borderRadius: 15,
     marginBottom: 10,
+    ...Shadow
   },
   walletTypeInfoContainer: {
     flex: 1,

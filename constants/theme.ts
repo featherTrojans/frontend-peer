@@ -1,3 +1,4 @@
+
 // import all themes and export everything
 
 import { Dimensions } from "react-native";
@@ -77,6 +78,15 @@ export const FONTS = {
   bold: { fontFamily: "GTbold" },
 };
 
+export const Shadow = {
+  shadowColor: COLORS.borderColor2,
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 10, height: -10},
+    shadowRadius: 3,
+    elevation: 10,
+    backgroundColor: 'white'
+}
+
 export const fontsize = {
   
   bbsmall: {
@@ -125,6 +135,6 @@ export const fontsize = {
   }
 };
 
-const appTheme = { COLORS, SIZES, FONTS, fontsize };
+const appTheme = { COLORS, SIZES, FONTS, fontsize, Shadow };
 
 export default appTheme;

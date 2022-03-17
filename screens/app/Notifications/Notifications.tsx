@@ -4,6 +4,7 @@ import { styles } from "./Notifications.styles";
 import { icons } from "../../../constants";
 import { Backheader } from "../../../components";
 import { string } from "yup";
+import { Shadow } from "../../../constants/theme";
 
 const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow } = icons;
 
@@ -30,33 +31,41 @@ const DATA = [
         message:
           "Hey padi, upgrade your account today, do more with the feather app.",
       },
+    ],
+  },
+  {
+    date: "",
+    messages: [
       {
         type: "withdrawal",
         title: "Cash Withdrawal",
         time: "2:39pm",
         message:
-          "Hey, @dderinsexy - Derin Balonun just accepted your cash request of N33,500",
+          "Hey padi, upgrade your account today, do more with the feather app.",
       },
+    ],
+  },
+  {
+    date: "",
+    messages: [
       {
         type: "withdrawal",
         title: "Cash Withdrawal",
         time: "2:39pm",
         message:
-          "Hey, @dderinsexy - Derin Balonun renegotiated withdrawal charge to N500",
+          "Hey padi, upgrade your account today, do more with the feather app.",
       },
+    ],
+  },
+  {
+    date: "",
+    messages: [
       {
-        type: "credit",
-        title: "Cash Withdrawal",
-        time: "1:09pm",
-        message:
-          "Hey, @nsexy - Derin Balonun just accepted your cash request of N3,200",
-      },
-      {
-        type: "withdrawal",
-        title: "Cash Withdrawal",
+        type: "account",
+        title: "Upgrade Account Type",
         time: "2:39pm",
         message:
-          "Hey, @dderinsexy - Derin Balonun renegotiated withdrawal charge to N500",
+          "Hey padi, upgrade your account today, do more with the feather app.",
       },
     ],
   },
@@ -100,7 +109,7 @@ const Notification = ({
   messages: notificationProps[];
 }) => {
   return (
-    <View style={{ marginBottom: 28 }}>
+    <View style={[{ marginBottom: 28, ...Shadow, borderRadius: 15 }]}>
       <View style={{ marginBottom: 24 }}>
         <Text style={styles.date}>{date}</Text>
       </View>

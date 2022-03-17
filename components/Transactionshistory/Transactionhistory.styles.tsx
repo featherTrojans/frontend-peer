@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS, fontsize, FONTS } from "../../constants";
-
+import { Shadow } from "../../constants/theme";
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 15,
     marginBottom: 10,
+    ...Shadow
   },
   dateContainer: {
     marginBottom: 18,
