@@ -53,14 +53,16 @@ const WithdrawPin = ({ navigation, route}) => {
       setLoading(true);
       setShowModal(false);
       console.log(userInfo, coords.locationText)
-      const response = await axiosCustom.post("/request/create",{
+      const data = {
         amount:amount,
-        charges:charges,
-        agent:userInfo.username,
-        agentUsername: userInfo.fullName,
+        charges:charges, 
+        agentUsername:userInfo.username,
+        agent: userInfo.fullName,
         statusId: userInfo.reference,
         meetupPoint: coords.locationText
-      })
+      }
+      console.log(data)
+      const response = await axiosCustom.post("/request/create",data)
 
       console.log(response)
       setShowNextModal(true)

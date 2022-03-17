@@ -132,17 +132,6 @@ const Transactions = ({ navigation }: any) => {
   
 
 
-
-
-   
-
-
-
-
-
-
-
-
   useEffect(() => {
     getAllTransactions();
   }, []);

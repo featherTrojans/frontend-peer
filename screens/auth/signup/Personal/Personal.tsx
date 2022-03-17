@@ -89,10 +89,10 @@ const Personal = ({ navigation }) => {
               const response = await axiosCustom.post("auth/signup", values);
               //store data in context
               // setAuthData(response?.data?.data)
-              navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:"wregwsds"});
+              navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:null});
             } catch (err) {
               if(err.response){
-                if(!err?.response?.data?.data?.isVerified){
+                if(err?.response?.data?.data?.isVerified){
                   return navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:null})
                 }
               }

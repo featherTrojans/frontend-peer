@@ -12,7 +12,7 @@ const { Arrowin, Arrowout } = icons;
 
 const History = ({ data }: any) => {
   // const navigation = useNavigation()
-  const { direction, description, to, amount, from } = data;
+  const { direction, description, to, amount, from, title } = data;
 
   // useEffect(()=>{
 
@@ -36,7 +36,7 @@ const History = ({ data }: any) => {
           {Arrow}
         </View>
         <View>
-          <Text style={styles.title}>{description}</Text>
+          <Text style={styles.title}>{title}</Text>
           <Text style={styles.transactionType}>
             {transactionType} : {transactionValue}
           </Text>

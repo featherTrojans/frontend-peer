@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     marginVertical: 25,
-    paddingHorizontal: 22,
+    paddingHorizontal: 7,
+    alignItems: 'center'
   },
   mainHeaderText: {
     ...fontsize.small,

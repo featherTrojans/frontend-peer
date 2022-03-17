@@ -28,7 +28,7 @@ const tableDatas = [
 const Summary = ({navigation}) => {
   const {authdata} = useContext(AuthContext)
   const [showmodal, setShowModal] = useState(false)
-  const [showSuccessmodal, setShowSuccessModal] = useState(true)
+  const [showSuccessmodal, setShowSuccessModal] = useState(false)
   
   
   useEffect(() => {

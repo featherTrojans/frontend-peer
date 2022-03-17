@@ -1,13 +1,10 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  StatusBar,
-} from "react-native";
+import { View, Text, StatusBar } from "react-native";
 import { useToast } from "react-native-toast-notifications";
 import { Bottombtn, Loader, Numberbtn } from "../../../../components";
+import LottieView from "lottie-react-native";
 
-import {icons } from "../../../../constants";
+import { FONTS, fontsize, icons } from "../../../../constants";
 
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
@@ -15,20 +12,20 @@ import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { styles } from "./Securepin.styles";
 
-const { SecureDot } = icons;
+const { SecureDot, Successcheckanimate } = icons;
 const SecurepinAgain = ({ route, navigation }) => {
-  const toast = useToast()  
-  const { token,pin } = route.params;  
+  const toast = useToast();
+  const { token, pin } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState<boolean>(false);
   const [amount, setAmount] = useState<string[]>([]);
-  const [showModal, setShowModal] = useState();
-  console.log(amount.join(""),pin )
-
+  const [showModal, setShowModal] = useState(false);
+  const [result, setResult] = useState<any>()
+  console.log(amount.join(""), pin);
 
   const handleSubmit = async () => {
-    if(pin.join("") !== amount.join("")){
-      return showerror(toast,null,"Pin doesn't match")
+    if (pin.join("") !== amount.join("")) {
+      return showerror(toast, null, "Pin doesn't match");
     }
     setLoading(true);
     try {
@@ -38,16 +35,18 @@ const SecurepinAgain = ({ route, navigation }) => {
         { pin },
         { headers: { token: token } }
       );
-      navigation.navigate("Setup", { token: response?.data?.data?.token, defaultUsername: response?.data?.data?.username});
+      setResult(response)
+      setShowModal(true)
+      // navigation.navigate("Setup", {
+      //   token: response?.data?.data?.token,
+      //   defaultUsername: response?.data?.data?.username,
+      // });
     } catch (err) {
-      showerror(toast, err)
+      showerror(toast, err);
     } finally {
       setLoading(false);
     }
   };
-
-
-
 
   const handleSetAmount = (value: string) => {
     if (amount.length < 4) {
@@ -63,18 +62,33 @@ const SecurepinAgain = ({ route, navigation }) => {
     }
   };
 
-
   return (
     <View style={styles.container}>
-      {loading && <Loader />}
       <StatusBar />
 
+      <Globalmodal
+        showState={showModal}
+        onBgPress={() => setShowModal(true)} // This should not do anything
+        btnFunction={() => navigation.navigate("Setup", {token: result?.data?.data?.token, defaultUsername: result?.data?.data?.username})}
+        btnText="Continue"
+      >
+        <>
+          <View style={{justifyContent: 'center', alignItems: 'center', marginHorizontal: 75, marginBottom: 50}}>
+            <LottieView
+              source={Successcheckanimate}
+              style={{ width: 148, height: 148, marginBottom: 18 }}
+              autoPlay
+              loop={false}
+            />
+          
+          <Text style={{ ...fontsize.bsmall, ...FONTS.regular, textAlign: 'center', lineHeight: 24 }}>
+            Your transaction pin has been successfully added
+          </Text>
+          </View>
+        </>
+      </Globalmodal>
 
-      
-
-
-
-
+      {loading && <Loader />}
       <View style={{ paddingHorizontal: 25 }}>
         <JustifyBetween style={{ marginBottom: 10 }}>
           <View>

@@ -3,8 +3,8 @@ import { COLORS, FONTS, fontsize } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
-    paddingTop: 20,
+    // paddingHorizontal: 15,
+    // paddingTop: 20,
     backgroundColor: COLORS.white,
     flex: 1,
   },

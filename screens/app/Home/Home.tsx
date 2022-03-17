@@ -28,6 +28,8 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
 import { customNavigation } from "../../../utils/customNavigation";
+import { useLinkTo } from '@react-navigation/native';
+
 
 const {
   Profilepics,
@@ -38,6 +40,7 @@ const {
   Paybills,
   Transfer,
   Deposit,
+  Smalluseravatar,
   Cryinganimate,
 } = icons;
 
@@ -60,16 +63,20 @@ const walletOptions = [
   {
     icon: <Paybills />,
     title: "Paybills",
-    link: "Choosewallet",
+    link: "Paybills",
   },
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  const { setAuthData, authdata, messageToken: token } = useContext(AuthContext);
+  const { setAuthData, authdata, messageToken } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [extractedToken, setExtractedToken] = useState()
+  const linkTo = useLinkTo();
+
+
 
   // const setMessageToken = async () => {
   //   try {
@@ -80,15 +87,28 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   }
   // }
 
+  const tokenExtractor = (string: any) => {
+    const firstIndex = string.indexOf("[")
+    return string.slice(firstIndex+1, -1)
+  }
+  useEffect(() => {
+    console.log(authdata, "here is the authdat")
+  }, [])
+
   useEffect(() => {
     // setMessageToken()
-    console.log(token, "This is my token message")
+    console.log(messageToken, "This is my token messagedstss")
+    if(messageToken){
+     setExtractedToken(tokenExtractor(messageToken))
+    }
+    console.log(extractedToken, 'Extracted token')
+    
     sendAnotherToken()
-  },[])
+  },[extractedToken,messageToken])
 
   const sendAnotherToken = async ()=>{
     try{
-      const response = await axiosCustom.post("/auth/token/create",{messageToken: token})
+      const response = await axiosCustom.post("/auth/token/create",{messageToken: `ExponentPushToken[${extractedToken}]`})
       console.log(response)
     }catch(err){
       console.log(err.response.data)
@@ -110,12 +130,16 @@ const Home = ({ navigation }: { navigation: any }) => {
     return ws.close();
   }, []);
 
+  // useEffect(() => {
+  //   getDashboardData();
+  // }, [authdata.walletBal]);
+
   useEffect(() => {
     getDashboardData();
-  }, [authdata.walletBal]);
+  }, []);
 
   const getDashboardData = async () => {
-    console.log("I am fetching again");
+    console.log("I am fetching again from home");
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
@@ -168,7 +192,15 @@ const Home = ({ navigation }: { navigation: any }) => {
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
         <View style={styles.profileContainer}>
-          <Profilepics />
+
+          <View>
+          {/* <Profilepics /> */}
+          {/* <Useravatar /> */}
+          <Smalluseravatar />
+          {/* <Defaultuseravatar /> */}
+          </View>
+
+
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
               Welcome, {nameToShow(authdata?.fullName)}✌🏽
@@ -202,7 +234,7 @@ const Home = ({ navigation }: { navigation: any }) => {
         }
       >
         <View style={styles.walletBlock}>
-          <Viewbalance navigate={() => navigation.navigate("Addcash")} />
+          <Viewbalance />
           <View style={styles.walletOptionsContainer}>
             {walletOptions.map(
               ({
@@ -239,7 +271,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.push("Transactions")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Root", {screen: "Transactions"})}>
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>
           </View>

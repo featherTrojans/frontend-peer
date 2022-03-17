@@ -11,63 +11,58 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "./Choosewallet.styles";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
-
+import { useNavigation } from "@react-navigation/native";
+import { Backheader } from "../../../../components";
 
 const { Backarrow, People, Debitcard, Arrowright, Forwardarrow } = icons;
 
-const Choosewallet = ({navigation}) => {
+const Choosewallet = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
-        <Globalmodal
+      <Globalmodal
         showState={isModalVisible}
         onBgPress={() => setModalVisible(!isModalVisible)}
         btnFunction={() => console.log("Hellow")}
-        >
-    
-            <View style={{ alignItems: "center" }}>
-              <View
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: COLORS.grey1,
-                  borderRadius: 50,
-                }}
-              />
+      >
+        <View style={{ alignItems: "center" }}>
+          <View
+            style={{
+              width: 100,
+              height: 100,
+              backgroundColor: COLORS.grey1,
+              borderRadius: 50,
+            }}
+          />
 
-              <Text
-                style={{
-                  textAlign: "center",
-                  marginHorizontal: 40,
-                  marginVertical: 40,
-                  ...fontsize.bsmall,
-                  ...FONTS.regular,
-                }}
-              >
-                You have successfully funded your “PRIMARY WALLET” with{" "}
-                <Text style={{ ...fontsize.bsmall, ...FONTS.bold }}>
-                  NGN 30,500.00
-                </Text>
-              </Text>
-            </View>
+          <Text
+            style={{
+              textAlign: "center",
+              marginHorizontal: 40,
+              marginVertical: 40,
+              ...fontsize.bsmall,
+              ...FONTS.regular,
+            }}
+          >
+            You have successfully funded your “PRIMARY WALLET” with{" "}
+            <Text style={{ ...fontsize.bsmall, ...FONTS.bold }}>
+              NGN 30,500.00
+            </Text>
+          </Text>
+        </View>
+      </Globalmodal>
 
-            
-        </Globalmodal>
+      <Backheader title="Add Cash" />
 
-
-
-
-      <View style={styles.backArrow}>
-        <Backarrow />
-        <Text style={styles.backArrowText}>Add Cash</Text>
-      </View>
-
-      <View>
+      <View style={{marginVertical: 16}}>
         <TouchableNativeFeedback
           background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, false)}
         >
-          <TouchableOpacity onPress={()=>navigation.navigate("WalletPin")} style={styles.walletTypeContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("WalletPin")}
+            style={styles.walletTypeContainer}
+          >
             {/* Image */}
             <View>
               <Debitcard />

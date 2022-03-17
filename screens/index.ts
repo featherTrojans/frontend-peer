@@ -64,7 +64,7 @@ import Depositpin from "./app/Deposit/Depositpin/Depositpin";
 import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
 import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 
-
+import Paybills from "./app/Billpayments/Paybills/Paybills";
 
 //This screen is for testing somne functionalities
 
@@ -134,4 +134,5 @@ export {
   CustomWebView,
   Depositinput,
   LockScreen,
+  Paybills
 };

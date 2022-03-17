@@ -53,6 +53,10 @@ const Accepteddeposit = ({navigation, route}) => {
       setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
   }
 
+  const handleRedirect = ()=>{
+     navigation.push("Depositpin",{requestInfo})
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -95,7 +99,7 @@ const Accepteddeposit = ({navigation, route}) => {
                     >
                       <Meetupdot />
                       <Text style={styles.depositLocationText}>
-                        {requestInfo.meetup}
+                        {requestInfo.meetupPoint}
                       </Text>
                     </View>
                   </View>
@@ -132,7 +136,7 @@ const Accepteddeposit = ({navigation, route}) => {
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <TouchableOpacity style={styles.bottomAcceptBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Depositpin",{requestInfo})}>
+              <TouchableOpacity style={styles.bottomAcceptBtn} activeOpacity={0.8} onPress={handleRedirect}>
                 <Text style={styles.cancelText}>RECEIVE PAYMENT</Text>
               </TouchableOpacity>
               <TouchableOpacity
