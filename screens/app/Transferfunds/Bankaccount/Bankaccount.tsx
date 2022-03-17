@@ -17,6 +17,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import amountFormatter from "../../../../utils/formatMoney";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, At } = icons;
 
@@ -155,7 +156,7 @@ const Bankaccount = ({ navigation, route }) => {
       contentContainerStyle={{ flex: 1 }}
     >
       {loading && <Loader />}
-      <StatusBar />
+      <Customstatusbar />
       <Backheader title="Bank Account" />
       <Globalmodal
         showState={showmodal}
@@ -210,7 +211,7 @@ const Bankaccount = ({ navigation, route }) => {
         <Input icon={<At />} placeholder="N37,580.50" disabled value={amount} />
 
         <View style={styles.headerContainer}>
-          <Text style={styles.leftHeader}>Saved A ccounts</Text>
+          <Text style={styles.leftHeader}>Saved Accounts</Text>
           <Text style={styles.rightHeader}>See More</Text>
         </View>
 
@@ -238,6 +239,9 @@ const Bankaccount = ({ navigation, route }) => {
           textStyle={styles.dropDownText}
           style={styles.dropDown}
           containerStyle={{}}
+          dropDownContainerStyle={{
+            borderColor: COLORS.grey1
+          }}
         />
         {/* <Input icon={<At />} placeholder="--- Select Bank ---" /> */}
         <Input

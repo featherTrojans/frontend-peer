@@ -13,6 +13,7 @@ import {
 import { COLORS } from "../../../../constants";
 import { AuthContext } from "../../../../context/AuthContext";
 import showerror from "../../../../utils/errorMessage";
+import Customstatusbar from "../../../shared/Customstatusbar";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 // import { styles } from "./TransferInput.styles";
 
@@ -57,6 +58,7 @@ function Requestnew({ navigation }) {
   return (
     <View style={styles.container}>
       <Backheader title="Amount" />
+      <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
         <View style={{ flex: 1, justifyContent: "center" }}>

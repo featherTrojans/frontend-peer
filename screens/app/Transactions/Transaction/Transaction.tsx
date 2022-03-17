@@ -10,6 +10,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
 
 import { styles } from "./Transaction.styles";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Cryinganimate } = icons;
 
@@ -172,6 +173,7 @@ const Transactions = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <Customstatusbar />
       {/* heading */}
       <View style={styles.contentContainer}>
         <Text style={styles.headerText}>History</Text>

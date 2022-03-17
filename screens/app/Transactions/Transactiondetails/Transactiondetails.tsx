@@ -25,6 +25,7 @@ import { FONTS, fontsize, COLORS, icons } from "../../../../constants";
 import { NavigationContainer } from "@react-navigation/native";
 import amountFormatter from "../../../../utils/formatMoney";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 // Sendingandreceive
 
@@ -168,8 +169,7 @@ const Transactiondetails = ({ navigation, route }) => {
   // const {price } = route?.params
   return (
     <View style={styles.container}>
-      <StatusBar />
-
+      <Customstatusbar />
       <Globalmodal
         showState={showModal}
         onBgPress={() => setShowModal(!showModal)}

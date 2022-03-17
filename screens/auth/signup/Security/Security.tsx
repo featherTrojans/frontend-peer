@@ -17,6 +17,7 @@ import { styles } from "./Security.styles";
 import { AuthContext } from "../../../../context/AuthContext";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Lockicondark } = icons;
 
@@ -41,7 +42,8 @@ const Security = ({ route, navigation }) => {
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
-        <StatusBar />
+
+        <Customstatusbar />
         {/* <Text>Sign up page</Text> */}
         {/* Get Started and dots */}
         <JustifyBetween style={{ marginBottom: 10 }}>

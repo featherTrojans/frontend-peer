@@ -7,6 +7,7 @@ export const OnboardingComponentContainer = styled.View`
   justify-content: center;
   align-items: center;
   padding: 0px 35px;
+  margin-top: -80px
 `;
 
 export const ImageContainer = styled.View`

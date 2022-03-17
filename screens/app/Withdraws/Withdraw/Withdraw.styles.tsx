@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
+import { Shadow } from "../../../../constants/theme";
 
 export const styles = StyleSheet.create({
   activeStyles: {
@@ -51,12 +52,9 @@ export const styles = StyleSheet.create({
     paddingLeft: 14,
     paddingRight: 17,
     borderRadius: 15,
-    elevation: 3,
-    shadowColor: "rgba(0,0,0,.05)",
-    shadowOffset: { width: 1, height: 3 },
-    shadowOpacity: 0.16,
-    shadowRadius: 20,
-    backgroundColor: COLORS.white,
+    marginBottom: 10,
+    ...Shadow
+
   },
   namesContainer: {
     marginLeft: 20,

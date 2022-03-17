@@ -93,10 +93,15 @@ export const styles = StyleSheet.create({
   // The textinput replacing the otp input for now
   cutstomOtpInput: {
     width: "100%",
-    height: 60,
+    height: 62,
     borderColor: COLORS.grey2,
     borderWidth: .5,
-    padding: 10
+    borderRadius: 10,
+    padding: 10,
+    ...FONTS.light,
+    ...fontsize.small,
+    paddingLeft: 12.5,
+    color: COLORS.black
   }
 
 

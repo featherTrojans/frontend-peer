@@ -8,6 +8,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
+import Customstatusbar from "../../../shared/Customstatusbar";
 const { Backarrow, SecureDot } = icons;
 
 const TransferpinBank = ({route, navigation}) => {
@@ -49,7 +50,7 @@ const TransferpinBank = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       {loading && <Loader />}
-      <StatusBar />
+      <Customstatusbar />
       <Globalmodal
       showState={showmodal}
       btnFunction={()=>navigation.navigate("Root")}

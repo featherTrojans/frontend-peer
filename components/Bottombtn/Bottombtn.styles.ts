@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.blue6,
     borderRadius: 10,
     // alignSelf: 'center',
-    
+
     justifyContent: "center",
     // justifySelf: "center",
     alignItems: "center",
@@ -22,6 +22,6 @@ export const styles = StyleSheet.create({
     ...fontsize.smallest,
     ...FONTS.bold,
     color: COLORS.white,
-    textTransform: 'uppercase'
+    textTransform: "uppercase",
   },
 });

@@ -5,6 +5,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 // import { styles } from "./Cancelrequest.styles";
 import { Bottombtn } from "../../../../components";
 import { styles } from "../../Withdraws/Cancelrequest/Cancelrequest.styles";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow } = icons;
 const Canceldeposit = () => {
@@ -21,7 +22,7 @@ const Canceldeposit = () => {
   return (
     <View style={styles.container}>
       {/* Back Arrow */}
-      <StatusBar />
+      <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 25 }}>
         <View style={{ marginVertical: 35 }}>
           <Backarrow />

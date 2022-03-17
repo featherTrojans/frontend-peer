@@ -17,6 +17,7 @@ import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
 import Map from "../../../shared/map/Map";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
+import Customstatusbar from "../../../shared/Customstatusbar";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
 // import { styles } from './Pendingwithdraw.styles'
@@ -42,6 +43,7 @@ const Accepteddeposit = ({navigation, route}) => {
 
   useEffect(()=>{
     // update both map, meeting point and  Agent point
+    console.log(requestInfo, "here is the user")
     getLocation()
   }, []);
 
@@ -59,7 +61,7 @@ const Accepteddeposit = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
         <Map />
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>

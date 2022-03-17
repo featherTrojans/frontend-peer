@@ -5,6 +5,7 @@ import { COLORS, icons } from "../../../../constants";
 import { styles } from "./Transfercash.styles";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { Backheader } from "../../../../components";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, Featherwallet, Bankaccount, Forwardarrow } = icons;
 
@@ -27,6 +28,7 @@ const Transfercash = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Backheader title="Transfer Cash" />
+      <Customstatusbar />
       {/* <View style={styles.backArrow}>
         <Backarrow />
         <Text style={styles.backArrowText}>Transfer Cash</Text>

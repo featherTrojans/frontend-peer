@@ -18,6 +18,7 @@ import * as Location from "expo-location";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, Forwardarrow, Requestee1, Requestee2, Requestee3, Onmapicon } = icons;
 const { Mapimage } = images;
@@ -101,6 +102,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const [active, setActive] = useState("peers");
   return (
     <View style={{ flex: 1 }}>
+      <Customstatusbar />
       <Map />
       <View>
         <Backarrow />

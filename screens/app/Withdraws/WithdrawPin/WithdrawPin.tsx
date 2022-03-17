@@ -8,6 +8,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { LocationContext } from "../../../../context/LocationContext";
+import Customstatusbar from "../../../shared/Customstatusbar";
 const { Backarrow, SecureDot } = icons;
 
 const WithdrawPin = ({ navigation, route}) => {
@@ -77,6 +78,8 @@ const WithdrawPin = ({ navigation, route}) => {
     <View style={styles.container}>
       {loading && <Loader />}
 
+      <Customstatusbar />
+
       <Globalmodal 
         showState={showmodal}
         onBgPress={() => setShowModal(!showmodal)}
@@ -143,7 +146,6 @@ const WithdrawPin = ({ navigation, route}) => {
            </View>
       </Globalmodal>
 
-      <StatusBar />
       <View style={styles.mainContainer}>
         <View style={styles.backArrowConteiner}>
           <Backarrow />

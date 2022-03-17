@@ -1,15 +1,15 @@
-import React, {useContext , useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
   StatusBar,
   TouchableOpacity,
   TouchableHighlight,
-  Alert
+  Alert,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
-import * as Yup from "yup"
+import * as Yup from "yup";
 import { Input, Loader } from "../../../../components/index";
 import { FONTS, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
@@ -18,44 +18,31 @@ import { styles } from "./Personal.styles";
 import { AuthContext } from "../../../../context/AuthContext";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
-
-
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const validationSchema = Yup.object().shape({
-  firstName: Yup
-  .string()
-  .label('First Name')
-  .required(),
-  lastName: Yup
-  .string()
-  .label('Last Name')
-  .required(),
-  email:  Yup
-  .string()
-  .label("Email")
-  .email()
-  .required(),
-  phoneNumber: Yup
-  .string()
-  .label("Phone Number")
-  .matches(phoneRegExp, 'This is not a valid phone number')
-})
-
-
+  firstName: Yup.string().label("First Name").required(),
+  lastName: Yup.string().label("Last Name").required(),
+  email: Yup.string().label("Email").email().required(),
+  phoneNumber: Yup.string()
+    .label("Phone Number")
+    .matches(phoneRegExp, "This is not a valid phone number"),
+});
 
 const Personal = ({ navigation }) => {
-  const {setAuthData} = useContext(AuthContext);
+  const { setAuthData } = useContext(AuthContext);
   const toast = useToast();
 
   return (
-    <KeyboardAwareScrollView> 
+    <KeyboardAwareScrollView>
       <View style={styles.container}>
-        <StatusBar />
-        
+        <Customstatusbar />
+
         {/* ERROR PAGE */}
 
         {/* <Text>Sign up page</Text> */}
@@ -81,29 +68,44 @@ const Personal = ({ navigation }) => {
             lastName: "",
             email: "",
             phoneNumber: "",
+            referalCode: ""
           }}
           validationSchema={validationSchema}
-          onSubmit={async (values,{setSubmitting}) => {
+          onSubmit={async (values, { setSubmitting }) => {
             try {
               //send the request
               const response = await axiosCustom.post("auth/signup", values);
               //store data in context
               // setAuthData(response?.data?.data)
-              navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:null});
+              navigation.navigate("Verification", {
+                email: values.email,
+                phoneNumber: values.phoneNumber,
+                token: null,
+              });
             } catch (err) {
-              if(err.response){
-                if(err?.response?.data?.data?.isVerified){
-                  return navigation.navigate("Verification",{email:values.email,phoneNumber:values.phoneNumber,token:null})
+              if (err.response) {
+                if (err?.response?.data?.data?.isVerified) {
+                  return navigation.navigate("Verification", {
+                    email: values.email,
+                    phoneNumber: values.phoneNumber,
+                    token: null,
+                  });
                 }
               }
-              showerror(toast,err)
-              
+              showerror(toast, err);
             }
           }}
         >
           {(formikProps) => {
-
-          const { isSubmitting, isValid, handleBlur, errors, touched, handleChange, handleSubmit } = formikProps;
+            const {
+              isSubmitting,
+              isValid,
+              handleBlur,
+              errors,
+              touched,
+              handleChange,
+              handleSubmit,
+            } = formikProps;
             return (
               <React.Fragment>
                 {isSubmitting && <Loader />}
@@ -136,29 +138,30 @@ const Personal = ({ navigation }) => {
                   icon={<Phoneicon />}
                 />
 
+                <Input
+                  placeholder="Referral Code (Optional)"
+                  name="referralCode"
+                  formikProps={formikProps}
+                  icon={<Phoneicon />}
+                />
                 {/* Proceed Btn */}
                 <View style={styles.bottomContainer}>
-
-                  
                   <TouchableOpacity
                     style={styles.proceedBtn}
                     activeOpacity={0.8}
                     onPress={handleSubmit}
                     disabled={isSubmitting}
                   >
-                    <Text style={styles.proceedText}>
-                      PROCEED
-                    </Text>
+                    <Text style={styles.proceedText}>PROCEED</Text>
                   </TouchableOpacity>
 
                   {/* Have an account */}
                   <View style={styles.bottomTextContainer}>
                     <Text style={styles.bottomText}>Have an account yet?</Text>
-                    
+
                     <TouchableOpacity
                       onPress={() => navigation.navigate("Login")}
                       activeOpacity={0.8}
-                      
                     >
                       <Text style={[styles.bottomText, { ...FONTS.bold }]}>
                         Login

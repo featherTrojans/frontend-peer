@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Chatsearchicon } = icons;
 
@@ -63,7 +64,7 @@ const Chat = ({
 const Chatshome = () => {
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
       {/* Header texts and search icon */}
       <View style={styles.topHeader}>
         <View style={styles.chatTextContainer}>

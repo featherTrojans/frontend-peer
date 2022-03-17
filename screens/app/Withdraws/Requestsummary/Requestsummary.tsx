@@ -8,6 +8,7 @@ import {
   Sendingandreceive,
 } from "../../../../components";
 import { FONTS, fontsize } from "../../../../constants";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 
 const Requestsummary = ({navigation, route}) => {
@@ -15,7 +16,8 @@ const Requestsummary = ({navigation, route}) => {
   console.log(requestInfo);
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
+
 
       <Backheader title="Request Summary" />
       <View

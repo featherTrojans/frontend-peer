@@ -11,6 +11,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { styles } from "./Securepin.styles";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { SecureDot, Successcheckanimate } = icons;
 const SecurepinAgain = ({ route, navigation }) => {
@@ -64,7 +65,7 @@ const SecurepinAgain = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
 
       <Globalmodal
         showState={showModal}

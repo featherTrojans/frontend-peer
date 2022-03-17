@@ -21,6 +21,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
+import Customstatusbar from "../../../shared/Customstatusbar";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
   // import { styles } from './Pendingwithdraw.styles'
@@ -64,7 +65,7 @@ import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/
 
     return (
       <View style={styles.container}>
-        <StatusBar />
+        <Customstatusbar />
         {loading && <Loader />}
         <Map />
           <View style={styles.previewContainer}>

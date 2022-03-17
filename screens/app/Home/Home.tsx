@@ -21,6 +21,7 @@ import {
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import LottieView from "lottie-react-native";
+import * as Animatable from "react-native-animatable";
 import { Service, Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
@@ -28,8 +29,8 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
 import { customNavigation } from "../../../utils/customNavigation";
-import { useLinkTo } from '@react-navigation/native';
-
+import { useLinkTo } from "@react-navigation/native";
+import Customstatusbar from "../../shared/Customstatusbar";
 
 const {
   Profilepics,
@@ -73,10 +74,8 @@ const Home = ({ navigation }: { navigation: any }) => {
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [extractedToken, setExtractedToken] = useState()
+  const [extractedToken, setExtractedToken] = useState();
   const linkTo = useLinkTo();
-
-
 
   // const setMessageToken = async () => {
   //   try {
@@ -88,32 +87,34 @@ const Home = ({ navigation }: { navigation: any }) => {
   // }
 
   const tokenExtractor = (string: any) => {
-    const firstIndex = string.indexOf("[")
-    return string.slice(firstIndex+1, -1)
-  }
+    const firstIndex = string.indexOf("[");
+    return string.slice(firstIndex + 1, -1);
+  };
   useEffect(() => {
-    console.log(authdata, "here is the authdat")
-  }, [])
+    console.log(authdata, "here is the authdat");
+  }, []);
 
   useEffect(() => {
     // setMessageToken()
-    console.log(messageToken, "This is my token messagedstss")
-    if(messageToken){
-     setExtractedToken(tokenExtractor(messageToken))
+    console.log(messageToken, "This is my token messagedstss");
+    if (messageToken) {
+      setExtractedToken(tokenExtractor(messageToken));
     }
-    console.log(extractedToken, 'Extracted token')
-    
-    sendAnotherToken()
-  },[extractedToken,messageToken])
+    console.log(extractedToken, "Extracted token");
 
-  const sendAnotherToken = async ()=>{
-    try{
-      const response = await axiosCustom.post("/auth/token/create",{messageToken: `ExponentPushToken[${extractedToken}]`})
-      console.log(response)
-    }catch(err){
-      console.log(err.response.data)
+    sendAnotherToken();
+  }, [extractedToken, messageToken]);
+
+  const sendAnotherToken = async () => {
+    try {
+      const response = await axiosCustom.post("/auth/token/create", {
+        messageToken: `ExponentPushToken[${extractedToken}]`,
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err.response.data);
     }
-  }
+  };
 
   //setting up websocket
   // useEffect(() => {
@@ -143,7 +144,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       setAuthData(response?.data?.data);
     } catch (err) {
       console.log(err.response);
-  } finally {
+    } finally {
       setLoading(false);
       setRefreshing(false);
     }
@@ -184,18 +185,16 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
         <View style={styles.profileContainer}>
-
           <View>
-          {/* <Profilepics /> */}
-          {/* <Useravatar /> */}
-          <Smalluseravatar />
-          {/* <Defaultuseravatar /> */}
+            {/* <Profilepics /> */}
+            {/* <Useravatar /> */}
+            <Smalluseravatar />
+            {/* <Defaultuseravatar /> */}
           </View>
-
 
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
@@ -233,27 +232,35 @@ const Home = ({ navigation }: { navigation: any }) => {
           <Viewbalance />
           <View style={styles.walletOptionsContainer}>
             {walletOptions.map(
-              ({
-                icon,
-                title,
-                link,
-              }: {
-                icon: JSX.Element;
-                title: string;
-                link: string;
-              }) => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate(link)}
-                  style={styles.optionContainer}
-                  activeOpacity={0.8}
+              (
+                {
+                  icon,
+                  title,
+                  link,
+                }: {
+                  icon: JSX.Element;
+                  title: string;
+                  link: string;
+                },
+                index
+              ) => (
+                <Animatable.View
+                  animation="bounceIn"
+                  delay={index * 150}
                   key={title}
                 >
-                  <View style={styles.optionIconBg}>
-                    {/* Icon will be inside this */}
-                    {icon}
-                  </View>
-                  <Text style={styles.optionTitle}>{title}</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate(link)}
+                    style={styles.optionContainer}
+                  >
+                    <View style={styles.optionIconBg}>
+                      {/* Icon will be inside this */}
+                      {icon}
+                    </View>
+                    <Text style={styles.optionTitle}>{title}</Text>
+                  </TouchableOpacity>
+                </Animatable.View>
               )
             )}
           </View>
@@ -276,7 +283,11 @@ const Home = ({ navigation }: { navigation: any }) => {
             <EmptyComponent />
           ) : (
             histories.map((history) => (
-              <Transactionhistory date={history.time} datas={history.data}  key={history.time}/>
+              <Transactionhistory
+                date={history.time}
+                datas={history.data}
+                key={history.time}
+              />
             ))
           )}
         </View>

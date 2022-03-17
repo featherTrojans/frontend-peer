@@ -14,6 +14,7 @@ import {
 } from "../../../../components";
 import { COLORS } from "../../../../constants";
 import amountFormatter from "../../../../utils/formatMoney";
+import Customstatusbar from "../../../shared/Customstatusbar";
 import { styles } from "./TransferInput.styles";
 
 
@@ -52,6 +53,7 @@ function TransferInput({ route, navigation }) {
   return (
     <View style={styles.container}>
       <Backheader title="Enter Amount" />
+      <Customstatusbar />
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance />

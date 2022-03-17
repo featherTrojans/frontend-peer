@@ -10,6 +10,7 @@ import BottomSheet, {
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { styles } from "./Settings.styles";
 import { AuthContext } from "../../../context/AuthContext";
+import Customstatusbar from "../../shared/Customstatusbar";
 
 const {
   Defaultuseravatar,
@@ -64,7 +65,7 @@ const Settings = ({navigation}) => {
   }
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
       <View>
         <Text style={styles.settingText}>Settings</Text>
       </View>

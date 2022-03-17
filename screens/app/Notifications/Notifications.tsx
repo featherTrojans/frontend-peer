@@ -5,6 +5,7 @@ import { icons } from "../../../constants";
 import { Backheader } from "../../../components";
 import { string } from "yup";
 import { Shadow } from "../../../constants/theme";
+import Customstatusbar from "../../shared/Customstatusbar";
 
 const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow } = icons;
 
@@ -158,6 +159,7 @@ const Notifications = () => {
       <View>
         <Backheader title="Notifications" />
       </View>
+      <Customstatusbar />
       <View style={styles.listContainer}>
         {/* Flatlist list of notifications */}
         <FlatList

@@ -9,6 +9,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Backarrow, Successcheckanimate } = icons;
 const Cancelrequest = ({route, navigation}) => {
@@ -48,6 +49,7 @@ const Cancelrequest = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       {loading && <Loader />}
+      <Customstatusbar />
       <Globalmodal
        showState={isModalVisible}
        
@@ -68,7 +70,6 @@ const Cancelrequest = ({route, navigation}) => {
            </View>
       </Globalmodal>
       {/* Back Arrow */}
-      <StatusBar />
       <View style={{ flex: 1, paddingHorizontal: 25 }}>
         <View style={{ marginVertical: 35 }}>
           <Backarrow />

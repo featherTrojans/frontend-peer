@@ -17,6 +17,7 @@ import {
   OnboardingFlatlist,
   SkipText,
 } from "./Onboarding.styles";
+import Customstatusbar from "../shared/Customstatusbar";
 
 const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
@@ -51,7 +52,10 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
 
   return (
     <OnboardingContainer>
-      <StatusBar />
+
+
+      <Customstatusbar />
+
       <LoginBtn activeOpacity={0.6} onPress={navigateToLogin}>
         <SkipText >Skip</SkipText>
         

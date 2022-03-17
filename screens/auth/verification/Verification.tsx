@@ -10,6 +10,7 @@ import { Bottombtn, Loader } from "../../../components";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
+import Customstatusbar from "../../shared/Customstatusbar";
 
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
@@ -75,7 +76,7 @@ const Verification = ({route,navigation}) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <Customstatusbar />
       {/* Closeicon */}
 
       <Globalmodal

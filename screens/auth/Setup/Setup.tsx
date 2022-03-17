@@ -18,6 +18,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import showerror from "../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
+import Customstatusbar from "../../shared/Customstatusbar";
 
 const { At, Check, WrongIcon, Successcheckanimate } = icons;
 
@@ -71,7 +72,7 @@ const Setup = ({ route, navigation }) => {
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
-        <StatusBar />
+        <Customstatusbar />
         {/* Header */}
 
         <Globalmodal

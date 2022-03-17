@@ -14,6 +14,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import amountFormatter from "../../../../utils/formatMoney";
 
 import Cryinganim from "../../../../assets/Lottie/animations/feather_cry_emoji.json"
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const {
   Backarrow,
@@ -53,11 +54,15 @@ const Requesteeprofile = ({ list, onpress }: any) => {
   const { image, agent, agentUsername, total, status } = list;
   
   return (
-    <TouchableOpacity style={styles.withdrawProfileContainer} activeOpacity={0.8} onPress={onpress}>
-      <View style={{ flexDirection: "row" }}>
+    <TouchableOpacity 
+    style={styles.withdrawProfileContainer} 
+    activeOpacity={0.8} 
+    onPress={onpress}
+    >
+      <View style={{ flexDirection: "row", alignItems: 'center' }}>
         {/* Image */}
         {image}
-
+          <View style={{width: 44, height: 44, backgroundColor: COLORS.grey1,  borderRadius: 44/2}}/>
         <View style={styles.namesContainer}>
           <Text style={styles.withdrawProfileName}>{agent}</Text>
           <Text style={styles.withdrawProfileUsername}>@{agentUsername}</Text>
@@ -152,6 +157,7 @@ const Withdraw = ({ navigation }) => {
     <View style={styles.container}>
       <Backheader title="Withdraw" />
       {loading && <Loader />}
+      <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance />
         <View style={{ flex: 1 }}>

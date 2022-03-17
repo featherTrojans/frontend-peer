@@ -19,6 +19,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 import showerror from "../../../../utils/errorMessage";
 import { AuthContext } from "../../../../context/AuthContext";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 
 
@@ -101,6 +102,7 @@ function Depositinput({ route, navigation }) {
   return (
     <View style={styles.container}>
       <Backheader title="Enter Amount" />
+      <Customstatusbar />
       {loading && <Loader />}
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <Viewbalance />
