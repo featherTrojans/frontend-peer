@@ -74,9 +74,7 @@ function Depositinput({ route, navigation }) {
 
   const handleSubmit= async ()=>{
     setLoading(true)
-    if(authdata?.walletBal < amount){
-      return showerror(toast, null, "insufficient amount")
-    }
+    
     let locationText = `${locationSide.name}, ${locationSide.city}`
     
     try{
@@ -84,7 +82,7 @@ function Depositinput({ route, navigation }) {
             amount,
             longitude: coords.longitude,
             latitude: coords.latitude,
-            locationText:  locationSide.city
+            locationText:  locationText
         })
         let asyncval = JSON.stringify({locationText, amount, time: Date.now()})
         try{

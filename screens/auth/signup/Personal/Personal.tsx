@@ -80,7 +80,7 @@ const Personal = ({ navigation }) => {
               navigation.navigate("Verification", {
                 email: values.email,
                 phoneNumber: values.phoneNumber,
-                token: null,
+                token: response?.data?.data?.token,
               });
             } catch (err) {
               if (err.response) {

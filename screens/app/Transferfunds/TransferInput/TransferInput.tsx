@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
 } from "react-native";
+import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
   Bottombtn,
@@ -13,6 +14,8 @@ import {
   Viewbalance,
 } from "../../../../components";
 import { COLORS } from "../../../../constants";
+import { AuthContext } from "../../../../context/AuthContext";
+import showerror from "../../../../utils/errorMessage";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { styles } from "./TransferInput.styles";
@@ -20,8 +23,10 @@ import { styles } from "./TransferInput.styles";
 
 function TransferInput({ route, navigation }) {
   const { nextscreen } = route.params;
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
+  const {authdata} = useContext(AuthContext);
+  const toast = useToast()
   const [amount, setAmount] = useState<string>("");
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   
   
   // const amountFormatter = (value: string) => {
@@ -49,6 +54,13 @@ function TransferInput({ route, navigation }) {
       return oldamount
     });
   };
+
+  const handleToNext = ()=>{
+    if(authdata?.walletBal < amount){
+      return showerror(toast, null, "insufficient amount")
+    }
+    navigation.navigate(nextscreen, { amount: amount })
+  }
 
   return (
     <View style={styles.container}>
@@ -83,9 +95,7 @@ function TransferInput({ route, navigation }) {
 
       <Bottombtn
         title="PROCEED"
-        onpress={() =>
-          navigation.navigate(nextscreen, { amount: amount })
-        }
+        onpress={handleToNext}
       />
     </View>
   );

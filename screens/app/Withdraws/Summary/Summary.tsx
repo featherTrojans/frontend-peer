@@ -77,7 +77,7 @@ const Summary = ({navigation, route}) => {
         <Customstatusbar />
       <Globalmodal
        showState={showmodal}
-       onBgPress={() => setShowModal(!showmodal)}
+      //  onBgPress={() => setShowModal(!showmodal)}
        >
          <View style={{
            paddingVertical: 70,

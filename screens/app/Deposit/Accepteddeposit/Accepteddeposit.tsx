@@ -18,6 +18,7 @@ import Map from "../../../shared/map/Map";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
 // import { styles } from './Pendingwithdraw.styles'
@@ -109,18 +110,21 @@ const Accepteddeposit = ({navigation, route}) => {
               </View>
             ) : (
               <View>
-                <Iconwithdatas
-                  icon={<Phoneicony />}
-                  title="Phone"
-                  details="Phone call to communicate"
-                  onpress={() => console.log("Redirect to Chat")}
-                />
-                <Iconwithdatas
-                  icon={<Smsicony />}
-                  title="SMS"
-                  details="Send a text to communicate"
-                  onpress={() => console.log("Redirect to Negotiate")}
-                />
+                
+                  <Iconwithdatas
+                    icon={<Phoneicony />}
+                    title="Phone"
+                    details="Phone call to communicate"
+                    onpress={ ()=>makePhoneCall(requestInfo.user.phoneNumber)}
+                    />
+                  
+                    <Iconwithdatas
+                      icon={<Smsicony />}
+                      title="SMS"
+                      details="Send a text to communicate"
+                      onpress={()=>sendMessage(requestInfo.user.phoneNumber,"")}
+                      />
+                  
                 <Iconwithdatas
                   icon={<Chaticon />}
                   title="Chat"

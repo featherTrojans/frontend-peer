@@ -68,7 +68,10 @@ const Security = ({ route, navigation }) => {
           }}
           validationSchema={validationSchema}
           onSubmit={async (values,{setSubmitting}) => {
-            console.log(values);
+            //  do validation
+            if( values.password.length < 8){
+              return showerror(toast,null,"password should have a minimun of 8 characters");
+            }
             try {
               //send the request
               const response = await axiosCustom.put("auth/password/set", {password:values.password},{headers:{token:token}});

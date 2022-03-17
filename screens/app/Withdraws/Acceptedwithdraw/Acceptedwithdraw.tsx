@@ -18,6 +18,8 @@ import Map from "../../../shared/map/Map";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
+import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -39,6 +41,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   const {requestInfo} = route.params;
   const {setCoords, setDestinationCoords} = useContext(LocationContext)
   const [toggleShow, setToggleShow] = useState(true);
+  const [userinfo, setUserinfo] = useState({})
 
   useEffect(()=>{
     // update both map, meeting point and  Agent point
@@ -46,6 +49,17 @@ const Acceptedwithdraw = ({ navigation, route }) => {
     getLocation()
   }, []);
 
+  useEffect(()=>{
+    getAdditionalUserInfo()
+  },[])
+  const getAdditionalUserInfo = async()=>{
+    try{
+      const response = await axiosCustom.get(`/user/${requestInfo.agentUsername}`)
+      setUserinfo(response?.data?.data)
+    }catch(err){
+
+    }
+  }
   const getLocation = async () => {
       const {coordinates, address} = await getCurrentLocation()
       setCoords({...coordinates,locationText:address});
@@ -104,13 +118,13 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                   icon={<Phoneicony />}
                   title="Phone"
                   details="Phone call to communicate"
-                  onpress={() => console.log("Redirect to Phone")}
+                  onpress={()=>makePhoneCall(userinfo.phoneNumber)}
                 />
                 <Iconwithdatas
                   icon={<Smsicony />}
                   title="SMS"
                   details="Send a text to communicate"
-                  onpress={() => console.log("Redirect to SMS")}
+                  onpress={()=>sendMessage(userinfo.phoneNumber,"")}
                 />
                 <Iconwithdatas
                   icon={<Chaticon />}
