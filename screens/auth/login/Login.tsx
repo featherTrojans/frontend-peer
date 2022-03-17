@@ -11,6 +11,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  StatusBar,
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -67,6 +68,16 @@ const Login = ({ navigation }: any) => {
         <View style={styles.logoWrapper}>
           <Newlogo />
         </View>
+
+        <StatusBar 
+          animated={true}
+          backgroundColor="#003AD6"
+          barStyle="light-content"
+          networkActivityIndicatorVisible={true}
+          showHideTransition="fade"
+          hidden={false}
+        
+        />
 
         {/* Form */}
         <Formik

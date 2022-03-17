@@ -43,6 +43,7 @@ const Accepteddeposit = ({navigation, route}) => {
 
   useEffect(()=>{
     // update both map, meeting point and  Agent point
+    console.log(requestInfo, "here is the user")
     getLocation()
   }, []);
 

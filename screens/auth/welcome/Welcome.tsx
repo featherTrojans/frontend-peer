@@ -11,6 +11,7 @@ import Animated, {
 import { styles } from "./Welcome.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
+import Customstatusbar from "../../shared/Customstatusbar";
 
 const { Smile, Winkinganimate } = icons;
 
@@ -68,6 +69,7 @@ const Welcome = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       {/* Smiling Icon */}
+      <Customstatusbar />
       <View style={{ justifyContent: "center", alignItems: "center", marginTop: 42 }}>
       <LottieView source={Winkinganimate} autoPlay loop style={{width: 194, height: 194}}/>
       </View>

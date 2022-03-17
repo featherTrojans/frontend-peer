@@ -54,11 +54,15 @@ const Requesteeprofile = ({ list, onpress }: any) => {
   const { image, agent, agentUsername, total, status } = list;
   
   return (
-    <TouchableOpacity style={styles.withdrawProfileContainer} activeOpacity={0.8} onPress={onpress}>
-      <View style={{ flexDirection: "row" }}>
+    <TouchableOpacity 
+    style={styles.withdrawProfileContainer} 
+    activeOpacity={0.8} 
+    onPress={onpress}
+    >
+      <View style={{ flexDirection: "row", alignItems: 'center' }}>
         {/* Image */}
         {image}
-
+          <View style={{width: 44, height: 44, backgroundColor: COLORS.grey1,  borderRadius: 44/2}}/>
         <View style={styles.namesContainer}>
           <Text style={styles.withdrawProfileName}>{agent}</Text>
           <Text style={styles.withdrawProfileUsername}>@{agentUsername}</Text>

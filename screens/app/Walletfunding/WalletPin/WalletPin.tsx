@@ -39,7 +39,7 @@ function WalletPin({ route, navigation }) {
     try{
         const response = await axiosCustom.post("/pay",{amount});
         console.log(response)
-        navigation.navigate("CustomWebView",{url:response.data.data.authorization_url, reference:response.data.data.reference})
+        navigation.navigate("CustomWebView",{url:response.data.data.authorization_url, reference:response.data.data.reference, amount: amount})
         // Linking.openURL(response.data.data.authorization_url)
         // WebBrowser.openBrowserAsync(response.data.data.authorization_url);
         // console.log(response)

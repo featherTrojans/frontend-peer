@@ -16,6 +16,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import Map from "../../../shared/map/Map";
 import amountFormatter from "../../../../utils/formatMoney";
 import { LocationContext } from "../../../../context/LocationContext";
+import Customstatusbar from "../../../shared/Customstatusbar";
 
 const { Locationmap } = images;
 const { Forwardarrow, Editicon, Meetupdot } = icons;
@@ -29,7 +30,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
     <View style={styles.container}>
       <Map />
       {loading && <Loader />}
-      <StatusBar />
+      <Customstatusbar />
       
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>

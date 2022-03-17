@@ -53,6 +53,9 @@ const Addcash = ({navigation}) => {
           textStyle={styles.dropDownText}
           style={styles.dropDown}
           containerStyle={{}}
+          dropDownContainerStyle={{
+            borderColor: COLORS.grey1
+          }}
         />
         {value !== null && (
           <View style={styles.balanceContainer}>

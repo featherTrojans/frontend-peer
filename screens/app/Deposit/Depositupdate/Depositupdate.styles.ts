@@ -90,6 +90,7 @@ export const styles = StyleSheet.create({
     height: 70,
     borderRadius: 15,
     marginVertical: 25,
+    marginHorizontal: 15,
     paddingLeft: 20,
     alignItems: "center",
     flexDirection: "row",
