@@ -14,6 +14,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { customNavigation, navigationRef } from "../utils/customNavigation";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 // import axiosCustom from "../httpRequests/axiosCustom";÷
@@ -434,13 +435,32 @@ const Tabs = () => {
   );
 };
 
+
+
 const RootNavigator = () => {
   const { token } = useContext(AuthContext);
+  const [onboarded, setOnboarded] = useState<null | boolean>(null)
+
+  const checkOnboarding = async () => {
+    try {
+        const value = await AsyncStorage.getItem('@onboarded')
+        if (value !== null) {
+            setOnboarded(JSON.parse(value))
+            console.log(onboarded, "This is inside the functions itself ")
+        }
+    } catch (err) {
+    } finally {
+    }
+}
+useEffect(() => {
+    checkOnboarding()
+    console.log(onboarded, "The Onboarding")
+}, [])
 
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-      // initialRouteName="Summary"
+      initialRouteName={onboarded ?  "Login" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
@@ -585,6 +605,10 @@ export default function MainNavigation() {
   const { token, setMessageToken } = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
+  const [onboarded, setOnboarded] = useState(false)
+
+
+
 
   useEffect(() => {
     setMessageToken(expoPushToken);

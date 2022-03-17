@@ -65,7 +65,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 
     return (
       <View style={styles.container}>
-        <Customstatusbar />
+        <Customstatusbar /> 
         {loading && <Loader />}
         <Map />
           <View style={styles.previewContainer}>

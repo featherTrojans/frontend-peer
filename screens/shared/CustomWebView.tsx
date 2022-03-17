@@ -1,35 +1,41 @@
-import { useContext, useRef } from "react"
-import WebView from "react-native-webview"
+import { useCallback, useContext, useRef } from "react";
+import WebView from "react-native-webview";
 import { AuthContext } from "../../context/AuthContext";
-import { usePushNotification } from "../../navigation"
+import { usePushNotification } from "../../navigation";
 
-const CustomWebView = ({navigation, route})=>{
-  
+const CustomWebView = ({ navigation, route }) => {
   const { sendPushNotification } = usePushNotification();
-  const {authdata, messageToken} = useContext(AuthContext)
+  const { authdata, messageToken } = useContext(AuthContext);
 
-
-    const webview = useRef()
-    const {url,reference, amount} = route.params
-    const callback_url = `https://featherwebview.com/?trxref=${reference}&reference=${reference}`
-    const onNavigationStateChange = (state:any)=>{
-      console.log(state)
-      const {url } = state;
-      if(!url) return 
-      if(url === callback_url){
+  const webview = useRef();
+  const { url, reference, amount } = route.params;
+  const callback_url = `https://featherwebview.com/?trxref=${reference}&reference=${reference}`;
+  const onNavigationStateChange = (state: any) => {
+    console.log(state);
+    const { url } = state;
+    if (!url) return;
+    if (url === callback_url) {
+     
         sendPushNotification(
           messageToken,
           "Wallet Funding",
           `Congrats🎉, You just funded your wallet with N${amount}`,
           "Root"
         );
-        webview.current?.stopLoading()
-        navigation.navigate("Home")
-      }
+   
+
+      webview.current?.stopLoading();
+      navigation.navigate("Home");
     }
-    return (
-      <WebView  ref={webview} source={{uri:url}} style={{marginTop:40}} onNavigationStateChange={onNavigationStateChange} />
-    )
-  }
-  
-  export default CustomWebView
+  };
+  return (
+    <WebView
+      ref={webview}
+      source={{ uri: url }}
+      style={{ marginTop: 40 }}
+      onNavigationStateChange={onNavigationStateChange}
+    />
+  );
+};
+
+export default CustomWebView;

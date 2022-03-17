@@ -120,7 +120,7 @@ const Verification = ({route,navigation}) => {
             setOtpCode(parseInt(code))
           }}
         /> */}
-        <TextInput keyboardType="number-pad" value={otpCode} onChangeText={(text)=> setOtpCode(text)} style={styles.cutstomOtpInput} />
+        <TextInput keyboardType="number-pad" value={otpCode} onChangeText={(text)=> setOtpCode(text)} style={styles.cutstomOtpInput} maxLength={6}/>
       </View>
       {/* Resend sms duration */}
       <View style={styles.resendAndDuration}>

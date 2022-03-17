@@ -5,6 +5,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import { Bottombtn, Inputinsettings } from "../../../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
+import Customstatusbar from "../../../../shared/Customstatusbar";
 
 const { Backarrow } = icons;
 
@@ -16,6 +17,7 @@ const Changepassword = () => {
     <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
             <View style={styles.mainHeaderContainer}>
         {/* Icons */}
+        <Customstatusbar />
 
         <TouchableOpacity
           onPress={() => navigation.goBack()}

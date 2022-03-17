@@ -21,7 +21,7 @@ const SecurepinAgain = ({ route, navigation }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [amount, setAmount] = useState<string[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [result, setResult] = useState<any>()
+  const [result, setResult] = useState<any>();
   console.log(amount.join(""), pin);
 
   const handleSubmit = async () => {
@@ -36,8 +36,8 @@ const SecurepinAgain = ({ route, navigation }) => {
         { pin },
         { headers: { token: token } }
       );
-      setResult(response)
-      setShowModal(true)
+      setResult(response);
+      setShowModal(true);
       // navigation.navigate("Setup", {
       //   token: response?.data?.data?.token,
       //   defaultUsername: response?.data?.data?.username,
@@ -70,21 +70,40 @@ const SecurepinAgain = ({ route, navigation }) => {
       <Globalmodal
         showState={showModal}
         onBgPress={() => setShowModal(true)} // This should not do anything
-        btnFunction={() => navigation.navigate("Setup", {token: result?.data?.data?.token, defaultUsername: result?.data?.data?.username})}
+        btnFunction={() =>
+          navigation.navigate("Setup", {
+            token: result?.data?.data?.token,
+            defaultUsername: result?.data?.data?.username,
+          })
+        }
         btnText="Continue"
       >
         <>
-          <View style={{justifyContent: 'center', alignItems: 'center', marginHorizontal: 75, marginBottom: 50}}>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              marginHorizontal: 75,
+              marginBottom: 50,
+            }}
+          >
             <LottieView
               source={Successcheckanimate}
               style={{ width: 148, height: 148, marginBottom: 18 }}
               autoPlay
               loop={false}
             />
-          
-          <Text style={{ ...fontsize.bsmall, ...FONTS.regular, textAlign: 'center', lineHeight: 24 }}>
-            Your transaction pin has been successfully added
-          </Text>
+
+            <Text
+              style={{
+                ...fontsize.bsmall,
+                ...FONTS.regular,
+                textAlign: "center",
+                lineHeight: 24,
+              }}
+            >
+              Your transaction pin has been successfully added
+            </Text>
           </View>
         </>
       </Globalmodal>

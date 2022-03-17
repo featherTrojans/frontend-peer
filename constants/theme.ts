@@ -90,48 +90,48 @@ export const Shadow = {
 export const fontsize = {
   
   bbsmall: {
-    fontSize: 18,
+    fontSize: RFValue(18),
   },
   bsmall: {
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
 
   bmsmall: {
-    fontSize: 15,
+    fontSize: RFValue(15),
   },
 
   small: {
-    fontSize: 14,
+    fontSize: RFValue(14),
   },
   smaller: {
-    fontSize: 13,
+    fontSize: RFValue(13),
   },
   smallest: {
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
   xsmallest: {
-    fontSize: 11,
+    fontSize: RFValue(11),
   },
   xxsmallest: {
-    fontSize: 10,
+    fontSize: RFValue(10),
   },
   medium: {
-    fontSize: 20,
+    fontSize: RFValue(20),
   },
   xmedium: {
-    fontSize: 21,
+    fontSize: RFValue(21),
   },
   bmedium: {
-    fontSize: 24,
+    fontSize: RFValue(24),
   },
   bxmedium: {
-    fontSize: 28,
+    fontSize: RFValue(28),
   },
   big: {
-    fontSize: 30,
+    fontSize: RFValue(30),
   },
   bigger:{
-    fontSize: 38,
+    fontSize: RFValue(38),
   }
 };
 

@@ -1,4 +1,3 @@
-
 import { useRef, useState } from "react";
 import { FlatList, Animated, StatusBar } from "react-native";
 import { OnboardingScreenNavigationProps } from "../../types";
@@ -18,6 +17,7 @@ import {
   SkipText,
 } from "./Onboarding.styles";
 import Customstatusbar from "../shared/Customstatusbar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
@@ -32,7 +32,33 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     setViewIndex(viewableItems[0]?.index);
   });
 
+  const storeData = async () => {
+    try {
+      const stored = await AsyncStorage.setItem(
+        "@onboarded",
+        JSON.stringify({ onboard: true })
+      );
+      if (stored !== null) {
+        console.log(stored, "this is the respone of trhe ");
+      }
+    } catch (e) {
+      // saving error
+    }
+  };
+
+  // const getData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem('@storage_Key')
+  //     if(value !== null) {
+  //       // value previously stored
+  //     }
+  //   } catch(e) {
+  //     // error reading value
+  //   }
+  // }
+
   const navigateToLogin = () => {
+    storeData();
     navigation.replace("Personal");
   };
 
@@ -52,13 +78,10 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
 
   return (
     <OnboardingContainer>
-
-
       <Customstatusbar />
 
       <LoginBtn activeOpacity={0.6} onPress={navigateToLogin}>
-        <SkipText >Skip</SkipText>
-        
+        <SkipText>Skip</SkipText>
       </LoginBtn>
 
       <OnboardingFlatlist
