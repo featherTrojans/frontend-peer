@@ -12,7 +12,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.blue6,
     borderRadius: 10,
+    // alignSelf: 'center',
+    
     justifyContent: "center",
+    // justifySelf: "center",
     alignItems: "center",
   },
   btnText: {

@@ -5,14 +5,14 @@ import {
   StatusBar,
   ScrollView,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
 import * as FileSystem from "expo-file-system";
-import * as Clipboard from "expo-clipboard"
+import * as Clipboard from "expo-clipboard";
 import moment from "moment";
 import { styles } from "./Transactiondetails.styles";
 import {
@@ -33,9 +33,9 @@ const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions } =
 
 const Transactiondetails = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
-  const copyColor = copied ? COLORS.blue6 : COLORS.grey2 
+  const copyColor = copied ? COLORS.blue6 : COLORS.grey2;
 
   const { data } = route.params;
 
@@ -58,21 +58,24 @@ const Transactiondetails = ({ navigation, route }) => {
   });
 
 
-
   const copyToClipboard = (copiedTest: string) => {
     Clipboard.setString(copiedTest);
-  };  
-  const subscription = Clipboard.addClipboardListener(({ content }: ClipboardEvent) => {
-    setCopied(true)
-    console.log("hellow")
-  });
+  };
 
-  
+  const subscription = Clipboard.addClipboardListener(
+    ({ content }: ClipboardEvent) => {
+      setCopied(true);
+      console.log("hellow");
+    }
+  );
+
+ 
+
+
+
   // Clipboard.removeClipboardListener(subscription);
 
-
-
-  const saveFile =  async (filePath:string) => {
+  const saveFile = async (filePath: string) => {
     const albumName = "Feather";
     const permission = await MediaLibrary.requestPermissionsAsync();
 
@@ -85,8 +88,6 @@ const Transactiondetails = ({ navigation, route }) => {
       }
 
       if (asset) {
-
-
         try {
           let album = await MediaLibrary.getAlbumAsync(albumName);
           if (album) {
@@ -104,8 +105,6 @@ const Transactiondetails = ({ navigation, route }) => {
           //   sortBy: MediaLibrary.SortBy.creationTime,
           // });
           // asset = await assetResult.assets[0];
-
-
         } catch (e) {
           console.error(" failed", e);
         }
@@ -113,9 +112,7 @@ const Transactiondetails = ({ navigation, route }) => {
         console.error("unable to use MediaLibrary, can not create assets");
       }
     }
-  }
-
-  
+  };
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -123,7 +120,7 @@ const Transactiondetails = ({ navigation, route }) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pdf Content</title>
+        <title>Feather Transactions</title>
         <style>
             body {
                 font-size: 16px;
@@ -137,6 +134,9 @@ const Transactiondetails = ({ navigation, route }) => {
     </head>
     <body>
         <h1>Hello, Welcome to Feather!</h1>
+        <img
+      src="https://res.cloudinary.com/gyroscope/image/upload/v1647102346/icon1_rq2rlo.png"
+      style="width: 90vw;" />
     </body>
     </html>
 `;
@@ -159,12 +159,6 @@ const Transactiondetails = ({ navigation, route }) => {
       console.error(error);
     }
   };
-
-
-
-
-
-
 
   const reportTransaction = () => {
     setShowModal(false);
@@ -248,9 +242,16 @@ const Transactiondetails = ({ navigation, route }) => {
                 >
                   {transactionRef}
                 </Text>
-                <TouchableOpacity style={styles.copyClipboardContainer} onPress={() => copyToClipboard(transactionRef)}>
+                <TouchableOpacity
+                  style={styles.copyClipboardContainer}
+                  onPress={() => copyToClipboard(transactionRef)}
+                >
                   <Copyclipboard />
-                  <Text style={[styles.copyClipboardText, {color: copyColor}]}>{copied ? "Copied" : "Copy"}</Text>
+                  <Text
+                    style={[styles.copyClipboardText, { color: copyColor }]}
+                  >
+                    {copied ? "Copied" : "Copy"}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>

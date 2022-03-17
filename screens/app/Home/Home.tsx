@@ -21,6 +21,7 @@ import {
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import LottieView from "lottie-react-native";
+import * as Animatable from "react-native-animatable"; 
 import { Service, Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
@@ -241,19 +242,25 @@ const Home = ({ navigation }: { navigation: any }) => {
                 icon: JSX.Element;
                 title: string;
                 link: string;
-              }) => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate(link)}
-                  style={styles.optionContainer}
-                  activeOpacity={0.8}
+              }, index) => (
+                <Animatable.View
+                animation="bounceIn"
+                delay={index* 150}
+                  
                   key={title}
                 >
+                  <TouchableOpacity
+                  activeOpacity={0.8}
+                    onPress={() => navigation.navigate(link)}
+                    
+                  >
                   <View style={styles.optionIconBg}>
                     {/* Icon will be inside this */}
                     {icon}
                   </View>
                   <Text style={styles.optionTitle}>{title}</Text>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                </Animatable.View>
               )
             )}
           </View>
@@ -267,7 +274,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("Root", {screen: "Transactions"})}>
+            <TouchableOpacity onPress={() => navigation.navigate("Root", {screen : "Transactions"})}>
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>
           </View>

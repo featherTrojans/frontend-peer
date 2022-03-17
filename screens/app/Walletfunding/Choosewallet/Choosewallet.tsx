@@ -55,14 +55,12 @@ const Choosewallet = ({ navigation }) => {
 
       <Backheader title="Add Cash" />
 
-      <View style={{marginVertical: 16}}>
+      <View style={{ marginVertical: 16, marginHorizontal: 15 }}>
         <TouchableNativeFeedback
           background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, false)}
+          onPress={() => navigation.navigate("WalletPin")}
         >
-          <TouchableOpacity
-            onPress={() => navigation.navigate("WalletPin")}
-            style={styles.walletTypeContainer}
-          >
+          <View style={styles.walletTypeContainer}>
             {/* Image */}
             <View>
               <Debitcard />
@@ -85,7 +83,7 @@ const Choosewallet = ({ navigation }) => {
                 </Text>
               </View>
             </View>
-          </TouchableOpacity>
+          </View>
         </TouchableNativeFeedback>
 
         <TouchableNativeFeedback

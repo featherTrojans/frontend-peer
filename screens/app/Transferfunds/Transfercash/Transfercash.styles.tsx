@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
-
+import { Shadow } from "../../../../constants/theme";
 
 export const styles = StyleSheet.create({
   container: {
@@ -20,10 +20,12 @@ export const styles = StyleSheet.create({
   optionContainer: {
     paddingVertical: 16,
     paddingHorizontal: 15,
+    // marginHorizontal: 15,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 10,
+    ...Shadow
   },
   optionDetails: {
     flexDirection: "row",

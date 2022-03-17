@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../constants";
+import { Shadow } from "../../constants/theme";
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,7 +10,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 17,
     marginBottom: 10,
     borderRadius: 15,
-    
+    ...Shadow
     
   },
   dataContainer: {

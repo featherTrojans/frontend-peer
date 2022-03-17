@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React,{useState, useEffect} from "react";
+import {Shadow} from 'react-native-shadow-2';
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Transactionhistory.styles";
 import { useNavigation } from '@react-navigation/native';
@@ -53,6 +54,7 @@ const History = ({ data }: any) => {
 
 const Transactionhistory = ({ datas, date }: { datas: []; date: string }) => {
   return (
+
     <View style={styles.container}>
       <View style={styles.dateContainer}>
         <Text style={styles.dateText}>{date}</Text>
@@ -65,7 +67,6 @@ const Transactionhistory = ({ datas, date }: { datas: []; date: string }) => {
           </View>
         );
       })}
-      <View></View>
     </View>
   );
 };
