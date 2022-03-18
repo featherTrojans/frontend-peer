@@ -169,16 +169,16 @@ export function usePushNotification() {
     };
   }, []);
 
-  //   const sendSchedulePushNotification = async () => {
-  //     await Notifications.scheduleNotificationAsync({
-  //       content: {
-  //         title: "You've got mail! 📬",
-  //         body: "Here is the notification body",
-  //         data: { data: "goes here", takeTo: "Newtransactions" },
-  //       },
-  //       trigger: { seconds: 5 },
-  //     });
-  //   };
+    // const sendSchedulePushNotification = async () => {
+    //   await Notifications.scheduleNotificationAsync({
+    //     content: {
+    //       title: "You've got mail! 📬",
+    //       body: "Here is the notification body",
+    //       data: { data: "goes here", takeTo: "Newtransactions" },
+    //     },
+    //     trigger: { seconds: 5 },
+    //   });
+    // };
 
   //Instant Notifications
   const sendPushNotification = async (

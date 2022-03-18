@@ -31,6 +31,7 @@ import { styles } from "./Home.styles";
 import { customNavigation } from "../../../utils/customNavigation";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
+import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 
 const {
   Profilepics,
@@ -76,8 +77,9 @@ const Home = ({ navigation }: { navigation: any }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
   const linkTo = useLinkTo();
-  const jumpToHistory = TabActions.jumpTo('History');
-  const jumpToSettings = TabActions.jumpTo('Settings');
+  const jumpToHistory = TabActions.jumpTo("History");
+  const jumpToSettings = TabActions.jumpTo("Settings");
+  // sendSchedulePushNotification
 
   // const setMessageToken = async () => {
   //   try {
@@ -93,8 +95,17 @@ const Home = ({ navigation }: { navigation: any }) => {
     return string.slice(firstIndex + 1, -1);
   };
   useEffect(() => {
-    console.log(authdata, "here is the authdat");
+    sendSchedulePushNotification(nameToShow(authdata.fullName))
   }, []);
+
+
+  const nameToShow = (value: string) => {
+    if (value?.split(" ").length > 1) {
+      return value?.split(" ")[1];
+    } else {
+      return value;
+    }
+  };
 
   useEffect(() => {
     // setMessageToken()
@@ -139,6 +150,7 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   const getDashboardData = async () => {
     console.log("I am fetching again from home");
+    
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
@@ -177,13 +189,6 @@ const Home = ({ navigation }: { navigation: any }) => {
     );
   };
 
-  const nameToShow = (value: string) => {
-    if (value?.split(" ").length > 1) {
-      return value?.split(" ")[1];
-    } else {
-      return value;
-    }
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -191,7 +196,10 @@ const Home = ({ navigation }: { navigation: any }) => {
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
         <View style={styles.profileContainer}>
-          <TouchableOpacity onPress={() =>  navigation.dispatch(jumpToSettings)} activeOpacity={0.8}>
+          <TouchableOpacity
+            onPress={() => navigation.dispatch(jumpToSettings)}
+            activeOpacity={0.8}
+          >
             {/* <Profilepics /> */}
             {/* <Useravatar /> */}
             <Smalluseravatar />
@@ -276,7 +284,9 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.dispatch(jumpToHistory)}>
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(jumpToHistory)}
+            >
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>
           </View>
