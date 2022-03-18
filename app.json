@@ -12,7 +12,7 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splashscreen.png",
+      "image": "./assets/images/splashy.png",
       "resizeMode": "contain",
       "backgroundColor": "#003AD6"
     },
