@@ -41,7 +41,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   const {requestInfo} = route.params;
   const {setCoords, setDestinationCoords} = useContext(LocationContext)
   const [toggleShow, setToggleShow] = useState(true);
-  const [userinfo, setUserinfo] = useState({})
+  const [userinfo, setUserinfo] = useState({phoneNumber:""})
 
   useEffect(()=>{
     // update both map, meeting point and  Agent point

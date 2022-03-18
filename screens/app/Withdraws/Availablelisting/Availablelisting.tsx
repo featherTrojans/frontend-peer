@@ -32,7 +32,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const { setCoords,setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([]);
   const [activeType, setActiveType] = useState("peers");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   let height = "10%"
   const checkCurrentHeight = () => {
@@ -53,15 +53,15 @@ const Availablelisting = ({ navigation, route }: any) => {
 
   const getAllAgents = async (address: string) => {
     try {
-      setLoading(true);
+      // setLoading(true);
       const response = await axiosCustom.post("/status/find", {
         amount: amount,
         location: address,
       });
-      console.log(response.data,"success")
+      
       setAgents(response.data.data);
     } catch (err) {
-      
+      // console.log(err.response)
     }finally{
       setLoading(false)
     }
@@ -73,9 +73,6 @@ const Availablelisting = ({ navigation, route }: any) => {
       // adding Location context
       setDestinationCoords(profile)
       navigation.navigate("Withdrawpreview", {amount,userInfo: profile})
-    }
-    if(loading){
-      return <ActivityIndicator />
     }
     return (
       <TouchableOpacity
@@ -165,7 +162,9 @@ const Availablelisting = ({ navigation, route }: any) => {
                 </TouchableOpacity>
               );
             })}
+                
           </View>
+                {loading && <ActivityIndicator color="black" size={50} />}
         </View>
 
         <BottomSheetFlatList

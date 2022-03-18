@@ -20,6 +20,7 @@ import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../shared/Customstatusbar";
 
+
 const { At, Check, WrongIcon, Successcheckanimate } = icons;
 
 const setAuthorizationToken = (token: string) => {
@@ -60,6 +61,7 @@ const Setup = ({ route, navigation }) => {
       setResult(response);
       setShowModal(true);
       setAuthorizationToken(response.data.data.token);
+      
       // setToken(response.data.data.token)
       // navigation.navigate("Welcome",{fromm:"setup", username:null,token:response.data.data.token})
     } catch (err) {

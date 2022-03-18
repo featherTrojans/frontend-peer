@@ -32,6 +32,14 @@ const Getdetails = ({ route, navigation }) => {
     getuserinfo(text)
   }
   
+  console.log(username, userinfo)
+  const handleDisabled = ()=>{
+    // if(username && typeof userinfo === "object"){
+    //   return false;
+    // } 
+
+    return userinfo.username === undefined
+  }
   return (
     <View style={styles.container}>
 
@@ -41,7 +49,7 @@ const Getdetails = ({ route, navigation }) => {
       <Globalmodal
         showState={showmodal}
         onBgPress={() => setShowModal(!showmodal)}
-        btnFunction={()=>navigation.navigate("Transferpin",{amount,userinfo})}
+        btnFunction={()=>{navigation.navigate("Transferpin",{amount,userinfo}); setShowModal(false)}}
         >
          <View style={{ alignItems: "center" }}>
            <Text style={{alignSelf:"flex-start", ...fontsize.bsmall, ...FONTS.medium}}>Transfer Summary</Text>
@@ -106,7 +114,7 @@ const Getdetails = ({ route, navigation }) => {
         </View>
       </View>
 
-      <Bottombtn title="PROCEED" onpress={()=>setShowModal(true)} disabled={userinfo.username === undefined}/>
+      <Bottombtn title="PROCEED" onpress={()=>setShowModal(true)} disabled={handleDisabled()}/>
 
 
     </View>

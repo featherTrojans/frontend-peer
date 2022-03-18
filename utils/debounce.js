@@ -31,7 +31,7 @@ function useDebounce(token = null){
             const response = await axiosCustom.get(`/user/${name}`,config);
             setUserInfo(response?.data?.data)
         }catch(err){
-            console.log(err.response)
+            // console.log(err.response)
             setUserInfo("")
             setError(true)
         }finally{

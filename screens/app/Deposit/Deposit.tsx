@@ -53,7 +53,7 @@ const Deposit = ({navigation}) => {
 
   useEffect(()=>{
     getpendingrequest()
-    getacceptedrequest()
+    getacceptedrequest() 
   },[])
 
   console.log(pending, accepted)
@@ -69,6 +69,7 @@ const Deposit = ({navigation}) => {
   const getacceptedrequest = async()=>{
     try{
       const response = await axiosCustom.get("/request/depositor/accepted");
+      console.log(response)
       setAccepted(response.data.data)
     }catch(err){
 

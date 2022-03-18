@@ -31,6 +31,7 @@ import { styles } from "./Home.styles";
 import { customNavigation } from "../../../utils/customNavigation";
 import { useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
+import DoubleTapToClose from "../../shared/DoubleBack";
 
 const {
   Profilepics,
@@ -77,22 +78,13 @@ const Home = ({ navigation }: { navigation: any }) => {
   const [extractedToken, setExtractedToken] = useState();
   const linkTo = useLinkTo();
 
-  // const setMessageToken = async () => {
-  //   try {
-  //     const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
-  //     console.log(response, "Here is the response data")
-  //   } catch (err) {
-  //     console.log(err.response.data)
-  //   }
-  // }
+  
 
   const tokenExtractor = (string: any) => {
     const firstIndex = string.indexOf("[");
     return string.slice(firstIndex + 1, -1);
   };
-  useEffect(() => {
-    console.log(authdata, "here is the authdat");
-  }, []);
+
 
   useEffect(() => {
     // setMessageToken()
@@ -136,7 +128,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   // }, []);
 
   const getDashboardData = async () => {
-    console.log("I am fetching again from home");
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
@@ -291,6 +282,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             ))
           )}
         </View>
+        {/* <DoubleTapToClose /> */}
       </ScrollView>
     </SafeAreaView>
   );

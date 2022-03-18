@@ -67,7 +67,7 @@ const Editinput = ({ label, value, name, formikprops }: EditinputProps) => {
 
 const Basicsettings = () => {
   const toast = useToast();
-  const { authdata } = useContext(AuthContext);
+  const { authdata, setAuthData } = useContext(AuthContext);
 
   return (
     <ScrollView
@@ -91,6 +91,7 @@ const Basicsettings = () => {
                 lastName: values.lastName,
               });
               console.log(response);
+              setAuthData({...authdata, username:values.username,fullName:`${values.lastName} ${values.firstName}`})
               // send success toast message
             } catch (err) {
               showerror(toast, err);

@@ -51,6 +51,9 @@ const Summary = ({navigation, route}) => {
           setShowModal(false);
           setShowSuccessModal(true)
         }
+        if(doc?.data()?.status === "rejected"){
+          setShowModal(false);
+        }
         console.log("Current data: ", doc.data());
     });
     } catch (e) {

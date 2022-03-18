@@ -76,7 +76,7 @@ function Depositinput({ route, navigation }) {
     setLoading(true)
     
     let locationText = `${locationSide.name}, ${locationSide.city}`
-    
+      console.log(locationText)
     try{
         await axiosCustom.post("/status/create",{
             amount,
