@@ -1,16 +1,20 @@
 {
   "expo": {
-    "name": "feather",
-    "slug": "feather",
+    "name": "Feather",
+    "slug": "Feather",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon1.png",
+    "icon": "./assets/images/icon2.png",
+    "notification": {
+      "icon": "./assets/images/notification.png",
+      "iosDisplayInForeground": true
+    },
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/splashy.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#003AD6"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,7 +28,7 @@
     "android": {
       "package": "feather.peer",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icon1.png",
+        "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"
       },
       "config":{
@@ -34,7 +38,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/notification.png"
     },
     "description": ""
   }
