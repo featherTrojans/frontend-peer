@@ -115,7 +115,7 @@ const Accepteddeposit = ({navigation, route}) => {
                     icon={<Phoneicony />}
                     title="Phone"
                     details="Phone call to communicate"
-                    onpress={ ()=>makePhoneCall(requestInfo.user.phoneNumber)}
+                    onpress={ () => makePhoneCall(requestInfo.user.phoneNumber)}
                     />
                   
                     <Iconwithdatas

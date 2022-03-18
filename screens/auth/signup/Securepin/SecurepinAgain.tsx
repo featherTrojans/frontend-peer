@@ -91,7 +91,7 @@ const SecurepinAgain = ({ route, navigation }) => {
               source={Successcheckanimate}
               style={{ width: 148, height: 148, marginBottom: 18 }}
               autoPlay
-              loop={false}
+              loop
             />
 
             <Text

@@ -57,7 +57,7 @@ const Cancelrequest = ({route, navigation}) => {
        >
            <View style={{ alignItems: "center" }}>
          
-         <LottieView source={Successcheckanimate} style={{width: 148, height: 148, marginBottom: 10}}/>
+         <LottieView source={Successcheckanimate} style={{width: 148, height: 148, marginBottom: 10}} autoPlay loop/>
              <Text
                style={{
                  textAlign: "center",

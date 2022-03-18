@@ -80,7 +80,7 @@ const Welcome = ({navigation, route}) => {
         </Text>:<><Text style={styles.welcomeText}>
          {getPeriod()}
         </Text>
-        <Text style={[styles.welcomeTextSub, {marginTop: 16}]}>{nameToShow(authdata.fullName)}</Text>
+        <Text style={[styles.welcomeTextSub, {marginTop: 16, textTransform: 'uppercase'}]}>{nameToShow(authdata.fullName)}</Text>
         </>
         }
       </View>

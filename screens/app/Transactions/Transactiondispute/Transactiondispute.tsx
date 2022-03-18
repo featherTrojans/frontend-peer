@@ -40,7 +40,7 @@ const Transactiondispute = () => {
       btnText="continue"
       >
         <View style={{marginHorizontal: 35, alignItems: "center", marginBottom: 35}}>
-          <LottieView source={Successcheckanimate} style={{width: 148, height: 148,}} autoPlay loop={false}/>
+          <LottieView source={Successcheckanimate} style={{width: 148, height: 148,}} autoPlay loop/>
           <Text style={{marginTop: 10, ...fontsize.bsmall, ...FONTS.regular, textAlign: 'center'}}>Your report has been sent successfully, we would reach out soon</Text>
         </View>
       </Globalmodal>

@@ -1,8 +1,14 @@
-const today = new Date().toLocaleDateString()
+
+import moment from "moment"
+
 
 const tofancyDate = (date:Date) => {
-  const currentdate = new Date(date).toLocaleDateString()
-  if(currentdate === today) return "Today";
+  const currentdate = moment(date).subtract(0, 'days').calendar().split(" ")[0]
+
+  if(currentdate !== "Today" && currentdate !== "Yesterday"){
+    return `${moment(date).format("Do")}, ${moment(date).format("MMMM")}`
+  }
+  
   return currentdate
 }
 

@@ -48,14 +48,14 @@ const Newtransactions = ({navigation}: any) => {
             iconBg="#DEE0E5"
             title="Fund Wallet"
             details="Add Cash to your wallets easily"
-            onpress={() => console.log("Redirect to Fund Transfer")}
+            onpress={() => navigation.navigate("Addcash")}
           />
           <Iconwithdatas
             icon={<Paybillicon />}
             iconBg="#E3CCFF"
             title="Paybills"
             details="Purchase airtime & data, PayTV Subscriptions…"
-            onpress={() => console.log("Redirect to Paybills")}
+            onpress={() => navigation.navigate("Paybills")}
           />
         </ScrollView>
 

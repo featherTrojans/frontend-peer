@@ -86,7 +86,7 @@ const Verification = ({route,navigation}) => {
         btnText="Continue"
       >
         <View style={{marginBottom: 50, justifyContent: 'center', alignItems: 'center', marginHorizontal: 85}}>
-            <LottieView source={Successcheckanimate} style={{width: 148, height: 148}} autoPlay loop={false}/>
+            <LottieView source={Successcheckanimate} style={{width: 148, height: 148}} autoPlay loop/>
             <Text style={{...fontsize.bsmall, ...FONTS.regular, marginTop: 17, textAlign: 'center'}}>Your number has been successfully verified</Text>
     
 

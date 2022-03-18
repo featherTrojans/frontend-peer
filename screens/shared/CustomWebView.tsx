@@ -14,7 +14,7 @@ const CustomWebView = ({ navigation, route }) => {
     console.log(state);
     const { url } = state;
     if (!url) return;
-    if (url === callback_url) {
+    if (url === callback_url) { 
      
         sendPushNotification(
           messageToken,
