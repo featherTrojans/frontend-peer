@@ -94,7 +94,7 @@ const Summary = ({navigation, route}) => {
        btnFunction={()=>navigation.navigate("Home")}
        >
            <View style={{ alignItems: "center", paddingVertical: 30 }}>
-            <LottieView source={Successcheckanimate} autoPlay loop={false} style={{width: 148, height: 148}}/>
+            <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/>
             <Text style={{marginBottom: 30, ...fontsize.bsmall,
                  ...FONTS.regular}}>Transaction Succesful</Text>
             <Text style={{width: "60%", textAlign:"center", ...fontsize.bsmall,

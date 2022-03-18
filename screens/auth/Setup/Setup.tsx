@@ -91,7 +91,7 @@ const Setup = ({ route, navigation }) => {
             <LottieView
               source={Successcheckanimate}
               autoPlay
-              loop={false}
+              loop
               style={{ width: 148, height: 148 }}
             />
             <View

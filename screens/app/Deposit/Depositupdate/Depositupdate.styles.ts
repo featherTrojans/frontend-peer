@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 import { COLORS, fontsize, FONTS } from "../../../../constants";
+import { Shadow } from "../../../../constants/theme";
+
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,11 +12,17 @@ export const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 20,
     paddingBottom: 14,
-    paddingLeft: 20,
-    paddingRight: 16,
-    backgroundColor: COLORS.white,
+    // paddingLeft: 20,
+    // paddingRight: 16,
+    marginHorizontal: 15,
+    // paddingHorizontal: 15,
+    paddingLeft: 20, 
+    paddingRight: 18,
+    // backgroundColor: COLORS.white,
     marginTop: 20,
     marginBottom: 10,
+    ...Shadow
+    
   },
   topSection: {
     flexDirection: "row",

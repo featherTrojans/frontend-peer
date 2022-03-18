@@ -1,8 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
-import { StyleSheet, Text, View, FlatList, RefreshControl, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  RefreshControl,
+  Platform,
+} from "react-native";
 import LottieView from "lottie-react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import { useIsFocused, useScrollToTop } from "@react-navigation/native";
 
 import { Bottombtn, Transactionhistory } from "../../../../components";
 import { COLORS, icons } from "../../../../constants";
@@ -94,11 +102,6 @@ const DATA = [
   },
 ];
 
-
-
-
-
-
 const EmptyComponent = () => {
   return (
     <View style={styles.emptyListContainer}>
@@ -122,19 +125,33 @@ const EmptyComponent = () => {
 
 const Transactions = ({ navigation }: any) => {
   const [transactions, setTransations] = useState();
-  const [loading, setLoading] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+  const flatlistRef = useRef(null);
 
-    ///States for the push notifications
-    const [expoPushToken, setExpoPushToken] = useState("");
-    const [notification, setNotification] = useState(false);
-    const notificationListener = useRef();
-    const responseListener = useRef();
-  
+  ///States for the push notifications
+  const [expoPushToken, setExpoPushToken] = useState("");
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
+
+
+
+const isFocused = useIsFocused()
+
+
+const toTop = () => {
+    // use current
+    flatlistRef.current?.scrollToOffset({ animated: true, offset: 0 })
+}
+if(isFocused){
+  toTop()
+}
 
   useEffect(() => {
     getAllTransactions();
+
   }, []);
 
   const getAllTransactions = async () => {
@@ -143,8 +160,7 @@ const Transactions = ({ navigation }: any) => {
       const response = await axiosCustom.get("/transactions");
       // console.log(response);
       setTransations(response?.data?.data?.transactions);
-      console.log(transactions)
-
+      console.log(transactions);
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -182,6 +198,7 @@ const Transactions = ({ navigation }: any) => {
           {DATA.length > 0 && <Listheader />}
 
           <FlatList
+            ref={flatlistRef}
             style={{ paddingTop: 10 }}
             data={formatData(transactions)}
             refreshControl={

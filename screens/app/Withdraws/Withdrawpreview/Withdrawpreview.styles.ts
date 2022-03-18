@@ -105,6 +105,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     alignItems: "center",
     flexDirection: "row",
+    position: 'relative'
   },
   requestText: {
     ...fontsize.smallest,
@@ -114,10 +115,13 @@ export const styles = StyleSheet.create({
   makeRequestCircle: {
     width: 40,
     height: 40,
+    // marginRight: "90%",
+    flex: 1,
     backgroundColor: COLORS.green2,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 20,
   },
 
   //Receive payment buttons

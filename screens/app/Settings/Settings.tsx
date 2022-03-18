@@ -82,10 +82,10 @@ const Settings = ({navigation}) => {
           {/* username */}
         </View>
         <View style={styles.profileExtraContainer}>
-          <View style={styles.alignedContainer}>
+          {/* <View style={styles.alignedContainer}>
             <Ratingstar />
             <Text style={styles.ratingText}>3.5</Text>
-          </View>
+          </View> */}
 
           {/* starter plan */}
           <View style={styles.alignedContainer}>
@@ -93,10 +93,10 @@ const Settings = ({navigation}) => {
             <Text style={styles.levelText}>Starter clan</Text>
           </View>
           {/* upgrade btn */}
-          <View style={styles.alignedContainer}>
+          {/* <View style={styles.alignedContainer}>
             <Upgradeicon />
             <Text style={styles.upgradeText}>Upgrade</Text>
-          </View>
+          </View> */}
         </View>
       </View>
 

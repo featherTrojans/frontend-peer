@@ -85,7 +85,7 @@ const Depositpin = ({route, navigation}) => {
         showState={successModal}
         btnFunction={()=>navigation.navigate("Home")}>
         <View style={{ alignItems: "center" }}>
-        <LottieView source={Successcheckanimate} autoPlay loop={false} style={{width: 148, height: 148}}/>
+        <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/>
              <Text
                style={{
                  textAlign: "center",

@@ -44,15 +44,17 @@ const StatusUpdate = ({ status, navigation }: any) => {
     <>
       <Customstatusbar />
       <View style={{ flex: 1 }}>
-        <View style={[styles.contentContainer, { flex: 1 }]}>
+        <View style={[styles.contentContainer]}>
           <View style={styles.topSection}>
             {/* Icons */}
-            <TransferIcon />
-            <View>
-              <Text style={styles.lastAmountText}>Last Amount Update</Text>
-              <Text style={styles.updatedTimeText}>
-                Updated {moment(status.time).calendar()}
-              </Text>
+            <View style={{ flexDirection: "row" }}>
+              <TransferIcon />
+              <View style={{ marginLeft: 24 }}>
+                <Text style={styles.lastAmountText}>Last Amount Update</Text>
+                <Text style={styles.updatedTimeText}>
+                  Updated {moment(status.time).calendar()}
+                </Text>
+              </View>
             </View>
 
             <Text style={styles.lastAmountPrice}>
@@ -80,11 +82,12 @@ const StatusUpdate = ({ status, navigation }: any) => {
               </TouchableOpacity>
             </View>
           </View>
+        </View>
 
+        
           <View style={styles.contentContainer}>
             <View style={styles.detailsRow}>
               <View style={styles.iconAndTitle}>
-                {/* Icons */}
                 <Accountbalanceicon />
                 <Text style={styles.iconTitle}>Balance</Text>
               </View>
@@ -92,8 +95,18 @@ const StatusUpdate = ({ status, navigation }: any) => {
                 N {amountFormatter(status.amount)}
               </Text>
             </View>
+            <View style={styles.horizontalLine} />
+            <View style={styles.detailsRow}>
+              <View style={styles.iconAndTitle}>
+                <Trendingupright />
+                <Text style={styles.iconTitle}>My Earnings last 24hrs</Text>
+              </View>
+              <Text style={styles.iconValue}>
+                N {amountFormatter(status.amount)}
+              </Text>
+            </View>
+
           </View>
-        </View>
 
         <TouchableOpacity
           onPress={() => {
@@ -156,9 +169,7 @@ const Depositupdate = ({ navigation }) => {
         </View>
 
         {status ? (
-          
-            <StatusUpdate status={status} navigation={navigation} />
-          
+          <StatusUpdate status={status} navigation={navigation} />
         ) : (
           <>
             <View style={{ flex: 1 }}>

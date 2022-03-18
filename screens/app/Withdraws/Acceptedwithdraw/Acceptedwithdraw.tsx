@@ -5,6 +5,7 @@ import {
   StatusBar,
   ImageBackground,
   TouchableOpacity,
+  Animated
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
@@ -16,12 +17,17 @@ import {
 import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 import Map from "../../../shared/map/Map";
 import { LocationContext } from "../../../../context/LocationContext";
-import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
+import {
+  getCoordinateFromAddress,
+  getCurrentLocation,
+} from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
-// import { styles } from './Pendingwithdraw.styles'
-// Bottombtn;
+import {
+  makePhoneCall,
+  sendMessage,
+} from "../../../../utils/userDeviceFunctions";
+import { Swipeable } from "react-native-gesture-handler";
 
 const {
   Forwardarrow,
@@ -38,132 +44,167 @@ const {
 const { Locationmap } = images;
 
 const Acceptedwithdraw = ({ navigation, route }) => {
-  const {requestInfo} = route.params;
-  const {setCoords, setDestinationCoords} = useContext(LocationContext)
+  const { requestInfo } = route.params;
+  const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [toggleShow, setToggleShow] = useState(true);
-  const [userinfo, setUserinfo] = useState({})
+  const [userinfo, setUserinfo] = useState({ phoneNumber: "" });
 
-  useEffect(()=>{
+  useEffect(() => {
     // update both map, meeting point and  Agent point
-    console.log(requestInfo)
-    getLocation()
+    console.log(requestInfo, "Here is the accepted withdrawal response");
+    console.log(userinfo, "here is the user info");
+    getLocation();
   }, []);
 
-  useEffect(()=>{
-    getAdditionalUserInfo()
-  },[])
-  const getAdditionalUserInfo = async()=>{
-    try{
-      const response = await axiosCustom.get(`/user/${requestInfo.agentUsername}`)
-      setUserinfo(response?.data?.data)
-    }catch(err){
+  useEffect(() => {
+    getAdditionalUserInfo();
+  }, []);
 
-    }
-  }
+  const getAdditionalUserInfo = async () => {
+    try {
+      const response = await axiosCustom.get(
+        `/user/${requestInfo.agentUsername}`
+      );
+      setUserinfo(response?.data?.data);
+
+      console.log(response, "Response again");
+    } catch (err) {}
+  };
   const getLocation = async () => {
-      const {coordinates, address} = await getCurrentLocation()
-      setCoords({...coordinates,locationText:address});
-      // get the other destination
-      const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
-      setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
-  }
+    const { coordinates, address } = await getCurrentLocation();
+    setCoords({ ...coordinates, locationText: address });
+    // get the other destination
+    const adddresscoord = await getCoordinateFromAddress(
+      requestInfo.meetupPoint
+    );
+    setDestinationCoords({
+      ...adddresscoord,
+      locationText: requestInfo.meetupPoint,
+    });
+  };
 
+  const leftActions = (progress, dragX) => {
+
+    const scale = dragX.interpolate({
+      inputRange: [0, 200],
+      outputRange: [0, 5],
+      extrapolate: 'clamp'
+    })
+    return (
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <Animated.View style={{padding: 10,backgroundColor: COLORS.blue6, width: 10, height: 10, transform: [{scale}]}}></Animated.View>
+      </View>
+    );
+  };
+
+  const swipedLeftFunction = () => {
+    console.log('We want to make redirct or proceed to make the payment')
+  }
 
   return (
     <View style={styles.container}>
       <Customstatusbar />
       <Map />
-        <View style={styles.previewContainer}>
-          <View style={{ paddingHorizontal: 25 }}>
-            {toggleShow ? (
-              <View>
-                <View style={styles.detailsProfile}>
-                  <Requesterdetails
-                    name={requestInfo.agentUsername}
-                    distance="3kms"
-                    duration={12}
-                  />
+      <View style={styles.previewContainer}>
+        <View style={{ paddingHorizontal: 25 }}>
+          {toggleShow ? (
+            <View>
+              <View style={styles.detailsProfile}>
+                <Requesterdetails
+                  name={requestInfo.agentUsername}
+                  distance="3kms"
+                  duration={12}
+                />
 
-                  <Orangecheckmark />
-                </View>
+                <Orangecheckmark />
+              </View>
 
-                <View style={{ marginTop: 20 }}>
-                  <Text style={styles.amountText}>Amount</Text>
-                  <Text style={styles.amountPrice}>
-                    NGN {requestInfo.amount}{" "}
-                    <Text style={styles.amountBaseCharge}>
-                      + {requestInfo.charges} (Base Charge)
-                    </Text>{" "}
-                  </Text>
-                  <Text style={styles.baseChargeNegotiate}>
-                    *Base Charges can be negotiated
-                  </Text>
-                </View>
+              <View style={{ marginTop: 20 }}>
+                <Text style={styles.amountText}>Amount</Text>
+                <Text style={styles.amountPrice}>
+                  NGN {requestInfo.amount}{" "}
+                  <Text style={styles.amountBaseCharge}>
+                    + {requestInfo.charges} (Base Charge)
+                  </Text>{" "}
+                </Text>
+                <Text style={styles.baseChargeNegotiate}>
+                  *Base Charges can be negotiated
+                </Text>
+              </View>
 
-                <View style={styles.meetupContainer}>
-                  <Text style={styles.meetUpText}>Meetup Point</Text>
-                  <View style={styles.meetupLocationContainer}>
-                    <View
-                      style={{ flexDirection: "row", alignItems: "center" }}
-                    >
-                      <Meetupdot />
-                      <Text style={styles.locationText}>{requestInfo?.meetupPoint}</Text>
-                    </View>
+              <View style={styles.meetupContainer}>
+                <Text style={styles.meetUpText}>Meetup Point</Text>
+                <View style={styles.meetupLocationContainer}>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Meetupdot />
+                    <Text style={styles.locationText}>
+                      {requestInfo?.meetupPoint}
+                    </Text>
                   </View>
                 </View>
               </View>
-            ) : (
-              <View>
-                <Iconwithdatas
-                  icon={<Phoneicony />}
-                  title="Phone"
-                  details="Phone call to communicate"
-                  onpress={()=>makePhoneCall(userinfo.phoneNumber)}
-                />
-                <Iconwithdatas
-                  icon={<Smsicony />}
-                  title="SMS"
-                  details="Send a text to communicate"
-                  onpress={()=>sendMessage(userinfo.phoneNumber,"")}
-                />
-                <Iconwithdatas
-                  icon={<Chaticon />}
-                  title="Chat"
-                  details="Discuss conversations via chat"
-                  onpress={() => console.log("Redirect to Chat")}
-                />
-                <Iconwithdatas
-                  icon={<Cancelicony />}
-                  title="Cancel Request "
-                  details="Cancel this transaction"
-                  onpress={() => console.log("Redirect to Cancel")}
-                />
-              </View>
-            )}
+            </View>
+          ) : (
+            <View>
+              <Iconwithdatas
+                icon={<Phoneicony />}
+                title="Phone"
+                details="Phone call to communicate"
+                onpress={() => makePhoneCall(userinfo.phoneNumber)}
+              />
+              <Iconwithdatas
+                icon={<Smsicony />}
+                title="SMS"
+                details="Send a text to communicate"
+                onpress={() => sendMessage(userinfo.phoneNumber, "")}
+              />
+              <Iconwithdatas
+                icon={<Chaticon />}
+                title="Chat"
+                details="Discuss conversations via chat"
+                onpress={() => console.log("Redirect to Chat")}
+              />
+              <Iconwithdatas
+                icon={<Cancelicony />}
+                title="Cancel Request "
+                details="Cancel this transaction"
+                onpress={() => console.log("Redirect to Cancel")}
+              />
+            </View>
+          )}
 
-            <View style={styles.bottomBtnContainer}>
+          <View style={styles.bottomBtnContainer}>
+            <View style={{ flex: 1 }}>
               <TouchableOpacity
                 style={styles.bottomMakeRequestBtn}
                 activeOpacity={0.8}
-                onPress={() => navigation.push("Requestsummary",{requestInfo})}
+                onPress={() =>
+                  navigation.push("Requestsummary", { requestInfo })
+                }
               >
-                <View style={styles.makeRequestCircle}>
-                  <Makerequestarrowright />
-                </View>
+                <Swipeable renderLeftActions={leftActions} onSwipeableLeftOpen={swipedLeftFunction}>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <View style={styles.makeRequestCircle}>
+                    <Makerequestarrowright />
+                  </View>
+                
                 <View style={{ marginHorizontal: 16 }}></View>
                 <Text style={styles.requestText}>MAKE PAYMENT</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                style={styles.blackBtn}
-                onPress={() => setToggleShow(!toggleShow)}
-              >
-                <Dropswitch />
+                </View>
+                </Swipeable>
               </TouchableOpacity>
             </View>
+
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.blackBtn}
+              onPress={() => setToggleShow(!toggleShow)}
+            >
+              <Dropswitch />
+            </TouchableOpacity>
           </View>
         </View>
-      
+      </View>
     </View>
   );
 };

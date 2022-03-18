@@ -29,7 +29,7 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
 import { customNavigation } from "../../../utils/customNavigation";
-import { useLinkTo } from "@react-navigation/native";
+import { TabActions, useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
 
 const {
@@ -76,6 +76,8 @@ const Home = ({ navigation }: { navigation: any }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
   const linkTo = useLinkTo();
+  const jumpToHistory = TabActions.jumpTo('History');
+  const jumpToSettings = TabActions.jumpTo('Settings');
 
   // const setMessageToken = async () => {
   //   try {
@@ -189,12 +191,12 @@ const Home = ({ navigation }: { navigation: any }) => {
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
         <View style={styles.profileContainer}>
-          <View>
+          <TouchableOpacity onPress={() =>  navigation.dispatch(jumpToSettings)} activeOpacity={0.8}>
             {/* <Profilepics /> */}
             {/* <Useravatar /> */}
             <Smalluseravatar />
             {/* <Defaultuseravatar /> */}
-          </View>
+          </TouchableOpacity>
 
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
@@ -274,7 +276,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("Root", {screen: "Transactions"})}>
+            <TouchableOpacity onPress={() => navigation.dispatch(jumpToHistory)}>
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>
           </View>

@@ -238,7 +238,7 @@ const horizontalAnimation = {
   },
 };
 
-export const verticalAnimation = {
+const verticalAnimation = {
   gestureDirection: "vertical",
   cardStyleInterpolator: ({ current, layouts }) => {
     return {
@@ -293,6 +293,7 @@ const Tabs = () => {
                 </View>
               );
             },
+            unmountOnBlur: true
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -320,6 +321,7 @@ const Tabs = () => {
                 </View>
               );
             },
+            
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -357,6 +359,7 @@ const Tabs = () => {
                 </View>
               );
             },
+            unmountOnBlur: true
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -460,7 +463,7 @@ useEffect(() => {
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={onboarded ?  "Login" : "Onboarding"}
+      initialRouteName={ false ?  "Login" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
@@ -575,8 +578,8 @@ useEffect(() => {
           {/* Deposit Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Depositupdate" component={Depositupdate} />
+            <AppStack.Screen name="Deposit" component={true ? Deposit : Depositupdate} />
             <AppStack.Screen name="Depositinput" component={Depositinput} />
-            <AppStack.Screen name="Deposit" component={Deposit} />
             <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
             <AppStack.Screen
               name="Accepteddeposit"

@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 import { COLORS, fontsize, FONTS, SIZES } from "../../../constants";
+import { Shadow } from "../../../constants/theme";
+
+
 
 export const styles = StyleSheet.create({
   container: {
@@ -37,7 +40,7 @@ export const styles = StyleSheet.create({
   },
   profileExtraContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     width: "100%",
     marginTop: 24,
     alignItems: "center",
@@ -69,9 +72,14 @@ export const styles = StyleSheet.create({
 
   iconWithTitleContainer: {
     justifyContent: "space-between",
-    marginLeft: 8,
-    marginRight: 22,
-    marginBottom: 25,
+    // marginLeft: 8,
+    paddingLeft: 8,
+    paddingRight: 20,
+    paddingVertical: 5,
+    // marginRight: 22,
+    marginBottom: 20,
+    ...Shadow
+    
   },
   iconBg: {
     width: 50,

@@ -148,6 +148,11 @@ const Withdraw = ({ navigation }) => {
             />
           )}
           keyExtractor={(item) => `${item.reference}`}
+          ListEmptyComponent={() => 
+              <View>
+              <Text>Empty DATA...</Text>
+            </View>
+          }
         />
       </View>
     );
