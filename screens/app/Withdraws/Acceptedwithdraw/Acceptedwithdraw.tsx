@@ -47,11 +47,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   const { requestInfo } = route.params;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [toggleShow, setToggleShow] = useState(true);
-<<<<<<< HEAD
   const [userinfo, setUserinfo] = useState({phoneNumber:""})
-=======
-  const [userinfo, setUserinfo] = useState({ phoneNumber: "" });
->>>>>>> 4b18c476de6281765982b37d6310aa63ef77440d
 
   useEffect(() => {
     // update both map, meeting point and  Agent point
@@ -186,7 +182,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                   navigation.push("Requestsummary", { requestInfo })
                 }
               >
-                <Swipeable renderLeftActions={leftActions} onSwipeableLeftOpen={swipedLeftFunction}>
+                {/* <Swipeable renderLeftActions={leftActions} onSwipeableLeftOpen={swipedLeftFunction}> */}
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <View style={styles.makeRequestCircle}>
                     <Makerequestarrowright />
@@ -195,7 +191,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                 <View style={{ marginHorizontal: 16 }}></View>
                 <Text style={styles.requestText}>MAKE PAYMENT</Text>
                 </View>
-                </Swipeable>
+                {/* </Swipeable> */}
               </TouchableOpacity>
             </View>
 

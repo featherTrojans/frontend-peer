@@ -446,11 +446,7 @@ const RootNavigator = ({initialBoarded}) => {
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-<<<<<<< HEAD
       initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
-=======
-      initialRouteName={ false ?  "Login" : "Onboarding"}
->>>>>>> 4b18c476de6281765982b37d6310aa63ef77440d
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
