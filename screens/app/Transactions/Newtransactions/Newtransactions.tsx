@@ -34,7 +34,7 @@ const Newtransactions = ({navigation}: any) => {
             iconBg="#D2EAFD"
             title="Deposit"
             details="Supply cash and earn cashback!"
-            onpress={() => navigation.navigate("Deposit")}
+            onpress={() => navigation.navigate("Depositupdate")}
           />
           <Iconwithdatas
             icon={<Newtransfericon />}

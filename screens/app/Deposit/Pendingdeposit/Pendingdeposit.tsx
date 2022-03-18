@@ -22,6 +22,7 @@ import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
   // import { styles } from './Pendingwithdraw.styles'
@@ -116,13 +117,13 @@ import Customstatusbar from "../../../shared/Customstatusbar";
                     icon={<Phoneicony />}
                     title="Phone"
                     details="Phone call to communicate"
-                    onpress={() => console.log("Redirect to Chat")}
+                    onpress={ ()=>makePhoneCall(requestInfo.user.phoneNumber)}
                   />
                   <Iconwithdatas
                     icon={<Smsicony />}
                     title="SMS"
                     details="Send a text to communicate"
-                    onpress={() => console.log("Redirect to Negotiate")}
+                    onpress={()=>sendMessage(requestInfo.user.phoneNumber,"")}
                   />
                   <Iconwithdatas
                     icon={<Chaticon />}

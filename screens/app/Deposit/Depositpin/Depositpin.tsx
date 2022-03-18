@@ -59,9 +59,14 @@ const Depositpin = ({route, navigation}) => {
       });
   }
   const handleApproveRequest = async ()=>{
+    const joinpin = pin.join("")
+    if(joinpin.length < 4){
+      return false
+    }
+
     setLoading(true)
     try{
-      await axiosCustom.post("/request/approve",{reference:requestInfo.reference, user_pin:pin.join("")})
+      await axiosCustom.post("/request/approve",{reference:requestInfo.reference, user_pin:joinpin})
       await handlePrepareToTestUpdate()
       //show success message
       setSuccessModal(true)

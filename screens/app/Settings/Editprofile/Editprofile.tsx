@@ -148,17 +148,19 @@ const Personalsettings = () => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <Formik
           initialValues={{
-            username: authdata.username,
-            firstName: authdata.fullName.split(" ")[1],
-            lastName: authdata.fullName.split(" ")[0],
+            gender: "",
+            dateOfBirth: "",
+            address: "",
+            lga:""
           }}
           validationSchema={validationSchema}
           onSubmit={async (values) => {
             try {
-              const response = await axiosCustom.put("/profile/update/basic", {
-                username: values.username,
-                firstName: values.firstName,
-                lastName: values.lastName,
+              const response = await axiosCustom.put("/profile/update/personal", {
+                gender: values.gender,
+                dateOfBirth: values.dateOfBirth,
+                address: values.address,
+                lga: values.lga,
               });
               console.log(response);
               // send success toast message

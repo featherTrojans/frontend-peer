@@ -43,17 +43,21 @@ const Transferpin = ({ route, navigation }) => {
     }
   };
   const handleSubmit = async () => {
+    const joinpin = pin.join("")
+    if(joinpin.length < 4){
+      return false
+    }
     try {
       setLoading(true);
-      console.log({
-        data: userinfo,
-        userToken: messageToken,
-        profile: authdata,
-      });
+      // console.log({
+      //   data: userinfo,
+      //   userToken: messageToken,
+      //   profile: authdata,
+      // });
       await axiosCustom.post("/transfer", {
         amount,
         transferTo: userinfo?.username,
-        userPin: pin.join(""),
+        userPin: joinpin,
       });
       //I am to send a push notification here
       sendPushNotification(
