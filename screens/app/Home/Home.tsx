@@ -95,7 +95,9 @@ const Home = ({ navigation }: { navigation: any }) => {
     return string.slice(firstIndex + 1, -1);
   };
   useEffect(() => {
-    sendSchedulePushNotification(nameToShow(authdata.fullName))
+    useCallback(() => {
+      sendSchedulePushNotification(nameToShow(authdata.fullName))
+    }, [])
   }, []);
 
 
