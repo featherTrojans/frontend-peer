@@ -170,7 +170,7 @@ const Availablelisting = ({ navigation, route }: any) => {
               // enablePanDownToClose={true}
             >
               {/* agents.length > 0  */}
-              {true ? (
+              {agents.length > 0  ? (
                 <>
                   <View>
                     <View>
