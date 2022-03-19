@@ -125,7 +125,7 @@ const Verification = ({route,navigation}) => {
       {/* Resend sms duration */}
       <View style={styles.resendAndDuration}>
         <TouchableOpacity disabled={disable} onPress={handleResendOTP}>
-          <Text style={styles.resendText}>Resend sms in</Text>
+        <Text style={styles.resendText}>Resend sms in</Text>
         </TouchableOpacity>
         <View>
           <Text style={styles.duration}>00 : {time}s</Text>

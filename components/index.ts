@@ -12,6 +12,7 @@ import Tab from "./Tab/Tab";
 import Transactionhistory from "./Transactionshistory/Transactionhistory";
 import Viewbalance from "./Viewbalance/Viewbalance";
 import Inputinsettings from "./Inputinsettings/Inputinsettings";
+import InitialsBg from "./InitialsBg/InitialsBg";
 
 
 export {
@@ -28,5 +29,6 @@ export {
     Numberbtn,
     Requesterdetails,
     Priceandcharges,
-    Inputinsettings
+    Inputinsettings,
+    InitialsBg
 }

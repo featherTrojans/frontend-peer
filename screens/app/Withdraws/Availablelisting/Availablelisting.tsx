@@ -91,9 +91,7 @@ const Availablelisting = ({ navigation, route }: any) => {
           {/* Image */}
           <View style={styles.infoContainer}>
             <Text style={styles.userName}>{fullName}</Text>
-            <View style={styles.otherInfo}>
-              <Text style={styles.distance}>~{duration} away</Text>
-            </View>
+            <Text style={styles.distance}>~{duration} away</Text>
           </View>
         </View>
         <Forwardarrow />

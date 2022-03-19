@@ -134,5 +134,5 @@ export {
   CustomWebView,
   Depositinput,
   LockScreen,
-  Paybills
+  Paybills,
 };

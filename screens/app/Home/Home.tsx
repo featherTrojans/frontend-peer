@@ -22,7 +22,12 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import LottieView from "lottie-react-native";
 import * as Animatable from "react-native-animatable";
-import { Service, Transactionhistory, Viewbalance } from "../../../components";
+import {
+  InitialsBg,
+  Service,
+  Transactionhistory,
+  Viewbalance,
+} from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
@@ -95,11 +100,8 @@ const Home = ({ navigation }: { navigation: any }) => {
     return string.slice(firstIndex + 1, -1);
   };
   useEffect(() => {
-  
-      sendSchedulePushNotification(nameToShow(authdata.fullName))
-
+    sendSchedulePushNotification(nameToShow(authdata.fullName));
   }, []);
-
 
   const nameToShow = (value: string) => {
     if (value?.split(" ").length > 1) {
@@ -152,7 +154,7 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   const getDashboardData = async () => {
     console.log("I am fetching again from home");
-    
+
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
@@ -191,7 +193,6 @@ const Home = ({ navigation }: { navigation: any }) => {
     );
   };
 
-
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
@@ -202,10 +203,8 @@ const Home = ({ navigation }: { navigation: any }) => {
             onPress={() => navigation.dispatch(jumpToSettings)}
             activeOpacity={0.8}
           >
-            {/* <Profilepics /> */}
-            {/* <Useravatar /> */}
-            <Smalluseravatar />
-            {/* <Defaultuseravatar /> */}
+            {/* <Smalluseravatar /> */}
+            <InitialsBg sideLength={51} name="Okikiola" />
           </TouchableOpacity>
 
           <View style={styles.profileNameContainer}>
