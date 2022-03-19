@@ -8,10 +8,11 @@ import {
 import React, { useEffect, useState } from "react";
 import LottieView from "lottie-react-native"
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
-import { Backheader, Bottombtn, Viewbalance } from "../../../components";
+import { Backheader, Bottombtn, InitialsBg, Viewbalance } from "../../../components";
 import { styles } from "../Withdraws/Withdraw/Withdraw.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../shared/Customstatusbar";
+import Usericondark from "../../../assets/icons/Usericondark";
 
 const {
   Backarrow,
@@ -83,14 +84,7 @@ const Deposit = ({navigation}) => {
       <TouchableOpacity style={styles.depositProfileContainer} activeOpacity={0.7} onPress={onpress}>
         <View style={styles.depositProfileDetails}>
           {/* Tro replace this with the user image */}
-          <View
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: 22,
-              backgroundColor: COLORS.grey1,
-            }}
-          />
+          <InitialsBg sideLength={44} name={user?.fullName}/>
           <View style={{ marginLeft: 13 }}>
             <Text style={styles.depositProfileName}>{user?.fullName}</Text>
             <Text style={styles.depositAmount}>

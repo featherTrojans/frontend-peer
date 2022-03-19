@@ -204,7 +204,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             activeOpacity={0.8}
           >
             {/* <Smalluseravatar /> */}
-            <InitialsBg sideLength={51} name="Okikiola" />
+            <InitialsBg sideLength={51} name={authdata.fullName} />
           </TouchableOpacity>
 
           <View style={styles.profileNameContainer}>

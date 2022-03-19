@@ -6,6 +6,7 @@ import {
   ScrollView,
   Platform,
   TouchableOpacity,
+  
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import * as Print from "expo-print";
@@ -26,6 +27,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import amountFormatter from "../../../../utils/formatMoney";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { AuthContext } from "../../../../context/AuthContext";
 
 // Sendingandreceive
 
@@ -212,7 +214,7 @@ const Transactiondetails = ({ navigation, route }) => {
             marginTop: 4,
           }}
         >
-          <Sendingandreceive />
+          <Sendingandreceive senderName={"O K"} receiverName={"S E"}/>
           <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
             NGN {amountFormatter(amount)}
           </Text>
