@@ -5,7 +5,8 @@ import {
   StatusBar,
   ImageBackground,
   TouchableOpacity,
-  Animated
+  Animated,
+  ActivityIndicator
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
@@ -28,6 +29,8 @@ import {
   sendMessage,
 } from "../../../../utils/userDeviceFunctions";
 import { Swipeable } from "react-native-gesture-handler";
+import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../../utils/errorMessage";
 
 const {
   Forwardarrow,
@@ -44,10 +47,13 @@ const {
 const { Locationmap } = images;
 
 const Acceptedwithdraw = ({ navigation, route }) => {
+  const toast = useToast()
   const { requestInfo } = route.params;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [toggleShow, setToggleShow] = useState(true);
   const [userinfo, setUserinfo] = useState({phoneNumber:""})
+  const [loading, setLoading] = useState(false)
+  const [locationLoading, setLocationLoading] = useState(false);
 
   useEffect(() => {
     // update both map, meeting point and  Agent point
@@ -71,16 +77,16 @@ const Acceptedwithdraw = ({ navigation, route }) => {
     } catch (err) {}
   };
   const getLocation = async () => {
+    try{
+      setLocationLoading(true)
     const { coordinates, address } = await getCurrentLocation();
     setCoords({ ...coordinates, locationText: address });
     // get the other destination
-    const adddresscoord = await getCoordinateFromAddress(
-      requestInfo.meetupPoint
-    );
-    setDestinationCoords({
-      ...adddresscoord,
-      locationText: requestInfo.meetupPoint,
-    });
+    // const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint);
+    // setDestinationCoords({...adddresscoord,locationText: requestInfo.meetupPoint,});
+    }catch(err){}finally{
+      setLocationLoading(false)
+    }
   };
 
   const leftActions = (progress, dragX) => {
@@ -100,6 +106,34 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   const swipedLeftFunction = () => {
     console.log('We want to make redirct or proceed to make the payment')
   }
+
+  const handleCancelRequest = async ()=>{
+    setLoading(true)
+    try{
+      await axiosCustom({
+        method:"DELETE",
+        url:"/request/cancel",
+        data:{
+          reference: requestInfo.reference,
+          reasonForCancel:"agent declining withdraw request"
+        }
+      })
+      navigation.navigate("Home")
+    }catch(err){
+      showerror(toast,err)
+    }finally{
+      setLoading(false)
+    } 
+  }
+
+  if(locationLoading){
+    return(
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+        <ActivityIndicator  color="#000" size="large" />
+       </View>
+      )
+  }
+
 
   return (
     <View style={styles.container}>
@@ -168,7 +202,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                 icon={<Cancelicony />}
                 title="Cancel Request "
                 details="Cancel this transaction"
-                onpress={() => console.log("Redirect to Cancel")}
+                onpress={handleCancelRequest}
               />
             </View>
           )}

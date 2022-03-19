@@ -114,6 +114,7 @@ import { AuthContext } from "../context/AuthContext";
 
 // import App from "../App";
 import Map from "../screens/shared/map/Map";
+import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 
 const {
   TabHome,
@@ -516,6 +517,10 @@ const RootNavigator = ({initialBoarded}) => {
             <AppStack.Screen
               name="Pendingwithdraw"
               component={Pendingwithdraw}
+            />
+            <AppStack.Screen
+              name="Negotiate"
+              component={Negotiate}
             />
             <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
             {/* TO MaKE AFTER ACCEPTING */}

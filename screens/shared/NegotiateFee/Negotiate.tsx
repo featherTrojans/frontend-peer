@@ -1,26 +1,24 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useContext, useState } from "react";
-import LottieView from "lottie-react-native";
-import { styles } from "./WithdrewPin.style";
-import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Bottombtn, Loader, Numberbtn, Sendingandreceive } from "../../../../components";
-import axiosCustom from "../../../../httpRequests/axiosCustom";
+import { styles } from "./Negotiate.style.";
+import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { Bottombtn, Loader, Numberbtn, Sendingandreceive } from "../../../components";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
-import showerror from "../../../../utils/errorMessage";
-import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import { LocationContext } from "../../../../context/LocationContext";
-import Customstatusbar from "../../../shared/Customstatusbar";
-const { Backarrow, SecureDot, Successcheckanimate } = icons;
+import showerror from "../../../utils/errorMessage";
+import Globalmodal from "../../shared/Globalmodal/Globalmodal";
+import { LocationContext } from "../../../context/LocationContext";
+import Customstatusbar from "../../shared/Customstatusbar";
+const { Backarrow, SecureDot } = icons;
 
-const WithdrawPin = ({ navigation, route}) => {
-  const {amount, userInfo} = route.params;
-  const {coords} = useContext(LocationContext)
+const Negotiate = ({ navigation, route}) => {
+  const {requestInfo} = route.params;
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [loading, setLoading] = useState(false)
-  const [charges, setCharges] = useState<string>("");
+  const [charges, setCharges] = useState<string>(requestInfo.charges);
   const [showmodal, setShowModal] = useState(false);
-  const [shownextmodal, setShowNextModal] = useState(false);
+  
 
   const amountFormatter = (value: string) => {
     return (
@@ -30,11 +28,12 @@ const WithdrawPin = ({ navigation, route}) => {
     );
   };
 
+  
   const handleRemoveAmount = () => {
     if (charges.length > 0) {
       const newdata = charges.substring(0, charges.length - 1)
       setCharges(newdata);
-      console.log(newdata);
+      
     }
   };
   const handleSetAmount = (value: string) => {
@@ -49,23 +48,13 @@ const WithdrawPin = ({ navigation, route}) => {
   
   const handleSubmit = async ()=>{
     try{
-      setLoading(true);
-      setShowModal(false);
-      console.log(userInfo, coords.locationText)
-      const data = {
-        amount:amount,
-        charges:charges, 
-        agentUsername:userInfo.username,
-        agent: userInfo.fullName,
-        statusId: userInfo.reference,
-        meetupPoint: coords.locationText
-      }
-      console.log(data)
-      const response = await axiosCustom.post("/request/create",data)
-
-      console.log(response)
-      setShowNextModal(true)
-      
+        setLoading(true)  
+       const response =  await axiosCustom.put("/request/negotiate",{
+            negotiatedFee: charges,
+            reference: requestInfo.reference
+        })
+        console.log(response)
+        setShowModal(true)
     }catch(err){
       showerror(toast,err)
     }finally{ 
@@ -80,8 +69,7 @@ const WithdrawPin = ({ navigation, route}) => {
 
       <Globalmodal 
         showState={showmodal}
-        onBgPress={() => setShowModal(!showmodal)}
-        btnFunction={handleSubmit}
+        btnFunction={() => navigation.navigate("Home")}
         >
          <View style={{ alignItems: "center" }}>
            <Text style={{alignSelf:"flex-start"}}>Request Summary</Text>
@@ -107,41 +95,17 @@ const WithdrawPin = ({ navigation, route}) => {
               /> */}
                 </View>
               <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
-                  NGN {amountFormatter(amount)}
+                  Base charges has been succesfully changed
               </Text>
-              <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 15 }}>
+              <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginVertical: 15 }}>
                 Withdraw Charges: 
-                <Text style={{...FONTS.bold}}>N {charges}</Text>
+                <Text style={{...FONTS.bold}}>NGN {amountFormatter(charges)}</Text>
               </Text>
-              <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular,}}>
+              {/* <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular,}}>
                 Note that the base charge above can be negotiated by <Text style={{...FONTS.bold}}> {userInfo.username}</Text>
-              </Text>
+              </Text> */}
             </View>
       </Globalmodal>
-      <Globalmodal
-        showState={shownextmodal}
-        btnFunction={() => navigation.navigate("Home")}
-      >
-        <View style={{ alignItems: "center" }}>
-            <LottieView
-                source={Successcheckanimate}
-                autoPlay
-                loop
-                style={{ width: 148, height: 148 }}
-              />
-
-             <Text
-               style={{
-                 textAlign: "center",
-                 marginHorizontal: 40,
-                 marginVertical: 40,
-                 ...fontsize.bsmall,
-                 ...FONTS.regular,
-               }}
-             >Your request has been sent, you will be notified once accepted</Text>
-           </View>
-      </Globalmodal>
-
       <View style={styles.mainContainer}>
         <View style={styles.backArrowConteiner}>
           <Backarrow />
@@ -149,10 +113,10 @@ const WithdrawPin = ({ navigation, route}) => {
 
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-            Add a fair amount to the base charge as fee
+            Negotiate the base charge as fee
             
           </Text>
-          <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
+          <Text style={styles.enterPinText}>Enter Amount</Text>
         </View>
         <View style={{ flex: 1, justifyContent: "center" }}>
         <View style={{ alignItems: "center" }}>
@@ -177,10 +141,10 @@ const WithdrawPin = ({ navigation, route}) => {
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
         </View>
-        <Bottombtn title="PROCEED" onpress={()=>setShowModal(true)}/>
+        <Bottombtn title="PROCEED" onpress={handleSubmit}/>
       </View>
     </View>
   );
 };
 
-export default WithdrawPin;
+export default Negotiate;

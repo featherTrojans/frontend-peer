@@ -29,7 +29,6 @@ const Withdrawpreview = ({navigation, route}: any) => {
   return (  
     <View style={styles.container}>
       <Map />
-      {loading && <Loader />}
       <Customstatusbar />
       
         <View style={styles.previewContainer}>

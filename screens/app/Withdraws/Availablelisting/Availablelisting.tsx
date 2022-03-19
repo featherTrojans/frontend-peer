@@ -33,6 +33,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const [agents, setAgents] = useState([]);
   const [activeType, setActiveType] = useState("peers");
   const [loading, setLoading] = useState(true);
+  const [locationLoading, setLocationLoading] = useState(false)
 
   let height = "10%"
   const checkCurrentHeight = () => {
@@ -46,9 +47,14 @@ const Availablelisting = ({ navigation, route }: any) => {
   }, []);
 
   const getLocation = async () => {
+    try{
+      setLocationLoading(true)
       const {coordinates, address} = await getCurrentLocation()
       setCoords({...coordinates,locationText:address});
       getAllAgents(address);
+    }catch(err){}finally{
+      setLocationLoading(false)
+    }
   }
 
   const getAllAgents = async (address: string) => {
@@ -58,10 +64,10 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: amount,
         location: address,
       });
-      
+      console.log(response.data.data)
       setAgents(response.data.data);
     } catch (err) {
-      // console.log(err.response)
+      console.log(err.response)
     }finally{
       setLoading(false)
     }
@@ -97,6 +103,15 @@ const Availablelisting = ({ navigation, route }: any) => {
   };
 
   const [active, setActive] = useState("peers");
+
+  if(locationLoading){
+    return(
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+        <ActivityIndicator color="#000" size="large" />
+    </View>
+      )
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <Customstatusbar />

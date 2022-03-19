@@ -4,7 +4,8 @@ import {
   View,
   StatusBar,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import React, {useContext, useEffect, useState} from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
@@ -28,21 +29,37 @@ const Pendingwithdraw = ({navigation, route}) => {
   const {setCoords, setDestinationCoords} = useContext(LocationContext)
   const {requestInfo} = route.params;
   const [toggleShow, setToggleShow] = useState(true);
+  const [locationLoading, setLocationLoading] = useState(false);
 
   useEffect(()=>{
     // update both map, meeting point and  Agent point
     getLocation()
   }, []);
 
+  console.log(requestInfo)
   const getLocation = async () => {
+    try{
+      setLocationLoading(true)
       const {coordinates, address} = await getCurrentLocation()
       setCoords({...coordinates,locationText:address});
       // get the other destination
-      const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
-      setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
+      console.log("okay i need help")
+      // const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
+      // setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
+    }catch(err){
+    }finally{
+      setLocationLoading(false)
+    }
   }
 
-  
+  if(locationLoading){
+    return(
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+        <ActivityIndicator  color="#000" size="large" />
+       </View>
+      )
+  }
+
   return (
     <View style={styles.container}>
       <Customstatusbar />
@@ -100,7 +117,7 @@ const Pendingwithdraw = ({navigation, route}) => {
                   icon={<Renegotiateicon />}
                   title="Renegotiate Charges "
                   details="Send in a new charge for this request"
-                  onpress={() => console.log("Redirect to Negotiate")}
+                  onpress={() => navigation.navigate("Negotiate",{requestInfo})}
                 />
               </View>
             )}

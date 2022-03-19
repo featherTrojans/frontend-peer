@@ -4,7 +4,8 @@ import {
     View,
     StatusBar,
     ImageBackground,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
   } from "react-native";
   import React, {useContext, useEffect, useState} from "react";
   import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
@@ -36,7 +37,8 @@ import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunction
     const {requestInfo} = route.params
     const {setCoords, setDestinationCoords} = useContext(LocationContext)
     const [toggleShow, setToggleShow] = useState(true);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [locationLoading, setLocationLoading] = useState(false);
     
     useEffect(()=>{
       // update both map, meeting point and  Agent point
@@ -44,11 +46,16 @@ import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunction
     }, []);
   
     const getLocation = async () => {
-        const {coordinates, address} = await getCurrentLocation()
+      try{
+        setLocationLoading(true)
+      const {coordinates, address} = await getCurrentLocation()
         setCoords({...coordinates,locationText:address});
         // get the other destination
         const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
         setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
+      }catch(err){}finally{
+          setLocationLoading(false)
+        }
     }
   
   
@@ -64,6 +71,34 @@ import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunction
       }
     }
 
+    const handleCancelRequest = async ()=>{
+      setLoading(true)
+      try{
+        await axiosCustom({
+          method:"DELETE",
+          url:"/request/cancel",
+          data:{
+            reference: requestInfo.reference,
+            reasonForCancel:"agent declining withdraw request"
+          }
+        })
+        navigation.navigate("Home")
+      }catch(err){
+        showerror(toast,err)
+      }finally{
+        setLoading(false)
+      }
+    }
+
+    if(locationLoading){
+      return(
+        <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+          <ActivityIndicator  color="#000" size="large" />
+         </View>
+        )
+    }
+
+    
     return (
       <View style={styles.container}>
         <Customstatusbar /> 
@@ -135,13 +170,13 @@ import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunction
                     icon={<Renegotiateicon />}
                     title="Renegotiate Charges "
                     details="Send in a new charge for this request"
-                    onpress={() => console.log("Redirect to Negotiate")}
+                    onpress={() => navigation.navigate("Negotiate",{requestInfo})}
                   />
                   <Iconwithdatas
                     icon={<Cancelicony />}
                     title="Decline Request "
                     details="Say no to this transaction"
-                    onpress={() => console.log("Redirect to Negotiate")}
+                    onpress={handleCancelRequest}
                   />
                 </View>
               )}

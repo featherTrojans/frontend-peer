@@ -36,6 +36,7 @@ const Setup = ({ route, navigation }) => {
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce(token);
   const [loading, setLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showLaterModal, setShowLaterModal] = useState<boolean>(false);
   const [result, setResult] = useState<any>();
   const { setToken } = useContext(AuthContext);
 
@@ -50,6 +51,9 @@ const Setup = ({ route, navigation }) => {
   };
 
   const onSubmit = async () => {
+    if(username === defaultUsername){
+      return handleLater()
+    }
     setLoading(true);
     try {
       const response = await axiosCustom.put(
@@ -70,6 +74,9 @@ const Setup = ({ route, navigation }) => {
       setLoading(false);
     }
   };
+  const handleLater = ()=>{
+    setShowLaterModal(true);
+  }
 
   return (
     <KeyboardAwareScrollView>
@@ -79,7 +86,7 @@ const Setup = ({ route, navigation }) => {
 
         <Globalmodal
           showState={showModal}
-          onBgPress={() => setShowModal(true)}
+          // onBgPress={() => setShowModal(true)}
           btnFunction={() =>
             navigation.navigate("Welcome", {
               fromm: "setup",
@@ -116,6 +123,70 @@ const Setup = ({ route, navigation }) => {
                 }}
               >
                 @{username}
+              </Text>
+              <Text
+                style={{
+                  ...fontsize.bsmall,
+                  ...FONTS.regular,
+                  marginVertical: 41,
+                  textAlign: 'center'
+                }}
+              >
+                This can be used as an account identity to receive payments and
+                perform transactions
+              </Text>
+              <Text
+              style={{
+                ...fontsize.small,
+                ...FONTS.regular,
+                color: COLORS.grey2,
+              }}
+            >
+              *This username can be changed under settings
+            </Text>
+            </View>
+          
+          </View>
+        </Globalmodal>
+        <Globalmodal
+          showState={showLaterModal}
+          // onBgPress={() => setShowLaterModal(true)}
+          btnFunction={() =>
+            navigation.navigate("Welcome", {
+              fromm: "setup",
+              username: null,
+              token: token,
+            })
+          }
+          btnText="continue"
+        >
+          <View style={{alignItems: 'center', justifyContent: 'center',}}>
+            <LottieView
+              source={Successcheckanimate}
+              autoPlay
+              loop
+              style={{ width: 148, height: 148 }}
+            />
+            <View
+              style={{ marginTop: 24, marginBottom: 41, marginHorizontal: 25, justifyContent: 'center', alignItems: 'center' }}
+            >
+              <Text
+                style={{
+                  ...fontsize.bsmall,
+                  ...FONTS.regular,
+                  marginBottom: 17,
+                }}
+              >
+                Your feather username is
+              </Text>
+              <Text
+                style={{
+                  ...fontsize.bxmedium,
+                  ...FONTS.bold,
+                  color: COLORS.blue6,
+                }}
+              >
+                @{defaultUsername}
               </Text>
               <Text
                 style={{
@@ -182,9 +253,9 @@ const Setup = ({ route, navigation }) => {
 
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
           {/* Setup later btn */}
-          <View style={{ marginBottom: 40 }}>
+          <TouchableOpacity onPress={handleLater} style={{ marginBottom: 40 }}>
             <Text style={styles.laterBtn}>SETUP LATER</Text>
-          </View>
+          </TouchableOpacity>
           {/* Continue btn */}
           <TouchableOpacity
             style={styles.continueBtn}
