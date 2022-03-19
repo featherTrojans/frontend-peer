@@ -158,9 +158,7 @@ if(isFocused){
     try {
       setLoading(true);
       const response = await axiosCustom.get("/transactions");
-      // console.log(response);
       setTransations(response?.data?.data?.transactions);
-      console.log(transactions);
     } catch (err) {
       console.log(err.response);
     } finally {

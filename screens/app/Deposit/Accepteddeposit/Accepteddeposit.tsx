@@ -4,13 +4,15 @@ import {
   View,
   StatusBar,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import React, {useContext, useEffect, useState} from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
 import {
   Bottombtn,
   Iconwithdatas,
+  Loader,
   Requesterdetails,
 } from "../../../../components";
 import { styles } from "../../Withdraws/Withdrawpreview/Withdrawpreview.styles";
@@ -19,6 +21,9 @@ import { LocationContext } from "../../../../context/LocationContext";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
+import { useToast } from "react-native-toast-notifications";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
+import showerror from "../../../../utils/errorMessage";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
 // import { styles } from './Pendingwithdraw.styles'
@@ -38,9 +43,12 @@ const {
 const { Locationmap } = images;
 
 const Accepteddeposit = ({navigation, route}) => {
+  const toast = useToast()
   const {requestInfo} = route.params
   const {setCoords, setDestinationCoords} = useContext(LocationContext)
   const [toggleShow, setToggleShow] = useState(true);
+  const [loading, setLoading] = useState(false)
+  const [locationLoading, setLocationLoading] = useState(false);
 
   useEffect(()=>{
     // update both map, meeting point and  Agent point
@@ -49,19 +57,52 @@ const Accepteddeposit = ({navigation, route}) => {
   }, []);
 
   const getLocation = async () => {
+    try{
+      setLocationLoading(true)
       const {coordinates, address} = await getCurrentLocation()
       setCoords({...coordinates,locationText:address});
       // get the other destination
       const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
       setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
-  }
+    }catch(err){}finally{
+      setLocationLoading(false)
+    }
+    }
 
+  const handleCancelRequest = async ()=>{
+    setLoading(true)
+    try{
+      await axiosCustom({
+        method:"DELETE",
+        url:"/request/cancel",
+        data:{
+          reference: requestInfo.reference,
+          reasonForCancel:"agent declining withdraw request"
+        }
+      })
+      navigation.navigate("Home")
+    }catch(err){
+      showerror(toast,err)
+    }finally{
+      setLoading(false)
+    } 
+  }
+  
   const handleRedirect = ()=>{
      navigation.push("Depositpin",{requestInfo})
   }
 
+  if(locationLoading){
+    return(
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+        <ActivityIndicator  color="#000" size="large" />
+       </View>
+      )
+  }
+
   return (
     <View style={styles.container}>
+      {loading && <Loader />}
       <Customstatusbar />
         <Map />
         <View style={styles.previewContainer}>
@@ -136,7 +177,7 @@ const Accepteddeposit = ({navigation, route}) => {
                   icon={<Cancelicony />}
                   title="Decline Request "
                   details="Say no to this transaction"
-                  onpress={() => console.log("Redirect to Negotiate")}
+                  onpress={handleCancelRequest}
                 />
               </View>
             )}

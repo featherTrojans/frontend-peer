@@ -10,11 +10,35 @@ import { Text , View} from 'react-native';
 import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import {icons} from "./constants"
 import { LocationProvider } from "./context/LocationContext";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const { Cancelicon } = icons;
 
 
 export default function App() {
+  const [onboarded, setOnboarded] = useState<null | boolean>(null)
+
+  const checkOnboarding = async () => {
+    // await AsyncStorage.removeItem('@onboarded')
+    try {
+        const value = await AsyncStorage.getItem('@onboarded')
+        console.log(value)
+        if (value !== null) {
+            setOnboarded(JSON.parse(value).onboard)
+            console.log(onboarded, "This is inside the functions itself ")
+        }else{
+          setOnboarded(false)
+        }
+    } catch (err) {
+          setOnboarded(false)
+    } finally {
+    }
+  }
+  useEffect(() => {
+      checkOnboarding() 
+      console.log(onboarded, "The Onboarding")
+  }, [])
+
 
 
   let [fontsLoaded] = useFonts({
@@ -24,7 +48,8 @@ export default function App() {
     GTbold: require("./assets/fonts/GTWalsheimPro-Bold.ttf"),
   });
 
-  if (!fontsLoaded) {
+
+  if (!fontsLoaded || onboarded === null ) {
     return <AppLoading />;
   } else {
     return (
@@ -50,7 +75,7 @@ export default function App() {
         </View>}>
         <AuthProvider>
           <LocationProvider>
-            <MainNavigation />
+            <MainNavigation initialBoarded={onboarded} />
           </LocationProvider>
         </AuthProvider>
       </ToastProvider>

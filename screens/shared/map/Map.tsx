@@ -14,14 +14,14 @@ const {width, height} = Dimensions.get("screen")
 
 const Map = ({}) => {
    const {coords , destinationCoords} = useContext(LocationContext);
+//    console.log(coords, destinationCoords)
    const mapRef = useRef(null)
     // console.log("the map object",mapRef.current)
    useEffect(() => {
-       if(!coords.latitude || !destinationCoords.latitude ) return false
-
-       if(mapRef.current){
-
-           mapRef?.current?.fitToSuppliedMarkers(['peer','agent'],{
+    //    if(!coords.latitude || !destinationCoords.latitude ) return false
+    if(mapRef.current){
+        //    console.log("should run again")
+           mapRef.current.fitToSuppliedMarkers(['peer','agent'],{
                edgePadding:{top:50, right: 50, bottom: 50, left: 50}
             })   
         }
@@ -51,6 +51,7 @@ const Map = ({}) => {
                         title={"Peer"}
                         description={"Peer"}
                         identifier="peer"
+                        pinColor={'red'}
                         />
                     }
                     {
@@ -71,6 +72,7 @@ const Map = ({}) => {
                         title={"agent"}
                         description={"agent"}
                         identifier="agent"
+                        pinColor={'blue'}
                         />
                     }
                 </MapView>

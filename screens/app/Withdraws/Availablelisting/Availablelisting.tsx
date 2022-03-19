@@ -37,7 +37,8 @@ const Availablelisting = ({ navigation, route }: any) => {
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([]);
   const [activeType, setActiveType] = useState("peers");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [locationLoading, setLocationLoading] = useState(false)
 
   let height = "10%";
   const checkCurrentHeight = () => {
@@ -51,23 +52,29 @@ const Availablelisting = ({ navigation, route }: any) => {
   }, []);
 
   const getLocation = async () => {
-    const { coordinates, address } = await getCurrentLocation();
-    setCoords({ ...coordinates, locationText: address });
-    getAllAgents(address);
-  };
+    try{
+      setLocationLoading(true)
+      const {coordinates, address} = await getCurrentLocation()
+      setCoords({...coordinates,locationText:address});
+      getAllAgents(address);
+    }catch(err){}finally{
+      setLocationLoading(false)
+    }
+  }
 
   const getAllAgents = async (address: string) => {
     try {
-      setLoading(true);
+      // setLoading(true);
       const response = await axiosCustom.post("/status/find", {
         amount: amount,
         location: address,
       });
-      console.log(response.data, "success");
+      console.log(response.data.data)
       setAgents(response.data.data);
     } catch (err) {
-    } finally {
-      setLoading(false);
+      console.log(err.response)
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -75,11 +82,8 @@ const Availablelisting = ({ navigation, route }: any) => {
     const { fullName, duration } = profile;
     const handleAgentSelect = () => {
       // adding Location context
-      setDestinationCoords(profile);
-      navigation.navigate("Withdrawpreview", { amount, userInfo: profile });
-    };
-    if (loading) {
-      return <ActivityIndicator />;
+      setDestinationCoords(profile)
+      navigation.navigate("Withdrawpreview", {amount,userInfo: profile})
     }
     return (
       <TouchableOpacity
@@ -100,6 +104,15 @@ const Availablelisting = ({ navigation, route }: any) => {
   };
 
   const [active, setActive] = useState("peers");
+
+  if(locationLoading){
+    return(
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+        <ActivityIndicator color="#000" size="large" />
+    </View>
+      )
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <Customstatusbar />
@@ -133,6 +146,41 @@ const Availablelisting = ({ navigation, route }: any) => {
                 : "Get cash easily from feather agents as well as POS money agents around you, very fast."}
             </Text>
           </View>
+          <View style={{ marginVertical: 32, flexDirection: "row", }}>
+            {listingtypes.map((listingtype) => {
+              const isActive = listingtype === activeType;
+              return (
+                <TouchableOpacity
+                  onPress={() => setActiveType(listingtype)}
+                  style={{
+                    marginRight: 24,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.listingTypesText,
+                      isActive && { color: COLORS.blue6 },
+                    ]}
+                  >
+                    {listingtype}
+                  </Text>
+                  {activeType === listingtype && (
+                    <View
+                      style={{
+                        width: 10,
+                        height: 2,
+                        backgroundColor: COLORS.blue6,
+                      }}
+                    />
+                  )}
+                </TouchableOpacity>
+              );
+            })}
+                
+          </View>
+                {loading && <ActivityIndicator color="black" size={50} />}
         </View>
 
         <BottomSheetFlatList

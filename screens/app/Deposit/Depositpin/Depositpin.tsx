@@ -52,10 +52,10 @@ const Depositpin = ({route, navigation}) => {
       setPin(newdata);
     }
   };
-  const handlePrepareToTestUpdate = async ()=>{
+  const handlePrepareToTestUpdate = async (status:string)=>{
     const washingtonRef = doc(db, "withdrawtransfer", requestInfo.reference);
       await updateDoc(washingtonRef, {
-        status: "approved"
+        status: status
       });
   }
   const handleApproveRequest = async ()=>{
@@ -67,11 +67,12 @@ const Depositpin = ({route, navigation}) => {
     setLoading(true)
     try{
       await axiosCustom.post("/request/approve",{reference:requestInfo.reference, user_pin:joinpin})
-      await handlePrepareToTestUpdate()
+      await handlePrepareToTestUpdate("approved")
       //show success message
       setSuccessModal(true)
     }catch(err){
       showerror(toast, err);
+      await handlePrepareToTestUpdate("rejected")
     }finally{
       setLoading(false)
     }

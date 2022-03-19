@@ -114,6 +114,7 @@ import { AuthContext } from "../context/AuthContext";
 
 // import App from "../App";
 import Map from "../screens/shared/map/Map";
+import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 
 const {
   TabHome,
@@ -440,30 +441,13 @@ const Tabs = () => {
 
 
 
-const RootNavigator = () => {
+const RootNavigator = ({initialBoarded}) => {
   const { token } = useContext(AuthContext);
-  const [onboarded, setOnboarded] = useState<null | boolean>(null)
-
-  const checkOnboarding = async () => {
-    try {
-        const value = await AsyncStorage.getItem('@onboarded')
-        if (value !== null) {
-            setOnboarded(JSON.parse(value))
-            console.log(onboarded, "This is inside the functions itself ")
-        }
-    } catch (err) {
-    } finally {
-    }
-}
-useEffect(() => {
-    checkOnboarding()
-    console.log(onboarded, "The Onboarding")
-}, [])
 
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={ false ?  "Login" : "Onboarding"}
+      initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
@@ -534,6 +518,10 @@ useEffect(() => {
               name="Pendingwithdraw"
               component={Pendingwithdraw}
             />
+            <AppStack.Screen
+              name="Negotiate"
+              component={Negotiate}
+            />
             <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
             {/* TO MaKE AFTER ACCEPTING */}
             <AppStack.Screen
@@ -602,7 +590,7 @@ useEffect(() => {
   );
 };
 
-export default function MainNavigation() {
+export default function MainNavigation({initialBoarded = false}) {
   const [modal, setModal] = useState(false);
   const timer = useRef<number>(Date.now());
   const { token, setMessageToken } = useContext(AuthContext);
@@ -640,7 +628,7 @@ export default function MainNavigation() {
   return (
     <NavigationContainer ref={navigationRef}>
       {/* {token ? <LockScreen modal={modal} setModal={setModal} /> : null} */}
-      <RootNavigator />
+      <RootNavigator initialBoarded={initialBoarded} />
     </NavigationContainer>
   );
 }

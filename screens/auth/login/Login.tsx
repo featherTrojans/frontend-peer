@@ -24,6 +24,7 @@ import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import * as LocalAuthentication from "expo-local-authentication";
 
+
 const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
 
 const setAuthorizationToken = (token: string) => {
@@ -95,6 +96,8 @@ const Login = ({ navigation }: any) => {
               //store token in ASYNC STORAGE
               //store in context
               setAuthorizationToken(response.data.data.token);
+              
+              
               // setToken(response.data.data.token)
               navigation.navigate("Welcome", {
                 fromm: "login",

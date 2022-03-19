@@ -20,6 +20,7 @@ const Summary = ({navigation, route}) => {
   const {authdata} = useContext(AuthContext)
   const [showmodal, setShowModal] = useState(false)
   const [showSuccessmodal, setShowSuccessModal] = useState(false)
+  const [showFailuremodal, setShowFailureModal] = useState(false)
 
   useEffect(()=>{
     firestoreListener()
@@ -50,6 +51,10 @@ const Summary = ({navigation, route}) => {
         if(doc?.data()?.status === "approved"){
           setShowModal(false);
           setShowSuccessModal(true)
+        }
+        if(doc?.data()?.status === "rejected"){
+          setShowModal(false);
+          setShowFailureModal(true)
         }
         console.log("Current data: ", doc.data());
     });
@@ -99,6 +104,20 @@ const Summary = ({navigation, route}) => {
                  ...FONTS.regular}}>Transaction Succesful</Text>
             <Text style={{width: "60%", textAlign:"center", ...fontsize.bsmall,
                  ...FONTS.regular}}>You can dispute this transaction after 24 hours</Text>
+           </View>
+          
+      </Globalmodal>
+      <Globalmodal
+       showState={showFailuremodal}
+       onBgPress={() => setShowFailureModal(!showFailuremodal)}
+       btnFunction={()=>navigation.navigate("Home")}
+       >
+           <View style={{ alignItems: "center", paddingVertical: 30 }}>
+            {/* <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/> */}
+            <Text style={{marginBottom: 30, ...fontsize.bsmall,
+                 ...FONTS.regular}}>Transaction Failed</Text>
+            <Text style={{width: "60%", textAlign:"center", ...fontsize.bsmall,
+                 ...FONTS.regular}}>Please try again later</Text>
            </View>
           
       </Globalmodal>

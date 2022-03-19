@@ -20,6 +20,5 @@ export const getCurrentLocation = async ()=>{
 export const getCoordinateFromAddress = async (addresstext: string)=>{
     Location.setGoogleApiKey("AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY");
     const coords = await Location.geocodeAsync(addresstext,{useGoogleMaps:true})
-    console.log(coords)
-    return coords
+    return coords[0]
 }

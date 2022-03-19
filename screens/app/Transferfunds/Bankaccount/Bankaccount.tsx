@@ -161,8 +161,10 @@ const Bankaccount = ({ navigation, route }) => {
       <Globalmodal
         showState={showmodal}
         onBgPress={() => setShowModal(!showmodal)}
-        btnFunction={() =>
-          navigation.navigate("TransferpinBank", { amount, accountInfomation })
+        btnFunction={() =>{
+          navigation.navigate("TransferpinBank", { amount, accountInfomation });
+          setShowModal(false)
+        }
         }
       >
         <View style={{ alignItems: "center" }}>
