@@ -121,6 +121,7 @@ import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json"
 import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json"
 import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json"
 import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json"
+import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.json"
 
 
 
@@ -262,7 +263,8 @@ Winkinganimate,
 Mapanimate,
 Phoneanimate,
 Sittinganimate,
-Successcheckanimate
+Successcheckanimate,
+Loadinglocationanimate
 
 
 
