@@ -79,7 +79,7 @@ export const styles = StyleSheet.create({
   listingType:{
     ...fontsize.bxmedium,
     ...FONTS.bold,
-    marginBottom: 23
+    // marginBottom: 23
   },
   listingTypeInfo:{
     ...fontsize.small,

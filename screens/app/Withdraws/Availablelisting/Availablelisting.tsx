@@ -21,6 +21,7 @@ import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { InitialsBg } from "../../../../components";
+import Comingsoonagent from "../../../../assets/Lottie/animations/comingSoonAgent.json";
 
 const {
   Backarrow,
@@ -30,7 +31,8 @@ const {
   Requestee3,
   Onmapicon,
   Loadinglocationanimate,
-  Cryinganimate
+  Cryinganimate,
+  Comingsoonagentanimate,
 } = icons;
 const { Mapimage } = images;
 
@@ -79,6 +81,14 @@ const Availablelisting = ({ navigation, route }: any) => {
     }
   };
 
+  const toggleActiveType = () => {
+    if (activeType === "peers") {
+      setActiveType("agents");
+    } else if (activeType === "agents") {
+      setActiveType("peers");
+    }
+  };
+
   ///This is for the single user component
   const Singleuser = ({ profile }: any) => {
     const { fullName, duration } = profile;
@@ -106,8 +116,6 @@ const Availablelisting = ({ navigation, route }: any) => {
     );
   };
 
-
-
   return (
     <View style={{ flex: 1 }}>
       <Customstatusbar />
@@ -115,8 +123,6 @@ const Availablelisting = ({ navigation, route }: any) => {
       <View>
         <Backarrow />
       </View>
-
-   
 
       {locationLoading ? (
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
@@ -155,43 +161,142 @@ const Availablelisting = ({ navigation, route }: any) => {
           </View>
         </View>
       ) : (
-        <BottomSheet
-          index={0}
-          snapPoints={["35%", "90%"]}
-          style={{ paddingHorizontal: 15 }}
-          // enablePanDownToClose={true}
-        >
-          {agents.length > 0 ? (
-            <>
-              <View>
-                <View>
-                  <Text style={styles.listingType}>
-                    {activeType === "peers" ? "Peers" : "Agents"}.
-                  </Text>
-                  <Text style={styles.listingTypeInfo}>
-                    {activeType === "peers"
-                      ? "Get cash easily from individuals and businesses around you, peers are likely to negotiate charges."
-                      : "Get cash easily from feather agents as well as POS money agents around you, very fast."}
+        <>
+          {activeType == "peers" ? (
+            <BottomSheet
+              index={0}
+              snapPoints={["35%", "90%"]}
+              style={{ paddingHorizontal: 15 }}
+              // enablePanDownToClose={true}
+            >
+              {/* agents.length > 0  */}
+              {true ? (
+                <>
+                  <View>
+                    <View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          marginBottom: 22,
+                        }}
+                      >
+                        <Text style={styles.listingType}>
+                          {activeType === "peers" ? "Peers" : "Agents"}.
+                        </Text>
+                        <TouchableOpacity
+                          onPress={toggleActiveType}
+                          activeOpacity={0.8}
+                        >
+                          <Text
+                            style={{
+                              ...fontsize.small,
+                              ...FONTS.medium,
+                              color: COLORS.blue6,
+                            }}
+                          >
+                            {activeType === "peers" ? "Agents" : "Peers"}
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                      <Text style={styles.listingTypeInfo}>
+                        {activeType === "peers"
+                          ? "Get cash easily from individuals and businesses around you, peers are likely to negotiate charges."
+                          : "Get cash easily from feather agents as well as POS money agents around you, very fast."}
+                      </Text>
+                    </View>
+                    {/* {loading && <ActivityIndicator color="black" size={50} />} */}
+                  </View>
+
+                  <BottomSheetFlatList
+                    showsVerticalScrollIndicator={false}
+                    data={agents}
+                    renderItem={({ item }) => <Singleuser profile={item} />}
+                    keyExtractor={(item) => item.reference}
+                  />
+                </>
+              ) : (
+                <View
+                  style={{ justifyContent: "center", alignItems: "center" }}
+                >
+                  <LottieView
+                    source={Cryinganimate}
+                    autoPlay
+                    loop
+                    style={{ width: 145, height: 145 }}
+                  />
+
+                  <Text
+                    style={{
+                      marginHorizontal: 52,
+                      textAlign: "center",
+                      ...fontsize.small,
+                      ...FONTS.regular,
+                      lineHeight: 22,
+                      color: COLORS.grey10,
+                    }}
+                  >
+                    Sorry we couldn’t find anyone to fulfil your request, kindly
+                    request a lower amount or try again later.
                   </Text>
                 </View>
-                {/* {loading && <ActivityIndicator color="black" size={50} />} */}
-              </View>
-
-              <BottomSheetFlatList
-                showsVerticalScrollIndicator={false}
-                data={agents}
-                renderItem={({ item }) => <Singleuser profile={item} />}
-                keyExtractor={(item) => item.reference}
-              />
-            </>
+              )}
+            </BottomSheet>
           ) : (
-            <View style={{justifyContent: "center", alignItems: "center"}}>
-              <LottieView  source={Cryinganimate} autoPlay loop style={{width: 145, height: 145}}/>
+            <BottomSheet
+              index={0}
+              snapPoints={["60%"]}
+              style={{ paddingHorizontal: 15 }}
+              // enablePanDownToClose={true}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 22,
+                }}
+              >
+                <Text style={styles.listingType}>
+                  {activeType === "peers" ? "Peers" : "Agents"}.
+                </Text>
+                <TouchableOpacity
+                  onPress={toggleActiveType}
+                  activeOpacity={0.8}
+                >
+                  <Text
+                    style={{
+                      ...fontsize.small,
+                      ...FONTS.medium,
+                      color: COLORS.blue6,
+                    }}
+                  >
+                    {activeType === "peers" ? "Agents" : "Peers"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.listingTypeInfo}>
+                Get cash easily from individuals and businesses around you,
+                peers are likely to negotiate charges.
+              </Text>
 
-              <Text style={{marginHorizontal: 52, textAlign: "center", ...fontsize.small, ...FONTS.regular, lineHeight: 22, color: COLORS.grey10}}>Sorry we couldn’t find anyone to fulfil your request, kindly request a lower amount or try again later.</Text>
-            </View>
+              <View style={{alignItems: "center"}}>
+                <LottieView
+                  source={require("../../../../assets/Lottie/animations/comingSoonAgent.json")}
+                  autoPlay
+                  loop
+                  style={{ width: 236, height: 236 }}
+                />
+
+                <Text style={{ ...fontsize.small, ...FONTS.regular, textAlign: "center", marginHorizontal: 62 }}>
+                  Agents are coming to your area very soon, you will be notified
+                  once ready
+                </Text>
+              </View>
+            </BottomSheet>
           )}
-        </BottomSheet>
+        </>
       )}
     </View>
   );
