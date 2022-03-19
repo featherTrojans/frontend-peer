@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 23,
+    
   },
   leftHeader: {
     ...fontsize.small,

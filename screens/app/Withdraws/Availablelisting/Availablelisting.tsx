@@ -4,7 +4,7 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import BottomSheet, {
   BottomSheetScrollView,
@@ -20,30 +20,35 @@ import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 
-const { Backarrow, Forwardarrow, Requestee1, Requestee2, Requestee3, Onmapicon } = icons;
+const {
+  Backarrow,
+  Forwardarrow,
+  Requestee1,
+  Requestee2,
+  Requestee3,
+  Onmapicon,
+} = icons;
 const { Mapimage } = images;
-
-
 
 const listingtypes = ["peers", "agents"];
 
 const Availablelisting = ({ navigation, route }: any) => {
   const { amount } = route.params;
-  const { setCoords,setDestinationCoords } = useContext(LocationContext);
+  const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([]);
   const [activeType, setActiveType] = useState("peers");
   const [loading, setLoading] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false)
 
-  let height = "10%"
+  let height = "10%";
   const checkCurrentHeight = () => {
-    if(height == "10%"){
-      let height =  "50%"
+    if (height == "10%") {
+      let height = "50%";
     }
-  }
+  };
 
   useEffect(() => {
-    getLocation()
+    getLocation();
   }, []);
 
   const getLocation = async () => {
@@ -72,10 +77,10 @@ const Availablelisting = ({ navigation, route }: any) => {
       setLoading(false)
     }
   };
-  
+
   const Singleuser = ({ profile }: any) => {
     const { fullName, duration } = profile;
-    const handleAgentSelect = ()=>{
+    const handleAgentSelect = () => {
       // adding Location context
       setDestinationCoords(profile)
       navigation.navigate("Withdrawpreview", {amount,userInfo: profile})
@@ -85,19 +90,15 @@ const Availablelisting = ({ navigation, route }: any) => {
         style={styles.userContainer}
         activeOpacity={0.8}
         onPress={handleAgentSelect}
-      >   
+      >
         <View style={styles.detailsContainer}>
           {/* Image */}
           <View style={styles.infoContainer}>
             <Text style={styles.userName}>{fullName}</Text>
-            <View style={styles.otherInfo}>
-              <Text style={styles.distance}>~{duration} away</Text>
-            </View>
+            <Text style={styles.distance}>~{duration} away</Text>
           </View>
         </View>
-        <View>
-          <Forwardarrow />
-        </View>
+        <Forwardarrow />
       </TouchableOpacity>
     );
   };
@@ -130,19 +131,19 @@ const Availablelisting = ({ navigation, route }: any) => {
 
       <BottomSheet
         index={0}
-        snapPoints={["10%", "50%", "90%"]}
+        snapPoints={["35%", "90%"]}
         style={{ paddingHorizontal: 15 }}
         // enablePanDownToClose={true}
       >
         <View>
           <View>
-            <Text style={styles.listingType}>{activeType === "peers" ? "Peers" : "Agents"}.</Text>
+            <Text style={styles.listingType}>
+              {activeType === "peers" ? "Peers" : "Agents"}.
+            </Text>
             <Text style={styles.listingTypeInfo}>
-              {activeType === 'peers' ? 
-                "Get cash easily from individuals and businesses around you, peers are likely to negotiate charges."
-                :
-                "Get cash easily from feather agents as well as POS money agents around you, very fast."
-            }
+              {activeType === "peers"
+                ? "Get cash easily from individuals and businesses around you, peers are likely to negotiate charges."
+                : "Get cash easily from feather agents as well as POS money agents around you, very fast."}
             </Text>
           </View>
           <View style={{ marginVertical: 32, flexDirection: "row", }}>

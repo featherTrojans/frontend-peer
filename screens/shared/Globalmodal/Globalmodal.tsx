@@ -29,7 +29,7 @@ const Globalmodal = ({
       backdropTransitionInTiming={200}
       animationOut={"fadeOut"}
       animationOutTiming={150}
-      style={{ margin: 0, justifyContent: "flex-end" }}
+      style={{ margin: 0, justifyContent: "flex-end", zIndex: 100 }}
       onBackdropPress={onBgPress}
       
     >

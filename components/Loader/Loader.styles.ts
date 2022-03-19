@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         bottom:0,
         right:0,
         left:0,
-        zIndex:99,
+        zIndex:120,
         backgroundColor: "rgba(255,255,255,0.7)"      
     },
     logoBg: {

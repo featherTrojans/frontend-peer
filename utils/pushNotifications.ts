@@ -41,13 +41,13 @@ export const registerForPushNotificationsAsync = async () => {
 
 //Schdeule Push Notifications
 
-// export const  sendSchedulePushNotification = async () => {
-//     await Notifications.scheduleNotificationAsync({
-//       content: {
-//         title: "You've got mail! 📬",
-//         body: 'Here is the notification body',
-//         data: { data: 'goes here', takeTo: "Newtransactions" },
-//       },
-//       trigger: { seconds: 5 },
-//     });
-//   }
+export const  sendSchedulePushNotification = async (name) => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: 'Acccount Registration',
+        body: `Hi ${name}, Welcome onboard to feather africa, Enjoy true freedom.`,
+        data: { data: 'goes here', takeTo: "Root" },
+      },
+      trigger: { seconds: 4 },
+    });
+  }

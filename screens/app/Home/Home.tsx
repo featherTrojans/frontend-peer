@@ -22,7 +22,12 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import LottieView from "lottie-react-native";
 import * as Animatable from "react-native-animatable";
-import { Service, Transactionhistory, Viewbalance } from "../../../components";
+import {
+  InitialsBg,
+  Service,
+  Transactionhistory,
+  Viewbalance,
+} from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
@@ -32,6 +37,7 @@ import { customNavigation } from "../../../utils/customNavigation";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
 import DoubleTapToClose from "../../shared/DoubleBack";
+import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 
 const {
   Profilepics,
@@ -77,8 +83,9 @@ const Home = ({ navigation }: { navigation: any }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
   const linkTo = useLinkTo();
-  const jumpToHistory = TabActions.jumpTo('History');
-  const jumpToSettings = TabActions.jumpTo('Settings');
+  const jumpToHistory = TabActions.jumpTo("History");
+  const jumpToSettings = TabActions.jumpTo("Settings");
+  // sendSchedulePushNotification
 
   
 
@@ -86,7 +93,17 @@ const Home = ({ navigation }: { navigation: any }) => {
     const firstIndex = string.indexOf("[");
     return string.slice(firstIndex + 1, -1);
   };
+  useEffect(() => {
+    sendSchedulePushNotification(nameToShow(authdata.fullName));
+  }, []);
 
+  const nameToShow = (value: string) => {
+    if (value?.split(" ").length > 1) {
+      return value?.split(" ")[1];
+    } else {
+      return value;
+    }
+  };
 
   useEffect(() => {
     // setMessageToken()
@@ -168,25 +185,18 @@ const Home = ({ navigation }: { navigation: any }) => {
     );
   };
 
-  const nameToShow = (value: string) => {
-    if (value?.split(" ").length > 1) {
-      return value?.split(" ")[1];
-    } else {
-      return value;
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
         <View style={styles.profileContainer}>
-          <TouchableOpacity onPress={() =>  navigation.dispatch(jumpToSettings)} activeOpacity={0.8}>
-            {/* <Profilepics /> */}
-            {/* <Useravatar /> */}
-            <Smalluseravatar />
-            {/* <Defaultuseravatar /> */}
+          <TouchableOpacity
+            onPress={() => navigation.dispatch(jumpToSettings)}
+            activeOpacity={0.8}
+          >
+            {/* <Smalluseravatar /> */}
+            <InitialsBg sideLength={51} name="Okikiola" />
           </TouchableOpacity>
 
           <View style={styles.profileNameContainer}>
@@ -267,7 +277,9 @@ const Home = ({ navigation }: { navigation: any }) => {
             <View>
               <Text style={styles.transactionHistory}>Transaction History</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.dispatch(jumpToHistory)}>
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(jumpToHistory)}
+            >
               <Text style={styles.seeAll}>See All</Text>
             </TouchableOpacity>
           </View>

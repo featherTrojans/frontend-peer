@@ -33,18 +33,19 @@ export const styles = StyleSheet.create({
 
   userContainer: {
     paddingTop: 20,
-    paddingBottom: 21,
+    paddingBottom: 20,
     paddingLeft: 14,
-    paddingRight: 21,
+    paddingRight: 20,
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
+    borderRadius: 15
   },
   detailsContainer: {
     flexDirection: "row",
   },
   infoContainer: {
-    marginLeft: 10,
+    marginLeft: 15,
   },
   userName: {
     color: COLORS.black,
