@@ -4,7 +4,7 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import BottomSheet, {
   BottomSheetScrollView,
@@ -20,36 +20,41 @@ import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 
-const { Backarrow, Forwardarrow, Requestee1, Requestee2, Requestee3, Onmapicon } = icons;
+const {
+  Backarrow,
+  Forwardarrow,
+  Requestee1,
+  Requestee2,
+  Requestee3,
+  Onmapicon,
+} = icons;
 const { Mapimage } = images;
-
-
 
 const listingtypes = ["peers", "agents"];
 
 const Availablelisting = ({ navigation, route }: any) => {
   const { amount } = route.params;
-  const { setCoords,setDestinationCoords } = useContext(LocationContext);
+  const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([]);
   const [activeType, setActiveType] = useState("peers");
   const [loading, setLoading] = useState(false);
 
-  let height = "10%"
+  let height = "10%";
   const checkCurrentHeight = () => {
-    if(height == "10%"){
-      let height =  "50%"
+    if (height == "10%") {
+      let height = "50%";
     }
-  }
+  };
 
   useEffect(() => {
-    getLocation()
+    getLocation();
   }, []);
 
   const getLocation = async () => {
-      const {coordinates, address} = await getCurrentLocation()
-      setCoords({...coordinates,locationText:address});
-      getAllAgents(address);
-  }
+    const { coordinates, address } = await getCurrentLocation();
+    setCoords({ ...coordinates, locationText: address });
+    getAllAgents(address);
+  };
 
   const getAllAgents = async (address: string) => {
     try {
@@ -58,31 +63,30 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: amount,
         location: address,
       });
-      console.log(response.data,"success")
+      console.log(response.data, "success");
       setAgents(response.data.data);
     } catch (err) {
-      
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
-  
+
   const Singleuser = ({ profile }: any) => {
     const { fullName, duration } = profile;
-    const handleAgentSelect = ()=>{
+    const handleAgentSelect = () => {
       // adding Location context
-      setDestinationCoords(profile)
-      navigation.navigate("Withdrawpreview", {amount,userInfo: profile})
-    }
-    if(loading){
-      return <ActivityIndicator />
+      setDestinationCoords(profile);
+      navigation.navigate("Withdrawpreview", { amount, userInfo: profile });
+    };
+    if (loading) {
+      return <ActivityIndicator />;
     }
     return (
       <TouchableOpacity
         style={styles.userContainer}
         activeOpacity={0.8}
         onPress={handleAgentSelect}
-      >   
+      >
         <View style={styles.detailsContainer}>
           {/* Image */}
           <View style={styles.infoContainer}>
@@ -92,9 +96,7 @@ const Availablelisting = ({ navigation, route }: any) => {
             </View>
           </View>
         </View>
-        <View>
-          <Forwardarrow />
-        </View>
+        <Forwardarrow />
       </TouchableOpacity>
     );
   };
@@ -118,53 +120,20 @@ const Availablelisting = ({ navigation, route }: any) => {
 
       <BottomSheet
         index={0}
-        snapPoints={["10%", "50%", "90%"]}
+        snapPoints={["35%", "90%"]}
         style={{ paddingHorizontal: 15 }}
         // enablePanDownToClose={true}
       >
         <View>
           <View>
-            <Text style={styles.listingType}>{activeType === "peers" ? "Peers" : "Agents"}.</Text>
-            <Text style={styles.listingTypeInfo}>
-              {activeType === 'peers' ? 
-                "Get cash easily from individuals and businesses around you, peers are likely to negotiate charges."
-                :
-                "Get cash easily from feather agents as well as POS money agents around you, very fast."
-            }
+            <Text style={styles.listingType}>
+              {activeType === "peers" ? "Peers" : "Agents"}.
             </Text>
-          </View>
-          <View style={{ marginVertical: 32, flexDirection: "row", }}>
-            {listingtypes.map((listingtype) => {
-              const isActive = listingtype === activeType;
-              return (
-                <TouchableOpacity
-                  onPress={() => setActiveType(listingtype)}
-                  style={{
-                    marginRight: 24,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={[
-                      styles.listingTypesText,
-                      isActive && { color: COLORS.blue6 },
-                    ]}
-                  >
-                    {listingtype}
-                  </Text>
-                  {activeType === listingtype && (
-                    <View
-                      style={{
-                        width: 10,
-                        height: 2,
-                        backgroundColor: COLORS.blue6,
-                      }}
-                    />
-                  )}
-                </TouchableOpacity>
-              );
-            })}
+            <Text style={styles.listingTypeInfo}>
+              {activeType === "peers"
+                ? "Get cash easily from individuals and businesses around you, peers are likely to negotiate charges."
+                : "Get cash easily from feather agents as well as POS money agents around you, very fast."}
+            </Text>
           </View>
         </View>
 

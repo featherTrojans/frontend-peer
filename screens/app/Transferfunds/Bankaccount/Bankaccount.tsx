@@ -151,9 +151,9 @@ const Bankaccount = ({ navigation, route }) => {
   };
   
   return (
-    <KeyboardAwareScrollView
+    <View
       style={styles.container}
-      contentContainerStyle={{ flex: 1 }}
+
     >
       {loading && <Loader />}
       <Customstatusbar />
@@ -210,13 +210,12 @@ const Bankaccount = ({ navigation, route }) => {
       <View style={{ flex: 1, paddingHorizontal: 25 }}>
         <Input icon={<At />} placeholder="N37,580.50" disabled value={amount} />
 
-        <View style={styles.headerContainer}>
+        {/* <View style={styles.headerContainer}>
           <Text style={styles.leftHeader}>Saved Accounts</Text>
           <Text style={styles.rightHeader}>See More</Text>
-        </View>
+        </View> */}
 
-        <View style={{ marginVertical: 35 }}>
-          {/* Flatlist container */}
+        {/* <View style={{ marginVertical: 35 }}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -225,7 +224,7 @@ const Bankaccount = ({ navigation, route }) => {
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => <Saveduser details={item} />}
           />
-        </View>
+        </View> */}
 
         <DropDownPicker
           open={open}
@@ -234,13 +233,14 @@ const Bankaccount = ({ navigation, route }) => {
           setOpen={setOpen}
           setValue={setValue}
           setItems={setItems}
-          placeholder="--- Select Wallet ---"
+          placeholder="--- Select Bank ---"
           placeholderStyle={styles.dropdowPlaceholder}
           textStyle={styles.dropDownText}
           style={styles.dropDown}
-          containerStyle={{}}
+          containerStyle={{zIndex: 0}}
           dropDownContainerStyle={{
-            borderColor: COLORS.grey1
+            borderColor: COLORS.grey1,
+            zIndex: 1
           }}
         />
         {/* <Input icon={<At />} placeholder="--- Select Bank ---" /> */}
@@ -250,7 +250,7 @@ const Bankaccount = ({ navigation, route }) => {
           value={accountnum}
           onChangeText={(text) => setAccountnum(text)}
         />
-        <View style={styles.addAccountContainer}>
+        {/* <View style={styles.addAccountContainer}>
           <BouncyCheckbox
             size={18}
             fillColor={COLORS.blue6}
@@ -271,11 +271,11 @@ const Bankaccount = ({ navigation, route }) => {
               alignItems: "center",
             }}
           />
-        </View>
+        </View> */}
       </View>
 
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
-    </KeyboardAwareScrollView>
+    </View>
   );
 };
 
