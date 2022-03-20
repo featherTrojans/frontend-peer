@@ -30,6 +30,7 @@ const {
   Requestee2,
   Requestee3,
   Onmapicon,
+  Forwardarrowblue,
   Loadinglocationanimate,
   Cryinganimate,
   Comingsoonagentanimate,
@@ -120,9 +121,21 @@ const Availablelisting = ({ navigation, route }: any) => {
     <View style={{ flex: 1 }}>
       <Customstatusbar />
       <Map />
-      <View>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => navigation.goBack()}
+        style={{
+          width: 25,
+          height: 25,
+          borderRadius: 5,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: COLORS.blue6,
+          marginLeft: 15,
+        }}
+      >
         <Backarrow />
-      </View>
+      </TouchableOpacity>
 
       {locationLoading ? (
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
@@ -134,13 +147,14 @@ const Availablelisting = ({ navigation, route }: any) => {
               borderTopRightRadius: 22,
               paddingHorizontal: 15,
               paddingTop: 15,
+              alignItems: "center",
             }}
           >
             <LottieView
               source={Loadinglocationanimate}
               autoPlay
               loop
-              style={{ margin: 0, height: 15 }}
+              style={{ height: 14, width: "100%" }}
             />
             <View style={{ flex: 1 }}>
               <Text
@@ -170,7 +184,7 @@ const Availablelisting = ({ navigation, route }: any) => {
               // enablePanDownToClose={true}
             >
               {/* agents.length > 0  */}
-              {agents.length > 0  ? (
+              {agents.length > 0 ? (
                 <>
                   <View>
                     <View>
@@ -185,19 +199,23 @@ const Availablelisting = ({ navigation, route }: any) => {
                         <Text style={styles.listingType}>
                           {activeType === "peers" ? "Peers" : "Agents"}.
                         </Text>
+
                         <TouchableOpacity
                           onPress={toggleActiveType}
                           activeOpacity={0.8}
+                          style={{ flexDirection: "row", alignItems: "center" }}
                         >
                           <Text
                             style={{
                               ...fontsize.small,
                               ...FONTS.medium,
                               color: COLORS.blue6,
+                              marginRight: 9,
                             }}
                           >
                             {activeType === "peers" ? "Agents" : "Peers"}
                           </Text>
+                          <Forwardarrowblue />
                         </TouchableOpacity>
                       </View>
                       <Text style={styles.listingTypeInfo}>
@@ -261,19 +279,23 @@ const Availablelisting = ({ navigation, route }: any) => {
                 <Text style={styles.listingType}>
                   {activeType === "peers" ? "Peers" : "Agents"}.
                 </Text>
+
                 <TouchableOpacity
                   onPress={toggleActiveType}
                   activeOpacity={0.8}
+                  style={{ flexDirection: "row", alignItems: "center" }}
                 >
                   <Text
                     style={{
                       ...fontsize.small,
                       ...FONTS.medium,
                       color: COLORS.blue6,
+                      marginRight: 9,
                     }}
                   >
                     {activeType === "peers" ? "Agents" : "Peers"}
                   </Text>
+                  <Forwardarrowblue />
                 </TouchableOpacity>
               </View>
               <Text style={styles.listingTypeInfo}>
@@ -281,7 +303,7 @@ const Availablelisting = ({ navigation, route }: any) => {
                 peers are likely to negotiate charges.
               </Text>
 
-              <View style={{alignItems: "center"}}>
+              <View style={{ alignItems: "center" }}>
                 <LottieView
                   source={require("../../../../assets/Lottie/animations/comingSoonAgent.json")}
                   autoPlay
@@ -289,9 +311,16 @@ const Availablelisting = ({ navigation, route }: any) => {
                   style={{ width: 236, height: 236 }}
                 />
 
-                <Text style={{ ...fontsize.small, ...FONTS.regular, textAlign: "center", marginHorizontal: 62 }}>
+                <Text
+                  style={{
+                    ...fontsize.small,
+                    ...FONTS.regular,
+                    textAlign: "center",
+                    marginHorizontal: 62,
+                  }}
+                >
                   Agents are coming to your area very soon, you will be notified
-                  once ready
+                  once ready.
                 </Text>
               </View>
             </BottomSheet>

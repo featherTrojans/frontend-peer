@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { styles } from './Requesterdetails.styles'
 import { COLORS } from '../../constants'
+import InitialsBg from '../InitialsBg/InitialsBg'
 
 
 type RequesterdetailsProps ={
@@ -17,14 +18,7 @@ const Requesterdetails = ({image, name, distance, duration}: RequesterdetailsPro
     {/* Details */}
     <View style={styles.imageBorder}>
       {/* To replace this with the user image */}
-      <View
-        style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor: COLORS.grey4,
-          borderRadius: 30,
-        }}
-      />
+      <InitialsBg sideLength={47} name={name}/>
     </View>
 
     <View style={{ marginLeft: 15 }}>

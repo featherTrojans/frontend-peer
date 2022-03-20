@@ -65,9 +65,14 @@ import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
 import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 
 import Paybills from "./app/Billpayments/Paybills/Paybills";
+import Airtimeamount from "./app/Billpayments/Airtime/Airtimeamount/Airtimeamount";
+import Airtimedetails from "./app/Billpayments/Airtime/Airtimedetails/Airtimedetails";
+import Airtimepurchasepin from "./app/Billpayments/Airtime/Airtimepurchasepin/Airtimepurchasepin";
+import Electricityamount from "./app/Billpayments/Electricity/Electricityamount/Electricityamount";
+import Electricitydetails from "./app/Billpayments/Electricity/Electricitydetails/Electricitydetails";
 
 //This screen is for testing somne functionalities
-
+ 
 import Testings from "./Testings";
 import TransferpinBank from "./app/Transferfunds/Transferpin/TransferPinBank";
 import WithdrawPin from "./app/Withdraws/WithdrawPin/WithdrawPin";
@@ -135,4 +140,9 @@ export {
   Depositinput,
   LockScreen,
   Paybills,
+  Airtimeamount,
+  Airtimedetails,
+  Airtimepurchasepin,
+  Electricityamount,
+  Electricitydetails
 };

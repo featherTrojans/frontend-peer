@@ -105,7 +105,15 @@ import {
   Depositinput,
   LockScreen,
   Testings,
+
+
+  //Paybills and Airtime
   Paybills,
+  Airtimeamount,
+  Airtimedetails,
+  Airtimepurchasepin,
+  Electricityamount,
+  Electricitydetails,
 } from "../screens";
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -562,6 +570,14 @@ const RootNavigator = ({initialBoarded}) => {
 
           {/* Paybills Screen */}
           <AppStack.Screen name="Paybills" component={Paybills} />
+          <AppStack.Screen name="Airtimeamount" component={Airtimeamount} />
+          <AppStack.Screen name="Airtimedetails" component={Airtimedetails} />
+          <AppStack.Screen name="Airtimepurchasepin" component={Airtimepurchasepin} />
+          <AppStack.Screen name="Electricityamount" component={Electricityamount} />
+          <AppStack.Screen name="Electricitydetails" component={Electricitydetails} />
+
+
+
 
           {/* Deposit Screens */}
           <AppStack.Group>

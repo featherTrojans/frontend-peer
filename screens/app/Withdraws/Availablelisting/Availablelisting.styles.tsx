@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
+import { Shadow } from "../../../../constants/theme";
 
 export const styles = StyleSheet.create({
   isActive: {
@@ -39,7 +40,9 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 15
+    borderRadius: 15,
+    ...Shadow
+
   },
   detailsContainer: {
     flexDirection: "row",

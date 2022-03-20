@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   subHeaderContainer: {
     flexDirection: "row",
-    paddingVertical: 25,
+    // paddingVertical: 25,
   },
   subheadersText: {
     ...fontsize.smallest,

@@ -9,6 +9,8 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 30,
     padding: 2,
+    justifyContent: "center",
+    alignItems: "center"
   },
   profileName: {
     ...fontsize.bsmall,

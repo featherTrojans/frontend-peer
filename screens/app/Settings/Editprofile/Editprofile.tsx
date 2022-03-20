@@ -91,7 +91,11 @@ const Basicsettings = () => {
                 lastName: values.lastName,
               });
               console.log(response);
-              setAuthData({...authdata, username:values.username,fullName:`${values.lastName} ${values.firstName}`})
+              setAuthData({
+                ...authdata,
+                username: values.username,
+                fullName: `${values.lastName} ${values.firstName}`,
+              });
               // send success toast message
             } catch (err) {
               showerror(toast, err);
@@ -152,17 +156,20 @@ const Personalsettings = () => {
             gender: "",
             dateOfBirth: "",
             address: "",
-            lga:""
+            lga: "",
           }}
           validationSchema={validationSchema}
           onSubmit={async (values) => {
             try {
-              const response = await axiosCustom.put("/profile/update/personal", {
-                gender: values.gender,
-                dateOfBirth: values.dateOfBirth,
-                address: values.address,
-                lga: values.lga,
-              });
+              const response = await axiosCustom.put(
+                "/profile/update/personal",
+                {
+                  gender: values.gender,
+                  dateOfBirth: values.dateOfBirth,
+                  address: values.address,
+                  lga: values.lga,
+                }
+              );
               console.log(response);
               // send success toast message
             } catch (err) {
@@ -275,6 +282,12 @@ const Editprofile = ({}) => {
   const ref = useRef<ScrollView>(null);
   const [index, setIndex] = useState(0);
 
+  const activeColor = (activeIndex: number) => {
+    return index === activeIndex ? "#003AD6" : "#000000"
+  }
+
+
+
   useEffect(() => {
     ref.current.scrollTo({
       x: SIZES.width * index,
@@ -326,29 +339,28 @@ const Editprofile = ({}) => {
           <TouchableOpacity
             style={{
               width: singleWidth(),
-              justifyContent: "center",
-              alignItems: "center",
+              paddingVertical: 24
             }}
             activeOpacity={0.7}
             onPress={() => animateToIndex(0)}
           >
-            <Text style={[styles.subheadersText]}>Basic</Text>
+            <Text style={[styles.subheadersText, {color: activeColor(0)}]}>Basic</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ width: singleWidth() }}
+            style={{ width: singleWidth(), paddingVertical: 24 }}
             activeOpacity={0.7}
             onPress={() => animateToIndex(1)}
           >
-            <Text style={[styles.subheadersText]}>Personal</Text>
+            <Text style={[styles.subheadersText, {color: activeColor(1)}]}>Personal</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ width: singleWidth() }}
+            style={{ width: singleWidth(), paddingVertical: 24 }}
             activeOpacity={0.7}
             onPress={() => animateToIndex(2)}
           >
-            <Text style={[styles.subheadersText]}>Documents</Text>
+            <Text style={[styles.subheadersText, {color: activeColor(2)}]}>Documents</Text>
           </TouchableOpacity>
         </View>
 

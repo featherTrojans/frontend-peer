@@ -62,10 +62,12 @@ export const styles = StyleSheet.create({
   withdrawProfileName: {
     ...fontsize.bsmall,
     ...FONTS.medium,
+    lineHeight: 27
   },
   withdrawProfileUsername: {
     ...fontsize.bsmall,
     ...FONTS.regular,
+
   },
   priceAndCheck: {
     alignItems: "flex-end",
