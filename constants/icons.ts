@@ -109,6 +109,8 @@ import Smalluseravatar from "../assets/icons/Smalluseravatar";
 import Networklogos from "../assets/icons/Networklogos";
 import Electricitybillsicon from "../assets/icons/Electricitybillsicon";
 import Cablestvicon from "../assets/icons/Cablestvicon";
+import Inputdropdown from "../assets/icons/Inputdropdown";
+import Addressbook from "../assets/icons/Addressbook";
 
 
 
@@ -256,6 +258,8 @@ Smalluseravatar,
 Networklogos,
 Electricitybillsicon,
 Cablestvicon,
+Inputdropdown,
+Addressbook,
 
 //Animated icons
 

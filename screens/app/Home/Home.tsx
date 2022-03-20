@@ -36,7 +36,6 @@ import { styles } from "./Home.styles";
 import { customNavigation } from "../../../utils/customNavigation";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
-import DoubleTapToClose from "../../shared/DoubleBack";
 import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 
 const {
@@ -87,7 +86,14 @@ const Home = ({ navigation }: { navigation: any }) => {
   const jumpToSettings = TabActions.jumpTo("Settings");
   // sendSchedulePushNotification
 
-  
+  // const setMessageToken = async () => {
+  //   try {
+  //     const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
+  //     console.log(response, "Here is the response data")
+  //   } catch (err) {
+  //     console.log(err.response.data)
+  //   }
+  // }
 
   const tokenExtractor = (string: any) => {
     const firstIndex = string.indexOf("[");
@@ -147,6 +153,8 @@ const Home = ({ navigation }: { navigation: any }) => {
   // }, []);
 
   const getDashboardData = async () => {
+    console.log("I am fetching again from home");
+
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
@@ -195,7 +203,6 @@ const Home = ({ navigation }: { navigation: any }) => {
             onPress={() => navigation.dispatch(jumpToSettings)}
             activeOpacity={0.8}
           >
-            {/* <Smalluseravatar /> */}
             <InitialsBg sideLength={51} name={authdata.fullName} />
           </TouchableOpacity>
 
@@ -296,7 +303,6 @@ const Home = ({ navigation }: { navigation: any }) => {
             ))
           )}
         </View>
-        {/* <DoubleTapToClose /> */}
       </ScrollView>
     </SafeAreaView>
   );

@@ -75,7 +75,7 @@ const Pendingwithdraw = ({navigation, route}) => {
                     duration={12}
                   />
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={styles.numberOfBadge}>203</Text>
+                    {/* <Text style={styles.numberOfBadge}>203</Text> */}
                     <Forwardarrow />
                   </View>
                 </View>

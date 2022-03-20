@@ -17,6 +17,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import { usePushNotification } from "../../../../navigation";
 import { AuthContext } from "../../../../context/AuthContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { ScrollView } from "react-native-gesture-handler";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -43,9 +44,9 @@ const Transferpin = ({ route, navigation }) => {
     }
   };
   const handleSubmit = async () => {
-    const joinpin = pin.join("")
-    if(joinpin.length < 4){
-      return false
+    const joinpin = pin.join("");
+    if (joinpin.length < 4) {
+      return false;
     }
     try {
       setLoading(true);
@@ -76,13 +77,13 @@ const Transferpin = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
       {loading && <Loader />}
       <Customstatusbar />
       <Globalmodal
         showState={showmodal}
         btnFunction={() => navigation.navigate("Root")}
-        onBgPress={() => setShowModal(false)}
+        onBgPress={() => setShowModal(true)}
       >
         <View style={{ alignItems: "center" }}>
           <LottieView
@@ -120,17 +121,20 @@ const Transferpin = ({ route, navigation }) => {
         </View>
       </Globalmodal>
 
-      <Backheader />
+      
+      <Backheader title="PIN"/>
       <View style={styles.mainContainer}>
+        
+
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
+          {/* <Text style={styles.descriptionText}>
             You are about to send{" "}
             <Text style={styles.descriptionSubText}>NGN {amount}</Text> from
             your Primary Wallet to @{userinfo?.username} -{" "}
             <Text style={{ textTransform: "capitalize" }}>
               {userinfo?.fullName}
             </Text>
-          </Text>
+          </Text> */}
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
 
@@ -156,7 +160,7 @@ const Transferpin = ({ route, navigation }) => {
         </View>
       </View>
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
-    </View>
+    </ScrollView>
   );
 };
 

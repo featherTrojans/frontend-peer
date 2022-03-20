@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from "react-native";
 import React from "react";
 import { Backheader } from "../../../../components";
 import { styles } from "./Paybills.styles";
@@ -7,7 +7,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
 // import { styles } from './Paybills.styles'
 
-const Paybills = () => {
+const Paybills = ({navigation}) => {
   const { Networklogos, Electricitybillsicon, Cablestvicon } = icons;
 
   return (
@@ -19,7 +19,7 @@ const Paybills = () => {
         showsVerticalScrollIndicator={false}
       >
         {/* Airtime purchase and data */}
-        <View style={[styles.eachContainer, { backgroundColor: "#EDF7FE" }]}>
+        <TouchableOpacity style={[styles.eachContainer, { backgroundColor: "#EDF7FE" }]} activeOpacity={0.8} onPress={() => navigation.navigate("Airtimeamount")}>
           <View style={styles.topRow}>
             <View>
               <Text style={styles.headers}>Airtime & Data</Text>
@@ -33,10 +33,10 @@ const Paybills = () => {
             Purchase airtime and data from your
           </Text>
           <Text style={styles.headerInfo}>favourite network in Nigeria.</Text>
-        </View>
+        </TouchableOpacity>
 
         {/* Electricity Bills and payment  */}
-        <View style={[styles.eachContainer, { backgroundColor: "#E0EDD8" }]}>
+        <TouchableOpacity style={[styles.eachContainer, { backgroundColor: "#E0EDD8" }]} activeOpacity={0.8} onPress={() => navigation.navigate("Electricityamount")}>
           <View style={styles.topRow}>
             <View>
             <Text style={styles.headers}>Electricity Bills</Text>
@@ -48,10 +48,10 @@ const Paybills = () => {
             Pay your power bills easily, no more
           </Text>
           <Text style={styles.headerInfo}>power outage due to payments</Text>
-        </View>
+        </TouchableOpacity>
 
         {/* Electricity Bills and payment  */}
-        <View style={[styles.eachContainer, { backgroundColor: "#F1E5FF" }]}>
+        <TouchableOpacity style={[styles.eachContainer, { backgroundColor: "#F1E5FF" }]} activeOpacity={0.8}>
           <View style={styles.topRow}>
             <View>
             <Text style={styles.headers}>CableTV Subscriptions</Text>
@@ -64,7 +64,7 @@ const Paybills = () => {
             Purchase airtime and data from your
           </Text>
           <Text style={styles.headerInfo}>favourite network in Nigeria.</Text>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
