@@ -44,7 +44,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([]);
   const [activeType, setActiveType] = useState("peers");
-  const [active, setActive] = useState("peers");
+  // const [active, setActive] = useState("peers");
   const [loading, setLoading] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
 
@@ -137,7 +137,7 @@ const Availablelisting = ({ navigation, route }: any) => {
         <Backarrow />
       </TouchableOpacity>
 
-      {locationLoading ? (
+      {(locationLoading || loading) ? (
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <View
             style={{

@@ -7,11 +7,12 @@ import Customstatusbar from '../../../../shared/Customstatusbar'
 import amountFormatter from '../../../../../utils/formatMoney'
 import { styles } from "../../../Transferfunds/TransferInput/TransferInput.styles";
 import { COLORS } from '../../../../../constants'
+import showerror from '../../../../../utils/errorMessage'
 
 
 
 const Electricityamount = ({navigation}) => {
- //   const { nextscreen } = route.params;
+
  const { authdata } = useContext(AuthContext);
  const toast = useToast();
  const [amount, setAmount] = useState<string>("");
@@ -41,12 +42,17 @@ const Electricityamount = ({navigation}) => {
    });
  };
 
-//   const handleToNext = () => {
-//     if (authdata?.walletBal < amount) {
-//       return showerror(toast, null, "insufficient amount");
-//     }
-//     navigation.navigate(nextscreen, { amount: amount });
-//   };
+
+const handleToNext = () => {
+  if (authdata?.walletBal < amount) {
+    return showerror(toast, null, "insufficient amount");
+  }
+  if(Number(amount) < 1){
+    return showerror(toast, null, "Amount cannot be 0.00");
+  }
+  navigation.navigate("Electricitydetails",{amount})
+};
+
 
  return (
    <View style={styles.container}>
@@ -78,7 +84,7 @@ const Electricityamount = ({navigation}) => {
        </View>
      </View>
 
-     <Bottombtn title="PROCEED" onpress={() => navigation.navigate("Electricitydetails",{amount})} />
+     <Bottombtn title="PROCEED" onpress={handleToNext} />
    </View>
  );
 }

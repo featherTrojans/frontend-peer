@@ -20,6 +20,8 @@ import { Shadow } from "../../../../../constants/theme";
 import Customstatusbar from "../../../../shared/Customstatusbar";
 import DropDownPicker from "react-native-dropdown-picker";
 import { AuthContext } from "../../../../../context/AuthContext";
+import showerror from "../../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
 
 
 const { Inputdropdown, Addressbook } = icons;
@@ -69,7 +71,8 @@ const Paybillsinput = ({
 };
 
 const Airtimedetails = ({ navigation, route }) => {
-  const {amount} = route.params
+  const {amount} = route.params;
+  const toast = useToast();
   const { authdata } = useContext(AuthContext);
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
@@ -100,6 +103,17 @@ const Airtimedetails = ({ navigation, route }) => {
   };
   const horizontalOffset = useRef(new Animated.Value(0)).current;
 
+
+  const handleToNext = ()=>{
+    if(!amount || !phone || !value ){
+        return showerror(toast, null, "All fields are complusory")
+    }
+    navigation.navigate("Airtimepurchasepin",{type:"airtime", data:{
+      amount:amount,
+      phone:phone,
+      network:value
+    }})
+  }
 
   return (
     <KeyboardAwareScrollView
@@ -240,7 +254,7 @@ const Airtimedetails = ({ navigation, route }) => {
               />
               <Paybillsinput
                 inputSymbol="#"
-                placeholder="08098653012"
+                placeholder="08000000000"
                 rightIcon={<Addressbook />}
                 keyboardType={"numeric"}
               />
@@ -250,11 +264,7 @@ const Airtimedetails = ({ navigation, route }) => {
       </KeyboardAwareScrollView>
       <Bottombtn
         title="proceed"
-        onpress={() => navigation.navigate("Airtimepurchasepin",{type:"airtime", data:{
-          amount:amount,
-          phone:phone,
-          network:value
-        }})}
+        onpress={handleToNext}
       />
     </KeyboardAwareScrollView>
   );
