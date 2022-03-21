@@ -4,15 +4,22 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  Animated,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import LottieView from "lottie-react-native"
-import { COLORS, FONTS, fontsize, icons } from "../../../constants";
-import { Backheader, Bottombtn, InitialsBg, Viewbalance } from "../../../components";
+import React, { useEffect, useRef, useState } from "react";
+import LottieView from "lottie-react-native";
+import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../constants";
+import {
+  Backheader,
+  Bottombtn,
+  InitialsBg,
+  Viewbalance,
+} from "../../../components";
 import { styles } from "../Withdraws/Withdraw/Withdraw.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../shared/Customstatusbar";
 import Usericondark from "../../../assets/icons/Usericondark";
+import { Shadow } from "../../../constants/theme";
 
 const {
   Backarrow,
@@ -20,7 +27,7 @@ const {
   Requestee2,
   Requestee3,
   Acceptedcheck,
-  Cryinganimate
+  Cryinganimate,
 } = icons;
 
 type DataProps = {
@@ -35,57 +42,76 @@ const Emptyrequest = () => {
   return (
     <View style={styles.emptyListContainer}>
       {/* Crying icons */}
-      <LottieView source={Cryinganimate} autoPlay loop style={{width: 190, height: 190}}/>
+      <LottieView
+        source={Cryinganimate}
+        autoPlay
+        loop
+        style={{ width: 190, height: 190 }}
+      />
       {/* Information text */}
       <Text style={styles.emptyListText}>
-          Padi, you have not performed any cash deposits today, Start Now.
+        Padi, you have not performed any cash deposits today, Start Now.
       </Text>
     </View>
   );
 };
 
-
-
-
-const Deposit = ({navigation}) => {
+const Deposit = ({ navigation }) => {
   const [active, setActive] = useState("pending");
-  const [pending, setPending] = useState([])
-  const [accepted, setAccepted] = useState([])
+  const [pending, setPending] = useState([]);
+  const [accepted, setAccepted] = useState([]);
+  const [index, setIndex] = useState(0);
 
-  useEffect(()=>{
-    getpendingrequest()
-    getacceptedrequest() 
-  },[])
+  const activeColor = (activeIndex: number) => {
+    return index === activeIndex ? "#003AD6" : "#000000";
+  };
+  const animateToIndex = (indexPoint: number) => {
+    setIndex(indexPoint);
+    setActive(["pending", "accepted"][indexPoint]);
+    Animated.spring(horizontalOffset, {
+      toValue: singleWidth() * indexPoint,
+      useNativeDriver: true,
+    }).start();
+  };
+  const singleWidth = () => {
+    let calcWidth = SIZES.width;
+    return calcWidth / 2;
+  };
+  const horizontalOffset = useRef(new Animated.Value(0)).current;
 
-  console.log(pending, accepted)
-  const getpendingrequest = async()=>{
-    try{
+  useEffect(() => {
+    getpendingrequest();
+    getacceptedrequest();
+  }, []);
+
+  console.log(pending, accepted);
+  const getpendingrequest = async () => {
+    try {
       const response = await axiosCustom.get("/request/depositor/pending");
-      console.log(response)
-      setPending(response.data.data)
-    }catch(err){
-
-    }
-  }
-  const getacceptedrequest = async()=>{
-    try{
+      console.log(response);
+      setPending(response.data.data);
+    } catch (err) {}
+  };
+  const getacceptedrequest = async () => {
+    try {
       const response = await axiosCustom.get("/request/depositor/accepted");
-      console.log(response)
-      setAccepted(response.data.data)
-    }catch(err){
-
-    }
-  }
+      console.log(response);
+      setAccepted(response.data.data);
+    } catch (err) {}
+  };
 
   // Requestee profile
-  const Requesteeprofile = ({ list, onpress}:  any ) => {
-    const {
-      reference, charges,status, full_name, user, amount } = list;
+  const Requesteeprofile = ({ list, onpress }: any) => {
+    const { reference, charges, status, full_name, user, amount } = list;
     return (
-      <TouchableOpacity style={styles.depositProfileContainer} activeOpacity={0.7} onPress={onpress}>
+      <TouchableOpacity
+        style={styles.depositProfileContainer}
+        activeOpacity={0.7}
+        onPress={onpress}
+      >
         <View style={styles.depositProfileDetails}>
           {/* Tro replace this with the user image */}
-          <InitialsBg sideLength={44} name={user?.fullName}/>
+          <InitialsBg sideLength={44} name={user?.fullName} />
           <View style={{ marginLeft: 13 }}>
             <Text style={styles.depositProfileName}>{user?.fullName}</Text>
             <Text style={styles.depositAmount}>
@@ -100,44 +126,87 @@ const Deposit = ({navigation}) => {
     );
   };
 
-  const REQUESTDATA = active === "pending" ? pending : accepted
+  const REQUESTDATA = active === "pending" ? pending : accepted;
 
   const Requestlist = () => {
     return (
       <View style={styles.requestContainer}>
-        <View style={styles.listHeaderContainer}>
-          <TouchableOpacity onPress={() => setActive("pending")}>
-            <Text
-              style={[
-                styles.listHeaderText,
-                active === "pending" && styles.activeStyles,
-              ]}
+        <View style={{ position: "relative", marginTop: 30, ...Shadow }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <TouchableOpacity
+              style={{
+                width: singleWidth(),
+                paddingVertical: 24,
+              }}
+              activeOpacity={0.7}
+              onPress={() => animateToIndex(0)}
             >
-              Pending Requests
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[
+                  {
+                    ...fontsize.smallest,
+                    ...FONTS.regular,
+                    textAlign: "center",
+                    color: activeColor(0),
+                  },
+                ]}
+              >
+                Pending Requests
+              </Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setActive("accepted")}>
-            <Text
-              style={[
-                styles.listHeaderText,
-                active === "accepted" && styles.activeStyles,
-              ]}
+            <TouchableOpacity
+              style={{ width: singleWidth(), paddingVertical: 24 }}
+              activeOpacity={0.7}
+              onPress={() => animateToIndex(1)}
             >
-              Accepted Requests
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[
+                  {
+                    ...fontsize.smallest,
+                    ...FONTS.regular,
+                    textAlign: "center",
+                    color: activeColor(1),
+                  },
+                ]}
+              >
+                Available Requests
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Animated.View
+            style={{
+              position: "absolute",
+              width: singleWidth(),
+              height: 1.5,
+              backgroundColor: COLORS.blue6,
+              bottom: 0,
+              left: 0,
+              transform: [{ translateX: horizontalOffset }, { scaleX: 1 }],
+            }}
+          />
         </View>
+
         <FlatList
           data={REQUESTDATA}
+          contentContainerStyle={{ marginTop: 30 }}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-          <Requesteeprofile list={item}    
-          onpress={() =>navigation.navigate(item.status === "PENDING"
-                ? "Pendingdeposit"
-                : "Accepteddeposit",
-                {requestInfo:item})
-          } />)
-        }
+            <Requesteeprofile
+              list={item}
+              onpress={() =>
+                navigation.navigate(
+                  item.status === "PENDING"
+                    ? "Pendingdeposit"
+                    : "Accepteddeposit",
+                  { requestInfo: item }
+                )
+              }
+            />
+          )}
           keyExtractor={(item) => `${item.reference}`}
         />
       </View>
@@ -149,9 +218,13 @@ const Deposit = ({navigation}) => {
       <Backheader title="Deposit" />
       <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
-      <Viewbalance />
+        <Viewbalance />
         <View style={{ flex: 1 }}>
-          {(pending.length < 1 && accepted.length < 1) ? <Emptyrequest /> : <Requestlist />}
+          {pending.length < 1 && accepted.length < 1 ? (
+            <Emptyrequest />
+          ) : (
+            <Requestlist />
+          )}
         </View>
       </View>
 

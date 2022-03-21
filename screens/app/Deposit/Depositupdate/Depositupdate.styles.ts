@@ -94,7 +94,7 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
   },
   bottomBtn:{
-    backgroundColor: COLORS.blue7,
+    backgroundColor: COLORS.white,
     height: 70,
     borderRadius: 15,
     marginVertical: 25,
@@ -102,6 +102,11 @@ export const styles = StyleSheet.create({
     paddingLeft: 20,
     alignItems: "center",
     flexDirection: "row",
+    borderColor: COLORS.grey11,
+    borderWidth: 1,
+    justifyContent: "space-between",
+    
+    paddingRight: 30
   },
   eyeiconBg:{
     width: 38,
@@ -115,7 +120,7 @@ export const styles = StyleSheet.create({
     ...fontsize.smaller,
     ...FONTS.medium,
     marginLeft: 18,
-    color: COLORS.white,
+    color: COLORS.black,
   },
   emptyListContainer: {
     justifyContent: "center",

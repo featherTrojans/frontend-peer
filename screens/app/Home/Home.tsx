@@ -75,7 +75,7 @@ const walletOptions = [
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  const { setAuthData, authdata, messageToken } = useContext(AuthContext);
+  const { setAuthData, authdata, messageToken, userColor } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
@@ -148,9 +148,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   return ws.close();
   // }, []);
 
-  // useEffect(() => {
-  //   getDashboardData();
-  // }, []);
+ 
 
   const getDashboardData = async () => {
     console.log("I am fetching again from home");
@@ -167,6 +165,9 @@ const Home = ({ navigation }: { navigation: any }) => {
       setRefreshing(false);
     }
   };
+  useEffect(() => {
+    getDashboardData();
+  }, []);
 
   const onRefreshFunc = useCallback(() => {
     setRefreshing(true);
@@ -203,7 +204,8 @@ const Home = ({ navigation }: { navigation: any }) => {
             onPress={() => navigation.dispatch(jumpToSettings)}
             activeOpacity={0.8}
           >
-            <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} />
+            <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} />
+            
           </TouchableOpacity>
 
           <View style={styles.profileNameContainer}>
