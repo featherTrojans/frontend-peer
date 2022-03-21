@@ -20,7 +20,8 @@ import SecureDot from "../../../../../assets/icons/SecureDot";
 
 const { Successcheckanimate } = icons;
 
-const Airtimepurchasepin = ({ navigation }) => {
+const Airtimepurchasepin = ({ navigation, route }) => {
+  const {type, data} = route.params
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   // const { amount, userinfo } = route.params;
@@ -42,6 +43,24 @@ const Airtimepurchasepin = ({ navigation }) => {
     }
   };
 
+  console.log({...data, user_pin: pin.join("")})
+  const handleSubmit = async ()=>{
+    setLoading(true)
+    try{
+      if(type === "airtime"){
+        const response = await axiosCustom.post("/bills/airtime",{...data, user_pin: pin.join("")})
+        console.log(response); 
+      }else{
+        const response = await axiosCustom.post("/bills/electricity",{...data, user_pin: pin.join("")})
+        console.log(response)
+      }
+      setShowModal(true)
+    }catch(err){
+      showerror(toast, err)
+    }finally{
+      setLoading(false)
+    }
+  }
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
       {loading && <Loader />}
@@ -59,18 +78,11 @@ const Airtimepurchasepin = ({ navigation }) => {
             style={{ width: 148, height: 148 }}
           />
 
-          <Text
-            style={{
-              textAlign: "center",
-              marginHorizontal: 40,
+          <Text style={{ textAlign: "center", marginHorizontal: 40,
               //  marginVertical: 40,
-              marginTop: 24,
-              marginBottom: 45,
-              ...fontsize.bsmall,
-              ...FONTS.regular,
-            }}
-          >
-            Airtime Purchase Successful!!
+              marginTop: 24, marginBottom: 45,
+              ...fontsize.bsmall, ...FONTS.regular, }}>
+            {type === "airtime" ? "Airtime" : "Electricity"} Purchase Successful!!
           </Text>
         </View>
       </Globalmodal>
@@ -78,9 +90,11 @@ const Airtimepurchasepin = ({ navigation }) => {
       <Backheader />
       <View style={styles.mainContainer}>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
-            You are about to purchase  <Text style={{...fontsize.bsmall, ...FONTS.bold}}>NGN 35,750.00 - Airtel </Text> to 09082764561
-          </Text>
+            {
+              type === "airtime" &&  <Text style={styles.descriptionText}>
+                You are about to purchase  <Text style={{...fontsize.bsmall, ...FONTS.bold}}>NGN {data.amount} - Airtel </Text> to 09082764561
+              </Text>
+            }
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
 
@@ -105,7 +119,7 @@ const Airtimepurchasepin = ({ navigation }) => {
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
       </View>
-      <Bottombtn title="PROCEED" onpress={() => setShowModal(true)} />
+      <Bottombtn title="PROCEED" onpress={handleSubmit} />
     </ScrollView>
   );
 };

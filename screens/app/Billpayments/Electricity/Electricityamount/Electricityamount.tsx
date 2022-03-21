@@ -78,7 +78,7 @@ const Electricityamount = ({navigation}) => {
        </View>
      </View>
 
-     <Bottombtn title="PROCEED" onpress={() => navigation.navigate("Electricitydetails")} />
+     <Bottombtn title="PROCEED" onpress={() => navigation.navigate("Electricitydetails",{amount})} />
    </View>
  );
 }

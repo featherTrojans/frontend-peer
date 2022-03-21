@@ -455,12 +455,12 @@ const RootNavigator = ({initialBoarded}) => {
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-      // initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
-      initialRouteName="Chatsdm"
+      initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
+      // initialRouteName="Paybills"
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
-      {token ? (
+      {!token ? (
         <AppStack.Group screenOptions={verticalAnimation}>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Personal" component={Personal} />

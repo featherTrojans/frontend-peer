@@ -19,6 +19,7 @@ import Map from "../../../shared/map/Map";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -111,7 +112,7 @@ const Pendingwithdraw = ({navigation, route}) => {
                   icon={<Chaticon />}
                   title="Chat"
                   details="Discuss conversations via chat"
-                  onpress={() => console.log("Redirect to Chat")}
+                  onpress={() => chatOnWhatsapp(requestInfo.phoneNumber)}
                 />
                 <Iconwithdatas
                   icon={<Renegotiateicon />}
