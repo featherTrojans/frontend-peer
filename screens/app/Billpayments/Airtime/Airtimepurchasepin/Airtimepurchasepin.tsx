@@ -48,10 +48,10 @@ const Airtimepurchasepin = ({ navigation, route }) => {
     setLoading(true)
     try{
       if(type === "airtime"){
-        const response = await axiosCustom.post("/bills/airtime",{...data, user_pin: pin.join("")})
+        const response = await axiosCustom.post("/bills/airtime",{...data, userPin: pin.join("")})
         console.log(response); 
       }else{
-        const response = await axiosCustom.post("/bills/electricity",{...data, user_pin: pin.join("")})
+        const response = await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
         console.log(response)
       }
       setShowModal(true)

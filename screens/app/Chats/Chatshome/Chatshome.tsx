@@ -45,7 +45,8 @@ const Chat = ({
 }) => {
   const navigate = useNavigation()
   return (
-    <TouchableOpacity onPress={()=>navigate.navigate("Chatsdm")} style={styles.chatContainer}>
+    // <TouchableOpacity onPress={()=>navigate.navigate("Chatsdm")} style={styles.chatContainer}>
+    <TouchableOpacity style={styles.chatContainer}>
       <View style={styles.chatAvatar}>
         {online && <View style={styles.chatStatusDot} />}
         {/* Image */}
@@ -142,12 +143,12 @@ const Chatshome = () => {
           </View>
 
           <ScrollView>
-            {chats.map(chat=>(<Chat
+            {/* {chats.map(chat=>(<Chat
               name={chat.id}
               time="09:34am"
               message={chat.data().lastchat}
               online={true}
-            />))}
+            />))} */}
             <Chat
               name="Stephene Adegok"
               time="09:34am"

@@ -15,7 +15,8 @@ type PaybillsinputProps = {
   placeholder: string;
   editable?: boolean
   value?:any,
-  onChangeText?:any
+  onChangeText?:any,
+  keyboardType?:any
 };
 
 const Paybillsinput = ({
@@ -156,12 +157,14 @@ const Electricitydetails = ({ navigation, route }) => {
               />
           <Paybillsinput inputSymbol="#" placeholder="Enter Meter Number"
            value={meterNumber}
+           keyboardType={"numeric"}
            onChangeText={(text:string)=>setMeterNumber(text)} />
           <Paybillsinput
               value={phone}
               onChangeText={(text:string)=>setPhone(text)}
               inputSymbol="#"
               placeholder="08012345678"
+              keyboardType={"numeric"}
               rightIcon={<Addressbook />}
             />
         </View>

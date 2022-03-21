@@ -30,7 +30,8 @@ type PaybillsinputProps = {
   placeholder: string;
   editable?: boolean
   value?:any,
-  onChangeText?:any
+  onChangeText?:any,
+  keyboardType?:any
 };
 
 const Paybillsinput = ({
@@ -59,6 +60,7 @@ const Paybillsinput = ({
         style={{ flex: 1, height: 62 }}
         placeholder={placeholder}
         placeholderTextColor={COLORS.black}
+        
         {...props}
       />
       {rightIcon}
@@ -225,6 +227,7 @@ const Airtimedetails = ({ navigation, route }) => {
                 inputSymbol="#"
                 placeholder="08012345678"
                 rightIcon={<Addressbook />}
+                keyboardType={"numeric"}
               />
             </>
           ) : (
@@ -239,6 +242,7 @@ const Airtimedetails = ({ navigation, route }) => {
                 inputSymbol="#"
                 placeholder="08098653012"
                 rightIcon={<Addressbook />}
+                keyboardType={"numeric"}
               />
             </>
           )}

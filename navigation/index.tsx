@@ -123,6 +123,7 @@ import { AuthContext } from "../context/AuthContext";
 // import App from "../App";
 import Map from "../screens/shared/map/Map";
 import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
+import axiosCustom from "../httpRequests/axiosCustom";
 
 const {
   TabHome,
@@ -582,7 +583,7 @@ const RootNavigator = ({initialBoarded}) => {
 export default function MainNavigation({initialBoarded = false}) {
   const [modal, setModal] = useState(false);
   const timer = useRef<number>(Date.now());
-  const { token, setMessageToken } = useContext(AuthContext);
+  const { token,setToken, setMessageToken } = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
   const [onboarded, setOnboarded] = useState(false)
@@ -591,6 +592,16 @@ export default function MainNavigation({initialBoarded = false}) {
   useEffect(() => {
     setMessageToken(expoPushToken);
   }, [token]);
+
+  useEffect(() => {
+    axiosCustom.interceptors.response.use((response)=>{
+      console.log(response.status)
+      if(response.status === 401){
+        setToken("")
+      }
+      return response  
+    })
+  }, [])
 
   useEffect(() => {
     const subscription: any = AppState.addEventListener(
@@ -614,7 +625,7 @@ export default function MainNavigation({initialBoarded = false}) {
 
   return (
     <NavigationContainer ref={navigationRef}>
-      {/* {token ? <LockScreen modal={modal} setModal={setModal} /> : null} */}
+      {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
       <RootNavigator initialBoarded={initialBoarded} />
     </NavigationContainer>
   );

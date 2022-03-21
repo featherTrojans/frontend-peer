@@ -19,7 +19,7 @@ import showerror from "../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../shared/Customstatusbar";
-
+// import { debounce } from "debounce";
 
 const { At, Check, WrongIcon, Successcheckanimate } = icons;
 
@@ -41,13 +41,9 @@ const Setup = ({ route, navigation }) => {
   const { setToken } = useContext(AuthContext);
 
   const handleUsernameChange = (text: string) => {
-    // const textsmall = text.toLowerCase()
-    const textsmall = text;
-    setUsername(textsmall);
+    setUsername(text);
     // and debound
-    if (textsmall.length > 3) {
-      getuserinfo(textsmall);
-    }
+    getuserinfo(text);
   };
 
   const onSubmit = async () => {
@@ -236,22 +232,19 @@ const Setup = ({ route, navigation }) => {
           name="username"
           icon={<At />}
         />
-        <View style={styles.namecont}>
-          {loadbounce ? (
-            <ActivityIndicator size={15} color={COLORS.blue6} />
-          ) : userinfo.fullName ? (
-            <>
+        {
+          (username.length > 3) && <View style={styles.namecont}>
+          {loadbounce ? (<ActivityIndicator size={15} color={COLORS.blue6} />
+          ) : userinfo.fullName ? (<>
               <WrongIcon />
               <Text style={styles.name}>{username} is not available</Text>
-            </>
-          ) : null}
-          {error && (
-            <>
+            </>) : null}
+          {error && (<>
               <Check />
               <Text style={styles.name}>{username} is available</Text>
-            </>
-          )}
-        </View>
+            </>)}
+          </View>
+        }
 
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
           {/* Setup later btn */}
