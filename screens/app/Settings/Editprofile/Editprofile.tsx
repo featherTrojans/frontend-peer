@@ -10,6 +10,8 @@ import {
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { DateTimePickerAndroid , RNDateTimePicker} from '@react-native-community/datetimepicker';
+
 import { styles } from "./Editprofile.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import { Bottombtn, Loader } from "../../../../components";
@@ -144,6 +146,7 @@ const Basicsettings = () => {
 const Personalsettings = () => {
   const toast = useToast();
   const { authdata } = useContext(AuthContext);
+  const [date, setDate] = useState(new Date());
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -189,12 +192,13 @@ const Personalsettings = () => {
                     label="gender"
                     value="-"
                   />
-                  <Editinput
+                  {/* <Editinput
                     formikprops={formikprops}
                     name="dateOfBirth"
                     label="Date of Birth"
                     value="-"
-                  />
+                  /> */}
+                  <RNDateTimePicker />
                   <Editinput
                     formikprops={formikprops}
                     name="address1"
@@ -283,10 +287,8 @@ const Editprofile = ({}) => {
   const [index, setIndex] = useState(0);
 
   const activeColor = (activeIndex: number) => {
-    return index === activeIndex ? "#003AD6" : "#000000"
-  }
-
-
+    return index === activeIndex ? "#003AD6" : "#000000";
+  };
 
   useEffect(() => {
     ref.current.scrollTo({
@@ -339,12 +341,14 @@ const Editprofile = ({}) => {
           <TouchableOpacity
             style={{
               width: singleWidth(),
-              paddingVertical: 24
+              paddingVertical: 24,
             }}
             activeOpacity={0.7}
             onPress={() => animateToIndex(0)}
           >
-            <Text style={[styles.subheadersText, {color: activeColor(0)}]}>Basic</Text>
+            <Text style={[styles.subheadersText, { color: activeColor(0) }]}>
+              Basic
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -352,7 +356,9 @@ const Editprofile = ({}) => {
             activeOpacity={0.7}
             onPress={() => animateToIndex(1)}
           >
-            <Text style={[styles.subheadersText, {color: activeColor(1)}]}>Personal</Text>
+            <Text style={[styles.subheadersText, { color: activeColor(1) }]}>
+              Personal
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -360,7 +366,9 @@ const Editprofile = ({}) => {
             activeOpacity={0.7}
             onPress={() => animateToIndex(2)}
           >
-            <Text style={[styles.subheadersText, {color: activeColor(2)}]}>Documents</Text>
+            <Text style={[styles.subheadersText, { color: activeColor(2) }]}>
+              Documents
+            </Text>
           </TouchableOpacity>
         </View>
 
