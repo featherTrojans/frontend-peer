@@ -16,12 +16,12 @@ const CustomWebView = ({ navigation, route }) => {
     if (!url) return;
     if (url === callback_url) { 
      
-        sendPushNotification(
-          messageToken,
-          "Wallet Funding",
-          `Congrats🎉, You just funded your wallet with N${amount}`,
-          "Root"
-        );
+        // sendPushNotification(
+        //   messageToken,
+        //   "Wallet Funding",
+        //   `Congrats🎉, You just funded your wallet with N${amount}`,
+        //   "Root"
+        // );
    
 
       webview.current?.stopLoading();

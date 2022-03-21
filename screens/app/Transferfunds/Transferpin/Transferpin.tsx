@@ -61,12 +61,12 @@ const Transferpin = ({ route, navigation }) => {
         userPin: joinpin,
       });
       //I am to send a push notification here
-      sendPushNotification(
-        userinfo.messageToken,
-        "Wallet Credit",
-        `Wallet Credit - N${amount} from “${authdata?.userDetails?.username} - ${authdata?.userDetails?.fullName}” `,
-        "Root"
-      );
+      // sendPushNotification(
+      //   userinfo.messageToken,
+      //   "Wallet Credit",
+      //   `Wallet Credit - N${amount} from “${authdata.username} - ${authdata.fullName}” `,
+      //   "Root"
+      // );
       setShowModal(true);
     } catch (err) {
       console.log(err.response);

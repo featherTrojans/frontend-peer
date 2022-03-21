@@ -100,7 +100,7 @@ const Home = ({ navigation }: { navigation: any }) => {
     return string.slice(firstIndex + 1, -1);
   };
   useEffect(() => {
-    sendSchedulePushNotification(nameToShow(authdata?.userDetails?.fullName));
+    // sendSchedulePushNotification(nameToShow(authdata.fullName));
   }, []);
 
   const nameToShow = (value: string) => {

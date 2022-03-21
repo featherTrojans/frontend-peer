@@ -20,8 +20,7 @@ import SecureDot from "../../../../../assets/icons/SecureDot";
 
 const { Successcheckanimate } = icons;
 
-const Airtimepurchasepin = ({ navigation, route }) => {
-  const {type, data} = route.params
+const Airtimepurchasepin = ({ navigation }) => {
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   // const { amount, userinfo } = route.params;
@@ -78,11 +77,18 @@ const Airtimepurchasepin = ({ navigation, route }) => {
             style={{ width: 148, height: 148 }}
           />
 
-          <Text style={{ textAlign: "center", marginHorizontal: 40,
+          <Text
+            style={{
+              textAlign: "center",
+              marginHorizontal: 40,
               //  marginVertical: 40,
-              marginTop: 24, marginBottom: 45,
-              ...fontsize.bsmall, ...FONTS.regular, }}>
-            {type === "airtime" ? "Airtime" : "Electricity"} Purchase Successful!!
+              marginTop: 24,
+              marginBottom: 45,
+              ...fontsize.bsmall,
+              ...FONTS.regular,
+            }}
+          >
+            Airtime Purchase Successful!!
           </Text>
         </View>
       </Globalmodal>
@@ -110,7 +116,12 @@ const Airtimepurchasepin = ({ navigation, route }) => {
         <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
             return (
-              <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
+              <Numberbtn
+                key={index}
+                onpress={
+                  number !== "" ? () => handleSetAmount(number) : () => null
+                }
+              >
                 {number}
               </Numberbtn>
             );
@@ -119,7 +130,7 @@ const Airtimepurchasepin = ({ navigation, route }) => {
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
       </View>
-      <Bottombtn title="PROCEED" onpress={handleSubmit} />
+      <Bottombtn title="PROCEED" onpress={() => setShowModal(true)} />
     </ScrollView>
   );
 };

@@ -68,7 +68,7 @@ const Personal = ({ navigation }) => {
             lastName: "",
             email: "",
             phoneNumber: "",
-            referalCode: ""
+            referredBy: ""
           }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
@@ -84,7 +84,7 @@ const Personal = ({ navigation }) => {
               });
             } catch (err) {
               if (err.response) {
-                if (err?.response?.data?.data?.isVerified) {
+                if (!err?.response?.data?.data?.isVerified) {
                   return navigation.navigate("Verification", {
                     email: values.email,
                     phoneNumber: values.phoneNumber,
@@ -140,7 +140,7 @@ const Personal = ({ navigation }) => {
 
                 <Input
                   placeholder="Referral Code (Optional)"
-                  name="referralCode"
+                  name="referredBy"
                   formikProps={formikProps}
                   icon={<Phoneicon />}
                 />

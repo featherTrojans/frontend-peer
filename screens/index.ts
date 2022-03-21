@@ -21,9 +21,11 @@ import Editprofile from "./app/Settings/Editprofile/Editprofile";
 import Securityprivacy from "./app/Settings/Securityandprivacy/Securityprivacy";
 import Changepassword from "./app/Settings/Securityandprivacy/Changepassword/Changepassword";
 import Changepin from "./app/Settings/Securityandprivacy/Changepin/Changepin";
+import Forgetpassword from "./auth/forgetpassword/Forgetpassword";
+import Forgetpasswordotp from "./auth/forgetpassword/Forgetpasswordotp/Forgetpasswordotp";
+import Setnewpassword from "./auth/forgetpassword/Setnewpassword/Setnewpassword";
 
 import Notifications from "./app/Notifications/Notifications";
-
 // These are the transactions sub screens
 
 import Availablelisting from "./app/Withdraws/Availablelisting/Availablelisting";
@@ -90,6 +92,9 @@ export {
   Personal,
   Security,
   Securepin,
+  Forgetpassword,
+  Forgetpasswordotp,
+  Setnewpassword,
   Welcome,
   Home,
   Transactions,
@@ -144,5 +149,6 @@ export {
   Airtimedetails,
   Airtimepurchasepin,
   Electricityamount,
-  Electricitydetails
+  Electricitydetails,
+
 };
