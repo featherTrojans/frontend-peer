@@ -13,7 +13,7 @@ import LottieView from "lottie-react-native"
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import {db} from "../../../../firebase"
-import {doc, updateDoc, } from "firebase/firestore"; 
+import {doc, getDoc, updateDoc, } from "firebase/firestore"; 
 
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
@@ -58,6 +58,18 @@ const Depositpin = ({route, navigation}) => {
         status: status
       });
   }
+  const checkifdocmentexist = async ()=>{
+    const document = await getDoc(doc(db, "withdrawtransfer", requestInfo.reference));
+      if(document.exists()){
+        if(document.data().staus === "pending"){
+          return true
+        }
+        throw {response:{data:{message:"swipe on the other phone"}}}
+        // throw new Error(response?.data?.message)
+      }else{
+        throw {response:{data:{message:"swipe on the other phone"}}}
+      }
+  }
   const handleApproveRequest = async ()=>{
     const joinpin = pin.join("")
     if(joinpin.length < 4){
@@ -66,6 +78,7 @@ const Depositpin = ({route, navigation}) => {
 
     setLoading(true)
     try{
+      await checkifdocmentexist()
       await axiosCustom.post("/request/approve",{reference:requestInfo.reference, user_pin:joinpin})
       await handlePrepareToTestUpdate("approved")
       //show success message

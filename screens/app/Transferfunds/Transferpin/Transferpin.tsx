@@ -64,7 +64,7 @@ const Transferpin = ({ route, navigation }) => {
       sendPushNotification(
         userinfo.messageToken,
         "Wallet Credit",
-        `Wallet Credit - N${amount} from “${authdata.username} - ${authdata.fullName}” `,
+        `Wallet Credit - N${amount} from “${authdata?.userDetails?.username} - ${authdata?.userDetails?.fullName}” `,
         "Root"
       );
       setShowModal(true);

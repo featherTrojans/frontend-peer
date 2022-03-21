@@ -29,9 +29,16 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 const { Backarrow } = icons;
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().label("First Name").required(),
+  username: Yup.string().label("userName").required(),
   firstName: Yup.string().label("First Name").required(),
   lastName: Yup.string().label("Last Name").required(),
+});
+
+const validationSchemaTwo = Yup.object().shape({
+  gender: Yup.string().label("gender").required(),
+  dateOfBirth: Yup.string().label("dateOfBirth").required(),
+  address: Yup.string().label("address").required(),
+  lga: Yup.string().label("lga").required(),
 });
 
 type EditinputProps = {
@@ -71,6 +78,7 @@ const Basicsettings = () => {
   const toast = useToast();
   const { authdata, setAuthData } = useContext(AuthContext);
 
+  console.log(authdata,"auth datat o")
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -80,9 +88,12 @@ const Basicsettings = () => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <Formik
           initialValues={{
-            username: authdata.username,
-            firstName: authdata.fullName.split(" ")[1],
-            lastName: authdata.fullName.split(" ")[0],
+            username: authdata?.userDetails?.username,
+            firstName: authdata?.userDetails?.fullName?.split(" ")[1],
+            lastName: authdata?.userDetails?.fullName?.split(" ")[0],
+            // username:"",
+            // firstName:"",
+            // lastName:""
           }}
           validationSchema={validationSchema}
           onSubmit={async (values) => {
@@ -93,10 +104,10 @@ const Basicsettings = () => {
                 lastName: values.lastName,
               });
               console.log(response);
+              const userdetails = {...authdata?.userDetails,username: values.username,fullName: `${values.lastName} ${values.firstName}`}
               setAuthData({
                 ...authdata,
-                username: values.username,
-                fullName: `${values.lastName} ${values.firstName}`,
+                userDetails:userdetails
               });
               // send success toast message
             } catch (err) {
@@ -145,8 +156,9 @@ const Basicsettings = () => {
 };
 const Personalsettings = () => {
   const toast = useToast();
-  const { authdata } = useContext(AuthContext);
-  const [date, setDate] = useState(new Date());
+  const { authdata, setAuthData } = useContext(AuthContext);
+
+  console.log(authdata,"auth datat o")
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -155,64 +167,61 @@ const Personalsettings = () => {
     >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <Formik
-          initialValues={{
+           initialValues={{
             gender: "",
             dateOfBirth: "",
             address: "",
             lga: "",
           }}
-          validationSchema={validationSchema}
+          validationSchema={validationSchemaTwo}
           onSubmit={async (values) => {
             try {
-              const response = await axiosCustom.put(
-                "/profile/update/personal",
-                {
-                  gender: values.gender,
-                  dateOfBirth: values.dateOfBirth,
-                  address: values.address,
-                  lga: values.lga,
-                }
+              const response = await axiosCustom.put( "/profile/update/personal",
+                {gender: values.gender,dateOfBirth: values.dateOfBirth,
+                  address: values.address,lga: values.lga,}
               );
               console.log(response);
+              const userdetails = {...authdata?.userDetails, 
+                gender: values.gender, 
+                dateOfBirth:values.dateOfBirth,
+                address: values.address,
+                lga: values.lga}
+              setAuthData({
+                ...authdata,
+                userDetails:userdetails
+              });
               // send success toast message
             } catch (err) {
               showerror(toast, err);
             }
           }}
         >
-          {(formikprops) => {
-            const { isSubmitting, handleSubmit } = formikprops;
+          {(formikProps) => {
+            const { isSubmitting, handleSubmit } = formikProps;
             return (
               <React.Fragment>
                 {isSubmitting && <Loader />}
                 <View style={styles.editInputContainer}>
                   <Editinput
-                    formikprops={formikprops}
+                    formikprops={formikProps}
                     name="gender"
                     label="gender"
                     value="-"
                   />
-                  {/* <Editinput
-                    formikprops={formikprops}
+                  <Editinput
+                    formikprops={formikProps}
                     name="dateOfBirth"
                     label="Date of Birth"
                     value="-"
-                  /> */}
-                  <RNDateTimePicker />
+                  />
                   <Editinput
-                    formikprops={formikprops}
-                    name="address1"
-                    label="Address Line 1"
+                    formikprops={formikProps}
+                    name="address"
+                    label="Address Line "
                     value="-"
                   />
                   <Editinput
-                    formikprops={formikprops}
-                    name="address2"
-                    label="Address Line 2"
-                    value="-"
-                  />
-                  <Editinput
-                    formikprops={formikprops}
+                    formikprops={formikProps}
                     name="lga"
                     label="LGA"
                     value="-"
@@ -227,6 +236,7 @@ const Personalsettings = () => {
     </ScrollView>
   );
 };
+
 
 const Documentsettings = () => {
   return (
@@ -312,6 +322,12 @@ const Editprofile = ({}) => {
 
   const navigation = useNavigation();
 
+  // return(
+  //   <View style={styles.container}>
+  //     <Customstatusbar />
+  //     <Text>The basic text</Text>
+  //   </View>
+  // )
   return (
     <View style={styles.container}>
       <Customstatusbar />

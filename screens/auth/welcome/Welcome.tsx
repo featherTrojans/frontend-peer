@@ -122,7 +122,7 @@ const Welcome = ({ navigation, route }) => {
                 { marginTop: 16, textTransform: "uppercase" },
               ]}
             >
-              {nameToShow(authdata.fullName)}
+              {nameToShow(authdata?.userDetails?.fullName)}
             </Text>
           </>
         )}

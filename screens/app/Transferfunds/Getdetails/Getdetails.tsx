@@ -65,7 +65,7 @@ const Getdetails = ({ route, navigation }) => {
           </Text>
 
           <Sendingandreceive
-            senderName={authdata.fullName}
+            senderName={authdata?.userDetails?.fullName}
             receiverName={userinfo?.fullName}
           />
 
