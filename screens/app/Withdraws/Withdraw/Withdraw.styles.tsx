@@ -80,12 +80,12 @@ export const styles = StyleSheet.create({
 
   //Deposit requetee profile
   depositProfileContainer: {
-    backgroundColor: COLORS.white,
     paddingBottom: 23,
     paddingVertical: 20,
     paddingHorizontal: 14,
     borderRadius: 15,
     marginBottom: 10,
+    ...Shadow
   },
   depositProfileDetails: {
     flexDirection: "row",

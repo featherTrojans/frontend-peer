@@ -2,7 +2,12 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { styles } from "./Depositupdate.styles";
 import moment from "moment";
-import { Backheader, Bottombtn, Loader, Viewbalance } from "../../../../components";
+import {
+  Backheader,
+  Bottombtn,
+  Loader,
+  Viewbalance,
+} from "../../../../components";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
@@ -17,6 +22,7 @@ const {
   Accountbalanceicon,
   Trendingupright,
   Viewrequesteye,
+  Viewcashrequesticon,
   Cryinganimate,
 } = icons;
 
@@ -68,15 +74,23 @@ const StatusUpdate = ({ status, navigation }: any) => {
             <View style={styles.locationIconandText}>
               {/* icons */}
               <Location />
-              <Text style={styles.location}>{status.status[0].locationText}</Text>
+              <Text style={styles.location}>
+                {status.status[0].locationText}
+              </Text>
             </View>
 
             <View style={styles.expirationContainer}>
               <Text style={styles.expirationText}>
-                Expires {moment(status.status[0].createdAt).add(1, "days").calendar()}
+                Expires{" "}
+                {moment(status.status[0].createdAt).add(1, "days").calendar()}
               </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Depositinput",{type:"update", reference:status.status[0].reference})}
+                onPress={() =>
+                  navigation.navigate("Depositinput", {
+                    type: "update",
+                    reference: status.status[0].reference,
+                  })
+                }
               >
                 <Text style={styles.updateText}>Update</Text>
               </TouchableOpacity>
@@ -84,42 +98,49 @@ const StatusUpdate = ({ status, navigation }: any) => {
           </View>
         </View>
 
-        
-          <View style={styles.contentContainer}>
-            <View style={styles.detailsRow}>
-              <View style={styles.iconAndTitle}>
-                <Accountbalanceicon />
-                <Text style={styles.iconTitle}>Balance</Text>
-              </View>
-              <Text style={styles.iconValue}>
-                N {amountFormatter(`${status.status[0].amount - status.totalEarnings}`)}
-              </Text>
+        <View style={styles.contentContainer}>
+          <View style={styles.detailsRow}>
+            <View style={styles.iconAndTitle}>
+              <Accountbalanceicon />
+              <Text style={styles.iconTitle}>Balance</Text>
             </View>
-            <View style={styles.horizontalLine} />
-            <View style={styles.detailsRow}>
-              <View style={styles.iconAndTitle}>
-                <Trendingupright />
-                <Text style={styles.iconTitle}>My Earnings last 24hrs</Text>
-              </View>
-              <Text style={styles.iconValue}>
-                N {amountFormatter(status.totalEarnings)}
-              </Text>
-            </View>
-
+            <Text style={styles.iconValue}>
+              N{" "}
+              {amountFormatter(
+                `${status.status[0].amount - status.totalEarnings}`
+              )}
+            </Text>
           </View>
+          <View style={styles.horizontalLine} />
+          <View style={styles.detailsRow}>
+            <View style={styles.iconAndTitle}>
+              <Trendingupright />
+              <Text style={styles.iconTitle}>My Earnings last 24hrs</Text>
+            </View>
+            <Text style={styles.iconValue}>
+              N {amountFormatter(status.totalEarnings)}
+            </Text>
+          </View>
+        </View>
 
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Deposit");
           }}
           style={styles.bottomBtn}
+          activeOpacity={0.8}
         >
-          <View style={styles.eyeiconBg}>
-            <Viewrequesteye />
+          <View style={{flexDirection: "row", alignItems: "center"}}>
+            <View style={styles.eyeiconBg}>
+              <Viewrequesteye />
+            </View>
+            <Text style={styles.viewRequestText}>
+              View Cash Requests (
+              {status.pendingRequests.length + status.acceptedRequests.length})
+            </Text>
           </View>
-          <Text style={styles.viewRequestText}>
-            View Cash Requests ({status.pendingRequests.length + status.acceptedRequests.length})
-          </Text>
+
+          <Viewcashrequesticon />
         </TouchableOpacity>
       </View>
     </>
@@ -128,25 +149,24 @@ const StatusUpdate = ({ status, navigation }: any) => {
 
 const Depositupdate = ({ navigation }) => {
   const [status, setStatus] = useState(null);
-  const [loading, setLoading] = useState(false)
-  
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     // getFromStorage();
     // get Status from the database
-    getDepositStatus()
+    getDepositStatus();
   }, []);
-
 
   const getDepositStatus = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await axiosCustom.get("/status/get");
       console.log(response.data.data);
-      setStatus(response.data.data)
+      setStatus(response.data.data);
     } catch (err) {
       // maybe show the error
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -185,7 +205,12 @@ const Depositupdate = ({ navigation }) => {
 
             <Bottombtn
               title="Create New Status"
-              onpress={() => navigation.navigate("Depositinput",{type:"create", reference:null})}
+              onpress={() =>
+                navigation.navigate("Depositinput", {
+                  type: "create",
+                  reference: null,
+                })
+              }
             />
           </>
         )}

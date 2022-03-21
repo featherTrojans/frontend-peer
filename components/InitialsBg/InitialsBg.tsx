@@ -5,9 +5,10 @@ import { FONTS, fontsize } from "../../constants";
 type InitialsBgProps = {
   sideLength: number;
   name: string;
+  bg?: string
 };
 
-const InitialsBg = ({ sideLength, name }: InitialsBgProps) => {
+const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
   const nameSplitter = () => {
     const splitName = name?.split(" ");
 
@@ -33,6 +34,8 @@ const InitialsBg = ({ sideLength, name }: InitialsBgProps) => {
   // const color = '#' + Math.random().toString(16).substr(-6);
   const color = colors[Math.floor(Math.random() * colors.length)];
 
+  const defaultColor = bg ? bg : color
+
   return (
     <View
       style={{
@@ -40,7 +43,7 @@ const InitialsBg = ({ sideLength, name }: InitialsBgProps) => {
         height: sideLength,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: color,
+        backgroundColor: defaultColor,
         borderRadius: sideLength / 2,
       }}
     >

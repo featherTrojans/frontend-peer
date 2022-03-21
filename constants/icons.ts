@@ -111,6 +111,7 @@ import Electricitybillsicon from "../assets/icons/Electricitybillsicon";
 import Cablestvicon from "../assets/icons/Cablestvicon";
 import Inputdropdown from "../assets/icons/Inputdropdown";
 import Addressbook from "../assets/icons/Addressbook";
+import Viewcashrequesticon from "../assets/icons/Viewcashrequesticon";
 
 
 
@@ -260,6 +261,7 @@ Electricitybillsicon,
 Cablestvicon,
 Inputdropdown,
 Addressbook,
+Viewcashrequesticon,
 
 //Animated icons
 

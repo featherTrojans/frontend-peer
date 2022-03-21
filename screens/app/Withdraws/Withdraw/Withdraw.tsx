@@ -4,10 +4,11 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  Animated
 } from "react-native";
-import React, { ReactNode, useState, useEffect } from "react";
+import React, { ReactNode, useState, useEffect, useRef } from "react";
 import LottieView from "lottie-react-native";
-import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
+import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import {
   Backheader,
   Bottombtn,
@@ -21,6 +22,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 
 import Cryinganim from "../../../../assets/Lottie/animations/feather_cry_emoji.json";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { Shadow } from "../../../../constants/theme";
 
 const {
   Backarrow,
@@ -127,33 +129,91 @@ const Withdraw = ({ navigation }) => {
     }
   };
 
+
+  const [index, setIndex] = useState(0);
+
+  const activeColor = (activeIndex: number) => {
+    return index === activeIndex ? "#003AD6" : "#000000";
+  };
+  const animateToIndex = (indexPoint: number) => {
+    setIndex(indexPoint);
+    setActive(["pending", "accepted"][indexPoint])
+    Animated.spring(horizontalOffset, {
+      toValue: singleWidth() * indexPoint,
+      useNativeDriver: true,
+    }).start();
+  };
+  const singleWidth = () => {
+    let calcWidth = SIZES.width;
+    return calcWidth / 2;
+  };
+  const horizontalOffset = useRef(new Animated.Value(0)).current;
+
   const REQUESTDATA = active === "pending" ? pendingRequests : acceptedRequests;
 
   const Requestlist = () => {
     return (
       <View style={styles.requestContainer}>
-        <View style={styles.listHeaderContainer}>
-          <TouchableOpacity onPress={() => setActive("pending")}>
-            <Text
-              style={[
-                styles.listHeaderText,
-                active === "pending" && styles.activeStyles,
-              ]}
-            >
-              Pending Requests
-            </Text>
-          </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setActive("accepted")}>
-            <Text
-              style={[
-                styles.listHeaderText,
-                active === "accepted" && styles.activeStyles,
-              ]}
+
+
+        <View style={{ position: "relative", marginTop: 30, ...Shadow }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <TouchableOpacity
+              style={{
+                width: singleWidth(),
+                paddingVertical: 24,
+              }}
+              activeOpacity={0.7}
+              onPress={() => animateToIndex(0)}
             >
-              Accepted Requests
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[
+                  {
+                    ...fontsize.smallest,
+                    ...FONTS.regular,
+                    textAlign: "center",
+                    color: activeColor(0),
+                  },
+                ]}
+              >
+                Pending Requests
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={{ width: singleWidth(), paddingVertical: 24 }}
+              activeOpacity={0.7}
+              onPress={() => animateToIndex(1)}
+            >
+              <Text
+                style={[
+                  {
+                    ...fontsize.smallest,
+                    ...FONTS.regular,
+                    textAlign: "center",
+                    color: activeColor(1),
+                  },
+                ]}
+              >
+                Available Requests
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Animated.View
+            style={{
+              position: "absolute",
+              width: singleWidth(),
+              height: 1.5,
+              backgroundColor: COLORS.blue6,
+              bottom: 0,
+              left: 0,
+              transform: [{ translateX: horizontalOffset }, { scaleX: 1 }],
+            }}
+          />
         </View>
 
         <FlatList

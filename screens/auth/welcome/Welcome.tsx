@@ -51,7 +51,7 @@ const Welcome = ({ navigation, route }) => {
   };
   useEffect(() => {
     getDashboardData();
-  }, [progressWidth]);
+  }, []);
 
   // const setTokenOnComplete = () => {
   //   setToken(token)
@@ -77,6 +77,12 @@ const Welcome = ({ navigation, route }) => {
     }
   };
 
+  useEffect(() => {
+    if(fromm == "setup"){
+      
+    }
+  }, [])
+
   // React.useEffect(() => {
   //     shared.value = someAnimation(callback)
   // }, [])
@@ -87,6 +93,7 @@ const Welcome = ({ navigation, route }) => {
 
   //   }, 3500);
   // }, []);
+
 
   return (
     <View style={styles.container}>
