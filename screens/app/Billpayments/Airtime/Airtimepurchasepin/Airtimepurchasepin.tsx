@@ -42,6 +42,24 @@ const Airtimepurchasepin = ({ navigation }) => {
     }
   };
 
+  console.log({...data, user_pin: pin.join("")})
+  const handleSubmit = async ()=>{
+    setLoading(true)
+    try{
+      if(type === "airtime"){
+        const response = await axiosCustom.post("/bills/airtime",{...data, userPin: pin.join("")})
+        console.log(response); 
+      }else{
+        const response = await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
+        console.log(response)
+      }
+      setShowModal(true)
+    }catch(err){
+      showerror(toast, err)
+    }finally{
+      setLoading(false)
+    }
+  }
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
       {loading && <Loader />}
@@ -78,13 +96,11 @@ const Airtimepurchasepin = ({ navigation }) => {
       <Backheader />
       <View style={styles.mainContainer}>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
-            You are about to purchase{" "}
-            <Text style={{ ...fontsize.bsmall, ...FONTS.bold }}>
-              NGN 35,750.00 - Airtel{" "}
-            </Text>{" "}
-            to 09082764561
-          </Text>
+            {
+              type === "airtime" &&  <Text style={styles.descriptionText}>
+                You are about to purchase  <Text style={{...fontsize.bsmall, ...FONTS.bold}}>NGN {data.amount} - Airtel </Text> to {data.phone}
+              </Text>
+            }
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
 

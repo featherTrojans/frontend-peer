@@ -11,6 +11,7 @@ import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import {icons} from "./constants"
 import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import axiosCustom from "./httpRequests/axiosCustom";
 
 const { Cancelicon } = icons;
 
@@ -36,9 +37,9 @@ export default function App() {
   }
   useEffect(() => {
       checkOnboarding() 
-      console.log(onboarded, "The Onboarding")
   }, [])
-
+ 
+  
 
 
   let [fontsLoaded] = useFonts({

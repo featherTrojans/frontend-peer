@@ -23,31 +23,6 @@ const LockScreen = ({modal, setModal}: any) => {
     const [pin, setPin] = useState<string[]>([]);
     const [loading, setLoading] = useState(false)
 
-    const handleSetAmount = (value: string) => {
-        if (pin.length < 4) {
-          setPin((oldamount) => [...oldamount, value]);
-        }
-      };
-      const handleRemoveAmount = () => {
-        if (pin.length > 0) {
-          const newdata = [...pin];
-          newdata.pop();
-          setPin(newdata);
-          console.log(newdata);
-        }
-      };
-    const handleSubmit = async ()=>{
-      setLoading(true)
-      try{
-         await axiosCustom.post("/auth/pin/verify",{user_pin: pin.join("")})
-        setPin([])
-        setModal(false)
-      }catch(err){
-        showerror(toast,err)
-      }finally{
-        setLoading(false)
-      }
-
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldamount) => [...oldamount, value]);
@@ -73,6 +48,7 @@ const LockScreen = ({modal, setModal}: any) => {
       setLoading(false);
     }
   };
+  // return (<View>Hi</View>)
   return (
     <Modal
       isVisible={modal}
@@ -125,7 +101,7 @@ const LockScreen = ({modal, setModal}: any) => {
       </SafeAreaView>
     </Modal>
   );
-}};
+};
 
 
 export default LockScreen;

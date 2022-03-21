@@ -44,7 +44,8 @@ export const styles = StyleSheet.create({
     height: 62,
     paddingLeft: 20,
     borderColor: "#E6E6E6",
-    marginBottom: 15
+    marginBottom: 15,
+    zIndex: 1
   },
   dropdowPlaceholder: {
     color: COLORS.black,

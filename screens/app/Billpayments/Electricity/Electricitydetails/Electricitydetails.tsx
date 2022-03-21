@@ -6,6 +6,8 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import Globalmodal from "../../../../shared/Globalmodal/Globalmodal";
 import LottieView from "lottie-react-native";
 import DropDownPicker from "react-native-dropdown-picker";
+import showerror from "../../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
 
 const { Addressbook, Inputdropdown, Successcheckanimate } = icons;
 
@@ -15,7 +17,8 @@ type PaybillsinputProps = {
   placeholder: string;
   editable?: boolean
   value?:any,
-  onChangeText?:any
+  onChangeText?:any,
+  keyboardType?:any
 };
 
 const Paybillsinput = ({
@@ -50,6 +53,7 @@ const Paybillsinput = ({
 
 const Electricitydetails = ({ navigation, route }) => {
     const {amount} = route.params
+    const toast = useToast();
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [phone, setPhone] = useState<null | string>(null);
@@ -70,6 +74,20 @@ const Electricitydetails = ({ navigation, route }) => {
       { label: "@    |    prepaid", value: "prepaid" },
       { label: "@    |    postpaid", value: "postpaid" },
     ]);
+
+
+    const handleToNext = ()=>{
+      if(!amount || !phone || !value || !value2 || !meterNumber ){
+          return showerror(toast, null, "All fields are complusory")
+      }
+      navigation.navigate("Airtimepurchasepin",{type:"electricity", data:{
+        amount:amount,
+        phone:phone,  
+        service:value,
+        variation: value2,
+        meter_number: meterNumber
+      }})
+    }
 
   return (
     <KeyboardAwareScrollView
@@ -156,25 +174,21 @@ const Electricitydetails = ({ navigation, route }) => {
               />
           <Paybillsinput inputSymbol="#" placeholder="Enter Meter Number"
            value={meterNumber}
+           keyboardType={"numeric"}
            onChangeText={(text:string)=>setMeterNumber(text)} />
           <Paybillsinput
               value={phone}
               onChangeText={(text:string)=>setPhone(text)}
               inputSymbol="#"
-              placeholder="08012345678"
+              placeholder="08000000000"
+              keyboardType={"numeric"}
               rightIcon={<Addressbook />}
             />
         </View>
       </KeyboardAwareScrollView>
       <Bottombtn
         title="proceed"
-        onpress={() => navigation.navigate("Airtimepurchasepin",{type:"electricity", data:{
-          amount:amount,
-          phone:phone,  
-          service:value,
-          variation: value2,
-          meter_number: meterNumber
-        }})}
+        onpress={handleToNext}
       />
     </KeyboardAwareScrollView>
   );

@@ -1,6 +1,11 @@
 import axios from "axios";
 
-export default axios.create({
+const axiosCustom = axios.create({
     baseURL:"https://feather.com.ng:3300/api/v1/",
     // baseURL:"http://44.202.108.194/api/v1/"
 })
+
+
+
+
+export default axiosCustom

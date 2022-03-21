@@ -121,6 +121,7 @@ const Saveduser = ({ details }: any) => {
 
 const Bankaccount = ({ navigation, route }) => {
   const { amount } = route.params;
+  // const amount=500
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
@@ -210,7 +211,7 @@ const Bankaccount = ({ navigation, route }) => {
         </View>
       </Globalmodal>
       <View style={{ flex: 1, paddingHorizontal: 25 }}>
-        <Input icon={<At />} placeholder="N37,580.50" disabled value={amount} />
+        <Input icon={<At />} placeholder="N37,580.50" editable={false} value={amount} />
 
         {/* <View style={styles.headerContainer}>
           <Text style={styles.leftHeader}>Saved Accounts</Text>
@@ -239,7 +240,7 @@ const Bankaccount = ({ navigation, route }) => {
           placeholderStyle={styles.dropdowPlaceholder}
           textStyle={styles.dropDownText}
           style={styles.dropDown}
-          containerStyle={{zIndex: 0}}
+          containerStyle={{}}
           dropDownContainerStyle={{
             borderColor: COLORS.grey1,
             zIndex: 1
