@@ -6,7 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Animated,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
@@ -48,12 +48,12 @@ const {
 const { Locationmap } = images;
 
 const Acceptedwithdraw = ({ navigation, route }) => {
-  const toast = useToast()
+  const toast = useToast();
   const { requestInfo } = route.params;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [toggleShow, setToggleShow] = useState(true);
-  const [userinfo, setUserinfo] = useState({phoneNumber:""})
-  const [loading, setLoading] = useState(false)
+  const [userinfo, setUserinfo] = useState({ phoneNumber: "" });
+  const [loading, setLoading] = useState(false);
   const [locationLoading, setLocationLoading] = useState(false);
 
   useEffect(() => {
@@ -78,63 +78,70 @@ const Acceptedwithdraw = ({ navigation, route }) => {
     } catch (err) {}
   };
   const getLocation = async () => {
-    try{
-      setLocationLoading(true)
-    const { coordinates, address } = await getCurrentLocation();
-    setCoords({ ...coordinates, locationText: address });
-    // get the other destination
-    // const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint);
-    // setDestinationCoords({...adddresscoord,locationText: requestInfo.meetupPoint,});
-    }catch(err){}finally{
-      setLocationLoading(false)
+    try {
+      setLocationLoading(true);
+      const { coordinates, address } = await getCurrentLocation();
+      setCoords({ ...coordinates, locationText: address });
+      // get the other destination
+      // const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint);
+      // setDestinationCoords({...adddresscoord,locationText: requestInfo.meetupPoint,});
+    } catch (err) {
+    } finally {
+      setLocationLoading(false);
     }
   };
 
   const leftActions = (progress, dragX) => {
-
     const scale = dragX.interpolate({
       inputRange: [0, 200],
       outputRange: [0, 5],
-      extrapolate: 'clamp'
-    })
+      extrapolate: "clamp",
+    });
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <Animated.View style={{padding: 10,backgroundColor: COLORS.blue6, width: 10, height: 10, transform: [{scale}]}}></Animated.View>
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Animated.View
+          style={{
+            padding: 10,
+            backgroundColor: COLORS.blue6,
+            width: 10,
+            height: 10,
+            transform: [{ scale }],
+          }}
+        ></Animated.View>
       </View>
     );
   };
 
   const swipedLeftFunction = () => {
-    console.log('We want to make redirct or proceed to make the payment')
-  }
+    console.log("We want to make redirct or proceed to make the payment");
+  };
 
-  const handleCancelRequest = async ()=>{
-    setLoading(true)
-    try{
+  const handleCancelRequest = async () => {
+    setLoading(true);
+    try {
       await axiosCustom({
-        method:"DELETE",
-        url:"/request/cancel",
-        data:{
+        method: "DELETE",
+        url: "/request/cancel",
+        data: {
           reference: requestInfo.reference,
-          reasonForCancel:"agent declining withdraw request"
-        }
-      })
-      navigation.navigate("Home")
-    }catch(err){
-      showerror(toast,err)
-    }finally{
-      setLoading(false)
-    } 
-  }
+          reasonForCancel: "agent declining withdraw request",
+        },
+      });
+      navigation.navigate("Home");
+    } catch (err) {
+      showerror(toast, err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  if(locationLoading){
-    return(
-      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
-        <ActivityIndicator  color="#000" size="large" />
-       </View>
-      )
+  if (locationLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator color="#000" size="large" />
+      </View>
+    );
   }
-
 
   return (
     <View style={styles.container}>
@@ -209,6 +216,8 @@ const Acceptedwithdraw = ({ navigation, route }) => {
           )}
 
           <View style={styles.bottomBtnContainer}>
+
+            {/* The accepted button */}
             <View style={{ flex: 1 }}>
               <TouchableOpacity
                 style={styles.bottomMakeRequestBtn}
@@ -218,17 +227,18 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                 }
               >
                 {/* <Swipeable renderLeftActions={leftActions} onSwipeableLeftOpen={swipedLeftFunction}> */}
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <View style={styles.makeRequestCircle}>
                     <Makerequestarrowright />
                   </View>
-                
-                <View style={{ marginHorizontal: 16 }}></View>
-                <Text style={styles.requestText}>MAKE PAYMENT</Text>
+
+                  <View style={{ marginHorizontal: 16 }}></View>
+                  <Text style={styles.requestText}>MAKE PAYMENT</Text>
                 </View>
                 {/* </Swipeable> */}
               </TouchableOpacity>
             </View>
+            {/* The accepted button done */}
 
             <TouchableOpacity
               activeOpacity={0.8}

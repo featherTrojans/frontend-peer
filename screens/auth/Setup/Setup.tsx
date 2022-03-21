@@ -205,6 +205,7 @@ const Setup = ({ route, navigation }) => {
                 ...fontsize.small,
                 ...FONTS.regular,
                 color: COLORS.grey2,
+                textAlign: "center"
               }}
             >
               *This username can be changed under settings
