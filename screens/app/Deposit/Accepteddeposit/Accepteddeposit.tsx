@@ -20,7 +20,7 @@ import Map from "../../../shared/map/Map";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
+import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
 import { useToast } from "react-native-toast-notifications";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
@@ -170,7 +170,7 @@ const Accepteddeposit = ({navigation, route}) => {
                   icon={<Chaticon />}
                   title="Chat"
                   details="Discuss conversations via chat"
-                  onpress={() => console.log("Redirect to Chat")}
+                  onpress={() => chatOnWhatsapp(requestInfo.user.phoneNumber)}
                 />
 
                 <Iconwithdatas

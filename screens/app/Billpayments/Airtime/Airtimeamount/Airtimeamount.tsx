@@ -22,11 +22,10 @@ import { styles } from "../../../Transferfunds/TransferInput/TransferInput.style
 
 const Airtimeamount = ({ navigation, route }) => {
 //   const { nextscreen } = route.params;
-  const { authdata } = useContext(AuthContext);
+  
   const toast = useToast();
   const [amount, setAmount] = useState<string>("");
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
-
   // const amountFormatter = (value: string) => {
   //   return (
   //     Number(value)
@@ -89,7 +88,7 @@ const Airtimeamount = ({ navigation, route }) => {
         </View>
       </View>
 
-      <Bottombtn title="PROCEED" onpress={() => navigation.navigate("Airtimedetails")} />
+      <Bottombtn title="PROCEED" onpress={() => navigation.navigate("Airtimedetails",{amount})} />
     </View>
   );
 };

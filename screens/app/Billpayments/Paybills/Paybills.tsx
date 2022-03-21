@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Button } from "react-native";
 import React from "react";
 import { Backheader } from "../../../../components";
 import { styles } from "./Paybills.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
 // import { styles } from './Paybills.styles'
 
 const Paybills = ({navigation}) => {
@@ -65,6 +66,7 @@ const Paybills = ({navigation}) => {
           </Text>
           <Text style={styles.headerInfo}>favourite network in Nigeria.</Text>
         </TouchableOpacity>
+        {/* <Button title="Chat with anoda" onPress={()=>chatOnWhatsapp("08035034968")}/> */}
       </ScrollView>
     </View>
   );

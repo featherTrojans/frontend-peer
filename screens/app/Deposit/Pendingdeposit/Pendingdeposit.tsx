@@ -23,7 +23,7 @@ import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
+import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
   // import { styles } from './Pendingwithdraw.styles'
@@ -164,7 +164,7 @@ import { makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunction
                     icon={<Chaticon />}
                     title="Chat"
                     details="Discuss conversations via chat"
-                    onpress={() => console.log("Redirect to Chat")}
+                    onpress={() => chatOnWhatsapp(requestInfo.user.phoneNumber)}
                   />
                   <Iconwithdatas
                     icon={<Renegotiateicon />}

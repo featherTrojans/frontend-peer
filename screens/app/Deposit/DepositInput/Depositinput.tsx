@@ -27,6 +27,7 @@ import { getCurrentLocation } from "../../../../utils/customLocation";
 
 function Depositinput({ route, navigation }) {
   const toast = useToast();
+  const {type, reference} = route.params
   const {authdata} = useContext(AuthContext)
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const [amount, setAmount] = useState<string>("");
@@ -66,18 +67,22 @@ function Depositinput({ route, navigation }) {
   const handleSubmit= async ()=>{
     setLoading(true)
     try{
+      if(type === "create"){
         await axiosCustom.post("/status/create",{
             amount,
             longitude: coords.longitude,
             latitude: coords.latitude,
             locationText:  coords.locationText
         })
-        let asyncval = JSON.stringify({locationText:coords.locationText, amount, time: Date.now()})
-        try{
-          await AsyncStorage.setItem("@depositstatus",asyncval)
-        }catch(err){
-          console.log(err)
-        }
+      }else{
+        await axiosCustom.put("/status/update",{
+          amount,
+          longitude: coords.longitude,
+          latitude: coords.latitude,
+          locationText:  coords.locationText,
+          reference
+        })
+      }
         navigation.navigate("Home")
     }catch(err){
       showerror(toast,err)

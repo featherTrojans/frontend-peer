@@ -25,6 +25,7 @@ import {
 import Customstatusbar from "../../../shared/Customstatusbar";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import {
+  chatOnWhatsapp,
   makePhoneCall,
   sendMessage,
 } from "../../../../utils/userDeviceFunctions";
@@ -203,7 +204,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                 icon={<Chaticon />}
                 title="Chat"
                 details="Discuss conversations via chat"
-                onpress={() => console.log("Redirect to Chat")}
+                onpress={() => chatOnWhatsapp(userinfo.phoneNumber)}
               />
               <Iconwithdatas
                 icon={<Cancelicony />}

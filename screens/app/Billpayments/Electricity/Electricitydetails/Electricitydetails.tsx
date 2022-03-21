@@ -5,13 +5,24 @@ import { Backheader, Bottombtn } from "../../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import Globalmodal from "../../../../shared/Globalmodal/Globalmodal";
 import LottieView from "lottie-react-native";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const { Addressbook, Inputdropdown, Successcheckanimate } = icons;
+
+type PaybillsinputProps = {
+  inputSymbol: string;
+  rightIcon?: JSX.Element;
+  placeholder: string;
+  editable?: boolean
+  value?:any,
+  onChangeText?:any
+};
 
 const Paybillsinput = ({
   inputSymbol,
   rightIcon,
   placeholder,
+  
 }: PaybillsinputProps) => {
   return (
     <View
@@ -37,8 +48,28 @@ const Paybillsinput = ({
   );
 };
 
-const Electricitydetails = ({ navigation }) => {
-    const [showmodal, setShowModal] = useState(false);
+const Electricitydetails = ({ navigation, route }) => {
+    const {amount} = route.params
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [phone, setPhone] = useState<null | string>(null);
+    const [meterNumber, setMeterNumber] = useState<null | string>(null)
+    const [items, setItems] = useState([
+      { label: "@    |    abuja-electric", value: "abuja-electric" },
+      { label: "@    |    eko-electric", value: "eko-electric" },
+      { label: "@    |    ibadan-electric", value: "ibadan-electric" },
+      { label: "@    |    ikeja-electric ", value: "ikeja-electric " },
+      { label: "@    |    jos-electric", value: "jos-electric" },
+      { label: "@    |    kaduna-electric", value: "kaduna-electric" },
+      { label: "@    |    kano-electric", value: "kano-electric" },
+      { label: "@    |    portharcourt-electric", value: "portharcourt-electric" }
+    ]);
+    const [open2, setOpen2] = useState(false);
+    const [value2, setValue2] = useState(null);
+    const [items2, setItems2] = useState([
+      { label: "@    |    prepaid", value: "prepaid" },
+      { label: "@    |    postpaid", value: "postpaid" },
+    ]);
 
   return (
     <KeyboardAwareScrollView
@@ -47,34 +78,7 @@ const Electricitydetails = ({ navigation }) => {
     >
       <Backheader title="Electricity Bill Payments" />
 
-      <Globalmodal
-        showState={showmodal}
-        btnFunction={() => navigation.navigate("Root")}
-        onBgPress={() => setShowModal(true)}
-      >
-        <View style={{ alignItems: "center" }}>
-          <LottieView
-            source={Successcheckanimate}
-            autoPlay
-            loop
-            style={{ width: 148, height: 148 }}
-          />
 
-          <Text
-            style={{
-              textAlign: "center",
-              marginHorizontal: 40,
-              //  marginVertical: 40,
-              marginTop: 24,
-              marginBottom: 45,
-              ...fontsize.bsmall,
-              ...FONTS.regular,
-            }}
-          >
-           Electricity Payments Successful!!
-          </Text>
-        </View>
-      </Globalmodal>
       <KeyboardAwareScrollView style={{ paddingHorizontal: 15, flex: 1 }}>
         <Text
           style={{
@@ -87,35 +91,90 @@ const Electricitydetails = ({ navigation }) => {
           Select your preferred network provider and receivers phone number.
         </Text>
 
-        <View style={{ marginTop: 40, flex: 1 }}>
-          <Paybillsinput inputSymbol="#" placeholder="37500" />
+        <View style={{ marginTop: 40, flex: 1 , minHeight: 400}}>
+          <Paybillsinput inputSymbol="#" placeholder={amount}  editable={false}  />
+          <DropDownPicker
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+                placeholder="@    |    Electricity Company"
+                placeholderStyle={{
+                  color: COLORS.black,
+                  ...fontsize.small,
+                  ...FONTS.regular,
+                }}
+                textStyle={{
+                  color: COLORS.black,
+                  ...fontsize.small,
+                  ...FONTS.regular,
+                }}
+                style={{
+                  height: 62,
+                  paddingLeft: 20,
+                  borderColor: "#E6E6E6",
+                  marginBottom: 15
+                }}
+                containerStyle={{}}
+                dropDownContainerStyle={{
+                  borderColor: COLORS.grey1,
+                  zIndex: 2
+                }}
+              />
+              <DropDownPicker
+                open={open2}
+                value={value2}
+                items={items2}
+                setOpen={setOpen2}
+                setValue={setValue2}
+                setItems={setItems2}
+                placeholder="@    |    Enter Meter Type"
+                placeholderStyle={{
+                  color: COLORS.black,
+                  ...fontsize.small,
+                  ...FONTS.regular,
+                }}
+                textStyle={{
+                  color: COLORS.black,
+                  ...fontsize.small,
+                  ...FONTS.regular,
+                }}
+                style={{
+                  height: 62,
+                  paddingLeft: 20,
+                  borderColor: "#E6E6E6",
+                  marginBottom: 15,
+                  zIndex: 1
+                }}
+                containerStyle={{}}
+                dropDownContainerStyle={{
+                  borderColor: COLORS.grey1,
+                  zIndex: 1
+                }}
+              />
+          <Paybillsinput inputSymbol="#" placeholder="Enter Meter Number"
+           value={meterNumber}
+           onChangeText={(text:string)=>setMeterNumber(text)} />
           <Paybillsinput
-            inputSymbol="@"
-            placeholder="Select Network"
-            rightIcon={<Inputdropdown />}
-          />
-          <Paybillsinput
-            inputSymbol="#"
-            placeholder="08098653012"
-            rightIcon={<Addressbook />}
-          />
-
-          <Paybillsinput inputSymbol="#" placeholder="Globacom" />
-          <Paybillsinput
-            inputSymbol="#"
-            placeholder="3GB (2 Days) - N980.00"
-            rightIcon={<Inputdropdown />}
-          />
-          <Paybillsinput
-            inputSymbol="#"
-            placeholder="08098653012"
-            rightIcon={<Addressbook />}
-          />
+              value={phone}
+              onChangeText={(text:string)=>setPhone(text)}
+              inputSymbol="#"
+              placeholder="08012345678"
+              rightIcon={<Addressbook />}
+            />
         </View>
       </KeyboardAwareScrollView>
       <Bottombtn
         title="proceed"
-        onpress={() => setShowModal(true)}
+        onpress={() => navigation.navigate("Airtimepurchasepin",{type:"electricity", data:{
+          amount:amount,
+          phone:phone,  
+          service:value,
+          variation: value2,
+          meter_number: meterNumber
+        }})}
       />
     </KeyboardAwareScrollView>
   );

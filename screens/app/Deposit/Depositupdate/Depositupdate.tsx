@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { styles } from "./Depositupdate.styles";
 import moment from "moment";
-import { Backheader, Bottombtn, Viewbalance } from "../../../../components";
+import { Backheader, Bottombtn, Loader, Viewbalance } from "../../../../components";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
@@ -58,7 +58,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
             </View>
 
             <Text style={styles.lastAmountPrice}>
-              NGN {amountFormatter(status.amount)}
+              NGN {amountFormatter(status.status[0].amount)}
             </Text>
           </View>
 
@@ -68,15 +68,15 @@ const StatusUpdate = ({ status, navigation }: any) => {
             <View style={styles.locationIconandText}>
               {/* icons */}
               <Location />
-              <Text style={styles.location}>{status.locationText}</Text>
+              <Text style={styles.location}>{status.status[0].locationText}</Text>
             </View>
 
             <View style={styles.expirationContainer}>
               <Text style={styles.expirationText}>
-                Expires {moment(status.time).add(1, "days").calendar()}
+                Expires {moment(status.status[0].createdAt).add(1, "days").calendar()}
               </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Depositinput")}
+                onPress={() => navigation.navigate("Depositinput",{type:"update", reference:status.status[0].reference})}
               >
                 <Text style={styles.updateText}>Update</Text>
               </TouchableOpacity>
@@ -92,7 +92,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
                 <Text style={styles.iconTitle}>Balance</Text>
               </View>
               <Text style={styles.iconValue}>
-                N {amountFormatter(status.amount)}
+                N {amountFormatter(`${status.status[0].amount - status.totalEarnings}`)}
               </Text>
             </View>
             <View style={styles.horizontalLine} />
@@ -102,7 +102,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
                 <Text style={styles.iconTitle}>My Earnings last 24hrs</Text>
               </View>
               <Text style={styles.iconValue}>
-                N {amountFormatter(status.amount)}
+                N {amountFormatter(status.totalEarnings)}
               </Text>
             </View>
 
@@ -118,7 +118,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
             <Viewrequesteye />
           </View>
           <Text style={styles.viewRequestText}>
-            View Cash Requests {/*(15)*/}
+            View Cash Requests ({status.pendingRequests.length + status.acceptedRequests.length})
           </Text>
         </TouchableOpacity>
       </View>
@@ -128,18 +128,25 @@ const StatusUpdate = ({ status, navigation }: any) => {
 
 const Depositupdate = ({ navigation }) => {
   const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(false)
+  
   useEffect(() => {
-    getFromStorage();
+    // getFromStorage();
     // get Status from the database
-    // getDepositStatus()
+    getDepositStatus()
   }, []);
+
 
   const getDepositStatus = async () => {
     try {
+      setLoading(true)
       const response = await axiosCustom.get("/status/get");
-      console.log(response.data);
+      console.log(response.data.data);
+      setStatus(response.data.data)
     } catch (err) {
       // maybe show the error
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -162,13 +169,13 @@ const Depositupdate = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Backheader title="Deposit" />
-
+      {loading && <Loader />}
       <View style={{ flex: 1 }}>
         <View style={{ paddingHorizontal: 15 }}>
           <Viewbalance />
         </View>
 
-        {status ? (
+        {status?.status?.length > 0 ? (
           <StatusUpdate status={status} navigation={navigation} />
         ) : (
           <>
@@ -178,7 +185,7 @@ const Depositupdate = ({ navigation }) => {
 
             <Bottombtn
               title="Create New Status"
-              onpress={() => navigation.navigate("Depositinput")}
+              onpress={() => navigation.navigate("Depositinput",{type:"create", reference:null})}
             />
           </>
         )}

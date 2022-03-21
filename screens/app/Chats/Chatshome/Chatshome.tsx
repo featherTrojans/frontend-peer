@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { db } from "../../../../firebase";
+import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
+import { TouchableOpacity } from "@gorhom/bottom-sheet";
+import { useNavigation } from "@react-navigation/native";
 
 const { Chatsearchicon } = icons;
 
@@ -39,8 +43,9 @@ const Chat = ({
   online: boolean;
   image?: ReactElement;
 }) => {
+  const navigate = useNavigation()
   return (
-    <View style={styles.chatContainer}>
+    <TouchableOpacity onPress={()=>navigate.navigate("Chatsdm")} style={styles.chatContainer}>
       <View style={styles.chatAvatar}>
         {online && <View style={styles.chatStatusDot} />}
         {/* Image */}
@@ -57,11 +62,30 @@ const Chat = ({
           <Text style={styles.chatHintMessage}>{message}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const Chatshome = () => {
+  const [chats, setChats] = useState<any>([])
+  // find the detail of the user name by checking the reference
+  useEffect(()=>{
+    getAllChats()
+  },[])
+
+  const getAllChats = async ()=>{
+    try{
+      const chatsRef = collection(db,"chats","dudeid","fellowchats")
+      // const querysnaps = await getDoc(chatsRef)
+      // console.log(querysnaps.length)
+      const chatsdata = await getDocs(chatsRef)
+      const chatsarr = chatsdata.docs;
+      setChats(chatsarr)
+      // console.log(chatsdata.docs)
+    }catch(err){
+
+    }
+  }
   return (
     <View style={styles.container}>
       <Customstatusbar />
@@ -70,7 +94,7 @@ const Chatshome = () => {
         <View style={styles.chatTextContainer}>
           <Text style={styles.chatText}>Chats</Text>
           <View style={styles.amountOfChatsContainer}>
-            <Text style={styles.amountOfChats}>176</Text>
+            <Text style={styles.amountOfChats}>{chats.length}</Text>
           </View>
         </View>
         <View>
@@ -118,8 +142,14 @@ const Chatshome = () => {
           </View>
 
           <ScrollView>
+            {chats.map(chat=>(<Chat
+              name={chat.id}
+              time="09:34am"
+              message={chat.data().lastchat}
+              online={true}
+            />))}
             <Chat
-              name="Stephene Adegoke"
+              name="Stephene Adegok"
               time="09:34am"
               message="Hey Oga mii, trust all is well, I called you ..."
               online={true}

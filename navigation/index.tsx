@@ -456,6 +456,7 @@ const RootNavigator = ({initialBoarded}) => {
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
+      // initialRouteName="Paybills"
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
@@ -500,10 +501,7 @@ const RootNavigator = ({initialBoarded}) => {
           {/* Settings Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Editprofile" component={Editprofile} />
-            <AppStack.Screen
-              name="Securityprivacy"
-              component={Securityprivacy}
-            />
+            <AppStack.Screen name="Securityprivacy" component={Securityprivacy} />
             <AppStack.Screen name="Changepassword" component={Changepassword} />
             <AppStack.Screen name="Changepin" component={Changepin} />
           </AppStack.Group>
@@ -511,31 +509,16 @@ const RootNavigator = ({initialBoarded}) => {
           <AppStack.Group>
             <AppStack.Screen name="Withdraw" component={Withdraw} />
             <AppStack.Screen name="Requestnew" component={Requestnew} />
-            <AppStack.Screen
-              name="Availablelisting"
-              component={Availablelisting}
-            />
-            <AppStack.Screen
-              name="Withdrawpreview"
-              component={Withdrawpreview}
-            />
+            <AppStack.Screen name="Availablelisting" component={Availablelisting}/>
+            <AppStack.Screen name="Withdrawpreview" component={Withdrawpreview} />
             <AppStack.Screen name="Editmeetup" component={Editmeetup} />
             {/* To Cancel */}
             {/* cancel requests */}
-            <AppStack.Screen
-              name="Pendingwithdraw"
-              component={Pendingwithdraw}
-            />
-            <AppStack.Screen
-              name="Negotiate"
-              component={Negotiate}
-            />
+            <AppStack.Screen name="Pendingwithdraw" component={Pendingwithdraw} />
+            <AppStack.Screen name="Negotiate" component={Negotiate} />
             <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
             {/* TO MaKE AFTER ACCEPTING */}
-            <AppStack.Screen
-              name="Acceptedwithdraw"
-              component={Acceptedwithdraw}
-            />
+            <AppStack.Screen name="Acceptedwithdraw" component={Acceptedwithdraw} />
             <AppStack.Screen name="Requestsummary" component={Requestsummary} />
             <AppStack.Screen name="Summary" component={Summary} />
             <AppStack.Screen name="WithdrawPin" component={WithdrawPin} />
@@ -555,18 +538,11 @@ const RootNavigator = ({initialBoarded}) => {
             <AppStack.Screen name="Getdetails" component={Getdetails} />
             <AppStack.Screen name="Bankaccount" component={Bankaccount} />
             <AppStack.Screen name="Transferpin" component={Transferpin} />
-            <AppStack.Screen
-              name="TransferpinBank"
-              component={TransferpinBank}
-            />
+            <AppStack.Screen name="TransferpinBank" component={TransferpinBank} />
           </AppStack.Group>
 
           {/* Notification Screen */}
-          <AppStack.Screen
-            name="Notifications"
-            component={Notifications}
-            options={horizontalAnimation}
-          />
+          <AppStack.Screen name="Notifications" component={Notifications} options={horizontalAnimation} />
 
           {/* Paybills Screen */}
           <AppStack.Screen name="Paybills" component={Paybills} />
@@ -585,10 +561,7 @@ const RootNavigator = ({initialBoarded}) => {
             <AppStack.Screen name="Deposit" component={true ? Deposit : Depositupdate} />
             <AppStack.Screen name="Depositinput" component={Depositinput} />
             <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
-            <AppStack.Screen
-              name="Accepteddeposit"
-              component={Accepteddeposit}
-            />
+            <AppStack.Screen name="Accepteddeposit" component={Accepteddeposit} />
             <AppStack.Screen name="Depositpin" component={Depositpin} />
             <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
           </AppStack.Group>
@@ -613,8 +586,6 @@ export default function MainNavigation({initialBoarded = false}) {
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
   const [onboarded, setOnboarded] = useState(false)
-
-
 
 
   useEffect(() => {
