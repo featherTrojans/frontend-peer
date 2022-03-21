@@ -24,7 +24,6 @@ import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import * as LocalAuthentication from "expo-local-authentication";
 
-
 const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
 
 const setAuthorizationToken = (token: string) => {
@@ -70,14 +69,13 @@ const Login = ({ navigation }: any) => {
           <Newlogo />
         </View>
 
-        <StatusBar 
+        <StatusBar
           animated={true}
           backgroundColor="#003AD6"
           barStyle="light-content"
           networkActivityIndicatorVisible={true}
           showHideTransition="fade"
           hidden={false}
-        
         />
 
         {/* Form */}
@@ -96,8 +94,7 @@ const Login = ({ navigation }: any) => {
               //store token in ASYNC STORAGE
               //store in context
               setAuthorizationToken(response.data.data.token);
-              
-              
+
               // setToken(response.data.data.token)
               navigation.navigate("Welcome", {
                 fromm: "login",
@@ -161,7 +158,13 @@ const Login = ({ navigation }: any) => {
                 {/* Bottom text */}
                 <JustifyBetween style={{ marginTop: 30, marginBottom: 70 }}>
                   <Text style={styles.biometrics}>Use Biometrics</Text>
-                  <Text style={styles.forgetPassword}>Forgot Password?</Text>
+
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Forgetpassword")}
+                    activeOpacity={0.8}
+                  >
+                    <Text style={styles.forgetPassword}>Forgot Password?</Text>
+                  </TouchableOpacity>
                 </JustifyBetween>
 
                 {/* Login btn */}
