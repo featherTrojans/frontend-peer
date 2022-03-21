@@ -63,9 +63,14 @@ const Securepin = ({ route, navigation }) => {
         </View>
 
         <View style={styles.numberBtnContainer}>
-          {numbers.map((number, index) => {
+        {numbers.map((number, index) => {
             return (
-              <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
+              <Numberbtn
+                key={index}
+                onpress={
+                  number !== "" ? () => handleSetAmount(number) : () => null
+                }
+              >
                 {number}
               </Numberbtn>
             );

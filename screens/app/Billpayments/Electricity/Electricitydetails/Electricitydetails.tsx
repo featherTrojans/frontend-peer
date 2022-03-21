@@ -71,7 +71,7 @@ const Electricitydetails = ({ navigation }) => {
               ...FONTS.regular,
             }}
           >
-           Mobile Data Purchase Successful!!
+           Electricity Payments Successful!!
           </Text>
         </View>
       </Globalmodal>
