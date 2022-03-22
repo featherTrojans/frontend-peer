@@ -4,7 +4,8 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  StatusBar,
 } from "react-native";
 import { useState } from "react";
 import Modal from "react-native-modal";
@@ -60,45 +61,105 @@ const LockScreen = ({ modal, setModal }: any) => {
       deviceHeight={SIZES.height}
       deviceWidth={SIZES.width}
     >
-      <SafeAreaView style={{flex: 1, paddingHorizontal: 15}}>
+      <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
         {loading && <Loader />}
-     
-        <View style={{marginTop: 44}}>
+        <StatusBar
+          animated={true}
+          backgroundColor={COLORS.blue6}
+          barStyle="light-content"
+          networkActivityIndicatorVisible={true}
+          showHideTransition="fade"
+          hidden={false}
+        />
+        <View style={{ marginTop: 44 }}>
           <Text style={styles.headerText}>Welcome Back,</Text>
           <Text style={styles.headerText}>Damilare</Text>
         </View>
 
-        <View style={{marginHorizontal: 70, marginTop: 42}}>
-          <Text style={{textAlign: "center", ...fontsize.bsmall,...FONTS.medium, color: COLORS.white}}>Enter PIN</Text>
+        <View style={{ marginHorizontal: 70, marginTop: 42 }}>
+          <Text
+            style={{
+              textAlign: "center",
+              ...fontsize.bsmall,
+              ...FONTS.medium,
+              color: COLORS.white,
+            }}
+          >
+            Enter PIN
+          </Text>
 
-          <View style={{flexDirection: 'row', justifyContent: "space-between",marginTop: 58, marginBottom: 105}}>
-            <View  style={{width: 16, height: 16, backgroundColor: COLORS.white, borderRadius: 16/2}}/>
-            <View  style={{width: 16, height: 16,  borderRadius: 20, backgroundColor: COLORS.blue6, opacity: 1}}/>
-            <View  style={{width: 16, height: 16, backgroundColor: COLORS.white, borderRadius: 16/2}}/>
-            <View  style={{width: 16, height: 16, backgroundColor: COLORS.white, borderRadius:16/2}}/>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 58,
+              marginBottom: 105,
+            }}
+          >
+            <View
+              style={{
+                width: 16,
+                height: 16,
+                backgroundColor: COLORS.white,
+                borderRadius: 16 / 2,
+              }}
+            />
+            <View
+              style={{
+                width: 16,
+                height: 16,
+                borderRadius: 20,
+                backgroundColor: COLORS.blue6,
+                opacity: 1,
+              }}
+            />
+            <View
+              style={{
+                width: 16,
+                height: 16,
+                backgroundColor: COLORS.white,
+                borderRadius: 16 / 2,
+              }}
+            />
+            <View
+              style={{
+                width: 16,
+                height: 16,
+                backgroundColor: COLORS.white,
+                borderRadius: 16 / 2,
+              }}
+            />
           </View>
         </View>
 
+        <View style={styles.numberBtnContainer}>
+          {numbers.map((number, index) => {
+            return (
+              <Numberbtn
+                key={index}
+                onpress={() => handleSetAmount(number)}
+                textColor={COLORS.white}
+              >
+                {number}
+              </Numberbtn>
+            );
+          })}
 
+          <Numberbtn
+            onpress={() => handleRemoveAmount()}
+            textColor={COLORS.white}
+          >
+            X
+          </Numberbtn>
+        </View>
 
-          <View style={styles.numberBtnContainer}>
-            {numbers.map((number, index) => {
-              return (
-                <Numberbtn key={index} onpress={() => handleSetAmount(number)} textColor={COLORS.white}>
-                  {number}
-                </Numberbtn>
-              );
-            })}
-
-            <Numberbtn onpress={() => handleRemoveAmount()} textColor={COLORS.white}>X</Numberbtn>
-          </View>
-
-
-          <View style={{ justifyContent: "center", alignItems: "center"}}>
-            <Text style={{...fontsize.bsmall, ...FONTS.bold, color: COLORS.yellow1}}>0/5</Text>
-          </View>
-
-    
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Text
+            style={{ ...fontsize.bsmall, ...FONTS.bold, color: COLORS.yellow1 }}
+          >
+            0/5
+          </Text>
+        </View>
       </SafeAreaView>
     </Modal>
   );
