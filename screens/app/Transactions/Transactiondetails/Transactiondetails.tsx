@@ -127,15 +127,15 @@ const Transactiondetails = ({ navigation, route }) => {
 
             h1 {
                 text-align: center,
-                color: "red"
+                color: "ed
             }
             p{
               font-size: 16px, 
-              color: "black", 
+              color: black, 
               text-align: center
             }
             div{
-              max-width: 225px, width: "100%",display: "flex", justify-content: "space-between", align-items: "center"
+              max-width: 225px, width: 100%,display: flex, justify-content: space-between, align-items: center
             }
         </style>
     </head>
@@ -148,8 +148,8 @@ const Transactiondetails = ({ navigation, route }) => {
 
       <div>
             
-            <div style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070, padding: 20px}}>1</div>
-            <div style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070}}>2</div>
+            <p style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070, padding: 20px}}>1</p>
+            <p style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070}}>2</p>
             
       </div>
 
