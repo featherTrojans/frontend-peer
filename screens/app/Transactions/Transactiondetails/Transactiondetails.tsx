@@ -48,12 +48,19 @@ const Transactiondetails = ({ navigation, route }) => {
     to: receiver,
     transId: transactionRef,
     location: meetupPoint,
+    title,
+    user,
+    otherUser
   } = data;
 
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")},  ${dt.format("Do")} ${dt.format(
     "MMM"
   )} '${dt.format("YY")} - ${dt.format("LT")}`;
+
+  useEffect(() =>  {
+    console.log(data, "Transaction details")
+  })
 
  
 
@@ -213,7 +220,7 @@ const Transactiondetails = ({ navigation, route }) => {
             marginTop: 4,
           }}
         >
-          <Sendingandreceive senderName={"O K"} receiverName={"S E"}/>
+          <Sendingandreceive senderName={user.fullName} receiverName={"S P"} title={title}/>
           <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
             NGN {amountFormatter(amount)}
           </Text>

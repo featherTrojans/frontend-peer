@@ -76,7 +76,7 @@ const walletOptions = [
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  const { setAuthData, authdata, messageToken, userColor } = useContext(AuthContext);
+  const { setAuthData, authdata, messageToken, userColor, userDefaultImage } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
@@ -206,7 +206,8 @@ const Home = ({ navigation }: { navigation: any }) => {
             onPress={() => navigation.dispatch(jumpToSettings)}
             activeOpacity={0.8}
           >
-            <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} />
+            {userDefaultImage()}
+            {/* <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} /> */}
             
           </TouchableOpacity>
 
