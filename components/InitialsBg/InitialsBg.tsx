@@ -12,7 +12,9 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
   const nameSplitter = () => {
     const splitName = name?.split(" ");
 
-    if (splitName) {
+    if (splitName.length > 2) {
+      return `${splitName[0][0]}${splitName[1][0]}`;
+    }else{
       return `${splitName[0][0]}${splitName[1][0]}`;
     }
   };

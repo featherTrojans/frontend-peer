@@ -39,7 +39,7 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
     const [toggleShow, setToggleShow] = useState(true);
     const [loading, setLoading] = useState(false);
     const [locationLoading, setLocationLoading] = useState(false);
-    
+    console.log(requestInfo)
     useEffect(()=>{
       // update both map, meeting point and  Agent point
       getLocation()
@@ -166,7 +166,7 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
                     icon={<Chaticon />}
                     title="Chat"
                     details="Discuss conversations via chat"
-                    onpress={() => chatOnWhatsapp(requestInfo.user.phoneNumber)}
+                    onpress={() => chatOnWhatsapp(requestInfo.user.phoneNumber,`Hi ${requestInfo.user.fullName}, I saw you made a cash request of ${requestInfo.amount} on Feather`)}
                   />
                   <Iconwithdatas
                     icon={<Renegotiateicon />}

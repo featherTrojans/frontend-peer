@@ -46,6 +46,7 @@ import TransferInput from "./app/Transferfunds/TransferInput/TransferInput";
 import Usersearch from "./app/Chats/Usersearch/Usersearch";
 import Chatsdm from "./app/Chats/Chatsdm/Chatsdm";
 import Chatshome from "./app/Chats/Chatshome/Chatshome";
+import Chatsoon from "./app/Chats/Chatsoon/Chatsoon";
 import Withdraw from "./app/Withdraws/Withdraw/Withdraw";
 import Transfercash from "./app/Transferfunds/Transfercash/Transfercash";
 import Getdetails from "./app/Transferfunds/Getdetails/Getdetails";
@@ -135,6 +136,7 @@ export {
   Cancelrequest,
   Chatsdm,
   Chatshome,
+  Chatsoon,
   Usersearch,
   Pendingrequest,
   Accepetedrequest,

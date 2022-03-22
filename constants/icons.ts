@@ -115,7 +115,6 @@ import Viewcashrequesticon from "../assets/icons/Viewcashrequesticon";
 
 
 
-
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json"
@@ -126,6 +125,7 @@ import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json"
 import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json"
 import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.json"
 import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json"
+import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json"
 
 
 
@@ -263,6 +263,9 @@ Inputdropdown,
 Addressbook,
 Viewcashrequesticon,
 
+
+
+
 //Animated icons
 
 Cryinganimate,
@@ -272,7 +275,8 @@ Phoneanimate,
 Sittinganimate,
 Successcheckanimate,
 Loadinglocationanimate,
-Comingsoonagentanimate
+Comingsoonagentanimate,
+Feathecomingsoonchatanimate
 
 
 

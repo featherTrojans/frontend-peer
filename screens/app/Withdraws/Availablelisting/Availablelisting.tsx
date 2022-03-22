@@ -64,6 +64,7 @@ const Availablelisting = ({ navigation, route }: any) => {
       if(!doesIncludeActiveStates(locationstate)){
         // navigate to the sorry not supported in your region yet
         // navigation.navigate("",{from:"deposit"})
+        navigation.navigate("Updatedeposit",{from:"withdrawal"})
       }
       setCoords({ ...coordinates, locationText: address });
       getAllAgents(address);

@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize, SIZES } from "../../../constants";
 import { styles } from "./LockScreen.style";
@@ -16,12 +16,15 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../Globalmodal/Globalmodal";
+import { AuthContext } from "../../../context/AuthContext";
 
 const LockScreen = ({modal, setModal}: any) => {
     const toast = useToast()
+    const {setToken} = useContext(AuthContext)
     const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
     const [pin, setPin] = useState<string[]>([]);
     const [loading, setLoading] = useState(false)
+    const [numoftrial, setNumberTrial] = useState(0)
 
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
@@ -60,6 +63,11 @@ const LockScreen = ({modal, setModal}: any) => {
       setPin([])
       setModal(false)  
     }catch(err){
+      const newnumoftrial = numoftrial + 1
+      setNumberTrial(newnumoftrial)
+      if(newnumoftrial === 3 ){
+        setToken("")
+      }
       console.log(err.response)
       // setModal(false)  
     }finally{
@@ -79,15 +87,8 @@ const LockScreen = ({modal, setModal}: any) => {
       <SafeAreaView style={styles.container} >
         {loading && <Loader />}
         <View style={{ paddingHorizontal: 25 }}>
-          <JustifyBetween style={{ marginBottom: 10 }}>
-            <View>
-              <Text style={styles.header}>Lock Screen </Text>
-              <Text style={styles.header}>4-digit secure pin to unlock</Text>
-            </View>
-          </JustifyBetween>
-          <View style={{ marginBottom: 40 }}>
-            <Text style={styles.subText}>Transaction PIN</Text>
-          </View>
+          
+          
 
           <View style={styles.pinContainer}>
             <View style={styles.pinInputContainer}>

@@ -63,7 +63,7 @@ const Setup = ({ route, navigation }) => {
       setAuthorizationToken(response.data.data.token);
       
       // setToken(response.data.data.token)
-      // navigation.navigate("Welcome",{fromm:"setup", username:null,token:response.data.data.token})
+      navigation.navigate("Welcome",{fromm:"setup", username:null,token:response.data.data.token})
     } catch (err) {
       showerror(toast, err);
     } finally {

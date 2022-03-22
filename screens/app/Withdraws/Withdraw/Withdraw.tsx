@@ -4,7 +4,7 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Animated
+  Animated,
 } from "react-native";
 import React, { ReactNode, useState, useEffect, useRef } from "react";
 import LottieView from "lottie-react-native";
@@ -81,7 +81,7 @@ const Requesteeprofile = ({ list, onpress }: any) => {
             borderRadius: 44 / 2,
           }}
         /> */}
-        <InitialsBg sideLength={44} name={agent}/>
+        <InitialsBg sideLength={44} name={agent} />
         <View style={styles.namesContainer}>
           <Text style={styles.withdrawProfileName}>{agent}</Text>
           <Text style={styles.withdrawProfileUsername}>@{agentUsername}</Text>
@@ -129,7 +129,6 @@ const Withdraw = ({ navigation }) => {
     }
   };
 
-
   const [index, setIndex] = useState(0);
 
   const activeColor = (activeIndex: number) => {
@@ -137,7 +136,7 @@ const Withdraw = ({ navigation }) => {
   };
   const animateToIndex = (indexPoint: number) => {
     setIndex(indexPoint);
-    setActive(["pending", "accepted"][indexPoint])
+    setActive(["pending", "accepted"][indexPoint]);
     Animated.spring(horizontalOffset, {
       toValue: singleWidth() * indexPoint,
       useNativeDriver: true,
@@ -154,9 +153,6 @@ const Withdraw = ({ navigation }) => {
   const Requestlist = () => {
     return (
       <View style={styles.requestContainer}>
-
-
-
         <View style={{ position: "relative", marginTop: 30, ...Shadow }}>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}

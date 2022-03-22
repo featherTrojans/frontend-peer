@@ -112,7 +112,7 @@ const Pendingwithdraw = ({navigation, route}) => {
                   icon={<Chaticon />}
                   title="Chat"
                   details="Discuss conversations via chat"
-                  onpress={() => chatOnWhatsapp(requestInfo.phoneNumber)}
+                  onpress={() => chatOnWhatsapp(requestInfo.phoneNumber,`Hi ${requestInfo.agent}, I made a cash request of ${requestInfo.amount} to you on Feather`)}
                 />
                 <Iconwithdatas
                   icon={<Renegotiateicon />}

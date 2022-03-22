@@ -9,37 +9,22 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import LottieView from "lottie-react-native"
+import LottieView from "lottie-react-native";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import {db} from "../../../../firebase"
-import {doc, getDoc, updateDoc, } from "firebase/firestore"; 
-
+import { db } from "../../../../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-const Depositpin = ({route, navigation}) => {
-
+const Depositpin = ({ route, navigation }) => {
   const toast = useToast();
-  const {requestInfo} = route.params
+  const { requestInfo } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
-  const [successModal, setSuccessModal] = useState(false)
-  const [loading, setLoading] = useState(false)
-  console.log(requestInfo)
+  const [successModal, setSuccessModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  console.log(requestInfo);
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldamount) => [...oldamount, value]);
@@ -52,80 +37,78 @@ const Depositpin = ({route, navigation}) => {
       setPin(newdata);
     }
   };
-  const handlePrepareToTestUpdate = async (status:string)=>{
+  const handlePrepareToTestUpdate = async (status: string) => {
     const washingtonRef = doc(db, "withdrawtransfer", requestInfo.reference);
-      await updateDoc(washingtonRef, {
-        status: status
-      });
-  }
-  const checkifdocmentexist = async ()=>{
-    const document = await getDoc(doc(db, "withdrawtransfer", requestInfo.reference));
-      if(document.exists()){
-        if(document.data().staus === "pending"){
-          return true
-        }
-        throw {response:{data:{message:"swipe on the other phone"}}}
-        // throw new Error(response?.data?.message)
-      }else{
-        throw {response:{data:{message:"swipe on the other phone"}}}
-      }
-  }
-  const handleApproveRequest = async ()=>{
-    const joinpin = pin.join("")
-    if(joinpin.length < 4){
-      return false
+    await updateDoc(washingtonRef, {
+      status: status,
+    });
+  };
+  const handleApproveRequest = async () => {
+    const joinpin = pin.join("");
+    if (joinpin.length < 4) {
+      return false;
     }
 
-    setLoading(true)
-    try{
-      await checkifdocmentexist()
-      await axiosCustom.post("/request/approve",{reference:requestInfo.reference, user_pin:joinpin})
-      await handlePrepareToTestUpdate("approved")
+    setLoading(true);
+    try {
+      await axiosCustom.post("/request/approve", {
+        reference: requestInfo.reference,
+        user_pin: joinpin,
+      });
+      await handlePrepareToTestUpdate("approved");
       //show success message
-      setSuccessModal(true)
-    }catch(err){
+      setSuccessModal(true);
+    } catch (err) {
       showerror(toast, err);
-      await handlePrepareToTestUpdate("rejected")
-    }finally{
-      setLoading(false)
+      await handlePrepareToTestUpdate("rejected");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
   // return (<Text>hi there pin and things and things in between and beyond </Text>)
   return (
     <View style={styles.container}>
       <Customstatusbar />
       {loading && <Loader />}
-       <Globalmodal
+      <Globalmodal
         showState={successModal}
-        btnFunction={()=>navigation.navigate("Home")}>
+        btnFunction={() => navigation.navigate("Home")}
+      >
         <View style={{ alignItems: "center" }}>
-        <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/>
-             <Text
-               style={{
-                 textAlign: "center",
-                 marginHorizontal: 40,
-                //  marginVertical: 40,
-                marginTop: 24,
-                marginBottom: 45,
-                 ...fontsize.bsmall,
-                 ...FONTS.regular,
-               }}
-             >Transaction Successful</Text>
-             <Text
-               style={{
-                 textAlign: "center",
-                 marginHorizontal: 40,
-                //  marginVertical: 40,
-                marginTop: 24,
-                marginBottom: 45,
-                 ...fontsize.bsmall,
-                 ...FONTS.regular,
-               }}
-             >You can dispute this 
-             transaction after 24 hours</Text>
-               {/* share and download */}
-             
-           </View>
+          <LottieView
+            source={Successcheckanimate}
+            autoPlay
+            loop
+            style={{ width: 148, height: 148 }}
+          />
+          <Text
+            style={{
+              textAlign: "center",
+              marginHorizontal: 40,
+              //  marginVertical: 40,
+              marginTop: 24,
+              marginBottom: 45,
+              ...fontsize.bsmall,
+              ...FONTS.regular,
+            }}
+          >
+            Transaction Successful
+          </Text>
+          <Text
+            style={{
+              textAlign: "center",
+              marginHorizontal: 40,
+              //  marginVertical: 40,
+              marginTop: 24,
+              marginBottom: 45,
+              ...fontsize.bsmall,
+              ...FONTS.regular,
+            }}
+          >
+            You can dispute this transaction after 24 hours
+          </Text>
+          {/* share and download */}
+        </View>
       </Globalmodal>
       <View style={styles.mainContainer}>
         <View style={styles.backArrowConteiner}>
@@ -134,7 +117,8 @@ const Depositpin = ({route, navigation}) => {
 
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-          Hi, {requestInfo?.user?.fullName} kindly put in your transaction pin to proceed your transaction of N{amountFormatter(requestInfo.total)}
+            Hi, {requestInfo?.user?.fullName} kindly put in your transaction pin
+            to proceed your transaction of N{amountFormatter(requestInfo.total)}
           </Text>
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
@@ -149,9 +133,14 @@ const Depositpin = ({route, navigation}) => {
         </View>
 
         <View style={styles.numberBtnContainer}>
-        {numbers.map((number, index) => {
+          {numbers.map((number, index) => {
             return (
-              <Numberbtn key={index} onpress={number !== ""? () => handleSetAmount(number): () => null}>
+              <Numberbtn
+                key={index}
+                onpress={
+                  number !== "" ? () => handleSetAmount(number) : () => null
+                }
+              >
                 {number}
               </Numberbtn>
             );
@@ -161,10 +150,7 @@ const Depositpin = ({route, navigation}) => {
         </View>
       </View>
 
-      <Bottombtn
-        title="CONTINUE"
-        onpress={handleApproveRequest}
-      />
+      <Bottombtn title="CONTINUE" onpress={handleApproveRequest} />
     </View>
   );
 };

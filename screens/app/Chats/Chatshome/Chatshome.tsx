@@ -92,12 +92,16 @@ const Chatshome = () => {
       <Customstatusbar />
       {/* Header texts and search icon */}
       <View style={styles.topHeader}>
+
+
         <View style={styles.chatTextContainer}>
           <Text style={styles.chatText}>Chats</Text>
           <View style={styles.amountOfChatsContainer}>
             <Text style={styles.amountOfChats}>{chats.length}</Text>
           </View>
         </View>
+
+        
         <View>
           <Chatsearchicon />
         </View>

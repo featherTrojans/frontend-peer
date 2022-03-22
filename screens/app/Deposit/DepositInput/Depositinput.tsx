@@ -47,6 +47,7 @@ function Depositinput({ route, navigation }) {
       if(!doesIncludeActiveStates(locationstate)){
         // navigate to the sorry not supported in your region yet
         // navigation.navigate("",{from:"deposit"})
+        navigation.navigate("Updatedeposit",{from:"deposit"})
       }
       setCoords({...coordinates,locationText:address});   
       
