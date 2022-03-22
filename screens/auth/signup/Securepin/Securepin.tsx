@@ -30,7 +30,6 @@ const Securepin = ({ route, navigation }) => {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
-      // console.log(newdata);
     }
   };
 

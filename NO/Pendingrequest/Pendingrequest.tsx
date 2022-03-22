@@ -45,7 +45,7 @@ const Pendingrequest = () => {
       {/* images showing receiver and sender */}
       <View style={{ flex: 0.5 }}>
         <View style={styles.detailsContainer}>
-          <Sendingandreceive />
+          {/* <Sendingandreceive /> */}
           <View style={{ marginBottom: 15 }}>
             <Text style={styles.detailsPrice}>NGN 35,000.00</Text>
           </View>

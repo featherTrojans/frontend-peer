@@ -20,7 +20,7 @@ import SecureDot from "../../../../../assets/icons/SecureDot";
 
 const { Successcheckanimate } = icons;
 
-const Airtimepurchasepin = ({ navigation }) => {
+const Airtimepurchasepin = ({ navigation, route }) => {
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const { type, data } = route.params;
@@ -66,7 +66,10 @@ const Airtimepurchasepin = ({ navigation }) => {
       <Customstatusbar />
       <Globalmodal
         showState={showmodal}
-        btnFunction={() => navigation.navigate("Root")}
+        btnFunction={() => {
+          setShowModal(false);
+          navigation.navigate("Root")
+        }}
         onBgPress={() => setShowModal(true)}
       >
         <View style={{ alignItems: "center" }}>

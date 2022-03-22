@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList, StatusBar } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import {
@@ -18,6 +18,7 @@ import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const { Backarrow, At } = icons;
 
@@ -121,6 +122,7 @@ const Saveduser = ({ details }: any) => {
 
 const Bankaccount = ({ navigation, route }) => {
   const { amount } = route.params;
+  const {authdata} = useContext(AuthContext)
   // const amount=500
   const toast = useToast();
   const [loading, setLoading] = useState(false);
@@ -179,7 +181,7 @@ const Bankaccount = ({ navigation, route }) => {
             Transfer Summary
           </Text>
 
-          <Sendingandreceive />
+          {/* <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.fullName || requestInfo?.user?.fullName || "A Z"} /> */}
 
           <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
             NGN {amountFormatter(amount)}

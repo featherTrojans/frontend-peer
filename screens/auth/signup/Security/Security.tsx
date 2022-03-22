@@ -23,6 +23,7 @@ const { Lockicondark } = icons;
 
 const Security = ({ route, navigation }) => {
   const {token} =  route.params;
+  const [showModal, setShowModal] = useState(false)
   const toast = useToast();
   const validationSchema = Yup.object().shape({
     password: Yup
@@ -42,10 +43,7 @@ const Security = ({ route, navigation }) => {
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
-
         <Customstatusbar />
-        {/* <Text>Sign up page</Text> */}
-        {/* Get Started and dots */}
         <JustifyBetween style={{ marginBottom: 10 }}>
           <View>
             <Text style={styles.header}>Get Started.</Text>
@@ -56,11 +54,9 @@ const Security = ({ route, navigation }) => {
             <View style={styles.topDots} />
           </View>
         </JustifyBetween>
-        {/* personal */}
         <View style={{ marginBottom: 40 }}>
           <Text style={styles.subText}>Security</Text>
         </View>
-
         <Formik
           initialValues={{
             password: "",
@@ -68,31 +64,21 @@ const Security = ({ route, navigation }) => {
           }}
           validationSchema={validationSchema}
           onSubmit={async (values,{setSubmitting}) => {
-            //  do validation
             if( values.password.length < 8){
               return showerror(toast,null,"password should have a minimun of 8 characters");
             }
-            try {
-              //send the request
+            try{
               const response = await axiosCustom.put("auth/password/set", {password:values.password},{headers:{token:token}});
-              //store data in context
-              // console.log(response)
               navigation.navigate("Securepin",{token:response?.data?.data?.token});
-            } catch (err) {
-              // error handling
+              // navigation.navigate("Welcome",{fromm:"setup", username:null,token:response?.data?.data?.token})
+            }catch(err){
               showerror(toast,err)
             }
-            //You want to call handleSubmitData here and pass in the values
           }}
         >
           {(formikProps) => {
             const {
               isSubmitting,
-              isValid,
-              handleBlur,
-              errors,
-              touched,
-              handleChange,
               handleSubmit,
             } = formikProps;
 
@@ -114,7 +100,6 @@ const Security = ({ route, navigation }) => {
                   icon={<Lockicondark />}
                   password
                 />
-
                 <View style={styles.bottomContainer}>
                   <TouchableOpacity
                     style={styles.proceedBtn}
@@ -140,10 +125,6 @@ const Security = ({ route, navigation }) => {
             );
           }}
         </Formik>
-
-        {/* Input */}
-
-        {/* Proceed Btn */}
       </View>
     </KeyboardAwareScrollView>
   );

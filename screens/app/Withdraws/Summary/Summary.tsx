@@ -135,7 +135,7 @@ const Summary = ({navigation, route}) => {
 
       <View style={{ alignItems: "center", justifyContent: 'center' }}>
         {/* Sending and receiver component */}
-        <Sendingandreceive />
+        <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.agent || requestInfo?.user?.agent || "A Z"} />
 
         {/* text of notification */}
         <View style={styles.notifyingTextContainer}>

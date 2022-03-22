@@ -617,8 +617,8 @@ const RootNavigator = ({initialBoarded}) => {
             <AppStack.Screen name="Chatshome" component={Chatshome} />
             <AppStack.Screen name="Chatsdm" component={Chatsdm} />
             <AppStack.Screen name="Usersearch" component={Usersearch} />
+            <AppStack.Screen name="CustomWebView" component={CustomWebView} />
           </AppStack.Group>
-          <AppStack.Screen name="CustomWebView" component={CustomWebView} />
         </>
       )}
     </AppStack.Navigator>

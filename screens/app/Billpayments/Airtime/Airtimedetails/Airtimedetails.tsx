@@ -77,7 +77,7 @@ const Airtimedetails = ({ navigation, route }) => {
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [phone, setPhone] = useState<null | string>(authdata?.phoneNumber);
+  const [phone, setPhone] = useState<null | string>(authdata?.userDetails?.phoneNumber);
   const [items, setItems] = useState([
     { label: "@    |    MTN", value: "MTN" },
     { label: "@    |    Airtel", value: "Airtel" },

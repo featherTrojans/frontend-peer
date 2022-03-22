@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { styles } from "./Requestsummary.styles";
 import {
   Backheader,
@@ -9,9 +9,11 @@ import {
 } from "../../../../components";
 import { FONTS, fontsize } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { AuthContext } from "../../../../context/AuthContext";
 
 
 const Requestsummary = ({navigation, route}) => {
+  const {authdata} = useContext(AuthContext);
   const {requestInfo} = route.params
   // console.log(requestInfo);
   return (
@@ -27,7 +29,7 @@ const Requestsummary = ({navigation, route}) => {
           marginTop: 20,
         }}
       >
-        <Sendingandreceive />
+        <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.agent || requestInfo?.user?.agent || "A Z"} />
         <Priceandcharges amount={requestInfo?.amount} charges={requestInfo?.charges} />
       </View>
 

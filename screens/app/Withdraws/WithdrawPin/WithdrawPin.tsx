@@ -10,11 +10,14 @@ import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { AuthContext } from "../../../../context/AuthContext";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const WithdrawPin = ({ navigation, route}) => {
   const {amount, userInfo} = route.params;
+
   const {coords} = useContext(LocationContext)
+  const {authdata} = useContext(AuthContext)
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [loading, setLoading] = useState(false)
@@ -86,7 +89,7 @@ const WithdrawPin = ({ navigation, route}) => {
          <View style={{ alignItems: "center" }}>
            <Text style={{alignSelf:"flex-start"}}>Request Summary</Text>
              <View style={{flexDirection:"row",justifyContent:"space-between", marginVertical:20}}>
-               <Sendingandreceive />
+               <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={userInfo?.fullName} />
               {/* <View
                 style={{
                   width: 80,
@@ -120,7 +123,11 @@ const WithdrawPin = ({ navigation, route}) => {
       </Globalmodal>
       <Globalmodal
         showState={shownextmodal}
-        btnFunction={() => navigation.navigate("Home")}
+        btnFunction={() => {
+          setShowModal(false);
+          setShowNextModal(false);
+          navigation.navigate("Home")
+        }}
       >
         <View style={{ alignItems: "center" }}>
             <LottieView

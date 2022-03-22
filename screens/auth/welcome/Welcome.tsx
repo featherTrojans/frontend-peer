@@ -53,9 +53,9 @@ const Welcome = ({ navigation, route }) => {
     getDashboardData();
   }, []);
 
-  // const setTokenOnComplete = () => {
-  //   setToken(token)
-  // }
+  const setTokenOnComplete = () => {
+    setToken(token)
+  }
 
   function callback() {
     "worklet";
@@ -65,8 +65,9 @@ const Welcome = ({ navigation, route }) => {
   const getDashboardData = async () => {
     try {
       const response = await axiosCustom.get("/dashboard");
+      console.log(response);
       setAuthData(response?.data?.data);
-
+      // setTokenOnComplete()
       progressWidth.value = withTiming(
         SIZES.width - 214,
         { duration: 3000 },

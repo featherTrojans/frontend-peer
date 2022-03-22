@@ -22,7 +22,7 @@ import Cancelicon from "../../../assets/icons/Cancelicon";
 
 const LockScreen = ({modal, setModal}: any) => {
     const toast = useToast()
-    const {setToken} = useContext(AuthContext)
+    const {setToken,authdata} = useContext(AuthContext)
     const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
     const [pin, setPin] = useState<string[]>([]);
     const [loading, setLoading] = useState(false)
@@ -114,7 +114,7 @@ const LockScreen = ({modal, setModal}: any) => {
         </View>}
         <View style={{marginTop: 44}}>
           <Text style={styles.headerText}>Welcome Back,</Text>
-          <Text style={styles.headerText}>Damilare</Text>
+          <Text style={styles.headerText}>{authdata?.userDetails?.fullName?.split(" ")[0]}</Text>
         </View>
 
         <View style={{marginHorizontal: 70, marginTop: 42}}>

@@ -29,7 +29,7 @@ const Accepetedrequest = () => {
 
             {/*  Scrolllable Starte */}
             <View style={styles.detailsContainer}>
-              <Sendingandreceive />
+              {/* <Sendingandreceive /> */}
               <View style={{ marginBottom: 15 }}>
                 <Text style={styles.amountText}>NGN 35,000.00</Text>
               </View>

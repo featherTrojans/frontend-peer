@@ -62,6 +62,7 @@ const Settings = ({navigation}) => {
   
   const handleSignout = ()=>{
     setToken("")
+    authdata({})
   }
   return (
     <View style={styles.container}>

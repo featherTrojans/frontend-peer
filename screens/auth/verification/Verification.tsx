@@ -51,8 +51,7 @@ const Verification = ({route,navigation}) => {
   const handleSubmit = async ()=>{
     setLoading(true)
     try{
-      const response = await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
-      // navigation.navigate("Security",{token:tokenn})
+      await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
       setShowModal(true)
     }catch(err){
       showerror(toast, err)
@@ -82,14 +81,15 @@ const Verification = ({route,navigation}) => {
       <Globalmodal
         showState={showModal}
         onBgPress={() => setShowModal(true)}
-        btnFunction={() => navigation.navigate("Security",{token:tokenn})}
+        btnFunction={() => {
+          setShowModal(false)
+          navigation.navigate("Security",{token:tokenn})
+        }}
         btnText="Continue"
       >
         <View style={{marginBottom: 50, justifyContent: 'center', alignItems: 'center', marginHorizontal: 85}}>
             <LottieView source={Successcheckanimate} style={{width: 148, height: 148}} autoPlay loop/>
             <Text style={{...fontsize.bsmall, ...FONTS.regular, marginTop: 17, textAlign: 'center'}}>Your number has been successfully verified</Text>
-    
-
         </View>
       </Globalmodal>
 

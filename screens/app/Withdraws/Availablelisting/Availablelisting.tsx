@@ -46,7 +46,6 @@ const Availablelisting = ({ navigation, route }: any) => {
   const [agents, setAgents] = useState([]);
   const [charge, setCharge] = useState(0);
   const [activeType, setActiveType] = useState("peers");
-  // const [active, setActive] = useState("peers");
   const [loading, setLoading] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
 
@@ -62,12 +61,10 @@ const Availablelisting = ({ navigation, route }: any) => {
       setLocationLoading(true);
       const { coordinates, address, locationstate } = await getCurrentLocation();
       if(!doesIncludeActiveStates(locationstate)){
-        // navigate to the sorry not supported in your region yet
-        // navigation.navigate("",{from:"deposit"})
         navigation.navigate("Updatedeposit",{from:"withdrawal"})
       }
       setCoords({ ...coordinates, locationText: address });
-      getAllAgents(address);
+      await getAllAgents(address);
     } catch (err) {
     } finally {
       setLocationLoading(false);
@@ -77,9 +74,9 @@ const Availablelisting = ({ navigation, route }: any) => {
   //This fucntion is to get the agents datas
   const getAllAgents = async (address: string) => {
     try {
-      // setLoading(true);
+      setLoading(true);
       const response = await axiosCustom.post("/status/find", {
-        amount: amount,
+        amount: Number(amount),
         location: address,
       });
       console.log(response.data);
