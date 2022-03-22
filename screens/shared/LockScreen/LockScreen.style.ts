@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  pinView:{
+  pinView: {
     width: 50,
     height: 60,
     borderColor: COLORS.blue7,
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  pinText:{
+  pinText: {
     ...fontsize.big,
   },
   proceedBtn: {
@@ -100,13 +100,12 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
   },
 
-
-
   ///Lock screen
 
-  headerText:{
+  headerText: {
     ...fontsize.big,
     ...FONTS.bold,
-    color: COLORS.white
-  }
+    color: COLORS.white,
+    textTransform: "capitalize",
+  },
 });

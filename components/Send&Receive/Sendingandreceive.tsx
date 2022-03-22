@@ -87,7 +87,7 @@ const showImage = (name, title) => {
               // borderRadius: 62 / 2,
             }}
             source={{
-              uri: assetsDB.fund.paystack,
+              uri: assetsDB["fund"]["paystack"],
             }}
           />
         </View>

@@ -31,7 +31,9 @@ export const styles = StyleSheet.create({
   profileUsername: {
     ...fontsize.small,
     ...FONTS.regular,
-    alignItems: 'center'
+    alignItems: 'center',
+    textTransform: "lowercase"
+    
   },
 
   walletBlock: {

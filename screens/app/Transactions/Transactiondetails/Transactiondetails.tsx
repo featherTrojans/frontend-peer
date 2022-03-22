@@ -6,7 +6,6 @@ import {
   ScrollView,
   Platform,
   TouchableOpacity,
-  
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import * as Print from "expo-print";
@@ -50,7 +49,7 @@ const Transactiondetails = ({ navigation, route }) => {
     location: meetupPoint,
     title,
     user,
-    otherUser
+    otherUser,
   } = data;
 
   const dt = moment(dateTime);
@@ -58,12 +57,9 @@ const Transactiondetails = ({ navigation, route }) => {
     "MMM"
   )} '${dt.format("YY")} - ${dt.format("LT")}`;
 
-  useEffect(() =>  {
-    console.log(data, "Transaction details")
-  })
-
- 
-
+  useEffect(() => {
+    console.log(data, "Transaction details");
+  });
 
   const copyToClipboard = (copiedTest: string) => {
     Clipboard.setString(copiedTest);
@@ -75,10 +71,6 @@ const Transactiondetails = ({ navigation, route }) => {
       console.log("hellow");
     }
   );
-
- 
-
-
 
   // Clipboard.removeClipboardListener(subscription);
 
@@ -131,22 +123,41 @@ const Transactiondetails = ({ navigation, route }) => {
         <style>
             body {
                 font-size: 16px;
-                color: rgb(255, 196, 0);
             }
 
             h1 {
-                text-align: left
+                text-align: center,
+                color: "red"
+            }
+            p{
+              font-size: 16px, 
+              color: "black", 
+              text-align: center
+            }
+            div{
+              max-width: 225px, width: "100%",display: "flex", justify-content: "space-between", align-items: "center"
             }
         </style>
-
-
     </head>
     <body>
     
-        <h1 >Hello, Welcome to Feather!</h1>
         <img
-      src="https://res.cloudinary.com/gyroscope/image/upload/v1647941538/feather-transaction_qeslnn.svg" />
+      src="https://res.cloudinary.com/gyroscope/image/upload/v1647941538/feather-transaction_qeslnn.svg" style={{max-width: 106px, width: "100%", object-fit: "cover"}}/>
+
+      <h1 >Transaction Summary</h1>
+
+      <div>
+            
+            <div style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070, padding: 20px}}>1</div>
+            <div style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070}}>2</div>
+            
+      </div>
+
+
     </body>
+
+
+
     </html>
 `;
 
@@ -220,7 +231,11 @@ const Transactiondetails = ({ navigation, route }) => {
             marginTop: 4,
           }}
         >
-          <Sendingandreceive senderName={user.fullName} receiverName={"S P"} title={title}/>
+          <Sendingandreceive
+            senderName={user?.fullName}
+            receiverName={otherUser?.fullName}
+            title={title}
+          />
           <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
             NGN {amountFormatter(amount)}
           </Text>
@@ -273,12 +288,16 @@ const Transactiondetails = ({ navigation, route }) => {
 
           <View style={styles.eachDetailContainer}>
             <Text style={styles.eachDetailTitle}>Receiver</Text>
-            <Text style={styles.eachDetailValue}>{receiver}</Text>
+            <Text style={styles.eachDetailValue}>
+              {receiver} - {user?.fullName}
+            </Text>
           </View>
 
           <View style={styles.eachDetailContainer}>
             <Text style={styles.eachDetailTitle}>Sender</Text>
-            <Text style={styles.eachDetailValue}>{sender}</Text>
+            <Text style={styles.eachDetailValue}>
+              {sender} - {otherUser && otherUser.fullName}
+            </Text>
           </View>
           <View style={styles.eachDetailContainer}>
             {meetupPoint && (
