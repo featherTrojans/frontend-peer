@@ -88,8 +88,8 @@ const Login = ({ navigation }: any) => {
           onSubmit={async (values) => {
             try {
               const response = await axiosCustom.post("/auth/signin", {
-                username: values.username,
-                password: values.password,
+                username: values.username.trim(),
+                password: values.password.trim(),
               });
               //store token in ASYNC STORAGE
               //store in context

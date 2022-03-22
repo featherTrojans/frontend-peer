@@ -39,7 +39,6 @@ const Transactiondetails = ({ navigation, route }) => {
   const [copied, setCopied] = useState(false);
 
   const copyColor = copied ? COLORS.blue6 : COLORS.grey2;
-
   const { data } = route.params;
 
   const {
@@ -57,7 +56,7 @@ const Transactiondetails = ({ navigation, route }) => {
   )} '${dt.format("YY")} - ${dt.format("LT")}`;
 
   useEffect(() => {
-    // console.log(data);
+    console.log(data);
   });
 
 
@@ -68,7 +67,7 @@ const Transactiondetails = ({ navigation, route }) => {
   const subscription = Clipboard.addClipboardListener(
     ({ content }: ClipboardEvent) => {
       setCopied(true);
-      // console.log("hellow");
+      console.log("hellow");
     }
   );
 
@@ -131,15 +130,17 @@ const Transactiondetails = ({ navigation, route }) => {
             }
 
             h1 {
-                text-align: center;
+                text-align: left
             }
         </style>
+
+
     </head>
     <body>
-        <h1>Hello, Welcome to Feather!</h1>
+    
+        <h1 >Hello, Welcome to Feather!</h1>
         <img
-      src="https://res.cloudinary.com/gyroscope/image/upload/v1647102346/icon1_rq2rlo.png"
-      style="width: 90vw;" />
+      src="https://res.cloudinary.com/gyroscope/image/upload/v1647941538/feather-transaction_qeslnn.svg" />
     </body>
     </html>
 `;

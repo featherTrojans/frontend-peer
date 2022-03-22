@@ -20,7 +20,7 @@ const Numberbtn = ({
       background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, true)}
     >
       <View style={styles.numberBtn}>
-        <Text style={[styles.numberBtnText,{color: textColor}]}>{children}</Text>
+        <Text style={[styles.numberBtnText,{color: textColor ? textColor : COLORS.black}]}>{children}</Text>
       </View>
     </TouchableNativeFeedback>
   );
