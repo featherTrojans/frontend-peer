@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     // width: SIZES.width,
     // height: SIZES.height,
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
+    backgroundColor: COLORS.blue6,
     paddingTop: 25,
     // paddingHorizontal: 25,
     // paddingBottom:40,
@@ -98,4 +99,14 @@ export const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
   },
+
+
+
+  ///Lock screen
+
+  headerText:{
+    ...fontsize.big,
+    ...FONTS.bold,
+    color: COLORS.white
+  }
 });
