@@ -126,6 +126,8 @@ import {
 } from "../screens";
 import { LockScreen } from "../screens";
 
+// import { LockScreen } from "../screens";
+
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 
@@ -473,7 +475,7 @@ const RootNavigator = ({initialBoarded}) => {
       {/* SCREEN FOR AUTH */}
       {!token ? (
         <AppStack.Group screenOptions={verticalAnimation}>
-          <AppStack.Screen name="Onboarding" component={Welcome} />
+          <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Personal" component={Personal} />
           <AppStack.Screen name="Verification" component={Verification} />
           <AppStack.Screen name="Security" component={Security} />

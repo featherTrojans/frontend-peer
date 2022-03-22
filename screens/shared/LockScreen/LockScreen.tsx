@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
+  TouchableNativeFeedback
 } from "react-native";
 import { useContext, useState } from "react";
 import Modal from "react-native-modal";
@@ -17,6 +18,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../Globalmodal/Globalmodal";
 import { AuthContext } from "../../../context/AuthContext";
+import Cancelicon from "../../../assets/icons/Cancelicon";
 
 const LockScreen = ({modal, setModal}: any) => {
     const toast = useToast()
@@ -25,10 +27,14 @@ const LockScreen = ({modal, setModal}: any) => {
     const [pin, setPin] = useState<string[]>([]);
     const [loading, setLoading] = useState(false)
     const [numoftrial, setNumberTrial] = useState(0)
+  const [error, setError] = useState(false)
 
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldamount) => [...oldamount, value]);
+    }
+    if(pin.length === 3){
+      handleSub()
     }
   };
   const handleRemoveAmount = () => {
@@ -57,6 +63,8 @@ const LockScreen = ({modal, setModal}: any) => {
   // return (<View>Hi</View>)
 
   const handleSub = async ()=>{
+    
+    
     setLoading(true)
     try{
       await axiosCustom.post("/auth/pin/verify",{user_pin: pin.join(""),pin:pin.join("")})
@@ -65,7 +73,9 @@ const LockScreen = ({modal, setModal}: any) => {
     }catch(err){
       const newnumoftrial = numoftrial + 1
       setNumberTrial(newnumoftrial)
+      setError(true)
       if(newnumoftrial === 3 ){
+        setModal(false) 
         setToken("")
       }
       console.log(err.response)
@@ -76,50 +86,74 @@ const LockScreen = ({modal, setModal}: any) => {
   }
   return (
     <Modal
-      isVisible={modal}
+      isVisible={modal} //modal should be pssed in here
       coverScreen={true}
-      backdropColor="#000"
-      backdropOpacity={0.2}
-      style={{margin: 0, flex: 1, }}
+      backdropColor={COLORS.blue6}
+      backdropOpacity={1}
+      style={{ margin: 0, flex: 1 }}
       deviceHeight={SIZES.height}
       deviceWidth={SIZES.width}
     >
-      <SafeAreaView style={styles.container} >
+      <SafeAreaView style={{flex: 1, paddingHorizontal: 15}}>
         {loading && <Loader />}
-        <View style={{ paddingHorizontal: 25 }}>
-          
-          
+        { error && <View  style={{
+        backgroundColor:"#E00000",
+        paddingVertical: 18,
+        paddingHorizontal: 24,
+        borderRadius: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "90%",
+        position:"absolute",
+        marginHorizontal:25,}}>
+        <Text style={{color: "#fff",fontSize: 14,lineHeight:20}}>Incorrect pin, try again</Text>    
+        <TouchableOpacity onPress={()=>setError(false)}>
+            <Cancelicon />
+        </TouchableOpacity>
+        </View>}
+        <View style={{marginTop: 44}}>
+          <Text style={styles.headerText}>Welcome Back,</Text>
+          <Text style={styles.headerText}>Damilare</Text>
+        </View>
 
-          <View style={styles.pinContainer}>
-            <View style={styles.pinInputContainer}>
-              <View style={styles.pinView}>{pin[0] && <SecureDot />}</View>
-              <View style={styles.pinView}>{pin[1] && <SecureDot />}</View>
-              <View style={styles.pinView}>{pin[2] && <SecureDot />}</View>
-              <View style={styles.pinView}>{pin[3] && <SecureDot />}</View>
-            </View>
+        <View style={{marginHorizontal: 70, marginTop: 42}}>
+          <Text style={{textAlign: "center", ...fontsize.bsmall,...FONTS.medium, color: COLORS.white}}>Enter PIN</Text>
+
+          <View style={{flexDirection: 'row', justifyContent: "center",marginTop: 58, marginBottom: 105}}>
+            {
+              pin.map(item=><View  style={{width: 16, height: 16,marginHorizontal:30, backgroundColor: COLORS.white, borderRadius: 16/2}}/>)
+            }
+            
+            {/* <View  style={{width: 16, height: 16, backgroundColor: COLORS.white, borderRadius: 16/2}}/>
+            <View  style={{width: 16, height: 16, backgroundColor: COLORS.white, borderRadius: 16/2}}/>
+            <View  style={{width: 16, height: 16, backgroundColor: COLORS.white, borderRadius:16/2}}/> */}
           </View>
+        </View>
+
+
 
           <View style={styles.numberBtnContainer}>
             {numbers.map((number, index) => {
               return (
-                <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
+                <Numberbtn key={index} onpress={() => handleSetAmount(number)} textColor={COLORS.white}>
                   {number}
                 </Numberbtn>
               );
             })}
 
-            <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
+            <Numberbtn onpress={() => handleRemoveAmount()} textColor={COLORS.white}>X</Numberbtn>
           </View>
-        </View>
-        <Bottombtn
-          title="SUBMIT"
-          disabled={pin.length !== 4}
-          onpress={handleSub}
-        />       
+
+
+          <View style={{ justifyContent: "center", alignItems: "center"}}>
+            <Text style={{...fontsize.bsmall, ...FONTS.bold, color: COLORS.yellow1}}>0/5</Text>
+          </View>
+
+    
       </SafeAreaView>
     </Modal>
   );
 };
-
 
 export default LockScreen;
