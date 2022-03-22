@@ -53,7 +53,7 @@ const LockScreen = ({ modal, setModal }: any) => {
   // return (<View>Hi</View>)
   return (
     <Modal
-      isVisible={true} //modal should be pssed in here
+      isVisible={modal} //modal should be pssed in here
       coverScreen={true}
       backdropColor={COLORS.blue6}
       backdropOpacity={1}
@@ -64,7 +64,7 @@ const LockScreen = ({ modal, setModal }: any) => {
       <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
         {loading && <Loader />}
         <StatusBar
-          animated={true}
+          animated={modal}
           backgroundColor={COLORS.blue6}
           barStyle="light-content"
           networkActivityIndicatorVisible={true}
