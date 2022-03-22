@@ -55,9 +55,7 @@ const Transactiondetails = ({ navigation, route }) => {
     "MMM"
   )} '${dt.format("YY")} - ${dt.format("LT")}`;
 
-  useEffect(() => {
-    console.log(data);
-  });
+ 
 
 
   const copyToClipboard = (copiedTest: string) => {
