@@ -112,6 +112,9 @@ import Cablestvicon from "../assets/icons/Cablestvicon";
 import Inputdropdown from "../assets/icons/Inputdropdown";
 import Addressbook from "../assets/icons/Addressbook";
 import Viewcashrequesticon from "../assets/icons/Viewcashrequesticon";
+import Featherdefault from "../assets/icons/Featherdefault";
+import Userdefaultmedium from "../assets/icons/Userdefaultmedium";
+
 
 
 
@@ -262,7 +265,8 @@ Cablestvicon,
 Inputdropdown,
 Addressbook,
 Viewcashrequesticon,
-
+Featherdefault,
+Userdefaultmedium,
 
 
 

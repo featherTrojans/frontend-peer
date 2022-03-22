@@ -5,7 +5,7 @@ import { FONTS, fontsize } from "../../constants";
 type InitialsBgProps = {
   sideLength: number;
   name: string;
-  bg?: string
+  bg?: string,
 };
 
 const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
@@ -49,6 +49,7 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
         borderRadius: sideLength / 2,
       }}
     >
+
       <Text style={{ ...fontsize.bsmall, ...FONTS.medium }}>
         {nameSplitter()}
       </Text>
