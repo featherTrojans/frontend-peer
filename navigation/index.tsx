@@ -124,7 +124,7 @@ import {
   
   
 } from "../screens";
-import { LockScreen } from "../screens";
+// import { LockScreen } from "../screens";
 
 // import { LockScreen } from "../screens";
 
@@ -671,7 +671,7 @@ export default function MainNavigation({initialBoarded = false}) {
 
   return (
     <NavigationContainer ref={navigationRef}>
-      {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
+      {/* {token ? <LockScreen modal={modal} setModal={setModal} /> : null} */}
       <RootNavigator initialBoarded={initialBoarded} />
     </NavigationContainer>
   );

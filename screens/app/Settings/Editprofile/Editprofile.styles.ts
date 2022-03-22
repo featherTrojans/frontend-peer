@@ -24,6 +24,10 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     // paddingVertical: 25,
   },
+  name:{
+    color: "#0034CB",
+    marginLeft: 10
+  },
   subheadersText: {
     ...fontsize.smallest,
     ...FONTS.regular,
@@ -92,6 +96,12 @@ export const styles = StyleSheet.create({
     ...fontsize.smaller,
     ...FONTS.regular,
     color: COLORS.grey2,
+  },
+  namecont:{
+    flexDirection: "row",
+    marginLeft: 5,
+    alignItems:"center",
+    marginBottom: 20
   },
   uploadIdBtn: {
     backgroundColor: COLORS.black,
