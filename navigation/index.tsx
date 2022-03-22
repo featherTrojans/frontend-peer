@@ -98,16 +98,19 @@ import {
   Depositpin,
   Canceldeposit,
   WalletPin,
+  Updatedeposit,
+
+
   //Chats
   Chatshome,
   Chatsdm,
+  Chatsoon,
   Usersearch,
   TransferpinBank,
   WithdrawPin,
   SecurepinAgain,
   CustomWebView,
   Depositinput,
-  LockScreen,
   Testings,
 
 
@@ -118,7 +121,10 @@ import {
   Airtimepurchasepin,
   Electricityamount,
   Electricitydetails,
+  
+  
 } from "../screens";
+import { LockScreen } from "../screens";
 
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -387,7 +393,7 @@ const Tabs = () => {
         />
         <BottomTab.Screen
           name="Chats"
-          component={Chatshome}
+          component={Chatsoon}
           options={{
             tabBarIcon: ({ focused, color, size }) => {
               return (
@@ -461,7 +467,7 @@ const RootNavigator = ({initialBoarded}) => {
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
+      initialRouteName={initialBoarded ?  "LockScreen" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
@@ -479,6 +485,7 @@ const RootNavigator = ({initialBoarded}) => {
           <AppStack.Screen name="Setup" component={Setup} />
           <AppStack.Screen name="Login" component={Login} />
           <AppStack.Screen name="Welcome" component={Welcome} />
+
         </AppStack.Group>
       ) : (
         <>
@@ -593,6 +600,7 @@ const RootNavigator = ({initialBoarded}) => {
             <AppStack.Screen name="Depositupdate" component={Depositupdate} />
             <AppStack.Screen name="Deposit" component={true ? Deposit : Depositupdate} />
             <AppStack.Screen name="Depositinput" component={Depositinput} />
+            <AppStack.Screen name="Updatedeposit" component={Updatedeposit} />
             <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
             <AppStack.Screen
               name="Accepteddeposit"

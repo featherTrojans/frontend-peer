@@ -62,15 +62,8 @@ const LockScreen = ({modal, setModal}: any) => {
       <SafeAreaView style={styles.container} >
         {loading && <Loader />}
         <View style={{ paddingHorizontal: 25 }}>
-          <JustifyBetween style={{ marginBottom: 10 }}>
-            <View>
-              <Text style={styles.header}>Lock Screen </Text>
-              <Text style={styles.header}>4-digit secure pin to unlock</Text>
-            </View>
-          </JustifyBetween>
-          <View style={{ marginBottom: 40 }}>
-            <Text style={styles.subText}>Transaction PIN</Text>
-          </View>
+          
+          
 
           <View style={styles.pinContainer}>
             <View style={styles.pinInputContainer}>
@@ -93,11 +86,13 @@ const LockScreen = ({modal, setModal}: any) => {
             <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
           </View>
         </View>
-        <Bottombtn
+
+        {/* THis function should now call when the length of numbers is 4 */}
+        {/* <Bottombtn
           title="submit"
           onpress={handleSubmit}
           disabled={pin.length !== 4}
-        />
+        /> */}
       </SafeAreaView>
     </Modal>
   );

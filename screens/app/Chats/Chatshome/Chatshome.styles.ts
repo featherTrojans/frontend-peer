@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
   chatTextContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 30
   },
   chatText: {
     ...fontsize.bmedium,

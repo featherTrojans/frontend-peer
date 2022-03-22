@@ -77,7 +77,7 @@ const Airtimedetails = ({ navigation, route }) => {
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [phone, setPhone] = useState<null | string>(authdata?.userDetails?.phoneNumber);
+  const [phone, setPhone] = useState<null | string>(authdata?.phoneNumber);
   const [items, setItems] = useState([
     { label: "@    |    MTN", value: "MTN" },
     { label: "@    |    Airtel", value: "Airtel" },
@@ -138,6 +138,9 @@ const Airtimedetails = ({ navigation, route }) => {
           Select your preferred network provider and receivers phone number.
         </Text>
 
+
+
+
         <View style={{ position: "relative", marginTop: 30, ...Shadow}}>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -196,6 +199,10 @@ const Airtimedetails = ({ navigation, route }) => {
             }}
           />
         </View>
+
+
+
+
 
         <View style={{ marginTop: 40,minHeight:400, flex: 1 }}>
           {index === 0 ? (

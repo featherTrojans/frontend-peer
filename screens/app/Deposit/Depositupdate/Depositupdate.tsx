@@ -206,10 +206,11 @@ const Depositupdate = ({ navigation }) => {
             <Bottombtn
               title="Create New Status"
               onpress={() =>
-                navigation.navigate("Depositinput", {
-                  type: "create",
-                  reference: null,
-                })
+                navigation.navigate("Updatedeposit")
+                // navigation.navigate("Depositinput", {
+                //   type: "create",
+                //   reference: null,
+                // })
               }
             />
           </>
