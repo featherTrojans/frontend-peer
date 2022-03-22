@@ -64,6 +64,7 @@ import Pendingdeposit from "./app/Deposit/Pendingdeposit/Pendingdeposit";
 import Accepteddeposit from "./app/Deposit/Accepteddeposit/Accepteddeposit";
 import Depositpin from "./app/Deposit/Depositpin/Depositpin";
 import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
+import Updatedeposit from "./app/Deposit/Updatedeposit/Updatedeposit";
 import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 
 import Paybills from "./app/Billpayments/Paybills/Paybills";
@@ -117,6 +118,7 @@ export {
   Notifications,
   Deposit,
   Depositupdate,
+  Updatedeposit,
   Pendingdeposit,
   Accepteddeposit,
   Depositpin,
