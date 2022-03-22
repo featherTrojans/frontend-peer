@@ -7,9 +7,9 @@ import {
   TouchableNativeFeedback,
   StatusBar,
 } from "react-native";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Modal from "react-native-modal";
-import { COLORS, FONTS, fontsize, SIZES } from "../../../constants";
+import { COLORS, FONTS, fontsize, SIZES, icons } from "../../../constants";
 import { styles } from "./LockScreen.style";
 import { JustifyBetween } from "../../../global/styles";
 import SecureDot from "../../../assets/icons/SecureDot";
@@ -18,16 +18,23 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../Globalmodal/Globalmodal";
+import { AuthContext } from "../../../context/AuthContext";
 
+const {Cancelicon} = icons
 const LockScreen = ({ modal, setModal }: any) => {
   const toast = useToast();
+  const {setToken,authdata} = useContext(AuthContext)
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-
+  const [numoftrial, setNumberTrial] = useState(0)
+  const [error, setError] = useState(false)
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldamount) => [...oldamount, value]);
+    }
+    if(pin.length === 3){
+      handleSubmit()
     }
   };
   const handleRemoveAmount = () => {
@@ -39,15 +46,25 @@ const LockScreen = ({ modal, setModal }: any) => {
     }
   };
   const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      await axiosCustom.post("/auth/pin/verify", { pin: pin.join("") });
-      setPin([]);
-      setModal(false);
-    } catch (err) {
-      showerror(toast, err);
-    } finally {
-      setLoading(false);
+    setLoading(true)
+    try{
+      await axiosCustom.post("/auth/pin/verify",{user_pin: pin.join(""),pin:pin.join("")})
+      setPin([])
+      setModal(false)  
+    }catch(err){
+      const newnumoftrial = numoftrial + 1
+      setNumberTrial(newnumoftrial)
+      setError(true)
+      if(newnumoftrial === 5 ){
+        setModal(false) 
+        setToken("")
+        setNumberTrial(0)
+        setPin([])
+      }
+      console.log(err.response)
+      // setModal(false)  
+    }finally{
+      setLoading(false)
     }
   };
   // return (<View>Hi</View>)
@@ -63,6 +80,22 @@ const LockScreen = ({ modal, setModal }: any) => {
     >
       <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
         {loading && <Loader />}
+       { error && <View  style={{
+              backgroundColor:"#E00000",
+              paddingVertical: 18,
+              paddingHorizontal: 24,
+              borderRadius: 10,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "90%",
+              position:"absolute",
+              marginHorizontal:25,}}>
+                <Text style={{color: "#fff",fontSize: 14,lineHeight:20}}>Incorrect pin, try again</Text>    
+                <TouchableOpacity onPress={()=>setError(false)}>
+                  <Cancelicon />
+                </TouchableOpacity>
+            </View>}
         <StatusBar
           animated={modal}
           backgroundColor={COLORS.blue6}
@@ -73,7 +106,7 @@ const LockScreen = ({ modal, setModal }: any) => {
         />
         <View style={{ marginTop: 44 }}>
           <Text style={styles.headerText}>Welcome Back,</Text>
-          <Text style={styles.headerText}>Damilare</Text> 
+          <Text style={styles.headerText}>{authdata?.userDetails?.fullName?.split(" ")[0]}</Text> 
         </View>
 
         <View style={{ marginHorizontal: 70, marginTop: 42 }}>
@@ -102,7 +135,7 @@ const LockScreen = ({ modal, setModal }: any) => {
                 width: 16,
                 height: 16,
                 backgroundColor: COLORS.white,
-                opacity: 0.2,
+                opacity: pin[0]?1:0.2,
                 borderRadius: 16 / 2,
               }}
             />
@@ -112,7 +145,7 @@ const LockScreen = ({ modal, setModal }: any) => {
                 height: 16,
                 borderRadius: 16/2,
                 backgroundColor: COLORS.white,
-                opacity: 0.2,
+                opacity:  pin[1]?1:0.2,
               }}
             />
             <View
@@ -121,7 +154,7 @@ const LockScreen = ({ modal, setModal }: any) => {
                 height: 16,
                 borderRadius: 16/2,
                 backgroundColor: COLORS.white,
-                opacity: 0.2,
+                opacity:  pin[2]?1:0.2,
               }}
             />
             <View
@@ -130,7 +163,7 @@ const LockScreen = ({ modal, setModal }: any) => {
                 height: 16,
                 backgroundColor: COLORS.white,
                 borderRadius: 16 / 2,
-                opacity: 0.2,
+                opacity:  pin[3]?1:0.2,
               }}
             />
           </View>
@@ -161,7 +194,7 @@ const LockScreen = ({ modal, setModal }: any) => {
           <Text
             style={{ ...fontsize.bsmall, ...FONTS.bold, color: COLORS.yellow1 }}
           >
-            0/5
+            {numoftrial}/5
           </Text>
         </View>
       </SafeAreaView>

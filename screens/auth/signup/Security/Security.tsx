@@ -10,7 +10,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Input, Loader } from "../../../../components/index";
-import { FONTS, icons } from "../../../../constants";
+import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Security.styles";
@@ -18,12 +18,15 @@ import { AuthContext } from "../../../../context/AuthContext";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import LottieView from "lottie-react-native";
 
-const { Lockicondark } = icons;
+const { Lockicondark,Successcheckanimate } = icons;
 
 const Security = ({ route, navigation }) => {
   const {token} =  route.params;
   const [showModal, setShowModal] = useState(false)
+  const [result, setResult] = useState<any>();
   const toast = useToast();
   const validationSchema = Yup.object().shape({
     password: Yup
@@ -42,6 +45,91 @@ const Security = ({ route, navigation }) => {
   
   return (
     <KeyboardAwareScrollView>
+       <Globalmodal
+          showState={showModal}
+          // onBgPress={() => setShowModal(true)}
+          btnFunction={() =>{
+            setShowModal(false);
+            navigation.navigate("Welcome", {
+              fromm: "setup",
+              username: null,
+              token: result?.token,
+            })
+          }
+          }
+          btnText="continue"
+        >
+          <View style={{alignItems: 'center', justifyContent: 'center',}}>
+            <LottieView
+              source={Successcheckanimate}
+              autoPlay
+              loop
+              style={{ width: 148, height: 148 }}
+            />
+            <View
+              style={{ marginTop: 24, marginBottom: 41, marginHorizontal: 25, justifyContent: 'center', alignItems: 'center' }}
+            >
+              <Text
+                style={{
+                  ...fontsize.bsmall,
+                  ...FONTS.regular,
+                  marginBottom: 17,
+                }}
+              >
+                Your feather username is
+              </Text>
+              <Text
+                style={{
+                  ...fontsize.bxmedium,
+                  ...FONTS.bold,
+                  color: COLORS.blue6,
+                }}
+              >
+                @{result?.userId}
+              </Text>
+              <Text
+                style={{
+                  ...fontsize.bsmall,
+                  ...FONTS.regular,
+                  marginBottom: 17,
+                }}
+              >
+                and Your transaction pin is
+              </Text>
+              <Text
+                style={{
+                  ...fontsize.bxmedium,
+                  ...FONTS.bold,
+                  color: COLORS.blue6,
+                }}
+              >
+                0000
+              </Text>
+              <Text
+                style={{
+                  ...fontsize.bsmall,
+                  ...FONTS.regular,
+                  marginVertical: 41,
+                  textAlign: 'center'
+                }}
+              >
+                This can be used as an account identity to receive payments and
+                perform transactions
+              </Text>
+              <Text
+              style={{
+                ...fontsize.small,
+                ...FONTS.regular,
+                color: COLORS.grey2,
+                textAlign: "center"
+              }}
+            >
+              *This username and transaction pin can be changed under settings
+            </Text>
+            </View>
+          
+          </View>
+        </Globalmodal>
       <View style={styles.container}>
         <Customstatusbar />
         <JustifyBetween style={{ marginBottom: 10 }}>
@@ -69,7 +157,9 @@ const Security = ({ route, navigation }) => {
             }
             try{
               const response = await axiosCustom.put("auth/password/set", {password:values.password},{headers:{token:token}});
-              navigation.navigate("Securepin",{token:response?.data?.data?.token});
+              setShowModal(true)
+              setResult(response.data.data)
+              // navigation.navigate("Securepin",{token:response?.data?.data?.token});
               // navigation.navigate("Welcome",{fromm:"setup", username:null,token:response?.data?.data?.token})
             }catch(err){
               showerror(toast,err)

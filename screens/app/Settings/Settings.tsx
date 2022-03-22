@@ -57,12 +57,12 @@ const Settings = ({navigation}) => {
   
 
   
-  const {authdata, setToken} = useContext(AuthContext)
+  const {authdata,setAuthData, setToken} = useContext(AuthContext)
   // console.log(authdata)
   
   const handleSignout = ()=>{
     setToken("")
-    authdata({})
+    setAuthData({})
   }
   return (
     <View style={styles.container}>

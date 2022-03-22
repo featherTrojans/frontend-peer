@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   Animated,
+  ActivityIndicator,
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
@@ -25,11 +26,11 @@ import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import useDebounce from "../../../../utils/debounce";
 
-const { Backarrow } = icons;
+const { Backarrow,Check, WrongIcon } = icons;
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().label("userName").required(),
   firstName: Yup.string().label("First Name").required(),
   lastName: Yup.string().label("Last Name").required(),
 });
@@ -48,6 +49,15 @@ type EditinputProps = {
   name?: string;
 };
 
+const EditinputSpecial = ({ label, value, name, ...props }: EditinputProps) => {
+  return (
+    <View style={{ marginBottom: 5 }}>
+      {/* Label */}
+      <Text style={styles.labelText}>{label}</Text>
+      <TextInput style={styles.textInput} value={value} {...props} />
+    </View>
+  );
+}
 const Editinput = ({ label, value, name, formikprops }: EditinputProps) => {
   if (formikprops) {
     const { values, handleChange, handleBlur } = formikprops;
@@ -77,8 +87,14 @@ const Editinput = ({ label, value, name, formikprops }: EditinputProps) => {
 const Basicsettings = () => {
   const toast = useToast();
   const { authdata, setAuthData } = useContext(AuthContext);
-
+  const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
+  const [usernamename, setusernamename] = useState(authdata?.userDetails?.username)
   // console.log(authdata,"auth datat o")
+  const handleUsernameChange = (text: string) => {
+    setusernamename(text);
+    // and debound
+    getuserinfo(text);
+  };
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -88,7 +104,7 @@ const Basicsettings = () => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <Formik
           initialValues={{
-            username: authdata?.userDetails?.username,
+            
             firstName: authdata?.userDetails?.fullName?.split(" ")[1],
             lastName: authdata?.userDetails?.fullName?.split(" ")[0],
             // username:"",
@@ -98,13 +114,15 @@ const Basicsettings = () => {
           validationSchema={validationSchema}
           onSubmit={async (values) => {
             try {
-              const response = await axiosCustom.put("/profile/update/basic", {
-                username: values.username,
+              const data =  {
+                newUsername: usernamename,
                 firstName: values.firstName,
                 lastName: values.lastName,
-              });
+              }
+              console.log(data)
+              const response = await axiosCustom.put("/profile/update/basic",data);
               // console.log(response);
-              const userdetails = {...authdata?.userDetails,username: values.username,fullName: `${values.lastName} ${values.firstName}`}
+              const userdetails = {...authdata?.userDetails,username: usernamename,fullName: `${values.lastName} ${values.firstName}`}
               setAuthData({
                 ...authdata,
                 userDetails:userdetails
@@ -116,7 +134,8 @@ const Basicsettings = () => {
           }}
         >
           {(formikProps) => {
-            const { isSubmitting, handleSubmit } = formikProps;
+            const { isSubmitting, handleSubmit , values} = formikProps;
+            // handleUsernameChange(values.username)
             return (
               <React.Fragment>
                 {isSubmitting && <Loader />}
@@ -129,11 +148,20 @@ const Basicsettings = () => {
                   </Text>
                 </View>
                 <View style={styles.editInputContainer}>
-                  <Editinput
+                  <EditinputSpecial
                     label="Username"
                     name="username"
-                    formikprops={formikProps}
+                    value={usernamename}
+                    onChangeText={(text)=>handleUsernameChange(text)}
                   />
+                  <View style={styles.namecont}>
+              {loadbounce ? (<ActivityIndicator size={15} color={COLORS.blue6} />) :( userinfo.fullName && (usernamename?.toLowerCase() !== authdata?.userDetails?.username?.toLowerCase() )) ? (
+              <><WrongIcon /><Text style={styles.name}>{usernamename} is taken</Text></>) : null}
+               {(error || (usernamename.toLowerCase() === authdata?.userDetails?.username.toLowerCase() )) && (<>
+                <Check />
+                <Text style={styles.name}>{usernamename}</Text>
+              </>)}
+          </View>
                   <Editinput
                     label="Firstname"
                     name="firstName"
