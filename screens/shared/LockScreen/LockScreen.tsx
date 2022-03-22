@@ -52,7 +52,7 @@ const LockScreen = ({ modal, setModal }: any) => {
   // return (<View>Hi</View>)
   return (
     <Modal
-      isVisible={true} //modal should be pssed in here
+      isVisible={modal} //modal should be pssed in here
       coverScreen={true}
       backdropColor={COLORS.blue6}
       backdropOpacity={1}
