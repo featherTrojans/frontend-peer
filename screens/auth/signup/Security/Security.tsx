@@ -93,7 +93,7 @@ const Security = ({ route, navigation }) => {
                   color: COLORS.blue6,
                 }}
               >
-                @{result?.userId}
+                @{result?.username}
               </Text>
               <Text
                 style={{

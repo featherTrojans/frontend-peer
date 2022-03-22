@@ -114,51 +114,112 @@ const Transactiondetails = ({ navigation, route }) => {
   };
 
   const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Feather Transactions</title>
-        <style>
-            body {
-                font-size: 16px;
-            }
-
-            h1 {
-                text-align: center,
-                color: "red"
-            }
-            p{
-              font-size: 16px, 
-              color: "black", 
-              text-align: center
-            }
-            div{
-              max-width: 225px, width: "100%",display: "flex", justify-content: "space-between", align-items: "center"
-            }
-        </style>
-    </head>
-    <body>
-    
-        <img
-      src="https://res.cloudinary.com/gyroscope/image/upload/v1647941538/feather-transaction_qeslnn.svg" style={{max-width: 106px, width: "100%", object-fit: "cover"}}/>
-
-      <h1 >Transaction Summary</h1>
-
-      <div>
-            
-            <div style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070, padding: 20px}}>1</div>
-            <div style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070}}>2</div>
-            
-      </div>
-
-
-    </body>
-
-
-
-    </html>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Feather Transactions</title>
+      <style>
+          body {
+              font-size: 16px;
+              padding: 20px;
+          }
+  
+          h1 {
+              text-align: center;
+              color: red
+          }
+          p{
+            font-size: 16px;
+            color: black;
+            text-align: center
+          }
+          .div{
+            max-width: 225px;
+          width: "100%";
+          display: flex;
+           justify-content: space-between;
+            align-items: center
+          }
+  
+          .transaction{}
+          .avatars{
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              margin-bottom: 20px;
+          }
+          .avatar__one{
+              width: 200px;
+              height: 200px;
+              background-color: gray;
+              border-radius: 100%;
+          }
+          .transaction__text{
+              text-align: center;
+          }
+          .transaction__heading{
+              text-align: center;
+          }
+          .transaction__ref{
+              font-size: 30px;
+              color: blue
+          }
+          .list{}
+          .item{
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 10px;
+          }
+          .item__left{}
+          .item__right{}
+          .footer{
+              text-align: center;
+          }
+      </style>
+  </head>
+  <body>
+  
+      <img
+    src="https://res.cloudinary.com/gyroscope/image/upload/v1647941538/feather-transaction_qeslnn.svg" style="max-width: 106px; width: 100%; object-fit: cover"/>
+  
+    <h1 class="transaction">Transaction Summary</h1>
+  
+    <div class="avatars">
+        <div class="avatar__one"></div>
+        <div class="avatar__one"></div>
+    </div>
+    <p class="transaction__text">This is the transaction report between Adebayo Coker and Strankey Johnson</p>
+  
+    <h3 class="transaction__heading">Transaction Ref</h3>
+   <p class="transaction__ref">Fth2454wj4523</p>
+  
+   <ul class="list">
+       <li class="item">
+           <span class="item__left">Receiver </span>
+           <span class="item__right">@suzzy ithens</span>
+       </li>
+       <li class="item">
+          <span class="item__left">Receiver </span>
+          <span class="item__right">@suzzy ithens</span>
+      </li>
+      <li class="item">
+          <span class="item__left">Receiver </span>
+          <span class="item__right">@suzzy ithens</span>
+      </li>
+      <li class="item">
+          <span class="item__left">Receiver </span>
+          <span class="item__right">@suzzy ithens</span>
+      </li>
+   </ul>
+  
+   <p class="footer">If you have an issue with this transaction kindly send a mail with transaction ref to <a href="">@feathersomethinf</a></p>
+  </body>
+  
+  
+  
+  </html>
 `;
 
   const shareReceipt = async (html) => {
