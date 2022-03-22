@@ -115,7 +115,7 @@ const Basicsettings = () => {
           onSubmit={async (values) => {
             try {
               const data =  {
-                username: usernamename,
+                newUsername: usernamename,
                 firstName: values.firstName,
                 lastName: values.lastName,
               }

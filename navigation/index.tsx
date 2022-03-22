@@ -126,7 +126,7 @@ import {
 } from "../screens";
 // import { LockScreen } from "../screens";
 
-// import { LockScreen } from "../screens";
+import { LockScreen } from "../screens";
 
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -671,7 +671,8 @@ export default function MainNavigation({initialBoarded = false}) {
 
   return (
     <NavigationContainer ref={navigationRef}>
-      {/* {token ? <LockScreen modal={modal} setModal={setModal} /> : null} */}
+      {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
+      {/* <LockScreen modal={true} setModal={setModal} /> */}
       <RootNavigator initialBoarded={initialBoarded} />
     </NavigationContainer>
   );
