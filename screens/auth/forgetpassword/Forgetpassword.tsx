@@ -1,11 +1,24 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { Input } from "../../../components";
 import { styles } from "../signup/Personal/Personal.styles";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 const { Envelopeicon } = icons;
 
 const Forgetpassword = ({ navigation }) => {
+  const [email, setEmail] = useState()
+  const handleSubmit = async () =>{
+    try{
+      const response = await axiosCustom.post("/forgot/password",{email})
+
+      navigation.navigate("Forgetpasswordotp", {
+        token: response?.data?.data?.token,
+        email: email
+      })
+    }catch(err){
+    }
+  }
   return (
     <View
       style={{ flex: 1, backgroundColor: COLORS.white, paddingHorizontal: 25 }}
@@ -21,6 +34,8 @@ const Forgetpassword = ({ navigation }) => {
         <Input
           placeholder="Email Address"
           name="email"
+          value={email}
+          onChangeText={(text)=>setEmail(text)}
           //   formikProps={formikProps}
           icon={<Envelopeicon />}
         />
@@ -30,7 +45,7 @@ const Forgetpassword = ({ navigation }) => {
         <TouchableOpacity
           style={styles.proceedBtn}
           activeOpacity={0.8}
-          onPress={() => navigation.navigate("Forgetpasswordotp")}
+          onPress={handleSubmit}
           // onPress={handleSubmit}
           // disabled={isSubmitting}
         >

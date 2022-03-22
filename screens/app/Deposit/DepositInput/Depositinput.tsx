@@ -44,6 +44,7 @@ function Depositinput({ route, navigation }) {
       setLocationLoading(true)
       const {coordinates, address} = await getCurrentLocation()
       setCoords({...coordinates,locationText:address});   
+      console.log(address, "my address")
     }catch(err){}finally{
       setLocationLoading(false)
     }

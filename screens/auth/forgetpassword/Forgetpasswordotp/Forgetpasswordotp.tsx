@@ -14,11 +14,12 @@ import LottieView from "lottie-react-native"
 
 const Forgetpasswordotp = ({navigation, route}) => {
     const toast = useToast()
+    const {email, token} = route.params
     const [time, setTime] = useState<number>(30)
     // const {email, phoneNumber, token} = route.params
     const [loading, setLoading] = useState<boolean>(false)
     const [otpCode, setOtpCode] = useState<any>("")
-    const [tokenn, setToken] = useState<string|null>("token")
+    const [tokenn, setToken] = useState<string|null>(token)
     const [disable, setDisable] = useState(true)
     const [showModal, setShowModal] = useState<boolean>(false)
   
@@ -44,33 +45,34 @@ const Forgetpasswordotp = ({navigation, route}) => {
       // handleResendOTP()
     },[])
   
-    // const handleSubmit = async ()=>{
-    //   setLoading(true)
-    //   try{
-    //     const response = await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
-    //     // navigation.navigate("Security",{token:tokenn})
-    //     setShowModal(true)
-    //   }catch(err){
-    //     showerror(toast, err)
-    //   }finally{
-    //     setLoading(false)
-    //   }
-    // }
+    const handleSubmit = async ()=>{
+      setLoading(true)
+      try{
+        const response = await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
+        // navigation.navigate("Security",{token:tokenn})
+        setShowModal(true)
+        
+      }catch(err){
+        showerror(toast, err)
+      }finally{
+        setLoading(false)
+      }
+    }
 
 
-    // const handleResendOTP = async () => {
-    //   setLoading(true)
-    //   try{
-    //     const response = await axiosCustom.post("auth/resend/code",{email});
-    //     setToken(response?.data?.data?.token)
-    //     setDisable(false)
-    //     setTime(30)
-    //   }catch(err){
-    //     showerror(toast, err)
-    //   }finally{
-    //     setLoading(false)
-    //   }
-    // }
+    const handleResendOTP = async () => {
+      setLoading(true)
+      try{
+        const response = await axiosCustom.post("auth/resend/code",{email});
+        setToken(response?.data?.data?.token)
+        setDisable(false)
+        setTime(30)
+      }catch(err){
+        showerror(toast, err)
+      }finally{
+        setLoading(false)
+      }
+    }
   
     return (
       <View style={styles.container}>
@@ -80,7 +82,10 @@ const Forgetpasswordotp = ({navigation, route}) => {
         <Globalmodal
           showState={showModal}
           onBgPress={() => setShowModal(true)}
-          btnFunction={() => navigation.navigate("Setnewpassword",{token:tokenn})}
+          btnFunction={() =>{
+              navigation.navigate("Setnewpassword",{token:tokenn, code:otpCode})
+              setShowModal(false)
+            }}
           btnText="Continue"
         >
           <View style={{marginBottom: 50, justifyContent: 'center', alignItems: 'center', marginHorizontal: 85}}>
@@ -98,8 +103,7 @@ const Forgetpasswordotp = ({navigation, route}) => {
         {/* OTP Message information */}
         <View style={styles.otpTextContainer}>
           <Text style={styles.otpMainText}>
-            An OTP has been sent to you via SMS to your phone number - <Text style={styles.otpSubText}>{"phoneNumber"}</Text>, and to your email
-            - <Text style={styles.otpSubText}>{"email"}</Text>
+            An OTP has been sent to your email - <Text style={styles.otpSubText}>{email}</Text>
           </Text>
         </View>
         {/* Verification input */}
@@ -122,7 +126,7 @@ const Forgetpasswordotp = ({navigation, route}) => {
         <View style={styles.resendAndDuration}>
           <TouchableOpacity 
           disabled={disable} 
-        //   onPress={handleResendOTP}
+          onPress={handleResendOTP}
           >
           <Text style={styles.resendText}>Resend sms in</Text>
           </TouchableOpacity>
@@ -142,7 +146,7 @@ const Forgetpasswordotp = ({navigation, route}) => {
         <View style={styles.btnContainer}>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => setShowModal(true)}
+            onPress={handleSubmit}
             style={styles.btnBg}
             // disabled={loading}
           >

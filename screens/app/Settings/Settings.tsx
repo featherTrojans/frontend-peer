@@ -77,8 +77,8 @@ const Settings = ({navigation}) => {
             <Defaultuseravatar />
           </View>
           {/* name */}
-          <Text style={styles.profileName}>{authdata.fullName}</Text>
-          <Text style={styles.profileUsername}>@{authdata.username}</Text>
+          <Text style={styles.profileName}>{authdata?.userDetails?.fullName}</Text>
+          <Text style={styles.profileUsername}>@{authdata?.userDetails?.username}</Text>
           {/* username */}
         </View>
         <View style={styles.profileExtraContainer}>

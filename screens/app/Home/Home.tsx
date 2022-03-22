@@ -204,14 +204,15 @@ const Home = ({ navigation }: { navigation: any }) => {
             onPress={() => navigation.dispatch(jumpToSettings)}
             activeOpacity={0.8}
           >
-            <InitialsBg sideLength={51} name={authdata.fullName} bg={userColor}/>
+            <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} />
+            
           </TouchableOpacity>
 
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
-              Welcome, {nameToShow(authdata?.fullName)}✌🏽
+              Welcome, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
             </Text>
-            <Text style={styles.profileUsername}>@{authdata?.username}</Text>
+            <Text style={styles.profileUsername}>@{authdata?.userDetails?.username}</Text>
           </View>
         </View>
         <TouchableOpacity
