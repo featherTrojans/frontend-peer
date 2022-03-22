@@ -14,6 +14,7 @@ import { styles } from "./Welcome.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../shared/Customstatusbar";
+import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 
 const { Smile, Winkinganimate } = icons;
 
@@ -79,7 +80,12 @@ const Welcome = ({ navigation, route }) => {
 
   useEffect(() => {
     if(fromm == "setup"){
+      sendSchedulePushNotification("Acccount Registration", `Hi ${nameToShow(authdata?.userDetails?.fullName)}, Welcome onboard to feather africa, Enjoy true freedom.`)
       
+    }
+    else{
+      sendSchedulePushNotification("Welcome Back Padi! 🎉", "Do more today. Enjoy financial flexibility")
+
     }
   }, [])
 
