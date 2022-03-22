@@ -21,7 +21,6 @@ const Changepin = () => {
   const [newpin, setNewpin] = useState("")
   const [confirmpin, setConfirmpin] = useState("")
   const handleSubmit = async ()=>{
-    setLoading(true)
     // validation
     if(newpin.length !== 4 || oldpin.length !== 4 || confirmpin.length !== 4){
       return showerror(toast,null,"length of pin must be equal to 4")
@@ -30,6 +29,7 @@ const Changepin = () => {
       return showerror(toast,null,"new pin and confirm pin don't match")
     }
     try{
+      setLoading(true)
       try{
         await axiosCustom.post("/auth/pin/verify", { user_pin: oldpin, pin: oldpin });
       }catch(err){

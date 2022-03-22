@@ -23,6 +23,14 @@ import LottieView from "lottie-react-native";
 
 const { Lockicondark,Successcheckanimate } = icons;
 
+
+
+const setAuthorizationToken = (token: string) => {
+  if (token) {
+    axiosCustom.defaults.headers.common["token"] = token;
+  }
+};
+
 const Security = ({ route, navigation }) => {
   const {token} =  route.params;
   const [showModal, setShowModal] = useState(false)
@@ -159,6 +167,7 @@ const Security = ({ route, navigation }) => {
               const response = await axiosCustom.put("auth/password/set", {password:values.password},{headers:{token:token}});
               setShowModal(true)
               setResult(response.data.data)
+              setAuthorizationToken(response?.data?.data?.token)
               // navigation.navigate("Securepin",{token:response?.data?.data?.token});
               // navigation.navigate("Welcome",{fromm:"setup", username:null,token:response?.data?.data?.token})
             }catch(err){
