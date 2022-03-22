@@ -78,7 +78,7 @@ const Basicsettings = () => {
   const toast = useToast();
   const { authdata, setAuthData } = useContext(AuthContext);
 
-  console.log(authdata,"auth datat o")
+  // console.log(authdata,"auth datat o")
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -103,7 +103,7 @@ const Basicsettings = () => {
                 firstName: values.firstName,
                 lastName: values.lastName,
               });
-              console.log(response);
+              // console.log(response);
               const userdetails = {...authdata?.userDetails,username: values.username,fullName: `${values.lastName} ${values.firstName}`}
               setAuthData({
                 ...authdata,
@@ -158,7 +158,7 @@ const Personalsettings = () => {
   const toast = useToast();
   const { authdata, setAuthData } = useContext(AuthContext);
 
-  console.log(authdata,"auth datat o")
+  // console.log(authdata,"auth datat o")
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -180,7 +180,7 @@ const Personalsettings = () => {
                 {gender: values.gender,dateOfBirth: values.dateOfBirth,
                   address: values.address,lga: values.lga,}
               );
-              console.log(response);
+              // console.log(response);
               const userdetails = {...authdata?.userDetails, 
                 gender: values.gender, 
                 dateOfBirth:values.dateOfBirth,

@@ -38,7 +38,7 @@ function WalletPin({ route, navigation }) {
       setLoading(true)
     try{
         const response = await axiosCustom.post("/pay",{amount});
-        console.log(response)
+        // console.log(response)
         navigation.navigate("CustomWebView",{url:response.data.data.authorization_url, reference:response.data.data.reference, amount: amount})
         // Linking.openURL(response.data.data.authorization_url)
         // WebBrowser.openBrowserAsync(response.data.data.authorization_url);
@@ -53,7 +53,7 @@ function WalletPin({ route, navigation }) {
     if (amount.length > 0) {
       const newdata = amount.substring(0, amount.length - 1)
       setAmount(newdata);
-      console.log(newdata);
+      // console.log(newdata);
     }
   };
   const handleSetAmount = (value: string) => {

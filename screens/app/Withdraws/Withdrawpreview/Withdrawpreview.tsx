@@ -23,7 +23,7 @@ const { Forwardarrow, Editicon, Meetupdot } = icons;
 
 const Withdrawpreview = ({navigation, route}: any) => {
   const toast = useToast()
-  const {userInfo, amount } = route.params
+  const {userInfo, amount, baseCharge } = route.params
   const [loading, setLoading] = useState(false)
   const {coords,destinationCoords} = useContext(LocationContext)
   return (  
@@ -61,7 +61,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
               <Text style={styles.amountPrice}>
                 NGN {amountFormatter(amount)}
                 <Text style={styles.amountBaseCharge}>
-                  + 1,50.00 (Base Charge)
+                  + {amountFormatter(String(baseCharge))} (Base Charge)
                 </Text>{" "}
               </Text>
               <Text style={styles.baseChargeNegotiate}>

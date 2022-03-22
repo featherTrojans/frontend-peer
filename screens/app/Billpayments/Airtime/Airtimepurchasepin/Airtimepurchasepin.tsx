@@ -23,7 +23,7 @@ const { Successcheckanimate } = icons;
 const Airtimepurchasepin = ({ navigation }) => {
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
-  // const { amount, userinfo } = route.params;
+  const { type, data } = route.params;
   const [pin, setPin] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
@@ -42,16 +42,16 @@ const Airtimepurchasepin = ({ navigation }) => {
     }
   };
 
-  console.log({...data, user_pin: pin.join("")})
+  
   const handleSubmit = async ()=>{
     setLoading(true)
     try{
       if(type === "airtime"){
-        const response = await axiosCustom.post("/bills/airtime",{...data, userPin: pin.join("")})
-        console.log(response); 
+        await axiosCustom.post("/bills/airtime",{...data, userPin: pin.join("")})
+        
       }else{
-        const response = await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
-        console.log(response)
+        await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
+        
       }
       setShowModal(true)
     }catch(err){

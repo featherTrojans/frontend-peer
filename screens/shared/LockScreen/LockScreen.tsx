@@ -33,22 +33,39 @@ const LockScreen = ({modal, setModal}: any) => {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
-      console.log(newdata);
+      // console.log(newdata);
     }
   };
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      await axiosCustom.post("/auth/pin/verify", { pin: pin.join("") });
-      setPin([]);
-      setModal(false);
-    } catch (err) {
-      showerror(toast, err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const handleSubmit = async () => {
+  //   console.log("preparing")
+  //   setLoading(true);
+  //   try {
+  //    const response = await axiosCustom.post("/auth/pin/verify", { user_pin: pin.join("") });
+  //     setPin([]);
+  //     console.log(response)
+  //     setModal(false);
+  //   } catch (err) {
+  //     showerror(toast, err);
+  //     console.log(err.response)
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   // return (<View>Hi</View>)
+
+  const handleSub = async ()=>{
+    setLoading(true)
+    try{
+      await axiosCustom.post("/auth/pin/verify",{user_pin: pin.join(""),pin:pin.join("")})
+      setPin([])
+      setModal(false)  
+    }catch(err){
+      console.log(err.response)
+      // setModal(false)  
+    }finally{
+      setLoading(false)
+    }
+  }
   return (
     <Modal
       isVisible={modal}
@@ -94,10 +111,10 @@ const LockScreen = ({modal, setModal}: any) => {
           </View>
         </View>
         <Bottombtn
-          title="submit"
-          onpress={handleSubmit}
+          title="SUBMIT"
           disabled={pin.length !== 4}
-        />
+          onpress={handleSub}
+        />       
       </SafeAreaView>
     </Modal>
   );

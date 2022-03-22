@@ -58,8 +58,8 @@ const Acceptedwithdraw = ({ navigation, route }) => {
 
   useEffect(() => {
     // update both map, meeting point and  Agent point
-    console.log(requestInfo, "Here is the accepted withdrawal response");
-    console.log(userinfo, "here is the user info");
+    // console.log(requestInfo, "Here is the accepted withdrawal response");
+    // console.log(userinfo, "here is the user info");
     getLocation();
   }, []);
 
@@ -74,7 +74,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
       );
       setUserinfo(response?.data?.data);
 
-      console.log(response, "Response again");
+      // console.log(response, "Response again");
     } catch (err) {}
   };
   const getLocation = async () => {
@@ -113,7 +113,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   };
 
   const swipedLeftFunction = () => {
-    console.log("We want to make redirct or proceed to make the payment");
+    // console.log("We want to make redirct or proceed to make the payment");
   };
 
   const handleCancelRequest = async () => {

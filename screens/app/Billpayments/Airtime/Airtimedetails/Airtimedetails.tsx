@@ -85,7 +85,7 @@ const Airtimedetails = ({ navigation, route }) => {
     { label: "@    |    9mobile", value: "9mobile" }
   ]);
 
-  console.log(authdata)
+  
 
   const activeColor = (activeIndex: number) => {
     return index === activeIndex ? "#003AD6" : "#000000";
@@ -240,7 +240,7 @@ const Airtimedetails = ({ navigation, route }) => {
                 onChangeText={(text:string)=>setPhone(text)}
                 inputSymbol="#"
                 placeholder="08012345678"
-                rightIcon={<Addressbook />}
+                // rightIcon={<Addressbook />}
                 keyboardType={"numeric"}
               />
             </>
@@ -254,8 +254,9 @@ const Airtimedetails = ({ navigation, route }) => {
               />
               <Paybillsinput
                 inputSymbol="#"
+                // value={phone}
                 placeholder="08000000000"
-                rightIcon={<Addressbook />}
+                // rightIcon={<Addressbook />}
                 keyboardType={"numeric"}
               />
             </>

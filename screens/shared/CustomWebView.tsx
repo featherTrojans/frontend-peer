@@ -11,7 +11,7 @@ const CustomWebView = ({ navigation, route }) => {
   const { url, reference, amount } = route.params;
   const callback_url = `https://featherwebview.com/?trxref=${reference}&reference=${reference}`;
   const onNavigationStateChange = (state: any) => {
-    console.log(state);
+    // console.log(state);
     const { url } = state;
     if (!url) return;
     if (url === callback_url) { 

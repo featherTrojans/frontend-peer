@@ -57,7 +57,7 @@ const Transactiondetails = ({ navigation, route }) => {
   )} '${dt.format("YY")} - ${dt.format("LT")}`;
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
   });
 
 
@@ -68,7 +68,7 @@ const Transactiondetails = ({ navigation, route }) => {
   const subscription = Clipboard.addClipboardListener(
     ({ content }: ClipboardEvent) => {
       setCopied(true);
-      console.log("hellow");
+      // console.log("hellow");
     }
   );
 

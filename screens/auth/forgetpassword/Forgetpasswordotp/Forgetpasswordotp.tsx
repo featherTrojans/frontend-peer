@@ -8,7 +8,7 @@ import { useToast } from 'react-native-toast-notifications'
 import { FONTS, fontsize, icons } from '../../../../constants'
 import { styles } from '../../verification/Verification.styles'
 import { Loader } from '../../../../components'
-import LottieView from "lottie-react-native"
+
    const { Successcheckanimate, Cancelicon } =icons
 
 
@@ -21,7 +21,7 @@ const Forgetpasswordotp = ({navigation, route}) => {
     const [otpCode, setOtpCode] = useState<any>("")
     const [tokenn, setToken] = useState<string|null>(token)
     const [disable, setDisable] = useState(true)
-    const [showModal, setShowModal] = useState<boolean>(false)
+    
   
       
     useEffect(() => {
@@ -48,9 +48,9 @@ const Forgetpasswordotp = ({navigation, route}) => {
     const handleSubmit = async ()=>{
       setLoading(true)
       try{
-        const response = await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
-        // navigation.navigate("Security",{token:tokenn})
-        setShowModal(true)
+        await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
+        navigation.navigate("Setnewpassword",{token:tokenn, code:otpCode})
+        
         
       }catch(err){
         showerror(toast, err)
@@ -78,21 +78,6 @@ const Forgetpasswordotp = ({navigation, route}) => {
       <View style={styles.container}>
         <Customstatusbar />
         {/* Closeicon */}
-  
-        <Globalmodal
-          showState={showModal}
-          onBgPress={() => setShowModal(true)}
-          btnFunction={() =>{
-              navigation.navigate("Setnewpassword",{token:tokenn, code:otpCode})
-              setShowModal(false)
-            }}
-          btnText="Continue"
-        >
-          <View style={{marginBottom: 50, justifyContent: 'center', alignItems: 'center', marginHorizontal: 85}}>
-              <LottieView source={Successcheckanimate} style={{width: 148, height: 148}} autoPlay loop/>
-              <Text style={{...fontsize.bsmall, ...FONTS.regular, marginTop: 17, textAlign: 'center'}}>Your Pasword has been chnaged successfully </Text>
-          </View>
-        </Globalmodal>
   
   
   

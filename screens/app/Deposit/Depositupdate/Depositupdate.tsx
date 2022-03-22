@@ -161,7 +161,7 @@ const Depositupdate = ({ navigation }) => {
     try {
       setLoading(true);
       const response = await axiosCustom.get("/status/get");
-      console.log(response.data.data);
+      
       setStatus(response.data.data);
     } catch (err) {
       // maybe show the error
@@ -170,21 +170,21 @@ const Depositupdate = ({ navigation }) => {
     }
   };
 
-  const getFromStorage = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("@depositstatus");
-      console.log(jsonValue);
-      if (jsonValue) {
-        const parseVal = JSON.parse(jsonValue);
-        // check time and reset status if time has pass
-        if (parseVal.time + 1000 * 60 * 60 * 24 > Date.now()) {
-          setStatus(parseVal);
-        } else {
-          await AsyncStorage.removeItem("@depositstatus");
-        }
-      }
-    } catch (err) {}
-  };
+  // const getFromStorage = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("@depositstatus");
+  //     console.log(jsonValue);
+  //     if (jsonValue) {
+  //       const parseVal = JSON.parse(jsonValue);
+  //       // check time and reset status if time has pass
+  //       if (parseVal.time + 1000 * 60 * 60 * 24 > Date.now()) {
+  //         setStatus(parseVal);
+  //       } else {
+  //         await AsyncStorage.removeItem("@depositstatus");
+  //       }
+  //     }
+  //   } catch (err) {}
+  // };
 
   return (
     <View style={styles.container}>

@@ -76,7 +76,7 @@ const Security = ({ route, navigation }) => {
               //send the request
               const response = await axiosCustom.put("auth/password/set", {password:values.password},{headers:{token:token}});
               //store data in context
-              console.log(response)
+              // console.log(response)
               navigation.navigate("Securepin",{token:response?.data?.data?.token});
             } catch (err) {
               // error handling

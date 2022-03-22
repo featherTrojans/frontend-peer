@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Backheader, Bottombtn } from "../../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
@@ -8,6 +8,7 @@ import LottieView from "lottie-react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import showerror from "../../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
+import { AuthContext } from "../../../../../context/AuthContext";
 
 const { Addressbook, Inputdropdown, Successcheckanimate } = icons;
 
@@ -25,7 +26,8 @@ const Paybillsinput = ({
   inputSymbol,
   rightIcon,
   placeholder,
-  
+  editable = true,
+  ...props
 }: PaybillsinputProps) => {
   return (
     <View
@@ -42,9 +44,11 @@ const Paybillsinput = ({
       <Text style={{ ...fontsize.bsmall }}>{inputSymbol}</Text>
       <Text style={{ marginLeft: 15.5, marginRight: 16.5 }}>|</Text>
       <TextInput
+        editable={editable}
         style={{ flex: 1, height: 62 }}
         placeholder={placeholder}
         placeholderTextColor={COLORS.black}
+        {...props}
       />
       {rightIcon}
     </View>
@@ -54,9 +58,10 @@ const Paybillsinput = ({
 const Electricitydetails = ({ navigation, route }) => {
     const {amount} = route.params
     const toast = useToast();
+    const { authdata } = useContext(AuthContext);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
-    const [phone, setPhone] = useState<null | string>(null);
+    const [phone, setPhone] = useState<null | string>(authdata?.userDetails?.phoneNumber);
     const [meterNumber, setMeterNumber] = useState<null | string>(null)
     const [items, setItems] = useState([
       { label: "@    |    abuja-electric", value: "abuja-electric" },
@@ -182,7 +187,7 @@ const Electricitydetails = ({ navigation, route }) => {
               inputSymbol="#"
               placeholder="08000000000"
               keyboardType={"numeric"}
-              rightIcon={<Addressbook />}
+              // rightIcon={<Addressbook />}
             />
         </View>
       </KeyboardAwareScrollView>

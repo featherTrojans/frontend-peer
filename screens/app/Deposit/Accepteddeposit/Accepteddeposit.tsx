@@ -52,11 +52,13 @@ const Accepteddeposit = ({navigation, route}) => {
 
   useEffect(()=>{
     // update both map, meeting point and  Agent point
-    console.log(requestInfo, "here is the user")
+    
     getLocation()
   }, []);
 
   const getLocation = async () => {
+    setDestinationCoords({})
+      setCoords({})
     try{
       setLocationLoading(true)
       const {coordinates, address} = await getCurrentLocation()

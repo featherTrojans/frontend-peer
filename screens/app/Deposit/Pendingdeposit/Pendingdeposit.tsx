@@ -46,6 +46,8 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
     }, []);
   
     const getLocation = async () => {
+      setDestinationCoords({})
+      setCoords({})
       try{
         setLocationLoading(true)
       const {coordinates, address} = await getCurrentLocation()

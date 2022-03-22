@@ -53,7 +53,7 @@ const Negotiate = ({ navigation, route}) => {
             negotiatedFee: charges,
             reference: requestInfo.reference
         })
-        console.log(response)
+        // console.log(response)
         setShowModal(true)
     }catch(err){
       showerror(toast,err)

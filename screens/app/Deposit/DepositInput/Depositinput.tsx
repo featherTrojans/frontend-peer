@@ -22,6 +22,7 @@ import showerror from "../../../../utils/errorMessage";
 import { AuthContext } from "../../../../context/AuthContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { getCurrentLocation } from "../../../../utils/customLocation";
+import { doesIncludeActiveStates } from "../../../../utils/utils";
 
 
 
@@ -42,9 +43,13 @@ function Depositinput({ route, navigation }) {
   const getLocation = async () => {
     try{
       setLocationLoading(true)
-      const {coordinates, address} = await getCurrentLocation()
+      const {coordinates, address, locationstate} = await getCurrentLocation()
+      if(!doesIncludeActiveStates(locationstate)){
+        // navigate to the sorry not supported in your region yet
+        // navigation.navigate("",{from:"deposit"})
+      }
       setCoords({...coordinates,locationText:address});   
-      console.log(address, "my address")
+      
     }catch(err){}finally{
       setLocationLoading(false)
     }

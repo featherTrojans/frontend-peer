@@ -84,18 +84,18 @@ const Deposit = ({ navigation }) => {
     getacceptedrequest();
   }, []);
 
-  console.log(pending, accepted);
+  
   const getpendingrequest = async () => {
     try {
       const response = await axiosCustom.get("/request/depositor/pending");
-      console.log(response);
+      
       setPending(response.data.data);
     } catch (err) {}
   };
   const getacceptedrequest = async () => {
     try {
       const response = await axiosCustom.get("/request/depositor/accepted");
-      console.log(response);
+      
       setAccepted(response.data.data);
     } catch (err) {}
   };

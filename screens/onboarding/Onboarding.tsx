@@ -39,7 +39,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
         JSON.stringify({ onboard: true })
       );
       if (stored !== null) {
-        console.log(stored, "this is the respone of trhe ");
+        // console.log(stored, "this is the respone of trhe ");
       }
     } catch (e) {
       // saving error

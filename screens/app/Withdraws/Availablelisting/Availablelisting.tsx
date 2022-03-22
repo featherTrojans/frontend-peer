@@ -22,6 +22,7 @@ import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { InitialsBg } from "../../../../components";
 import Comingsoonagent from "../../../../assets/Lottie/animations/comingSoonAgent.json";
+import { doesIncludeActiveStates } from "../../../../utils/utils";
 
 const {
   Backarrow,
@@ -43,6 +44,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const { amount } = route.params;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([]);
+  const [charge, setCharge] = useState(0);
   const [activeType, setActiveType] = useState("peers");
   // const [active, setActive] = useState("peers");
   const [loading, setLoading] = useState(true);
@@ -52,11 +54,17 @@ const Availablelisting = ({ navigation, route }: any) => {
     getLocation();
   }, []);
 
+  console.log(agents)
   //This function is to get the user locations
   const getLocation = async () => {
+    setDestinationCoords({})
     try {
       setLocationLoading(true);
-      const { coordinates, address } = await getCurrentLocation();
+      const { coordinates, address, locationstate } = await getCurrentLocation();
+      if(!doesIncludeActiveStates(locationstate)){
+        // navigate to the sorry not supported in your region yet
+        // navigation.navigate("",{from:"deposit"})
+      }
       setCoords({ ...coordinates, locationText: address });
       getAllAgents(address);
     } catch (err) {
@@ -73,8 +81,9 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: amount,
         location: address,
       });
-      console.log(response.data.data);
+      console.log(response.data);
       setAgents(response.data.data);
+      setCharge(response.data.charges)
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -96,7 +105,7 @@ const Availablelisting = ({ navigation, route }: any) => {
     const handleAgentSelect = () => {
       // adding Location context
       setDestinationCoords(profile);
-      navigation.navigate("Withdrawpreview", { amount, userInfo: profile });
+      navigation.navigate("Withdrawpreview", { amount, userInfo: profile, baseCharge: charge });
     };
     return (
       <TouchableOpacity

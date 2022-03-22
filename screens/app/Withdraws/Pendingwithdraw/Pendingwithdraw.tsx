@@ -36,15 +36,15 @@ const Pendingwithdraw = ({navigation, route}) => {
     // update both map, meeting point and  Agent point
     getLocation()
   }, []);
-
   console.log(requestInfo)
+  // console.log(requestInfo)
   const getLocation = async () => {
     try{
       setLocationLoading(true)
       const {coordinates, address} = await getCurrentLocation()
       setCoords({...coordinates,locationText:address});
       // get the other destination
-      console.log("okay i need help")
+      // console.log("okay i need help")
       // const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
       // setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
     }catch(err){

@@ -58,7 +58,7 @@ const Settings = ({navigation}) => {
 
   
   const {authdata, setToken} = useContext(AuthContext)
-  console.log(authdata)
+  // console.log(authdata)
   
   const handleSignout = ()=>{
     setToken("")

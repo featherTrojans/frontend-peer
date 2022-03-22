@@ -11,7 +11,7 @@ import { useToast } from "react-native-toast-notifications"
 export const sendMessage = async (phoneNumber: string | string[], defaultMessage: string ) => {
     // I will be getting the number from the endpoint
     const status = await SMS.sendSMSAsync(phoneNumber, defaultMessage)
-    console.log(status)
+    // console.log(status)
 }
 
 

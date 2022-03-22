@@ -13,7 +13,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 
 const Requestsummary = ({navigation, route}) => {
   const {requestInfo} = route.params
-  console.log(requestInfo);
+  // console.log(requestInfo);
   return (
     <View style={styles.container}>
       <Customstatusbar />

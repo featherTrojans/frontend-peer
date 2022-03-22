@@ -35,7 +35,7 @@ function Requestnew({ navigation }) {
     if (amount.length > 0) {
       const newdata = amount.substring(0, amount.length - 1)
       setAmount(newdata);
-      console.log(newdata);
+      // console.log(newdata);
     }
   };
   const handleSetAmount = (value: string) => {

@@ -33,7 +33,7 @@ const Getdetails = ({ route, navigation }) => {
     getuserinfo(text);
   };
 
-  console.log(username, userinfo);
+  // console.log(username, userinfo);
   const handleDisabled = () => {
     // if(username && typeof userinfo === "object"){
     //   return false;

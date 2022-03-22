@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn, Sendingandreceive } from "../../../../components";
@@ -32,7 +32,7 @@ const Summary = ({navigation, route}) => {
       const docRef = await setDoc(doc(db,"withdrawtransfer",requestInfo.reference),{
         status: "pending"
       })
-      console.log("Document written with ID: ", docRef);
+      // console.log("Document written with ID: ", docRef);
       setShowModal(true)
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -56,7 +56,7 @@ const Summary = ({navigation, route}) => {
           setShowModal(false);
           setShowFailureModal(true)
         }
-        console.log("Current data: ", doc.data());
+        // console.log("Current data: ", doc.data());
     });
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -85,9 +85,13 @@ const Summary = ({navigation, route}) => {
       //  onBgPress={() => setShowModal(!showmodal)}
        >
          <View style={{
-           paddingVertical: 70,
+           paddingBottom: 70,
+           paddingTop: 40,
            paddingHorizontal: 10
          }}>
+           <View style={{alignItems:"center", marginBottom:30}}>
+             <ActivityIndicator color="black" size="large" />
+           </View>
           <Text style={{lineHeight: 15, ...FONTS.regular}}>
             Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽
           </Text>

@@ -1,28 +1,37 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, {useState} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
-import { Input } from "../../../components";
+import { Input, Loader } from "../../../components";
 import { styles } from "../signup/Personal/Personal.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
+import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../utils/errorMessage";
 const { Envelopeicon } = icons;
 
 const Forgetpassword = ({ navigation }) => {
-  const [email, setEmail] = useState()
+  const toast = useToast()
+  const [email, setEmail] = useState("")
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async () =>{
     try{
+      setLoading(true)
       const response = await axiosCustom.post("/forgot/password",{email})
-
       navigation.navigate("Forgetpasswordotp", {
         token: response?.data?.data?.token,
         email: email
       })
     }catch(err){
+      showerror(toast,err)
+    }
+    finally{
+      setLoading(false)
     }
   }
   return (
     <View
       style={{ flex: 1, backgroundColor: COLORS.white, paddingHorizontal: 25 }}
     >
+      {loading && <Loader />}
       <View style={{ marginTop: 34, }}>
         <Text style={{ ...fontsize.big, ...FONTS.bold, marginBottom: 30 }}>Forgot Password</Text>
         <Text style={{ ...fontsize.bsmall, ...FONTS.regular, lineHeight: 24 }}>

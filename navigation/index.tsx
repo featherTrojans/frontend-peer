@@ -157,7 +157,7 @@ export function usePushNotification() {
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
-      console.log(token, "From the index");
+      
     });
 
     // console.log(expoPushToken, "This is the token")
@@ -173,7 +173,7 @@ export function usePushNotification() {
         //   console.log(response);
         console.log("I just tapped the note", response);
         const { data } = response.notification.request.content;
-        console.log(data);
+        
         //   console.log("Here is the data", data.data.takeTo)
         customNavigation(data.redirectTo, {});
       });
@@ -462,6 +462,7 @@ const RootNavigator = ({initialBoarded}) => {
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
+      // initialRouteName="Summary"
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
@@ -632,7 +633,6 @@ export default function MainNavigation({initialBoarded = false}) {
 
   useEffect(() => {
     axiosCustom.interceptors.response.use((response)=>{
-      console.log(response.status)
       if(response.status === 401){
         setToken("")
       }

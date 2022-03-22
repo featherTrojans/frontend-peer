@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React,{useState} from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Input, Loader } from "../../../../components";
 import { styles } from "../../signup/Personal/Personal.styles";
@@ -8,11 +8,13 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import showerror from "../../../../utils/errorMessage";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-
-const { Lockicondark,  } = icons;
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import LottieView from "lottie-react-native"
+const { Lockicondark, Successcheckanimate } = icons;
 
 const Setnewpassword = ({ navigation , route}) => {
   const {code, token} = route.params
+  const [showModal, setShowModal] = useState<boolean>(false)
   const toast = useToast();
   const validationSchema = Yup.object().shape({
     password: Yup
@@ -28,9 +30,25 @@ const Setnewpassword = ({ navigation , route}) => {
       }),
   });
   return (
+    
     <View
       style={{ flex: 1, backgroundColor: COLORS.white, paddingHorizontal: 25 }}
     >
+
+      <Globalmodal
+          showState={showModal}
+          onBgPress={() => setShowModal(true)}
+          btnFunction={() =>{
+              navigation.navigate("Login")
+              setShowModal(false)
+            }}
+          btnText="Continue"
+        >
+          <View style={{marginBottom: 50, justifyContent: 'center', alignItems: 'center', marginHorizontal: 85}}>
+              <LottieView source={Successcheckanimate} style={{width: 148, height: 148}} autoPlay loop/>
+              <Text style={{...fontsize.bsmall, ...FONTS.regular, marginTop: 17, textAlign: 'center'}}>Your Pasword has been chnaged successfully </Text>
+          </View>
+        </Globalmodal>
       <View style={{ marginTop: 34 }}>
         <Text style={{ ...fontsize.big, ...FONTS.bold, marginBottom: 30 }}>
         Set New Password
@@ -54,7 +72,8 @@ const Setnewpassword = ({ navigation , route}) => {
               //send the request
               const response = await axiosCustom.put("/new/password", {password:values.password, code:code},{headers:{token:token}});
               //store data in context
-              console.log(response)
+              // console.log(response)
+              setShowModal(true)
               // GLobal succss then to login
               // navigation.navigate("Securepin",{token:response?.data?.data?.token});
             } catch (err) {

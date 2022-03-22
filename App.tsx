@@ -23,10 +23,10 @@ export default function App() {
     // await AsyncStorage.removeItem('@onboarded')
     try {
         const value = await AsyncStorage.getItem('@onboarded')
-        console.log(value)
+        
         if (value !== null) {
             setOnboarded(JSON.parse(value).onboard)
-            console.log(onboarded, "This is inside the functions itself ")
+            
         }else{
           setOnboarded(false)
         }
