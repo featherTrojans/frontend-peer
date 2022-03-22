@@ -86,6 +86,7 @@ const Editinput = ({ label, value, name, formikprops }: EditinputProps) => {
 
 const Basicsettings = () => {
   const toast = useToast();
+  const navigation = useNavigation()
   const { authdata, setAuthData } = useContext(AuthContext);
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
   const [usernamename, setusernamename] = useState(authdata?.userDetails?.username)
@@ -128,6 +129,8 @@ const Basicsettings = () => {
                 userDetails:userdetails
               });
               // send success toast message
+              
+              navigation.navigate("Root")
             } catch (err) {
               showerror(toast, err);
             }
