@@ -84,10 +84,10 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
             reasonForCancel:"agent declining withdraw request"
           }
         })
-      }catch(err){
-        // showerror(toast,err)
-      }finally{
         navigation.navigate("Home")
+      }catch(err){
+        showerror(toast,err)
+      }finally{
         setLoading(false)
       }
     }

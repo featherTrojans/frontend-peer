@@ -39,10 +39,10 @@ const Cancelrequest = ({route, navigation}) => {
           reasonForCancel:reason
         }
       })
-    }catch(err){
-      // showerror(toast,err)
-    }finally{
       setModalVisible(true)
+    }catch(err){
+      showerror(toast,err)
+    }finally{
       setLoading(false)
     }
   }

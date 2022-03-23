@@ -5,5 +5,5 @@ export const doesIncludeActiveStates = (state:string)=>{
 
 export const plusBase = (charge:string) =>{
   const chargeNum = Number(charge);
-  return `${chargeNum  + Math.ceil(chargeNum/5000) * 100}`
+  return `${chargeNum  + Math.ceil(chargeNum/5000) * 50}`
 }
