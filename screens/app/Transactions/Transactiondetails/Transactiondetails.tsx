@@ -114,6 +114,53 @@ const Transactiondetails = ({ navigation, route }) => {
   };
 
   const htmlContent = `
+<<<<<<< HEAD
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Feather Transactions</title>
+        <style>
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                text-align: center,
+                color: "ed
+            }
+            p{
+              font-size: 16px, 
+              color: black, 
+              text-align: center
+            }
+            div{
+              max-width: 225px, width: 100%,display: flex, justify-content: space-between, align-items: center
+            }
+        </style>
+    </head>
+    <body>
+    
+        <img
+      src="https://res.cloudinary.com/gyroscope/image/upload/v1647941538/feather-transaction_qeslnn.svg" style={{max-width: 106px, width: 100%, object-fit: coverß }}/>
+
+      <h1 >Transaction Summary</h1>
+
+      <div>
+            
+            <p style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070, padding: 20px}}>1</p>
+            <p style={{width: 62px, height: 62px, border-radius: 32px, background-color: #707070}}>2</p>
+            
+      </div>
+
+
+    </body>
+
+
+
+    </html>
+=======
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -220,6 +267,7 @@ const Transactiondetails = ({ navigation, route }) => {
   
   
   </html>
+>>>>>>> fbe459e650b05767ffad5646ecceeaf6f8f86858
 `;
 
   const shareReceipt = async (html) => {

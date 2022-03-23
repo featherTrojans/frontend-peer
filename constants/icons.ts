@@ -17,10 +17,8 @@ import Tabhistory from "../assets/icons/Tabhistory";
 import Tabsettings from "../assets/icons/Tabsettings";
 import Tabuser from "../assets/icons/Tabuser";
 import Tabplusicon from "../assets/icons/Tabplusicon";
-// import MarkerIcon from "../assets/icons/MarkerIcon";
-
-
-
+import MarkerIcon from "../assets/icons/MarkerIcon";
+import Markedicon from "../assets/icons/Markedicon";
 import Bell from "../assets/icons/Bell";
 import Profilepics from "../assets/icons/Profilepics";
 import Arrowright from "../assets/icons/Arrowright";
@@ -64,7 +62,6 @@ import Depositicon from "../assets/icons/Depositicon";
 import SadEmoji from "../assets/icons/SadEmoji";
 import TransferIcon from "../assets/icons/TransferIcon";
 import Location from "../assets/icons/Location";
-
 
 import SecureDot from "../assets/icons/SecureDot";
 import Chatsearchicon from "../assets/icons/Chatsearchicon";
@@ -114,36 +111,19 @@ import Addressbook from "../assets/icons/Addressbook";
 import Viewcashrequesticon from "../assets/icons/Viewcashrequesticon";
 import Featherdefault from "../assets/icons/Featherdefault";
 import Userdefaultmedium from "../assets/icons/Userdefaultmedium";
-
-
-
+import Feathertextlogo from "../assets/icons/Feathertextlogo";
 
 ///Animated icons
 
-import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json"
-import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.json"
-import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json"
-import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json"
-import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json"
-import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json"
-import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.json"
-import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json"
-import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
+import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.json";
+import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json";
+import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json";
+import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json";
+import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json";
+import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.json";
+import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json";
+import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
 
 // Receiverimage
 
@@ -242,61 +222,43 @@ export default {
   Paybillicon,
   Passwordhideicon,
   Tabplusicon,
-  // MarkerIcon
+  MarkerIcon,
   Defaultuseravatar,
   Memoji1,
   Upgradeicon,
   Memoji2,
-Lockicon,
-Shareappicon,
-Supporticon,
-Feathersmallicon,
-Outlinedlock,
-Forwardarrowblue,
-Fingerprinticon,
-Sharereceipt,
-Downloadreceipt,
-Reporttransactions,
-Onmapicon,
-Smalluseravatar,
-Networklogos,
-Electricitybillsicon,
-Cablestvicon,
-Inputdropdown,
-Addressbook,
-Viewcashrequesticon,
-Featherdefault,
-Userdefaultmedium,
+  Lockicon,
+  Shareappicon,
+  Supporticon,
+  Feathersmallicon,
+  Outlinedlock,
+  Forwardarrowblue,
+  Fingerprinticon,
+  Sharereceipt,
+  Downloadreceipt,
+  Reporttransactions,
+  Onmapicon,
+  Smalluseravatar,
+  Networklogos,
+  Electricitybillsicon,
+  Cablestvicon,
+  Inputdropdown,
+  Addressbook,
+  Viewcashrequesticon,
+  Featherdefault,
+  Userdefaultmedium,
+  Feathertextlogo,
+  Markedicon,
 
+  //Animated icons
 
-
-//Animated icons
-
-Cryinganimate,
-Winkinganimate,
-Mapanimate,
-Phoneanimate,
-Sittinganimate,
-Successcheckanimate,
-Loadinglocationanimate,
-Comingsoonagentanimate,
-Feathecomingsoonchatanimate
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-  
-
+  Cryinganimate,
+  Winkinganimate,
+  Mapanimate,
+  Phoneanimate,
+  Sittinganimate,
+  Successcheckanimate,
+  Loadinglocationanimate,
+  Comingsoonagentanimate,
+  Feathecomingsoonchatanimate,
 };

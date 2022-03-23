@@ -8,6 +8,7 @@ import Signup from "./auth/signup/Signup";
 import Verification from "./auth/verification/Verification";
 import Setup from "./auth/Setup/Setup";
 import Welcome from "./auth/welcome/Welcome";
+import Welcometochange from "./auth/Welcometochange/Welcometochange";
 
 // These are the main app screens
 import Home from "./app/Home/Home";
@@ -98,6 +99,7 @@ export {
   Forgetpasswordotp,
   Setnewpassword,
   Welcome,
+  Welcometochange,
   Home,
   Transactions,
   Newtransactions,
