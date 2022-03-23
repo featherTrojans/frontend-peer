@@ -332,7 +332,7 @@ const Transactiondetails = ({ navigation, route }) => {
               margin-bottom: 42px;
               line-height: 24px;
           }
-          span.transaction_names{
+          span.transaction__names{
 
             text-transform: capitalize;
           }
@@ -400,7 +400,7 @@ const Transactiondetails = ({ navigation, route }) => {
     </div>
 
 
-    <p class="transaction__text">This is the transaction report between <span class="transaction_names">${user?.fullName}</span> and <span class="transation__names">${otherUser?.fullName}</span></p>
+    <p class="transaction__text">This is the transaction report between <span class="transaction__names">${user?.fullName}</span> and <span class="transaction__names">${otherUser?.fullName}</span></p>
   
     <h3 class="transaction__heading">Transaction Ref.</h3>
    <p class="transaction__ref">${transactionRef}</p>
