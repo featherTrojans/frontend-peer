@@ -306,7 +306,7 @@ const Personalsettings = () => {
                           {moment(date).calendar()}
                         </Text>
                       </TouchableOpacity>
-                        {show && ( <DateTimePicker  value={new Date()} mode="date" is24Hour={true} onChange={onChange}/>
+                        {show && ( <DateTimePicker date={new Date()} value={new Date()} mode="date" is24Hour={true} onChange={onChange} maximumDate={new Date()}/>
                     )}
                   </View>
                   {/* <Editinput

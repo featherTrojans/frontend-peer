@@ -48,7 +48,7 @@ export const  sendSchedulePushNotification = async (title, message) => {
         body: message,
         data: { data: 'goes here', takeTo: "Root" },
       },
-      trigger: { seconds: 4 },
+      trigger: { seconds: 6 },
     });
   }
 
