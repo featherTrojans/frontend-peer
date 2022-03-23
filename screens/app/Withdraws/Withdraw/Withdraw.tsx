@@ -229,8 +229,8 @@ const Withdraw = ({ navigation }) => {
           )}
           keyExtractor={(item) => `${item.reference}`}
           ListEmptyComponent={() => (
-            <View>
-              <Text>Empty DATA...</Text>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: "center"}}>
+              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue6}}>NO DATAS..</Text>
             </View>
           )}
         />

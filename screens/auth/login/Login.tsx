@@ -169,7 +169,7 @@ const Login = ({ navigation }: any) => {
                 </View>
                 {/* Bottom text */}
                 <JustifyBetween style={{ marginTop: 30, marginBottom: 70 }}>
-                  <Text style={styles.biometrics}>Use Biometrics</Text>
+                  <Text style={[styles.biometrics, {opacity: .2}]}>Use Biometrics</Text>
 
                   <TouchableOpacity
                     onPress={() => navigation.navigate("Forgetpassword")}
