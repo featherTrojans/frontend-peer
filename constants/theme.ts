@@ -33,6 +33,7 @@ export const COLORS = {
   grey9: "#BFBFBF",
   grey10: "#262626",
   grey11: "#EFEFEF",
+  grey12: "#F2F5FF",
   
 
   yellow1: "#FF9D00",
@@ -52,6 +53,7 @@ export const COLORS = {
   lineColor: `rgba(112, 112, 112, .1)`,
   lineColor2: `rgba(112, 112, 112, .3)`,
   lineColor3: `rgba(112, 112, 112, .5)`,
+  lineColor4: `rgba(112, 112, 112, .6)`,
   
   halfBlack: `rgba(0, 0, 0, .5)`,
   placeHolder: `rgba(225, 225, 225, 1)`,

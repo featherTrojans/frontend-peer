@@ -142,7 +142,7 @@ const Transactiondetails = ({ navigation, route }) => {
     <body>
     
         <img
-      src="https://res.cloudinary.com/gyroscope/image/upload/v1647941538/feather-transaction_qeslnn.svg" style={{max-width: 106px, width: "100%", object-fit: "cover"}}/>
+      src="https://res.cloudinary.com/gyroscope/image/upload/v1647941538/feather-transaction_qeslnn.svg" style={{max-width: 106px, width: 100%, object-fit: coverß }}/>
 
       <h1 >Transaction Summary</h1>
 

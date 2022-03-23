@@ -45,6 +45,7 @@ import {
   Forgetpasswordotp,
   Setnewpassword,
   Welcome,
+  Welcometochange,
 
 
   //Dashboard Screens
@@ -121,6 +122,7 @@ import {
   Airtimepurchasepin,
   Electricityamount,
   Electricitydetails,
+
   
   
 } from "../screens";
@@ -358,7 +360,7 @@ const Tabs = () => {
 
         <BottomTab.Screen
           name="Transactions"
-          component={Newtransactions}
+          component={Welcometochange}
           options={{
             tabBarIcon: ({ focused, color, size }) => {
               return (
@@ -487,6 +489,8 @@ const RootNavigator = ({initialBoarded}) => {
           <AppStack.Screen name="Setup" component={Setup} />
           <AppStack.Screen name="Login" component={Login} />
           <AppStack.Screen name="Welcome" component={Welcome} />
+          <AppStack.Screen name="Welcometochange" component={Welcometochange} />
+
 
         </AppStack.Group>
       ) : (
