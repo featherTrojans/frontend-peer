@@ -16,7 +16,7 @@ import * as Yup from "yup";
 import { styles } from "./Editprofile.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import { Bottombtn, Loader } from "../../../../components";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from "@react-native-community/datetimepicker";
 import Defaultuseravatar from "../../../../assets/icons/Defaultuseravatar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { string } from "yup";
@@ -31,7 +31,7 @@ import useDebounce from "../../../../utils/debounce";
 import DropDownPicker from "react-native-dropdown-picker";
 import moment from "moment";
 
-const { Backarrow,Check, WrongIcon } = icons;
+const { Backarrow, Check, WrongIcon } = icons;
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().label("First Name").required(),
@@ -54,13 +54,13 @@ type EditinputProps = {
 
 const EditinputSpecial = ({ label, value, name, ...props }: EditinputProps) => {
   return (
-    <View style={{ marginBottom: 5 }}>
+    <View style={{ flex: 1 }}>
       {/* Label */}
       <Text style={styles.labelText}>{label}</Text>
-      <TextInput style={styles.textInput} value={value} {...props} />
+      <TextInput style={{paddingVertical: 12}} value={value} {...props} />
     </View>
   );
-}
+};
 const Editinput = ({ label, value, name, formikprops }: EditinputProps) => {
   if (formikprops) {
     const { values, handleChange, handleBlur } = formikprops;
@@ -92,7 +92,9 @@ const Basicsettings = () => {
   const navigation = useNavigation();
   const { authdata, setAuthData } = useContext(AuthContext);
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
-  const [usernamename, setusernamename] = useState(authdata?.userDetails?.username)
+  const [usernamename, setusernamename] = useState(
+    authdata?.userDetails?.username
+  );
   // console.log(authdata,"auth datat o")
   const handleUsernameChange = (text: string) => {
     setusernamename(text);
@@ -108,7 +110,6 @@ const Basicsettings = () => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <Formik
           initialValues={{
-            
             firstName: authdata?.userDetails?.fullName?.split(" ")[1],
             lastName: authdata?.userDetails?.fullName?.split(" ")[0],
             // username:"",
@@ -118,30 +119,37 @@ const Basicsettings = () => {
           validationSchema={validationSchema}
           onSubmit={async (values) => {
             try {
-              const data =  {
+              const data = {
                 newUsername: usernamename,
                 firstName: values.firstName,
                 lastName: values.lastName,
-              }
-              console.log(data)
-              const response = await axiosCustom.put("/profile/update/basic",data);
+              };
+              console.log(data);
+              const response = await axiosCustom.put(
+                "/profile/update/basic",
+                data
+              );
               // console.log(response);
-              const userdetails = {...authdata?.userDetails,username: usernamename,fullName: `${values.lastName} ${values.firstName}`}
+              const userdetails = {
+                ...authdata?.userDetails,
+                username: usernamename,
+                fullName: `${values.lastName} ${values.firstName}`,
+              };
               setAuthData({
                 ...authdata,
-                userDetails:userdetails
+                userDetails: userdetails,
               });
-              
+
               // send success toast message
-              
-              navigation.navigate("Root")
+
+              navigation.navigate("Root");
             } catch (err) {
               showerror(toast, err);
             }
           }}
         >
           {(formikProps) => {
-            const { isSubmitting, handleSubmit , values} = formikProps;
+            const { isSubmitting, handleSubmit, values } = formikProps;
             // handleUsernameChange(values.username)
             return (
               <React.Fragment>
@@ -155,20 +163,40 @@ const Basicsettings = () => {
                   </Text>
                 </View>
                 <View style={styles.editInputContainer}>
+
+                  <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderColor: COLORS.grey1, borderBottomWidth: 1, marginBottom: 30}}>
+
                   <EditinputSpecial
                     label="Username"
                     name="username"
                     value={usernamename}
-                    onChangeText={(text)=>handleUsernameChange(text)}
+                    onChangeText={(text) => handleUsernameChange(text)}
                   />
+
+
                   <View style={styles.namecont}>
-              {loadbounce ? (<ActivityIndicator size={15} color={COLORS.blue6} />) :( userinfo.fullName && (usernamename?.toLowerCase() !== authdata?.userDetails?.username?.toLowerCase() )) ? (
-              <><WrongIcon /><Text style={styles.name}>{usernamename} is taken</Text></>) : null}
-               {(error || (usernamename.toLowerCase() === authdata?.userDetails?.username.toLowerCase() )) && (<>
-                <Check />
-                <Text style={styles.name}>{usernamename}</Text>
-              </>)}
-          </View>
+                    {loadbounce ? (
+                      <ActivityIndicator size={15} color={COLORS.blue6} />
+                    ) : userinfo.fullName &&
+                      usernamename?.toLowerCase() !==
+                        authdata?.userDetails?.username?.toLowerCase() ? (
+                      <>
+                        <WrongIcon />
+                        <Text style={styles.name}>{usernamename} is taken</Text>
+                      </>
+                    ) : null}
+                    {(error ||
+                      usernamename.toLowerCase() ===
+                        authdata?.userDetails?.username.toLowerCase()) && (
+                      <>
+                        <Check />
+                        <Text style={styles.name}>{usernamename}</Text>
+                      </>
+                    )}
+                  </View>
+                  </View>
+
+
                   <Editinput
                     label="Firstname"
                     name="firstName"
@@ -197,12 +225,12 @@ const Personalsettings = () => {
   const [value, setValue] = useState(authdata?.userDetails?.gender);
   const [items, setItems] = useState([
     { label: "Male", value: "Male" },
-    { label: "Female", value: "Female" }
+    { label: "Female", value: "Female" },
   ]);
   const [date, setDate] = useState(authdata?.userDetails?.dateOfBirth);
   const [show, setShow] = useState(false);
 
-  console.log(date)
+  console.log(date);
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShow(false);
@@ -213,7 +241,6 @@ const Personalsettings = () => {
     setShow(true);
   };
 
-
   // console.log(authdata,"auth datat o")
   return (
     <ScrollView
@@ -223,7 +250,7 @@ const Personalsettings = () => {
     >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <Formik
-           initialValues={{
+          initialValues={{
             // gender: "",
             // dateOfBirth: "",
             address: authdata?.userDetails?.address,
@@ -232,24 +259,31 @@ const Personalsettings = () => {
           validationSchema={validationSchemaTwo}
           onSubmit={async (values) => {
             try {
-              const response = await axiosCustom.put( "/profile/update/personal",
-                {gender: value,dateOfBirth: date,
-                  address: values.address,lga: values.lga,}
+              const response = await axiosCustom.put(
+                "/profile/update/personal",
+                {
+                  gender: value,
+                  dateOfBirth: date,
+                  address: values.address,
+                  lga: values.lga,
+                }
               );
               // console.log(response);
-              const userdetails = {...authdata?.userDetails, 
-                gender: value, 
-                dateOfBirth:date,
+              const userdetails = {
+                ...authdata?.userDetails,
+                gender: value,
+                dateOfBirth: date,
                 address: values.address,
-                lga: values.lga}
+                lga: values.lga,
+              };
               setAuthData({
                 ...authdata,
-                userDetails:userdetails
+                userDetails: userdetails,
               });
-              
+
               // send success toast message
-              
-              navigation.navigate("Root")
+
+              navigation.navigate("Root");
               // send success toast message
             } catch (err) {
               showerror(toast, err);
@@ -291,22 +325,39 @@ const Personalsettings = () => {
                       height: 62,
                       borderColor: "#E6E6E6",
                       marginBottom: 30,
-                       borderWidth:0,
-                      borderBottomWidth:1
+                      borderWidth: 0,
+                      borderBottomWidth: 1,
                     }}
                     containerStyle={{}}
                     dropDownContainerStyle={{
-                      borderColor: COLORS.grey1
+                      borderColor: COLORS.grey1,
                     }}
                   />
-                    <View style={{ marginBottom: 30 }}>
+                  <View style={{ marginBottom: 30 }}>
                     <Text style={styles.labelText}>Date of Birth</Text>
-                      <TouchableOpacity style={{marginTop: 10}} onPress={showDatepicker}>
-                        <Text style={{color: COLORS.black,...fontsize.small,...FONTS.regular}}>
-                          {moment(date).calendar()}
-                        </Text>
-                      </TouchableOpacity>
-                        {show && ( <DateTimePicker date={new Date()} value={new Date()} mode="date" is24Hour={true} onChange={onChange} maximumDate={new Date()}/>
+                    <TouchableOpacity
+                      style={{ marginTop: 10 }}
+                      onPress={showDatepicker}
+                    >
+                      <Text
+                        style={{
+                          color: COLORS.black,
+                          ...fontsize.small,
+                          ...FONTS.regular,
+                        }}
+                      >
+                        {moment(date).calendar()}
+                      </Text>
+                    </TouchableOpacity>
+                    {show && (
+                      <DateTimePicker
+                        date={new Date()}
+                        value={new Date()}
+                        mode="date"
+                        is24Hour={true}
+                        onChange={onChange}
+                        maximumDate={new Date()}
+                      />
                     )}
                   </View>
                   {/* <Editinput
@@ -337,7 +388,6 @@ const Personalsettings = () => {
     </ScrollView>
   );
 };
-
 
 const Documentsettings = () => {
   return (
