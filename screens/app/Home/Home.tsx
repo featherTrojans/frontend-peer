@@ -86,7 +86,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
   // sendSchedulePushNotification
-  console.log(authdata,"my name and stuff")
+  // console.log(authdata,"my name and stuff")
 
   // const setMessageToken = async () => {
   //   try {

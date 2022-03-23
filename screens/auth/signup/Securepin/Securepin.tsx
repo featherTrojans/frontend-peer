@@ -18,7 +18,7 @@ import { styles } from "./Securepin.styles";
 const { SecureDot } = icons;
 const Securepin = ({ route, navigation }) => {
   const toast = useToast()
-  const { token } = route.params;
+  const { token, fromm } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
 
@@ -39,7 +39,7 @@ const Securepin = ({ route, navigation }) => {
     if(pin.join("") === "0000"){
       return showerror(toast,null,"Pin cannot be set to 0000")
     }
-    navigation.navigate("SecurepinAgain",{token,pin})
+    navigation.navigate("SecurepinAgain",{token,pin,fromm})
   }
 
   return (

@@ -100,7 +100,11 @@ const Login = ({ navigation }: any) => {
               try{
                await  axiosCustom.post("auth/pin/verify",{user_pin:"0000"},{ headers: { token: token } })
                // send to that modal
+               console.log(values)
                 // navigation.navigate("Securepin",{token:result?.token});
+                navigation.navigate("Welcometochange",{ fromm: "login",
+                username: values.username,
+                token: token,});
               }catch(err){
                 // setToken(response.data.data.token)
                 navigation.navigate("Welcome", {

@@ -58,84 +58,43 @@ const Security = ({ route, navigation }) => {
           // onBgPress={() => setShowModal(true)}
           btnFunction={() =>{
             setShowModal(false);
-            navigation.navigate("Welcome", {
-              fromm: "setup",
-              username: null,
-              token: result?.token,
-            })
-          }
+            navigation.navigate("Welcometochange",{ fromm: "login",
+            username: result?.username,
+            token: result?.token});
+
+            // navigation.navigate("Welcome", {
+            //   fromm: "setup",
+            //   username: null,
+            //   token: result?.token,
+            // })
+            }
           }
           btnText="continue"
         >
-          <View style={{alignItems: 'center', justifyContent: 'center',}}>
+           <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              marginHorizontal: 75,
+              marginBottom: 50,
+            }}
+          >
             <LottieView
               source={Successcheckanimate}
               autoPlay
               loop
-              style={{ width: 148, height: 148 }}
+              style={{ width: 148, height: 148, marginBottom: 18 }}
             />
-            <View
-              style={{ marginTop: 24, marginBottom: 41, marginHorizontal: 25, justifyContent: 'center', alignItems: 'center' }}
-            >
-              <Text
-                style={{
-                  ...fontsize.bsmall,
-                  ...FONTS.regular,
-                  marginBottom: 17,
-                }}
-              >
-                Your feather username is
-              </Text>
-              <Text
-                style={{
-                  ...fontsize.bxmedium,
-                  ...FONTS.bold,
-                  color: COLORS.blue6,
-                }}
-              >
-                @{result?.username}
-              </Text>
-              <Text
-                style={{
-                  ...fontsize.bsmall,
-                  ...FONTS.regular,
-                  marginBottom: 17,
-                }}
-              >
-                and Your transaction pin is
-              </Text>
-              <Text
-                style={{
-                  ...fontsize.bxmedium,
-                  ...FONTS.bold,
-                  color: COLORS.blue6,
-                }}
-              >
-                0000
-              </Text>
-              <Text
-                style={{
-                  ...fontsize.bsmall,
-                  ...FONTS.regular,
-                  marginVertical: 41,
-                  textAlign: 'center'
-                }}
-              >
-                This can be used as an account identity to receive payments and
-                perform transactions
-              </Text>
-              <Text
+           <Text
               style={{
-                ...fontsize.small,
+                ...fontsize.bsmall,
                 ...FONTS.regular,
-                color: COLORS.grey2,
-                textAlign: "center"
+                textAlign: "center",
+                lineHeight: 24,
               }}
             >
-              *This username and transaction pin can be changed under settings
+              Your password has been successfully added
             </Text>
-            </View>
-          
           </View>
         </Globalmodal>
       <View style={styles.container}>

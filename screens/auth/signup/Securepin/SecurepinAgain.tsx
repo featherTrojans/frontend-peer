@@ -16,7 +16,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 const { SecureDot, Successcheckanimate } = icons;
 const SecurepinAgain = ({ route, navigation }) => {
   const toast = useToast();
-  const { token, pin } = route.params;
+  const { token, pin,fromm } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState<boolean>(false);
   const [amount, setAmount] = useState<string[]>([]);
@@ -73,8 +73,8 @@ const SecurepinAgain = ({ route, navigation }) => {
         btnFunction={() =>{
           setShowModal(false)
           navigation.navigate("Welcome", {
-            fromm: "setup",
-            username: null,
+            fromm: fromm,
+            username: result?.username,
             token: result?.token,
           })
         }}

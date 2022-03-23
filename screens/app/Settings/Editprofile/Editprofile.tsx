@@ -7,15 +7,16 @@ import {
   ScrollView,
   Animated,
   ActivityIndicator,
+  Button,
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { DateTimePickerAndroid , RNDateTimePicker} from '@react-native-community/datetimepicker';
 
 import { styles } from "./Editprofile.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import { Bottombtn, Loader } from "../../../../components";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import Defaultuseravatar from "../../../../assets/icons/Defaultuseravatar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { string } from "yup";
@@ -27,6 +28,8 @@ import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import useDebounce from "../../../../utils/debounce";
+import DropDownPicker from "react-native-dropdown-picker";
+import moment from "moment";
 
 const { Backarrow,Check, WrongIcon } = icons;
 
@@ -36,8 +39,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const validationSchemaTwo = Yup.object().shape({
-  gender: Yup.string().label("gender").required(),
-  dateOfBirth: Yup.string().label("dateOfBirth").required(),
+  // gender: Yup.string().label("gender").required(),
+  // dateOfBirth: Yup.string().label("dateOfBirth").required(),
   address: Yup.string().label("address").required(),
   lga: Yup.string().label("lga").required(),
 });
@@ -86,7 +89,7 @@ const Editinput = ({ label, value, name, formikprops }: EditinputProps) => {
 
 const Basicsettings = () => {
   const toast = useToast();
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const { authdata, setAuthData } = useContext(AuthContext);
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
   const [usernamename, setusernamename] = useState(authdata?.userDetails?.username)
@@ -128,6 +131,7 @@ const Basicsettings = () => {
                 ...authdata,
                 userDetails:userdetails
               });
+              
               // send success toast message
               
               navigation.navigate("Root")
@@ -187,7 +191,28 @@ const Basicsettings = () => {
 };
 const Personalsettings = () => {
   const toast = useToast();
+  const navigation = useNavigation();
   const { authdata, setAuthData } = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(authdata?.userDetails?.gender);
+  const [items, setItems] = useState([
+    { label: "Male", value: "Male" },
+    { label: "Female", value: "Female" }
+  ]);
+  const [date, setDate] = useState(authdata?.userDetails?.dateOfBirth);
+  const [show, setShow] = useState(false);
+
+  console.log(date)
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
 
   // console.log(authdata,"auth datat o")
   return (
@@ -199,28 +224,32 @@ const Personalsettings = () => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <Formik
            initialValues={{
-            gender: "",
-            dateOfBirth: "",
-            address: "",
-            lga: "",
+            // gender: "",
+            // dateOfBirth: "",
+            address: authdata?.userDetails?.address,
+            lga: authdata?.userDetails?.lga,
           }}
           validationSchema={validationSchemaTwo}
           onSubmit={async (values) => {
             try {
               const response = await axiosCustom.put( "/profile/update/personal",
-                {gender: values.gender,dateOfBirth: values.dateOfBirth,
+                {gender: value,dateOfBirth: date,
                   address: values.address,lga: values.lga,}
               );
               // console.log(response);
               const userdetails = {...authdata?.userDetails, 
-                gender: values.gender, 
-                dateOfBirth:values.dateOfBirth,
+                gender: value, 
+                dateOfBirth:date,
                 address: values.address,
                 lga: values.lga}
               setAuthData({
                 ...authdata,
                 userDetails:userdetails
               });
+              
+              // send success toast message
+              
+              navigation.navigate("Root")
               // send success toast message
             } catch (err) {
               showerror(toast, err);
@@ -233,18 +262,59 @@ const Personalsettings = () => {
               <React.Fragment>
                 {isSubmitting && <Loader />}
                 <View style={styles.editInputContainer}>
-                  <Editinput
+                  {/* <Editinput
                     formikprops={formikProps}
                     name="gender"
                     label="gender"
                     value="-"
+                  /> */}
+                  <Text style={styles.labelText}>Gender</Text>
+                  <DropDownPicker
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                    placeholder="Gender"
+                    placeholderStyle={{
+                      color: COLORS.black,
+                      ...fontsize.small,
+                      ...FONTS.regular,
+                    }}
+                    textStyle={{
+                      color: COLORS.black,
+                      ...fontsize.small,
+                      ...FONTS.regular,
+                    }}
+                    style={{
+                      height: 62,
+                      borderColor: "#E6E6E6",
+                      marginBottom: 30,
+                       borderWidth:0,
+                      borderBottomWidth:1
+                    }}
+                    containerStyle={{}}
+                    dropDownContainerStyle={{
+                      borderColor: COLORS.grey1
+                    }}
                   />
-                  <Editinput
+                    <View style={{ marginBottom: 30 }}>
+                    <Text style={styles.labelText}>Date of Birth</Text>
+                      <TouchableOpacity style={{marginTop: 10}} onPress={showDatepicker}>
+                        <Text style={{color: COLORS.black,...fontsize.small,...FONTS.regular}}>
+                          {moment(date).calendar()}
+                        </Text>
+                      </TouchableOpacity>
+                        {show && ( <DateTimePicker  value={new Date()} mode="date" is24Hour={true} onChange={onChange}/>
+                    )}
+                  </View>
+                  {/* <Editinput
                     formikprops={formikProps}
                     name="dateOfBirth"
                     label="Date of Birth"
                     value="-"
-                  />
+                  /> */}
                   <Editinput
                     formikprops={formikProps}
                     name="address"

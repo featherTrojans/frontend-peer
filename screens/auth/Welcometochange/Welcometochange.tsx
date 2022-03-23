@@ -3,7 +3,8 @@ import React from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 const { Feathertextlogo, Markedicon } = icons;
 
-const Welcometochange = () => {
+const Welcometochange = ({navigation, route}) => {
+  const {token, username, fromm} = route.params
   return (
     <ScrollView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View
@@ -60,9 +61,9 @@ const Welcometochange = () => {
               color: COLORS.grey2,
             }}
           >
-            Your default username is
+            {fromm === "setup" && "Your default username is"}
           </Text>
-          <Text style={{ ...fontsize.medium, ...FONTS.bold }}>Feather7380</Text>
+          <Text style={{ ...fontsize.medium, ...FONTS.bold }}>{username}</Text>
           <Text
             style={{
               marginVertical: 32,
@@ -102,7 +103,7 @@ const Welcometochange = () => {
           </Text>
         </View>
 
-        <TouchableOpacity style={{backgroundColor: COLORS.blue6, height: 62, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 42, marginBottom: 38}}>
+        <TouchableOpacity onPress={()=>navigation.navigate("Securepin",{token:token, fromm})} style={{backgroundColor: COLORS.blue6, height: 62, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 42, marginBottom: 38}}>
             <Text style={{color: COLORS.white, ...fontsize.smallest, ...FONTS.bold, textTransform: "uppercase"}}>Setup transaction pin</Text>
         </TouchableOpacity>
         <Text style={{textAlign: "center", ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>Need Help? <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue6}}>Learn More</Text></Text>
