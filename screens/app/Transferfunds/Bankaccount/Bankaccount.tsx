@@ -181,7 +181,10 @@ const Bankaccount = ({ navigation, route }) => {
             Transfer Summary
           </Text>
 
-          {/* <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.fullName || requestInfo?.user?.fullName || "A Z"} /> */}
+          <Sendingandreceive 
+          senderName={authdata?.userDetails?.fullName} 
+          receiverName={"Am Zm"} title={value && value} 
+          />
 
           <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
             NGN {amountFormatter(amount)}

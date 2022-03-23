@@ -91,30 +91,30 @@ const Acceptedwithdraw = ({ navigation, route }) => {
     }
   };
 
-  const leftActions = (progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [0, 200],
-      outputRange: [0, 5],
-      extrapolate: "clamp",
-    });
-    return (
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <Animated.View
-          style={{
-            padding: 10,
-            backgroundColor: COLORS.blue6,
-            width: 10,
-            height: 10,
-            transform: [{ scale }],
-          }}
-        ></Animated.View>
-      </View>
-    );
-  };
+  // const leftActions = (progress, dragX) => {
+  //   const scale = dragX.interpolate({
+  //     inputRange: [0, 200],
+  //     outputRange: [0, 5],
+  //     extrapolate: "clamp",
+  //   });
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: "center" }}>
+  //       <Animated.View
+  //         style={{
+  //           padding: 10,
+  //           backgroundColor: COLORS.blue6,
+  //           width: 10,
+  //           height: 10,
+  //           transform: [{ scale }],
+  //         }}
+  //       ></Animated.View>
+  //     </View>
+  //   );
+  // };
 
-  const swipedLeftFunction = () => {
-    // console.log("We want to make redirct or proceed to make the payment");
-  };
+  // const swipedLeftFunction = () => {
+  //   // console.log("We want to make redirct or proceed to make the payment");
+  // };
 
   const handleCancelRequest = async () => {
     setLoading(true);
@@ -153,7 +153,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
             <View>
               <View style={styles.detailsProfile}>
                 <Requesterdetails
-                  name={requestInfo.agentUsername}
+                  name={requestInfo?.agentUsername}
                   distance="3kms"
                   duration={12}
                 />
@@ -192,19 +192,24 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                 icon={<Phoneicony />}
                 title="Phone"
                 details="Phone call to communicate"
-                onpress={() => makePhoneCall(userinfo.phoneNumber)}
+                onpress={() => makePhoneCall(userinfo?.phoneNumber)}
               />
               <Iconwithdatas
                 icon={<Smsicony />}
                 title="SMS"
                 details="Send a text to communicate"
-                onpress={() => sendMessage(userinfo.phoneNumber, "")}
+                onpress={() => sendMessage(userinfo?.phoneNumber, "")}
               />
               <Iconwithdatas
                 icon={<Chaticon />}
                 title="Chat"
                 details="Discuss conversations via chat"
-                onpress={() => chatOnWhatsapp(userinfo.phoneNumber,`Hi ${requestInfo.agent}, I made a cash request of ${requestInfo.amount} to you on Feather`)}
+                onpress={() =>
+                  chatOnWhatsapp(
+                    userinfo.phoneNumber,
+                    `Hi ${requestInfo?.agent}, I made a cash request of ${requestInfo?.amount} to you on Feather`
+                  )
+                }
               />
               <Iconwithdatas
                 icon={<Cancelicony />}
@@ -216,7 +221,6 @@ const Acceptedwithdraw = ({ navigation, route }) => {
           )}
 
           <View style={styles.bottomBtnContainer}>
-
             {/* The accepted button */}
             <View style={{ flex: 1 }}>
               <TouchableOpacity

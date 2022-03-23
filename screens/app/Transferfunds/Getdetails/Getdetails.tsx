@@ -67,6 +67,7 @@ const Getdetails = ({ route, navigation }) => {
           <Sendingandreceive
             senderName={authdata?.userDetails?.fullName}
             receiverName={userinfo?.fullName}
+            title="Wallet Credit"
           />
 
           <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
