@@ -14,9 +14,9 @@ const Chatsoon = () => {
         <Customstatusbar />
         <View style={styles.chatTextContainer}>
           <Text style={styles.chatText}>Chats</Text>
-          <View style={styles.amountOfChatsContainer}>
-            <Text style={styles.amountOfChats}>6</Text>
-          </View>
+          {/* <View style={styles.amountOfChatsContainer}> */}
+            {/* <Text style={styles.amountOfChats}>6</Text> */}
+          {/* </View> */}
         </View>
       <View style={{marginTop: 50, justifyContent: "center", alignItems: "center", marginHorizontal: 62}}>
           {/* JSON animations */}
