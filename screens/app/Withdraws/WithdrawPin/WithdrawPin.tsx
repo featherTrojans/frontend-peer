@@ -120,7 +120,7 @@ const WithdrawPin = ({ navigation, route}) => {
               </Text>
               <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 15 }}>
                 Withdraw Charges: 
-                <Text style={{...FONTS.bold}}>N {charges}</Text>
+                <Text style={{...FONTS.bold}}>N {plusBase(charges)}</Text>
               </Text>
               <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular,}}>
                 Note that the base charge above can be negotiated by <Text style={{...FONTS.bold}}> {userInfo.username}</Text>
@@ -165,7 +165,7 @@ const WithdrawPin = ({ navigation, route}) => {
             Add a fair amount to the base charge as fee
             
           </Text>
-          <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
+          <Text style={styles.enterPinText}>Enter Amount</Text>
         </View>
         <View style={{ flex: 1, justifyContent: "center" }}>
         <View style={{ alignItems: "center" }}>

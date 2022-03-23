@@ -95,10 +95,10 @@ const Accepteddeposit = ({ navigation, route }) => {
           reasonForCancel: "agent declining withdraw request",
         },
       });
-    } catch (err) {
-      // showerror(toast, err);
-    } finally {
       navigation.navigate("Home");
+    } catch (err) {
+      showerror(toast, err);
+    } finally {
       setLoading(false);
     }
   };

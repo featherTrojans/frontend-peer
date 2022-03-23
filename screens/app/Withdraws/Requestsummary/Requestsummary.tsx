@@ -35,7 +35,7 @@ const Requestsummary = ({navigation, route}) => {
 
       <View style={styles.saferulesContainer}>
         <Text style={styles.saferuleText}>
-          1. It is advisable that you meet-up in an open or public place.
+          1. We advice that you meet-up in an open or public place preferably not during odd hours for your safety.
         </Text>
         <Text style={styles.saferuleText}>
           2. Ensure that the cash given to you is certified as “in good condition” by you.
