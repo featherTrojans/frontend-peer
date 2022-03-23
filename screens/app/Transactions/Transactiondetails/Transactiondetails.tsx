@@ -332,7 +332,7 @@ const Transactiondetails = ({ navigation, route }) => {
               margin-bottom: 42px;
               line-height: 24px;
           }
-          span.transaction__names{
+          p > span.transaction__names{
 
             text-transform: capitalize;
           }
@@ -400,7 +400,7 @@ const Transactiondetails = ({ navigation, route }) => {
     </div>
 
 
-    <p class="transaction__text">This is the transaction report between <span class="transaction__names">${user?.fullName}</span> and <span class="transaction__names">${otherUser?.fullName}</span></p>
+    <p class="transaction__text">This is the transaction report between <span class="transaction__names">${user?.fullName}</span> and <span class="transaction__names">${otherUser ? otherUser.fullName : receiver}</span></p>
   
     <h3 class="transaction__heading">Transaction Ref.</h3>
    <p class="transaction__ref">${transactionRef}</p>
@@ -408,7 +408,7 @@ const Transactiondetails = ({ navigation, route }) => {
    <ul class="list">
        <li class="item">
            <span class="item__left">Receiver </span>
-           <span class="item__right">${otherUser && otherUser.fullName}</span>
+           <span class="item__right">${otherUser ? otherUser.fullName : "Feather Africa Inc"}</span>
        </li>
        <li class="item">
           <span class="item__left">Amount </span>

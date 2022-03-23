@@ -101,7 +101,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     marginLeft: 5,
     alignItems:"center",
-    marginBottom: 20
+    alignSelf: "center",
+    // marginBottom: 20
   },
   uploadIdBtn: {
     backgroundColor: COLORS.black,
