@@ -76,6 +76,7 @@ const Depositpin = ({ route, navigation }) => {
       //show success message
       setSuccessModal(true);
     } catch (err) {
+      console.log(err)
       showerror(toast, err);
       await handlePrepareToTestUpdate("rejected");
     } finally {

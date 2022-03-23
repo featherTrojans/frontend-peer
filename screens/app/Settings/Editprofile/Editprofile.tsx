@@ -340,13 +340,14 @@ const Personalsettings = () => {
                       onPress={showDatepicker}
                     >
                       <Text
-                        style={{
+                      
+                        style={[styles.textInput,{
                           color: COLORS.black,
                           ...fontsize.small,
                           ...FONTS.regular,
-                        }}
+                        }]}
                       >
-                        {moment(date).calendar()}
+                        {date ? moment(date).calendar() : " Click to add DOB" }
                       </Text>
                     </TouchableOpacity>
                     {show && (
