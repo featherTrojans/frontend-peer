@@ -36,7 +36,7 @@ const SecurepinAgain = ({ route, navigation }) => {
         { pin },
         { headers: { token: token } }
       );
-      setResult(response);
+      setResult(response.data.data);
       setShowModal(true);
       // navigation.navigate("Setup", {
       //   token: response?.data?.data?.token,
@@ -72,9 +72,10 @@ const SecurepinAgain = ({ route, navigation }) => {
         onBgPress={() => setShowModal(true)} // This should not do anything
         btnFunction={() =>{
           setShowModal(false)
-          navigation.navigate("Setup", {
-            token: result?.data?.data?.token,
-            defaultUsername: result?.data?.data?.username,
+          navigation.navigate("Welcome", {
+            fromm: "setup",
+            username: null,
+            token: result?.token,
           })
         }}
         btnText="Continue"

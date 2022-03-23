@@ -11,7 +11,13 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
+import { plusBase } from "../../../../utils/utils";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
+
+
+
+
+
 
 const WithdrawPin = ({ navigation, route}) => {
   const {amount, userInfo} = route.params;
@@ -57,7 +63,7 @@ const WithdrawPin = ({ navigation, route}) => {
       // console.log(userInfo, coords.locationText)
       const data = {
         amount:amount,
-        charges:charges, 
+        charges: plusBase(charges), 
         agentUsername:userInfo.username,
         agent: userInfo.fullName,
         statusId: userInfo.reference,

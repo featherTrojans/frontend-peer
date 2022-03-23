@@ -5,16 +5,19 @@ import {
   StatusBar,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useToast } from "react-native-toast-notifications";
 import { Bottombtn, Loader, Numberbtn } from "../../../../components";
 
 import { icons } from "../../../../constants";
 
 import { JustifyBetween } from "../../../../global/styles";
+import showerror from "../../../../utils/errorMessage";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { styles } from "./Securepin.styles";
 
 const { SecureDot } = icons;
 const Securepin = ({ route, navigation }) => {
+  const toast = useToast()
   const { token } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
@@ -32,6 +35,12 @@ const Securepin = ({ route, navigation }) => {
       setPin(newdata);
     }
   };
+  const handleNext =  ()=>{
+    if(pin.join("") === "0000"){
+      return showerror(toast,null,"Pin cannot be set to 0000")
+    }
+    navigation.navigate("SecurepinAgain",{token,pin})
+  }
 
   return (
     <View style={styles.container}>
@@ -83,7 +92,7 @@ const Securepin = ({ route, navigation }) => {
       </View>
       <Bottombtn
         title="PROCEED"
-        onpress={()=>navigation.navigate("SecurepinAgain",{token,pin})}
+        onpress={handleNext}
         disabled={pin.length !== 4}
       />
     </View>

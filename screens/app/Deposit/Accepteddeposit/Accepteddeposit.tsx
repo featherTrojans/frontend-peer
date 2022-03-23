@@ -95,10 +95,10 @@ const Accepteddeposit = ({ navigation, route }) => {
           reasonForCancel: "agent declining withdraw request",
         },
       });
-      navigation.navigate("Home");
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
+      navigation.navigate("Home");
       setLoading(false);
     }
   };
@@ -142,7 +142,7 @@ const Accepteddeposit = ({ navigation, route }) => {
                 <Text style={styles.amountPrice}>
                   NGN {requestInfo.amount}{" "}
                   <Text style={styles.depositAmountBaseCharge}>
-                    + {requestInfo.charges} (Base Charge)
+                    + {requestInfo.charges} (negotiation charge)
                   </Text>{" "}
                 </Text>
                 <Text style={styles.baseChargeNegotiate}>

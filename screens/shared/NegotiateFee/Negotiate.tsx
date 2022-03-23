@@ -10,6 +10,7 @@ import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import { LocationContext } from "../../../context/LocationContext";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { AuthContext } from "../../../context/AuthContext";
+import { plusBase } from "../../../utils/utils";
 const { Backarrow, SecureDot } = icons;
 
 const Negotiate = ({ navigation, route}) => {
@@ -52,7 +53,7 @@ const Negotiate = ({ navigation, route}) => {
     try{
         setLoading(true)  
        const response =  await axiosCustom.put("/request/negotiate",{
-            negotiatedFee: charges,
+            negotiatedFee: plusBase(charges),
             reference: requestInfo.reference
         })
         // console.log(response)

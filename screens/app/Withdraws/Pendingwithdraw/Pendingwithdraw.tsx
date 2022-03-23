@@ -86,7 +86,7 @@ const Pendingwithdraw = ({navigation, route}) => {
                   <Text style={styles.amountPrice}>
                     NGN {requestInfo?.amount}{" "}
                     <Text style={styles.amountBaseCharge}>
-                      + {requestInfo?.charges} (Base Charge)
+                      + {requestInfo?.charges} (negotiation charge)
                     </Text>{" "}
                   </Text>
                   <Text style={styles.baseChargeNegotiate}>

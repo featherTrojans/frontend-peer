@@ -133,7 +133,7 @@ const Airtimepurchasepin = ({ navigation, route }) => {
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
       </View>
-      <Bottombtn title="PROCEED" onpress={() => setShowModal(true)} />
+      <Bottombtn title="PROCEED" onpress={handleSubmit} />
     </ScrollView>
   );
 };

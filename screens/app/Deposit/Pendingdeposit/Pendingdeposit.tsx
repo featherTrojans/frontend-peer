@@ -84,10 +84,10 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
             reasonForCancel:"agent declining withdraw request"
           }
         })
-        navigation.navigate("Home")
       }catch(err){
-        showerror(toast,err)
+        // showerror(toast,err)
       }finally{
+        navigation.navigate("Home")
         setLoading(false)
       }
     }
@@ -128,7 +128,7 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
                     <Text style={styles.amountPrice}>
                       NGN {requestInfo.amount}{" "}
                       <Text style={styles.depositAmountBaseCharge}>
-                        + {requestInfo.charges} (Base Charge)
+                        + {requestInfo.charges} (negotiation charge)
                       </Text>{" "}
                     </Text>
                     <Text style={styles.baseChargeNegotiate}>

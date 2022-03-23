@@ -168,7 +168,7 @@ const Security = ({ route, navigation }) => {
               setShowModal(true)
               setResult(response.data.data)
               setAuthorizationToken(response?.data?.data?.token)
-              // navigation.navigate("Securepin",{token:response?.data?.data?.token});
+              // navigation.navigate("Securepin",{token:result?.token});
               // navigation.navigate("Welcome",{fromm:"setup", username:null,token:response?.data?.data?.token})
             }catch(err){
               showerror(toast,err)
