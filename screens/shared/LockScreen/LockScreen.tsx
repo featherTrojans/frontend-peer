@@ -30,11 +30,12 @@ const LockScreen = ({ modal, setModal }: any) => {
   const [numoftrial, setNumberTrial] = useState(0)
   const [error, setError] = useState(false)
   const handleSetAmount = (value: string) => {
+    const newpin = [...pin,value]
     if (pin.length < 4) {
-      setPin((oldamount) => [...oldamount, value]);
+      setPin(newpin);
     }
     if(pin.length === 3){
-      handleSubmit()
+      handleSubmit(newpin)
     }
   };
   const handleRemoveAmount = () => {
@@ -45,10 +46,10 @@ const LockScreen = ({ modal, setModal }: any) => {
       console.log(newdata);
     }
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (newpin:any) => {
     setLoading(true)
     try{
-      await axiosCustom.post("/auth/pin/verify",{user_pin: pin.join(""),pin:pin.join("")})
+      await axiosCustom.post("/auth/pin/verify",{user_pin: newpin.join(""),pin:newpin.join("")})
       setPin([])
       setModal(false)  
     }catch(err){
