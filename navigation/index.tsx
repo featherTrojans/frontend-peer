@@ -360,7 +360,7 @@ const Tabs = () => {
 
         <BottomTab.Screen
           name="Transactions"
-          component={Welcometochange}
+          component={Newtransactions}
           options={{
             tabBarIcon: ({ focused, color, size }) => {
               return (
@@ -472,7 +472,6 @@ const RootNavigator = ({initialBoarded}) => {
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
-      // initialRouteName="Welcometochange"
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
@@ -491,8 +490,6 @@ const RootNavigator = ({initialBoarded}) => {
           <AppStack.Screen name="Login" component={Login} />
           <AppStack.Screen name="Welcome" component={Welcome} />
           <AppStack.Screen name="Welcometochange" component={Welcometochange} />
-
-
         </AppStack.Group>
       ) : (
         <>
