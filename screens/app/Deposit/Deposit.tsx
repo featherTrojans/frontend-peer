@@ -197,7 +197,7 @@ const Deposit = ({ navigation }) => {
           ListEmptyComponent={() => (
 
             <View style={{flex: 1, justifyContent: 'center', alignItems: "center"}}>
-              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue6, marginTop: 70}}>No DATAS..</Text>
+              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue6, marginTop: 70, marginHorizontal: 50, textAlign: 'center', lineHeight: 24}}>Sorry you have no available request at the moment.</Text>
             </View>
           )}
           renderItem={({ item }) => (
