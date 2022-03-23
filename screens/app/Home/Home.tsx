@@ -38,6 +38,7 @@ import { TabActions, useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 import DoubleTapToClose from "../../shared/DoubleBack";
+import { connectFirestoreEmulator } from "firebase/firestore";
 
 const {
   Profilepics,
@@ -160,6 +161,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       const response = await axiosCustom.get("/dashboard");
       // setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
+      // console.log(response.data)
     } catch (err) {
       console.log(err.response);
     } finally {

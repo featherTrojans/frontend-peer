@@ -72,7 +72,7 @@ const assetsDB = {
   },
 };
 
-const showImage = (name: string, title: string | null) => {
+const showImage = (senderName: string, receiverName: string, title: string | null) => {
   switch (title) {
     case "funding":
       return (
@@ -100,11 +100,11 @@ const showImage = (name: string, title: string | null) => {
       );
       break;
     case "Wallet Debit":
-      return <InitialsBg name={name} sideLength={62} />;
+      return <InitialsBg name={receiverName} sideLength={62} />;
 
       break;
     case "Wallet Credit":
-      return <InitialsBg name={name} sideLength={62} />;
+      return <InitialsBg name={senderName} sideLength={62} />;
 
     case "GTB":
     case "FIRST":
@@ -184,7 +184,7 @@ const Sendingandreceive = ({
       </View>
       <View style={{ position: "relative" }}>
         {/* <Receiverimage /> */}
-        {showImage(receiverName, title)}
+        {showImage(senderName, receiverName, title)}
 
         {/* <Image
           source={Trustedbadgepng}

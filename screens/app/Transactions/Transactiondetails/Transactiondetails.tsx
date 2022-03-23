@@ -31,6 +31,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
 
+
 // Sendingandreceive
 
 const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions } =
@@ -183,7 +184,7 @@ const Transactiondetails = ({ navigation, route }) => {
     },
   };
 
-  const showImage = (name, title) => {
+  const showImageOnReceipt = (name, title) => {
     switch (title) {
       case "funding":
         return `
@@ -197,7 +198,7 @@ const Transactiondetails = ({ navigation, route }) => {
         case "Wallet Credit":
         return `
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-        ${nameSplitter(otherUser.fullName)}
+        ${nameSplitter(otherUser ? otherUser.fullName : "Feather Africa Inc")}
         </div>
         
         `;
@@ -223,8 +224,10 @@ const Transactiondetails = ({ navigation, route }) => {
         return {senderName: otherUser.fullName, receiverName: user.fullName}
         break;
         case "Wallet Debit":
-          return {senderName: user.fullName, receiverName: otherUser.fullName}
+          return {senderName: user.fullName, receiverName: otherUser ? otherUser.fullName : "EScrow"}
           case "funding":
+            return {senderName: sender, receiverName: receiver}
+          case "escrow":
             return {senderName: sender, receiverName: receiver}
       default:
         break;
@@ -332,9 +335,8 @@ const Transactiondetails = ({ navigation, route }) => {
               margin-bottom: 42px;
               line-height: 24px;
           }
-          p > span.transaction__names{
-
-            text-transform: capitalize;
+          span.transaction__names{
+            text-transform: uppercase;
           }
           .transaction__heading{
             font-size: 16px;
@@ -368,6 +370,9 @@ const Transactiondetails = ({ navigation, route }) => {
             font-weight:bold;
             line-height: 30px;
           }
+           .receiver{
+            text-transform: capitalize;
+          }
           .total{
             color: #003AD6;
           }
@@ -395,12 +400,12 @@ const Transactiondetails = ({ navigation, route }) => {
         <img class="checked__icon" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035323/greenyy_exqzbx.svg" />
         
         
-        ${showImage(user.fullName, title)}
+        ${showImageOnReceipt(user.fullName, title)}
     </div>
     </div>
 
 
-    <p class="transaction__text">This is the transaction report between <span class="transaction__names">${user?.fullName}</span> and <span class="transaction__names">${otherUser ? otherUser.fullName : receiver}</span></p>
+    <p class="transaction__text">This is the transaction report between <span class="transaction__names">${typeOfName(title)?.senderName}</span> and <span class="transaction__names">${typeOfName(title)?.receiverName}</span></p>
   
     <h3 class="transaction__heading">Transaction Ref.</h3>
    <p class="transaction__ref">${transactionRef}</p>
@@ -408,11 +413,11 @@ const Transactiondetails = ({ navigation, route }) => {
    <ul class="list">
        <li class="item">
            <span class="item__left">Receiver </span>
-           <span class="item__right">${otherUser ? otherUser.fullName : "Feather Africa Inc"}</span>
+           <span class="item__right receiver">${typeOfName(title)?.receiverName}</span>
        </li>
        <li class="item">
           <span class="item__left">Amount </span>
-          <span class="item__right">NGN ${amount}</span>
+          <span class="item__right">NGN ${amountFormatter(amount)}</span>
       </li>
       <li class="item">
           <span class="item__left">Transaction Charge </span>
@@ -420,7 +425,7 @@ const Transactiondetails = ({ navigation, route }) => {
       </li>
       <li class="item">
           <span class="item__left">Total</span>
-          <span class="item__right total">NGN ${amount}</span>
+          <span class="item__right total">NGN ${amountFormatter(amount)}</span>
       </li>
    </ul>
   
@@ -506,7 +511,7 @@ const Transactiondetails = ({ navigation, route }) => {
         >
           <Sendingandreceive
             senderName={typeOfName(title)?.senderName}
-            receiverName={otherUser &&  otherUser.fullName}
+            receiverName={typeOfName(title)?.receiverName}
             title={title}
           />
           <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
