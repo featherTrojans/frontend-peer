@@ -83,7 +83,7 @@ const Changepin = () => {
           <View style={{ marginTop: 42 }}>
             <Inputinsettings
               label="Current Transaction PIN"
-              placeholder="Enter Password"
+              placeholder="Enter Pin"
               maxLength={4}
               value={oldpin}
               onChangeText={(text)=>setOldpin(text)}
@@ -91,7 +91,7 @@ const Changepin = () => {
             />
             <Inputinsettings
               label="New Transaction PIN "
-              placeholder="Enter Password"
+              placeholder="Enter Pin"
               value={newpin}
               onChangeText={(text)=>setNewpin(text)}
               maxLength={4}
@@ -99,7 +99,7 @@ const Changepin = () => {
             />
             <Inputinsettings
               label="Confirm Transaction PIN"
-              placeholder="Enter Password"
+              placeholder="Enter Pin"
               value={confirmpin}
               onChangeText={(text)=>setConfirmpin(text)}
               maxLength={4}
