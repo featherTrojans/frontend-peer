@@ -1,9 +1,15 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
-import { icons, images } from "../../constants";
+import { COLORS, icons, images } from "../../constants";
 import { styles } from "./Sendingandreceive.styles";
 import InitialsBg from "../InitialsBg/InitialsBg";
-const { Senderimage, Sendingarrow, Receivingarrow, Receiverimage, Userdefaultmedium } = icons;
+const {
+  Senderimage,
+  Sendingarrow,
+  Receivingarrow,
+  Receiverimage,
+  Userdefaultmedium,
+} = icons;
 const { Trustedbadgepng } = images;
 
 // Wallet Credit
@@ -66,7 +72,7 @@ const assetsDB = {
   },
 };
 
-const showImage = (name, title) => {
+const showImage = (name: string, title: string | null) => {
   switch (title) {
     case "funding":
       return (
@@ -77,7 +83,7 @@ const showImage = (name, title) => {
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 62 / 2,
-            backgroundColor: "#001757"
+            backgroundColor: "#001757",
           }}
         >
           <Image
@@ -100,6 +106,53 @@ const showImage = (name, title) => {
     case "Wallet Credit":
       return <InitialsBg name={name} sideLength={62} />;
 
+    case "GTB":
+    case "FIRST":
+    case "ZENITH":
+    case "ACCESS":
+    case "STANBIC":
+    case "DIAMOND":
+    case "SKYE":
+    case "WEMA":
+    case "FCMB":
+    case "FIDELITY":
+    case "UBA":
+    case "UNION":
+    case "ECOBANK":
+    case "HERITAGE":
+    case "UNITY":
+    case "STERLING":
+    case "JAIZ":
+    case "KEYSTONE":
+    case "KUDA":
+    case "POLARIS":
+    case "PAYCOM":
+    case "PROVIDUS":
+    case "TAJ":
+      return (
+        <View
+          style={{
+            width: 62,
+            height: 62,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 62 / 2,
+            borderColor: COLORS.blue6,
+            borderWidth: 1
+          }}
+        >
+          <Image
+            style={{
+              width: "60%",
+              height: "60%",
+              // borderRadius: 62 / 2,
+            }}
+            source={{
+              uri: assetsDB["banks"][title],
+            }}
+          />
+        </View>
+      );
       break;
 
     default:
@@ -111,6 +164,7 @@ type SendingandreceiveProps = {
   senderName?: string;
   receiverName?: string;
   title?: string;
+  value?: string | null;
 };
 
 const Sendingandreceive = ({

@@ -194,13 +194,12 @@ const Deposit = ({ navigation }) => {
           data={REQUESTDATA}
           contentContainerStyle={{ marginTop: 30 }}
           showsVerticalScrollIndicator={false}
-          ListEmptyComponent={() => {
+          ListEmptyComponent={() => (
 
-            <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-
-              <Text>Empty Data..</Text>
-              </View>
-          }}
+            <View style={{flex: 1, justifyContent: 'center', alignItems: "center"}}>
+              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue6, marginTop: 70}}>No DATAS..</Text>
+            </View>
+          )}
           renderItem={({ item }) => (
             <Requesteeprofile
               list={item}
