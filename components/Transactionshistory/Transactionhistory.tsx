@@ -26,17 +26,18 @@ const History = ({ data }) => {
   const transactionValue = direction === "in" ? from : to;
   const amountSign = direction === "in" ? "+" : "-";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
+  const networkType = from.toUpperCase()
 
 
   const transactionBadge = () => {
     switch (title) {
       case "Airtime Purchase":
         return (
-          <View style={styles.arrowBg}>
-            <Image  source={{uri: assetsDB["bills"][from] }} resizeMode="cover"  style={{
+          <View style={[styles.arrowBg, {borderRadius: 30}]}>
+            <Image  source={{uri: assetsDB["bills"][networkType] }} resizeMode="cover"  style={{
               width: "100%",
               height: "100%",
-              borderRadius: 62 / 2,
+              // borderRadius: 62 / 2,
             }}/>
           </View>
         )

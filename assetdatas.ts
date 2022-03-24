@@ -301,6 +301,7 @@ export const assetsDB = {
     },
     {
       "name": "Ecobank Nigeria",
+      "image":  "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/ecobank/ecobank.png",
       "slug": "ecobank-nigeria",
       "code": "050",
       "longcode": "050150010",
@@ -399,6 +400,7 @@ export const assetsDB = {
     },
     {
       "name": "First City Monument Bank",
+      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fcmb/fcmb.png",
       "slug": "first-city-monument-bank",
       "code": "214",
       "longcode": "214150018",

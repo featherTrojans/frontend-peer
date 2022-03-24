@@ -43,16 +43,14 @@ const Withdrawpreview = ({navigation, route}: any) => {
             <View style={styles.detailsProfile}>
               <Requesterdetails
                 name={userInfo.fullName}
-                distance={userInfo.duration}
+                distance={userInfo.distance}
                 duration={userInfo.duration}
               />
 
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                {/* Badge icon */}
+              {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={styles.numberOfBadge}>203</Text>
-                {/* Number of badges */}
                 <Forwardarrow />
-              </View>
+              </View> */}
             </View>
 
             {/* This part will disappear after clicking on continue */}

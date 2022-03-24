@@ -131,6 +131,7 @@ const showImage = (senderName: string, receiverName: string, title: string | nul
       break;
     
       case "Airtime Purchase":
+        const networkType = value?.toUpperCase()
       return (
         <View
           style={{
@@ -150,7 +151,7 @@ const showImage = (senderName: string, receiverName: string, title: string | nul
               // borderRadius: 62 / 2,
             }}
             source={{
-              uri: assetsDB["bills"][value],
+              uri: assetsDB["bills"][networkType],
             }}
           />
         </View>

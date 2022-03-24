@@ -111,7 +111,7 @@ const Electricitydetails = ({ navigation, route }) => {
             marginRight: 55,
           }}
         >
-          Select your preferred network provider and receivers phone number.
+          Select your preferred electricity provider in any part of Nigeria.
         </Text>
 
         <View style={{ marginTop: 40, flex: 1 , minHeight: 400}}>

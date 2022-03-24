@@ -139,9 +139,10 @@ const Transactiondetails = ({ navigation, route }) => {
         break;
         // assetsDB["bills"][sender]
       case "Airtime Purchase":
+        const networkType = sender?.toUpperCase()
         return `
           <div style="min-width: 62px; min-height: 62px; border-radius: 32px;  display: flex; justify-content: center; align-items: center;">
-            <img src="${assetsDB["bills"][sender]}" style="width: 50px; height: 50px" />
+            <img src="${assetsDB["bills"][networkType]}" style="width: 50px; height: 50px" />
           </div>
           
           `;
