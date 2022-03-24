@@ -75,6 +75,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   amountTxt: {
+    textAlign:"center",
     ...fontsize.big,
     ...FONTS.medium,
   },
