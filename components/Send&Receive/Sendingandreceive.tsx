@@ -3,6 +3,7 @@ import React from "react";
 import { COLORS, icons, images } from "../../constants";
 import { styles } from "./Sendingandreceive.styles";
 import InitialsBg from "../InitialsBg/InitialsBg";
+import { assetsDB, bankLogo } from "../../assetdatas";
 const {
   Senderimage,
   Sendingarrow,
@@ -16,63 +17,9 @@ const { Trustedbadgepng } = images;
 // Wallet Debit
 // Funding
 
-const assetsDB = {
-  banks: {
-    GTB: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/guaranty_trust_bank/guaranty_trust_bank.png",
-    FIRST:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/first_bank/first_bank.png",
-    ZENITH:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/zenith_bank/zenith_bank.png",
-    ACCESS:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/access_bank/access_bank.png",
-    STANBIC:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/stanbic_ibtc/stanbic_ibtc.png",
-    DIAMOND:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/access_bank/access_bank.png",
-    SKYE: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/polaris_bank/polaris_bank.png",
-    WEMA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/wema_bank/wema_bank.png",
-    FCMB: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fcmb/fcmb.png",
-    FIDELITY:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fidelity_bank/fidelity_bank.png",
-    UBA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/united_bank_for_africa/united_bank_for_africa.png",
-    UNION:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fidelity_bank/fidelity_bank.png",
-    ECOBANK:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/ecobank/ecobank.png",
-    HERITAGE:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/heritage_bank/heritage_bank.png",
-    UNITY:
-      "https://explain.com.ng/wp-content/uploads/2021/03/WeChat-Image_20210323235401.jpg",
-    STERLING:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/sterling_bank/sterling_bank.png",
-    JAIZ: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSiQ7OKpP8Eys6O2KgXQLs80w6Gv1aO7NpXw&usqp=CAU",
-    KEYSTONE:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/keystone_bank/keystone_bank.png",
-    KUDA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/kuda_bank/kuda_bank.png",
-    POLARIS:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/polaris_bank/polaris_bank.png",
-    PAYCOM: "https://asset.brandfetch.io/id2FbKPB40/idW2zUwfi4.png",
-    PROVIDUS:
-      "https://providusbank.com/wp-content/uploads/2022/02/Providus-Bank-Logo.png",
-    TAJ: "https://www.tajbank.com/site-assets/uploads/2019/08/tajbank-logo-xlarge-1024x426.png",
-  },
 
-  fund: {
-    paystack:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/paystack/paystack.png",
-  },
 
-  bills: {
-    MTN: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/mtn/mtn.png",
-    AIRTEL:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/airtel/airtel.png",
-    ETISALAT:
-      "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/9mobile/9mobile.png",
-    GLO: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/glo/glo.png",
-  },
-};
-
-const showImage = (senderName: string, receiverName: string, title: string | null) => {
+const showImage = (senderName: string, receiverName: string, title: string | null, value?: string) => {
   switch (title) {
     case "funding":
       return (
@@ -155,6 +102,61 @@ const showImage = (senderName: string, receiverName: string, title: string | nul
       );
       break;
 
+      case "withdrawal":
+        const targetLogo = bankLogo.filter(logo => logo.name === value)
+      return (
+        <View
+          style={{
+            width: 62,
+            height: 62,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 62 / 2,
+            borderColor: COLORS.blue6,
+            borderWidth: 1
+          }}
+        >
+          <Image
+            style={{
+              width: "60%",
+              height: "60%",
+              // borderRadius: 62 / 2,
+            }}
+            source={{
+              uri: targetLogo[0]["image"],
+            }}
+          />
+        </View>
+      );
+      break;
+    
+      case "Airtime Purchase":
+      return (
+        <View
+          style={{
+            width: 62,
+            height: 62,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 62 / 2,
+            borderColor: COLORS.blue6,
+            borderWidth: 1
+          }}
+        >
+          <Image
+            style={{
+              width: "60%",
+              height: "60%",
+              // borderRadius: 62 / 2,
+            }}
+            source={{
+              uri: assetsDB["bills"][value],
+            }}
+          />
+        </View>
+      );
+      break;
+
     default:
       break;
   }
@@ -171,6 +173,7 @@ const Sendingandreceive = ({
   senderName,
   receiverName,
   title,
+  value
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
@@ -184,7 +187,7 @@ const Sendingandreceive = ({
       </View>
       <View style={{ position: "relative" }}>
         {/* <Receiverimage /> */}
-        {showImage(senderName, receiverName, title)}
+        {showImage(senderName, receiverName, title, value)}
 
         {/* <Image
           source={Trustedbadgepng}
