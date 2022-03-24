@@ -119,7 +119,7 @@ const WithdrawPin = ({ navigation, route}) => {
                   NGN {amountFormatter(amount)}
               </Text>
               <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 15 }}>
-                Withdraw Charges: 
+                Negotiation Charges: 
                 <Text style={{...FONTS.bold}}>N {plusBase(charges)}</Text>
               </Text>
               <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular,}}>

@@ -61,7 +61,7 @@ const Welcometochange = ({navigation, route}) => {
               color: COLORS.grey2,
             }}
           >
-            {fromm === "setup" && "Your default username is"}
+            Your default username is
           </Text>
           <Text style={{ ...fontsize.medium, ...FONTS.bold }}>{username}</Text>
           <Text
