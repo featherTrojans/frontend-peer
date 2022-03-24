@@ -27,7 +27,6 @@ export const styles = StyleSheet.create({
     lineHeight: 25,
     color: COLORS.black,
     marginBottom: 30,
-    marginHorizontal: 90
   },
   descriptionSubText: {
     ...FONTS.bold,

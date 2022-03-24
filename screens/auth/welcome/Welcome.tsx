@@ -55,8 +55,8 @@ const Welcome = ({ navigation, route }) => {
   }, []);
 
   const setTokenOnComplete = () => {
-    setToken(token)
-  }
+    setToken(token);
+  };
 
   function callback() {
     "worklet";
@@ -79,14 +79,24 @@ const Welcome = ({ navigation, route }) => {
     }
   };
 
-  useEffect(() => {
-    if(fromm == "setup"){
-      sendSchedulePushNotification("Acccount Registration", `Hi ${nameToShow(authdata?.userDetails?.fullName)}, Welcome onboard to feather africa, Enjoy true freedom.`)
-      
-    }
-    else{
-      sendSchedulePushNotification("Welcome Back Padi! 🎉", "Do more today. Enjoy financial flexibility")
 
+  const nameInNotification = authdata?.userDetails?.fullName ? nameToShow(authdata?.userDetails?.fullName) : "Padi"
+
+  useEffect(() => {
+    if (fromm == "setup" && token) {
+      sendSchedulePushNotification(
+        "Acccount Registration",
+        `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
+      );
+    } 
+  }, []);
+
+  useEffect(() => {
+    if(fromm !== "setup" && token){
+      sendSchedulePushNotification(
+        "Welcome Back Padi! 🎉",
+        "Do more today. Enjoy financial flexibility"
+      );
     }
   }, [])
 
@@ -100,7 +110,6 @@ const Welcome = ({ navigation, route }) => {
 
   //   }, 3500);
   // }, []);
-
 
   return (
     <View style={styles.container}>

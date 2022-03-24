@@ -173,6 +173,9 @@ const Home = ({ navigation }: { navigation: any }) => {
     getDashboardData();
   }, []);
 
+
+
+
   const onRefreshFunc = useCallback(() => {
     setRefreshing(true);
     getDashboardData();

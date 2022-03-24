@@ -37,7 +37,7 @@ const History = ({ data }) => {
             <Image  source={{uri: assetsDB["bills"][networkType] }} resizeMode="cover"  style={{
               width: "100%",
               height: "100%",
-              // borderRadius: 62 / 2,
+              borderRadius: 62 / 2,
             }}/>
           </View>
         )
