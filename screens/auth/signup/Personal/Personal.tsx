@@ -74,7 +74,13 @@ const Personal = ({ navigation }) => {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               //send the request
-              const response = await axiosCustom.post("auth/signup", values);
+              const response = await axiosCustom.post("auth/signup", {
+                firstName:values.firstName.trim(),
+                lastName:values.lastName.trim(),
+                email:values.email.trim(),
+                phoneNumber:values.phoneNumber.trim(),
+                referredBy:values.referredBy.trim()
+              });
               //store data in context
               // setAuthData(response?.data?.data)
               navigation.navigate("Verification", {

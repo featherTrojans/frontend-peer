@@ -72,8 +72,8 @@ const Pendingwithdraw = ({navigation, route}) => {
                 <View style={styles.detailsProfile}>
                   <Requesterdetails
                     name={requestInfo.agent}
-                    distance="3kms"
-                    duration={12}
+                    // distance="3kms"
+                    duration={"12 mins"}
                   />
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     {/* <Text style={styles.numberOfBadge}>203</Text> */}

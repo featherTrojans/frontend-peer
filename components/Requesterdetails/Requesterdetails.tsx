@@ -9,7 +9,7 @@ type RequesterdetailsProps ={
   image?: string,
   name: string,
   distance: string,
-  duration: number
+  duration: string
 }
 
 const Requesterdetails = ({image, name, distance, duration}: RequesterdetailsProps) => {
@@ -24,7 +24,8 @@ const Requesterdetails = ({image, name, distance, duration}: RequesterdetailsPro
     <View style={{ marginLeft: 15 }}>
       <Text style={styles.profileName}>{name}</Text>
       <Text style={styles.distanceDuration}>
-        {distance} away | {duration} mins
+        {/* {distance} */}
+           {duration} away
       </Text>
     </View>
   </View>

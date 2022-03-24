@@ -127,8 +127,8 @@ const Accepteddeposit = ({ navigation, route }) => {
               <View style={styles.detailsProfile}>
                 <Requesterdetails
                   name={requestInfo?.user?.fullName}
-                  distance="3kms"
-                  duration={12}
+                  // distance="3kms"
+                  duration={"12 mins"}
                 />
 
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
