@@ -123,36 +123,18 @@ const WithdrawPin = ({ navigation, route }) => {
                   marginHorizontal:10
                 }}
               /> */}
-          </View>
-          <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
-            NGN {amountFormatter(amount)}
-          </Text>
-          <Text
-            style={{
-              backgroundColor: "#F2F5FF",
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-              borderRadius: 30,
-              marginTop: 15,
-            }}
-          >
-            Withdraw Charges:
-            <Text style={{ ...FONTS.bold }}>N {charges}</Text>
-          </Text>
-          <Text
-            style={{
-              textAlign: "center",
-              marginHorizontal: 40,
-              marginVertical: 40,
-              ...fontsize.bsmall,
-              ...FONTS.regular,
-              lineHeight: 25,
-            }}
-          >
-            Note that the base charge above can be negotiated by{" "}
-            <Text style={{ ...FONTS.bold }}> @{userInfo.username}</Text>
-          </Text>
-        </View>
+                </View>
+              <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
+                  NGN {amountFormatter(amount)}
+              </Text>
+              <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 15 }}>
+                Negotiation Charges: 
+                <Text style={{...FONTS.bold}}>N {plusBase(charges)}</Text>
+              </Text>
+              <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular, lineHeight: 25,}}>
+                Note that the base charge above can be negotiated by <Text style={{...FONTS.bold}}> @{userInfo.username}</Text>
+              </Text>
+            </View>
       </Globalmodal>
       <Globalmodal
         showState={shownextmodal}

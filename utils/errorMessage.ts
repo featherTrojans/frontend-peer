@@ -7,7 +7,7 @@ function showerror(toast:any,err:any,customeerror?:string){
     }else if(customeerror){
       message = customeerror
     }else{
-      message = "unable to perform request, please try again"
+      message = "Padi something went wrong, try again"
     }
     if(toast.show !== undefined){
       toast.show(message); 

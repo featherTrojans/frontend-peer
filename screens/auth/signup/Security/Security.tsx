@@ -58,7 +58,7 @@ const Security = ({ route, navigation }) => {
           // onBgPress={() => setShowModal(true)}
           btnFunction={() =>{
             setShowModal(false);
-            navigation.navigate("Welcometochange",{ fromm: "login",
+            navigation.navigate("Welcometochange",{ fromm: "setup",
             username: result?.username,
             token: result?.token});
 

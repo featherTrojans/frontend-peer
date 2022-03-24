@@ -77,7 +77,7 @@ const Negotiate = ({ navigation, route}) => {
          <View style={{ alignItems: "center" }}>
            <Text style={{alignSelf:"flex-start"}}>Request Summary</Text>
              <View style={{flexDirection:"row",justifyContent:"space-between", marginVertical:20}}>
-               <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.fullName || requestInfo?.user?.fullName || "A Z"}/>
+               <Sendingandreceive title="Wallet Debit" senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.agent || "A Z"}/>
               {/* <View
                 style={{
                   width: 80,
@@ -101,7 +101,7 @@ const Negotiate = ({ navigation, route}) => {
                   Base charges has been succesfully changed
               </Text>
               <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginVertical: 15 }}>
-                Withdraw Charges: 
+                Negotiation Charges: 
                 <Text style={{...FONTS.bold}}>NGN {amountFormatter(charges)}</Text>
               </Text>
               {/* <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular,}}>

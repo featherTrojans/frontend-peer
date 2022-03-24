@@ -13,7 +13,7 @@ import LottieView from "lottie-react-native";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -43,6 +43,20 @@ const Depositpin = ({ route, navigation }) => {
       status: status,
     });
   };
+
+  const checkIfDocExist = async ()=>{
+    const  document = await getDoc(doc(db,"withdrawtransfer",requestInfo.reference))
+    if(document.exists()){
+      if(document.data().status === "pending"){
+        return true
+      }else{
+         throw {response:{data:{message:"Please swipe to confirm payment on withdrawal device"}}}   
+      }
+    }else{
+       throw {response:{data:{message:"Please swipe to confirm payment on withdrawal device"}}}
+    }
+  }
+
   const handleApproveRequest = async () => {
     const joinpin = pin.join("");
     if (joinpin.length < 4) {
@@ -50,7 +64,10 @@ const Depositpin = ({ route, navigation }) => {
     }
 
     setLoading(true);
+  
     try {
+      // check if document exist
+      await checkIfDocExist()
       await axiosCustom.post("/request/approve", {
         reference: requestInfo.reference,
         user_pin: joinpin,
@@ -59,6 +76,7 @@ const Depositpin = ({ route, navigation }) => {
       //show success message
       setSuccessModal(true);
     } catch (err) {
+      console.log(err)
       showerror(toast, err);
       await handlePrepareToTestUpdate("rejected");
     } finally {
