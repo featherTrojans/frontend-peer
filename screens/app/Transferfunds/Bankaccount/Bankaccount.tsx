@@ -29,7 +29,6 @@ const availableBanks = [
   { label: "ACCESS", value: "ACCESS" },
   { label: "STANBIC", value: "STANBIC" },
   { label: "DIAMOND", value: "DIAMOND" },
-  { label: "SKYE", value: "SKYE" },
   { label: "WEMA", value: "WEMA" },
   { label: "FCMB", value: "FCMB" },
   { label: "FIDELITY", value: "FIDELITY" },

@@ -175,7 +175,7 @@ const WithdrawPin = ({ navigation, route }) => {
           <Text style={styles.descriptionText}>
             Add a fair amount to the base charge as fee
           </Text>
-          <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
+          <Text style={styles.enterPinText}>Enter Amount</Text>
         </View>
         <View style={{ flex: 1, justifyContent: "center" }}>
           <View style={{ alignItems: "center" }}>

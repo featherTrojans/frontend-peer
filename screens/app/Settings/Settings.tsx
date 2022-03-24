@@ -45,8 +45,8 @@ const Iconwithtitle = ({ bg, icon, title, onpress }: IconwithtitleProps) => {
   );
 };
 
-const handleOpenWithWebBrowser = () => {
-  WebBrowser.openBrowserAsync('https://www.feather.africa');
+const handleOpenWithWebBrowser = (name:string,email:string) => {
+  WebBrowser.openBrowserAsync(`https://www.feather.africa/support/app/${name}/${email}`);
 };
 
 const handleOpenWithLinking = () => {
@@ -133,7 +133,7 @@ const Settings = ({navigation}) => {
             bg="#F1E5FF"
             icon={<Supporticon />}
             title="Support / Help Desk"
-            onpress={() => handleOpenWithWebBrowser()}
+            onpress={() => handleOpenWithWebBrowser(authdata?.userDetails?.fullName?.split(" ")[0], authdata?.userDetails?.email)}
           />
           <Iconwithtitle
             bg="#E6ECFF"

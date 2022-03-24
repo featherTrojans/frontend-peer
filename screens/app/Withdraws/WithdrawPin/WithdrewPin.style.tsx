@@ -75,6 +75,7 @@ export const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   amountTxt: {
+    textAlign:"center",
     ...fontsize.big,
     ...FONTS.medium,
   },
