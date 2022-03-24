@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     paddingHorizontal: 25,
   },
   backArrowConteiner: {
@@ -71,8 +71,8 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: 15,
     width: "70%",
-    textAlign: "left",
-    alignItems: "flex-start",
+    textAlign: "center",
+    alignItems: "center",
   },
   amountTxt: {
     ...fontsize.big,
