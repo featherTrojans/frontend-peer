@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     lineHeight: 25,
     color: COLORS.black,
     marginBottom: 30,
+    marginHorizontal: 90
   },
   descriptionSubText: {
     ...FONTS.bold,
@@ -71,8 +72,8 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: 15,
     width: "70%",
-    textAlign: "left",
-    alignItems: "flex-start",
+    textAlign: "center",
+    alignItems: "center",
   },
   amountTxt: {
     textAlign:"center",
