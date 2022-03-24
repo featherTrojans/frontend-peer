@@ -83,8 +83,9 @@ const Personal = ({ navigation }) => {
                 token: response?.data?.data?.token,
               });
             } catch (err) {
+              console.log(err.response)
               if (err.response) {
-                if (err?.response?.data?.data?.isVerified) {
+                if (!err?.response?.data?.data?.isVerified) {
                   return navigation.navigate("Verification", {
                     email: values.email,
                     phoneNumber: values.phoneNumber,

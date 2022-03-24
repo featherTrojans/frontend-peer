@@ -56,7 +56,7 @@ const Pendingwithdraw = ({navigation, route}) => {
   if(locationLoading){
     return(
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
-        <ActivityIndicator  color="#000" size="large" />
+        <ActivityIndicator  color="#003AD6" size="large" />
        </View>
       )
   }

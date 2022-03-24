@@ -6,7 +6,7 @@ import {
   ScrollView,
   Platform,
   TouchableOpacity,
-  Image
+  Image,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import * as Print from "expo-print";
@@ -16,13 +16,13 @@ import * as FileSystem from "expo-file-system";
 import * as Clipboard from "expo-clipboard";
 import moment from "moment";
 import { styles } from "./Transactiondetails.styles";
+import { assetsDB, bankLogo } from "../../../../assetdatas";
 import {
   Backheader,
   Bottombtn,
   Iconwithdatas,
   InitialsBg,
   Sendingandreceive,
-
 } from "../../../../components";
 import { FONTS, fontsize, COLORS, icons } from "../../../../constants";
 import { NavigationContainer } from "@react-navigation/native";
@@ -30,7 +30,6 @@ import amountFormatter from "../../../../utils/formatMoney";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
-
 
 // Sendingandreceive
 
@@ -56,7 +55,6 @@ const Transactiondetails = ({ navigation, route }) => {
     otherUser,
   } = data;
 
-
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")},  ${dt.format("Do")} ${dt.format(
     "MMM"
@@ -71,7 +69,7 @@ const Transactiondetails = ({ navigation, route }) => {
 
     if (splitName.length > 2) {
       return `${splitName[0][0]}${splitName[1][0]}`;
-    }else{
+    } else {
       return `${splitName[0][0]}${splitName[1][0]}`;
     }
   };
@@ -128,74 +126,36 @@ const Transactiondetails = ({ navigation, route }) => {
     }
   };
 
-  const assetsDB = {
-    banks: {
-      GTB: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/guaranty_trust_bank/guaranty_trust_bank.png",
-      FIRST:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/first_bank/first_bank.png",
-      ZENITH:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/zenith_bank/zenith_bank.png",
-      ACCESS:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/access_bank/access_bank.png",
-      STANBIC:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/stanbic_ibtc/stanbic_ibtc.png",
-      DIAMOND:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/access_bank/access_bank.png",
-      SKYE: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/polaris_bank/polaris_bank.png",
-      WEMA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/wema_bank/wema_bank.png",
-      FCMB: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fcmb/fcmb.png",
-      FIDELITY:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fidelity_bank/fidelity_bank.png",
-      UBA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/united_bank_for_africa/united_bank_for_africa.png",
-      UNION:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fidelity_bank/fidelity_bank.png",
-      ECOBANK:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/ecobank/ecobank.png",
-      HERITAGE:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/heritage_bank/heritage_bank.png",
-      UNITY:
-        "https://explain.com.ng/wp-content/uploads/2021/03/WeChat-Image_20210323235401.jpg",
-      STERLING:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/sterling_bank/sterling_bank.png",
-      JAIZ: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSiQ7OKpP8Eys6O2KgXQLs80w6Gv1aO7NpXw&usqp=CAU",
-      KEYSTONE:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/keystone_bank/keystone_bank.png",
-      KUDA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/kuda_bank/kuda_bank.png",
-      POLARIS:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/polaris_bank/polaris_bank.png",
-      PAYCOM: "https://asset.brandfetch.io/id2FbKPB40/idW2zUwfi4.png",
-      PROVIDUS:
-        "https://providusbank.com/wp-content/uploads/2022/02/Providus-Bank-Logo.png",
-      TAJ: "https://www.tajbank.com/site-assets/uploads/2019/08/tajbank-logo-xlarge-1024x426.png",
-    },
-  
-    fund: {
-      paystack:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/paystack/paystack.png",
-    },
-  
-    bills: {
-      MTN: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/mtn/mtn.png",
-      AIRTEL:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/airtel/airtel.png",
-      ETISALAT:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/9mobile/9mobile.png",
-      GLO: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/glo/glo.png",
-    },
-  };
-
-  const showImageOnReceipt = (name, title) => {
+  const showImageOnReceipt = (name: string, title: string, sender?: string) => {
+    const targetLogo = bankLogo.filter(logo => logo.name === sender)
     switch (title) {
       case "funding":
         return `
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #001757; display: flex; justify-content: center; align-items: center;">
-          <img src="${assetsDB['fund']["paystack"]}" style="width: 25px; height: 25px" />
+          <img src="${assetsDB["fund"]["paystack"]}" style="width: 25px; height: 25px" />
         </div>
         
         `;
         break;
+        // assetsDB["bills"][sender]
+      case "Airtime Purchase":
+        return `
+          <div style="min-width: 62px; min-height: 62px; border-radius: 32px;  display: flex; justify-content: center; align-items: center;">
+            <img src="${assetsDB["bills"][sender]}" style="width: 50px; height: 50px" />
+          </div>
+          
+          `;
+        break;
+      case "withdrawal":
+        return `
+            <div style="min-width: 62px; min-height: 62px; border-radius: 32px;  display: flex; justify-content: center; align-items: center;">
+              <img src="${targetLogo[0]["image"]}" style="width: 50px; height: 50px" />
+            </div>
+            
+            `;
+        break;
       case "Wallet Debit":
-        case "Wallet Credit":
+      case "Wallet Credit":
         return `
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
         ${nameSplitter(otherUser ? otherUser.fullName : "Feather Africa Inc")}
@@ -209,31 +169,33 @@ const Transactiondetails = ({ navigation, route }) => {
         ${nameSplitter(user.fullName)}
         </div>
         `;
-        
+
         break;
     }
   };
 
-
-
-
-
   const typeOfName = (title: string) => {
     switch (title) {
       case "Wallet Credit":
-        return {senderName: otherUser.fullName, receiverName: user.fullName}
+        return { senderName: otherUser.fullName, receiverName: user.fullName };
         break;
-        case "Wallet Debit":
-          return {senderName: user.fullName, receiverName: otherUser ? otherUser.fullName : "EScrow"}
-          case "funding":
-            return {senderName: sender, receiverName: receiver}
-          case "escrow":
-            return {senderName: sender, receiverName: receiver}
+      case "Wallet Debit":
+        return {
+          senderName: user.fullName,
+          receiverName: otherUser ? otherUser.fullName : "EScrow",
+        };
+      case "funding":
+        return { senderName: sender, receiverName: receiver };
+      case "escrow":
+        return { senderName: sender, receiverName: receiver };
+      case "Airtime Purchase":
+        return { senderName: sender, receiverName: receiver };
+      case "withdrawal":
+        return { senderName: sender, receiverName: receiver };
       default:
         break;
     }
-  }
-
+  };
 
   const htmlContent = `
   <!DOCTYPE html>
@@ -398,14 +360,16 @@ const Transactiondetails = ({ navigation, route }) => {
         <img class="user__image" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035185/62x62_feather_dibyrp.svg" />
         <div class="dashed__line"></div>
         <img class="checked__icon" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035323/greenyy_exqzbx.svg" />
-        
-        
-        ${showImageOnReceipt(user.fullName, title)}
+        ${showImageOnReceipt(user.fullName, title, title === "withdrawal" ? receiver : sender)}
     </div>
     </div>
 
 
-    <p class="transaction__text">This is the transaction report between <span class="transaction__names">${typeOfName(title)?.senderName}</span> and <span class="transaction__names">${typeOfName(title)?.receiverName}</span></p>
+    <p class="transaction__text">This is the transaction report between <span class="transaction__names">${
+      typeOfName(title)?.senderName
+    }</span> and <span class="transaction__names">${
+    typeOfName(title)?.receiverName
+  }</span></p>
   
     <h3 class="transaction__heading">Transaction Ref.</h3>
    <p class="transaction__ref">${transactionRef}</p>
@@ -413,7 +377,9 @@ const Transactiondetails = ({ navigation, route }) => {
    <ul class="list">
        <li class="item">
            <span class="item__left">Receiver </span>
-           <span class="item__right receiver">${typeOfName(title)?.receiverName}</span>
+           <span class="item__right receiver">${
+             typeOfName(title)?.receiverName
+           }</span>
        </li>
        <li class="item">
           <span class="item__left">Amount </span>
@@ -513,6 +479,7 @@ const Transactiondetails = ({ navigation, route }) => {
             senderName={typeOfName(title)?.senderName}
             receiverName={typeOfName(title)?.receiverName}
             title={title}
+            value={title === "withdrawal" ? receiver : sender}
           />
           <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
             NGN {amountFormatter(amount)}
