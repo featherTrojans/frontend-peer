@@ -29,13 +29,13 @@ const Requestsummary = ({navigation, route}) => {
           marginTop: 20,
         }}
       >
-        <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.agent || requestInfo?.user?.agent || "A Z"} />
+        <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.agent || requestInfo?.user?.agent || "A Z"} title="Wallet Credit" />
         <Priceandcharges amount={requestInfo?.amount} charges={requestInfo?.charges} />
       </View>
 
       <View style={styles.saferulesContainer}>
         <Text style={styles.saferuleText}>
-          1. We advice that you meet-up in an open or public place preferably not during odd hours for your safety.
+          1. It is advisable that you meet-up in an open or public place.
         </Text>
         <Text style={styles.saferuleText}>
           2. Ensure that the cash given to you is certified as “in good condition” by you.
