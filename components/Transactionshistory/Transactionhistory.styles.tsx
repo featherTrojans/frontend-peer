@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.medium,
     marginBottom: 3,
+    textTransform:  'capitalize'
   },
   transactionType: {
     ...fontsize.smaller,
