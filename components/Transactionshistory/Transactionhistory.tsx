@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React,{useState, useEffect} from "react";
 import {Shadow} from 'react-native-shadow-2';
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
@@ -6,12 +6,12 @@ import { styles } from "./Transactionhistory.styles";
 import { useNavigation } from '@react-navigation/native';
 import amountFormatter from "../../utils/formatMoney";
 import { customNavigation } from "../../utils/customNavigation";
-
+import { assetsDB, bankLogo } from "../../assetdatas";
 
 
 const { Arrowin, Arrowout } = icons;
 
-const History = ({ data }: any) => {
+const History = ({ data }) => {
   // const navigation = useNavigation()
   const { direction, description, to, amount, from, title } = data;
 
@@ -26,6 +26,44 @@ const History = ({ data }: any) => {
   const transactionValue = direction === "in" ? from : to;
   const amountSign = direction === "in" ? "+" : "-";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
+
+
+  const transactionBadge = () => {
+    switch (title) {
+      case "Airtime Purchase":
+        return (
+          <View style={styles.arrowBg}>
+            <Image  source={{uri: assetsDB["bills"][from] }} resizeMode="cover"  style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: 62 / 2,
+            }}/>
+          </View>
+        )
+        break;
+
+        case "withdrawal":
+          const targetLogo = bankLogo.filter(logo => logo.name === to)
+          return (
+            <View style={styles.arrowBg}>
+              <Image  source={{uri: targetLogo[0]["image"] }} resizeMode="cover"  style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: 62 / 2,
+              }}/>
+            </View>
+          )
+          break;
+     default:
+      return (
+        <View style={[styles.arrowBg, { backgroundColor: circleColor }]}>
+          {Arrow}
+        </View>
+      )
+        break;
+    }
+}
+
   return (
     <TouchableOpacity 
     activeOpacity={0.8}
@@ -33,9 +71,11 @@ const History = ({ data }: any) => {
     onPress={() => customNavigation("Transactiondetails", {data: data})}
     >
       <View style={styles.historyDetailsContainer}>
-        <View style={[styles.arrowBg, { backgroundColor: circleColor }]}>
-          {Arrow}
-        </View>
+
+
+        
+        {transactionBadge()}
+
         <View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.transactionType}>
