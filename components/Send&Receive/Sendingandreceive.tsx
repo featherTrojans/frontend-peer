@@ -17,28 +17,18 @@ const { Trustedbadgepng } = images;
 // Wallet Debit
 // Funding
 
-
-
-const showImage = (senderName: string, receiverName: string, title: string | null, value?: string) => {
+const showImage = (
+  senderName: string,
+  receiverName: string,
+  title: string | null,
+  value?: string
+) => {
   switch (title) {
     case "funding":
       return (
-        <View
-          style={{
-            width: 62,
-            height: 62,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 62 / 2,
-            backgroundColor: "#001757",
-          }}
-        >
+        <View style={styles.typeContainer}>
           <Image
-            style={{
-              width: "50%",
-              height: "50%",
-              // borderRadius: 62 / 2,
-            }}
+            style={styles.imageStyle}
             source={{
               uri: assetsDB["fund"]["paystack"],
             }}
@@ -77,23 +67,9 @@ const showImage = (senderName: string, receiverName: string, title: string | nul
     case "PROVIDUS":
     case "TAJ":
       return (
-        <View
-          style={{
-            width: 62,
-            height: 62,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 62 / 2,
-            borderColor: COLORS.blue6,
-            borderWidth: 1
-          }}
-        >
+        <View style={styles.typeContainer}>
           <Image
-            style={{
-              width: "60%",
-              height: "60%",
-              // borderRadius: 62 / 2,
-            }}
+            style={styles.imageStyle}
             source={{
               uri: assetsDB["banks"][title],
             }}
@@ -102,26 +78,12 @@ const showImage = (senderName: string, receiverName: string, title: string | nul
       );
       break;
 
-      case "withdrawal":
-        const targetLogo = bankLogo.filter(logo => logo.name === value)
+    case "withdrawal":
+      const targetLogo = bankLogo.filter((logo) => logo.name === value);
       return (
-        <View
-          style={{
-            width: 62,
-            height: 62,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 62 / 2,
-            borderColor: COLORS.blue6,
-            borderWidth: 1
-          }}
-        >
+        <View style={styles.typeContainer}>
           <Image
-            style={{
-              width: "60%",
-              height: "60%",
-              // borderRadius: 62 / 2,
-            }}
+            style={styles.imageStyle}
             source={{
               uri: targetLogo[0]["image"],
             }}
@@ -129,27 +91,13 @@ const showImage = (senderName: string, receiverName: string, title: string | nul
         </View>
       );
       break;
-    
-      case "Airtime Purchase":
-        const networkType = value?.toUpperCase()
+
+    case "Airtime Purchase":
+      const networkType = value?.toUpperCase();
       return (
-        <View
-          style={{
-            width: 62,
-            height: 62,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 62 / 2,
-            borderColor: COLORS.blue6,
-            borderWidth: 1
-          }}
-        >
+        <View style={styles.typeContainer}>
           <Image
-            style={{
-              width: "60%",
-              height: "60%",
-              // borderRadius: 62 / 2,
-            }}
+            style={styles.imageStyle}
             source={{
               uri: assetsDB["bills"][networkType],
             }}
@@ -174,12 +122,10 @@ const Sendingandreceive = ({
   senderName,
   receiverName,
   title,
-  value
+  value,
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
-      {/* <Senderimage /> */}
-      {/* {showImage(senderName, "Wallet Credit")} */}
       <Userdefaultmedium />
 
       <View style={styles.arrowContainer}>
@@ -189,12 +135,6 @@ const Sendingandreceive = ({
       <View style={{ position: "relative" }}>
         {/* <Receiverimage /> */}
         {showImage(senderName, receiverName, title, value)}
-
-        {/* <Image
-          source={Trustedbadgepng}
-          resizeMode="cover"
-          style={styles.badgeImage}
-        /> */}
       </View>
     </View>
   );

@@ -19,30 +19,6 @@ const { Newlogo } = icons;
 const Loader = () => {
 
 
-
-    // This upper animation is for the scaling logo, just
-
-
-  // const progress = useSharedValue(1);
-  // const scale = useSharedValue(1)
-
-  // const scalingLogo = useAnimatedStyle(() => {
-  //   return {
-  //     transform: [{scale: scale.value}]
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //     progress.value = withTiming(0.5, {duration: 1500})
-  //     scale.value= withRepeat(withSpring(1.5), -1, true)
-  // }, []);
-
-
-
-
-
-// This lower animation is for the bubbling, Pikc one but i like the this shaaa 
-
   const opacity = useSharedValue(1);
   const bubblingCircle = useAnimatedStyle(() => {
     return {

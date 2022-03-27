@@ -86,7 +86,7 @@ const Welcome = ({ navigation, route }) => {
     if (fromm == "setup" && token) {
       sendSchedulePushNotification(
         "Acccount Registration",
-        `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
+        `Hi ${}, Welcome onboard to feather africa, Enjoy true freedom.`
       );
     } 
   }, []);

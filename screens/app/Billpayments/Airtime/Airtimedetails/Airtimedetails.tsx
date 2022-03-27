@@ -22,7 +22,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { AuthContext } from "../../../../../context/AuthContext";
 import showerror from "../../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
-
+import { styles } from "./Airtimedetails.styles";
 
 const { Inputdropdown, Addressbook } = icons;
 
@@ -30,10 +30,10 @@ type PaybillsinputProps = {
   inputSymbol: string;
   rightIcon?: JSX.Element;
   placeholder: string;
-  editable?: boolean
-  value?:any,
-  onChangeText?:any,
-  keyboardType?:any
+  editable?: boolean;
+  value?: any;
+  onChangeText?: any;
+  keyboardType?: any;
 };
 
 const Paybillsinput = ({
@@ -44,25 +44,14 @@ const Paybillsinput = ({
   ...props
 }: PaybillsinputProps) => {
   return (
-    <View
-      style={{
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: COLORS.paybillInput,
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 20,
-        marginBottom: 15,
-      }}
-    >
-      <Text style={{ ...fontsize.bsmall }}>{inputSymbol}</Text>
-      <Text style={{ marginLeft: 15.5, marginRight: 16.5 }}>|</Text>
+    <View style={styles.paybillsInput}>
+      <Text style={styles.atSymbol}>{inputSymbol}</Text>
+      <Text style={styles.boundaryLine}>|</Text>
       <TextInput
         editable={editable}
         style={{ flex: 1, height: 62 }}
         placeholder={placeholder}
         placeholderTextColor={COLORS.black}
-        
         {...props}
       />
       {rightIcon}
@@ -71,21 +60,21 @@ const Paybillsinput = ({
 };
 
 const Airtimedetails = ({ navigation, route }) => {
-  const {amount} = route.params;
+  const { amount } = route.params;
   const toast = useToast();
   const { authdata } = useContext(AuthContext);
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [phone, setPhone] = useState<null | string>(authdata?.userDetails?.phoneNumber);
+  const [phone, setPhone] = useState<null | string>(
+    authdata?.userDetails?.phoneNumber
+  );
   const [items, setItems] = useState([
     { label: "@    |    MTN", value: "MTN" },
     { label: "@    |    Airtel", value: "Airtel" },
     { label: "@    |    Globacom", value: "Glo" },
-    { label: "@    |    9mobile", value: "9mobile" }
+    { label: "@    |    9mobile", value: "9mobile" },
   ]);
-
-  
 
   const activeColor = (activeIndex: number) => {
     return index === activeIndex ? "#003AD6" : "#000000";
@@ -103,17 +92,19 @@ const Airtimedetails = ({ navigation, route }) => {
   };
   const horizontalOffset = useRef(new Animated.Value(0)).current;
 
-
-  const handleToNext = ()=>{
-    if(!amount || !phone || !value ){
-        return showerror(toast, null, "All fields are complusory")
+  const handleToNext = () => {
+    if (!amount || !phone || !value) {
+      return showerror(toast, null, "All fields are compulsory");
     }
-    navigation.navigate("Airtimepurchasepin",{type:"airtime", data:{
-      amount:amount,
-      phone:phone,
-      network:value
-    }})
-  }
+    navigation.navigate("Airtimepurchasepin", {
+      type: "airtime",
+      data: {
+        amount: amount,
+        phone: phone,
+        network: value,
+      },
+    });
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -122,29 +113,16 @@ const Airtimedetails = ({ navigation, route }) => {
     >
       <Customstatusbar />
 
-      
       <Backheader
         title={index === 0 ? "Purchase Airtime" : "Purchase Airtime & Data"}
       />
       <KeyboardAwareScrollView style={{ paddingHorizontal: 15, flex: 1 }}>
-        <Text
-          style={{
-            marginTop: 16,
-            ...fontsize.bsmall,
-            ...FONTS.regular,
-            marginRight: 55,
-          }}
-        >
+        <Text style={styles.headerText}>
           Select your preferred network provider and receivers phone number.
         </Text>
 
-
-
-
-        <View style={{ position: "relative", marginTop: 30, ...Shadow}}>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
+        <View style={styles.selectionTypeContainer}>
+          <View style={styles.optionsContainer}>
             <TouchableOpacity
               style={{
                 width: singleWidth(),
@@ -153,16 +131,7 @@ const Airtimedetails = ({ navigation, route }) => {
               activeOpacity={0.7}
               onPress={() => animateToIndex(0)}
             >
-              <Text
-                style={[
-                  {
-                    ...fontsize.smallest,
-                    ...FONTS.regular,
-                    textAlign: "center",
-                    color: activeColor(0),
-                  },
-                ]}
-              >
+              <Text style={[styles.selectionType, { color: activeColor(0) }]}>
                 Airtime
               </Text>
             </TouchableOpacity>
@@ -172,42 +141,31 @@ const Airtimedetails = ({ navigation, route }) => {
               activeOpacity={0.7}
               onPress={() => animateToIndex(1)}
             >
-              <Text
-                style={[
-                  {
-                    ...fontsize.smallest,
-                    ...FONTS.regular,
-                    textAlign: "center",
-                    color: activeColor(1),
-                  },
-                ]}
-              >
+              <Text style={[styles.selectionType, { color: activeColor(1) }]}>
                 Mobile Data
               </Text>
             </TouchableOpacity>
           </View>
 
           <Animated.View
-            style={{
-              position: "absolute",
-              width: singleWidth(),
-              height: 1.5,
-              backgroundColor: COLORS.blue6,
-              bottom: 0,
-              left: 0,
-              transform: [{ translateX: horizontalOffset }, { scaleX: 1 }],
-            }}
+            style={[
+              styles.animatedLine,
+              {
+                width: singleWidth(),
+                transform: [{ translateX: horizontalOffset }, { scaleX: 1 }],
+              },
+            ]}
           />
         </View>
 
-
-
-
-
-        <View style={{ marginTop: 40,minHeight:400, flex: 1 }}>
+        <View style={styles.inputsContainer}>
           {index === 0 ? (
             <>
-              <Paybillsinput inputSymbol="#" placeholder={amount} editable={false} />
+              <Paybillsinput
+                inputSymbol="#"
+                placeholder={amount}
+                editable={false}
+              />
               {/* <Paybillsinput
                 inputSymbol="@"
                 placeholder="Select Network"
@@ -235,16 +193,16 @@ const Airtimedetails = ({ navigation, route }) => {
                   height: 62,
                   paddingLeft: 20,
                   borderColor: "#E6E6E6",
-                  marginBottom: 15
+                  marginBottom: 15,
                 }}
                 containerStyle={{}}
                 dropDownContainerStyle={{
-                  borderColor: COLORS.grey1
+                  borderColor: COLORS.grey1,
                 }}
               />
               <Paybillsinput
                 value={phone}
-                onChangeText={(text:string)=>setPhone(text)}
+                onChangeText={(text: string) => setPhone(text)}
                 inputSymbol="#"
                 placeholder="08012345678"
                 // rightIcon={<Addressbook />}
@@ -270,10 +228,7 @@ const Airtimedetails = ({ navigation, route }) => {
           )}
         </View>
       </KeyboardAwareScrollView>
-      <Bottombtn
-        title="proceed"
-        onpress={handleToNext}
-      />
+      <Bottombtn title="proceed" onpress={handleToNext} />
     </KeyboardAwareScrollView>
   );
 };

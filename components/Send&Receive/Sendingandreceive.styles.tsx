@@ -1,18 +1,37 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../constants";
 
 export const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
     // marginBottom: 18,
-    marginBottom: 26, 
-    marginTop: 42
+    marginBottom: 26,
+    marginTop: 42,
   },
-  arrowContainer:{
-      marginHorizontal: 30
+  arrowContainer: {
+    marginHorizontal: 30,
   },
   badgeImage: {
-    position: "absolute", 
-    left: -10
-  }
+    position: "absolute",
+    left: -10,
+  },
+
+  ///Show Images styles
+
+
+  typeContainer: {
+    width: 62,
+    height: 62,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 62 / 2,
+    backgroundColor: "#001757",
+  },
+  imageStyle: {
+    width: "50%",
+    height: "50%",
+  },
+
+
 });

@@ -21,8 +21,8 @@ import Customstatusbar from "../../../../shared/Customstatusbar";
 import { styles } from "../../../Transferfunds/TransferInput/TransferInput.styles";
 
 const Airtimeamount = ({ navigation, route }) => {
-//   const { nextscreen } = route.params;
-  const {authdata} = useContext(AuthContext)
+  //   const { nextscreen } = route.params;
+  const { authdata } = useContext(AuthContext);
   const toast = useToast();
   const [amount, setAmount] = useState<string>("");
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
@@ -54,10 +54,10 @@ const Airtimeamount = ({ navigation, route }) => {
     if (authdata?.walletBal < amount) {
       return showerror(toast, null, "insufficient amount");
     }
-    if(Number(amount) < 1){
+    if (Number(amount) < 1) {
       return showerror(toast, null, "Amount cannot be 0.00");
     }
-    navigation.navigate("Airtimedetails",{amount})
+    navigation.navigate("Airtimedetails", { amount });
   };
 
   return (

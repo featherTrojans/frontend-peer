@@ -29,6 +29,7 @@ const availableBanks = [
   { label: "ACCESS", value: "ACCESS" },
   { label: "STANBIC", value: "STANBIC" },
   { label: "DIAMOND", value: "DIAMOND" },
+  { label: "SKYE", value: "SKYE" },
   { label: "WEMA", value: "WEMA" },
   { label: "FCMB", value: "FCMB" },
   { label: "FIDELITY", value: "FIDELITY" },
@@ -182,7 +183,8 @@ const Bankaccount = ({ navigation, route }) => {
 
           <Sendingandreceive 
           senderName={authdata?.userDetails?.fullName} 
-          receiverName={"Am Zm"} title={value && value} 
+          receiverName={"Am Zm"} 
+          title={value && value} 
           />
 
           <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>

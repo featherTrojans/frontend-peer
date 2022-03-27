@@ -1,3 +1,9 @@
 import { StyleSheet } from "react-native";
+import { FONTS, fontsize } from "../../constants";
 
-StyleSheet
+export const styles = StyleSheet.create({
+    initialText: {
+        ...fontsize.bsmall, 
+        ...FONTS.medium
+    }
+})

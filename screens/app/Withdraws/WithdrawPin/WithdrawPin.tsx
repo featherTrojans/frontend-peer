@@ -123,18 +123,36 @@ const WithdrawPin = ({ navigation, route }) => {
                   marginHorizontal:10
                 }}
               /> */}
-                </View>
-              <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
-                  NGN {amountFormatter(amount)}
-              </Text>
-              <Text style={{backgroundColor:"#F2F5FF", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 30, marginTop: 15 }}>
-                Negotiation Charges: 
-                <Text style={{...FONTS.bold}}>N {plusBase(charges)}</Text>
-              </Text>
-              <Text style={{textAlign: "center",marginHorizontal: 40,marginVertical: 40,...fontsize.bsmall,...FONTS.regular, lineHeight: 25,}}>
-                Note that the base charge above can be negotiated by <Text style={{...FONTS.bold}}> @{userInfo.username}</Text>
-              </Text>
-            </View>
+          </View>
+          <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
+            NGN {amountFormatter(amount)}
+          </Text>
+          <Text
+            style={{
+              backgroundColor: "#F2F5FF",
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+              borderRadius: 30,
+              marginTop: 15,
+            }}
+          >
+            Negotiation Charges:
+            <Text style={{ ...FONTS.bold }}>N {plusBase(charges)}</Text>
+          </Text>
+          <Text
+            style={{
+              textAlign: "center",
+              marginHorizontal: 40,
+              marginVertical: 40,
+              ...fontsize.bsmall,
+              ...FONTS.regular,
+              lineHeight: 25,
+            }}
+          >
+            Note that the base charge above can be negotiated by{" "}
+            <Text style={{ ...FONTS.bold }}> @{userInfo.username}</Text>
+          </Text>
+        </View>
       </Globalmodal>
       <Globalmodal
         showState={shownextmodal}
@@ -166,38 +184,43 @@ const WithdrawPin = ({ navigation, route }) => {
         </View>
       </Globalmodal>
 
-      <View style={styles.mainContainer}>
-        <View style={styles.backArrowConteiner}>
-          <Backarrow />
-        </View>
-
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
-            Add a fair amount to the base charge as fee
-          </Text>
-          <Text style={styles.enterPinText}>Enter Amount</Text>
-        </View>
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <View style={{ alignItems: "center" }}>
-            <View style={styles.amountcont}>
-              <Text style={styles.amountTxt}>
-                {" "}
-                <Text style={{ color: COLORS.grey5 }}>N</Text>{" "}
-                {amountFormatter(charges)}
-              </Text>
-            </View>
+      <View style={{ flex: 1, backgroundColor: COLORS.white }}>
+        <View style={styles.mainContainer}>
+          <View style={styles.backArrowConteiner}>
+            <Backarrow />
           </View>
 
-          <View style={styles.numberBtnContainer}>
-            {numbers.map((number, index) => {
-              return (
-                <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
-                  {number}
-                </Numberbtn>
-              );
-            })}
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.descriptionText}>
+              Add a fair amount to the base charge as fee
+            </Text>
+            <Text style={styles.enterPinText}>Enter Amount</Text>
+          </View>
+          <View style={{ flex: 1, justifyContent: "center" }}>
+            <View style={{ alignItems: "center" }}>
+              <View style={styles.amountcont}>
+                <Text style={styles.amountTxt}>
+                  {" "}
+                  <Text style={{ color: COLORS.grey5 }}>N</Text>{" "}
+                  {amountFormatter(charges)}
+                </Text>
+              </View>
+            </View>
 
-            <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
+            <View style={styles.numberBtnContainer}>
+              {numbers.map((number, index) => {
+                return (
+                  <Numberbtn
+                    key={index}
+                    onpress={() => handleSetAmount(number)}
+                  >
+                    {number}
+                  </Numberbtn>
+                );
+              })}
+
+              <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
+            </View>
           </View>
         </View>
         <Bottombtn title="PROCEED" onpress={() => setShowModal(true)} />
