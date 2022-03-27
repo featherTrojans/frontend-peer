@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../constants";
 
 export const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   imageBorder: {
     width: 55,
     height: 55,
@@ -10,7 +14,7 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     padding: 2,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   profileName: {
     ...fontsize.bsmall,

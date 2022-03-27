@@ -66,4 +66,16 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
+  ///Deposit pin screen
+
+  transactionSubHeader: {
+    textAlign: "center",
+    marginHorizontal: 40,
+    //  marginVertical: 40,
+    marginTop: 24,
+    marginBottom: 45,
+    ...fontsize.bsmall,
+    ...FONTS.regular,
+  },
 });

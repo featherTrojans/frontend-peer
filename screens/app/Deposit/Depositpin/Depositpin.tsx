@@ -100,28 +100,12 @@ const Depositpin = ({ route, navigation }) => {
             style={{ width: 148, height: 148 }}
           />
           <Text
-            style={{
-              textAlign: "center",
-              marginHorizontal: 40,
-              //  marginVertical: 40,
-              marginTop: 24,
-              marginBottom: 45,
-              ...fontsize.bsmall,
-              ...FONTS.regular,
-            }}
+            style={styles.transactionSubHeader}
           >
             Transaction Successful
           </Text>
           <Text
-            style={{
-              textAlign: "center",
-              marginHorizontal: 40,
-              //  marginVertical: 40,
-              marginTop: 24,
-              marginBottom: 45,
-              ...fontsize.bsmall,
-              ...FONTS.regular,
-            }}
+            style={styles.transactionSubHeader}
           >
             You can dispute this transaction after 24 hours
           </Text>

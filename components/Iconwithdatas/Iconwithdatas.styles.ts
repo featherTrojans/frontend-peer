@@ -10,8 +10,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 17,
     marginBottom: 10,
     borderRadius: 15,
-    ...Shadow
-    
+    ...Shadow,
+  },
+  iconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 39,
+    height: 39,
+    borderRadius: 20,
   },
   dataContainer: {
     flex: 1,
