@@ -33,6 +33,15 @@ import moment from "moment";
 
 const { Backarrow, Check, WrongIcon } = icons;
 
+
+
+const setAuthorizationToken = (token: string) => {
+  if (token) {
+    axiosCustom.defaults.headers.common["token"] = token;
+  }
+};
+
+
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().label("First Name").required(),
   lastName: Yup.string().label("Last Name").required(),
@@ -120,16 +129,16 @@ const Basicsettings = () => {
           onSubmit={async (values) => {
             try {
               const data = {
-                newUsername: usernamename,
-                firstName: values.firstName,
-                lastName: values.lastName,
+                newUsername: usernamename.trim(),
+                firstName: values.firstName.trim(),
+                lastName: values.lastName.trim(),
               };
               console.log(data);
               const response = await axiosCustom.put(
                 "/profile/update/basic",
                 data
               );
-              // console.log(response);
+              console.log(response);
               const userdetails = {
                 ...authdata?.userDetails,
                 username: usernamename,
@@ -139,7 +148,9 @@ const Basicsettings = () => {
                 ...authdata,
                 userDetails: userdetails,
               });
-
+              
+              // set new token
+              setAuthorizationToken(response?.data?.data?.token)
               // send success toast message
 
               navigation.navigate("Root");

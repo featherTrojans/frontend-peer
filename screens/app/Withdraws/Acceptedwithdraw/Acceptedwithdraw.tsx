@@ -154,8 +154,8 @@ const Acceptedwithdraw = ({ navigation, route }) => {
               <View style={styles.detailsProfile}>
                 <Requesterdetails
                   name={requestInfo?.agentUsername}
-                  distance="3kms"
-                  duration={12}
+                  // distance="3kms"
+                  duration={"12 mins"}
                 />
 
                 <Orangecheckmark />

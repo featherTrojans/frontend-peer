@@ -32,10 +32,12 @@ const Welcome = ({ navigation, route }) => {
   });
 
   const nameToShow = (value: string) => {
-    if (value?.split(" ").length > 1) {
-      return value?.split(" ")[1];
+    if(!value) return ""
+    const newvalue =  value.replace(/\s+/g, ' ');
+    if (newvalue?.split(" ").length > 1) {
+      return newvalue?.split(" ")[1];
     } else {
-      return value;
+      return newvalue;
     }
   };
 
@@ -83,22 +85,22 @@ const Welcome = ({ navigation, route }) => {
   const nameInNotification = authdata?.userDetails?.fullName ? nameToShow(authdata?.userDetails?.fullName) : "Padi"
 
   useEffect(() => {
-    if (fromm == "setup" && token) {
+    if (fromm == "setup" && authdata?.userDetails?.fullName) {
       sendSchedulePushNotification(
         "Acccount Registration",
-        `Hi ${}, Welcome onboard to feather africa, Enjoy true freedom.`
+        `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
       );
     } 
-  }, []);
+  }, [authdata]);
 
   useEffect(() => {
-    if(fromm !== "setup" && token){
+    if(fromm !== "setup" && authdata?.userDetails?.fullName){
       sendSchedulePushNotification(
         "Welcome Back Padi! 🎉",
         "Do more today. Enjoy financial flexibility"
       );
     }
-  }, [])
+  }, [authdata])
 
   // React.useEffect(() => {
   //     shared.value = someAnimation(callback)
@@ -145,7 +147,7 @@ const Welcome = ({ navigation, route }) => {
                 { marginTop: 16, textTransform: "uppercase" },
               ]}
             >
-              {nameToShow(authdata?.userDetails?.fullName)}
+              {authdata?.userDetails?.fullName && nameToShow(authdata?.userDetails?.fullName)}
             </Text>
           </>
         )}
