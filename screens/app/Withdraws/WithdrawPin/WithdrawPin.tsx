@@ -16,7 +16,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
-import { plusBase } from "../../../../utils/utils";
+import { justCharge, plusBase } from "../../../../utils/utils";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const WithdrawPin = ({ navigation, route }) => {
@@ -63,11 +63,12 @@ const WithdrawPin = ({ navigation, route }) => {
       // console.log(userInfo, coords.locationText)
       const data = {
         amount: amount,
-        charges: plusBase(charges),
+        charges: justCharge(charges),
         agentUsername: userInfo.username,
         agent: userInfo.fullName,
         statusId: userInfo.reference,
         meetupPoint: coords.locationText,
+        negotiatedFee: charges
       };
       // console.log(data)
       const response = await axiosCustom.post("/request/create", data);

@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
     ...fontsize.bsmall,
     ...FONTS.regular,
     fontSize: 16,
+    textAlign:"center"
   },
   notifyingSubText: {
     ...FONTS.bold,

@@ -15,7 +15,7 @@ import LottieView from "lottie-react-native";
 import { images, icons, COLORS, fontsize, FONTS } from "../../../../constants";
 import { styles } from "./Availablelisting.styles";
 import Map from "../../../shared/map/Map";
-import * as Location from "expo-location";
+import * as Location from "expo-Obj";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
@@ -53,15 +53,15 @@ const Availablelisting = ({ navigation, route }: any) => {
     getLocation();
   }, []);
 
-  console.log(agents)
+  // console.log(agents)
   //This function is to get the user locations
   const getLocation = async () => {
     setDestinationCoords({})
     try {
       setLocationLoading(true);
-      const { coordinates, address, locationstate } = await getCurrentLocation();
-      if(!doesIncludeActiveStates(locationstate)){
-        navigation.navigate("Updatedeposit",{from:"withdrawal"})
+      const { coordinates, address, locationObj } = await getCurrentLocation();
+      if(!doesIncludeActiveStates(locationObj)){
+        navigation.replace("Updatedeposit",{from:"withdrawal"})
       }
       setCoords({ ...coordinates, locationText: address });
       await getAllAgents(address);
@@ -79,7 +79,7 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: Number(amount),
         location: address,
       });
-      console.log(response.data);
+      // console.log(response.data);
       setAgents(response.data.data);
       setCharge(response.data.charges)
     } catch (err) {
