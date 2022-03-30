@@ -8,13 +8,6 @@ type RequesterdetailsProps = {
   image?: string;
   name: string;
   distance: string;
-  duration: number;
-};
-
-type RequesterdetailsProps = {
-  image?: string;
-  name: string;
-  distance: string;
   duration: string;
 };
 
