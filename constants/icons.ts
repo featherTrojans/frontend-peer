@@ -112,6 +112,9 @@ import Viewcashrequesticon from "../assets/icons/Viewcashrequesticon";
 import Featherdefault from "../assets/icons/Featherdefault";
 import Userdefaultmedium from "../assets/icons/Userdefaultmedium";
 import Feathertextlogo from "../assets/icons/Feathertextlogo";
+import Ratingsstar from "../assets/icons/Ratingsstar";
+import Userdefaultsmaller from "../assets/icons/Userdefaultsmaller";
+import Sendingandreceivearrows from "../assets/icons/Sendingandreceivearrows";
 
 ///Animated icons
 
@@ -163,6 +166,7 @@ export default {
   Arrowout,
   Backarrow,
   Forwardarrow,
+  Sendingandreceivearrows,
 
   Requestee1,
   Requestee2,
@@ -183,6 +187,7 @@ export default {
   Backarrowgrey,
   Trustedbadge,
   Directionarrow,
+  Ratingsstar,
   Smallcancel,
   Smallcomment,
   Smallphone,
@@ -200,6 +205,7 @@ export default {
   Location,
   Copyclipboard,
   Editicon,
+  Userdefaultsmaller,
   Meetupdot,
   Clearinput,
   Chaticon,

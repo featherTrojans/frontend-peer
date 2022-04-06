@@ -54,7 +54,7 @@ const Choosewallet = ({ navigation }) => {
             </Text>
           </Text>
         </View>
-      </Globalmodal>
+      </Globalmodal> 
 
       <Backheader title="Add Cash" />
 

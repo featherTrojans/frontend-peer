@@ -10,6 +10,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import {db} from "../../../../firebase"
 import {doc, updateDoc,query,where, collection, addDoc, onSnapshot, setDoc } from "firebase/firestore"; 
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 
 const { Backarrow, Successcheckanimate } = icons;
 
@@ -21,11 +22,22 @@ const Summary = ({navigation, route}) => {
   const [showmodal, setShowModal] = useState(false)
   const [showSuccessmodal, setShowSuccessModal] = useState(false)
   const [showFailuremodal, setShowFailureModal] = useState(false)
+  const [agentInfo, setAgentInfo] = useState({})
 
   useEffect(()=>{
     firestoreListener()
   },[])
 
+  useEffect(() => {
+     getAgentInfo()
+  }, [])
+  const getAgentInfo = async ()=>{
+    try{
+      const response = await axiosCustom.get(`/user/${requestInfo.agentUsername}`)
+      setAgentInfo(response?.data?.data)
+    }catch(err){
+    }
+  }
   const handleReadyToReceive = async ()=>{
     // create a document first
     try {
@@ -99,8 +111,8 @@ const Summary = ({navigation, route}) => {
       </Globalmodal>
       <Globalmodal
        showState={showSuccessmodal}
-       onBgPress={() => setShowSuccessModal(!showSuccessmodal)}
-       btnFunction={()=>navigation.navigate("Home")}
+      //  onBgPress={() => setShowSuccessModal(!showSuccessmodal)}
+       btnFunction={()=>navigation.navigate("Transactionsrating",{userToRate:userinfo?.userUid, reference:requestInfo.reference})}
        >
            <View style={{ alignItems: "center", paddingVertical: 30 }}>
             <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/>

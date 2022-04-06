@@ -99,9 +99,9 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   }
   // }
 
-  useEffect(() => {
-    Intercom.registerIdentifiedUser({email:authdata?.userDetails?.email,userId:authdata?.userDetails?.userId})
-  }, [])
+  // useEffect(() => {
+  //   Intercom.registerIdentifiedUser({email:authdata?.userDetails?.email,userId:authdata?.userDetails?.userId})
+  // }, [])
   
   const tokenExtractor = (string: any) => {
     const firstIndex = string.indexOf("[");

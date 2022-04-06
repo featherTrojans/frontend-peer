@@ -59,4 +59,26 @@ export const styles = StyleSheet.create({
     minHeight: 400,
     flex: 1,
   },
+
+  //For the electricity bills component
+  placeholderStyle: {
+    color: COLORS.black,
+    ...fontsize.small,
+    ...FONTS.regular,
+  },
+  textStyle: {
+    color: COLORS.black,
+    ...fontsize.small,
+    ...FONTS.regular,
+  },
+  dropDownStyle: {
+    height: 62,
+    paddingLeft: 20,
+    borderColor: "#E6E6E6",
+    marginBottom: 15,
+  },
+  dropdownContainerStyle: {
+    borderColor: COLORS.grey1,
+    zIndex: 2,
+  },
 });
