@@ -7,9 +7,10 @@ import {
   KeyboardAvoidingView,
   Animated,
   TouchableNativeFeedback,
-  Easing
+  Easing,
 } from "react-native";
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
+import LottieView from "lottie-react-native";
 import { styles } from "./Transactionsrating.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
@@ -20,68 +21,73 @@ import {
 } from "../../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-const { Ratingsstar, Userdefaultsmaller, Sendingandreceivearrows } = icons;
+import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+const {
+  Ratingsstar,
+  Userdefaultsmaller,
+  Sendingandreceivearrows,
+  Mapanimate,
+  Ratingsuccessanimate,
+} = icons;
 
 const Transactionsrating = () => {
+  const [rating, setRating] = useState({
+    rating: 0,
+    animation: new Animated.Value(1),
+  });
+  const [showModal, setShowModal] = useState(false);
+  const numStars = 5;
+  let stars = [];
 
+  const rate = (star: number) => {
+    setRating({ ...rating, rating: star });
+  };
 
-        const [rating, setRating] = useState({
-            rating: 0,
-            animation: new Animated.Value(1)
-        })
-        const numStars = 5
-        let stars = []
+  const animate = () => {
+    Animated.timing(rating.animation, {
+      toValue: 1.4,
+      duration: 500,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start(() => {
+      rating.animation.setValue(1);
+    });
+  };
 
-        const rate = (star: number ) => {
-            setRating({...rating,rating: star})
-        }
+  const animatedScale = rating.animation.interpolate({
+    inputRange: [1, 1.1, 1.4],
+    outputRange: [1, 1.4, 1],
+  });
+  const animatedOpacity = rating.animation.interpolate({
+    inputRange: [1, 1.2, 2],
+    outputRange: [1, 0.6, 1],
+  });
 
-        const animate = () => {
-            Animated.timing(rating.animation, {
-                toValue: 1.4,   
-                duration: 500,
-                easing: Easing.linear, 
-                useNativeDriver: true 
-            }).start(() => {
-                rating.animation.setValue(1)
-            })
-        }
+  const animatedWobble = rating.animation.interpolate({
+    inputRange: [1, 1.25, 1.75, 2],
+    outputRange: ["0deg", "-3deg", "3deg", "0deg"],
+  });
 
-        const animatedScale = rating.animation.interpolate({
-            inputRange: [1, 1.1, 1.4],
-            outputRange: [1, 1.4, 1]
-        })
-        const animatedOpacity = rating.animation.interpolate({
-            inputRange: [1, 1.2, 2],
-            outputRange: [1, 0.6, 1]
-        })
+  const animatedStyle = {
+    transform: [{ scale: animatedScale }, { rotate: animatedWobble }],
+    opacity: animatedOpacity,
+  };
 
-        const animatedWobble = rating.animation.interpolate({
-            inputRange: [1, 1.25, 1.75, 2],
-            outputRange: ["0deg", "-3deg", "3deg", "0deg"]
-        })
-
-        const animatedStyle = {
-            transform: [{scale: animatedScale}, {rotate: animatedWobble }],
-            opacity: animatedOpacity
-        }
-
-        for(let x = 1; x <= numStars; x++ ){
-            stars.push(
-                <TouchableWithoutFeedback 
-                key={x} 
-                onPress={() => {
-                     rate(x)
-                     animate()
-                }}>
-                    <Animated.View style={x <= rating.rating ? animatedStyle: ""} >
-                        <Ratingsstar filled={x <= rating.rating ? true : false}/>
-                    </Animated.View>
-                </TouchableWithoutFeedback>
-            )
-        }
-
-
+  for (let x = 1; x <= numStars; x++) {
+    stars.push(
+      <TouchableWithoutFeedback
+        key={x}
+        onPress={() => {
+          rate(x);
+          animate();
+        }}
+      >
+        <Animated.View style={x <= rating.rating ? animatedStyle : ""}>
+          <Ratingsstar filled={x <= rating.rating ? true : false} />
+        </Animated.View>
+      </TouchableWithoutFeedback>
+    );
+  }
 
   return (
     <KeyboardAvoidingView
@@ -91,6 +97,36 @@ const Transactionsrating = () => {
       <View style={styles.container}>
         <Customstatusbar />
         {/* HEader  */}
+
+        <Globalmodal
+        // To pass the state controlling the modal in
+          showState={false}
+          btnFunction={() => setShowModal(true)}
+          btnText="COntinue"
+        >
+          <View style={{justifyContent: "center", alignItems: "center"}}>
+            <LottieView
+              source={Ratingsuccessanimate}
+              style={{ width: 186, height: 186,}}
+              autoPlay
+              loop
+            />
+            <Text
+              style={{
+                marginHorizontal: 40,
+                textAlign: "center",
+                marginBottom: 35,
+                marginTop: 55,
+                ...fontsize.bsmall,
+                ...FONTS.regular,
+                color: COLORS.black,
+              }}
+            >
+              Thanks for rating this transaction, you just recieved{" "}
+              <Text style={{ ...FONTS.bold }}>N7.50</Text>
+            </Text>
+          </View>
+        </Globalmodal>
 
         <View style={{ paddingHorizontal: 15, flex: 0.7 }}>
           <View
@@ -104,11 +140,17 @@ const Transactionsrating = () => {
             <Text style={{ ...fontsize.bbsmall, ...FONTS.bold }}>
               Rate Transaction
             </Text>
-            <View style={{ flexDirection: "row", alignItems: "center", marginRight: 10 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginRight: 10,
+              }}
+            >
               {/* Sender and Receiver Image */}
               <Userdefaultsmaller />
-              <View style={{marginHorizontal: 18}}>
-                  <Sendingandreceivearrows />
+              <View style={{ marginHorizontal: 18 }}>
+                <Sendingandreceivearrows />
               </View>
 
               {/* To replace this name with name of the receiver or sender */}
@@ -133,7 +175,6 @@ const Transactionsrating = () => {
               </Text>
             </View>
 
-
             <View
               style={{
                 width: 244,
@@ -144,9 +185,6 @@ const Transactionsrating = () => {
             >
               {stars}
             </View>
-
-
-
           </View>
         </View>
         <View style={{ flex: 0.3, justifyContent: "flex-end" }}>
@@ -164,7 +202,7 @@ const Transactionsrating = () => {
             placeholder="Comment (Optional)"
             placeholderTextColor={COLORS.black}
           />
-          <Bottombtn title="rate" onpress={() => console.log("ratings")} />
+          <Bottombtn title="rate" onpress={() => setShowModal(true)} />
         </View>
       </View>
     </KeyboardAvoidingView>

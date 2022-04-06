@@ -116,7 +116,7 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     // marginRight: "90%",
-    flex: 1,
+    // flex: 1,
     backgroundColor: COLORS.green2,
     borderRadius: 20,
     justifyContent: "center",

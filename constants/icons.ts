@@ -126,6 +126,7 @@ import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json";
 import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json";
 import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.json";
 import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json";
+import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json"
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
 
 // Receiverimage
@@ -267,4 +268,5 @@ export default {
   Loadinglocationanimate,
   Comingsoonagentanimate,
   Feathecomingsoonchatanimate,
+  Ratingsuccessanimate
 };

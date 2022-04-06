@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Share } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
+import * as Sharing from 'expo-sharing';
 import BottomSheet, {
   BottomSheetScrollView,
   BottomSheetFlatList,
@@ -53,9 +54,20 @@ const handleOpenWithLinking = () => {
   Linking.openURL('https://www.feather.africa');
 };
 
-const Settings = ({navigation}) => {
-  
 
+const shareAppLink = async () => {
+  const result = await Share.share({
+    title: "Feather Beta",
+    message: "https://play.google.com/store/apps/details?id=feather.peer",
+    url: "https://play.google.com/store/apps/details?id=feather.peer"
+  }, {
+    dialogTitle: "Feather Beta",
+    subject: "Feather Beta"
+  })
+  
+}
+
+const Settings = ({navigation}) => {
   
   const {authdata,setAuthData, setToken} = useContext(AuthContext)
   // console.log(authdata)
@@ -127,7 +139,7 @@ const Settings = ({navigation}) => {
             bg="#FFF5E5"
             icon={<Shareappicon />}
             title="Share Feather App"
-            onpress={() => console.log("My profile")}
+            onpress={() => shareAppLink()}
           />
           <Iconwithtitle
             bg="#F1E5FF"
@@ -148,7 +160,10 @@ const Settings = ({navigation}) => {
             <TouchableOpacity onPress={handleSignout}>
               <Text style={{...fontsize.small, ...FONTS.bold, marginBottom: 35, color: COLORS.pink1}}>Sign Out</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity activeOpacity={0.8} onPress={() => shareAppLink()}>
             <Text style={{...fontsize.small, ...FONTS.medium}}>Rate App</Text>
+            </TouchableOpacity>
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
