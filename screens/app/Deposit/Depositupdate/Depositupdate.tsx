@@ -161,7 +161,6 @@ const Depositupdate = ({ navigation }) => {
     try {
       setLoading(true);
       const response = await axiosCustom.get("/status/get");
-      
       setStatus(response.data.data);
     } catch (err) {
       // maybe show the error

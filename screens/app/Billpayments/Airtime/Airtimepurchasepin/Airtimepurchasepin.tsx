@@ -101,7 +101,7 @@ const Airtimepurchasepin = ({ navigation, route }) => {
         <View style={styles.descriptionContainer}>
             {
               type === "airtime" &&  <Text style={styles.descriptionText}>
-                You are about to purchase  <Text style={{...fontsize.bsmall, ...FONTS.bold}}>NGN {data.amount} - Airtel </Text> to {data.phone}
+                You are about to purchase  <Text style={{...fontsize.bsmall, ...FONTS.bold}}>NGN {data.amount} - {data.network} </Text> to {data.phone}
               </Text>
             }
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>

@@ -36,7 +36,7 @@ const TransferpinBank = ({route, navigation}) => {
     
     try{
       setLoading(true);
-      const response = await axiosCustom.post("/withdraw",{amount,account_code:accountInfomation.account_code,userPin:pin.join("")})
+      const response = await axiosCustom.post("/withdraw",{amount:Number(amount),account_code:accountInfomation.account_code,userPin:pin.join("")})
       
       setShowModal(true)
     }catch(err){

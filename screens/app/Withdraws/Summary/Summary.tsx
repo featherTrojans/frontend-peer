@@ -92,8 +92,8 @@ const Summary = ({navigation, route}) => {
            <View style={{alignItems:"center", marginBottom:30}}>
              <ActivityIndicator color="black" size="large" />
            </View>
-          <Text style={{lineHeight: 15, ...FONTS.regular}}>
-            Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽
+          <Text style={{lineHeight: 15, ...FONTS.regular, textAlign:"center"}}>
+            Kindly input your transaction pin on {requestInfo?.agent?.split("")[0] || requestInfo?.agent }'s device to complete the transaction, don’t worry it’s safe✌🏽
           </Text>
          </View>
       </Globalmodal>
@@ -141,7 +141,7 @@ const Summary = ({navigation, route}) => {
         <View style={styles.notifyingTextContainer}>
           <Text style={styles.notifyingText}>
             You are initiating a payment transaction to{" "}
-            <Text style={styles.notifyingSubText}>Susan Becroft</Text>
+            <Text style={styles.notifyingSubText}>{requestInfo?.agent}</Text>
           </Text>
         </View>
       </View>

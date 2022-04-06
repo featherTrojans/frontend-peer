@@ -55,7 +55,7 @@ const Negotiate = ({ navigation, route }) => {
     try {
       setLoading(true);
       const response = await axiosCustom.put("/request/negotiate", {
-        negotiatedFee: plusBase(charges),
+        negotiatedFee:charges,
         reference: requestInfo.reference,
       });
       // console.log(response)

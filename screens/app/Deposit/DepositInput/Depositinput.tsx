@@ -43,11 +43,11 @@ function Depositinput({ route, navigation }) {
   const getLocation = async () => {
     try{
       setLocationLoading(true)
-      const {coordinates, address, locationstate} = await getCurrentLocation()
-      if(!doesIncludeActiveStates(locationstate)){
+      const {coordinates, address, locationObj} = await getCurrentLocation()
+      if(!doesIncludeActiveStates(locationObj)){
         // navigate to the sorry not supported in your region yet
         // navigation.navigate("",{from:"deposit"})
-        navigation.navigate("Updatedeposit",{from:"deposit"})
+        navigation.replace("Updatedeposit",{from:"deposit"})
       }
       setCoords({...coordinates,locationText:address});   
       
@@ -76,14 +76,14 @@ function Depositinput({ route, navigation }) {
     try{
       if(type === "create"){
         await axiosCustom.post("/status/create",{
-            amount,
+            amount: Number(amount),
             longitude: coords.longitude,
             latitude: coords.latitude,
             locationText:  coords.locationText
         })
       }else{
         await axiosCustom.put("/status/update",{
-          amount,
+          amount:Number(amount),
           longitude: coords.longitude,
           latitude: coords.latitude,
           locationText:  coords.locationText,

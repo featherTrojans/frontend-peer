@@ -15,6 +15,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { useNavigation } from "@react-navigation/native";
 
 
 const {Successcheckanimate} = icons
@@ -24,7 +25,7 @@ const {Successcheckanimate} = icons
 
 
 const Transactiondispute = () => {
-
+  const navigation = useNavigation()
   const [showModal, setShowModal] = useState(false)
 
 
@@ -36,7 +37,10 @@ const Transactiondispute = () => {
       <Globalmodal
       showState={showModal}
       onBgPress={() => setShowModal(true)}
-      btnFunction={() => setShowModal(true)}
+      btnFunction={() => {
+        setShowModal(false);
+        navigation.navigate("Root")
+      }}
       btnText="continue"
       >
         <View style={{marginHorizontal: 35, alignItems: "center", marginBottom: 35}}>
