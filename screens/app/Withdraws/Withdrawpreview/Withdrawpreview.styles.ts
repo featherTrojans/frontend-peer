@@ -1,3 +1,4 @@
+import { saveToLibraryAsync } from "expo-media-library";
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
 
@@ -93,21 +94,29 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.black,
     borderRadius: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: 14
   },
 
   //Make Request button
   bottomMakeRequestBtn: {
-    flex: 1,
-    backgroundColor: COLORS.black,
-    borderRadius: 10,
+    // flex: 1,
+
+    // Will still set it back to flex
+    // width: 300, 
+    // height: 62,
+    // paddingHorizontal: 10,
+
+    backgroundColor: COLORS.green2,
+    borderRadius: 10, 
     marginRight: 14,
-    paddingHorizontal: 10,
     alignItems: "center",
-    flexDirection: "row",
+    // flexDirection: "row",
+    justifyContent: "center",
     position: 'relative'
   },
-  requestText: {
+  requestText: { 
+    textAlign: "center",
     ...fontsize.smallest,
     ...FONTS.bold,
     color: COLORS.white,
@@ -115,14 +124,19 @@ export const styles = StyleSheet.create({
   makeRequestCircle: {
     width: 40,
     height: 40,
-    // marginRight: "90%",
-    // flex: 1,
-    backgroundColor: COLORS.green2,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
+    // marginRight: "90%",
+    // flex: 1,
+
+    backgroundColor: COLORS.white,
     zIndex: 20,
+    position: 'absolute',
+    left: 10
   },
+
+
 
   //Receive payment buttons
 

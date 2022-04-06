@@ -39,7 +39,7 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
         borderRadius: sideLength / 2,
       }}
     >
-      <Text style={styles.initialText}>{nameSplitter(name)}</Text>
+      <Text style={styles.initialText}>{nameSplitter(name).toUpperCase()}</Text>
     </View>
   );
 };

@@ -5,11 +5,10 @@ import {
   StatusBar,
   ImageBackground,
   TouchableOpacity,
-  Animated,
   ActivityIndicator,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { COLORS, images, icons, fontsize, FONTS } from "../../../../constants";
+import { COLORS, images, icons, fontsize, FONTS, SIZES } from "../../../../constants";
 import {
   Bottombtn,
   Iconwithdatas,
@@ -29,9 +28,10 @@ import {
   makePhoneCall,
   sendMessage,
 } from "../../../../utils/userDeviceFunctions";
-import { Swipeable } from "react-native-gesture-handler";
+import { PanGestureHandler, Swipeable } from "react-native-gesture-handler";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
+import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 
 const {
   Forwardarrow,
@@ -47,14 +47,28 @@ const {
 } = icons;
 const { Locationmap } = images;
 
+
+const BUTTON_WIDTH = SIZES.width - 50 - 62 -14;
+const BUTTON_HEIGHT = 62;
+const BUTTON_PADDING = 10;
+const SWIPEABLE_DIMENSIONS = BUTTON_HEIGHT - 2 * BUTTON_PADDING;
+const H_WAVE_RANGE = SWIPEABLE_DIMENSIONS + 2 * BUTTON_PADDING;
+const H_SWIPE_RANGE = BUTTON_WIDTH - 2 * BUTTON_PADDING - SWIPEABLE_DIMENSIONS;
+
+
+
+
+
 const Acceptedwithdraw = ({ navigation, route }) => {
   const toast = useToast();
   const { requestInfo } = route.params;
+  const X = useSharedValue(0)
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [toggleShow, setToggleShow] = useState(true);
   const [userinfo, setUserinfo] = useState({ phoneNumber: "" });
   const [loading, setLoading] = useState(false);
   const [locationLoading, setLocationLoading] = useState(false);
+  const [toggledSwipe, setToggledSWipe] = useState(false)
 
   useEffect(() => {
     // update both map, meeting point and  Agent point
@@ -65,7 +79,18 @@ const Acceptedwithdraw = ({ navigation, route }) => {
 
   useEffect(() => {
     getAdditionalUserInfo();
+
+    console.log(requestInfo, "Here is the request info");
   }, []);
+
+  useEffect(() => {
+    if(toggledSwipe){
+      navigation.push("Requestsummary", { requestInfo })
+    }
+    return () => {
+      setToggledSWipe(false)
+    }
+  },[toggledSwipe])
 
   const getAdditionalUserInfo = async () => {
     try {
@@ -90,6 +115,55 @@ const Acceptedwithdraw = ({ navigation, route }) => {
       setLocationLoading(false);
     }
   };
+
+
+  
+
+  const animatedGestureHandler = useAnimatedGestureHandler({
+    onStart: (_, ctx) => {
+      ctx.completed = toggledSwipe
+    },
+    onActive: (e, ctx) => {
+      let newValue;
+
+      if(ctx.completed){
+        newValue = H_SWIPE_RANGE + e.translationX
+      }
+      else{
+        X.value = e.translationX;
+      }
+      if(newValue >=0 && newValue <= H_SWIPE_RANGE){
+        X.value = newValue;
+      }
+     
+      
+    },
+    onEnd: () => {
+      if(X.value < BUTTON_WIDTH/2 - SWIPEABLE_DIMENSIONS/2 ){
+        X.value = withSpring(0)
+       runOnJS(setToggledSWipe)(false)
+      }
+      else{
+        X.value = withSpring(H_SWIPE_RANGE)
+        runOnJS(setToggledSWipe)(true)
+      }
+    }
+  });
+  const animatedStyle =  {
+    swipeable: useAnimatedStyle(() => {
+      return {
+        transform: [{translateX: X.value}] 
+      }
+    }),
+    swipeText: useAnimatedStyle(() => {
+      return {
+        opacity: interpolate(X.value, [0, H_SWIPE_RANGE], [0.8, 0], Extrapolate.CLAMP),
+        transform: [{
+          translateX: interpolate(X.value, [0, H_SWIPE_RANGE], [0, BUTTON_WIDTH/2 - SWIPEABLE_DIMENSIONS],Extrapolate.CLAMP)
+        }]
+      }
+    })
+  }
 
   // const leftActions = (progress, dragX) => {
   //   const scale = dragX.interpolate({
@@ -138,10 +212,11 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   if (locationLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color="#000" size="large" />
+        <ActivityIndicator color="#003AD6" size="large" />
       </View>
     );
   }
+ 
 
   return (
     <View style={styles.container}>
@@ -153,7 +228,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
             <View>
               <View style={styles.detailsProfile}>
                 <Requesterdetails
-                  name={requestInfo?.agentUsername}
+                  name={requestInfo?.agent}
                   // distance="3kms"
                   duration={"12 mins"}
                 />
@@ -224,22 +299,30 @@ const Acceptedwithdraw = ({ navigation, route }) => {
             {/* The accepted button */}
             <View style={{ flex: 1 }}>
               <TouchableOpacity
-                style={styles.bottomMakeRequestBtn}
-                activeOpacity={0.8}
-                onPress={() =>
-                  navigation.push("Requestsummary", { requestInfo })
-                }
+                style={{
+                  width: BUTTON_WIDTH,
+                  height: BUTTON_HEIGHT,
+                  padding: BUTTON_PADDING,
+                  backgroundColor: COLORS.green2,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: 10,
+                  marginRight: 14
+                }}
+                activeOpacity={1}
+                // onPress={() =>
+                //   navigation.push("Requestsummary", { requestInfo })
+                // }
               >
-                {/* <Swipeable renderLeftActions={leftActions} onSwipeableLeftOpen={swipedLeftFunction}> */}
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <View style={styles.makeRequestCircle}>
+                <PanGestureHandler onGestureEvent={animatedGestureHandler}>
+                  <Animated.View style={[styles.makeRequestCircle,animatedStyle.swipeable]}>
                     <Makerequestarrowright />
-                  </View>
+                  </Animated.View>
+                </PanGestureHandler>
+                <Animated.Text style={[styles.requestText, animatedStyle.swipeText]}>MAKE PAYMENT</Animated.Text> 
 
-                  <View style={{ marginHorizontal: 16 }}></View>
-                  <Text style={styles.requestText}>MAKE PAYMENT</Text>
-                </View>
-                {/* </Swipeable> */}
+                {/* <View style={{ marginHorizontal: 16 }}></View>
+                  */}
               </TouchableOpacity>
             </View>
             {/* The accepted button done */}
