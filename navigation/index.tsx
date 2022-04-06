@@ -487,7 +487,7 @@ const RootNavigator = ({initialBoarded}) => {
       {!token ? (
         <AppStack.Group screenOptions={verticalAnimation}>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
-          <AppStack.Screen name="Personal" component={Transactionsrating} />
+          <AppStack.Screen name="Personal" component={Personal} />
           <AppStack.Screen name="Verification" component={Verification} />
           <AppStack.Screen name="Security" component={Security} />
           <AppStack.Screen name="Securepin" component={Securepin} />
@@ -669,6 +669,11 @@ export default function MainNavigation({initialBoarded = false}) {
           appState.current.match(/inactive|background/) &&
           nextAppState === "active"
         ) {
+
+          if(!token){
+            return 
+          }
+          
           if(Date.now() - timer.current > 900000){
             setToken("");
             setModal(false);
