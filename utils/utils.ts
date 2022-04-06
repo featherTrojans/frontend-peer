@@ -1,5 +1,5 @@
 export const doesIncludeActiveStates = (locationObj:object)=>{
-  // return true
+  return true
   // {
   //   "city": "Lagos",
   //   "country": "Nigeria",
@@ -13,21 +13,22 @@ export const doesIncludeActiveStates = (locationObj:object)=>{
   // check one by one in the sides sides 
   const allowedstates = ["lagos","oyo","osun","ogun"]
     for(let state of allowedstates){
-      if(locationObj.region.toLowerCase().includes(state)){
+      if(locationObj?.region?.toLowerCase()?.includes(state)){
         return true
       }
     }
     for(let state of allowedstates){
-      if(locationObj.subregion.toLowerCase().includes(state)){
+      if(locationObj?.subregion?.toLowerCase()?.includes(state)){
         return true
       }
     }
     for(let state of allowedstates){
-      if(locationObj.city.toLowerCase().includes(state)){
+      if(locationObj?.city?.toLowerCase()?.includes(state)){
         return true
       }
     }
 
+    return false
     //subregion
     //
   }

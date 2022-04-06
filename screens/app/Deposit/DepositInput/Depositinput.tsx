@@ -32,7 +32,7 @@ function Depositinput({ route, navigation }) {
   const {authdata} = useContext(AuthContext)
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const [amount, setAmount] = useState<string>("");
-  const [coords, setCoords] = useState({});
+  const [coords, setCoords] = useState<any>({});
   const [loading, setLoading] = useState(false)
   const [locationLoading, setLocationLoading] = useState(false)
 
@@ -43,14 +43,13 @@ function Depositinput({ route, navigation }) {
   const getLocation = async () => {
     try{
       setLocationLoading(true)
-      const {coordinates, address, locationObj} = await getCurrentLocation()
+      const {coordinates, address, locationObj}:any = await getCurrentLocation()
       if(!doesIncludeActiveStates(locationObj)){
         // navigate to the sorry not supported in your region yet
         // navigation.navigate("",{from:"deposit"})
         navigation.replace("Updatedeposit",{from:"deposit"})
       }
-      setCoords({...coordinates,locationText:address});   
-      
+      setCoords({...coordinates,locationText:address});     
     }catch(err){}finally{
       setLocationLoading(false)
     }

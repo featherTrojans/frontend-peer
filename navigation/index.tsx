@@ -660,11 +660,22 @@ export default function MainNavigation({initialBoarded = false}) {
           appState.current.match(/inactive|background/) &&
           nextAppState === "active"
         ) {
-          if (Date.now() - timer.current > 300000) return setModal(true);
+          if(Date.now() - timer.current > 900000){
+            setToken("");
+            setModal(false);
+            return
+          }
+          if (Date.now() - timer.current > 300000){
+            return setModal(true);
+          } 
+
           return;
         }
         appState.current = nextAppState;
-        if (!modal || !token) timer.current = Date.now();
+        if (!modal || !token) {
+          timer.current = Date.now()
+          setModal(false)
+        }
       }
     );
     return () => {

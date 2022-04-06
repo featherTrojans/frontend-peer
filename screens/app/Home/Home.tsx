@@ -39,6 +39,7 @@ import Customstatusbar from "../../shared/Customstatusbar";
 import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 import DoubleTapToClose from "../../shared/DoubleBack";
 import { connectFirestoreEmulator } from "firebase/firestore";
+import Intercom from "@intercom/intercom-react-native"
 
 const {
   Profilepics,
@@ -98,6 +99,10 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   }
   // }
 
+  useEffect(() => {
+    Intercom.registerIdentifiedUser({email:authdata?.userDetails?.email,userId:authdata?.userDetails?.userId})
+  }, [])
+  
   const tokenExtractor = (string: any) => {
     const firstIndex = string.indexOf("[");
     return string.slice(firstIndex + 1, -1);
