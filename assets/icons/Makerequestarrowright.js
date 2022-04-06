@@ -6,7 +6,7 @@ const Makerequestarrowright = () => (
     <G
       data-name="Icon feather-arrow-left"
       fill="none"
-      stroke="#fff"
+      stroke="#25DBA3"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
