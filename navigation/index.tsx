@@ -487,7 +487,7 @@ const RootNavigator = ({initialBoarded}) => {
       {!token ? (
         <AppStack.Group screenOptions={verticalAnimation}>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
-          <AppStack.Screen name="Personal" component={Transactionsrating} />
+          <AppStack.Screen name="Personal" component={Personal} />
           <AppStack.Screen name="Verification" component={Verification} />
           <AppStack.Screen name="Security" component={Security} />
           <AppStack.Screen name="Securepin" component={Securepin} />
@@ -568,6 +568,7 @@ const RootNavigator = ({initialBoarded}) => {
             <AppStack.Screen name="Requestsummary" component={Requestsummary} />
             <AppStack.Screen name="Summary" component={Summary} />
             <AppStack.Screen name="WithdrawPin" component={WithdrawPin} />
+            <AppStack.Screen name="Transactionsrating" component={Transactionsrating} />
           </AppStack.Group>
 
           {/* Wallet Funding */}
@@ -668,11 +669,27 @@ export default function MainNavigation({initialBoarded = false}) {
           appState.current.match(/inactive|background/) &&
           nextAppState === "active"
         ) {
-          if (Date.now() - timer.current > 300000) return setModal(true);
+
+          if(!token){
+            return 
+          }
+          
+          if(Date.now() - timer.current > 900000){
+            setToken("");
+            setModal(false);
+            return
+          }
+          if (Date.now() - timer.current > 300000){
+            return setModal(true);
+          } 
+
           return;
         }
         appState.current = nextAppState;
-        if (!modal || !token) timer.current = Date.now();
+        if (!modal || !token) {
+          timer.current = Date.now()
+          setModal(false)
+        }
       }
     );
     return () => {

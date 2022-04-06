@@ -16,6 +16,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import { AuthContext } from "../../../../context/AuthContext";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { getCurrentLocation } from "../../../../utils/customLocation";
 const {
   TransferIcon,
   Location,
@@ -150,13 +151,27 @@ const StatusUpdate = ({ status, navigation }: any) => {
 const Depositupdate = ({ navigation }) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [coords, setCoords] = useState<any>({});
 
+  console.log(status,"status")
   useEffect(() => {
-    // getFromStorage();
-    // get Status from the database
     getDepositStatus();
   }, []);
+  useEffect(() => {
+    updateDepositLocation()    
+  }, [status, coords])
+  useEffect(() => {
+    getLocation()
+  }, []);
 
+  const getLocation = async () => {
+    try{
+      const {coordinates, address, locationObj}:any = await getCurrentLocation()
+      setCoords({...coordinates,locationText:address});     
+    }catch(err){}finally{
+    }
+  }
+  
   const getDepositStatus = async () => {
     try {
       setLoading(true);
@@ -168,22 +183,22 @@ const Depositupdate = ({ navigation }) => {
       setLoading(false);
     }
   };
-
-  // const getFromStorage = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("@depositstatus");
-  //     console.log(jsonValue);
-  //     if (jsonValue) {
-  //       const parseVal = JSON.parse(jsonValue);
-  //       // check time and reset status if time has pass
-  //       if (parseVal.time + 1000 * 60 * 60 * 24 > Date.now()) {
-  //         setStatus(parseVal);
-  //       } else {
-  //         await AsyncStorage.removeItem("@depositstatus");
-  //       }
-  //     }
-  //   } catch (err) {}
-  // };
+  const updateDepositLocation = async ()=>{
+    console.log("trying to update the depositor location")
+    try{
+      if(status && coords.longitude){
+        const response = await axiosCustom.put('/status/location/update',{
+          longitude: coords.longitude,
+          latitude: coords.latitude,
+          locationText:  coords.locationText,
+          reference: status?.status[0]?.reference
+        })
+        console.log(response)
+      }
+    }catch(err){
+    }finally{
+    }
+  }
 
   return (
     <View style={styles.container}>

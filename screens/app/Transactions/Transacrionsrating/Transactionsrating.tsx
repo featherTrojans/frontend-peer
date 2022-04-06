@@ -17,11 +17,13 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import {
   Bottombtn,
   InitialsBg,
+  Loader,
   Sendingandreceive,
 } from "../../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 const {
   Ratingsstar,
   Userdefaultsmaller,
@@ -30,14 +32,15 @@ const {
   Ratingsuccessanimate,
 } = icons;
 
-
-
-const Transactionsrating = () => {
+const Transactionsrating = ({navigation, route}) => {
+  const {userToRate,reference} = route.params
   const [rating, setRating] = useState({
     rating: 0,
     animation: new Animated.Value(1),
   });
   const [showModal, setShowModal] = useState(false);
+  const [comment, setComment] = useState("");
+  const [loading, setLoading] = useState(false);
   const numStars = 5;
   let stars = [];
 
@@ -78,6 +81,22 @@ const Transactionsrating = () => {
     justifyContent: 'center',
     alignItems: "center"
   };
+  
+  const handleSubmit = async ()=>{
+    setLoading(true)
+    try{
+      await axiosCustom.post("/rating",{
+        rating:rating,
+        description:comment,
+        userToRate:userToRate,
+        reference:reference
+      })
+      setShowModal(true)
+    }catch(err){
+    }finally{
+      setLoading(false)
+    }
+}
 
   for (let x = 1; x <= numStars; x++) {
     stars.push(
@@ -103,11 +122,11 @@ const Transactionsrating = () => {
       <View style={styles.container}>
         <Customstatusbar />
         {/* HEader  */}
-
+        {loading && <Loader />}
         <Globalmodal
         // To pass the state controlling the modal in
-          showState={false}
-          btnFunction={() => setShowModal(true)}
+          showState={showModal}
+          btnFunction={() => navigation.navigate('Home')}
           btnText="COntinue"
         >
           <View style={{justifyContent: "center", alignItems: "center"}}>
@@ -129,7 +148,7 @@ const Transactionsrating = () => {
               }}
             >
               Thanks for rating this transaction, you just recieved{" "}
-              <Text style={{ ...FONTS.bold }}>N7.50</Text>
+              <Text style={{ ...FONTS.bold }}>N10.00</Text>
             </Text>
           </View>
         </Globalmodal>
@@ -207,8 +226,10 @@ const Transactionsrating = () => {
             }}
             placeholder="Comment (Optional)"
             placeholderTextColor={COLORS.black}
+            onChangeText={(text)=>setComment(text)}
+            value={comment}
           />
-          <Bottombtn title="rate" onpress={() => setShowModal(true)} />
+          <Bottombtn title="rate" onpress={handleSubmit} />
         </View>
       </View>
     </KeyboardAvoidingView>

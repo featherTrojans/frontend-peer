@@ -27,6 +27,7 @@ const Getdetails = ({ route, navigation }) => {
   const { authdata } = useContext(AuthContext);
   const { amount } = route.params;
 
+  console.log(userinfo,"userinfo");
   const handleUsernameChange = (text: string) => {
     setUsername(text);
     // and debound
@@ -116,7 +117,7 @@ const Getdetails = ({ route, navigation }) => {
         <View>
           <Input
             icon={<At />}
-            disabled={true}
+            disabled={true} 
             value={amount}
             placeholder="N37,580.50"
           />

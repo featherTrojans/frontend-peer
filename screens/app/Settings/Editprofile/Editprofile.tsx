@@ -358,7 +358,7 @@ const Personalsettings = () => {
                           ...FONTS.regular,
                         }]}
                       >
-                        {date ? moment(date).calendar() : " Click to add DOB" }
+                        {date ? moment(date).format('YYYY/MM/DD') : " Click to add DOB" }
                       </Text>
                     </TouchableOpacity>
                     {show && (

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -17,7 +17,8 @@
       "backgroundColor": "#003AD6"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "enabled": false
     },
     "assetBundlePatterns": [
       "**/*"
@@ -26,14 +27,36 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode":3,
       "package": "feather.peer",
+      "permissions":[
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "VIBRATE",
+        "MANAGE_DOCUMENTS",
+        "READ_INTERNAL_STORAGE",
+        "MODIFY_AUDIO_SETTINGS",
+        "READ_CALENDAR",
+        "WRITE_CALENDAR",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_WIFI_STATE",
+        "WRITE_SETTINGS",
+        "READ_CONTACTS",
+        "CAMERA",
+        "VIBRATE",
+        "SYSTEM_ALERT_WINDOW",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "RECORD_AUDIO"
+  ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"
       },
       "config":{
         "googleMaps":{
-          "apiKey":"AIzaSyA4C5Ezt6h_4Po4PX0jrnzrAchAolScS9k"
+          "apiKey":"AIzaSyBzIYA7wqNVTxq0LTO88-cIue_X9mXd5-w"
         }
       }
     },
