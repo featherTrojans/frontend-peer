@@ -223,12 +223,12 @@ const Home = ({ navigation }: { navigation: any }) => {
             <Text style={styles.profileUsername}>@{authdata?.userDetails?.username}</Text>
           </View>
         </View>
-        {/* <TouchableOpacity
-          activeOpacity={0.7}
+        <TouchableOpacity
+          activeOpacity={0.8}
           onPress={() => navigation.navigate("Notifications")}
         >
           <Bell />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
 
       {/* Wallet info and details */}

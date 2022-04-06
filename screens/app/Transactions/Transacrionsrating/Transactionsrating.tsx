@@ -30,6 +30,8 @@ const {
   Ratingsuccessanimate,
 } = icons;
 
+
+
 const Transactionsrating = () => {
   const [rating, setRating] = useState({
     rating: 0,
@@ -71,6 +73,10 @@ const Transactionsrating = () => {
   const animatedStyle = {
     transform: [{ scale: animatedScale }, { rotate: animatedWobble }],
     opacity: animatedOpacity,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: "center"
   };
 
   for (let x = 1; x <= numStars; x++) {

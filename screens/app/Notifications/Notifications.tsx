@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { styles } from "./Notifications.styles";
 import { icons } from "../../../constants";
 import { Backheader } from "../../../components";
 import { string } from "yup";
 import { Shadow } from "../../../constants/theme";
 import Customstatusbar from "../../shared/Customstatusbar";
-
+import axiosCustom from "../../../httpRequests/axiosCustom";
 const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow } = icons;
 
 const DATA = [
@@ -109,6 +109,32 @@ const Notification = ({
   date: string;
   messages: notificationProps[];
 }) => {
+
+  const [loading, setLoading] = useState(false)
+  const [notifications, setNotifications] = useState([])
+
+
+
+
+
+  const getAllNotifications = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosCustom.get("/notifications");
+      console.log(response, "Here is the notifications")
+      setNotifications(response.data);
+    } catch (err) {
+      console.log(err.response);
+    } finally {
+      setLoading(true);
+      // setRefreshing(false);
+    }
+  };
+
+
+  useEffect(() => {
+    getAllNotifications()
+  })
   return (
     <View style={[{ marginBottom: 28, ...Shadow, borderRadius: 15 }]}>
       <View style={{ marginBottom: 24 }}>

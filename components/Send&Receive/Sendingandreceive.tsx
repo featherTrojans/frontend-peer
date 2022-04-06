@@ -36,6 +36,18 @@ const showImage = (
         </View>
       );
       break;
+      case "Fund Reversal":
+        return (
+          <View style={styles.typeContainer}>
+            <Image
+              style={styles.imageStyle}
+              source={{
+                uri: assetsDB["fund"]["paystack"],
+              }}
+            />
+          </View>
+        );
+        break;
     case "Wallet Debit":
       return <InitialsBg name={receiverName} sideLength={62} />;
 

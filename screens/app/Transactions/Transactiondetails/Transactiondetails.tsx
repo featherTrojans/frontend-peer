@@ -137,6 +137,14 @@ const Transactiondetails = ({ navigation, route }) => {
         
         `;
         break;
+        case "Fund Reversal":
+          return `
+          <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #001757; display: flex; justify-content: center; align-items: center;">
+            <img src="${assetsDB["fund"]["paystack"]}" style="width: 25px; height: 25px" />
+          </div>
+          
+          `;
+          break;
         // assetsDB["bills"][sender]
       case "Airtime Purchase":
         const networkType = sender?.toUpperCase()
@@ -187,6 +195,8 @@ const Transactiondetails = ({ navigation, route }) => {
         };
       case "funding":
         return { senderName: sender, receiverName: receiver };
+        case "Fund Reversal":
+          return { senderName: sender, receiverName: receiver };
       case "escrow":
         return { senderName: sender, receiverName: receiver };
       case "Airtime Purchase":
