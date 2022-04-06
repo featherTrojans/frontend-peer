@@ -4,12 +4,7 @@ import { styles } from "./Requesterdetails.styles";
 import { COLORS } from "../../constants";
 import InitialsBg from "../InitialsBg/InitialsBg";
 
-type RequesterdetailsProps = {
-  image?: string;
-  name: string;
-  distance: string;
-  duration: number;
-};
+
 
 type RequesterdetailsProps = {
   image?: string;

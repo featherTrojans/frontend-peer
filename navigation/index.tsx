@@ -56,9 +56,16 @@ import {
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
+  Transactionsrating,
+
+
+
+
   Pendingrequest, //This screen has changed
   Accepetedrequest, //This screen has changed too
   History,
+
+  //User Settings
   Settings,
   Editprofile,
   Securityprivacy,
@@ -126,6 +133,7 @@ import {
   
   
 } from "../screens";
+
 // import { LockScreen } from "../screens";
 
 import { LockScreen } from "../screens";
@@ -479,7 +487,7 @@ const RootNavigator = ({initialBoarded}) => {
       {!token ? (
         <AppStack.Group screenOptions={verticalAnimation}>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
-          <AppStack.Screen name="Personal" component={Personal} />
+          <AppStack.Screen name="Personal" component={Transactionsrating} />
           <AppStack.Screen name="Verification" component={Verification} />
           <AppStack.Screen name="Security" component={Security} />
           <AppStack.Screen name="Securepin" component={Securepin} />

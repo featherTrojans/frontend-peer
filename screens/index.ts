@@ -54,6 +54,7 @@ import Getdetails from "./app/Transferfunds/Getdetails/Getdetails";
 import Choosewallet from "./app/Walletfunding/Choosewallet/Choosewallet";
 import Transactiondetails from "./app/Transactions/Transactiondetails/Transactiondetails";
 import Transactiondispute from "./app/Transactions/Transactiondispute/Transactiondispute";
+import Transactionsrating from "./app/Transactions/Transacrionsrating/Transactionsrating";
 import Deposit from "./app/Deposit/Deposit";
 import Withdrawpreview from "./app/Withdraws/Withdrawpreview/Withdrawpreview";
 import Editmeetup from "./app/Withdraws/Editmeetup/Editmeetup";
@@ -105,6 +106,7 @@ export {
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
+  Transactionsrating,
   History,
   Settings,
   Editprofile,

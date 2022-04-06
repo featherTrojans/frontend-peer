@@ -33,9 +33,25 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  eachSupportedView: {
+    width: 62,
+    height: 62,
+  },
+  eachSupportImage: {
+    width: "100%",
+    height: "100%",
+  },
   eachSupportedTitle: {
     ...fontsize.smallest,
     ...FONTS.medium,
-    marginTop: 18
+    marginTop: 18,
+  },
+  extraText: {
+    marginHorizontal: 40,
+    textAlign: "center",
+    ...fontsize.bsmall,
+    ...FONTS.regular,
+    lineHeight: 25,
+    marginBottom: 38,
   },
 });

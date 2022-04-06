@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
-
 
 
 export const styles = StyleSheet.create({

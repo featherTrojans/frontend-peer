@@ -21,7 +21,7 @@ const showImage = (
   senderName: string,
   receiverName: string,
   title: string | null,
-  value?: string
+  value?: string,
 ) => {
   switch (title) {
     case "funding":
@@ -95,7 +95,7 @@ const showImage = (
     case "Airtime Purchase":
       const networkType = value?.toUpperCase();
       return (
-        <View style={styles.typeContainer}>
+        <View style={[styles.typeContainer, {backgroundColor: "transparent"}]}>
           <Image
             style={styles.imageStyle}
             source={{
