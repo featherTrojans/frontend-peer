@@ -98,13 +98,10 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   }
   // }
 
-  const tokenExtractor = (string: any) => {
-    const firstIndex = string.indexOf("[");
-    return string.slice(firstIndex + 1, -1);
-  };
-  useEffect(() => {
+
+  // useEffect(() => {
     // sendSchedulePushNotification(nameToShow(authdata.fullName));
-  }, []);
+  // }, []);
 
   const nameToShow = (value: string) => {
     if (value?.split(" ").length > 1) {
@@ -114,26 +111,29 @@ const Home = ({ navigation }: { navigation: any }) => {
     }
   };
 
- 
+  // const tokenExtractor = (string: any) => {
+  //   const firstIndex = string.indexOf("[");
+  //   return string.slice(firstIndex + 1, -1);
+  // };
 
-  const sendAnotherToken = async () => {
-    try {
-      const response = await axiosCustom.post("/auth/token/create", {
-        messageToken: `ExponentPushToken[${extractedToken}]`,
-      });
-      // console.log(response);
-    } catch (err) {
-      console.log(err.response.data);
-    }
-  };
-  useEffect(() => {
+  // const sendAnotherToken = async () => {
+  //   try {
+  //     const response = await axiosCustom.post("/auth/token/create", {
+  //       messageToken: `ExponentPushToken[${extractedToken}]`,
+  //     });
+  //     // console.log(response);
+  //   } catch (err) {
+  //     console.log(err.response.data);
+  //   }
+  // };
+  // useEffect(() => {
    
-    if (messageToken) {
-      setExtractedToken(tokenExtractor(messageToken));
-    }
+  //   if (messageToken) {
+  //     setExtractedToken(tokenExtractor(messageToken));
+  //   }
 
-    sendAnotherToken();
-  }, [extractedToken, messageToken]);
+  //   sendAnotherToken();
+  // }, [extractedToken, messageToken]);
 
 
   
