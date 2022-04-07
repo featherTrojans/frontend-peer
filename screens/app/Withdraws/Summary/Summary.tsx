@@ -24,6 +24,7 @@ const Summary = ({navigation, route}) => {
   const [showFailuremodal, setShowFailureModal] = useState(false)
   const [agentInfo, setAgentInfo] = useState({})
 
+  console.log(agentInfo,"agent info")
   useEffect(()=>{
     firestoreListener()
   },[])
@@ -112,7 +113,7 @@ const Summary = ({navigation, route}) => {
       <Globalmodal
        showState={showSuccessmodal}
       //  onBgPress={() => setShowSuccessModal(!showSuccessmodal)}
-       btnFunction={()=>navigation.navigate("Transactionsrating",{userToRate:userinfo?.userUid, reference:requestInfo.reference})}
+       btnFunction={()=>navigation.navigate("Transactionsrating",{userToRate:agentInfo?.userUid, reference:requestInfo.reference})}
        >
            <View style={{ alignItems: "center", paddingVertical: 30 }}>
             <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/>
