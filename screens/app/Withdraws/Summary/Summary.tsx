@@ -24,7 +24,7 @@ const Summary = ({navigation, route}) => {
   const [showFailuremodal, setShowFailureModal] = useState(false)
   const [agentInfo, setAgentInfo] = useState({})
 
-  console.log(agentInfo,"agent info")
+  console.log(agentInfo.userUid,"agent info")
   useEffect(()=>{
     firestoreListener()
   },[])
@@ -113,7 +113,10 @@ const Summary = ({navigation, route}) => {
       <Globalmodal
        showState={showSuccessmodal}
       //  onBgPress={() => setShowSuccessModal(!showSuccessmodal)}
-       btnFunction={()=>navigation.navigate("Transactionsrating",{userToRate:agentInfo?.userUid, reference:requestInfo.reference})}
+       btnFunction={()=>{
+         setShowSuccessModal(false);
+         navigation.navigate("Transactionsrating",{userToRate:agentInfo.userUid, reference:requestInfo.reference})
+        }}
        >
            <View style={{ alignItems: "center", paddingVertical: 30 }}>
             <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/>
@@ -127,7 +130,10 @@ const Summary = ({navigation, route}) => {
       <Globalmodal
        showState={showFailuremodal}
        onBgPress={() => setShowFailureModal(!showFailuremodal)}
-       btnFunction={()=>navigation.navigate("Home")}
+       btnFunction={()=>{
+        setShowFailureModal(false); 
+        navigation.navigate("Home");
+        }}
        >
            <View style={{ alignItems: "center", paddingVertical: 30 }}>
             {/* <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/> */}

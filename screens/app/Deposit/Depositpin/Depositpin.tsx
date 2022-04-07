@@ -25,7 +25,7 @@ const Depositpin = ({ route, navigation }) => {
   const [pin, setPin] = useState<string[]>([]);
   const [successModal, setSuccessModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(requestInfo);
+  
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldamount) => [...oldamount, value]);
@@ -77,7 +77,7 @@ const Depositpin = ({ route, navigation }) => {
       //show success message
       setSuccessModal(true);
     } catch (err) {
-      console.log(err)
+      
       showerror(toast, err);
       await handlePrepareToTestUpdate("rejected");
     } finally {

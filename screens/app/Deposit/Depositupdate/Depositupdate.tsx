@@ -193,7 +193,7 @@ const Depositupdate = ({ navigation }) => {
           locationText:  coords.locationText,
           reference: status?.status[0]?.reference
         })
-        console.log(response)
+        
       }
     }catch(err){
     }finally{

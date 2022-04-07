@@ -24,6 +24,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
+import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../../utils/errorMessage";
 const {
   Ratingsstar,
   Userdefaultsmaller,
@@ -34,6 +36,7 @@ const {
 
 const Transactionsrating = ({navigation, route}) => {
   const {userToRate,reference} = route.params
+  const toast = useToast()
   const [rating, setRating] = useState({
     rating: 0,
     animation: new Animated.Value(1),
@@ -83,16 +86,23 @@ const Transactionsrating = ({navigation, route}) => {
   };
   
   const handleSubmit = async ()=>{
+
+    if(comment.length < 4 || rating.rating < 1){
+      showerror(toast,null,"Please provide a comment and rate ")
+      return
+    }
+    const data = {
+      rating:rating.rating,
+      description:comment,
+      userToRate:userToRate,
+      reference:reference
+    } 
     setLoading(true)
     try{
-      await axiosCustom.post("/rating",{
-        rating:rating,
-        description:comment,
-        userToRate:userToRate,
-        reference:reference
-      })
+      await axiosCustom.post("/rating",data)
       setShowModal(true)
     }catch(err){
+      showerror(toast,err)
     }finally{
       setLoading(false)
     }

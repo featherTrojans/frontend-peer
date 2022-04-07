@@ -149,7 +149,8 @@ const Settings = ({navigation}) => {
             bg="#F1E5FF"
             icon={<Supporticon />}
             title="Support / Help Desk"
-            onpress={() => handleOpenWithWebBrowser(authdata?.userDetails?.fullName?.split(" ")[0], authdata?.userDetails?.email)}
+            // onpress={() => handleOpenWithWebBrowser(authdata?.userDetails?.fullName?.split(" ")[0], authdata?.userDetails?.email)}
+            onpress={() => navigation.navigate("CustomWebViewSupport")}
           />
           <Iconwithtitle
             bg="#E6ECFF"
