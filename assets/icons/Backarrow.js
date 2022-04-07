@@ -4,8 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import Svg, { G, Path } from "react-native-svg";
 
 function Backarrow() {
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
   return (
+    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()}>
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       width="9.648"
@@ -30,6 +31,7 @@ function Backarrow() {
         />
       </G>
     </Svg>
+    </TouchableOpacity>
   );
 }
 

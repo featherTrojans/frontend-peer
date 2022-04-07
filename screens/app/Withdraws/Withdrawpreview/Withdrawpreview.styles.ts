@@ -54,7 +54,8 @@ export const styles = StyleSheet.create({
     color: COLORS.grey2,
   },
   meetupContainer: {
-    marginTop: RFValue(22),
+    marginTop: RFValue(46),
+    marginBottom: RFValue(56)
   },
   meetUpText: {
     ...fontsize.small,
@@ -64,6 +65,7 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(20),
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center"
   },
   locationText: {
     ...fontsize.bbsmall,

@@ -1,17 +1,20 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
+
+
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     // padding: 15,
-    paddingTop: 20,
+    paddingTop: RFValue(20),
     backgroundColor: COLORS.white,
   },
   backArrow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 38,
+    marginBottom: RFValue(38),
     // paddingLeft: 25
     paddingHorizontal: 25
   },
@@ -23,17 +26,17 @@ export const styles = StyleSheet.create({
   backArrowText: {
     ...fontsize.bsmall,
     ...FONTS.medium,
+    color: COLORS.black
   },
   notifyingTextContainer: {
-    paddingHorizontal: 77,
-    marginTop: 40,
-    marginBottom: 68,
+    paddingHorizontal: RFValue(65),
+    marginTop: RFValue(30),
+    marginBottom: RFValue(68),
   },
   notifyingText: {
-    lineHeight: 24,
+    lineHeight: 25,
     ...fontsize.bsmall,
     ...FONTS.regular,
-    fontSize: 16,
     textAlign:"center"
   },
   notifyingSubText: {
@@ -41,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   tablesContainer: {
     flex: 1,
-    paddingHorizontal: 37,
+    paddingHorizontal: RFValue(37),
   },
   tableContainer: {
     flexDirection: "row",
@@ -60,15 +63,15 @@ export const styles = StyleSheet.create({
   bottomLine: {
     height: 0.5,
     backgroundColor: COLORS.lineColor2,
-    marginVertical: 18,
+    marginVertical: RFValue(18),
   },
 
 
   btnBg: {
     backgroundColor: COLORS.blue6,
-    paddingTop: 22,
-    paddingBottom: 24,
-    borderRadius: 10,
+    paddingTop: RFValue(22),
+    paddingBottom: RFValue(24),
+    borderRadius: RFValue(10),
     justifyContent: "center",
     alignItems: "center",
   },

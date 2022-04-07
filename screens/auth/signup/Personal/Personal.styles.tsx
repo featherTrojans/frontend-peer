@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
       flex: 1, 
       justifyContent: "flex-end", 
       marginBottom: RFValue(80),
-      marginTop: RFValue(80)
+      marginTop: RFValue(60),
 
     },
     bottomTextContainer: {

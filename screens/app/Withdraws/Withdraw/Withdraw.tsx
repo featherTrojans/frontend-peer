@@ -23,6 +23,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import Cryinganim from "../../../../assets/Lottie/animations/feather_cry_emoji.json";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { Shadow } from "../../../../constants/theme";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const {
   Backarrow,
@@ -50,7 +51,7 @@ const Emptyrequest = () => {
         source={Cryinganimate}
         autoPlay
         loop
-        style={{ width: 190, height: 190 }}
+        style={{ width: RFValue(190), height:  RFValue(190)}}
       />
 
       <Text style={styles.emptyListText}>
@@ -153,14 +154,14 @@ const Withdraw = ({ navigation }) => {
   const Requestlist = () => {
     return (
       <View style={styles.requestContainer}>
-        <View style={{ position: "relative", marginTop: 30, ...Shadow }}>
+        <View style={{ position: "relative", marginTop: RFValue(30), ...Shadow }}>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
             <TouchableOpacity
               style={{
                 width: singleWidth(),
-                paddingVertical: 24,
+                paddingVertical: RFValue(24),
               }}
               activeOpacity={0.7}
               onPress={() => animateToIndex(0)}
@@ -180,7 +181,7 @@ const Withdraw = ({ navigation }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={{ width: singleWidth(), paddingVertical: 24 }}
+              style={{ width: singleWidth(), paddingVertical: RFValue(24)}}
               activeOpacity={0.7}
               onPress={() => animateToIndex(1)}
             >
@@ -194,7 +195,7 @@ const Withdraw = ({ navigation }) => {
                   },
                 ]}
               >
-                Available Requests
+                Accepted Requests
               </Text>
             </TouchableOpacity>
           </View>
@@ -230,7 +231,7 @@ const Withdraw = ({ navigation }) => {
           keyExtractor={(item) => `${item.reference}`}
           ListEmptyComponent={() => (
             <View style={{flex: 1, justifyContent: 'center', alignItems: "center"}}>
-              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.black, marginTop: 70, marginHorizontal: 50, textAlign: 'center', lineHeight: 24}}>Sorry you have no available request at the moment.</Text>
+              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.black, marginTop: RFValue(70), marginHorizontal: RFValue(50), textAlign: 'center', lineHeight: 24}}>Sorry you have no available request at the moment.</Text>
             </View>
           )}
         />
