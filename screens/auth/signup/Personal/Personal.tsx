@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   Alert,
+  ScrollView,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
@@ -19,6 +20,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
@@ -39,15 +41,15 @@ const Personal = ({ navigation }) => {
   const toast = useToast();
 
   return (
-    <KeyboardAwareScrollView>
-      <View style={styles.container}>
+    <KeyboardAwareScrollView >
+      <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
         <Customstatusbar />
 
         {/* ERROR PAGE */}
 
         {/* <Text>Sign up page</Text> */}
         {/* Get Started and dots */}
-        <JustifyBetween style={{ marginBottom: 10 }}>
+        <JustifyBetween style={{ marginBottom: RFValue(10) }}>
           <View>
             <Text style={styles.header}>Get Started.</Text>
           </View>
@@ -58,7 +60,7 @@ const Personal = ({ navigation }) => {
           </View>
         </JustifyBetween>
         {/* personal */}
-        <View style={{ marginBottom: 40 }}>
+        <View style={{ marginBottom: RFValue(40) }}>
           <Text style={styles.subText}>Personal</Text>
         </View>
 
@@ -68,18 +70,18 @@ const Personal = ({ navigation }) => {
             lastName: "",
             email: "",
             phoneNumber: "",
-            referredBy: ""
+            referredBy: "",
           }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             try {
               //send the request
               const response = await axiosCustom.post("auth/signup", {
-                firstName:values.firstName.trim(),
-                lastName:values.lastName.trim(),
-                email:values.email.trim(),
-                phoneNumber:values.phoneNumber.trim(),
-                referredBy:values.referredBy.trim()
+                firstName: values.firstName.trim(),
+                lastName: values.lastName.trim(),
+                email: values.email.trim(),
+                phoneNumber: values.phoneNumber.trim(),
+                referredBy: values.referredBy.trim(),
               });
               //store data in context
               // setAuthData(response?.data?.data)
@@ -89,7 +91,7 @@ const Personal = ({ navigation }) => {
                 token: response?.data?.data?.token,
               });
             } catch (err) {
-              console.log(err.response)
+              console.log(err.response);
               if (err.response) {
                 if (!err?.response?.data?.data?.isVerified) {
                   return navigation.navigate("Verification", {
@@ -180,7 +182,7 @@ const Personal = ({ navigation }) => {
             );
           }}
         </Formik>
-      </View>
+      </ScrollView>
     </KeyboardAwareScrollView>
   );
 };

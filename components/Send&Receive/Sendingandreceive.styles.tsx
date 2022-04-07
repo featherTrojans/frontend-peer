@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS } from "../../constants";
 
 export const styles = StyleSheet.create({
@@ -6,11 +7,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     // marginBottom: 18,
-    marginBottom: 26,
-    marginTop: 42,
+    marginBottom: RFValue(26),
+    marginTop: RFValue(42),
   },
   arrowContainer: {
-    marginHorizontal: 30,
+    marginHorizontal: RFValue(30),
   },
   badgeImage: {
     position: "absolute",
@@ -21,12 +22,12 @@ export const styles = StyleSheet.create({
 
 
   typeContainer: {
-    width: 62,
-    height: 62,
+    width: RFValue(62),
+    height: RFValue(62),
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 62 / 2,
-    backgroundColor: "#001757",
+    borderRadius: RFValue(62 / 2),
+    // backgroundColor: "#001757",
   },
   imageStyle: {
     width: "50%",

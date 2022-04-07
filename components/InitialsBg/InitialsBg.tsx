@@ -3,6 +3,7 @@ import React from "react";
 import { FONTS, fontsize } from "../../constants";
 import { nameSplitter } from "../../utils/nameSplitter";
 import { styles } from "./InitialsBg.styles";
+import { RFValue } from "react-native-responsive-fontsize";
 
 type InitialsBgProps = {
   sideLength: number;
@@ -31,12 +32,12 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
   return (
     <View
       style={{
-        width: sideLength,
-        height: sideLength,
+        width:  RFValue(sideLength),
+        height: RFValue(sideLength),
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: defaultColor,
-        borderRadius: sideLength / 2,
+        borderRadius: RFValue(sideLength /2),
       }}
     >
       <Text style={styles.initialText}>{nameSplitter(name).toUpperCase()}</Text>

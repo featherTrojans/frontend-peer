@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../constants";
 
 
@@ -11,27 +12,35 @@ export const styles = StyleSheet.create({
     listContainer: {
         flex: 1,
         backgroundColor: COLORS.white,
-        paddingHorizontal: 15
+        paddingHorizontal: RFValue(15)
     },
     notificationContainer: {
         flex: 1,
         flexDirection: 'row',
         backgroundColor: COLORS.white,
-        borderRadius: 15,
-        paddingHorizontal: 15,
-        paddingVertical: 17,
+        borderRadius: RFValue(15),
+        paddingHorizontal: RFValue(15),
+        paddingVertical: RFValue(17),
         // marginBottom: 10
     },
-    senderIcon: {
-        width: 39,
-        height: 39,
-        borderRadius: 39,
+    creditIcon: {
+        width: RFValue(39),
+        height: RFValue(39),
+        borderRadius: RFValue(39),
         backgroundColor: COLORS.green2,
         justifyContent: 'center',
         alignItems: 'center'
     },
+    debitIcon: {
+        width: RFValue(39),
+        height: RFValue(39),
+        borderRadius: RFValue(39),
+        backgroundColor: COLORS.pink1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     infoContainer: {
-        marginLeft: 15.5
+        marginLeft: RFValue(15.5)
     },
     titleandtime: {
         flexDirection: 'row',
@@ -45,7 +54,9 @@ export const styles = StyleSheet.create({
     title: {
         ...fontsize.small,
         ...FONTS.medium,
-        color: COLORS.black
+        color: COLORS.black,
+        textTransform: 'capitalize'
+        
     },
     time: {
         ...fontsize.smaller,
@@ -59,7 +70,7 @@ export const styles = StyleSheet.create({
         lineHeight: 24
     },
     horizontalLine: {
-        marginVertical: 12,
+        marginVertical: RFValue(12),
         backgroundColor: COLORS.lineColor2,
         height: .5
     },
@@ -69,11 +80,11 @@ export const styles = StyleSheet.create({
     },
     upgradeNowText: {
         color: COLORS.blue6,
-        marginTop: 10,
+        marginTop: RFValue(10),
         lineHeight: 27,
         ...fontsize.smaller,
         ...FONTS.bold,
-        marginRight: 6
+        marginRight: RFValue(6)
 
     }
 })

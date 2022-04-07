@@ -12,6 +12,7 @@ import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { styles } from "./Securepin.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { SecureDot, Successcheckanimate } = icons;
 const SecurepinAgain = ({ route, navigation }) => {
@@ -85,13 +86,13 @@ const SecurepinAgain = ({ route, navigation }) => {
             style={{
               justifyContent: "center",
               alignItems: "center",
-              marginHorizontal: 75,
-              marginBottom: 50,
+              marginHorizontal: RFValue(75),
+              marginBottom: RFValue(50),
             }}
           >
             <LottieView
               source={Successcheckanimate}
-              style={{ width: 148, height: 148, marginBottom: 18 }}
+              style={{ width: RFValue(148), height: RFValue(148), marginBottom: RFValue(18) }}
               autoPlay
               loop
             />
@@ -112,18 +113,18 @@ const SecurepinAgain = ({ route, navigation }) => {
 
       {loading && <Loader />}
       <View style={{ paddingHorizontal: 25 }}>
-        <JustifyBetween style={{ marginBottom: 10 }}>
+        <JustifyBetween style={{ marginBottom: RFValue(10) }}>
           <View>
             <Text style={styles.header}>Type in your </Text>
             <Text style={styles.header}>secure pin again</Text>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <View style={[styles.topDots, { marginRight: 10 }]} />
-            <View style={[styles.topDots, { marginRight: 10 }]} />
+            <View style={[styles.topDots, { marginRight: RFValue(10) }]} />
+            <View style={[styles.topDots, { marginRight: RFValue(10) }]} />
             <View style={styles.activeDot} />
           </View>
         </JustifyBetween>
-        <View style={{ marginBottom: 40 }}>
+        <View style={{ marginBottom: RFValue(40) }}>
           <Text style={styles.subText}>Transaction PIN</Text>
         </View>
 

@@ -18,6 +18,7 @@ import {
 } from "./Onboarding.styles";
 import Customstatusbar from "../shared/Customstatusbar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
@@ -80,7 +81,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     <OnboardingContainer>
       <Customstatusbar />
 
-      <LoginBtn activeOpacity={0.6} onPress={navigateToLogin}>
+      <LoginBtn activeOpacity={0.6} onPress={navigateToLogin} style={{marginBottom: RFValue(32)}}>
         <SkipText>Skip</SkipText>
       </LoginBtn>
 

@@ -8,10 +8,10 @@ export const styles = StyleSheet.create({
     container: {
       // flex: 1,
       width: SIZES.width,
-      height: SIZES.height,
+      // height: SIZES.height,
       backgroundColor: COLORS.white,
       paddingHorizontal: 25,
-      paddingTop: 25,
+      paddingTop: RFValue(25),
     },
     header: {
       ...fontsize.big,
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
       backgroundColor: COLORS.blue6,
       justifyContent: "center",
       alignItems: "center",
-      height: 62,
+      height: RFValue(62),
       borderRadius: 10,
     },
     proceedText: {
@@ -50,13 +50,15 @@ export const styles = StyleSheet.create({
     bottomContainer:{
       flex: 1, 
       justifyContent: "flex-end", 
-      marginBottom: 80
+      marginBottom: RFValue(80),
+      marginTop: RFValue(80)
+
     },
     bottomTextContainer: {
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      marginTop: 28,
+      marginTop: RFValue(28),
     },
     bottomText: {
       ...fontsize.small,

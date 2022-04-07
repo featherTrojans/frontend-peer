@@ -74,6 +74,7 @@ export const SIZES = {
   // App Dimensions
   width,
   height,
+  respond: RFValue(1)
 };
 
 export const FONTS = {

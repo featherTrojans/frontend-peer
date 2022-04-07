@@ -9,6 +9,7 @@ import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { RFValue } from "react-native-responsive-fontsize";
 const { Backarrow, SecureDot } = icons;
 
 const TransferpinBank = ({route, navigation}) => {
@@ -58,22 +59,22 @@ const TransferpinBank = ({route, navigation}) => {
         <View style={{ alignItems: "center" }}>
              <View
                style={{
-                 width: 100,
-                 height: 100,
+                 width: RFValue(100),
+                 height: RFValue(100),
                  backgroundColor: COLORS.grey1,
-                 borderRadius: 50,
+                 borderRadius: RFValue(50),
                }}
              />
 
              <Text
                style={{
                  textAlign: "center",
-                 marginHorizontal: 40,
-                 marginVertical: 40,
+                 marginHorizontal: RFValue(40),
+                 marginVertical: RFValue(40),
                  ...fontsize.bsmall,
                  ...FONTS.regular,
                }}
-             >You have successfully transffered NGN {amountFormatter(amount)} to  “{accountInfomation.bank_name} -<Text style={{textTransform: 'capitalize'}}>{accountInfomation.account_name}</Text> ”</Text>
+             >You have successfully transfered NGN {amountFormatter(amount)} to  “{accountInfomation.bank_name} -<Text style={{textTransform: 'capitalize'}}>{accountInfomation.account_name}</Text> ”</Text>
            </View>
       </Globalmodal>
 

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, fontsize, FONTS } from "../../../../constants";
 
 export const styles = StyleSheet.create({
@@ -10,13 +11,13 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 25,
+    paddingHorizontal: RFValue(25),
   },
   backArrowConteiner: {
-    marginVertical: 20,
+    marginVertical: RFValue(20),
   },
   descriptionContainer: {
-    marginHorizontal: 25,
+    marginHorizontal: RFValue(25),
     justifyContent: "center",
     alignItems: "center",
   },
@@ -26,7 +27,7 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     lineHeight: 25,
     color: COLORS.black,
-    marginBottom: 15,
+    marginBottom: RFValue(15),
   },
   descriptionSubText: {
     ...FONTS.bold,
@@ -47,22 +48,22 @@ export const styles = StyleSheet.create({
   pinContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 48,
-    marginBottom: 65,
+    marginTop: RFValue(48),
+    marginBottom: RFValue(65),
   },
   pinInputContainer: {
-    width: 252,
+    width: RFValue(252),
     flexDirection: "row",
     justifyContent: "space-between",
   },
   pinView: {
-    width: 50,
-    height: 60,
+    width: RFValue(50),
+    height: RFValue(60),
     borderColor: COLORS.blue7,
     borderWidth: 1,
     borderRadius: 13,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingHorizontal: RFValue(15),
+    paddingVertical: RFValue(10),
     justifyContent: "center",
     alignItems: "center",
   },
@@ -71,10 +72,10 @@ export const styles = StyleSheet.create({
 
   transactionSubHeader: {
     textAlign: "center",
-    marginHorizontal: 40,
+    marginHorizontal: RFValue(40),
     //  marginVertical: 40,
-    marginTop: 24,
-    marginBottom: 45,
+    marginTop: RFValue(24),
+    marginBottom: RFValue(45),
     ...fontsize.bsmall,
     ...FONTS.regular,
   },

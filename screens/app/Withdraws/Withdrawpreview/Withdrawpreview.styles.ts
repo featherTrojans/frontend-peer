@@ -1,5 +1,6 @@
 import { saveToLibraryAsync } from "expo-media-library";
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
 
 export const styles = StyleSheet.create({
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     left: 0,
-    paddingTop: 25,
+    paddingTop: RFValue(25),
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
   },
@@ -39,8 +40,8 @@ export const styles = StyleSheet.create({
   amountPrice: {
     ...fontsize.bsmall,
     ...FONTS.medium,
-    marginTop: 6,
-    marginBottom: 12,
+    marginTop: RFValue(6),
+    marginBottom: RFValue(12),
   },
   amountBaseCharge: {
     ...fontsize.small,
@@ -53,33 +54,33 @@ export const styles = StyleSheet.create({
     color: COLORS.grey2,
   },
   meetupContainer: {
-    marginTop: 22,
+    marginTop: RFValue(22),
   },
   meetUpText: {
     ...fontsize.small,
     ...FONTS.regular,
   },
   meetupLocationContainer: {
-    marginTop: 20,
+    marginTop: RFValue(20),
     flexDirection: "row",
     justifyContent: "space-between",
   },
   locationText: {
     ...fontsize.bbsmall,
     ...FONTS.medium,
-    marginLeft: 12,
+    marginLeft: RFValue(12),
   },
 
   ///Cancel Buttons
   bottomBtnContainer: {
-    marginVertical: 20,
+    marginVertical: RFValue(20),
     flexDirection: "row",
   },
   bottomCancelBtn: {
     flex: 1,
     backgroundColor: COLORS.red1,
     borderRadius: 10,
-    marginRight: 14,
+    marginRight: RFValue(14),
     justifyContent: "center",
     alignItems: "center",
   },
@@ -89,13 +90,13 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
   },
   blackBtn: {
-    width: 62,
-    height: 62,
+    width: RFValue(62),
+    height: RFValue(62),
     backgroundColor: COLORS.black,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 14
+    marginLeft: RFValue(14)
   },
 
   //Make Request button
@@ -122,9 +123,9 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
   },
   makeRequestCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: RFValue(40),
+    height: RFValue(40),
+    borderRadius: RFValue(20),
     justifyContent: "center",
     alignItems: "center",
     // marginRight: "90%",
@@ -145,7 +146,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.green1,
     borderRadius: 10,
-    marginRight: 14,
+    marginRight: RFValue(14),
     justifyContent: "center",
     alignItems: "center",
   },
@@ -157,6 +158,6 @@ export const styles = StyleSheet.create({
     ...fontsize.bmsmall,
     ...FONTS.regular,
     marginLeft: 12,
-    marginRight: 100,
+    marginRight: RFValue(100),
   },
 });

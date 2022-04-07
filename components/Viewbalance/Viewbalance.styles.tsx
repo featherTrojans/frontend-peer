@@ -1,15 +1,16 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, fontsize, FONTS } from "../../constants";
 
 export const styles = StyleSheet.create({
   container: {
-    elevation: 3,
-    shadowColor: "rgba(0,0,0,.06)",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 18,
+    // elevation: 3,
+    // shadowColor: "rgba(0,0,0,.06)",
+    // shadowOffset: { width: 0, height: 3 },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 20,
+    paddingHorizontal: RFValue(20),
+    paddingVertical: RFValue(18),
     borderRadius: 10,
     backgroundColor: COLORS.blue6,
   },
@@ -24,21 +25,21 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
   },
   underLine: {
-    width: 183,
+    width: RFValue(183),
     height: 0.5,
     backgroundColor: COLORS.inputBorderColor,
-    marginBottom: 13.6,
-    marginTop: 13.6,
+    marginBottom: RFValue(13.6),
+    marginTop: RFValue(13.6),
   },
 
 
   
   addCashBg: {
     backgroundColor: COLORS.blue7,
-    paddingVertical: 12,
-    paddingLeft: 18,
-    paddingRight: 11.4,
-    borderRadius: 9,
+    paddingVertical: RFValue(12),
+    paddingLeft: RFValue(18),
+    paddingRight: RFValue(11.4),
+    borderRadius: RFValue(9),
     flexDirection: "row",
     alignSelf: "center",
     alignItems: "center",
@@ -47,7 +48,7 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
     ...fontsize.small,
     ...FONTS.medium,
-    marginRight: 17.6,
+    marginRight: RFValue(17.6),
   },
 
 
@@ -62,7 +63,7 @@ export const styles = StyleSheet.create({
   balanceText: {
     ...fontsize.smaller,
     ...FONTS.regular,
-    marginBottom: 6,
+    marginBottom: RFValue(6),
     color: COLORS.yellow2,
   },
   balanceAmount: {

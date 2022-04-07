@@ -17,6 +17,7 @@ import {
 } from "../../../../../components";
 import amountFormatter from "../../../../../utils/formatMoney";
 import SecureDot from "../../../../../assets/icons/SecureDot";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Successcheckanimate } = icons;
 
@@ -77,16 +78,16 @@ const Airtimepurchasepin = ({ navigation, route }) => {
             source={Successcheckanimate}
             autoPlay
             loop
-            style={{ width: 148, height: 148 }}
+            style={{ width: RFValue(148), height: RFValue(148) }}
           />
 
           <Text
             style={{
               textAlign: "center",
-              marginHorizontal: 40,
+              marginHorizontal: RFValue(40),
               //  marginVertical: 40,
-              marginTop: 24,
-              marginBottom: 45,
+              marginTop: RFValue(24),
+              marginBottom: RFValue(45),
               ...fontsize.bsmall,
               ...FONTS.regular,
             }}

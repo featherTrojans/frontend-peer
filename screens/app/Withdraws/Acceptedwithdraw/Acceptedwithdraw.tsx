@@ -32,6 +32,7 @@ import { PanGestureHandler, Swipeable } from "react-native-gesture-handler";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const {
   Forwardarrow,
@@ -48,8 +49,8 @@ const {
 const { Locationmap } = images;
 
 
-const BUTTON_WIDTH = SIZES.width - 50 - 62 -14;
-const BUTTON_HEIGHT = 62;
+const BUTTON_WIDTH =  SIZES.width - 50 - 62 -14;
+const BUTTON_HEIGHT = RFValue(62);
 const BUTTON_PADDING = 10;
 const SWIPEABLE_DIMENSIONS = BUTTON_HEIGHT - 2 * BUTTON_PADDING;
 const H_WAVE_RANGE = SWIPEABLE_DIMENSIONS + 2 * BUTTON_PADDING;

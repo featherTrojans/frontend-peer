@@ -1,3 +1,4 @@
+import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { COLORS, FONTS, fontsize } from "../../constants";
 
@@ -11,7 +12,6 @@ export const OnboardingContainer = styled.View`
 
 export const LoginBtn = styled.TouchableOpacity`
   margin-top: 8px;
-  margin-bottom: 32px;
   justify-content: flex-end;
   align-items: flex-end;
   margin-right: 27px;

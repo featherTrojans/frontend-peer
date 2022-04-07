@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 50,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: RFValue(22),
   },
   animationText: {
     ...fontsize.bsmall,
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   supportedContainer: {
     flexDirection: "row",
     marginHorizontal: 28,
-    marginTop: 30,
+    marginTop: RFValue(30),
     justifyContent: "space-between",
   },
   eachSupportedContainer: {
@@ -34,8 +34,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   eachSupportedView: {
-    width: 62,
-    height: 62,
+    width: RFValue(62),
+    height: RFValue(62),
   },
   eachSupportImage: {
     width: "100%",
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   eachSupportedTitle: {
     ...fontsize.smallest,
     ...FONTS.medium,
-    marginTop: 18,
+    marginTop: RFValue(18),
   },
   extraText: {
     marginHorizontal: 40,
@@ -52,6 +52,6 @@ export const styles = StyleSheet.create({
     ...fontsize.bsmall,
     ...FONTS.regular,
     lineHeight: 25,
-    marginBottom: 38,
+    marginBottom: RFValue(38),
   },
 });

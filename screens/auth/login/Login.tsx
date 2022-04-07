@@ -23,6 +23,7 @@ import showerror from "../../../utils/errorMessage";
 import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import * as LocalAuthentication from "expo-local-authentication";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
 
@@ -62,7 +63,9 @@ const Login = ({ navigation }: any) => {
 
   const toast = useToast();
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView
+      
+    >
       <View style={styles.container}>
         {/* Logo */}
         <View style={styles.logoWrapper}>
@@ -79,129 +82,151 @@ const Login = ({ navigation }: any) => {
         />
 
         {/* Form */}
-        <Formik
-          initialValues={{
-            username: "",
-            password: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={async (values) => {
-            try {
-              const response = await axiosCustom.post("/auth/signin", {
-                username: values.username.trim(),
-                password: values.password.trim(),
-              });
-              //store token in ASYNC STORAGE
-              //store in context
-              const token = response.data.data.token
-              setAuthorizationToken(token);
-
-              // check if token is using 0000
-              try{
-               await  axiosCustom.post("auth/pin/verify",{user_pin:"0000"},{ headers: { token: token } })
-               // send to that modal
-               console.log(values)
-                // navigation.navigate("Securepin",{token:result?.token});
-                navigation.navigate("Welcometochange",{ fromm: "login",
-                username: values.username,
-                token: token,});
-              }catch(err){
-                // setToken(response.data.data.token)
-                navigation.navigate("Welcome", {
-                  fromm: "login",
-                  username: values.username,
-                  token: token,
+          <Formik
+            initialValues={{
+              username: "",
+              password: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={async (values) => {
+              try {
+                const response = await axiosCustom.post("/auth/signin", {
+                  username: values.username.trim(),
+                  password: values.password.trim(),
                 });
+                //store token in ASYNC STORAGE
+                //store in context
+                const token = response.data.data.token;
+                setAuthorizationToken(token);
+
+                // check if token is using 0000
+                try {
+                  await axiosCustom.post(
+                    "auth/pin/verify",
+                    { user_pin: "0000" },
+                    { headers: { token: token } }
+                  );
+                  // send to that modal
+                  console.log(values);
+                  // navigation.navigate("Securepin",{token:result?.token});
+                  navigation.navigate("Welcometochange", {
+                    fromm: "login",
+                    username: values.username,
+                    token: token,
+                  });
+                } catch (err) {
+                  // setToken(response.data.data.token)
+                  navigation.navigate("Welcome", {
+                    fromm: "login",
+                    username: values.username,
+                    token: token,
+                  });
+                }
+              } catch (err) {
+                showerror(toast, err);
               }
-            } catch (err) {
-              showerror(toast, err);
-            }
-          }}
-        >
-          {(formikProps) => {
-            const {
-              isSubmitting,
-              isValid,
-              handleBlur,
-              errors,
-              touched,
-              handleChange,
-              handleSubmit,
-            } = formikProps;
-            return (
-              <>
-                {isSubmitting && <Loader />}
-                {/* Phone or tag input */}
-                <View style={[styles.inputContainer, { marginBottom: 15 }]}>
-                  <View style={styles.inputiconwrapper}>
-                    <Usericon />
-                  </View>
-                  <TextInput
-                    style={styles.textInput}
-                    placeholder="Enter your phone or feather tag"
-                    placeholderTextColor={COLORS.white}
-                    underlineColorAndroid="transparent"
-                    onChangeText={handleChange("username")}
-                    onBlur={handleBlur("username")}
-                  />
-                </View>
-
-                {/* Password input */}
-                <View style={styles.inputContainer}>
-                  <View style={styles.inputiconwrapper}>
-                    <Lock />
-                  </View>
-                  <TextInput
-                    style={styles.textInput}
-                    placeholder="Enter your password"
-                    placeholderTextColor={COLORS.white}
-                    secureTextEntry={hidePassword}
-                    underlineColorAndroid="transparent"
-                    onChangeText={handleChange("password")}
-                    onBlur={handleBlur("password")}
-                  />
-                  <TouchableOpacity
-                    onPress={() => setHidePassword(!hidePassword)}
-                    activeOpacity={0.8}
-                  >
-                    {hidePassword ? <Eyeicon /> : <Passwordhideicon />}
-                  </TouchableOpacity>
-                </View>
-                {/* Bottom text */}
-                <JustifyBetween style={{ marginTop: 30, marginBottom: 70 }}>
-                  <Text style={[styles.biometrics, {opacity: .2}]}>Use Biometrics</Text>
-
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate("Forgetpassword")}
-                    activeOpacity={0.8}
-                  >
-                    <Text style={styles.forgetPassword}>Forgot Password?</Text>
-                  </TouchableOpacity>
-                </JustifyBetween>
-
-                {/* Login btn */}
-                <TouchableOpacity
-                  onPress={handleSubmit}
-                  style={styles.loginbtn}
-                  activeOpacity={0.8}
-                >
-                  <Text style={styles.loginbtnText}>Log in</Text>
-                </TouchableOpacity>
-              </>
-            );
-          }}
-        </Formik>
-
-        <View style={styles.haveanaccount}>
-          <Text style={styles.haveaccounttext}>Don’t have an account yet?</Text>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate("Personal")}
+            }}
           >
-            <Text style={styles.registerText}>Register</Text>
-          </TouchableOpacity>
+            {(formikProps) => {
+              const {
+                isSubmitting,
+                isValid,
+                handleBlur,
+                errors,
+                touched,
+                handleChange,
+                handleSubmit,
+              } = formikProps;
+              return (
+                <>
+                  {isSubmitting && <Loader />}
+                  {/* Phone or tag input */}
+                  <View
+                    style={[
+                      styles.inputContainer,
+                      { marginBottom: RFValue(15) },
+                    ]}
+                  >
+                    <View style={styles.inputiconwrapper}>
+                      <Usericon />
+                    </View>
+                    <TextInput
+                      style={styles.textInput}
+                      placeholder="Enter your phone or feather tag"
+                      placeholderTextColor={COLORS.white}
+                      underlineColorAndroid="transparent"
+                      onChangeText={handleChange("username")}
+                      onBlur={handleBlur("username")}
+                    />
+                  </View>
+
+                  {/* Password input */}
+                  <View style={styles.inputContainer}>
+                    <View style={styles.inputiconwrapper}>
+                      <Lock />
+                    </View>
+                    <TextInput
+                      style={styles.textInput}
+                      placeholder="Enter your password"
+                      placeholderTextColor={COLORS.white}
+                      secureTextEntry={hidePassword}
+                      underlineColorAndroid="transparent"
+                      onChangeText={handleChange("password")}
+                      onBlur={handleBlur("password")}
+                    />
+                    <TouchableOpacity
+                      onPress={() => setHidePassword(!hidePassword)}
+                      activeOpacity={0.8}
+                    >
+                      {hidePassword ? <Eyeicon /> : <Passwordhideicon />}
+                    </TouchableOpacity>
+                  </View>
+                  {/* Bottom text */}
+                  <JustifyBetween
+                    style={{
+                      marginTop: RFValue(30),
+                      marginBottom: RFValue(70),
+                    }}
+                  >
+                    <Text style={[styles.biometrics, { opacity: 0.2 }]}>
+                      Use Biometrics
+                    </Text>
+
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Forgetpassword")}
+                      activeOpacity={0.8}
+                    >
+                      <Text style={styles.forgetPassword}>
+                        Forgot Password?
+                      </Text>
+                    </TouchableOpacity>
+                  </JustifyBetween>
+
+                  {/* Login btn */}
+                  <TouchableOpacity
+                    onPress={handleSubmit}
+                    style={styles.loginbtn}
+                    activeOpacity={0.8}
+                  >
+                    <Text style={styles.loginbtnText}>Log in</Text>
+                  </TouchableOpacity>
+                </>
+              );
+            }}
+          </Formik>
+
+          <View style={styles.haveanaccount}>
+            <Text style={styles.haveaccounttext}>
+              Don’t have an account yet?
+            </Text>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate("Personal")}
+            >
+              <Text style={styles.registerText}>Register</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
     </KeyboardAwareScrollView>
   );
 };

@@ -5,6 +5,7 @@ import {
   StatusBar,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { RFValue } from "react-native-responsive-fontsize";
 import { useToast } from "react-native-toast-notifications";
 import { Bottombtn, Loader, Numberbtn } from "../../../../components";
 
@@ -45,19 +46,19 @@ const Securepin = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Customstatusbar />
-      <View style={{ paddingHorizontal: 25 }}>
-        <JustifyBetween style={{ marginBottom: 10 }}>
+      <View style={{ paddingHorizontal: RFValue(25) }}>
+        <JustifyBetween style={{ marginBottom: RFValue(10) }}>
           <View>
             <Text style={styles.header}>Set up your </Text>
             <Text style={styles.header}>4-digit secure pin</Text>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <View style={[styles.topDots, { marginRight: 10 }]} />
-            <View style={[styles.topDots, { marginRight: 10 }]} />
+            <View style={[styles.topDots, { marginRight: RFValue(10)}]} />
+            <View style={[styles.topDots, { marginRight: RFValue(10)}]} />
             <View style={styles.activeDot} />
           </View>
         </JustifyBetween>
-        <View style={{ marginBottom: 40 }}>
+        <View style={{ marginBottom: RFValue(40) }}>
           <Text style={styles.subText}>Transaction PIN</Text>
         </View>
 

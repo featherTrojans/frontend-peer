@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../../../constants";
 import { Shadow } from "../../../../../constants/theme";
 
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
-    marginBottom: 15,
+    marginBottom: RFValue(15),
   },
   atSymbol: {
     ...fontsize.bsmall,
@@ -35,7 +36,7 @@ export const styles = StyleSheet.create({
 
   selectionTypeContainer: {
     position: "relative",
-    marginTop: 30,
+    marginTop: RFValue(30),
     ...Shadow,
   },
   optionsContainer: {
@@ -55,8 +56,8 @@ export const styles = StyleSheet.create({
     left: 0,
   },
   inputsContainer: {
-    marginTop: 40,
-    minHeight: 400,
+    marginTop: RFValue(40),
+    minHeight: RFValue(400),
     flex: 1,
   },
 
@@ -72,10 +73,10 @@ export const styles = StyleSheet.create({
     ...FONTS.regular,
   },
   dropDownStyle: {
-    height: 62,
+    height: RFValue(62),
     paddingLeft: 20,
     borderColor: "#E6E6E6",
-    marginBottom: 15,
+    marginBottom: RFValue(15),
   },
   dropdownContainerStyle: {
     borderColor: COLORS.grey1,

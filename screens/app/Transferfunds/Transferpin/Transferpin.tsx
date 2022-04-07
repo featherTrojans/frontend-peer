@@ -18,6 +18,7 @@ import { usePushNotification } from "../../../../navigation";
 import { AuthContext } from "../../../../context/AuthContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { ScrollView } from "react-native-gesture-handler";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -90,16 +91,16 @@ const Transferpin = ({ route, navigation }) => {
             source={Successcheckanimate}
             autoPlay
             loop
-            style={{ width: 148, height: 148 }}
+            style={{ width: RFValue(148), height: RFValue(148) }}
           />
 
           <Text
             style={{
               textAlign: "center",
-              marginHorizontal: 40,
+              marginHorizontal: RFValue(40),
               //  marginVertical: 40,
-              marginTop: 24,
-              marginBottom: 45,
+              marginTop: RFValue(24),
+              marginBottom: RFValue(45),
               ...fontsize.bsmall,
               ...FONTS.regular,
             }}

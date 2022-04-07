@@ -17,6 +17,7 @@ import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
 import { justCharge, plusBase } from "../../../../utils/utils";
+import { RFValue } from "react-native-responsive-fontsize";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const WithdrawPin = ({ navigation, route }) => {
@@ -131,10 +132,10 @@ const WithdrawPin = ({ navigation, route }) => {
           <Text
             style={{
               backgroundColor: "#F2F5FF",
-              paddingVertical: 10,
-              paddingHorizontal: 20,
+              paddingVertical: RFValue(10),
+              paddingHorizontal: RFValue(20),
               borderRadius: 30,
-              marginTop: 15,
+              marginTop: RFValue(15),
             }}
           >
             Negotiation Charges:
@@ -143,8 +144,8 @@ const WithdrawPin = ({ navigation, route }) => {
           <Text
             style={{
               textAlign: "center",
-              marginHorizontal: 40,
-              marginVertical: 40,
+              marginHorizontal: RFValue(40),
+              marginVertical: RFValue(40),
               ...fontsize.bsmall,
               ...FONTS.regular,
               lineHeight: 25,
@@ -168,14 +169,14 @@ const WithdrawPin = ({ navigation, route }) => {
             source={Successcheckanimate}
             autoPlay
             loop
-            style={{ width: 148, height: 148 }}
+            style={{ width: RFValue(148), height: RFValue(148) }}
           />
 
           <Text
             style={{
               textAlign: "center",
-              marginHorizontal: 40,
-              marginVertical: 40,
+              marginHorizontal: RFValue(40),
+              marginVertical: RFValue(40),
               ...fontsize.bsmall,
               ...FONTS.regular,
             }}

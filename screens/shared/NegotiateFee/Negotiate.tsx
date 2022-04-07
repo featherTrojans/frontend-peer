@@ -16,6 +16,7 @@ import { LocationContext } from "../../../context/LocationContext";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { AuthContext } from "../../../context/AuthContext";
 import { plusBase } from "../../../utils/utils";
+import { RFValue } from "react-native-responsive-fontsize";
 const { Backarrow, SecureDot } = icons;
 
 const Negotiate = ({ navigation, route }) => {
@@ -82,7 +83,7 @@ const Negotiate = ({ navigation, route }) => {
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              marginVertical: 20,
+              marginVertical:  RFValue(20),
             }}
           >
             <Sendingandreceive
@@ -117,10 +118,10 @@ const Negotiate = ({ navigation, route }) => {
           <Text
             style={{
               backgroundColor: "#F2F5FF",
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-              borderRadius: 30,
-              marginVertical: 15,
+              paddingVertical: RFValue(10),
+              paddingHorizontal: RFValue(20),
+              borderRadius: RFValue(30),
+              marginVertical: RFValue(15),
             }}
           >
             Withdraw Charges:

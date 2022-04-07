@@ -2,6 +2,8 @@
 import React from 'react'
 import { icons } from './constants'
 import LottieView from "lottie-react-native"
+import { RFValue } from 'react-native-responsive-fontsize'
+
 
 
 const {Mapanimate, Phoneanimate, Sittinganimate} = icons
@@ -9,7 +11,7 @@ const {Mapanimate, Phoneanimate, Sittinganimate} = icons
 
 export default [
     {
-        icon: <LottieView source={Mapanimate} autoPlay loop style={{width: 320, height: 160, marginBottom: 44}}/>,
+        icon: <LottieView source={Mapanimate} autoPlay loop style={{width: RFValue(320), height: RFValue(160), marginBottom: RFValue(44)}}/>,
         header: "Withdraw your cash from businesses and people around you.",
         information: "Get you cash in hand easily from finding people and agents based on your location."
     },

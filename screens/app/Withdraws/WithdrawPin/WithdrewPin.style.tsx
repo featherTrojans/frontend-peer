@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, fontsize, FONTS } from "../../../../constants";
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -10,13 +10,13 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 25,
+    paddingHorizontal: RFValue(25),
   },
   backArrowConteiner: {
-    marginVertical: 20,
+    marginVertical: RFValue(20),
   },
   descriptionContainer: {
-    marginHorizontal: 25,
+    marginHorizontal: RFValue(25),
     justifyContent: "center",
     alignItems: "center",
   },
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     lineHeight: 25,
     color: COLORS.black,
-    marginBottom: 30,
+    marginBottom: RFValue(30),
   },
   descriptionSubText: {
     ...FONTS.bold,
@@ -47,29 +47,29 @@ export const styles = StyleSheet.create({
   pinContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 48,
-    marginBottom: 65,
+    marginTop: RFValue(48),
+    marginBottom: RFValue(65),
   },
   pinInputContainer: {
-    width: 252,
+    width: RFValue(252),
     flexDirection: "row",
     justifyContent: "space-between",
   },
   pinView: {
-    width: 50,
-    height: 60,
+    width: RFValue(50),
+    height: RFValue(60),
     borderColor: COLORS.blue7,
     borderWidth: 1,
-    borderRadius: 13,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    borderRadius: RFValue(13),
+    paddingHorizontal: RFValue(15),
+    paddingVertical: RFValue(10),
     justifyContent: "center",
     alignItems: "center",
   },
   amountcont: {
     borderBottomColor: COLORS.lineColor2,
     borderBottomWidth: 1,
-    paddingVertical: 15,
+    paddingVertical: RFValue(15),
     width: "70%",
     textAlign: "center",
     alignItems: "center",

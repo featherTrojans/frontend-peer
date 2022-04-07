@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { styles } from "./Notifications.styles";
 import { icons } from "../../../constants";
 import { Backheader } from "../../../components";
@@ -7,7 +7,10 @@ import { string } from "yup";
 import { Shadow } from "../../../constants/theme";
 import Customstatusbar from "../../shared/Customstatusbar";
 import axiosCustom from "../../../httpRequests/axiosCustom";
-const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow } = icons;
+import formatData from "../../../utils/fomatTrans";
+import moment from "moment";
+import { RFValue } from "react-native-responsive-fontsize";
+const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow, Arrowout } = icons;
 
 const DATA = [
   {
@@ -81,18 +84,31 @@ type notificationProps = {
 
 const messageicon = (type: string) => {
   switch (type) {
-    case "credit":
+    case "Wallet Credit":
       return (
-        <View style={styles.senderIcon}>
+        <View style={styles.creditIcon}>
           <Arrowin />
         </View>
       );
 
       break;
+
+      case "Wallet Debit":
+        return (
+          <View style={styles.debitIcon}>
+            <Arrowout />
+          </View>
+        );
+  
+        break;
     case "account":
       return <Useravatar />;
       break;
-    case "withdrawal":
+    case "Cash Withdrawal":
+      return <Logoavatar />;
+      break;
+    
+      case "Cash Deposit":
       return <Logoavatar />;
       break;
 
@@ -110,65 +126,46 @@ const Notification = ({
   messages: notificationProps[];
 }) => {
 
-  const [loading, setLoading] = useState(false)
-  const [notifications, setNotifications] = useState([])
-
-
-
-
-
-  const getAllNotifications = async () => {
-    try {
-      setLoading(true);
-      const response = await axiosCustom.get("/notifications");
-      console.log(response, "Here is the notifications")
-      setNotifications(response.data);
-    } catch (err) {
-      console.log(err.response);
-    } finally {
-      setLoading(true);
-      // setRefreshing(false);
-    }
-  };
-
-
-  useEffect(() => {
-    getAllNotifications()
-  })
   return (
-    <View style={[{ marginBottom: 28, ...Shadow, borderRadius: 15 }]}>
-      <View style={{ marginBottom: 24 }}>
+    <View style={[{ marginBottom: RFValue(28), ...Shadow, borderRadius: RFValue(15) }]}>
+      <View style={{ marginBottom: RFValue(24) }}>
         <Text style={styles.date}>{date}</Text>
       </View>
       {messages.map(
-        ({ type, title, time, message }: notificationProps, index: number) => {
+        ({ type, title, createdAt:time, description: message }: notificationProps, index: number) => {
           const isLastItem = index === messages.length;
-          const isUpgrade = type === "account"
+          const isUpgrade = type === "account";
+          const formattedTime = `${moment(time).format('h:mm')}${moment(time).format('a')}`
           return (
             <View
               style={[
                 styles.notificationContainer,
-                { marginBottom: !isLastItem ? 10 : 0 },
+                { marginBottom: !isLastItem ? RFValue(10) : 0 },
               ]}
               key={index}
             >
-              <View >
+              <View>
                 {/* Sender Icons */}
-                {messageicon(type)}
+                {messageicon(title)}
               </View>
               <View style={[styles.infoContainer, { flex: 1 }]}>
                 <View style={styles.titleandtime}>
                   {/* Top Section */}
                   <Text style={styles.title}>{title}</Text>
-                  <Text style={styles.time}>{time}</Text>
+                  <Text style={styles.time}>{formattedTime}</Text>
                 </View>
                 {/* Horizontal line */}
                 <View style={styles.horizontalLine} />
                 <View>
                   <Text style={styles.message}>{message}</Text>
-                  {isUpgrade && <View style={styles.upgradeNow}><Text style={styles.upgradeNowText}>Upgrade Now <Upgradenowarrow /></Text></View>}
+                  {isUpgrade && (
+                    <View style={styles.upgradeNow}>
+                      <Text style={styles.upgradeNowText}>
+                        Upgrade Now <Upgradenowarrow />
+                      </Text>
+                    </View>
+                  )}
                 </View>
-
               </View>
             </View>
           );
@@ -179,6 +176,28 @@ const Notification = ({
 };
 
 const Notifications = () => {
+
+  const [loading, setLoading] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+
+  const getAllNotifications = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosCustom.get("/notifications");
+      console.log(response, "Here is the notifications");
+      setNotifications(response?.data?.data?.notifications);
+    } catch (err) {
+      console.log(err.response);
+    } finally {
+      setLoading(true);
+      // setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    getAllNotifications();
+  }, []);
+
   return (
     <View style={styles.container}>
       {/* Header title */}
@@ -189,12 +208,12 @@ const Notifications = () => {
       <View style={styles.listContainer}>
         {/* Flatlist list of notifications */}
         <FlatList
-          data={DATA}
+          data={formatData(notifications)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <Notification date={item.date} messages={item.messages} />
+            <Notification date={item.time} messages={item.data} />
           )}
-          keyExtractor={(item) => item.date}
+          keyExtractor={(item) => item.time}
           // ListEmptyComponent={}
         />
       </View>

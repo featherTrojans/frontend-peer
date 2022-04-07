@@ -19,6 +19,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../Globalmodal/Globalmodal";
 import { AuthContext } from "../../../context/AuthContext";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const {Cancelicon} = icons
 const LockScreen = ({ modal, setModal }: any) => {
@@ -83,16 +84,16 @@ const LockScreen = ({ modal, setModal }: any) => {
         {loading && <Loader />}
        { error && <View  style={{
               backgroundColor:"#E00000",
-              paddingVertical: 18,
-              paddingHorizontal: 24,
-              borderRadius: 10,
+              paddingVertical: RFValue(18),
+              paddingHorizontal: RFValue(24),
+              borderRadius: RFValue(10),
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
               width: "90%",
               position:"absolute",
-              marginHorizontal:25,}}>
-                <Text style={{color: "#fff",fontSize: 14,lineHeight:20}}>Incorrect pin, try again</Text>    
+              marginHorizontal:  RFValue(25),}}>
+                <Text style={{color: "#fff", ...fontsize.small,lineHeight:20, ...FONTS.regular}}>Incorrect pin, try again</Text>    
                 <TouchableOpacity onPress={()=>setError(false)}>
                   <Cancelicon />
                 </TouchableOpacity>
@@ -105,12 +106,12 @@ const LockScreen = ({ modal, setModal }: any) => {
           showHideTransition="fade"
           hidden={false}
         />
-        <View style={{ marginTop: 44 }}>
+        <View style={{ marginTop: RFValue(44) }}>
           <Text style={styles.headerText}>Welcome Back,</Text>
-          <Text style={styles.headerText}>{authdata?.userDetails?.fullName?.split(" ")[0]}</Text> 
+          <Text style={styles.headerText}>{authdata?.userDetails?.fullName?.replace(/\s+/g, ' ').split(" ")[0]}</Text> 
         </View>
 
-        <View style={{ marginHorizontal: 70, marginTop: 42 }}>
+        <View style={{ marginHorizontal: RFValue(70), marginTop: RFValue(42) }}>
           <Text
             style={{
               textAlign: "center",
@@ -126,44 +127,45 @@ const LockScreen = ({ modal, setModal }: any) => {
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              marginTop: 58,
-              marginBottom: 105,
-              height: 16
+              marginTop: RFValue(58),
+              marginBottom: RFValue(105),
+              height: RFValue(16)
             }}
           >
             <View
               style={{
-                width: 16,
-                height: 16,
+                width: RFValue(16),
+                height: RFValue(16),
+                borderRadius: RFValue(16/2),
                 backgroundColor: COLORS.white,
                 opacity: pin[0]?1:0.2,
-                borderRadius: 16 / 2,
+                
               }}
             />
             <View
               style={{
-                width: 16,
-                height: 16,
-                borderRadius: 16/2,
+                width: RFValue(16),
+                height: RFValue(16),
+                borderRadius: RFValue(16/2),
                 backgroundColor: COLORS.white,
-                opacity:  pin[1]?1:0.2,
+                opacity: pin[0]?1:0.2,
               }}
             />
             <View
               style={{
-                width: 16,
-                height: 16,
-                borderRadius: 16/2,
+                width: RFValue(16),
+                height: RFValue(16),
+                borderRadius: RFValue(16/2),
                 backgroundColor: COLORS.white,
                 opacity:  pin[2]?1:0.2,
               }}
             />
             <View
               style={{
-                width: 16,
-                height: 16,
+                width: RFValue(16),
+                height: RFValue(16),
                 backgroundColor: COLORS.white,
-                borderRadius: 16 / 2,
+                borderRadius: RFValue(16/2),
                 opacity:  pin[3]?1:0.2,
               }}
             />

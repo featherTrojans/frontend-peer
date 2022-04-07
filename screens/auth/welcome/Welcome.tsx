@@ -15,6 +15,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Smile, Winkinganimate } = icons;
 
@@ -121,16 +122,19 @@ const Welcome = ({ navigation, route }) => {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          marginTop: 42,
+          // marginTop: RFValue(42),
+          flex: .4
         }}
       >
         <LottieView
           source={Winkinganimate}
           autoPlay
           loop
-          style={{ width: 194, height: 194 }}
+          style={{ width: RFValue(194), height: RFValue(194) }}
         />
       </View>
+
+
       {/* Welcome text */}
       <View style={styles.welcomeTextContainer}>
         {fromm === "setup" ? (
@@ -153,9 +157,13 @@ const Welcome = ({ navigation, route }) => {
         )}
       </View>
 
+
+
       {/* Progress Line */}
+      <View style={{flex: .4,  justifyContent: "center"}}>
       <View style={styles.lineBg}>
         <Animated.View style={[styles.line, animatedStyle]} />
+      </View>
       </View>
 
       {/* Get started text */}
@@ -166,6 +174,8 @@ const Welcome = ({ navigation, route }) => {
             : "Hey welcome back to feather, transact more today, earn more with cash deposits."}
         </Text>
       </View>
+
+
     </View>
   );
 };

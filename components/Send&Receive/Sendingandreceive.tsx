@@ -26,7 +26,7 @@ const showImage = (
   switch (title) {
     case "funding":
       return (
-        <View style={styles.typeContainer}>
+        <View style={[{backgroundColor: COLORS.blue7},styles.typeContainer]}>
           <Image
             style={styles.imageStyle}
             source={{

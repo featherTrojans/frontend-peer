@@ -39,7 +39,6 @@ import Customstatusbar from "../../shared/Customstatusbar";
 import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 import DoubleTapToClose from "../../shared/DoubleBack";
 import { connectFirestoreEmulator } from "firebase/firestore";
-import Intercom from "@intercom/intercom-react-native"
 
 const {
   Profilepics,
@@ -99,10 +98,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   }
   // }
 
-  // useEffect(() => {
-  //   Intercom.registerIdentifiedUser({email:authdata?.userDetails?.email,userId:authdata?.userDetails?.userId})
-  // }, [])
-  
   const tokenExtractor = (string: any) => {
     const firstIndex = string.indexOf("[");
     return string.slice(firstIndex + 1, -1);
@@ -119,16 +114,7 @@ const Home = ({ navigation }: { navigation: any }) => {
     }
   };
 
-  useEffect(() => {
-    // setMessageToken()
-    // console.log(messageToken, "This is my token messagedstss");
-    if (messageToken) {
-      setExtractedToken(tokenExtractor(messageToken));
-    }
-    // console.log(extractedToken, "Extracted token");
-
-    sendAnotherToken();
-  }, [extractedToken, messageToken]);
+ 
 
   const sendAnotherToken = async () => {
     try {
@@ -140,7 +126,17 @@ const Home = ({ navigation }: { navigation: any }) => {
       console.log(err.response.data);
     }
   };
+  useEffect(() => {
+   
+    if (messageToken) {
+      setExtractedToken(tokenExtractor(messageToken));
+    }
 
+    sendAnotherToken();
+  }, [extractedToken, messageToken]);
+
+
+  
   //setting up websocket
   // useEffect(() => {
   //   const ws = new WebSocket(

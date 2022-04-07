@@ -5,7 +5,7 @@ import { Backheader, Bottombtn } from "../../../../components";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons, images } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
-
+import { RFValue } from "react-native-responsive-fontsize";
 const { Cryinganimate } = icons;
 const { Lagosbadge, Oyobadge, Osunbadge, Ogunbadge } = images;
 
@@ -42,7 +42,7 @@ const Updatedeposit = ({ navigation, route }) => {
           <View style={styles.animationContainer}>
             <LottieView
               source={Cryinganimate}
-              style={{ width: 190, height: 190 }}
+              style={{ width: RFValue(190), height: RFValue(190) }}
               autoPlay
               loop
             />
@@ -52,7 +52,7 @@ const Updatedeposit = ({ navigation, route }) => {
             </Text>
           </View>
 
-          <View style={{ marginTop: 40, marginBottom: 40 }}>
+          <View style={{ marginTop: RFValue(40), marginBottom: RFValue(40) }}>
             <Text style={styles.supportedStates}>Supported States</Text>
             <View style={styles.supportedContainer}>
               {/* Icons */}

@@ -19,6 +19,7 @@ import showerror from "../../../../../utils/errorMessage";
 import amountFormatter from "../../../../../utils/formatMoney";
 import Customstatusbar from "../../../../shared/Customstatusbar";
 import { styles } from "../../../Transferfunds/TransferInput/TransferInput.styles";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const Airtimeamount = ({ navigation, route }) => {
   //   const { nextscreen } = route.params;
@@ -65,7 +66,7 @@ const Airtimeamount = ({ navigation, route }) => {
       <Backheader title="Enter Amount" />
       <Customstatusbar />
 
-      <View style={{ flex: 1, paddingHorizontal: 15 }}>
+      <View style={{ flex: 1, paddingHorizontal: RFValue(15) }}>
         <Viewbalance />
 
         <View style={{ flex: 1, justifyContent: "center" }}>

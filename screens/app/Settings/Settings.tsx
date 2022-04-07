@@ -54,6 +54,10 @@ const handleOpenWithLinking = () => {
   Linking.openURL('https://www.feather.africa');
 };
 
+const rateAppOnPlayStore = () => {
+  Linking.openURL('https://play.google.com/store/apps/details?id=feather.peer');
+};
+
 
 const shareAppLink = async () => {
   const result = await Share.share({
@@ -161,7 +165,7 @@ const Settings = ({navigation}) => {
               <Text style={{...fontsize.small, ...FONTS.bold, marginBottom: 35, color: COLORS.pink1}}>Sign Out</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={0.8} onPress={() => shareAppLink()}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => rateAppOnPlayStore()}>
             <Text style={{...fontsize.small, ...FONTS.medium}}>Rate App</Text>
             </TouchableOpacity>
           </View>

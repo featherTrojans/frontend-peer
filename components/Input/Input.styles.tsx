@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize} from "../../constants";
 
 
 export const styles = StyleSheet.create({
     inputContainer: {
-      height: 62,
+      height: RFValue(62),
       flexDirection: "row",
       alignItems: "center",
       borderWidth: 0.5,

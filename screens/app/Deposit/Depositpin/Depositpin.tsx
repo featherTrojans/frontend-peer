@@ -14,6 +14,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -97,7 +98,7 @@ const Depositpin = ({ route, navigation }) => {
             source={Successcheckanimate}
             autoPlay
             loop
-            style={{ width: 148, height: 148 }}
+            style={{ width: RFValue(148), height:  RFValue(148)}}
           />
           <Text
             style={styles.transactionSubHeader}

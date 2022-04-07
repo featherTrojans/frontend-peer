@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import amountFormatter from "../../utils/formatMoney";
 import { customNavigation } from "../../utils/customNavigation";
 import { assetsDB, bankLogo } from "../../assetdatas";
+import { RFValue } from "react-native-responsive-fontsize";
 
 
 const { Arrowin, Arrowout } = icons;
@@ -33,11 +34,11 @@ const History = ({ data }) => {
     switch (title) {
       case "Airtime Purchase":
         return (
-          <View style={[styles.arrowBg, {borderRadius: 30}]}>
+          <View style={[styles.arrowBg, {borderRadius: RFValue(30)}]}>
             <Image  source={{uri: assetsDB["bills"][networkType] }} resizeMode="cover"  style={{
               width: "100%",
               height: "100%",
-              borderRadius: 62 / 2,
+              borderRadius: RFValue(62 / 2),
             }}/>
           </View>
         )
@@ -50,7 +51,7 @@ const History = ({ data }) => {
               <Image  source={{uri: targetLogo[0]["image"] }} resizeMode="cover"  style={{
                 width: "100%",
                 height: "100%",
-                borderRadius: 62 / 2,
+                borderRadius: RFValue(62 / 2),
               }}/>
             </View>
           )

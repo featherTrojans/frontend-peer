@@ -66,6 +66,8 @@ const Pendingwithdraw = ({navigation, route}) => {
       <Customstatusbar />
         <Map />
         <View style={styles.previewContainer}>
+
+
           <View style={{ paddingHorizontal: 25 }}>
             {toggleShow ? (
               <View>
@@ -124,7 +126,11 @@ const Pendingwithdraw = ({navigation, route}) => {
             )}
 
             <View style={styles.bottomBtnContainer}>
-              <TouchableOpacity style={styles.bottomCancelBtn} activeOpacity={0.8} onPress={() => navigation.navigate("Cancelrequest",{reference: requestInfo.reference})}>
+              <TouchableOpacity 
+              style={styles.bottomCancelBtn} 
+              activeOpacity={0.8} 
+              onPress={() => navigation.navigate("Cancelrequest",{reference: requestInfo.reference})}
+              >
                 <Text style={styles.cancelText}>CANCEL REQUEST</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -136,6 +142,8 @@ const Pendingwithdraw = ({navigation, route}) => {
               </TouchableOpacity>
             </View>
           </View>
+
+          
         </View>
       
     </View>

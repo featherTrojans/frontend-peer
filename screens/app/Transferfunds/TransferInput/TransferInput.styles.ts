@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { COLORS, FONTS, fontsize } from "../../../../constants";
+import { RFValue } from "react-native-responsive-fontsize";
+import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,14 +8,14 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   numberBtn: {
-    width: 60,
-    height: 60,
+    width: RFValue(60),
+    height: RFValue(60),
     justifyContent: "center",
     alignItems: "center",
     // backgroundColor: COLORS.grey1,
-    borderRadius: 30,
-    marginHorizontal: 20,
-    marginVertical: 10,
+    borderRadius:  RFValue(30),
+    marginHorizontal: RFValue(20),
+    marginVertical: RFValue(10),
   },
   numberBtnText: {
     ...fontsize.bmedium,
@@ -22,7 +23,9 @@ export const styles = StyleSheet.create({
     color: COLORS.grey2,
   },
   numberBtnContainer: {
-    // flex: 1,
+
+    // I commented out this flex property befoe
+    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -30,8 +33,8 @@ export const styles = StyleSheet.create({
     // marginBottom: 30,
   },
   btnBg: {
-    paddingTop: 22,
-    paddingBottom: 24,
+    paddingTop: RFValue(22),
+    paddingBottom: RFValue(24),
     backgroundColor: COLORS.blue6,
     alignSelf: "stretch",
     justifyContent: "center",
@@ -48,7 +51,7 @@ export const styles = StyleSheet.create({
   amountcont: {
     borderBottomColor: COLORS.lineColor2,
     borderBottomWidth: 1,
-    paddingVertical: 15,
+    paddingVertical: RFValue(15),
     width: "70%",
     textAlign: "center",
     alignItems: "center",

@@ -6,6 +6,7 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
 } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
@@ -67,7 +68,7 @@ function TransferInput({ route, navigation }) {
       <Backheader title="Enter Amount" />
       <Customstatusbar />
 
-      <View style={{ flex: 1, paddingHorizontal: 15 }}>
+      <View style={{ flex: 1, paddingHorizontal: RFValue(15) }}>
       <Viewbalance />
 
         <View style={{ flex: 1, justifyContent: "center" }}>

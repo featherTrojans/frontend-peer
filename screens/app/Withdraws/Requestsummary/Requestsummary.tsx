@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, Text, View, StatusBar, ScrollView } from "react-native";
 import React, { useContext } from "react";
 import { styles } from "./Requestsummary.styles";
 import {
@@ -22,6 +22,7 @@ const Requestsummary = ({navigation, route}) => {
 
 
       <Backheader title="Request Summary" />
+      <ScrollView style={{flex: 1}}>
       <View
         style={{
           justifyContent: "center",
@@ -44,6 +45,7 @@ const Requestsummary = ({navigation, route}) => {
         3. Make sure you complete payment as soon as cash is received.
         </Text>
       </View>
+      </ScrollView>
 
 
         <Bottombtn title="I Understand, Proceed" onpress={() => navigation.push("Summary",{requestInfo})}/>
