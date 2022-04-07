@@ -172,7 +172,7 @@ const Deposit = ({ navigation }) => {
                   },
                 ]}
               >
-                Available Requests
+                Accepted Requests
               </Text>
             </TouchableOpacity>
           </View>
