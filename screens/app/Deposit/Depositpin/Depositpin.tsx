@@ -91,7 +91,7 @@ const Depositpin = ({ route, navigation }) => {
       {loading && <Loader />}
       <Globalmodal
         showState={successModal}
-        btnFunction={() => navigation.navigate("Transactionsrating",{userToRate:requestInfo.user.userUid, reference:requestInfo.reference})}
+        btnFunction={() => navigation.navigate("Transactionsrating",{userToRate:requestInfo.userUid, reference:requestInfo.reference})}
       >
         <View style={{ alignItems: "center" }}>
           <LottieView
