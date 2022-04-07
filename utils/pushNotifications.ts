@@ -20,20 +20,6 @@ export const registerForPushNotificationsAsync = async () => {
   }
   token = (await Notifications.getExpoPushTokenAsync()).data;
 
-  const tokenExtractor = (string: any) => {
-    const firstIndex = string.indexOf("[");
-    return string.slice(firstIndex + 1, -1);
-  };
-  try {
-    // 
-    const response = await axiosCustom.post("/auth/token/create", {
-      messageToken: `ExponentPushToken[MS80wYDkU3CXw4W0g6uRbX]`,
-    });
-    console.log(response, "This a new way for token setting");
-  } catch (err) {
-    console.log(err.response);
-  }
-
   console.log(token, "From the push screen");
 
   if (Platform.OS === "android") {
@@ -60,6 +46,23 @@ export const sendSchedulePushNotification = async (title, message) => {
     trigger: { seconds: 6 },
   });
 };
+
+export const sendTokenToDB = async(token:string)=>{
+  const tokenExtractor = (string: any) => {
+    const firstIndex = string.indexOf("[");
+    return string.slice(firstIndex + 1, -1);
+  };
+  try {
+    // 
+    console.log(tokenExtractor(token))
+    const response = await axiosCustom.post("/auth/token/create", {
+      messageToken: `ExponentPushToken[${tokenExtractor(token)}]`,
+    });
+    console.log(response, "This a new way for token setting");
+  } catch (err) {
+    console.log(err.response);
+  }
+}
 
 // export const  sendSchedulePushNotification = async (title) => {
 //   await Notifications.scheduleNotificationAsync({

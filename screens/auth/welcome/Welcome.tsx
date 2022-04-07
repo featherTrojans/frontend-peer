@@ -14,14 +14,14 @@ import { styles } from "./Welcome.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../shared/Customstatusbar";
-import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
+import { sendSchedulePushNotification, sendTokenToDB } from "../../../utils/pushNotifications";
 import { RFValue } from "react-native-responsive-fontsize";
 
 const { Smile, Winkinganimate } = icons;
 
 const Welcome = ({ navigation, route }) => {
   const { fromm, username, token } = route.params;
-  const { setToken, authdata } = useContext(AuthContext);
+  const { setToken, authdata , messageToken} = useContext(AuthContext);
   const { setAuthData } = useContext(AuthContext);
   const [percentage, setPercentage] = useState(0);
 
@@ -69,6 +69,7 @@ const Welcome = ({ navigation, route }) => {
   const getDashboardData = async () => {
     try {
       const response = await axiosCustom.get("/dashboard");
+      await sendTokenToDB(messageToken)
       console.log(response);
       setAuthData(response?.data?.data);
       // setTokenOnComplete()
