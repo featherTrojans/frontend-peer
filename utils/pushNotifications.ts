@@ -20,7 +20,7 @@ export const registerForPushNotificationsAsync = async () => {
   }
   token = (await Notifications.getExpoPushTokenAsync()).data;
 
-  console.log(token, "From the push screen");
+
 
   if (Platform.OS === "android") {
     Notifications.setNotificationChannelAsync("default", {
@@ -48,17 +48,18 @@ export const sendSchedulePushNotification = async (title, message) => {
 };
 
 export const sendTokenToDB = async(token:string)=>{
+  
   const tokenExtractor = (string: any) => {
     const firstIndex = string.indexOf("[");
     return string.slice(firstIndex + 1, -1);
   };
   try {
-    // 
-    console.log(tokenExtractor(token), "here is the ex token")
+    
     const response = await axiosCustom.post("/auth/token/create", {
       messageToken: `ExponentPushToken[${tokenExtractor(token)}]`,
     });
-    // console.log(response, "This a new way for token setting");
+    console.log(response, "token response inside push notification");
+    return response
   } catch (err) {
     console.log(err.response);
   }

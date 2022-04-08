@@ -1,6 +1,6 @@
 import {useRef, useEffect, useState} from "react";
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { StatusBar } from 'expo-status-bar';
+// import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications'
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -11,7 +11,7 @@ import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import {icons} from "./constants"
 import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import axiosCustom from "./httpRequests/axiosCustom";
+
 
 const { Cancelicon } = icons;
 
