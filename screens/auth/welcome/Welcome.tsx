@@ -91,7 +91,7 @@ const Welcome = ({ navigation, route }) => {
     try {
       const response = await axiosCustom.get("/dashboard");
       await sendTokenToDB(messageToken)
-      // console.log(response);
+      
       setAuthData(response?.data?.data);
       // setTokenOnComplete()
       progressWidth.value = withTiming(

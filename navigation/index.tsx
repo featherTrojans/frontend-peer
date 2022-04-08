@@ -684,10 +684,10 @@ export default function MainNavigation({ initialBoarded = false }) {
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
   const [onboarded, setOnboarded] = useState(false);
-
+  
   useEffect(() => {
     setMessageToken(expoPushToken);
-  }, [token]);
+  }, [expoPushToken]);
 
   useEffect(() => {
     axiosCustom.interceptors.response.use((response) => {
@@ -699,7 +699,7 @@ export default function MainNavigation({ initialBoarded = false }) {
   }, []);
 
   useEffect(() => {
-    console.log(token,"from here")
+    
     const subscription: any = AppState.addEventListener(
       "change",
       (nextAppState) => {
