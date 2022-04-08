@@ -117,10 +117,10 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
                       duration={"12 mins"}
                     />
   
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
                         <Ratingstar />
                       <Text style={styles.numberOfBadge}>3.5</Text>
-                    </View>
+                    </View> */}
                   </View>
   
                   <View style={{ marginTop: 20 }}>
