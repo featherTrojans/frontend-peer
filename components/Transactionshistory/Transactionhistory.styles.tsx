@@ -37,9 +37,9 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   arrowBg: {
-    width: RFValue(39),
-    height: RFValue(39),
-    borderRadius: RFValue(39),
+    width: 39,
+    height: 39,
+    borderRadius: 39,
     justifyContent: "center",
     alignItems: "center",
     marginRight: RFValue(14),

@@ -58,7 +58,7 @@ import Logoavatar from "../assets/icons/Logoavatar";
 import Upgradenowarrow from "../assets/icons/Upgradenowarrow";
 import Withdrawicon from "../assets/icons/Withdrawicon";
 import Depositicon from "../assets/icons/Depositicon";
-
+import Bonusicon from "../assets/icons/Bonusicon";
 import SadEmoji from "../assets/icons/SadEmoji";
 import TransferIcon from "../assets/icons/TransferIcon";
 import Location from "../assets/icons/Location";
@@ -115,7 +115,7 @@ import Feathertextlogo from "../assets/icons/Feathertextlogo";
 import Ratingsstar from "../assets/icons/Ratingsstar";
 import Userdefaultsmaller from "../assets/icons/Userdefaultsmaller";
 import Sendingandreceivearrows from "../assets/icons/Sendingandreceivearrows";
-
+import Bonusiconlarge from "../assets/icons/Bonusiconlarge";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -213,6 +213,7 @@ export default {
   Renegotiateicon,
   Makerequestarrowright,
   Orangecheckmark,
+  Bonusiconlarge,
 
   Cancelicony,
   Smsicony,
@@ -256,6 +257,7 @@ export default {
   Userdefaultmedium,
   Feathertextlogo,
   Markedicon,
+  Bonusicon,
 
   //Animated icons
 

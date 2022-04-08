@@ -167,8 +167,8 @@ const Transactiondetails = ({ navigation, route }) => {
       case "Wallet Credit":
         if (sender === "Bonus") {
           return `
-        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-          JU
+        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
+        <img src="${assetsDB["others"]["bonus"]}" style="width: 50px; height: 50px" />
         </div>
         `;
         } else {

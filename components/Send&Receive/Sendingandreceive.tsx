@@ -10,6 +10,7 @@ const {
   Receivingarrow,
   Receiverimage,
   Userdefaultmedium,
+  Bonusiconlarge
 } = icons;
 const { Trustedbadgepng } = images;
 
@@ -50,10 +51,19 @@ const showImage = (
         break;
     case "Wallet Debit":
       return <InitialsBg name={receiverName} sideLength={62} />;
-
       break;
     case "Wallet Credit":
-      return <InitialsBg name={senderName} sideLength={62} />;
+      if(senderName === "Bonus"){
+        return (
+          <Bonusiconlarge />
+        );
+      }
+      else{
+        return(
+          <InitialsBg name={senderName} sideLength={62} />
+        )
+      }
+      break;
 
     case "GTB":
     case "FIRST":

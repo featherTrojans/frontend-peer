@@ -43,6 +43,7 @@ export const assetsDB = {
       paystack:
         "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/paystack/paystack.png",
     },
+
   
     bills: {
       MTN: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/mtn/mtn.png",
@@ -52,6 +53,9 @@ export const assetsDB = {
         "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/9mobile/9mobile.png",
       GLO: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/glo/glo.png",
     },
+    others:{
+      bonus: "https://res.cloudinary.com/gyroscope/image/upload/v1649441365/coinnery_llu8ny.svg"
+    }
   };
 
 
