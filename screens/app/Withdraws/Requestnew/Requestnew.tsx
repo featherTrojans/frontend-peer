@@ -52,7 +52,7 @@ function Requestnew({ navigation }) {
         return showerror(toast, null,"insufficient amount")
       }
       if(200 > Number(amount)){
-        return showerror(toast, null,"cash request is can't be lower than 200N")
+        return showerror(toast, null,"cash request is can't be lower than N200")
       }
       navigation.navigate("Availablelisting",{amount})
   }

@@ -68,12 +68,16 @@ const Depositpin = ({ route, navigation }) => {
   
     try {
       // check if document exist
+      console.log(1)
       await checkIfDocExist()
+      console.log(2)
       await axiosCustom.post("/request/approve", {
         reference: requestInfo.reference,
         user_pin: joinpin,
       });
+      console.log(3)
       await handlePrepareToTestUpdate("approved");
+      console.log(4)
       //show success message
       setSuccessModal(true);
     } catch (err) {
@@ -83,8 +87,9 @@ const Depositpin = ({ route, navigation }) => {
       if(err?.response?.data?.message === "Incorrect Pin"){
         return
       }
-
+      console.log(5)
       await handlePrepareToTestUpdate("rejected");
+      console.log(6)
     } finally {
       setLoading(false);
     }

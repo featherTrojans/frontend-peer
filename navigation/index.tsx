@@ -699,15 +699,19 @@ export default function MainNavigation({ initialBoarded = false }) {
   }, []);
 
   useEffect(() => {
+    console.log(token,"from here")
     const subscription: any = AppState.addEventListener(
       "change",
       (nextAppState) => {
+        // console.log(token,"from the whattt")
         if (
           appState.current.match(/inactive|background/) &&
           nextAppState === "active"
         ) {
-          if (!token) {
-            return;
+          
+          if(!token){
+            
+            return 
           }
 
           if (Date.now() - timer.current > 900000) {
@@ -731,7 +735,7 @@ export default function MainNavigation({ initialBoarded = false }) {
     return () => {
       // subscription.remove();
     };
-  }, []);
+  }, [token]);
 
   return (
     <NavigationContainer ref={navigationRef}>
