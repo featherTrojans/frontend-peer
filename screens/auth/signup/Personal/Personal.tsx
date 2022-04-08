@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -21,6 +21,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
@@ -31,13 +32,86 @@ const validationSchema = Yup.object().shape({
   firstName: Yup.string().label("First Name").required(),
   lastName: Yup.string().label("Last Name").required(),
   email: Yup.string().label("Email").email().required(),
+  referredBy: Yup.string().label("Email").email().required(),
   phoneNumber: Yup.string()
     .label("Phone Number")
     .matches(phoneRegExp, "This is not a valid phone number"),
 });
 
+
 const Personal = ({ navigation }) => {
   const { setAuthData } = useContext(AuthContext);
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState(false)
+  const [items, setItems] = useState([
+   
+    {
+        label : 'Kiki - mide_kiki',
+        value : 'mide_kiki'
+    },
+    {
+      label : 'Bobola - akin_boboola',
+        value : 'akin_boboola'
+    },
+    {
+      label : 'Ope - opemidimeji_xo',
+        value : 'opemidimeji_xo'
+    },
+    {
+      label : 'Sharon - ronn_aa',
+        value : 'ronn_aa'
+    },
+    {
+      label : 'Anike - adedoyinanike',
+        value : 'adedoyinanike'
+    },
+    {
+      label : 'Faith  - microbialawyer',
+        value : 'microbialawyer'
+    },
+    {
+      label : 'Eniola - ennyorlahalesh',
+        value : 'ennyorlahalesh'
+    },
+    {
+      label : 'Dami - AyamDamiee',
+        value : 'AyamDamiee'
+    },
+    {
+      label : 'Ayomide - mide_yy',
+        value : 'mide_yy'
+    },
+    {
+      label : 'Naomi - nao_mide',
+        value : 'nao_mide'
+    },
+    {
+      label : 'Ayobami - vell_vet',
+        value : 'vell_vet'
+    },
+    {
+      label : 'PDan - DanOlubunmi',
+        value : 'DanOlubunmi'
+    },
+    {
+      label : 'Titi - Titilope__xo',
+        value : 'Titilope__xo'
+    },
+    {
+      label : 'Ruth - duchess_elina',
+        value : 'duchess_elina'
+    },
+    {
+      label : 'Tomisin - Jesu_tomiisin',
+        value : 'Jesu_tomiisin'
+    },
+    {
+      label : 'Gomina - thedavidadesina',
+        value : 'thedavidadesina'
+    },
+
+]);
+
   const toast = useToast();
 
   return (
@@ -147,12 +221,33 @@ const Personal = ({ navigation }) => {
                   icon={<Phoneicon />}
                 />
 
+
+
                 <Input
                   placeholder="Referral Code (Optional)"
                   name="referredBy"
                   formikProps={formikProps}
                   icon={<Phoneicon />}
                 />
+
+<DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            placeholder="Referral Code (Optional)"
+            placeholderStyle={{}}
+            textStyle={{}}
+            style={[{ zIndex: 1, flex: 1 }]}
+            dropDownContainerStyle={{flex: 1}}
+          />
+
+
+
+
+
                 {/* Proceed Btn */}
                 <View style={styles.bottomContainer}>
                   <TouchableOpacity

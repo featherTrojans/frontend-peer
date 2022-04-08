@@ -1,5 +1,6 @@
 import { useToast } from "react-native-toast-notifications";
 function showerror(toast:any,err:any,customeerror?:string){
+  console.log(err)
   console.log(err?.response)
   let message:string = err?.response?.data?.message
     if(message && typeof message ==="string"){

@@ -6,6 +6,10 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
+import BottomSheet, {
+  BottomSheetScrollView,
+  BottomSheetFlatList,
+} from "@gorhom/bottom-sheet";
 import React, {useState, useContext} from "react";
 import { styles } from "./Withdrawpreview.styles";
 import { COLORS, FONTS, fontsize, images, icons } from "../../../../constants";
@@ -32,6 +36,9 @@ const Withdrawpreview = ({navigation, route}: any) => {
       <Map />
       <Customstatusbar />
       
+      <BottomSheet
+      snapPoints={[ "30%", "65%",]}
+      >
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
             {/* Confirm meetup text will show after clikcing continue*/}
@@ -72,16 +79,20 @@ const Withdrawpreview = ({navigation, route}: any) => {
 
             <View style={styles.meetupContainer}>
               <Text style={styles.meetUpText}>Meetup Point</Text>
-              <View style={styles.meetupLocationContainer}>
+
+              <TouchableOpacity style={styles.meetupLocationContainer} activeOpacity={0.8} onPress={() => navigation.navigate("Editmeetup") }>
+
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Meetupdot />
                   <Text style={styles.locationText}>{coords?.locationText}</Text>
                 </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate("Editmeetup") }>
+                <TouchableOpacity onPress={() => navigation.navigate("Editmeetup")} activeOpacity={0.8}>
                   <Editicon />
                 </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
+
+
             </View>
           </View>
           <Bottombtn
@@ -89,6 +100,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
             onpress={()=>navigation.navigate("WithdrawPin",{userInfo,amount})}
           />
         </View>
+        </BottomSheet>
     </View>
   );
 };

@@ -51,6 +51,9 @@ function Requestnew({ navigation }) {
       if(authdata?.walletBal < amount){
         return showerror(toast, null,"insufficient amount")
       }
+      if(200 > Number(amount)){
+        return showerror(toast, null,"cash request is can't be lower than 200N")
+      }
       navigation.navigate("Availablelisting",{amount})
   }
 

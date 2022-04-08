@@ -33,18 +33,17 @@ import moment from "moment";
 
 const { Backarrow, Check, WrongIcon } = icons;
 
-
-
 const setAuthorizationToken = (token: string) => {
   if (token) {
     axiosCustom.defaults.headers.common["token"] = token;
   }
 };
 
-
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().label("First Name").required(),
   lastName: Yup.string().label("Last Name").required(),
+  email: Yup.string().label("Last Name").required(),
+  phone: Yup.string().label("email").required()
 });
 
 const validationSchemaTwo = Yup.object().shape({
@@ -66,11 +65,11 @@ const EditinputSpecial = ({ label, value, name, ...props }: EditinputProps) => {
     <View style={{ flex: 1 }}>
       {/* Label */}
       <Text style={styles.labelText}>{label}</Text>
-      <TextInput style={{paddingVertical: 12}} value={value} {...props} />
+      <TextInput style={{ paddingVertical: 12 }} value={value} {...props} />
     </View>
   );
 };
-const Editinput = ({ label, value, name, formikprops }: EditinputProps) => {
+const Editinput = ({ label, value, name, formikprops, }: EditinputProps,  {...rest}) => {
   if (formikprops) {
     const { values, handleChange, handleBlur } = formikprops;
     return (
@@ -83,6 +82,8 @@ const Editinput = ({ label, value, name, formikprops }: EditinputProps) => {
           value={values[name]}
           style={styles.textInput}
           placeholder={value}
+          placeholderTextColor="red"
+          {...rest}
         />
       </View>
     );
@@ -148,9 +149,9 @@ const Basicsettings = () => {
                 ...authdata,
                 userDetails: userdetails,
               });
-              
+
               // set new token
-              setAuthorizationToken(response?.data?.data?.token)
+              setAuthorizationToken(response?.data?.data?.token);
               // send success toast message
 
               navigation.navigate("Root");
@@ -169,44 +170,51 @@ const Basicsettings = () => {
                   <View style={styles.avatarBg}>
                     <Defaultuseravatar />
                   </View>
-                  <Text style={styles.avatarText}>
+                  {/* <Text style={styles.avatarText}>
                     Tap to change display picture
-                  </Text>
+                  </Text> */}
                 </View>
                 <View style={styles.editInputContainer}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      borderColor: COLORS.grey1,
+                      borderBottomWidth: 1,
+                      marginBottom: 30,
+                    }}
+                  >
+                    <EditinputSpecial
+                      label="Username"
+                      name="username"
+                      value={usernamename}
+                      onChangeText={(text) => handleUsernameChange(text)}
+                    />
 
-                  <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderColor: COLORS.grey1, borderBottomWidth: 1, marginBottom: 30}}>
-
-                  <EditinputSpecial
-                    label="Username"
-                    name="username"
-                    value={usernamename}
-                    onChangeText={(text) => handleUsernameChange(text)}
-                  />
-
-
-                  <View style={styles.namecont}>
-                    {loadbounce ? (
-                      <ActivityIndicator size={15} color={COLORS.blue6} />
-                    ) : userinfo.fullName &&
-                      usernamename?.toLowerCase() !==
-                        authdata?.userDetails?.username?.toLowerCase() ? (
-                      <>
-                        <WrongIcon />
-                        <Text style={styles.name}>{usernamename} is taken</Text>
-                      </>
-                    ) : null}
-                    {(error ||
-                      usernamename.toLowerCase() ===
-                        authdata?.userDetails?.username.toLowerCase()) && (
-                      <>
-                        <Check />
-                        <Text style={styles.name}>{usernamename}</Text>
-                      </>
-                    )}
+                    <View style={styles.namecont}>
+                      {loadbounce ? (
+                        <ActivityIndicator size={15} color={COLORS.blue6} />
+                      ) : userinfo.fullName &&
+                        usernamename?.toLowerCase() !==
+                          authdata?.userDetails?.username?.toLowerCase() ? (
+                        <>
+                          <WrongIcon />
+                          <Text style={styles.name}>
+                            {usernamename} is taken
+                          </Text>
+                        </>
+                      ) : null}
+                      {(error ||
+                        usernamename.toLowerCase() ===
+                          authdata?.userDetails?.username.toLowerCase()) && (
+                        <>
+                          <Check />
+                          <Text style={styles.name}>{usernamename}</Text>
+                        </>
+                      )}
+                    </View>
                   </View>
-                  </View>
-
 
                   <Editinput
                     label="Firstname"
@@ -216,6 +224,18 @@ const Basicsettings = () => {
                   <Editinput
                     label="Lastname"
                     name="lastName"
+                    formikprops={formikProps}
+                  />
+
+                  <Editinput
+                    label="Email"
+                    name="email"
+                    formikprops={formikProps}
+                  />
+
+                  <Editinput
+                    label="Phone"
+                    name="phone"
                     formikprops={formikProps}
                   />
                 </View>
@@ -351,14 +371,18 @@ const Personalsettings = () => {
                       onPress={showDatepicker}
                     >
                       <Text
-                      
-                        style={[styles.textInput,{
-                          color: COLORS.black,
-                          ...fontsize.small,
-                          ...FONTS.regular,
-                        }]}
+                        style={[
+                          styles.textInput,
+                          {
+                            color: COLORS.black,
+                            ...fontsize.small,
+                            ...FONTS.regular,
+                          },
+                        ]}
                       >
-                        {date ? moment(date).format('YYYY/MM/DD') : " Click to add DOB" }
+                        {date
+                          ? moment(date).format("YYYY/MM/DD")
+                          : " Click to add DOB"}
                       </Text>
                     </TouchableOpacity>
                     {show && (
@@ -463,25 +487,25 @@ const Editprofile = ({}) => {
     return index === activeIndex ? "#003AD6" : "#000000";
   };
 
-  useEffect(() => {
-    ref.current.scrollTo({
-      x: SIZES.width * index,
-      y: 0,
-      animated: true,
-    });
-  }, [index]);
+  // useEffect(() => {
+  //   ref.current.scrollTo({
+  //     x: SIZES.width * index,
+  //     y: 0,
+  //     animated: true,
+  //   });
+  // }, [index]);
 
-  useEffect(() => {
-    console.log(scrolling);
-  }, [scrolling]);
+  // useEffect(() => {
+  //   console.log(scrolling);
+  // }, [scrolling]);
 
-  const animateToIndex = (indexPoint: number) => {
-    setIndex(indexPoint);
-    Animated.spring(horizontalOffset, {
-      toValue: singleWidth() * indexPoint,
-      useNativeDriver: true,
-    }).start();
-  };
+  // const animateToIndex = (indexPoint: number) => {
+  //   setIndex(indexPoint);
+  //   Animated.spring(horizontalOffset, {
+  //     toValue: singleWidth() * indexPoint,
+  //     useNativeDriver: true,
+  //   }).start();
+  // };
 
   const navigation = useNavigation();
 
@@ -515,7 +539,7 @@ const Editprofile = ({}) => {
         <View />
       </View>
 
-      <View style={{ position: "relative" }}>
+      {/* <View style={{ position: "relative" }}>
         <View style={styles.subHeaderContainer}>
           <TouchableOpacity
             style={{
@@ -562,30 +586,21 @@ const Editprofile = ({}) => {
             transform: [{ translateX: horizontalOffset }, { scaleX: 0.8 }],
           }}
         />
-      </View>
+      </View> */}
 
-      <Animated.ScrollView
+      {/* <Animated.ScrollView
         ref={ref}
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled
         scrollEventThrottle={16}
         snapToAlignment="center"
-        // onScroll={Animated.event(
-        //   [{
-        //     nativeEvent: {
-        //       contentOffset: {
-        //         x: horizontalOffset,
-        //       },
-        //     },
-        //   }],
-        //   { useNativeDriver: true },
-        // )}
-      >
-        <Basicsettings />
-        <Personalsettings />
-        <Documentsettings />
-      </Animated.ScrollView>
+        
+      > */}
+      <Basicsettings />
+      {/* <Personalsettings /> */}
+      {/* <Documentsettings /> */}
+      {/* </Animated.ScrollView> */}
     </View>
   );
 };

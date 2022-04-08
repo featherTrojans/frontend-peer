@@ -204,26 +204,16 @@ const Airtimedetails = ({ navigation, route }) => {
                 value={phone}
                 onChangeText={(text: string) => setPhone(text)}
                 inputSymbol="#"
-                placeholder="08012345678"
+                placeholder="Input phone number"
                 // rightIcon={<Addressbook />}
                 keyboardType={"numeric"}
               />
             </>
           ) : (
             <>
-              <Paybillsinput inputSymbol="#" placeholder="Globacom" />
-              <Paybillsinput
-                inputSymbol="#"
-                placeholder="3GB (2 Days) - N980.00"
-                rightIcon={<Inputdropdown />}
-              />
-              <Paybillsinput
-                inputSymbol="#"
-                // value={phone}
-                placeholder="08000000000"
-                // rightIcon={<Addressbook />}
-                keyboardType={"numeric"}
-              />
+              <View style={{flex: 1,  justifyContent: "center", alignItems: "center"}}>
+                <Text>Coming Soon</Text>
+              </View>
             </>
           )}
         </View>

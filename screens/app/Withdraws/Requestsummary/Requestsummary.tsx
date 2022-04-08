@@ -10,6 +10,7 @@ import {
 import { FONTS, fontsize } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
+import amountFormatter from "../../../../utils/formatMoney";
 
 
 const Requestsummary = ({navigation, route}) => {
@@ -31,7 +32,7 @@ const Requestsummary = ({navigation, route}) => {
         }}
       >
         <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.agent || requestInfo?.user?.agent || "A Z"} title="Wallet Credit" />
-        <Priceandcharges amount={requestInfo?.amount} charges={requestInfo?.charges} />
+        <Priceandcharges amount={requestInfo?.amount} charges={+requestInfo?.charges + +requestInfo?.negotiatedFee } />
       </View>
 
       <View style={styles.saferulesContainer}>

@@ -31,13 +31,13 @@ const Pendingwithdraw = ({navigation, route}) => {
   const {requestInfo} = route.params;
   const [toggleShow, setToggleShow] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
-
+  
   useEffect(()=>{
     // update both map, meeting point and  Agent point
     getLocation()
   }, []);
-  console.log(requestInfo)
-  // console.log(requestInfo)
+  
+  
   const getLocation = async () => {
     try{
       setLocationLoading(true)
@@ -88,7 +88,7 @@ const Pendingwithdraw = ({navigation, route}) => {
                   <Text style={styles.amountPrice}>
                     NGN {requestInfo?.amount}{" "}
                     <Text style={styles.amountBaseCharge}>
-                      + {requestInfo?.charges} (negotiation charge)
+                      + {+requestInfo?.charges + +requestInfo?.negotiatedFee } (negotiation charge)
                     </Text>{" "}
                   </Text>
                   <Text style={styles.baseChargeNegotiate}>

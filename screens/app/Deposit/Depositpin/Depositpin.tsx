@@ -51,10 +51,10 @@ const Depositpin = ({ route, navigation }) => {
       if(document.data().status === "pending"){
         return true
       }else{
-         throw {response:{data:{message:"Please swipe to confirm payment on withdrawal device"}}}   
+         throw {response:{data:{message:`Pls swipe 'Make Payment' on @${requestInfo?.user?.username}'s device to continue`}}}   
       }
     }else{
-       throw {response:{data:{message:"Please swipe to confirm payment on withdrawal device"}}}
+       throw {response:{data:{message:`Pls swipe 'Make Payment' on @${requestInfo?.user?.username}'s device to continue`}}}
     }
   }
 
@@ -79,6 +79,11 @@ const Depositpin = ({ route, navigation }) => {
     } catch (err) {
       
       showerror(toast, err);
+      // check the error, don't reject for pin error
+      if(err?.response?.data?.message === "Incorrect Pin"){
+        return
+      }
+
       await handlePrepareToTestUpdate("rejected");
     } finally {
       setLoading(false);
@@ -91,7 +96,15 @@ const Depositpin = ({ route, navigation }) => {
       {loading && <Loader />}
       <Globalmodal
         showState={successModal}
-        btnFunction={() => navigation.navigate("Transactionsrating",{userToRate:requestInfo.userUid, reference:requestInfo.reference})}
+        btnFunction={() => {
+          setSuccessModal(false)
+          navigation.navigate("Transactionsrating",{
+          userToRate:requestInfo.userUid, 
+          reference:requestInfo.reference,
+          username: requestInfo?.user?.username,
+          fullname: requestInfo?.user?.fullName
+        })}
+      }
       >
         <View style={{ alignItems: "center" }}>
           <LottieView

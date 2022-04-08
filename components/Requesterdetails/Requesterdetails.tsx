@@ -7,7 +7,7 @@ import InitialsBg from "../InitialsBg/InitialsBg";
 type RequesterdetailsProps = {
   image?: string;
   name: string;
-  distance: string;
+  distance?: string;
   duration: string;
 };
 

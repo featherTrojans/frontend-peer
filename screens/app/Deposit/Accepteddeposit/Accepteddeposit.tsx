@@ -142,7 +142,7 @@ const Accepteddeposit = ({ navigation, route }) => {
                 <Text style={styles.amountPrice}>
                   NGN {requestInfo.amount}{" "}
                   <Text style={styles.depositAmountBaseCharge}>
-                    + {requestInfo.charges} (negotiation charge)
+                    + {+requestInfo?.charges + +requestInfo?.negotiatedFee}  (negotiation charge)
                   </Text>{" "}
                 </Text>
                 <Text style={styles.baseChargeNegotiate}>

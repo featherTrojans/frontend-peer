@@ -34,8 +34,8 @@ const {
   Ratingsuccessanimate,
 } = icons;
 
-const Transactionsrating = ({navigation, route}) => {
-  const {userToRate,reference} = route.params
+const Transactionsrating = ({navigation, route}:any) => {
+  const {userToRate,reference, username,fullname} = route.params
   const toast = useToast()
   const [rating, setRating] = useState({
     rating: 0,
@@ -97,11 +97,13 @@ const Transactionsrating = ({navigation, route}) => {
       userToRate:userToRate,
       reference:reference
     } 
+    console.log(data)
     setLoading(true)
     try{
       await axiosCustom.post("/rating",data)
       setShowModal(true)
     }catch(err){
+      
       showerror(toast,err)
     }finally{
       setLoading(false)
@@ -189,7 +191,7 @@ const Transactionsrating = ({navigation, route}) => {
               </View>
 
               {/* To replace this name with name of the receiver or sender */}
-              <InitialsBg sideLength={36} name="Ok Mc" />
+              <InitialsBg sideLength={36} name={fullname} />
             </View>
           </View>
 
@@ -205,7 +207,7 @@ const Transactionsrating = ({navigation, route}) => {
                 }}
               >
                 Please rate your transaction with{" "}
-                <Text style={{ ...FONTS.bold }}>@suzzyb</Text>, rating attracts
+                <Text style={{ ...FONTS.bold }}>@{username}</Text>, rating attracts
                 a gift oh 😎
               </Text>
             </View>

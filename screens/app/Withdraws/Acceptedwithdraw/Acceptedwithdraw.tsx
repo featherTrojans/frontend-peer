@@ -71,6 +71,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   const [locationLoading, setLocationLoading] = useState(false);
   const [toggledSwipe, setToggledSWipe] = useState(false)
 
+  console.log(requestInfo)
   useEffect(() => {
     // update both map, meeting point and  Agent point
     // console.log(requestInfo, "Here is the accepted withdrawal response");
@@ -242,7 +243,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                 <Text style={styles.amountPrice}>
                   NGN {requestInfo.amount}{" "}
                   <Text style={styles.amountBaseCharge}>
-                    + {requestInfo.charges} (negotiation charge)
+                    + {+requestInfo?.charges + +requestInfo?.negotiatedFee } (negotiation charge)
                   </Text>{" "}
                 </Text>
                 <Text style={styles.baseChargeNegotiate}>
