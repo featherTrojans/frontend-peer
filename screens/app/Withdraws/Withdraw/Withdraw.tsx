@@ -100,7 +100,7 @@ const Requesteeprofile = ({ list, onpress }: any) => {
   );
 };
 
-const Withdraw = ({ navigation, route }) => {
+const Withdraw = ({ navigation }) => {
   const [active, setActive] = useState("pending");
   const [loading, setLoading] = useState(false);
   const [pendingRequests, setPendingRequests] = useState([]);
