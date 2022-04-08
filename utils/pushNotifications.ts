@@ -54,11 +54,11 @@ export const sendTokenToDB = async(token:string)=>{
   };
   try {
     // 
-    console.log(tokenExtractor(token))
+    console.log(tokenExtractor(token), "here is the ex token")
     const response = await axiosCustom.post("/auth/token/create", {
       messageToken: `ExponentPushToken[${tokenExtractor(token)}]`,
     });
-    console.log(response, "This a new way for token setting");
+    // console.log(response, "This a new way for token setting");
   } catch (err) {
     console.log(err.response);
   }

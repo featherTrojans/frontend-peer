@@ -37,6 +37,8 @@ export const styles = StyleSheet.create({
   profileUsername: {
     ...fontsize.bsmall,
     ...FONTS.regular,
+    color: COLORS.grey8,
+    textTransform: "lowercase" ,
   },
   profileExtraContainer: {
     flexDirection: "row",

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext, useState } from "react";
+import React, { useRef, useEffect, useContext, useState, useCallback } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, icons, SIZES, fontsize } from "../../../constants";
@@ -103,6 +103,15 @@ const Welcome = ({ navigation, route }) => {
       );
     }
   }, [authdata])
+
+  // useCallback(() => {
+  //   if(fromm !== "setup" && authdata?.userDetails?.fullName){
+  //     sendSchedulePushNotification(
+  //       "Welcome Back Padi! 🎉",
+  //       "Do more today. Enjoy financial flexibility"
+  //     );
+  //   }
+  // },[authdata])
 
   // React.useEffect(() => {
   //     shared.value = someAnimation(callback)

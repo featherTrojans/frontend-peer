@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
+import * as Haptics from 'expo-haptics';
 import { COLORS, images, icons, fontsize, FONTS, SIZES } from "../../../../constants";
 import {
   Bottombtn,
@@ -88,6 +89,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   useEffect(() => {
     if(toggledSwipe){
       navigation.push("Requestsummary", { requestInfo })
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
     }
     return () => {
       setToggledSWipe(false)

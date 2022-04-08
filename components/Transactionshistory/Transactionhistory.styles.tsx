@@ -54,6 +54,7 @@ export const styles = StyleSheet.create({
     ...fontsize.smaller,
     ...FONTS.regular,
     color: COLORS.halfBlack,
+    alignItems: "center"
   },
   amount: {
     ...fontsize.small,

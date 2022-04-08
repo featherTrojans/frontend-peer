@@ -245,10 +245,10 @@ const Summary = ({ navigation, route }) => {
             style={{
               marginBottom: RFValue(30),
               ...fontsize.bsmall,
-              ...FONTS.regular,
+              ...FONTS.medium,
             }}
           >
-            Transaction Succesful
+            Transaction Successful
           </Text>
           <Text
             style={{

@@ -129,7 +129,7 @@ const LockScreen = ({ modal, setModal }: any) => {
               flexDirection: "row",
               justifyContent: "space-between",
               marginTop: RFValue(58),
-              marginBottom: RFValue(105),
+              marginBottom: RFValue(60),
               height: RFValue(16)
             }}
           >
