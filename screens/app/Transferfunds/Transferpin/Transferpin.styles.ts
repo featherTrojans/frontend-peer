@@ -14,10 +14,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: RFValue(25),
   },
   backArrowConteiner: {
-    marginVertical: RFValue(20),
+    marginVertical: RFValue(10),
   },
   descriptionContainer: {
-    marginHorizontal: RFValue(25),
+    marginHorizontal: RFValue(15),
     justifyContent: "center",
     alignItems: "center",
   },
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     ...fontsize.bsmall,
     ...FONTS.medium,
-    lineHeight: 25,
+    lineHeight: RFValue(25),
     color: COLORS.black,
     marginBottom: RFValue(15),
   },
@@ -48,8 +48,8 @@ export const styles = StyleSheet.create({
   pinContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: RFValue(48),
-    marginBottom: RFValue(65),
+    marginTop: RFValue(35),
+    marginBottom: RFValue(30),
   },
   pinInputContainer: {
     width: RFValue(252),
@@ -59,9 +59,9 @@ export const styles = StyleSheet.create({
   pinView: {
     width: RFValue(50),
     height: RFValue(60),
-    borderColor: COLORS.blue7,
+    borderColor: COLORS.blue7,  
     borderWidth: 1,
-    borderRadius: 13,
+    borderRadius: RFValue(13),
     paddingHorizontal: RFValue(15),
     paddingVertical: RFValue(10),
     justifyContent: "center",
@@ -77,6 +77,6 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(24),
     marginBottom: RFValue(45),
     ...fontsize.bsmall,
-    ...FONTS.regular,
+    ...FONTS.medium,
   },
 });

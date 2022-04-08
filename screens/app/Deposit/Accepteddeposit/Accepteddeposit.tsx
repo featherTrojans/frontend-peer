@@ -31,6 +31,7 @@ import {
 import { useToast } from "react-native-toast-notifications";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
+import { RFValue } from "react-native-responsive-fontsize";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
 // import { styles } from './Pendingwithdraw.styles'
@@ -110,7 +111,7 @@ const Accepteddeposit = ({ navigation, route }) => {
   if (locationLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color="#000" size="large" />
+        <ActivityIndicator color={COLORS.blue6} size="large" />
       </View>
     );
   }
@@ -131,13 +132,13 @@ const Accepteddeposit = ({ navigation, route }) => {
                   duration={"12 mins"}
                 />
 
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Ratingstar />
                   <Text style={styles.numberOfBadge}>3.5</Text>
-                </View>
+                </View> */}
               </View>
 
-              <View style={{ marginTop: 20 }}>
+              <View style={{ marginTop: RFValue(20) }}>
                 <Text style={styles.amountText}>Amount</Text>
                 <Text style={styles.amountPrice}>
                   NGN {requestInfo.amount}{" "}
