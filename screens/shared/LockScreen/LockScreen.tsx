@@ -30,6 +30,7 @@ const LockScreen = ({ modal, setModal }: any) => {
   const [loading, setLoading] = useState(false);
   const [numoftrial, setNumberTrial] = useState(0)
   const [error, setError] = useState(false)
+  console.log(pin) 
   const handleSetAmount = (value: string) => {
     const newpin = [...pin,value]
     if (pin.length < 4) {
@@ -148,7 +149,7 @@ const LockScreen = ({ modal, setModal }: any) => {
                 height: RFValue(16),
                 borderRadius: RFValue(16/2),
                 backgroundColor: COLORS.white,
-                opacity: pin[0]?1:0.2,
+                opacity: pin[1]?1:0.2,
               }}
             />
             <View

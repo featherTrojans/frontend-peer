@@ -648,7 +648,7 @@ export default function MainNavigation({initialBoarded = false}) {
   const [onboarded, setOnboarded] = useState(false)
 
 
-
+  // console.log(token,"i have")
 
   useEffect(() => {
     setMessageToken(expoPushToken);
@@ -664,15 +664,18 @@ export default function MainNavigation({initialBoarded = false}) {
   }, [])
 
   useEffect(() => {
+    console.log(token,"from here")
     const subscription: any = AppState.addEventListener(
       "change",
       (nextAppState) => {
+        // console.log(token,"from the whattt")
         if (
           appState.current.match(/inactive|background/) &&
           nextAppState === "active"
         ) {
-
+          console.log("run na", token)
           if(!token){
+            console.log("I should have token here right",token)
             return 
           }
           
@@ -697,7 +700,7 @@ export default function MainNavigation({initialBoarded = false}) {
     return () => {
       // subscription.remove();
     };
-  }, []);
+  }, [token]);
 
   return (
     <NavigationContainer ref={navigationRef}>
