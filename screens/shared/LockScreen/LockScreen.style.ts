@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
   pinContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: RFValue(80),
+    marginBottom: RFValue(60),
   },
   pinInputContainer: {
     width: RFValue(252),
