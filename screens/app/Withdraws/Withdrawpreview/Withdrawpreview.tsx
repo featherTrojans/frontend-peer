@@ -35,10 +35,6 @@ const Withdrawpreview = ({navigation, route}: any) => {
     <View style={styles.container}>
       <Map />
       <Customstatusbar />
-      
-      <BottomSheet
-      snapPoints={[ "30%", "65%",]}
-      >
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>
             {/* Confirm meetup text will show after clikcing continue*/}
@@ -100,7 +96,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
             onpress={()=>navigation.navigate("WithdrawPin",{userInfo,amount})}
           />
         </View>
-        </BottomSheet>
+        
     </View>
   );
 };

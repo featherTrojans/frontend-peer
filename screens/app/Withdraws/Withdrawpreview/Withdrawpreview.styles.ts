@@ -54,8 +54,8 @@ export const styles = StyleSheet.create({
     color: COLORS.grey2,
   },
   meetupContainer: {
-    marginTop: RFValue(46),
-    marginBottom: RFValue(56)
+    marginTop: RFValue(16),
+    marginBottom: RFValue(25)
   },
   meetUpText: {
     ...fontsize.small,

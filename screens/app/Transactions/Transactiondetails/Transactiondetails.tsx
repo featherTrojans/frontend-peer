@@ -127,7 +127,7 @@ const Transactiondetails = ({ navigation, route }) => {
   };
 
   const showImageOnReceipt = (name: string, title: string, sender?: string) => {
-    const targetLogo = bankLogo.filter(logo => logo.name === sender)
+    const targetLogo = bankLogo.filter((logo) => logo.name === sender);
     switch (title) {
       case "funding":
         return `
@@ -137,17 +137,17 @@ const Transactiondetails = ({ navigation, route }) => {
         
         `;
         break;
-        case "Fund Reversal":
-          return `
+      case "Fund Reversal":
+        return `
           <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #001757; display: flex; justify-content: center; align-items: center;">
             <img src="${assetsDB["fund"]["paystack"]}" style="width: 25px; height: 25px" />
           </div>
           
           `;
-          break;
-        // assetsDB["bills"][sender]
+        break;
+      // assetsDB["bills"][sender]
       case "Airtime Purchase":
-        const networkType = sender?.toUpperCase()
+        const networkType = sender?.toUpperCase();
         return `
           <div style="min-width: 62px; min-height: 62px; border-radius: 32px;  display: flex; justify-content: center; align-items: center;">
             <img src="${assetsDB["bills"][networkType]}" style="width: 50px; height: 50px" />
@@ -165,12 +165,20 @@ const Transactiondetails = ({ navigation, route }) => {
         break;
       case "Wallet Debit":
       case "Wallet Credit":
-        return `
+        if (sender === "Bonus") {
+          return `
+        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
+          JU
+        </div>
+        `;
+        } else {
+          return `
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
         ${nameSplitter(otherUser ? otherUser.fullName : "Feather Africa Inc")}
         </div>
-        
         `;
+        }
+
         break;
       default:
         return `
@@ -186,17 +194,23 @@ const Transactiondetails = ({ navigation, route }) => {
   const typeOfName = (title: string) => {
     switch (title) {
       case "Wallet Credit":
-        return { senderName: otherUser.fullName, receiverName: user.fullName };
+        if (sender === "Bonus") {
+          return { senderName: sender, receiverName: receiver };
+        } else {
+          return {
+            senderName: otherUser.fullName,
+            receiverName: user.fullName,
+          };
+        }
         break;
+
       case "Wallet Debit":
-        return {
-          senderName: user.fullName,
-          receiverName: otherUser ? otherUser.fullName : "EScrow",
-        };
+        return { senderName: user.fullName, receiverName: otherUser?.fullName };
+        break;
       case "funding":
         return { senderName: sender, receiverName: receiver };
-        case "Fund Reversal":
-          return { senderName: sender, receiverName: receiver };
+      case "Fund Reversal":
+        return { senderName: sender, receiverName: receiver };
       case "escrow":
         return { senderName: sender, receiverName: receiver };
       case "Airtime Purchase":
@@ -371,13 +385,19 @@ const Transactiondetails = ({ navigation, route }) => {
         <img class="user__image" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035185/62x62_feather_dibyrp.svg" />
         <div class="dashed__line"></div>
         <img class="checked__icon" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035323/greenyy_exqzbx.svg" />
-        ${showImageOnReceipt(user.fullName, title, title === "withdrawal" ? receiver : sender)}
+        ${showImageOnReceipt(
+          user.fullName,
+          title,
+          title === "withdrawal" ? receiver : sender
+        )}
     </div>
     </div>
 
 
     <p class="transaction__text">This is the transaction report between <span class="transaction__names">${
-      typeOfName(title)?.senderName
+      typeOfName(title)?.senderName !== "Bonus"
+        ? typeOfName(title)?.senderName
+        : "FEATHER"
     }</span> and <span class="transaction__names">${
     typeOfName(title)?.receiverName
   }</span></p>

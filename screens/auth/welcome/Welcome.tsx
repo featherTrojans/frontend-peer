@@ -24,6 +24,7 @@ const Welcome = ({ navigation, route }) => {
   const { setToken, authdata , messageToken} = useContext(AuthContext);
   const { setAuthData } = useContext(AuthContext);
   const [percentage, setPercentage] = useState(0);
+  
 
   const progressWidth = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
@@ -41,6 +42,26 @@ const Welcome = ({ navigation, route }) => {
       return newvalue;
     }
   };
+  const nameInNotification = authdata?.userDetails?.fullName ? nameToShow(authdata?.userDetails?.fullName) : "Padi"
+
+  
+  useEffect(() => {
+    if (fromm == "setup" && authdata?.userDetails?.fullName) {
+      sendSchedulePushNotification(
+        "Acccount Registration",
+        `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
+      );
+    } 
+  }, [authdata]);
+
+  useEffect(() => {
+    if(fromm !== "setup" && authdata?.userDetails?.fullName){
+      sendSchedulePushNotification(
+        "Welcome Back Padi! 🎉",
+        "Do more today. Enjoy financial flexibility"
+      );
+    }
+  }, [authdata])
 
   const getPeriod = () => {
     const hour = new Date().getHours();
@@ -84,25 +105,7 @@ const Welcome = ({ navigation, route }) => {
   };
 
 
-  const nameInNotification = authdata?.userDetails?.fullName ? nameToShow(authdata?.userDetails?.fullName) : "Padi"
 
-  useEffect(() => {
-    if (fromm == "setup" && authdata?.userDetails?.fullName) {
-      sendSchedulePushNotification(
-        "Acccount Registration",
-        `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
-      );
-    } 
-  }, [authdata]);
-
-  useEffect(() => {
-    if(fromm !== "setup" && authdata?.userDetails?.fullName){
-      sendSchedulePushNotification(
-        "Welcome Back Padi! 🎉",
-        "Do more today. Enjoy financial flexibility"
-      );
-    }
-  }, [authdata])
 
   // useCallback(() => {
   //   if(fromm !== "setup" && authdata?.userDetails?.fullName){

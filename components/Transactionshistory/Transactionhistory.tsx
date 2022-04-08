@@ -32,7 +32,7 @@ const History = ({ data }) => {
   const isUser = (title: string) => {
     const capital = title
 
-    if(capital === "Wallet Credit" || capital === "Wallet Debit"){
+    if((capital === "Wallet Credit" || capital === "Wallet Debit") && transactionValue.toUpperCase() !== "BONUS" ){
         return (
           <Text>@<Text style={{textTransform: 'lowercase'}}>{transactionValue}</Text></Text>
         )
