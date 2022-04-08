@@ -137,6 +137,7 @@ import { AuthContext } from "../context/AuthContext";
 import Map from "../screens/shared/map/Map";
 import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 import axiosCustom from "../httpRequests/axiosCustom";
+import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 
 const {
   TabHome,
@@ -178,7 +179,7 @@ export function usePushNotification() {
     responseListener.current =
       Notification.addNotificationResponseReceivedListener((response) => {
         //   console.log(response);
-        console.log("I just tapped the note", response);
+        
         const { data } = response.notification.request.content;
 
         //   console.log("Here is the data", data.data.takeTo)
@@ -668,6 +669,7 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Chatsdm" component={Chatsdm} />
             <AppStack.Screen name="Usersearch" component={Usersearch} />
             <AppStack.Screen name="CustomWebView" component={CustomWebView} />
+            <AppStack.Screen name="CustomWebViewSupport" component={CustomWebViewSupport} />
           </AppStack.Group>
         </>
       )}

@@ -32,7 +32,7 @@ const Requestsummary = ({navigation, route}) => {
         }}
       >
         <Sendingandreceive senderName={authdata?.userDetails?.fullName} receiverName={requestInfo?.agent || requestInfo?.user?.agent || "A Z"} title="Wallet Credit" />
-        <Priceandcharges amount={requestInfo?.amount} charges={requestInfo?.charges} />
+        <Priceandcharges amount={requestInfo?.amount} charges={+requestInfo?.charges + +requestInfo?.negotiatedFee } />
       </View>
 
       <View style={styles.saferulesContainer}>

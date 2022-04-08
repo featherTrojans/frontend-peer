@@ -176,7 +176,7 @@ const Withdraw = ({ navigation }) => {
                   },
                 ]}
               >
-                Pending Requests
+                Pending Requests ({pendingRequests.length})
               </Text>
             </TouchableOpacity>
 
@@ -195,7 +195,7 @@ const Withdraw = ({ navigation }) => {
                   },
                 ]}
               >
-                Accepted Requests
+                Accepted Requests ({acceptedRequests.length})
               </Text>
             </TouchableOpacity>
           </View>

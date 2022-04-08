@@ -153,7 +153,7 @@ const Deposit = ({ navigation }) => {
                   },
                 ]}
               >
-                Pending Requests
+                Pending Requests ({pending.length})
               </Text>
             </TouchableOpacity>
 
@@ -172,7 +172,7 @@ const Deposit = ({ navigation }) => {
                   },
                 ]}
               >
-                Accepted Requests
+                Accepted Requests ({accepted.length})
               </Text>
             </TouchableOpacity>
           </View>

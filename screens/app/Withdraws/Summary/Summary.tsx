@@ -4,10 +4,12 @@ import {
   Text,
   View,
   ScrollView,
+  Button,
+  TouchableOpacity
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Bottombtn, Sendingandreceive } from "../../../../components";
+import { Bottombtn, Loader, Sendingandreceive } from "../../../../components";
 import { styles } from "./Summary.styles";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { AuthContext } from "../../../../context/AuthContext";
@@ -31,17 +33,21 @@ import {
 } from "firebase/firestore";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { RFValue } from "react-native-responsive-fontsize";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
+import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../../utils/errorMessage";
 
 const { Backarrow, Successcheckanimate } = icons;
 
 const Summary = ({ navigation, route }) => {
   const { requestInfo } = route.params;
+  const toast = useToast()
   const { authdata } = useContext(AuthContext);
   const [showmodal, setShowModal] = useState(false);
   const [showSuccessmodal, setShowSuccessModal] = useState(false);
   const [showFailuremodal, setShowFailureModal] = useState(false);
   const [agentInfo, setAgentInfo] = useState({});
+  const [loading, setLoading] = useState(false)
 
   console.log(agentInfo, "agent info");
   useEffect(() => {
@@ -102,6 +108,24 @@ const Summary = ({ navigation, route }) => {
     }
   };
 
+  const handleCancelRequest = async () => {
+    setLoading(true);
+    try {
+      await axiosCustom({
+        method: "DELETE",
+        url: "/request/cancel",
+        data: {
+          reference: requestInfo.reference,
+          reasonForCancel: "agent declining withdraw request",
+        },
+      });
+      navigation.navigate("Home");
+    } catch (err) {
+      showerror(toast, err);
+    } finally {
+      setLoading(false);
+    }
+  };
   // const handlePrepareToReceive = async ()=>{
   //   // create a document first
   //   try {
@@ -119,11 +143,12 @@ const Summary = ({ navigation, route }) => {
     <View style={styles.container}>
       {/* icon on the left and text in the middle */}
       <Customstatusbar />
-
+      {loading && <Loader />}
       <Globalmodal
         showState={showmodal}
         //  onBgPress={() => setShowModal(!showmodal)}
       >
+        
         <View
           style={{
             paddingTop: RFValue(40),
@@ -171,7 +196,7 @@ const Summary = ({ navigation, route }) => {
               3 failed pin attempts - Transaction declines
             </Text>
           </View>
-
+              
           <TouchableOpacity
             style={{
               paddingTop: RFValue(26),
@@ -181,6 +206,7 @@ const Summary = ({ navigation, route }) => {
               borderRadius: 10,
               marginTop: RFValue(40),
             }}
+            onPress={handleCancelRequest}
           >
             <Text
               style={{
@@ -193,18 +219,20 @@ const Summary = ({ navigation, route }) => {
               CANCEL REQUEST
             </Text>
           </TouchableOpacity>
+              
         </View>
       </Globalmodal>
 
       <Globalmodal
         showState={showSuccessmodal}
         //  onBgPress={() => setShowSuccessModal(!showSuccessmodal)}
-        btnFunction={() =>
-          navigation.navigate("Transactionsrating", {
-            userToRate: agentInfo?.userUid,
-            reference: requestInfo.reference,
-          })
-        }
+        btnFunction={()=>{
+          setShowSuccessModal(false);
+          navigation.navigate("Transactionsrating",{userToRate:agentInfo.userUid, 
+            reference:requestInfo.reference, 
+            username:agentInfo.username,
+            fullname:agentInfo.fullName})
+         }}
       >
         <View style={{ alignItems: "center", paddingVertical: RFValue(30) }}>
           <LottieView
@@ -313,7 +341,7 @@ const Summary = ({ navigation, route }) => {
             <View style={styles.tableContainer}>
               <Text style={styles.tableTitle}>Withdrawal Charge</Text>
               <Text style={styles.tableValue}>
-                + NGN {amountFormatter(requestInfo?.charges)}
+                + NGN {amountFormatter(`${+requestInfo?.charges + +requestInfo?.negotiatedFee}` )}
               </Text>
             </View>
             <View style={styles.bottomLine} />

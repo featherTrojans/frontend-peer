@@ -7,7 +7,7 @@ const CustomWebView = ({ navigation, route }) => {
   const { sendPushNotification } = usePushNotification();
   const { authdata, messageToken } = useContext(AuthContext);
 
-  const webview = useRef();
+  const webviewRef = useRef(null);
   const { url, reference, amount } = route.params;
   const callback_url = `https://featherwebview.com/?trxref=${reference}&reference=${reference}`;
   const onNavigationStateChange = (state: any) => {
@@ -15,7 +15,8 @@ const CustomWebView = ({ navigation, route }) => {
     const { url } = state;
     if (!url) return;
     if (url === callback_url) { 
-     
+      
+      console.log(true,"i match")
         // sendPushNotification(
         //   messageToken,
         //   "Wallet Funding",
@@ -24,13 +25,13 @@ const CustomWebView = ({ navigation, route }) => {
         // );
    
 
-      webview.current?.stopLoading();
+      webviewRef.current?.stopLoading();
       navigation.navigate("Home");
     }
   };
   return (
     <WebView
-      ref={webview}
+      ref={webviewRef}
       source={{ uri: url }}
       style={{ marginTop: 40 }}
       onNavigationStateChange={onNavigationStateChange}

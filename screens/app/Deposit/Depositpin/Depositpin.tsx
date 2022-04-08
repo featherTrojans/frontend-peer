@@ -25,7 +25,7 @@ const Depositpin = ({ route, navigation }) => {
   const [pin, setPin] = useState<string[]>([]);
   const [successModal, setSuccessModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(requestInfo);
+  
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldamount) => [...oldamount, value]);
@@ -51,10 +51,10 @@ const Depositpin = ({ route, navigation }) => {
       if(document.data().status === "pending"){
         return true
       }else{
-         throw {response:{data:{message:"Please swipe to confirm payment on withdrawal device"}}}   
+         throw {response:{data:{message:`Pls swipe 'Make Payment' on @${requestInfo?.user?.username}'s device to continue`}}}   
       }
     }else{
-       throw {response:{data:{message:"Please swipe to confirm payment on withdrawal device"}}}
+       throw {response:{data:{message:`Pls swipe 'Make Payment' on @${requestInfo?.user?.username}'s device to continue`}}}
     }
   }
 
@@ -77,8 +77,13 @@ const Depositpin = ({ route, navigation }) => {
       //show success message
       setSuccessModal(true);
     } catch (err) {
-      console.log(err)
+      
       showerror(toast, err);
+      // check the error, don't reject for pin error
+      if(err?.response?.data?.message === "Incorrect Pin"){
+        return
+      }
+
       await handlePrepareToTestUpdate("rejected");
     } finally {
       setLoading(false);
@@ -93,7 +98,15 @@ const Depositpin = ({ route, navigation }) => {
 
       <Globalmodal
         showState={successModal}
-        btnFunction={() => navigation.navigate("Transactionsrating",{userToRate:requestInfo.userUid, reference:requestInfo.reference})}
+        btnFunction={() => {
+          setSuccessModal(false)
+          navigation.navigate("Transactionsrating",{
+          userToRate:requestInfo.userUid, 
+          reference:requestInfo.reference,
+          username: requestInfo?.user?.username,
+          fullname: requestInfo?.user?.fullName
+        })}
+      }
       >
         <View style={{ alignItems: "center" }}>
           <LottieView
