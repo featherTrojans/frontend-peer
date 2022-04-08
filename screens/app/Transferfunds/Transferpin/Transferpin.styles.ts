@@ -11,7 +11,10 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: RFValue(25),
+
+    // i topuched the padding
+    // paddingHorizontal: RFValue(25),
+    
   },
   backArrowConteiner: {
     marginVertical: RFValue(10),
@@ -40,10 +43,12 @@ export const styles = StyleSheet.create({
   },
 
   numberBtnContainer: {
+    // flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
+    backgroundColor: "red"
   },
   pinContainer: {
     justifyContent: "center",

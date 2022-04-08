@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StatusBar,
+  ScrollView
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -44,7 +45,7 @@ const Securepin = ({ route, navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Customstatusbar />
       <View style={{ paddingHorizontal: RFValue(25) }}>
         <JustifyBetween style={{ marginBottom: RFValue(10) }}>
@@ -96,7 +97,7 @@ const Securepin = ({ route, navigation }) => {
         onpress={handleNext}
         disabled={pin.length !== 4}
       />
-    </View>
+    </ScrollView>
   );
 };
 

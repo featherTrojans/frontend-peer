@@ -26,11 +26,13 @@ export const styles = StyleSheet.create({
 
     // I commented out this flex property befoe
     flex: 1,
+
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
     // marginBottom: 30,
+    
   },
   btnBg: {
     paddingTop: RFValue(22),

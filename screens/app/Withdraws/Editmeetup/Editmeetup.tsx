@@ -73,7 +73,7 @@ const Editmeetup = ({navigation}) => {
             }}
             />
             <Bottombtn 
-                title="Edit meet"
+                title="UPDATE MEETUP"
                 onpress={()=>navigation.goBack()}
             />
         </View>

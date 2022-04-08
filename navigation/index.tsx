@@ -568,7 +568,7 @@ const RootNavigator = ({ initialBoarded }) => {
           </AppStack.Group>
           {/* Withdraw Screens */}
           <AppStack.Group>
-            <AppStack.Screen name="Withdraw" component={Withdraw} />
+            <AppStack.Screen name="Withdraw" component={WithdrawPin} />
             <AppStack.Screen name="Requestnew" component={Requestnew} />
             <AppStack.Screen
               name="Availablelisting"
