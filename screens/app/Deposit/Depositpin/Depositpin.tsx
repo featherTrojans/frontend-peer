@@ -89,6 +89,8 @@ const Depositpin = ({ route, navigation }) => {
     <View style={styles.container}>
       <Customstatusbar />
       {loading && <Loader />}
+
+
       <Globalmodal
         showState={successModal}
         btnFunction={() => navigation.navigate("Transactionsrating",{userToRate:requestInfo.userUid, reference:requestInfo.reference})}
@@ -113,6 +115,8 @@ const Depositpin = ({ route, navigation }) => {
           {/* share and download */}
         </View>
       </Globalmodal>
+
+      
       <View style={styles.mainContainer}>
         <View style={styles.backArrowConteiner}>
           <Backarrow />

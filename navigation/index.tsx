@@ -14,7 +14,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { customNavigation, navigationRef } from "../utils/customNavigation";
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 // import axiosCustom from "../httpRequests/axiosCustom";÷
@@ -47,7 +47,6 @@ import {
   Welcome,
   Welcometochange,
 
-
   //Dashboard Screens
   Home,
 
@@ -57,10 +56,6 @@ import {
   Transactiondetails,
   Transactiondispute,
   Transactionsrating,
-
-
-
-
   Pendingrequest, //This screen has changed
   Accepetedrequest, //This screen has changed too
   History,
@@ -108,7 +103,6 @@ import {
   WalletPin,
   Updatedeposit,
 
-
   //Chats
   Chatshome,
   Chatsdm,
@@ -121,7 +115,6 @@ import {
   Depositinput,
   Testings,
 
-
   //Paybills and Airtime
   Paybills,
   Airtimeamount,
@@ -129,9 +122,6 @@ import {
   Airtimepurchasepin,
   Electricityamount,
   Electricitydetails,
-
-  
-  
 } from "../screens";
 
 // import { LockScreen } from "../screens";
@@ -175,7 +165,6 @@ export function usePushNotification() {
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
-      
     });
 
     // console.log(expoPushToken, "This is the token")
@@ -191,7 +180,7 @@ export function usePushNotification() {
         //   console.log(response);
         console.log("I just tapped the note", response);
         const { data } = response.notification.request.content;
-        
+
         //   console.log("Here is the data", data.data.takeTo)
         customNavigation(data.redirectTo, {});
       });
@@ -202,16 +191,16 @@ export function usePushNotification() {
     };
   }, []);
 
-    // const sendSchedulePushNotification = async () => {
-    //   await Notifications.scheduleNotificationAsync({
-    //     content: {
-    //       title: "You've got mail! 📬",
-    //       body: "Here is the notification body",
-    //       data: { data: "goes here", takeTo: "Newtransactions" },
-    //     },
-    //     trigger: { seconds: 5 },
-    //   });
-    // };
+  // const sendSchedulePushNotification = async () => {
+  //   await Notifications.scheduleNotificationAsync({
+  //     content: {
+  //       title: "You've got mail! 📬",
+  //       body: "Here is the notification body",
+  //       data: { data: "goes here", takeTo: "Newtransactions" },
+  //     },
+  //     trigger: { seconds: 5 },
+  //   });
+  // };
 
   //Instant Notifications
   const sendPushNotification = async (
@@ -308,6 +297,45 @@ const Tabs = () => {
             justifyContent: "center",
           },
         }}
+        screenListeners={({ navigation, route }) => ({
+          state: (e) => {
+            switch (route.name) {
+              case "Home":
+                Animated.spring(tabOffsetValue, {
+                  toValue: 0,
+                  useNativeDriver: true,
+                }).start();
+                break;
+              case "History":
+                Animated.spring(tabOffsetValue, {
+                  toValue: getWidth(),
+                  useNativeDriver: true,
+                }).start();
+                break;
+              case "Transactions":
+                Animated.spring(tabOffsetValue, {
+                  toValue: getWidth() * 2,
+                  useNativeDriver: true,
+                }).start();
+                break;
+              case "Chats":
+                Animated.spring(tabOffsetValue, {
+                  toValue: getWidth() * 3,
+                  useNativeDriver: true,
+                }).start();
+                break;
+              case "Settings":
+                Animated.spring(tabOffsetValue, {
+                  toValue: getWidth() * 4,
+                  useNativeDriver: true,
+                }).start();
+                break;
+
+              default:
+                break;
+            }
+          },
+        })}
       >
         <BottomTab.Screen
           name="Home"
@@ -326,7 +354,7 @@ const Tabs = () => {
                 </View>
               );
             },
-            unmountOnBlur: true
+            unmountOnBlur: true,
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -354,7 +382,7 @@ const Tabs = () => {
                 </View>
               );
             },
-            
+            unmountOnBlur: true,
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -392,7 +420,7 @@ const Tabs = () => {
                 </View>
               );
             },
-            unmountOnBlur: true
+            unmountOnBlur: true,
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -471,16 +499,14 @@ const Tabs = () => {
   );
 };
 
-
-
-const RootNavigator = ({initialBoarded}) => {
+const RootNavigator = ({ initialBoarded }) => {
   const { token } = useContext(AuthContext);
 
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
       // initialRouteName="Welcometochange"
-      initialRouteName={initialBoarded ?  "Login" : "Onboarding"}
+      initialRouteName={initialBoarded ? "Login" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
@@ -492,7 +518,10 @@ const RootNavigator = ({initialBoarded}) => {
           <AppStack.Screen name="Security" component={Security} />
           <AppStack.Screen name="Securepin" component={Securepin} />
           <AppStack.Screen name="Forgetpassword" component={Forgetpassword} />
-          <AppStack.Screen name="Forgetpasswordotp" component={Forgetpasswordotp} />
+          <AppStack.Screen
+            name="Forgetpasswordotp"
+            component={Forgetpasswordotp}
+          />
           <AppStack.Screen name="Setnewpassword" component={Setnewpassword} />
           <AppStack.Screen name="SecurepinAgain" component={SecurepinAgain} />
           <AppStack.Screen name="Setup" component={Setup} />
@@ -555,10 +584,7 @@ const RootNavigator = ({initialBoarded}) => {
               name="Pendingwithdraw"
               component={Pendingwithdraw}
             />
-            <AppStack.Screen
-              name="Negotiate"
-              component={Negotiate}
-            />
+            <AppStack.Screen name="Negotiate" component={Negotiate} />
             <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
             {/* TO MaKE AFTER ACCEPTING */}
             <AppStack.Screen
@@ -568,7 +594,10 @@ const RootNavigator = ({initialBoarded}) => {
             <AppStack.Screen name="Requestsummary" component={Requestsummary} />
             <AppStack.Screen name="Summary" component={Summary} />
             <AppStack.Screen name="WithdrawPin" component={WithdrawPin} />
-            <AppStack.Screen name="Transactionsrating" component={Transactionsrating} />
+            <AppStack.Screen
+              name="Transactionsrating"
+              component={Transactionsrating}
+            />
           </AppStack.Group>
 
           {/* Wallet Funding */}
@@ -602,17 +631,26 @@ const RootNavigator = ({initialBoarded}) => {
           <AppStack.Screen name="Paybills" component={Paybills} />
           <AppStack.Screen name="Airtimeamount" component={Airtimeamount} />
           <AppStack.Screen name="Airtimedetails" component={Airtimedetails} />
-          <AppStack.Screen name="Airtimepurchasepin" component={Airtimepurchasepin} />
-          <AppStack.Screen name="Electricityamount" component={Electricityamount} />
-          <AppStack.Screen name="Electricitydetails" component={Electricitydetails} />
-
-
-
+          <AppStack.Screen
+            name="Airtimepurchasepin"
+            component={Airtimepurchasepin}
+          />
+          <AppStack.Screen
+            name="Electricityamount"
+            component={Electricityamount}
+          />
+          <AppStack.Screen
+            name="Electricitydetails"
+            component={Electricitydetails}
+          />
 
           {/* Deposit Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Depositupdate" component={Depositupdate} />
-            <AppStack.Screen name="Deposit" component={true ? Deposit : Depositupdate} />
+            <AppStack.Screen
+              name="Deposit"
+              component={true ? Deposit : Depositupdate}
+            />
             <AppStack.Screen name="Depositinput" component={Depositinput} />
             <AppStack.Screen name="Updatedeposit" component={Updatedeposit} />
             <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
@@ -637,29 +675,26 @@ const RootNavigator = ({initialBoarded}) => {
   );
 };
 
-export default function MainNavigation({initialBoarded = false}) {
+export default function MainNavigation({ initialBoarded = false }) {
   const [modal, setModal] = useState(false);
   const timer = useRef<number>(Date.now());
-  const { token,setToken, setMessageToken } = useContext(AuthContext);
+  const { token, setToken, setMessageToken } = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
-  const [onboarded, setOnboarded] = useState(false)
-
-
-
+  const [onboarded, setOnboarded] = useState(false);
 
   useEffect(() => {
     setMessageToken(expoPushToken);
   }, [token]);
 
   useEffect(() => {
-    axiosCustom.interceptors.response.use((response)=>{
-      if(response.status === 401){
-        setToken("")
+    axiosCustom.interceptors.response.use((response) => {
+      if (response.status === 401) {
+        setToken("");
       }
-      return response  
-    })
-  }, [])
+      return response;
+    });
+  }, []);
 
   useEffect(() => {
     const subscription: any = AppState.addEventListener(
@@ -669,26 +704,25 @@ export default function MainNavigation({initialBoarded = false}) {
           appState.current.match(/inactive|background/) &&
           nextAppState === "active"
         ) {
-
-          if(!token){
-            return 
+          if (!token) {
+            return;
           }
-          
-          if(Date.now() - timer.current > 900000){
+
+          if (Date.now() - timer.current > 900000) {
             setToken("");
             setModal(false);
-            return
+            return;
           }
-          if (Date.now() - timer.current > 300000){
+          if (Date.now() - timer.current > 300000) {
             return setModal(true);
-          } 
+          }
 
           return;
         }
         appState.current = nextAppState;
         if (!modal || !token) {
-          timer.current = Date.now()
-          setModal(false)
+          timer.current = Date.now();
+          setModal(false);
         }
       }
     );

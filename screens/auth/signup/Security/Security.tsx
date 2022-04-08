@@ -124,6 +124,7 @@ const Security = ({ route, navigation }) => {
             }
             try{
               const response = await axiosCustom.put("auth/password/set", {password:values.password},{headers:{token:token}});
+              
               setShowModal(true)
               setResult(response.data.data)
               setAuthorizationToken(response?.data?.data?.token)

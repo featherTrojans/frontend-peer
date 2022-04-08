@@ -29,6 +29,21 @@ const History = ({ data }) => {
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
   const networkType = from.toUpperCase()
 
+  const isUser = (title: string) => {
+    const capital = title
+
+    if(capital === "Wallet Credit" || capital === "Wallet Debit"){
+        return (
+          <Text>@<Text style={{textTransform: 'lowercase'}}>{transactionValue}</Text></Text>
+        )
+    }
+    else{
+      return (
+        <Text style={{textTransform: "capitalize"}}>{transactionValue}</Text>
+      )
+    }
+  }
+
 
   const transactionBadge = () => {
     switch (title) {
@@ -81,7 +96,7 @@ const History = ({ data }) => {
         <View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.transactionType}>
-            {transactionType} : {transactionValue}
+            {transactionType} : {isUser(title)}
           </Text>
         </View>
       </View>

@@ -12,6 +12,7 @@ import BottomSheet, {
 } from "@gorhom/bottom-sheet";
 import React, { useState, useEffect, useContext } from "react";
 import LottieView from "lottie-react-native";
+
 import { images, icons, COLORS, fontsize, FONTS } from "../../../../constants";
 import { styles } from "./Availablelisting.styles";
 import Map from "../../../shared/map/Map";
