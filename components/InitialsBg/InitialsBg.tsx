@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { FONTS, fontsize } from "../../constants";
+import { COLORS, FONTS, fontsize } from "../../constants";
 import { nameSplitter } from "../../utils/nameSplitter";
 import { styles } from "./InitialsBg.styles";
 import { RFValue } from "react-native-responsive-fontsize";
+import UserAvatar from "@muhzi/react-native-user-avatar";
 
 type InitialsBgProps = {
   sideLength: number;
@@ -41,8 +42,10 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
       }}
     >
       <Text style={styles.initialText}>{nameSplitter(name).toUpperCase()}</Text>
-    </View>
+    </View> 
   );
 };
 
 export default InitialsBg;
+
+

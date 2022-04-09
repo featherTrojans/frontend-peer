@@ -1980,13 +1980,6 @@
     "@types/yargs" "^16.0.0"
     "chalk" "^4.0.0"
 
-"@muhzi/react-native-user-avatar@^1.0.7":
-  "integrity" "sha512-K0chlC9/va6rmYx7mlb5d/H+aEIT+ZuZNucrRTABBzW0AyHVQOwBEbxNDvUoQZ72bRAXTINu0JKu5SbXomBzQQ=="
-  "resolved" "https://registry.npmjs.org/@muhzi/react-native-user-avatar/-/react-native-user-avatar-1.0.7.tgz"
-  "version" "1.0.7"
-  dependencies:
-    "prop-types" "^15.7.2"
-
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
   "resolved" "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
