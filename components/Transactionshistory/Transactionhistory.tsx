@@ -98,7 +98,7 @@ const History = ({ data }) => {
           );
         } else {
           return (
-            <View style={[styles.arrowBg, { backgroundColor: circleColor }]}>
+            <View style={[styles.arrowBg, { backgroundColor: circleColor, borderRadius: 39/2 }]}>
               {Arrow}
             </View>
           );
@@ -107,7 +107,7 @@ const History = ({ data }) => {
 
       default:
         return (
-          <View style={[styles.arrowBg, { backgroundColor: circleColor }]}>
+          <View style={[styles.arrowBg, { backgroundColor: circleColor, borderRadius: 39/2 }]}>
             {Arrow}
           </View>
         );

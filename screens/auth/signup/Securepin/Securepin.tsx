@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  StatusBar,
-  ScrollView
-} from "react-native";
+import { View, Text, StatusBar, ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useToast } from "react-native-toast-notifications";
@@ -19,11 +14,10 @@ import { styles } from "./Securepin.styles";
 
 const { SecureDot } = icons;
 const Securepin = ({ route, navigation }) => {
-  const toast = useToast()
+  const toast = useToast();
   const { token, fromm } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
-
 
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
@@ -37,12 +31,12 @@ const Securepin = ({ route, navigation }) => {
       setPin(newdata);
     }
   };
-  const handleNext =  ()=>{
-    if(pin.join("") === "0000"){
-      return showerror(toast,null,"Pin cannot be set to 0000")
+  const handleNext = () => {
+    if (pin.join("") === "0000") {
+      return showerror(toast, null, "Pin cannot be set to 0000");
     }
-    navigation.navigate("SecurepinAgain",{token,pin,fromm})
-  }
+    navigation.navigate("SecurepinAgain", { token, pin, fromm });
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -54,8 +48,8 @@ const Securepin = ({ route, navigation }) => {
             <Text style={styles.header}>4-digit secure pin</Text>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <View style={[styles.topDots, { marginRight: RFValue(10)}]} />
-            <View style={[styles.topDots, { marginRight: RFValue(10)}]} />
+            <View style={[styles.topDots, { marginRight: RFValue(10) }]} />
+            <View style={[styles.topDots, { marginRight: RFValue(10) }]} />
             <View style={styles.activeDot} />
           </View>
         </JustifyBetween>

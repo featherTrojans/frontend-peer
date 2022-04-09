@@ -204,7 +204,7 @@ const Depositupdate = ({ navigation }) => {
     <View style={styles.container}>
       <Backheader title="Deposit" />
       {loading && <Loader />}
-      <ScrollView style={{ flex: 1, }}>
+      <ScrollView style={{ flex: 1, }} contentContainerStyle={{flex: 1}}>
         <View style={{ paddingHorizontal: 15 }}>
           <Viewbalance />
         </View>
