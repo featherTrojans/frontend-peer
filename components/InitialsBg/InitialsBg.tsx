@@ -32,12 +32,12 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
   return (
     <View
       style={{
-        width:  RFValue(sideLength),
-        height: RFValue(sideLength),
+        width:  sideLength,
+        height: sideLength,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: defaultColor,
-        borderRadius: RFValue(sideLength /2),
+        borderRadius: sideLength /2,
       }}
     >
       <Text style={styles.initialText}>{nameSplitter(name).toUpperCase()}</Text>

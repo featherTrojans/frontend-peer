@@ -9,7 +9,7 @@ import { customNavigation } from "../../utils/customNavigation";
 import { assetsDB, bankLogo } from "../../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
 
-const { Arrowin, Arrowout, Bonusicon } = icons;
+const { Arrowin, Arrowout, Bonusicon, Utilitypayment, Utilitylarge } = icons;
 
 const History = ({ data }) => {
   // const navigation = useNavigation()
@@ -81,6 +81,13 @@ const History = ({ data }) => {
           </View>
         );
         break;
+        case "Utility Payment":
+          return (
+            <View style={styles.arrowBg}>
+              <Utilitypayment />
+            </View>
+          );
+          break;
       case "Wallet Credit":
         if (transactionValue === "Bonus") {
 
@@ -96,7 +103,6 @@ const History = ({ data }) => {
             </View>
           );
         }
-
         break;
 
       default:

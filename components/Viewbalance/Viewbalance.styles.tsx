@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
   },
   underLine: {
-    // width: RFValue(183),
+    // width: RFValue(183), 
     flex: 1,
     height: 0.5,
     backgroundColor: COLORS.inputBorderColor,

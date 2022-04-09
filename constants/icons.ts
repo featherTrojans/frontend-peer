@@ -26,6 +26,7 @@ import Eyecrossed from "../assets/icons/Eyecrossed";
 import Deposit from "../assets/icons/Deposit";
 import Withdraw from "../assets/icons/Withdraw";
 import Transfer from "../assets/icons/Transfer";
+import Utilitypayment from "../assets/icons/Utilitypayment";
 import Paybills from "../assets/icons/Paybills";
 import Cryingicon from "../assets/icons/Cryingicon";
 import Arrowin from "../assets/icons/Arrowin";
@@ -46,6 +47,7 @@ import Receivingarrow from "../assets/icons/Receivingarrow";
 import Sendingarrow from "../assets/icons/Sendingarrow";
 import Chatdark from "../assets/icons/Chatdark";
 import Cancelrequest from "../assets/icons/Cancelrequest";
+import Utilitylarge from "../assets/icons/Utilitylarge";
 import Renegotiate from "../assets/icons/Renegotiate";
 import Backarrowgrey from "../assets/icons/Backarrowgrey";
 import Trustedbadge from "../assets/icons/Trustedbadge";
@@ -149,6 +151,7 @@ export default {
   TabHome,
   Tabtransactions,
   Tabhistory,
+  Utilitypayment,
   Tabsettings,
   Tabuser,
 
@@ -162,6 +165,7 @@ export default {
   Transfer,
   Paybills,
   Cryingicon,
+  Utilitylarge,
 
   Arrowin,
   Arrowout,

@@ -22,7 +22,7 @@ const Viewbalance = ({ navigate }: any) => {
     <View style={styles.container}>
       {/* Top part of the block */}
       <View style={styles.topContainer}>
-        <View>
+        <View style={{ flex: 1, marginRight: 20}}>
           <Text style={styles.primaryText}>Primary Wallet</Text>
           <View style={styles.underLine} />
         </View>

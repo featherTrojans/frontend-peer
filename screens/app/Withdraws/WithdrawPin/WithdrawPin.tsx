@@ -139,7 +139,7 @@ const WithdrawPin = ({ navigation, route }) => {
             }}
           >
             Negotiation Charges:
-            <Text style={{ ...FONTS.bold }}>N {plusBase(charges)}</Text>
+            <Text style={{ ...FONTS.bold }}>N {amountFormatter(plusBase(charges))}</Text>
           </Text>
           <Text
             style={{

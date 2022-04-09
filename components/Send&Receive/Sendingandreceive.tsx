@@ -4,13 +4,15 @@ import { COLORS, icons, images } from "../../constants";
 import { styles } from "./Sendingandreceive.styles";
 import InitialsBg from "../InitialsBg/InitialsBg";
 import { assetsDB, bankLogo } from "../../assetdatas";
+import { RFValue } from "react-native-responsive-fontsize";
 const {
   Senderimage,
   Sendingarrow,
   Receivingarrow,
   Receiverimage,
   Userdefaultmedium,
-  Bonusiconlarge
+  Bonusiconlarge,
+  Utilitylarge
 } = icons;
 const { Trustedbadgepng } = images;
 
@@ -39,7 +41,7 @@ const showImage = (
       break;
       case "Fund Reversal":
         return (
-          <View style={styles.typeContainer}>
+          <View style={[styles.typeContainer, {backgroundColor: "#001757", borderRadius: RFValue(62 / 2)}]}>
             <Image
               style={styles.imageStyle}
               source={{
@@ -64,6 +66,13 @@ const showImage = (
         )
       }
       break;
+      case "Utility Payment":
+        return (
+          <View style={[styles.typeContainer, { borderRadius: RFValue(62 / 2)}]}>
+            <Utilitylarge />
+          </View>
+        );
+        break;
 
     case "GTB":
     case "FIRST":
@@ -129,6 +138,12 @@ const showImage = (
       break;
 
     default:
+
+    return (
+      <View>
+        <Text>TH</Text>
+      </View>
+    )
       break;
   }
 };

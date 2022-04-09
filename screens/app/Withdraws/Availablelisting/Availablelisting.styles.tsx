@@ -54,6 +54,7 @@ export const styles = StyleSheet.create({
     color: COLORS.black,
     ...fontsize.bsmall,
     ...FONTS.medium,
+    textTransform: "uppercase"
   },
   otherInfo: {
     flexDirection: "row",

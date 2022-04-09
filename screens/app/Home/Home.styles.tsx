@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
   emptyText: {
     color: COLORS.black,
     textAlign: "center",
-    ...fontsize.bsmall,
+    ...fontsize.small,
     ...FONTS.regular,
   },
   transactNow: {

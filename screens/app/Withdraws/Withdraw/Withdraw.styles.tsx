@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
   emptyListText: {
     textAlign: "center",
     paddingHorizontal: 50,
-    ...fontsize.bsmall,
+    ...fontsize.small,
     ...FONTS.regular,
   },
 

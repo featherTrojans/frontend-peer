@@ -145,6 +145,14 @@ const Transactiondetails = ({ navigation, route }) => {
           
           `;
         break;
+        case "Utility Payment":
+          return `
+            <div style="min-width: 62px; min-height: 62px; border-radius: 32px; display: flex; justify-content: center; align-items: center;">
+              <img src="${assetsDB["others"]["utility"]}" style="width: 62px; height: 62px" />
+            </div>
+            
+            `;
+          break;
       // assetsDB["bills"][sender]
       case "Airtime Purchase":
         const networkType = sender?.toUpperCase();
@@ -208,16 +216,14 @@ const Transactiondetails = ({ navigation, route }) => {
         return { senderName: user.fullName, receiverName: otherUser?.fullName };
         break;
       case "funding":
-        return { senderName: sender, receiverName: receiver };
       case "Fund Reversal":
-        return { senderName: sender, receiverName: receiver };
       case "escrow":
-        return { senderName: sender, receiverName: receiver };
       case "Airtime Purchase":
-        return { senderName: sender, receiverName: receiver };
       case "withdrawal":
         return { senderName: sender, receiverName: receiver };
+        break;
       default:
+        return { senderName: sender, receiverName: receiver };
         break;
     }
   };

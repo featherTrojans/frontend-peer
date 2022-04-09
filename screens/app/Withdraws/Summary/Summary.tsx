@@ -5,10 +5,11 @@ import {
   View,
   ScrollView,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
+
+import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import { Bottombtn, Loader, Sendingandreceive } from "../../../../components";
 import { styles } from "./Summary.styles";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
@@ -36,18 +37,20 @@ import { RFValue } from "react-native-responsive-fontsize";
 
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Modal from "react-native-modal";
 
 const { Backarrow, Successcheckanimate } = icons;
 
 const Summary = ({ navigation, route }) => {
   const { requestInfo } = route.params;
-  const toast = useToast()
+  const toast = useToast();
   const { authdata } = useContext(AuthContext);
   const [showmodal, setShowModal] = useState(false);
   const [showSuccessmodal, setShowSuccessModal] = useState(false);
   const [showFailuremodal, setShowFailureModal] = useState(false);
   const [agentInfo, setAgentInfo] = useState({});
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   console.log(agentInfo, "agent info");
   useEffect(() => {
@@ -144,95 +147,120 @@ const Summary = ({ navigation, route }) => {
       {/* icon on the left and text in the middle */}
       <Customstatusbar />
       {loading && <Loader />}
-      <Globalmodal
-        showState={showmodal}
-        //  onBgPress={() => setShowModal(!showmodal)}
-      >
-        
-        <View
-          style={{
-            paddingTop: RFValue(40),
-            // paddingHorizontal: RFValue(10),
-            // paddingBottom: RFValue(70),
-          }}
-        >
-          <View style={{ alignItems: "center", marginBottom: RFValue(30) }}>
-            <ActivityIndicator color="black" size="large" />
-          </View>
-          <Text
-            style={{
-              lineHeight: 25,
-              ...FONTS.regular,
-              ...fontsize.bsmall,
-              textAlign: "center",
-            }}
-          >
-            Kindly input your transaction pin on{" "}
-            <Text style={{ textTransform: "capitalize" }}>
-              {requestInfo?.agent?.replace(/\s+/g, " ").split(" ")[1] ||
-                requestInfo?.agent}
-            </Text>
-            's device to complete the transaction, don’t worry it’s safe✌🏽
-          </Text>
 
-          <View
-            style={{
-              justifyContent: "center",
-              backgroundColor: COLORS.pink1,
-              borderRadius: 22,
-              paddingTop: RFValue(16),
-              paddingBottom: RFValue(14),
-              marginTop: RFValue(30),
-            }}
-          >
-            <Text
+      {/* Starts here */}
+
+      <Modal
+        isVisible={showmodal}
+        coverScreen={true}
+        backdropColor="#000"
+        backdropOpacity={0.2}
+        animationInTiming={400}
+        backdropTransitionInTiming={200}
+        animationOut={"fadeOut"}
+        animationOutTiming={150}
+        style={{ margin: 0, flex: 1 }}
+        // onBackdropPress={onBgPress}
+      >
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <BottomSheet snapPoints={["45%", "60%"]}>
+            <View
               style={{
-                textAlign: "center",
-                ...fontsize.small,
-                ...FONTS.medium,
-                color: COLORS.white,
+                paddingTop: RFValue(40),
+                // flex: 1,
+                // backgroundColor: COLORS.blue1,
+                // alignItems: "center",
+                // justifyContent: "center",
+                paddingHorizontal: 15,
               }}
             >
-              3 failed pin attempts - Transaction declines
-            </Text>
-          </View>
-              
-          <TouchableOpacity
-            style={{
-              paddingTop: RFValue(26),
-              paddingBottom: RFValue(24),
-              justifyContent: "center",
-              backgroundColor: COLORS.red1,
-              borderRadius: 10,
-              marginTop: RFValue(40),
-            }}
-            onPress={handleCancelRequest}
-          >
-            <Text
-              style={{
-                textAlign: "center",
-                color: COLORS.white,
-                ...fontsize.smallest,
-                ...FONTS.bold,
-              }}
-            >
-              CANCEL REQUEST
-            </Text>
-          </TouchableOpacity>
-              
-        </View>
-      </Globalmodal>
+              <View>
+                <View
+                  style={{ alignItems: "center", marginBottom: RFValue(30) }}
+                >
+                  <ActivityIndicator color={COLORS.blue6} size="large" />
+                </View>
+                <Text
+                  style={{
+                    lineHeight: 25,
+                    ...FONTS.regular,
+                    ...fontsize.bsmall,
+                    textAlign: "center",
+                    marginHorizontal: 20
+                  }}
+                >
+                  Kindly input your transaction pin on{" "}
+                  <Text style={{ textTransform: "capitalize" }}>
+                    {requestInfo?.agent?.replace(/\s+/g, " ").split(" ")[1] ||
+                      requestInfo?.agent}
+                  </Text>
+                  's device to complete the transaction, don’t worry it’s safe✌🏽
+                </Text>
+
+                <View
+                  style={{
+                    justifyContent: "center",
+                    backgroundColor: COLORS.pink1,
+                    borderRadius: 22,
+                    paddingTop: RFValue(16),
+                    paddingBottom: RFValue(14),
+                    paddingHorizontal: 27,
+                    marginTop: RFValue(30),
+                  }}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      ...fontsize.small,
+                      ...FONTS.medium,
+                      color: COLORS.white,
+                    }}
+                  >
+                    3 failed pin attempts - Transaction declines
+                  </Text>
+                </View>
+
+                <TouchableOpacity
+                  style={{
+                    paddingTop: RFValue(26),
+                    paddingBottom: RFValue(24),
+                    justifyContent: "center",
+                    backgroundColor: COLORS.red1,
+                    borderRadius: RFValue(10),
+                    marginTop: RFValue(40),
+                  }}
+                  onPress={handleCancelRequest}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: COLORS.white,
+                      ...fontsize.smallest,
+                      ...FONTS.bold,
+                    }}
+                  >
+                    CANCEL REQUEST
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </BottomSheet>
+        </GestureHandlerRootView>
+      </Modal>
+
 
       <Globalmodal
         showState={showSuccessmodal}
         //  onBgPress={() => setShowSuccessModal(!showSuccessmodal)}
-        btnFunction={()=>{
+        btnFunction={() => {
           setShowSuccessModal(false);
-          navigation.navigate("Transactionsrating",{userToRate:agentInfo.userUid, 
-            reference:requestInfo.reference, 
-            username:agentInfo.username,
-            fullname:agentInfo.fullName})
-         }}
+          navigation.navigate("Transactionsrating", {
+            userToRate: agentInfo.userUid,
+            reference: requestInfo.reference,
+            username: agentInfo.username,
+            fullname: agentInfo.fullName,
+          });
+        }}
       >
         <View style={{ alignItems: "center", paddingVertical: RFValue(30) }}>
           <LottieView
@@ -341,7 +369,10 @@ const Summary = ({ navigation, route }) => {
             <View style={styles.tableContainer}>
               <Text style={styles.tableTitle}>Withdrawal Charge</Text>
               <Text style={styles.tableValue}>
-                + NGN {amountFormatter(`${+requestInfo?.charges + +requestInfo?.negotiatedFee}` )}
+                + NGN{" "}
+                {amountFormatter(
+                  `${+requestInfo?.charges + +requestInfo?.negotiatedFee}`
+                )}
               </Text>
             </View>
             <View style={styles.bottomLine} />

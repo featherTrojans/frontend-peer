@@ -11,6 +11,7 @@ import LottieView from "lottie-react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { useIsFocused, useScrollToTop } from "@react-navigation/native";
+import { TabActions, useLinkTo } from "@react-navigation/native";
 
 import { Bottombtn, Transactionhistory } from "../../../../components";
 import { COLORS, icons } from "../../../../constants";
@@ -19,6 +20,7 @@ import formatData from "../../../../utils/fomatTrans";
 
 import { styles } from "./Transaction.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Cryinganimate } = icons;
 
@@ -102,26 +104,7 @@ const DATA = [
   },
 ];
 
-const EmptyComponent = () => {
-  return (
-    <View style={styles.emptyListContainer}>
-      {/* Crying icons */}
-      {/* <Cryingicon /> */}
-      <LottieView
-        source={Cryinganimate}
-        autoPlay
-        loop
-        style={{ width: 190, height: 190 }}
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.emptyContainerText}>
-          Padi, you have not performed any transactions yet.{" "}
-          <Text style={styles.emptyContainerSubText}>Transact Now</Text>
-        </Text>
-      </View>
-    </View>
-  );
-};
+
 
 const Transactions = ({ navigation }: any) => {
   const [transactions, setTransations] = useState();
@@ -134,6 +117,29 @@ const Transactions = ({ navigation }: any) => {
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
+  const jumpToNewtransactions = TabActions.jumpTo("Transactions");
+
+
+  const EmptyComponent = () => {
+    return (
+      <View style={styles.emptyListContainer}>
+        {/* Crying icons */}
+        {/* <Cryingicon /> */}
+        <LottieView
+          source={Cryinganimate}
+          autoPlay
+          loop
+          style={{ width: RFValue(190), height: RFValue(190) }}
+        />
+        <View style={styles.textContainer}>
+          <Text style={styles.emptyContainerText}>
+            Padi, you have not performed any transactions yet.{" "}
+            <Text style={styles.emptyContainerSubText} onPress={() => navigation.dispatch(jumpToNewtransactions)} >Transact Now</Text>
+          </Text>
+        </View>
+      </View>
+    );
+  };
 
 
 

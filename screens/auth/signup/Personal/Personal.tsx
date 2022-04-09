@@ -32,7 +32,7 @@ const validationSchema = Yup.object().shape({
   firstName: Yup.string().label("First Name").required(),
   lastName: Yup.string().label("Last Name").required(),
   email: Yup.string().label("Email").email().required(),
-  referredBy: Yup.string().label("Email"),
+  referredBy: Yup.string().label("Referrer"),
   phoneNumber: Yup.string()
     .label("Phone Number")
     .matches(phoneRegExp, "This is not a valid phone number"),

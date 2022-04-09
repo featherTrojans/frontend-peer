@@ -54,7 +54,8 @@ export const assetsDB = {
       GLO: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/glo/glo.png",
     },
     others:{
-      bonus: "https://res.cloudinary.com/gyroscope/image/upload/v1649441365/coinnery_llu8ny.svg"
+      bonus: "https://res.cloudinary.com/gyroscope/image/upload/v1649502844/star_4_apy8qg.svg",
+      utility: "https://res.cloudinary.com/gyroscope/image/upload/v1649504458/utility2_laa0ls.svg"
     }
   };
 

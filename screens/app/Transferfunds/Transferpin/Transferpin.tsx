@@ -159,6 +159,8 @@ const Transferpin = ({ route, navigation }) => {
 
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
+
+        
       </View>
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
     </ScrollView>

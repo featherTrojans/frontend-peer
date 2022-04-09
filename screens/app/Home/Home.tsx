@@ -77,7 +77,8 @@ const walletOptions = [
 ];
 
 const Home = ({ navigation }: { navigation: any }) => {
-  const { setAuthData, authdata, messageToken, userColor, userDefaultImage } = useContext(AuthContext);
+  const { setAuthData, authdata, messageToken, userColor, userDefaultImage } =
+    useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
@@ -86,6 +87,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   const linkTo = useLinkTo();
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
+  const jumpToNewtransactions = TabActions.jumpTo("Transactions");
   // sendSchedulePushNotification
   // console.log(authdata,"my name and stuff")
 
@@ -98,9 +100,8 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   }
   // }
 
-
   // useEffect(() => {
-    // sendSchedulePushNotification(nameToShow(authdata.fullName));
+  // sendSchedulePushNotification(nameToShow(authdata.fullName));
   // }, []);
 
   const nameToShow = (value: string) => {
@@ -127,7 +128,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   }
   // };
   // useEffect(() => {
-   
+
   //   if (messageToken) {
   //     setExtractedToken(tokenExtractor(messageToken));
   //   }
@@ -135,8 +136,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   sendAnotherToken();
   // }, [extractedToken, messageToken]);
 
-
-  
   //setting up websocket
   // useEffect(() => {
   //   const ws = new WebSocket(
@@ -151,8 +150,6 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   //   return ws.close();
   // }, []);
-
- 
 
   const getDashboardData = async () => {
     // console.log("I am fetching again from home");
@@ -174,9 +171,6 @@ const Home = ({ navigation }: { navigation: any }) => {
     getDashboardData();
   }, []);
 
-
-
-
   const onRefreshFunc = useCallback(() => {
     setRefreshing(true);
     getDashboardData();
@@ -195,7 +189,8 @@ const Home = ({ navigation }: { navigation: any }) => {
         <View style={{ marginHorizontal: 50 }}>
           <Text style={styles.emptyText}>
             Padi, you have not performed any transactions yet.{" "}
-            <Text style={styles.transactNow}>Transact Now</Text>
+              <Text style={styles.transactNow} onPress={() => navigation.dispatch(jumpToNewtransactions)}>Transact Now</Text>
+      
           </Text>
         </View>
       </View>
@@ -214,14 +209,15 @@ const Home = ({ navigation }: { navigation: any }) => {
           >
             {userDefaultImage()}
             {/* <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} /> */}
-            
           </TouchableOpacity>
 
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
               Welcome, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
             </Text>
-            <Text style={styles.profileUsername}>@{authdata?.userDetails?.username}</Text>
+            <Text style={styles.profileUsername}>
+              @{authdata?.userDetails?.username}
+            </Text>
           </View>
         </View>
         <TouchableOpacity

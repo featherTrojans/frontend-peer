@@ -21,6 +21,8 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     color: COLORS.black,
     marginBottom: 3,
+    textTransform: "uppercase"
+    
   },
   distanceDuration: {
     ...fontsize.small,

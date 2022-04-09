@@ -86,5 +86,10 @@ export const styles = StyleSheet.create({
         ...FONTS.bold,
         marginRight: RFValue(6)
 
+    },
+    emptyListText:{
+        ...fontsize.small,
+        ...FONTS.regular,
+        color: COLORS.black
     }
 })

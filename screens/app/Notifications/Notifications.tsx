@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "./Notifications.styles";
 import { icons } from "../../../constants";
@@ -198,6 +198,10 @@ const Notifications = () => {
     getAllNotifications();
   }, []);
 
+
+
+  
+
   return (
     <View style={styles.container}>
       {/* Header title */}
@@ -208,13 +212,20 @@ const Notifications = () => {
       <View style={styles.listContainer}>
         {/* Flatlist list of notifications */}
         <FlatList
+        // contentContainerStyle={{flex: 1}}
           data={formatData(notifications)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <Notification date={item.time} messages={item.data} />
           )}
           keyExtractor={(item) => item.time}
-          // ListEmptyComponent={}
+          ListEmptyComponent={() => {
+            return(
+              <View style={{flex: 1,  justifyContent: "center", alignItems: "center", marginTop: RFValue(100)}}>
+                <Text style={styles.emptyListText}>Oops, no notifications yet. </Text>
+              </View>
+            )
+          }}
         />
       </View>
     </View>

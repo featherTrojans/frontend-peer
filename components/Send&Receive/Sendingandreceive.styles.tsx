@@ -22,11 +22,11 @@ export const styles = StyleSheet.create({
 
 
   typeContainer: {
-    width: RFValue(62),
-    height: RFValue(62),
+    width: 62,
+    height: 62,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: RFValue(62 / 2),
+    borderRadius: 62 / 2,
     // backgroundColor: "#001757",
   },
   imageStyle: {

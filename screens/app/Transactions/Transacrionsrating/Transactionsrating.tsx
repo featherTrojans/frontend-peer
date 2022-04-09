@@ -26,6 +26,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
+import { RFValue } from "react-native-responsive-fontsize";
 const {
   Ratingsstar,
   Userdefaultsmaller,
@@ -152,8 +153,8 @@ const Transactionsrating = ({navigation, route}:any) => {
               style={{
                 marginHorizontal: 40,
                 textAlign: "center",
-                marginBottom: 35,
-                marginTop: 55,
+                marginBottom: RFValue(35),
+                marginTop: RFValue(55),
                 ...fontsize.bsmall,
                 ...FONTS.regular,
                 color: COLORS.black,
@@ -168,7 +169,7 @@ const Transactionsrating = ({navigation, route}:any) => {
         <View style={{ paddingHorizontal: 15, flex: 0.7 }}>
           <View
             style={{
-              marginVertical: 10,
+              marginVertical: RFValue(10),
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
@@ -197,7 +198,7 @@ const Transactionsrating = ({navigation, route}:any) => {
 
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <View
-              style={{ marginTop: 45, marginBottom: 60, paddingHorizontal: 48 }}
+              style={{ marginTop: RFValue(35), marginBottom: RFValue(35), paddingHorizontal: 48 }}
             >
               <Text
                 style={{
@@ -214,7 +215,7 @@ const Transactionsrating = ({navigation, route}:any) => {
 
             <View
               style={{
-                width: 244,
+                width: RFValue(244),
                 justifyContent: "space-between",
                 flexDirection: "row",
                 alignItems: "center",

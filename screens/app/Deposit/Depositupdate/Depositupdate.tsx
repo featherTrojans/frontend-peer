@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, Text, View, StatusBar, ScrollView } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { styles } from "./Depositupdate.styles";
 import moment from "moment";
@@ -50,7 +50,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
   return (
     <>
       <Customstatusbar />
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, }}>
         <View style={[styles.contentContainer]}>
           <View style={styles.topSection}>
             {/* Icons */}
@@ -204,7 +204,7 @@ const Depositupdate = ({ navigation }) => {
     <View style={styles.container}>
       <Backheader title="Deposit" />
       {loading && <Loader />}
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1, }}>
         <View style={{ paddingHorizontal: 15 }}>
           <Viewbalance />
         </View>
@@ -228,7 +228,7 @@ const Depositupdate = ({ navigation }) => {
             />
           </>
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 };

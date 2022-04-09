@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   emptyContainerText: {
     color: COLORS.black,
     textAlign: "center",
-    ...fontsize.bsmall,
+    ...fontsize.small,
     ...FONTS.regular,
   },
   emptyContainerSubText: {
