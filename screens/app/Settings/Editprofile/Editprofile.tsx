@@ -69,7 +69,7 @@ const EditinputSpecial = ({ label, value, name, ...props }: EditinputProps) => {
     </View>
   );
 };
-const Editinput = ({ label, value, name, formikprops, }: EditinputProps,  {...rest}) => {
+const Editinput = ({ label, value, name, formikprops,...rest }: EditinputProps) => {
   if (formikprops) {
     const { values, handleChange, handleBlur } = formikprops;
     return (
@@ -105,7 +105,7 @@ const Basicsettings = () => {
   const [usernamename, setusernamename] = useState(
     authdata?.userDetails?.username
   );
-  // console.log(authdata,"auth datat o")
+  console.log(authdata,"auth datat o")
   const handleUsernameChange = (text: string) => {
     setusernamename(text);
     // and debound
@@ -122,9 +122,8 @@ const Basicsettings = () => {
           initialValues={{
             firstName: authdata?.userDetails?.fullName?.split(" ")[1],
             lastName: authdata?.userDetails?.fullName?.split(" ")[0],
-            // username:"",
-            // firstName:"",
-            // lastName:""
+            email:authdata?.userDetails?.email,
+            phone:authdata?.userDetails?.phoneNumber
           }}
           validationSchema={validationSchema}
           onSubmit={async (values) => {
@@ -231,12 +230,14 @@ const Basicsettings = () => {
                     label="Email"
                     name="email"
                     formikprops={formikProps}
+                    editable={false}
                   />
 
                   <Editinput
                     label="Phone"
                     name="phone"
                     formikprops={formikProps}
+                    editable={false}
                   />
                 </View>
                 <Bottombtn title="Save changes" onpress={handleSubmit} />

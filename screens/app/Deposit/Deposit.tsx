@@ -56,7 +56,8 @@ const Emptyrequest = () => {
   );
 };
 
-const Deposit = ({ navigation }) => {
+const Deposit = ({ navigation,route}) => {
+  const {pendingRequests,acceptedRequests} = route.params
   const [active, setActive] = useState("pending");
   const [pending, setPending] = useState([]);
   const [accepted, setAccepted] = useState([]);
@@ -79,10 +80,10 @@ const Deposit = ({ navigation }) => {
   };
   const horizontalOffset = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    getpendingrequest();
-    getacceptedrequest();
-  }, []);
+  // useEffect(() => {
+  //   getpendingrequest();
+  //   getacceptedrequest();
+  // }, []);
 
   
   const getpendingrequest = async () => {
@@ -126,7 +127,7 @@ const Deposit = ({ navigation }) => {
     );
   };
 
-  const REQUESTDATA = active === "pending" ? pending : accepted;
+  const REQUESTDATA = active === "pending" ? pendingRequests : acceptedRequests;
 
   const Requestlist = () => {
     return (
@@ -153,7 +154,7 @@ const Deposit = ({ navigation }) => {
                   },
                 ]}
               >
-                Pending Requests ({pending.length})
+                Pending Requests ({pendingRequests.length})
               </Text>
             </TouchableOpacity>
 
@@ -172,7 +173,7 @@ const Deposit = ({ navigation }) => {
                   },
                 ]}
               >
-                Accepted Requests ({accepted.length})
+                Accepted Requests ({acceptedRequests.length})
               </Text>
             </TouchableOpacity>
           </View>
@@ -226,7 +227,7 @@ const Deposit = ({ navigation }) => {
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
         <View style={{ flex: 1 }}>
-          {pending.length < 1 && accepted.length < 1 ? (
+          {pendingRequests.length < 1 && acceptedRequests.length < 1 ? (
             <Emptyrequest />
           ) : (
             <Requestlist />

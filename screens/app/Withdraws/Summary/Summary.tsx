@@ -293,7 +293,7 @@ const Summary = ({ navigation, route }) => {
       <Globalmodal
         showState={showFailuremodal}
         onBgPress={() => setShowFailureModal(!showFailuremodal)}
-        btnFunction={() => navigation.navigate("Home")}
+        btnFunction={() => navigation.navigate("Acceptedwithdraw",{requestInfo:requestInfo})}
       >
         <View style={{ alignItems: "center", paddingVertical: RFValue(30) }}>
           {/* <LottieView source={Successcheckanimate} autoPlay loop style={{width: 148, height: 148}}/> */}

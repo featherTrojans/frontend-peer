@@ -9,6 +9,7 @@ import {
   Button,
   Image,
   Text,
+  TouchableOpacity
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -138,6 +139,7 @@ import Map from "../screens/shared/map/Map";
 import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
+
 
 const {
   TabHome,
@@ -683,7 +685,7 @@ export default function MainNavigation({ initialBoarded = false }) {
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
   const [onboarded, setOnboarded] = useState(false);
-  
+  const [faketoken, setfaketoken] = useState(false)
   useEffect(() => {
     setMessageToken(expoPushToken);
   }, [expoPushToken]);
@@ -698,44 +700,59 @@ export default function MainNavigation({ initialBoarded = false }) {
   }, []);
 
   useEffect(() => {
+    AppState.addEventListener("change",lockLogic);
     
-    const subscription: any = AppState.addEventListener(
-      "change",
-      (nextAppState) => {
-        // console.log(token,"from the whattt")
-        if (
-          appState.current.match(/inactive|background/) &&
-          nextAppState === "active"
-        ) {
-          
-          if(!token){
-            
-            return 
-          }
-
-          if (Date.now() - timer.current > 900000) {
-            setToken("");
-            setModal(false);
-            return;
-          }
-          if (Date.now() - timer.current > 300000) {
-            return setModal(true);
-          }
-
-          return;
-        }
-        appState.current = nextAppState;
-        if (!modal || !token) {
-          timer.current = Date.now();
-          setModal(false);
-        }
-      }
-    );
     return () => {
-      // subscription.remove();
+      AppState.removeEventListener("change",lockLogic)
     };
-  }, [token]);
+  }, [token,modal]);
 
+  const testingLogic = (nextAppState)=>{
+    console.log(nextAppState)
+    console.log(faketoken)
+  }
+
+  const lockLogic = (nextAppState) => {
+    // console.log(token,"from the whattt")
+    if (
+      appState.current.match(/inactive|background/) &&
+      nextAppState === "active"
+    ) {
+      
+      if(!token){
+        return 
+      }
+
+      if (Date.now() - timer.current > 900000) {
+        setToken("");
+        setModal(false);
+        return;
+      }
+      if (Date.now() - timer.current > 60000) {
+        return setModal(true);
+      }
+
+      timer.current = Date.now();
+      return;
+    }
+    appState.current = nextAppState;
+    if (!modal && token) {  
+      timer.current = Date.now();
+      // setModal(false);
+    }
+  }
+
+  // return(
+  //   <View style={{marginTop: 500}}>
+  //     <TouchableOpacity onPress={()=>setfaketoken(true)}>
+  //       <Text>I will change state</Text>
+  //     </TouchableOpacity>
+  //     <TouchableOpacity onPress={()=>setfaketoken(false)}>
+  //       <Text>I will change state again</Text>
+  //     </TouchableOpacity>
+  //     <Text>{faketoken}</Text>
+  //   </View>
+  // )
   return (
     <NavigationContainer ref={navigationRef}>
       {token ? <LockScreen modal={modal} setModal={setModal} /> : null}

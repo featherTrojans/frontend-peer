@@ -21,7 +21,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const WithdrawPin = ({ navigation, route }) => {
-  const { amount, userInfo } = route.params;
+  const { amount, userInfo,baseCharge } = route.params;
 
   const { coords } = useContext(LocationContext);
   const { authdata } = useContext(AuthContext);
@@ -32,6 +32,7 @@ const WithdrawPin = ({ navigation, route }) => {
   const [showmodal, setShowModal] = useState(false);
   const [shownextmodal, setShowNextModal] = useState(false);
 
+  console.log(baseCharge)
   const amountFormatter = (value: string) => {
     return (
       Number(value)
@@ -64,7 +65,7 @@ const WithdrawPin = ({ navigation, route }) => {
       // console.log(userInfo, coords.locationText)
       const data = {
         amount: amount,
-        charges: justCharge(charges),
+        charges: baseCharge,
         agentUsername: userInfo.username,
         agent: userInfo.fullName,
         statusId: userInfo.reference,
@@ -139,7 +140,7 @@ const WithdrawPin = ({ navigation, route }) => {
             }}
           >
             Negotiation Charges:
-            <Text style={{ ...FONTS.bold }}>N {amountFormatter(plusBase(charges))}</Text>
+            <Text style={{ ...FONTS.bold }}>N {baseCharge + +charges}</Text>
           </Text>
           <Text
             style={{
