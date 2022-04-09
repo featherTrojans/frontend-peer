@@ -136,6 +136,7 @@ const SecurepinAgain = ({ route, navigation }) => {
             <View style={styles.pinView}>{amount[3] && <SecureDot />}</View>
           </View>
         </View>
+      </View>
         <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
             return (
@@ -151,7 +152,6 @@ const SecurepinAgain = ({ route, navigation }) => {
           })}
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View>
-      </View>
       <Bottombtn
         title="PROCEED"
         onpress={handleSubmit}

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: RFValue(25),
+    // paddingHorizontal: RFValue(25),
   },
   backArrowConteiner: {
     marginVertical: RFValue(20),
@@ -43,6 +43,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
+    // backgroundColor:"blue"
   },
   pinContainer: {
     justifyContent: "center",
