@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
   TouchableHighlight,
+  StyleSheet,
 } from "react-native";
 import { WebView } from 'react-native-webview';
 import { useToast } from "react-native-toast-notifications";
@@ -84,7 +85,7 @@ function WalletPin({ route, navigation }) {
               </Text>
             </View>
           </View>
-          <View style={styles.numberBtnContainer}>
+          <View style={[walletStyles.walletpinContainer, ]}>
             {numbers.map((number, index) => {
               return (
                 <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
@@ -106,3 +107,16 @@ function WalletPin({ route, navigation }) {
 }
 
 export default WalletPin;
+
+
+const walletStyles = StyleSheet.create({
+  walletpinContainer:{
+    // flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    // marginBottom: 30,
+    // backgroundColor: "red"
+  }
+})

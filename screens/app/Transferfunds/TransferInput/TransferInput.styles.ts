@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     flexWrap: "wrap",
     // marginBottom: 30,
-    // backgroundColor: "red"
+    backgroundColor: "red"
     
   },
   btnBg: {

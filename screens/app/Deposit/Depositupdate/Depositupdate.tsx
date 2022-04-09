@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, StatusBar, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { styles } from "./Depositupdate.styles";
 import moment from "moment";
@@ -50,7 +57,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
   return (
     <>
       <Customstatusbar />
-      <View style={{ flex: 1, }}>
+      <View style={{ flex: 1 }}>
         <View style={[styles.contentContainer]}>
           <View style={styles.topSection}>
             {/* Icons */}
@@ -131,7 +138,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
           style={styles.bottomBtn}
           activeOpacity={0.8}
         >
-          <View style={{flexDirection: "row", alignItems: "center"}}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={styles.eyeiconBg}>
               <Viewrequesteye />
             </View>
@@ -153,25 +160,27 @@ const Depositupdate = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [coords, setCoords] = useState<any>({});
 
-  console.log(status,"status")
+  console.log(status, "status");
   useEffect(() => {
     getDepositStatus();
   }, []);
   useEffect(() => {
-    updateDepositLocation()    
-  }, [status, coords])
+    updateDepositLocation();
+  }, [status, coords]);
   useEffect(() => {
-    getLocation()
+    getLocation();
   }, []);
 
   const getLocation = async () => {
-    try{
-      const {coordinates, address, locationObj}:any = await getCurrentLocation()
-      setCoords({...coordinates,locationText:address});     
-    }catch(err){}finally{
+    try {
+      const { coordinates, address, locationObj }: any =
+        await getCurrentLocation();
+      setCoords({ ...coordinates, locationText: address });
+    } catch (err) {
+    } finally {
     }
-  }
-  
+  };
+
   const getDepositStatus = async () => {
     try {
       setLoading(true);
@@ -183,50 +192,70 @@ const Depositupdate = ({ navigation }) => {
       setLoading(false);
     }
   };
-  const updateDepositLocation = async ()=>{
-    console.log("trying to update the depositor location")
-    try{
-      if(status && coords.longitude){
-        const response = await axiosCustom.put('/status/location/update',{
+  const updateDepositLocation = async () => {
+    console.log("trying to update the depositor location");
+    try {
+      if (status && coords.longitude) {
+        const response = await axiosCustom.put("/status/location/update", {
           longitude: coords.longitude,
           latitude: coords.latitude,
-          locationText:  coords.locationText,
-          reference: status?.status[0]?.reference
-        })
-        
+          locationText: coords.locationText,
+          reference: status?.status[0]?.reference,
+        });
       }
-    }catch(err){
-    }finally{
+    } catch (err) {
+    } finally {
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
       <Backheader title="Deposit" />
-      {loading && <Loader />}
-      <ScrollView style={{ flex: 1, }} contentContainerStyle={{flex: 1}}>
+
+      {/* {loading && <Loader />} */}
+
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flex: 1 }}>
         <View style={{ paddingHorizontal: 15 }}>
           <Viewbalance />
         </View>
 
-        {status?.status?.length > 0 ? (
-          <StatusUpdate status={status} navigation={navigation} />
-        ) : (
-          <>
-            <View style={{ flex: 1 }}>
-              <Emptyrequest />
-            </View>
+        {loading ? (
 
-            <Bottombtn
-              title="Create New Status"
-              onpress={() =>
-                navigation.navigate("Depositinput", {
-                  type: "create",
-                  reference: null,
-                })
-              }
-            />
+
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <ActivityIndicator size="large" color={COLORS.blue6} />
+          </View>
+
+        ) : (
+
+          <>
+            {status?.status?.length > 0 ? (
+              <StatusUpdate status={status} navigation={navigation} />
+            ) : (
+              <>
+                <View style={{ flex: 1 }}>
+                  <Emptyrequest />
+                </View>
+
+                <Bottombtn
+                  title="Create New Status"
+                  onpress={() =>
+                    navigation.navigate("Depositinput", {
+                      type: "create",
+                      reference: null,
+                    })
+                  }
+                />
+
+                
+              </>
+            )}
           </>
+
+
+
         )}
       </ScrollView>
     </View>

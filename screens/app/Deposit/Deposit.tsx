@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
+  ActivityIndicator
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import LottieView from "lottie-react-native";
@@ -61,6 +62,7 @@ const Deposit = ({ navigation }) => {
   const [pending, setPending] = useState([]);
   const [accepted, setAccepted] = useState([]);
   const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const activeColor = (activeIndex: number) => {
     return index === activeIndex ? "#003AD6" : "#000000";
@@ -80,24 +82,42 @@ const Deposit = ({ navigation }) => {
   const horizontalOffset = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    getpendingrequest();
-    getacceptedrequest();
+    getdepositrequest();
+    // getacceptedrequest();
   }, []);
 
-  
-  const getpendingrequest = async () => {
+  // const getpendingrequest = async () => {
+  //   try {
+  //     const response = await axiosCustom.get("/request/depositor/pending");
+
+  //     setPending(response.data.data);
+  //   } catch (err) {}
+  // };
+
+  // const getacceptedrequest = async () => {
+  //   try {
+  //     const response = await axiosCustom.get("/request/depositor/accepted");
+
+  //     setAccepted(response.data.data);
+  //   } catch (err) {}
+  // };
+
+  const getdepositrequest = async () => {
     try {
-      const response = await axiosCustom.get("/request/depositor/pending");
-      
-      setPending(response.data.data);
-    } catch (err) {}
-  };
-  const getacceptedrequest = async () => {
-    try {
-      const response = await axiosCustom.get("/request/depositor/accepted");
-      
-      setAccepted(response.data.data);
-    } catch (err) {}
+      setLoading(true);
+      const acceptedresponse = await axiosCustom.get(
+        "/request/depositor/accepted"
+      );
+      const pendingresponse = await axiosCustom.get(
+        "/request/depositor/pending"
+      );
+      setPending(pendingresponse.data.data);
+      setAccepted(acceptedresponse.data.data);
+    } catch (error) {
+      console.log(err.response);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Requestee profile
@@ -195,9 +215,26 @@ const Deposit = ({ navigation }) => {
           contentContainerStyle={{ marginTop: 30 }}
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={() => (
-
-            <View style={{flex: 1, justifyContent: 'center', alignItems: "center"}}>
-              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.black, marginTop: 70, marginHorizontal: 50, textAlign: 'center', lineHeight: 24}}>Sorry you have no available request at the moment.</Text>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  ...fontsize.small,
+                  ...FONTS.regular,
+                  color: COLORS.black,
+                  marginTop: 70,
+                  marginHorizontal: 50,
+                  textAlign: "center",
+                  lineHeight: 24,
+                }}
+              >
+                Sorry you have no available request at the moment.
+              </Text>
             </View>
           )}
           renderItem={({ item }) => (
@@ -226,14 +263,19 @@ const Deposit = ({ navigation }) => {
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
 
-        
-        <View style={{ flex: 1 }}>
-          {pending.length < 1 && accepted.length < 1 ? (
-            <Emptyrequest />
-          ) : (
-            <Requestlist />
-          )}
+        {loading ? (
+          <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+          <ActivityIndicator size="large" color={COLORS.blue6} />
         </View>
+        ) : (
+          <View style={{ flex: 1 }}>
+            {pending.length < 1 && accepted.length < 1 ? (
+              <Emptyrequest />
+            ) : (
+              <Requestlist />
+            )}
+          </View>
+        )}
       </View>
 
       {/* <Bottombtn
