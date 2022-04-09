@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
 
 
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
   },
   mainTextContainer: {
     marginLeft: 7,
-    width: 295,
+    width: RFValue(295),
     marginBottom: 28,
   },
   mainText: {
@@ -43,7 +44,8 @@ export const styles = StyleSheet.create({
   namecont:{
     flexDirection: "row",
     marginLeft: 20,
-    alignItems:"center"
+    alignItems:"center",
+    marginTop: -10
   },
   name:{
     color: "#0034CB",
