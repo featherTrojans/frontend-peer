@@ -383,7 +383,6 @@ const Tabs = () => {
                 </View>
               );
             },
-            unmountOnBlur: true,
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -534,7 +533,7 @@ const RootNavigator = ({ initialBoarded }) => {
         <>
           {/* Transaction Screens*/}
           <AppStack.Group>
-            <AppStack.Screen name="Root" component={Tabs} />
+            <AppStack.Screen options={horizontalAnimation} name="Root" component={Tabs} />
             <AppStack.Screen name="Transactions" component={Transactions} />
             <AppStack.Screen
               name="Newtransactions"
