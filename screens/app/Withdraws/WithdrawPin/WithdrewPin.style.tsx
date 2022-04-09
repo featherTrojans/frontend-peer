@@ -43,6 +43,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
+    // backgroundColor:"blue"
   },
   pinContainer: {
     justifyContent: "center",

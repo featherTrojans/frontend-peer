@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     // backgroundColor: COLORS.white,
-    paddingHorizontal: RFValue(25),
+    // paddingHorizontal: RFValue(25),
   },
   backArrowConteiner: {
     marginVertical: RFValue(20),

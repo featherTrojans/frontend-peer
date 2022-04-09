@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     marginHorizontal: RFValue(20),
     marginVertical: RFValue(10),
-    // backgroundColor: "blue"
+    // backgroundColor: "red"
   },
   numberBtnText: {
     ...fontsize.bmedium,

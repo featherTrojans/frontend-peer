@@ -43,7 +43,7 @@ const Securepin = ({ route, navigation }) => {
       <Customstatusbar />
       <View style={{ paddingHorizontal: RFValue(25) }}>
         <JustifyBetween style={{ marginBottom: RFValue(10) }}>
-          <View>
+          <View >
             <Text style={styles.header}>Set up your </Text>
             <Text style={styles.header}>4-digit secure pin</Text>
           </View>
@@ -66,10 +66,12 @@ const Securepin = ({ route, navigation }) => {
           </View>
         </View>
 
-       
+
+
+        
       </View>
       <View style={styles.numberBtnContainer}>
-          {numbers.map((number, index) => {
+        {numbers.map((number, index) => {
             return (
               <Numberbtn
                 key={index}
