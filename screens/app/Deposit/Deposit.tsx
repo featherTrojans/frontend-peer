@@ -225,6 +225,8 @@ const Deposit = ({ navigation }) => {
       <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
+
+        
         <View style={{ flex: 1 }}>
           {pending.length < 1 && accepted.length < 1 ? (
             <Emptyrequest />
