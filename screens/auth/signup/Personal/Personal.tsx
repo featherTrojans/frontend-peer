@@ -84,7 +84,7 @@ const Personal = ({ navigation }) => {
                 lastName: values.lastName.trim(),
                 email: values.email.trim(),
                 phoneNumber: values.phoneNumber.trim(),
-                referredBy: values.referredBy.trim(),
+                referredBy: values.referredBy.trim(), 
               });
               //store data in context
               // setAuthData(response?.data?.data)

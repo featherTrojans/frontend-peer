@@ -12,6 +12,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { styles } from "./Settings.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import Customstatusbar from "../../shared/Customstatusbar";
+import { Shadow } from "../../../constants/theme";
 
 const {
   Defaultuseravatar,
@@ -117,7 +118,16 @@ const Settings = ({navigation}) => {
         </View>
       </View>
 
-      <BottomSheet snapPoints={["50%", "75%"]}>
+      <BottomSheet snapPoints={["50%", "75%"]}  style={{
+            shadowColor: COLORS.grey2,
+            shadowOpacity: 0.5,
+            shadowOffset: { width: 10, height: -10},
+            shadowRadius: 6,
+            elevation: 10,
+            backgroundColor: 'white',
+            borderRadius: 25
+          
+            }} >
         <BottomSheetScrollView
           contentContainerStyle={{
             backgroundColor: COLORS.white,
@@ -125,6 +135,8 @@ const Settings = ({navigation}) => {
             // paddingTop: 25,
             // marginBottom: 45
             paddingBottom: 45,
+          
+            
           }}
         >
           <Iconwithtitle
