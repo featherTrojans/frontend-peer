@@ -162,7 +162,7 @@ const Depositupdate = ({ navigation, route }) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [coords, setCoords] = useState<any>({});
-
+  console.log(status, "the status")
   useEffect(() => {
     getDepositStatus();
   },[route.params?.from]);

@@ -57,6 +57,7 @@ const WithdrawPin = ({ navigation, route }) => {
   };
 
   const handleSubmit = async () => {
+   
     try {
       setLoading(true);
       setShowModal(false);
@@ -69,8 +70,9 @@ const WithdrawPin = ({ navigation, route }) => {
         meetupPoint: coords.locationText,
         negotiatedFee: charges
       };
+      console.log(data)
       const response = await axiosCustom.post("/request/create", data);
-
+ 
       setShowNextModal(true);
     } catch (err) {
       showerror(toast, err);
@@ -221,7 +223,13 @@ const WithdrawPin = ({ navigation, route }) => {
             </View>
           </View>
         </View>
-        <Bottombtn title="PROCEED" onpress={() => setShowModal(true)} />
+        <Bottombtn title="PROCEED" onpress={() =>{
+          if(Number(charges) <= 0 ){
+            showerror(toast,null ,"sorry you have to input a fair amount to continue");
+            return
+          }
+          setShowModal(true)
+      }} />
       </View>
     </View>
   );

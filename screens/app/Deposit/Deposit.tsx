@@ -123,7 +123,7 @@ const Deposit = ({ navigation,route}) => {
 
   // Requestee profile
   const Requesteeprofile = ({ list, onpress }: any) => {
-    const { reference, charges, status, full_name, user, amount } = list;
+    const { reference, charges, status, full_name, user, amount,negotiatedFee } = list;
     return (
       <TouchableOpacity
         style={styles.depositProfileContainer}
@@ -138,7 +138,7 @@ const Deposit = ({ navigation,route}) => {
             <Text style={styles.depositAmount}>
               NGN {amount}{" "}
               <Text style={styles.depositBasecharge}>
-                + NGN {charges} Charges
+                + NGN {+charges + +negotiatedFee}  Charges
               </Text>
             </Text>
           </View>
