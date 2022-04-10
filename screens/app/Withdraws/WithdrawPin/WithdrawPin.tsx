@@ -188,8 +188,8 @@ const WithdrawPin = ({ navigation, route }) => {
       </Globalmodal>
 
       <View style={{ flex: 1, backgroundColor: COLORS.white }}>
-        <View style={styles.mainContainer}>
-          <View style={styles.backArrowConteiner}>
+        <View style={[styles.mainContainer, ]}>
+          <View style={[styles.backArrowConteiner,{ marginLeft: 15}]}>
             <Backarrow />
           </View>
 

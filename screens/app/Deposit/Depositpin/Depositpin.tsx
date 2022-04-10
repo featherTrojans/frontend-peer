@@ -134,11 +134,11 @@ const Depositpin = ({ route, navigation }) => {
         </View>
       </Globalmodal>
 
-      
-      <View style={styles.mainContainer}>
-        <View style={styles.backArrowConteiner}>
-          <Backarrow />
-        </View>
+
+        <View style={[styles.mainContainer, ]}>
+          <View style={[styles.backArrowConteiner,{ marginLeft: 15}]}>
+            <Backarrow />
+          </View>
 
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>

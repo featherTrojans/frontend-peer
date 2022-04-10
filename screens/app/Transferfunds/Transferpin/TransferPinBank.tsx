@@ -87,7 +87,7 @@ const TransferpinBank = ({route, navigation}) => {
 
 
       <View style={styles.mainContainer}>
-        <View style={styles.backArrowConteiner}>
+        <View style={[styles.backArrowConteiner, {marginLeft: 15}]}>
           <Backarrow />
         </View>
 
