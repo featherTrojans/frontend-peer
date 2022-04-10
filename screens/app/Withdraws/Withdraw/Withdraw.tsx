@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
+  ActivityIndicator,
 } from "react-native";
 import React, { ReactNode, useState, useEffect, useRef } from "react";
 import LottieView from "lottie-react-native";
@@ -85,7 +86,7 @@ const Requesteeprofile = ({ list, onpress }: any) => {
         <InitialsBg sideLength={44} name={agent} />
         <View style={styles.namesContainer}>
           <Text style={styles.withdrawProfileName}>{agent}</Text>
-          <Text style={styles.withdrawProfileUsername}>@{agentUsername}</Text>
+          <Text style={styles.withdrawProfileUsername}>@{agentUsername.toLowerCase()}</Text>
         </View>
       </View>
 
@@ -242,17 +243,26 @@ const Withdraw = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Backheader title="Withdraw" />
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
       <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
+        {loading ? (
+            <View
+              style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+            >
+              <ActivityIndicator size="large" color={COLORS.blue6} />
+            </View>
+
+            ) :(
         <View style={{ flex: 1 }}>
           {pendingRequests.length < 1 && acceptedRequests.length < 1 ? (
             <Emptyrequest />
-          ) : (
-            <Requestlist />
-          )}
+            ) : (
+              <Requestlist />
+              )}
         </View>
+              )}
       </View>
 
       <Bottombtn

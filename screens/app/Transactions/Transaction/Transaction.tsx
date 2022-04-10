@@ -6,6 +6,7 @@ import {
   FlatList,
   RefreshControl,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import LottieView from "lottie-react-native";
 import * as Device from "expo-device";
@@ -104,8 +105,6 @@ const DATA = [
   },
 ];
 
-
-
 const Transactions = ({ navigation }: any) => {
   const [transactions, setTransations] = useState();
   const [loading, setLoading] = useState<boolean>(false);
@@ -118,7 +117,6 @@ const Transactions = ({ navigation }: any) => {
   const notificationListener = useRef();
   const responseListener = useRef();
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-
 
   const EmptyComponent = () => {
     return (
@@ -134,30 +132,30 @@ const Transactions = ({ navigation }: any) => {
         <View style={styles.textContainer}>
           <Text style={styles.emptyContainerText}>
             Padi, you have not performed any transactions yet.{" "}
-            <Text style={styles.emptyContainerSubText} onPress={() => navigation.dispatch(jumpToNewtransactions)} >Transact Now</Text>
+            <Text
+              style={styles.emptyContainerSubText}
+              onPress={() => navigation.dispatch(jumpToNewtransactions)}
+            >
+              Transact Now
+            </Text>
           </Text>
         </View>
       </View>
     );
   };
 
+  const isFocused = useIsFocused();
 
-
-
-const isFocused = useIsFocused()
-
-
-const toTop = () => {
+  const toTop = () => {
     // use current
-    flatlistRef.current?.scrollToOffset({ animated: true, offset: 0 })
-}
-if(isFocused){
-  toTop()
-}
+    flatlistRef.current?.scrollToOffset({ animated: true, offset: 0 });
+  };
+  if (isFocused) {
+    toTop();
+  }
 
   useEffect(() => {
     getAllTransactions();
-
   }, []);
 
   const getAllTransactions = async () => {
@@ -165,11 +163,11 @@ if(isFocused){
       setLoading(true);
       const response = await axiosCustom.get("/transactions");
       setTransations(response?.data?.data?.transactions);
-      console.log(response, 'Trasnations')
+      console.log(response, "Trasnations");
     } catch (err) {
       console.log(err.response);
     } finally {
-      setLoading(true);
+      setLoading(false);
       setRefreshing(false);
     }
   };
@@ -200,30 +198,43 @@ if(isFocused){
         <Text style={styles.headerText}>History</Text>
 
         <View style={styles.listContainer}>
-          {DATA.length > 0 && <Listheader />}
-
-          <FlatList
-            ref={flatlistRef}
-            style={{ paddingTop: 10 }}
-            data={formatData(transactions)}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={handleRefresh}
-                progressBackgroundColor="white"
-                colors={["#003AD6"]}
-                tintColor={"#003AD6"}
+          {loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ActivityIndicator size="large" color={COLORS.blue6} />
+            </View>
+          ) : (
+            <>
+              {DATA.length > 0 && <Listheader />}
+              <FlatList
+                ref={flatlistRef}
+                style={{ paddingTop: 10 }}
+                data={formatData(transactions)}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={handleRefresh}
+                    progressBackgroundColor="white"
+                    colors={["#003AD6"]}
+                    tintColor={"#003AD6"}
+                  />
+                }
+                // refreshing={refreshing}
+                // onRefresh={handleRefresh}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item }: any) => (
+                  <Transactionhistory date={item.time} datas={item.data} />
+                )}
+                keyExtractor={(item) => item.time}
+                ListEmptyComponent={<EmptyComponent />}
               />
-            }
-            // refreshing={refreshing}
-            // onRefresh={handleRefresh}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }: any) => (
-              <Transactionhistory date={item.time} datas={item.data} />
-            )}
-            keyExtractor={(item) => item.time}
-            ListEmptyComponent={<EmptyComponent />}
-          />
+            </>
+          )}
         </View>
       </View>
 

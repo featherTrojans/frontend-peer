@@ -707,10 +707,6 @@ export default function MainNavigation({ initialBoarded = false }) {
     };
   }, [token,modal]);
 
-  const testingLogic = (nextAppState)=>{
-    console.log(nextAppState)
-    console.log(faketoken)
-  }
 
   const lockLogic = (nextAppState) => {
     // console.log(token,"from the whattt")
@@ -728,7 +724,7 @@ export default function MainNavigation({ initialBoarded = false }) {
         setModal(false);
         return;
       }
-      if (Date.now() - timer.current > 60000) {
+      if (Date.now() - timer.current > 300000) {
         return setModal(true);
       }
 
@@ -742,17 +738,6 @@ export default function MainNavigation({ initialBoarded = false }) {
     }
   }
 
-  // return(
-  //   <View style={{marginTop: 500}}>
-  //     <TouchableOpacity onPress={()=>setfaketoken(true)}>
-  //       <Text>I will change state</Text>
-  //     </TouchableOpacity>
-  //     <TouchableOpacity onPress={()=>setfaketoken(false)}>
-  //       <Text>I will change state again</Text>
-  //     </TouchableOpacity>
-  //     <Text>{faketoken}</Text>
-  //   </View>
-  // )
   return (
     <NavigationContainer ref={navigationRef}>
       {token ? <LockScreen modal={modal} setModal={setModal} /> : null}

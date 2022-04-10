@@ -3,7 +3,7 @@ import React from "react";
 // import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import { COLORS, icons } from "../../../../constants";
 import { styles } from "./Transfercash.styles";
-import { TouchableOpacity } from "@gorhom/bottom-sheet";
+
 import { Backheader } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
 

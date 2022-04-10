@@ -239,9 +239,9 @@ const Home = ({ navigation }: { navigation: any }) => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefreshFunc}
-            progressBackgroundColor="white"
-            colors={["#003AD6"]}
-            tintColor={"#003AD6"}
+            progressBackgroundColor={COLORS.white}
+            colors={[COLORS.blue6]}
+            tintColor={COLORS.white}
           />
         }
       >

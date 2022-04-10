@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, FlatList, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "./Notifications.styles";
-import { icons } from "../../../constants";
+import { icons, COLORS } from "../../../constants";
 import { Backheader } from "../../../components";
 import { string } from "yup";
 import { Shadow } from "../../../constants/theme";
@@ -189,7 +189,7 @@ const Notifications = () => {
     } catch (err) {
       console.log(err.response);
     } finally {
-      setLoading(true);
+      setLoading(false);
       // setRefreshing(false);
     }
   };
@@ -209,9 +209,18 @@ const Notifications = () => {
         <Backheader title="Notifications" />
       </View>
       <Customstatusbar />
+
+
       <View style={styles.listContainer}>
-        {/* Flatlist list of notifications */}
-        <FlatList
+
+
+        {loading ?
+        
+            <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+              <ActivityIndicator size="large" color={COLORS.blue6} />
+            </View>
+          :
+          <FlatList
         // contentContainerStyle={{flex: 1}}
           data={formatData(notifications)}
           showsVerticalScrollIndicator={false}
@@ -227,6 +236,10 @@ const Notifications = () => {
             )
           }}
         />
+      
+      }
+        {/* Flatlist list of notifications */}
+        
       </View>
     </View>
   );

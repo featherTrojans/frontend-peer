@@ -101,7 +101,7 @@ function Depositinput({ route, navigation }) {
   if(locationLoading){
     return(
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
-        <ActivityIndicator  color="#000" size="large" />
+        <ActivityIndicator  color={COLORS.blue6} size="large" />
        </View>
       )
   }
