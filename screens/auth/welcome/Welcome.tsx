@@ -59,6 +59,7 @@ const Welcome = ({ navigation, route }) => {
 
     const sendRegistrationMessage = () => {
       if (fromm == "setup" && authdata?.userDetails?.fullName) {
+        checked = false
         console.log("push from setup");
         sendSchedulePushNotification(
           "Acccount Registration",
@@ -80,13 +81,15 @@ const Welcome = ({ navigation, route }) => {
     let check = true;
     const sendMessage = () => {
       if (fromm !== "setup" && authdata?.userDetails?.fullName) {
-        // console.log("push from login")
+        
+        console.log("push from login new")
         // console.log(authdata, "Here is the authdata")
         // console.log(authdata?.userDetails?.fullName)
         sendSchedulePushNotification(
           "Welcome Back Padi! 🎉",
           "Do more today. Enjoy financial flexibility"
         );
+        check = false
       }
     };
     if (check) {
@@ -95,8 +98,20 @@ const Welcome = ({ navigation, route }) => {
 
     return () => {
       check = false;
+      sendMessage();
+
     };
   }, [authdata]);
+
+
+
+
+
+
+
+
+
+
 
   const getPeriod = () => {
     const hour = new Date().getHours();

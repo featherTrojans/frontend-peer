@@ -181,6 +181,7 @@ export function usePushNotification() {
     responseListener.current =
       Notification.addNotificationResponseReceivedListener((response) => {
         const { data } = response.notification.request.content;
+        // console.log(data, "here is the notification data")
         customNavigation(data.redirectTo, {});
       });
 
