@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useContext, useState, useCallback } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useContext,
+  useState,
+  useCallback,
+} from "react";
 import { StyleSheet, Text, View } from "react-native";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, icons, SIZES, fontsize } from "../../../constants";
@@ -14,17 +20,19 @@ import { styles } from "./Welcome.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../shared/Customstatusbar";
-import { sendSchedulePushNotification, sendTokenToDB } from "../../../utils/pushNotifications";
+import {
+  sendSchedulePushNotification,
+  sendTokenToDB,
+} from "../../../utils/pushNotifications";
 import { RFValue } from "react-native-responsive-fontsize";
 
 const { Smile, Winkinganimate } = icons;
 
 const Welcome = ({ navigation, route }) => {
   const { fromm, username, token } = route.params;
-  const { setToken, authdata , messageToken} = useContext(AuthContext);
+  const { setToken, authdata, messageToken } = useContext(AuthContext);
   const { setAuthData } = useContext(AuthContext);
   const [percentage, setPercentage] = useState(0);
-  
 
   const progressWidth = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
@@ -34,37 +42,44 @@ const Welcome = ({ navigation, route }) => {
   });
 
   const nameToShow = (value: string) => {
-    if(!value) return ""
-    const newvalue =  value.replace(/\s+/g, ' ');
+    if (!value) return "";
+    const newvalue = value.replace(/\s+/g, " ");
     if (newvalue?.split(" ").length > 1) {
       return newvalue?.split(" ")[1];
     } else {
       return newvalue;
     }
   };
-  const nameInNotification = authdata?.userDetails?.fullName ? nameToShow(authdata?.userDetails?.fullName) : "Padi"
+  const nameInNotification = authdata?.userDetails?.fullName
+    ? nameToShow(authdata?.userDetails?.fullName)
+    : "Padi";
 
-  
   useEffect(() => {
+    let checked = true;
 
-      let check = true
-
-      const sendRegistrationMessage = () => {
-        if (fromm == "setup" && authdata?.userDetails?.fullName) {
-          console.log("push from setup")
-          sendSchedulePushNotification(
-            "Acccount Registration",
-            `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
-          );
-        } 
+    const sendRegistrationMessage = () => {
+      if (fromm == "setup" && authdata?.userDetails?.fullName) {
+        console.log("push from setup");
+        sendSchedulePushNotification(
+          "Acccount Registration",
+          `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
+        );
       }
-    
+    };
+    if (checked) {
+      sendRegistrationMessage();
+    }
+    return () => {
+      checked = false;
+    };
   }, [authdata]);
 
+  // A comment just for the push
+
   useEffect(() => {
-    let check = true
-    const  sendMessage = () => {
-      if(fromm !== "setup" && authdata?.userDetails?.fullName){
+    let check = true;
+    const sendMessage = () => {
+      if (fromm !== "setup" && authdata?.userDetails?.fullName) {
         // console.log("push from login")
         // console.log(authdata, "Here is the authdata")
         // console.log(authdata?.userDetails?.fullName)
@@ -73,18 +88,15 @@ const Welcome = ({ navigation, route }) => {
           "Do more today. Enjoy financial flexibility"
         );
       }
+    };
+    if (check) {
+      sendMessage();
     }
-    if(check){
-      sendMessage()
-    }
-    
 
     return () => {
-      check = false
-    }
-
-    
-  }, [authdata])
+      check = false;
+    };
+  }, [authdata]);
 
   const getPeriod = () => {
     const hour = new Date().getHours();
@@ -113,8 +125,8 @@ const Welcome = ({ navigation, route }) => {
   const getDashboardData = async () => {
     try {
       const response = await axiosCustom.get("/dashboard");
-      await sendTokenToDB(messageToken)
-      
+      await sendTokenToDB(messageToken);
+
       setAuthData(response?.data?.data);
       // setTokenOnComplete()
       progressWidth.value = withTiming(
@@ -126,9 +138,6 @@ const Welcome = ({ navigation, route }) => {
       // console.log(err.response);
     }
   };
-
-
-
 
   // useCallback(() => {
   //   if(fromm !== "setup" && authdata?.userDetails?.fullName){
@@ -159,7 +168,7 @@ const Welcome = ({ navigation, route }) => {
           justifyContent: "center",
           alignItems: "center",
           // marginTop: RFValue(42),
-          flex: .4
+          flex: 0.4,
         }}
       >
         <LottieView
@@ -169,7 +178,6 @@ const Welcome = ({ navigation, route }) => {
           style={{ width: RFValue(194), height: RFValue(194) }}
         />
       </View>
-
 
       {/* Welcome text */}
       <View style={styles.welcomeTextContainer}>
@@ -187,19 +195,18 @@ const Welcome = ({ navigation, route }) => {
                 { marginTop: 16, textTransform: "uppercase" },
               ]}
             >
-              {authdata?.userDetails?.fullName && nameToShow(authdata?.userDetails?.fullName)}
+              {authdata?.userDetails?.fullName &&
+                nameToShow(authdata?.userDetails?.fullName)}
             </Text>
           </>
         )}
       </View>
 
-
-
       {/* Progress Line */}
-      <View style={{flex: .4,  justifyContent: "center"}}>
-      <View style={styles.lineBg}>
-        <Animated.View style={[styles.line, animatedStyle]} />
-      </View>
+      <View style={{ flex: 0.4, justifyContent: "center" }}>
+        <View style={styles.lineBg}>
+          <Animated.View style={[styles.line, animatedStyle]} />
+        </View>
       </View>
 
       {/* Get started text */}
@@ -210,8 +217,6 @@ const Welcome = ({ navigation, route }) => {
             : "Hey welcome back to feather, transact more today, earn more with cash deposits."}
         </Text>
       </View>
-
-
     </View>
   );
 };
