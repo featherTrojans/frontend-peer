@@ -58,7 +58,6 @@ export const sendTokenToDB = async(token:string)=>{
     const response = await axiosCustom.post("/auth/token/create", {
       messageToken: token,
     });
-    console.log(response, "token response inside push notification");
     return response
   } catch (err) {
     console.log(err.response);

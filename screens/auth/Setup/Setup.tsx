@@ -57,7 +57,6 @@ const Setup = ({ route, navigation }) => {
         { newUsername: username },
         { headers: { token: token } }
       );
-      // console.log(response);
       setResult(response);
       setShowModal(true);
       setAuthorizationToken(response.data.data.token);

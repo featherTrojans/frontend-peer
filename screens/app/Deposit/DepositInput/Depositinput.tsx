@@ -36,7 +36,7 @@ function Depositinput({ route, navigation }) {
   const [loading, setLoading] = useState(false)
   const [locationLoading, setLocationLoading] = useState(false)
 
-  console.log("input screen")
+
   useEffect(() => {
     getLocation()
   }, []);

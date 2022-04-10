@@ -27,14 +27,12 @@ const Getdetails = ({ route, navigation }) => {
   const { authdata } = useContext(AuthContext);
   const { amount } = route.params;
 
-  console.log(userinfo,"userinfo");
   const handleUsernameChange = (text: string) => {
     setUsername(text);
     // and debound
     getuserinfo(text);
   };
 
-  // console.log(username, userinfo);
   const handleDisabled = () => {
     // if(username && typeof userinfo === "object"){
     //   return false;

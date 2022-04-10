@@ -170,7 +170,7 @@ export function usePushNotification() {
       setExpoPushToken(token);
     });
 
-    // console.log(expoPushToken, "This is the token")
+ 
 
     notificationListener.current = Notification.addNotificationReceivedListener(
       (notification) => {
@@ -180,11 +180,7 @@ export function usePushNotification() {
 
     responseListener.current =
       Notification.addNotificationResponseReceivedListener((response) => {
-        //   console.log(response);
-        
         const { data } = response.notification.request.content;
-        console.log(data, "Here is the notification data")
-        //   console.log("Here is the data", data.data.takeTo)
         customNavigation(data.redirectTo, {});
       });
 
@@ -710,7 +706,6 @@ export default function MainNavigation({ initialBoarded = false }) {
 
 
   const lockLogic = (nextAppState) => {
-    // console.log(token,"from the whattt")
     if (
       appState.current.match(/inactive|background/) &&
       nextAppState === "active"

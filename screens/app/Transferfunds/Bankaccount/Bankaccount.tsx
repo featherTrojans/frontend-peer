@@ -258,6 +258,7 @@ const Bankaccount = ({ navigation, route }) => {
           placeholder="Account Number"
           value={accountnum}
           onChangeText={(text) => setAccountnum(text)}
+          keyboardType="number-pad"
         />
         {/* <View style={styles.addAccountContainer}>
           <BouncyCheckbox

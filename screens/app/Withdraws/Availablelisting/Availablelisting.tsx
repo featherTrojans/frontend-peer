@@ -54,8 +54,6 @@ const Availablelisting = ({ navigation, route }: any) => {
     getLocation();
   }, []);
 
-  // console.log(agents)
-  //This function is to get the user locations
   const getLocation = async () => {
     setDestinationCoords({})
     try {
@@ -80,7 +78,6 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: Number(amount),
         location: address,
       });
-      // console.log(response.data);
       setAgents(response.data.data);
       setCharge(response.data.charges)
     } catch (err) {

@@ -72,7 +72,6 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   const [locationLoading, setLocationLoading] = useState(false);
   const [toggledSwipe, setToggledSWipe] = useState(false)
 
-  console.log(requestInfo)
   useEffect(() => {
     // update both map, meeting point and  Agent point
     // console.log(requestInfo, "Here is the accepted withdrawal response");
@@ -83,7 +82,6 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   useEffect(() => {
     getAdditionalUserInfo();
 
-    console.log(requestInfo, "Here is the request info");
   }, []);
 
   useEffect(() => {

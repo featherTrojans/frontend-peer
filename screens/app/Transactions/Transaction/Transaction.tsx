@@ -163,7 +163,7 @@ const Transactions = ({ navigation }: any) => {
       setLoading(true);
       const response = await axiosCustom.get("/transactions");
       setTransations(response?.data?.data?.transactions);
-      console.log(response, "Trasnations");
+      
     } catch (err) {
       console.log(err.response);
     } finally {

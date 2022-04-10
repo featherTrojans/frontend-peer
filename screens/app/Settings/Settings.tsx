@@ -75,7 +75,7 @@ const shareAppLink = async () => {
 const Settings = ({navigation}) => {
   
   const {authdata,setAuthData, setToken} = useContext(AuthContext)
-  // console.log(authdata)
+
   
   const handleSignout = ()=>{
     setToken("")

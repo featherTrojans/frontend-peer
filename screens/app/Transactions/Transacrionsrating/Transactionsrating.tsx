@@ -99,7 +99,7 @@ const Transactionsrating = ({navigation, route}:any) => {
       userToRate:userToRate,
       reference:reference
     } 
-    console.log(data)
+
     setLoading(true)
     try{
       await axiosCustom.post("/rating",data)

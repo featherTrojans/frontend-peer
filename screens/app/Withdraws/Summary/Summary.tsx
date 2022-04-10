@@ -52,7 +52,6 @@ const Summary = ({ navigation, route }) => {
   const [agentInfo, setAgentInfo] = useState({});
   const [loading, setLoading] = useState(false);
 
-  console.log(agentInfo, "agent info");
   useEffect(() => {
     firestoreListener();
   }, []);
@@ -77,7 +76,6 @@ const Summary = ({ navigation, route }) => {
           status: "pending",
         }
       );
-      // console.log("Document written with ID: ", docRef);
       setShowModal(true);
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -103,7 +101,6 @@ const Summary = ({ navigation, route }) => {
             setShowModal(false);
             setShowFailureModal(true);
           }
-          // console.log("Current data: ", doc.data());
         }
       );
     } catch (e) {

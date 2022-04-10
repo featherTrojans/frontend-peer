@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity } from 
 import React, { useContext, useState } from "react";
 import { styles } from "./Changepassword.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
-import { Bottombtn, Inputinsettings } from "../../../../../components";
+import { Bottombtn, Inputinsettings, Loader } from "../../../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import Customstatusbar from "../../../../shared/Customstatusbar";
@@ -32,11 +32,11 @@ const Changepassword = () => {
       return showerror(toast,null,"new password and confirm password don't match")
     }
     try{
+      setLoading(true)
       await axiosCustom.put("/auth/password/changepassword", { oldpassword:oldpassword,newpassword:newpassword });
       navigation.navigate("Root")
     }catch(err){
-      console.log(err.response)
-      showerror(toast,null,"unable to reset password, please try again later")
+      showerror(toast,err)
     }finally{
       setLoading(false)
     }
@@ -44,9 +44,9 @@ const Changepassword = () => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
+        {loading && <Loader />}
             <View style={styles.mainHeaderContainer}>
         {/* Icons */}
-        {loading && <Loader />}
         <Customstatusbar />
 
         <TouchableOpacity
@@ -91,7 +91,7 @@ const Changepassword = () => {
               onChangeText={(text)=>setNewpassword(text)}
             />
             <Inputinsettings
-              label="New Password"
+              label="Confirm Password"
               placeholder="Enter Password"
               value={confirmpassword}
               onChangeText={(text)=>setConfirmpassword(text)}

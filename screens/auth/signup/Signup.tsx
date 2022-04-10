@@ -13,7 +13,6 @@ const Signup = ({navigation}: any) => {
   const scrollViewRef = useRef<ScrollView>(null);
   
 useEffect(() => {
-  console.log(scrollX)
 
 }, [scrollX])
 

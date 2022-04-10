@@ -39,7 +39,7 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
     const [toggleShow, setToggleShow] = useState(true);
     const [loading, setLoading] = useState(false);
     const [locationLoading, setLocationLoading] = useState(false);
-    console.log(requestInfo)
+
     useEffect(()=>{
       // update both map, meeting point and  Agent point
       getLocation()

@@ -44,7 +44,6 @@ const Pendingwithdraw = ({navigation, route}) => {
       const {coordinates, address} = await getCurrentLocation()
       setCoords({...coordinates,locationText:address});
       // get the other destination
-      // console.log("okay i need help")
       // const adddresscoord = await getCoordinateFromAddress(requestInfo.meetupPoint)
       // setDestinationCoords({...adddresscoord, locationText:requestInfo.meetupPoint })
     }catch(err){
