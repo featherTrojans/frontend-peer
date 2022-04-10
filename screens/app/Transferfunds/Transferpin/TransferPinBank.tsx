@@ -10,7 +10,13 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
-const { Backarrow, SecureDot } = icons;
+import LottieView from "lottie-react-native"
+
+
+
+
+
+const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const TransferpinBank = ({route, navigation}) => {
   const toast = useToast();
@@ -57,20 +63,20 @@ const TransferpinBank = ({route, navigation}) => {
       btnFunction={()=>navigation.navigate("Root")}
       >
         <View style={{ alignItems: "center" }}>
-             <View
-               style={{
-                 width: RFValue(100),
-                 height: RFValue(100),
-                 backgroundColor: COLORS.grey1,
-                 borderRadius: RFValue(50),
-               }}
-             />
+        <LottieView
+            source={Successcheckanimate}
+            autoPlay
+            loop
+            style={{ width: RFValue(148), height: RFValue(148) }}
+          />
 
              <Text
                style={{
                  textAlign: "center",
                  marginHorizontal: RFValue(40),
-                 marginVertical: RFValue(40),
+              //  marginVertical: 40,
+              marginTop: RFValue(24),
+              marginBottom: RFValue(45),
                  ...fontsize.bsmall,
                  ...FONTS.regular,
                }}
