@@ -8,6 +8,7 @@ import amountFormatter from "../../utils/formatMoney";
 import { customNavigation } from "../../utils/customNavigation";
 import { assetsDB, bankLogo } from "../../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
+import * as Animatable from "react-native-animatable";
 
 const { Arrowin, Arrowout, Bonusicon, Utilitypayment, Utilitylarge } = icons;
 
@@ -81,24 +82,28 @@ const History = ({ data }) => {
           </View>
         );
         break;
-        case "Utility Payment":
-          return (
-            <View style={styles.arrowBg}>
-              <Utilitypayment />
-            </View>
-          );
-          break;
+      case "Utility Payment":
+        return (
+          <View style={styles.arrowBg}>
+            <Utilitypayment />
+          </View>
+        );
+        break;
       case "Wallet Credit":
         if (transactionValue === "Bonus") {
-
           return (
-            <View style={[styles.arrowBg ]}>
+            <View style={[styles.arrowBg]}>
               <Bonusicon />
             </View>
           );
         } else {
           return (
-            <View style={[styles.arrowBg, { backgroundColor: circleColor, borderRadius: 39/2 }]}>
+            <View
+              style={[
+                styles.arrowBg,
+                { backgroundColor: circleColor, borderRadius: 39 / 2 },
+              ]}
+            >
               {Arrow}
             </View>
           );
@@ -107,7 +112,12 @@ const History = ({ data }) => {
 
       default:
         return (
-          <View style={[styles.arrowBg, { backgroundColor: circleColor, borderRadius: 39/2 }]}>
+          <View
+            style={[
+              styles.arrowBg,
+              { backgroundColor: circleColor, borderRadius: 39 / 2 },
+            ]}
+          >
             {Arrow}
           </View>
         );
@@ -140,21 +150,33 @@ const History = ({ data }) => {
   );
 };
 
-const Transactionhistory = ({ datas, date }: { datas: []; date: string }) => {
+const Transactionhistory = ({
+  datas,
+  date,
+  index,
+}: {
+  datas: [];
+  date: string;
+  index: number;
+}) => {
   return (
-    <View style={styles.container}>
+    <Animatable.View
+      animation="slideInUp"
+      delay={index * 100}
+      style={styles.container}
+    >
       <View style={styles.dateContainer}>
         <Text style={styles.dateText}>{date}</Text>
       </View>
       {datas.map((data, index) => {
         return (
-          <View key={index}>
+          <Animatable.View animation="slideInUp" delay={index * 50} key={index}>
             <History data={data} />
             {index + 1 !== datas.length && <View style={styles.bottomLine} />}
-          </View>
+          </Animatable.View>
         );
       })}
-    </View>
+    </Animatable.View>
   );
 };
 

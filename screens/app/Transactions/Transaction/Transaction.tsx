@@ -227,8 +227,8 @@ const Transactions = ({ navigation }: any) => {
                 // refreshing={refreshing}
                 // onRefresh={handleRefresh}
                 showsVerticalScrollIndicator={false}
-                renderItem={({ item }: any) => (
-                  <Transactionhistory date={item.time} datas={item.data} />
+                renderItem={({ item, index }: any) => (
+                  <Transactionhistory date={item.time} datas={item.data} index={index}/>
                 )}
                 keyExtractor={(item) => item.time}
                 ListEmptyComponent={<EmptyComponent />}
