@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8672307351",
+    "project_id": "feather-1af12",
+    "storage_bucket": "feather-1af12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8672307351:android:472861f87e3ba55db261d2",
+        "android_client_info": {
+          "package_name": "feather.peer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8672307351-90llckdlh8fb5h5r776lfbhe1e86tudv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPLvNwSiN1txcg_Jss4_Tn0zC0Mo75DAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8672307351-90llckdlh8fb5h5r776lfbhe1e86tudv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
