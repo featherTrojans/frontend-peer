@@ -165,7 +165,6 @@ const Depositupdate = ({ navigation, route }) => {
 
   useEffect(() => {
     getDepositStatus();
-    console.log("should fetch again")
   },[route.params?.from]);
   useEffect(() => {
     updateDepositLocation();

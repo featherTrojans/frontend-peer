@@ -16,7 +16,6 @@ import amountFormatter from "../../../../utils/formatMoney";
 const Requestsummary = ({navigation, route}) => {
   const {authdata} = useContext(AuthContext);
   const {requestInfo} = route.params
-  // console.log(requestInfo);
   return (
     <View style={styles.container}>
       <Customstatusbar />

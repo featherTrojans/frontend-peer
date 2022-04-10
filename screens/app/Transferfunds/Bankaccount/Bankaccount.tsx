@@ -134,6 +134,17 @@ const Bankaccount = ({ navigation, route }) => {
   const [accountnum, setAccountnum] = useState("");
   const [accountInfomation, setAccountInformation] = useState({});
 
+  const getBankCharges = ()=>{
+    if(amount <= 5000){
+      return "N10.00"
+    }
+    if(amount > 5000 && amount <= 50000){
+      return "N25.00"
+    }
+    if(amount > 50000){
+      return "N50.00"
+    }
+  }
   const handleSubmit = async () => {
     setLoading(true);
     try {
@@ -200,7 +211,7 @@ const Bankaccount = ({ navigation, route }) => {
             }}
           >
             Transfer Charges:
-            <Text style={{ ...FONTS.bold }}> + N0.00</Text>
+            <Text style={{ ...FONTS.bold }}> + {getBankCharges()}</Text>
           </Text>
           <Text
             style={{
@@ -258,6 +269,7 @@ const Bankaccount = ({ navigation, route }) => {
           placeholder="Account Number"
           value={accountnum}
           onChangeText={(text) => setAccountnum(text)}
+          keyboardType="number-pad"
         />
         {/* <View style={styles.addAccountContainer}>
           <BouncyCheckbox

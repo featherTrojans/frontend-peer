@@ -89,7 +89,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
   // sendSchedulePushNotification
-  // console.log(authdata,"my name and stuff")
+
 
   // const setMessageToken = async () => {
   //   try {
@@ -121,8 +121,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   //   try {
   //     const response = await axiosCustom.post("/auth/token/create", {
   //       messageToken: `ExponentPushToken[${extractedToken}]`,
-  //     });
-  //     // console.log(response);
+  //     });;
   //   } catch (err) {
   //     console.log(err.response.data);
   //   }
@@ -161,7 +160,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       setAuthData(response?.data?.data);
       // console.log(response.data)
     } catch (err) {
-      console.log(err.response);
+  
     } finally {
       setLoading(false);
       setRefreshing(false);

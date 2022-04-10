@@ -105,7 +105,6 @@ const Basicsettings = () => {
   const [usernamename, setusernamename] = useState(
     authdata?.userDetails?.username
   );
-  console.log(authdata,"auth datat o")
   const handleUsernameChange = (text: string) => {
     setusernamename(text);
     // and debound
@@ -133,12 +132,10 @@ const Basicsettings = () => {
                 firstName: values.firstName.trim(),
                 lastName: values.lastName.trim(),
               };
-              console.log(data);
               const response = await axiosCustom.put(
                 "/profile/update/basic",
                 data
               );
-              console.log(response);
               const userdetails = {
                 ...authdata?.userDetails,
                 username: usernamename,
@@ -262,7 +259,7 @@ const Personalsettings = () => {
   const [date, setDate] = useState(authdata?.userDetails?.dateOfBirth);
   const [show, setShow] = useState(false);
 
-  console.log(date);
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShow(false);
@@ -273,7 +270,6 @@ const Personalsettings = () => {
     setShow(true);
   };
 
-  // console.log(authdata,"auth datat o")
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -300,7 +296,6 @@ const Personalsettings = () => {
                   lga: values.lga,
                 }
               );
-              // console.log(response);
               const userdetails = {
                 ...authdata?.userDetails,
                 gender: value,

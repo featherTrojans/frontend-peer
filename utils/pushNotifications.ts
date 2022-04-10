@@ -56,9 +56,8 @@ export const sendTokenToDB = async(token:string)=>{
   try {
     
     const response = await axiosCustom.post("/auth/token/create", {
-      messageToken: `ExponentPushToken[${tokenExtractor(token)}]`,
+      messageToken: token,
     });
-    console.log(response, "token response inside push notification");
     return response
   } catch (err) {
     console.log(err.response);

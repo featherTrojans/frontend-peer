@@ -32,7 +32,6 @@ const WithdrawPin = ({ navigation, route }) => {
   const [showmodal, setShowModal] = useState(false);
   const [shownextmodal, setShowNextModal] = useState(false);
 
-  console.log(baseCharge)
   const amountFormatter = (value: string) => {
     return (
       Number(value)
@@ -45,7 +44,6 @@ const WithdrawPin = ({ navigation, route }) => {
     if (charges.length > 0) {
       const newdata = charges.substring(0, charges.length - 1);
       setCharges(newdata);
-      // console.log(newdata);
     }
   };
   const handleSetAmount = (value: string) => {
@@ -62,7 +60,6 @@ const WithdrawPin = ({ navigation, route }) => {
     try {
       setLoading(true);
       setShowModal(false);
-      // console.log(userInfo, coords.locationText)
       const data = {
         amount: amount,
         charges: baseCharge,
@@ -72,10 +69,8 @@ const WithdrawPin = ({ navigation, route }) => {
         meetupPoint: coords.locationText,
         negotiatedFee: charges
       };
-      // console.log(data)
       const response = await axiosCustom.post("/request/create", data);
 
-      // console.log(response)
       setShowNextModal(true);
     } catch (err) {
       showerror(toast, err);

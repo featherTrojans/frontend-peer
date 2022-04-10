@@ -23,7 +23,6 @@ const SecurepinAgain = ({ route, navigation }) => {
   const [amount, setAmount] = useState<string[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState<any>();
-  // console.log(amount.join(""), pin);
 
   const handleSubmit = async () => {
     if (pin.join("") !== amount.join("")) {
@@ -60,7 +59,6 @@ const SecurepinAgain = ({ route, navigation }) => {
       const newdata = [...amount];
       newdata.pop();
       setAmount(newdata);
-      // console.log(newdata);
     }
   };
 

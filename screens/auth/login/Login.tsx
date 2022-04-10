@@ -106,8 +106,6 @@ const Login = ({ navigation }: any) => {
                     { user_pin: "0000" },
                     { headers: { token: token } }
                   );
-                  // send to that modal
-                  console.log(values);
                   // navigation.navigate("Securepin",{token:result?.token});
                   navigation.navigate("Welcometochange", {
                     fromm: "login",

@@ -47,6 +47,7 @@ const Welcome = ({ navigation, route }) => {
   
   useEffect(() => {
     if (fromm == "setup" && authdata?.userDetails?.fullName) {
+      console.log("push from setup")
       sendSchedulePushNotification(
         "Acccount Registration",
         `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
@@ -56,6 +57,8 @@ const Welcome = ({ navigation, route }) => {
 
   useEffect(() => {
     if(fromm !== "setup" && authdata?.userDetails?.fullName){
+      console.log("push from login")
+      console.log(authdata?.userDetails?.fullName)
       sendSchedulePushNotification(
         "Welcome Back Padi! 🎉",
         "Do more today. Enjoy financial flexibility"

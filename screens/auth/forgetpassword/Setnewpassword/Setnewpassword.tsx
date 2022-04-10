@@ -72,7 +72,6 @@ const Setnewpassword = ({ navigation , route}) => {
               //send the request
               const response = await axiosCustom.put("/new/password", {password:values.password, code:code},{headers:{token:token}});
               //store data in context
-              // console.log(response)
               setShowModal(true)
               // GLobal succss then to login
               // navigation.navigate("Securepin",{token:response?.data?.data?.token});

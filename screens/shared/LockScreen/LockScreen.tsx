@@ -30,7 +30,6 @@ const LockScreen = ({ modal, setModal }: any) => {
   const [loading, setLoading] = useState(false);
   const [numoftrial, setNumberTrial] = useState(0)
   const [error, setError] = useState(false)
-  console.log(pin) 
   const handleSetAmount = (value: string) => {
     const newpin = [...pin,value]
     if (pin.length < 4) {
@@ -45,7 +44,6 @@ const LockScreen = ({ modal, setModal }: any) => {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
-      console.log(newdata);
     }
   };
   const handleSubmit = async (newpin:any) => {

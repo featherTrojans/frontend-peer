@@ -16,7 +16,6 @@ const CustomWebView = ({ navigation, route }) => {
     if (!url) return;
     if (url === callback_url) { 
       
-      console.log(true,"i match")
         // sendPushNotification(
         //   messageToken,
         //   "Wallet Funding",

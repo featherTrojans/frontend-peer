@@ -170,7 +170,7 @@ export function usePushNotification() {
       setExpoPushToken(token);
     });
 
-    // console.log(expoPushToken, "This is the token")
+ 
 
     notificationListener.current = Notification.addNotificationReceivedListener(
       (notification) => {
@@ -180,11 +180,7 @@ export function usePushNotification() {
 
     responseListener.current =
       Notification.addNotificationResponseReceivedListener((response) => {
-        //   console.log(response);
-        
         const { data } = response.notification.request.content;
-        console.log(data, "Here is the notification data")
-        //   console.log("Here is the data", data.data.takeTo)
         customNavigation(data.redirectTo, {});
       });
 
@@ -685,9 +681,9 @@ export default function MainNavigation({ initialBoarded = false }) {
   const { token, setToken, setMessageToken } = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
-  const [onboarded, setOnboarded] = useState(false);
-  const [faketoken, setfaketoken] = useState(false)
+  
   useEffect(() => {
+    
     setMessageToken(expoPushToken);
   }, [expoPushToken]);
 
@@ -710,7 +706,6 @@ export default function MainNavigation({ initialBoarded = false }) {
 
 
   const lockLogic = (nextAppState) => {
-    // console.log(token,"from the whattt")
     if (
       appState.current.match(/inactive|background/) &&
       nextAppState === "active"
@@ -742,7 +737,6 @@ export default function MainNavigation({ initialBoarded = false }) {
   return (
     <NavigationContainer ref={navigationRef}>
       {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
-      {/* <LockScreen modal={true} setModal={setModal} /> */}
       <RootNavigator initialBoarded={initialBoarded} />
     </NavigationContainer>
   );

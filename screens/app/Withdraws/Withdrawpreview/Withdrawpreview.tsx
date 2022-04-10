@@ -30,7 +30,6 @@ const Withdrawpreview = ({navigation, route}: any) => {
   const {userInfo, amount, baseCharge } = route.params
   const [loading, setLoading] = useState(false)
   const {coords,destinationCoords} = useContext(LocationContext)
-  console.log(userInfo,"user info")
   return (  
     <View style={styles.container}>
       <Map />

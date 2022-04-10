@@ -81,7 +81,7 @@ const Transactiondetails = ({ navigation, route }) => {
   const subscription = Clipboard.addClipboardListener(
     ({ content }: ClipboardEvent) => {
       setCopied(true);
-      console.log("hellow");
+ 
     }
   );
 
