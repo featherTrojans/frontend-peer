@@ -46,24 +46,44 @@ const Welcome = ({ navigation, route }) => {
 
   
   useEffect(() => {
-    if (fromm == "setup" && authdata?.userDetails?.fullName) {
-      console.log("push from setup")
-      sendSchedulePushNotification(
-        "Acccount Registration",
-        `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
-      );
-    } 
+
+      let check = true
+
+      const sendRegistrationMessage = () => {
+        if (fromm == "setup" && authdata?.userDetails?.fullName) {
+          console.log("push from setup")
+          sendSchedulePushNotification(
+            "Acccount Registration",
+            `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
+          );
+        } 
+      }
+    
   }, [authdata]);
 
   useEffect(() => {
-    if(fromm !== "setup" && authdata?.userDetails?.fullName){
-      console.log("push from login")
-      console.log(authdata?.userDetails?.fullName)
-      sendSchedulePushNotification(
-        "Welcome Back Padi! 🎉",
-        "Do more today. Enjoy financial flexibility"
-      );
+    let check = true
+    const  sendMessage = () => {
+      if(fromm !== "setup" && authdata?.userDetails?.fullName){
+        // console.log("push from login")
+        // console.log(authdata, "Here is the authdata")
+        // console.log(authdata?.userDetails?.fullName)
+        sendSchedulePushNotification(
+          "Welcome Back Padi! 🎉",
+          "Do more today. Enjoy financial flexibility"
+        );
+      }
     }
+    if(check){
+      sendMessage()
+    }
+    
+
+    return () => {
+      check = false
+    }
+
+    
   }, [authdata])
 
   const getPeriod = () => {
