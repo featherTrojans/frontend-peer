@@ -33,6 +33,7 @@ const Welcome = ({ navigation, route }) => {
   const { setToken, authdata, messageToken } = useContext(AuthContext);
   const { setAuthData } = useContext(AuthContext);
   const [percentage, setPercentage] = useState(0);
+  const [sent, setSent] = useState(false)
 
   const progressWidth = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
@@ -55,7 +56,6 @@ const Welcome = ({ navigation, route }) => {
     : "Padi";
 
   useEffect(() => {
-    let checked = true;
 
     const sendRegistrationMessage = () => {
       if (fromm == "setup" && authdata?.userDetails?.fullName) {
@@ -64,20 +64,18 @@ const Welcome = ({ navigation, route }) => {
           "Acccount Registration",
           `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
         );
+        setSent(true)
       }
     };
-    if (checked) {
+    if (!sent) {
       sendRegistrationMessage();
     }
-    return () => {
-      checked = false;
-    };
+   
   }, [authdata]);
 
   // A comment just for the push
 
   useEffect(() => {
-    let check = true;
     const sendMessage = () => {
       if (fromm !== "setup" && authdata?.userDetails?.fullName) {
         // console.log("push from login")
@@ -87,15 +85,13 @@ const Welcome = ({ navigation, route }) => {
           "Welcome Back Padi! 🎉",
           "Do more today. Enjoy financial flexibility"
         );
+        setSent(true)
       }
     };
-    if (check) {
+    if (!sent) {
       sendMessage();
     }
 
-    return () => {
-      check = false;
-    };
   }, [authdata]);
 
   const getPeriod = () => {
