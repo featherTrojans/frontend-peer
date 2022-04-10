@@ -93,7 +93,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
           </View>
           <Bottombtn
             title="CONTINUE"
-            onpress={()=>navigation.navigate("WithdrawPin",{userInfo,amount})}
+            onpress={()=>navigation.navigate("WithdrawPin",{userInfo,amount,baseCharge})}
           />
         </View>
         

@@ -36,6 +36,7 @@ function Depositinput({ route, navigation }) {
   const [loading, setLoading] = useState(false)
   const [locationLoading, setLocationLoading] = useState(false)
 
+  console.log("input screen")
   useEffect(() => {
     getLocation()
   }, []);
@@ -89,7 +90,8 @@ function Depositinput({ route, navigation }) {
           reference
         })
       }
-        navigation.navigate("Home")
+      const random = Math.random()
+        navigation.navigate("Depositupdate",{from:`true ${random}`})
     }catch(err){
       showerror(toast,err)
     }finally{
@@ -137,6 +139,8 @@ function Depositinput({ route, navigation }) {
       <Bottombtn
         title="PROCEED"
         onpress={handleSubmit}
+        // onpress={()=>navigation.navigate("Depositupdate",{from:"true"})}
+        
       />
     </View>
   );

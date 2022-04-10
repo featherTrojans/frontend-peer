@@ -11,7 +11,7 @@ export const getCurrentLocation = async ()=>{
     let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
     Location.setGoogleApiKey("AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY");
     let locationaddress = await Location.reverseGeocodeAsync(location.coords,{ useGoogleMaps: true });
-    console.log(locationaddress[0])
+    // console.log(locationaddress[0])
     let locationText = `${locationaddress[0].name}, ${locationaddress[0].city}`
     return {coordinates:location.coords, address: locationText, locationObj: locationaddress[0]}
 }

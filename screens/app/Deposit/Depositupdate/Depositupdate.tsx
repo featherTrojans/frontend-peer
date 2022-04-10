@@ -133,7 +133,10 @@ const StatusUpdate = ({ status, navigation }: any) => {
 
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Deposit");
+            navigation.navigate("Deposit",{
+              pendingRequests:status.pendingRequests,
+              acceptedRequests:status.acceptedRequests
+            });
           }}
           style={styles.bottomBtn}
           activeOpacity={0.8}
@@ -155,15 +158,15 @@ const StatusUpdate = ({ status, navigation }: any) => {
   );
 };
 
-const Depositupdate = ({ navigation }) => {
+const Depositupdate = ({ navigation, route }) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [coords, setCoords] = useState<any>({});
 
-  console.log(status, "status");
   useEffect(() => {
     getDepositStatus();
-  }, []);
+    console.log("should fetch again")
+  },[route.params?.from]);
   useEffect(() => {
     updateDepositLocation();
   }, [status, coords]);
@@ -193,7 +196,7 @@ const Depositupdate = ({ navigation }) => {
     }
   };
   const updateDepositLocation = async () => {
-    console.log("trying to update the depositor location");
+    
     try {
       if (status && coords.longitude) {
         const response = await axiosCustom.put("/status/location/update", {

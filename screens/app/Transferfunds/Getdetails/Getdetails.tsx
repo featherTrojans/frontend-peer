@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator,TouchableOpacity } from "react-native";
 import React, { useState, useCallback, useContext } from "react";
 
 import { styles } from "./Getdetails.styles";
-import { TouchableOpacity } from "@gorhom/bottom-sheet";
+
 import {
   Backheader,
   Bottombtn,
@@ -39,7 +39,7 @@ const Getdetails = ({ route, navigation }) => {
     // if(username && typeof userinfo === "object"){
     //   return false;
     // }
-
+    
     return userinfo.username === undefined;
   };
   return (

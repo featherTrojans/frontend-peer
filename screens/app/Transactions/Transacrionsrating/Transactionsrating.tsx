@@ -8,6 +8,7 @@ import {
   Animated,
   TouchableNativeFeedback,
   Easing,
+  // TouchableWithoutFeedback
 } from "react-native";
 import React, { useRef, useState } from "react";
 import LottieView from "lottie-react-native";
@@ -113,7 +114,7 @@ const Transactionsrating = ({navigation, route}:any) => {
 
   for (let x = 1; x <= numStars; x++) {
     stars.push(
-      <TouchableWithoutFeedback
+      <TouchableNativeFeedback
         key={x}
         onPress={() => {
           rate(x);
@@ -123,7 +124,7 @@ const Transactionsrating = ({navigation, route}:any) => {
         <Animated.View style={x <= rating.rating ? animatedStyle : ""}>
           <Ratingsstar filled={x <= rating.rating ? true : false} />
         </Animated.View>
-      </TouchableWithoutFeedback>
+      </TouchableNativeFeedback>
     );
   }
 

@@ -5,7 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import React, { ReactNode, useState, useEffect, useRef } from "react";
 import LottieView from "lottie-react-native";
@@ -52,7 +52,7 @@ const Emptyrequest = () => {
         source={Cryinganimate}
         autoPlay
         loop
-        style={{ width: RFValue(190), height: RFValue(190) }}
+        style={{ width: RFValue(190), height:  RFValue(190)}}
       />
 
       <Text style={styles.emptyListText}>
@@ -86,7 +86,7 @@ const Requesteeprofile = ({ list, onpress }: any) => {
         <InitialsBg sideLength={44} name={agent} />
         <View style={styles.namesContainer}>
           <Text style={styles.withdrawProfileName}>{agent}</Text>
-          <Text style={styles.withdrawProfileUsername}>@{agentUsername}</Text>
+          <Text style={styles.withdrawProfileUsername}>@{agentUsername.toLowerCase()}</Text>
         </View>
       </View>
 
@@ -155,9 +155,7 @@ const Withdraw = ({ navigation }) => {
   const Requestlist = () => {
     return (
       <View style={styles.requestContainer}>
-        <View
-          style={{ position: "relative", marginTop: RFValue(30), ...Shadow }}
-        >
+        <View style={{ position: "relative", marginTop: RFValue(30), ...Shadow }}>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
@@ -184,7 +182,7 @@ const Withdraw = ({ navigation }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={{ width: singleWidth(), paddingVertical: RFValue(24) }}
+              style={{ width: singleWidth(), paddingVertical: RFValue(24)}}
               activeOpacity={0.7}
               onPress={() => animateToIndex(1)}
             >
@@ -233,26 +231,8 @@ const Withdraw = ({ navigation }) => {
           )}
           keyExtractor={(item) => `${item.reference}`}
           ListEmptyComponent={() => (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{
-                  ...fontsize.small,
-                  ...FONTS.regular,
-                  color: COLORS.black,
-                  marginTop: RFValue(70),
-                  marginHorizontal: RFValue(50),
-                  textAlign: "center",
-                  lineHeight: 24,
-                }}
-              >
-                Sorry you have no available request at the moment.
-              </Text>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: "center"}}>
+              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.black, marginTop: RFValue(70), marginHorizontal: RFValue(50), textAlign: 'center', lineHeight: 24}}>Sorry you have no available request at the moment.</Text>
             </View>
           )}
         />
@@ -267,20 +247,22 @@ const Withdraw = ({ navigation }) => {
       <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
-
         {loading ? (
-            <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-            <ActivityIndicator size="large" color={COLORS.blue6} />
-          </View>
-        ) : (
-          <View style={{ flex: 1 }}>
-            {pendingRequests.length < 1 && acceptedRequests.length < 1 ? (
-              <Emptyrequest />
+            <View
+              style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+            >
+              <ActivityIndicator size="large" color={COLORS.blue6} />
+            </View>
+
+            ) :(
+        <View style={{ flex: 1 }}>
+          {pendingRequests.length < 1 && acceptedRequests.length < 1 ? (
+            <Emptyrequest />
             ) : (
               <Requestlist />
-            )}
-          </View>
-        )}
+              )}
+        </View>
+              )}
       </View>
 
       <Bottombtn

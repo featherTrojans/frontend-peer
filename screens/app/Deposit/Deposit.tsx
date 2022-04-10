@@ -57,9 +57,10 @@ const Emptyrequest = () => {
   );
 };
 
-const Deposit = ({ navigation }) => {
+const Deposit = ({ navigation,route}) => {
+  const {pendingRequests,acceptedRequests} = route.params
   const [active, setActive] = useState("pending");
-  const [pending, setPending] = useState([]);
+  const [pending , setPending] = useState([]);
   const [accepted, setAccepted] = useState([]);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -81,14 +82,14 @@ const Deposit = ({ navigation }) => {
   };
   const horizontalOffset = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    getdepositrequest();
-    // getacceptedrequest();
-  }, []);
+  // useEffect(() => {
+  //   getpendingrequest();
+  //   getacceptedrequest();
+  // }, []);
 
   // const getpendingrequest = async () => {
   //   try {
-  //     const response = await axiosCustom.get("/request/depositor/pending");
+  //     const response = await axiosCustom.get("/request/depositor/pending ");
 
   //     setPending(response.data.data);
   //   } catch (err) {}
@@ -102,23 +103,23 @@ const Deposit = ({ navigation }) => {
   //   } catch (err) {}
   // };
 
-  const getdepositrequest = async () => {
-    try {
-      setLoading(true);
-      const acceptedresponse = await axiosCustom.get(
-        "/request/depositor/accepted"
-      );
-      const pendingresponse = await axiosCustom.get(
-        "/request/depositor/pending"
-      );
-      setPending(pendingresponse.data.data);
-      setAccepted(acceptedresponse.data.data);
-    } catch (error) {
-      console.log(err.response);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const getdepositrequest = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const acceptedresponse = await axiosCustom.get(
+  //       "/request/depositor/accepted"
+  //     );
+  //     const pendingresponse = await axiosCustom.get(
+  //       "/request/depositor/pending "
+  //     );
+  //     setPending(pendingresponse.data.data);
+  //     setAccepted(acceptedresponse.data.data);
+  //   } catch (error) {
+  //     console.log(err.response);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // Requestee profile
   const Requesteeprofile = ({ list, onpress }: any) => {
@@ -146,7 +147,7 @@ const Deposit = ({ navigation }) => {
     );
   };
 
-  const REQUESTDATA = active === "pending" ? pending : accepted;
+  const REQUESTDATA = active === "pending" ? pendingRequests : acceptedRequests;
 
   const Requestlist = () => {
     return (
@@ -173,7 +174,7 @@ const Deposit = ({ navigation }) => {
                   },
                 ]}
               >
-                Pending Requests ({pending.length})
+                Pending Requests ({pendingRequests.length})
               </Text>
             </TouchableOpacity>
 
@@ -192,7 +193,7 @@ const Deposit = ({ navigation }) => {
                   },
                 ]}
               >
-                Accepted Requests ({accepted.length})
+                Accepted Requests ({acceptedRequests.length})
               </Text>
             </TouchableOpacity>
           </View>
@@ -269,7 +270,7 @@ const Deposit = ({ navigation }) => {
         </View>
         ) : (
           <View style={{ flex: 1 }}>
-            {pending.length < 1 && accepted.length < 1 ? (
+            {pendingRequests.length < 1 && acceptedRequests.length < 1 ? (
               <Emptyrequest />
             ) : (
               <Requestlist />
