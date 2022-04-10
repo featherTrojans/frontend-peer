@@ -385,6 +385,7 @@ const Tabs = () => {
                 </View>
               );
             },
+            unmountOnBlur: true,
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
