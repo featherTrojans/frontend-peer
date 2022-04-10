@@ -185,7 +185,7 @@ export function usePushNotification() {
         const { data } = response.notification.request.content;
         console.log(data, "Here is the notification data")
         //   console.log("Here is the data", data.data.takeTo)
-        customNavigation(data.takeTo, {});
+        customNavigation(data.redirectTo, {});
       });
 
     return () => {
