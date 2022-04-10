@@ -684,9 +684,9 @@ export default function MainNavigation({ initialBoarded = false }) {
   const { token, setToken, setMessageToken } = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
-  const [onboarded, setOnboarded] = useState(false);
-  const [faketoken, setfaketoken] = useState(false)
+  
   useEffect(() => {
+    
     setMessageToken(expoPushToken);
   }, [expoPushToken]);
 
@@ -741,7 +741,6 @@ export default function MainNavigation({ initialBoarded = false }) {
   return (
     <NavigationContainer ref={navigationRef}>
       {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
-      {/* <LockScreen modal={true} setModal={setModal} /> */}
       <RootNavigator initialBoarded={initialBoarded} />
     </NavigationContainer>
   );

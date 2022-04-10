@@ -1,22 +1,52 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { styles } from "./Changepassword.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import { Bottombtn, Inputinsettings } from "../../../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import Customstatusbar from "../../../../shared/Customstatusbar";
+import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../../../utils/errorMessage";
+import axiosCustom from "../../../../../httpRequests/axiosCustom";
+import { AuthContext } from "../../../../../context/AuthContext";
 
 const { Backarrow } = icons;
 
 const Changepassword = () => {
-
+  const toast = useToast();
+  const {authdata} = useContext(AuthContext)
+  const [loading, setLoading] = useState(false);
+  const [oldpassword, setOldpassword] = useState("")
+  const [newpassword, setNewpassword] = useState("")
+  const [confirmpassword, setConfirmpassword] = useState("")
 
   const navigation = useNavigation()
+
+  const handleSubmit = async ()=>{
+    // validation
+    if(!confirmpassword || !newpassword || !oldpassword){
+      return showerror(toast,null,"all fields are required")
+    }
+    if(confirmpassword !== newpassword){
+      return showerror(toast,null,"new password and confirm password don't match")
+    }
+    try{
+      await axiosCustom.put("/auth/password/changepassword", { oldpassword:oldpassword,newpassword:newpassword });
+      navigation.navigate("Root")
+    }catch(err){
+      console.log(err.response)
+      showerror(toast,null,"unable to reset password, please try again later")
+    }finally{
+      setLoading(false)
+    }
+  }
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
             <View style={styles.mainHeaderContainer}>
         {/* Icons */}
+        {loading && <Loader />}
         <Customstatusbar />
 
         <TouchableOpacity
@@ -51,20 +81,26 @@ const Changepassword = () => {
             <Inputinsettings
               label="Current Password"
               placeholder="Enter Password"
+              value={oldpassword}
+              onChangeText={(text)=>setOldpassword(text)}
             />
             <Inputinsettings
               label="New Password"
               placeholder="Enter Password"
+              value={newpassword}
+              onChangeText={(text)=>setNewpassword(text)}
             />
             <Inputinsettings
               label="New Password"
               placeholder="Enter Password"
+              value={confirmpassword}
+              onChangeText={(text)=>setConfirmpassword(text)}
             />
           </View>
         </View>
         <Bottombtn
           title="Change Password"
-          onpress={() => console.log("Changed password clicked")}
+          onpress={handleSubmit}
         />
       </KeyboardAwareScrollView>
     </ScrollView>
