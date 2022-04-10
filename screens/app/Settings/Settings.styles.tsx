@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 5,
     // marginRight: 22,
     marginBottom: 20,
-    ...Shadow
+    // ...Shadow
     
   },
   iconBg: {
