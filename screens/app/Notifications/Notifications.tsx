@@ -10,6 +10,7 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import moment from "moment";
 import { RFValue } from "react-native-responsive-fontsize";
+import * as Animatable from "react-native-animatable"
 const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow, Arrowout } = icons;
 
 const DATA = [
@@ -121,13 +122,19 @@ const messageicon = (type: string) => {
 const Notification = ({
   date,
   messages,
+  index
 }: {
   date: string;
+  index: number;
   messages: notificationProps[];
 }) => {
 
   return (
-    <View style={[{ marginBottom: RFValue(28), ...Shadow, borderRadius: RFValue(15) }]}>
+    <Animatable.View 
+    animation="slideInUp"
+    delay={index * 50}
+    
+    style={[{ marginBottom: RFValue(28), ...Shadow, borderRadius: RFValue(15) }]}>
       <View style={{ marginBottom: RFValue(24) }}>
         <Text style={styles.date}>{date}</Text>
       </View>
@@ -137,7 +144,9 @@ const Notification = ({
           const isUpgrade = type === "account";
           const formattedTime = `${moment(time).format('h:mm')}${moment(time).format('a')}`
           return (
-            <View
+            <Animatable.View
+            animation="slideInUp"
+            delay={index * 50}
               style={[
                 styles.notificationContainer,
                 { marginBottom: !isLastItem ? RFValue(10) : 0 },
@@ -167,11 +176,11 @@ const Notification = ({
                   )}
                 </View>
               </View>
-            </View>
+            </Animatable.View>
           );
         }
       )}
-    </View>
+    </Animatable.View>
   );
 };
 
@@ -224,8 +233,8 @@ const Notifications = () => {
         // contentContainerStyle={{flex: 1}}
           data={formatData(notifications)}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <Notification date={item.time} messages={item.data} />
+          renderItem={({ item, index }) => (
+            <Notification date={item.time} messages={item.data} index={index} />
           )}
           keyExtractor={(item) => item.time}
           ListEmptyComponent={() => {

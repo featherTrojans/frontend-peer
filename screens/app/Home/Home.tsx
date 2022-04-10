@@ -263,7 +263,7 @@ const Home = ({ navigation }: { navigation: any }) => {
               ) => (
                 <Animatable.View
                   animation="bounceIn"
-                  delay={index * 150}
+                  delay={index * 100}
                   key={title}
                 >
                   <TouchableOpacity
