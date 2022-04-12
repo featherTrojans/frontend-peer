@@ -5,6 +5,7 @@ import { styles } from "./WithdrewPin.style";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import {
   Bottombtn,
+  Keyboard,
   Loader,
   Numberbtn,
   Sendingandreceive,
@@ -21,7 +22,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const WithdrawPin = ({ navigation, route }) => {
-  const { amount, userInfo,baseCharge } = route.params;
+  const { amount, userInfo, baseCharge } = route.params;
 
   const { coords } = useContext(LocationContext);
   const { authdata } = useContext(AuthContext);
@@ -57,7 +58,6 @@ const WithdrawPin = ({ navigation, route }) => {
   };
 
   const handleSubmit = async () => {
-   
     try {
       setLoading(true);
       setShowModal(false);
@@ -68,11 +68,11 @@ const WithdrawPin = ({ navigation, route }) => {
         agent: userInfo.fullName,
         statusId: userInfo.reference,
         meetupPoint: coords.locationText,
-        negotiatedFee: charges
+        negotiatedFee: charges,
       };
-      console.log(data)
+      console.log(data);
       const response = await axiosCustom.post("/request/create", data);
- 
+
       setShowNextModal(true);
     } catch (err) {
       showerror(toast, err);
@@ -185,8 +185,8 @@ const WithdrawPin = ({ navigation, route }) => {
       </Globalmodal>
 
       <View style={{ flex: 1, backgroundColor: COLORS.white }}>
-        <View style={[styles.mainContainer, ]}>
-          <View style={[styles.backArrowConteiner,{ marginLeft: 15}]}>
+        <View style={[styles.mainContainer]}>
+          <View style={[styles.backArrowConteiner, { marginLeft: 15 }]}>
             <Backarrow />
           </View>
 
@@ -207,7 +207,7 @@ const WithdrawPin = ({ navigation, route }) => {
               </View>
             </View>
 
-            <View style={styles.numberBtnContainer}>
+            {/* <View style={styles.numberBtnContainer}>
               {numbers.map((number, index) => {
                 return (
                   <Numberbtn
@@ -220,16 +220,29 @@ const WithdrawPin = ({ navigation, route }) => {
               })}
 
               <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-            </View>
+            </View> */}
+
+            <Keyboard
+              array={[...numbers]}
+              setDigit={handleSetAmount}
+              removeDigit={handleRemoveAmount}
+            />
           </View>
         </View>
-        <Bottombtn title="PROCEED" onpress={() =>{
-          if(Number(charges) <= 0 ){
-            showerror(toast,null ,"sorry you have to input a fair amount to continue");
-            return
-          }
-          setShowModal(true)
-      }} />
+        <Bottombtn
+          title="PROCEED"
+          onpress={() => {
+            if (Number(charges) <= 0) {
+              showerror(
+                toast,
+                null,
+                "sorry you have to input a fair amount to continue"
+              );
+              return;
+            }
+            setShowModal(true);
+          }}
+        />
       </View>
     </View>
   );

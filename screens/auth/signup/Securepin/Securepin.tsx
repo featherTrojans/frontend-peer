@@ -3,7 +3,7 @@ import { View, Text, StatusBar, ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useToast } from "react-native-toast-notifications";
-import { Bottombtn, Loader, Numberbtn } from "../../../../components";
+import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
 
 import { icons } from "../../../../constants";
 
@@ -43,7 +43,7 @@ const Securepin = ({ route, navigation }) => {
       <Customstatusbar />
       <View style={{ paddingHorizontal: RFValue(25) }}>
         <JustifyBetween style={{ marginBottom: RFValue(10) }}>
-          <View >
+          <View>
             <Text style={styles.header}>Set up your </Text>
             <Text style={styles.header}>4-digit secure pin</Text>
           </View>
@@ -65,27 +65,30 @@ const Securepin = ({ route, navigation }) => {
             <View style={styles.pinView}>{pin[3] && <SecureDot />}</View>
           </View>
         </View>
-
-
-
-        
       </View>
-      <View style={styles.numberBtnContainer}>
-        {numbers.map((number, index) => {
-            return (
-              <Numberbtn
-                key={index}
-                onpress={
-                  number !== "" ? () => handleSetAmount(number) : () => null
-                }
-              >
-                {number}
-              </Numberbtn>
-            );
-          })}
 
-          <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View>
+      {/* <View style={styles.numberBtnContainer}>
+        {numbers.map((number, index) => {
+          return (
+            <Numberbtn
+              key={index}
+              onpress={
+                number !== "" ? () => handleSetAmount(number) : () => null
+              }
+            >
+              {number}
+            </Numberbtn>
+          );
+        })}
+
+        <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
+      </View> */}
+
+      <Keyboard
+        array={[...numbers]}
+        setDigit={handleSetAmount}
+        removeDigit={handleRemoveAmount}
+      />
 
       <Bottombtn
         title="PROCEED"

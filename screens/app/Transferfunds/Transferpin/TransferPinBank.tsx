@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState } from "react";
 import { styles } from "./Transferpin.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Bottombtn, Loader, Numberbtn } from "../../../../components";
+import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
@@ -10,18 +10,13 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
-import LottieView from "lottie-react-native"
-
-
-
-
-
+import LottieView from "lottie-react-native";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
-const TransferpinBank = ({route, navigation}) => {
+const TransferpinBank = ({ route, navigation }) => {
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
-  const {amount,accountInfomation} = route.params
+  const { amount, accountInfomation } = route.params;
   const [pin, setPin] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
@@ -36,58 +31,64 @@ const TransferpinBank = ({route, navigation}) => {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
-      
     }
   };
   const handleSubmit = async () => {
-    
-    try{
+    try {
       setLoading(true);
-      const response = await axiosCustom.post("/withdraw",{amount:Number(amount),account_code:accountInfomation.account_code,userPin:pin.join("")})
-      
-      setShowModal(true)
-    }catch(err){
-      
-      showerror(toast,err)
-    }finally{
-      setLoading(false)
+      const response = await axiosCustom.post("/withdraw", {
+        amount: Number(amount),
+        account_code: accountInfomation.account_code,
+        userPin: pin.join(""),
+      });
+
+      setShowModal(true);
+    } catch (err) {
+      showerror(toast, err);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
       {loading && <Loader />}
       <Customstatusbar />
       <Globalmodal
-      showState={showmodal}
-      btnFunction={()=>navigation.navigate("Root")}
+        showState={showmodal}
+        btnFunction={() => navigation.navigate("Root")}
       >
         <View style={{ alignItems: "center" }}>
-        <LottieView
+          <LottieView
             source={Successcheckanimate}
             autoPlay
             loop
             style={{ width: RFValue(148), height: RFValue(148) }}
           />
 
-             <Text
-               style={{
-                 textAlign: "center",
-                 marginHorizontal: RFValue(40),
+          <Text
+            style={{
+              textAlign: "center",
+              marginHorizontal: RFValue(40),
               //  marginVertical: 40,
               marginTop: RFValue(24),
               marginBottom: RFValue(45),
-                 ...fontsize.bsmall,
-                 ...FONTS.regular,
-               }}
-             >You have successfully transfered NGN {amountFormatter(amount)} to  “{accountInfomation.bank_name} -<Text style={{textTransform: 'capitalize'}}>{accountInfomation.account_name}</Text> ”</Text>
-           </View>
+              ...fontsize.bsmall,
+              ...FONTS.regular,
+            }}
+          >
+            You have successfully transfered NGN {amountFormatter(amount)} to “
+            {accountInfomation.bank_name} -
+            <Text style={{ textTransform: "capitalize" }}>
+              {accountInfomation.account_name}
+            </Text>{" "}
+            ”
+          </Text>
+        </View>
       </Globalmodal>
 
-
-
       <View style={styles.mainContainer}>
-        <View style={[styles.backArrowConteiner, {marginLeft: 15}]}>
+        <View style={[styles.backArrowConteiner, { marginLeft: 15 }]}>
           <Backarrow />
         </View>
 
@@ -95,7 +96,10 @@ const TransferpinBank = ({route, navigation}) => {
           <Text style={styles.descriptionText}>
             You are about to send{" "}
             <Text style={styles.descriptionSubText}>NGN {amount}</Text> from
-            your Primary Wallet to {accountInfomation.bank_name} - <Text style={{textTransform: 'capitalize'}}>{accountInfomation.account_name}</Text>
+            your Primary Wallet to {accountInfomation.bank_name} -{" "}
+            <Text style={{ textTransform: "capitalize" }}>
+              {accountInfomation.account_name}
+            </Text>
           </Text>
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
@@ -109,7 +113,7 @@ const TransferpinBank = ({route, navigation}) => {
           </View>
         </View>
 
-        <View style={styles.numberBtnContainer}>
+        {/* <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
             return (
               <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
@@ -119,10 +123,15 @@ const TransferpinBank = ({route, navigation}) => {
           })}
 
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View>
-        
+        </View> */}
+
+        <Keyboard
+          array={[...numbers]}
+          setDigit={handleSetAmount}
+          removeDigit={handleRemoveAmount}
+        />
       </View>
-      <Bottombtn title="PROCEED" onpress={handleSubmit}/>
+      <Bottombtn title="PROCEED" onpress={handleSubmit} />
     </View>
   );
 };

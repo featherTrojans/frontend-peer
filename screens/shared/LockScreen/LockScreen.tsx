@@ -13,7 +13,7 @@ import { COLORS, FONTS, fontsize, SIZES, icons } from "../../../constants";
 import { styles } from "./LockScreen.style";
 import { JustifyBetween } from "../../../global/styles";
 import SecureDot from "../../../assets/icons/SecureDot";
-import { Bottombtn, Loader, Numberbtn } from "../../../components";
+import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../components";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
@@ -171,7 +171,10 @@ const LockScreen = ({ modal, setModal }: any) => {
           </View>
         </View>
 
-        <View style={styles.numberBtnContainer}>
+
+
+
+        {/* <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
             return (
               <Numberbtn
@@ -190,7 +193,15 @@ const LockScreen = ({ modal, setModal }: any) => {
           >
             X
           </Numberbtn>
-        </View>
+        </View> */}
+
+
+<Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
+
+
+
+
+
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Text

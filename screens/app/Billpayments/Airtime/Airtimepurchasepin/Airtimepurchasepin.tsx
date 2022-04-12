@@ -12,6 +12,7 @@ import Customstatusbar from "../../../../shared/Customstatusbar";
 import {
   Backheader,
   Bottombtn,
+  Keyboard,
   Loader,
   Numberbtn,
 } from "../../../../../components";
@@ -117,7 +118,9 @@ const Airtimepurchasepin = ({ navigation, route }) => {
           </View>
         </View>
 
-        <View style={styles.numberBtnContainer}>
+
+
+        {/* <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
             return (
               <Numberbtn
@@ -132,7 +135,12 @@ const Airtimepurchasepin = ({ navigation, route }) => {
           })}
 
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View>
+        </View> */}
+
+
+
+        <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
+
       </View>
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
     </ScrollView>

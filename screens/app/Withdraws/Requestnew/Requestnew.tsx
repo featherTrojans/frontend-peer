@@ -1,12 +1,10 @@
 import React, { useState, useContext } from "react";
-import {
-  View,
-  Text,
-} from "react-native";
+import { View, Text } from "react-native";
 import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
   Bottombtn,
+  Keyboard,
   Numberbtn,
   Viewbalance,
 } from "../../../../components";
@@ -18,12 +16,11 @@ import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 // import { styles } from "./TransferInput.styles";
 
 function Requestnew({ navigation }) {
-  const toast = useToast()
+  const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [amount, setAmount] = useState<string>("");
-  const {authdata} = useContext(AuthContext)
+  const { authdata } = useContext(AuthContext);
 
-  
   const amountFormatter = (value: string) => {
     return (
       Number(value)
@@ -33,30 +30,29 @@ function Requestnew({ navigation }) {
   };
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
-      const newdata = amount.substring(0, amount.length - 1)
+      const newdata = amount.substring(0, amount.length - 1);
       setAmount(newdata);
       // console.log(newdata);
     }
   };
   const handleSetAmount = (value: string) => {
     setAmount((oldamount) => {
-      let newamount = oldamount.concat(value)
-      if(Number(newamount)){
-        return newamount
+      let newamount = oldamount.concat(value);
+      if (Number(newamount)) {
+        return newamount;
       }
-      return oldamount
+      return oldamount;
     });
   };
-  const handleNextScreen = ()=>{
-      if(authdata?.walletBal < amount){
-        return showerror(toast, null,"insufficient amount")
-      }
-      if(200 > Number(amount)){
-        return showerror(toast, null,"cash request is can't be lower than N200")
-      }
-      navigation.navigate("Availablelisting",{amount})
-  }
-
+  const handleNextScreen = () => {
+    if (authdata?.walletBal < amount) {
+      return showerror(toast, null, "insufficient amount");
+    }
+    if (200 > Number(amount)) {
+      return showerror(toast, null, "cash request is can't be lower than N200");
+    }
+    navigation.navigate("Availablelisting", { amount });
+  };
 
   return (
     <View style={styles.container}>
@@ -74,7 +70,8 @@ function Requestnew({ navigation }) {
               </Text>
             </View>
           </View>
-          <View style={styles.numberBtnContainer}>
+
+          {/* <View style={styles.numberBtnContainer}>
             {numbers.map((number, index) => {
               return (
                 <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
@@ -83,13 +80,16 @@ function Requestnew({ navigation }) {
               );
             })}
             <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-          </View>
+          </View> */}
+
+          <Keyboard
+            array={[...numbers]}
+            setDigit={handleSetAmount}
+            removeDigit={handleRemoveAmount}
+          />
         </View>
       </View>
-      <Bottombtn
-        title="PROCEED"
-        onpress={handleNextScreen}
-      />
+      <Bottombtn title="PROCEED" onpress={handleNextScreen} />
     </View>
   );
 }

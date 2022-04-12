@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, StatusBar } from "react-native";
 import { useToast } from "react-native-toast-notifications";
-import { Bottombtn, Loader, Numberbtn } from "../../../../components";
+import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
 import LottieView from "lottie-react-native";
 
 import { FONTS, fontsize, icons } from "../../../../constants";
@@ -17,7 +17,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 const { SecureDot, Successcheckanimate } = icons;
 const SecurepinAgain = ({ route, navigation }) => {
   const toast = useToast();
-  const { token, pin,fromm } = route.params;
+  const { token, pin, fromm } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState<boolean>(false);
   const [amount, setAmount] = useState<string[]>([]);
@@ -69,13 +69,13 @@ const SecurepinAgain = ({ route, navigation }) => {
       <Globalmodal
         showState={showModal}
         onBgPress={() => setShowModal(true)} // This should not do anything
-        btnFunction={() =>{
-          setShowModal(false)
+        btnFunction={() => {
+          setShowModal(false);
           navigation.navigate("Welcome", {
             fromm: fromm,
             username: result?.username,
             token: result?.token,
-          })
+          });
         }}
         btnText="Continue"
       >
@@ -90,7 +90,11 @@ const SecurepinAgain = ({ route, navigation }) => {
           >
             <LottieView
               source={Successcheckanimate}
-              style={{ width: RFValue(148), height: RFValue(148), marginBottom: RFValue(18) }}
+              style={{
+                width: RFValue(148),
+                height: RFValue(148),
+                marginBottom: RFValue(18),
+              }}
               autoPlay
               loop
             />
@@ -135,7 +139,8 @@ const SecurepinAgain = ({ route, navigation }) => {
           </View>
         </View>
       </View>
-        <View style={styles.numberBtnContainer}>
+
+      {/* <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
             return (
               <Numberbtn
@@ -149,7 +154,14 @@ const SecurepinAgain = ({ route, navigation }) => {
             );
           })}
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View>
+        </View> */}
+
+      <Keyboard
+        array={[...numbers]}
+        setDigit={handleSetAmount}
+        removeDigit={handleRemoveAmount}
+      />
+
       <Bottombtn
         title="PROCEED"
         onpress={handleSubmit}

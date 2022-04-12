@@ -13,6 +13,7 @@ import Transactionhistory from "./Transactionshistory/Transactionhistory";
 import Viewbalance from "./Viewbalance/Viewbalance";
 import Inputinsettings from "./Inputinsettings/Inputinsettings";
 import InitialsBg from "./InitialsBg/InitialsBg";
+import Keyboard from "./Keyboard/Keyboard";
 
 
 export {
@@ -30,5 +31,6 @@ export {
     Requesterdetails,
     Priceandcharges,
     Inputinsettings,
-    InitialsBg
+    InitialsBg,
+    Keyboard
 }

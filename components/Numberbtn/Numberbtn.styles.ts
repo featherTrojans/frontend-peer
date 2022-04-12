@@ -7,8 +7,8 @@ const btnSize = (SIZES.width-50)/6
 
 export const styles = StyleSheet.create({
   numberBtn: {
-    width: RFValue(btnSize),
-    height: RFValue(btnSize),
+    width: RFValue(60),
+    height: RFValue(60),
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 30,

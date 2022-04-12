@@ -4,6 +4,7 @@ import { styles } from "./Negotiate.style.";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import {
   Bottombtn,
+  Keyboard,
   Loader,
   Numberbtn,
   Sendingandreceive,
@@ -56,7 +57,7 @@ const Negotiate = ({ navigation, route }) => {
     try {
       setLoading(true);
       const response = await axiosCustom.put("/request/negotiate", {
-        negotiatedFee:charges,
+        negotiatedFee: charges,
         reference: requestInfo.reference,
       });
       // console.log(response)
@@ -83,7 +84,7 @@ const Negotiate = ({ navigation, route }) => {
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              marginVertical:  RFValue(20),
+              marginVertical: RFValue(20),
             }}
           >
             <Sendingandreceive
@@ -134,9 +135,9 @@ const Negotiate = ({ navigation, route }) => {
               </Text> */}
         </View>
       </Globalmodal>
-      <View style={{flex: 1, backgroundColor: COLORS.white, }}>
+      <View style={{ flex: 1, backgroundColor: COLORS.white }}>
         <View style={styles.mainContainer}>
-          <View style={[styles.backArrowConteiner, {marginLeft: 15} ]}>
+          <View style={[styles.backArrowConteiner, { marginLeft: 15 }]}>
             <Backarrow />
           </View>
 
@@ -157,7 +158,7 @@ const Negotiate = ({ navigation, route }) => {
               </View>
             </View>
 
-            <View style={styles.numberBtnContainer}>
+            {/* <View style={styles.numberBtnContainer}>
               {numbers.map((number, index) => {
                 return (
                   <Numberbtn
@@ -170,9 +171,14 @@ const Negotiate = ({ navigation, route }) => {
               })}
 
               <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-            </View>
+            </View> */}
+
+            <Keyboard
+              array={[...numbers]}
+              setDigit={handleSetAmount}
+              removeDigit={handleRemoveAmount}
+            />
           </View>
-          
         </View>
         <Bottombtn title="PROCEED" onpress={handleSubmit} />
       </View>
