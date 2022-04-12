@@ -24,6 +24,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { getCurrentLocation } from "../../../../utils/customLocation";
+import { RFValue } from "react-native-responsive-fontsize";
 const {
   TransferIcon,
   Location,
@@ -57,7 +58,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
   return (
     <>
       <Customstatusbar />
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
         <View style={[styles.contentContainer]}>
           <View style={styles.topSection}>
             {/* Icons */}
@@ -71,8 +72,11 @@ const StatusUpdate = ({ status, navigation }: any) => {
               </View>
             </View>
 
-            <Text style={styles.lastAmountPrice}>
+            {/* <Text style={styles.lastAmountPrice}>
               NGN {amountFormatter(status.status[0].amount)}
+            </Text> */}
+            <Text style={styles.lastAmountPrice}>
+              NGN1000000
             </Text>
           </View>
 
@@ -129,6 +133,8 @@ const StatusUpdate = ({ status, navigation }: any) => {
           </View>
         </View>
 
+
+
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Deposit",{
@@ -151,7 +157,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
 
           <Viewcashrequesticon />
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </>
   );
 };
@@ -160,9 +166,10 @@ const Depositupdate = ({ navigation, route }) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [coords, setCoords] = useState<any>({});
-  console.log(status, "the status")
+
   useEffect(() => {
     getDepositStatus();
+    console.log("should fetch again")
   },[route.params?.from]);
   useEffect(() => {
     updateDepositLocation();
@@ -241,7 +248,7 @@ const Depositupdate = ({ navigation, route }) => {
 
                 <Bottombtn
                   title="Create New Status"
-                  onpress={() =>
+                  onpress={() => 
                     navigation.navigate("Depositinput", {
                       type: "create",
                       reference: null,

@@ -6,7 +6,7 @@ const Server = {
 }
 
 const axiosCustom = axios.create({
-    baseURL:Server.dev
+    baseURL:Server.live
 })
 
 

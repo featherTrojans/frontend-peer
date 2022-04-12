@@ -7,13 +7,14 @@ import {
   TouchableHighlight,
   StyleSheet,
 } from "react-native";
-import { WebView } from 'react-native-webview';
+import { WebView } from "react-native-webview";
 import { useToast } from "react-native-toast-notifications";
-import * as Linking from 'expo-linking';
-import * as WebBrowser from 'expo-web-browser';
+import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
 import {
   Backheader,
   Bottombtn,
+  Keyboard,
   Loader,
   Numberbtn,
   Viewbalance,
@@ -25,55 +26,52 @@ import amountFormatter from "../../../../utils/formatMoney";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
 
-
-
-
 function WalletPin({ route, navigation }) {
-  const toast = useToast()
+  const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const [amount, setAmount] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  
 
-  const handleSubmit = async () =>{
-      setLoading(true)
-    try{
-        const response = await axiosCustom.post("/pay",{amount});
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosCustom.post("/pay", { amount });
 
-        navigation.navigate("CustomWebView",{url:response.data.data.authorization_url, reference:response.data.data.reference, amount: amount})
-        // Linking.openURL(response.data.data.authorization_url)
-        // WebBrowser.openBrowserAsync(response.data.data.authorization_url);
-
-    }catch(err){
-        showerror(toast,err)
-    }finally{
-        setLoading(false)
-    } 
-  }
+      navigation.navigate("CustomWebView", {
+        url: response.data.data.authorization_url,
+        reference: response.data.data.reference,
+        amount: amount,
+      });
+      // Linking.openURL(response.data.data.authorization_url)
+      // WebBrowser.openBrowserAsync(response.data.data.authorization_url);
+    } catch (err) {
+      showerror(toast, err);
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
-      const newdata = amount.substring(0, amount.length - 1)
+      const newdata = amount.substring(0, amount.length - 1);
       setAmount(newdata);
     }
   };
   const handleSetAmount = (value: string) => {
-    
     setAmount((oldamount) => {
-      let newamount = oldamount.concat(value)
-      if(Number(newamount)){
-        return newamount
+      let newamount = oldamount.concat(value);
+      if (Number(newamount)) {
+        return newamount;
       }
-      return oldamount
+      return oldamount;
     });
   };
 
   return (
     <View style={styles.container}>
       <Backheader title="Enter Amount" />
-        {loading && <Loader />}
-        <Customstatusbar />
+      {loading && <Loader />}
+      <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
-
         <View style={{ flex: 1, justifyContent: "center" }}>
           <View style={{ alignItems: "center" }}>
             <View style={styles.amountcont}>
@@ -84,7 +82,8 @@ function WalletPin({ route, navigation }) {
               </Text>
             </View>
           </View>
-          <View style={[walletStyles.walletpinContainer, ]}>
+
+          {/* <View style={[walletStyles.walletpinContainer, ]}>
             {numbers.map((number, index) => {
               return (
                 <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
@@ -93,23 +92,25 @@ function WalletPin({ route, navigation }) {
               );
             })}
             <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-          </View>
+          </View> */}
+
+          <Keyboard
+            array={[...numbers]}
+            setDigit={handleSetAmount}
+            removeDigit={handleRemoveAmount}
+          />
         </View>
       </View>
 
-      <Bottombtn
-        title="PROCEED"
-        onpress={handleSubmit}
-      />
+      <Bottombtn title="PROCEED" onpress={handleSubmit} />
     </View>
   );
 }
 
 export default WalletPin;
 
-
 const walletStyles = StyleSheet.create({
-  walletpinContainer:{
+  walletpinContainer: {
     // flex: 1,
     flexDirection: "row",
     justifyContent: "center",
@@ -117,5 +118,5 @@ const walletStyles = StyleSheet.create({
     flexWrap: "wrap",
     // marginBottom: 30,
     // backgroundColor: "red"
-  }
-})
+  },
+});

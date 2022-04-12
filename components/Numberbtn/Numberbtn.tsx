@@ -7,20 +7,26 @@ const Numberbtn = ({
   children,
   onpress,
   textColor,
-
 }: {
   children: string;
   onpress: () => void;
-  textColor?: string
+  textColor?: string;
 }) => {
   return (
     <TouchableNativeFeedback
-      style={styles.numberBtn}
+      style={[styles.numberBtn]}
       onPress={onpress}
       background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, true)}
     >
       <View style={styles.numberBtn}>
-        <Text style={[styles.numberBtnText,{color: textColor ? textColor : COLORS.black}]}>{children}</Text>
+        <Text
+          style={[
+            styles.numberBtnText,
+            { color: textColor ? textColor : COLORS.black },
+          ]}
+        >
+          {children}
+        </Text>
       </View>
     </TouchableNativeFeedback>
   );

@@ -6,6 +6,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import {
   Backheader,
   Bottombtn,
+  Keyboard,
   Loader,
   Numberbtn,
 } from "../../../../components";
@@ -148,7 +149,7 @@ const Transferpin = ({ route, navigation }) => {
           </View>
         </View>
 
-        <View style={styles.numberBtnContainer}>
+        {/* <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
             return (
               <Numberbtn key={index} onpress={number !== ""? () => handleSetAmount(number): () => null}>
@@ -156,9 +157,10 @@ const Transferpin = ({ route, navigation }) => {
               </Numberbtn>
             );
           })}
-
+          
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View>
+        </View> */}
+      <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
 
         
       </View>

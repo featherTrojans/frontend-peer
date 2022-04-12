@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import { styles } from "./Transferpin.styles";
 
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Numberbtn, Bottombtn, Loader } from "../../../../components";
+import { Numberbtn, Bottombtn, Loader, Keyboard } from "../../../../components";
 import { styles } from "../../Transferfunds/Transferpin/Transferpin.styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
@@ -25,7 +25,7 @@ const Depositpin = ({ route, navigation }) => {
   const [pin, setPin] = useState<string[]>([]);
   const [successModal, setSuccessModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  
+
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldamount) => [...oldamount, value]);
@@ -45,18 +45,32 @@ const Depositpin = ({ route, navigation }) => {
     });
   };
 
-  const checkIfDocExist = async ()=>{
-    const  document = await getDoc(doc(db,"withdrawtransfer",requestInfo.reference))
-    if(document.exists()){
-      if(document.data().status === "pending"){
-        return true
-      }else{
-         throw {response:{data:{message:`Pls swipe 'Make Payment' on @${requestInfo?.user?.username}'s device to continue`}}}   
+  const checkIfDocExist = async () => {
+    const document = await getDoc(
+      doc(db, "withdrawtransfer", requestInfo.reference)
+    );
+    if (document.exists()) {
+      if (document.data().status === "pending") {
+        return true;
+      } else {
+        throw {
+          response: {
+            data: {
+              message: `Pls swipe 'Make Payment' on @${requestInfo?.user?.username}'s device to continue`,
+            },
+          },
+        };
       }
-    }else{
-       throw {response:{data:{message:`Pls swipe 'Make Payment' on @${requestInfo?.user?.username}'s device to continue`}}}
+    } else {
+      throw {
+        response: {
+          data: {
+            message: `Pls swipe 'Make Payment' on @${requestInfo?.user?.username}'s device to continue`,
+          },
+        },
+      };
     }
-  }
+  };
 
   const handleApproveRequest = async () => {
     const joinpin = pin.join("");
@@ -65,31 +79,30 @@ const Depositpin = ({ route, navigation }) => {
     }
 
     setLoading(true);
-  
+
     try {
       // check if document exist
-      console.log(1)
-      await checkIfDocExist()
-      console.log(2)
+      console.log(1);
+      await checkIfDocExist();
+      console.log(2);
       await axiosCustom.post("/request/approve", {
         reference: requestInfo.reference,
         user_pin: joinpin,
       });
-      console.log(3)
+      console.log(3);
       await handlePrepareToTestUpdate("approved");
-      console.log(4)
+      console.log(4);
       //show success message
       setSuccessModal(true);
     } catch (err) {
-      
       showerror(toast, err);
       // check the error, don't reject for pin error
-      if(err?.response?.data?.message === "Incorrect Pin"){
-        return
+      if (err?.response?.data?.message === "Incorrect Pin") {
+        return;
       }
-      console.log(5)
+      console.log(5);
       await handlePrepareToTestUpdate("rejected");
-      console.log(6)
+      console.log(6);
     } finally {
       setLoading(false);
     }
@@ -100,45 +113,39 @@ const Depositpin = ({ route, navigation }) => {
       <Customstatusbar />
       {loading && <Loader />}
 
-
       <Globalmodal
         showState={successModal}
         btnFunction={() => {
-          setSuccessModal(false)
-          navigation.navigate("Transactionsrating",{
-          userToRate:requestInfo.userUid, 
-          reference:requestInfo.reference,
-          username: requestInfo?.user?.username,
-          fullname: requestInfo?.user?.fullName
-        })}
-      }
+          setSuccessModal(false);
+          navigation.navigate("Transactionsrating", {
+            userToRate: requestInfo.userUid,
+            reference: requestInfo.reference,
+            username: requestInfo?.user?.username,
+            fullname: requestInfo?.user?.fullName,
+          });
+        }}
       >
         <View style={{ alignItems: "center" }}>
           <LottieView
             source={Successcheckanimate}
             autoPlay
             loop
-            style={{ width: RFValue(148), height:  RFValue(148)}}
+            style={{ width: RFValue(148), height: RFValue(148) }}
           />
-          <Text
-            style={styles.transactionSubHeader}
-          >
+          <Text style={styles.transactionSubHeader}>
             Transaction Successful
           </Text>
-          <Text
-            style={styles.transactionSubHeader}
-          >
+          <Text style={styles.transactionSubHeader}>
             You can dispute this transaction after 24 hours
           </Text>
           {/* share and download */}
         </View>
       </Globalmodal>
 
-
-        <View style={[styles.mainContainer, ]}>
-          <View style={[styles.backArrowConteiner,{ marginLeft: 15}]}>
-            <Backarrow />
-          </View>
+      <View style={[styles.mainContainer]}>
+        <View style={[styles.backArrowConteiner, { marginLeft: 15 }]}>
+          <Backarrow />
+        </View>
 
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
@@ -157,7 +164,7 @@ const Depositpin = ({ route, navigation }) => {
           </View>
         </View>
 
-        <View style={styles.numberBtnContainer}>
+        {/* <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
             return (
               <Numberbtn
@@ -172,7 +179,13 @@ const Depositpin = ({ route, navigation }) => {
           })}
 
           <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View>
+        </View> */}
+
+        <Keyboard
+          array={[...numbers]}
+          setDigit={handleSetAmount}
+          removeDigit={handleRemoveAmount}
+        />
       </View>
 
       <Bottombtn title="CONTINUE" onpress={handleApproveRequest} />

@@ -11,6 +11,7 @@ import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
   Bottombtn,
+  Keyboard,
   Numberbtn,
   Viewbalance,
 } from "../../../../components";
@@ -81,7 +82,9 @@ function TransferInput({ route, navigation }) {
               </Text>
             </View>
           </View>
-          <View style={styles.numberBtnContainer}>
+
+
+          {/* <View style={styles.numberBtnContainer}>
             {numbers.map((number, index) => {
               return (
                 <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
@@ -90,7 +93,11 @@ function TransferInput({ route, navigation }) {
               );
             })}
             <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-          </View>
+          </View> */}
+
+          <Keyboard  array={[...numbers]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
+
+
         </View>
       </View>
 
