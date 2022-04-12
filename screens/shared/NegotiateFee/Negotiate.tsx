@@ -25,7 +25,7 @@ const Negotiate = ({ navigation, route }) => {
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [loading, setLoading] = useState(false);
-  const [charges, setCharges] = useState<string>(requestInfo.charges);
+  const [charges, setCharges] = useState<string>(requestInfo.negotiatedFee);
   const [showmodal, setShowModal] = useState(false);
 
   const amountFormatter = (value: string) => {
@@ -53,6 +53,10 @@ const Negotiate = ({ navigation, route }) => {
   };
 
   const handleSubmit = async () => {
+    if(Number(charges) <= 0 ){
+      showerror(toast,null ,"sorry you have to input a fair amount to continue");
+      return
+    }
     try {
       setLoading(true);
       const response = await axiosCustom.put("/request/negotiate", {
@@ -142,7 +146,8 @@ const Negotiate = ({ navigation, route }) => {
 
           <View style={styles.descriptionContainer}>
             <Text style={styles.descriptionText}>
-              Negotiate the base charge as fee
+              Add or reduce the charges to negotiate
+              
             </Text>
             <Text style={styles.enterPinText}>Enter Amount</Text>
           </View>

@@ -114,9 +114,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
             </View>
             <Text style={styles.iconValue}>
               N{" "}
-              {amountFormatter(
-                `${status.status[0].amount - status.totalEarnings}`
-              )}
+              {amountFormatter(`${status.status[0].balance}`)}
             </Text>
           </View>
           <View style={styles.horizontalLine} />

@@ -105,7 +105,7 @@ const Accepteddeposit = ({ navigation, route }) => {
   };
 
   const handleRedirect = () => {
-    navigation.push("Depositpin", { requestInfo });
+    navigation.push("DepositSummary", { requestInfo });
   };
 
   if (locationLoading) {
