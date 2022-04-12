@@ -20,7 +20,7 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
         {[array[0], array[1], array[2]].map((number, index) => {
           return (
             <Numberbtn
-              key={index}
+              key={number}
               onpress={number !== "" ? () => setDigit(number) : () => null}
               textColor={textColor}
             >
@@ -33,7 +33,7 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
         {[array[3], array[4], array[5]].map((number, index) => {
           return (
             <Numberbtn
-              key={index}
+              key={number}
               onpress={number !== "" ? () => setDigit(number) : () => null}
               textColor={textColor}
             >
@@ -46,7 +46,7 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
         {[array[6], array[7], array[8]].map((number, index) => {
           return (
             <Numberbtn
-              key={index}
+              key={number}
               onpress={number !== "" ? () => setDigit(number) : () => null}
               textColor={textColor}
             >
@@ -73,7 +73,7 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
                 ></View>
               ) : (
                 <Numberbtn
-                  key={index}
+                  key={number}
                   onpress={number !== "" ? () => setDigit(number) : () => null}
                   textColor={textColor}
                 >
