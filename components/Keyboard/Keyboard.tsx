@@ -58,9 +58,10 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
       <View style={{ flexDirection: "row" }}>
         {[array[9], array[10]].map((number, index) => {
           return (
-            <>
+            <View key={number} style={{ flexDirection: "row"}}>
               {number === "" ? (
                 <View
+                key={number}
                   style={{
                     width: RFValue(60),
                     height: RFValue(60),
@@ -80,12 +81,13 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
                   {number}
                 </Numberbtn>
               )}
-            </>
+            </View>
           );
         })}
         <Numberbtn 
         onpress={() => removeDigit()}
         textColor={textColor}
+        key="x"
         >X</Numberbtn>
       </View>
     </View>
