@@ -21,22 +21,22 @@ import Globalmodal from "../Globalmodal/Globalmodal";
 import { AuthContext } from "../../../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
 
-const {Cancelicon} = icons
+const { Cancelicon } = icons;
 const LockScreen = ({ modal, setModal }: any) => {
   const toast = useToast();
-  const {setToken,authdata} = useContext(AuthContext)
+  const { setToken, authdata } = useContext(AuthContext);
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const [numoftrial, setNumberTrial] = useState(0)
-  const [error, setError] = useState(false)
+  const [numoftrial, setNumberTrial] = useState(0);
+  const [error, setError] = useState(false);
   const handleSetAmount = (value: string) => {
-    const newpin = [...pin,value]
+    const newpin = [...pin, value];
     if (pin.length < 4) {
       setPin(newpin);
     }
-    if(pin.length === 3){
-      handleSubmit(newpin)
+    if (pin.length === 3) {
+      handleSubmit(newpin);
     }
   };
   const handleRemoveAmount = () => {
@@ -46,26 +46,29 @@ const LockScreen = ({ modal, setModal }: any) => {
       setPin(newdata);
     }
   };
-  const handleSubmit = async (newpin:any) => {
-    setLoading(true)
-    try{
-      await axiosCustom.post("/auth/pin/verify",{user_pin: newpin.join(""),pin:newpin.join("")})
-      setPin([])
-      setModal(false)  
-    }catch(err){
-      const newnumoftrial = numoftrial + 1
-      setNumberTrial(newnumoftrial)
-      setError(true)
-      if(newnumoftrial === 5 ){
-        setModal(false) 
-        setToken("")
-        setNumberTrial(0)
-        setPin([])
+  const handleSubmit = async (newpin: any) => {
+    setLoading(true);
+    try {
+      await axiosCustom.post("/auth/pin/verify", {
+        user_pin: newpin.join(""),
+        pin: newpin.join(""),
+      });
+      setPin([]);
+      setModal(false);
+    } catch (err) {
+      const newnumoftrial = numoftrial + 1;
+      setNumberTrial(newnumoftrial);
+      setError(true);
+      if (newnumoftrial === 5) {
+        setModal(false);
+        setToken("");
+        setNumberTrial(0);
+        setPin([]);
       }
-      console.log(err.response)
-      // setModal(false)  
-    }finally{
-      setLoading(false)
+      console.log(err.response);
+      // setModal(false)
+    } finally {
+      setLoading(false);
     }
   };
   // return (<View>Hi</View>)
@@ -81,8 +84,10 @@ const LockScreen = ({ modal, setModal }: any) => {
     >
       <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
         {loading && <Loader />}
-       { error && <View  style={{
-              backgroundColor:"#E00000",
+        {error && (
+          <View
+            style={{
+              backgroundColor: "#E00000",
               paddingVertical: RFValue(18),
               paddingHorizontal: RFValue(24),
               borderRadius: RFValue(10),
@@ -90,13 +95,25 @@ const LockScreen = ({ modal, setModal }: any) => {
               justifyContent: "space-between",
               alignItems: "center",
               width: "90%",
-              position:"absolute",
-              marginHorizontal:  RFValue(25),}}>
-                <Text style={{color: "#fff", ...fontsize.small,lineHeight:20, ...FONTS.regular}}>Incorrect pin, try again</Text>    
-                <TouchableOpacity onPress={()=>setError(false)}>
-                  <Cancelicon />
-                </TouchableOpacity>
-            </View>}
+              position: "absolute",
+              marginHorizontal: RFValue(25),
+            }}
+          >
+            <Text
+              style={{
+                color: "#fff",
+                ...fontsize.small,
+                lineHeight: 20,
+                ...FONTS.regular,
+              }}
+            >
+              Incorrect pin, try again
+            </Text>
+            <TouchableOpacity onPress={() => setError(false)}>
+              <Cancelicon />
+            </TouchableOpacity>
+          </View>
+        )}
         <StatusBar
           animated={modal}
           backgroundColor={COLORS.blue6}
@@ -107,7 +124,13 @@ const LockScreen = ({ modal, setModal }: any) => {
         />
         <View style={{ marginTop: RFValue(44) }}>
           <Text style={styles.headerText}>Welcome Back,</Text>
-          <Text style={styles.headerText}>{authdata?.userDetails?.fullName?.replace(/\s+/g, ' ').split(" ")[0]}</Text> 
+          <Text style={styles.headerText}>
+            {
+              authdata?.userDetails?.fullName
+                ?.replace(/\s+/g, " ")
+                .split(" ")[0]
+            }
+          </Text>
         </View>
 
         <View style={{ marginHorizontal: RFValue(70), marginTop: RFValue(42) }}>
@@ -128,35 +151,34 @@ const LockScreen = ({ modal, setModal }: any) => {
               justifyContent: "space-between",
               marginTop: RFValue(58),
               marginBottom: RFValue(60),
-              height: RFValue(16)
+              height: RFValue(16),
             }}
           >
             <View
               style={{
                 width: RFValue(16),
                 height: RFValue(16),
-                borderRadius: RFValue(16/2),
+                borderRadius: RFValue(16 / 2),
                 backgroundColor: COLORS.white,
-                opacity: pin[0]?1:0.2,
-                
+                opacity: pin[0] ? 1 : 0.2,
               }}
             />
             <View
               style={{
                 width: RFValue(16),
                 height: RFValue(16),
-                borderRadius: RFValue(16/2),
+                borderRadius: RFValue(16 / 2),
                 backgroundColor: COLORS.white,
-                opacity: pin[1]?1:0.2,
+                opacity: pin[1] ? 1 : 0.2,
               }}
             />
             <View
               style={{
                 width: RFValue(16),
                 height: RFValue(16),
-                borderRadius: RFValue(16/2),
+                borderRadius: RFValue(16 / 2),
                 backgroundColor: COLORS.white,
-                opacity:  pin[2]?1:0.2,
+                opacity: pin[2] ? 1 : 0.2,
               }}
             />
             <View
@@ -164,15 +186,12 @@ const LockScreen = ({ modal, setModal }: any) => {
                 width: RFValue(16),
                 height: RFValue(16),
                 backgroundColor: COLORS.white,
-                borderRadius: RFValue(16/2),
-                opacity:  pin[3]?1:0.2,
+                borderRadius: RFValue(16 / 2),
+                opacity: pin[3] ? 1 : 0.2,
               }}
             />
           </View>
         </View>
-
-
-
 
         {/* <View style={styles.numberBtnContainer}>
           {numbers.map((number, index) => {
@@ -195,13 +214,12 @@ const LockScreen = ({ modal, setModal }: any) => {
           </Numberbtn>
         </View> */}
 
-
-<Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
-
-
-
-
-
+        <Keyboard
+          array={[...numbers]}
+          setDigit={handleSetAmount}
+          removeDigit={handleRemoveAmount}
+          textColor={COLORS.white}
+        />
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Text

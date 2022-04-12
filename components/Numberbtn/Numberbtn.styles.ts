@@ -11,10 +11,11 @@ export const styles = StyleSheet.create({
     height: RFValue(60),
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 30,
     marginHorizontal: RFValue(20),
     marginVertical: RFValue(10),
     // backgroundColor: "red"
+    borderRadius: RFValue(60/2),
+
   },
   numberBtnText: {
     ...fontsize.bmedium,

@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   lastAmountText: {
-    ...fontsize.bmsmall,
+    ...fontsize.small,
     ...FONTS.medium,
     marginBottom: 7,
   },
@@ -95,18 +95,21 @@ export const styles = StyleSheet.create({
   },
   bottomBtn:{
     backgroundColor: COLORS.white,
-    height: 70,
+    // height: 70,
+    
     borderRadius: 15,
     marginVertical: 25,
     marginHorizontal: 15,
     paddingLeft: 20,
+    paddingRight: 30,
+    paddingVertical: 16,
     alignItems: "center",
     flexDirection: "row",
     borderColor: COLORS.grey11,
     borderWidth: 1,
     justifyContent: "space-between",
     
-    paddingRight: 30
+    
   },
   eyeiconBg:{
     width: 38,

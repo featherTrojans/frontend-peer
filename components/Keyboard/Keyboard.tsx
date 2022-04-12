@@ -2,7 +2,18 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Numberbtn from "../Numberbtn/Numberbtn";
 import { RFValue } from "react-native-responsive-fontsize";
-const Keyboard = ({ array, setDigit, removeDigit }) => {
+
+
+
+type KeyboardProps = {
+    array: any,
+    setDigit: any,
+    removeDigit: any,
+    textColor?: string
+}
+
+
+const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) => {
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>
       <View style={{ flexDirection: "row" }}>
@@ -11,6 +22,7 @@ const Keyboard = ({ array, setDigit, removeDigit }) => {
             <Numberbtn
               key={index}
               onpress={number !== "" ? () => setDigit(number) : () => null}
+              textColor={textColor}
             >
               {number}
             </Numberbtn>
@@ -23,6 +35,7 @@ const Keyboard = ({ array, setDigit, removeDigit }) => {
             <Numberbtn
               key={index}
               onpress={number !== "" ? () => setDigit(number) : () => null}
+              textColor={textColor}
             >
               {number}
             </Numberbtn>
@@ -35,6 +48,7 @@ const Keyboard = ({ array, setDigit, removeDigit }) => {
             <Numberbtn
               key={index}
               onpress={number !== "" ? () => setDigit(number) : () => null}
+              textColor={textColor}
             >
               {number}
             </Numberbtn>
@@ -61,6 +75,7 @@ const Keyboard = ({ array, setDigit, removeDigit }) => {
                 <Numberbtn
                   key={index}
                   onpress={number !== "" ? () => setDigit(number) : () => null}
+                  textColor={textColor}
                 >
                   {number}
                 </Numberbtn>
@@ -68,7 +83,10 @@ const Keyboard = ({ array, setDigit, removeDigit }) => {
             </>
           );
         })}
-        <Numberbtn onpress={() => removeDigit()}>X</Numberbtn>
+        <Numberbtn 
+        onpress={() => removeDigit()}
+        textColor={textColor}
+        >X</Numberbtn>
       </View>
     </View>
   );
