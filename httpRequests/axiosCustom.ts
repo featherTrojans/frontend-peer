@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const Server = {
-    dev:"https://featherafrica.co:3300/api/v1/",
-    live:"https://feather.com.ng:3300/api/v1/"
+    live:"https://featherafrica.co:3300/api/v1/",
+    dev:"https://feather.com.ng:3300/api/v1/"
 }
 
 const axiosCustom = axios.create({
