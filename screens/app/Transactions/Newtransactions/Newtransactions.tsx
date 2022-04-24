@@ -2,8 +2,10 @@ import { StyleSheet, Text, View, ScrollView, StatusBar } from "react-native";
 import React from "react";
 import { styles } from "./Newtransactions.styles";
 import { Backheader, Iconwithdatas } from "../../../../components";
-import { icons } from "../../../../constants";
+import { FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ifIphoneX, getStatusBarHeight } from 'react-native-iphone-x-helper'
 
 
 const { Withdrawicon, Depositicon, Eyecrossed, TransferIcon, Newtransfericon,Fundwalleticon, Paybillicon } = icons;
@@ -12,12 +14,14 @@ const { Withdrawicon, Depositicon, Eyecrossed, TransferIcon, Newtransfericon,Fun
 
 const Newtransactions = ({navigation}: any) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{paddingTop: getStatusBarHeight(true)+30}]}>
       <Customstatusbar />
-      <Backheader title="New Transactions" />
+      {/* <Backheader title="New Transactions" /> */}
+      
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <ScrollView style={{ flex: 1 }}>
           {/* Header title */}
+          <Text style={{...fontsize.xmedium, ...FONTS.bold, marginBottom: 28}}>New Transactions</Text>
           <View style={{ marginBottom: 30 }}>
             <Text style={styles.subHeader}>Perform a transaction</Text>
           </View>

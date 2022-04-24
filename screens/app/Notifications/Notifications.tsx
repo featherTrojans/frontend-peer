@@ -11,6 +11,7 @@ import formatData from "../../../utils/fomatTrans";
 import moment from "moment";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable"
+import { SafeAreaView } from "react-native-safe-area-context";
 const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow, Arrowout } = icons;
 
 const DATA = [
@@ -193,7 +194,7 @@ const Notifications = () => {
     try {
       setLoading(true);
       const response = await axiosCustom.get("/notifications");
-      
+      console.log(response, "Here is the notifications");
       setNotifications(response?.data?.data?.notifications);
     } catch (err) {
       console.log(err.response);
@@ -212,7 +213,7 @@ const Notifications = () => {
   
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Header title */}
       <View>
         <Backheader title="Notifications" />
@@ -250,7 +251,7 @@ const Notifications = () => {
         {/* Flatlist list of notifications */}
         
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -10,6 +10,7 @@ import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow, Successcheckanimate } = icons;
 const Cancelrequest = ({route, navigation}) => {
@@ -47,7 +48,7 @@ const Cancelrequest = ({route, navigation}) => {
     }
   }
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {loading && <Loader />}
       <Customstatusbar />
       <Globalmodal
@@ -116,7 +117,7 @@ const Cancelrequest = ({route, navigation}) => {
         onpress={handleCancelRequest}
       />
 
-    </View>
+    </SafeAreaView>
   );
 };
 

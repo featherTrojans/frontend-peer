@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   settingText: {
     ...FONTS.bold,
     ...fontsize.bmedium,
-    marginTop: 30,
+    // marginTop: 30,
   },
   profileContainer: {
     alignItems: "center",
@@ -33,12 +33,14 @@ export const styles = StyleSheet.create({
     ...FONTS.bold,
     marginBottom: 7,
     marginTop: 24,
+    textAlign: 'center',
+    textTransform: 'capitalize'
   },
   profileUsername: {
     ...fontsize.bsmall,
     ...FONTS.regular,
     color: COLORS.grey8,
-    textTransform: "lowercase" ,
+    textTransform: "lowercase",
   },
   profileExtraContainer: {
     flexDirection: "row",

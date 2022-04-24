@@ -4,7 +4,7 @@ import { useToast } from "react-native-toast-notifications";
 import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
 import LottieView from "lottie-react-native";
 
-import { FONTS, fontsize, icons } from "../../../../constants";
+import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
@@ -13,6 +13,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { styles } from "./Securepin.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { SecureDot, Successcheckanimate } = icons;
 const SecurepinAgain = ({ route, navigation }) => {
@@ -63,6 +64,7 @@ const SecurepinAgain = ({ route, navigation }) => {
   };
 
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
     <View style={styles.container}>
       <Customstatusbar />
 
@@ -140,21 +142,7 @@ const SecurepinAgain = ({ route, navigation }) => {
         </View>
       </View>
 
-      {/* <View style={styles.numberBtnContainer}>
-          {numbers.map((number, index) => {
-            return (
-              <Numberbtn
-                key={index}
-                onpress={
-                  number !== "" ? () => handleSetAmount(number) : () => null
-                }
-              >
-                {number}
-              </Numberbtn>
-            );
-          })}
-          <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View> */}
+      
 
       <Keyboard
         array={[...numbers]}
@@ -168,6 +156,7 @@ const SecurepinAgain = ({ route, navigation }) => {
         disabled={amount.length !== 4}
       />
     </View>
+    </SafeAreaView>
   );
 };
 

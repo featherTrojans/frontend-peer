@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Share } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as WebBrowser from 'expo-web-browser';
@@ -13,6 +13,9 @@ import { styles } from "./Settings.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { Shadow } from "../../../constants/theme";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ifIphoneX, getStatusBarHeight } from 'react-native-iphone-x-helper'
+
 
 const {
   Defaultuseravatar,
@@ -47,6 +50,17 @@ const Iconwithtitle = ({ bg, icon, title, onpress }: IconwithtitleProps) => {
   );
 };
 
+const abbreviateName = (name: string) => {
+  if(name?.length > 18){
+    const splitName = name.replace(/\s+/g, ' ').split(" ");
+
+    if (splitName.length >= 2) {
+      return `${splitName[0]} ${splitName[1][0]}${'.'}`;
+    }
+  }
+  return name
+}
+
 const handleOpenWithWebBrowser = (name:string,email:string) => {
   WebBrowser.openBrowserAsync(`https://www.feather.africa/support/app/${name}/${email}`);
 };
@@ -76,13 +90,17 @@ const Settings = ({navigation}) => {
   
   const {authdata,setAuthData, setToken} = useContext(AuthContext)
 
+
+  const snapPoints = useMemo(() => ["50%", "75%"], [])
+
   
   const handleSignout = ()=>{
     setToken("")
     setAuthData({})
   }
   return (
-    <View style={styles.container}>
+    // <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}} >
+    <View style={[styles.container, {paddingTop: getStatusBarHeight(true)+30}]}>
       <Customstatusbar />
       <View>
         <Text style={styles.settingText}>Settings</Text>
@@ -95,7 +113,7 @@ const Settings = ({navigation}) => {
             <Defaultuseravatar />
           </View>
           {/* name */}
-          <Text style={styles.profileName}>{authdata?.userDetails?.fullName}</Text>
+          <Text style={styles.profileName}>{abbreviateName(authdata?.userDetails?.fullName)}</Text>
           <Text style={styles.profileUsername}>@{authdata?.userDetails?.username}</Text>
           {/* username */}
         </View>
@@ -118,7 +136,10 @@ const Settings = ({navigation}) => {
         </View>
       </View>
 
-      <BottomSheet snapPoints={["50%", "75%"]}  style={{
+      <BottomSheet 
+      index={1}
+      snapPoints={snapPoints}  
+      style={{
             shadowColor: COLORS.grey2,
             shadowOpacity: 0.5,
             shadowOffset: { width: 10, height: -10},
@@ -185,6 +206,7 @@ const Settings = ({navigation}) => {
         </BottomSheetScrollView>
       </BottomSheet>
     </View>
+    // </SafeAreaView>
   );
 };
 

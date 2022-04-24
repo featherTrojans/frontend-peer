@@ -28,6 +28,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 const {
   Ratingsstar,
   Userdefaultsmaller,
@@ -129,6 +130,7 @@ const Transactionsrating = ({navigation, route}:any) => {
   }
 
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       contentContainerStyle={{ flex: 1 }}
@@ -247,6 +249,7 @@ const Transactionsrating = ({navigation, route}:any) => {
         </View>
       </View>
     </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

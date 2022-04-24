@@ -6,6 +6,7 @@ import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons, images } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 const { Cryinganimate } = icons;
 const { Lagosbadge, Oyobadge, Osunbadge, Ogunbadge } = images;
 
@@ -31,7 +32,7 @@ const supportedStates = [
 const Updatedeposit = ({ navigation, route }) => {
   const { from } = route.params;
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
       <Backheader
         title={`${from === "deposit" ? "Update Deposit" : "Withdrawal"}`}
@@ -82,7 +83,7 @@ const Updatedeposit = ({ navigation, route }) => {
           onpress={() => navigation.navigate("Home")}
         />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

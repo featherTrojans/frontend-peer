@@ -21,6 +21,7 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../shared/Customstatusbar";
 import Usericondark from "../../../assets/icons/Usericondark";
 import { Shadow } from "../../../constants/theme";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const {
   Backarrow,
@@ -258,7 +259,7 @@ const Deposit = ({ navigation,route}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Deposit" />
       <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
@@ -283,7 +284,7 @@ const Deposit = ({ navigation,route}) => {
         title="NEW DEPOSIT"
         onpress={() => console.log("New Transaction clicked")}
       /> */}
-    </View>
+    </SafeAreaView>
   );
 };
 

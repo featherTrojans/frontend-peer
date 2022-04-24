@@ -14,6 +14,8 @@ import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { Backheader } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Backarrow, People, Debitcard, Arrowright, Forwardarrow } = icons;
 
@@ -21,7 +23,7 @@ const Choosewallet = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
 
       <Globalmodal
@@ -58,7 +60,7 @@ const Choosewallet = ({ navigation }) => {
 
       <Backheader title="Add Cash" />
 
-      <View style={{ marginVertical: 16, marginHorizontal: 15 }}>
+      <View style={{ marginVertical: RFValue(16), marginHorizontal: 15 }}>
         <TouchableNativeFeedback
           background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, false)}
           onPress={() => navigation.navigate("WalletPin")}
@@ -142,7 +144,7 @@ const Choosewallet = ({ navigation }) => {
 
         {/* Second Block */}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -24,6 +24,7 @@ import { useToast } from "react-native-toast-notifications";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
+import { SafeAreaView } from "react-native-safe-area-context";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
   // import { styles } from './Pendingwithdraw.styles'
@@ -102,7 +103,7 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
 
     
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Customstatusbar /> 
         {loading && <Loader />}
         <Map />
@@ -197,7 +198,7 @@ import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/us
               </View>
             </View>
           </View>
-      </View>
+      </SafeAreaView>
     );
   };
   

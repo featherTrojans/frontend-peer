@@ -18,6 +18,7 @@ import Customstatusbar from "../../shared/Customstatusbar";
 import { AuthContext } from "../../../context/AuthContext";
 import { plusBase } from "../../../utils/utils";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 const { Backarrow, SecureDot } = icons;
 
 const Negotiate = ({ navigation, route }) => {
@@ -69,6 +70,7 @@ const Negotiate = ({ navigation, route }) => {
     }
   };
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
     <View style={styles.container}>
       {loading && <Loader />}
 
@@ -158,20 +160,6 @@ const Negotiate = ({ navigation, route }) => {
               </View>
             </View>
 
-            {/* <View style={styles.numberBtnContainer}>
-              {numbers.map((number, index) => {
-                return (
-                  <Numberbtn
-                    key={index}
-                    onpress={() => handleSetAmount(number)}
-                  >
-                    {number}
-                  </Numberbtn>
-                );
-              })}
-
-              <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-            </View> */}
 
             <Keyboard
               array={[...numbers]}
@@ -183,6 +171,7 @@ const Negotiate = ({ navigation, route }) => {
         <Bottombtn title="PROCEED" onpress={handleSubmit} />
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 

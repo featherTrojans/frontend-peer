@@ -30,6 +30,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import useDebounce from "../../../../utils/debounce";
 import DropDownPicker from "react-native-dropdown-picker";
 import moment from "moment";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow, Check, WrongIcon } = icons;
 
@@ -512,7 +513,7 @@ const Editprofile = ({}) => {
   //   </View>
   // )
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
 
       <View style={styles.mainHeaderContainer}>
@@ -597,7 +598,7 @@ const Editprofile = ({}) => {
       {/* <Personalsettings /> */}
       {/* <Documentsettings /> */}
       {/* </Animated.ScrollView> */}
-    </View>
+    </SafeAreaView>
   );
 };
 

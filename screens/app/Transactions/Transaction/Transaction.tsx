@@ -22,6 +22,9 @@ import formatData from "../../../../utils/fomatTrans";
 import { styles } from "./Transaction.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ifIphoneX, getStatusBarHeight } from 'react-native-iphone-x-helper'
+
 
 const { Cryinganimate } = icons;
 
@@ -163,7 +166,6 @@ const Transactions = ({ navigation }: any) => {
       setLoading(true);
       const response = await axiosCustom.get("/transactions");
       setTransations(response?.data?.data?.transactions);
-      
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -191,57 +193,58 @@ const Transactions = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Customstatusbar />
-      {/* heading */}
-      <View style={styles.contentContainer}>
-        <Text style={styles.headerText}>History</Text>
+    <View style={[styles.container, {paddingTop: getStatusBarHeight(true)+30}]} >
+      
+        {/* heading */}
+        <View style={styles.contentContainer}>
+        <Customstatusbar />
+        
+          <Text style={styles.headerText}>History</Text>
 
-        <View style={styles.listContainer}>
-          {loading ? (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <ActivityIndicator size="large" color={COLORS.blue6} />
-            </View>
-          ) : (
-            <>
-              {DATA.length > 0 && <Listheader />}
-              <FlatList
-                ref={flatlistRef}
-                style={{ paddingTop: 10 }}
-                data={formatData(transactions)}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={handleRefresh}
-                    progressBackgroundColor="white"
-                    colors={["#003AD6"]}
-                    tintColor={"#003AD6"}
-                  />
-                }
-                // refreshing={refreshing}
-                // onRefresh={handleRefresh}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item, index }: any) => (
-                  <Transactionhistory date={item.time} datas={item.data} index={index}/>
-                )}
-                keyExtractor={(item) => item.time}
-                ListEmptyComponent={<EmptyComponent />}
-              />
-            </>
-          )}
+          <View style={styles.listContainer}>
+            {loading ? (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <ActivityIndicator size="large" color={COLORS.blue6} />
+              </View>
+            ) : (
+              <>
+                {DATA.length > 0 && <Listheader />}
+                <FlatList
+                  ref={flatlistRef}
+                  style={{ paddingTop: 10 }}
+                  data={formatData(transactions)}
+                  refreshControl={
+                    <RefreshControl
+                      refreshing={refreshing}
+                      onRefresh={handleRefresh}
+                      progressBackgroundColor="white"
+                      colors={["#003AD6"]}
+                      tintColor={"#003AD6"}
+                    />
+                  }
+                  // refreshing={refreshing}
+                  // onRefresh={handleRefresh}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ item, index }: any) => (
+                    <Transactionhistory
+                      date={item.time}
+                      datas={item.data}
+                      index={index}
+                    />
+                  )}
+                  keyExtractor={(item) => item.time}
+                  ListEmptyComponent={<EmptyComponent />}
+                />
+              </>
+            )}
+          </View>
         </View>
-      </View>
-
-      {/* <Bottombtn
-        title="+ NEW TRANSACTIONS"
-        onpress={() =>navigation.navigate("Newtransactions")}
-      /> */}
     </View>
   );
 };

@@ -11,6 +11,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
 import LottieView from "lottie-react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const TransferpinBank = ({ route, navigation }) => {
@@ -51,7 +52,7 @@ const TransferpinBank = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {loading && <Loader />}
       <Customstatusbar />
       <Globalmodal
@@ -113,17 +114,7 @@ const TransferpinBank = ({ route, navigation }) => {
           </View>
         </View>
 
-        {/* <View style={styles.numberBtnContainer}>
-          {numbers.map((number, index) => {
-            return (
-              <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
-                {number}
-              </Numberbtn>
-            );
-          })}
-
-          <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View> */}
+       
 
         <Keyboard
           array={[...numbers]}
@@ -132,7 +123,7 @@ const TransferpinBank = ({ route, navigation }) => {
         />
       </View>
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
-    </View>
+    </SafeAreaView>
   );
 };
 

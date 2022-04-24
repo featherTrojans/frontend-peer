@@ -19,6 +19,7 @@ import {
 import amountFormatter from "../../../../../utils/formatMoney";
 import SecureDot from "../../../../../assets/icons/SecureDot";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Successcheckanimate } = icons;
 
@@ -63,6 +64,7 @@ const Airtimepurchasepin = ({ navigation, route }) => {
     }
   }
   return (
+    <SafeAreaView style={styles.container}>
     <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
       {loading && <Loader />}
       <Customstatusbar />
@@ -144,6 +146,7 @@ const Airtimepurchasepin = ({ navigation, route }) => {
       </View>
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

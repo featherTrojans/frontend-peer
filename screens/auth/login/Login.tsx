@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { styles } from "./Login.styles";
-import { COLORS, icons } from "../../../constants";
+import { COLORS, icons, SIZES } from "../../../constants";
 
 import { useToast } from "react-native-toast-notifications";
 import {
@@ -24,6 +24,7 @@ import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import * as LocalAuthentication from "expo-local-authentication";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
 
@@ -42,46 +43,27 @@ const Login = ({ navigation }: any) => {
   const [hidePassword, setHidePassword] = useState(true);
   const { setToken } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   login()
-  // })
-
-  // const login = async () => {
-  //   try {
-  //     let results = await LocalAuthentication.authenticateAsync();
-  //     if(results.success) {
-  //       Alert.alert('alert', 'login success')
-  //     } else {
-  //       Alert.alert('alert',  JSON.stringify(results))
-  //     }
-  //   }catch(err) {
-  //     Alert.alert('alert', 'login fail: ' + err)
-  //     console.log(err);
-  //   }
-
-  // }
 
   const toast = useToast();
   return (
-    <KeyboardAwareScrollView
-      
-    >
-      <View style={styles.container}>
-        {/* Logo */}
-        <View style={styles.logoWrapper}>
-          <Newlogo />
-        </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.blue6 }}>
+      <KeyboardAwareScrollView>
+        <View style={styles.container}>
+          {/* Logo */}
+          <View style={styles.logoWrapper}>
+            <Newlogo />
+          </View>
 
-        <StatusBar
-          animated={true}
-          backgroundColor="#003AD6"
-          barStyle="light-content"
-          networkActivityIndicatorVisible={true}
-          showHideTransition="fade"
-          hidden={false}
-        />
+          <StatusBar
+            animated={true}
+            backgroundColor="#003AD6"
+            barStyle="light-content"
+            networkActivityIndicatorVisible={true}
+            showHideTransition="fade"
+            hidden={false}
+          />
 
-        {/* Form */}
+          {/* Form */}
           <Formik
             initialValues={{
               username: "",
@@ -138,6 +120,8 @@ const Login = ({ navigation }: any) => {
               return (
                 <>
                   {isSubmitting && <Loader />}
+                  {/* <Loader /> */}
+
                   {/* Phone or tag input */}
                   <View
                     style={[
@@ -155,6 +139,7 @@ const Login = ({ navigation }: any) => {
                       underlineColorAndroid="transparent"
                       onChangeText={handleChange("username")}
                       onBlur={handleBlur("username")}
+                      selectionColor={COLORS.white}
                     />
                   </View>
 
@@ -171,6 +156,7 @@ const Login = ({ navigation }: any) => {
                       underlineColorAndroid="transparent"
                       onChangeText={handleChange("password")}
                       onBlur={handleBlur("password")}
+                      selectionColor={COLORS.white}
                     />
                     <TouchableOpacity
                       onPress={() => setHidePassword(!hidePassword)}
@@ -202,7 +188,7 @@ const Login = ({ navigation }: any) => {
 
                   {/* Login btn */}
                   <TouchableOpacity
-                    onPress={handleSubmit}
+                    onPress={() => handleSubmit()}
                     style={styles.loginbtn}
                     activeOpacity={0.8}
                   >
@@ -215,7 +201,7 @@ const Login = ({ navigation }: any) => {
 
           <View style={styles.haveanaccount}>
             <Text style={styles.haveaccounttext}>
-              Don’t have an account yet?
+              Don’t have an account yet?{" "}
             </Text>
             <TouchableOpacity
               activeOpacity={0.8}
@@ -225,7 +211,8 @@ const Login = ({ navigation }: any) => {
             </TouchableOpacity>
           </View>
         </View>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

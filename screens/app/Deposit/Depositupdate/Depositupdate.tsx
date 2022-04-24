@@ -25,6 +25,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 const {
   TransferIcon,
   Location,
@@ -218,7 +219,7 @@ const Depositupdate = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Deposit" />
 
       {/* {loading && <Loader />} */}
@@ -267,7 +268,7 @@ const Depositupdate = ({ navigation, route }) => {
 
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

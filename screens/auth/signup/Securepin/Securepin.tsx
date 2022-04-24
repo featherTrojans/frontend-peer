@@ -2,10 +2,11 @@ import { useState } from "react";
 import { View, Text, StatusBar, ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useToast } from "react-native-toast-notifications";
 import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
 
-import { icons } from "../../../../constants";
+import { COLORS, icons } from "../../../../constants";
 
 import { JustifyBetween } from "../../../../global/styles";
 import showerror from "../../../../utils/errorMessage";
@@ -39,6 +40,7 @@ const Securepin = ({ route, navigation }) => {
   };
 
   return (
+    <SafeAreaView style={{flex:1, backgroundColor: COLORS.white}}>
     <ScrollView style={styles.container}>
       <Customstatusbar />
       <View style={{ paddingHorizontal: RFValue(25) }}>
@@ -67,22 +69,6 @@ const Securepin = ({ route, navigation }) => {
         </View>
       </View>
 
-      {/* <View style={styles.numberBtnContainer}>
-        {numbers.map((number, index) => {
-          return (
-            <Numberbtn
-              key={index}
-              onpress={
-                number !== "" ? () => handleSetAmount(number) : () => null
-              }
-            >
-              {number}
-            </Numberbtn>
-          );
-        })}
-
-        <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-      </View> */}
 
       <Keyboard
         array={[...numbers]}
@@ -96,6 +82,7 @@ const Securepin = ({ route, navigation }) => {
         disabled={pin.length !== 4}
       />
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

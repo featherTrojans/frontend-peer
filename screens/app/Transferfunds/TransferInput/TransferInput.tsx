@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
@@ -65,7 +66,7 @@ function TransferInput({ route, navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Enter Amount" />
       <Customstatusbar />
 
@@ -105,7 +106,7 @@ function TransferInput({ route, navigation }) {
         title="PROCEED"
         onpress={handleToNext}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

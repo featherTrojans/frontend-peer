@@ -24,6 +24,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { InitialsBg } from "../../../../components";
 import Comingsoonagent from "../../../../assets/Lottie/animations/comingSoonAgent.json";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const {
   Backarrow,
@@ -123,7 +124,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <Customstatusbar />
       <Map />
       <TouchableOpacity
@@ -332,7 +333,7 @@ const Availablelisting = ({ navigation, route }: any) => {
           )}
         </>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

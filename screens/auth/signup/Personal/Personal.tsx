@@ -22,6 +22,7 @@ import showerror from "../../../../utils/errorMessage";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
 import DropDownPicker from "react-native-dropdown-picker";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Usericondark, Phoneicon, Envelopeicon } = icons;
 
@@ -38,217 +39,161 @@ const validationSchema = Yup.object().shape({
     .matches(phoneRegExp, "This is not a valid phone number"),
 });
 
-
 const Personal = ({ navigation }) => {
   const { setAuthData } = useContext(AuthContext);
   const toast = useToast();
 
   return (
-    <KeyboardAwareScrollView >
-      <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
-        <Customstatusbar />
+    <SafeAreaView style={styles.container}>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+        <View>
+          <Customstatusbar />
 
-        {/* ERROR PAGE */}
+          {/* ERROR PAGE */}
 
-        {/* <Text>Sign up page</Text> */}
-        {/* Get Started and dots */}
-        <JustifyBetween style={{ marginBottom: RFValue(10) }}>
-          <View>
-            <Text style={styles.header}>Get Started.</Text>
+          {/* <Text>Sign up page</Text> */}
+          {/* Get Started and dots */}
+
+          <JustifyBetween style={{ marginBottom: RFValue(10) }}>
+            <View>
+              <Text style={styles.header}>Get Started.</Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <View style={[styles.activeDot, { marginRight: 10 }]} />
+              <View style={[styles.topDots, { marginRight: 10 }]} />
+              <View style={styles.topDots} />
+            </View>
+          </JustifyBetween>
+          {/* personal */}
+          <View style={{ marginBottom: RFValue(40) }}>
+            <Text style={styles.subText}>Personal</Text>
           </View>
-          <View style={{ flexDirection: "row" }}>
-            <View style={[styles.activeDot, { marginRight: 10 }]} />
-            <View style={[styles.topDots, { marginRight: 10 }]} />
-            <View style={styles.topDots} />
-          </View>
-        </JustifyBetween>
-        {/* personal */}
-        <View style={{ marginBottom: RFValue(40) }}>
-          <Text style={styles.subText}>Personal</Text>
-        </View>
 
-        <Formik
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            email: "",
-            phoneNumber: "",
-            referredBy: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={async (values, { setSubmitting }) => {
-            try {
-              //send the request
-              const response = await axiosCustom.post("auth/signup", {
-                firstName: values.firstName.trim(),
-                lastName: values.lastName.trim(),
-                email: values.email.trim(),
-                phoneNumber: values.phoneNumber.trim(),
-                referredBy: values.referredBy.trim(), 
-              });
-              //store data in context
-              // setAuthData(response?.data?.data)
-              navigation.navigate("Verification", {
-                email: values.email,
-                phoneNumber: values.phoneNumber,
-                token: response?.data?.data?.token,
-              });
-            } catch (err) {
-              console.log(err.response);
-              if (err.response) {
-                if (!err?.response?.data?.data?.isVerified) {
-                  return navigation.navigate("Verification", {
-                    email: values.email,
-                    phoneNumber: values.phoneNumber,
-                    token: null,
-                  });
+          <Formik
+            initialValues={{
+              firstName: "",
+              lastName: "",
+              email: "",
+              phoneNumber: "",
+              referredBy: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={async (values, { setSubmitting }) => {
+              try {
+                //send the request
+                const response = await axiosCustom.post("auth/signup", {
+                  firstName: values.firstName.trim(),
+                  lastName: values.lastName.trim(),
+                  email: values.email.trim(),
+                  phoneNumber: values.phoneNumber.trim(),
+                  referredBy: values.referredBy.trim(),
+                });
+                //store data in context
+                // setAuthData(response?.data?.data)
+                navigation.navigate("Verification", {
+                  email: values.email,
+                  phoneNumber: values.phoneNumber,
+                  token: response?.data?.data?.token,
+                });
+              } catch (err) {
+                console.log(err.response);
+                if (err.response) {
+                  if (!err?.response?.data?.data?.isVerified) {
+                    return navigation.navigate("Verification", {
+                      email: values.email,
+                      phoneNumber: values.phoneNumber,
+                      token: null,
+                    });
+                  }
                 }
+                showerror(toast, err);
               }
-              showerror(toast, err);
-            }
-          }}
-        >
-          {(formikProps) => {
-            const {
-              isSubmitting,
-              isValid,
-              handleBlur,
-              errors,
-              touched,
-              handleChange,
-              handleSubmit,
-            } = formikProps;
-            return (
-              <React.Fragment>
-                {isSubmitting && <Loader />}
-                {/* Input */}
-                <Input
-                  placeholder="Firstname"
-                  name="firstName"
-                  formikProps={formikProps}
-                  icon={<Usericondark />}
-                />
+            }}
+          >
+            {(formikProps) => {
+              const {
+                isSubmitting,
+                isValid,
+                handleBlur,
+                errors,
+                touched,
+                handleChange,
+                handleSubmit,
+              } = formikProps;
+              return (
+                <React.Fragment>
+                  {isSubmitting && <Loader />}
+                  {/* Input */}
+                  <Input
+                    placeholder="Firstname"
+                    name="firstName"
+                    formikProps={formikProps}
+                    icon={<Usericondark />}
+                  />
 
-                <Input
-                  placeholder="Lastname"
-                  name="lastName"
-                  formikProps={formikProps}
-                  icon={<Usericondark />}
-                />
+                  <Input
+                    placeholder="Lastname"
+                    name="lastName"
+                    formikProps={formikProps}
+                    icon={<Usericondark />}
+                  />
 
-                <Input
-                  placeholder="Email Address"
-                  name="email"
-                  formikProps={formikProps}
-                  icon={<Envelopeicon />}
-                />
+                  <Input
+                    placeholder="Email Address"
+                    name="email"
+                    formikProps={formikProps}
+                    icon={<Envelopeicon />}
+                  />
 
-                <Input
-                  placeholder="Phone Number"
-                  name="phoneNumber"
-                  formikProps={formikProps}
-                  icon={<Phoneicon />}
-                />
+                  <Input
+                    placeholder="Phone Number"
+                    name="phoneNumber"
+                    formikProps={formikProps}
+                    icon={<Phoneicon />}
+                  />
 
+                  <Input
+                    placeholder="Referral Code (Optional)"
+                    name="referredBy"
+                    formikProps={formikProps}
+                    icon={<Phoneicon />}
+                  />
 
-
-                <Input
-                  placeholder="Referral Code (Optional)"
-                  name="referredBy"
-                  formikProps={formikProps}
-                  icon={<Phoneicon />}
-                />
-
-
-                {/* Proceed Btn */}
-                <View style={styles.bottomContainer}>
-                  <TouchableOpacity
-                    style={styles.proceedBtn}
-                    activeOpacity={0.8}
-                    onPress={handleSubmit}
-                    disabled={isSubmitting}
-                  >
-                    <Text style={styles.proceedText}>PROCEED</Text>
-                  </TouchableOpacity>
-
-                  {/* Have an account */}
-                  <View style={styles.bottomTextContainer}>
-                    <Text style={styles.bottomText}>Have an account yet?</Text>
-
+                  {/* Proceed Btn */}
+                  <View style={styles.bottomContainer}>
                     <TouchableOpacity
-                      onPress={() => navigation.navigate("Login")}
+                      style={styles.proceedBtn}
                       activeOpacity={0.8}
+                      onPress={handleSubmit}
+                      disabled={isSubmitting}
                     >
-                      <Text style={[styles.bottomText, { ...FONTS.bold }]}>
-                        Login
-                      </Text>
+                      <Text style={styles.proceedText}>PROCEED</Text>
                     </TouchableOpacity>
+
+                    {/* Have an account */}
+                    <View style={styles.bottomTextContainer}>
+                      <Text style={styles.bottomText}>
+                        Have an account yet?{" "}
+                      </Text>
+
+                      <TouchableOpacity
+                        onPress={() => navigation.navigate("Login")}
+                        activeOpacity={0.8}
+                      >
+                        <Text style={[styles.bottomText, { ...FONTS.bold }]}>
+                          Login
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                </View>
-              </React.Fragment>
-            );
-          }}
-        </Formik>
-      </ScrollView>
-    </KeyboardAwareScrollView>
+                </React.Fragment>
+              );
+            }}
+          </Formik>
+        </View>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 
 export default Personal;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     // flex: 1,
-//     width: SIZES.width,
-//     height: SIZES.height,
-//     backgroundColor: COLORS.white,
-//     paddingHorizontal: 25,
-//     paddingTop: 25,
-//   },
-//   header: {
-//     ...fontsize.big,
-//     ...FONTS.bold,
-//     color: COLORS.black,
-//   },
-//   topDots: {
-//     width: 8,
-//     height: 8,
-//     backgroundColor: COLORS.grey1,
-//     borderRadius: 16,
-//   },
-//   subText: {
-//     color: COLORS.grey5,
-//     ...fontsize.medium,
-//     ...FONTS.regular
-//   },
-//   proceedBtn: {
-//     backgroundColor: COLORS.blue6,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     height: 62,
-//     borderRadius: 10,
-//   },
-//   proceedText: {
-//     color: COLORS.white,
-//     ...fontsize.smallest,
-//     ...FONTS.bold,
-//   },
-//   bottomContainer:{
-//     flex: 1,
-//     justifyContent: "flex-end",
-//     marginBottom: 80
-//   },
-//   bottomTextContainer: {
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginTop: 28,
-//   },
-//   bottomText: {
-//     ...fontsize.small,
-//     ...FONTS.regular,
-//     color: COLORS.black,
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });

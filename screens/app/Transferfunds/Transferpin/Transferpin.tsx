@@ -20,6 +20,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { ScrollView } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -79,6 +80,7 @@ const Transferpin = ({ route, navigation }) => {
   };
 
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.blue6}}>
     <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
       {loading && <Loader />}
       <Customstatusbar />
@@ -129,14 +131,6 @@ const Transferpin = ({ route, navigation }) => {
         
 
         <View style={styles.descriptionContainer}>
-          {/* <Text style={styles.descriptionText}>
-            You are about to send{" "}
-            <Text style={styles.descriptionSubText}>NGN {amount}</Text> from
-            your Primary Wallet to @{userinfo?.username} -{" "}
-            <Text style={{ textTransform: "capitalize" }}>
-              {userinfo?.fullName}
-            </Text>
-          </Text> */}
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
 
@@ -166,6 +160,7 @@ const Transferpin = ({ route, navigation }) => {
       </View>
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

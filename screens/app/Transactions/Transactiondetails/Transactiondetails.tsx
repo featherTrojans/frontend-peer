@@ -30,6 +30,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // Sendingandreceive
 
@@ -468,7 +469,7 @@ const Transactiondetails = ({ navigation, route }) => {
 
   // const {price } = route?.params
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
       <Globalmodal
         showState={showModal}
@@ -607,7 +608,7 @@ const Transactiondetails = ({ navigation, route }) => {
         bg="#000"
         onpress={() => setShowModal(true)}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

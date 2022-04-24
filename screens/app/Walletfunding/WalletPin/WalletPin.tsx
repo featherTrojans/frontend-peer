@@ -25,6 +25,7 @@ import showerror from "../../../../utils/errorMessage";
 import amountFormatter from "../../../../utils/formatMoney";
 import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function WalletPin({ route, navigation }) {
   const toast = useToast();
@@ -67,7 +68,7 @@ function WalletPin({ route, navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Enter Amount" />
       {loading && <Loader />}
       <Customstatusbar />
@@ -83,16 +84,6 @@ function WalletPin({ route, navigation }) {
             </View>
           </View>
 
-          {/* <View style={[walletStyles.walletpinContainer, ]}>
-            {numbers.map((number, index) => {
-              return (
-                <Numberbtn key={index} onpress={() => handleSetAmount(number)}>
-                  {number}
-                </Numberbtn>
-              );
-            })}
-            <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-          </View> */}
 
           <Keyboard
             array={[...numbers]}
@@ -103,7 +94,7 @@ function WalletPin({ route, navigation }) {
       </View>
 
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
-    </View>
+    </SafeAreaView>
   );
 }
 

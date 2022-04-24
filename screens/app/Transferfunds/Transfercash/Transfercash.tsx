@@ -6,6 +6,8 @@ import { styles } from "./Transfercash.styles";
 
 import { Backheader } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow, Featherwallet, Bankaccount, Forwardarrow } = icons;
 
@@ -26,15 +28,12 @@ const options = [
 
 const Transfercash = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Transfer Cash" />
       <Customstatusbar />
-      {/* <View style={styles.backArrow}>
-        <Backarrow />
-        <Text style={styles.backArrowText}>Transfer Cash</Text>
-      </View> */}
+  
 
-      <View style={{ marginTop: 20, marginHorizontal: 15 }}>
+      <View style={{ marginTop: RFValue(20), marginHorizontal: 15 }}>
         {options.map(({ icon, type, about, nextscreen }, index) => (
           <TouchableNativeFeedback
             background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, false)}
@@ -56,7 +55,7 @@ const Transfercash = ({ navigation }) => {
           </TouchableNativeFeedback>
         ))}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

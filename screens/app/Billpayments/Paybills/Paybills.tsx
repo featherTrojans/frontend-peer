@@ -13,13 +13,14 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
+import { SafeAreaView } from "react-native-safe-area-context";
 // import { styles } from './Paybills.styles'
 
 const Paybills = ({ navigation }) => {
   const { Networklogos, Electricitybillsicon, Cablestvicon } = icons;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
       <Backheader title="Paybills" />
       <ScrollView
@@ -90,7 +91,7 @@ const Paybills = ({ navigation }) => {
         </TouchableOpacity>
         {/* <Button title="Chat with anoda" onPress={()=>chatOnWhatsapp("08035034968")}/> */}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

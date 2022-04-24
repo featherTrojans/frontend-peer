@@ -11,6 +11,7 @@ import { useToast } from "react-native-toast-notifications";
 import { AuthContext } from "../../../../../context/AuthContext";
 import { styles } from "../../Airtime/Airtimedetails/Airtimedetails.styles";
 import styled from "styled-components";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Addressbook, Inputdropdown, Successcheckanimate } = icons;
 
@@ -94,6 +95,7 @@ const Electricitydetails = ({ navigation, route }) => {
   };
 
   return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: COLORS.white }}
       contentContainerStyle={{ flex: 1 }}
@@ -156,6 +158,7 @@ const Electricitydetails = ({ navigation, route }) => {
       </KeyboardAwareScrollView>
       <Bottombtn title="proceed" onpress={handleToNext} />
     </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

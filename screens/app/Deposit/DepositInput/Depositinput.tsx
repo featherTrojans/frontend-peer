@@ -20,6 +20,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function Depositinput({ route, navigation }) {
   const toast = useToast();
@@ -101,7 +102,7 @@ function Depositinput({ route, navigation }) {
     );
   }
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Enter Amount" />
       <Customstatusbar />
 
@@ -142,7 +143,7 @@ function Depositinput({ route, navigation }) {
       </View>
 
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
-    </View>
+    </SafeAreaView>
   );
 }
 

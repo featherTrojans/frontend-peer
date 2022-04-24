@@ -6,6 +6,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn } from "../../../../components";
 import { styles } from "../../Withdraws/Cancelrequest/Cancelrequest.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow } = icons;
 const Canceldeposit = () => {
@@ -20,7 +21,7 @@ const Canceldeposit = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Back Arrow */}
       <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 25 }}>
@@ -66,7 +67,7 @@ const Canceldeposit = () => {
         onpress={() => console.log("Cancel button pressed")}
       />
 
-    </View>
+    </SafeAreaView>
   );
 };
 

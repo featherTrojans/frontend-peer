@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
@@ -55,7 +56,7 @@ function Requestnew({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Amount" />
       <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
@@ -90,7 +91,7 @@ function Requestnew({ navigation }) {
         </View>
       </View>
       <Bottombtn title="PROCEED" onpress={handleNextScreen} />
-    </View>
+    </SafeAreaView>
   );
 }
 
