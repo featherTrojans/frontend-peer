@@ -4355,6 +4355,11 @@
   "resolved" "https://registry.npmjs.org/expo-print/-/expo-print-11.1.1.tgz"
   "version" "11.1.1"
 
+"expo-secure-store@^11.1.1":
+  "integrity" "sha512-pCajYYoZbl8IORxXw83SLUsWlU6a+HmjJZP8oiSvkG1KnZ5gPepiAMRRmcFUApYXBgiOvKRGOBEUfVwmR7yO4A=="
+  "resolved" "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-11.1.1.tgz"
+  "version" "11.1.1"
+
 "expo-sharing@^10.1.1":
   "integrity" "sha512-Wyre/y6Ce+S7PYwu1QGH2QNtO8ftHViiivSGAIif4shCO64QbO2JHYvgBzeMvAGfvUXzbJ04I+oCZKypA59tnA=="
   "resolved" "https://registry.npmjs.org/expo-sharing/-/expo-sharing-10.1.1.tgz"
@@ -7701,6 +7706,11 @@
   dependencies:
     "prop-types" "^15.6.2"
     "react-native-iphone-x-helper" "^1.0.3"
+
+"react-native-keychain@^8.0.0":
+  "integrity" "sha512-c7Cs+YQN26UaQsRG1dmlXL7VL2ctnXwH/dl0IOMEQ7ZaL2NdN313YSAI8ZEZZjrVhNmPsyWEuvTFqWrdpItqQg=="
+  "resolved" "https://registry.npmjs.org/react-native-keychain/-/react-native-keychain-8.0.0.tgz"
+  "version" "8.0.0"
 
 "react-native-maps-directions@^1.8.0":
   "integrity" "sha512-7KWfPrvPLU8VP2nEqsnrWlOuylidlRWWDdk3lqT5Nb1q87FeyzNgA7Ib7n6cZlQwH4usTRlJSnzNo/yQ3u4AZw=="

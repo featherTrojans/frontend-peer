@@ -23,7 +23,9 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import LottieView from "lottie-react-native";
 import * as Animatable from "react-native-animatable";
-import { ifIphoneX, getStatusBarHeight } from 'react-native-iphone-x-helper'
+import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
+import { useIsFocused, useScrollToTop } from "@react-navigation/native";
+
 import {
   InitialsBg,
   Service,
@@ -86,24 +88,14 @@ const Home = ({ navigation }: { navigation: any }) => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
+  const scrollViewRef = useRef(null);
+
   const linkTo = useLinkTo();
+  const isFocused = useIsFocused();
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
   // sendSchedulePushNotification
-
-  // const setMessageToken = async () => {
-  //   try {
-  //     const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
-  //     console.log(response, "Here is the response data")
-  //   } catch (err) {
-  //     console.log(err.response.data)
-  //   }
-  // }
-
-  // useEffect(() => {
-  // sendSchedulePushNotification(nameToShow(authdata.fullName));
-  // }, []);
 
   const nameToShow = (value: string) => {
     if (value?.split(" ").length > 1) {
@@ -112,8 +104,6 @@ const Home = ({ navigation }: { navigation: any }) => {
       return value;
     }
   };
-
-
 
   //setting up websocket
   // useEffect(() => {
@@ -129,6 +119,17 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   //   return ws.close();
   // }, []);
+
+  const toTop = () => {
+    scrollViewRef.current?.scrollTo({
+      y: 0,
+      animated: true,
+    });
+  };
+
+  if (isFocused) {
+    toTop();
+  }
 
   const getDashboardData = async () => {
     // console.log("I am fetching again from home");
@@ -180,130 +181,128 @@ const Home = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    
-    
     // <SafeAreaView style={[styles.container, { flex: 1 }]} edges={['right', 'left', 'top',]} >
-      
-      <View style={[styles.container,{paddingTop: getStatusBarHeight(true)}]}>
-        <Customstatusbar />
-        
-        <View style={styles.headerContainer}>
-          {/* user profile and notification icon */}
-          <View style={styles.profileContainer}>
-            <TouchableOpacity
-              onPress={() => navigation.dispatch(jumpToSettings)}
-              activeOpacity={0.8}
-            >
-              {userDefaultImage()}
-              {/* <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} /> */}
-            </TouchableOpacity>
 
-            <View style={styles.profileNameContainer}>
-              <Text style={styles.profileName}>
-                Welcome, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
-              </Text>
-              <Text style={styles.profileUsername}>
-                @{authdata?.userDetails?.username}
-              </Text>
-            </View>
-          </View>
+    <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
+      <Customstatusbar />
+
+      <View style={styles.headerContainer}>
+        {/* user profile and notification icon */}
+        <View style={styles.profileContainer}>
           <TouchableOpacity
+            onPress={() => navigation.dispatch(jumpToSettings)}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("Notifications")}
           >
-            <Bell />
+            {userDefaultImage()}
+            {/* <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} /> */}
           </TouchableOpacity>
-        </View>
 
-        {/* Wallet info and details */}
-
-        {/* Start of the block */}
-        {/*  */}
-
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefreshFunc}
-              progressBackgroundColor={COLORS.white}
-              colors={[COLORS.blue6]}
-              tintColor={COLORS.white}
-            />
-          }
-        >
-          <View style={styles.walletBlock}>
-            <Viewbalance />
-            <View style={styles.walletOptionsContainer}>
-              {walletOptions.map(
-                (
-                  {
-                    icon,
-                    title,
-                    link,
-                  }: {
-                    icon: JSX.Element;
-                    title: string;
-                    link: string;
-                  },
-                  index
-                ) => (
-                  <Animatable.View
-                    animation="bounceIn"
-                    delay={index * 100}
-                    key={title}
-                  >
-                    <TouchableOpacity
-                      activeOpacity={0.8}
-                      onPress={() => navigation.navigate(link)}
-                      style={styles.optionContainer}
-                    >
-                      <View style={styles.optionIconBg}>
-                        {/* Icon will be inside this */}
-                        {icon}
-                      </View>
-                      <Text style={styles.optionTitle}>{title}</Text>
-                    </TouchableOpacity>
-                  </Animatable.View>
-                )
-              )}
-            </View>
+          <View style={styles.profileNameContainer}>
+            <Text style={styles.profileName}>
+              Welcome, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
+            </Text>
+            <Text style={styles.profileUsername}>
+              @{authdata?.userDetails?.username}
+            </Text>
           </View>
+        </View>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("Notifications")}
+        >
+          <Bell />
+        </TouchableOpacity>
+      </View>
 
-          {/* End of the block */}
+      {/* Wallet info and details */}
 
-          {/* Transaction history lists header*/}
-          <View style={{ flex: 1 }}>
-            <View style={styles.transactionHeader}>
-              <View>
-                <Text style={styles.transactionHistory}>
-                  Transaction History
-                </Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => navigation.dispatch(jumpToHistory)}
-              >
-                <Text style={styles.seeAll}>See All</Text>
-              </TouchableOpacity>
-            </View>
+      {/* Start of the block */}
+      {/*  */}
 
-            {histories.length === 0 ? (
-              <EmptyComponent />
-            ) : (
-              histories.map((history) => (
-                <Transactionhistory
-                  date={history.time}
-                  datas={history.data}
-                  key={history.time}
-                />
-              ))
+      <ScrollView
+        ref={scrollViewRef}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefreshFunc}
+            progressBackgroundColor={COLORS.white}
+            colors={[COLORS.blue6]}
+            tintColor={COLORS.blue6}
+            title="Refreshing"
+            titleColor={COLORS.blue6}
+          />
+        }
+      >
+        <View style={styles.walletBlock}>
+          <Viewbalance />
+          <View style={styles.walletOptionsContainer}>
+            {walletOptions.map(
+              (
+                {
+                  icon,
+                  title,
+                  link,
+                }: {
+                  icon: JSX.Element;
+                  title: string;
+                  link: string;
+                },
+                index
+              ) => (
+                <Animatable.View
+                  animation="bounceIn"
+                  delay={index * 100}
+                  key={title}
+                >
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate(link)}
+                    style={styles.optionContainer}
+                  >
+                    <View style={styles.optionIconBg}>
+                      {/* Icon will be inside this */}
+                      {icon}
+                    </View>
+                    <Text style={styles.optionTitle}>{title}</Text>
+                  </TouchableOpacity>
+                </Animatable.View>
+              )
             )}
           </View>
-          <DoubleTapToClose />
-        </ScrollView>
-      </View>
+        </View>
+
+        {/* End of the block */}
+
+        {/* Transaction history lists header*/}
+        <View style={{ flex: 1 }}>
+          <View style={styles.transactionHeader}>
+            <View>
+              <Text style={styles.transactionHistory}>Transaction History</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(jumpToHistory)}
+            >
+              <Text style={styles.seeAll}>See All</Text>
+            </TouchableOpacity>
+          </View>
+
+          {histories.length === 0 ? (
+            <EmptyComponent />
+          ) : (
+            histories.map((history) => (
+              <Transactionhistory
+                date={history.time}
+                datas={history.data}
+                key={history.time}
+              />
+            ))
+          )}
+        </View>
+        <DoubleTapToClose />
+      </ScrollView>
+    </View>
     // </SafeAreaView>
-    
   );
 };
 

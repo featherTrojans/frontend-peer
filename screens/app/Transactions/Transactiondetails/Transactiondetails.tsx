@@ -59,11 +59,11 @@ const Transactiondetails = ({ navigation, route }) => {
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")},  ${dt.format("Do")} ${dt.format(
     "MMM"
-  )} '${dt.format("YY")} - ${dt.format("LT")}`;
+  )} '${dt.format("YY")} - ${dt.format('h:mm')}${dt.format('A')}`;
 
-  useEffect(() => {
-    console.log(data, "Transaction details");
-  });
+  // useEffect(() => {
+  //   console.log(data, "Transaction details");
+  // });
 
   const nameSplitter = (name: string) => {
     const splitName = name?.split(" ");
@@ -528,7 +528,7 @@ const Transactiondetails = ({ navigation, route }) => {
         <View style={styles.detailsContainer}>
           <View style={styles.eachDetailContainer}>
             <Text style={styles.eachDetailTitle}>Date & Time</Text>
-            <Text style={styles.eachDetailValue}>{formatDateTime}</Text>
+            <Text style={{...fontsize.small, ...FONTS.regular}}>{formatDateTime}</Text>
           </View>
 
           <View

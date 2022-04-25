@@ -91,7 +91,6 @@ const Settings = ({navigation}) => {
   const {authdata,setAuthData, setToken} = useContext(AuthContext)
 
 
-  const snapPoints = useMemo(() => ["50%", "75%"], [])
 
   
   const handleSignout = ()=>{
@@ -137,12 +136,12 @@ const Settings = ({navigation}) => {
       </View>
 
       <BottomSheet 
-      index={1}
-      snapPoints={snapPoints}  
+      index={0}
+      snapPoints={["50%", "75%"]}  
       style={{
             shadowColor: COLORS.grey2,
             shadowOpacity: 0.5,
-            shadowOffset: { width: 10, height: -10},
+            shadowOffset: { width: 10, height: 5},
             shadowRadius: 6,
             elevation: 10,
             backgroundColor: 'white',

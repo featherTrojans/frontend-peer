@@ -10,7 +10,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -25,6 +25,7 @@ import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
+
 
 import {
   RootStackParamList,
@@ -58,8 +59,8 @@ import {
   Transactiondetails,
   Transactiondispute,
   Transactionsrating,
-  Pendingrequest, //This screen has changed
-  Accepetedrequest, //This screen has changed too
+  // Pendingrequest, //This screen has changed
+  // Accepetedrequest, //This screen has changed too
   History,
 
   //User Settings
@@ -141,7 +142,6 @@ import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 
-
 const {
   TabHome,
   Tabhistory,
@@ -170,8 +170,6 @@ export function usePushNotification() {
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
     });
-
- 
 
     notificationListener.current = Notification.addNotificationReceivedListener(
       (notification) => {
@@ -239,7 +237,6 @@ export function usePushNotification() {
 
 function getWidth() {
   let width = SIZES.width;
-
   return width / 5;
 }
 
@@ -355,7 +352,7 @@ const Tabs = () => {
                 </View>
               );
             },
-            unmountOnBlur: true,
+            // unmountOnBlur: true,
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -383,7 +380,7 @@ const Tabs = () => {
                 </View>
               );
             },
-            unmountOnBlur: true,
+            // unmountOnBlur: true,
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
@@ -534,7 +531,11 @@ const RootNavigator = ({ initialBoarded }) => {
         <>
           {/* Transaction Screens*/}
           <AppStack.Group>
-            <AppStack.Screen options={horizontalAnimation} name="Root" component={Tabs} />
+            <AppStack.Screen
+              options={horizontalAnimation}
+              name="Root"
+              component={Tabs}
+            />
             <AppStack.Screen name="Transactions" component={Transactions} />
             <AppStack.Screen
               name="Newtransactions"
@@ -566,6 +567,7 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Changepassword" component={Changepassword} />
             <AppStack.Screen name="Changepin" component={Changepin} />
           </AppStack.Group>
+
           {/* Withdraw Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Withdraw" component={Withdraw} />
@@ -648,10 +650,7 @@ const RootNavigator = ({ initialBoarded }) => {
           {/* Deposit Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Depositupdate" component={Depositupdate} />
-            <AppStack.Screen
-              name="Deposit"
-              component={true ? Deposit : Depositupdate}
-            />
+            <AppStack.Screen name="Deposit" component={Deposit} />
             <AppStack.Screen name="Depositinput" component={Depositinput} />
             <AppStack.Screen name="Updatedeposit" component={Updatedeposit} />
             <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
@@ -669,7 +668,10 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Chatsdm" component={Chatsdm} />
             <AppStack.Screen name="Usersearch" component={Usersearch} />
             <AppStack.Screen name="CustomWebView" component={CustomWebView} />
-            <AppStack.Screen name="CustomWebViewSupport" component={CustomWebViewSupport} />
+            <AppStack.Screen
+              name="CustomWebViewSupport"
+              component={CustomWebViewSupport}
+            />
           </AppStack.Group>
         </>
       )}
@@ -683,9 +685,8 @@ export default function MainNavigation({ initialBoarded = false }) {
   const { token, setToken, setMessageToken } = useContext(AuthContext);
   const appState = useRef(AppState.currentState);
   const { sendPushNotification, expoPushToken } = usePushNotification();
-  
+
   useEffect(() => {
-    
     setMessageToken(expoPushToken);
   }, [expoPushToken]);
 
@@ -699,22 +700,20 @@ export default function MainNavigation({ initialBoarded = false }) {
   }, []);
 
   useEffect(() => {
-    AppState.addEventListener("change",lockLogic);
-    
-    return () => {
-      AppState.removeEventListener("change",lockLogic)
-    };
-  }, [token,modal]);
+    AppState.addEventListener("change", lockLogic);
 
+    return () => {
+      AppState.removeEventListener("change", lockLogic);
+    };
+  }, [token, modal]);
 
   const lockLogic = (nextAppState) => {
     if (
       appState.current.match(/inactive|background/) &&
       nextAppState === "active"
     ) {
-      
-      if(!token){
-        return 
+      if (!token) {
+        return;
       }
 
       if (Date.now() - timer.current > 900000) {
@@ -730,11 +729,11 @@ export default function MainNavigation({ initialBoarded = false }) {
       return;
     }
     appState.current = nextAppState;
-    if (!modal && token) {  
+    if (!modal && token) {
       timer.current = Date.now();
       // setModal(false);
     }
-  }
+  };
 
   return (
     <NavigationContainer ref={navigationRef}>

@@ -7,6 +7,9 @@ import {
   RefreshControl,
   Platform,
   ActivityIndicator,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Animated
 } from "react-native";
 import LottieView from "lottie-react-native";
 import * as Device from "expo-device";
@@ -15,7 +18,7 @@ import { useIsFocused, useScrollToTop } from "@react-navigation/native";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 
 import { Bottombtn, Transactionhistory } from "../../../../components";
-import { COLORS, icons } from "../../../../constants";
+import { COLORS, icons, SIZES } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
 
@@ -23,8 +26,7 @@ import { styles } from "./Transaction.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ifIphoneX, getStatusBarHeight } from 'react-native-iphone-x-helper'
-
+import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const { Cryinganimate } = icons;
 
@@ -119,7 +121,11 @@ const Transactions = ({ navigation }: any) => {
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
+  const isFocused = useIsFocused();
+  const [pageVerticalOffset, setPageVerticalOffset] = useState<number>(0)
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
+  const PAGE_OFFSET_THRESHOLD = SIZES.height
+  const scrollX = useRef<any>(new Animated.Value(0)).current;
 
   const EmptyComponent = () => {
     return (
@@ -147,12 +153,10 @@ const Transactions = ({ navigation }: any) => {
     );
   };
 
-  const isFocused = useIsFocused();
-
   const toTop = () => {
-    // use current
     flatlistRef.current?.scrollToOffset({ animated: true, offset: 0 });
   };
+
   if (isFocused) {
     toTop();
   }
@@ -193,58 +197,82 @@ const Transactions = ({ navigation }: any) => {
   };
 
   return (
-    <View style={[styles.container, {paddingTop: getStatusBarHeight(true)+30}]} >
-      
-        {/* heading */}
-        <View style={styles.contentContainer}>
+    <View
+      style={[styles.container, { paddingTop: getStatusBarHeight(true) + 30 }]}
+    >
+      {/* heading */}
+      <View style={styles.contentContainer}>
         <Customstatusbar />
-        
-          <Text style={styles.headerText}>History</Text>
 
-          <View style={styles.listContainer}>
-            {loading ? (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
+        <Text style={styles.headerText}>History</Text>
+
+        <View style={styles.listContainer}>
+          {loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ActivityIndicator size="large" color={COLORS.blue6} />
+            </View>
+          ) : (
+            <>
+              {DATA.length > 0 && <Listheader />}
+              <Animated.FlatList
+                ref={flatlistRef}
+                style={{ paddingTop: 10 }}
+                data={formatData(transactions)}
+                // scrollEventThrottle={16}
+                onScroll={event => {
+                  setPageVerticalOffset(event.nativeEvent.contentSize.height);
                 }}
-              >
-                <ActivityIndicator size="large" color={COLORS.blue6} />
-              </View>
-            ) : (
-              <>
-                {DATA.length > 0 && <Listheader />}
-                <FlatList
-                  ref={flatlistRef}
-                  style={{ paddingTop: 10 }}
-                  data={formatData(transactions)}
-                  refreshControl={
-                    <RefreshControl
-                      refreshing={refreshing}
-                      onRefresh={handleRefresh}
-                      progressBackgroundColor="white"
-                      colors={["#003AD6"]}
-                      tintColor={"#003AD6"}
-                    />
-                  }
-                  // refreshing={refreshing}
-                  // onRefresh={handleRefresh}
-                  showsVerticalScrollIndicator={false}
-                  renderItem={({ item, index }: any) => (
-                    <Transactionhistory
-                      date={item.time}
-                      datas={item.data}
-                      index={index}
-                    />
-                  )}
-                  keyExtractor={(item) => item.time}
-                  ListEmptyComponent={<EmptyComponent />}
-                />
-              </>
-            )}
-          </View>
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={handleRefresh}
+                    progressBackgroundColor="white"
+                    colors={[COLORS.blue6]}
+                    tintColor={COLORS.blue6}
+                    title="Refreshing"
+                    titleColor={COLORS.blue6}
+                  />
+                }
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item, index }: any) => (
+                  <Transactionhistory
+                    date={item.time}
+                    datas={item.data}
+                    index={index}
+                  />
+                )}
+                keyExtractor={(item) => item.time}
+                ListEmptyComponent={<EmptyComponent />}
+              />
+            </>
+          )}
         </View>
+{/* 
+        {pageVerticalOffset > 1000 ? (
+          <TouchableWithoutFeedback onPress={() => toTop()}>
+          <View
+            style={{
+              width: RFValue(30),
+              height: RFValue(30),
+              borderRadius: RFValue(30 / 2),
+              backgroundColor: COLORS.blue6,
+              position: "absolute",
+              right: 10,
+              bottom: 20,
+              // opacity: 0.2,
+            }}
+          />
+        </TouchableWithoutFeedback>
+        ): null} */}
+        
+
+      </View>
     </View>
   );
 };

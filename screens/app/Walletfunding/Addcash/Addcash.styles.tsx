@@ -1,14 +1,15 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingTop: 20,
+    // paddingTop: 20,
   },
   dropDown: {
-    height: 62,
+    height: RFValue(62),
     paddingLeft: 20,
     borderColor: "#E6E6E6",
   },

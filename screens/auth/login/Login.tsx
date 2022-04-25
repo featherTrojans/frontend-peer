@@ -2,7 +2,9 @@ import { useContext, useEffect } from "react";
 import { styles } from "./Login.styles";
 import { COLORS, icons, SIZES } from "../../../constants";
 
+
 import { useToast } from "react-native-toast-notifications";
+
 import {
   View,
   Text,
@@ -12,9 +14,14 @@ import {
   TouchableOpacity,
   Alert,
   StatusBar,
+  Platform,
+  KeyboardAvoidingView
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
+// import * as Keychain from 'react-native-keychain';
+import {setGenericPassword, getGenericPassword,ACCESS_CONTROL, Options, AuthenticationPrompt} from "react-native-keychain"
+import * as LocalAuthentication from "expo-local-authentication";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Input, Loader } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
@@ -22,7 +29,6 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import showerror from "../../../utils/errorMessage";
 import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
-import * as LocalAuthentication from "expo-local-authentication";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -39,15 +45,92 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().label("password").required(),
 });
 
+
+
+
+
 const Login = ({ navigation }: any) => {
   const [hidePassword, setHidePassword] = useState(true);
   const { setToken } = useContext(AuthContext);
+  const [isBiometricAllowed, setIsBiometricAllowed] = useState(false)
+  const [authenticated, setIsAuthenticated] = useState(false) 
 
+
+  const LOGIN_SERVICE = "LOGIN_SERVICE"
+  const CREDENTIALS_STORAGE_OPTIONS: Options = {
+    accessControl: ACCESS_CONTROL.BIOMETRY_CURRENT_SET_OR_DEVICE_PASSCODE,
+    service: LOGIN_SERVICE
+  }
+
+
+    const username = 'Charuka';
+  const password = 'iTsAsEcReT';
+  
+
+  // const storeIt = async () => {
+  //   await setGenericPassword(username, password, CREDENTIALS_STORAGE_OPTIONS);
+  // }
+
+
+  const checkUserStatus = async () => {
+    try {
+      const credentials = await getGenericPassword(CREDENTIALS_STORAGE_OPTIONS);
+      if (credentials) {
+        console.log(
+          'Credentials successfully loaded for user ' + credentials.username
+        );
+      } else {
+        console.log('No credentials stored');
+      }
+    } catch (error) {
+      console.log('Keychain couldn\'t be accessed!', error);
+    }
+  }
+
+  // useEffect(() => {
+  //   storeIt()
+    
+  // },[])
+
+  ///To check if the devuce supports biometrics
+  useEffect(() => {
+    (async () => {
+      const compatible = await LocalAuthentication.hasHardwareAsync()
+      setIsBiometricAllowed(compatible)
+    })()
+  })
+
+
+  const onAuthenticate = async () => {
+
+    try {
+      const result = await  LocalAuthentication.authenticateAsync({
+        promptMessage: 'Authenticate with Biometrics',
+        fallbackLabel: ' Enter Password',
+      });
+      setIsAuthenticated(result.success)
+      checkUserStatus()
+      console.log(result.success, "Auth is successful ")
+      
+
+    } catch (error) {
+      console.log(error)
+    }
+    
+    
+  }
+
+
+
+  
+
+
+ 
 
   const toast = useToast();
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.blue6 }}>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView >
         <View style={styles.container}>
           {/* Logo */}
           <View style={styles.logoWrapper}>
@@ -76,10 +159,17 @@ const Login = ({ navigation }: any) => {
                   username: values.username.trim(),
                   password: values.password.trim(),
                 });
+                if(response.status === 200){
+                console.log(response, "here is the response")
+                await setGenericPassword("Okikiola", "Omotosho", CREDENTIALS_STORAGE_OPTIONS)
+                // storeIt()
+                  // I want to save the usernam and password to keychain from here
+                } 
                 //store token in ASYNC STORAGE
                 //store in context
                 const token = response.data.data.token;
                 setAuthorizationToken(token);
+
 
                 // check if token is using 0000
                 try {
@@ -105,6 +195,8 @@ const Login = ({ navigation }: any) => {
               } catch (err) {
                 showerror(toast, err);
               }
+
+
             }}
           >
             {(formikProps) => {
@@ -172,7 +264,7 @@ const Login = ({ navigation }: any) => {
                       marginBottom: RFValue(70),
                     }}
                   >
-                    <Text style={[styles.biometrics, { opacity: 0.2 }]}>
+                    <Text style={[styles.biometrics, { opacity: isBiometricAllowed ? 1 : 0.2 }]} onPress={() => onAuthenticate()}>
                       Use Biometrics
                     </Text>
 
