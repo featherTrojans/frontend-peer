@@ -124,13 +124,7 @@ const LockScreen = ({ modal, setModal }: any) => {
         />
         <View style={{ marginTop: RFValue(44) }}>
           <Text style={styles.headerText}>Welcome Back,</Text>
-          <Text style={styles.headerText}>
-            {
-              authdata?.userDetails?.fullName
-                ?.replace(/\s+/g, " ")
-                .split(" ")[0]
-            }
-          </Text>
+          <Text style={styles.headerText}>{authdata?.userDetails?.fullName?.replace(/\s+/g, ' ').split(" ")[1]}</Text> 
         </View>
 
         <View style={{ marginHorizontal: RFValue(70), marginTop: RFValue(42) }}>

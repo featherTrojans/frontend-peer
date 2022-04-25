@@ -102,6 +102,7 @@ import {
   Pendingdeposit,
   Accepteddeposit,
   Depositpin,
+  DepositSummary,
   Canceldeposit,
   WalletPin,
   Updatedeposit,
@@ -503,7 +504,7 @@ const RootNavigator = ({ initialBoarded }) => {
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-      // initialRouteName="Welcometochange"
+      // initialRouteName="DepositSummary"
       initialRouteName={initialBoarded ? "Login" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
@@ -659,6 +660,7 @@ const RootNavigator = ({ initialBoarded }) => {
               component={Accepteddeposit}
             />
             <AppStack.Screen name="Depositpin" component={Depositpin} />
+            <AppStack.Screen name="DepositSummary" component={DepositSummary} />
             <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
           </AppStack.Group>
 

@@ -68,6 +68,7 @@ import Pendingdeposit from "./app/Deposit/Pendingdeposit/Pendingdeposit";
 import Accepteddeposit from "./app/Deposit/Accepteddeposit/Accepteddeposit";
 import Depositpin from "./app/Deposit/Depositpin/Depositpin";
 import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
+import DepositSummary from "./app/Deposit/DepositSummary/DepositSummary";
 import Updatedeposit from "./app/Deposit/Updatedeposit/Updatedeposit";
 import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 
@@ -159,5 +160,5 @@ export {
   Airtimepurchasepin,
   Electricityamount,
   Electricitydetails,
-
+  DepositSummary
 };
