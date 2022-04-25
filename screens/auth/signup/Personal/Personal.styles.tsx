@@ -6,8 +6,8 @@ import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
 
 export const styles = StyleSheet.create({
     container: {
-      // flex: 1,
-      width: SIZES.width,
+      flex: 1,
+      // width: SIZES.width,
       // height: SIZES.height,
       backgroundColor: COLORS.white,
       paddingHorizontal: 25,
@@ -50,8 +50,8 @@ export const styles = StyleSheet.create({
     bottomContainer:{
       flex: 1, 
       justifyContent: "flex-end", 
-      marginBottom: RFValue(80),
-      marginTop: RFValue(60),
+      // marginBottom: RFValue(80),
+      marginTop: RFValue(40),
 
     },
     bottomTextContainer: {

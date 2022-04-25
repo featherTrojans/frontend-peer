@@ -21,6 +21,7 @@ import Map from "../../../shared/map/Map";
 import amountFormatter from "../../../../utils/formatMoney";
 import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Locationmap } = images;
 const { Forwardarrow, Editicon, Meetupdot } = icons;
@@ -31,7 +32,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
   const [loading, setLoading] = useState(false)
   const {coords,destinationCoords} = useContext(LocationContext)
   return (  
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Map />
       <Customstatusbar />
         <View style={styles.previewContainer}>
@@ -96,7 +97,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
           />
         </View>
         
-    </View>
+    </SafeAreaView>
   );
 };
 

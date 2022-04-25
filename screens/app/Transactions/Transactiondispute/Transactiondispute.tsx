@@ -16,6 +16,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 const {Successcheckanimate} = icons
@@ -31,7 +32,7 @@ const Transactiondispute = () => {
 
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
 
       <Globalmodal
@@ -74,7 +75,7 @@ const Transactiondispute = () => {
         title="REPORT"
         onpress={() => setShowModal(true)}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

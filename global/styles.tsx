@@ -1,5 +1,12 @@
 import styled from "styled-components/native";
+import { StyleSheet } from "react-native";
 import { COLORS, FONTS } from "../constants";
+
+export const globalStyles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 25
+  }
+})
 
 export const InputContainer = styled.View`
   height: 62;

@@ -21,6 +21,7 @@ import amountFormatter from "../../../../../utils/formatMoney";
 import Customstatusbar from "../../../../shared/Customstatusbar";
 import { styles } from "../../../Transferfunds/TransferInput/TransferInput.styles";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Airtimeamount = ({ navigation, route }) => {
   //   const { nextscreen } = route.params;
@@ -63,7 +64,7 @@ const Airtimeamount = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Enter Amount" />
       <Customstatusbar />
 
@@ -101,7 +102,7 @@ const Airtimeamount = ({ navigation, route }) => {
       </View>
 
       <Bottombtn title="PROCEED" onpress={handleToNext} />
-    </View>
+    </SafeAreaView>
   );
 };
 

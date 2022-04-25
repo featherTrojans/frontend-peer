@@ -19,6 +19,8 @@ import showerror from "../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 // import { debounce } from "debounce";
 
 const { At, Check, WrongIcon, Successcheckanimate } = icons;
@@ -74,7 +76,8 @@ const Setup = ({ route, navigation }) => {
   }
 
   return (
-    <KeyboardAwareScrollView>
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+    <KeyboardAwareScrollView style={{flex: 1}} contentContainerStyle={{flex: 1}}>
       <View style={styles.container}>
         <Customstatusbar />
         {/* Header */}
@@ -263,6 +266,7 @@ const Setup = ({ route, navigation }) => {
         {/* Input box */}
       </View>
     </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

@@ -19,6 +19,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
 import { justCharge, plusBase } from "../../../../utils/utils";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const WithdrawPin = ({ navigation, route }) => {
@@ -81,7 +82,7 @@ const WithdrawPin = ({ navigation, route }) => {
     }
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {loading && <Loader />}
 
       <Customstatusbar />
@@ -207,20 +208,6 @@ const WithdrawPin = ({ navigation, route }) => {
               </View>
             </View>
 
-            {/* <View style={styles.numberBtnContainer}>
-              {numbers.map((number, index) => {
-                return (
-                  <Numberbtn
-                    key={index}
-                    onpress={() => handleSetAmount(number)}
-                  >
-                    {number}
-                  </Numberbtn>
-                );
-              })}
-
-              <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-            </View> */}
 
             <Keyboard
               array={[...numbers]}
@@ -244,7 +231,7 @@ const WithdrawPin = ({ navigation, route }) => {
           }}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

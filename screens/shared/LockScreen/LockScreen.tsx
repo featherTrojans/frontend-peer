@@ -187,26 +187,6 @@ const LockScreen = ({ modal, setModal }: any) => {
           </View>
         </View>
 
-        {/* <View style={styles.numberBtnContainer}>
-          {numbers.map((number, index) => {
-            return (
-              <Numberbtn
-                key={index}
-                onpress={() => handleSetAmount(number)}
-                textColor={COLORS.white}
-              >
-                {number}
-              </Numberbtn>
-            );
-          })}
-
-          <Numberbtn
-            onpress={() => handleRemoveAmount()}
-            textColor={COLORS.white}
-          >
-            X
-          </Numberbtn>
-        </View> */}
 
         <Keyboard
           array={[...numbers]}

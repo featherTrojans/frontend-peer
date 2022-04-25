@@ -19,6 +19,7 @@ import { useToast } from "react-native-toast-notifications";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow, At } = icons;
 
@@ -122,7 +123,7 @@ const Saveduser = ({ details }: any) => {
 
 const Bankaccount = ({ navigation, route }) => {
   const { amount } = route.params;
-  const {authdata} = useContext(AuthContext)
+  const { authdata } = useContext(AuthContext);
   // const amount=500
   const toast = useToast();
   const [loading, setLoading] = useState(false);
@@ -134,17 +135,17 @@ const Bankaccount = ({ navigation, route }) => {
   const [accountnum, setAccountnum] = useState("");
   const [accountInfomation, setAccountInformation] = useState({});
 
-  const getBankCharges = ()=>{
-    if(amount <= 5000){
-      return "N10.00"
+  const getBankCharges = () => {
+    if (amount <= 5000) {
+      return "N10.00";
     }
-    if(amount > 5000 && amount <= 50000){
-      return "N25.00"
+    if (amount > 5000 && amount <= 50000) {
+      return "N25.00";
     }
-    if(amount > 50000){
-      return "N50.00"
+    if (amount > 50000) {
+      return "N50.00";
     }
-  }
+  };
   const handleSubmit = async () => {
     setLoading(true);
     try {
@@ -154,7 +155,7 @@ const Bankaccount = ({ navigation, route }) => {
         data: { account_number: accountnum, bank_name: value },
       });
       setAccountInformation(response?.data?.data);
-      
+
       setShowModal(true);
     } catch (err) {
       showerror(toast, err);
@@ -163,23 +164,19 @@ const Bankaccount = ({ navigation, route }) => {
     }
     // () => navigation.push("Transferpin")
   };
-  
-  return (
-    <View
-      style={styles.container}
 
-    >
+  return (
+    <SafeAreaView style={styles.container}>
       {loading && <Loader />}
       <Customstatusbar />
       <Backheader title="Bank Account" />
       <Globalmodal
         showState={showmodal}
         onBgPress={() => setShowModal(!showmodal)}
-        btnFunction={() =>{
+        btnFunction={() => {
           navigation.navigate("TransferpinBank", { amount, accountInfomation });
-          setShowModal(false)
-        }
-        }
+          setShowModal(false);
+        }}
       >
         <View style={{ alignItems: "center" }}>
           <Text
@@ -192,10 +189,10 @@ const Bankaccount = ({ navigation, route }) => {
             Transfer Summary
           </Text>
 
-          <Sendingandreceive 
-          senderName={authdata?.userDetails?.fullName} 
-          receiverName={"Am Zm"} 
-          title={value && value} 
+          <Sendingandreceive
+            senderName={authdata?.userDetails?.fullName}
+            receiverName={"Am Zm"}
+            title={value && value}
           />
 
           <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
@@ -223,12 +220,21 @@ const Bankaccount = ({ navigation, route }) => {
             }}
           >
             Are you sure you want to transfer cash to{" "}
-            {accountInfomation?.bank_name} - <Text style={{textTransform: 'capitalize'}}>{accountInfomation?.account_name}</Text> ?
+            {accountInfomation?.bank_name} -{" "}
+            <Text style={{ textTransform: "capitalize" }}>
+              {accountInfomation?.account_name}
+            </Text>{" "}
+            ?
           </Text>
         </View>
       </Globalmodal>
       <View style={{ flex: 1, paddingHorizontal: 25 }}>
-        <Input icon={<At />} placeholder="N37,580.50" editable={false} value={amount} />
+        <Input
+          icon={<At />}
+          placeholder="N37,580.50"
+          editable={false}
+          value={amount}
+        />
 
         {/* <View style={styles.headerContainer}>
           <Text style={styles.leftHeader}>Saved Accounts</Text>
@@ -260,7 +266,7 @@ const Bankaccount = ({ navigation, route }) => {
           containerStyle={{}}
           dropDownContainerStyle={{
             borderColor: COLORS.grey1,
-            zIndex: 1
+            zIndex: 1,
           }}
         />
         {/* <Input icon={<At />} placeholder="--- Select Bank ---" /> */}
@@ -296,7 +302,7 @@ const Bankaccount = ({ navigation, route }) => {
       </View>
 
       <Bottombtn title="PROCEED" onpress={handleSubmit} />
-    </View>
+    </SafeAreaView>
   );
 };
 

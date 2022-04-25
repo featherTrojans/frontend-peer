@@ -32,6 +32,7 @@ import { useToast } from "react-native-toast-notifications";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 //   import { styles } from "../Withdrawpreview/Withdrawpreview.styles";
 // styles
 // import { styles } from './Pendingwithdraw.styles'
@@ -117,7 +118,7 @@ const Accepteddeposit = ({ navigation, route }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {loading && <Loader />}
       <Customstatusbar />
       <Map />
@@ -213,7 +214,7 @@ const Accepteddeposit = ({ navigation, route }) => {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

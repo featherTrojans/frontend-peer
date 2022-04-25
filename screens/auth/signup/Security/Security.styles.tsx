@@ -1,14 +1,15 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    width: SIZES.width,
-    height: SIZES.height,
+    flex: 1,
+    // width: SIZES.width,
+    // height: SIZES.height,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 25,
-    paddingTop: 25,
+    // paddingHorizontal: 25,
+    // paddingTop: 25,
   },
   header: {
     ...fontsize.big,
@@ -36,8 +37,8 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.blue6,
     justifyContent: "center",
     alignItems: "center",
-    height: 62,
-    borderRadius: 10,
+    height: RFValue(62),
+    borderRadius: RFValue(10),
   },
   proceedText: {
     color: COLORS.white,
@@ -47,13 +48,14 @@ export const styles = StyleSheet.create({
   bottomContainer: {
     flex: 1,
     justifyContent: "flex-end",
-    marginBottom: 80,
+    marginBottom: RFValue(20),
+    // backgroundColor: 'red'
   },
   bottomTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 28,
+    marginTop: RFValue(28),
   },
   bottomText: {
     ...fontsize.small,

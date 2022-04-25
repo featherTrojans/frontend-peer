@@ -17,6 +17,8 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
+import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow, At, Check, WrongIcon } = icons;
 
@@ -41,7 +43,7 @@ const Getdetails = ({ route, navigation }) => {
     return userinfo.username === undefined;
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Feather Wallet" />
       <Customstatusbar />
       <Globalmodal
@@ -146,7 +148,7 @@ const Getdetails = ({ route, navigation }) => {
       </View>
 
       <TouchableOpacity
-        style={{ paddingBottom: 24, paddingTop: 26, marginHorizontal: 25 }}
+        style={{ paddingBottom: RFValue(24), paddingTop: RFValue(26), marginHorizontal: 25 }}
         activeOpacity={0.8}
         onPress={() => setShowModal(true)}
         disabled={handleDisabled()}
@@ -160,12 +162,8 @@ const Getdetails = ({ route, navigation }) => {
         </View>
       </TouchableOpacity>
 
-      {/* <Bottombtn
-        title="PROCEED"
-        onpress={() => setShowModal(true)}
-        disabled={handleDisabled()}
-      /> */}
-    </View>
+     
+    </SafeAreaView>
   );
 };
 

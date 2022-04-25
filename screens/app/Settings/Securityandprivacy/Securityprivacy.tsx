@@ -10,6 +10,7 @@ import React from "react";
 import { styles } from "./Securityprivacy.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow, Forwardarrowblue, Outlinedlock, Fingerprinticon } = icons;
 
@@ -55,7 +56,7 @@ const Eachbtn = ({ icon, title, onpress }: EachbtnProps) => {
 
 const Securityprivacy = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
       <View style={styles.mainHeaderContainer}>
         {/* Icons */}
@@ -94,7 +95,7 @@ const Securityprivacy = ({ navigation }) => {
           onpress={() => console.log("helloow")}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

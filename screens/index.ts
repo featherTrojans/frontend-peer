@@ -34,10 +34,11 @@ import Addcash from "./app/Walletfunding/Addcash/Addcash";
 
 import Requestnew from "./app/Withdraws/Requestnew/Requestnew";
 import Bankaccount from "./app/Transferfunds/Bankaccount/Bankaccount";
-import Pendingrequest from "../NO/Pendingrequest/Pendingrequest";
+// import Pendingrequest from "../NO/Pendingrequest/Pendingrequest";
+// import Accepetedrequest from "../NO/Acceptedrequest/Accepetedrequest";
+
 import Summary from "./app/Withdraws/Summary/Summary";
 import Cancelrequest from "./app/Withdraws/Cancelrequest/Cancelrequest";
-import Accepetedrequest from "../NO/Acceptedrequest/Accepetedrequest";
 import Personal from "./auth/signup/Personal/Personal";
 import Security from "./auth/signup/Security/Security";
 import Securepin from "./auth/signup/Securepin/Securepin";
@@ -143,8 +144,8 @@ export {
   Chatshome,
   Chatsoon,
   Usersearch,
-  Pendingrequest,
-  Accepetedrequest,
+  // Pendingrequest,
+  // Accepetedrequest,
   WalletPin,
   Testings,
   TransferpinBank,

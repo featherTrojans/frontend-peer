@@ -81,4 +81,3 @@ export const styles = StyleSheet.create({
     ...FONTS.bold 
   }
 });
-

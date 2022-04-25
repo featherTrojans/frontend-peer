@@ -11,6 +11,8 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { RFValue } from "react-native-responsive-fontsize";
 
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
@@ -74,7 +76,8 @@ const Verification = ({route,navigation}) => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <View style={{paddingHorizontal: 25,paddingTop: RFValue(36), flex: 1}}>
       <Customstatusbar />
       {/* Closeicon */}
 
@@ -87,9 +90,9 @@ const Verification = ({route,navigation}) => {
         }}
         btnText="Continue"
       >
-        <View style={{marginBottom: 50, justifyContent: 'center', alignItems: 'center', marginHorizontal: 85}}>
+        <View style={{marginBottom: RFValue(50), justifyContent: 'center', alignItems: 'center', marginHorizontal: 85}}>
             <LottieView source={Successcheckanimate} style={{width: 148, height: 148}} autoPlay loop/>
-            <Text style={{...fontsize.bsmall, ...FONTS.regular, marginTop: 17, textAlign: 'center'}}>Your number has been successfully verified</Text>
+            <Text style={{...fontsize.bsmall, ...FONTS.regular, marginTop: RFValue(17), textAlign: 'center'}}>Your number has been successfully verified</Text>
         </View>
       </Globalmodal>
 
@@ -150,7 +153,8 @@ const Verification = ({route,navigation}) => {
           <Text style={styles.btnText}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 };
 

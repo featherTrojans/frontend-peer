@@ -5,9 +5,11 @@ import showerror from '../../../../utils/errorMessage'
 import Globalmodal from '../../../shared/Globalmodal/Globalmodal'
 import Customstatusbar from '../../../shared/Customstatusbar'
 import { useToast } from 'react-native-toast-notifications'
-import { FONTS, fontsize, icons } from '../../../../constants'
+import { COLORS, FONTS, fontsize, icons } from '../../../../constants'
 import { styles } from '../../verification/Verification.styles'
 import { Loader } from '../../../../components'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { RFValue } from 'react-native-responsive-fontsize'
 
    const { Successcheckanimate, Cancelicon } =icons
 
@@ -75,7 +77,8 @@ const Forgetpasswordotp = ({navigation, route}) => {
     }
   
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+      <View style={[styles.container, {paddingHorizontal: RFValue(25), paddingTop: RFValue(25)}]}>
         <Customstatusbar />
         {/* Closeicon */}
   
@@ -139,6 +142,7 @@ const Forgetpasswordotp = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
       </View>
+      </SafeAreaView>
     );
 }
 

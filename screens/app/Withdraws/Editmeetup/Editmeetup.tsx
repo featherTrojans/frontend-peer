@@ -15,6 +15,7 @@ import { Bottombtn } from "../../../../components";
 import { LocationContext } from "../../../../context/LocationContext";
 import { navigationRef } from "../../../../utils/customNavigation";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Cancelicon, Meetupdot, Clearinput } = icons;
 
@@ -23,7 +24,7 @@ const { Cancelicon, Meetupdot, Clearinput } = icons;
 const Editmeetup = ({ navigation }) => {
   const { setCoords } = useContext(LocationContext);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
 
       <View style={{ paddingHorizontal: 15, flex: 1 }}>
@@ -65,7 +66,7 @@ const Editmeetup = ({ navigation }) => {
         />
       </View>
       <Bottombtn title="UPDATE MEETUP" onpress={() => navigation.goBack()} />
-    </View>
+    </SafeAreaView>
   );
 };
 

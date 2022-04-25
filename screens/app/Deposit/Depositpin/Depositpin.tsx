@@ -15,6 +15,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -109,7 +110,7 @@ const Depositpin = ({ route, navigation }) => {
   };
   // return (<Text>hi there pin and things and things in between and beyond </Text>)
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
       {loading && <Loader />}
 
@@ -164,22 +165,7 @@ const Depositpin = ({ route, navigation }) => {
           </View>
         </View>
 
-        {/* <View style={styles.numberBtnContainer}>
-          {numbers.map((number, index) => {
-            return (
-              <Numberbtn
-                key={index}
-                onpress={
-                  number !== "" ? () => handleSetAmount(number) : () => null
-                }
-              >
-                {number}
-              </Numberbtn>
-            );
-          })}
-
-          <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View> */}
+      
 
         <Keyboard
           array={[...numbers]}
@@ -189,7 +175,7 @@ const Depositpin = ({ route, navigation }) => {
       </View>
 
       <Bottombtn title="CONTINUE" onpress={handleApproveRequest} />
-    </View>
+    </SafeAreaView>
   );
 };
 

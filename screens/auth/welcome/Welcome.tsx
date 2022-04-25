@@ -25,6 +25,7 @@ import {
   sendTokenToDB,
 } from "../../../utils/pushNotifications";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Smile, Winkinganimate } = icons;
 
@@ -147,27 +148,10 @@ const Welcome = ({ navigation, route }) => {
     }
   };
 
-  // useCallback(() => {
-  //   if(fromm !== "setup" && authdata?.userDetails?.fullName){
-  //     sendSchedulePushNotification(
-  //       "Welcome Back Padi! 🎉",
-  //       "Do more today. Enjoy financial flexibility"
-  //     );
-  //   }
-  // },[authdata])
 
-  // React.useEffect(() => {
-  //     shared.value = someAnimation(callback)
-  // }, [])
-
-  // useEffect(() => {
-  //   progressWidth.value = withTiming(SIZES.width - 214, { duration: 3000 });
-  //   setTimeout(() => {
-
-  //   }, 3500);
-  // }, []);
 
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
     <View style={styles.container}>
       {/* Smiling Icon */}
       <Customstatusbar />
@@ -226,6 +210,7 @@ const Welcome = ({ navigation, route }) => {
         </Text>
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 

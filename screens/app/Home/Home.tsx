@@ -13,15 +13,17 @@ import {
   Image,
   ScrollView,
   FlatList,
-  SafeAreaView,
+  // SafeAreaView,
   TouchableOpacity,
   RefreshControl,
   Platform,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import LottieView from "lottie-react-native";
 import * as Animatable from "react-native-animatable";
+import { ifIphoneX, getStatusBarHeight } from 'react-native-iphone-x-helper'
 import {
   InitialsBg,
   Service,
@@ -90,7 +92,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
   // sendSchedulePushNotification
 
-
   // const setMessageToken = async () => {
   //   try {
   //     const response = await axiosCustom.post("/auth/token/create", {messageToken: "ExponentPushToken[HtMvcuJzxC2c3PxLxJewxg]"})
@@ -112,28 +113,7 @@ const Home = ({ navigation }: { navigation: any }) => {
     }
   };
 
-  // const tokenExtractor = (string: any) => {
-  //   const firstIndex = string.indexOf("[");
-  //   return string.slice(firstIndex + 1, -1);
-  // };
 
-  // const sendAnotherToken = async () => {
-  //   try {
-  //     const response = await axiosCustom.post("/auth/token/create", {
-  //       messageToken: `ExponentPushToken[${extractedToken}]`,
-  //     });;
-  //   } catch (err) {
-  //     console.log(err.response.data);
-  //   }
-  // };
-  // useEffect(() => {
-
-  //   if (messageToken) {
-  //     setExtractedToken(tokenExtractor(messageToken));
-  //   }
-
-  //   sendAnotherToken();
-  // }, [extractedToken, messageToken]);
 
   //setting up websocket
   // useEffect(() => {
@@ -160,7 +140,6 @@ const Home = ({ navigation }: { navigation: any }) => {
       setAuthData(response?.data?.data);
       // console.log(response.data)
     } catch (err) {
-  
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -188,8 +167,12 @@ const Home = ({ navigation }: { navigation: any }) => {
         <View style={{ marginHorizontal: 50 }}>
           <Text style={styles.emptyText}>
             Padi, you have not performed any transactions yet.{" "}
-              <Text style={styles.transactNow} onPress={() => navigation.dispatch(jumpToNewtransactions)}>Transact Now</Text>
-      
+            <Text
+              style={styles.transactNow}
+              onPress={() => navigation.dispatch(jumpToNewtransactions)}
+            >
+              Transact Now
+            </Text>
           </Text>
         </View>
       </View>
@@ -197,121 +180,130 @@ const Home = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Customstatusbar />
-      <View style={styles.headerContainer}>
-        {/* user profile and notification icon */}
-        <View style={styles.profileContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.dispatch(jumpToSettings)}
-            activeOpacity={0.8}
-          >
-            {userDefaultImage()}
-            {/* <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} /> */}
-          </TouchableOpacity>
+    
+    
+    // <SafeAreaView style={[styles.container, { flex: 1 }]} edges={['right', 'left', 'top',]} >
+      
+      <View style={[styles.container,{paddingTop: getStatusBarHeight(true)}]}>
+        <Customstatusbar />
+        
+        <View style={styles.headerContainer}>
+          {/* user profile and notification icon */}
+          <View style={styles.profileContainer}>
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(jumpToSettings)}
+              activeOpacity={0.8}
+            >
+              {userDefaultImage()}
+              {/* <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} /> */}
+            </TouchableOpacity>
 
-          <View style={styles.profileNameContainer}>
-            <Text style={styles.profileName}>
-              Welcome, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
-            </Text>
-            <Text style={styles.profileUsername}>
-              @{authdata?.userDetails?.username}
-            </Text>
+            <View style={styles.profileNameContainer}>
+              <Text style={styles.profileName}>
+                Welcome, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
+              </Text>
+              <Text style={styles.profileUsername}>
+                @{authdata?.userDetails?.username}
+              </Text>
+            </View>
           </View>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate("Notifications")}
+          >
+            <Bell />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => navigation.navigate("Notifications")}
+
+        {/* Wallet info and details */}
+
+        {/* Start of the block */}
+        {/*  */}
+
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefreshFunc}
+              progressBackgroundColor={COLORS.white}
+              colors={[COLORS.blue6]}
+              tintColor={COLORS.white}
+            />
+          }
         >
-          <Bell />
-        </TouchableOpacity>
-      </View>
-
-      {/* Wallet info and details */}
-
-      {/* Start of the block */}
-      {/*  */}
-
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefreshFunc}
-            progressBackgroundColor={COLORS.white}
-            colors={[COLORS.blue6]}
-            tintColor={COLORS.white}
-          />
-        }
-      >
-        <View style={styles.walletBlock}>
-          <Viewbalance />
-          <View style={styles.walletOptionsContainer}>
-            {walletOptions.map(
-              (
-                {
-                  icon,
-                  title,
-                  link,
-                }: {
-                  icon: JSX.Element;
-                  title: string;
-                  link: string;
-                },
-                index
-              ) => (
-                <Animatable.View
-                  animation="bounceIn"
-                  delay={index * 100}
-                  key={title}
-                >
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    onPress={() => navigation.navigate(link)}
-                    style={styles.optionContainer}
+          <View style={styles.walletBlock}>
+            <Viewbalance />
+            <View style={styles.walletOptionsContainer}>
+              {walletOptions.map(
+                (
+                  {
+                    icon,
+                    title,
+                    link,
+                  }: {
+                    icon: JSX.Element;
+                    title: string;
+                    link: string;
+                  },
+                  index
+                ) => (
+                  <Animatable.View
+                    animation="bounceIn"
+                    delay={index * 100}
+                    key={title}
                   >
-                    <View style={styles.optionIconBg}>
-                      {/* Icon will be inside this */}
-                      {icon}
-                    </View>
-                    <Text style={styles.optionTitle}>{title}</Text>
-                  </TouchableOpacity>
-                </Animatable.View>
-              )
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      onPress={() => navigation.navigate(link)}
+                      style={styles.optionContainer}
+                    >
+                      <View style={styles.optionIconBg}>
+                        {/* Icon will be inside this */}
+                        {icon}
+                      </View>
+                      <Text style={styles.optionTitle}>{title}</Text>
+                    </TouchableOpacity>
+                  </Animatable.View>
+                )
+              )}
+            </View>
+          </View>
+
+          {/* End of the block */}
+
+          {/* Transaction history lists header*/}
+          <View style={{ flex: 1 }}>
+            <View style={styles.transactionHeader}>
+              <View>
+                <Text style={styles.transactionHistory}>
+                  Transaction History
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => navigation.dispatch(jumpToHistory)}
+              >
+                <Text style={styles.seeAll}>See All</Text>
+              </TouchableOpacity>
+            </View>
+
+            {histories.length === 0 ? (
+              <EmptyComponent />
+            ) : (
+              histories.map((history) => (
+                <Transactionhistory
+                  date={history.time}
+                  datas={history.data}
+                  key={history.time}
+                />
+              ))
             )}
           </View>
-        </View>
-
-        {/* End of the block */}
-
-        {/* Transaction history lists header*/}
-        <View style={{ flex: 1 }}>
-          <View style={styles.transactionHeader}>
-            <View>
-              <Text style={styles.transactionHistory}>Transaction History</Text>
-            </View>
-            <TouchableOpacity
-              onPress={() => navigation.dispatch(jumpToHistory)}
-            >
-              <Text style={styles.seeAll}>See All</Text>
-            </TouchableOpacity>
-          </View>
-
-          {histories.length === 0 ? (
-            <EmptyComponent />
-          ) : (
-            histories.map((history) => (
-              <Transactionhistory
-                date={history.time}
-                datas={history.data}
-                key={history.time}
-              />
-            ))
-          )}
-        </View>
-        <DoubleTapToClose />
-      </ScrollView>
-    </SafeAreaView>
+          <DoubleTapToClose />
+        </ScrollView>
+      </View>
+    // </SafeAreaView>
+    
   );
 };
 

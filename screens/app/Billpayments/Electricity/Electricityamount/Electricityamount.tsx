@@ -14,6 +14,7 @@ import amountFormatter from "../../../../../utils/formatMoney";
 import { styles } from "../../../Transferfunds/TransferInput/TransferInput.styles";
 import { COLORS } from "../../../../../constants";
 import showerror from "../../../../../utils/errorMessage";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Electricityamount = ({ navigation }) => {
   const { authdata } = useContext(AuthContext);
@@ -56,7 +57,7 @@ const Electricityamount = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Enter Amount" />
       <Customstatusbar />
 
@@ -93,7 +94,7 @@ const Electricityamount = ({ navigation }) => {
       </View>
 
       <Bottombtn title="PROCEED" onpress={handleToNext} />
-    </View>
+    </SafeAreaView>
   );
 };
 

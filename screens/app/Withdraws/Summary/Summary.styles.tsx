@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     // padding: 15,
-    paddingTop: RFValue(20),
+    // paddingTop: RFValue(20),
     backgroundColor: COLORS.white,
   },
   backArrow: {

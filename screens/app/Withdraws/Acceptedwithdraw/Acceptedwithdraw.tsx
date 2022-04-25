@@ -34,6 +34,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const {
   Forwardarrow,
@@ -167,30 +168,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
     })
   }
 
-  // const leftActions = (progress, dragX) => {
-  //   const scale = dragX.interpolate({
-  //     inputRange: [0, 200],
-  //     outputRange: [0, 5],
-  //     extrapolate: "clamp",
-  //   });
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: "center" }}>
-  //       <Animated.View
-  //         style={{
-  //           padding: 10,
-  //           backgroundColor: COLORS.blue6,
-  //           width: 10,
-  //           height: 10,
-  //           transform: [{ scale }],
-  //         }}
-  //       ></Animated.View>
-  //     </View>
-  //   );
-  // };
 
-  // const swipedLeftFunction = () => {
-  //   // console.log("We want to make redirct or proceed to make the payment");
-  // };
 
   const handleCancelRequest = async () => {
     setLoading(true);
@@ -221,7 +199,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
  
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
       <Map />
       <View style={styles.previewContainer}>
@@ -339,7 +317,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

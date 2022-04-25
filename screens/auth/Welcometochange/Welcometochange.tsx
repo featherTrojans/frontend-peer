@@ -2,7 +2,11 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-nati
 import React from "react";
 import * as WebBrowser from 'expo-web-browser';
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Customstatusbar from "../../shared/Customstatusbar";
+import { RFValue } from "react-native-responsive-fontsize";
 const { Feathertextlogo, Markedicon } = icons;
+
 
 
 
@@ -14,14 +18,16 @@ const Welcometochange = ({navigation, route}) => {
   const {token, username, fromm} = route.params
 
   return (
-    <ScrollView style={{ backgroundColor: COLORS.white, flex: 1 }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+    <ScrollView style={{ backgroundColor: COLORS.white, flex: 1 }} showsVerticalScrollIndicator={false}>
+      <Customstatusbar />
       <View
         style={{
           flex: 0.4,
           backgroundColor: COLORS.grey12,
           paddingHorizontal: 15,
-          paddingTop: 30,
-          paddingBottom: 60,
+          paddingTop: RFValue(30),
+          paddingBottom: RFValue(60),
         }}
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -41,7 +47,7 @@ const Welcometochange = ({navigation, route}) => {
         <View style={{}}>
         <Text
             style={{
-              marginTop: 50,
+              marginTop: RFValue(50),
               ...fontsize.big,
               ...FONTS.bold,
               lineHeight: 37,
@@ -69,12 +75,12 @@ const Welcometochange = ({navigation, route}) => {
       </View>
 
       <View style={{ paddingHorizontal: 15, flex: 0.8 }}>
-        <View style={{ marginTop: 46, marginBottom: 54.5 }}>
+        <View style={{ marginTop: RFValue(46), marginBottom: RFValue(54.5) }}>
           <Text
             style={{
               ...fontsize.bsmall,
               ...FONTS.regular,
-              marginBottom: 13,
+              marginBottom: RFValue(13),
               color: COLORS.grey2,
             }}
           >
@@ -83,7 +89,7 @@ const Welcometochange = ({navigation, route}) => {
           <Text style={{ ...fontsize.medium, ...FONTS.bold }}>{username}</Text>
           <Text
             style={{
-              marginVertical: 32,
+              marginVertical: RFValue(32),
               ...fontsize.bsmall,
               ...FONTS.regular,
               lineHeight: 24,
@@ -93,7 +99,7 @@ const Welcometochange = ({navigation, route}) => {
             users with your username.
           </Text>
           <Text
-            style={{ ...fontsize.bsmall, ...FONTS.regular, marginBottom: 13 }}
+            style={{ ...fontsize.bsmall, ...FONTS.regular, marginBottom: RFValue(13) }}
           >
             You can always change this by navigating to
           </Text>
@@ -105,7 +111,7 @@ const Welcometochange = ({navigation, route}) => {
         </View>
         <View style={{ height: 0.5, backgroundColor: COLORS.lineColor4 }} />
 
-        <View style={{ marginTop: 55, marginBottom: 52 }}>
+        <View style={{ marginTop: RFValue(55), marginBottom: RFValue(52) }}>
           <Text
             style={{
               textAlign: "center",
@@ -120,11 +126,11 @@ const Welcometochange = ({navigation, route}) => {
           </Text>
         </View>
 
-        <TouchableOpacity onPress={()=>navigation.navigate("Securepin",{token:token, fromm})} style={{backgroundColor: COLORS.blue6, height: 62, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 42, marginBottom: 38}}>
+        <TouchableOpacity onPress={()=>navigation.navigate("Securepin",{token:token, fromm})} style={{backgroundColor: COLORS.blue6, height: RFValue(62), justifyContent: "center", alignItems: "center", borderRadius: RFValue(10), marginTop: RFValue(42), marginBottom: RFValue(38)}}>
             <Text style={{color: COLORS.white, ...fontsize.smallest, ...FONTS.bold, textTransform: "uppercase"}}>Setup transaction pin</Text>
         </TouchableOpacity>
         
-        <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", marginBottom:20}}>
+        <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", marginBottom: RFValue(20)}}>
          <Text style={{textAlign: "center", ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>Need Help?{" "} 
           </Text>
           <TouchableOpacity onPress={()=>handleOpenWithWebBrowser()}>
@@ -134,6 +140,7 @@ const Welcometochange = ({navigation, route}) => {
         
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

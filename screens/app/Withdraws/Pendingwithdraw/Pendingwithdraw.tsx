@@ -20,6 +20,7 @@ import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/
 import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
+import { SafeAreaView } from "react-native-safe-area-context";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -61,7 +62,7 @@ const Pendingwithdraw = ({navigation, route}) => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Customstatusbar />
         <Map />
         <View style={styles.previewContainer}>
@@ -145,7 +146,7 @@ const Pendingwithdraw = ({navigation, route}) => {
           
         </View>
       
-    </View>
+    </SafeAreaView>
   );
 };
 

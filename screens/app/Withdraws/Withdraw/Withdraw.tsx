@@ -25,6 +25,7 @@ import Cryinganim from "../../../../assets/Lottie/animations/feather_cry_emoji.j
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { Shadow } from "../../../../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const {
   Backarrow,
@@ -241,7 +242,7 @@ const Withdraw = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Backheader title="Withdraw" />
       {/* {loading && <Loader />} */}
       <Customstatusbar />
@@ -269,7 +270,7 @@ const Withdraw = ({ navigation }) => {
         title="NEW WITHDRAWAL"
         onpress={() => navigation.navigate("Requestnew")}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

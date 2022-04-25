@@ -8,6 +8,7 @@ import { db } from "../../../../firebase";
 import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Chatsearchicon } = icons;
 
@@ -88,6 +89,7 @@ const Chatshome = () => {
     }
   }
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
     <View style={styles.container}>
       <Customstatusbar />
       {/* Header texts and search icon */}
@@ -193,6 +195,7 @@ const Chatshome = () => {
         </View>
       </ScrollView>
     </View>
+    </SafeAreaView>
   );
 };
 

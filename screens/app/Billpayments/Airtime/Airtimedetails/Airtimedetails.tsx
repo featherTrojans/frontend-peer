@@ -23,6 +23,7 @@ import { AuthContext } from "../../../../../context/AuthContext";
 import showerror from "../../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { styles } from "./Airtimedetails.styles";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { Inputdropdown, Addressbook } = icons;
 
@@ -107,6 +108,7 @@ const Airtimedetails = ({ navigation, route }) => {
   };
 
   return (
+    <SafeAreaView  style={{ flex: 1, backgroundColor: COLORS.white }} >
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: COLORS.white }}
       contentContainerStyle={{ flex: 1 }}
@@ -220,6 +222,7 @@ const Airtimedetails = ({ navigation, route }) => {
       </KeyboardAwareScrollView>
       <Bottombtn title="proceed" onpress={handleToNext} />
     </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 
