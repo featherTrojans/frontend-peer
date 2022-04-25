@@ -86,7 +86,7 @@ function Depositinput({ route, navigation }) {
           reference,
         });
       }
-      navigation.navigate("Home");
+      navigation.navigate("Depositupdate",{from:"depositpin"});
     } catch (err) {
       showerror(toast, err);
     } finally {

@@ -512,7 +512,7 @@ const RootNavigator = ({ initialBoarded }) => {
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
-      {!token ? (
+      {token ? (
         <AppStack.Group screenOptions={verticalAnimation}>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Personal" component={Personal} />
@@ -533,6 +533,14 @@ const RootNavigator = ({ initialBoarded }) => {
         </AppStack.Group>
       ) : (
         <>
+          {/* Chats Screens */}
+          <AppStack.Group>
+            <AppStack.Screen name="Chatsdm" component={Chatsdm} />
+            <AppStack.Screen name="Chatshome" component={Chatshome} />
+            <AppStack.Screen name="Usersearch" component={Usersearch} />
+            <AppStack.Screen name="CustomWebView" component={CustomWebView} />
+            <AppStack.Screen name="CustomWebViewSupport" component={CustomWebViewSupport} />
+          </AppStack.Group>
           {/* Transaction Screens*/}
           <AppStack.Group>
             <AppStack.Screen options={horizontalAnimation} name="Root" component={Tabs} />
@@ -665,14 +673,7 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
           </AppStack.Group>
 
-          {/* Chats Screens */}
-          <AppStack.Group>
-            <AppStack.Screen name="Chatshome" component={Chatshome} />
-            <AppStack.Screen name="Chatsdm" component={Chatsdm} />
-            <AppStack.Screen name="Usersearch" component={Usersearch} />
-            <AppStack.Screen name="CustomWebView" component={CustomWebView} />
-            <AppStack.Screen name="CustomWebViewSupport" component={CustomWebViewSupport} />
-          </AppStack.Group>
+          
         </>
       )}
     </AppStack.Navigator>
