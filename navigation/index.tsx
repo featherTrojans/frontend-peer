@@ -535,8 +535,8 @@ const RootNavigator = ({ initialBoarded }) => {
         <>
           {/* Chats Screens */}
           <AppStack.Group>
-            <AppStack.Screen name="Chatsdm" component={Chatsdm} />
             <AppStack.Screen name="Chatshome" component={Chatshome} />
+            <AppStack.Screen name="Chatsdm" component={Chatsdm} />
             <AppStack.Screen name="Usersearch" component={Usersearch} />
             <AppStack.Screen name="CustomWebView" component={CustomWebView} />
             <AppStack.Screen name="CustomWebViewSupport" component={CustomWebViewSupport} />
