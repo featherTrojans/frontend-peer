@@ -49,6 +49,7 @@ Editprofile: undefined;
 Securityprivacy: undefined;
 Changepassword: undefined;
 Changepin: undefined;
+Biometrics: undefined;
 
 
   //Withdraw

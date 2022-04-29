@@ -8,6 +8,7 @@ const AuthContext = createContext<any>({});
 const AuthProvider:FC = ({children}) =>{
     const [userColor, setUSerColor] = useState("#E5EBFB")
     const [authdata, setAuthData] = useState({})
+    const [allowBiometrics, setAllowBiometrics] = useState(false)
     const userDefaultImage = () => {
         return (
             <Featherdefault />
@@ -18,8 +19,7 @@ const AuthProvider:FC = ({children}) =>{
     const [messageToken, setMessageToken] = useState("")
     const [showAmount, setShowAmount] = useState<boolean>(true)
     return (
-        <AuthContext.Provider value={{authdata,setAuthData,token,setToken, messageToken, setMessageToken, showAmount, setShowAmount, userColor, userDefaultImage}}>
-            
+        <AuthContext.Provider value={{authdata,setAuthData,token,setToken, messageToken, setMessageToken, showAmount, setShowAmount, userColor, userDefaultImage, allowBiometrics, setAllowBiometrics}}>
             {children}
         </AuthContext.Provider>
     )

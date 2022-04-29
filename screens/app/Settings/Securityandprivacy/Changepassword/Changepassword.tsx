@@ -23,7 +23,7 @@ const { Backarrow } = icons;
 
 const Changepassword = () => {
   const toast = useToast();
-  const { authdata } = useContext(AuthContext);
+  const { authdata, setAllowBiometrics } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [oldpassword, setOldpassword] = useState("");
   const [newpassword, setNewpassword] = useState("");
@@ -49,6 +49,8 @@ const Changepassword = () => {
         oldpassword: oldpassword,
         newpassword: newpassword,
       });
+      setAllowBiometrics(false)
+
       navigation.navigate("Root");
     } catch (err) {
       showerror(toast, err);

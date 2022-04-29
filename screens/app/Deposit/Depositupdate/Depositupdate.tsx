@@ -73,12 +73,10 @@ const StatusUpdate = ({ status, navigation }: any) => {
               </View>
             </View>
 
-            {/* <Text style={styles.lastAmountPrice}>
-              NGN {amountFormatter(status.status[0].amount)}
-            </Text> */}
             <Text style={styles.lastAmountPrice}>
-              NGN1000000
+              NGN {amountFormatter(status.status[0].amount)}
             </Text>
+            
           </View>
 
           <View style={styles.horizontalLine} />

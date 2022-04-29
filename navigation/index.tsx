@@ -69,6 +69,7 @@ import {
   Securityprivacy,
   Changepassword,
   Changepin,
+  Biometrics,
 
   //Withdraw
   Requestnew,
@@ -127,7 +128,6 @@ import {
   Electricityamount,
   Electricitydetails,
 } from "../screens";
-
 // import { LockScreen } from "../screens";
 
 import { LockScreen } from "../screens";
@@ -567,6 +567,7 @@ const RootNavigator = ({ initialBoarded }) => {
             />
             <AppStack.Screen name="Changepassword" component={Changepassword} />
             <AppStack.Screen name="Changepin" component={Changepin} />
+            <AppStack.Screen name="Biometrics" component={Biometrics} />
           </AppStack.Group>
 
           {/* Withdraw Screens */}

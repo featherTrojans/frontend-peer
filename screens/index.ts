@@ -23,6 +23,7 @@ import Securityprivacy from "./app/Settings/Securityandprivacy/Securityprivacy";
 import Changepassword from "./app/Settings/Securityandprivacy/Changepassword/Changepassword";
 import Changepin from "./app/Settings/Securityandprivacy/Changepin/Changepin";
 import Forgetpassword from "./auth/forgetpassword/Forgetpassword";
+import Biometrics from "./app/Settings/Securityandprivacy/Biometrics/Biometrics";
 import Forgetpasswordotp from "./auth/forgetpassword/Forgetpasswordotp/Forgetpasswordotp";
 import Setnewpassword from "./auth/forgetpassword/Setnewpassword/Setnewpassword";
 
@@ -101,6 +102,7 @@ export {
   Forgetpassword,
   Forgetpasswordotp,
   Setnewpassword,
+  Biometrics,
   Welcome,
   Welcometochange,
   Home,

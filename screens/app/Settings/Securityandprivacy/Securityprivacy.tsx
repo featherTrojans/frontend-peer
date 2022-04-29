@@ -43,7 +43,7 @@ const Eachbtn = ({ icon, title, onpress }: EachbtnProps) => {
             ...fontsize.small,
             ...FONTS.regular,
             color: COLORS.grey5,
-            opacity: title === "Biometrics" ? 0.3 : 1
+            
           }}
         >
           {title}
@@ -92,7 +92,7 @@ const Securityprivacy = ({ navigation }) => {
         <Eachbtn
           icon={<Fingerprinticon />}
           title="Biometrics"
-          onpress={() => console.log("helloow")}
+          onpress={() => navigation.navigate("Biometrics")}
         />
       </View>
     </SafeAreaView>
