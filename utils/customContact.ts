@@ -8,10 +8,6 @@ const useContact = () =>{
           const { status } = await Contacts.requestPermissionsAsync();
           if(status === 'granted'){
             const { data } = await Contacts.getContactsAsync();
-            if (data.length > 0) {
-                const contact = data[0];
-                console.log(contact);
-            }
             setContacts(data)
           }
         })();

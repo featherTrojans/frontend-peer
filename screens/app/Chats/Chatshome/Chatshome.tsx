@@ -10,6 +10,7 @@ import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import useContact from "../../../../utils/customContact";
 import Chat from "./Chats";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 
 const { Chatsearchicon } = icons;
 
@@ -33,17 +34,91 @@ const Eachprofile = ({
 };
 
 
+const dataforcontacts = [
+  {
+    phoneNumbers:[
+      {
+        number: "081 6794 3849"
+      },
+      {
+        number: "08167943849"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "07088780964"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "09037768252"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "09029428324"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "07089179087"
+      }
+    ]
+  }
+]
 
 const Chatshome = () => {
   const [chats, setChats] = useState<any>([])
-  // find the detail of the user name by checking the reference
   // const {authdata} = useContext(AuthContext);
+  const [contactsResolved, setContactResolved] = useState([])
   const {contacts} = useContact()
-  console.log(contacts, "all my contacts")
   const authid = "specc"
+
+  useEffect(()=>{
+    const pendingrequests =  dataforcontacts.map((contact)=>{
+      const numbersArr = []
+      contact?.phoneNumbers?.forEach((phone)=>{
+        const number =  phone.number.replace(/\s+/g, '')
+        if(!numbersArr.includes(number)){
+          numbersArr.push(number)
+        }
+      })
+      for(let num of numbersArr){
+        console.log(num)
+        return axiosCustom.get(`/user/${num}`,{headers:{token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjUxMDgwNTc2LCJleHAiOjE2NTEwODc3NzZ9.ZpcZ9HNo1y-AyBsKNUUlJLYF09ovN42-qen9JfXMTk4"}})
+      }
+    })
+    getAllContactInFeather(pendingrequests)
+  },[contacts])
+
   useEffect(()=>{
     getAllChats()
   },[])
+
+  const getAllContactInFeather = async (pendingrequests)=>{
+    Promise.allSettled = Promise.allSettled || ((promises) => Promise.all(
+      promises.map(p => p
+          .then(value => ({
+              status: "fulfilled",
+              value
+          }))
+          .catch(reason => ({
+              status: "rejected",
+              reason
+          }))
+      )
+  ));
+    const resolvedContacts =  await Promise.allSettled(pendingrequests)
+    setContactResolved(resolvedContacts.filter(stat=> stat.status === "fulfilled"))
+  }
   const getAllChats = async ()=>{
     try{
       // auery first where 
@@ -95,14 +170,8 @@ const Chatshome = () => {
             showsHorizontalScrollIndicator={false}
           >
             {
-              contacts.map((contact)=><Eachprofile name="Tayo Aina" username="@ttayodom22" />)
+              contactsResolved.map((contact)=><Eachprofile name="Tayo Aina" username="@ttayodom22" />)
             }
-            <Eachprofile name="Mabel Njoku" username="@sexystallionjj" />
-            <Eachprofile name="Olu Michael" username="@michael217" />
-            <Eachprofile name="Jaiye Williams" username="@williamsbb" />
-            <Eachprofile name="Enoma Samuel" username="@samuelenoma" />
-            <Eachprofile name="Stacy Ugbeda" username="@samuelenoma" />
-            <Eachprofile name="Mabel Njoku" username="@sexystallionjj" />
             <View style={styles.seeMoreContainer}>
               <View style={styles.seeMoreBg}>
                 <View style={{ flexDirection: "row" }}>

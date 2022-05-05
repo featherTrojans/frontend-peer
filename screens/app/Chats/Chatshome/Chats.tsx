@@ -17,7 +17,7 @@ const Chat = ({userId}:chatProps) => {
     },[])
     const getUser = async ()=>{
         try{
-            const response = await axiosCustom.get(`/user/${userId}`, {headers:{token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmOWVuVFF0dlVRIiwidXNlcm5hbWUiOiJzcGVjYyIsImVtYWlsIjoiQkFNSUFZTzkwQEdNQUlMLkNPTSIsImZ1bGxOYW1lIjoiTEFXQUwgQVlPQkFNSSIsImlhdCI6MTY1MTA0MTYyNiwiZXhwIjoxNjUxMDQ4ODI2fQ.tmoqQ1BxssOlFhzdLBDIUiEUmOgCDF-5VtQ5y_QV-cU"}})
+            const response = await axiosCustom.get(`/user/${userId}`, {headers:{token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjUxMDgwNTc2LCJleHAiOjE2NTEwODc3NzZ9.ZpcZ9HNo1y-AyBsKNUUlJLYF09ovN42-qen9JfXMTk4"}})
             setUserInfo(response.data.data)
         }catch(err){
           console.log(err.response)
