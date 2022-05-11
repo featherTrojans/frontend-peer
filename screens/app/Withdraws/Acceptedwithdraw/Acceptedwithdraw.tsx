@@ -71,7 +71,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [locationLoading, setLocationLoading] = useState(false);
   const [toggledSwipe, setToggledSWipe] = useState(false)
-
+  const [userinfo, setUserinfo] = useState({})
   useEffect(() => {
     // update both map, meeting point and  Agent point
     // console.log(requestInfo, "Here is the accepted withdrawal response");
@@ -93,6 +93,22 @@ const Acceptedwithdraw = ({ navigation, route }) => {
       setToggledSWipe(false)
     }
   },[toggledSwipe])
+  useEffect(()=>{
+    getAgentInfo()
+  },[requestInfo])
+  
+  const getAgentInfo = async ()=>{
+    try{
+      const response = await axiosCustom.get(`/user/${requestInfo.agentUsername}`)
+      console.log(response)
+      setUserinfo(response.data)
+    }catch(err){
+    }
+  }
+
+  const toChatInApp = ()=>{
+    navigation.navigate("Chatsdm",{userId:userinfo.userUid, userInfo: userinfo})
+}
 
   const getAdditionalUserInfo = async () => {
     try {
@@ -281,12 +297,13 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                 icon={<Chaticon />}
                 title="Chat"
                 details="Discuss conversations via chat"
-                onpress={() =>
-                  chatOnWhatsapp(
-                    userinfo.phoneNumber,
-                    `Hi ${requestInfo?.agent}, I made a cash request of ${requestInfo?.amount} to you on Feather`
-                  )
-                }
+                onpress={toChatInApp}
+                // onpress={() =>
+                //   chatOnWhatsapp(
+                //     userinfo.phoneNumber,
+                //     `Hi ${requestInfo?.agent}, I made a cash request of ${requestInfo?.amount} to you on Feather`
+                //   )
+                // }
               />
               <Iconwithdatas
                 icon={<Cancelicony />}

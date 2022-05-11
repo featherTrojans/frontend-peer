@@ -5,7 +5,7 @@ import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import call from "react-native-phone-call"
 import { useToast } from "react-native-toast-notifications"
-import { useNavigation } from "@react-navigation/native";
+
 
 
 
@@ -36,7 +36,6 @@ export const chatOnWhatsapp = (phonenumber:string, text = "Hello") => {
     Linking.openURL(`whatsapp://send?text=${text}&phone=234${phonenumber}`)
 }
 
-export const chatInApp = (userId:string,userInfo:{[pro:string]:any})=>{
-    const navigation = useNavigation()
+export const chatInApp = (userId:string,userInfo:{[pro:string]:any}, navigation)=>{
     return navigation.navigate("Chatsdm",{userId, userInfo})
 }

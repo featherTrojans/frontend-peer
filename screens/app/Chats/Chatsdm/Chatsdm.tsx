@@ -26,18 +26,18 @@ const Chatsdm = ({route}) => {
   const [chattext, setchattext] = useState("")
   const textinput = useRef(null)
   const scrollViewRef = useRef();
-  useEffect(()=>{
-    const keyboardshowinglistener = Keyboard.addListener("keyboardDidShow", () => {
-        console.log("it is showing")
-        if(show){
-          Keyboard.dismiss()
-        }
-        scrollViewRef.current.scrollToEnd({ animated: true })
-    })
-    return () => {
-      keyboardshowinglistener.remove()
-    }
-  },[show])
+  // useEffect(()=>{
+  //   const keyboardshowinglistener = Keyboard.addListener("keyboardDidShow", () => {
+  //       console.log("it is showing")
+  //       if(show){
+  //         Keyboard.dismiss()
+  //       }
+  //       scrollViewRef.current.scrollToEnd({ animated: true })
+  //   })
+  //   return () => {
+  //     keyboardshowinglistener.remove()
+  //   }
+  // },[show])
 
 
   // console.log(messages)
@@ -66,7 +66,7 @@ const Chatsdm = ({route}) => {
  
   
   const getThisChats = async ()=>{
-    const authId = "specc"
+    const authId = authdata?.userDetails?.userUid
     try{
       let document;
       let id1id2 = `${authId}-${userId}`
@@ -112,7 +112,7 @@ const Chatsdm = ({route}) => {
 
 
   const sendFireBaseMessage = async ()=>{
-    const authId = "specc"
+    const authId = authdata?.userDetails?.userUid
     const messageData = {
       message:chattext,
       sender:authId,
@@ -191,14 +191,14 @@ const Chatsdm = ({route}) => {
       <View style={styles.chatTextContainer}>
         <View style={styles.inputarea}>
           <View style={styles.chatTextInput}>
-            <TouchableOpacity onPress={handleShowEmoji}>
+            {/* <TouchableOpacity onPress={handleShowEmoji}>
               <SmileEmoji />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TextInput ref={textinput} placeholder="Enter Message" style={styles.textinput} value={chattext} onChangeText={text=>setchattext(text)}  />
           </View>
           <Button onPress={sendFireBaseMessage} title="Press me to send" />
         </View>
-        {show &&<EmojiBoard containerStyle={{marginBottom: 5, position:"relative"}} showBoard={true} onClick={onClick} />}
+        {/* {show &&<EmojiBoard containerStyle={{marginBottom: 5, position:"relative"}} showBoard={true} onClick={onClick} />} */}
       </View>
     </View>
   );
