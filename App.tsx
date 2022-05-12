@@ -6,7 +6,7 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { AuthProvider } from './context/AuthContext';
 import MainNavigation from './navigation';
-import { Text , View} from 'react-native';
+import { Text , View, LogBox} from 'react-native';
 import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import {icons} from "./constants"
 import { LocationProvider } from "./context/LocationContext";
@@ -15,6 +15,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const { Cancelicon } = icons;
 
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 export default function App() {
   const [onboarded, setOnboarded] = useState<null | boolean>(null)

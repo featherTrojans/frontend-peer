@@ -530,6 +530,7 @@ const RootNavigator = ({ initialBoarded }) => {
         </AppStack.Group>
       ) : (
         <>
+          
           {/* Transaction Screens*/}
           <AppStack.Group>
             <AppStack.Screen
@@ -664,7 +665,6 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="DepositSummary" component={DepositSummary} />
             <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
           </AppStack.Group>
-
           {/* Chats Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Chatshome" component={Chatshome} />
@@ -676,6 +676,7 @@ const RootNavigator = ({ initialBoarded }) => {
               component={CustomWebViewSupport}
             />
           </AppStack.Group>
+          
         </>
       )}
     </AppStack.Navigator>

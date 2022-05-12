@@ -19,8 +19,10 @@ import Map from "../../../shared/map/Map";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
+// import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { chatInApp, chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -32,13 +34,27 @@ const Pendingwithdraw = ({navigation, route}) => {
   const {requestInfo} = route.params;
   const [toggleShow, setToggleShow] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
-  
+  const [userinfo, setUserinfo] = useState({})
+
+  console.log(userinfo,"userinfo")
   useEffect(()=>{
     // update both map, meeting point and  Agent point
     getLocation()
   }, []);
   
+  useEffect(()=>{
+    getAgentInfo()
+  },[requestInfo])
   
+  const getAgentInfo = async ()=>{
+    try{
+      const response = await axiosCustom.get(`/user/${requestInfo.agentUsername}`)
+      console.log(response)
+      setUserinfo(response.data)
+    }catch(err){
+    }
+  }
+
   const getLocation = async () => {
     try{
       setLocationLoading(true)
@@ -53,6 +69,10 @@ const Pendingwithdraw = ({navigation, route}) => {
     }
   }
 
+
+  const toChatInApp = ()=>{
+      navigation.navigate("Chatsdm",{userId:userinfo.userUid, userInfo: userinfo})
+  }
   if(locationLoading){
     return(
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
@@ -114,7 +134,8 @@ const Pendingwithdraw = ({navigation, route}) => {
                   icon={<Chaticon />}
                   title="Chat"
                   details="Discuss conversations via chat"
-                  onpress={() => chatOnWhatsapp(requestInfo.phoneNumber,`Hi ${requestInfo.agent}, I made a cash request of ${requestInfo.amount} to you on Feather`)}
+                  // onpress={() => chatOnWhatsapp(requestInfo.phoneNumber,`Hi ${requestInfo.agent}, I made a cash request of ${requestInfo.amount} to you on Feather`)}
+                  onpress={toChatInApp}
                 />
                 <Iconwithdatas
                   icon={<Renegotiateicon />}

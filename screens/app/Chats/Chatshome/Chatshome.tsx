@@ -1,14 +1,17 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState, useContext } from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
-import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData, query, where } from "firebase/firestore";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useContact from "../../../../utils/customContact";
+import Chat from "./Chats";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 
 const { Chatsearchicon } = icons;
 
@@ -31,58 +34,110 @@ const Eachprofile = ({
   );
 };
 
-const Chat = ({
-  name,
-  time,
-  message,
-  online,
-  image,
-}: {
-  name: string;
-  time: string;
-  message: string;
-  online: boolean;
-  image?: ReactElement;
-}) => {
-  const navigate = useNavigation()
-  return (
-    // <TouchableOpacity onPress={()=>navigate.navigate("Chatsdm")} style={styles.chatContainer}>
-    <TouchableOpacity style={styles.chatContainer}>
-      <View style={styles.chatAvatar}>
-        {online && <View style={styles.chatStatusDot} />}
-        {/* Image */}
-      </View>
-      <View style={styles.chatInfo}>
-        <View style={styles.chatNameAndTime}>
-          <Text style={styles.chatName}>{name}</Text>
-          {/* Name */}
-          {/* time */}
-          <Text style={styles.chatTime}>{time}</Text>
-        </View>
-        <View>
-          {/* hint message */}
-          <Text style={styles.chatHintMessage}>{message}</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
+
+const dataforcontacts = [
+  {
+    phoneNumbers:[
+      {
+        number: "081 6794 3849"
+      },
+      {
+        number: "08167943849"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "07088780964"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "09037768252"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "09029428324"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "07089179087"
+      }
+    ]
+  }
+]
 
 const Chatshome = () => {
   const [chats, setChats] = useState<any>([])
-  // find the detail of the user name by checking the reference
+  // const {authdata} = useContext(AuthContext);
+  const [contactsResolved, setContactResolved] = useState([])
+  const {contacts} = useContact()
+  const authid = "specc"
+
+  useEffect(()=>{
+    const pendingrequests =  dataforcontacts.map((contact)=>{
+      const numbersArr = []
+      contact?.phoneNumbers?.forEach((phone)=>{
+        const number =  phone.number.replace(/\s+/g, '')
+        if(!numbersArr.includes(number)){
+          numbersArr.push(number)
+        }
+      })
+      for(let num of numbersArr){
+        console.log(num)
+        return axiosCustom.get(`/user/${num}`,{headers:{token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjUxMDgwNTc2LCJleHAiOjE2NTEwODc3NzZ9.ZpcZ9HNo1y-AyBsKNUUlJLYF09ovN42-qen9JfXMTk4"}})
+      }
+    })
+    getAllContactInFeather(pendingrequests)
+  },[contacts])
+
   useEffect(()=>{
     getAllChats()
   },[])
 
+  const getAllContactInFeather = async (pendingrequests)=>{
+    Promise.allSettled = Promise.allSettled || ((promises) => Promise.all(
+      promises.map(p => p
+          .then(value => ({
+              status: "fulfilled",
+              value
+          }))
+          .catch(reason => ({
+              status: "rejected",
+              reason
+          }))
+      )
+  ));
+    const resolvedContacts =  await Promise.allSettled(pendingrequests)
+    setContactResolved(resolvedContacts.filter(stat=> stat.status === "fulfilled"))
+  }
   const getAllChats = async ()=>{
     try{
-      const chatsRef = collection(db,"chats","dudeid","fellowchats")
-      // const querysnaps = await getDoc(chatsRef)
+      // auery first where 
+      const chatsRef = collection(db,"chatstwo")
+      const chatQuery1 = query(chatsRef, where("id1","==",authid))
+      const chatQuery2 = query(chatsRef, where("id2","==",authid))
       // console.log(querysnaps.length)
-      const chatsdata = await getDocs(chatsRef)
-      const chatsarr = chatsdata.docs;
-      setChats(chatsarr)
+      const [chatdata1, chatdata2 ] = await Promise.all([getDocs(chatQuery1),getDocs(chatQuery2)])
+      // const chatdata2 = await getDocs(chatQuery1)
+      
+      const allchats = []
+      chatdata2.forEach((document)=>{
+        allchats.push(document.data())
+      })
+      chatdata1.forEach((document)=>{
+        allchats.push(document.data())      
+      })
+      setChats(allchats)
       // console.log(chatsdata.docs)
     }catch(err){
 
@@ -94,21 +149,16 @@ const Chatshome = () => {
       <Customstatusbar />
       {/* Header texts and search icon */}
       <View style={styles.topHeader}>
-
-
         <View style={styles.chatTextContainer}>
           <Text style={styles.chatText}>Chats</Text>
           <View style={styles.amountOfChatsContainer}>
             <Text style={styles.amountOfChats}>{chats.length}</Text>
           </View>
         </View>
-
-        
         <View>
           <Chatsearchicon />
         </View>
       </View>
-
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginTop: 5, marginBottom: 37 }}>
           <View>
@@ -121,14 +171,9 @@ const Chatshome = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            <Eachprofile name="Tayo Aina" username="@ttayodom22" />
-            <Eachprofile name="Mabel Njoku" username="@sexystallionjj" />
-            <Eachprofile name="Olu Michael" username="@michael217" />
-            <Eachprofile name="Jaiye Williams" username="@williamsbb" />
-            <Eachprofile name="Enoma Samuel" username="@samuelenoma" />
-            <Eachprofile name="Stacy Ugbeda" username="@samuelenoma" />
-            <Eachprofile name="Mabel Njoku" username="@sexystallionjj" />
-
+            {
+              contactsResolved.map((contact)=><Eachprofile name="Tayo Aina" username="@ttayodom22" />)
+            }
             <View style={styles.seeMoreContainer}>
               <View style={styles.seeMoreBg}>
                 <View style={{ flexDirection: "row" }}>
@@ -137,17 +182,14 @@ const Chatshome = () => {
                   <View style={[styles.seeMoreDots, { marginRight: 0 }]} />
                 </View>
               </View>
-
               <Text style={styles.seeMoreText}>See More</Text>
             </View>
           </ScrollView>
         </View>
-
         <View>
           <View style={styles.chatHeader}>
             <Text style={styles.chatHeaderText}>Recent Chats</Text>
           </View>
-
           <ScrollView>
             {/* {chats.map(chat=>(<Chat
               name={chat.id}
@@ -155,42 +197,12 @@ const Chatshome = () => {
               message={chat.data().lastchat}
               online={true}
             />))} */}
-            <Chat
-              name="Stephene Adegok"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={true}
-            />
-            <Chat
-              name="Michael Olateju"
-              time="08:20am"
-              message="Hi, Trust you are doing good ..."
-              online={true}
-            />
-            <Chat
-              name="Mabel Njoku"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={false}
-            />
-            <Chat
-              name="Enoma Samuel"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={false}
-            />
-            <Chat
-              name="Olu Michael"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={true}
-            />
-            <Chat
-              name="Jaiye Williams"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={true}
-            />
+            {
+              chats.map((chat)=>{
+                let userid = chat.id1 !== authid? chat.id1 : chat.id2 
+                return (<Chat key={userid} userId= {userid} />)
+              })
+            }
           </ScrollView>
         </View>
       </ScrollView>
