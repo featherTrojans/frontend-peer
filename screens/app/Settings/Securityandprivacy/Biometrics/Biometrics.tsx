@@ -27,7 +27,7 @@ const Biometrics = () => {
   const [isEnabled, setIsEnabled] = useState(true);
   const { allowBiometrics ,setAllowBiometrics} = useContext(AuthContext)
   const toggleSwitch = () => {
-    setAllowBiometrics(!allowBiometrics);
+    setAllowBiometrics(!allowBiometrics); 
   } 
 
   return (
@@ -79,8 +79,8 @@ const Biometrics = () => {
 
           <Switch
             trackColor={{ false: COLORS.switchOff, true: COLORS.switchOn }}
-            thumbColor={COLORS.blue7}
-            ios_backgroundColor="#3e3e3e"
+            thumbColor={allowBiometrics ? COLORS.blue7 : COLORS.grey5}
+            ios_backgroundColor={allowBiometrics ? COLORS.switchOn : COLORS.switchOff}
             onValueChange={toggleSwitch}
             value={allowBiometrics}
           />
