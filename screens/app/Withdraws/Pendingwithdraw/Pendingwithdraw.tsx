@@ -21,6 +21,7 @@ import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
 import { SafeAreaView } from "react-native-safe-area-context";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 // import { styles } from './Pendingwithdraw.styles'
 // Bottombtn;
 
@@ -32,12 +33,25 @@ const Pendingwithdraw = ({navigation, route}) => {
   const {requestInfo} = route.params;
   const [toggleShow, setToggleShow] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
-  
+  const [userinfo, setUserinfo] = useState({})
+  console.log("requestInfo",requestInfo)
+  console.log("userinfo", userinfo)
   useEffect(()=>{
     // update both map, meeting point and  Agent point
     getLocation()
   }, []);
   
+  useEffect(()=>{
+    getAgentInfo()
+  },[requestInfo])
+  
+  const getAgentInfo = async ()=>{
+    try{
+      const response = await axiosCustom.get(`/user/${requestInfo.agentUsername}`)
+      setUserinfo(response.data.data)
+    }catch(err){
+    }
+  }
   
   const getLocation = async () => {
     try{
@@ -51,6 +65,10 @@ const Pendingwithdraw = ({navigation, route}) => {
     }finally{
       setLocationLoading(false)
     }
+  }
+
+  const toChatInApp = ()=>{
+    navigation.navigate("Chatsdm",{ userInfo: userinfo})
   }
 
   if(locationLoading){
@@ -114,7 +132,7 @@ const Pendingwithdraw = ({navigation, route}) => {
                   icon={<Chaticon />}
                   title="Chat"
                   details="Discuss conversations via chat"
-                  onpress={() => chatOnWhatsapp(requestInfo.phoneNumber,`Hi ${requestInfo.agent}, I made a cash request of ${requestInfo.amount} to you on Feather`)}
+                  onpress={toChatInApp}
                 />
                 <Iconwithdatas
                   icon={<Renegotiateicon />}

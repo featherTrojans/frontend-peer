@@ -46,5 +46,57 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: COLORS.white,
         paddingHorizontal: 15
-    },
+      },
+      chatTextContainer:{
+        position: "relative",
+      },
+      inputarea:{
+        paddingHorizontal: 20,
+      },
+      chatTextInput:{
+          padding: 10, 
+          backgroundColor:"#fff", 
+          borderRadius: 10, 
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.22,
+          shadowRadius: 2.22,
+          elevation: 3,
+          flexDirection:"row",
+          alignItems: "center"
+      },
+      textinput:{
+        flex: 1,
+        paddingHorizontal: 10 
+      },
+      chatToMe:{
+        flexDirection: "row-reverse",
+        marginBottom: 15
+      },
+      chatToMeColor:{
+        padding: 20,
+        backgroundColor: "#003AD6",
+        borderRadius: 20,
+        borderBottomRightRadius: 0,
+        marginBottom: 10,
+        color: "#fff",
+      },
+      chatToMeTime:{
+        textAlign:"right"
+      },
+      chatNotMe:{
+        flexDirection: "row",
+        marginBottom: 15
+      },
+      chatNotMeColor:{
+        padding: 20,
+        backgroundColor: "#F7F8FA",
+        borderRadius: 20,
+        borderBottomLeftRadius: 0,
+        marginBottom: 10,
+        color: "#000",
+      }
 })

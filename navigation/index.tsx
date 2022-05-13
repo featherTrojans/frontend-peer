@@ -435,7 +435,7 @@ const Tabs = () => {
         />
         <BottomTab.Screen
           name="Chats"
-          component={Chatsoon}
+          component={Chatsdm}
           options={{
             tabBarIcon: ({ focused, color, size }) => {
               return (

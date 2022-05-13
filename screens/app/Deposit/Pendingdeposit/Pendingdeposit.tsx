@@ -41,6 +41,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
     const [loading, setLoading] = useState(false);
     const [locationLoading, setLocationLoading] = useState(false);
 
+    console.log("requestInfo",requestInfo)
     useEffect(()=>{
       // update both map, meeting point and  Agent point
       getLocation()
