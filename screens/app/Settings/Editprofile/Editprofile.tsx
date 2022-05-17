@@ -101,7 +101,7 @@ const Editinput = ({ label, value, name, formikprops,...rest }: EditinputProps) 
 const Basicsettings = () => {
   const toast = useToast();
   const navigation = useNavigation();
-  const { authdata, setAuthData } = useContext(AuthContext);
+  const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
   const [usernamename, setusernamename] = useState(
     authdata?.userDetails?.username
@@ -149,10 +149,11 @@ const Basicsettings = () => {
 
               // set new token
               setAuthorizationToken(response?.data?.data?.token);
-              // send success toast message
-
+              //Disable Biometrics
+              setAllowBiometrics(false)
               navigation.navigate("Root");
             } catch (err) {
+              // send success toast message
               showerror(toast, err);
             }
           }}

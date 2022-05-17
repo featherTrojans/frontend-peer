@@ -23,7 +23,7 @@ const { Backarrow } = icons;
 
 const Changepassword = () => {
   const toast = useToast();
-  const { authdata } = useContext(AuthContext);
+  const { authdata, setAllowBiometrics } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [oldpassword, setOldpassword] = useState("");
   const [newpassword, setNewpassword] = useState("");
@@ -49,6 +49,8 @@ const Changepassword = () => {
         oldpassword: oldpassword,
         newpassword: newpassword,
       });
+      setAllowBiometrics(false)
+
       navigation.navigate("Root");
     } catch (err) {
       showerror(toast, err);
@@ -58,7 +60,7 @@ const Changepassword = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
         {loading && <Loader />}
         <View style={styles.mainHeaderContainer}>
@@ -82,13 +84,14 @@ const Changepassword = () => {
           <View />
         </View>
 
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView >
           <View
             style={{
               flex: 1,
               paddingHorizontal: 22,
               marginTop: 20,
               marginBottom: 42,
+              // backgroundColor: 'red'
             }}
           >
             <Text style={styles.changePasswordText}>Change Password</Text>
@@ -114,7 +117,8 @@ const Changepassword = () => {
               />
             </View>
           </View>
-          <Bottombtn title="Change Password" onpress={handleSubmit} />
+          
+            <Bottombtn title="Change Password" onpress={handleSubmit} />
         </KeyboardAwareScrollView>
       </ScrollView>
     </SafeAreaView>

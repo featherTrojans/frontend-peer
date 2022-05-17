@@ -24,7 +24,17 @@ export type RootStackParamList = {
   Setup: undefined;
   Login: undefined;
   Signup: undefined;
+  Forgetpassword: undefined;
+  Forgetpasswordotp: undefined;
+  Setnewpassword: undefined;
+  SecurepinAgain: undefined;
+  Welcometochange: undefined;
   Welcome: undefined;
+
+
+
+
+
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
 
   //Transactions
@@ -32,6 +42,15 @@ export type RootStackParamList = {
   Newtransactions: undefined;
   Transactiondetails: {price: number};
   Transactiondispute: undefined;
+
+
+//Settings
+Editprofile: undefined;
+Securityprivacy: undefined;
+Changepassword: undefined;
+Changepin: undefined;
+Biometrics: undefined;
+
 
   //Withdraw
   Requestnew: undefined;
@@ -44,10 +63,14 @@ export type RootStackParamList = {
   Requestsummary: undefined;
   Cancelrequest: undefined;
   Summary: undefined;
+  Negotiate: undefined;
+  WithdrawPin: undefined;
+  Transactionsrating: undefined;
 
   //Wallet funding
   Addcash: undefined;
   Choosewallet: undefined;
+  WalletPin: undefined;
 
   //Transfer funds
   Transfercash: undefined;
@@ -55,13 +78,27 @@ export type RootStackParamList = {
   Getdetails: undefined;
   Bankaccount: undefined;
   Transferpin: undefined;
+  TransferpinBank: undefined;
 
   //Notification
   Notifications: undefined;
 
+
+  //Paybills
+  Paybills: undefined;
+  Airtimeamount: undefined;
+  Airtimedetails: undefined;
+  Airtimepurchasepin: undefined;
+  Electricityamount: undefined;
+  Electricitydetails: undefined;
+
+
+
   //Deposit
   Deposit: undefined;
   Depositupdate: undefined;
+  Depositinput: undefined;
+  Updatedeposit: undefined;
   Pendingdeposit: undefined;
   Accepteddeposit: undefined;
   Depositpin: undefined;
@@ -71,6 +108,8 @@ export type RootStackParamList = {
   Chatshome: undefined;
   Chatsdm: undefined;
   Usersearch: undefined;
+  CustomWebView: undefined;
+  CustomWebViewSupport: undefined
 };
 
 export type RootTransactionScreen = {
