@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
         paddingTop: 17,
         paddingBottom: 12,
         paddingHorizontal: 22,
+        marginTop: 30
       },
       headerDetailsContainer: { 
           flexDirection: "row", 
@@ -66,7 +67,8 @@ export const styles = StyleSheet.create({
           shadowRadius: 2.22,
           elevation: 3,
           flexDirection:"row",
-          alignItems: "center"
+          alignItems: "center",
+          marginBottom: 20
       },
       textinput:{
         flex: 1,

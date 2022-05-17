@@ -62,7 +62,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
         }
     }
   
-  
+    const toChatInApp = ()=>{
+      navigation.navigate("Chatsdm",{ userInfo: {...requestInfo.user,userUid:requestInfo.userUid}})
+    }
+
     const handleAcceptRequest = async () =>{
       setLoading(true)
       try{
@@ -168,7 +171,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
                     icon={<Chaticon />}
                     title="Chat"
                     details="Discuss conversations via chat"
-                    onpress={() => chatOnWhatsapp(requestInfo.user.phoneNumber,`Hi ${requestInfo.user.fullName}, I saw you made a cash request of ${requestInfo.amount} on Feather`)}
+                    // onpress={() => chatOnWhatsapp(requestInfo.user.phoneNumber,`Hi ${requestInfo.user.fullName}, I saw you made a cash request of ${requestInfo.amount} on Feather`)}
+                    onpress={toChatInApp}
                   />
                   <Iconwithdatas
                     icon={<Renegotiateicon />}

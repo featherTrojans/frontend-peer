@@ -1,88 +1,195 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState , useContext} from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
-import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData, query, where, onSnapshot } from "firebase/firestore";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthContext } from "../../../../context/AuthContext";
+import Chat from "./Chat";
+import useContact from "../../../../utils/customContact";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 
 const { Chatsearchicon } = icons;
+
+const dataforcontacts = [
+  {
+    phoneNumbers:[
+      {
+        number: "081 6794 3849"
+      },
+      {
+        number: "08167943849"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "07088780964"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "09037768252"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "09029428324"
+      }
+    ]
+  },
+  {
+    phoneNumbers:[
+      {
+        number: "07089179087"
+      }
+    ]
+  }
+]
 
 const Eachprofile = ({
   name,
   username,
+  userInfo
 }: {
   name: string;
   username: string;
+  userInfo: any
 }) => {
+  const navigate = useNavigation()
+
   return (
-    <View style={styles.eachprofileContainer}>
+    <TouchableOpacity style={styles.eachprofileContainer}
+    onPress={()=>navigate.navigate("Chatsdm",{userInfo})}>
       <View style={styles.profileAvatar}></View>
 
       <View style={styles.nameAndUsername}>
         <Text style={styles.eachProfileName}>{name}</Text>
         <Text>{username}</Text>
       </View>
-    </View>
-  );
-};
-
-const Chat = ({
-  name,
-  time,
-  message,
-  online,
-  image,
-}: {
-  name: string;
-  time: string;
-  message: string;
-  online: boolean;
-  image?: ReactElement;
-}) => {
-  const navigate = useNavigation()
-  return (
-    // <TouchableOpacity onPress={()=>navigate.navigate("Chatsdm")} style={styles.chatContainer}>
-    <TouchableOpacity style={styles.chatContainer}>
-      <View style={styles.chatAvatar}>
-        {online && <View style={styles.chatStatusDot} />}
-        {/* Image */}
-      </View>
-      <View style={styles.chatInfo}>
-        <View style={styles.chatNameAndTime}>
-          <Text style={styles.chatName}>{name}</Text>
-          {/* Name */}
-          {/* time */}
-          <Text style={styles.chatTime}>{time}</Text>
-        </View>
-        <View>
-          {/* hint message */}
-          <Text style={styles.chatHintMessage}>{message}</Text>
-        </View>
-      </View>
     </TouchableOpacity>
   );
 };
 
+
 const Chatshome = () => {
+  const {authdata} = useContext(AuthContext);
+  const {contacts} = useContact()
   const [chats, setChats] = useState<any>([])
+  const [chattwos, setChattwos] = useState<any>([])
+  const [contactsResolved, setContactResolved] = useState([])
   // find the detail of the user name by checking the reference
+  const authId = authdata?.userDetails?.userUid
+
+  // console.log(contacts)
+
+  // useEffect(()=>{
+  //   getAllChats()
+  // },[])
+
+  // snapshot1
   useEffect(()=>{
-    getAllChats()
+    const chatsRef = collection(db,"chatstwo")
+      const chatQuery1 = query(chatsRef, where("id1","==",authId))
+    const unsub = onSnapshot(chatQuery1 , (docs) => {
+      const newdata = []
+      docs.forEach((change) => { 
+            newdata.push(change.data())
+      });
+      setChattwos(newdata)
+    });
+
+    return ()=>{
+      unsub()
+    }
   },[])
+
+  // snapshot2
+  useEffect(()=>{
+    const chatsRef = collection(db,"chatstwo")
+    const chatQuery1 = query(chatsRef, where("id2","==",authId))
+    const unsub = onSnapshot(chatQuery1 , (docs) => {
+      const newdata = []
+      docs.forEach((change) => { 
+            newdata.push(change.data())
+      });
+      setChats(newdata)
+    });
+
+    return ()=>{
+      unsub()
+    }
+  },[])
+  
+  // useEffect(()=>{
+  //   const pendingrequests =  contacts.map((contact)=>{
+  //     const numbersArr = []
+  //     contact?.phoneNumbers?.forEach((phone)=>{
+  //       const number =  phone.number.replace(/\s+/g, '')
+  //       if(!numbersArr.includes(number)){
+  //         numbersArr.push(number)
+  //       }
+  //     })
+  //     for(let num of numbersArr){
+  //       console.log(num)
+  //       return axiosCustom.get(`/user/${num}`)
+  //     }
+  //   })
+  //   getAllContactInFeather(pendingrequests)
+  // },[contacts])
+
+
+  const getAllContactInFeather = async (pendingrequests)=>{
+    Promise.allSettled = Promise.allSettled || ((promises) => Promise.all(
+      promises.map(p => p
+          .then(value => ({
+              status: "fulfilled",
+              value
+          }))
+          .catch(reason => ({
+              status: "rejected",
+              reason
+          }))
+      )
+  ));
+    const resolvedContacts =  await Promise.allSettled(pendingrequests)
+    const feathercontact =  []
+    resolvedContacts.forEach((cont)=>{
+      if(cont.status === "fulfilled"){
+        feathercontact.push(cont?.value?.data?.data)
+      }
+    })
+    setContactResolved(feathercontact)
+  }
 
   const getAllChats = async ()=>{
     try{
-      const chatsRef = collection(db,"chats","dudeid","fellowchats")
-      // const querysnaps = await getDoc(chatsRef)
+      // auery first where 
+      const chatsRef = collection(db,"chatstwo")
+      const chatQuery1 = query(chatsRef, where("id1","==",authId))
+      const chatQuery2 = query(chatsRef, where("id2","==",authId))
       // console.log(querysnaps.length)
-      const chatsdata = await getDocs(chatsRef)
-      const chatsarr = chatsdata.docs;
-      setChats(chatsarr)
+      const [chatdata1, chatdata2 ] = await Promise.all([getDocs(chatQuery1),getDocs(chatQuery2)])
+      // const chatdata2 = await getDocs(chatQuery1)
+      
+      const allchats = []
+      chatdata2.forEach((document)=>{
+        allchats.push(document.data())
+      })
+      chatdata1.forEach((document)=>{
+        allchats.push(document.data())      
+      })
+      setChats(allchats)
       // console.log(chatsdata.docs)
     }catch(err){
 
@@ -99,7 +206,7 @@ const Chatshome = () => {
         <View style={styles.chatTextContainer}>
           <Text style={styles.chatText}>Chats</Text>
           <View style={styles.amountOfChatsContainer}>
-            <Text style={styles.amountOfChats}>{chats.length}</Text>
+            <Text style={styles.amountOfChats}>{chats.length + chattwos.length}</Text>
           </View>
         </View>
 
@@ -121,13 +228,9 @@ const Chatshome = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            <Eachprofile name="Tayo Aina" username="@ttayodom22" />
-            <Eachprofile name="Mabel Njoku" username="@sexystallionjj" />
-            <Eachprofile name="Olu Michael" username="@michael217" />
-            <Eachprofile name="Jaiye Williams" username="@williamsbb" />
-            <Eachprofile name="Enoma Samuel" username="@samuelenoma" />
-            <Eachprofile name="Stacy Ugbeda" username="@samuelenoma" />
-            <Eachprofile name="Mabel Njoku" username="@sexystallionjj" />
+            {contactsResolved.map((contact)=>{
+              return <Eachprofile userInfo={contact} name={contact.fullName} username={`@${contact.username}`} />
+            })}
 
             <View style={styles.seeMoreContainer}>
               <View style={styles.seeMoreBg}>
@@ -155,42 +258,18 @@ const Chatshome = () => {
               message={chat.data().lastchat}
               online={true}
             />))} */}
-            <Chat
-              name="Stephene Adegok"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={true}
-            />
-            <Chat
-              name="Michael Olateju"
-              time="08:20am"
-              message="Hi, Trust you are doing good ..."
-              online={true}
-            />
-            <Chat
-              name="Mabel Njoku"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={false}
-            />
-            <Chat
-              name="Enoma Samuel"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={false}
-            />
-            <Chat
-              name="Olu Michael"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={true}
-            />
-            <Chat
-              name="Jaiye Williams"
-              time="09:34am"
-              message="Hey Oga mii, trust all is well, I called you ..."
-              online={true}
-            />
+           {
+              chats.map((chat)=>{
+                let userid = chat.id1 !== authId? chat.id1 : chat.id2 
+                return (<Chat key={userid} userId= {userid} chatinfo={chat}/>)
+              })
+            }
+            {
+              chattwos.map((chat)=>{
+                let userid = chat.id1 !== authId? chat.id1 : chat.id2 
+                return (<Chat key={userid} userId= {userid} chatinfo={chat}/>)
+              })
+            }
           </ScrollView>
         </View>
       </ScrollView>

@@ -105,6 +105,10 @@ const Accepteddeposit = ({ navigation, route }) => {
     }
   };
 
+  const toChatInApp = ()=>{
+    navigation.navigate("Chatsdm",{ userInfo: {...requestInfo.user,userUid:requestInfo.userUid}})
+  }
+
   const handleRedirect = () => {
     navigation.push("DepositSummary", { requestInfo });
   };
@@ -184,7 +188,8 @@ const Accepteddeposit = ({ navigation, route }) => {
                 icon={<Chaticon />}
                 title="Chat"
                 details="Discuss conversations via chat"
-                onpress={() => chatOnWhatsapp(requestInfo.user.phoneNumber,`Hi ${requestInfo.user.fullName}, I saw you made a cash request of ${requestInfo.amount} on Feather`)}
+                // onpress={() => chatOnWhatsapp(requestInfo.user.phoneNumber,`Hi ${requestInfo.user.fullName}, I saw you made a cash request of ${requestInfo.amount} on Feather`)}
+                onpress={toChatInApp}
               />
 
               <Iconwithdatas
