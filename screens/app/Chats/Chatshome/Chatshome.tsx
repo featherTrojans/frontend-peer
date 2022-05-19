@@ -51,7 +51,7 @@ const dataforcontacts = [
   {
     phoneNumbers:[
       {
-        number: "07089179087"
+        number: "08167569588"
       }
     ]
   }
@@ -84,7 +84,7 @@ const Eachprofile = ({
 
 const Chatshome = () => {
   const {authdata} = useContext(AuthContext);
-  const {contacts} = useContact()
+  // const {contacts} = useContact()
   const [chats, setChats] = useState<any>([])
   const [chattwos, setChattwos] = useState<any>([])
   const [contactsResolved, setContactResolved] = useState([])
@@ -93,9 +93,9 @@ const Chatshome = () => {
 
   // console.log(contacts)
 
-  // useEffect(()=>{
-  //   getAllChats()
-  // },[])
+  useEffect(()=>{
+    getAllChats()
+  },[])
 
   // snapshot1
   useEffect(()=>{
@@ -131,22 +131,22 @@ const Chatshome = () => {
     }
   },[])
   
-  // useEffect(()=>{
-  //   const pendingrequests =  contacts.map((contact)=>{
-  //     const numbersArr = []
-  //     contact?.phoneNumbers?.forEach((phone)=>{
-  //       const number =  phone.number.replace(/\s+/g, '')
-  //       if(!numbersArr.includes(number)){
-  //         numbersArr.push(number)
-  //       }
-  //     })
-  //     for(let num of numbersArr){
-  //       console.log(num)
-  //       return axiosCustom.get(`/user/${num}`)
-  //     }
-  //   })
-  //   getAllContactInFeather(pendingrequests)
-  // },[contacts])
+  useEffect(()=>{
+    const pendingrequests =  dataforcontacts.map((contact)=>{
+      const numbersArr = []
+      contact?.phoneNumbers?.forEach((phone)=>{
+        const number =  phone.number.replace(/\s+/g, '')
+        if(!numbersArr.includes(number)){
+          numbersArr.push(number)
+        }
+      })
+      for(let num of numbersArr){
+        console.log(num)
+        return axiosCustom.get(`/user/${num}`)
+      }
+    })
+    getAllContactInFeather(pendingrequests)
+  },[])
 
 
   const getAllContactInFeather = async (pendingrequests)=>{
