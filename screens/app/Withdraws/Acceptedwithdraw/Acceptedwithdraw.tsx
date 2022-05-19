@@ -135,6 +135,9 @@ const Acceptedwithdraw = ({ navigation, route }) => {
     }
   };
 
+  const toChatInApp = ()=>{
+    navigation.navigate("Chatsdm",{ userInfo: userinfo})
+  }
 
   
 
@@ -276,12 +279,6 @@ const Acceptedwithdraw = ({ navigation, route }) => {
                 title="Chat"
                 details="Discuss conversations via chat"
                 onpress={toChatInApp}
-                // onpress={() =>
-                //   chatOnWhatsapp(
-                //     userinfo.phoneNumber,
-                //     `Hi ${requestInfo?.agent}, I made a cash request of ${requestInfo?.amount} to you on Feather`
-                //   )
-                // }
               />
               <Iconwithdatas
                 icon={<Cancelicony />}

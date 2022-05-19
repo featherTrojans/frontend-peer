@@ -119,6 +119,7 @@ import Ratingsstar from "../assets/icons/Ratingsstar";
 import Userdefaultsmaller from "../assets/icons/Userdefaultsmaller";
 import Sendingandreceivearrows from "../assets/icons/Sendingandreceivearrows";
 import Bonusiconlarge from "../assets/icons/Bonusiconlarge";
+import SendIcon from "../assets/icons/SendIcon";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -147,6 +148,7 @@ export default {
   Cancelicon,
   At,
   Smile,
+  SendIcon,
 
   Tabchats,
   TabHome,

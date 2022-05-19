@@ -1,39 +1,20 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { ReactElement, useEffect, useState, useContext } from "react";
+import React, { ReactElement, useEffect, useState , useContext} from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
-import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData, query, where } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData, query, where, onSnapshot } from "firebase/firestore";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthContext } from "../../../../context/AuthContext";
+import Chat from "./Chat";
 import useContact from "../../../../utils/customContact";
-import Chat from "./Chats";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 
 const { Chatsearchicon } = icons;
-
-const Eachprofile = ({
-  name,
-  username,
-}: {
-  name: string;
-  username: string;
-}) => {
-  return (
-    <View style={styles.eachprofileContainer}>
-      <View style={styles.profileAvatar}></View>
-
-      <View style={styles.nameAndUsername}>
-        <Text style={styles.eachProfileName}>{name}</Text>
-        <Text>{username}</Text>
-      </View>
-    </View>
-  );
-};
-
 
 const dataforcontacts = [
   {
@@ -76,33 +57,97 @@ const dataforcontacts = [
   }
 ]
 
+const Eachprofile = ({
+  name,
+  username,
+  userInfo
+}: {
+  name: string;
+  username: string;
+  userInfo: any
+}) => {
+  const navigate = useNavigation()
+
+  return (
+    <TouchableOpacity style={styles.eachprofileContainer}
+    onPress={()=>navigate.navigate("Chatsdm",{userInfo})}>
+      <View style={styles.profileAvatar}></View>
+
+      <View style={styles.nameAndUsername}>
+        <Text style={styles.eachProfileName}>{name}</Text>
+        <Text>{username}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+
 const Chatshome = () => {
-  const [chats, setChats] = useState<any>([])
-  // const {authdata} = useContext(AuthContext);
-  const [contactsResolved, setContactResolved] = useState([])
+  const {authdata} = useContext(AuthContext);
   const {contacts} = useContact()
-  const authid = "specc"
+  const [chats, setChats] = useState<any>([])
+  const [chattwos, setChattwos] = useState<any>([])
+  const [contactsResolved, setContactResolved] = useState([])
+  // find the detail of the user name by checking the reference
+  const authId = authdata?.userDetails?.userUid
 
-  useEffect(()=>{
-    const pendingrequests =  dataforcontacts.map((contact)=>{
-      const numbersArr = []
-      contact?.phoneNumbers?.forEach((phone)=>{
-        const number =  phone.number.replace(/\s+/g, '')
-        if(!numbersArr.includes(number)){
-          numbersArr.push(number)
-        }
-      })
-      for(let num of numbersArr){
-        console.log(num)
-        return axiosCustom.get(`/user/${num}`,{headers:{token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjUxMDgwNTc2LCJleHAiOjE2NTEwODc3NzZ9.ZpcZ9HNo1y-AyBsKNUUlJLYF09ovN42-qen9JfXMTk4"}})
-      }
-    })
-    getAllContactInFeather(pendingrequests)
-  },[contacts])
+  // console.log(contacts)
 
+  // useEffect(()=>{
+  //   getAllChats()
+  // },[])
+
+  // snapshot1
   useEffect(()=>{
-    getAllChats()
+    const chatsRef = collection(db,"chatstwo")
+      const chatQuery1 = query(chatsRef, where("id1","==",authId))
+    const unsub = onSnapshot(chatQuery1 , (docs) => {
+      const newdata = []
+      docs.forEach((change) => { 
+            newdata.push(change.data())
+      });
+      setChattwos(newdata)
+    });
+
+    return ()=>{
+      unsub()
+    }
   },[])
+
+  // snapshot2
+  useEffect(()=>{
+    const chatsRef = collection(db,"chatstwo")
+    const chatQuery1 = query(chatsRef, where("id2","==",authId))
+    const unsub = onSnapshot(chatQuery1 , (docs) => {
+      const newdata = []
+      docs.forEach((change) => { 
+            newdata.push(change.data())
+      });
+      setChats(newdata)
+    });
+
+    return ()=>{
+      unsub()
+    }
+  },[])
+  
+  // useEffect(()=>{
+  //   const pendingrequests =  contacts.map((contact)=>{
+  //     const numbersArr = []
+  //     contact?.phoneNumbers?.forEach((phone)=>{
+  //       const number =  phone.number.replace(/\s+/g, '')
+  //       if(!numbersArr.includes(number)){
+  //         numbersArr.push(number)
+  //       }
+  //     })
+  //     for(let num of numbersArr){
+  //       console.log(num)
+  //       return axiosCustom.get(`/user/${num}`)
+  //     }
+  //   })
+  //   getAllContactInFeather(pendingrequests)
+  // },[contacts])
+
 
   const getAllContactInFeather = async (pendingrequests)=>{
     Promise.allSettled = Promise.allSettled || ((promises) => Promise.all(
@@ -118,14 +163,21 @@ const Chatshome = () => {
       )
   ));
     const resolvedContacts =  await Promise.allSettled(pendingrequests)
-    setContactResolved(resolvedContacts.filter(stat=> stat.status === "fulfilled"))
+    const feathercontact =  []
+    resolvedContacts.forEach((cont)=>{
+      if(cont.status === "fulfilled"){
+        feathercontact.push(cont?.value?.data?.data)
+      }
+    })
+    setContactResolved(feathercontact)
   }
+
   const getAllChats = async ()=>{
     try{
       // auery first where 
       const chatsRef = collection(db,"chatstwo")
-      const chatQuery1 = query(chatsRef, where("id1","==",authid))
-      const chatQuery2 = query(chatsRef, where("id2","==",authid))
+      const chatQuery1 = query(chatsRef, where("id1","==",authId))
+      const chatQuery2 = query(chatsRef, where("id2","==",authId))
       // console.log(querysnaps.length)
       const [chatdata1, chatdata2 ] = await Promise.all([getDocs(chatQuery1),getDocs(chatQuery2)])
       // const chatdata2 = await getDocs(chatQuery1)
@@ -152,7 +204,7 @@ const Chatshome = () => {
         <View style={styles.chatTextContainer}>
           <Text style={styles.chatText}>Chats</Text>
           <View style={styles.amountOfChatsContainer}>
-            <Text style={styles.amountOfChats}>{chats.length}</Text>
+            <Text style={styles.amountOfChats}>{chats.length + chattwos.length}</Text>
           </View>
         </View>
         <View>
@@ -171,9 +223,10 @@ const Chatshome = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            {
-              contactsResolved.map((contact)=><Eachprofile name="Tayo Aina" username="@ttayodom22" />)
-            }
+            {contactsResolved.map((contact)=>{
+              return <Eachprofile userInfo={contact} name={contact.fullName} username={`@${contact.username}`} />
+            })}
+
             <View style={styles.seeMoreContainer}>
               <View style={styles.seeMoreBg}>
                 <View style={{ flexDirection: "row" }}>
@@ -197,10 +250,16 @@ const Chatshome = () => {
               message={chat.data().lastchat}
               online={true}
             />))} */}
-            {
+           {
               chats.map((chat)=>{
-                let userid = chat.id1 !== authid? chat.id1 : chat.id2 
-                return (<Chat key={userid} userId= {userid} />)
+                let userid = chat.id1 !== authId? chat.id1 : chat.id2 
+                return (<Chat key={userid} userId= {userid} chatinfo={chat}/>)
+              })
+            }
+            {
+              chattwos.map((chat)=>{
+                let userid = chat.id1 !== authId? chat.id1 : chat.id2 
+                return (<Chat key={userid} userId= {userid} chatinfo={chat}/>)
               })
             }
           </ScrollView>

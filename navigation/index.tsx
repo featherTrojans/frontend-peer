@@ -432,7 +432,7 @@ const Tabs = () => {
         />
         <BottomTab.Screen
           name="Chats"
-          component={Chatsoon}
+          component={Chatshome}
           options={{
             tabBarIcon: ({ focused, color, size }) => {
               return (
@@ -446,6 +446,7 @@ const Tabs = () => {
                 </View>
               );
             },
+            // unmountOnBlur: true,
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {

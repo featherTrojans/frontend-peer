@@ -117,7 +117,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 9,
     alignItems: "center",
-    marginBottom: 37,
+    marginBottom: 37
   },
   chatAvatar: {
     width: 56,
@@ -155,6 +155,7 @@ export const styles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.regular,
     color: COLORS.grey2,
+    marginLeft: 10
   },
   chatHintMessage: {
     ...fontsize.small,
