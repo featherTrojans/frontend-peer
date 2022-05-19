@@ -54,6 +54,7 @@ export const COLORS = {
   lineColor3: `rgba(112, 112, 112, .5)`,
   lineColor4: `rgba(112, 112, 112, .6)`,
   switchOff:  `rgba(0, 23, 87, .1)`,
+  thumbOff:   `rgba(0, 58, 214, 1)`,
   switchOn:  `rgba(0, 58, 214, .4)`,
 
   

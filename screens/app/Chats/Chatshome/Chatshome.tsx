@@ -201,21 +201,16 @@ const Chatshome = () => {
       <Customstatusbar />
       {/* Header texts and search icon */}
       <View style={styles.topHeader}>
-
-
         <View style={styles.chatTextContainer}>
           <Text style={styles.chatText}>Chats</Text>
           <View style={styles.amountOfChatsContainer}>
             <Text style={styles.amountOfChats}>{chats.length + chattwos.length}</Text>
           </View>
         </View>
-
-        
         <View>
           <Chatsearchicon />
         </View>
       </View>
-
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginTop: 5, marginBottom: 37 }}>
           <View>
@@ -240,17 +235,14 @@ const Chatshome = () => {
                   <View style={[styles.seeMoreDots, { marginRight: 0 }]} />
                 </View>
               </View>
-
               <Text style={styles.seeMoreText}>See More</Text>
             </View>
           </ScrollView>
         </View>
-
         <View>
           <View style={styles.chatHeader}>
             <Text style={styles.chatHeaderText}>Recent Chats</Text>
           </View>
-
           <ScrollView>
             {/* {chats.map(chat=>(<Chat
               name={chat.id}

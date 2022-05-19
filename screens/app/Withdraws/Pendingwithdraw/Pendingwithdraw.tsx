@@ -19,7 +19,7 @@ import Map from "../../../shared/map/Map";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import { LocationContext } from "../../../../context/LocationContext";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
+// import { chatOnWhatsapp } from "../../../../utils/userDeviceFunctions";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 // import { styles } from './Pendingwithdraw.styles'
@@ -53,6 +53,8 @@ const Pendingwithdraw = ({navigation, route}) => {
     }
   }
   
+
+
   const getLocation = async () => {
     try{
       setLocationLoading(true)

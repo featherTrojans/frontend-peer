@@ -5,8 +5,12 @@ import { COLORS, FONTS, fontsize, icons, images } from "../../../../constants";
 import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, setDoc, query, orderBy, updateDoc  } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { AuthContext } from "../../../../context/AuthContext";
-// import { StatusBar } from 'expo-status-bar'
+// import {  TextInput } from "react-native-gesture-handler";
 import moment from "moment";
+// import EmojiBoard from 'react-native-emoji-board'
+import { useNavigation } from "@react-navigation/native";
+// import { StatusBar } from 'expo-status-bar'
+// import moment from "moment";
 import { InitialsBg } from "../../../../components";
 
 
@@ -52,6 +56,7 @@ const Chatsdm = ({route}) => {
       let document;
       let id1id2 = `${authId}-${userInfo.userUid}`
       document = await getDoc(doc(db,"chatstwo",id1id2))
+      
       if(document.exists()){
         setchatid(id1id2)
         return
@@ -73,6 +78,16 @@ const Chatsdm = ({route}) => {
     }
   }
 
+  const saveMessagesInStore = (querySnapshot)=>{
+    const allmessages = []
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      allmessages.push(doc.data())
+    });
+    setMessages(allmessages)
+  }
+
+
   const sendFireBaseMessage = async ()=>{
     console.log("hi theerrerere mesage sending ")
     let message = chattext;
@@ -93,12 +108,15 @@ const Chatsdm = ({route}) => {
       console.log(err)
     }
   }
+
   return (
     <View style={styles.container}>
       {/* header section */}
       <StatusBar />      
       <View style={styles.chatHeader}>
-        <Backarrow />
+        <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <Backarrow />
+        </TouchableOpacity>
         <View style={styles.headerDetailsContainer}>
           {/* Image */}
           {/* <Image source={Chatimage} resizeMode="cover" /> */}
@@ -118,6 +136,7 @@ const Chatsdm = ({route}) => {
         ref={scrollViewRef}
         onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
       {/* Messages area */}
+      
 
       {messages.map(mes=>{
           if(mes.sender === userInfo.userUid){

@@ -290,8 +290,9 @@ const Home = ({ navigation }: { navigation: any }) => {
           {histories.length === 0 ? (
             <EmptyComponent />
           ) : (
-            histories.map((history) => (
+            histories.map((history, index) => (
               <Transactionhistory
+                index={index}
                 date={history.time}
                 datas={history.data}
                 key={history.time}

@@ -8,6 +8,7 @@ import { useToast } from "react-native-toast-notifications"
 
 
 
+
 export const sendMessage = async (phoneNumber: string | string[], defaultMessage: string ) => {
     // I will be getting the number from the endpoint
     const status = await SMS.sendSMSAsync(phoneNumber, defaultMessage)
@@ -33,4 +34,8 @@ export const makePhoneCall = (phoneNumber: string) => {
 
 export const chatOnWhatsapp = (phonenumber:string, text = "Hello") => {
     Linking.openURL(`whatsapp://send?text=${text}&phone=234${phonenumber}`)
+}
+
+export const chatInApp = (userId:string,userInfo:{[pro:string]:any}, navigation)=>{
+    return navigation.navigate("Chatsdm",{userId, userInfo})
 }

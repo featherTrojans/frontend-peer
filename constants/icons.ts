@@ -114,6 +114,7 @@ import Viewcashrequesticon from "../assets/icons/Viewcashrequesticon";
 import Featherdefault from "../assets/icons/Featherdefault";
 import Userdefaultmedium from "../assets/icons/Userdefaultmedium";
 import Feathertextlogo from "../assets/icons/Feathertextlogo";
+import SmileEmoji from "../assets/icons/SmileEmoji";
 import Ratingsstar from "../assets/icons/Ratingsstar";
 import Userdefaultsmaller from "../assets/icons/Userdefaultsmaller";
 import Sendingandreceivearrows from "../assets/icons/Sendingandreceivearrows";
@@ -264,7 +265,7 @@ export default {
   Feathertextlogo,
   Markedicon,
   Bonusicon,
-
+  SmileEmoji,
   //Animated icons
 
   Cryinganimate,

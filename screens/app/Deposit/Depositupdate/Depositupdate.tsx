@@ -59,7 +59,7 @@ const StatusUpdate = ({ status, navigation }: any) => {
   return (
     <>
       <Customstatusbar />
-      <ScrollView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <View style={[styles.contentContainer]}>
           <View style={styles.topSection}>
             {/* Icons */}
@@ -132,8 +132,6 @@ const StatusUpdate = ({ status, navigation }: any) => {
           </View>
         </View>
 
-
-
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Deposit",{
@@ -156,19 +154,18 @@ const StatusUpdate = ({ status, navigation }: any) => {
 
           <Viewcashrequesticon />
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     </>
   );
 };
 
-const Depositupdate = ({ navigation, route }) => {
+const Depositupdate = ({ navigation, route}) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [coords, setCoords] = useState<any>({});
-
+  
   useEffect(() => {
     getDepositStatus();
-    console.log("should fetch again")
   },[route.params?.from]);
   useEffect(() => {
     updateDepositLocation();
@@ -247,7 +244,7 @@ const Depositupdate = ({ navigation, route }) => {
 
                 <Bottombtn
                   title="Create New Status"
-                  onpress={() => 
+                  onpress={() =>
                     navigation.navigate("Depositinput", {
                       type: "create",
                       reference: null,
