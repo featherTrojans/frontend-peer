@@ -132,7 +132,7 @@ const Chatsdm = ({navigation,route}) => {
       backdropColor={COLORS.black}
       backdropOpacity={0.2}
       >
-        <View style={{  backgroundColor: COLORS.white,paddingTop: 40, borderTopRightRadius: 30,borderTopLeftRadius: 30, paddingHorizontal: 15,}}>
+        <View style={styles.viewWrapper}>
           {children}
         </View>
       </Modal>
@@ -151,24 +151,24 @@ const Chatsdm = ({navigation,route}) => {
         {/* Send cash or keep typing modal */}
         <Chatsmodal showState={sendcashModal}>
           
-          <Text style={{textAlign: "center", paddingHorizontal: 30, marginBottom: 40, ...fontsize.small, ...FONTS.medium, lineHeight: 24, color: COLORS.black2}}>Hey Padi, want to send cash to Stephanie Okereke or is it just a text language?</Text>
+          <Text style={styles.sendCashHeader}>Hey Padi, want to send cash to Stephanie Okereke or is it just a text language?</Text>
 
-              <View style={{flexDirection: "row", justifyContent: "space-between",marginBottom: getBottomSpace()+20}}>
+              <View style={styles.sendCashWrapper}>
 
                   {/* First One */}
-                  <View style={{paddingHorizontal: 15, paddingVertical: 12, flexDirection: "row",flex: 0.48, backgroundColor: COLORS.blue5, alignItems: "center", borderRadius: 6}}>
-                    <View style={{width: 31, height: 31, borderRadius: 31/2, backgroundColor: COLORS.white}}>
+                  <View style={styles.sendCashButton}>
+                    <View style={styles.buttonIconBg}>
                       {/* icons */}
                     </View>
-                    <Text style={{marginLeft: 10, color: COLORS.white, ...fontsize.smallest, ...FONTS.medium, lineHeight: 18}}>Send Cash?</Text>
+                    <Text style={styles.buttonText}>Send Cash?</Text>
                   </View>
 
                   {/* Second Button */}
-                  <View style={{paddingHorizontal: 15, paddingVertical: 12,flex: 0.48, flexDirection: "row", backgroundColor: COLORS.purple, alignItems: "center", borderRadius: 6}}>
-                    <View style={{width: 31, height: 31, borderRadius: 31/2, backgroundColor: COLORS.white}}>
+                  <View style={styles.sendCashButton}>
+                    <View style={styles.buttonIconBg}>
                       {/* icons */}
                     </View>
-                    <Text style={{marginLeft: 10, color: COLORS.white, ...fontsize.smallest, ...FONTS.medium, lineHeight: 18}}>Keep Typing?</Text>
+                    <Text style={styles.buttonText}>Keep Typing?</Text>
                   </View>
               </View>
           
@@ -179,13 +179,13 @@ const Chatsdm = ({navigation,route}) => {
 
 
         <Chatsmodal showState={chooseAmount}>
-          <Text style={{textAlign: "center", ...fontsize.small, ...FONTS.medium, color: COLORS.black2}}>How much do you want to send?</Text>
+          <Text style={styles.chooseAmountHeader}>How much do you want to send?</Text>
 
-          <View style={{ justifyContent: "center", alignItems: "center", marginTop: 52, marginBottom: 48}}>
+          <View style={styles.amountBlockWrap}>
             <View style={{flexDirection: "row", alignItems: "center"}}>
               {/* minus icon */}
 
-                <Text style={{...fontsize.biggest, ...FONTS.bold, lineHeight: 66}}>N0.00</Text>
+                <Text style={styles.addedAmountText}>N0.00</Text>
               {/* Add icon */}
             </View>
           </View>
@@ -193,18 +193,18 @@ const Chatsdm = ({navigation,route}) => {
 
 
           {/* Amount options */}
-          <View style={{flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginBottom: 46}}>
+          <View style={styles.amountOptionsContainer}>
             {amounts.map((amount, index) => {
               return (
-                <TouchableOpacity activeOpacity={0.8} key={index} style={{width: 76, height: 41, backgroundColor: COLORS.white3, justifyContent: "center", alignItems: "center",marginRight: 10,marginBottom: 15, borderRadius: 21}}>
-                    <Text style={{...fontsize.small, ...FONTS.regular}}>N{amount}</Text>
+                <TouchableOpacity activeOpacity={0.8} key={index} style={styles.amountOption}>
+                    <Text style={styles.amountOptionText}>N{amount}</Text>
                 </TouchableOpacity>
               )
             })}
           </View>
 
-          <TouchableOpacity style={{paddingTop: 23, paddingBottom: 20, backgroundColor: COLORS.blue5,marginBottom: getBottomSpace()+ 27, borderRadius: 6}}>
-              <Text style={{textAlign: "center", color: COLORS.white, ...fontsize.smallest, ...FONTS.medium, lineHeight: 18}}>Proceed</Text>
+          <TouchableOpacity style={styles.buttonWrapper}>
+              <Text style={styles.buttonTextValue}>Proceed</Text>
           </TouchableOpacity>
         </Chatsmodal>   
 
@@ -214,24 +214,30 @@ const Chatsdm = ({navigation,route}) => {
 
       <Chatsmodal showState={enterPin}>
 
-        <Text style={{textAlign: "center",...fontsize.small, ...FONTS.regular}}>Amount to send : <Text style={{...FONTS.bold}}>N5,000</Text> + N0 Charges</Text>
+        <Text style={styles.securePinHeader}>Amount to send : <Text style={{...FONTS.bold}}>N5,000</Text> + N0 Charges</Text>
 
-        <View style={{height: 56, justifyContent: "center", flexDirection: "row",alignItems: "center", borderWidth: 0.5, borderColor: COLORS.borderColor2, borderRadius: 10, paddingLeft: 24, marginVertical: 16}}>
+        <View style={styles.inputLockWrapper}>
           <Outlinedlock />
-          <TextInput style={{ flex: 1,borderLeftWidth: 0.5, marginLeft: 17, paddingHorizontal: 15, ...fontsize.smallest, lineHeight: 24, ...FONTS.regular}} placeholder="Enter your secure 4 digit PIN" placeholderTextColor={COLORS.grey2} maxLength={4} keyboardType="numeric" />
+          <TextInput style={styles.securePinTextInput} placeholder="Enter your secure 4 digit PIN" placeholderTextColor={COLORS.grey2} maxLength={4} keyboardType="numeric" />
         </View>
 
-        <TouchableOpacity style={{paddingTop: 23, paddingBottom: 20, backgroundColor: COLORS.blue5,marginBottom: getBottomSpace()+ 27, borderRadius: 6}}>
-              <Text style={{textAlign: "center", color: COLORS.white, ...fontsize.smallest, ...FONTS.medium, lineHeight: 18}}>Transfer Cash</Text>
+        <TouchableOpacity style={styles.buttonWrapper}>
+              <Text style={styles.buttonTextValue}>Transfer Cash</Text>
         </TouchableOpacity>
 
       </Chatsmodal>
 
 
+
+
+
+
+              {/* Sending success Modal */}
+
       <Chatsmodal showState={sendSuccess}>
         <View style={{ alignItems: "center"}}>
         <LottieView source={Successcheckanimate} autoPlay loop style={{width: 118, height: 118, marginBottom: 15 }}/>
-        <Text style={{marginBottom: getBottomSpace()+50, ...fontsize.small, ...FONTS.regular, lineHeight: 24,color: COLORS.black2}}>Transaction Successful</Text>
+        <Text style={styles.sendingSuccessText}>Transaction Successful</Text>
         </View>
       </Chatsmodal>
 
