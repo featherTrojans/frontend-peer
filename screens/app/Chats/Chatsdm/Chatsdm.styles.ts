@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
         paddingTop: 17,
         paddingBottom: 12,
         paddingHorizontal: 22,
-        marginTop: 30
       },
       headerDetailsContainer: { 
           flexDirection: "row", 
@@ -76,18 +75,20 @@ export const styles = StyleSheet.create({
       },
       chatToMe:{
         flexDirection: "row-reverse",
-        marginBottom: 15
+        marginBottom: 15,
+        alignItems: "flex-end",
       },
       chatToMeColor:{
         padding: 20,
         backgroundColor: "#003AD6",
-        borderRadius: 20,
         borderBottomRightRadius: 0,
         marginBottom: 10,
-        color: "#fff",
+        borderRadius: 20,
       },
       chatToMeTime:{
-        textAlign:"right"
+        color: COLORS.black2,
+        ...fontsize.smallest,
+        ...FONTS.regular
       },
       chatNotMe:{
         flexDirection: "row",
@@ -96,9 +97,14 @@ export const styles = StyleSheet.create({
       chatNotMeColor:{
         padding: 20,
         backgroundColor: "#F7F8FA",
+        marginBottom: 10,
         borderRadius: 20,
         borderBottomLeftRadius: 0,
-        marginBottom: 10,
-        color: "#000",
+      }, 
+
+      chatTextStyle: {
+        ...fontsize.smallest, 
+        ...FONTS.regular, 
+        lineHeight: 21
       }
 })

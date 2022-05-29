@@ -106,7 +106,7 @@ Biometrics: undefined;
 
   //Chats
   Chatshome: undefined;
-  Chatsdm: undefined;
+  Chatsdm: {};
   Usersearch: undefined;
   CustomWebView: undefined;
   CustomWebViewSupport: undefined

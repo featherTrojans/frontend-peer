@@ -41,11 +41,13 @@ export const COLORS = {
   green2: "#25DBA3",
   pink1: "#E00070",
   red1: "#E00000",
+  purple: "#6300AC",
 
   paybillInput: "#E6E6E6",
   checkBorder: "#A5A5A5",
   errorBorder: `rgba(224, 0, 0, .5)`,
   black: "#000000",
+  black2: "#333333",
   borderColor: "#EDEDED",
   borderColor2: `rgba(112, 112, 112, .2)`,
   borderColor3: `rgba(112, 112, 112, .3)`,
@@ -141,6 +143,9 @@ export const fontsize = {
   },
   bigger:{
     fontSize: RFValue(38),
+  },
+  biggest:{
+    fontSize: RFValue(40),
   }
 };
 

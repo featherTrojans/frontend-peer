@@ -75,7 +75,7 @@ const Eachprofile = ({
 
       <View style={styles.nameAndUsername}>
         <Text style={styles.eachProfileName}>{name}</Text>
-        <Text>{username}</Text>
+        <Text style={styles.eachProfileUsername}>{username}</Text>
       </View>
     </TouchableOpacity>
   );

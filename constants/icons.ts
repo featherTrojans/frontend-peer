@@ -120,6 +120,9 @@ import Userdefaultsmaller from "../assets/icons/Userdefaultsmaller";
 import Sendingandreceivearrows from "../assets/icons/Sendingandreceivearrows";
 import Bonusiconlarge from "../assets/icons/Bonusiconlarge";
 import SendIcon from "../assets/icons/SendIcon";
+import Outlinelockgrey from "../assets/icons/Outlinelockgrey";
+
+
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -251,6 +254,7 @@ export default {
   Fingerprinticon,
   Sharereceipt,
   Downloadreceipt,
+  Outlinelockgrey,
   Reporttransactions,
   Onmapicon,
   Smalluseravatar,
