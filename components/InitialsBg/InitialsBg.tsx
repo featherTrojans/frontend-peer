@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { COLORS, FONTS, fontsize } from "../../constants";
 import { nameSplitter } from "../../utils/nameSplitter";
 import { styles } from "./InitialsBg.styles";
@@ -13,6 +13,8 @@ type InitialsBgProps = {
 };
 
 const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
+  const [defaultColor, setDefaultColor] = useState("gray")
+
   const colors = [
     "#BBE0FD",
     "#FFF5E5",
@@ -27,8 +29,10 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
     "#DEE0E5",
     "#E3CCFF",
   ];
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  const defaultColor = bg ? bg : color;
+  useEffect(()=>{
+    const color = bg? bg : colors[Math.floor(Math.random() * colors.length)];
+    setDefaultColor(color)
+  },[])
 
   return (
     <View

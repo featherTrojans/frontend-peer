@@ -28,12 +28,16 @@ export const styles = StyleSheet.create({
   amountOfChatsContainer: {
     marginLeft: 17,
     backgroundColor: COLORS.blue6,
-    height: 22,
+    minHeight: 22,
+    minWidth: 27,
+    paddingTop: 5, 
+    paddingBottom:  4,
+    paddingHorizontal: 6,
     width: "auto",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 11,
-    paddingHorizontal: 6,
+    borderRadius: 100,
+
   },
   amountOfChats: {
     color: COLORS.white,
@@ -96,11 +100,14 @@ export const styles = StyleSheet.create({
   eachProfileName: {
     ...fontsize.small,
     ...FONTS.medium,
+    opacity: 0.8,
+    marginBottom: 7
   },
   eachProfileUsername: {
     ...fontsize.smallest,
     ...FONTS.medium,
     color: COLORS.grey2,
+    opacity: 0.8
   },
 
   //   For the chat screen
