@@ -12,20 +12,24 @@ import { useNavigation } from "@react-navigation/native";
 // import { StatusBar } from 'expo-status-bar'
 // import moment from "moment";
 import { InitialsBg } from "../../../../components";
-
-
+import axiosCustom from "../../../../httpRequests/axiosCustom";
 const { Backarrow, SendIcon } = icons;
 const { Chatimage } = images;
 
 const Chatsdm = ({route}) => {
-  const {userInfo} = route.params
+  const {userInfo} = route?.params
   const {authdata} = useContext(AuthContext);
   const [messages, setMessages] =  useState<any>([]);
   const [chatid, setchatid] = useState("")
   const [chattext, setchattext] = useState("")
+  const [amount, setAmount ] = useState(0)
+  const [userPin, setUserPin] = useState(0)
   const authId = authdata?.userDetails?.userUid
-  console.log(messages)
+
+  console.log(userInfo)
+
   const scrollViewRef = useRef();
+  
   useEffect(() => {    
     getThisChats()
   }, [])
@@ -78,15 +82,19 @@ const Chatsdm = ({route}) => {
     }
   }
 
-  const saveMessagesInStore = (querySnapshot)=>{
-    const allmessages = []
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      allmessages.push(doc.data())
-    });
-    setMessages(allmessages)
-  }
+ 
 
+  const sendCash = async ()=>{
+    try{
+      axiosCustom.post("/transfer",{
+        amount:amount,
+        transferTo:userInfo.username,
+        userPin:userPin
+      })
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   const sendFireBaseMessage = async ()=>{
     console.log("hi theerrerere mesage sending ")
@@ -134,6 +142,7 @@ const Chatsdm = ({route}) => {
       <ScrollView 
         style={styles.messageAreaContainer} 
         ref={scrollViewRef}
+        
         onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
       {/* Messages area */}
       

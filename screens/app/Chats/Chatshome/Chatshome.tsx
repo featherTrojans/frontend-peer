@@ -1,93 +1,28 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { ReactElement, useEffect, useState , useContext} from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState , useContext} from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
 import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData, query, where, onSnapshot } from "firebase/firestore";
-import { TouchableOpacity } from "@gorhom/bottom-sheet";
-import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../../../context/AuthContext";
 import Chat from "./Chat";
-import useContact from "../../../../utils/customContact";
-import axiosCustom from "../../../../httpRequests/axiosCustom";
+
+import Contact from "./Contact";
 
 const { Chatsearchicon } = icons;
 
-const dataforcontacts = [
-  {
-    phoneNumbers:[
-      {
-        number: "081 6794 3849"
-      },
-      {
-        number: "08167943849"
-      }
-    ]
-  },
-  {
-    phoneNumbers:[
-      {
-        number: "07088780964"
-      }
-    ]
-  },
-  {
-    phoneNumbers:[
-      {
-        number: "09037768252"
-      }
-    ]
-  },
-  {
-    phoneNumbers:[
-      {
-        number: "09029428324"
-      }
-    ]
-  },
-  {
-    phoneNumbers:[
-      {
-        number: "08167569588"
-      }
-    ]
-  }
-]
 
-const Eachprofile = ({
-  name,
-  username,
-  userInfo
-}: {
-  name: string;
-  username: string;
-  userInfo: any
-}) => {
-  const navigate = useNavigation()
-
-  return (
-    <TouchableOpacity style={styles.eachprofileContainer}
-    onPress={()=>navigate.navigate("Chatsdm",{userInfo})}>
-      <View style={styles.profileAvatar}></View>
-
-      <View style={styles.nameAndUsername}>
-        <Text style={styles.eachProfileName}>{name}</Text>
-        <Text>{username}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
 
 
 const Chatshome = () => {
   const {authdata} = useContext(AuthContext);
-  // const {contacts} = useContact()
+
   const [chats, setChats] = useState<any>([])
   const [chattwos, setChattwos] = useState<any>([])
-  const [contactsResolved, setContactResolved] = useState([])
+  
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid
 
@@ -131,46 +66,7 @@ const Chatshome = () => {
     }
   },[])
   
-  useEffect(()=>{
-    const pendingrequests =  dataforcontacts.map((contact)=>{
-      const numbersArr = []
-      contact?.phoneNumbers?.forEach((phone)=>{
-        const number =  phone.number.replace(/\s+/g, '')
-        if(!numbersArr.includes(number)){
-          numbersArr.push(number)
-        }
-      })
-      for(let num of numbersArr){
-        console.log(num)
-        return axiosCustom.get(`/user/${num}`)
-      }
-    })
-    getAllContactInFeather(pendingrequests)
-  },[])
-
-
-  const getAllContactInFeather = async (pendingrequests)=>{
-    Promise.allSettled = Promise.allSettled || ((promises) => Promise.all(
-      promises.map(p => p
-          .then(value => ({
-              status: "fulfilled",
-              value
-          }))
-          .catch(reason => ({
-              status: "rejected",
-              reason
-          }))
-      )
-  ));
-    const resolvedContacts =  await Promise.allSettled(pendingrequests)
-    const feathercontact =  []
-    resolvedContacts.forEach((cont)=>{
-      if(cont.status === "fulfilled"){
-        feathercontact.push(cont?.value?.data?.data)
-      }
-    })
-    setContactResolved(feathercontact)
-  }
+  
 
   const getAllChats = async ()=>{
     try{
@@ -218,26 +114,11 @@ const Chatshome = () => {
               Feather Users In Your Contact
             </Text>
           </View>
-          <ScrollView
-            contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9 }}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          >
-            {contactsResolved.map((contact)=>{
-              return <Eachprofile userInfo={contact} name={contact.fullName} username={`@${contact.username}`} />
-            })}
+         
+            
+            <Contact />
 
-            <View style={styles.seeMoreContainer}>
-              <View style={styles.seeMoreBg}>
-                <View style={{ flexDirection: "row" }}>
-                  <View style={styles.seeMoreDots} />
-                  <View style={styles.seeMoreDots} />
-                  <View style={[styles.seeMoreDots, { marginRight: 0 }]} />
-                </View>
-              </View>
-              <Text style={styles.seeMoreText}>See More</Text>
-            </View>
-          </ScrollView>
+            
         </View>
         <View>
           <View style={styles.chatHeader}>
