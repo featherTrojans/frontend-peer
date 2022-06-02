@@ -14,7 +14,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 const { Backarrow, SendIcon, Outlinedlock,Plusicon,
   Minusicon,
   Arrowupicon,
-  Lettercaseicon, Successcheckanimate  } = icons;
+  Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate  } = icons;
 const { Chatimage } = images;
 import { Bottombtn, InitialsBg } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
@@ -200,8 +200,11 @@ const Chatsdm = ({navigation,route}) => {
   const renderSenderHTML = (mes)=>{
     if(mes?.action === "transfer"){
       return (
-        <View>
-          <Text>You just received N{mes.message} from this user</Text>
+        <View style={{justifyContent: "center", alignItems: "center"}}>
+          <Successtranfericon />
+          <View style={{borderWidth: 0.5, borderColor: COLORS.grey13, backgroundColor: COLORS.grey14, paddingHorizontal: 24, paddingTop: 9, paddingBottom: 13,marginTop: 10, borderRadius: 24 }}>
+            <Text style={{...fontsize.smallest, ...FONTS.bold, lineHeight: 24, color: COLORS.black, textAlign: "center"}}> 🎉 You just received  <Text style={{...FONTS.bold}}>N{mes.message}</Text> from this user</Text>
+          </View>
         </View>
       )
     }
@@ -355,6 +358,7 @@ const Chatsdm = ({navigation,route}) => {
         style={styles.messageAreaContainer} 
         ref={scrollViewRef}
         showsVerticalScrollIndicator={false}
+        bounces={false}
         onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
       {/* Messages area */}
 
@@ -377,10 +381,14 @@ const Chatsdm = ({navigation,route}) => {
             {/* <TouchableOpacity onPress={handleShowEmoji}>
               <SmileEmoji />
             </TouchableOpacity> */}
-            <TextInput  placeholder="Enter Message" style={styles.textinput} value={chattext} onChangeText={handleTextChange}  />
-            <TouchableOpacity style={{backgroundColor:"#003AD6", paddingHorizontal: 15,paddingVertical: 10, borderRadius:20 }} onPress={()=>sendFireBaseMessage()} >
-              <Text style={{color:"#fff"}}>send</Text>
+            <TextInput  placeholder="Enter Message" style={[styles.textinput, {...FONTS.regular, color: COLORS.grey7}]} value={chattext} onChangeText={handleTextChange}  />
+
+
+            <TouchableOpacity activeOpacity={0.8}  onPress={()=>sendFireBaseMessage()} >
+              <Sendmessageicon />
             </TouchableOpacity>
+
+
           </View>
         {/* <SendIcon /> */}
         </View>

@@ -125,6 +125,10 @@ import Plusicon from "../assets/icons/Plusicon";
 import Minusicon from "../assets/icons/Minus";
 import Lettercaseicon from "../assets/icons/Lettercaseicon";
 import Arrowupicon from "../assets/icons/Arrowupicon";
+import Successtranfericon from "../assets/icons/Successtranfericon";
+import Sendmessageicon from "../assets/icons/Sendmessageicon";
+
+
 
 
 ///Animated icons
@@ -203,6 +207,7 @@ export default {
   Backarrowgrey,
   Trustedbadge,
   Directionarrow,
+  Successtranfericon,
   Ratingsstar,
   Smallcancel,
   Smallcomment,
@@ -233,7 +238,7 @@ export default {
   Minusicon,
   Arrowupicon,
   Lettercaseicon,
-  
+  Sendmessageicon,
   Cancelicony,
   Smsicony,
   Phoneicony,

@@ -69,6 +69,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
+    borderWidth: 1,
+    borderColor: COLORS.grey1
   },
   textinput: {
     flex: 1,

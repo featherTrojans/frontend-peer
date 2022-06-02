@@ -8,11 +8,13 @@ import { db } from "../../../../firebase";
 import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData, query, where, onSnapshot } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../../../context/AuthContext";
+import LottieView from "lottie-react-native"
 import Chat from "./Chat";
 
 import Contact from "./Contact";
+import { RFValue } from "react-native-responsive-fontsize";
 
-const { Chatsearchicon } = icons;
+const { Chatsearchicon, Cryinganimate } = icons;
 
 
 
@@ -124,13 +126,25 @@ const Chatshome = () => {
           <View style={styles.chatHeader}>
             <Text style={styles.chatHeaderText}>Recent Chats</Text>
           </View>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {/* {chats.map(chat=>(<Chat
-              name={chat.id}
-              time="09:34am"
-              message={chat.data().lastchat}
-              online={true}
-            />))} */}
+
+
+
+
+        {/* This is for when the recent chat is empty */}
+
+        
+        {/* <View style={{justifyContent: "center",  alignItems: "center"}}>
+          <LottieView source={Cryinganimate} style={{width: RFValue(190), height: RFValue(190)}}/>
+            <Text style={{...fontsize.bsmall, ...FONTS.regular, lineHeight: 25, color: COLORS.black, textAlign: "center"}}>You do not have any recent chats. Start a conversation with a feather user in your contact or search a username</Text>        
+        </View> */}
+
+
+
+
+
+          <ScrollView  showsVerticalScrollIndicator={false}>
+         
+
            {
               chats.map((chat)=>{
                 let userid = chat.id1 !== authId? chat.id1 : chat.id2 
@@ -144,6 +158,10 @@ const Chatshome = () => {
               })
             }
           </ScrollView>
+
+
+
+
         </View>
       </ScrollView>
     </View>

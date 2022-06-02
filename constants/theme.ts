@@ -33,6 +33,8 @@ export const COLORS = {
   grey10: "#262626",
   grey11: "#EFEFEF",
   grey12: "#F2F5FF",
+  grey13: "#DEDEDE",
+  grey14: "#FCFDFF",
   
 
   yellow1: "#FF9D00",
