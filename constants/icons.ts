@@ -121,6 +121,10 @@ import Sendingandreceivearrows from "../assets/icons/Sendingandreceivearrows";
 import Bonusiconlarge from "../assets/icons/Bonusiconlarge";
 import SendIcon from "../assets/icons/SendIcon";
 import Outlinelockgrey from "../assets/icons/Outlinelockgrey";
+import Plusicon from "../assets/icons/Plusicon";
+import Minusicon from "../assets/icons/Minus";
+import Lettercaseicon from "../assets/icons/Lettercaseicon";
+import Arrowupicon from "../assets/icons/Arrowupicon";
 
 
 ///Animated icons
@@ -135,6 +139,7 @@ import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.j
 import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json";
 import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json"
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
+
 
 // Receiverimage
 
@@ -224,7 +229,11 @@ export default {
   Makerequestarrowright,
   Orangecheckmark,
   Bonusiconlarge,
-
+  Plusicon,
+  Minusicon,
+  Arrowupicon,
+  Lettercaseicon,
+  
   Cancelicony,
   Smsicony,
   Phoneicony,

@@ -139,7 +139,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     flexDirection: "row",
     flex: 0.48,
-    backgroundColor: COLORS.blue5,
+    
     alignItems: "center",
     borderRadius: 6,
   },
@@ -148,6 +148,8 @@ export const styles = StyleSheet.create({
     height: 31,
     borderRadius: 31 / 2,
     backgroundColor: COLORS.white,
+    justifyContent: "center",
+    alignItems: "center"
   },
   buttonText: {
     marginLeft: 10,
@@ -249,3 +251,4 @@ export const styles = StyleSheet.create({
     color: COLORS.black2,
   },
 });
+

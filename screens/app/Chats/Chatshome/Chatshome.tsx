@@ -124,7 +124,7 @@ const Chatshome = () => {
           <View style={styles.chatHeader}>
             <Text style={styles.chatHeaderText}>Recent Chats</Text>
           </View>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             {/* {chats.map(chat=>(<Chat
               name={chat.id}
               time="09:34am"

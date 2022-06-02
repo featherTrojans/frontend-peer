@@ -11,7 +11,10 @@ import { useNavigation } from "@react-navigation/native";
 // import { StatusBar } from 'expo-status-bar'
 // import moment from "moment";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-const { Backarrow, SendIcon, Outlinedlock, Successcheckanimate  } = icons;
+const { Backarrow, SendIcon, Outlinedlock,Plusicon,
+  Minusicon,
+  Arrowupicon,
+  Lettercaseicon, Successcheckanimate  } = icons;
 const { Chatimage } = images;
 import { Bottombtn, InitialsBg } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
@@ -228,17 +231,17 @@ const Chatsdm = ({navigation,route}) => {
               <View style={styles.sendCashWrapper}>
 
                   {/* First One */}
-                  <TouchableOpacity onPress={()=>setChooseAmount(true)} style={styles.sendCashButton}>
+                  <TouchableOpacity activeOpacity={0.8} onPress={()=>setChooseAmount(true)} style={[ {backgroundColor: COLORS.blue5},   styles.sendCashButton]}>
                     <View style={styles.buttonIconBg}>
-                      {/* icons */}
+                      <Arrowupicon />
                     </View>
                     <Text style={styles.buttonText}>Send Cash?</Text>
                   </TouchableOpacity>
 
                   {/* Second Button */}
-                  <TouchableOpacity onPress={()=>setSendCashModal(false)} style={styles.sendCashButton}>
+                  <TouchableOpacity activeOpacity={0.8} onPress={()=>setSendCashModal(false)} style={[{backgroundColor: COLORS.purple},   styles.sendCashButton]}>
                     <View style={styles.buttonIconBg}>
-                      {/* icons */}
+                      <Lettercaseicon />
                     </View>
                     <Text style={styles.buttonText}>Keep Typing?</Text>
                   </TouchableOpacity>
@@ -256,9 +259,11 @@ const Chatsdm = ({navigation,route}) => {
           <View style={styles.amountBlockWrap}>
             <View style={{flexDirection: "row", alignItems: "center"}}>
               {/* minus icon */}
+                <Minusicon />
 
                 <Text style={styles.addedAmountText}>N0.00</Text>
               {/* Add icon */}
+              <Plusicon />
             </View>
           </View>
 
