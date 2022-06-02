@@ -5,7 +5,7 @@ import Svg, { G, Path } from "react-native-svg"
 
 function Minus() {
   return (
-    <Svg xmlns="http://www.w3.org/2000/svg" width={17.909} height={3} {...props}>
+    <Svg xmlns="http://www.w3.org/2000/svg" width={17.909} height={3} >
     <G data-name="Group 6342">
       <G data-name="Icon feather-plus">
         <Path

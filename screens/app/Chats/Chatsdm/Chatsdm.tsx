@@ -186,13 +186,7 @@ const Chatsdm = ({navigation,route}) => {
   }
 
   const renderReceiverHTML = (mes)=>{
-    if(mes?.action === "transfer"){
-      return (
-        <View>
-          <Text>You just received N{mes.message} from this user</Text>
-        </View>
-      )
-    }
+    
     return (
       <View key={mes.createdAt} style={styles.chatToMe}>
         <View>
@@ -204,6 +198,13 @@ const Chatsdm = ({navigation,route}) => {
   }
 
   const renderSenderHTML = (mes)=>{
+    if(mes?.action === "transfer"){
+      return (
+        <View>
+          <Text>You just received N{mes.message} from this user</Text>
+        </View>
+      )
+    }
     return (
       <View key={mes.createdAt} style={styles.chatNotMe}>
         <View>
