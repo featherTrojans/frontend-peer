@@ -350,10 +350,10 @@ const Chatsdm = ({navigation,route}) => {
           <InitialsBg sideLength={50} name={userInfo?.fullName || "0 0"} />
           <View style={{ marginLeft: 20 }}>
             <Text style={styles.chatName}>{userInfo.fullName}</Text>
-            <View style={styles.chatStatusContainer}>
+            {/* <View style={styles.chatStatusContainer}>
               <View style={styles.chatStatusDot} />
               <Text style={styles.chatStatusText}>Online</Text>
-            </View>
+            </View> */}
           </View>
         </View>
       </View>
