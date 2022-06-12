@@ -29,6 +29,7 @@ const Chat = ({userId, chatinfo}:chatProps) => {
     return (
       // <TouchableOpacity onPress={()=>navigate.navigate("Chatsdm")} style={styles.chatContainer}>
       <TouchableOpacity
+      activeOpacity={0.8}
        onPress={()=>navigate.navigate("Chatsdm",{userInfo})}
        style={styles.chatContainer}>
         <View style={styles.chatAvatar}>

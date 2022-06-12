@@ -10,6 +10,8 @@ import React, { useState } from "react";
 import { styles } from "./Usersearch.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { StringSchema } from "yup";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const { Backarrow, Chatsearchicon, Backarrowgrey } = icons;
 
@@ -45,7 +47,7 @@ const Usersearch = () => {
   const activeTextStyle = active === "username" && styles.activeTypeBtnText;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar />
       <View style={styles.headerSection}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -72,7 +74,7 @@ const Usersearch = () => {
             style={styles.textInput}
           />
         </View>
-        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} bounces={false}>
           <Text style={styles.listHeader}>Feather Users In Your Contact</Text>
 
           {/*we will map through the list here and List out users in the contact */}
@@ -88,7 +90,7 @@ const Usersearch = () => {
           <SingleUser name="Ayobami Saleem" username="@bamiayo" />
         </ScrollView>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

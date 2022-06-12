@@ -304,7 +304,7 @@ function Successtranfericon() {
             <Text
               transform="rotate(-8.08 799.729 -438.39)"
               fontSize={6}
-              fontFamily="GTWalsheimPro-Bold, GT Walsheim Pro"
+              // fontFamily="GTWalsheimPro-Bold, GT Walsheim Pro"
               fontWeight={700}
               letterSpacing="-.02em"
             >

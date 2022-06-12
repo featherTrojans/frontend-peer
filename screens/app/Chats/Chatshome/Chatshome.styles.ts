@@ -154,9 +154,10 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   chatName: {
-    ...fontsize.bbsmall,
-    ...FONTS.medium,
+    ...fontsize.bsmall,
+    ...FONTS.regular,
     color: COLORS.grey7,
+    textTransform: "capitalize"
   },
   chatTime: {
     ...fontsize.small,

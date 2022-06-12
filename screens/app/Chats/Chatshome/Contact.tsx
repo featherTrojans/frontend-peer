@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from "./Chatshome.styles";
 import { useNavigation } from '@react-navigation/native';
@@ -61,7 +61,7 @@ const Eachprofile = ({
     const navigate = useNavigation()
   
     return (
-      <TouchableOpacity style={styles.eachprofileContainer}
+      <TouchableOpacity activeOpacity={0.8} style={styles.eachprofileContainer}
       onPress={()=>navigate.navigate("Chatsdm",{userInfo})}>
         <View style={styles.profileAvatar}>
         <InitialsBg sideLength={56} name={name || "0 0"} />
@@ -104,21 +104,32 @@ const Contact = () => {
           try{
               const response = await axiosCustom.post("/user/multiple",{numbers:allcontacts})
               setContactResolved(response.data.data)
+              console.log(contactsResolved, "All conct")
           }catch(err){
             console.log(err.response)
           }
       }
 
     return (
-        <ScrollView
-        contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9 }}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      >
-            {contactsResolved.map((contact)=>{
-                return <Eachprofile userInfo={contact} name={contact.fullName} username={`@${contact.username}`} />
-            })}
-        <View style={styles.seeMoreContainer}>
+
+
+      <FlatList 
+      data={contactsResolved}
+      horizontal
+      bounces={false}
+      showsHorizontalScrollIndicator={false}
+      initialNumToRender={5}
+      maxToRenderPerBatch={5}
+      contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9 }}
+      renderItem={({item, index}) => {
+        const contact = item
+        return (
+          <Eachprofile userInfo={contact} name={contact.fullName} username={`@${contact.username}`} key={index} />
+        )
+      }}
+      ListFooterComponent={() => {
+        return (
+               <View style={styles.seeMoreContainer}>
               <View style={styles.seeMoreBg}>
                 <View style={{ flexDirection: "row" }}>
                   <View style={styles.seeMoreDots} />
@@ -128,7 +139,10 @@ const Contact = () => {
               </View>
               <Text style={styles.seeMoreText}>See More</Text>
             </View>
-          </ScrollView>
+        )
+      }}
+      
+      />
     )
 }
 

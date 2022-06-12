@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     color: COLORS.grey7,
     lineHeight: 21,
+    textTransform: "capitalize"
   },
   chatStatusContainer: {
     flexDirection: "row",

@@ -109,7 +109,10 @@ const Chatshome = () => {
           <Chatsearchicon />
         </View>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+
+
+
+      <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
         <View style={{ marginTop: 5, marginBottom: 37 }}>
           <View>
             <Text style={styles.secondSubHeader}>
@@ -142,13 +145,13 @@ const Chatshome = () => {
 
 
 
-          <ScrollView  showsVerticalScrollIndicator={false}>
+          {/* <ScrollView  showsVerticalScrollIndicator={false}> */}
          
 
            {
               chats.map((chat)=>{
                 let userid = chat.id1 !== authId? chat.id1 : chat.id2 
-                return (<Chat key={userid} userId= {userid} chatinfo={chat}/>)
+                return (<Chat key={userid} userId= {userid} chatinfo={chat} />)
               })
             }
             {
@@ -157,7 +160,7 @@ const Chatshome = () => {
                 return (<Chat key={userid} userId= {userid} chatinfo={chat}/>)
               })
             }
-          </ScrollView>
+          {/* </ScrollView> */}
 
 
 

@@ -14,7 +14,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 const { Backarrow, SendIcon, Outlinedlock,Plusicon,
   Minusicon,
   Arrowupicon,
-  Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate  } = icons;
+  Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate, Feathecomingsoonchatanimate } = icons;
 const { Chatimage } = images;
 import { Bottombtn, InitialsBg } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
@@ -63,6 +63,7 @@ const Chatsdm = ({navigation,route}) => {
   const [enterPin, setEnterPin] = useState(false)
   const [sendSuccess, setSendSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [fetchmessage, setFetchmessage] = useState(false)
 
   const authId = authdata?.userDetails?.userUid
   const scrollViewRef = useRef<ScrollView>();
@@ -73,6 +74,7 @@ const Chatsdm = ({navigation,route}) => {
 
   useEffect(()=>{
     let unsub = ()=>{}
+    setFetchmessage(true)
     if(chatid){ 
       const chatRef = collection(db, "chatstwo",chatid,"messages" )
       const queryref =  query(chatRef, orderBy("createdAt"))
@@ -82,6 +84,7 @@ const Chatsdm = ({navigation,route}) => {
               newdata.push(change.data())
         });
         setMessages(newdata)
+        setFetchmessage(false)
       });
     }
 
@@ -354,14 +357,25 @@ const Chatsdm = ({navigation,route}) => {
           </View>
         </View>
       </View>
-      <ScrollView 
+
+
+
+      {fetchmessage  ?
+      
+        <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+              <LottieView source={Feathecomingsoonchatanimate} autoPlay loop style={{ width: 160, height: 160 }}/>          
+        </View>
+
+
+        :
+
+        <ScrollView 
         style={styles.messageAreaContainer} 
         ref={scrollViewRef}
         showsVerticalScrollIndicator={false}
         bounces={false}
         onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
       {/* Messages area */}
-
       {messages.map(mes=>{
           if(mes.sender === userInfo.userUid){
             return (
@@ -375,6 +389,17 @@ const Chatsdm = ({navigation,route}) => {
       
       {/* message input box */}
       </ScrollView>
+    
+      }
+
+      
+
+
+
+
+
+
+
       <View style={styles.chatTextContainer}>
         <View style={styles.inputarea}>
           <View style={styles.chatTextInput}>
@@ -384,9 +409,12 @@ const Chatsdm = ({navigation,route}) => {
             <TextInput  placeholder="Enter Message" style={[styles.textinput, {...FONTS.regular, color: COLORS.grey7}]} value={chattext} onChangeText={handleTextChange}  />
 
 
-            <TouchableOpacity activeOpacity={0.8}  onPress={()=>sendFireBaseMessage()} >
-              <Sendmessageicon />
-            </TouchableOpacity>
+            {chattext !== ""  &&
+              <TouchableOpacity activeOpacity={0.8}  onPress={()=>sendFireBaseMessage()} >
+                <Sendmessageicon />
+              </TouchableOpacity>
+            }
+           
 
 
           </View>
