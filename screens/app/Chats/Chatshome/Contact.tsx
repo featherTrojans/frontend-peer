@@ -95,9 +95,9 @@ const Contact = () => {
                 }
           }
         })
-        // console.log(allcontacts)
+        console.log(allcontacts)
         getAllContactInFeather(allcontacts)
-      },[])
+      },[contacts])
     
     
       const getAllContactInFeather = async (allcontacts)=>{

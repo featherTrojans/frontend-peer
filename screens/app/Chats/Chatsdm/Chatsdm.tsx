@@ -142,7 +142,7 @@ const Chatsdm = ({navigation,route}) => {
   }
 
   const sendFireBaseMessage = async (action="message") =>{
-    console.log("hi theerrerere mesage sending ")
+    if(chattext === "" && action === "message") return 
     let message = chattext;
     let createdAt =  Date.now()
     const messageData = {
@@ -174,9 +174,13 @@ const Chatsdm = ({navigation,route}) => {
   const handlePinChange= (text)=>{
     setUserPin(text)
   }
+  const handleAmountChange = text=>{
+    const amount = Number(text)
+    setAmount(text)
+  }
   const handleTextChange = (text)=>{
     setchattext(text)
-    if(text === "@"){
+    if(text[text.length - 1] === "@"){
       setSendCashModal(true)
     }
   }
@@ -186,6 +190,7 @@ const Chatsdm = ({navigation,route}) => {
     setChooseAmount(false)
     setEnterPin(false)
     setSendSuccess(false)
+    setUserPin("")
   }
 
   const renderReceiverHTML = (mes)=>{
@@ -266,16 +271,13 @@ const Chatsdm = ({navigation,route}) => {
           <View style={styles.amountBlockWrap}>
             <View style={{flexDirection: "row", alignItems: "center"}}>
               {/* minus icon */}
-                <Minusicon />
-
-                <Text style={styles.addedAmountText}>N0.00</Text>
+                {/* <Minusicon /> */}
+                <TextInput style={styles.addedAmountText} keyboardType="numeric" placeholder="N0.00" value={amount} onChangeText={handleAmountChange} />
+                {/* <Text style={styles.addedAmountText}>N0.00</Text> */}
               {/* Add icon */}
-              <Plusicon />
+              {/* <Plusicon /> */}
             </View>
           </View>
-
-
-
           {/* Amount options */}
           <View style={styles.amountOptionsContainer}>
             {amounts.map((item, index) => {
@@ -287,7 +289,7 @@ const Chatsdm = ({navigation,route}) => {
             })}
           </View>
 
-          <TouchableOpacity style={styles.buttonWrapper}>
+          <TouchableOpacity style={styles.buttonWrapper} onPress={()=>{clearModals(); setEnterPin(true)}}>
               <Text style={styles.buttonTextValue}>Proceed</Text>
           </TouchableOpacity>
         </Chatsmodal>   
@@ -302,7 +304,8 @@ const Chatsdm = ({navigation,route}) => {
 
         <View style={styles.inputLockWrapper}>
           <Outlinedlock />
-          <TextInput style={styles.securePinTextInput} 
+          <TextInput style={styles.securePinTextInput}
+          secureTextEntry={true} 
           placeholder="Enter your secure 4 digit PIN" 
           placeholderTextColor={COLORS.grey2} 
           onChangeText={handlePinChange}
