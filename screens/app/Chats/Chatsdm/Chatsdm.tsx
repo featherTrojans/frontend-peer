@@ -11,6 +11,10 @@ import { useNavigation } from "@react-navigation/native";
 // import { StatusBar } from 'expo-status-bar'
 // import moment from "moment";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
+
+
+
+
 const { Backarrow, SendIcon, Outlinedlock,Plusicon,
   Minusicon,
   Arrowupicon,
@@ -21,6 +25,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 import LottieView from "lottie-react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
+import { usePushNotification } from "../../../../navigation";
 
 const amounts = [
   {name:"50", value:50},
@@ -66,6 +71,11 @@ const Chatsdm = ({navigation,route}) => {
   const [fetchmessage, setFetchmessage] = useState(false)
 
   const authId = authdata?.userDetails?.userUid
+
+  const { sendPushNotification, expoPushToken } = usePushNotification();
+
+
+
   const scrollViewRef = useRef<ScrollView>();
   
   useEffect(() => {    
@@ -155,6 +165,7 @@ const Chatsdm = ({navigation,route}) => {
     try{
       setchattext("")
       await addDoc(collection(db,"chatstwo",chatid,"messages"),messageData)
+      sendPushNotification(userInfo.messageToken, authdata?.userDetails.fullName, message, "Chatshome" )
       if(action === "message"){
         await updateDoc(doc(db,"chatstwo",chatid),{
           lastMessage: message,
