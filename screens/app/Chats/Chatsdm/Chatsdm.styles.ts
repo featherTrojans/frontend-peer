@@ -76,6 +76,7 @@ export const styles = StyleSheet.create({
   textinput: {
     flex: 1,
     paddingHorizontal: 10,
+    paddingVertical: 3,
   },
   chatToMe: {
     flexDirection: "row-reverse",
@@ -83,7 +84,7 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   chatToMeColor: {
-    padding: 20,
+    padding: 15,
     backgroundColor: "#003AD6",
     borderBottomRightRadius: 0,
     marginBottom: 10,
@@ -99,7 +100,7 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
   },
   chatNotMeColor: {
-    padding: 20,
+    padding: 15,
     backgroundColor: "#F7F8FA",
     marginBottom: 10,
     borderRadius: 20,
@@ -179,6 +180,7 @@ export const styles = StyleSheet.create({
     ...fontsize.biggest,
     ...FONTS.bold,
     lineHeight: 66,
+    minWidth: 150,
   },
   amountOptionsContainer: {
     flexDirection: "row",

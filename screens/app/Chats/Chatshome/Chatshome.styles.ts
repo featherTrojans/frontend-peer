@@ -101,7 +101,8 @@ export const styles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.medium,
     opacity: 0.8,
-    marginBottom: 7
+    marginBottom: 7,
+    textTransform:"capitalize"
   },
   eachProfileUsername: {
     ...fontsize.smallest,

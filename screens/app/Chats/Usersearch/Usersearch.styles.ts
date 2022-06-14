@@ -78,6 +78,7 @@ export const styles = StyleSheet.create({
     ...fontsize.bsmall,
     ...FONTS.medium,
     color: `rgba(0,0,0, .8)`,
+    textTransform:"capitalize"
   },
   userSearchUsername: {
     ...fontsize.small,

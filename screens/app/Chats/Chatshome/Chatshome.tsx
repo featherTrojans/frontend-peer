@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState , useContext} from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
@@ -24,6 +24,7 @@ const Chatshome = () => {
 
   const [chats, setChats] = useState<any>([])
   const [chattwos, setChattwos] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(true)
   
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid
@@ -71,6 +72,7 @@ const Chatshome = () => {
   
 
   const getAllChats = async ()=>{
+    setLoading(true);
     try{
       // auery first where 
       const chatsRef = collection(db,"chatstwo")
@@ -90,7 +92,8 @@ const Chatshome = () => {
       setChats(allchats)
       // console.log(chatsdata.docs)
     }catch(err){
-
+    }finally{
+      setLoading(false);
     }
   }
   return (
@@ -109,9 +112,6 @@ const Chatshome = () => {
           <Chatsearchicon />
         </View>
       </View>
-
-
-
       <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
         <View style={{ marginTop: 5, marginBottom: 37 }}>
           <View>
@@ -119,52 +119,26 @@ const Chatshome = () => {
               Feather Users In Your Contact
             </Text>
           </View>
-         
-            
-            <Contact />
-
-            
+          <Contact />  
         </View>
         <View>
           <View style={styles.chatHeader}>
             <Text style={styles.chatHeaderText}>Recent Chats</Text>
           </View>
-
-
-
-
+          
         {/* This is for when the recent chat is empty */}
-
-        
-        {/* <View style={{justifyContent: "center",  alignItems: "center"}}>
-          <LottieView source={Cryinganimate} style={{width: RFValue(190), height: RFValue(190)}}/>
+        {
+          (!loading && chats.length === 0 && chattwos.length === 0) && 
+          (<View style={{justifyContent: "center",  alignItems: "center"}}>
+            <LottieView source={Cryinganimate} style={{width: RFValue(190), height: RFValue(190)}}/>
             <Text style={{...fontsize.bsmall, ...FONTS.regular, lineHeight: 25, color: COLORS.black, textAlign: "center"}}>You do not have any recent chats. Start a conversation with a feather user in your contact or search a username</Text>        
-        </View> */}
-
-
-
-
-
-          {/* <ScrollView  showsVerticalScrollIndicator={false}> */}
-         
-
-           {
-              chats.map((chat)=>{
-                let userid = chat.id1 !== authId? chat.id1 : chat.id2 
-                return (<Chat key={userid} userId= {userid} chatinfo={chat} />)
-              })
-            }
-            {
-              chattwos.map((chat)=>{
-                let userid = chat.id1 !== authId? chat.id1 : chat.id2 
-                return (<Chat key={userid} userId= {userid} chatinfo={chat}/>)
-              })
-            }
-          {/* </ScrollView> */}
-
-
-
-
+          </View>)
+        }
+        {
+          loading?(<View style={{marginTop: 100}}>
+            <ActivityIndicator size="large" color="#000" />
+          </View>):<Chat authId={authId} chattwos={chattwos} chats={chats} />
+        }  
         </View>
       </ScrollView>
     </View>

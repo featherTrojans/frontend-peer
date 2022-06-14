@@ -5,42 +5,51 @@ import {
   StatusBar,
   TextInput,
   ScrollView,
+  FlatList,
+  TouchableOpacity
 } from "react-native";
 import React, { useState } from "react";
 import { styles } from "./Usersearch.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { StringSchema } from "yup";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Eachprofile from "../Chatshome/EachProfile";
+import { InitialsBg } from "../../../../components";
+import { useNavigation } from "@react-navigation/native";
 
 
 const { Backarrow, Chatsearchicon, Backarrowgrey } = icons;
 
 const SingleUser = ({
-  profilePics,
+  userInfo,
   name,
   username,
 }: {
-  profilePics?: string;
+  userInfo?: any;
   name: string;
   username: string;
 }) => {
+  const navigate = useNavigation()
   return (
-    <View style={styles.userSearchContainer}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.userSearchContainer}  onPress={()=>navigate.navigate("Chatsdm",{userInfo})}>
       <View style={styles.userSearchData}>
         {/* To Replace this with the user image */}
-        <View style={styles.userSearchImage} />
-
+        <View style={styles.userSearchImage}>
+          <InitialsBg sideLength={56} name={name || "0 0"} />
+        </View>
         <View style={{ marginLeft: 14 }}>
           <Text style={styles.userSearchName}>{name}</Text>
           <Text style={styles.userSearchUsername}>{username}</Text>
         </View>
       </View>
       <Backarrowgrey />
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const Usersearch = () => {
+const Usersearch = ({navigation, route}) => {
+  const phoneContact = route?.params?.phoneContact;
+  console.log(phoneContact, "This is a contact")
   const [active, setActive] = useState("username");
 
   const activeStyle = active === "username" && styles.activeTypeBtn;
@@ -74,21 +83,19 @@ const Usersearch = () => {
             style={styles.textInput}
           />
         </View>
-        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} bounces={false}>
-          <Text style={styles.listHeader}>Feather Users In Your Contact</Text>
-
-          {/*we will map through the list here and List out users in the contact */}
-          <SingleUser name="Mabel Njoku" username="@sexystallionjj" />
-          <SingleUser name="Jaiye Williams" username="@williamsbb" />
-          <SingleUser name="Enoma Samuel" username="@williamsbb" />
-          <SingleUser name="Stacy Ugbeda" username="@stashugbeda" />
-          <SingleUser name="Blessing Okra" username="@blessingokorobida" />
-          <SingleUser name="Okikiola Omotosho" username="@gyroscope" />
-          <SingleUser name="Ayobami Saleem" username="@bamiayo" />
-          <SingleUser name="Ayobami Saleem" username="@bamiayo" />
-          <SingleUser name="Ayobami Saleem" username="@bamiayo" />
-          <SingleUser name="Ayobami Saleem" username="@bamiayo" />
-        </ScrollView>
+        <Text style={styles.listHeader}>Feather Users In Your Contact</Text>  
+        <FlatList
+          data={phoneContact}
+          bounces={false}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9 }}
+          renderItem={({item, index}) => {
+            const contact = item
+            return (
+              <SingleUser userInfo={contact} name={contact.fullName} username={`@${contact.username}`} key={index} />
+            )
+          }}  
+        />
       </View>
     </SafeAreaView>
   );

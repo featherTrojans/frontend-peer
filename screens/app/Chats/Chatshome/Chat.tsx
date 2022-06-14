@@ -11,8 +11,7 @@ type chatProps = {
   chatinfo:any
 }
 
-const Chat = ({userId, chatinfo}:chatProps) => {
-  
+const Chat = ({userId, chatinfo}:chatProps) => {  
     const navigate = useNavigation()
     const [userInfo, setUserInfo] = useState({})
     useEffect(()=>{
@@ -33,19 +32,14 @@ const Chat = ({userId, chatinfo}:chatProps) => {
        onPress={()=>navigate.navigate("Chatsdm",{userInfo})}
        style={styles.chatContainer}>
         <View style={styles.chatAvatar}>
-          {/* {online && <View style={styles.chatStatusDot} />} */}
-          {/* Image */}
           <InitialsBg sideLength={56} name={userInfo?.fullName || "0 0"} />
         </View>
         <View style={styles.chatInfo}>
           <View style={styles.chatNameAndTime}>
             <Text numberOfLines={1} ellipsizeMode="tail" style={styles.chatName}>{userInfo?.fullName}</Text>
-            {/* Name */}
-            {/* time */}
             <Text style={styles.chatTime}>{moment(chatinfo?.createdAt).format('LT')}</Text>
           </View>
           <View>
-            {/* hint message */}
             <Text style={styles.chatHintMessage}>{chatinfo?.lastMessage}</Text>
           </View>
         </View>
@@ -53,4 +47,24 @@ const Chat = ({userId, chatinfo}:chatProps) => {
     );
   };
 
-  export default Chat
+
+const AllChats = ({chats, chattwos, authId})=>{
+    return (
+      <>
+        {
+          chats.map((chat)=>{
+            let userid = chat.id1 !== authId? chat.id1 : chat.id2 
+            return (<Chat key={userid} userId= {userid} chatinfo={chat} />)
+          })
+        }
+        {
+          chattwos.map((chat)=>{
+            let userid = chat.id1 !== authId? chat.id1 : chat.id2 
+            return (<Chat key={userid} userId= {userid} chatinfo={chat}/>)
+          })
+        }
+      </>
+    )
+  }
+
+export default AllChats
