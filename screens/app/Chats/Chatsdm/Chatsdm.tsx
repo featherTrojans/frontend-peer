@@ -1,18 +1,29 @@
-import { TouchableOpacity, Text, View, ScrollView,TextInput } from "react-native";
+import { TouchableOpacity, Text, View, ScrollView,TextInput, ImageBackground } from "react-native";
 import React, {useState, useEffect, useContext, useRef} from "react";
 import { styles } from "./Chatsdm.styles";
-import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
+import { COLORS, FONTS, fontsize, icons, images } from "../../../../constants";
 import { addDoc, collection, doc, getDoc, onSnapshot, setDoc, query, orderBy, updateDoc  } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { AuthContext } from "../../../../context/AuthContext";
 import moment from "moment";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-const { Backarrow,Successtranfericon,Sendmessageicon,  Feathecomingsoonchatanimate, SendTF } = icons;
-import { InitialsBg } from "../../../../components";
+
+
+
+
+
+
+const { Backarrow, SendIcon, Outlinedlock,Plusicon,
+  Minusicon,
+  Arrowupicon,
+  Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate, Feathecomingsoonchatanimate, SendTF } = icons;
+const { Chatimage, chatbg } = images;
+import { Bottombtn, InitialsBg } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import LottieView from "lottie-react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
 import AllChatsModal from "./AllChatsModal";
+import { usePushNotification } from "../../../../navigation";
 
 
 
@@ -32,6 +43,11 @@ const Chatsdm = ({navigation,route}) => {
   const [fetchmessage, setFetchmessage] = useState(false)
 
   const authId = authdata?.userDetails?.userUid
+
+  const { sendPushNotification, expoPushToken } = usePushNotification();
+
+
+
   const scrollViewRef = useRef<ScrollView>();
   
   useEffect(() => {    
@@ -108,13 +124,19 @@ const Chatsdm = ({navigation,route}) => {
   }
 
   const sendFireBaseMessage = async (action="message") =>{
+    if(chattext === "" && action === "message") return 
+    let chatId = chatid;
     if(!chatid){
       // first create document
-      
+     chatId = `${authId}-${userInfo.userUid}`
+      await setDoc(doc(db,"chatstwo",id1id2),{
+        id1: authId,
+        id2: userInfo.userUid
+      })
+      setchatid(chatId)
     }
-    if(chattext === "" && action === "message") return 
     let message = chattext;
-    let createdAt =  Date.now()
+    let createdAt =  Date.now();
     const messageData = {
       message: action === "message"? chattext: amount.name,
       sender:authId,
@@ -123,8 +145,9 @@ const Chatsdm = ({navigation,route}) => {
     }
     console.log(messageData)
     try{
-      setchattext("")
-      await addDoc(collection(db,"chatstwo",chatid,"messages"),messageData)
+      setchattext("")   
+      await addDoc(collection(db,"chatstwo",chatId,"messages"),messageData)
+      sendPushNotification(userInfo.messageToken, authdata?.userDetails.fullName, message, "Chatshome" )
       if(action === "message"){
         await updateDoc(doc(db,"chatstwo",chatid),{
           lastMessage: message,
@@ -206,6 +229,7 @@ const Chatsdm = ({navigation,route}) => {
   }
   
   return (
+    <ImageBackground source={chatbg} style={{width:"100%", flex: 1}}>
     <SafeAreaView
     style={styles.container}>
       <Customstatusbar />      
@@ -226,7 +250,6 @@ const Chatsdm = ({navigation,route}) => {
         userPin={userPin}
         sendCash={sendCash}
       />
-
       <View style={styles.chatHeader}>
         <TouchableOpacity onPress={()=>navigation.goBack()}>
           <Backarrow />
@@ -277,6 +300,7 @@ const Chatsdm = ({navigation,route}) => {
         </View>
       </View>
     </SafeAreaView>
+      </ImageBackground>
   );
 };
 

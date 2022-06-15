@@ -128,8 +128,8 @@ export const styles = StyleSheet.create({
     marginBottom: 37
   },
   chatAvatar: {
-    width: 56,
-    height: 56,
+    width: 50,
+    height: 50,
     backgroundColor: COLORS.grey1,
     borderRadius: 30,
     position: "relative",

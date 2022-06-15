@@ -5,7 +5,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
-import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData, query, where, onSnapshot } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, collectionGroup, QueryDocumentSnapshot, DocumentData, query, where, onSnapshot, orderBy } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../../../context/AuthContext";
 import LottieView from "lottie-react-native"
@@ -24,19 +24,21 @@ const Chatshome = () => {
 
   const [chats, setChats] = useState<any>([])
   const [chattwos, setChattwos] = useState<any>([])
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false)
   
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid
 
+  console.log(chats, "the chats")
   // console.log(contacts)
 
   useEffect(()=>{
-    getAllChats()
+    // getAllChats()
   },[])
 
   // snapshot1
   useEffect(()=>{
+    setLoading(true)
     const chatsRef = collection(db,"chatstwo")
       const chatQuery1 = query(chatsRef, where("id1","==",authId))
     const unsub = onSnapshot(chatQuery1 , (docs) => {
@@ -46,7 +48,7 @@ const Chatshome = () => {
       });
       setChattwos(newdata)
     });
-
+    setLoading(false)
     return ()=>{
       unsub()
     }
@@ -76,19 +78,21 @@ const Chatshome = () => {
     try{
       // auery first where 
       const chatsRef = collection(db,"chatstwo")
-      const chatQuery1 = query(chatsRef, where("id1","==",authId))
-      const chatQuery2 = query(chatsRef, where("id2","==",authId))
+      const chatQuery1 = query(chatsRef, where("id1","==",authId), orderBy("createdAt"))
+      const chatQuery2 = query(chatsRef, where("id2","==",authId), orderBy("createdAt"))
       // console.log(querysnaps.length)
       const [chatdata1, chatdata2 ] = await Promise.all([getDocs(chatQuery1),getDocs(chatQuery2)])
       // const chatdata2 = await getDocs(chatQuery1)
       
       const allchats = []
+      const allchatTwo = []
       chatdata2.forEach((document)=>{
-        allchats.push(document.data())
+        allchatTwo.push(document.data())
       })
       chatdata1.forEach((document)=>{
         allchats.push(document.data())      
       })
+      setChattwos(allchatTwo);
       setChats(allchats)
       // console.log(chatsdata.docs)
     }catch(err){
@@ -96,6 +100,7 @@ const Chatshome = () => {
       setLoading(false);
     }
   }
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
     <View style={styles.container}>

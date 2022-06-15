@@ -8,6 +8,7 @@ import Lagosbadge from "../assets/images/lagos.png"
 import Ogunbadge from "../assets/images/ogun.png";
 import Osunbadge from "../assets/images/osun.png"
 import Oyobadge from "../assets/images/oyo.png"
+import chatbg from "../assets/images/chatbg.png"
 
 
 export default {
@@ -18,5 +19,6 @@ export default {
     Lagosbadge,
     Ogunbadge,
     Osunbadge,
-    Oyobadge
+    Oyobadge,
+    chatbg
 }

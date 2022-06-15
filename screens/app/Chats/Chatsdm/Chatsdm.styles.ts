@@ -5,7 +5,6 @@ import { COLORS, FONTS, fontsize } from "../../../../constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
   },
 
   chatHeader: {
@@ -14,6 +13,7 @@ export const styles = StyleSheet.create({
     paddingTop: 17,
     paddingBottom: 12,
     paddingHorizontal: 22,
+    backgroundColor: COLORS.white,
   },
   headerDetailsContainer: {
     flexDirection: "row",
@@ -46,7 +46,6 @@ export const styles = StyleSheet.create({
   },
   messageAreaContainer: {
     flex: 1,
-    backgroundColor: COLORS.white,
     paddingHorizontal: 15,
   },
   chatTextContainer: {

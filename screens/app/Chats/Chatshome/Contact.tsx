@@ -32,7 +32,6 @@ const Contact = () => {
                 }
           }
         })
-        console.log(allcontacts)
         getAllContactInFeather(allcontacts)
       },[contacts])
      
