@@ -127,6 +127,7 @@ import Lettercaseicon from "../assets/icons/Lettercaseicon";
 import Arrowupicon from "../assets/icons/Arrowupicon";
 import Successtranfericon from "../assets/icons/Successtranfericon";
 import Sendmessageicon from "../assets/icons/Sendmessageicon";
+import SendTF from "../assets/icons/SendTf"
 
 
 
@@ -161,7 +162,7 @@ export default {
   At,
   Smile,
   SendIcon,
-
+  SendTF,
   Tabchats,
   TabHome,
   Tabtransactions,

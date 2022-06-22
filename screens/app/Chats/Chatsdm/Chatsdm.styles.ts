@@ -5,7 +5,6 @@ import { COLORS, FONTS, fontsize } from "../../../../constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
   },
 
   chatHeader: {
@@ -14,6 +13,7 @@ export const styles = StyleSheet.create({
     paddingTop: 17,
     paddingBottom: 12,
     paddingHorizontal: 22,
+    backgroundColor: COLORS.white,
   },
   headerDetailsContainer: {
     flexDirection: "row",
@@ -46,7 +46,6 @@ export const styles = StyleSheet.create({
   },
   messageAreaContainer: {
     flex: 1,
-    backgroundColor: COLORS.white,
     paddingHorizontal: 15,
   },
   chatTextContainer: {
@@ -76,6 +75,7 @@ export const styles = StyleSheet.create({
   textinput: {
     flex: 1,
     paddingHorizontal: 10,
+    paddingVertical: 3,
   },
   chatToMe: {
     flexDirection: "row-reverse",
@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   chatToMeColor: {
-    padding: 20,
+    padding: 15,
     backgroundColor: "#003AD6",
     borderBottomRightRadius: 0,
     marginBottom: 10,
@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
   },
   chatNotMeColor: {
-    padding: 20,
+    padding: 15,
     backgroundColor: "#F7F8FA",
     marginBottom: 10,
     borderRadius: 20,
@@ -179,6 +179,8 @@ export const styles = StyleSheet.create({
     ...fontsize.biggest,
     ...FONTS.bold,
     lineHeight: 66,
+    minWidth: 150,
+    textAlign: "center"
   },
   amountOptionsContainer: {
     flexDirection: "row",

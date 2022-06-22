@@ -101,7 +101,8 @@ export const styles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.medium,
     opacity: 0.8,
-    marginBottom: 7
+    marginBottom: 7,
+    textTransform:"capitalize"
   },
   eachProfileUsername: {
     ...fontsize.smallest,
@@ -127,8 +128,8 @@ export const styles = StyleSheet.create({
     marginBottom: 37
   },
   chatAvatar: {
-    width: 56,
-    height: 56,
+    width: 50,
+    height: 50,
     backgroundColor: COLORS.grey1,
     borderRadius: 30,
     position: "relative",
