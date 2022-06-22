@@ -165,7 +165,7 @@ const Chatsdm = ({navigation,route}) => {
     try{
       setchattext("")
       await addDoc(collection(db,"chatstwo",chatid,"messages"),messageData)
-      sendPushNotification(userInfo.messageToken, authdata?.userDetails.fullName, message, "Chatshome" )
+      sendPushNotification(userInfo.messageToken, authdata?.userDetails.fullName, message, "Chatshome" ) 
       if(action === "message"){
         await updateDoc(doc(db,"chatstwo",chatid),{
           lastMessage: message,
