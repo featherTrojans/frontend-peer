@@ -180,6 +180,7 @@ export const styles = StyleSheet.create({
     ...FONTS.bold,
     lineHeight: 66,
     minWidth: 150,
+    textAlign: "center"
   },
   amountOptionsContainer: {
     flexDirection: "row",

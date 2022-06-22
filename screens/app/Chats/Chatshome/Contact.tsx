@@ -10,45 +10,13 @@ import Eachprofile from './EachProfile';
   
 
 
-const Contact = () => {
+const Contact = ({contactsResolved}) => {
     const navigate = useNavigation()
-    const [contactsResolved, setContactResolved] = useState([])
-    const [filteredContact, setFilteredContact] = useState([]);
-    const {contacts} = useContact()
-    
-    useEffect(()=>{
-        const allcontacts = []
-        contacts.forEach((contact)=>{
-          const numbersArr = []
-          contact?.phoneNumbers?.forEach((phone)=>{
-            const number =  phone.number.replace(/\s+/g, '')
-            if(!numbersArr.includes(number)){
-              numbersArr.push(number)
-            }
-          })
-          for(let num of numbersArr){
-              if(num){
-                  allcontacts.push(num)
-                }
-          }
-        })
-        getAllContactInFeather(allcontacts)
-      },[contacts])
-     
-      const getAllContactInFeather = async (allcontacts)=>{
-          try{
-              const response = await axiosCustom.post("/user/multiple",{numbers:allcontacts})
-              setContactResolved(response.data.data)
-              setFilteredContact(response.data.data.slice(0,5))
-          }catch(err){
-            console.log(err.response)
-          }
-      }
-
+  
     return (
 
       <FlatList 
-      data={filteredContact}
+      data={contactsResolved}
       horizontal
       bounces={false}
       showsHorizontalScrollIndicator={false}

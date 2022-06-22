@@ -45,12 +45,22 @@ const AllChatsModal = ({
     setChooseAmount,
     setSendCashModal,
     setEnterPin,
+    clearModalsAll,
     clearModals,
     sendcashModal,chooseAmount,enterPin,sendSuccess}:any) => {
+    
+    const handleToNext = ()=>{
+      if(amount.value <= 0){
+        return 
+      }
+      clearModals(); 
+      setEnterPin(true)    
+    }
+
   return (
         <>
         {/* Send cash or keep typing modal */}
-        <Chatsmodal showState={sendcashModal} onBgPress={clearModals}>
+        <Chatsmodal showState={sendcashModal} onBgPress={clearModalsAll}>
           
           <Text style={styles.sendCashHeader}>Hey Padi, want to send cash to Stephanie Okereke or is it just a text language?</Text>
 
@@ -79,14 +89,18 @@ const AllChatsModal = ({
         {/* Choose amount to send */}
 
 
-        <Chatsmodal showState={chooseAmount} onBgPress={clearModals}>
+        <Chatsmodal showState={chooseAmount} onBgPress={clearModalsAll}>
           <Text style={styles.chooseAmountHeader}>How much do you want to send?</Text>
 
           <View style={styles.amountBlockWrap}>
             <View style={{flexDirection: "row", alignItems: "center"}}>
               {/* minus icon */}
                 {/* <Minusicon /> */}
-                <TextInput style={styles.addedAmountText} keyboardType="numeric" placeholder="N0.00" value={amount} onChangeText={handleAmountChange} />
+                <TextInput style={styles.addedAmountText}
+                 keyboardType="numeric"
+                 placeholder="N0.00"
+                //  value={amount.value}
+                 onChangeText={handleAmountChange} />
                 {/* <Text style={styles.addedAmountText}>N0.00</Text> */}
               {/* Add icon */}
               {/* <Plusicon /> */}
@@ -103,7 +117,7 @@ const AllChatsModal = ({
             })}
           </View>
 
-          <TouchableOpacity style={styles.buttonWrapper} onPress={()=>{clearModals(); setEnterPin(true)}}>
+          <TouchableOpacity style={styles.buttonWrapper} onPress={()=>{handleToNext}}>
               <Text style={styles.buttonTextValue}>Proceed</Text>
           </TouchableOpacity>
         </Chatsmodal>   
@@ -112,7 +126,7 @@ const AllChatsModal = ({
 
       {/* Enter Secure Pin */}
 
-      <Chatsmodal showState={enterPin} onBgPress={loading?()=>{}:clearModals} >
+      <Chatsmodal showState={enterPin} onBgPress={loading?()=>{}:clearModalsAll} >
 
         <Text style={styles.securePinHeader}>Amount to send : <Text style={{...FONTS.bold}}>N{amount.name}</Text> + N0 Charges</Text>
 
@@ -136,7 +150,7 @@ const AllChatsModal = ({
 
               {/* Sending success Modal */}
 
-      <Chatsmodal showState={sendSuccess} onBgPress={clearModals}>
+      <Chatsmodal showState={sendSuccess} onBgPress={clearModalsAll}>
         <View style={{ alignItems: "center"}}>
         <LottieView source={Successcheckanimate} autoPlay loop style={{width: 118, height: 118, marginBottom: 15 }}/>
         <Text style={styles.sendingSuccessText}>Transaction Successful</Text>

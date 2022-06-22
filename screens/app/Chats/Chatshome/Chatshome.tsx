@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState , useContext} from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
@@ -13,13 +13,15 @@ import Chat from "./Chat";
 
 import Contact from "./Contact";
 import { RFValue } from "react-native-responsive-fontsize";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
+import useContact from "../../../../utils/customContact";
 
 const { Chatsearchicon, Cryinganimate } = icons;
 
 
 
 
-const Chatshome = () => {
+const Chatshome = ({navigation}) => {
   const {authdata} = useContext(AuthContext);
 
   const [chats, setChats] = useState<any>([])
@@ -29,8 +31,28 @@ const Chatshome = () => {
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid
 
-  console.log(chats, "the chats")
-  // console.log(contacts)
+  
+  const [contactsResolved, setContactResolved] = useState([])
+  const {contacts} = useContact()
+  
+  useEffect(()=>{
+      const allcontacts = []
+      contacts.forEach((contact)=>{
+        const numbersArr = []
+        contact?.phoneNumbers?.forEach((phone)=>{
+          const number =  phone.number.replace(/\s+/g, '')
+          if(!numbersArr.includes(number)){
+            numbersArr.push(number)
+          }
+        })
+        for(let num of numbersArr){
+            if(num){
+                allcontacts.push(num)
+              }
+        }
+      })
+      getAllContactInFeather(allcontacts)
+    },[contacts])
 
   useEffect(()=>{
     // getAllChats()
@@ -71,7 +93,15 @@ const Chatshome = () => {
     }
   },[])
   
-  
+  const getAllContactInFeather = async (allcontacts)=>{
+    try{
+        const response = await axiosCustom.post("/user/multiple",{numbers:allcontacts})
+        setContactResolved(response.data.data)
+        
+    }catch(err){
+      console.log(err.response)
+    }
+  }
 
   const getAllChats = async ()=>{
     setLoading(true);
@@ -113,9 +143,9 @@ const Chatshome = () => {
             <Text style={styles.amountOfChats}>{chats.length + chattwos.length}</Text>
           </View>
         </View>
-        <View>
+        <TouchableOpacity  onPress={()=>navigation.navigate("Usersearch",{phoneContact:contactsResolved})} >
           <Chatsearchicon />
-        </View>
+        </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
         <View style={{ marginTop: 5, marginBottom: 37 }}>
@@ -124,7 +154,7 @@ const Chatshome = () => {
               Feather Users In Your Contact
             </Text>
           </View>
-          <Contact />  
+          <Contact contactsResolved={contactsResolved} />  
         </View>
         <View>
           <View style={styles.chatHeader}>

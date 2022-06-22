@@ -168,8 +168,8 @@ const Chatsdm = ({navigation,route}) => {
     setUserPin(text)
   }
   const handleAmountChange = text=>{
-    const amount = Number(text)
-    setAmount(text)
+    const amount = Number(text).toFixed(2);
+    setAmount({value:amount, name:text});
   }
   const handleTextChange = (text)=>{
     setchattext(text)
@@ -183,7 +183,16 @@ const Chatsdm = ({navigation,route}) => {
     setChooseAmount(false)
     setEnterPin(false)
     setSendSuccess(false)
-    setUserPin("")
+    setUserPin("");
+    // setAmount({value:0,name:""})
+  }
+  const clearModalsAll = ()=>{
+    setSendCashModal(false)
+    setChooseAmount(false)
+    setEnterPin(false)
+    setSendSuccess(false)
+    setUserPin("");
+    setAmount({value:0,name:""})
   }
 
   const renderReceiverHTML = (mes)=>{
@@ -239,6 +248,7 @@ const Chatsdm = ({navigation,route}) => {
         enterPin={enterPin}
         sendSuccess={sendSuccess} 
         clearModals={clearModals}
+        clearModalsAll={clearModalsAll}
         setChooseAmount={setChooseAmount}
         setSendCashModal={setSendCashModal}
         amount={amount}
