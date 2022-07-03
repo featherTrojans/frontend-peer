@@ -58,17 +58,17 @@ const Chatshome = ({navigation}) => {
     // getAllChats()
   },[])
 
-  // snapshot1
+  // snapshot1 
   useEffect(()=>{
     setLoading(true)
     const chatsRef = collection(db,"chatstwo")
-      const chatQuery1 = query(chatsRef, where("id1","==",authId))
+    const chatQuery1 = query(chatsRef, where("id1","==",authId), orderBy("createdAt","desc"))
     const unsub = onSnapshot(chatQuery1 , (docs) => {
       const newdata = []
       docs.forEach((change) => { 
             newdata.push(change.data())
       });
-      setChattwos(newdata)
+      setChattwos(newdata);
     });
     setLoading(false)
     return ()=>{
@@ -79,7 +79,7 @@ const Chatshome = ({navigation}) => {
   // snapshot2
   useEffect(()=>{
     const chatsRef = collection(db,"chatstwo")
-    const chatQuery1 = query(chatsRef, where("id2","==",authId))
+    const chatQuery1 = query(chatsRef, where("id2","==",authId), orderBy("createdAt","desc"))
     const unsub = onSnapshot(chatQuery1 , (docs) => {
       const newdata = []
       docs.forEach((change) => { 
@@ -99,7 +99,7 @@ const Chatshome = ({navigation}) => {
         setContactResolved(response.data.data)
         
     }catch(err){
-      console.log(err.response)
+      // console.log(err.response)
     }
   }
 
