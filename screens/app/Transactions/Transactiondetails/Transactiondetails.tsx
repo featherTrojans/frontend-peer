@@ -597,7 +597,7 @@ const Transactiondetails = ({ navigation, route }) => {
               style={[styles.eachDetailValue, { textTransform: "uppercase" }]}
             >
               NGN {amountFormatter(amount)} + NGN 0.00
-              <Text style={{ textTransform: "capitalize" }}>Charges</Text>
+              <Text style={{ textTransform: "capitalize" }}> Charges</Text>
             </Text>
           </View>
         </View>
