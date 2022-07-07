@@ -46,8 +46,6 @@ const Chatsdm = ({navigation,route}) => {
 
   const { sendPushNotification, expoPushToken } = usePushNotification();
 
-
-
   const scrollViewRef = useRef<ScrollView>();
   
   useEffect(() => {    
@@ -91,12 +89,12 @@ const Chatsdm = ({navigation,route}) => {
         setchatid(id2id1)
         return
       }
-      // create new document
-      await setDoc(doc(db,"chatstwo",id1id2),{
-        id1: authId,
-        id2: userInfo.userUid
-      })
-      setchatid(id1id2)
+      // // create new document
+      // await setDoc(doc(db,"chatstwo",id1id2),{
+      //   id1: authId,
+      //   id2: userInfo.userUid
+      // })
+      // setchatid(id1id2)
     }catch(err){
       console.log(err)
     }
@@ -129,7 +127,7 @@ const Chatsdm = ({navigation,route}) => {
     if(!chatid){
       // first create document
      chatId = `${authId}-${userInfo.userUid}`
-      await setDoc(doc(db,"chatstwo",id1id2),{
+      await setDoc(doc(db,"chatstwo",chatId),{
         id1: authId,
         id2: userInfo.userUid
       })
