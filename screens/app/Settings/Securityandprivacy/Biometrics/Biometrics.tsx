@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Switch,
 } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styles } from "../Changepassword/Changepassword.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import { Bottombtn, Inputinsettings, Loader } from "../../../../../components";
@@ -19,16 +19,80 @@ import showerror from "../../../../../utils/errorMessage";
 import axiosCustom from "../../../../../httpRequests/axiosCustom";
 import { AuthContext } from "../../../../../context/AuthContext";
 import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  getBiometricsAccess,
+  removeBiometricsAccess,
+  saveBiometricsAccess,
+} from "../../../../../utils/biometrics";
+import { ContactTypes } from "expo-contacts";
 
 const { Backarrow, Fingerprinticon } = icons;
 
 const Biometrics = () => {
   const navigation = useNavigation();
-  const [isEnabled, setIsEnabled] = useState(true);
-  const { allowBiometrics ,setAllowBiometrics} = useContext(AuthContext)
+  const [isEnabled, setIsEnabled] = useState(false);
+  const { allowBiometrics, setAllowBiometrics } = useContext(AuthContext);
+
+  // const toggleSwitch = () => {
+  //   setAllowBiometrics(!allowBiometrics);
+  //   if(!allowBiometrics){
+  //     saveBiometricsAccess()
+  //   }
+  //   else{
+  //   removeBiometricsAccess()
+  //   }
+  // }
+
+
+  
+
+
+
+
+
   const toggleSwitch = () => {
-    setAllowBiometrics(!allowBiometrics); 
-  } 
+    setIsEnabled((previousState) => !previousState);
+  };
+
+  useEffect(() => {
+    const checkStatus = async () => {
+      const response = await getBiometricsAccess();
+      console.log(response, "here is it");
+
+      if (response === "true") {
+        setIsEnabled(true);
+        saveBiometricsAccess();
+        console.log("setted to true")
+      } else {
+        setIsEnabled(false);
+        removeBiometricsAccess()
+        console.log('setted to false')
+      }
+      console.log(isEnabled, "isENabled");
+    }; 
+    console.log(isEnabled, "Status")
+
+
+    checkStatus();
+  }, [isEnabled]);
+
+
+  //   useEffect(() => {
+  //   if (isEnabled) {
+  //     saveBiometricsAccess();
+  //   } else {
+  //     removeBiometricsAccess();
+  //   }
+  // }, [isEnabled]);
+
+
+
+
+
+
+
+
+
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -79,10 +143,10 @@ const Biometrics = () => {
 
           <Switch
             trackColor={{ false: COLORS.switchOff, true: COLORS.switchOn }}
-            thumbColor={allowBiometrics ? COLORS.blue7 : COLORS.grey5}
-            ios_backgroundColor={allowBiometrics ? COLORS.switchOn : COLORS.switchOff}
+            thumbColor={false ? COLORS.blue7 : COLORS.grey5}
+            ios_backgroundColor={false ? COLORS.switchOn : COLORS.switchOff}
             onValueChange={toggleSwitch}
-            value={allowBiometrics}
+            value={isEnabled}
           />
         </View>
       </View>

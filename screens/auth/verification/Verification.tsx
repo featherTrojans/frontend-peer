@@ -45,6 +45,10 @@ const Verification = ({route,navigation}) => {
       clearInterval(timer)
     }
   }, [])
+
+
+
+  
   
   useEffect(()=>{
     // handleResendOTP()

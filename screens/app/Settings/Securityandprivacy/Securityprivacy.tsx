@@ -6,11 +6,12 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { styles } from "./Securityprivacy.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getBiometricsAccess } from "../../../../utils/biometrics";
 
 const { Backarrow, Forwardarrowblue, Outlinedlock, Fingerprinticon } = icons;
 
@@ -21,6 +22,9 @@ type EachbtnProps = {
 };
 
 const Eachbtn = ({ icon, title, onpress }: EachbtnProps) => {
+
+
+
   return (
     <TouchableOpacity
       style={{
@@ -43,7 +47,6 @@ const Eachbtn = ({ icon, title, onpress }: EachbtnProps) => {
             ...fontsize.small,
             ...FONTS.regular,
             color: COLORS.grey5,
-            
           }}
         >
           {title}
@@ -95,6 +98,7 @@ const Securityprivacy = ({ navigation }) => {
           onpress={() => navigation.navigate("Biometrics")}
         />
       </View>
+
     </SafeAreaView>
   );
 };

@@ -36,7 +36,7 @@ import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getCredentials, saveCredentials } from "../../../utils/biometrics";
+import { getBiometricsAccess, getCredentials, saveCredentials } from "../../../utils/biometrics";
 
 const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
 
@@ -53,10 +53,13 @@ const validationSchema = Yup.object().shape({
 
 const Login = ({ navigation }: any) => {
   const [hidePassword, setHidePassword] = useState(true);
-  const { setToken, allowBiometrics, setAllowBiometrics } = useContext(AuthContext);
+  const { setToken, allowBiometrics, setAllowBiometrics } =
+    useContext(AuthContext);
+
   const [isBiometricAllowed, setIsBiometricAllowed] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [enableBiometrics, setEnableBiometrics] = useState<null |string>(null)
   const toast = useToast();
 
   const loginFunc = async (values) => {
@@ -71,7 +74,7 @@ const Login = ({ navigation }: any) => {
           values.username.trim(),
           values.password.trim()
         );
-        setAllowBiometrics(true)
+        setAllowBiometrics(true);
       }
 
       //store token in ASYNC STORAGE
@@ -107,13 +110,24 @@ const Login = ({ navigation }: any) => {
     }
   };
 
-  ///To check if the devuie supports biometrics
+  ///To check if the device supports biometrics
   useEffect(() => {
     (async () => {
       const compatible = await LocalAuthentication.hasHardwareAsync();
       setIsBiometricAllowed(compatible);
     })();
   });
+
+
+  useEffect(() => {
+    const checkStatus = async () => {
+      const response = await getBiometricsAccess();
+      console.log(response, "here is it");
+      setEnableBiometrics(response)
+    };
+
+    checkStatus()
+  }, []);
 
   const biometricsLogin = async () => {
     try {
@@ -227,9 +241,9 @@ const Login = ({ navigation }: any) => {
                     <Text
                       style={[
                         styles.biometrics,
-                        { opacity: isBiometricAllowed && allowBiometrics ? 1 : 0.2 },
+                        { opacity: isBiometricAllowed && enableBiometrics? 1 : 0.2 },
                       ]}
-                      onPress={allowBiometrics ? () => biometricsLogin() : null}
+                      onPress={isBiometricAllowed && enableBiometrics ? biometricsLogin : null}
                     >
                       Use Biometrics
                     </Text>

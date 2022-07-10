@@ -1,8 +1,5 @@
 import * as SecureStore from "expo-secure-store";
 
-
-
-
 const saveCredentials = async (username, password) => {
   const credentials = { username, password };
   try {
@@ -13,21 +10,62 @@ const saveCredentials = async (username, password) => {
   }
 };
 
-
-
 const getCredentials = async () => {
-    try {
-      const credentials = await SecureStore.getItemAsync('credentials');
-      if (credentials) {
-          const myCreds = JSON.parse(credentials);
-          return ({
-              username: myCreds.username,
-              password: myCreds.password,
-          });
-      } 
-    } catch (e) {
-      console.log(e);
+  try {
+    const credentials = await SecureStore.getItemAsync("credentials");
+    if (credentials) {
+      const myCreds = JSON.parse(credentials);
+      return {
+        username: myCreds.username,
+        password: myCreds.password,
+      };
     }
-  };
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-  export {saveCredentials, getCredentials};
+
+const deleteCredentials = async () => {
+  try {
+     await SecureStore.deleteItemAsync("credentials");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const saveBiometricsAccess = async () => {
+  try {
+    await SecureStore.setItemAsync("savebiometrics", "true");
+    console.log("Access stored")
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getBiometricsAccess = async () => {
+  try {
+   const checkIfAccess = await SecureStore.getItemAsync("savebiometrics");
+   return checkIfAccess
+    console.log("Get Access Status", checkIfAccess)
+  } catch (err) {
+    console.log(err);
+  }
+};
+const removeBiometricsAccess = async () => {
+  try {
+    await SecureStore.deleteItemAsync("savebiometrics");
+    console.log("Access locked")
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export {
+  saveCredentials,
+  getCredentials,
+  deleteCredentials,
+  saveBiometricsAccess,
+  getBiometricsAccess,
+  removeBiometricsAccess
+};
