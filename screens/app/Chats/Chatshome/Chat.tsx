@@ -49,53 +49,46 @@ const Chat = ({userId, chatinfo}:chatProps) => {
 
 
 const AllChats = ({chats, chattwos, authId})=>{
-  // const [allChats, setAllChats] = useState([]);
+  const [allChats, setAllChats] = useState([]);
 
-  // console.log(allChats);
-  // useEffect(()=>{
-  //   //algorithm
-  //   const arranged = [];
-  //   let i = 0;
-  //   let j = 0;
+  console.log(allChats);
+  useEffect(()=>{
+    //algorithm
+    const arranged = [];
+    let i = 0;
+    let j = 0;
 
-  //   while(i < chats.length && j < chattwos.length){
-  //     if(chats[i].createdAt > chattwos[j].createdAt){
-  //       arranged.push(chats[i])
-  //       i++
-  //     }else{
-  //       arranged.push(chattwos[j])
-  //       j++
-  //     }
-  //   }
-  //   while(i < chats.length){
-  //     arranged.push(chats[i])
-  //     i++
-  //    }
-  //   while(j < chattwos.length){
-  //     arranged.push(chattwos[j])
-  //       j++
-  //     }
+    while(i < chats.length && j < chattwos.length){
+      if(chats[i].createdAt > chattwos[j].createdAt){
+        arranged.push(chats[i])
+        i++
+      }else{
+        arranged.push(chattwos[j])
+        j++
+      }
+    }
+    while(i < chats.length){
+      arranged.push(chats[i])
+      i++
+     }
+    while(j < chattwos.length){
+      arranged.push(chattwos[j])
+        j++
+      }
   
-  //   setAllChats(arranged);
+    setAllChats(arranged);
 
-  // },[chats, chattwos])
+  },[chats, chattwos])
 
   
     return (
       <>
         {
-          chattwos.map((chat)=>{
+          allChats.map((chat)=>{
             let userid = chat.id1 !== authId? chat.id1 : chat.id2 
             return (<Chat key={userid} userId= {userid} chatinfo={chat} />)
           })
         }
-        {
-          chats.map((chat)=>{
-            let userid = chat.id1 !== authId? chat.id1 : chat.id2 
-            return (<Chat key={userid} userId= {userid} chatinfo={chat} />)
-          })
-        }
-        
       </>
     )
   }
