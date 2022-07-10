@@ -61,29 +61,29 @@ const Biometrics = () => {
 
       if (response === "true") {
         setIsEnabled(true);
-        saveBiometricsAccess();
-        console.log("setted to true")
+        // saveBiometricsAccess();
+        // console.log("setted to true")
       } else {
         setIsEnabled(false);
-        removeBiometricsAccess()
-        console.log('setted to false')
+        // removeBiometricsAccess()
+        // console.log('setted to false')
       }
-      console.log(isEnabled, "isENabled");
+      // console.log(isEnabled, "isENabled");
     }; 
-    console.log(isEnabled, "Status")
+    // console.log(isEnabled, "Status")
 
 
     checkStatus();
+  }, []);
+
+
+    useEffect(() => {
+    if (isEnabled) {
+      saveBiometricsAccess();
+    } else {
+      removeBiometricsAccess();
+    }
   }, [isEnabled]);
-
-
-  //   useEffect(() => {
-  //   if (isEnabled) {
-  //     saveBiometricsAccess();
-  //   } else {
-  //     removeBiometricsAccess();
-  //   }
-  // }, [isEnabled]);
 
 
 
