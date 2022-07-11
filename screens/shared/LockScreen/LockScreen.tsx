@@ -7,7 +7,7 @@ import {
   TouchableNativeFeedback,
   StatusBar,
 } from "react-native";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize, SIZES, icons } from "../../../constants";
 import { styles } from "./LockScreen.style";
