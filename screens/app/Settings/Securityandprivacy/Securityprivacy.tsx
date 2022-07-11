@@ -99,7 +99,7 @@ const Securityprivacy = ({ navigation }) => {
         />
       </View>
 
-    </SafeAreaView>
+     </SafeAreaView>
   );
 };
 

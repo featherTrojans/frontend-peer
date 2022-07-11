@@ -1,4 +1,5 @@
 import axios from "axios";
+import serversettings from "../utils/serversettings";
 
 const Server = {
     live:"https://featherafrica.co:3300/api/v1/",
@@ -6,7 +7,7 @@ const Server = {
 }
 
 const axiosCustom = axios.create({
-    baseURL:Server.live
+    baseURL: serversettings.apiUrl
 })
 
 
