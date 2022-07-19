@@ -1,4 +1,4 @@
-import {useRef, useEffect, useState} from "react";
+import React, {useRef, useEffect, useState} from "react";
 // import { StatusBar } from 'expo-status-bar';
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications'
@@ -6,11 +6,11 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { AuthProvider } from './context/AuthContext';
 import MainNavigation from './navigation';
-import { Text , View, LogBox} from 'react-native';
-import { TouchableOpacity } from '@gorhom/bottom-sheet';
+import { Text , View, LogBox, TouchableOpacity} from 'react-native';
 import {icons} from "./constants"
 import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 
 const { Cancelicon } = icons;
@@ -69,6 +69,7 @@ export default function App() {
         justifyContent: "space-between",
         alignItems: "center",
         width: "90%",
+        marginTop: getStatusBarHeight(true),
         marginHorizontal:25,}}>
         <Text style={{color: "#fff",fontSize: 14,lineHeight:20}}>{props.message}</Text>    
         <TouchableOpacity onPress={props.onHide}>
