@@ -8,6 +8,7 @@ import {
   Animated,
   ActivityIndicator,
   Button,
+  TouchableOpacity
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
@@ -20,7 +21,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Defaultuseravatar from "../../../../assets/icons/Defaultuseravatar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { string } from "yup";
-import { TouchableOpacity } from "react-native-gesture-handler";
+// import { TouchableOpacity } from "react-native-gesture-handler";
 import { AuthContext } from "../../../../context/AuthContext";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
@@ -164,14 +165,20 @@ const Basicsettings = () => {
             return (
               <React.Fragment>
                 {isSubmitting && <Loader />}
-                <View style={styles.avatarContainer}>
+
+
+                <TouchableOpacity style={styles.avatarContainer} activeOpacity={0.8}>
                   <View style={styles.avatarBg}>
                     <Defaultuseravatar />
                   </View>
-                  {/* <Text style={styles.avatarText}>
-                    Tap to change display picture
-                  </Text> */}
-                </View>
+                  <Text style={styles.avatarText}>
+                    Tap to change
+                  </Text>
+                </TouchableOpacity>
+
+
+
+
                 <View style={styles.editInputContainer}>
                   <View
                     style={{
