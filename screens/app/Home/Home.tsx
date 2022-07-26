@@ -105,19 +105,29 @@ const Home = ({ navigation }: { navigation: any }) => {
     }
   };
 
-  //setting up websocket
+  // setting up websocket
   // useEffect(() => {
   //   const ws = new WebSocket(
-  //     `wss://feather.com.ng:3300/balance/${authdata.userId}`,
+  //     "wss://feather.com.ng:3300/balance/ZkemEIDqRY",
   //     "realtime"
   //   );
-  //   ws.onmessage = (data) => {
-  //     // i want to update the context
-  //     if (data.data == authdata.walletBal) return;
-  //     setAuthData({ ...authdata, walletBal: data.data });
-  //   };
 
-  //   return ws.close();
+  //   ws.onopen = (data) => {
+  //     console.log("Opened", data);
+      
+  //   }
+  //   ws.onmessage = (data) => {
+  //     console.log(data.data, "Here is the websocket data");
+      
+  //     // i want to update the context
+  //     // if (data.data == authdata.walletBal) return;
+  //     // setAuthData({ ...authdata, walletBal: data.data });
+  //   };
+  //   ws.onerror = (e) => {
+  //     console.log(e.message, "there is an error connecting");
+  //   }
+
+  //   // return ws.close();
   // }, []);
 
   const toTop = () => {

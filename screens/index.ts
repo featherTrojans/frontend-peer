@@ -72,6 +72,10 @@ import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
 import DepositSummary from "./app/Deposit/DepositSummary/DepositSummary";
 import Updatedeposit from "./app/Deposit/Updatedeposit/Updatedeposit";
 import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
+import Walletmanagement from "./app/Settings/Walletmanagement/Walletmanagement";
+import Addbvn from "./app/Settings/Addbvn/Addbvn";
+
+
 
 import Paybills from "./app/Billpayments/Paybills/Paybills";
 import Airtimeamount from "./app/Billpayments/Airtime/Airtimeamount/Airtimeamount";
@@ -137,6 +141,8 @@ export {
   Withdraw,
   Withdrawpreview,
   Editmeetup,
+  Walletmanagement,
+  Addbvn,
   Pendingwithdraw,
   Acceptedwithdraw,
   Requestsummary,

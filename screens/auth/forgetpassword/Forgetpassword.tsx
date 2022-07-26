@@ -14,6 +14,9 @@ const Forgetpassword = ({ navigation }) => {
   const toast = useToast();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
+
+  
   const handleSubmit = async () => {
     try {
       setLoading(true);
@@ -28,6 +31,11 @@ const Forgetpassword = ({ navigation }) => {
       setLoading(false);
     }
   };
+
+  
+
+
+
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <Customstatusbar />

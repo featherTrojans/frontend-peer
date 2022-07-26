@@ -127,6 +127,9 @@ import Lettercaseicon from "../assets/icons/Lettercaseicon";
 import Arrowupicon from "../assets/icons/Arrowupicon";
 import Successtranfericon from "../assets/icons/Successtranfericon";
 import Sendmessageicon from "../assets/icons/Sendmessageicon";
+import Shareaccounticon from "../assets/icons/Shareaccounticon";
+import Bvnlock from "../assets/icons/Bvnlock";
+
 import SendTF from "../assets/icons/SendTf"
 
 
@@ -213,13 +216,13 @@ export default {
   Smallcancel,
   Smallcomment,
   Smallphone,
-
+  Bvnlock,
   Useravatar,
   Logoavatar,
   Upgradenowarrow,
   Withdrawicon,
   Depositicon,
-
+  Shareaccounticon,
   SecureDot,
   Chatsearchicon,
   SadEmoji,
@@ -282,6 +285,7 @@ export default {
   Featherdefault,
   Userdefaultmedium,
   Feathertextlogo,
+  
   Markedicon,
   Bonusicon,
   SmileEmoji,

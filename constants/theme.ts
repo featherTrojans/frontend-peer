@@ -16,6 +16,7 @@ export const COLORS = {
   blue5: "#4d53e0",
   blue6: "#003AD6",
   blue7: "#001757",
+  blue8: "#0548D7",
   transparentBlue: "#F2F5FF",
 
 
@@ -39,6 +40,7 @@ export const COLORS = {
 
   yellow1: "#FF9D00",
   yellow2: "#FFC84B",
+  yellow3: "#FFC100",
   green1: "#00C9AA",
   green2: "#25DBA3",
   pink1: "#E00070",

@@ -50,6 +50,8 @@ Securityprivacy: undefined;
 Changepassword: undefined;
 Changepin: undefined;
 Biometrics: undefined;
+Walletmanagement: undefined;
+Addbvn: undefined;
 
 
   //Withdraw

@@ -181,6 +181,7 @@ const Transactions = ({ navigation }: any) => {
   const handleRefresh = () => {
     setRefreshing(true);
     getAllTransactions();
+    
   };
 
   const Listheader = () => {

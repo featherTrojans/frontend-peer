@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { styles } from "./Login.styles";
 import { COLORS, icons, SIZES } from "../../../constants";
 

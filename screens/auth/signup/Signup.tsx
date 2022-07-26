@@ -48,6 +48,7 @@ useEffect(() => {
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
           { useNativeDriver: false }
         )}
+        
     >
       {/* <Personal navigation={navigation}/>
       <Security />

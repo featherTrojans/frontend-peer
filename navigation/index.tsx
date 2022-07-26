@@ -70,6 +70,8 @@ import {
   Changepassword,
   Changepin,
   Biometrics,
+  Walletmanagement,
+  Addbvn,
 
   //Withdraw
   Requestnew,
@@ -127,9 +129,9 @@ import {
   Airtimepurchasepin,
   Electricityamount,
   Electricitydetails,
+
 } from "../screens";
 // import { LockScreen } from "../screens";
-
 import { LockScreen } from "../screens";
 
 import { Loader, Tab } from "../components";
@@ -568,6 +570,10 @@ const RootNavigator = ({ initialBoarded }) => {
               component={Securityprivacy}
             />
             <AppStack.Screen name="Changepassword" component={Changepassword} />
+            <AppStack.Screen name="Walletmanagement" component={Walletmanagement} />
+            <AppStack.Screen name="Addbvn" component={Addbvn} />
+
+
             <AppStack.Screen name="Changepin" component={Changepin} />
             <AppStack.Screen name="Biometrics" component={Biometrics} />
           </AppStack.Group>

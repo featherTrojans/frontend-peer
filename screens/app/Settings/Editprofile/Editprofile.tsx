@@ -13,7 +13,7 @@ import {
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-
+import * as ImagePicker from 'expo-image-picker';
 import { styles } from "./Editprofile.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import { Bottombtn, Loader } from "../../../../components";
@@ -107,11 +107,47 @@ const Basicsettings = () => {
   const [usernamename, setusernamename] = useState(
     authdata?.userDetails?.username
   );
+  const [loading, setLoading] = useState(false)
   const handleUsernameChange = (text: string) => {
     setusernamename(text);
     // and debound
     getuserinfo(text);
   };
+
+
+
+  const handleImageUpload = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+          try {
+            setLoading(true);
+            const formdata = new FormData();
+            formdata.append("media", {
+              name: `${authdata.username}`,
+              type: "image/jpeg",
+              uri: result.uri, 
+            });
+            // const response = await updateUserAvatar(formdata);
+            // setUserData({ ...userData, user: response });
+          } catch (err) {
+            console.log(err);
+          } finally {
+            setLoading(false);
+          }
+        }
+  }
+
+
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -167,7 +203,7 @@ const Basicsettings = () => {
                 {isSubmitting && <Loader />}
 
 
-                <TouchableOpacity style={styles.avatarContainer} activeOpacity={0.8}>
+                <TouchableOpacity style={styles.avatarContainer} activeOpacity={0.8} onPress={}>
                   <View style={styles.avatarBg}>
                     <Defaultuseravatar />
                   </View>

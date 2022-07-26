@@ -29,26 +29,18 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   profileName: {
-    ...fontsize.bmedium,
+    ...fontsize.xmedium,
     ...FONTS.bold,
-    marginBottom: 7,
-    marginTop: 24,
-    textAlign: 'center',
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    marginBottom: 6
   },
   profileUsername: {
-    ...fontsize.bsmall,
+    ...fontsize.small,
     ...FONTS.regular,
     color: COLORS.grey8,
     textTransform: "lowercase",
   },
-  profileExtraContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    width: "100%",
-    marginTop: 24,
-    alignItems: "center",
-  },
+
   alignedContainer: {
     flexDirection: "row",
     alignItems: "center",
