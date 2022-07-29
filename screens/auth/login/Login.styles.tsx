@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 25,
-    backgroundColor: COLORS.blue6,
+    backgroundColor: COLORS.white3,
   },
   logoWrapper: {
     width: SIZES.width - 50,
@@ -20,50 +20,51 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputContainer: {
-    height: 62,
+    height: 53,
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 0.5,
+    // borderWidth: 0.5,
     paddingHorizontal: 20,
-    borderRadius: 10,
-    borderColor: COLORS.inputBorderColor,
-    backgroundColor: COLORS.blue6,
+    borderRadius: 5,
+    borderColor: "transparent",
+    backgroundColor: COLORS.grey1,
   },
   textInput: {
     flex: 1,
-    borderColor: COLORS.white,
-    color: COLORS.white,
+    // borderColor: COLORS.white,
+    color: COLORS.blue9,
     ...FONTS.light,
-    ...fontsize.small,
+    ...fontsize.smallest,
     paddingLeft: 12.5,
   },
   inputiconwrapper: {
-    borderRightWidth: 1,
-    borderColor: COLORS.white,
+    borderRightWidth: .5,
+    borderColor: COLORS.grey15,
     paddingRight: 12,
   },
   biometrics: {
-    ...fontsize.smaller,
+    ...fontsize.smallest,
     ...FONTS.regular,
-    color: COLORS.white,
+    color: COLORS.blue9,
   },
   forgetPassword: {
-    ...fontsize.smaller,
-    ...FONTS.bold,
-    color: COLORS.white,
+    ...fontsize.smallest,
+    ...FONTS.medium,
+    color: COLORS.blue9,
   },
   loginbtn: {
-    backgroundColor: COLORS.white,
-    borderRadius: 10,
+    backgroundColor: COLORS.blue6,
+    borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
-    height: 62,
+    // height: 62,
+    paddingVertical: 20,
     marginBottom: 38,
   },
   loginbtnText: {
-    ...fontsize.small,
-    ...FONTS.bold,
-    color: COLORS.blue6,
+    ...fontsize.smallest,
+    ...FONTS.medium,
+    color: COLORS.white,
   },
   haveanaccount: {
     marginBottom: 81,
@@ -72,12 +73,13 @@ export const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   haveaccounttext: {
-    color: COLORS.white,
-    ...fontsize.small,
+    color: COLORS.blue9,
+    ...fontsize.smallest,
     ...FONTS.regular,
   },
   registerText: { 
-    color: COLORS.yellow1, 
+    // color: COLORS.yellow1, 
+    ...fontsize.smallest,
     ...FONTS.bold 
   }
 });

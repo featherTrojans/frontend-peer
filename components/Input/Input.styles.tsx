@@ -5,25 +5,25 @@ import { COLORS, FONTS, fontsize} from "../../constants";
 
 export const styles = StyleSheet.create({
     inputContainer: {
-      height: RFValue(62),
+      height: 53,
       flexDirection: "row",
       alignItems: "center",
-      borderWidth: 0.5,
+      // borderWidth: 0.5,
       paddingHorizontal: 20,
-      borderRadius: 10,
-      backgroundColor: COLORS.white,
+      borderRadius: 5,
+      backgroundColor: COLORS.grey1,
+      borderColor: "transparent"
     },
     textInput: {
       flex: 1,
-      borderColor: COLORS.white,
-      color: COLORS.black,
+      color: COLORS.blue9,
       ...FONTS.light,
-      ...fontsize.small,
+      ...fontsize.smallest,
       paddingLeft: 12.5,
     },
     inputiconwrapper: {
-      borderRightWidth: 1,
-      borderColor: COLORS.black,
+      borderRightWidth: .5,
+      borderColor: COLORS.grey15,
       paddingRight: 12,
     },
   });

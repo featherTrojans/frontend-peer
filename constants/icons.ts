@@ -57,6 +57,7 @@ import Smallcomment from "../assets/icons/Smallcomment";
 import Smallphone from "../assets/icons/Smallphone";
 import Useravatar from "../assets/icons/Useravatar";
 import Logoavatar from "../assets/icons/Logoavatar";
+import Walletmanageicon from "../assets/icons/Walletmanageicon";
 import Upgradenowarrow from "../assets/icons/Upgradenowarrow";
 import Withdrawicon from "../assets/icons/Withdrawicon";
 import Depositicon from "../assets/icons/Depositicon";
@@ -64,7 +65,7 @@ import Bonusicon from "../assets/icons/Bonusicon";
 import SadEmoji from "../assets/icons/SadEmoji";
 import TransferIcon from "../assets/icons/TransferIcon";
 import Location from "../assets/icons/Location";
-
+import Goldenstaricon from "../assets/icons/Goldenstaricon";
 import SecureDot from "../assets/icons/SecureDot";
 import Chatsearchicon from "../assets/icons/Chatsearchicon";
 import Copyclipboard from "../assets/icons/Copyclipboard";
@@ -129,8 +130,11 @@ import Successtranfericon from "../assets/icons/Successtranfericon";
 import Sendmessageicon from "../assets/icons/Sendmessageicon";
 import Shareaccounticon from "../assets/icons/Shareaccounticon";
 import Bvnlock from "../assets/icons/Bvnlock";
+import Withdrawalnotificationicon from "../assets/icons/Withdrawalnotificationicon";
 
 import SendTF from "../assets/icons/SendTf"
+import Patternbg from "../assets/icons/Patternbg";
+import Whitebackarrow from "../assets/icons/Whitebackarrow";
 
 
 
@@ -147,6 +151,7 @@ import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.j
 import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json";
 import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json"
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
+import Dollaricon from "../assets/icons/Dollaricon";
 
 
 // Receiverimage
@@ -195,8 +200,9 @@ export default {
   Requestee1,
   Requestee2,
   Requestee3,
-
+  Goldenstaricon,
   Acceptedcheck,
+  Patternbg,
   Featherwallet,
   Bankaccount,
   Debitcard,
@@ -205,6 +211,7 @@ export default {
   Senderimage,
   Receivingarrow,
   Sendingarrow,
+  Whitebackarrow,
   Chatdark,
   Cancelrequest,
   Renegotiate,
@@ -226,6 +233,7 @@ export default {
   SecureDot,
   Chatsearchicon,
   SadEmoji,
+  Walletmanageicon,
   TransferIcon,
   Location,
   Copyclipboard,
@@ -254,6 +262,7 @@ export default {
   Check,
   WrongIcon,
   Newtransfericon,
+Dollaricon,
   Fundwalleticon,
   Paybillicon,
   Passwordhideicon,
@@ -269,6 +278,7 @@ export default {
   Feathersmallicon,
   Outlinedlock,
   Forwardarrowblue,
+  Withdrawalnotificationicon,
   Fingerprinticon,
   Sharereceipt,
   Downloadreceipt,

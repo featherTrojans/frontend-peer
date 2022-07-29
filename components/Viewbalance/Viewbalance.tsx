@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useContext, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
-import { styles } from "./Viewbalance.styles";
+import { viewbalancestyles } from "./Viewbalance.styles";
 import { AuthContext } from "../../context/AuthContext";
 import amountFormatter from "../../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
@@ -19,30 +19,28 @@ const Viewbalance = ({ navigate }: any) => {
   const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
 
   return (
-    <View style={styles.container}>
+    <View style={viewbalancestyles.container}>
       {/* Top part of the block */}
-      <View style={styles.topContainer}>
-        <View style={{ flex: 1, marginRight: 20}}>
-          <Text style={styles.primaryText}>Primary Wallet</Text>
-          <View style={styles.underLine} />
+      <View style={viewbalancestyles.topContainer}>
+        <View style={{ flex: 1, marginRight: 20 }}>
+          <Text style={viewbalancestyles.primaryText}>Primary Wallet</Text>
+          <View style={viewbalancestyles.underLine} />
         </View>
 
         <TouchableOpacity
-          style={styles.addCashBg}
+          style={viewbalancestyles.addCashBg}
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Addcash")}
         >
-          <Text style={styles.addCashText}>Add Cash</Text>
-          <Arrowright />
+          <Text style={viewbalancestyles.addCashText}>Add Cash</Text>
         </TouchableOpacity>
       </View>
       {/* Bottom part of the block */}
-      <View style={styles.bottomContainer}>
+      <View style={viewbalancestyles.bottomContainer}>
         {/* Left text */}
         <View>
-          <Text style={styles.balanceText}>Balance</Text>
-          {/* <Text style={styles.balanceAmount}>NGN {amountFormatter(authdata?.walletBal)}</Text> */}
-          <Text style={styles.balanceAmount}>
+          <Text style={viewbalancestyles.balanceText}>Feather Balance</Text>
+          <Text style={viewbalancestyles.balanceAmount}>
             NGN {showAmount ? amountFormatter(authdata?.walletBal) : "******"}
           </Text>
         </View>

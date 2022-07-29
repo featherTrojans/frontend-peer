@@ -7,8 +7,6 @@ import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
-      // width: SIZES.width,
-      // height: SIZES.height,
       backgroundColor: COLORS.white,
       paddingHorizontal: 25,
       paddingTop: RFValue(25),
@@ -19,14 +17,14 @@ export const styles = StyleSheet.create({
       color: COLORS.black,
     },
     topDots: {
-      width: 8,
-      height: 8,
+      width: 5,
+      height: 5,
       backgroundColor: COLORS.grey1,
       borderRadius: 16,
     },
     activeDot: {
-      width: 19,
-      height: 8,
+      width: 12,
+      height: 5,
       backgroundColor: COLORS.blue6,
       borderRadius: 4,
     },
@@ -39,13 +37,13 @@ export const styles = StyleSheet.create({
       backgroundColor: COLORS.blue6,
       justifyContent: "center",
       alignItems: "center",
-      height: RFValue(62),
-      borderRadius: 10,
+      paddingVertical: 20,
+      borderRadius: 5,
     },
     proceedText: {
       color: COLORS.white,
       ...fontsize.smallest,
-      ...FONTS.bold,
+      ...FONTS.medium,
     },
     bottomContainer:{
       flex: 1, 
@@ -61,9 +59,9 @@ export const styles = StyleSheet.create({
       marginTop: RFValue(28),
     },
     bottomText: {
-      ...fontsize.small,
+      ...fontsize.smallest,
       ...FONTS.regular,
-      color: COLORS.black,
+      color: COLORS.blue9,
       alignItems: "center",
       justifyContent: "center",
     },

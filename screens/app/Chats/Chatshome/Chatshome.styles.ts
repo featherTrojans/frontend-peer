@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
   },
 
   secondSubHeader: {
-    ...fontsize.bsmall,
+    ...fontsize.small,
     ...fontsize.medium,
     color: COLORS.black,
   },

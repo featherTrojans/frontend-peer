@@ -1,18 +1,18 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
-    backgroundColor: COLORS.white,
-
+    backgroundColor: COLORS.white3,
   },
   headerContainer: {
     justifyContent: "space-between",
     flexDirection: "row",
-    alignItems: 'center',
-    paddingVertical: 10
+    alignItems: "center",
+    paddingVertical: 10,
   },
   profileContainer: {
     flexDirection: "row",
@@ -23,36 +23,29 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   profileName: {
-    ...fontsize.bsmall,
+    ...fontsize.small,
     ...FONTS.bold,
     marginBottom: 2,
-    textTransform: 'capitalize'
+    textTransform: "capitalize",
   },
   profileUsername: {
-    ...fontsize.small,
-    ...FONTS.regular,
-    alignItems: 'center',
-    textTransform: "lowercase"
-    
+    ...fontsize.xsmallest,
+    ...FONTS.medium,
+    alignItems: "center",
+    textTransform: "lowercase",
   },
 
   walletBlock: {
     marginTop: 20,
-    marginBottom: 31,
-    backgroundColor: COLORS.blue6,
+    marginBottom: 12,
     borderRadius: 10,
   },
 
   walletOptionsContainer: {
-    backgroundColor: COLORS.blue6,
-    paddingLeft: 20,
-    paddingRight: 23,
-    paddingBottom: 26,
-    marginTop: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
+    backgroundColor: COLORS.white,
+    marginTop: 12,
+    borderRadius: 15,
+    padding: 20,
   },
   optionContainer: {
     justifyContent: "center",
@@ -62,14 +55,35 @@ export const styles = StyleSheet.create({
     marginBottom: 13,
     width: 39,
     height: 39,
-    backgroundColor: COLORS.iconBg,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 39,
   },
   optionTitle: {
-    ...fontsize.smaller,
+    ...fontsize.xsmallest,
     ...FONTS.regular,
+    color: COLORS.blue9,
+  },
+
+  // Horizontal information styles
+
+  informationblockwrap: {
+    width: RFValue(252),
+    marginRight: 20,
+    borderRadius: 7,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    paddingBottom: 24,
+  },
+  informationiconswrap: {
+    marginBottom: 10,
+    height: 18,
+    flexDirection: "row",
+  },
+  informationblocktext: {
+    ...fontsize.smallest,
+    ...FONTS.regular,
+    lineHeight: 18,
     color: COLORS.white,
   },
 
@@ -78,16 +92,17 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 22,
+    marginTop: 22,
+    marginBottom: 20,
   },
   transactionHistory: {
-    ...fontsize.bsmall,
+    ...fontsize.smallest,
     ...FONTS.medium,
   },
   seeAll: {
-    ...fontsize.small,
+    ...fontsize.xsmallest,
     ...FONTS.bold,
-    color: COLORS.blue6
+    color: COLORS.blue6,
   },
 
   //   EmptyComponent styling

@@ -34,7 +34,8 @@ const {
   Shareappicon,
   Supporticon,
   Feathersmallicon,
-  Shareaccounticon
+  Shareaccounticon,
+  Walletmanageicon
 } = icons;
 
 type IconwithtitleProps = {
@@ -192,7 +193,7 @@ const Settings = ({ navigation }) => {
           />
              <Iconwithtitle
             bg="#FFE3E3"
-            icon={<Lockicon />}
+            icon={<Walletmanageicon />}
             title="Wallet Management"
             onpress={() => navigation.navigate("Walletmanagement")}
           />

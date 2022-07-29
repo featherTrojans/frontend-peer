@@ -6,7 +6,7 @@ const tofancyDate = (date:Date) => {
   const currentdate = moment(date).subtract(0, 'days').calendar().split(" ")[0]
 
   if(currentdate !== "Today" && currentdate !== "Yesterday"){
-    return `${moment(date).format("Do")}, ${moment(date).format("MMMM")}`
+    return `${moment(date).format("Do")} ${moment(date).format("MMMM")}, ${moment(date).format("YYYY")}`
   }
   
   return currentdate

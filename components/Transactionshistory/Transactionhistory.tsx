@@ -21,7 +21,7 @@ const History = ({ data }) => {
   // },[]);
 
   const priceColor = direction === "in" ? COLORS.green1 : COLORS.pink1;
-  const circleColor = direction === "in" ? COLORS.green2 : COLORS.pink1;
+  const circleColor = direction === "in" ? COLORS.green3 : COLORS.red2;
   const transactionType = direction === "in" ? "From" : "To";
   const transactionValue = direction === "in" ? from : to;
   const amountSign = direction === "in" ? "+" : "-";
@@ -165,9 +165,7 @@ const Transactionhistory = ({
       delay={index * 100}
       style={styles.container}
     >
-      <View style={styles.dateContainer}>
         <Text style={styles.dateText}>{date}</Text>
-      </View>
       {datas.map((data, index) => {
         return (
           <Animatable.View animation="slideInUp" delay={index * 50} key={index}>

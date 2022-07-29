@@ -203,7 +203,7 @@ const Basicsettings = () => {
                 {isSubmitting && <Loader />}
 
 
-                <TouchableOpacity style={styles.avatarContainer} activeOpacity={0.8} onPress={}>
+                <TouchableOpacity style={styles.avatarContainer} activeOpacity={0.8}>
                   <View style={styles.avatarBg}>
                     <Defaultuseravatar />
                   </View>

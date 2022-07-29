@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, FlatList, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "./Notifications.styles";
 import { icons, COLORS } from "../../../constants";
@@ -10,9 +16,9 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import moment from "moment";
 import { RFValue } from "react-native-responsive-fontsize";
-import * as Animatable from "react-native-animatable"
+import * as Animatable from "react-native-animatable";
 import { SafeAreaView } from "react-native-safe-area-context";
-const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow, Arrowout } = icons;
+const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow, Arrowout, Withdrawalnotificationicon } = icons;
 
 const DATA = [
   {
@@ -82,35 +88,47 @@ type notificationProps = {
   title: string;
   time: string;
   message: string;
+  createdAt: string;
+  description: string
 };
 
 const messageicon = (type: string) => {
   switch (type) {
     case "Wallet Credit":
       return (
-        <View style={styles.creditIcon}>
+        <View style={[styles.iconBg, { backgroundColor: COLORS.green3 }]}>
           <Arrowin />
+        </View>
+      );
+      break;
+
+    case "Wallet Debit":
+      return (
+        <View style={[styles.iconBg, { backgroundColor: COLORS.red2 }]}>
+          <Arrowout />
         </View>
       );
 
       break;
-
-      case "Wallet Debit":
-        return (
-          <View style={styles.debitIcon}>
-            <Arrowout />
-          </View>
-        );
-  
-        break;
     case "account":
       return <Useravatar />;
       break;
+      case "Fund Reversal":
+        return (
+          <View style={[styles.iconBg, { backgroundColor: COLORS.green3 }]}>
+            <Arrowin />
+          </View>
+        );
+        break;
     case "Cash Withdrawal":
-      return <Logoavatar />;
+      return (
+        <View style={[styles.iconBg, { backgroundColor: COLORS.grey1 }]}>
+          <Withdrawalnotificationicon />
+        </View>
+      );
+
       break;
-    
-      case "Cash Deposit":
+    case "Cash Deposit":
       return <Logoavatar />;
       break;
 
@@ -123,59 +141,64 @@ const messageicon = (type: string) => {
 const Notification = ({
   date,
   messages,
-  index
+  index,
 }: {
   date: string;
   index: number;
   messages: notificationProps[];
 }) => {
-
   return (
-    <Animatable.View 
-    animation="slideInUp"
-    delay={index * 50}
-    
-    style={[{ marginBottom: RFValue(28), ...Shadow, borderRadius: RFValue(15) }]}>
-      <View style={{ marginBottom: RFValue(24) }}>
-        <Text style={styles.date}>{date}</Text>
-      </View>
+    <Animatable.View animation="slideInUp" delay={index * 50}>
+      <Text style={styles.date}>{date}</Text>
+
       {messages.map(
-        ({ type, title, createdAt:time, description: message }: notificationProps, index: number) => {
+        (
+          {
+            type,
+            title,
+            createdAt: time,
+            description: message,
+          }: notificationProps,
+          index: number
+        ) => {
           const isLastItem = index === messages.length;
           const isUpgrade = type === "account";
-          const formattedTime = `${moment(time).format('h:mm')}${moment(time).format('a')}`
+          const formattedTime = `${moment(time).format("h:mm")}${moment(time).format("a")}`;
           return (
             <Animatable.View
-            animation="slideInUp"
-            delay={index * 50}
+              animation="slideInUp"
+              delay={index * 50}
               style={[
                 styles.notificationContainer,
                 { marginBottom: !isLastItem ? RFValue(10) : 0 },
               ]}
               key={index}
             >
-              <View>
-                {/* Sender Icons */}
-                {messageicon(title)}
-              </View>
-              <View style={[styles.infoContainer, { flex: 1 }]}>
-                <View style={styles.titleandtime}>
-                  {/* Top Section */}
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  {messageicon(title)}
                   <Text style={styles.title}>{title}</Text>
-                  <Text style={styles.time}>{formattedTime}</Text>
                 </View>
-                {/* Horizontal line */}
-                <View style={styles.horizontalLine} />
-                <View>
-                  <Text style={styles.message}>{message}</Text>
-                  {isUpgrade && (
-                    <View style={styles.upgradeNow}>
-                      <Text style={styles.upgradeNowText}>
-                        Upgrade Now <Upgradenowarrow />
-                      </Text>
-                    </View>
-                  )}
-                </View>
+                <Text style={styles.time}>{formattedTime}</Text>
+              </View>
+
+              <View style={styles.horizontalLine} />
+
+              <View>
+                <Text style={styles.message}>{message}</Text>
+                {isUpgrade && (
+                  <View style={styles.upgradeNow}>
+                    <Text style={styles.upgradeNowText}>
+                      Upgrade Now <Upgradenowarrow />
+                    </Text>
+                  </View>
+                )}
               </View>
             </Animatable.View>
           );
@@ -186,7 +209,6 @@ const Notification = ({
 };
 
 const Notifications = () => {
-
   const [loading, setLoading] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
@@ -208,10 +230,6 @@ const Notifications = () => {
     getAllNotifications();
   }, []);
 
-
-
-  
-
   return (
     <SafeAreaView style={styles.container}>
       {/* Header title */}
@@ -220,36 +238,45 @@ const Notifications = () => {
       </View>
       <Customstatusbar />
 
-
       <View style={styles.listContainer}>
-
-
-        {loading ?
-        
-            <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-              <ActivityIndicator size="large" color={COLORS.blue6} />
-            </View>
-          :
+        {loading ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <ActivityIndicator size="large" color={COLORS.blue6} />
+          </View>
+        ) : (
           <FlatList
-        // contentContainerStyle={{flex: 1}}
-          data={formatData(notifications)}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item, index }) => (
-            <Notification date={item.time} messages={item.data} index={index} />
-          )}
-          keyExtractor={(item) => item.time}
-          ListEmptyComponent={() => {
-            return(
-              <View style={{flex: 1,  justifyContent: "center", alignItems: "center", marginTop: RFValue(100)}}>
-                <Text style={styles.emptyListText}>Oops, no notifications yet. </Text>
-              </View>
-            )
-          }}
-        />
-      
-      }
+            // contentContainerStyle={{flex: 1}}
+            data={formatData(notifications)}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item, index }: {item: {time: string, data: any}, index: number}) => (
+              <Notification
+                date={item.time}
+                messages={item.data}
+                index={index}
+              />
+            )}
+            keyExtractor={(item) => item.time}
+            ListEmptyComponent={() => {
+              return (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: RFValue(100),
+                  }}
+                >
+                  <Text style={styles.emptyListText}>
+                    Oops, no notifications yet.{" "}
+                  </Text>
+                </View>
+              );
+            }}
+          />
+        )}
         {/* Flatlist list of notifications */}
-        
       </View>
     </SafeAreaView>
   );

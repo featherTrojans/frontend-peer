@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { styles } from "./Login.styles";
-import { COLORS, icons, SIZES } from "../../../constants";
+import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../constants";
 
 import { useToast } from "react-native-toast-notifications";
 
@@ -36,7 +36,13 @@ import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getBiometricsAccess, getCredentials, saveCredentials } from "../../../utils/biometrics";
+import {
+  getBiometricsAccess,
+  getCredentials,
+  saveCredentials,
+} from "../../../utils/biometrics";
+import Customstatusbar from "../../shared/Customstatusbar";
+
 
 const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
 
@@ -59,7 +65,7 @@ const Login = ({ navigation }: any) => {
   const [isBiometricAllowed, setIsBiometricAllowed] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [enableBiometrics, setEnableBiometrics] = useState<null |string>(null)
+  const [enableBiometrics, setEnableBiometrics] = useState<null | string>(null);
   const toast = useToast();
 
   const loginFunc = async (values) => {
@@ -118,15 +124,14 @@ const Login = ({ navigation }: any) => {
     })();
   });
 
-
   useEffect(() => {
     const checkStatus = async () => {
       const response = await getBiometricsAccess();
       console.log(response, "here is it");
-      setEnableBiometrics(response)
+      setEnableBiometrics(response);
     };
 
-    checkStatus()
+    checkStatus();
   }, []);
 
   const biometricsLogin = async () => {
@@ -148,23 +153,27 @@ const Login = ({ navigation }: any) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.blue6 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white3 }}>
+
+      <Customstatusbar />
       <KeyboardAwareScrollView>
         <View style={styles.container}>
           {/* Logo */}
-          <View style={styles.logoWrapper}>
-            <Newlogo />
+
+       
+
+
+          <View style={{marginTop: 30}}>
+          <Newlogo />
+          <View style={{marginTop: 28, marginBottom: 40}}>
+            <Text style={{...fontsize.bsmall, ...FONTS.medium, color: COLORS.black, lineHeight: 21, marginBottom: 9}}>Padi, Welcome Back</Text>
+            <Text style={{...fontsize.smallest, color: COLORS.grey16, ...FONTS.regular}}>Sign into your feather account</Text>
           </View>
 
-          <StatusBar
-            animated={true}
-            backgroundColor="#003AD6"
-            barStyle="light-content"
-            networkActivityIndicatorVisible={true}
-            showHideTransition="fade"
-            hidden={false}
-          />
 
+
+          </View>
+ 
           {/* Form */}
           <Formik
             initialValues={{
@@ -189,25 +198,12 @@ const Login = ({ navigation }: any) => {
                   {/* {isSubmitting && checkIfSubmitting()} */}
                   {loading && <Loader />}
 
-                  <View
-                    style={[
-                      styles.inputContainer,
-                      { marginBottom: RFValue(15) },
-                    ]}
-                  >
-                    <View style={styles.inputiconwrapper}>
-                      <Usericon />
-                    </View>
-                    <TextInput
-                      style={styles.textInput}
-                      placeholder="Enter your phone or feather tag"
-                      placeholderTextColor={COLORS.white}
-                      underlineColorAndroid="transparent"
-                      onChangeText={handleChange("username")}
-                      onBlur={handleBlur("username")}
-                      selectionColor={COLORS.white}
-                    />
-                  </View>
+                  <Input
+                    placeholder="Phone Number / email / username"
+                    name="username"
+                    formikProps={formikProps}
+                    icon={<Usericon />}
+                  />
 
                   {/* Password input */}
                   <View style={styles.inputContainer}>
@@ -216,13 +212,13 @@ const Login = ({ navigation }: any) => {
                     </View>
                     <TextInput
                       style={styles.textInput}
-                      placeholder="Enter your password"
-                      placeholderTextColor={COLORS.white}
+                      placeholder="Password"
+                      placeholderTextColor={COLORS.grey16}
                       secureTextEntry={hidePassword}
                       underlineColorAndroid="transparent"
                       onChangeText={handleChange("password")}
                       onBlur={handleBlur("password")}
-                      selectionColor={COLORS.white}
+                      selectionColor={COLORS.blue9}
                     />
                     <TouchableOpacity
                       onPress={() => setHidePassword(!hidePassword)}
@@ -231,19 +227,27 @@ const Login = ({ navigation }: any) => {
                       {hidePassword ? <Eyeicon /> : <Passwordhideicon />}
                     </TouchableOpacity>
                   </View>
+
                   {/* Bottom text */}
                   <JustifyBetween
                     style={{
-                      marginTop: RFValue(30),
-                      marginBottom: RFValue(70),
+                      marginTop: RFValue(16),
+                      marginBottom: RFValue(22),
                     }}
                   >
                     <Text
                       style={[
                         styles.biometrics,
-                        { opacity: isBiometricAllowed && enableBiometrics? 1 : 0.2 },
+                        {
+                          opacity:
+                            isBiometricAllowed && enableBiometrics ? 1 : 0.2,
+                        },
                       ]}
-                      onPress={isBiometricAllowed && enableBiometrics ? biometricsLogin : null}
+                      onPress={
+                        isBiometricAllowed && enableBiometrics
+                          ? biometricsLogin
+                          : null
+                      }
                     >
                       Use Biometrics
                     </Text>
@@ -264,7 +268,7 @@ const Login = ({ navigation }: any) => {
                     style={styles.loginbtn}
                     activeOpacity={0.8}
                   >
-                    <Text style={styles.loginbtnText}>Log in</Text>
+                    <Text style={styles.loginbtnText}>Sign in</Text>
                   </TouchableOpacity>
                 </>
               );
@@ -272,14 +276,12 @@ const Login = ({ navigation }: any) => {
           </Formik>
 
           <View style={styles.haveanaccount}>
-            <Text style={styles.haveaccounttext}>
-              Don’t have an account yet?{" "}
-            </Text>
+            <Text style={styles.haveaccounttext}>Don’t have an account? </Text>
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => navigation.navigate("Personal")}
             >
-              <Text style={styles.registerText}>Register</Text>
+              <Text style={styles.registerText}>Signup</Text>
             </TouchableOpacity>
           </View>
         </View>

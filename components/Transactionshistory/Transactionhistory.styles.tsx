@@ -13,13 +13,14 @@ export const styles = StyleSheet.create({
     marginBottom:RFValue(10),
     ...Shadow
   },
-  dateContainer: {
-    marginBottom: RFValue(18),
-  },
+
   dateText: {
-    ...fontsize.small,
-    color: COLORS.blue7,
+    ...fontsize.smallest,
+    color: COLORS.blue9,
     ...FONTS.medium,
+    lineHeight: 27,
+    marginBottom: RFValue(18),
+
   },
   bottomLine: {
     height: 0.5,
@@ -45,19 +46,21 @@ export const styles = StyleSheet.create({
     marginRight: RFValue(14),
   },
   title: {
-    ...fontsize.small,
+    ...fontsize.smaller,
     ...FONTS.medium,
     marginBottom: RFValue(3),
     textTransform:  'capitalize'
   },
   transactionType: {
-    ...fontsize.smaller,
+    ...fontsize.smallest,
+    lineHeight: 27,
     ...FONTS.regular,
     color: COLORS.halfBlack,
     alignItems: "center"
   },
   amount: {
-    ...fontsize.small,
+    ...fontsize.smallest,
     ...FONTS.medium,
+    lineHeight: 27
   },
 });

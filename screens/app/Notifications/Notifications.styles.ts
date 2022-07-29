@@ -12,34 +12,26 @@ export const styles = StyleSheet.create({
     },
     listContainer: {
         flex: 1,
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.white3,
         paddingHorizontal: RFValue(15)
     },
     notificationContainer: {
         flex: 1,
-        flexDirection: 'row',
+        // flexDirection: 'row',
         backgroundColor: COLORS.white,
         borderRadius: RFValue(15),
         paddingHorizontal: RFValue(15),
         paddingVertical: RFValue(17),
         // marginBottom: 10
     },
-    creditIcon: {
-        width: RFValue(39),
-        height: RFValue(39),
-        borderRadius: RFValue(39),
-        backgroundColor: COLORS.green2,
+    iconBg: {
+        width: 30,
+        height: 30,
+        borderRadius: 30/2,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    debitIcon: {
-        width: RFValue(39),
-        height: RFValue(39),
-        borderRadius: RFValue(39),
-        backgroundColor: COLORS.pink1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+
     infoContainer: {
         marginLeft: RFValue(15.5)
     },
@@ -48,24 +40,28 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     date: {
-        ...fontsize.small,
+        ...fontsize.smallest,
         ...FONTS.medium,
-        color: COLORS.blue7
+        color: COLORS.blue9,
+        marginTop: 22,
+        marginBottom: 20,
+        textAlign: "center"
     },
     title: {
-        ...fontsize.small,
-        ...FONTS.medium,
+        ...fontsize.smallest,
+        ...FONTS.regular,
         color: COLORS.black,
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        marginLeft: 12.5
         
     },
     time: {
-        ...fontsize.smaller,
+        ...fontsize.xsmallest,
         ...FONTS.regular,
         color: COLORS.grey2
     },
     message:{
-        ...fontsize.small,
+        ...fontsize.smallest,
         ...FONTS.regular,
         color: COLORS.black,
         lineHeight: 24

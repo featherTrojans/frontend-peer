@@ -17,6 +17,7 @@ export const COLORS = {
   blue6: "#003AD6",
   blue7: "#001757",
   blue8: "#0548D7",
+  blue9: "#11141A",
   transparentBlue: "#F2F5FF",
 
 
@@ -36,15 +37,18 @@ export const COLORS = {
   grey12: "#F2F5FF",
   grey13: "#DEDEDE",
   grey14: "#FCFDFF",
-  
+  grey15: "#CBCBCB",
+  grey16: "#696969",
 
   yellow1: "#FF9D00",
   yellow2: "#FFC84B",
   yellow3: "#FFC100",
   green1: "#00C9AA",
   green2: "#25DBA3",
+  green3: "#E5FAF6",
   pink1: "#E00070",
   red1: "#E00000",
+  red2: "#FFE3E3",
   purple: "#6300AC",
 
   paybillInput: "#E6E6E6",

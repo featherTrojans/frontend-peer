@@ -43,6 +43,7 @@ import Customstatusbar from "../../shared/Customstatusbar";
 import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 import DoubleTapToClose from "../../shared/DoubleBack";
 import { connectFirestoreEmulator } from "firebase/firestore";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const {
   Profilepics,
@@ -54,29 +55,40 @@ const {
   Transfer,
   Deposit,
   Smalluseravatar,
+  Withdrawicon,
+  Depositicon,
+  Newtransfericon,
+  Paybillicon,
+  Goldenstaricon,
+  Dollaricon,
+  Patternbg,
   Cryinganimate,
 } = icons;
 
 const walletOptions = [
   {
-    icon: <Withdraw />,
+    icon: <Withdrawicon />,
     title: "Withdraw",
     link: "Withdraw",
+    iconBg: "#E0EDD8",
   },
   {
-    icon: <Deposit />,
+    icon: <Depositicon />,
     title: "Deposit",
     link: "Depositupdate",
+    iconBg: "#D2EAFD",
   },
   {
-    icon: <Transfer />,
+    icon: <Newtransfericon />,
     title: "Transfer",
     link: "Transfercash",
+    iconBg: "#FCF3D1",
   },
   {
-    icon: <Paybills />,
+    icon: <Paybillicon />,
     title: "Paybills",
     link: "Paybills",
+    iconBg: "#E3CCFF",
   },
 ];
 
@@ -95,7 +107,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-  // sendSchedulePushNotification
 
   const nameToShow = (value: string) => {
     if (value?.split(" ").length > 1) {
@@ -104,31 +115,6 @@ const Home = ({ navigation }: { navigation: any }) => {
       return value;
     }
   };
-
-  // setting up websocket
-  // useEffect(() => {
-  //   const ws = new WebSocket(
-  //     "wss://feather.com.ng:3300/balance/ZkemEIDqRY",
-  //     "realtime"
-  //   );
-
-  //   ws.onopen = (data) => {
-  //     console.log("Opened", data);
-      
-  //   }
-  //   ws.onmessage = (data) => {
-  //     console.log(data.data, "Here is the websocket data");
-      
-  //     // i want to update the context
-  //     // if (data.data == authdata.walletBal) return;
-  //     // setAuthData({ ...authdata, walletBal: data.data });
-  //   };
-  //   ws.onerror = (e) => {
-  //     console.log(e.message, "there is an error connecting");
-  //   }
-
-  //   // return ws.close();
-  // }, []);
 
   const toTop = () => {
     scrollViewRef.current?.scrollTo({
@@ -191,8 +177,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    // <SafeAreaView style={[styles.container, { flex: 1 }]} edges={['right', 'left', 'top',]} >
-
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <Customstatusbar />
 
@@ -209,7 +193,7 @@ const Home = ({ navigation }: { navigation: any }) => {
 
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
-              Welcome, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
+              Hi, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
             </Text>
             <Text style={styles.profileUsername}>
               @{authdata?.userDetails?.username}
@@ -223,8 +207,6 @@ const Home = ({ navigation }: { navigation: any }) => {
           <Bell />
         </TouchableOpacity>
       </View>
-
-      {/* Wallet info and details */}
 
       {/* Start of the block */}
       {/*  */}
@@ -244,52 +226,127 @@ const Home = ({ navigation }: { navigation: any }) => {
           />
         }
       >
+        {/* Balance and sub pages */}
         <View style={styles.walletBlock}>
           <Viewbalance />
           <View style={styles.walletOptionsContainer}>
-            {walletOptions.map(
-              (
-                {
-                  icon,
-                  title,
-                  link,
-                }: {
-                  icon: JSX.Element;
-                  title: string;
-                  link: string;
-                },
-                index
-              ) => (
-                <Animatable.View
-                  animation="bounceIn"
-                  delay={index * 100}
-                  key={title}
-                >
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    onPress={() => navigation.navigate(link)}
-                    style={styles.optionContainer}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  ...fontsize.smallest,
+                  ...FONTS.medium,
+                  color: COLORS.black,
+                }}
+              >
+                Padi, what do you want to do today?
+              </Text>
+              <View
+                style={{ width: 4, height: 4, backgroundColor: COLORS.black }}
+              />
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 30,
+              }}
+            >
+              {walletOptions.map(
+                (
+                  {
+                    icon,
+                    title,
+                    link,
+                    iconBg,
+                  }: {
+                    icon: JSX.Element;
+                    title: string;
+                    link: string;
+                    iconBg: string;
+                  },
+                  index
+                ) => (
+                  <Animatable.View
+                    animation="bounceIn"
+                    delay={index * 100}
+                    key={title}
                   >
-                    <View style={styles.optionIconBg}>
-                      {/* Icon will be inside this */}
-                      {icon}
-                    </View>
-                    <Text style={styles.optionTitle}>{title}</Text>
-                  </TouchableOpacity>
-                </Animatable.View>
-              )
-            )}
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      onPress={() => navigation.navigate(link)}
+                      style={styles.optionContainer}
+                    >
+                      <View
+                        style={[
+                          styles.optionIconBg,
+                          { backgroundColor: iconBg },
+                        ]}
+                      >
+                        {icon}
+                      </View>
+                      <Text style={styles.optionTitle}>{title}</Text>
+                    </TouchableOpacity>
+                  </Animatable.View>
+                )
+              )}
+            </View>
           </View>
         </View>
+
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          bounces={false}
+        >
+          <View
+            style={[
+              styles.informationblockwrap,
+              { backgroundColor: "#8456FF" },
+            ]}
+          >
+            <View style={styles.informationiconswrap}>
+              <Goldenstaricon />
+              <View style={{ marginRight: 3.4 }} />
+              <Goldenstaricon />
+              <View style={{ marginRight: 3.4 }} />
+              <Goldenstaricon />
+            </View>
+
+            <Text style={styles.informationblocktext}>
+              Earn N10 each time you rate a successful withdraw transaction{" "}
+            </Text>
+          </View>
+
+          <View
+            style={[
+              styles.informationblockwrap,
+              { backgroundColor: "#5676FF", marginRight: 0 },
+            ]}
+          >
+      
+            <View style={styles.informationiconswrap}>
+              <Dollaricon />
+            </View>
+            <Text style={styles.informationblocktext}>
+              Start your beta side hustle by making cash available for people to
+              withdraw
+            </Text>
+          </View>
+        </ScrollView>
 
         {/* End of the block */}
 
         {/* Transaction history lists header*/}
         <View style={{ flex: 1 }}>
           <View style={styles.transactionHeader}>
-            <View>
-              <Text style={styles.transactionHistory}>Transaction History</Text>
-            </View>
+            <Text style={styles.transactionHistory}>Transaction History</Text>
             <TouchableOpacity
               onPress={() => navigation.dispatch(jumpToHistory)}
             >
@@ -313,7 +370,6 @@ const Home = ({ navigation }: { navigation: any }) => {
         <DoubleTapToClose />
       </ScrollView>
     </View>
-    // </SafeAreaView>
   );
 };
 

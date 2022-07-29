@@ -3,41 +3,19 @@ import Svg, { Path, G } from "react-native-svg";
 
 function Arrowout() {
   return (
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="10.517"
-      height="10.517"
-      viewBox="0 0 10.517 10.517"
+    <Svg xmlns="http://www.w3.org/2000/svg" width={7.74} height={7.74} >
+    <G
+      data-name="Icon feather-arrow-down-left"
+      fill="none"
+      stroke="#ff5668"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
     >
-      <G
-        id="Icon_feather-arrow-down-left"
-        data-name="Icon feather-arrow-down-left"
-        transform="translate(1.414 1.414)"
-      >
-        <Path
-          id="Path_3871"
-          data-name="Path 3871"
-          d="M10.5,18.189,18.189,10.5"
-          transform="translate(-10.5 -10.5)"
-          fill="none"
-          stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <Path
-          id="Path_3872"
-          data-name="Path 3872"
-          d="M10.5,10.5h7.689v7.689"
-          transform="translate(-10.5 -10.5)"
-          fill="none"
-          stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-      </G>
-    </Svg>
+      <Path data-name="Path 3871" d="M1.061 6.68 6.68 1.061" />
+      <Path data-name="Path 3872" d="M1.061 1.061H6.68V6.68" />
+    </G>
+  </Svg>
   );
 }
 
