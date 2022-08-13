@@ -135,6 +135,9 @@ import Withdrawalnotificationicon from "../assets/icons/Withdrawalnotificationic
 import SendTF from "../assets/icons/SendTf"
 import Patternbg from "../assets/icons/Patternbg";
 import Whitebackarrow from "../assets/icons/Whitebackarrow";
+import Emptynotification from "../assets/icons/Emptynotification";
+// import passwordpinlock from "../assets/icons/passwordpinlock";
+import Passwordpinlock from "../assets/icons/Passwordpinlock";
 
 
 
@@ -152,6 +155,7 @@ import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.
 import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json"
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
 import Dollaricon from "../assets/icons/Dollaricon";
+import Emptyicon from "../assets/icons/Emptyicon";
 
 
 // Receiverimage
@@ -222,12 +226,15 @@ export default {
   Ratingsstar,
   Smallcancel,
   Smallcomment,
+  Passwordpinlock,
   Smallphone,
   Bvnlock,
   Useravatar,
   Logoavatar,
   Upgradenowarrow,
+  Emptynotification,
   Withdrawicon,
+  Emptyicon,
   Depositicon,
   Shareaccounticon,
   SecureDot,

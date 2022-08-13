@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
-    backgroundColor: "white",
+    // backgroundColor: "white",
     // paddingTop: 22,
   },
   topHeader: {
@@ -45,11 +45,7 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
   },
 
-  secondSubHeader: {
-    ...fontsize.small,
-    ...fontsize.medium,
-    color: COLORS.black,
-  },
+
   seeMoreContainer: {
     width: "auto",
     alignSelf: "flex-start",
@@ -86,54 +82,36 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 31,
   },
-  profileAvatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: COLORS.grey1,
-    marginBottom: 14,
-  },
+
   nameAndUsername: {
+    marginTop: 12,
     justifyContent: "center",
     alignItems: "center",
   },
   eachProfileName: {
-    ...fontsize.small,
+    ...fontsize.smallest,
     ...FONTS.medium,
     opacity: 0.8,
     marginBottom: 7,
     textTransform:"capitalize"
   },
   eachProfileUsername: {
-    ...fontsize.smallest,
-    ...FONTS.medium,
-    color: COLORS.grey2,
+    ...fontsize.xsmallest,
+    ...FONTS.regular,
+    color: COLORS.grey16,
     opacity: 0.8
   },
 
+
+
+
   //   For the chat screen
-  chatHeader: {
-    marginBottom: 22,
-    marginLeft: 9,
-  },
-  chatHeaderText: {
-    ...fontsize.bsmall,
-    ...FONTS.medium,
-    color: COLORS.blue6
-  },
+
   chatContainer: {
     flexDirection: "row",
-    marginHorizontal: 9,
     alignItems: "center",
-    marginBottom: 37
   },
-  chatAvatar: {
-    width: 50,
-    height: 50,
-    backgroundColor: COLORS.grey1,
-    borderRadius: 30,
-    position: "relative",
-  },
+
   chatStatusDot: {
     width: 16,
     height: 16,
@@ -155,19 +133,19 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   chatName: {
-    ...fontsize.bsmall,
+    ...fontsize.smaller,
     ...FONTS.regular,
     color: COLORS.grey7,
     textTransform: "capitalize"
   },
   chatTime: {
-    ...fontsize.small,
+    ...fontsize.xsmallest,
     ...FONTS.regular,
-    color: COLORS.grey2,
+    color: COLORS.blue9,
     marginLeft: 10
   },
   chatHintMessage: {
-    ...fontsize.small,
+    ...fontsize.xsmallest,
     ...FONTS.regular,
     color: COLORS.grey2,
   },

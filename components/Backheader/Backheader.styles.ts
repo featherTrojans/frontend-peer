@@ -3,9 +3,10 @@ import { COLORS, FONTS, fontsize } from "../../constants";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingVertical: 22,
+    paddingVertical: 18,
     paddingHorizontal: 15,
     backgroundColor: COLORS.white,
+    
   },
   backArrowContainer: {
     flexDirection: "row",
@@ -17,10 +18,10 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 25 / 2,
+    marginRight: 16
   },
   backArrowText: {
-    ...fontsize.xmedium,
-    ...FONTS.bold,
-    marginLeft: 16,
+    ...fontsize.small,
+    ...FONTS.medium,
   },
 });

@@ -44,6 +44,10 @@ import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 import DoubleTapToClose from "../../shared/DoubleBack";
 import { connectFirestoreEmulator } from "firebase/firestore";
 import { RFValue } from "react-native-responsive-fontsize";
+import { nameToShow } from "../../../utils/nameToShow";
+import { getPeriod } from "../../../utils/getDayPeriod";
+
+
 
 const {
   Profilepics,
@@ -108,13 +112,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
 
-  const nameToShow = (value: string) => {
-    if (value?.split(" ").length > 1) {
-      return value?.split(" ")[1];
-    } else {
-      return value;
-    }
-  };
+
 
   const toTop = () => {
     scrollViewRef.current?.scrollTo({
@@ -193,7 +191,7 @@ const Home = ({ navigation }: { navigation: any }) => {
 
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
-              Hi, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
+              {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
             </Text>
             <Text style={styles.profileUsername}>
               @{authdata?.userDetails?.username}
@@ -354,10 +352,13 @@ const Home = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
           </View>
 
+
+          {/*  */}
           {histories.length === 0 ? (
             <EmptyComponent />
           ) : (
-            histories.map((history, index) => (
+            histories.map((history:{time: string, data:
+             any}, index) => (
               <Transactionhistory
                 index={index}
                 date={history.time}

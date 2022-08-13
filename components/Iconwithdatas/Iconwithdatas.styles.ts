@@ -5,12 +5,11 @@ import { Shadow } from "../../constants/theme";
 export const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    paddingTop: 19,
-    paddingBottom: 22,
-    paddingHorizontal: 17,
+    // paddingTop: 19,
+    // paddingBottom: 22,
+    // paddingHorizontal: 17,
     marginBottom: 10,
-    borderRadius: 15,
-    ...Shadow,
+    backgroundColor: "white"
   },
   iconContainer: {
     justifyContent: "center",
@@ -30,8 +29,9 @@ export const styles = StyleSheet.create({
     marginBottom: 6,
   },
   titleText: {
-    ...fontsize.bmsmall,
+    ...fontsize.smallest,
     ...FONTS.medium,
+    color: COLORS.black
   },
   detailsText: {
     ...fontsize.xsmallest,

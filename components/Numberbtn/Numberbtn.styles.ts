@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
 
   },
   numberBtnText: {
-    ...fontsize.bmedium,
+    ...fontsize.bbsmall,
     ...FONTS.medium,
     color: COLORS.grey2,
   },

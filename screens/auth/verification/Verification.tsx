@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react"
+import React, {useState, useEffect} from "react"
 import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity, StatusBar } from "react-native";
 import LottieView from 'lottie-react-native'
 import OTPInputView from '@twotalltotems/react-native-otp-input'
@@ -6,7 +6,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
-import { Bottombtn, Loader } from "../../../components";
+import { Backheader, Bottombtn, Custombutton, Loader } from "../../../components";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
@@ -55,16 +55,20 @@ const Verification = ({route,navigation}) => {
   },[])
 
   const handleSubmit = async ()=>{
+
     setLoading(true)
     try{
       await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
-      setShowModal(true)
+      // setShowModal(true)
+     return navigation.navigate("Security",{token:tokenn})
     }catch(err){
       showerror(toast, err)
     }finally{
       setLoading(false)
     }
   }
+
+
   const handleResendOTP = async () => {
     setLoading(true)
     try{
@@ -81,11 +85,15 @@ const Verification = ({route,navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{paddingHorizontal: 25,paddingTop: RFValue(36), flex: 1}}>
       <Customstatusbar />
-      {/* Closeicon */}
 
-      <Globalmodal
+
+      <Backheader title="Verify Phone Number"/>
+      <View style={{paddingHorizontal: 25, flex: 1}}>
+
+
+
+      {/* <Globalmodal
         showState={showModal}
         onBgPress={() => setShowModal(true)}
         btnFunction={() => {
@@ -98,65 +106,60 @@ const Verification = ({route,navigation}) => {
             <LottieView source={Successcheckanimate} style={{width: 148, height: 148}} autoPlay loop/>
             <Text style={{...fontsize.bsmall, ...FONTS.regular, marginTop: RFValue(17), textAlign: 'center'}}>Your number has been successfully verified</Text>
         </View>
-      </Globalmodal>
+      </Globalmodal> */}
 
 
 
       {loading && <Loader />}
-      <TouchableOpacity style={styles.cancelIcon} onPress={()=>navigation.goBack()}>
-        <Cancelicon />
-      </TouchableOpacity>
-      {/* OTP Message information */}
-      <View style={styles.otpTextContainer}>
-        <Text style={styles.otpMainText}>
-          An OTP has been sent to you via SMS to your phone number - <Text style={styles.otpSubText}>{phoneNumber}</Text>, and to your email
-          - <Text style={styles.otpSubText}>{email}</Text>
-        </Text>
+   
+      
+
+      <View>
+        <Text style={{...fontsize.bsmall, ...FONTS.regular, color: COLORS.black, lineHeight: 20}}>Enter OTP sent to your device</Text>
+        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16, lineHeight: 20, marginTop: 15,}}>An OTP has been sent to you via SMS to your phone number - {phoneNumber}, and to your email - {email}</Text>
       </View>
+
+
+
       {/* Verification input */}
       <View style={styles.otpInputContainer}>
-        {/* <OTPInputView
-          style={styles.otpInputContainer}
-          pinCount={6}
-          autoFocusOnLoad
-          codeInputFieldStyle={styles.otpInput}
-          codeInputHighlightStyle={styles.otpInputActive}
-          onCodeFilled={(code) => {
-            // You can access the code value here or call any function to get it, ADD Types too
-            console.log(`Here is the code ${code}`);
-            setOtpCode(parseInt(code))
-          }}
-        /> */}
         <TextInput keyboardType="number-pad" returnKeyType="done" value={otpCode} onChangeText={(text)=> setOtpCode(text)} style={styles.cutstomOtpInput} maxLength={6}/>
       </View>
+
+
+
+
+
+      <View style={{backgroundColor: COLORS.white, padding: 20, borderRadius: 15, marginBottom: 22}}>
+
+      
       {/* Resend sms duration */}
       <View style={styles.resendAndDuration}>
         <TouchableOpacity disabled={disable} onPress={handleResendOTP}>
         <Text style={styles.resendText}>Resend sms in</Text>
         </TouchableOpacity>
-        <View>
           <Text style={styles.duration}>00 : {time}s</Text>
-        </View>
       </View>
+
+
 
       {/* Dashedline */}
       <View style={styles.dashedLine} />
       {/* Change number text */}
       <TouchableOpacity onPress={()=>navigation.goBack()}>
-        <Text style={styles.changeNumber}>Change Number?</Text>
+        <Text style={styles.changeNumber}>Incorrect Number? <Text style={{color: COLORS.blue9}}>Change Number</Text></Text>
       </TouchableOpacity>
 
-      {/* Submit button */}
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={handleSubmit}
-          style={styles.btnBg}
-          disabled={loading}
-        >
-          <Text style={styles.btnText}>SUBMIT</Text>
-        </TouchableOpacity>
       </View>
+
+
+
+      <Custombutton btntext="Verify" onpress={handleSubmit} disable={loading} />
+ 
+
+
+
+
       </View>
     </SafeAreaView>
   );

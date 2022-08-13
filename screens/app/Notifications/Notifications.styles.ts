@@ -32,9 +32,6 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    infoContainer: {
-        marginLeft: RFValue(15.5)
-    },
     titleandtime: {
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -85,8 +82,12 @@ export const styles = StyleSheet.create({
 
     },
     emptyListText:{
-        ...fontsize.small,
+        ...fontsize.smaller,
         ...FONTS.regular,
-        color: COLORS.black
+        color: COLORS.black,
+        marginTop: 32,
+        paddingHorizontal: 50,
+        textAlign: "center",
+        lineHeight: 20
     }
 })

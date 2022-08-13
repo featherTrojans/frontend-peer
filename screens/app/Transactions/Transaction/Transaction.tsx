@@ -17,7 +17,7 @@ import * as Notifications from "expo-notifications";
 import { useIsFocused, useScrollToTop } from "@react-navigation/native";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 
-import { Bottombtn, Transactionhistory } from "../../../../components";
+import { Backheader, Bottombtn, Transactionhistory } from "../../../../components";
 import { COLORS, icons, SIZES } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
@@ -136,17 +136,12 @@ const Transactions = ({ navigation }: any) => {
           source={Cryinganimate}
           autoPlay
           loop
-          style={{ width: RFValue(190), height: RFValue(190) }}
+          style={{ width: RFValue(155), height: RFValue(155) }}
         />
         <View style={styles.textContainer}>
           <Text style={styles.emptyContainerText}>
             Padi, you have not performed any transactions yet.{" "}
-            <Text
-              style={styles.emptyContainerSubText}
-              onPress={() => navigation.dispatch(jumpToNewtransactions)}
-            >
-              Transact Now
-            </Text>
+            
           </Text>
         </View>
       </View>
@@ -184,28 +179,17 @@ const Transactions = ({ navigation }: any) => {
     
   };
 
-  const Listheader = () => {
-    return (
-      <View style={styles.listHeaderContainer}>
-        <View>
-          <Text style={styles.leftsideHeader}>What you’ve been up to</Text>
-        </View>
-        {/* <View>
-          <Text style={styles.rightsideHeader}>See All</Text>
-        </View> */}
-      </View>
-    );
-  };
+
 
   return (
     <View
-      style={[styles.container, { paddingTop: getStatusBarHeight(true) + 30 }]}
+      style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}
     >
-      {/* heading */}
+      <Backheader title="History" showArrow={false} />
       <View style={styles.contentContainer}>
         <Customstatusbar />
 
-        <Text style={styles.headerText}>History</Text>
+        
 
         <View style={styles.listContainer}>
           {loading ? (
@@ -220,11 +204,11 @@ const Transactions = ({ navigation }: any) => {
             </View>
           ) : (
             <>
-              {DATA.length > 0 && <Listheader />}
               <Animated.FlatList
                 ref={flatlistRef}
-                style={{ paddingTop: 10 }}
+                // style={{ paddingTop: 10 }}
                 data={formatData(transactions)}
+
                 // scrollEventThrottle={16}
                 onScroll={event => {
                   setPageVerticalOffset(event.nativeEvent.contentSize.height);

@@ -18,7 +18,15 @@ import moment from "moment";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { SafeAreaView } from "react-native-safe-area-context";
-const { Arrowin, Useravatar, Logoavatar, Upgradenowarrow, Arrowout, Withdrawalnotificationicon } = icons;
+const {
+  Arrowin,
+  Useravatar,
+  Logoavatar,
+  Upgradenowarrow,
+  Arrowout,
+  Withdrawalnotificationicon,
+  Emptynotification,
+} = icons;
 
 const DATA = [
   {
@@ -89,7 +97,7 @@ type notificationProps = {
   time: string;
   message: string;
   createdAt: string;
-  description: string
+  description: string;
 };
 
 const messageicon = (type: string) => {
@@ -113,13 +121,13 @@ const messageicon = (type: string) => {
     case "account":
       return <Useravatar />;
       break;
-      case "Fund Reversal":
-        return (
-          <View style={[styles.iconBg, { backgroundColor: COLORS.green3 }]}>
-            <Arrowin />
-          </View>
-        );
-        break;
+    case "Fund Reversal":
+      return (
+        <View style={[styles.iconBg, { backgroundColor: COLORS.green3 }]}>
+          <Arrowin />
+        </View>
+      );
+      break;
     case "Cash Withdrawal":
       return (
         <View style={[styles.iconBg, { backgroundColor: COLORS.grey1 }]}>
@@ -163,7 +171,9 @@ const Notification = ({
         ) => {
           const isLastItem = index === messages.length;
           const isUpgrade = type === "account";
-          const formattedTime = `${moment(time).format("h:mm")}${moment(time).format("a")}`;
+          const formattedTime = `${moment(time).format("h:mm")}${moment(
+            time
+          ).format("a")}`;
           return (
             <Animatable.View
               animation="slideInUp"
@@ -250,7 +260,13 @@ const Notifications = () => {
             // contentContainerStyle={{flex: 1}}
             data={formatData(notifications)}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item, index }: {item: {time: string, data: any}, index: number}) => (
+            renderItem={({
+              item,
+              index,
+            }: {
+              item: { time: string; data: any };
+              index: number;
+            }) => (
               <Notification
                 date={item.time}
                 messages={item.data}
@@ -268,8 +284,9 @@ const Notifications = () => {
                     marginTop: RFValue(100),
                   }}
                 >
+                  <Emptynotification />
                   <Text style={styles.emptyListText}>
-                    Oops, no notifications yet.{" "}
+                    Oops, you have no pending notifications here.{" "}
                   </Text>
                 </View>
               );

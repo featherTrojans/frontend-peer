@@ -21,13 +21,11 @@ const Eachprofile = ({
     return (
       <TouchableOpacity activeOpacity={0.8} style={styles.eachprofileContainer}
       onPress={()=>navigate.navigate("Chatsdm",{userInfo})}>
-        <View style={styles.profileAvatar}>
-        <InitialsBg sideLength={56} name={name || "0 0"} />
-        </View>
+        <InitialsBg sideLength={31} name={name || "0 0"} />
   
         <View style={styles.nameAndUsername}>
           <Text style={styles.eachProfileName}>{name}</Text>
-          <Text>{username}</Text>
+          <Text style={styles.eachProfileUsername}>{username}</Text>
         </View>
       </TouchableOpacity>
     );

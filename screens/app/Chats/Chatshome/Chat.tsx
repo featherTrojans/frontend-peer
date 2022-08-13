@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import moment from "moment";
 import { InitialsBg } from "../../../../components";
+import { COLORS } from "../../../../constants";
 
 type chatProps = {
   userId: string,
@@ -31,9 +32,9 @@ const Chat = ({userId, chatinfo}:chatProps) => {
       activeOpacity={0.8}
        onPress={()=>navigate.navigate("Chatsdm",{userInfo})}
        style={styles.chatContainer}>
-        <View style={styles.chatAvatar}>
-          <InitialsBg sideLength={50} bg="#f6f8ff" name={userInfo?.fullName || "0 0"} />
-        </View>
+          <InitialsBg sideLength={34} bg="#f6f8ff" name={userInfo?.fullName || "0 0"} />
+
+
         <View style={styles.chatInfo}>
           <View style={styles.chatNameAndTime}>
             <Text numberOfLines={1} ellipsizeMode="tail" style={styles.chatName}>{userInfo?.fullName}</Text>
@@ -84,9 +85,16 @@ const AllChats = ({chats, chattwos, authId})=>{
     return (
       <>
         {
-          allChats.map((chat)=>{
+          allChats.map((chat, index)=>{
             let userid = chat.id1 !== authId? chat.id1 : chat.id2 
-            return (<Chat key={userid} userId= {userid} chatinfo={chat} />)
+            const isLast = allChats.length === index+1
+            return (
+            <View key={userid}>
+            <Chat  userId= {userid} chatinfo={chat} />
+            {!isLast && <View style={{marginTop: 25, marginBottom: 25, backgroundColor: COLORS.borderColor2, height: 0.5}}/>} 
+            </View>
+            
+            )
           })
         }
       </>

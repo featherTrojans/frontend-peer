@@ -12,18 +12,29 @@ import { useNavigation } from "@react-navigation/native";
 
 const { Backarrow } = icons;
 
-const Backheader = ({ title }: { title?: string }) => {
+const Backheader = ({
+  title,
+  showArrow = true,
+  mb = 20
+}: {
+  title?: string;
+  showArrow?: boolean;
+  mb?: number
+}) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {marginBottom: mb}]}>
       <View style={styles.backArrowContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backArrowIcon}
-        >
-          <Backarrow />
-        </TouchableOpacity>
+        {showArrow && (
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backArrowIcon}
+          >
+            <Backarrow />
+          </TouchableOpacity>
+        )}
+
         <Text style={styles.backArrowText}>{title}</Text>
       </View>
     </View>

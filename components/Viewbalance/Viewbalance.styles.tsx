@@ -5,10 +5,10 @@ import { COLORS, fontsize, FONTS } from "../../constants";
 export const viewbalancestyles = StyleSheet.create({
   container: {
  
-    paddingHorizontal: RFValue(20),
-    paddingVertical: RFValue(18),
+    paddingHorizontal: 20,
+    paddingVertical: RFValue(20),
     borderRadius: 10,
-    backgroundColor: COLORS.blue6,
+    backgroundColor: COLORS.white,
   },
   //   Top part of the container
   topContainer: {
@@ -18,7 +18,7 @@ export const viewbalancestyles = StyleSheet.create({
   primaryText: {
     ...fontsize.xsmallest,
     ...FONTS.regular,
-    color: COLORS.white,
+    color: COLORS.grey16,
   },
   underLine: {
     height: 0.5,
@@ -28,18 +28,18 @@ export const viewbalancestyles = StyleSheet.create({
   },
 
   addCashBg: {
-    backgroundColor: COLORS.blue7,
+    backgroundColor: COLORS.blue10,
     flexDirection: "row",
     alignSelf: "center",
     alignItems: "center",
-    paddingVertical: RFValue(14),
-    paddingLeft: RFValue(16),
-    paddingRight: RFValue(12),
+    paddingVertical: 12,
+    paddingLeft: 16,
+    paddingRight: 12,
     borderRadius: RFValue(22),
   },
   addCashText: {
     color: COLORS.white,
-    ...fontsize.small,
+    ...fontsize.smallest,
     ...FONTS.medium,
   },
 
@@ -53,12 +53,13 @@ export const viewbalancestyles = StyleSheet.create({
   balanceText: {
     ...fontsize.smaller,
     ...FONTS.medium,
-    marginBottom: RFValue(6),
-    color: COLORS.yellow2,
+    // marginBottom: RFValue(6),
+    color: COLORS.blue9,
+    marginRight: 16
   },
   balanceAmount: {
     ...fontsize.bmedium,
     ...FONTS.bold,
-    color: COLORS.white,
+    color: COLORS.blue9,
   },
 });

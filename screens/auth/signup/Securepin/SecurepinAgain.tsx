@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StatusBar } from "react-native";
 import { useToast } from "react-native-toast-notifications";
 import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
@@ -10,12 +10,13 @@ import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import { styles } from "./Securepin.styles";
+import { securepinstyles } from "./Securepin.styles";
+
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const { SecureDot, Successcheckanimate } = icons;
+const { SecureDot, Successcheckanimate, Newlogo } = icons;
 const SecurepinAgain = ({ route, navigation }) => {
   const toast = useToast();
   const { token, pin, fromm } = route.params;
@@ -63,9 +64,15 @@ const SecurepinAgain = ({ route, navigation }) => {
     }
   };
 
+  useEffect(() => {
+    if (amount.length === 4) {
+      console.log(pin, "here is rhe amount");
+      handleSubmit();
+    }
+  }, [amount]);
+
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-    <View style={styles.container}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <Customstatusbar />
 
       <Globalmodal
@@ -116,46 +123,81 @@ const SecurepinAgain = ({ route, navigation }) => {
       </Globalmodal>
 
       {loading && <Loader />}
-      <View style={{ paddingHorizontal: 25 }}>
-        <JustifyBetween style={{ marginBottom: RFValue(10) }}>
-          <View>
-            <Text style={styles.header}>Type in your </Text>
-            <Text style={styles.header}>secure pin again</Text>
-          </View>
+
+      <View style={securepinstyles.container}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Newlogo />
           <View style={{ flexDirection: "row" }}>
-            <View style={[styles.topDots, { marginRight: RFValue(10) }]} />
-            <View style={[styles.topDots, { marginRight: RFValue(10) }]} />
-            <View style={styles.activeDot} />
+            <View
+              style={[securepinstyles.topDots, { marginRight: RFValue(10) }]}
+            />
+            <View
+              style={[securepinstyles.topDots, { marginRight: RFValue(10) }]}
+            />
+            <View style={securepinstyles.activeDot} />
           </View>
-        </JustifyBetween>
-        <View style={{ marginBottom: RFValue(40) }}>
-          <Text style={styles.subText}>Transaction PIN</Text>
         </View>
 
-        <View style={styles.pinContainer}>
-          <View style={styles.pinInputContainer}>
-            <View style={styles.pinView}>{amount[0] && <SecureDot />}</View>
-            <View style={styles.pinView}>{amount[1] && <SecureDot />}</View>
-            <View style={styles.pinView}>{amount[2] && <SecureDot />}</View>
-            <View style={styles.pinView}>{amount[3] && <SecureDot />}</View>
+        <View style={{ marginTop: 28, marginBottom: 80 }}>
+          <Text
+            style={{ ...fontsize.bsmall, ...FONTS.medium, marginBottom: 9 }}
+          >
+            Confirm your secure PIN
+          </Text>
+          <Text
+            style={{
+              ...fontsize.smallest,
+              ...FONTS.regular,
+              color: COLORS.grey16,
+            }}
+          >
+            Re-type Transaction PIN
+          </Text>
+        </View>
+
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={securepinstyles.pinInputContainer}>
+            <View
+              style={[
+                securepinstyles.pinView,
+                { backgroundColor: amount[0] ? COLORS.blue6 : COLORS.grey3 },
+              ]}
+            />
+            <View
+              style={[
+                securepinstyles.pinView,
+                { backgroundColor: amount[1] ? COLORS.blue6 : COLORS.grey3 },
+              ]}
+            />
+            <View
+              style={[
+                securepinstyles.pinView,
+                { backgroundColor: amount[2] ? COLORS.blue6 : COLORS.grey3 },
+              ]}
+            />
+            <View
+              style={[
+                securepinstyles.pinView,
+                { backgroundColor: amount[3] ? COLORS.blue6 : COLORS.grey3 },
+              ]}
+            />
           </View>
         </View>
+
+        <View style={{ flex: 1 }} />
+
+        <Keyboard
+          array={[...numbers]}
+          setDigit={handleSetAmount}
+          removeDigit={handleRemoveAmount}
+        />
       </View>
-
-      
-
-      <Keyboard
-        array={[...numbers]}
-        setDigit={handleSetAmount}
-        removeDigit={handleRemoveAmount}
-      />
-
-      <Bottombtn
-        title="PROCEED"
-        onpress={handleSubmit}
-        disabled={amount.length !== 4}
-      />
-    </View>
     </SafeAreaView>
   );
 };

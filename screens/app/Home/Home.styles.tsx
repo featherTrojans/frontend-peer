@@ -23,14 +23,14 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   profileName: {
-    ...fontsize.small,
-    ...FONTS.bold,
+    ...fontsize.smaller,
+    ...FONTS.regular,
     marginBottom: 2,
     textTransform: "capitalize",
   },
   profileUsername: {
     ...fontsize.xsmallest,
-    ...FONTS.medium,
+    ...FONTS.regular,
     alignItems: "center",
     textTransform: "lowercase",
   },
@@ -114,12 +114,12 @@ export const styles = StyleSheet.create({
   emptyText: {
     color: COLORS.black,
     textAlign: "center",
-    ...fontsize.small,
+    ...fontsize.smaller,
     ...FONTS.regular,
   },
   transactNow: {
     color: COLORS.blue6,
-    ...FONTS.bold,
+    ...FONTS.medium,
   },
 
   centerEmptySet: {

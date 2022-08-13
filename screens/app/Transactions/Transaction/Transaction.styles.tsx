@@ -4,7 +4,7 @@ import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.white3,
     // paddingTop: 22,
     // paddingHorizontal: 15,
   },
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    marginTop: 23,
+    // marginTop: 23,
   },
   listHeaderContainer: {
     flexDirection: "row",
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   emptyContainerText: {
     color: COLORS.black,
     textAlign: "center",
-    ...fontsize.small,
+    ...fontsize.smaller,
     ...FONTS.regular,
   },
   emptyContainerSubText: {

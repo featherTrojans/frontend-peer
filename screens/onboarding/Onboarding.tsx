@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FlatList, Animated, StatusBar } from "react-native";
 import { OnboardingScreenNavigationProps } from "../../types";
 import { COLORS, FONTS, fontsize, SIZES } from "../../constants";

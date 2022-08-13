@@ -6,30 +6,17 @@ export const styles = StyleSheet.create({
     flex: 1,
     // paddingHorizontal: 25,
     
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.white3,
   },
   cancelIcon: {
     marginBottom: 36,
   },
-  otpTextContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 25,
-  },
-  otpMainText: {
-    textAlign: "center",
-    ...FONTS.regular,
-    color: COLORS.black,
-    ...fontsize.bsmall,
-  },
-  otpSubText: {
-    ...FONTS.medium,
-    color: COLORS.blue6,
-  },
+  
   otpInputContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 28,
+    // marginBottom: 28,
+    marginVertical: 40
   },
   otpInput: {
     width: 51,
@@ -51,12 +38,16 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   resendText: {
-    ...fontsize.small,
+    ...fontsize.smallest,
     ...FONTS.medium,
+    color: COLORS.black,
+    lineHeight: 20
   },
   duration: {
-    ...fontsize.small,
+    ...fontsize.smallest,
     ...FONTS.regular,
+    color: COLORS.black,
+    lineHeight: 20
   },
   dashedLine: {
     height: 0.5,
@@ -65,14 +56,11 @@ export const styles = StyleSheet.create({
     marginTop: 24,
   },
   changeNumber: {
-    color: COLORS.grey5,
-    ...fontsize.small,
+    color: COLORS.grey16,
+    ...fontsize.smallest,
     ...FONTS.medium,
   },
-  btnContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-  },
+
   btnBg: {
     height: 62,
     backgroundColor: COLORS.blue6,

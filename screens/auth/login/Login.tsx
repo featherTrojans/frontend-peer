@@ -28,7 +28,7 @@ import {
 } from "react-native-keychain";
 import * as LocalAuthentication from "expo-local-authentication";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Input, Loader } from "../../../components";
+import { Custombutton, Input, Loader } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import showerror from "../../../utils/errorMessage";
@@ -42,7 +42,6 @@ import {
   saveCredentials,
 } from "../../../utils/biometrics";
 import Customstatusbar from "../../shared/Customstatusbar";
-
 
 const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
 
@@ -154,26 +153,37 @@ const Login = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white3 }}>
-
       <Customstatusbar />
       <KeyboardAwareScrollView>
         <View style={styles.container}>
           {/* Logo */}
 
-       
-
-
-          <View style={{marginTop: 30}}>
-          <Newlogo />
-          <View style={{marginTop: 28, marginBottom: 40}}>
-            <Text style={{...fontsize.bsmall, ...FONTS.medium, color: COLORS.black, lineHeight: 21, marginBottom: 9}}>Padi, Welcome Back</Text>
-            <Text style={{...fontsize.smallest, color: COLORS.grey16, ...FONTS.regular}}>Sign into your feather account</Text>
+          <View style={{ marginTop: 30 }}>
+            <Newlogo />
+            <View style={{ marginTop: 28, marginBottom: 40 }}>
+              <Text
+                style={{
+                  ...fontsize.bsmall,
+                  ...FONTS.medium,
+                  color: COLORS.black,
+                  lineHeight: 21,
+                  marginBottom: 9,
+                }}
+              >
+                Padi, Welcome Back
+              </Text>
+              <Text
+                style={{
+                  ...fontsize.smallest,
+                  color: COLORS.grey16,
+                  ...FONTS.regular,
+                }}
+              >
+                Sign into your feather account
+              </Text>
+            </View>
           </View>
 
-
-
-          </View>
- 
           {/* Form */}
           <Formik
             initialValues={{
@@ -262,14 +272,7 @@ const Login = ({ navigation }: any) => {
                     </TouchableOpacity>
                   </JustifyBetween>
 
-                  {/* Login btn */}
-                  <TouchableOpacity
-                    onPress={() => handleSubmit()}
-                    style={styles.loginbtn}
-                    activeOpacity={0.8}
-                  >
-                    <Text style={styles.loginbtnText}>Sign in</Text>
-                  </TouchableOpacity>
+                  <Custombutton btntext="Sign in" onpress={handleSubmit} />
                 </>
               );
             }}

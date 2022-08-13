@@ -17,15 +17,17 @@ export const styles = StyleSheet.create({
   },
   headerDetailsContainer: {
     flexDirection: "row",
-    marginLeft: 20,
+    marginLeft: 14,
     alignItems: "center",
   },
   chatName: {
-    ...fontsize.bsmall,
+    flex: 1,
+    ...fontsize.smaller,
     ...FONTS.medium,
     color: COLORS.grey7,
     lineHeight: 21,
-    textTransform: "capitalize"
+    textTransform: "capitalize",
+    marginLeft: 12
   },
   chatStatusContainer: {
     flexDirection: "row",
@@ -90,7 +92,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   chatToMeTime: {
-    color: COLORS.black2,
+    color: "#8456FF",
     ...fontsize.smallest,
     ...FONTS.regular,
   },

@@ -3,7 +3,7 @@ import { FONTS, fontsize } from "../../constants";
 
 export const styles = StyleSheet.create({
     initialText: {
-        ...fontsize.bsmall, 
+        ...fontsize.smallest, 
         ...FONTS.medium
     }
 })

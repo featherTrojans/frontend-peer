@@ -13,6 +13,7 @@ import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import {
   Backheader,
   Bottombtn,
+  Custombutton,
   InitialsBg,
   Loader,
   Viewbalance,
@@ -34,6 +35,7 @@ const {
   Requestee2,
   Requestee3,
   Acceptedcheck,
+  Emptyicon,
   Cryinganimate,
 } = icons;
 
@@ -53,7 +55,7 @@ const Emptyrequest = () => {
         source={Cryinganimate}
         autoPlay
         loop
-        style={{ width: RFValue(190), height:  RFValue(190)}}
+        style={{ width: RFValue(190), height: RFValue(190) }}
       />
 
       <Text style={styles.emptyListText}>
@@ -74,20 +76,13 @@ const Requesteeprofile = ({ list, onpress }: any) => {
       onPress={onpress}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        {/* Image */}
-        {/* {image} */}
-        {/* <View
-          style={{
-            width: 44,
-            height: 44,
-            backgroundColor: COLORS.grey1,
-            borderRadius: 44 / 2,
-          }}
-        /> */}
+    
         <InitialsBg sideLength={44} name={agent} />
         <View style={styles.namesContainer}>
           <Text style={styles.withdrawProfileName}>{agent}</Text>
-          <Text style={styles.withdrawProfileUsername}>@{agentUsername.toLowerCase()}</Text>
+          <Text style={styles.withdrawProfileUsername}>
+            @{agentUsername.toLowerCase()}
+          </Text>
         </View>
       </View>
 
@@ -112,6 +107,7 @@ const Withdraw = ({ navigation }) => {
     getPendingRequest();
     getAcceptedRequest();
   }, []);
+
   const getPendingRequest = async () => {
     setLoading(true);
     try {
@@ -123,6 +119,7 @@ const Withdraw = ({ navigation }) => {
       setLoading(false);
     }
   };
+
   const getAcceptedRequest = async () => {
     try {
       const response = await axiosCustom.get("/request/accepted");
@@ -132,111 +129,63 @@ const Withdraw = ({ navigation }) => {
     }
   };
 
-  const [index, setIndex] = useState(0);
 
-  const activeColor = (activeIndex: number) => {
-    return index === activeIndex ? "#003AD6" : "#000000";
-  };
-  const animateToIndex = (indexPoint: number) => {
-    setIndex(indexPoint);
-    setActive(["pending", "accepted"][indexPoint]);
-    Animated.spring(horizontalOffset, {
-      toValue: singleWidth() * indexPoint,
-      useNativeDriver: true,
-    }).start();
-  };
-  const singleWidth = () => {
-    let calcWidth = SIZES.width;
-    return calcWidth / 2;
-  };
-  const horizontalOffset = useRef(new Animated.Value(0)).current;
+  const datas = [
+    {
+      title: "Pending Requests",
+      data: [
+        { name: "Damilare Seyinde" },
+        { name: "Rasaq Momoh" },
+        { name: "Peterson Yeyejare" },
+      ],
+    },
+    { title: "Accepted Requests", data: [{name: "Famuagun"}] },
+  ];
 
-  const REQUESTDATA = active === "pending" ? pendingRequests : acceptedRequests;
-
-  const Requestlist = () => {
+  const Requestuser = ({ details, accepted }: {details: any , accepted: boolean }) => {
+    const {name} = details
     return (
-      <View style={styles.requestContainer}>
-        <View style={{ position: "relative", marginTop: RFValue(30), ...Shadow }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
+            style={{
+              width: 34,
+              height: 34,
+              backgroundColor: "#8456FF",
+              borderRadius: 34 / 2,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            <TouchableOpacity
-              style={{
-                width: singleWidth(),
-                paddingVertical: RFValue(24),
-              }}
-              activeOpacity={0.7}
-              onPress={() => animateToIndex(0)}
-            >
-              <Text
-                style={[
-                  {
-                    ...fontsize.smallest,
-                    ...FONTS.regular,
-                    textAlign: "center",
-                    color: activeColor(0),
-                  },
-                ]}
-              >
-                Pending Requests ({pendingRequests.length})
-              </Text>
-            </TouchableOpacity>
+            <Text style={{ color: COLORS.white, ...fontsize.smaller, ...FONTS.medium }}>D</Text>
 
-            <TouchableOpacity
-              style={{ width: singleWidth(), paddingVertical: RFValue(24)}}
-              activeOpacity={0.7}
-              onPress={() => animateToIndex(1)}
-            >
-              <Text
-                style={[
-                  {
-                    ...fontsize.smallest,
-                    ...FONTS.regular,
-                    textAlign: "center",
-                    color: activeColor(1),
-                  },
-                ]}
-              >
-                Accepted Requests ({acceptedRequests.length})
-              </Text>
-            </TouchableOpacity>
+            {accepted && (
+              <View style={{ position: "absolute", bottom: -3, right: 0 }}>
+                <Acceptedcheck />
+              </View>
+            )}
           </View>
 
-          <Animated.View
-            style={{
-              position: "absolute",
-              width: singleWidth(),
-              height: 1.5,
-              backgroundColor: COLORS.blue6,
-              bottom: 0,
-              left: 0,
-              transform: [{ translateX: horizontalOffset }, { scaleX: 1 }],
-            }}
-          />
+          <View style={{ marginLeft: 12 }}>
+            <Text
+              style={{
+                ...fontsize.smaller,
+                ...FONTS.medium,
+                color: COLORS.blue9,
+                lineHeight: 27,
+              }}
+            >
+              {name}
+            </Text>
+            <Text style={{ ...fontsize.smallest, color: COLORS.halfBlack }}>
+              12 Mins Away
+            </Text>
+          </View>
         </View>
 
-        <FlatList
-          data={REQUESTDATA}
-          renderItem={({ item }) => (
-            <Requesteeprofile
-              list={item}
-              onpress={() =>
-                navigation.navigate(
-                  item.status === "PENDING"
-                    ? "Pendingwithdraw"
-                    : "Acceptedwithdraw",
-                  { requestInfo: item }
-                )
-              }
-            />
-          )}
-          keyExtractor={(item) => `${item.reference}`}
-          ListEmptyComponent={() => (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: "center"}}>
-              <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.black, marginTop: RFValue(70), marginHorizontal: RFValue(50), textAlign: 'center', lineHeight: 24}}>Sorry you have no available request at the moment.</Text>
-            </View>
-          )}
-        />
+        <Text style={{ ...fontsize.smallest, ...FONTS.medium, lineHeight: 27 }}>
+          N23,000
+        </Text>
       </View>
     );
   };
@@ -246,30 +195,119 @@ const Withdraw = ({ navigation }) => {
       <Backheader title="Withdraw" />
       {/* {loading && <Loader />} */}
       <Customstatusbar />
-      <View style={{ flex: 1, paddingHorizontal: 15 }}>
+      <View style={{ paddingHorizontal: 15 }}>
         <Viewbalance />
-        {loading ? (
-            <View
-              style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-            >
-              <ActivityIndicator size="large" color={COLORS.blue6} />
-            </View>
-
-            ) :(
-        <View style={{ flex: 1 }}>
-          {pendingRequests.length < 1 && acceptedRequests.length < 1 ? (
-            <Emptyrequest />
-            ) : (
-              <Requestlist />
-              )}
-        </View>
-              )}
       </View>
 
-      <Bottombtn
+      <FlatList
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 15, marginTop: 15 }}
+        data={datas}
+        renderItem={({ item, index }) => {
+          const isLast = datas.length === index + 1;
+          const { title, data } = item;
+
+          return (
+            <View
+              style={{
+                backgroundColor: COLORS.white,
+                width: SIZES.width - 30,
+                height: "auto",
+                marginRight: isLast ? 0 : 20,
+                borderRadius: 15,
+                paddingHorizontal: 16,
+                paddingVertical: 22,
+                alignSelf: "flex-start",
+              }}
+            >
+              <Text
+                style={{
+                  ...fontsize.smaller,
+                  ...FONTS.regular,
+                  color: COLORS.blue9,
+                  marginBottom: 42,
+                }}
+              >
+                {title}
+              </Text>
+
+                {data.length > 0 ?    
+                
+                
+                data.map((info, index) => {
+                  const isLastItem = data.length === index + 1;
+                  const accepted = title === "Accepted Requests"
+                  return (
+                    <View key={index}>
+                      <Requestuser details={info} accepted={accepted}/>
+                      {!isLastItem && (
+                        <View
+                          style={{
+                            marginVertical: 21,
+                            backgroundColor: COLORS.borderColor2,
+                            height: 0.5,
+                          }}
+                        />
+                      )}
+                    </View>
+                  );
+                })
+                
+                : 
+                
+                <View style={{ justifyContent: "center", alignItems: "center", paddingVertical: 50, paddingHorizontal: 30}}>
+                  <Emptyicon />
+                  <Text style={{textAlign: "center", marginTop: 20, ...fontsize.smaller, ...FONTS.regular}}>Padi, you don’t have any pending withdrawal requests</Text>
+                </View>
+                
+                
+                }
+
+              {/* {data.map((info, index) => {
+                const isLastItem = data.length === index + 1;
+                const accepted = title === "Accepted Requests"
+                return (
+                  <View key={index}>
+                    <Requestuser details={info} accepted={accepted}/>
+                    {!isLastItem && (
+                      <View
+                        style={{
+                          marginVertical: 21,
+                          backgroundColor: COLORS.borderColor2,
+                          height: 0.5,
+                        }}
+                      />
+                    )}
+                  </View>
+                );
+              })} */}
+
+
+            </View>
+          );
+        }}
+        keyExtractor={(item) => item.title}
+      />
+
+      <View
+        style={{
+          flex: 1,
+          paddingHorizontal: 15,
+          justifyContent: "flex-end",
+          marginBottom: 20,
+        }}
+      >
+        <Custombutton
+          btntext="Withdraw Cash"
+          onpress={() => console.log("hellow")}
+        />
+      </View>
+
+      {/* <Bottombtn
         title="NEW WITHDRAWAL"
         onpress={() => navigation.navigate("Requestnew")}
-      />
+      /> */}
     </SafeAreaView>
   );
 };

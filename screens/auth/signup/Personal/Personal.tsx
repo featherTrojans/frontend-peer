@@ -11,7 +11,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Input, Loader } from "../../../../components/index";
+import { Custombutton, Input, Loader } from "../../../../components/index";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
@@ -163,19 +163,26 @@ const Personal = ({ navigation }) => {
 
                   {/* Proceed Btn */}
                   <View style={styles.bottomContainer}>
-                    <TouchableOpacity
+
+
+
+                     <Custombutton btntext="Sign up" onpress={handleSubmit} disable={isSubmitting}/> 
+                    {/* <TouchableOpacity
                       style={styles.proceedBtn}
                       activeOpacity={0.8}
                       onPress={handleSubmit}
                       disabled={isSubmitting}
                     >
                       <Text style={styles.proceedText}>PROCEED</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+
+
+
 
                     {/* Have an account */}
                     <View style={styles.bottomTextContainer}>
                       <Text style={styles.bottomText}>
-                        Have an account yet?{" "}
+                      Already have an account? {" "}
                       </Text>
 
                       <TouchableOpacity
@@ -183,7 +190,7 @@ const Personal = ({ navigation }) => {
                         activeOpacity={0.8}
                       >
                         <Text style={[styles.bottomText, { ...FONTS.bold }]}>
-                          Login
+                          Sign in
                         </Text>
                       </TouchableOpacity>
                     </View>

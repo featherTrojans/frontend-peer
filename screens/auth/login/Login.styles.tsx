@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
   },
   haveanaccount: {
-    marginBottom: 81,
+    marginTop: 32,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: 'row'
@@ -78,7 +78,6 @@ export const styles = StyleSheet.create({
     ...FONTS.regular,
   },
   registerText: { 
-    // color: COLORS.yellow1, 
     ...fontsize.smallest,
     ...FONTS.bold 
   }

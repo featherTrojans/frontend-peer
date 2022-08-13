@@ -4,11 +4,11 @@ import { COLORS, FONTS, fontsize } from "../../../../constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.white3,
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     marginTop: 16,
     marginHorizontal: 15,
   },
@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 32,
     marginBottom: 15,
     borderRadius: 8,
+    backgroundColor: COLORS.white
   },
   topRow: {
     marginBottom: 40,
@@ -26,12 +27,14 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   headers: {
-    ...fontsize.bsmall,
+    ...fontsize.small,
     ...FONTS.medium,
     lineHeight: 22,
   },
   headerInfo: {
-    ...fontsize.small,
+    // flex: 0.5,
+    width: "80%",
+    ...fontsize.smallest,
     ...FONTS.regular,
     lineHeight: 21,
     color: COLORS.grey2,

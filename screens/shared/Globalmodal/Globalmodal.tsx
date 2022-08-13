@@ -3,6 +3,7 @@ import React from "react";
 import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize } from "../../../constants";
 import { styles } from "./Globalmodal.styles";
+import { Custombutton } from "../../../components";
 
 type globalModalProps = {
   showState: boolean;
@@ -17,7 +18,7 @@ const Globalmodal = ({
   onBgPress,
   children,
   btnFunction,
-  btnText = "CONTINUE",
+  btnText="continue",
 }: globalModalProps) => {
   return (
     <Modal
@@ -36,15 +37,12 @@ const Globalmodal = ({
       <View style={styles.container}>
         {children}
 
-        {btnFunction  && (
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={btnFunction}
-            style={styles.btnStyle}
-          >
-            <Text style={styles.btnText}>{btnText}</Text>
-          </TouchableOpacity>
-        )}
+        {btnFunction  && 
+
+          <Custombutton btntext={btnText} onpress={btnFunction}/>
+
+          
+        }
       </View>
     </Modal>
   );

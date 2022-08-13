@@ -19,6 +19,30 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const Paybills = ({ navigation }) => {
   const { Networklogos, Electricitybillsicon, Cablestvicon } = icons;
 
+  const paybilltypes = [
+    {
+      title: "Airtime & Data",
+      subtitle: "Purchase",
+      info: "Purchase airtime and data from your favourite network in Nigeria.",
+      logo: <Networklogos/>,
+      route: "Airtimedetails"
+    },
+    {
+      title: "Electricity Bills",
+      subtitle: "Payments",
+      info: "Pay your power bills easily, no more power outage due to payments ",
+      logo: <Electricitybillsicon/>,
+      route: "Electricityamount"
+    },
+    {
+      title: "CableTV Subscriptions",
+      subtitle: "Payment",
+      info: "Purchase your cable tv subscriptions from your favorite providers",
+      logo: <Cablestvicon/>,
+      route: "Electricityamount"
+    },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
@@ -28,28 +52,36 @@ const Paybills = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
       >
         {/* Airtime purchase and data */}
-        <TouchableOpacity
-          style={[styles.eachContainer, { backgroundColor: "#EDF7FE" }]}
-          activeOpacity={0.8}
-          onPress={() => navigation.navigate("Airtimeamount")}
-        >
-          <View style={styles.topRow}>
-            <View>
-              <Text style={styles.headers}>Airtime & Data</Text>
-              <Text style={styles.headers}>Purchase</Text>
-            </View>
 
-            <Networklogos />
-            {/* images */}
-          </View>
-          <Text style={styles.headerInfo}>
-            Purchase airtime and data from your
-          </Text>
-          <Text style={styles.headerInfo}>favourite network in Nigeria.</Text>
-        </TouchableOpacity>
+        {paybilltypes.map(({ title, subtitle, logo, info, route }, index) => {
+          return (
+            <TouchableOpacity
+              key={index}
+              style={styles.eachContainer}
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate(route)}
+            >
+              <View style={styles.topRow}>
+                <View>
+                  <Text style={styles.headers}>{title}</Text>
+                  <Text style={styles.headers}>{subtitle}</Text>
+                </View>
+
+                {logo}
+                {/* images */}
+              </View>
+              <Text style={styles.headerInfo}>
+                {info}
+              </Text>
+              {/* <Text style={styles.headerInfo}>
+                favourite network in Nigeria.
+              </Text> */}
+            </TouchableOpacity>
+          );
+        })}
 
         {/* Electricity Bills and payment  */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[styles.eachContainer, { backgroundColor: "#E0EDD8" }]}
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Electricityamount")}
@@ -65,10 +97,10 @@ const Paybills = ({ navigation }) => {
             Pay your power bills easily, no more
           </Text>
           <Text style={styles.headerInfo}>power outage due to payments</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* Electricity Bills and payment  */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[styles.eachContainer, { backgroundColor: "#F1E5FF" }]}
           activeOpacity={0.8}
         >
@@ -86,10 +118,8 @@ const Paybills = ({ navigation }) => {
             </Text>
             <View style={{flexDirection: "row", justifyContent: "space-between"}}>
             <Text style={styles.headerInfo}>favourite network in Nigeria.</Text>
-            <Text style={[styles.headerInfo, {color: "#7600FF", ...FONTS.bold} ]}>Coming Soon</Text>
           </View>
-        </TouchableOpacity>
-        {/* <Button title="Chat with anoda" onPress={()=>chatOnWhatsapp("08035034968")}/> */}
+        </TouchableOpacity> */}
       </ScrollView>
     </SafeAreaView>
   );

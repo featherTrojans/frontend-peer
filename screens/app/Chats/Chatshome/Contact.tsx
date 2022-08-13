@@ -6,6 +6,7 @@ import useContact from '../../../../utils/customContact';
 import axiosCustom from '../../../../httpRequests/axiosCustom';
 import { InitialsBg } from '../../../../components';
 import Eachprofile from './EachProfile';
+import { COLORS, FONTS, fontsize } from '../../../../constants';
 
   
 
@@ -14,37 +15,45 @@ const Contact = ({contactsResolved}) => {
     const navigate = useNavigation()
   
     return (
+      <View style={{backgroundColor: COLORS.white, borderRadius: 15, paddingVertical: 20, paddingHorizontal: 16, minHeight: 162}}>
+
+        <View style={{flexDirection: 'row', justifyContent: "space-between"}}>
+          <Text>Feather users in your contact</Text>
+          <Text>See more</Text>
+        </View>
+
+
+
+
+
+
 
       <FlatList 
       data={contactsResolved}
+      // style={{flex: 1}}
+      
       horizontal
       bounces={false}
       showsHorizontalScrollIndicator={false}
       initialNumToRender={5}
       maxToRenderPerBatch={5}
-      contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9 }}
+      contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9, }}
       renderItem={({item, index}) => {
         const contact = item
         return (
           <Eachprofile userInfo={contact} name={contact.fullName} username={`@${contact.username}`} key={index} />
         )
       }}
-      ListFooterComponent={() => {
+      ListEmptyComponent={() => {
         return (
-            <TouchableOpacity onPress={()=>navigate.navigate("Usersearch",{phoneContact:contactsResolved})} style={styles.seeMoreContainer}>
-              <View style={styles.seeMoreBg}>
-                <View style={{ flexDirection: "row" }}>
-                  <View style={styles.seeMoreDots} />
-                  <View style={styles.seeMoreDots} />
-                  <View style={[styles.seeMoreDots, { marginRight: 0 }]} />
-                </View>
-                </View>
-              <Text style={styles.seeMoreText}>See More</Text>
-            </TouchableOpacity>
+          <View style={{flex: 1,width: "100%", flexDirection: 'row', alignItems: 'center', justifyContent: "center" }}>
+            <Text style={{textAlign: "center", ...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>No feather user in your contacts. Invite</Text>
+            </View>
         )
       }}
       
       />
+      </View>
     )
 }
 

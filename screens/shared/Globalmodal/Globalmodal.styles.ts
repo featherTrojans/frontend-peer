@@ -1,14 +1,12 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../../constants";
-
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 export const styles = StyleSheet.create({
     container:{
         backgroundColor: COLORS.white,
-        // alignItems: "center",
-        paddingHorizontal: 25,
-        paddingTop: 16,
-        paddingBottom: 44,
+        paddingBottom: getBottomSpace()+20,
+        paddingHorizontal: 15,
         borderTopLeftRadius: 22,
         borderTopRightRadius: 22,
       },

@@ -11,6 +11,7 @@ import { viewbalancestyles } from "./Viewbalance.styles";
 import { AuthContext } from "../../context/AuthContext";
 import amountFormatter from "../../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Eyecrossed, Arrowright } = icons;
 
@@ -39,19 +40,24 @@ const Viewbalance = ({ navigate }: any) => {
       <View style={viewbalancestyles.bottomContainer}>
         {/* Left text */}
         <View>
+
+          <View style={{flexDirection: "row", alignItems: "center", marginBottom: RFValue(6)}}>
           <Text style={viewbalancestyles.balanceText}>Feather Balance</Text>
+          <TouchableOpacity
+          onPress={() => setShowAmount(!showAmount)}
+          activeOpacity={0.8}
+        >
+          <Eyecrossed />
+        </TouchableOpacity>
+          </View>
+          
           <Text style={viewbalancestyles.balanceAmount}>
             NGN {showAmount ? amountFormatter(authdata?.walletBal) : "******"}
           </Text>
         </View>
 
         {/* Eye icon */}
-        <TouchableOpacity
-          onPress={() => setShowAmount(!showAmount)}
-          activeOpacity={0.8}
-        >
-          <Eyecrossed />
-        </TouchableOpacity>
+        
       </View>
     </View>
   );

@@ -4,7 +4,7 @@ import { COLORS, FONTS, fontsize } from "../../constants";
 import { nameSplitter } from "../../utils/nameSplitter";
 import { styles } from "./InitialsBg.styles";
 import { RFValue } from "react-native-responsive-fontsize";
-import UserAvatar from "@muhzi/react-native-user-avatar";
+// import UserAvatar from "@muhzi/react-native-user-avatar";
 
 type InitialsBgProps = {
   sideLength: number;

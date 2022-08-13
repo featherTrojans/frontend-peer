@@ -8,7 +8,13 @@ import { AuthContext } from "../../../../context/AuthContext";
 import moment from "moment";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 
-
+const { Chatimage, chatbg } = images;
+import { Bottombtn, InitialsBg } from "../../../../components";
+import Customstatusbar from "../../../shared/Customstatusbar";
+import LottieView from "lottie-react-native"
+import { SafeAreaView } from "react-native-safe-area-context";
+import AllChatsModal from "./AllChatsModal";
+import { usePushNotification } from "../../../../navigation";
 
 
 
@@ -17,13 +23,7 @@ const { Backarrow, SendIcon, Outlinedlock,Plusicon,
   Minusicon,
   Arrowupicon,
   Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate, Feathecomingsoonchatanimate, SendTF } = icons;
-const { Chatimage, chatbg } = images;
-import { Bottombtn, InitialsBg } from "../../../../components";
-import Customstatusbar from "../../../shared/Customstatusbar";
-import LottieView from "lottie-react-native"
-import { SafeAreaView } from "react-native-safe-area-context";
-import AllChatsModal from "./AllChatsModal";
-import { usePushNotification } from "../../../../navigation";
+
 
 
 
@@ -258,20 +258,28 @@ const Chatsdm = ({navigation,route}) => {
         userPin={userPin}
         sendCash={sendCash}
       />
+
+
+
       <View style={styles.chatHeader}>
         <TouchableOpacity onPress={()=>navigation.goBack()}>
           <Backarrow />
         </TouchableOpacity>
+
+
         <View style={styles.headerDetailsContainer}>
-          <InitialsBg sideLength={50} name={userInfo?.fullName || "0 0"} />
-          <View style={{ marginLeft: 20, flex: 1 }}>
+          <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
             <Text style={styles.chatName}>{userInfo.fullName}</Text>
-          </View>
           <TouchableOpacity activeOpacity={0.8} onPress={()=>setSendCashModal(true)}>
             <SendTF style={{marginRight: 10}} />
           </TouchableOpacity>
         </View>
+
+
       </View>
+
+
+
       {fetchmessage  ?
         <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
               <LottieView source={Feathecomingsoonchatanimate} autoPlay loop style={{ width: 160, height: 160 }}/>          

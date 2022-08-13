@@ -87,8 +87,8 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
         <Numberbtn 
         onpress={() => removeDigit()}
         textColor={textColor}
-        key="x"
-        >X</Numberbtn>
+        key="<"
+        >{"<"}</Numberbtn>
       </View>
     </View>
   );

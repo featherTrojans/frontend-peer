@@ -68,13 +68,10 @@ export const styles = StyleSheet.create({
 
   iconWithTitleContainer: {
     justifyContent: "space-between",
-    // marginLeft: 8,
     paddingLeft: 8,
     paddingRight: 20,
     paddingVertical: 5,
-    // marginRight: 22,
     marginBottom: 20,
-    // ...Shadow
     
   },
   iconBg: {
