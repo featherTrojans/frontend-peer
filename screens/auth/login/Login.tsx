@@ -208,6 +208,8 @@ const Login = ({ navigation }: any) => {
                   {/* {isSubmitting && checkIfSubmitting()} */}
                   {loading && <Loader />}
 
+
+                  {/* Username input */}
                   <Input
                     placeholder="Phone Number / email / username"
                     name="username"
@@ -215,28 +217,16 @@ const Login = ({ navigation }: any) => {
                     icon={<Usericon />}
                   />
 
+
                   {/* Password input */}
-                  <View style={styles.inputContainer}>
-                    <View style={styles.inputiconwrapper}>
-                      <Lock />
-                    </View>
-                    <TextInput
-                      style={styles.textInput}
-                      placeholder="Password"
-                      placeholderTextColor={COLORS.grey16}
-                      secureTextEntry={hidePassword}
-                      underlineColorAndroid="transparent"
-                      onChangeText={handleChange("password")}
-                      onBlur={handleBlur("password")}
-                      selectionColor={COLORS.blue9}
-                    />
-                    <TouchableOpacity
-                      onPress={() => setHidePassword(!hidePassword)}
-                      activeOpacity={0.8}
-                    >
-                      {hidePassword ? <Eyeicon /> : <Passwordhideicon />}
-                    </TouchableOpacity>
-                  </View>
+                  <Input
+                    placeholder="Password"
+                    name="password"
+                    formikProps={formikProps}
+                    icon={<Lock />}
+                    password={true}
+                  />
+
 
                   {/* Bottom text */}
                   <JustifyBetween

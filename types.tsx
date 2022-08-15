@@ -89,11 +89,13 @@ Addbvn: undefined;
   //Paybills
   Paybills: undefined;
   Airtimeamount: undefined;
+  Airtimeanddata: undefined;
   Airtimedetails: undefined;
   Airtimepurchasepin: undefined;
   Electricityamount: undefined;
   Electricitydetails: undefined;
-
+  Electricitytype: undefined;
+  Electricitymetertype: undefined;
 
 
   //Deposit

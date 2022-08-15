@@ -4,8 +4,7 @@ import { styles } from "./Chatshome.styles";
 import { useNavigation } from "@react-navigation/native";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import moment from "moment";
-import { InitialsBg } from "../../../../components";
-import { COLORS } from "../../../../constants";
+import { Horizontaline, InitialsBg } from "../../../../components";
 
 type chatProps = {
   userId: string,
@@ -91,7 +90,7 @@ const AllChats = ({chats, chattwos, authId})=>{
             return (
             <View key={userid}>
             <Chat  userId= {userid} chatinfo={chat} />
-            {!isLast && <View style={{marginTop: 25, marginBottom: 25, backgroundColor: COLORS.borderColor2, height: 0.5}}/>} 
+            {!isLast && <Horizontaline marginV={25}/>} 
             </View>
             
             )

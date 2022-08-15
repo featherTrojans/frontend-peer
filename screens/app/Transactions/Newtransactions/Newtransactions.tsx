@@ -102,7 +102,7 @@ const Newtransactions = ({ navigation }: any) => {
                   {index + 1 !== actions.length && (
                     <View
                       style={{
-                        marginVertical: 20,
+                        marginVertical: 22,
                         backgroundColor: COLORS.grey2,
                         opacity: 0.2,
                         height: 0.5,

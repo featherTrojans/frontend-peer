@@ -6,7 +6,7 @@ import Customstatusbar from "../../screens/shared/Customstatusbar";
 
 const Mainwrapper = ({ children }) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white3 }}>
       <Customstatusbar />
 
       {children}

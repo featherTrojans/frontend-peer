@@ -3,7 +3,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS, fontsize } from "../../../../../constants";
 import { Shadow } from "../../../../../constants/theme";
 
-export const styles = StyleSheet.create({
+export const airtimedetailstyles = StyleSheet.create({
 
 
 

@@ -5,35 +5,28 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
-  ActivityIndicator,
 } from "react-native";
-import React, { ReactNode, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import {
   Backheader,
-  Bottombtn,
   Custombutton,
+  Horizontaline,
   InitialsBg,
-  Loader,
+  Mainwrapper,
   Viewbalance,
 } from "../../../../components";
-import { styles } from "./Withdraw.styles";
+import { withdrawstyles } from "./Withdraw.styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import amountFormatter from "../../../../utils/formatMoney";
 
-import Cryinganim from "../../../../assets/Lottie/animations/feather_cry_emoji.json";
-import Customstatusbar from "../../../shared/Customstatusbar";
-import { Shadow } from "../../../../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const {
   Backarrow,
   Cryingicon,
-  Requestee1,
-  Requestee2,
-  Requestee3,
+
   Acceptedcheck,
   Emptyicon,
   Cryinganimate,
@@ -49,59 +42,68 @@ type DataProps = {
 // Component to show when the list is empty
 const Emptyrequest = () => {
   return (
-    <View style={styles.emptyListContainer}>
-      {/* Crying icons */}
+    <View style={withdrawstyles.emptyListContainer}>
       <LottieView
         source={Cryinganimate}
         autoPlay
         loop
-        style={{ width: RFValue(190), height: RFValue(190) }}
+        style={{ width: RFValue(103), height: RFValue(103) }}
       />
-
-      <Text style={styles.emptyListText}>
-        Padi, you have not performed any cash request today, Start Later.
+      <Text style={withdrawstyles.emptyListText}>
+        Padi, you don’t have any pending withdrawal requests
       </Text>
     </View>
   );
 };
 
 // Requestee profile
-const Requesteeprofile = ({ list, onpress }: any) => {
-  const { image, agent, agentUsername, total, status } = list;
+// const Requesteeprofile = ({ list, onpress }: any) => {
+//   const { image, agent, agentUsername, total, status } = list;
 
-  return (
-    <TouchableOpacity
-      style={styles.withdrawProfileContainer}
-      activeOpacity={0.8}
-      onPress={onpress}
-    >
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-    
-        <InitialsBg sideLength={44} name={agent} />
-        <View style={styles.namesContainer}>
-          <Text style={styles.withdrawProfileName}>{agent}</Text>
-          <Text style={styles.withdrawProfileUsername}>
-            @{agentUsername.toLowerCase()}
-          </Text>
-        </View>
-      </View>
+//   return (
+//     <TouchableOpacity
+//       style={styles.withdrawProfileContainer}
+//       activeOpacity={0.8}
+//       onPress={onpress}
+//     >
+//       <View style={{ flexDirection: "row", alignItems: "center" }}>
+//         <InitialsBg sideLength={44} name={agent} />
+//         <View style={styles.namesContainer}>
+//           <Text style={styles.withdrawProfileName}>{agent}</Text>
+//           <Text style={styles.withdrawProfileUsername}>
+//             @{agentUsername.toLowerCase()}
+//           </Text>
+//         </View>
+//       </View>
 
-      <View style={styles.priceAndCheck}>
-        <Text style={styles.withdrawProfilePrice}>
-          N{amountFormatter(total)}
-        </Text>
+//       <View style={styles.priceAndCheck}>
+//         <Text style={styles.withdrawProfilePrice}>
+//           N{amountFormatter(total)}
+//         </Text>
 
-        {status === "ACCEPTED" && <Acceptedcheck />}
-      </View>
-    </TouchableOpacity>
-  );
-};
+//         {status === "ACCEPTED" && <Acceptedcheck />}
+//       </View>
+//     </TouchableOpacity>
+//   );
+// };
 
 const Withdraw = ({ navigation }) => {
   const [active, setActive] = useState("pending");
   const [loading, setLoading] = useState(false);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([]);
+
+  const scrollX = useRef<any>(new Animated.Value(0)).current;
+  const flatListRef = useRef<FlatList>(null);
+
+  const [viewIndex, setViewIndex] = useState<number>(0);
+
+  // i removed changed from the params passed to this useRef below
+  const onViewChangeRef = useRef<
+    ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
+  >(({ viewableItems, changed }) => {
+    setViewIndex(viewableItems[0]?.index);
+  });
 
   useEffect(() => {
     getPendingRequest();
@@ -129,35 +131,31 @@ const Withdraw = ({ navigation }) => {
     }
   };
 
-
   const datas = [
     {
       title: "Pending Requests",
       data: [
-        { name: "Damilare Seyinde" },
-        { name: "Rasaq Momoh" },
-        { name: "Peterson Yeyejare" },
+        // { name: "Damilare Seyinde" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Peterson Yeyejare" },
       ],
     },
-    { title: "Accepted Requests", data: [{name: "Famuagun"}] },
+    { title: "Accepted Requests", data: [] },
   ];
 
-  const Requestuser = ({ details, accepted }: {details: any , accepted: boolean }) => {
-    const {name} = details
+  const Requestuser = ({
+    details,
+    accepted,
+  }: {
+    details: any;
+    accepted: boolean;
+  }) => {
+    const { name } = details;
     return (
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View
-            style={{
-              width: 34,
-              height: 34,
-              backgroundColor: "#8456FF",
-              borderRadius: 34 / 2,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: COLORS.white, ...fontsize.smaller, ...FONTS.medium }}>D</Text>
+      <View style={withdrawstyles.requesteeprofilewrap}>
+        <View style={withdrawstyles.requesteeprofilewrap}>
+          <View style={withdrawstyles.requesteeinitialsbg}>
+            <Text style={withdrawstyles.requesteeinitialtext}>D</Text>
 
             {accepted && (
               <View style={{ position: "absolute", bottom: -3, right: 0 }}>
@@ -167,34 +165,19 @@ const Withdraw = ({ navigation }) => {
           </View>
 
           <View style={{ marginLeft: 12 }}>
-            <Text
-              style={{
-                ...fontsize.smaller,
-                ...FONTS.medium,
-                color: COLORS.blue9,
-                lineHeight: 27,
-              }}
-            >
-              {name}
-            </Text>
-            <Text style={{ ...fontsize.smallest, color: COLORS.halfBlack }}>
-              12 Mins Away
-            </Text>
+            <Text style={withdrawstyles.requesteename}>{name}</Text>
+            <Text style={withdrawstyles.requesteedistance}>12 Mins Away</Text>
           </View>
         </View>
 
-        <Text style={{ ...fontsize.smallest, ...FONTS.medium, lineHeight: 27 }}>
-          N23,000
-        </Text>
+        <Text style={withdrawstyles.requestedamount}>N23,000</Text>
       </View>
     );
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Mainwrapper>
       <Backheader title="Withdraw" />
-      {/* {loading && <Loader />} */}
-      <Customstatusbar />
       <View style={{ paddingHorizontal: 15 }}>
         <Viewbalance />
       </View>
@@ -203,6 +186,9 @@ const Withdraw = ({ navigation }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 15, marginTop: 15 }}
+        snapToAlignment="center"
+        pagingEnabled
+        bounces={false}
         data={datas}
         renderItem={({ item, index }) => {
           const isLast = datas.length === index + 1;
@@ -210,105 +196,79 @@ const Withdraw = ({ navigation }) => {
 
           return (
             <View
-              style={{
-                backgroundColor: COLORS.white,
-                width: SIZES.width - 30,
-                height: "auto",
-                marginRight: isLast ? 0 : 20,
-                borderRadius: 15,
-                paddingHorizontal: 16,
-                paddingVertical: 22,
-                alignSelf: "flex-start",
-              }}
+              style={[withdrawstyles.requesteeblock, { marginRight: isLast ? 0 : 20 }]}
             >
-              <Text
-                style={{
-                  ...fontsize.smaller,
-                  ...FONTS.regular,
-                  color: COLORS.blue9,
-                  marginBottom: 42,
-                }}
-              >
-                {title}
-              </Text>
+              <Text style={withdrawstyles.requesteeblocktitle}>{title}</Text>
 
-                {data.length > 0 ?    
-                
-                
+              {data.length > 0 ? (
                 data.map((info, index) => {
                   const isLastItem = data.length === index + 1;
-                  const accepted = title === "Accepted Requests"
+                  const accepted = title === "Accepted Requests";
                   return (
                     <View key={index}>
-                      <Requestuser details={info} accepted={accepted}/>
-                      {!isLastItem && (
-                        <View
-                          style={{
-                            marginVertical: 21,
-                            backgroundColor: COLORS.borderColor2,
-                            height: 0.5,
-                          }}
-                        />
-                      )}
+                      <Requestuser details={info} accepted={accepted} />
+                      {!isLastItem && <Horizontaline marginV={21} />}
                     </View>
                   );
                 })
-                
-                : 
-                
-                <View style={{ justifyContent: "center", alignItems: "center", paddingVertical: 50, paddingHorizontal: 30}}>
-                  <Emptyicon />
-                  <Text style={{textAlign: "center", marginTop: 20, ...fontsize.smaller, ...FONTS.regular}}>Padi, you don’t have any pending withdrawal requests</Text>
-                </View>
-                
-                
-                }
-
-              {/* {data.map((info, index) => {
-                const isLastItem = data.length === index + 1;
-                const accepted = title === "Accepted Requests"
-                return (
-                  <View key={index}>
-                    <Requestuser details={info} accepted={accepted}/>
-                    {!isLastItem && (
-                      <View
-                        style={{
-                          marginVertical: 21,
-                          backgroundColor: COLORS.borderColor2,
-                          height: 0.5,
-                        }}
-                      />
-                    )}
-                  </View>
-                );
-              })} */}
-
-
+              ) : (
+                <Emptyrequest />
+              )}
             </View>
           );
         }}
+        onViewableItemsChanged={onViewChangeRef.current}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: false }
+        )}
         keyExtractor={(item) => item.title}
       />
 
-      <View
-        style={{
-          flex: 1,
-          paddingHorizontal: 15,
-          justifyContent: "flex-end",
-          marginBottom: 20,
-        }}
-      >
+      {/* Dotes below the scrolls */}
+      <View style={withdrawstyles.statusdotwrap}>
+        <View style={withdrawstyles.statusdotwrapinner}>
+          {datas.map((item, index) => {
+            const dotPosition = Animated.divide(scrollX, SIZES.width);
+
+            const dotColor = dotPosition.interpolate({
+              inputRange: [index - 1, index, index + 1],
+              outputRange: [COLORS.grey3, COLORS.black, COLORS.grey3],
+              extrapolate: "clamp",
+            });
+            const dotWidth = dotPosition.interpolate({
+              inputRange: [index - 1, index, index + 1],
+              outputRange: [8, 20, 8],
+              extrapolate: "clamp",
+            });
+            return (
+              <Animated.View
+                key={index}
+                style={[
+                  {
+                    height: 8,
+                    borderRadius: 8 / 2,
+                    backgroundColor: dotColor,
+                    width: dotWidth,
+                  },
+                ]}
+              />
+            );
+          })}
+        </View>
+      </View>
+
+      {/* Bottom Button */}
+
+      <View style={withdrawstyles.bottombtnwrap}>
         <Custombutton
           btntext="Withdraw Cash"
-          onpress={() => console.log("hellow")}
+          onpress={() => console.log("hellow from withdraw")}
         />
       </View>
 
-      {/* <Bottombtn
-        title="NEW WITHDRAWAL"
-        onpress={() => navigation.navigate("Requestnew")}
-      /> */}
-    </SafeAreaView>
+    
+    </Mainwrapper>
   );
 };
 

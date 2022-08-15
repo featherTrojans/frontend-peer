@@ -14,6 +14,7 @@ import {
   Backheader,
   Bottombtn,
   InitialsBg,
+  Mainwrapper,
   Viewbalance,
 } from "../../../components";
 import { styles } from "../Withdraws/Withdraw/Withdraw.styles";
@@ -21,13 +22,12 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import Customstatusbar from "../../shared/Customstatusbar";
 import Usericondark from "../../../assets/icons/Usericondark";
 import { Shadow } from "../../../constants/theme";
-import { SafeAreaView } from "react-native-safe-area-context";
+// import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const {
   Backarrow,
-  Requestee1,
-  Requestee2,
-  Requestee3,
+
   Acceptedcheck,
   Cryinganimate,
 } = icons;
@@ -259,8 +259,8 @@ const Deposit = ({ navigation,route}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Backheader title="Deposit" />
+    <Mainwrapper >
+      {/* <Backheader title="Deposit" /> */}
       <Customstatusbar />
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
@@ -280,11 +280,8 @@ const Deposit = ({ navigation,route}) => {
         )}
       </View>
 
-      {/* <Bottombtn
-        title="NEW DEPOSIT"
-        onpress={() => console.log("New Transaction clicked")}
-      /> */}
-    </SafeAreaView>
+      
+    </Mainwrapper>
   );
 };
 

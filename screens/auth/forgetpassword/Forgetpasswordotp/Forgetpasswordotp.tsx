@@ -90,9 +90,9 @@ const Forgetpasswordotp = ({navigation, route}) => {
         </TouchableOpacity>
         {/* OTP Message information */}
         <View style={styles.otpTextContainer}>
-          <Text style={styles.otpMainText}>
+          {/* <Text style={styles.otpMainText}>
             An OTP has been sent to your email - <Text style={styles.otpSubText}>{email}</Text>
-          </Text>
+          </Text> */}
         </View>
         {/* Verification input */}
         <View style={styles.otpInputContainer}>

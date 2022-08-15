@@ -12,94 +12,136 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getBiometricsAccess } from "../../../../utils/biometrics";
+import { Backheader, Mainwrapper } from "../../../../components";
 
-const { Backarrow, Forwardarrowblue, Outlinedlock, Fingerprinticon } = icons;
+const {
+  Backarrow,
+  Forwardarrow,
+  Outlinedlock,
+  Bluefingerprinticon,
+  Purplelockicon,
+  Greenlockicon,
+} = icons;
 
 type EachbtnProps = {
   icon: JSX.Element;
   title: string;
+  bg: string;
   onpress: () => void;
 };
 
-const Eachbtn = ({ icon, title, onpress }: EachbtnProps) => {
-
-
-
+const Eachbtn = ({ icon, title, bg, onpress }: EachbtnProps) => {
   return (
     <TouchableOpacity
       style={{
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingBottom: 32,
-        borderBottomColor: COLORS.lineColor3,
-        borderBottomWidth: 0.5,
-        marginBottom: 32,
+        alignItems: "center"
+        // paddingBottom: 32,
+        // borderBottomColor: COLORS.lineColor3,
+        // borderBottomWidth: 0.5,
+        // marginBottom: 32,
       }}
       activeOpacity={0.6}
       onPress={onpress}
     >
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
         {/* Icons */}
-        {icon}
+        <View
+          style={{
+            width: 34,
+            height: 34,
+            backgroundColor: bg,
+            borderRadius: 34 / 2,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {icon}
+        </View>
         <Text
           style={{
             marginLeft: 22,
-            ...fontsize.small,
+            ...fontsize.smaller,
             ...FONTS.regular,
-            color: COLORS.grey5,
+            color: COLORS.blue9,
           }}
         >
           {title}
         </Text>
       </View>
-      <Forwardarrowblue />
+      <Forwardarrow />
     </TouchableOpacity>
   );
 };
 
 const Securityprivacy = ({ navigation }) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Customstatusbar />
-      <View style={styles.mainHeaderContainer}>
-        {/* Icons */}
+  const options = [
+    {
+      title: "Change Password",
+      icon: <Purplelockicon />,
+      bg: "#F1E5FF",
+      route: "Changepassword",
+    },
+    {
+      title: "Change Transaction PIN",
+      icon: <Greenlockicon />,
+      bg: "#E5FAF6",
+      route: "Changepin",
+    },
+    {
+      title: "Biometrics Login",
+      icon: <Bluefingerprinticon />,
+      bg: "#D2EAFD",
+      route: "Biometrics",
+    },
+  ];
 
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
+  return (
+    <Mainwrapper>
+      <Backheader title="Security & Privacy" />
+
+      <View style={{ paddingHorizontal: 15 }}>
+        <View
           style={{
-            width: 25,
-            height: 25,
-            // backgroundColor: 'red',
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 25 / 2,
+            backgroundColor: COLORS.white,
+            paddingHorizontal: 20,
+            paddingVertical: 22,
+            borderRadius: 15,
           }}
         >
-          <Backarrow />
-        </TouchableOpacity>
-        <Text style={styles.mainHeaderText}>Security & Privacy</Text>
-        <View />
-      </View>
+          <Text style={{ marginBottom: 44, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9 }}>Select an option</Text>
 
-      <View style={{ marginHorizontal: 22, marginTop: 40 }}>
-        <Eachbtn
-          icon={<Outlinedlock />}
-          title="Change Password"
-          onpress={() => navigation.navigate("Changepassword")}
-        />
-        <Eachbtn
+          {/* {options} */}
+          {options.map(({ title, icon, bg, route }, index) => {
+            const isLast = options.length === index +1
+            return (
+              <View key={index}>
+                
+              <Eachbtn
+                bg={bg}
+                icon={icon}
+                title={title}
+                onpress={() => navigation.navigate(route)}
+              />
+              {!isLast && <View style={{marginVertical: 20, height: 0.5, backgroundColor: COLORS.borderColor2}}/>}
+              </View>
+            );
+          })}
+
+          {/* <Eachbtn
           icon={<Outlinedlock />}
           title="Reset Transaction PIN"
           onpress={() => navigation.navigate("Changepin")}
         />
         <Eachbtn
-          icon={<Fingerprinticon />}
+          icon={<Bluefingerprinticon />}
           title="Biometrics"
           onpress={() => navigation.navigate("Biometrics")}
-        />
+        /> */}
+        </View>
       </View>
-
-     </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

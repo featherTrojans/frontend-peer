@@ -33,7 +33,8 @@ import Contact from "./Contact";
 import { RFValue } from "react-native-responsive-fontsize";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import useContact from "../../../../utils/customContact";
-import { Backheader } from "../../../../components";
+import { Backheader, Mainwrapper } from "../../../../components";
+
 
 const { Chatsearchicon, Cryinganimate } = icons;
 
@@ -167,9 +168,8 @@ const Chatshome = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white3 }}>
-      <Customstatusbar />
-      <Backheader title="Chats" />
+    <Mainwrapper>
+      <Backheader title="Chats" showArrow={false} />
 
       <View style={styles.container}>
         {/* <TouchableOpacity  onPress={()=>navigation.navigate("Usersearch",{phoneContact:contactsResolved})} > */}
@@ -213,7 +213,7 @@ const Chatshome = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

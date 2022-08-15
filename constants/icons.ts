@@ -23,6 +23,9 @@ import Bell from "../assets/icons/Bell";
 import Profilepics from "../assets/icons/Profilepics";
 import Arrowright from "../assets/icons/Arrowright";
 import Eyecrossed from "../assets/icons/Eyecrossed";
+import Ekoelectricityicon from "../assets/icons/Ekoelectricityicon";
+import IBelectricityicon from "../assets/icons/IBelectricityicon";
+import Ikejaelectricityicon from "../assets/icons/Ikejaelectricityicon";
 import Deposit from "../assets/icons/Deposit";
 import Withdraw from "../assets/icons/Withdraw";
 import Transfer from "../assets/icons/Transfer";
@@ -32,9 +35,6 @@ import Cryingicon from "../assets/icons/Cryingicon";
 import Arrowin from "../assets/icons/Arrowin";
 import Arrowout from "../assets/icons/Arrowout";
 import Backarrow from "../assets/icons/Backarrow";
-import Requestee1 from "../assets/icons/Requestee1";
-import Requestee2 from "../assets/icons/Requestee2";
-import Requestee3 from "../assets/icons/Requestee3";
 import Acceptedcheck from "../assets/icons/Acceptedcheck";
 import Forwardarrow from "../assets/icons/Forwardarrow";
 import Featherwallet from "../assets/icons/Featherwallet";
@@ -131,16 +131,18 @@ import Sendmessageicon from "../assets/icons/Sendmessageicon";
 import Shareaccounticon from "../assets/icons/Shareaccounticon";
 import Bvnlock from "../assets/icons/Bvnlock";
 import Withdrawalnotificationicon from "../assets/icons/Withdrawalnotificationicon";
-
+import Purplelockicon from "../assets/icons/Purplelockicon";
+import Greenlockicon from "../assets/icons/Greenlockicon";
 import SendTF from "../assets/icons/SendTf"
 import Patternbg from "../assets/icons/Patternbg";
 import Whitebackarrow from "../assets/icons/Whitebackarrow";
 import Emptynotification from "../assets/icons/Emptynotification";
 // import passwordpinlock from "../assets/icons/passwordpinlock";
 import Passwordpinlock from "../assets/icons/Passwordpinlock";
+import Airtimeicon from "../assets/icons/Airtimeicon";
+import Mobiledataicon from "../assets/icons/Mobiledataicon";
 
-
-
+import Bluefingerprinticon from "../assets/icons/Bluefingerprinticon";
 
 ///Animated icons
 
@@ -182,7 +184,8 @@ export default {
   Utilitypayment,
   Tabsettings,
   Tabuser,
-
+  Ekoelectricityicon,
+  Ikejaelectricityicon,
   Bell,
   Profilepics,
   Arrowright,
@@ -200,10 +203,6 @@ export default {
   Backarrow,
   Forwardarrow,
   Sendingandreceivearrows,
-
-  Requestee1,
-  Requestee2,
-  Requestee3,
   Goldenstaricon,
   Acceptedcheck,
   Patternbg,
@@ -228,6 +227,7 @@ export default {
   Smallcomment,
   Passwordpinlock,
   Smallphone,
+  Purplelockicon,
   Bvnlock,
   Useravatar,
   Logoavatar,
@@ -236,6 +236,7 @@ export default {
   Withdrawicon,
   Emptyicon,
   Depositicon,
+  Airtimeicon,
   Shareaccounticon,
   SecureDot,
   Chatsearchicon,
@@ -270,6 +271,7 @@ export default {
   WrongIcon,
   Newtransfericon,
 Dollaricon,
+Mobiledataicon,
   Fundwalleticon,
   Paybillicon,
   Passwordhideicon,
@@ -294,7 +296,9 @@ Dollaricon,
   Onmapicon,
   Smalluseravatar,
   Networklogos,
+  Greenlockicon,
   Electricitybillsicon,
+  IBelectricityicon,
   Cablestvicon,
   Inputdropdown,
   Addressbook,
@@ -302,7 +306,7 @@ Dollaricon,
   Featherdefault,
   Userdefaultmedium,
   Feathertextlogo,
-  
+  Bluefingerprinticon,
   Markedicon,
   Bonusicon,
   SmileEmoji,

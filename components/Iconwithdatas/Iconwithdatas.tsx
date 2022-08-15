@@ -33,25 +33,24 @@ const Iconwithdatas = ({
       background={TouchableNativeFeedback.Ripple(COLORS.lightBlue, false)}
     >
       <View style={styles.container}>
-        <View
-          style={[
-            styles.iconContainer,
-            { backgroundColor: iconBg ? iconBg : "" },
-          ]}
-        >
-          {/* This is for the icon */}
-          {icon}
-        </View>
-        {/* Datas */}
-        <View style={styles.dataContainer}>
-          <View style={styles.topSection}>
-            <Text style={styles.titleText}>{title}</Text>
-            <Forwardarrow />
+        <View style={{flexDirection: "row", flex: 1}}>
+          <View
+            style={[
+              styles.iconContainer,
+              { backgroundColor: iconBg ? iconBg : "" },
+            ]}
+          >
+            {icon}
           </View>
-          <View>
+          {/* Datas */}
+          <View style={styles.dataContainer}>
+            <Text style={styles.titleText}>{title}</Text>
             <Text style={styles.detailsText}>{details}</Text>
           </View>
         </View>
+        
+        <Forwardarrow />
+
       </View>
     </TouchableNativeFeedback>
   );

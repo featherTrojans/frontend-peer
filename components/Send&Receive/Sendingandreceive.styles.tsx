@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     // marginBottom: 18,
-    marginBottom: RFValue(26),
-    marginTop: RFValue(42),
+    // marginBottom: RFValue(26),
+    // marginTop: RFValue(42),
   },
   arrowContainer: {
     marginHorizontal: RFValue(30),
@@ -24,14 +24,16 @@ export const styles = StyleSheet.create({
   typeContainer: {
     width: 62,
     height: 62,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 62 / 2,
     // backgroundColor: "#001757",
   },
   imageStyle: {
-    width: "50%",
-    height: "50%",
+    width: "90%",
+    height: "90%",
+
   },
 
 

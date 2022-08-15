@@ -25,14 +25,14 @@ const Paybills = ({ navigation }) => {
       subtitle: "Purchase",
       info: "Purchase airtime and data from your favourite network in Nigeria.",
       logo: <Networklogos/>,
-      route: "Airtimedetails"
+      route: "Airtimeanddata"
     },
     {
       title: "Electricity Bills",
       subtitle: "Payments",
       info: "Pay your power bills easily, no more power outage due to payments ",
       logo: <Electricitybillsicon/>,
-      route: "Electricityamount"
+      route: "Electricitytype"
     },
     {
       title: "CableTV Subscriptions",

@@ -79,10 +79,15 @@ import Addbvn from "./app/Settings/Addbvn/Addbvn";
 
 import Paybills from "./app/Billpayments/Paybills/Paybills";
 import Airtimeamount from "./app/Billpayments/Airtime/Airtimeamount/Airtimeamount";
+import Airtimeanddata from "./app/Billpayments/Airtime/Airtimeanddata/Airtimeanddata";
 import Airtimedetails from "./app/Billpayments/Airtime/Airtimedetails/Airtimedetails";
+
 import Airtimepurchasepin from "./app/Billpayments/Airtime/Airtimepurchasepin/Airtimepurchasepin";
 import Electricityamount from "./app/Billpayments/Electricity/Electricityamount/Electricityamount";
 import Electricitydetails from "./app/Billpayments/Electricity/Electricitydetails/Electricitydetails";
+import Electricitytype from "./app/Billpayments/Electricity/Electricitytype/Electricitytype";
+import Electricitymetertype from "./app/Billpayments/Electricity/Electricitymetertype/Electricitymetertype";
+
 
 //This screen is for testing somne functionalities
  
@@ -164,9 +169,12 @@ export {
   LockScreen,
   Paybills,
   Airtimeamount,
+  Airtimeanddata,
   Airtimedetails,
   Airtimepurchasepin,
   Electricityamount,
   Electricitydetails,
+  Electricitytype,
+  Electricitymetertype,
   DepositSummary
 };

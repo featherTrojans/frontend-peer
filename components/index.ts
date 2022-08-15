@@ -16,7 +16,7 @@ import InitialsBg from "./InitialsBg/InitialsBg";
 import Keyboard from "./Keyboard/Keyboard";
 import Custombutton from "./Custombutton/Custombutton";
 import Mainwrapper from "./Mainwrapper/Mainwrapper";
-
+import Horizontaline from "./Horizontaline/Horizontaline";
 export {
     Input,
     Tab,
@@ -36,5 +36,7 @@ export {
     Inputinsettings,
     InitialsBg,
     Keyboard,
-    Custombutton
+    Custombutton,
+    Horizontaline
+
 }

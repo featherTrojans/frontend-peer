@@ -1,12 +1,12 @@
-import React from "react";
-import { Text, View, TextInput } from "react-native";
+import React, {useState} from "react";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { icons, COLORS } from "../../constants";
 // import { inputContainer } from "../../global/styles";
 import { ReactNode } from "react";
 import { styles } from "./Input.styles";
 
-const { Eyeicon, Usericondark } = icons;
+const { Eyeicon, Usericondark, Passwordhideicon } = icons;
 
 type inputProps = {
   icon: ReactNode;
@@ -19,11 +19,18 @@ type inputProps = {
 const Input = ({
   icon,
   placeholder,
-  password,
+  password=false,
   formikProps,
   name,
   ...rest
 }: inputProps) => {
+
+
+  const [showPassword, setShowPassword] = useState(password)
+
+
+
+
   if (formikProps === undefined) {
     return (
       <View
@@ -67,8 +74,18 @@ const Input = ({
         underlineColorAndroid="transparent"
         onBlur={handleBlur(name)}
         {...rest}
-        secureTextEntry={password ? true : false}
+        secureTextEntry={password && showPassword ? true : false}
       />
+
+      {password && 
+      
+      <TouchableOpacity
+                      onPress={() => setShowPassword(!showPassword)}
+                      activeOpacity={0.8}
+                    >
+                      {showPassword ? <Eyeicon /> : <Passwordhideicon />}
+                    </TouchableOpacity>
+      }
     </View>
   );
 };

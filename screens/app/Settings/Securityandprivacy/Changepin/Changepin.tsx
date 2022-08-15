@@ -7,9 +7,19 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
 // import { styles } from "./Changepassword.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
-import { Bottombtn, Inputinsettings, Loader } from "../../../../../components";
+import {
+  Backheader,
+  Bottombtn,
+  Custombutton,
+  Input,
+  Inputinsettings,
+  Loader,
+  Mainwrapper,
+} from "../../../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "../Changepassword/Changepassword.styles";
 import { useNavigation } from "@react-navigation/native";
@@ -17,18 +27,23 @@ import Customstatusbar from "../../../../shared/Customstatusbar";
 import axiosCustom from "../../../../../httpRequests/axiosCustom";
 import showerror from "../../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-const { Backarrow } = icons;
+const { Backarrow, Lock } = icons;
 
 const Changepin = () => {
   const toast = useToast();
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
-  const [oldpin, setOldpin] = useState("");
-  const [newpin, setNewpin] = useState("");
-  const [confirmpin, setConfirmpin] = useState("");
-  const handleSubmit = async () => {
+
+
+
+
+  // const [oldpin, setOldpin] = useState("");
+  // const [newpin, setNewpin] = useState("");
+  // const [confirmpin, setConfirmpin] = useState("");
+
+  const handleSubmit = async (values) => {
+    const {oldpin, newpin, confirmpin} = values
     // validation
     if (newpin.length !== 4 || oldpin.length !== 4 || confirmpin.length !== 4) {
       return showerror(toast, null, "length of pin must be equal to 4");
@@ -57,72 +72,92 @@ const Changepin = () => {
       setLoading(false);
     }
   };
+
+  const validationSchema = Yup.object().shape({
+    oldpin: Yup.string().label("oldpin").required(),
+    newpin: Yup.string().label("newpin").required(),
+    confirmpin: Yup.string().label("confirmpin").required(),
+  });
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+    <Mainwrapper>
+      <Backheader title="Change PIN" />
+
       <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
         {loading && <Loader />}
-        <View style={styles.mainHeaderContainer}>
-          {/* Icons */}
-          <Customstatusbar />
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              width: 25,
-              height: 25,
-              // backgroundColor: 'red',
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 25 / 2,
-            }}
-          >
-            <Backarrow />
-          </TouchableOpacity>
-          <Text style={styles.mainHeaderText}>Security & Privacy</Text>
-          <View />
-        </View>
 
         <KeyboardAwareScrollView>
           <View
             style={{
               flex: 1,
               paddingHorizontal: 22,
-              marginTop: 20,
+              marginTop: 10,
               marginBottom: 42,
             }}
           >
-            <Text style={styles.changePasswordText}>Change PIN</Text>
+            <Formik
+              initialValues={{
+                oldpin: "",
+                newpin: "",
+                confirmpin: "",
+              }}
+              validationSchema={validationSchema}
+              onSubmit={(values) => handleSubmit(values)}
+            >
+              {(formikProps) => {
+                const {
+                  isSubmitting,
+                  isValid,
+                  handleBlur,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleSubmit,
+                } = formikProps;
 
-            <View style={{ marginTop: 42 }}>
-              <Inputinsettings
-                label="Current Transaction PIN"
-                placeholder="Enter Pin"
-                maxLength={4}
-                value={oldpin}
-                onChangeText={(text) => setOldpin(text)}
-                keyboardType={"numeric"}
-              />
-              <Inputinsettings
-                label="New Transaction PIN "
-                placeholder="Enter Pin"
-                value={newpin}
-                onChangeText={(text) => setNewpin(text)}
-                maxLength={4}
-                keyboardType={"numeric"}
-              />
-              <Inputinsettings
-                label="Confirm Transaction PIN"
-                placeholder="Enter Pin"
-                value={confirmpin}
-                onChangeText={(text) => setConfirmpin(text)}
-                maxLength={4}
-                keyboardType={"numeric"}
-              />
-            </View>
+                return (
+                  <>
+                    <Input
+                      placeholder="Current PIN"
+                      name="oldpin"
+                      formikProps={formikProps}
+                      icon={<Lock />}
+                      password={true}
+                      maxLength={4}
+                      keyboardType={"numeric"}
+                    />
+                    <Input
+                      placeholder="New PIN"
+                      name="newpin"
+                      formikProps={formikProps}
+                      icon={<Lock />}
+                      password={true}
+                      maxLength={4}
+                      keyboardType={"numeric"}
+                    />
+                    <Input
+                      placeholder="Confirm PIN"
+                      name="confirmpin"
+                      formikProps={formikProps}
+                      icon={<Lock />}
+                      password={true}
+                      maxLength={4}
+                      keyboardType={"numeric"}
+                    />
+
+                    <Custombutton btntext="Change PIN" onpress={handleSubmit}/>
+
+
+                  </>
+                );
+              }}
+            </Formik>
+
+            
           </View>
-          <Bottombtn title="Change Pin" onpress={handleSubmit} />
         </KeyboardAwareScrollView>
       </ScrollView>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

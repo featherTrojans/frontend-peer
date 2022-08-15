@@ -10,7 +10,7 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { styles } from "../Changepassword/Changepassword.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
-import { Bottombtn, Inputinsettings, Loader } from "../../../../../components";
+import { Backheader, Bottombtn, Inputinsettings, Loader, Mainwrapper } from "../../../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import Customstatusbar from "../../../../shared/Customstatusbar";
@@ -26,27 +26,13 @@ import {
 } from "../../../../../utils/biometrics";
 import { ContactTypes } from "expo-contacts";
 
-const { Backarrow, Fingerprinticon } = icons;
+
+const { Backarrow, Bluefingerprinticon } = icons;
 
 const Biometrics = () => {
   const navigation = useNavigation();
   const [isEnabled, setIsEnabled] = useState(false);
   const { allowBiometrics, setAllowBiometrics } = useContext(AuthContext);
-
-  // const toggleSwitch = () => {
-  //   setAllowBiometrics(!allowBiometrics);
-  //   if(!allowBiometrics){
-  //     saveBiometricsAccess()
-  //   }
-  //   else{
-  //   removeBiometricsAccess()
-  //   }
-  // }
-
-
-  
-
-
 
 
 
@@ -95,44 +81,48 @@ const Biometrics = () => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-      <Customstatusbar />
-      <View style={styles.container}>
-        <View style={styles.mainHeaderContainer}>
-          {/* Icons */}
+    <Mainwrapper>
 
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              width: 25,
-              height: 25,
-              // backgroundColor: 'red',
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 25 / 2,
-            }}
-          >
-            <Backarrow />
-          </TouchableOpacity>
-          <Text style={styles.mainHeaderText}>Security & Privacy</Text>
-          <View />
-        </View>
+      <Backheader title="Biometrics Login"/>
+
+
+
+
+
+      <View  style={{paddingHorizontal: 15}}>
+
+
+
+
 
         <View
           style={{
-            paddingHorizontal: 22,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 40,
+            paddingHorizontal: 20,
+            paddingVertical: 22,
+            backgroundColor: COLORS.white,
+            borderRadius: 15,
           }}
         >
+          <Text style={{marginBottom: 40}}>Enable for transactions</Text>
+
+
+
+          <View style={{flexDirection: "row", justifyContent: "space-between",  }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Fingerprinticon />
+
+
+            <View style={{width: 34, height: 34, backgroundColor: "#D2EAFD", borderRadius: 34/2, justifyContent: "center", alignItems: "center"}}>
+            <Bluefingerprinticon />
+
+            </View>
+
+
+
+
             <Text
               style={{
                 marginLeft: 20,
-                ...fontsize.small,
+                ...fontsize.smaller,
                 ...FONTS.medium,
                 color: COLORS.blue3,
               }}
@@ -143,14 +133,18 @@ const Biometrics = () => {
 
           <Switch
             trackColor={{ false: COLORS.switchOff, true: COLORS.switchOn }}
-            thumbColor={false ? COLORS.blue7 : COLORS.grey5}
-            ios_backgroundColor={false ? COLORS.switchOn : COLORS.switchOff}
+            thumbColor={isEnabled ? COLORS.blue6 : COLORS.grey5}
+            ios_backgroundColor={isEnabled ? COLORS.switchOn : COLORS.switchOff}
             onValueChange={toggleSwitch}
             value={isEnabled}
           />
+          </View>
+
+
+
         </View>
       </View>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

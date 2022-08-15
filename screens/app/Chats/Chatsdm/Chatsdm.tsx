@@ -245,10 +245,12 @@ const Chatsdm = ({navigation,route}) => {
         chooseAmount={chooseAmount}
         enterPin={enterPin}
         sendSuccess={sendSuccess} 
+
         clearModals={clearModals}
         clearModalsAll={clearModalsAll}
         setChooseAmount={setChooseAmount}
         setSendCashModal={setSendCashModal}
+        
         amount={amount}
         handleAmountChange={handleAmountChange}
         setAmount={setAmount}

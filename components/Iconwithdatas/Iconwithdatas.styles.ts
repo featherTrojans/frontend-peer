@@ -5,11 +5,8 @@ import { Shadow } from "../../constants/theme";
 export const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    // paddingTop: 19,
-    // paddingBottom: 22,
-    // paddingHorizontal: 17,
-    marginBottom: 10,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    alignItems: "center"
   },
   iconContainer: {
     justifyContent: "center",
@@ -22,16 +19,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 16,
   },
-  topSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 6,
-  },
+
   titleText: {
     ...fontsize.smallest,
     ...FONTS.medium,
-    color: COLORS.black
+    color: COLORS.black,
+    marginBottom: 6
   },
   detailsText: {
     ...fontsize.xsmallest,

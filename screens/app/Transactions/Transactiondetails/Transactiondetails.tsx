@@ -22,6 +22,7 @@ import {
   Bottombtn,
   Iconwithdatas,
   InitialsBg,
+  Mainwrapper,
   Sendingandreceive,
 } from "../../../../components";
 import { FONTS, fontsize, COLORS, icons } from "../../../../constants";
@@ -469,7 +470,7 @@ const Transactiondetails = ({ navigation, route }) => {
 
   // const {price } = route?.params
   return (
-    <SafeAreaView style={styles.container}>
+    <Mainwrapper >
       <Customstatusbar />
       <Globalmodal
         showState={showModal}
@@ -500,7 +501,7 @@ const Transactiondetails = ({ navigation, route }) => {
         </>
       </Globalmodal>
 
-      <Backheader title="Details" />
+      <Backheader title="Transaction Details" />
 
       <ScrollView
         style={{ flex: 1 }}
@@ -510,7 +511,6 @@ const Transactiondetails = ({ navigation, route }) => {
           style={{
             justifyContent: "center",
             alignItems: "center",
-            marginTop: 4,
           }}
         >
           <Sendingandreceive
@@ -519,19 +519,19 @@ const Transactiondetails = ({ navigation, route }) => {
             title={title}
             value={title === "withdrawal" ? receiver : sender}
           />
-          <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
+          {/* <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
             NGN {amountFormatter(amount)}
-          </Text>
+          </Text> */}
         </View>
 
         {/* The details container */}
         <View style={styles.detailsContainer}>
-          <View style={styles.eachDetailContainer}>
+          {/* <View style={styles.eachDetailContainer}>
             <Text style={styles.eachDetailTitle}>Date & Time</Text>
             <Text style={{...fontsize.small, ...FONTS.regular}}>{formatDateTime}</Text>
-          </View>
+          </View> */}
 
-          <View
+          {/* <View
             style={[
               styles.eachDetailContainer,
               { flexDirection: "row", alignItems: "center" },
@@ -567,9 +567,9 @@ const Transactiondetails = ({ navigation, route }) => {
                 Successful
               </Text>
             </View>
-          </View>
+          </View> */}
 
-          <View style={styles.eachDetailContainer}>
+          {/* <View style={styles.eachDetailContainer}>
             <Text style={styles.eachDetailTitle}>Receiver</Text>
             <Text style={styles.eachDetailValue}>
               {receiver} - {typeOfName(title)?.receiverName}
@@ -581,8 +581,8 @@ const Transactiondetails = ({ navigation, route }) => {
             <Text style={styles.eachDetailValue}>
               {sender} - {typeOfName(title)?.senderName}
             </Text>
-          </View>
-          <View style={styles.eachDetailContainer}>
+          </View> */}
+          {/* <View style={styles.eachDetailContainer}>
             {meetupPoint && (
               <View style={styles.eachDetailContainer}>
                 <Text style={styles.eachDetailTitle}>{meetupPoint}</Text>
@@ -599,16 +599,16 @@ const Transactiondetails = ({ navigation, route }) => {
               NGN {amountFormatter(amount)} + NGN 0.00
               <Text style={{ textTransform: "capitalize" }}> Charges</Text>
             </Text>
-          </View>
+          </View> */}
         </View>
       </ScrollView>
 
-      <Bottombtn
+      {/* <Bottombtn
         title="VIEW OPTIONS"
         bg="#000"
         onpress={() => setShowModal(true)}
-      />
-    </SafeAreaView>
+      /> */}
+    </Mainwrapper>
   );
 };
 

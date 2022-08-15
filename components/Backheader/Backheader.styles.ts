@@ -13,12 +13,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   backArrowIcon: {
-    width: 25,
-    height: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 25 / 2,
-    marginRight: 16
+    // width: 25,
+    // height: 25,
+    // justifyContent: "center",
+    // alignItems: "center",
+    // borderRadius: 25 / 2,
+    marginRight: 10.5
   },
   backArrowText: {
     ...fontsize.small,

@@ -9,8 +9,8 @@ export const styles = StyleSheet.create({
 
   detailsContainer: {
     paddingHorizontal: 26,
-    paddingTop: 20,
-    marginTop: 25,
+    // paddingTop: 20,
+    // marginTop: 25,
   },
 
   eachDetailContainer: {

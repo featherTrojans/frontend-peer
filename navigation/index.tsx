@@ -124,12 +124,15 @@ import {
 
   //Paybills and Airtime
   Paybills,
+
   Airtimeamount,
+  Airtimeanddata,
   Airtimedetails,
   Airtimepurchasepin,
   Electricityamount,
   Electricitydetails,
-
+  Electricitytype,
+  Electricitymetertype
 } from "../screens";
 // import { LockScreen } from "../screens";
 import { LockScreen } from "../screens";
@@ -642,6 +645,7 @@ const RootNavigator = ({ initialBoarded }) => {
 
           {/* Paybills Screen */}
           <AppStack.Screen name="Paybills" component={Paybills} />
+          <AppStack.Screen name="Airtimeanddata" component={Airtimeanddata} />
           <AppStack.Screen name="Airtimeamount" component={Airtimeamount} />
           <AppStack.Screen name="Airtimedetails" component={Airtimedetails} />
           <AppStack.Screen
@@ -655,6 +659,14 @@ const RootNavigator = ({ initialBoarded }) => {
           <AppStack.Screen
             name="Electricitydetails"
             component={Electricitydetails}
+          />
+          <AppStack.Screen
+            name="Electricitytype"
+            component={Electricitytype}
+          />
+           <AppStack.Screen
+            name="Electricitymetertype"
+            component={Electricitymetertype}
           />
 
           {/* Deposit Screens */}

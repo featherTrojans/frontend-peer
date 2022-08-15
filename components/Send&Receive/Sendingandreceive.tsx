@@ -44,6 +44,7 @@ const showImage = (
           <View style={[styles.typeContainer, {backgroundColor: "#001757", borderRadius: RFValue(62 / 2)}]}>
             <Image
               style={styles.imageStyle}
+              resizeMode="contain"
               source={{
                 uri: assetsDB["fund"]["paystack"],
               }}
@@ -165,10 +166,10 @@ const Sendingandreceive = ({
     <View style={styles.container}>
       <Userdefaultmedium />
 
-      <View style={styles.arrowContainer}>
+      {/* <View style={styles.arrowContainer}>
         <Sendingarrow />
         <Receivingarrow />
-      </View>
+      </View> */}
       <View style={{ position: "relative" }}>
         {/* <Receiverimage /> */}
         {showImage(senderName, receiverName, title, value)}

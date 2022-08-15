@@ -7,8 +7,8 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "./Notifications.styles";
-import { icons, COLORS } from "../../../constants";
-import { Backheader } from "../../../components";
+import { icons, COLORS, SIZES } from "../../../constants";
+import { Backheader, Mainwrapper } from "../../../components";
 import { string } from "yup";
 import { Shadow } from "../../../constants/theme";
 import Customstatusbar from "../../shared/Customstatusbar";
@@ -241,12 +241,10 @@ const Notifications = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Mainwrapper>
       {/* Header title */}
-      <View>
         <Backheader title="Notifications" />
-      </View>
-      <Customstatusbar />
+      {/* <Customstatusbar /> */}
 
       <View style={styles.listContainer}>
         {loading ? (
@@ -260,6 +258,10 @@ const Notifications = () => {
             // contentContainerStyle={{flex: 1}}
             data={formatData(notifications)}
             showsVerticalScrollIndicator={false}
+            // pagingEnabled
+            // snapToAlignment="center"
+            // scrollEventThrottle={16}
+            bounces={false}
             renderItem={({
               item,
               index,
@@ -295,7 +297,7 @@ const Notifications = () => {
         )}
         {/* Flatlist list of notifications */}
       </View>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 
