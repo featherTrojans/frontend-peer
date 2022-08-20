@@ -38,9 +38,6 @@ const Changepin = () => {
 
 
 
-  // const [oldpin, setOldpin] = useState("");
-  // const [newpin, setNewpin] = useState("");
-  // const [confirmpin, setConfirmpin] = useState("");
 
   const handleSubmit = async (values) => {
     const {oldpin, newpin, confirmpin} = values
@@ -86,7 +83,7 @@ const Changepin = () => {
       <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
         {loading && <Loader />}
 
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView  contentContainerStyle={{flex: 1}}>
           <View
             style={{
               flex: 1,
@@ -116,7 +113,7 @@ const Changepin = () => {
                 } = formikProps;
 
                 return (
-                  <>
+                  <View style={{flex: 1}}>
                     <Input
                       placeholder="Current PIN"
                       name="oldpin"
@@ -144,11 +141,11 @@ const Changepin = () => {
                       maxLength={4}
                       keyboardType={"numeric"}
                     />
-
+                    <View style={{flex: 1}} /> 
                     <Custombutton btntext="Change PIN" onpress={handleSubmit}/>
 
 
-                  </>
+                  </View>
                 );
               }}
             </Formik>

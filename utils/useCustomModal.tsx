@@ -1,0 +1,57 @@
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import Modal from "react-native-modal";
+import { COLORS } from "../constants";
+
+type globalModalProps = {
+  children: JSX.Element;
+  bg?: string
+};
+
+const useCustomModal = () => {
+  const [showState, setShowState] = useState(false);
+
+  const openModal = () => {
+    setShowState(true);
+  };
+
+  const closeModal = () => {
+    setShowState(false);
+  };
+
+  const CustomModal = ({ children, bg="#fff" }: globalModalProps) => {
+    return (
+      <Modal
+        isVisible={showState}
+        coverScreen={true}
+        backdropColor="#000"
+        backdropOpacity={0.2}
+        animationInTiming={400}
+        backdropTransitionInTiming={200}
+        animationOut={"fadeOut"}
+        animationOutTiming={150}
+        style={{ margin: 0, justifyContent: "flex-end", zIndex: 100 }}
+        onBackdropPress={() => setShowState(!showState)}
+        onBackButtonPress={() => setShowState(!showState)}
+      >
+        <View
+          style={{
+            paddingVertical: 36,
+            backgroundColor: bg,
+            paddingHorizontal: 15,
+            borderTopRightRadius: 22,
+            borderTopLeftRadius: 22,
+          }}
+        >
+          {children}
+        </View>
+      </Modal>
+    );
+  };
+
+  return { CustomModal, openModal, closeModal };
+};
+
+export default useCustomModal;
+
+const styles = StyleSheet.create({});

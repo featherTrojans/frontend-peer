@@ -19,6 +19,7 @@ export const COLORS = {
   blue8: "#0548D7",
   blue9: "#11141A",
   blue10: "#5676FF",
+  blue11: "#D2EAFD",
   transparentBlue: "#F2F5FF",
 
 
@@ -44,13 +45,18 @@ export const COLORS = {
   yellow1: "#FF9D00",
   yellow2: "#FFC84B",
   yellow3: "#FFC100",
+  yellow4: "#FFC100",
   green1: "#00C9AA",
   green2: "#25DBA3",
   green3: "#E5FAF6",
   pink1: "#E00070",
   red1: "#E00000",
   red2: "#FFE3E3",
+  red3: "#FF5668",
   purple: "#6300AC",
+  purple2: "#7600FF",
+  purple3: "#F1E5FF",
+  purple4: "#8456FF",
 
   paybillInput: "#E6E6E6",
   checkBorder: "#A5A5A5",
@@ -58,6 +64,7 @@ export const COLORS = {
   black: "#000000",
   black2: "#333333",
   borderColor: "#EDEDED",
+  inputBgColor: `rgba(240, 240, 240, .5)`,
   borderColor2: `rgba(112, 112, 112, .2)`,
   borderColor3: `rgba(112, 112, 112, .3)`,
   lineColor: `rgba(112, 112, 112, .1)`,
@@ -67,8 +74,8 @@ export const COLORS = {
   switchOff:  `rgba(0, 23, 87, .1)`,
   thumbOff:   `rgba(0, 58, 214, 1)`,
   switchOn:  `rgba(0, 58, 214, .1)`,
-
-  
+  trasparentBlue2: `rgba(230, 236, 255, .7)`,
+  trasparentPurple: `rgba(241, 229, 255, .7)`,
   halfBlack: `rgba(0, 0, 0, .5)`,
   placeHolder: `rgba(225, 225, 225, 1)`,
   placeHolder2: `rgba(51, 51, 51, .4)`,
@@ -149,6 +156,9 @@ export const fontsize = {
   },
   big: {
     fontSize: RFValue(30),
+  },
+  xbig:{
+    fontSize: RFValue(32),
   },
   bigger:{
     fontSize: RFValue(38),

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { icons, COLORS } from "../../constants";
@@ -13,30 +13,27 @@ type inputProps = {
   placeholder: string;
   password?: boolean;
   name: string;
-  formikProps: any;
+  formikProps?: any;
+  inputbg?: string
 };
 
 const Input = ({
   icon,
   placeholder,
-  password=false,
+  password = false,
   formikProps,
   name,
+  inputbg = COLORS.grey1,
   ...rest
 }: inputProps) => {
-
-
-  const [showPassword, setShowPassword] = useState(password)
-
-
-
+  const [showPassword, setShowPassword] = useState(password);
 
   if (formikProps === undefined) {
     return (
       <View
         style={[
           styles.inputContainer,
-          { marginBottom: 15, borderColor: COLORS.inputBorderColorDark },
+          { marginBottom: 15, borderColor: COLORS.inputBorderColorDark, backgroundColor: inputbg },
         ]}
       >
         <View style={styles.inputiconwrapper}>{icon}</View>
@@ -62,7 +59,7 @@ const Input = ({
     <View
       style={[
         styles.inputContainer,
-        { marginBottom: 15, borderColor: borderColor },
+        { marginBottom: 15, borderColor: borderColor, backgroundColor: inputbg },
       ]}
     >
       <View style={styles.inputiconwrapper}>{icon}</View>
@@ -77,15 +74,14 @@ const Input = ({
         secureTextEntry={password && showPassword ? true : false}
       />
 
-      {password && 
-      
-      <TouchableOpacity
-                      onPress={() => setShowPassword(!showPassword)}
-                      activeOpacity={0.8}
-                    >
-                      {showPassword ? <Eyeicon /> : <Passwordhideicon />}
-                    </TouchableOpacity>
-      }
+      {password && (
+        <TouchableOpacity
+          onPress={() => setShowPassword(!showPassword)}
+          activeOpacity={0.8}
+        >
+          {showPassword ? <Eyeicon /> : <Passwordhideicon />}
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

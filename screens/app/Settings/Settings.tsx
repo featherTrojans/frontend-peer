@@ -1,27 +1,16 @@
 import React, { useContext, useMemo } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-  TouchableOpacity,
-  Share,
-} from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Text, View, TouchableOpacity, Share } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
 import * as Sharing from "expo-sharing";
-import BottomSheet, {
-  BottomSheetScrollView,
-  BottomSheetFlatList,
-} from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { styles } from "./Settings.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import Customstatusbar from "../../shared/Customstatusbar";
-import { Shadow } from "../../../constants/theme";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
+import { Backheader, Copyaccountinfo, Upgrademodal } from "../../../components";
+import useCustomModal from "../../../utils/useCustomModal";
 
 const {
   Defaultuseravatar,
@@ -35,7 +24,7 @@ const {
   Supporticon,
   Feathersmallicon,
   Shareaccounticon,
-  Walletmanageicon
+  Walletmanageicon,
 } = icons;
 
 type IconwithtitleProps = {
@@ -91,7 +80,8 @@ const shareAppLink = async () => {
   const result = await Share.share(
     {
       title: "Feather Beta",
-      message: "https://play.google.com/store/apps/details?id=feather.peer",
+      // message: "https://play.google.com/store/apps/details?id=feather.peer",
+      // message: `${"Account: 12333 "} \n ${"Age: 14" } \n ${"Job: Design"}`,
       url: "https://play.google.com/store/apps/details?id=feather.peer",
     },
     {
@@ -103,65 +93,211 @@ const shareAppLink = async () => {
 
 const Settings = ({ navigation }) => {
   const { authdata, setAuthData, setToken } = useContext(AuthContext);
+  const {CustomModal, openModal} = useCustomModal()
+  const {CustomModal: UpgradeuserModal, openModal:openUpgradeModal} = useCustomModal()
+  const usertype = "newbie"
+  const isNewbie = usertype === "newbie"
 
   const handleSignout = () => {
     setToken("");
     setAuthData({});
   };
-  return (
-    <View
-      style={[styles.container, { paddingTop: getStatusBarHeight(true) + 30 }]}
-    >
-      <Customstatusbar />
-      <Text style={styles.settingText}>Settings</Text>
 
-      <View style={{flexDirection: "row", marginTop: 25, alignItems: "center"}}>
-        {/* user image */}
-        <View style={{width: 60, height: 60, backgroundColor: COLORS.grey3, borderRadius: 60/2}}>
-        </View>
-        <View style={{ marginLeft: 15}}>
-        <Text style={styles.profileName}>
-            {abbreviateName(authdata?.userDetails?.fullName)}
+  const Rightside = () => {
+    return (
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text
+          style={{ ...fontsize.small, ...FONTS.medium, color: COLORS.black }}
+        >
+          Became an Agent
+        </Text>
+        <TouchableOpacity
+        activeOpacity={0.8}
+          onPress={() => navigation.navigate("Becomeanagent")}
+          style={{
+            marginLeft: 10,
+            backgroundColor: COLORS.red3,
+            paddingVertical: 5,
+            paddingHorizontal: 10.5,
+            borderRadius: 18,
+          }}
+        >
+          <Text
+            style={{ ...fontsize.smallest, color: COLORS.white, ...FONTS.bold }}
+          >
+            New
           </Text>
-          <Text style={styles.profileUsername}>
-            @{authdata?.userDetails?.username}
-          </Text>
-        </View>
+        </TouchableOpacity>
       </View>
+    );
+  };
 
+  return (
+    <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
+      <Customstatusbar />
 
-      <View style={{marginTop: 20, paddingHorizontal: 22, backgroundColor: COLORS.blue6, paddingTop: 20, paddingBottom: 18, borderRadius: 16}}>
+      <Backheader
+        title="Settings"
+        showArrow={false}
+        rightComponent={<Rightside />}
+      />
+      {/* <Text style={styles.settingText}>Settings</Text> */}
 
-        <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 16}}>
-          <View style={{flexDirection: "row", alignItems: "center"}}>
-              <Memoji1 />
-              <View style={{backgroundColor: COLORS.deposit, paddingHorizontal: 11, marginLeft: 10.5, paddingTop: 8, paddingBottom: 6, borderRadius: 13}}>
-                <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.white}}>Newbie</Text>
-              </View>
-            </View>
-            <Text style={{...fontsize.smallest, color: COLORS.yellow3, ...FONTS.bold, lineHeight: 22}} onPress={() => navigation.navigate("Addbvn")}>Upgrade</Text>
-        </View>
-
-        <View>
-          <Text style={{...fontsize.small,...FONTS.regular, color: COLORS.white, lineHeight: 18}}>Hey 👋 Padi, upgrade your profile today and get a bank account created for you to receive money.</Text>
-
-          <View style={{flexDirection: "row", justifyContent: "space-between", marginTop: 26, alignItems: "center"}}>
-              <View>
-                <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.white}}>Account Number :</Text>
-                <Text style={{...fontsize.bsmall,  color: COLORS.white, ...FONTS.bold}}>1000063012</Text>
-              </View>
-              <View>
-                <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.white}}>Bank Name : </Text>
-                <Text style={{...fontsize.bsmall, ...FONTS.bold, color: COLORS.white}}>VFD Bank</Text>
-              </View>
-              <Shareaccounticon />
+      <View style={{ paddingHorizontal: 15 }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          {/* user image */}
+          <View style={{ width: 60, height: 60 }}>
+            <Defaultuseravatar />
+          </View>
+          <View style={{ marginLeft: 15 }}>
+            <Text style={styles.profileName}>
+              {abbreviateName(authdata?.userDetails?.fullName)}
+            </Text>
+            <Text style={styles.profileUsername}>
+              @{authdata?.userDetails?.username}
+            </Text>
           </View>
         </View>
 
+        <CustomModal>
+          <Copyaccountinfo />
+        </CustomModal>
+        <UpgradeuserModal bg={COLORS.white3}>
+            <Upgrademodal />
+        </UpgradeuserModal>
 
+        <View
+          style={{
+            marginTop: 20,
+            paddingHorizontal: 22,
+            backgroundColor: COLORS.blue6,
+            paddingTop: 20,
+            paddingBottom: 18,
+            borderRadius: 16,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 16,
+            }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Memoji1 />
+              <View
+                style={{
+                  backgroundColor: COLORS.deposit,
+                  paddingHorizontal: 11,
+                  marginLeft: 10.5,
+                  paddingTop: 8,
+                  paddingBottom: 6,
+                  borderRadius: 13,
+                }}
+              >
+                <Text
+                  style={{
+                    ...fontsize.smallest,
+                    ...FONTS.regular,
+                    color: COLORS.white,
+                    textTransform: "capitalize"
+                  }}
+                >
+                  {usertype}
+                </Text>
+              </View>
+            </View>
+
+
+            {isNewbie &&
+              <Text
+              style={{
+                ...fontsize.smallest,
+                color: COLORS.yellow3,
+                ...FONTS.bold,
+                lineHeight: 22,
+              }}
+              // onPress={() => navigation.navigate("Addbvn")}
+              onPress={openUpgradeModal}
+            >
+              Upgrade
+            </Text>
+            
+            }
+            
+          </View>
+
+          <View>
+            <Text
+              style={{
+                ...fontsize.small,
+                ...FONTS.regular,
+                color: COLORS.white,
+                lineHeight: 18,
+              }}
+            >
+              Hey 👋 Padi, upgrade your profile today and get a bank account
+              created for you to receive money.
+            </Text>
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 26,
+                alignItems: "center",
+              }}
+            >
+              <View>
+                <Text
+                  style={{
+                    ...fontsize.smallest,
+                    ...FONTS.regular,
+                    color: COLORS.white,
+                  }}
+                >
+                  Account Number :
+                </Text>
+                <Text
+                  style={{
+                    ...fontsize.bsmall,
+                    color: COLORS.white,
+                    ...FONTS.bold,
+                  }}
+                >
+                 {!isNewbie ?  "1000063012" : "* * * * * * * * * *"}
+                </Text>
+              </View>
+              <View>
+                <Text
+                  style={{
+                    ...fontsize.smallest,
+                    ...FONTS.regular,
+                    color: COLORS.white,
+                  }}
+                >
+                  Bank Name :{" "}
+                </Text>
+                <Text
+                  style={{
+                    ...fontsize.bsmall,
+                    ...FONTS.bold,
+                    color: COLORS.white,
+                  }}
+                >
+                  VFD Bank
+                </Text>
+              </View>
+
+
+                <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={{backgroundColor: COLORS.blue8,width: 35, height: 35, borderRadius: 30, justifyContent: "center", alignItems: "center"}}>
+                  <Shareaccounticon />
+                </TouchableOpacity>
+            </View>
+          </View>
+        </View>
       </View>
-
-  
 
       <BottomSheet
         index={0}
@@ -191,7 +327,7 @@ const Settings = ({ navigation }) => {
             title="My Profile"
             onpress={() => navigation.navigate("Editprofile")}
           />
-             <Iconwithtitle
+          <Iconwithtitle
             bg="#FFE3E3"
             icon={<Walletmanageicon />}
             title="Wallet Management"

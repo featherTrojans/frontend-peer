@@ -11,7 +11,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Custombutton, Input, Loader } from "../../../../components/index";
+import { Custombutton, Input, Loader, Mainwrapper } from "../../../../components/index";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
@@ -23,6 +23,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
 import DropDownPicker from "react-native-dropdown-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const { Usericondark, Phoneicon, Envelopeicon, Newlogo } = icons;
 
@@ -44,14 +45,19 @@ const Personal = ({ navigation }) => {
   const toast = useToast();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Mainwrapper >
+
+
+
+
+
+
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View>
-          <Customstatusbar />
+        <View style={{flex: 1, paddingHorizontal: 25}}>
 
       
 
-            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
+            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 30}}>
               <Newlogo />
 
               <View style={{ flexDirection: "row" }}>
@@ -201,7 +207,7 @@ const Personal = ({ navigation }) => {
           </Formik>
         </View>
       </KeyboardAwareScrollView>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
-import { Input, Loader } from "../../../components";
+import { Custombutton, Input, Loader, Mainwrapper } from "../../../components";
 import { styles } from "../signup/Personal/Personal.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../../shared/Customstatusbar";
-const { Envelopeicon } = icons;
+const { Envelopeicon, Newlogo } = icons;
 
 const Forgetpassword = ({ navigation }) => {
   const toast = useToast();
@@ -37,16 +37,21 @@ const Forgetpassword = ({ navigation }) => {
 
 
   return (
-    <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
-      <Customstatusbar />
+    <Mainwrapper >
+
+
+
       <View style={{ paddingHorizontal: 25, flex: 1 }}>
         {loading && <Loader />}
-        <View style={{ marginTop: 34 }}>
-          <Text style={{ ...fontsize.big, ...FONTS.bold, marginBottom: 30 }}>
+        <View style={{ marginTop: 30 }}>
+          <View style={{marginBottom: 28}}>
+            <Newlogo />
+          </View>
+          <Text style={{ ...fontsize.bsmall, ...FONTS.bold, marginBottom: 9 }}>
             Forgot Password
           </Text>
           <Text
-            style={{ ...fontsize.bsmall, ...FONTS.regular, lineHeight: 24 }}
+            style={{ ...fontsize.smallest, ...FONTS.regular, lineHeight: 24 }}
           >
             Kindly input a valid email address linked to your feather account.
           </Text>
@@ -64,15 +69,13 @@ const Forgetpassword = ({ navigation }) => {
         </View>
 
         <View style={[styles.bottomContainer, {marginBottom: 20}]}>
-          <TouchableOpacity
-            style={styles.proceedBtn}
-            activeOpacity={0.8}
-            onPress={handleSubmit}
-            // onPress={handleSubmit}
+
+
+          <Custombutton
+               // onPress={handleSubmit}
             // disabled={isSubmitting}
-          >
-            <Text style={styles.proceedText}>PROCEED</Text>
-          </TouchableOpacity>
+           btntext="Proceed" onpress={() => console.log('hellow')}/>
+    
 
           {/* Have an account */}
           <View style={styles.bottomTextContainer}>
@@ -87,7 +90,9 @@ const Forgetpassword = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+
+
+    </Mainwrapper>
   );
 };
 

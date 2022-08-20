@@ -50,7 +50,7 @@ const Chatsdm = ({navigation,route}) => {
   
   useEffect(() => {    
     getThisChats()
-  }, [])
+}, [])
 
   useEffect(()=>{
     let unsub = ()=>{}
@@ -240,6 +240,9 @@ const Chatsdm = ({navigation,route}) => {
     <SafeAreaView
     style={styles.container}>
       <Customstatusbar />      
+
+
+
       <AllChatsModal 
         sendcashModal={sendcashModal}
         chooseAmount={chooseAmount}

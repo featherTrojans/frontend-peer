@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
       // borderWidth: 0.5,
       paddingHorizontal: 20,
       borderRadius: 5,
-      backgroundColor: COLORS.grey1,
+      // backgroundColor: COLORS.grey1,
+      
       borderColor: "transparent"
     },
     textInput: {
@@ -20,6 +21,7 @@ export const styles = StyleSheet.create({
       ...FONTS.light,
       ...fontsize.smallest,
       paddingLeft: 12.5,
+      textTransform: "capitalize"
     },
     inputiconwrapper: {
       borderRightWidth: .5,

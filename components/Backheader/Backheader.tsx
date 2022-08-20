@@ -5,8 +5,8 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
 } from "react-native";
-import React from "react";
-import { icons } from "../../constants";
+import React, { ReactChild, ReactElement } from "react";
+import { COLORS, icons } from "../../constants";
 import { styles } from "./Backheader.styles";
 import { useNavigation } from "@react-navigation/native";
 
@@ -15,16 +15,21 @@ const { Backarrow } = icons;
 const Backheader = ({
   title,
   showArrow = true,
-  mb = 20
+  mb = 20,
+  bg= "#fff",
+  rightComponent,
+
 }: {
   title?: string;
   showArrow?: boolean;
-  mb?: number
+  mb?: number,
+  bg?: string,
+  rightComponent?: any
 }) => {
   const navigation = useNavigation();
 
   return (
-    <View style={[styles.container, {marginBottom: mb}]}>
+    <View style={[styles.container, {marginBottom: mb, backgroundColor: bg}]}>
       <View style={styles.backArrowContainer}>
         {showArrow && (
           <TouchableOpacity
@@ -37,6 +42,7 @@ const Backheader = ({
 
         <Text style={styles.backArrowText}>{title}</Text>
       </View>
+      {rightComponent}
     </View>
   );
 };

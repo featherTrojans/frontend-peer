@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginVertical: 25,
     paddingHorizontal: 7,
-    alignItems: 'center'
+    alignItems: "center",
   },
   mainHeaderText: {
     ...fontsize.small,
@@ -24,54 +24,107 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     // paddingVertical: 25,
   },
-  name:{
+  name: {
     color: "#0034CB",
-    marginLeft: 10
+    marginLeft: 10,
   },
   subheadersText: {
     ...fontsize.smallest,
     ...FONTS.regular,
     color: COLORS.black,
-    textAlign: 'center'
+    textAlign: "center",
   },
   subheaderActive: {
     color: COLORS.blue6,
   },
-  avatarContainer: {
-    justifyContent: "center",
+  avatarFullname: {
+    ...fontsize.medium,
+    ...FONTS.bold,
+    color: COLORS.blue9,
+    textTransform: "capitalize",
+  },
+  avatarProfileWrap: {
+    flexDirection: "row",
     alignItems: "center",
-    marginTop: 36,
+  },
+  avatarUsername: {
+    ...fontsize.small,
+    ...FONTS.regular,
+    color: COLORS.blue9,
   },
   avatarBg: {
     backgroundColor: COLORS.transparentBlue,
-    height: 92,
-    width: 92,
+    height: 62,
+    width: 62,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 92 / 2,
-    marginBottom: 23,
   },
   avatarText: {
-    ...fontsize.smaller,
+    ...fontsize.smallest,
     ...FONTS.regular,
     color: COLORS.grey5,
+    marginTop: 10,
   },
-  editInputContainer: {
-    marginTop: 55,
-    paddingHorizontal: 22,
+  upgradeBtnWrap: {
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
+  upgradeBtnBg: {
+    paddingHorizontal: 12,
+    backgroundColor: COLORS.blue3,
+    paddingVertical: 8,
+    borderRadius: 18,
+  },
+  upgradeBtnText: {
+    ...fontsize.smallest,
+    ...FONTS.medium,
+    color: COLORS.white,
   },
 
-  // Editinput box
-  labelText: {
-    ...fontsize.small,
-    ...FONTS.medium,
-    marginBottom: 5,
+  editInputContainer: {
+    paddingHorizontal: 15,
+  },
+  headerRightwrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerRightmemojibg: {
+    marginLeft: 10.5,
+    // backgroundColor: COLORS.green2,
+    borderRadius: 18,
+    paddingHorizontal: 11,
+    paddingVertical: 6,
+  },
+  headerRightUsertype: {
+    color: COLORS.white,
+    ...fontsize.smallest,
+    ...FONTS.regular,
     textTransform: "capitalize",
   },
-  textInput: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: COLORS.borderColor3,
-    paddingVertical: 12,
+
+  becomeandagentwrap: {
+    marginTop: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  becomeanagenttext: {
+    ...fontsize.small,
+    ...FONTS.medium,
+    color: COLORS.black,
+  },
+  becomeagentredbg: {
+    marginLeft: 10,
+    backgroundColor: COLORS.red3,
+    paddingHorizontal: 15,
+    paddingVertical: 6,
+    borderRadius: 18,
+  },
+  becomeagentnewtext: {
+    ...fontsize.smallest,
+    ...FONTS.bold,
+    color: COLORS.white,
   },
 
   //Document settings
@@ -97,10 +150,10 @@ export const styles = StyleSheet.create({
     ...FONTS.regular,
     color: COLORS.grey2,
   },
-  namecont:{
+  namecont: {
     flexDirection: "row",
     marginLeft: 5,
-    alignItems:"center",
+    alignItems: "center",
     alignSelf: "center",
     // marginBottom: 20
   },

@@ -17,6 +17,11 @@ import Keyboard from "./Keyboard/Keyboard";
 import Custombutton from "./Custombutton/Custombutton";
 import Mainwrapper from "./Mainwrapper/Mainwrapper";
 import Horizontaline from "./Horizontaline/Horizontaline";
+import Tableoption from "./Tableoption/Tableoption";
+import Copyaccountinfo from "./Copyaccountinfo/Copyaccountinfo";
+import Upgrademodal from "./Upgrademodal/Upgrademodal";
+import Chooseamountmodal from "./Chooseamountmodal/Chooseamountmodal";
+
 export {
     Input,
     Tab,
@@ -28,7 +33,7 @@ export {
     Iconwithdatas,
     Loader,
     Bottombtn,
-    
+    Tableoption,
     Mainwrapper,
     Numberbtn,
     Requesterdetails,
@@ -37,6 +42,9 @@ export {
     InitialsBg,
     Keyboard,
     Custombutton,
-    Horizontaline
+    Horizontaline,
+    Copyaccountinfo,
+    Upgrademodal,
+    Chooseamountmodal
 
 }

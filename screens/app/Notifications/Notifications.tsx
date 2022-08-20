@@ -244,7 +244,6 @@ const Notifications = () => {
     <Mainwrapper>
       {/* Header title */}
         <Backheader title="Notifications" />
-      {/* <Customstatusbar /> */}
 
       <View style={styles.listContainer}>
         {loading ? (

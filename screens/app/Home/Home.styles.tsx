@@ -65,6 +65,30 @@ export const styles = StyleSheet.create({
     color: COLORS.blue9,
   },
 
+  //Transfer modal styles
+
+  headerWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 35,
+  },
+  addcashheadertext: {
+    ...fontsize.smaller,
+    ...FONTS.medium,
+    color: COLORS.blue9,
+  },
+  primarywallettext: {
+    ...fontsize.smallest,
+    ...FONTS.regular,
+    marginBottom: 11,
+  },
+  availablebalancetext: {
+    ...fontsize.small,
+    ...FONTS.bold,
+    textAlign: "right",
+    color: COLORS.purple2,
+  },
+
   // Horizontal information styles
 
   informationblockwrap: {

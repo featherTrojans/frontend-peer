@@ -18,6 +18,7 @@ type dataProps = {
   title: string;
   details: string;
   onpress: () => void;
+  infocolor?: string
 };
 
 const Iconwithdatas = ({
@@ -26,6 +27,7 @@ const Iconwithdatas = ({
   title,
   details,
   onpress,
+  infocolor="#707070"
 }: dataProps) => {
   return (
     <TouchableNativeFeedback
@@ -45,7 +47,7 @@ const Iconwithdatas = ({
           {/* Datas */}
           <View style={styles.dataContainer}>
             <Text style={styles.titleText}>{title}</Text>
-            <Text style={styles.detailsText}>{details}</Text>
+            <Text style={[styles.detailsText, {color: infocolor}]}>{details}</Text>
           </View>
         </View>
         

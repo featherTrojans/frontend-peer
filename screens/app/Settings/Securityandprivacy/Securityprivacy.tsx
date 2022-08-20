@@ -129,16 +129,7 @@ const Securityprivacy = ({ navigation }) => {
             );
           })}
 
-          {/* <Eachbtn
-          icon={<Outlinedlock />}
-          title="Reset Transaction PIN"
-          onpress={() => navigation.navigate("Changepin")}
-        />
-        <Eachbtn
-          icon={<Bluefingerprinticon />}
-          title="Biometrics"
-          onpress={() => navigation.navigate("Biometrics")}
-        /> */}
+        
         </View>
       </View>
     </Mainwrapper>

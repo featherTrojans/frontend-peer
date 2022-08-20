@@ -62,7 +62,7 @@ const Changepassword = () => {
         newpassword: newpassword,
       });
       setAllowBiometrics(false)
-      navigation.navigate("Root");
+      navigation.navigate("Root", {screen: "Settings"});
     } catch (err) {
       showerror(toast, err);
     } finally {
@@ -83,7 +83,7 @@ const Changepassword = () => {
       <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
         {loading && <Loader />}
 
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView contentContainerStyle={{flex: 1}}>
           <View
             style={{
               flex: 1,
@@ -114,7 +114,7 @@ const Changepassword = () => {
                 } = formikProps;
 
                 return (
-                  <>
+                  <View style={{flex: 1}}>
                     <Input
                       placeholder="Current Password"
                       name="currentpassword"
@@ -136,37 +136,15 @@ const Changepassword = () => {
                       icon={<Lock />}
                       password={true}
                     />
-
-                    <Custombutton btntext="Change PIN" onpress={handleSubmit} />
-                  </>
+                    <View style={{flex: 1}}/>
+                    <Custombutton btntext="Change Password" onpress={handleSubmit} />
+                  </View>
                 );
               }}
             </Formik>
-            {/* <Text style={styles.changePasswordText}>Change Password</Text>
 
-            <View style={{ marginTop: 42 }}>
-              <Inputinsettings
-                label="Current Password"
-                placeholder="Enter Password"
-                value={oldpassword}
-                onChangeText={(text) => setOldpassword(text)}
-              />
-              <Inputinsettings
-                label="New Password"
-                placeholder="Enter Password"
-                value={newpassword}
-                onChangeText={(text) => setNewpassword(text)}
-              />
-              <Inputinsettings
-                label="Confirm Password"
-                placeholder="Enter Password"
-                value={confirmpassword}
-                onChangeText={(text) => setConfirmpassword(text)}
-              />
-            </View> */}
           </View>
 
-          {/* <Bottombtn title="Change Password" onpress={handleSubmit} /> */}
         </KeyboardAwareScrollView>
       </ScrollView>
     </Mainwrapper>

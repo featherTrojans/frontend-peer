@@ -7,7 +7,6 @@ import { COLORS, FONTS, fontsize, SIZES } from "../../../../constants";
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: COLORS.white,
       paddingHorizontal: 25,
       paddingTop: RFValue(25),
     },

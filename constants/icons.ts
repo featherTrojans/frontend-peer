@@ -78,6 +78,7 @@ import Makerequestarrowright from "../assets/icons/Makerequestarrowright";
 import Orangecheckmark from "../assets/icons/Orangecheckmark";
 import Cancelicony from "../assets/icons/Cancelicony";
 import Smsicony from "../assets/icons/Smsicony";
+import Searcontacticon from "../assets/icons/Searcontacticon";
 import Phoneicony from "../assets/icons/Phoneicony";
 import Ratingstar from "../assets/icons/Ratingstar";
 import Accountbalanceicon from "../assets/icons/Accountbalanceicon";
@@ -141,9 +142,18 @@ import Emptynotification from "../assets/icons/Emptynotification";
 import Passwordpinlock from "../assets/icons/Passwordpinlock";
 import Airtimeicon from "../assets/icons/Airtimeicon";
 import Mobiledataicon from "../assets/icons/Mobiledataicon";
-
+import Memoji1bigicon from "../assets/icons/Memoji1bigicon";
 import Bluefingerprinticon from "../assets/icons/Bluefingerprinticon";
-
+import Debitcardicon from "../assets/icons/Debitcardicon";
+import Featheragenticon from "../assets/icons/Featheragenticon";
+import Familyrequesticon from "../assets/icons/Familyrequesticon";
+import Bluebankicon from "../assets/icons/Bluebankicon";
+import Bluewalleticon from "../assets/icons/Bluewalleticon";
+import Ashicon from "../assets/icons/Ashicon";
+import Briefcaseicon from "../assets/icons/Briefcaseicon";
+import Gloicon from "../assets/icons/Gloicon";
+import Mtnlogo from "../assets/icons/Mtnlogo";
+import Purplehouseicon from "../assets/icons/Purplehouseicon";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -158,7 +168,7 @@ import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-su
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
 import Dollaricon from "../assets/icons/Dollaricon";
 import Emptyicon from "../assets/icons/Emptyicon";
-
+import Aticon from "../assets/icons/Aticon";
 
 // Receiverimage
 
@@ -173,7 +183,12 @@ export default {
   Envelopeicon,
   Lockicondark,
   Cancelicon,
+  Debitcardicon,
+  Featheragenticon,
+  Familyrequesticon,
   At,
+  Gloicon,
+  Mtnlogo,
   Smile,
   SendIcon,
   SendTF,
@@ -190,14 +205,16 @@ export default {
   Profilepics,
   Arrowright,
   Eyecrossed,
-
+  Ashicon,
+  Briefcaseicon,
   Deposit,
   Withdraw,
   Transfer,
   Paybills,
   Cryingicon,
   Utilitylarge,
-
+  Bluebankicon,
+  Bluewalleticon,
   Arrowin,
   Arrowout,
   Backarrow,
@@ -205,6 +222,7 @@ export default {
   Sendingandreceivearrows,
   Goldenstaricon,
   Acceptedcheck,
+  Searcontacticon,
   Patternbg,
   Featherwallet,
   Bankaccount,
@@ -228,6 +246,7 @@ export default {
   Passwordpinlock,
   Smallphone,
   Purplelockicon,
+  Aticon,
   Bvnlock,
   Useravatar,
   Logoavatar,
@@ -246,6 +265,7 @@ export default {
   Location,
   Copyclipboard,
   Editicon,
+  Purplehouseicon,
   Userdefaultsmaller,
   Meetupdot,
   Clearinput,
@@ -294,6 +314,7 @@ Mobiledataicon,
   Outlinelockgrey,
   Reporttransactions,
   Onmapicon,
+  Memoji1bigicon,
   Smalluseravatar,
   Networklogos,
   Greenlockicon,

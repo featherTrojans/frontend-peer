@@ -7,8 +7,8 @@ import { Shadow } from "../../../constants/theme";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
-    paddingHorizontal: 15,
+    backgroundColor: COLORS.white3,
+    // paddingHorizontal: 15,
   },
   settingText: {
     ...FONTS.bold,
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   profileName: {
-    ...fontsize.xmedium,
+    ...fontsize.medium,
     ...FONTS.bold,
     textTransform: 'capitalize',
     marginBottom: 6

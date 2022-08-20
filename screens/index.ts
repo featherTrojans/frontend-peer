@@ -64,6 +64,7 @@ import Pendingwithdraw from "./app/Withdraws/Pendingwithdraw/Pendingwithdraw";
 import Acceptedwithdraw from "./app/Withdraws/Acceptedwithdraw/Acceptedwithdraw";
 import Requestsummary from "./app/Withdraws/Requestsummary/Requestsummary";
 import Transferpin from "./app/Transferfunds/Transferpin/Transferpin";
+import Selectbank from "./app/Transferfunds/Selectbank/Selectbank";
 import Canceldeposit from "./app/Deposit/Canceldeposit/Canceldeposit";
 import Pendingdeposit from "./app/Deposit/Pendingdeposit/Pendingdeposit";
 import Accepteddeposit from "./app/Deposit/Accepteddeposit/Accepteddeposit";
@@ -87,8 +88,11 @@ import Electricityamount from "./app/Billpayments/Electricity/Electricityamount/
 import Electricitydetails from "./app/Billpayments/Electricity/Electricitydetails/Electricitydetails";
 import Electricitytype from "./app/Billpayments/Electricity/Electricitytype/Electricitytype";
 import Electricitymetertype from "./app/Billpayments/Electricity/Electricitymetertype/Electricitymetertype";
-
-
+import Dataprovider from "./app/Billpayments/Airtime/Dataprovider/Dataprovider";
+import Dataplan from "./app/Billpayments/Airtime/Dataplan/Dataplan";
+import Airtimeprovider from "./app/Billpayments/Airtime/Airtimeprovider/Airtimeprovider";
+import Becomeanagent from "./app/Becomeanagent/Becomeanagent";
+import Sendcash from "./app/Transferfunds/Sendcash/Sendcash";
 //This screen is for testing somne functionalities
  
 import Testings from "./Testings";
@@ -119,6 +123,7 @@ export {
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
+  Selectbank,
   Transactionsrating,
   History,
   Settings,
@@ -137,6 +142,7 @@ export {
   Deposit,
   Depositupdate,
   Updatedeposit,
+  Sendcash,
   Pendingdeposit,
   Accepteddeposit,
   Depositpin,
@@ -155,6 +161,7 @@ export {
   Cancelrequest,
   Chatsdm,
   Chatshome,
+  Becomeanagent,
   Chatsoon,
   Usersearch,
   // Pendingrequest,
@@ -172,9 +179,12 @@ export {
   Airtimeanddata,
   Airtimedetails,
   Airtimepurchasepin,
+  Airtimeprovider,
   Electricityamount,
   Electricitydetails,
   Electricitytype,
   Electricitymetertype,
+  Dataprovider,
+  Dataplan,
   DepositSummary
 };

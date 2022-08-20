@@ -18,41 +18,51 @@ const {
 } = icons;
 
 const Newtransactions = ({ navigation }: any) => {
+
+  
+
+
+
+
+
   const actions = [
     {
       icon: <Withdrawicon />,
       iconBg: "#E0EDD8",
       title: "Withdraw",
       details: "Get cash from feather users near you.",
-      route: "Withdraw",
+      onpress: () => navigation.navigate("Withdraw")
     },
     {
       icon: <Depositicon />,
       iconBg: "#D2EAFD",
       title: "Deposit",
       details: "Supply cash and earn cashback!",
-      route: "Depositupdate",
+      onpress: () => navigation.navigate("Depositupdate")
     },
     {
       icon: <Newtransfericon />,
       iconBg: "#FCF3D1",
       title: "Transfer",
       details: "Send cash to feather wallets and bank accounts.",
-      route: "Transfercash",
+      onpress: () => navigation.navigate("Transfercash")
+
     },
     {
       icon: <Fundwalleticon />,
       iconBg: "#DEE0E5",
       title: "Fund Wallet",
       details: "Add Cash to your wallets easily",
-      route: "Addcash",
+      onpress: () => navigation.navigate("Addcash")
+
     },
     {
       icon: <Paybillicon />,
       iconBg: "#E3CCFF",
       title: "Paybills",
       details: "Purchase airtime & data, PayTV Subscriptions…",
-      route: "Paybills",
+      onpress: () => navigation.navigate("Paybills")
+
     },
   ];
 
@@ -88,7 +98,7 @@ const Newtransactions = ({ navigation }: any) => {
               Perform an action⚡
             </Text>
 
-            {actions.map(({ icon, iconBg, title, details, route }, index) => {
+            {actions.map(({ icon, iconBg, title, details, onpress }, index) => {
               return (
                 <View key={index}>
                   <Iconwithdatas
@@ -97,7 +107,7 @@ const Newtransactions = ({ navigation }: any) => {
                     iconBg={iconBg}
                     title={title}
                     details={details}
-                    onpress={() => navigation.navigate(route)}
+                    onpress={onpress}
                   />
                   {index + 1 !== actions.length && (
                     <View

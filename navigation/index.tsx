@@ -132,10 +132,19 @@ import {
   Electricityamount,
   Electricitydetails,
   Electricitytype,
-  Electricitymetertype
+  Electricitymetertype,
+  Dataprovider,
+  Dataplan,
+  Airtimeprovider,
+  Becomeanagent,
+  Sendcash,
+  Selectbank
 } from "../screens";
 // import { LockScreen } from "../screens";
+
+
 import { LockScreen } from "../screens";
+
 
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -574,6 +583,8 @@ const RootNavigator = ({ initialBoarded }) => {
             />
             <AppStack.Screen name="Changepassword" component={Changepassword} />
             <AppStack.Screen name="Walletmanagement" component={Walletmanagement} />
+            <AppStack.Screen name="Becomeanagent" component={Becomeanagent} />
+
             <AppStack.Screen name="Addbvn" component={Addbvn} />
 
 
@@ -630,6 +641,9 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Getdetails" component={Getdetails} />
             <AppStack.Screen name="Bankaccount" component={Bankaccount} />
             <AppStack.Screen name="Transferpin" component={Transferpin} />
+            <AppStack.Screen name="Sendcash" component={Sendcash} />
+            <AppStack.Screen name="Selectbank" component={Selectbank} />
+
             <AppStack.Screen
               name="TransferpinBank"
               component={TransferpinBank}
@@ -648,6 +662,11 @@ const RootNavigator = ({ initialBoarded }) => {
           <AppStack.Screen name="Airtimeanddata" component={Airtimeanddata} />
           <AppStack.Screen name="Airtimeamount" component={Airtimeamount} />
           <AppStack.Screen name="Airtimedetails" component={Airtimedetails} />
+          <AppStack.Screen name="Airtimeprovider" component={Airtimeprovider} />
+
+          <AppStack.Screen name="Dataprovider" component={Dataprovider} />
+          <AppStack.Screen name="Dataplan" component={Dataplan} />
+
           <AppStack.Screen
             name="Airtimepurchasepin"
             component={Airtimepurchasepin}

@@ -1,26 +1,45 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
-import { Backheader, Mainwrapper } from "../../../../../components";
+import { Backheader, Custombutton, Mainwrapper } from "../../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
+import useCustomModal from "../../../../../utils/useCustomModal";
 
 const { Forwardarrow, Airtimeicon, Mobiledataicon } = icons;
-const Airtimeanddata = () => {
+const Airtimeanddata = ({navigation}) => {
+
+
+  const {CustomModal, openModal} = useCustomModal()
+
+
   const typedatas = [
     {
       bg: "#D2EAFD",
       icon: <Airtimeicon />,
       title: "Airtime Purchase",
+      action: () => openModal()
     },
     {
       bg: "#F1E5FF",
       icon: <Mobiledataicon />,
       title: "Mobile Data Purchase",
+      action: () => navigation.navigate("Dataprovider")
     },
   ];
 
   return (
     <Mainwrapper>
       <Backheader title="Airtime & Data Purchase" />
+
+
+
+    <CustomModal>
+      <View>
+        <Text>Yes</Text>
+
+        <Custombutton btntext="Continue" onpress={() => navigation.navigate("Airtimeprovider")}/>
+      </View>
+      
+    </CustomModal>
 
       <View style={{ paddingHorizontal: 15 }}>
         <View
@@ -42,11 +61,13 @@ const Airtimeanddata = () => {
             Select Type
           </Text>
 
-          {typedatas.map(({ bg, title, icon }, index) => {
+          {typedatas.map(({ bg, title, icon, action }, index) => {
             const isLast = index + 1 === typedatas.length;
             return (
               <View key={index}>
-                <View
+                <TouchableOpacity
+                onPress={action}
+                activeOpacity={0.8}
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
@@ -78,7 +99,7 @@ const Airtimeanddata = () => {
                     </Text>
                   </View>
                   <Forwardarrow />
-                </View>
+                </TouchableOpacity>
 
                 {!isLast && (
                   <View

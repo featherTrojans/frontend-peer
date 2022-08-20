@@ -12,15 +12,94 @@ import { AuthContext } from "../../context/AuthContext";
 import amountFormatter from "../../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
 import { RFValue } from "react-native-responsive-fontsize";
+import useCustomModal from "../../utils/useCustomModal";
+import { styles } from "../../screens/app/Home/Home.styles";
+import Iconwithdatas from "../Iconwithdatas/Iconwithdatas";
+import Horizontaline from "../Horizontaline/Horizontaline";
+import Chooseamountmodal from "../Chooseamountmodal/Chooseamountmodal";
 
-const { Eyecrossed, Arrowright } = icons;
+
+const {
+  Eyecrossed,
+  Arrowright,
+  Debitcardicon,
+  Featheragenticon,
+  Familyrequesticon,
+} = icons;
 
 const Viewbalance = ({ navigate }: any) => {
   const navigation = useNavigation();
   const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
+  const { CustomModal: AddCashModal, openModal, closeModal: closeAddCashModal } = useCustomModal();
+  const {CustomModal: ChooseamountModal, openModal: openAmountModal} = useCustomModal()
+
+  const addcashoptions = [
+    {
+      icon: <Debitcardicon />,
+      title: "Debit card, Bank or USSD",
+      info: "Secured by Paystack.",
+      action: () => {
+        closeAddCashModal()
+        openAmountModal()
+      }
+    },
+    {
+      icon: <Featheragenticon />,
+      title: "Feather Agents",
+      info: "Secured by Feather Technologies.",
+      action: () => console.log("Feather agents")
+    },
+    {
+      icon: <Familyrequesticon />,
+      title: "Request from family & friends",
+      info: "Coming Soon!",
+      infocolor: COLORS.purple2,
+      action: () => console.log("Family Request")
+    },
+  ];
 
   return (
     <View style={viewbalancestyles.container}>
+
+      {/* Choose amount modal */}
+      <ChooseamountModal>
+          <Chooseamountmodal headerText="How much do you want to fund?" onpress={() => console.log("Amount Selected")}/>
+      </ChooseamountModal>
+
+
+
+
+      {/* Add cash modal */}
+      <AddCashModal>
+        <View>
+          <View style={styles.headerWrapper}>
+            <Text style={styles.addcashheadertext}>Add Cash Options</Text>
+            <View>
+              <Text style={styles.primarywallettext}>
+                Primary Wallet Balance
+              </Text>
+              <Text style={styles.availablebalancetext}>N{amountFormatter(authdata?.walletBal)}</Text>
+            </View>
+          </View>
+
+          {addcashoptions.map(({ icon, title, info, infocolor, action }, index) => {
+            const isLast = addcashoptions.length === index + 1;
+            return (
+              <View key={index}>
+                <Iconwithdatas
+                  icon={icon}
+                  title={title}
+                  details={info}
+                  iconBg={""}
+                  onpress={action}
+                  infocolor={infocolor}
+                />
+                {!isLast && <Horizontaline marginV={18} />}
+              </View>
+            );
+          })}
+        </View>
+      </AddCashModal>
       {/* Top part of the block */}
       <View style={viewbalancestyles.topContainer}>
         <View style={{ flex: 1, marginRight: 20 }}>
@@ -31,7 +110,7 @@ const Viewbalance = ({ navigate }: any) => {
         <TouchableOpacity
           style={viewbalancestyles.addCashBg}
           activeOpacity={0.8}
-          onPress={() => navigation.navigate("Addcash")}
+          onPress={openModal}
         >
           <Text style={viewbalancestyles.addCashText}>Add Cash</Text>
         </TouchableOpacity>
@@ -40,24 +119,28 @@ const Viewbalance = ({ navigate }: any) => {
       <View style={viewbalancestyles.bottomContainer}>
         {/* Left text */}
         <View>
-
-          <View style={{flexDirection: "row", alignItems: "center", marginBottom: RFValue(6)}}>
-          <Text style={viewbalancestyles.balanceText}>Feather Balance</Text>
-          <TouchableOpacity
-          onPress={() => setShowAmount(!showAmount)}
-          activeOpacity={0.8}
-        >
-          <Eyecrossed />
-        </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: RFValue(6),
+            }}
+          >
+            <Text style={viewbalancestyles.balanceText}>Feather Balance</Text>
+            <TouchableOpacity
+              onPress={() => setShowAmount(!showAmount)}
+              activeOpacity={0.8}
+            >
+              <Eyecrossed />
+            </TouchableOpacity>
           </View>
-          
+
           <Text style={viewbalancestyles.balanceAmount}>
             NGN {showAmount ? amountFormatter(authdata?.walletBal) : "******"}
           </Text>
         </View>
 
         {/* Eye icon */}
-        
       </View>
     </View>
   );

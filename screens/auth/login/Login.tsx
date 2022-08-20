@@ -28,7 +28,7 @@ import {
 } from "react-native-keychain";
 import * as LocalAuthentication from "expo-local-authentication";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Custombutton, Input, Loader } from "../../../components";
+import { Custombutton, Input, Loader, Mainwrapper } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import showerror from "../../../utils/errorMessage";
@@ -152,8 +152,8 @@ const Login = ({ navigation }: any) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white3 }}>
-      <Customstatusbar />
+    <Mainwrapper >
+
       <KeyboardAwareScrollView>
         <View style={styles.container}>
           {/* Logo */}
@@ -268,6 +268,10 @@ const Login = ({ navigation }: any) => {
             }}
           </Formik>
 
+
+
+
+
           <View style={styles.haveanaccount}>
             <Text style={styles.haveaccounttext}>Don’t have an account? </Text>
             <TouchableOpacity
@@ -279,7 +283,7 @@ const Login = ({ navigation }: any) => {
           </View>
         </View>
       </KeyboardAwareScrollView>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

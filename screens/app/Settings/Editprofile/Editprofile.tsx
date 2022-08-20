@@ -1,27 +1,27 @@
 import {
-  StyleSheet,
   Text,
   View,
-  StatusBar,
-  TextInput,
   ScrollView,
-  Animated,
-  ActivityIndicator,
-  Button,
-  TouchableOpacity
+
+  TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 import { styles } from "./Editprofile.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
-import { Bottombtn, Loader } from "../../../../components";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import {
+  Backheader,
+  Bottombtn,
+  Custombutton,
+  Input,
+  Loader,
+  Mainwrapper,
+  Upgrademodal,
+} from "../../../../components";
 import Defaultuseravatar from "../../../../assets/icons/Defaultuseravatar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { string } from "yup";
-// import { TouchableOpacity } from "react-native-gesture-handler";
 import { AuthContext } from "../../../../context/AuthContext";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
@@ -29,11 +29,19 @@ import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import useDebounce from "../../../../utils/debounce";
-import DropDownPicker from "react-native-dropdown-picker";
-import moment from "moment";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-const { Backarrow, Check, WrongIcon } = icons;
+import { SafeAreaView } from "react-native-safe-area-context";
+import useCustomModal from "../../../../utils/useCustomModal";
+
+const {
+  Backarrow,
+  Check,
+  WrongIcon,
+  Usericondark,
+  Envelopeicon,
+  Phoneicon,
+  Memoji1,
+} = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -42,131 +50,117 @@ const setAuthorizationToken = (token: string) => {
 };
 
 const validationSchema = Yup.object().shape({
+  userName: Yup.string().label("username").required(),
   firstName: Yup.string().label("First Name").required(),
   lastName: Yup.string().label("Last Name").required(),
   email: Yup.string().label("Last Name").required(),
-  phone: Yup.string().label("email").required()
+  phone: Yup.string().label("email").required(),
 });
-
-const validationSchemaTwo = Yup.object().shape({
-  // gender: Yup.string().label("gender").required(),
-  // dateOfBirth: Yup.string().label("dateOfBirth").required(),
-  address: Yup.string().label("address").required(),
-  lga: Yup.string().label("lga").required(),
-});
-
-type EditinputProps = {
-  label: string;
-  value?: string;
-  formikprops?: any;
-  name?: string;
-};
-
-const EditinputSpecial = ({ label, value, name, ...props }: EditinputProps) => {
-  return (
-    <View style={{ flex: 1 }}>
-      {/* Label */}
-      <Text style={styles.labelText}>{label}</Text>
-      <TextInput style={{ paddingVertical: 12 }} value={value} {...props} />
-    </View>
-  );
-};
-const Editinput = ({ label, value, name, formikprops,...rest }: EditinputProps) => {
-  if (formikprops) {
-    const { values, handleChange, handleBlur } = formikprops;
-    return (
-      <View style={{ marginBottom: 30 }}>
-        {/* Label */}
-        <Text style={styles.labelText}>{label}</Text>
-        <TextInput
-          onChangeText={handleChange(name)}
-          onBlur={handleBlur(name)}
-          value={values[name]}
-          style={styles.textInput}
-          placeholder={value}
-          placeholderTextColor="red"
-          {...rest}
-        />
-      </View>
-    );
-  }
-  return (
-    <View style={{ marginBottom: 30 }}>
-      {/* Label */}
-      <Text style={styles.labelText}>{label}</Text>
-      <TextInput style={styles.textInput} placeholder={value} />
-    </View>
-  );
-};
+const usertype = "newbie";
 
 const Basicsettings = () => {
   const toast = useToast();
   const navigation = useNavigation();
   const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
+  const {CustomModal, openModal} = useCustomModal()
   const [usernamename, setusernamename] = useState(
     authdata?.userDetails?.username
   );
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const handleUsernameChange = (text: string) => {
     setusernamename(text);
     // and debound
     getuserinfo(text);
   };
 
-
-
   const handleImageUpload = async () => {
-        // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
-        });
-    
-        console.log(result);
-    
-        if (!result.cancelled) {
-          try {
-            setLoading(true);
-            const formdata = new FormData();
-            formdata.append("media", {
-              name: `${authdata.username}`,
-              type: "image/jpeg",
-              uri: result.uri, 
-            });
-            // const response = await updateUserAvatar(formdata);
-            // setUserData({ ...userData, user: response });
-          } catch (err) {
-            console.log(err);
-          } finally {
-            setLoading(false);
-          }
-        }
-  }
+    // No permissions request is necessary for launching the image library
+    // let result = await ImagePicker.launchImageLibraryAsync({
+    //   mediaTypes: ImagePicker.MediaTypeOptions.All,
+    //   allowsEditing: true,
+    //   aspect: [4, 3],
+    //   quality: 1,
+    // });
 
+    // console.log(result);
 
+    // if (!result.cancelled) {
+    //   try {
+    //     setLoading(true);
+    //     const formdata = new FormData();
+    //     formdata.append("media", {
+    //       name: `${authdata.username}`,
+    //       type: "image/jpeg",
+    //       uri: result.uri,
+    //     });
+    //     const response = await updateUserAvatar(formdata);
+    //     setUserData({ ...userData, user: response });
+    //   } catch (err) {
+    //     console.log(err);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
+  };
 
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
+      bounces={false}
       snapToAlignment="center"
-      contentContainerStyle={{ flex: 1, width: SIZES.width }}
+      contentContainerStyle={{ flex: 1 }}
     >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ paddingHorizontal: 15, marginBottom: 50 }}>
+          <TouchableOpacity activeOpacity={0.8}>
+            <View style={styles.avatarProfileWrap}>
+              <View style={styles.avatarBg}>
+                <Defaultuseravatar />
+              </View>
+              <View style={{ marginLeft: 15 }}>
+                <Text style={styles.avatarFullname}>
+                  {authdata?.userDetails?.fullName}
+                </Text>
+                <Text style={styles.avatarUsername}>
+                  @{authdata?.userDetails?.username}
+                </Text>
+              </View>
+            </View>
+
+            <Text style={styles.avatarText}>Tap to Edit</Text>
+          </TouchableOpacity>
+
+          <CustomModal>
+              <Upgrademodal />
+          </CustomModal>
+
+
+
+          {usertype === "newbie" && 
+            <View style={styles.upgradeBtnWrap}>
+            <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={styles.upgradeBtnBg}>
+              <Text style={styles.upgradeBtnText}>Upgrade</Text>
+            </TouchableOpacity>
+          </View>
+          
+          }
+          
+        </View>
+
         <Formik
           initialValues={{
+            username: authdata?.userDetails?.username,
             firstName: authdata?.userDetails?.fullName?.split(" ")[1],
             lastName: authdata?.userDetails?.fullName?.split(" ")[0],
-            email:authdata?.userDetails?.email,
-            phone:authdata?.userDetails?.phoneNumber
+            email: authdata?.userDetails?.email,
+            phone: authdata?.userDetails?.phoneNumber,
           }}
           validationSchema={validationSchema}
           onSubmit={async (values) => {
             try {
               const data = {
-                newUsername: usernamename.trim(),
+                newUsername: values.username.trim(),
                 firstName: values.firstName.trim(),
                 lastName: values.lastName.trim(),
               };
@@ -187,7 +181,7 @@ const Basicsettings = () => {
               // set new token
               setAuthorizationToken(response?.data?.data?.token);
               //Disable Biometrics
-              setAllowBiometrics(false)
+              setAllowBiometrics(false);
               navigation.navigate("Root");
             } catch (err) {
               // send success toast message
@@ -197,452 +191,141 @@ const Basicsettings = () => {
         >
           {(formikProps) => {
             const { isSubmitting, handleSubmit, values } = formikProps;
-            // handleUsernameChange(values.username)
             return (
               <React.Fragment>
                 {isSubmitting && <Loader />}
 
-
-                <TouchableOpacity style={styles.avatarContainer} activeOpacity={0.8}>
-                  <View style={styles.avatarBg}>
-                    <Defaultuseravatar />
-                  </View>
-                  <Text style={styles.avatarText}>
-                    Tap to change
-                  </Text>
-                </TouchableOpacity>
-
-
-
-
                 <View style={styles.editInputContainer}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      borderColor: COLORS.grey1,
-                      borderBottomWidth: 1,
-                      marginBottom: 30,
-                    }}
-                  >
-                    <EditinputSpecial
-                      label="Username"
-                      name="username"
-                      value={usernamename}
-                      onChangeText={(text) => handleUsernameChange(text)}
-                    />
-
-                    <View style={styles.namecont}>
-                      {loadbounce ? (
-                        <ActivityIndicator size={15} color={COLORS.blue6} />
-                      ) : userinfo.fullName &&
-                        usernamename?.toLowerCase() !==
-                          authdata?.userDetails?.username?.toLowerCase() ? (
-                        <>
-                          <WrongIcon />
-                          <Text style={styles.name}>
-                            {usernamename} is taken
-                          </Text>
-                        </>
-                      ) : null}
-                      {(error ||
-                        usernamename.toLowerCase() ===
-                          authdata?.userDetails?.username.toLowerCase()) && (
-                        <>
-                          <Check />
-                          <Text style={styles.name}>{usernamename}</Text>
-                        </>
-                      )}
-                    </View>
-                  </View>
-
-                  <Editinput
-                    label="Firstname"
-                    name="firstName"
-                    formikprops={formikProps}
-                  />
-                  <Editinput
-                    label="Lastname"
-                    name="lastName"
-                    formikprops={formikProps}
-                  />
-
-                  <Editinput
-                    label="Email"
-                    name="email"
-                    formikprops={formikProps}
-                    editable={false}
-                  />
-
-                  <Editinput
-                    label="Phone"
-                    name="phone"
-                    formikprops={formikProps}
-                    editable={false}
-                  />
-                </View>
-                <Bottombtn title="Save changes" onpress={handleSubmit} />
-              </React.Fragment>
-            );
-          }}
-        </Formik>
-      </KeyboardAwareScrollView>
-    </ScrollView>
-  );
-};
-const Personalsettings = () => {
-  const toast = useToast();
-  const navigation = useNavigation();
-  const { authdata, setAuthData } = useContext(AuthContext);
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(authdata?.userDetails?.gender);
-  const [items, setItems] = useState([
-    { label: "Male", value: "Male" },
-    { label: "Female", value: "Female" },
-  ]);
-  const [date, setDate] = useState(authdata?.userDetails?.dateOfBirth);
-  const [show, setShow] = useState(false);
-
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    setShow(false);
-    setDate(currentDate);
-  };
-
-  const showDatepicker = () => {
-    setShow(true);
-  };
-
-  return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      snapToAlignment="center"
-      contentContainerStyle={{ flex: 1, width: SIZES.width }}
-    >
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <Formik
-          initialValues={{
-            // gender: "",
-            // dateOfBirth: "",
-            address: authdata?.userDetails?.address,
-            lga: authdata?.userDetails?.lga,
-          }}
-          validationSchema={validationSchemaTwo}
-          onSubmit={async (values) => {
-            try {
-              const response = await axiosCustom.put(
-                "/profile/update/personal",
-                {
-                  gender: value,
-                  dateOfBirth: date,
-                  address: values.address,
-                  lga: values.lga,
-                }
-              );
-              const userdetails = {
-                ...authdata?.userDetails,
-                gender: value,
-                dateOfBirth: date,
-                address: values.address,
-                lga: values.lga,
-              };
-              setAuthData({
-                ...authdata,
-                userDetails: userdetails,
-              });
-
-              // send success toast message
-
-              navigation.navigate("Root");
-              // send success toast message
-            } catch (err) {
-              showerror(toast, err);
-            }
-          }}
-        >
-          {(formikProps) => {
-            const { isSubmitting, handleSubmit } = formikProps;
-            return (
-              <React.Fragment>
-                {isSubmitting && <Loader />}
-                <View style={styles.editInputContainer}>
-                  {/* <Editinput
-                    formikprops={formikProps}
-                    name="gender"
-                    label="gender"
-                    value="-"
-                  /> */}
-                  <Text style={styles.labelText}>Gender</Text>
-                  <DropDownPicker
-                    open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
-                    placeholder="Gender"
-                    placeholderStyle={{
-                      color: COLORS.black,
-                      ...fontsize.small,
-                      ...FONTS.regular,
-                    }}
-                    textStyle={{
-                      color: COLORS.black,
-                      ...fontsize.small,
-                      ...FONTS.regular,
-                    }}
-                    style={{
-                      height: 62,
-                      borderColor: "#E6E6E6",
-                      marginBottom: 30,
-                      borderWidth: 0,
-                      borderBottomWidth: 1,
-                    }}
-                    containerStyle={{}}
-                    dropDownContainerStyle={{
-                      borderColor: COLORS.grey1,
-                    }}
-                  />
-                  <View style={{ marginBottom: 30 }}>
-                    <Text style={styles.labelText}>Date of Birth</Text>
-                    <TouchableOpacity
-                      style={{ marginTop: 10 }}
-                      onPress={showDatepicker}
-                    >
-                      <Text
-                        style={[
-                          styles.textInput,
-                          {
-                            color: COLORS.black,
-                            ...fontsize.small,
-                            ...FONTS.regular,
-                          },
-                        ]}
-                      >
-                        {date
-                          ? moment(date).format("YYYY/MM/DD")
-                          : " Click to add DOB"}
-                      </Text>
-                    </TouchableOpacity>
-                    {show && (
-                      <DateTimePicker
-                        date={new Date()}
-                        value={new Date()}
-                        mode="date"
-                        is24Hour={true}
-                        onChange={onChange}
-                        maximumDate={new Date()}
-                      />
+                  {/* Debounce check for username */}
+                  {/* <View style={styles.namecont}>
+                    {loadbounce ? (
+                      <ActivityIndicator size={15} color={COLORS.blue6} />
+                    ) : userinfo.fullName &&
+                      usernamename?.toLowerCase() !==
+                        authdata?.userDetails?.username?.toLowerCase() ? (
+                      <>
+                        <WrongIcon />
+                        <Text style={styles.name}>{usernamename} is taken</Text>
+                      </>
+                    ) : null}
+                    {(error ||
+                      usernamename.toLowerCase() ===
+                        authdata?.userDetails?.username.toLowerCase()) && (
+                      <>
+                        <Check />
+                        <Text style={styles.name}>{usernamename}</Text>
+                      </>
                     )}
-                  </View>
-                  {/* <Editinput
-                    formikprops={formikProps}
-                    name="dateOfBirth"
-                    label="Date of Birth"
-                    value="-"
-                  /> */}
-                  <Editinput
-                    formikprops={formikProps}
-                    name="address"
-                    label="Address Line "
-                    value="-"
+                  </View> */}
+
+                  <Input
+                    placeholder="Username"
+                    name="username"
+                    formikProps={formikProps}
+                    icon={<Usericondark />}
+                    value={values.username}
                   />
-                  <Editinput
-                    formikprops={formikProps}
-                    name="lga"
-                    label="LGA"
-                    value="-"
+
+                  <Input
+                    placeholder="Firstname"
+                    name="firstName"
+                    formikProps={formikProps}
+                    icon={<Usericondark />}
+                    value={values.firstName}
                   />
+
+                  <Input
+                    placeholder="Lastname"
+                    name="lastName"
+                    formikProps={formikProps}
+                    icon={<Usericondark />}
+                    value={values.lastName}
+                  />
+
+                  <Input
+                    placeholder="Phone Number"
+                    name="phoneNumber"
+                    formikProps={formikProps}
+                    icon={<Phoneicon />}
+                    value={values.phone}
+                    editable={false}
+                  />
+
+                  <Input
+                    placeholder="Email Address"
+                    name="email"
+                    formikProps={formikProps}
+                    icon={<Envelopeicon />}
+                    value={values.email}
+                    editable={false}
+                  />
+                  <Custombutton btntext="Save Changes" onpress={handleSubmit} />
                 </View>
-                <Bottombtn title="Save changes" onpress={handleSubmit} />
               </React.Fragment>
             );
           }}
         </Formik>
-      </KeyboardAwareScrollView>
-    </ScrollView>
-  );
-};
 
-const Documentsettings = () => {
-  return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      snapToAlignment="center"
-      contentContainerStyle={{ flex: 1, width: SIZES.width }}
-    >
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.documentContainer}>
-          <View style={{ marginRight: 35 }}>
-            <Text style={styles.identityText}>Identity Verification</Text>
-            <Text style={styles.identitySubText}>
-              Kindly provide feather with a valid means of identity to upgrade
-              your account.
-            </Text>
+        {usertype === "odogwu" && <TouchableOpacity activeOpacity={0.8} style={styles.becomeandagentwrap}>
+          <Text style={styles.becomeanagenttext}>Became an Agent</Text>
+          <View style={styles.becomeagentredbg}>
+            <Text style={styles.becomeagentnewtext}>New</Text>
           </View>
+        </TouchableOpacity>}
 
-          <View style={{ marginTop: 45 }}>
-            <Editinput label="ID Type" value="--- Select Type ---" />
-            <Editinput label="ID Number" value="Enter valid ID number" />
 
-            <View style={styles.uploadIdBtn}>
-              <Text style={styles.uploadIdText}>Upload ID</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.documentContainer}>
-          <View>
-            <Text style={styles.identityText}>Utility Bill Verification</Text>
-            <Text style={styles.identitySubText}>
-              Kindly provide feather with your utility bill carrying your
-              address of not more than 3 months back.
-            </Text>
-          </View>
-
-          <View style={[styles.uploadIdBtn, { marginTop: 42 }]}>
-            <Text style={styles.uploadIdText}>Upload Utility Bill</Text>
-          </View>
-        </View>
       </KeyboardAwareScrollView>
     </ScrollView>
   );
 };
 
 const Editprofile = ({}) => {
-  const singleWidth = () => {
-    let calcWidth = SIZES.width;
-    return calcWidth / 3;
-  };
-
-  const horizontalOffset = useRef(new Animated.Value(0)).current;
-  const scrolling = useRef(new Animated.Value(0)).current;
-  const [snap, setSnap] = useState(0);
-
-  const ref = useRef<ScrollView>(null);
-  const [index, setIndex] = useState(0);
-
-  const activeColor = (activeIndex: number) => {
-    return index === activeIndex ? "#003AD6" : "#000000";
-  };
-
-  // useEffect(() => {
-  //   ref.current.scrollTo({
-  //     x: SIZES.width * index,
-  //     y: 0,
-  //     animated: true,
-  //   });
-  // }, [index]);
-
-  // useEffect(() => {
-  //   console.log(scrolling);
-  // }, [scrolling]);
-
-  // const animateToIndex = (indexPoint: number) => {
-  //   setIndex(indexPoint);
-  //   Animated.spring(horizontalOffset, {
-  //     toValue: singleWidth() * indexPoint,
-  //     useNativeDriver: true,
-  //   }).start();
-  // };
-
   const navigation = useNavigation();
 
-  // return(
-  //   <View style={styles.container}>
-  //     <Customstatusbar />
-  //     <Text>The basic text</Text>
-  //   </View>
-  // )
-  return (
-    <SafeAreaView style={styles.container}>
-      <Customstatusbar />
+  const HeaderRightSide = () => {
+    const userTypeBg = (usertype: string) => {
+      switch (usertype) {
+        case "newbie":
+          return COLORS.green2;
+          break;
+        case "odogwu":
+          return COLORS.blue6;
+          break;
+        case "agent":
+          return "#8456FF";
+          break;
 
-      <View style={styles.mainHeaderContainer}>
-        {/* Icons */}
+        default:
+          return COLORS.green2;
+          break;
+      }
+    };
 
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            width: 25,
-            height: 25,
-            // backgroundColor: 'red',
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 25 / 2,
-          }}
+    return (
+      <View style={styles.headerRightwrapper}>
+        <Memoji1 />
+
+        <View
+          style={[
+            styles.headerRightmemojibg,
+            { backgroundColor: userTypeBg(usertype) },
+          ]}
         >
-          <Backarrow />
-        </TouchableOpacity>
-        <Text style={styles.mainHeaderText}>Edit Profile</Text>
-        <View />
-      </View>
-
-      {/* <View style={{ position: "relative" }}>
-        <View style={styles.subHeaderContainer}>
-          <TouchableOpacity
-            style={{
-              width: singleWidth(),
-              paddingVertical: 24,
-            }}
-            activeOpacity={0.7}
-            onPress={() => animateToIndex(0)}
-          >
-            <Text style={[styles.subheadersText, { color: activeColor(0) }]}>
-              Basic
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{ width: singleWidth(), paddingVertical: 24 }}
-            activeOpacity={0.7}
-            onPress={() => animateToIndex(1)}
-          >
-            <Text style={[styles.subheadersText, { color: activeColor(1) }]}>
-              Personal
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{ width: singleWidth(), paddingVertical: 24 }}
-            activeOpacity={0.7}
-            onPress={() => animateToIndex(2)}
-          >
-            <Text style={[styles.subheadersText, { color: activeColor(2) }]}>
-              Documents
-            </Text>
-          </TouchableOpacity>
+          <Text style={styles.headerRightUsertype}>{usertype}</Text>
         </View>
+      </View>
+    );
+  };
 
-        <Animated.View
-          style={{
-            position: "absolute",
-            width: singleWidth(),
-            height: 1.5,
-            backgroundColor: COLORS.blue6,
-            bottom: 0,
-            left: 0,
-            transform: [{ translateX: horizontalOffset }, { scaleX: 0.8 }],
-          }}
-        />
-      </View> */}
-
-      {/* <Animated.ScrollView
-        ref={ref}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        scrollEventThrottle={16}
-        snapToAlignment="center"
-        
-      > */}
+  return (
+    <Mainwrapper>
+      <Backheader
+        title="Edit Profile"
+        rightComponent={<HeaderRightSide />}
+        bg={COLORS.white3}
+      />
       <Basicsettings />
-      {/* <Personalsettings /> */}
-      {/* <Documentsettings /> */}
-      {/* </Animated.ScrollView> */}
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

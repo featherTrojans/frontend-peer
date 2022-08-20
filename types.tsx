@@ -95,8 +95,13 @@ Addbvn: undefined;
   Electricityamount: undefined;
   Electricitydetails: undefined;
   Electricitytype: undefined;
+  Becomeanagent: undefined;
   Electricitymetertype: undefined;
-
+  Dataprovider: undefined;
+  Airtimeprovider: undefined;
+  Sendcash: undefined;
+  Selectbank: undefined;
+  Dataplan: undefined;
 
   //Deposit
   Deposit: undefined;

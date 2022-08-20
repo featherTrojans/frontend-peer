@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 25,
-    backgroundColor: COLORS.white3,
   },
   logoWrapper: {
     width: SIZES.width - 50,
