@@ -102,7 +102,8 @@ Addbvn: undefined;
   Sendcash: undefined;
   Selectbank: undefined;
   Dataplan: undefined;
-
+  Meetuppoint: undefined;
+  Safetycautions: undefined;
   //Deposit
   Deposit: undefined;
   Depositupdate: undefined;

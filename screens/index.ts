@@ -93,6 +93,9 @@ import Dataplan from "./app/Billpayments/Airtime/Dataplan/Dataplan";
 import Airtimeprovider from "./app/Billpayments/Airtime/Airtimeprovider/Airtimeprovider";
 import Becomeanagent from "./app/Becomeanagent/Becomeanagent";
 import Sendcash from "./app/Transferfunds/Sendcash/Sendcash";
+import Meetuppoint from "./app/Meetuppoint/Meetuppoint";
+import Safetycautions from "./app/Safetycautions/Safetycautions";
+
 //This screen is for testing somne functionalities
  
 import Testings from "./Testings";
@@ -164,6 +167,7 @@ export {
   Becomeanagent,
   Chatsoon,
   Usersearch,
+  Safetycautions,
   // Pendingrequest,
   // Accepetedrequest,
   WalletPin,
@@ -178,6 +182,7 @@ export {
   Airtimeamount,
   Airtimeanddata,
   Airtimedetails,
+  Meetuppoint,
   Airtimepurchasepin,
   Airtimeprovider,
   Electricityamount,

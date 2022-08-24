@@ -15,6 +15,7 @@ import {
   Bottombtn,
   InitialsBg,
   Mainwrapper,
+  Transactionpin,
   Viewbalance,
 } from "../../../components";
 import { styles } from "../Withdraws/Withdraw/Withdraw.styles";
@@ -23,6 +24,7 @@ import Customstatusbar from "../../shared/Customstatusbar";
 import Usericondark from "../../../assets/icons/Usericondark";
 import { Shadow } from "../../../constants/theme";
 // import { SafeAreaView } from "react-native-safe-area-context";
+
 
 
 const {

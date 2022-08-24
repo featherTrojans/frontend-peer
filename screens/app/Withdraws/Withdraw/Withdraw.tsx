@@ -263,7 +263,7 @@ const Withdraw = ({ navigation }) => {
       <View style={withdrawstyles.bottombtnwrap}>
         <Custombutton
           btntext="Withdraw Cash"
-          onpress={() => console.log("hellow from withdraw")}
+          onpress={() => navigation.navigate("Availablelisting")}
         />
       </View>
 

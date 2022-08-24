@@ -138,7 +138,9 @@ import {
   Airtimeprovider,
   Becomeanagent,
   Sendcash,
-  Selectbank
+  Selectbank,
+  Meetuppoint,
+  Safetycautions
 } from "../screens";
 // import { LockScreen } from "../screens";
 
@@ -695,6 +697,10 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Depositinput" component={Depositinput} />
             <AppStack.Screen name="Updatedeposit" component={Updatedeposit} />
             <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
+            <AppStack.Screen name="Meetuppoint" component={Meetuppoint} />
+            <AppStack.Screen name="Safetycautions" component={Safetycautions} />
+
+
             <AppStack.Screen
               name="Accepteddeposit"
               component={Accepteddeposit}

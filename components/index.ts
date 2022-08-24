@@ -21,6 +21,10 @@ import Tableoption from "./Tableoption/Tableoption";
 import Copyaccountinfo from "./Copyaccountinfo/Copyaccountinfo";
 import Upgrademodal from "./Upgrademodal/Upgrademodal";
 import Chooseamountmodal from "./Chooseamountmodal/Chooseamountmodal";
+import Requesterinfo from "./Modals/Requesterinfo";
+import Transactionsummary from "./Modals/Transactionsummary";
+import Transactionpin from "./Modals/Transactionpin";
+
 
 export {
     Input,
@@ -45,6 +49,10 @@ export {
     Horizontaline,
     Copyaccountinfo,
     Upgrademodal,
-    Chooseamountmodal
+    Chooseamountmodal,
+    Requesterinfo,
+    Transactionsummary,
+    Transactionpin
+
 
 }

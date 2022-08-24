@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Animated,
   FlatList,
+  TouchableOpacity
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
 // import { styles } from "./Depositupdate.styles";
@@ -18,11 +19,13 @@ import {
   Horizontaline,
   Loader,
   Mainwrapper,
+  Requesterinfo,
+  Transactionpin,
+  Transactionsummary,
   Viewbalance,
 } from "../../../../components";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
-import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import amountFormatter from "../../../../utils/formatMoney";
 import { AuthContext } from "../../../../context/AuthContext";
@@ -31,7 +34,9 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import { RFValue } from "react-native-responsive-fontsize";
 import { withdrawstyles } from "../../Withdraws/Withdraw/Withdraw.styles";
-// import { SafeAreaView } from "react-native-safe-area-context";
+import useCustomModal from "../../../../utils/useCustomModal";
+
+
 const {
   TransferIcon,
   Location,
@@ -39,6 +44,9 @@ const {
   Trendingupright,
   Viewrequesteye,
   Viewcashrequesticon,
+  Purplebalanceicon,
+  Greenarrowupicon,
+  Depositpinlocationicon,
   Acceptedcheck,
   Cryinganimate,
 } = icons;
@@ -186,7 +194,8 @@ const Depositupdate = ({ navigation, route }) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [coords, setCoords] = useState<any>({});
-
+  const {CustomModal: DepositdetailsModal, openModal: openDepositdetailsModal} = useCustomModal()
+  const {CustomModal, openModal} = useCustomModal()
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
 
@@ -255,9 +264,9 @@ const Depositupdate = ({ navigation, route }) => {
     {
       title: "Pending Requests",
       data: [
-        // { name: "Damilare Seyinde" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Peterson Yeyejare" },
+        { name: "Damilare Seyinde" },
+        { name: "Rasaq Momoh" },
+        { name: "Peterson Yeyejare" },
       ],
     },
     { title: "Accepted Requests", data: [] },
@@ -272,7 +281,16 @@ const Depositupdate = ({ navigation, route }) => {
   }) => {
     const { name } = details;
     return (
-      <View style={withdrawstyles.requesteeprofilewrap}>
+      <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={withdrawstyles.requesteeprofilewrap}>
+
+        <CustomModal>
+          <View>
+            
+          </View>
+            {/* <Transactionpin /> */}
+          {/* <Requesterinfo /> */}
+          {/* <Transactionsummary /> */}
+        </CustomModal>
         <View style={withdrawstyles.requesteeprofilewrap}>
           <View style={withdrawstyles.requesteeinitialsbg}>
             <Text style={withdrawstyles.requesteeinitialtext}>D</Text>
@@ -291,7 +309,7 @@ const Depositupdate = ({ navigation, route }) => {
         </View>
 
         <Text style={withdrawstyles.requestedamount}>N23,000</Text>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -302,6 +320,61 @@ const Depositupdate = ({ navigation, route }) => {
       <View style={{ paddingHorizontal: 15 }}>
         <Viewbalance />
       </View>
+
+
+
+      {/* Deposit details and info modal */}
+      <DepositdetailsModal>
+        <View >
+          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Deposit Details</Text>
+
+        <View style={{paddingHorizontal: 45, justifyContent: "center", alignItems: 'center', marginBottom: 50, marginTop: 20}}>
+          <View style={{width: 48, height: 48, backgroundColor: COLORS.grey1, borderRadius: 48/2, justifyContent: "center", alignItems: "center"}}>
+          {/* icon */}
+            <Depositpinlocationicon />
+          </View>
+          
+          <Text style={{textAlign: "center", marginVertical: 22, ...fontsize.smaller, ...FONTS.medium, lineHeight: 22, color: COLORS.blue9}}>Last known location</Text>
+          <Text style={{textAlign: 'center', ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Destiny Restaurant, Makoko, Along Justice Jacobs Rd, Lekki, Lagos</Text>
+        </View>
+
+        <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"}}>
+          <View style={{flexDirection: "row", alignItems: "center"}}>
+            {/* iocns */}
+            <View style={{width: 26,  height: 26, borderRadius: 26/2, backgroundColor: COLORS.green3, justifyContent: "center", alignItems: "center"}}>
+              <Greenarrowupicon />
+            </View>
+            <Text style={{marginLeft: 12, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>My Earnings last 24hrs</Text>
+          </View>
+          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>+ N150,700.50</Text>
+        </View>
+        <Horizontaline marginV={20}/>
+
+        <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"}}>
+          <View style={{flexDirection: "row", alignItems: "center"}}>
+            {/* iocns */}
+            <View style={{width: 26,  height: 26, borderRadius: 26/2, backgroundColor: COLORS.purple3, justifyContent: "center", alignItems: "center"}}>
+              <Purplebalanceicon />
+            </View>
+            <Text style={{marginLeft: 12, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Deposit Balance</Text>
+          </View>
+          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>N12,560.00</Text>
+        </View>
+        <Horizontaline marginV={20}/>
+
+
+
+
+        <Text style={{textAlign: "center", color: COLORS.red1, ...fontsize.smaller, ...FONTS.medium, marginBottom: 25}}>Expires 21 Sept. 2022, 18:35pm</Text>
+
+        <Custombutton btntext="Update Deposit" bg={COLORS.blue9} onpress={() => console.log('Char')}/>
+
+
+
+
+
+        </View>
+      </DepositdetailsModal>
 
       <FlatList
         horizontal
@@ -384,12 +457,30 @@ const Depositupdate = ({ navigation, route }) => {
 
       {/* Bottom Button */}
 
-      <View style={withdrawstyles.bottombtnwrap}>
+         
+
+          {datas[0].data.length > 0?
+            <View style={withdrawstyles.bottombtnwrap}>
+            <Custombutton
+            btntext="View Deposit Details"
+            bg={COLORS.blue9}
+            // onpress={() => navigation.navigate("Cancelrequest")}
+              onpress={openDepositdetailsModal}
+
+            />
+          </View>
+          :
+          <View style={withdrawstyles.bottombtnwrap}>
         <Custombutton
-          btntext="View Deposit Details"
-          onpress={() => console.log("hellow from deposit")}
+              btntext="Create Deposit"
+
+          onpress={() => navigation.navigate("Meetuppoint")}
         />
       </View>
+
+          
+          }
+      
     </Mainwrapper>
   );
 };

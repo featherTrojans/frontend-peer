@@ -154,6 +154,11 @@ import Briefcaseicon from "../assets/icons/Briefcaseicon";
 import Gloicon from "../assets/icons/Gloicon";
 import Mtnlogo from "../assets/icons/Mtnlogo";
 import Purplehouseicon from "../assets/icons/Purplehouseicon";
+import Depositpinlocationicon from "../assets/icons/Depositpinlocationicon";
+import Purplebalanceicon from "../assets/icons/Purplebalanceicon";
+import Greenarrowupicon from "../assets/icons/Greenarrowupicon";
+import Purplechaticon from "../assets/icons/Purplechaticon";
+import Greenphoneicon from "../assets/icons/Greenphoneicon";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -203,6 +208,7 @@ export default {
   Ikejaelectricityicon,
   Bell,
   Profilepics,
+  Purplechaticon,
   Arrowright,
   Eyecrossed,
   Ashicon,
@@ -221,6 +227,9 @@ export default {
   Forwardarrow,
   Sendingandreceivearrows,
   Goldenstaricon,
+  Depositpinlocationicon,
+  Purplebalanceicon,
+  Greenarrowupicon,
   Acceptedcheck,
   Searcontacticon,
   Patternbg,
@@ -238,6 +247,7 @@ export default {
   Renegotiate,
   Backarrowgrey,
   Trustedbadge,
+  Greenphoneicon,
   Directionarrow,
   Successtranfericon,
   Ratingsstar,

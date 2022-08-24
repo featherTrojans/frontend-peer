@@ -36,7 +36,7 @@ import useContact from "../../../../utils/customContact";
 import { Backheader, Mainwrapper } from "../../../../components";
 
 
-const { Chatsearchicon, Cryinganimate } = icons;
+const { Chatsearchicon, Cryinganimate, Emptynotification } = icons;
 
 const Chatshome = ({ navigation }) => {
   const { authdata } = useContext(AuthContext);
@@ -195,12 +195,9 @@ const Chatshome = ({ navigation }) => {
             </View>
             {/* This is for when the recent chat is empty */}
             {!loading && chats.length === 0 && chattwos.length === 0 && (
-              <View style={{ justifyContent: "center", alignItems: "center" }}>
-                <LottieView
-                  source={Cryinganimate}
-                  style={{ width: RFValue(190), height: RFValue(190) }}
-                />
-                <Text>Oops, you have no recent conversations here</Text>
+              <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+                <Emptynotification />
+                <Text style={{...fontsize.smaller, ...FONTS.regular, marginTop: 30, paddingHorizontal: 35, textAlign: "center"}}>Oops, you have no recent conversations here</Text>
               </View>
             )}
             {loading ? (
