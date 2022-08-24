@@ -9,6 +9,7 @@ import Ogunbadge from "../assets/images/ogun.png";
 import Osunbadge from "../assets/images/osun.png"
 import Oyobadge from "../assets/images/oyo.png"
 import chatbg from "../assets/images/chatbg.png"
+import Waterwave from "../assets/images/waterwave.png"
 
 
 export default {
@@ -20,5 +21,6 @@ export default {
     Ogunbadge,
     Osunbadge,
     Oyobadge,
-    chatbg
+    chatbg,
+    Waterwave 
 }

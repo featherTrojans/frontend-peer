@@ -17,6 +17,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   Platform,
+  ImageBackground,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Device from "expo-device";
@@ -37,7 +38,7 @@ import {
   Transactionhistory,
   Viewbalance,
 } from "../../../components";
-import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
@@ -54,7 +55,6 @@ import { getPeriod } from "../../../utils/getDayPeriod";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import useCustomModal from "../../../utils/useCustomModal";
 import Alltransfermodal from "../../../components/Alltransfermodal/Alltransfermodal";
-
 
 const {
   Profilepics,
@@ -86,15 +86,17 @@ const {
 
   Cryinganimate,
 } = icons;
+const { Waterwave } = images;
 
-
-const Amountbtn = ({amountText}) => {
+const Amountbtn = ({ amountText }) => {
   return (
     <View>
-      <Text style={{...fontsize.smaller, ...FONTS.regular}}>N{amountText}</Text>
+      <Text style={{ ...fontsize.smaller, ...FONTS.regular }}>
+        N{amountText}
+      </Text>
     </View>
-  )
-}
+  );
+};
 
 const Home = ({ navigation }: { navigation: any }) => {
   const { setAuthData, authdata, messageToken, userColor, userDefaultImage } =
@@ -111,11 +113,26 @@ const Home = ({ navigation }: { navigation: any }) => {
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-  const { CustomModal: TransferModal, openModal: openTransferModal, closeModal: closeTransferModal } =
-    useCustomModal();
-  const {CustomModal, openModal: openAmountModal, closeModal: closeAmountModal} = useCustomModal()
-  const {CustomModal: TransfercashInfoModal, openModal: openTransfercashInfoModal, closeModal: closeTransfercashinfoModal } = useCustomModal()
-  const {CustomModal: AmountToBankModal, openModal: openBankAmountModal, closeModal: closeBankAmountModal} = useCustomModal()
+  const {
+    CustomModal: TransferModal,
+    openModal: openTransferModal,
+    closeModal: closeTransferModal,
+  } = useCustomModal();
+  const {
+    CustomModal,
+    openModal: openAmountModal,
+    closeModal: closeAmountModal,
+  } = useCustomModal();
+  const {
+    CustomModal: TransfercashInfoModal,
+    openModal: openTransfercashInfoModal,
+    closeModal: closeTransfercashinfoModal,
+  } = useCustomModal();
+  const {
+    CustomModal: AmountToBankModal,
+    openModal: openBankAmountModal,
+    closeModal: closeBankAmountModal,
+  } = useCustomModal();
 
   const walletOptions = [
     {
@@ -208,27 +225,24 @@ const Home = ({ navigation }: { navigation: any }) => {
     );
   };
 
-
-
-
   const transfercashoptions = [
     {
       icon: <Bluewalleticon />,
       title: "To Feather Wallet",
       info: "Send cash to any feather user at N0.00",
       action: () => {
-        closeTransferModal()
-        openAmountModal()
-      }
+        closeTransferModal();
+        openAmountModal();
+      },
     },
     {
       icon: <Bluebankicon />,
       title: "To Bank Account",
       info: "Transfer to any bank in Nigeria at N10.00",
       action: () => {
-        closeTransferModal()
-        openBankAmountModal()
-      }
+        closeTransferModal();
+        openBankAmountModal();
+      },
     },
   ];
 
@@ -236,63 +250,127 @@ const Home = ({ navigation }: { navigation: any }) => {
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <Customstatusbar />
 
-
-
       {/* Transfer cash inputs modal */}
-    <TransfercashInfoModal>
-      <View>
-        <Text style={{marginBottom: 10, ...fontsize.smaller, ...FONTS.medium}}>Transfer Cash</Text>
-        <View style={{justifyContent: "flex-end", flexDirection: "row", alignItems: "center"}}>
-            <Text style={{...fontsize.xsmallest, ...FONTS.medium, color: COLORS.grey16}}>Charges</Text>
-            <View style={{paddingVertical: 8,paddingHorizontal: 10, backgroundColor: COLORS.trasparentBlue2, marginLeft: 10, borderRadius: 18}}>
-              <Text style={{...fontsize.xsmallest, ...FONTS.bold, color: COLORS.blue6}}>+ N100.00</Text>
+      <TransfercashInfoModal>
+        <View>
+          <Text
+            style={{ marginBottom: 10, ...fontsize.smaller, ...FONTS.medium }}
+          >
+            Transfer Cash
+          </Text>
+          <View
+            style={{
+              justifyContent: "flex-end",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                ...fontsize.xsmallest,
+                ...FONTS.medium,
+                color: COLORS.grey16,
+              }}
+            >
+              Charges
+            </Text>
+            <View
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 10,
+                backgroundColor: COLORS.trasparentBlue2,
+                marginLeft: 10,
+                borderRadius: 18,
+              }}
+            >
+              <Text
+                style={{
+                  ...fontsize.xsmallest,
+                  ...FONTS.bold,
+                  color: COLORS.blue6,
+                }}
+              >
+                + N100.00
+              </Text>
             </View>
           </View>
 
-        <View style={{marginTop: 25, marginBottom: 35}}>
-        <Input icon={<Ashicon />} placeholder="Enter amount" name="plan" inputbg={COLORS.inputBgColor}/>
-            <Input icon={<Aticon />} placeholder="Enter username of feather user" name="network" inputbg={COLORS.inputBgColor}/>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => {
-          closeTransfercashinfoModal()
-          navigation.navigate('Sendcash')
-        } } style={{flexDirection: "row", alignItems: "center", backgroundColor: COLORS.trasparentPurple, alignSelf: "flex-start", paddingVertical: 9, paddingHorizontal: 14, borderRadius: 18}}>
-                <Searcontacticon />
-                <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple2, marginLeft:8}}>Search Contacts</Text>
+          <View style={{ marginTop: 25, marginBottom: 35 }}>
+            <Input
+              icon={<Ashicon />}
+              placeholder="Enter amount"
+              name="plan"
+              inputbg={COLORS.inputBgColor}
+            />
+            <Input
+              icon={<Aticon />}
+              placeholder="Enter username of feather user"
+              name="network"
+              inputbg={COLORS.inputBgColor}
+            />
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                closeTransfercashinfoModal();
+                navigation.navigate("Sendcash");
+              }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                backgroundColor: COLORS.trasparentPurple,
+                alignSelf: "flex-start",
+                paddingVertical: 9,
+                paddingHorizontal: 14,
+                borderRadius: 18,
+              }}
+            >
+              <Searcontacticon />
+              <Text
+                style={{
+                  ...fontsize.smallest,
+                  ...FONTS.regular,
+                  color: COLORS.purple2,
+                  marginLeft: 8,
+                }}
+              >
+                Search Contacts
+              </Text>
             </TouchableOpacity>
-            </View>
-        <Custombutton btntext="Yeah, Continue" onpress={() => {
-          closeTransfercashinfoModal()
-          navigation.navigate('Sendcash')
-        } }/>
-      
-      </View>
-    </TransfercashInfoModal>
+          </View>
+          <Custombutton
+            btntext="Yeah, Continue"
+            onpress={() => {
+              closeTransfercashinfoModal();
+              navigation.navigate("Sendcash");
+            }}
+          />
+        </View>
+      </TransfercashInfoModal>
 
+      {/* Chooose amount to send to bank amount  */}
+      <AmountToBankModal>
+        <Chooseamountmodal
+          headerText="How much do you want to transfer?"
+          onpress={() => {
+            closeBankAmountModal();
+            navigation.navigate("Selectbank");
+          }}
+        />
+      </AmountToBankModal>
 
-
-        {/* Chooose amount to send to bank amount  */}
-        <AmountToBankModal>
-            <Chooseamountmodal headerText="How much do you want to transfer?" onpress={() => {
-              closeBankAmountModal()
-              navigation.navigate("Selectbank")
-            }}/>
-        </AmountToBankModal>
-
-
-
-
-    {/* Choose amount to send feather modal */}
+      {/* Choose amount to send feather modal */}
       <CustomModal>
-        <Chooseamountmodal headerText="How much do you want to transfer?" onpress={() => {
-          closeAmountModal()
-          openTransfercashInfoModal()
-        }} />
+        <Chooseamountmodal
+          headerText="How much do you want to transfer?"
+          onpress={() => {
+            closeAmountModal();
+            openTransfercashInfoModal();
+          }}
+        />
       </CustomModal>
 
-
-    {/* Transfer Modal */}
+      {/* Transfer Modal */}
       <TransferModal>
-  
         <View>
           <View style={styles.headerWrapper}>
             <Text style={styles.addcashheadertext}>Transfer Cash</Text>
@@ -449,13 +527,21 @@ const Home = ({ navigation }: { navigation: any }) => {
           showsHorizontalScrollIndicator={false}
           bounces={false}
         >
+
+
           <View
             style={[
               styles.informationblockwrap,
-              { backgroundColor: "#8456FF" },
+              { backgroundColor: "#8456FF", position: 'relative', overflow: "hidden", flex: 1 },
+
             ]}
           >
-            <View style={styles.informationiconswrap}>
+    
+            <View style={[StyleSheet.absoluteFill, {left: -200}]}>
+               <Image source={Waterwave}  style={{width: '200%', height: '120%',}}/>
+            </View>  
+
+             <View style={styles.informationiconswrap}>
               <Goldenstaricon />
               <View style={{ marginRight: 3.4 }} />
               <Goldenstaricon />
@@ -466,6 +552,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <Text style={styles.informationblocktext}>
               Earn N10 each time you rate a successful withdraw transaction{" "}
             </Text>
+
           </View>
 
           <View

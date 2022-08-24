@@ -20,6 +20,7 @@ import { assetsDB, bankLogo } from "../../../../assetdatas";
 import {
   Backheader,
   Bottombtn,
+  Horizontaline,
   Iconwithdatas,
   InitialsBg,
   Mainwrapper,
@@ -32,6 +33,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useCustomModal from "../../../../utils/useCustomModal";
 
 // Sendingandreceive
 
@@ -41,7 +43,7 @@ const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions } =
 const Transactiondetails = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
   const [copied, setCopied] = useState(false);
-
+  const {CustomModal: TransactiondetailsModal, openModal: openTransactiondetailsModal} = useCustomModal()
   const copyColor = copied ? COLORS.blue6 : COLORS.grey2;
   const { data } = route.params;
 
@@ -468,13 +470,21 @@ const Transactiondetails = ({ navigation, route }) => {
     navigation.navigate("Transactiondispute");
   };
 
+  const RightComponent = ({onpress}) => {
+    return (
+      <TouchableOpacity onPress={onpress} style={{width: 15, height: "100%", backgroundColor: "red"}}>
+
+      </TouchableOpacity>
+    )
+  }
+
+
   // const {price } = route?.params
   return (
     <Mainwrapper >
-      <Customstatusbar />
-      <Globalmodal
-        showState={showModal}
-        onBgPress={() => setShowModal(!showModal)}
+      <TransactiondetailsModal
+        // showState={showModal}
+        // onBgPress={() => setShowModal(!showModal)}
       >
         <>
           <Iconwithdatas
@@ -499,9 +509,9 @@ const Transactiondetails = ({ navigation, route }) => {
             onpress={() => reportTransaction()}
           />
         </>
-      </Globalmodal>
+      </TransactiondetailsModal>
 
-      <Backheader title="Transaction Details" />
+      <Backheader title="Transaction Details" rightComponent={<RightComponent onpress={openTransactiondetailsModal}/>}/>
 
       <ScrollView
         style={{ flex: 1 }}
@@ -525,7 +535,52 @@ const Transactiondetails = ({ navigation, route }) => {
         </View>
 
         {/* The details container */}
-        <View style={styles.detailsContainer}>
+        <View style={[styles.detailsContainer,]}>
+
+          <Text style={{textAlign: "center", marginTop: 34, marginBottom: 40,paddingHorizontal: 30,  ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>This is a transaction report between {typeOfName(title)?.receiverName} and {typeOfName(title)?.senderName}</Text>
+
+
+        <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{...fontsize.bsmall, ...FONTS.regular, marginBottom: 16}}>Transaction Ref.</Text>
+        <Text style={{...fontsize.bmedium, ...FONTS.bold, color: COLORS.blue7, textTransform: "uppercase"}}>{transactionRef} </Text>
+        </View>
+
+          <View style={{marginTop: 62, marginBottom: 52}}>
+        <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
+          <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Receiver</Text>
+          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9, textTransform: "capitalize"}}>{typeOfName(title)?.receiverName}</Text>
+        </View>
+
+        <Horizontaline marginV={22}/>
+
+
+        <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
+          <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Amount</Text>
+          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9}}>NGN {amountFormatter(amount)}</Text>
+        </View>
+
+        <Horizontaline marginV={22}/>
+
+
+        <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
+          <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Transaction Charge</Text>
+          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9}}>+ NGN 26.50</Text>
+        </View>
+
+        <Horizontaline marginV={22}/>
+
+        <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
+          <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Total</Text>
+          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue6}}>NGN {amountFormatter(amount)} </Text>
+        </View>
+        </View>
+
+
+          <Text style={{textAlign: "center"}}>
+          If you have an issue with this transaction, 
+kindly send a mail with the transaction ref 
+to  <Text style={{color: COLORS.blue6}}>disputes@feather.africa</Text> 
+          </Text>
           {/* <View style={styles.eachDetailContainer}>
             <Text style={styles.eachDetailTitle}>Date & Time</Text>
             <Text style={{...fontsize.small, ...FONTS.regular}}>{formatDateTime}</Text>
