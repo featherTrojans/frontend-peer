@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { Backheader, Horizontaline, Mainwrapper } from '../../../../../components'
 import { electrictystyles } from '../../Electricity/Electricitytype/Electricitytype.styles'
@@ -14,9 +14,8 @@ const Dataprovider = ({navigation}) => {
     const providertypes = [
         {
           title: "MTN Nigeria",
-          logo: <Mtnlogo />,
+          logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1",
           subroute: {
-            logotype: "mtn",
             suboptions: [
                 {
                   type: " 500MB Data Package - N350",
@@ -71,9 +70,8 @@ const Dataprovider = ({navigation}) => {
         },
         {
           title: "Globacom",
-          logo: <Gloicon />,
+          logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGlobacom%20Limited%20Logo%20(2).png?alt=media&token=a1bf3984-a862-451e-a8b5-6f3b96b1fea4",
           subroute: {
-            logotype: "glo",
             suboptions: [
               {
                 type: " 500MB Data Package - N350",
@@ -128,9 +126,8 @@ const Dataprovider = ({navigation}) => {
         },
         {
           title: "9 Mobile",
-          logo: <Ikejaelectricityicon />,
+          logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2F9mobile%20Logo%20(1).png?alt=media&token=011b2934-d9b5-449d-89c5-66eb46fff497",
           subroute: {
-            logotype: "ikeja",
             suboptions: [
                 {
                   type: " 500MB Data Package - N350",
@@ -185,9 +182,8 @@ const Dataprovider = ({navigation}) => {
         },
         {
             title: "Airtel Nigeria",
-            logo: <Ikejaelectricityicon />,
+            logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAirtel%20Nigeria%20Logo%20(1).png?alt=media&token=5dba1e6a-3cce-43fa-972f-df17926db7ff",
             subroute: {
-              logotype: "ikeja",
               suboptions: [
                 {
                   type: " 500MB Data Package - N350",
@@ -263,11 +259,12 @@ const Dataprovider = ({navigation}) => {
                   onPress={() =>
                     navigation.navigate("Dataplan", {
                       subdata: subroute,
+                      image: logo
                     })
                   }
                 >
                   <View style={electrictystyles.logoandtitlewrap}>
-                    {logo}
+                    <Image source={{uri: logo}} style={{width: 34, height: 34, borderRadius: 34/2}}/>
                     <Text style={electrictystyles.optiontitle}>{title}</Text>
                   </View>
                   <Forwardarrow />

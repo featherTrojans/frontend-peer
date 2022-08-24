@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import {
   Backheader,
@@ -21,27 +21,9 @@ const {
   Searcontacticon,
 } = icons;
 
-const Eachoption = ({ logotype, type }) => {
+const Eachoption = ({ image, type }) => {
   const { CustomModal, openModal } = useCustomModal();
-  const showLogo = (logotype: string) => {
-    switch (logotype) {
-      case "mtn":
-        return <Mtnlogo />;
-        break;
-      case "glo":
-        return <Gloicon />;
-        break;
-      case "9mobile":
-        return <Ikejaelectricityicon />;
-        break;
-      case "airtel":
-        return <Ikejaelectricityicon />;
-        break;
 
-      default:
-        break;
-    }
-  };
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -66,7 +48,13 @@ const Eachoption = ({ logotype, type }) => {
             >
               Airtime Purchase
             </Text>
-            {showLogo(logotype)}
+            {/* {showLogo(logotype)} */}
+            <Image
+        style={{width: 36, height: 36, borderRadius: 36/2}}
+        source={{
+          uri: image,
+        }}
+      />
           </View>
 
           <View style={{ marginTop: 25, marginBottom: 35 }}>
@@ -121,8 +109,13 @@ const Eachoption = ({ logotype, type }) => {
       </CustomModal>
 
       <View style={electrictystyles.logoandtitlewrap}>
-        {/* {logo} */}
-        {showLogo(logotype)}
+ 
+        <Image
+        style={{width: 34, height: 34, borderRadius: 34/2}}
+        source={{
+          uri: image,
+        }}
+      />
         <Text style={electrictystyles.optiontitle}>{type}</Text>
       </View>
       <Forwardarrow />
@@ -134,19 +127,19 @@ const Airtimeprovider = ({ navigation }) => {
   const providertypes = [
     {
       title: "MTN Nigeria",
-      logotype: "mtn",
+      logotype: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1",
     },
     {
       title: "Globacom",
-      logotype: "glo",
+      logotype: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGlobacom%20Limited%20Logo%20(2).png?alt=media&token=a1bf3984-a862-451e-a8b5-6f3b96b1fea4",
     },
     {
       title: "9 Mobile",
-      logotype: "9mobile",
+      logotype: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2F9mobile%20Logo%20(1).png?alt=media&token=011b2934-d9b5-449d-89c5-66eb46fff497",
     },
     {
       title: "Airtel Nigeria",
-      logotype: "airtel",
+      logotype: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAirtel%20Nigeria%20Logo%20(1).png?alt=media&token=5dba1e6a-3cce-43fa-972f-df17926db7ff",
     },
   ];
 
@@ -164,7 +157,7 @@ const Airtimeprovider = ({ navigation }) => {
             const isLast = providertypes.length === index + 1;
             return (
               <View key={index}>
-                <Eachoption logotype={logotype} type={title} />
+                <Eachoption image={logotype} type={title} />
                 {!isLast && <Horizontaline marginV={0} />}
               </View>
             );
