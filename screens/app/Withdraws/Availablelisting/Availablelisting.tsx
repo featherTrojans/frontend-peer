@@ -6,15 +6,25 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
+  Animated,
+  Easing,
+  FlatList,
 } from "react-native";
 import BottomSheet, {
   BottomSheetScrollView,
   BottomSheetFlatList,
 } from "@gorhom/bottom-sheet";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import LottieView from "lottie-react-native";
 
-import { images, icons, COLORS, fontsize, FONTS, SIZES } from "../../../../constants";
+import {
+  images,
+  icons,
+  COLORS,
+  fontsize,
+  FONTS,
+  SIZES,
+} from "../../../../constants";
 import { styles } from "./Availablelisting.styles";
 import Map from "../../../shared/map/Map";
 import * as Location from "expo-Obj";
@@ -33,6 +43,9 @@ const {
   Forwardarrow,
   Onmapicon,
   Forwardarrowblue,
+  Listingsdrop,
+  Emptynotification,
+  Emptyicon,
   Loadinglocationanimate,
   Cryinganimate,
   Comingsoonagentanimate,
@@ -41,26 +54,85 @@ const { Mapimage } = images;
 
 const listingtypes = ["peers", "agents"];
 
+const Emptyrequest = () => {
+  return (
+    <View>
+      <Text>Padi, you don’t have any pending withdrawal requests</Text>
+    </View>
+  );
+};
+
 const Availablelisting = ({ navigation, route }: any) => {
   // const { amount } = route.params;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
-  const [agents, setAgents] = useState([1,2,2.4, 5,6 ,4 ,3,2 ,4, 3,4,2,2,2,3,4,2,4,3,2]);
+  const [agents, setAgents] = useState([
+    1, 2, 2.4, 5, 6, 4, 3, 2, 4, 3, 4, 2, 2, 2, 3, 4, 2, 4, 3, 2,
+  ]);
   const [charge, setCharge] = useState(0);
   const [activeType, setActiveType] = useState("peers");
   const [loading, setLoading] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
+  const animatedHeight = useRef(new Animated.Value(0)).current;
+  const [isShow, setIsShow] = useState(false);
+  const scrollX = useRef<any>(new Animated.Value(0)).current;
+  const flatListRef = useRef<FlatList>(null);
+  const dotLength = Animated.divide(scrollX, SIZES.width);
+  const [viewIndex, setViewIndex] = useState<number>(0);
+  const [info, setInfo] = useState("More")
+
+  // i removed changed from the params passed to this useRef below
+  const onViewChangeRef = useRef<
+    ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
+  >(({ viewableItems, changed }) => {
+    setViewIndex(viewableItems[0]?.index);
+  });
+
+  // This function is to toggle the listings height
+  const toggleHeight = () => {
+    if (isShow == true) {
+      Animated.timing(animatedHeight, {
+        toValue: 1,
+        duration: 200,
+        easing: Easing.linear,
+        useNativeDriver: false, // <-- neccessary
+      }).start(() => {
+        setIsShow(false);
+        setInfo("Less")
+      });
+    } else {
+      Animated.timing(animatedHeight, {
+        toValue: 0,
+        duration: 200,
+        easing: Easing.linear,
+        useNativeDriver: false, // <-- neccessary
+      }).start(() => {
+        setIsShow(true);
+        setInfo("More")
+      });
+    }
+  };
+
+  const newHeight = animatedHeight.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["50%", "100%"], // Variness in height
+  });
+
+  const rotateX = animatedHeight.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["180deg", "0deg"], // <-- value that larger than your content's height
+  });
 
   useEffect(() => {
     getLocation();
   }, []);
 
   const getLocation = async () => {
-    setDestinationCoords({})
+    setDestinationCoords({});
     try {
       setLocationLoading(true);
       const { coordinates, address, locationObj } = await getCurrentLocation();
-      if(!doesIncludeActiveStates(locationObj)){
-        navigation.replace("Updatedeposit",{from:"withdrawal"})
+      if (!doesIncludeActiveStates(locationObj)) {
+        navigation.replace("Updatedeposit", { from: "withdrawal" });
       }
       setCoords({ ...coordinates, locationText: address });
       // i commnet this line out cause i want to test
@@ -70,6 +142,32 @@ const Availablelisting = ({ navigation, route }: any) => {
       setLocationLoading(false);
     }
   };
+
+  const datas = [
+    {
+      title: "Peers",
+      data: [
+        // { name: "Damilare Seyinde" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Peterson Yeyejare" },
+      ],
+    },
+    {
+      title: "Agents",
+      data: [
+        
+      ],
+    },
+  ];
 
   //This fucntion is to get the agents datas
   // const getAllAgents = async (address: string) => {
@@ -95,6 +193,7 @@ const Availablelisting = ({ navigation, route }: any) => {
       setActiveType("peers");
     }
   };
+
 
   ///This is for the single user component
   const Singleuser = ({ profile }: any) => {
@@ -124,27 +223,11 @@ const Availablelisting = ({ navigation, route }: any) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white, marginBottom: getBottomSpace()+20 }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: COLORS.white, marginBottom: 20 }}
+    >
       <Customstatusbar />
       <Map />
-
-
-      {/* Back Arrow */}
-      {/* <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => navigation.goBack()}
-        style={{
-          width: 25,
-          height: 25,
-          borderRadius: 5,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: COLORS.blue6,
-          marginLeft: 15,
-        }}
-      >
-        <Backarrow />
-      </TouchableOpacity> */}
 
       <Backheader title="Withdraw" />
 
@@ -188,63 +271,153 @@ const Availablelisting = ({ navigation, route }: any) => {
         </View>
       ) : (
         <>
-        {/* activeType == "peers"  */}
 
-        
-          {true ? (
-                <BottomSheet
-                index={0}
-                snapPoints={["35%", "85%"]}
-                style={{ paddingHorizontal: 15, marginHorizontal: 15, }}
-                // enablePanDownToClose={true}
-              >
-                {agents.length > 0 ? (
-                  <>
-                  <Text>The User list</Text>
-                    <BottomSheetFlatList
-                      showsVerticalScrollIndicator={false}
-                      data={agents}
-                      renderItem={({ item }) => <Singleuser profile={item} />}
-                      keyExtractor={(item) => item.reference}
-                    />
-                  </>
-                ) : (
-                  <View
-                    style={{ justifyContent: "center", alignItems: "center" }}
-                  >
-                    <LottieView
-                      source={Cryinganimate}
-                      autoPlay
-                      loop
-                      style={{ width: 145, height: 145 }}
-                    />
-  
-                    <Text
-                      style={{
-                        marginHorizontal: 52,
-                        textAlign: "center",
-                        ...fontsize.small,
-                        ...FONTS.regular,
-                        lineHeight: 22,
-                        color: COLORS.grey10,
-                      }}
-                    >
-                      Sorry we couldn’t find anyone to fulfil your request, kindly
-                      request a lower amount or try again later.
-                    </Text>
-                  </View>
-                )}
-              </BottomSheet>
-          ) : (
-            <BottomSheet
-              index={0}
-              snapPoints={["35%", "85%"]}
-              style={{ paddingHorizontal: 15, marginHorizontal: 15 }}
-              // enablePanDownToClose={true}
+          <View style={{ flex: 1, justifyContent: "flex-end" }}>
+            <Animated.View
+              style={{
+                height: newHeight,
+                backgroundColor: COLORS.white,
+                marginHorizontal: 15,
+                borderRadius: 15,
+                padding: 15,
+              }}
             >
-              <Text>The Agent list</Text>
-            </BottomSheet>
-          )} 
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 25,
+                  alignItems: 'center'
+                }}
+              >
+                <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>{viewIndex === 0 ? "Peers" : "Agents"}</Text>
+                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center',  padding: 4}} onPress={toggleHeight}>
+                  <Text style={{marginRight: 8, ...fontsize.smaller, ...FONTS.medium, color: COLORS.purple4}}>View {info}</Text>
+                  <Animated.View
+                       style={[
+                        {
+                         
+                          transform: [{ rotateX }],
+                        },
+                      ]}
+                  >
+                    <Listingsdrop />
+                  </Animated.View>
+                </TouchableOpacity>
+              </View>
+
+              <FlatList
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                snapToAlignment="center"
+                pagingEnabled
+                bounces={false}
+                data={datas}
+                nestedScrollEnabled
+                renderItem={({ item, index }) => {
+                  const isLast = datas.length === index + 1;
+                  const { title, data } = item;
+                  return (
+                    <ScrollView
+                      nestedScrollEnabled
+                      showsVerticalScrollIndicator={false}
+                    >
+                      {data.length > 0 ? (
+                        data.map((info, index) => {
+                          const isLastItem = data.length === index + 1;
+                          return (
+                            <View
+                              key={index}
+                              style={{
+                                backgroundColor: "blue",
+                                flex: 1,
+                                height: 100,
+                                width: SIZES.width - 65,
+                                marginRight: 5,
+                                marginBottom: 10,
+                              }}
+                            />
+                          );
+                        })
+                      ) : (
+                        <View
+                          style={{
+                            // backgroundColor: "blue",
+                            flex: 1,
+                            height: 200,
+                            width: SIZES.width - 60,
+                            marginBottom: 10,
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Emptyicon />
+                          <Text style={{marginTop: 20, paddingHorizontal: 40, textAlign: 'center', lineHeight: 20, ...fontsize.smallest, ...FONTS.regular}}>Padi, you don’t have any accepted withdrawal requests.</Text>
+                        </View>
+                      )}
+                    </ScrollView>
+                  );
+                }}
+                onViewableItemsChanged={onViewChangeRef.current}
+                onScroll={Animated.event(
+                  [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                  { useNativeDriver: false }
+                )}
+                keyExtractor={(item) => item.title}
+              />
+
+              {/* Dots for scroll indicators */}
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  paddingTop: 10,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: 38,
+
+                  }}
+                >
+                  {Array(2)
+                    .fill(1)
+                    .map((item, index) => {
+                      const dotPosition = Animated.divide(
+                        scrollX,
+                        SIZES.width - 60
+                      );
+
+                      const dotColor = dotPosition.interpolate({
+                        inputRange: [index - 1, index, index + 1],
+                        outputRange: [COLORS.grey3, COLORS.black, COLORS.grey3],
+                        extrapolate: "clamp",
+                      });
+                      const dotWidth = dotPosition.interpolate({
+                        inputRange: [index - 1, index, index + 1],
+                        outputRange: [8, 20, 8],
+                        extrapolate: "clamp",
+                      });
+                      return (
+                        <Animated.View
+                          key={index}
+                          style={[
+                            {
+                              height: 8,
+                              borderRadius: 8 / 2,
+                              backgroundColor: dotColor,
+                              width: dotWidth,
+                            },
+                          ]}
+                        />
+                      );
+                    })}
+                </View>
+              </View>
+            </Animated.View>
+          </View>
         </>
       )}
     </SafeAreaView>

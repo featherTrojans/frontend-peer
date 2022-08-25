@@ -12,6 +12,7 @@ import At from "../assets/icons/At";
 import Smile from "../assets/icons/Smile";
 import Tabchats from "../assets/icons/Tabchats";
 import TabHome from "../assets/icons/TabHome";
+import Listingsdrop from "../assets/icons/Listingsdrop";
 import Tabtransactions from "../assets/icons/Tabtransactions";
 import Tabhistory from "../assets/icons/Tabhistory";
 import Tabsettings from "../assets/icons/Tabsettings";
@@ -220,6 +221,7 @@ export default {
   Cryingicon,
   Utilitylarge,
   Bluebankicon,
+  Listingsdrop,
   Bluewalleticon,
   Arrowin,
   Arrowout,

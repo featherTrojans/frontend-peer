@@ -1,7 +1,8 @@
 import React, {useRef, useEffect, useState} from "react";
-// import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications'
+import Toast from "react-native-toast-message";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { AuthProvider } from './context/AuthContext';
@@ -14,6 +15,52 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 
 const { Cancelicon } = icons;
+
+let show = false;
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+
+
+  errorToast: ({ text1, props }: { text1: string; props: any }) => (
+    <View
+      style={{
+        // height: 60,
+        width: "100%",
+        backgroundColor: "#E00000",
+        paddingHorizontal: 25,
+        minHeight: 66,
+        // borderRadius: 4,
+        // borderColor: "#ff5757",
+        // borderWidth: 1,
+        // paddingVertical: 20
+      }}
+    >
+      <TouchableOpacity 
+      style={{backgroundColor: 'blue', padding: 8}}
+      
+      >
+        <Text>X</Text>
+        </TouchableOpacity>
+      {props.show && <StatusBar style="light" backgroundColor="red"/>}
+      <Text >{props.message}</Text>
+    </View>
+  ),
+  /*
+    Or create a completely new type - `tomatoToast`,
+    building the layout from scratch.
+
+    I can consume any custom `props` I want.
+    They will be passed when calling the `show` method (see below)
+  */
+  successToast: ({ text1, props }: { text1: string; props: any }) => (
+    <View>
+      <Text>{props.message}</Text>
+    </View>
+  ),
+};
 
 
 LogBox.ignoreLogs(['Setting a timer']);
@@ -55,6 +102,7 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
+      <>
       <ToastProvider 
       placement="top" 
       duration={3000} 
@@ -82,6 +130,11 @@ export default function App() {
           </LocationProvider>
         </AuthProvider>
       </ToastProvider>
+      <Toast 
+      config={toastConfig} 
+      topOffset={getStatusBarHeight(true)} 
+       />
+      </>
     );
   }
 }
