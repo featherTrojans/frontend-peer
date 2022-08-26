@@ -12,6 +12,7 @@ import Welcometochange from "./auth/Welcometochange/Welcometochange";
 
 // These are the main app screens
 import Home from "./app/Home/Home";
+import Getstarted from "./app/Getstarted/Getstarted";
 import History from "./app/History/History";
 // import Transactions from "./app/Transactions/Transactions";
 import Transactions from "./app/Transactions/Transaction/Transaction";
@@ -129,6 +130,7 @@ export {
   Selectbank,
   Transactionsrating,
   History,
+  Getstarted,
   Settings,
   Editprofile,
   Securityprivacy,

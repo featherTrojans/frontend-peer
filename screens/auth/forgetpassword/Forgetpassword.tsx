@@ -74,7 +74,7 @@ const Forgetpassword = ({ navigation }) => {
           <Custombutton
                // onPress={handleSubmit}
             // disabled={isSubmitting}
-           btntext="Proceed" onpress={() => console.log('hellow')}/>
+           btntext="Proceed" onpress={handleSubmit}/>
     
 
           {/* Have an account */}

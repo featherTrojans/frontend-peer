@@ -18,6 +18,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootStackParamList = {
   Onboarding: undefined;
   Personal: undefined;
+  Getstarted: undefined;
   Verification: undefined;
   Security: undefined;
   Securepin: undefined;

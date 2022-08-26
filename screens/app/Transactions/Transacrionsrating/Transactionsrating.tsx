@@ -131,19 +131,20 @@ const Transactionsrating = ({navigation, route}:any) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+        <Customstatusbar />
+
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       contentContainerStyle={{ flex: 1 }}
     >
       <View style={styles.container}>
-        <Customstatusbar />
         {/* HEader  */}
         {loading && <Loader />}
         <Globalmodal
         // To pass the state controlling the modal in
           showState={showModal}
           btnFunction={() => navigation.navigate('Home')}
-          btnText="COntinue"
+          btnText="Continue"
         >
           <View style={{justifyContent: "center", alignItems: "center"}}>
             <LottieView

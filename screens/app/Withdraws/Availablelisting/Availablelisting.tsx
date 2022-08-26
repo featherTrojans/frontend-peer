@@ -147,12 +147,12 @@ const Availablelisting = ({ navigation, route }: any) => {
     {
       title: "Peers",
       data: [
-        // { name: "Damilare Seyinde" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
+        { name: "Damilare Seyinde" },
+        { name: "Rasaq Momoh" },
+        { name: "Rasaq Momoh" },
+        { name: "Rasaq Momoh" },
+        { name: "Rasaq Momoh" },
+        { name: "Rasaq Momoh" },
         // { name: "Rasaq Momoh" },
         // { name: "Rasaq Momoh" },
         // { name: "Rasaq Momoh" },
