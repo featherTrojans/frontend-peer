@@ -20,10 +20,12 @@ import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../Globalmodal/Globalmodal";
 import { AuthContext } from "../../../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
+import useAlert from "../../../utils/useAlerts";
 
-const { Cancelicon } = icons;
+const { Cancelicon, Newlogo } = icons;
 const LockScreen = ({ modal, setModal }: any) => {
   const toast = useToast();
+  const {errorAlert} = useAlert()
   const { setToken, authdata } = useContext(AuthContext);
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
@@ -76,13 +78,13 @@ const LockScreen = ({ modal, setModal }: any) => {
     <Modal
       isVisible={modal} //modal should be pssed in here
       coverScreen={true}
-      backdropColor={COLORS.blue6}
+      backdropColor={COLORS.white3}
       backdropOpacity={1}
       style={{ margin: 0, flex: 1 }}
       deviceHeight={SIZES.height}
       deviceWidth={SIZES.width}
     >
-      <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
+      <SafeAreaView style={{ flex: 1, paddingHorizontal: 15, paddingBottom: 20 }}>
         {loading && <Loader />}
         {error && (
           <View
@@ -114,94 +116,91 @@ const LockScreen = ({ modal, setModal }: any) => {
             </TouchableOpacity>
           </View>
         )}
-        <StatusBar
-          animated={modal}
-          backgroundColor={COLORS.blue6}
-          barStyle="light-content"
-          networkActivityIndicatorVisible={true}
-          showHideTransition="fade"
-          hidden={false}
-        />
-        <View style={{ marginTop: RFValue(44) }}>
-          <Text style={styles.headerText}>Welcome Back,</Text>
-          <Text style={styles.headerText}>{authdata?.userDetails?.fullName?.replace(/\s+/g, ' ').split(" ")[1]}</Text> 
+   
+        <View style={{ marginTop: RFValue(30) }}>
+          <Newlogo />
+          <Text style={[styles.headerText, {marginTop: 36}]}>Welcome Back, <Text style={{...FONTS.bold, color: COLORS.blue6}}>{authdata?.userDetails?.fullName?.replace(/\s+/g, ' ').split(" ")[1]}.</Text>  </Text>
+          <Text style={{marginTop: 10, ...fontsize.smaller, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>Lets get you back to where {`\n`} you left off.</Text>
         </View>
 
-        <View style={{ marginHorizontal: RFValue(70), marginTop: RFValue(42) }}>
+        <View >
+
+
           <Text
             style={{
               textAlign: "center",
-              ...fontsize.bsmall,
-              ...FONTS.medium,
-              color: COLORS.white,
+              ...fontsize.smaller,
+              ...FONTS.regular,
+              color: COLORS.blue9,
+              marginTop: 40,
+              marginBottom: 60
             }}
           >
-            Enter PIN
+            Enter your Feather PIN
           </Text>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: RFValue(58),
-              marginBottom: RFValue(60),
-              height: RFValue(16),
-            }}
-          >
+
+
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+
             <View
               style={{
-                width: RFValue(16),
-                height: RFValue(16),
-                borderRadius: RFValue(16 / 2),
-                backgroundColor: COLORS.white,
-                opacity: pin[0] ? 1 : 0.2,
+                width: RFValue(160),
+                flexDirection: "row",
+                justifyContent: "space-between",
               }}
+            >
+              <View
+              style={[
+                styles.pinView,
+                { backgroundColor: pin[0] ? COLORS.blue6 : COLORS.grey3 },
+              ]}
             />
             <View
-              style={{
-                width: RFValue(16),
-                height: RFValue(16),
-                borderRadius: RFValue(16 / 2),
-                backgroundColor: COLORS.white,
-                opacity: pin[1] ? 1 : 0.2,
-              }}
+              style={[
+                styles.pinView,
+                { backgroundColor: pin[1] ? COLORS.blue6 : COLORS.grey3 },
+              ]}
             />
             <View
-              style={{
-                width: RFValue(16),
-                height: RFValue(16),
-                borderRadius: RFValue(16 / 2),
-                backgroundColor: COLORS.white,
-                opacity: pin[2] ? 1 : 0.2,
-              }}
+              style={[
+                styles.pinView,
+                { backgroundColor: pin[2] ? COLORS.blue6 : COLORS.grey3 },
+              ]}
             />
             <View
-              style={{
-                width: RFValue(16),
-                height: RFValue(16),
-                backgroundColor: COLORS.white,
-                borderRadius: RFValue(16 / 2),
-                opacity: pin[3] ? 1 : 0.2,
-              }}
+              style={[
+                styles.pinView,
+                { backgroundColor: pin[3] ? COLORS.blue6 : COLORS.grey3 },
+              ]}
             />
+              
+            </View>
           </View>
+
+
+
         </View>
 
+        <View style={{flex: 1, }} />
 
+       
         <Keyboard
           array={[...numbers]}
           setDigit={handleSetAmount}
           removeDigit={handleRemoveAmount}
-          textColor={COLORS.white}
+          textColor={COLORS.blue9}
         />
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Text
-            style={{ ...fontsize.bsmall, ...FONTS.bold, color: COLORS.yellow1 }}
+            style={{ ...fontsize.small, ...FONTS.medium, color: COLORS.grey16 }}
           >
-            {numoftrial}/5
+            {numoftrial}/5 Attempts
           </Text>
         </View>
+
+
       </SafeAreaView>
     </Modal>
   );

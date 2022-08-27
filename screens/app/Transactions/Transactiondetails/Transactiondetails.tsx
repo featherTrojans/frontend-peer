@@ -37,7 +37,7 @@ import useCustomModal from "../../../../utils/useCustomModal";
 
 // Sendingandreceive
 
-const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions } =
+const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions, Detailsmoreicon } =
   icons;
 
 const Transactiondetails = ({ navigation, route }) => {
@@ -472,8 +472,8 @@ const Transactiondetails = ({ navigation, route }) => {
 
   const RightComponent = ({onpress}) => {
     return (
-      <TouchableOpacity onPress={onpress} style={{width: 15, height: "100%", backgroundColor: "red"}}>
-
+      <TouchableOpacity onPress={onpress} style={{  paddingHorizontal: 10, height: "100%",}}>
+        <Detailsmoreicon />
       </TouchableOpacity>
     )
   }
@@ -537,7 +537,7 @@ const Transactiondetails = ({ navigation, route }) => {
         {/* The details container */}
         <View style={[styles.detailsContainer,]}>
 
-          <Text style={{textAlign: "center", marginTop: 34, marginBottom: 40,paddingHorizontal: 30,  ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>This is a transaction report between {typeOfName(title)?.receiverName} and {typeOfName(title)?.senderName}</Text>
+          <Text style={{textAlign: "center", marginTop: 34, marginBottom: 40,  ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>This is a transaction report between {`\n`} {typeOfName(title)?.receiverName} and {typeOfName(title)?.senderName}</Text>
 
 
         <View style={{ justifyContent: 'center', alignItems: 'center'}}>

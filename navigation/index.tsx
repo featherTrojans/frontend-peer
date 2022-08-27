@@ -121,6 +121,7 @@ import {
   CustomWebView,
   Depositinput,
   Testings,
+  LockScreen,
 
   //Paybills and Airtime
   Paybills,

@@ -12,6 +12,7 @@ import At from "../assets/icons/At";
 import Smile from "../assets/icons/Smile";
 import Tabchats from "../assets/icons/Tabchats";
 import TabHome from "../assets/icons/TabHome";
+import Detailsmoreicon from "../assets/icons/Detailsmoreicon";
 import Listingsdrop from "../assets/icons/Listingsdrop";
 import Tabtransactions from "../assets/icons/Tabtransactions";
 import Tabhistory from "../assets/icons/Tabhistory";
@@ -195,6 +196,7 @@ export default {
   At,
   Gloicon,
   Mtnlogo,
+  Detailsmoreicon,
   Smile,
   SendIcon,
   SendTF,
