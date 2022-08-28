@@ -7,16 +7,52 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import React from "react";
+import React, { useState, useContext } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
+import { Loader } from "../../../../components";
+import showerror from "../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const { Bvnlock, Whitebackarrow } = icons;
 
 const Addbvn = ({navigation}) => {
+  const { authdata, setAuthData } = useContext(AuthContext);
+  const [bvn, setBvn] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSucess] = useState(false)
+  const toast = useToast()
+  const handleSubmit = async () => {
+    setLoading(true);
+    try{
+      const response = await axiosCustom.post("user/upgrade",{bvn});
+      //otp screen or back to seetings
+      console.log(response);
+      setSucess(true);
+      setAuthData({...authdata, userDetails:{...authdata.userDetails, userLevel:2}})
+
+      setTimeout(()=>{
+        navigation.navigate("Settings")
+      },1000)
+    }catch(err){
+      showerror(toast, err)
+      console.log(err.response);
+    }finally{
+      setLoading(false);
+    }
+  }
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.blue6, flex: 1 }}>
+      {loading && <Loader />}  
       <Customstatusbar />
+      {success && (<View style={{backgroundColor:"green", 
+      padding:20, 
+      borderRadius: 15,
+      position:"absolute", width:"94%", marginHorizontal: "3%", marginTop: 40, zIndex:2}}>
+        <Text style={{color:"#fff"}}>Upgrade succesful</Text>
+      </View>)}
       <View style={{ paddingHorizontal: 16, marginTop: 30 }}>
         <View
           style={{
@@ -94,6 +130,8 @@ const Addbvn = ({navigation}) => {
               height: 58,
               color: COLORS.white,
             }}
+            value={bvn}
+            onChangeText={(text:string)=>setBvn(text)}
             placeholder="Enter BVN"
             placeholderTextColor={COLORS.inputBorderColor}
           />
@@ -153,6 +191,8 @@ const Addbvn = ({navigation}) => {
               backgroundColor: COLORS.green2,
               borderRadius: 5,
             }}
+            activeOpacity={0.8}
+            onPress={handleSubmit}
           >
             <Text
               style={{

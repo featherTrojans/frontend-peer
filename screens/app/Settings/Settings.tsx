@@ -94,10 +94,10 @@ const shareAppLink = async () => {
 const Settings = ({ navigation }) => {
   const { authdata, setAuthData, setToken } = useContext(AuthContext);
   const {CustomModal, openModal} = useCustomModal()
-  const {CustomModal: UpgradeuserModal, openModal:openUpgradeModal} = useCustomModal()
-  const usertype = "newbie"
-  const isNewbie = usertype === "newbie"
+  const {CustomModal: UpgradeuserModal, openModal:openUpgradeModal, closeModal:closeUpgradeModal} = useCustomModal()
 
+  const usertype = authdata?.userDetails?.userLevel < 2 ? "newbie" : "Odogwu"
+  const isNewbie = usertype === "newbie"
   const handleSignout = () => {
     setToken("");
     setAuthData({});
@@ -163,7 +163,7 @@ const Settings = ({ navigation }) => {
           <Copyaccountinfo />
         </CustomModal>
         <UpgradeuserModal bg={COLORS.white3}>
-            <Upgrademodal />
+            <Upgrademodal closeUpgradeModal={closeUpgradeModal} />
         </UpgradeuserModal>
 
         <View
