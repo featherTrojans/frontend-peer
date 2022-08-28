@@ -142,10 +142,10 @@ import {
   Selectbank,
   Meetuppoint,
   Safetycautions,
-  Getstarted
+  Getstarted,
+  Verifybvn
 } from "../screens";
 // import { LockScreen } from "../screens";
-
 
 
 import { Loader, Tab } from "../components";
@@ -591,6 +591,8 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Becomeanagent" component={Becomeanagent} />
 
             <AppStack.Screen name="Addbvn" component={Addbvn} />
+          <AppStack.Screen name="Verifybvn" component={Verifybvn} />
+
 
 
             <AppStack.Screen name="Changepin" component={Changepin} />

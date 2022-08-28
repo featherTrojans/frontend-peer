@@ -161,6 +161,8 @@ import Purplebalanceicon from "../assets/icons/Purplebalanceicon";
 import Greenarrowupicon from "../assets/icons/Greenarrowupicon";
 import Purplechaticon from "../assets/icons/Purplechaticon";
 import Greenphoneicon from "../assets/icons/Greenphoneicon";
+import Whitecheck from "../assets/icons/Whitecheck";
+import Bvndropicon from "../assets/icons/Bvndropicon";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -220,6 +222,8 @@ export default {
   Withdraw,
   Transfer,
   Paybills,
+  Whitecheck,
+  Bvndropicon,
   Cryingicon,
   Utilitylarge,
   Bluebankicon,

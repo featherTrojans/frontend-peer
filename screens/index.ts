@@ -76,7 +76,7 @@ import Updatedeposit from "./app/Deposit/Updatedeposit/Updatedeposit";
 import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 import Walletmanagement from "./app/Settings/Walletmanagement/Walletmanagement";
 import Addbvn from "./app/Settings/Addbvn/Addbvn";
-
+import Verifybvn from "./app/Settings/Verifybvn/Verifybvn";
 
 
 import Paybills from "./app/Billpayments/Paybills/Paybills";
@@ -165,6 +165,7 @@ export {
   Summary,
   Cancelrequest,
   Chatsdm,
+  Verifybvn,
   Chatshome,
   Becomeanagent,
   Chatsoon,
