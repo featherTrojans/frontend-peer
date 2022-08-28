@@ -19,10 +19,26 @@ const useAlert = () => {
     });
   };
 
+  const blueAlert = (messageText: string) => {
+    Toast.show({
+      type: "blueToast",
+      // And I can pass any custom props I want
+      props: { message: messageText, show: false },
+    });
+  };
+
+  const purpleAlert = (messageText: string) => {
+    Toast.show({
+      type: "purpleToast",
+      // And I can pass any custom props I want
+      props: { message: messageText, show: false },
+    });
+  };
+
   
 
   return {
-    successAlert, errorAlert
+    successAlert, errorAlert, blueAlert, purpleAlert
   }
 
 };
