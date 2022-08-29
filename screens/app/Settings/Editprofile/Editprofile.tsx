@@ -96,8 +96,7 @@ const Editprofile = ({}) => {
           // console.log(result.uri, "this is the image url");
           const response = await axiosCustom.post("/upload/image",formdata);
           console.log(response, "Uploaded response");
-          
-          // setUserData({ ...userData, user: response });
+                    
         } catch (err) {
           console.log(err);
         } finally {

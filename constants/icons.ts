@@ -165,6 +165,8 @@ import Whitecheck from "../assets/icons/Whitecheck";
 import Bvndropicon from "../assets/icons/Bvndropicon";
 import Alertcancelicon from "../assets/icons/Alertcancelicon";
 import Newlogowhite from "../assets/icons/Newlogowhite";
+import Dashedline from "../assets/icons/Dashedline";
+import Greencheckicon from "../assets/icons/Greencheckicon";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -196,6 +198,8 @@ export default {
   Cancelicon,
   Debitcardicon,
   Featheragenticon,
+  Dashedline,
+  Greencheckicon,
   Familyrequesticon,
   At,
   Gloicon,
