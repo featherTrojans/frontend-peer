@@ -5,6 +5,7 @@ import { Custombutton, Horizontaline, Mainwrapper } from '../../../../components
 import { COLORS, FONTS, fontsize, icons } from '../../../../constants'
 import axiosCustom from '../../../../httpRequests/axiosCustom';
 import { AuthContext } from '../../../../context/AuthContext';
+import useAlert from '../../../../utils/useAlerts';
 
 
 const {Whitebackarrow} = icons
@@ -15,16 +16,18 @@ const Verifybvn = ({navigation}) => {
     const otpInput = useRef(null);
     const [otpCode, setOtpCode] = useState<any>("")
     const [success, setSucess] = useState(false)
-
+    const {blueAlert, errorAlert} = useAlert()
    const handleOTPSubmit = async ()=>{
      try{
       await axiosCustom.post("user/verify/upgrade",{code:otpCode})
       setAuthData({...authdata, userDetails:{userLevel: 2, ...authdata.userDetails}})
       setSucess(true);
+      blueAlert("")
       setTimeout(()=>{
         navigation.navigate("Settings")
       },1000)
      }catch(err){
+       errorAlert("unable to verify the otp")
       console.log(err.response);
      }
    } 
