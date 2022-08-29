@@ -32,11 +32,14 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { Backheader, InitialsBg } from "../../../../components";
+import { Backheader, Horizontaline, InitialsBg, Requesterinfo, Transactionsummary } from "../../../../components";
 import Comingsoonagent from "../../../../assets/Lottie/animations/comingSoonAgent.json";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getBottomSpace } from "react-native-iphone-x-helper";
+import Requestuser from "../../../shared/RequestUser";
+import useCustomModal from "../../../../utils/useCustomModal";
+import Withdrawinfo from "../../../../components/Modals/Withdrawinfo";
 
 const {
   Backarrow,
@@ -63,7 +66,7 @@ const Emptyrequest = () => {
 };
 
 const Availablelisting = ({ navigation, route }: any) => {
-  // const { amount } = route.params;
+  const amount = route.params;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [agents, setAgents] = useState([
     1, 2, 2.4, 5, 6, 4, 3, 2, 4, 3, 4, 2, 2, 2, 3, 4, 2, 4, 3, 2,
@@ -79,6 +82,8 @@ const Availablelisting = ({ navigation, route }: any) => {
   const dotLength = Animated.divide(scrollX, SIZES.width);
   const [viewIndex, setViewIndex] = useState<number>(0);
   const [info, setInfo] = useState("More")
+  const { CustomModal ,openModal, closeModal} = useCustomModal()
+  const { CustomModal:TransationSummaryModal ,openModal: openTransactionSummaryModal, closeModal:closeTransactionSummeryModal} = useCustomModal()
 
   // i removed changed from the params passed to this useRef below
   const onViewChangeRef = useRef<
@@ -136,7 +141,7 @@ const Availablelisting = ({ navigation, route }: any) => {
       }
       setCoords({ ...coordinates, locationText: address });
       // i commnet this line out cause i want to test
-      // await getAllAgents(address);
+      await getAllAgents(address);
     } catch (err) {
     } finally {
       setLocationLoading(false);
@@ -170,21 +175,21 @@ const Availablelisting = ({ navigation, route }: any) => {
   ];
 
   //This fucntion is to get the agents datas
-  // const getAllAgents = async (address: string) => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await axiosCustom.post("/status/find", {
-  //       amount: Number(amount),
-  //       location: address,
-  //     });
-  //     setAgents(response.data.data);
-  //     setCharge(response.data.charges)
-  //   } catch (err) {
-  //     console.log(err.response);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const getAllAgents = async (address: string) => {
+    try {
+      setLoading(true);
+      const response = await axiosCustom.post("/status/find", {
+        amount: Number(amount),
+        location: address,
+      });
+      setAgents(response.data.data);
+      setCharge(response.data.charges)
+    } catch (err) {
+      console.log(err.response);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const toggleActiveType = () => {
     if (activeType === "peers") {
@@ -226,13 +231,25 @@ const Availablelisting = ({ navigation, route }: any) => {
     <SafeAreaView
       style={{ flex: 1, backgroundColor: COLORS.white, marginBottom: 20 }}
     >
+      
+      <CustomModal>
+        <Withdrawinfo openTransationSummary={openTransactionSummaryModal}/>
+      </CustomModal>
+
+      <TransationSummaryModal>
+        <Transactionsummary />
+      </TransationSummaryModal>
+
       <Customstatusbar />
       <Map />
 
+
+
       <Backheader title="Withdraw" />
 
-      {/* {(locationLoading || loading) ? ( */}
-      {false ? (
+      
+      
+      {(locationLoading || loading) ? (
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <View
             style={{
@@ -326,17 +343,19 @@ const Availablelisting = ({ navigation, route }: any) => {
                         data.map((info, index) => {
                           const isLastItem = data.length === index + 1;
                           return (
-                            <View
+                            <TouchableOpacity
                               key={index}
                               style={{
-                                backgroundColor: "blue",
                                 flex: 1,
                                 height: 100,
                                 width: SIZES.width - 65,
                                 marginRight: 5,
-                                marginBottom: 10,
                               }}
-                            />
+                              onPress={()=>{openModal()}}
+                            >
+                              <Requestuser details={{name:"Ade"}} />
+                              {!isLastItem && <Horizontaline marginV={21} />}
+                            </TouchableOpacity>
                           );
                         })
                       ) : (
@@ -372,7 +391,7 @@ const Availablelisting = ({ navigation, route }: any) => {
                   justifyContent: "center",
                   alignItems: "center",
                   paddingTop: 10,
-                }}
+                }} 
               >
                 <View
                   style={{

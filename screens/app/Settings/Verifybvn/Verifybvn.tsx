@@ -1,23 +1,47 @@
 import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import OTPTextInput from "react-native-otp-textinput";
 import { Custombutton, Horizontaline, Mainwrapper } from '../../../../components'
 import { COLORS, FONTS, fontsize, icons } from '../../../../constants'
+import axiosCustom from '../../../../httpRequests/axiosCustom';
+import { AuthContext } from '../../../../context/AuthContext';
+import useAlert from '../../../../utils/useAlerts';
 
 
 const {Whitebackarrow} = icons
 
 
 const Verifybvn = ({navigation}) => {
-
+    const { authdata, setAuthData } = useContext(AuthContext);
     const otpInput = useRef(null);
     const [otpCode, setOtpCode] = useState<any>("")
-
+    const [success, setSucess] = useState(false)
+    const {blueAlert, errorAlert} = useAlert()
+   const handleOTPSubmit = async ()=>{
+     try{
+      await axiosCustom.post("user/verify/upgrade",{code:otpCode})
+      setAuthData({...authdata, userDetails:{userLevel: 2, ...authdata.userDetails}})
+      setSucess(true);
+      blueAlert("bvn verification successful")
+      setTimeout(()=>{
+        navigation.navigate("Settings")
+      },1000)
+     }catch(err){
+       errorAlert("unable to verify the otp")
+      console.log(err.response);
+     }
+   } 
 
   return (
     <Mainwrapper bgColor={COLORS.blue6}>
 
 <ScrollView style={{ paddingHorizontal: 16, marginTop: 30 }} showsVerticalScrollIndicator={false} bounces={false}>
+    {success && (<View style={{backgroundColor:"green", 
+          padding:20, 
+          borderRadius: 15,
+          position:"absolute", width:"94%", marginHorizontal: "3%", marginTop: 40, zIndex:2}}>
+            <Text style={{color:"#fff"}}>Upgrade succesful</Text>
+          </View>)}
        <View
           style={{
             flexDirection: "row",
@@ -93,7 +117,7 @@ const Verifybvn = ({navigation}) => {
       <OTPTextInput
             ref={otpInput}
             handleTextChange={(text) => setOtpCode(text)}
-            inputCount={5}
+            inputCount={6}
             // tintColor={COLORS.green1}
             // offTintColor={COLORS.grey6}
             textInputStyle={{
@@ -123,7 +147,7 @@ const Verifybvn = ({navigation}) => {
         <Text style={{...fontsize.smallest, color: COLORS.white, ...FONTS.regular}}>Incorrect BVN?  <Text style={{color: COLORS.yellow1, ...FONTS.medium}}>Change BVN.</Text></Text>
       </View>
 
-        <Custombutton btntext="Verify" bg={COLORS.green2} onpress={() => console.log("hellow from verify btn")}/>
+        <Custombutton btntext="Verify" bg={COLORS.green2} onpress={handleOTPSubmit}/>
 
 
 

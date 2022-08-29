@@ -10,19 +10,43 @@ import {
   Animated,
   Easing,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
+import { Loader } from "../../../../components";
+import showerror from "../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
+import { AuthContext } from "../../../../context/AuthContext";
 import { Custombutton, Horizontaline } from "../../../../components";
 
 const { Bvnlock, Whitebackarrow, Whitecheck,
   Bvndropicon } = icons;
 
 const Addbvn = ({navigation}) => {
-
+  
+  const [bvn, setBvn] = useState("");
+  const [loading, setLoading] = useState(false);
+  const toast = useToast()
   const animatedHeight = useRef(new Animated.Value(0)).current;
   const [isShow, setIsShow] = useState(false);
   const [shownText, setShownText] = useState("View")
+
+  
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    console.log("--------------------------------response----------------------------")
+    try{
+      await axiosCustom.post("user/upgrade",{bvn});
+      navigation.navigate("Verifybvn")
+    }catch(err){
+      showerror(toast, err)
+    }finally{
+      setLoading(false);
+    }
+  }
+
 
   const toggleHeight = () => {
     if (isShow == true) {
@@ -71,7 +95,10 @@ const Addbvn = ({navigation}) => {
   
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.blue6, flex: 1 }}>
+      {loading && <Loader />}  
       <Customstatusbar />
+      
+      <View style={{ paddingHorizontal: 16, marginTop: 30 }}></View>
       <ScrollView style={{ paddingHorizontal: 16, marginTop: 30 }} showsVerticalScrollIndicator={false} bounces={false}>
         
         
@@ -156,6 +183,8 @@ const Addbvn = ({navigation}) => {
               height: 58,
               color: COLORS.white,
             }}
+            value={bvn}
+            onChangeText={(text:string)=>setBvn(text)}
             placeholder="Enter BVN"
             placeholderTextColor={COLORS.inputBorderColor}
           />
@@ -201,7 +230,7 @@ const Addbvn = ({navigation}) => {
             </Text>
           </View>
 
-
+          </View>
 
           <TouchableOpacity
           activeOpacity={0.8}
@@ -218,7 +247,27 @@ const Addbvn = ({navigation}) => {
           >
             {shownText}
           </Text>
-
+            </TouchableOpacity>
+        <View style={{ marginTop: 38 }}>
+          <TouchableOpacity
+            style={{
+              paddingVertical: 21,
+              backgroundColor: COLORS.green2,
+              borderRadius: 5,
+            }}
+            activeOpacity={0.8}
+            onPress={handleSubmit}
+          >
+            <Text
+              style={{
+                textAlign: "center",
+                color: COLORS.white,
+                ...fontsize.small,
+                ...FONTS.medium,
+              }}
+            >
+              Continue
+            </Text>
           <Animated.View style={[{transform: [{rotateX}]}]}>
             <Bvndropicon />
           </Animated.View>
@@ -248,19 +297,9 @@ const Addbvn = ({navigation}) => {
             <Horizontaline marginV={20}/>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.white, lineHeight: 20}}>Your BVN does not give us access to your bank accounts or transactions</Text>
           </Animated.View>
-
-
-        </Animated.View>
-
-
-
-
-
-
-
+          </Animated.View>
         <View style={{ marginTop: 38 }}>
-          <Custombutton btntext="Upgrade Account" bg={COLORS.green2} onpress={() => navigation.navigate("Verifybvn")}/>
-
+          <Custombutton btntext="Upgrade Account" bg={COLORS.green2} onpress={handleSubmit}/>
           <Text
             style={{
               textAlign: "center",

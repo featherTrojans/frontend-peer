@@ -3,10 +3,13 @@ import React from "react";
 import { COLORS, FONTS, fontsize } from "../../constants";
 import Tableoption from "../Tableoption/Tableoption";
 import Custombutton from "../Custombutton/Custombutton";
+import { navigationRef } from "../../utils/customNavigation";
+import { useNavigation } from "@react-navigation/native";
 
 
 
-const Upgrademodal = () => {
+const Upgrademodal = ({closeUpgradeModal}) => {
+  const navigate = useNavigation()
   return (
     <View>
       <Text
@@ -37,7 +40,7 @@ const Upgrademodal = () => {
       </View>
 
         <Text style={{...fontsize.smaller, textAlign: "center", ...FONTS.regular, color: COLORS.grey2, marginBottom: 32}}>For more info visit : <Text style={{...FONTS.medium, color: COLORS.blue9}}> feather.africa/accounts/upgrade</Text></Text>
-        <Custombutton btntext="Great, Upgrade" onpress={() => console.log("Upgarde modal")}/>
+        <Custombutton btntext="Great, Upgrade" onpress={() => {closeUpgradeModal(); navigate.navigate("Addbvn")}}/>
 
     </View>
   );
