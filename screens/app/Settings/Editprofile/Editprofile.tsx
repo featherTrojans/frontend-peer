@@ -58,229 +58,58 @@ const validationSchema = Yup.object().shape({
 });
 const usertype = "newbie";
 
-const Basicsettings = () => {
-  const toast = useToast();
-  const navigation = useNavigation();
-  const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
-  const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
-  const {CustomModal, openModal} = useCustomModal()
-  const [usernamename, setusernamename] = useState(
-    authdata?.userDetails?.username
-  );
-  const [loading, setLoading] = useState(false);
-  const handleUsernameChange = (text: string) => {
-    setusernamename(text);
-    // and debound
-    getuserinfo(text);
-  };
 
-  const handleImageUpload = async () => {
-    // No permissions request is necessary for launching the image library
-    // let result = await ImagePicker.launchImageLibraryAsync({
-    //   mediaTypes: ImagePicker.MediaTypeOptions.All,
-    //   allowsEditing: true,
-    //   aspect: [4, 3],
-    //   quality: 1,
-    // });
-
-    // console.log(result);
-
-    // if (!result.cancelled) {
-    //   try {
-    //     setLoading(true);
-    //     const formdata = new FormData();
-    //     formdata.append("media", {
-    //       name: `${authdata.username}`,
-    //       type: "image/jpeg",
-    //       uri: result.uri,
-    //     });
-    //     const response = await updateUserAvatar(formdata);
-    //     setUserData({ ...userData, user: response });
-    //   } catch (err) {
-    //     console.log(err);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // }
-  };
-
-  return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      bounces={false}
-      snapToAlignment="center"
-      contentContainerStyle={{ flex: 1 }}
-    >
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ paddingHorizontal: 15, marginBottom: 50 }}>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.avatarProfileWrap}>
-              <View style={styles.avatarBg}>
-                <Defaultuseravatar />
-              </View>
-              <View style={{ marginLeft: 15 }}>
-                <Text style={styles.avatarFullname}>
-                  {authdata?.userDetails?.fullName}
-                </Text>
-                <Text style={styles.avatarUsername}>
-                  @{authdata?.userDetails?.username}
-                </Text>
-              </View>
-            </View>
-
-            <Text style={styles.avatarText}>Tap to Edit</Text>
-          </TouchableOpacity>
-
-          <CustomModal>
-              <Upgrademodal />
-          </CustomModal>
-
-
-
-          {usertype === "newbie" && 
-            <View style={styles.upgradeBtnWrap}>
-            <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={styles.upgradeBtnBg}>
-              <Text style={styles.upgradeBtnText}>Upgrade</Text>
-            </TouchableOpacity>
-          </View>
-          
-          }
-          
-        </View>
-
-        <Formik
-          initialValues={{
-            username: authdata?.userDetails?.username,
-            firstName: authdata?.userDetails?.fullName?.split(" ")[1],
-            lastName: authdata?.userDetails?.fullName?.split(" ")[0],
-            email: authdata?.userDetails?.email,
-            phone: authdata?.userDetails?.phoneNumber,
-          }}
-          validationSchema={validationSchema}
-          onSubmit={async (values) => {
-            try {
-              const data = {
-                newUsername: values.username.trim(),
-                firstName: values.firstName.trim(),
-                lastName: values.lastName.trim(),
-              };
-              const response = await axiosCustom.put(
-                "/profile/update/basic",
-                data
-              );
-              const userdetails = {
-                ...authdata?.userDetails,
-                username: usernamename,
-                fullName: `${values.lastName} ${values.firstName}`,
-              };
-              setAuthData({
-                ...authdata,
-                userDetails: userdetails,
-              });
-
-              // set new token
-              setAuthorizationToken(response?.data?.data?.token);
-              //Disable Biometrics
-              setAllowBiometrics(false);
-              navigation.navigate("Root");
-            } catch (err) {
-              // send success toast message
-              showerror(toast, err);
-            }
-          }}
-        >
-          {(formikProps) => {
-            const { isSubmitting, handleSubmit, values } = formikProps;
-            return (
-              <React.Fragment>
-                {isSubmitting && <Loader />}
-
-                <View style={styles.editInputContainer}>
-                  {/* Debounce check for username */}
-                  {/* <View style={styles.namecont}>
-                    {loadbounce ? (
-                      <ActivityIndicator size={15} color={COLORS.blue6} />
-                    ) : userinfo.fullName &&
-                      usernamename?.toLowerCase() !==
-                        authdata?.userDetails?.username?.toLowerCase() ? (
-                      <>
-                        <WrongIcon />
-                        <Text style={styles.name}>{usernamename} is taken</Text>
-                      </>
-                    ) : null}
-                    {(error ||
-                      usernamename.toLowerCase() ===
-                        authdata?.userDetails?.username.toLowerCase()) && (
-                      <>
-                        <Check />
-                        <Text style={styles.name}>{usernamename}</Text>
-                      </>
-                    )}
-                  </View> */}
-
-                  <Input
-                    placeholder="Username"
-                    name="username"
-                    formikProps={formikProps}
-                    icon={<Usericondark />}
-                    value={values.username}
-                  />
-
-                  <Input
-                    placeholder="Firstname"
-                    name="firstName"
-                    formikProps={formikProps}
-                    icon={<Usericondark />}
-                    value={values.firstName}
-                  />
-
-                  <Input
-                    placeholder="Lastname"
-                    name="lastName"
-                    formikProps={formikProps}
-                    icon={<Usericondark />}
-                    value={values.lastName}
-                  />
-
-                  <Input
-                    placeholder="Phone Number"
-                    name="phoneNumber"
-                    formikProps={formikProps}
-                    icon={<Phoneicon />}
-                    value={values.phone}
-                    editable={false}
-                  />
-
-                  <Input
-                    placeholder="Email Address"
-                    name="email"
-                    formikProps={formikProps}
-                    icon={<Envelopeicon />}
-                    value={values.email}
-                    editable={false}
-                  />
-                  <Custombutton btntext="Save Changes" onpress={handleSubmit} />
-                </View>
-              </React.Fragment>
-            );
-          }}
-        </Formik>
-
-        {usertype === "odogwu" && <TouchableOpacity activeOpacity={0.8} style={styles.becomeandagentwrap}>
-          <Text style={styles.becomeanagenttext}>Became an Agent</Text>
-          <View style={styles.becomeagentredbg}>
-            <Text style={styles.becomeagentnewtext}>New</Text>
-          </View>
-        </TouchableOpacity>}
-
-
-      </KeyboardAwareScrollView>
-    </ScrollView>
-  );
-};
 
 const Editprofile = ({}) => {
-  const navigation = useNavigation();
+
+  const toast = useToast();
+    const navigation = useNavigation();
+    const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
+    const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
+    const {CustomModal, openModal} = useCustomModal()
+    const [usernamename, setusernamename] = useState(
+      authdata?.userDetails?.username
+    );
+    const [loading, setLoading] = useState(false);
+    const handleUsernameChange = (text: string) => {
+      setusernamename(text);
+      // and debound
+      getuserinfo(text);
+    };
+  
+    const handleImageUpload = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+  
+      // console.log(result);
+
+      if (!result.cancelled) {
+        try {
+          setLoading(true);
+          const formdata = new FormData();
+          formdata.append('file', result.uri);
+          formdata.append('name', 'Gyroscope');
+
+          console.log(result.uri, "this is the user url");
+          
+          const response = await axiosCustom.post("/upload/image",formdata);
+          console.log(response, "Uploaded response");
+          
+          // setUserData({ ...userData, user: response });
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setLoading(false);
+        }
+     
+      }
+  
+      
+    };
 
   const HeaderRightSide = () => {
     const userTypeBg = (usertype: string) => {
@@ -317,6 +146,8 @@ const Editprofile = ({}) => {
     );
   };
 
+
+
   return (
     <Mainwrapper>
       <Backheader
@@ -324,7 +155,177 @@ const Editprofile = ({}) => {
         rightComponent={<HeaderRightSide />}
         bg={COLORS.white3}
       />
-      <Basicsettings />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        snapToAlignment="center"
+        contentContainerStyle={{ flex: 1 }}
+      >
+        <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+          <View style={{ paddingHorizontal: 15, marginBottom: 50 }}>
+            <TouchableOpacity activeOpacity={0.8} onPress={handleImageUpload}>
+              <View style={styles.avatarProfileWrap}>
+                <View style={styles.avatarBg}>
+                  <Defaultuseravatar />
+                </View>
+                <View style={{ marginLeft: 15 }}>
+                  <Text style={styles.avatarFullname}>
+                    {authdata?.userDetails?.fullName}
+                  </Text>
+                  <Text style={styles.avatarUsername}>
+                    @{authdata?.userDetails?.username}
+                  </Text>
+                </View>
+              </View>
+  
+              <Text style={styles.avatarText}>Tap to Edit</Text>
+            </TouchableOpacity>
+  
+            <CustomModal>
+                <Upgrademodal />
+            </CustomModal>
+  
+  
+  
+            {usertype === "newbie" && 
+              <View style={styles.upgradeBtnWrap}>
+              <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={styles.upgradeBtnBg}>
+                <Text style={styles.upgradeBtnText}>Upgrade</Text>
+              </TouchableOpacity>
+            </View>
+            
+            }
+            
+          </View>
+  
+          <Formik
+            initialValues={{
+              username: authdata?.userDetails?.username,
+              firstName: authdata?.userDetails?.fullName?.split(" ")[1],
+              lastName: authdata?.userDetails?.fullName?.split(" ")[0],
+              email: authdata?.userDetails?.email,
+              phone: authdata?.userDetails?.phoneNumber,
+            }}
+            validationSchema={validationSchema}
+            onSubmit={async (values) => {
+              try {
+                const data = {
+                  newUsername: values.username.trim(),
+                  firstName: values.firstName.trim(),
+                  lastName: values.lastName.trim(),
+                };
+                const response = await axiosCustom.put(
+                  "/profile/update/basic",
+                  data
+                );
+                const userdetails = {
+                  ...authdata?.userDetails,
+                  username: usernamename,
+                  fullName: `${values.lastName} ${values.firstName}`,
+                };
+                setAuthData({
+                  ...authdata,
+                  userDetails: userdetails,
+                });
+  
+                // set new token
+                setAuthorizationToken(response?.data?.data?.token);
+                //Disable Biometrics
+                setAllowBiometrics(false);
+                navigation.navigate("Root");
+              } catch (err) {
+                // send success toast message
+                showerror(toast, err);
+              }
+            }}
+          >
+            {(formikProps) => {
+              const { isSubmitting, handleSubmit, values } = formikProps;
+              return (
+                <React.Fragment>
+                  {isSubmitting && <Loader />}
+  
+                  <View style={styles.editInputContainer}>
+                    {/* Debounce check for username */}
+                    {/* <View style={styles.namecont}>
+                      {loadbounce ? (
+                        <ActivityIndicator size={15} color={COLORS.blue6} />
+                      ) : userinfo.fullName &&
+                        usernamename?.toLowerCase() !==
+                          authdata?.userDetails?.username?.toLowerCase() ? (
+                        <>
+                          <WrongIcon />
+                          <Text style={styles.name}>{usernamename} is taken</Text>
+                        </>
+                      ) : null}
+                      {(error ||
+                        usernamename.toLowerCase() ===
+                          authdata?.userDetails?.username.toLowerCase()) && (
+                        <>
+                          <Check />
+                          <Text style={styles.name}>{usernamename}</Text>
+                        </>
+                      )}
+                    </View> */}
+  
+                    <Input
+                      placeholder="Username"
+                      name="username"
+                      formikProps={formikProps}
+                      icon={<Usericondark />}
+                      value={values.username}
+                    />
+  
+                    <Input
+                      placeholder="Firstname"
+                      name="firstName"
+                      formikProps={formikProps}
+                      icon={<Usericondark />}
+                      value={values.firstName}
+                    />
+  
+                    <Input
+                      placeholder="Lastname"
+                      name="lastName"
+                      formikProps={formikProps}
+                      icon={<Usericondark />}
+                      value={values.lastName}
+                    />
+  
+                    <Input
+                      placeholder="Phone Number"
+                      name="phoneNumber"
+                      formikProps={formikProps}
+                      icon={<Phoneicon />}
+                      value={values.phone}
+                      editable={false}
+                    />
+  
+                    <Input
+                      placeholder="Email Address"
+                      name="email"
+                      formikProps={formikProps}
+                      icon={<Envelopeicon />}
+                      value={values.email}
+                      editable={false}
+                    />
+                    <Custombutton btntext="Save Changes" onpress={handleSubmit} />
+                  </View>
+                </React.Fragment>
+              );
+            }}
+          </Formik>
+  
+          {usertype === "odogwu" && <TouchableOpacity activeOpacity={0.8} style={styles.becomeandagentwrap}>
+            <Text style={styles.becomeanagenttext}>Became an Agent</Text>
+            <View style={styles.becomeagentredbg}>
+              <Text style={styles.becomeagentnewtext}>New</Text>
+            </View>
+          </TouchableOpacity>}
+  
+  
+        </KeyboardAwareScrollView>
+      </ScrollView>
     </Mainwrapper>
   );
 };

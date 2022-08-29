@@ -137,9 +137,10 @@ const Personal = ({ navigation }) => {
                     name="firstName"
                     formikProps={formikProps}
                     icon={<Usericondark />}
+                    inputbg={COLORS.white}
                   />
 
-                  <Input
+                  <Input  
                     placeholder="Lastname"
                     name="lastName"
                     formikProps={formikProps}

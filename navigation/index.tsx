@@ -121,6 +121,7 @@ import {
   CustomWebView,
   Depositinput,
   Testings,
+  LockScreen,
 
   //Paybills and Airtime
   Paybills,
@@ -140,12 +141,11 @@ import {
   Sendcash,
   Selectbank,
   Meetuppoint,
-  Safetycautions
+  Safetycautions,
+  Getstarted,
+  Verifybvn
 } from "../screens";
 // import { LockScreen } from "../screens";
-
-
-import { LockScreen } from "../screens";
 
 
 import { Loader, Tab } from "../components";
@@ -522,18 +522,21 @@ const RootNavigator = ({ initialBoarded }) => {
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
       // initialRouteName="DepositSummary"
-      initialRouteName={initialBoarded ? "Login" : "Onboarding"}
+      initialRouteName={initialBoarded ? "Getstarted" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
       {!token ? (
         <AppStack.Group screenOptions={verticalAnimation}>
+          <AppStack.Screen name="Getstarted" component={Getstarted} />
+
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Personal" component={Personal} />
           <AppStack.Screen name="Verification" component={Verification} />
           <AppStack.Screen name="Security" component={Security} />
           <AppStack.Screen name="Securepin" component={Securepin} />
           <AppStack.Screen name="Forgetpassword" component={Forgetpassword} />
+
           <AppStack.Screen
             name="Forgetpasswordotp"
             component={Forgetpasswordotp}
@@ -588,6 +591,8 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Becomeanagent" component={Becomeanagent} />
 
             <AppStack.Screen name="Addbvn" component={Addbvn} />
+          <AppStack.Screen name="Verifybvn" component={Verifybvn} />
+
 
 
             <AppStack.Screen name="Changepin" component={Changepin} />

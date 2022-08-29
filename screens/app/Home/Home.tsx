@@ -184,7 +184,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       const response = await axiosCustom.get("/dashboard");
       // setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
-      // console.log(response.data)
+      console.log(response.data.data.imageUrl, "user image url")
     } catch (err) {
     } finally {
       setLoading(false);

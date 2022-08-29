@@ -11,6 +11,7 @@ import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import {
   Backheader,
+  Chooseamountmodal,
   Custombutton,
   Horizontaline,
   InitialsBg,
@@ -22,6 +23,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import amountFormatter from "../../../../utils/formatMoney";
 
 import { RFValue } from "react-native-responsive-fontsize";
+import useCustomModal from "../../../../utils/useCustomModal";
 
 const {
   Backarrow,
@@ -92,7 +94,8 @@ const Withdraw = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([]);
-
+  const [withdrawmodal, setWithdrawmodal] = useState(false)
+  const { CustomModal ,openModal, closeModal} = useCustomModal()
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
 
@@ -114,6 +117,8 @@ const Withdraw = ({ navigation }) => {
     setLoading(true);
     try {
       const response = await axiosCustom.get("/request/pending");
+      console.log("-------------------------------RESPONSE---------------------------")
+      console.log(response.data.data)
       setPendingRequests(response?.data?.data);
     } catch (err) {
       console.log(err.response);
@@ -125,6 +130,8 @@ const Withdraw = ({ navigation }) => {
   const getAcceptedRequest = async () => {
     try {
       const response = await axiosCustom.get("/request/accepted");
+      console.log("-------------------------------RESPONSETWO---------------------------")
+      console.log(response.data.data)
       setAcceptedRequests(response?.data?.data);
     } catch (err) {
       console.log(err.response);
@@ -175,8 +182,16 @@ const Withdraw = ({ navigation }) => {
     );
   };
 
+  const handleWithdraw = (amount)=>{
+      closeModal()
+      navigation.navigate("Availablelisting",amount);
+  }
   return (
     <Mainwrapper>
+      <>
+      <CustomModal>
+        <Chooseamountmodal headerText={"How much do you want to withdraw?"} onpress={handleWithdraw} />
+      </CustomModal>
       <Backheader title="Withdraw" />
       <View style={{ paddingHorizontal: 15 }}>
         <Viewbalance />
@@ -192,8 +207,11 @@ const Withdraw = ({ navigation }) => {
         data={datas}
         renderItem={({ item, index }) => {
           const isLast = datas.length === index + 1;
-          const { title, data } = item;
-
+          const { title} = item;
+          let data = pendingRequests
+          if(isLast){
+            data = acceptedRequests
+          }  
           return (
             <View
               style={[withdrawstyles.requesteeblock, { marginRight: isLast ? 0 : 20 }]}
@@ -263,11 +281,11 @@ const Withdraw = ({ navigation }) => {
       <View style={withdrawstyles.bottombtnwrap}>
         <Custombutton
           btntext="Withdraw Cash"
-          onpress={() => navigation.navigate("Availablelisting")}
+          onpress={()=>openModal()}
         />
       </View>
 
-    
+    </>
     </Mainwrapper>
   );
 };

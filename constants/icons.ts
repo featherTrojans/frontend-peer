@@ -12,6 +12,8 @@ import At from "../assets/icons/At";
 import Smile from "../assets/icons/Smile";
 import Tabchats from "../assets/icons/Tabchats";
 import TabHome from "../assets/icons/TabHome";
+import Detailsmoreicon from "../assets/icons/Detailsmoreicon";
+import Listingsdrop from "../assets/icons/Listingsdrop";
 import Tabtransactions from "../assets/icons/Tabtransactions";
 import Tabhistory from "../assets/icons/Tabhistory";
 import Tabsettings from "../assets/icons/Tabsettings";
@@ -159,6 +161,9 @@ import Purplebalanceicon from "../assets/icons/Purplebalanceicon";
 import Greenarrowupicon from "../assets/icons/Greenarrowupicon";
 import Purplechaticon from "../assets/icons/Purplechaticon";
 import Greenphoneicon from "../assets/icons/Greenphoneicon";
+import Whitecheck from "../assets/icons/Whitecheck";
+import Bvndropicon from "../assets/icons/Bvndropicon";
+import Alertcancelicon from "../assets/icons/Alertcancelicon";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -194,6 +199,7 @@ export default {
   At,
   Gloicon,
   Mtnlogo,
+  Detailsmoreicon,
   Smile,
   SendIcon,
   SendTF,
@@ -217,9 +223,12 @@ export default {
   Withdraw,
   Transfer,
   Paybills,
+  Whitecheck,
+  Bvndropicon,
   Cryingicon,
   Utilitylarge,
   Bluebankicon,
+  Listingsdrop,
   Bluewalleticon,
   Arrowin,
   Arrowout,
@@ -241,6 +250,7 @@ export default {
   Senderimage,
   Receivingarrow,
   Sendingarrow,
+  Alertcancelicon,
   Whitebackarrow,
   Chatdark,
   Cancelrequest,

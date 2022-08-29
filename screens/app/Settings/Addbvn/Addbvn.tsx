@@ -6,18 +6,103 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
+  ScrollView,
+  Animated,
+  Easing,
 } from "react-native";
-import React from "react";
+import React, { useState, useContext, useRef } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import axiosCustom from "../../../../httpRequests/axiosCustom";
+import { Loader } from "../../../../components";
+import showerror from "../../../../utils/errorMessage";
+import { useToast } from "react-native-toast-notifications";
+import { AuthContext } from "../../../../context/AuthContext";
+import { Custombutton, Horizontaline } from "../../../../components";
+import useAlert from "../../../../utils/useAlerts";
 
-const { Bvnlock, Whitebackarrow } = icons;
+const { Bvnlock, Whitebackarrow, Whitecheck,
+  Bvndropicon } = icons;
 
 const Addbvn = ({navigation}) => {
+  
+  const [bvn, setBvn] = useState("");
+  const [loading, setLoading] = useState(false);
+  const toast = useToast()
+  const animatedHeight = useRef(new Animated.Value(0)).current;
+  const [isShow, setIsShow] = useState(false);
+  const [shownText, setShownText] = useState("View")
+  const {successAlert, errorAlert } = useAlert()
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    console.log("--------------------------------response----------------------------")
+    try{
+      await axiosCustom.post("user/upgrade",{bvn});
+      navigation.navigate("Verifybvn")
+    }catch(err){
+      errorAlert(err)
+    }finally{
+      setLoading(false);
+    }
+  }
+
+
+  const toggleHeight = () => {
+    if (isShow == true) {
+      Animated.timing(animatedHeight, {
+        toValue: 1,
+        duration: 200,
+        easing: Easing.linear,
+        useNativeDriver: false, // <-- neccessary
+      }).start(() => {
+        setIsShow(false);
+        setShownText("Hide")
+      });
+    } else {
+      Animated.timing(animatedHeight, {
+        toValue: 0,
+        duration: 200,
+        easing: Easing.linear,
+        useNativeDriver: false, // <-- neccessary
+      }).start(() => {
+        setIsShow(true);
+        setShownText("View")
+      });
+    }
+  };
+
+
+  //Interpolation for the height animation
+  const newHeight = animatedHeight.interpolate({
+    inputRange: [0, 1],
+    outputRange: [55, 270], // Variness in height
+  });
+
+  //Interpoltion for the toggled view opacirty
+  const animatedOpacity = animatedHeight.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1]
+  })
+
+
+  // Interpolation for the dropdwon icon
+  const rotateX = animatedHeight.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["180deg", "0deg"], // <-- value that larger than your content's height
+  });
+
+  
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.blue6, flex: 1 }}>
+      {loading && <Loader />}  
       <Customstatusbar />
-      <View style={{ paddingHorizontal: 16, marginTop: 30 }}>
+      
+      <View style={{ paddingHorizontal: 16, marginTop: 30 }}></View>
+      <ScrollView style={{ paddingHorizontal: 16, marginTop: 30 }} showsVerticalScrollIndicator={false} bounces={false}>
+        
+        
+        
         <View
           style={{
             flexDirection: "row",
@@ -59,11 +144,15 @@ const Addbvn = ({navigation}) => {
           </View>
         </View>
 
+
+
+
+
         <View style={{ marginTop: 50 }}>
           <Text
             style={{
-              ...fontsize.big,
-              ...FONTS.bold,
+              ...fontsize.bmedium,
+              ...FONTS.medium,
               lineHeight: 37,
               color: COLORS.white,
               marginBottom: 22,
@@ -73,7 +162,7 @@ const Addbvn = ({navigation}) => {
           </Text>
           <Text
             style={{
-              ...fontsize.bmsmall,
+              ...fontsize.small,
               ...FONTS.regular,
               color: COLORS.white,
             }}
@@ -84,7 +173,7 @@ const Addbvn = ({navigation}) => {
         </View>
 
         <View style={{ marginTop: 57 }}>
-          <Text style={{ color: COLORS.white }}>
+          <Text style={{ color: COLORS.white, ...fontsize.smallest, ...FONTS.medium }}>
             Bank Verification Number (11-digits)
           </Text>
           <TextInput
@@ -94,24 +183,29 @@ const Addbvn = ({navigation}) => {
               height: 58,
               color: COLORS.white,
             }}
+            value={bvn}
+            onChangeText={(text:string)=>setBvn(text)}
             placeholder="Enter BVN"
             placeholderTextColor={COLORS.inputBorderColor}
           />
         </View>
 
-        <View
+        <Animated.View
           style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
+            
             paddingVertical: 18,
             borderRadius: 8,
             backgroundColor: COLORS.blue8,
             paddingHorizontal: 20,
             marginTop: 26,
+            height: newHeight
           }}
         >
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+
+          <View style={{flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",}}>
+          <View style={{ flexDirection: "row", alignItems: "center", }}>
             <View
               style={{
                 width: 24,
@@ -128,44 +222,66 @@ const Addbvn = ({navigation}) => {
               style={{
                 marginLeft: 15,
                 color: COLORS.white,
-                ...fontsize.small,
+                ...fontsize.smallest,
                 ...FONTS.regular,
               }}
             >
               Why we need your BVN
             </Text>
           </View>
+
+          <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={toggleHeight}
+          style={{flexDirection: "row", alignItems: 'center'}}
+          >
           <Text
             style={{
               color: COLORS.white,
               ...fontsize.xsmallest,
               ...FONTS.regular,
+              marginRight: 6
             }}
           >
-            View
+            {shownText}
           </Text>
-        </View>
+
+          <Animated.View style={[{transform: [{rotateX}]}]}>
+            <Bvndropicon />
+          </Animated.View>
+            </TouchableOpacity>
+          </View>
 
         <View style={{ marginTop: 38 }}>
-          <TouchableOpacity
-            style={{
-              paddingVertical: 21,
-              backgroundColor: COLORS.green2,
-              borderRadius: 5,
-            }}
-          >
-            <Text
-              style={{
-                textAlign: "center",
-                color: COLORS.white,
-                ...fontsize.small,
-                ...FONTS.medium,
-              }}
-            >
-              Continue
-            </Text>
-          </TouchableOpacity>
+          
 
+          </View>
+
+
+
+          <Animated.View style={{marginTop: 18, paddingLeft: 40, opacity: animatedOpacity}}>
+            <Text style={{marginBottom: 22, ...fontsize.smallest, ...FONTS.regular, color: COLORS.white}}>We only need access to your:</Text>
+
+            <View style={{marginBottom: 12, flexDirection: 'row', alignItems: "center"}}>
+              <Whitecheck />
+              <Text style={{marginLeft: 10.6, ...fontsize.smallest, ...FONTS.regular, color: COLORS.white}}>Firstname</Text>
+            </View>
+            <View style={{marginBottom: 12, flexDirection: 'row', alignItems: "center"}}>
+              <Whitecheck />
+              <Text style={{marginLeft: 10.6, ...fontsize.smallest, ...FONTS.regular, color: COLORS.white}}>Phone Number</Text>
+            </View>
+
+            <View style={{marginBottom: 12, flexDirection: 'row', alignItems: "center"}}>
+              <Whitecheck />
+              <Text style={{marginLeft: 10.6, ...fontsize.smallest, ...FONTS.regular, color: COLORS.white}}>Date of Birth</Text>
+            </View>
+
+            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.white, lineHeight: 20}}>Your BVN does not give us access to your bank accounts or transactions</Text>
+            <Horizontaline marginV={20}/>
+          </Animated.View>
+          </Animated.View>
+        <View style={{ marginTop: 38 }}>
+          <Custombutton btntext="Upgrade Account" bg={COLORS.green2} onpress={handleSubmit}/>
           <Text
             style={{
               textAlign: "center",
@@ -179,7 +295,11 @@ const Addbvn = ({navigation}) => {
             Secured by VFD Microfinance Bank
           </Text>
         </View>
-      </View>
+
+
+
+
+      </ScrollView>
     </SafeAreaView>
   );
 };

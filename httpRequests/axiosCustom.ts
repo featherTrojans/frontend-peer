@@ -8,6 +8,7 @@ const Server = {
 
 const axiosCustom = axios.create({
     baseURL: serversettings.apiUrl
+    // baseURL: Server.live
 })
 
 
