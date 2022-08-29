@@ -34,6 +34,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 import useCustomModal from "../../../../utils/useCustomModal";
+import { sendEmail } from "../../../../utils/emailSender";
 
 // Sendingandreceive
 
@@ -58,6 +59,10 @@ const Transactiondetails = ({ navigation, route }) => {
     user,
     otherUser,
   } = data;
+
+
+  // console.log(data, "here is the");
+  
 
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")},  ${dt.format("Do")} ${dt.format(
@@ -470,6 +475,11 @@ const Transactiondetails = ({ navigation, route }) => {
     navigation.navigate("Transactiondispute");
   };
 
+
+  const openEmailPrompt = () => {
+    
+  }
+
   const RightComponent = ({onpress}) => {
     return (
       <TouchableOpacity onPress={onpress} style={{  paddingHorizontal: 10, height: "100%",}}>
@@ -537,7 +547,7 @@ const Transactiondetails = ({ navigation, route }) => {
         {/* The details container */}
         <View style={[styles.detailsContainer,]}>
 
-          <Text style={{textAlign: "center", marginTop: 34, marginBottom: 40,  ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>This is a transaction report between {`\n`} {typeOfName(title)?.receiverName} and {typeOfName(title)?.senderName}</Text>
+          <Text style={{textAlign: "center", marginTop: 34, marginBottom: 40,  ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>This is a transaction report between {`\n`} <Text style={{textTransform: 'capitalize'}}>{typeOfName(title)?.receiverName}</Text> and <Text style={{textTransform: "capitalize"}}>{typeOfName(title)?.senderName}</Text> </Text>
 
 
         <View style={{ justifyContent: 'center', alignItems: 'center'}}>
@@ -564,7 +574,7 @@ const Transactiondetails = ({ navigation, route }) => {
 
         <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
           <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Transaction Charge</Text>
-          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9}}>+ NGN 26.50</Text>
+          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9}}>+ NGN 00.00</Text>
         </View>
 
         <Horizontaline marginV={22}/>
@@ -576,10 +586,13 @@ const Transactiondetails = ({ navigation, route }) => {
         </View>
 
 
-          <Text style={{textAlign: "center"}}>
+          <Text style={{textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}
+          
+          
+          >
           If you have an issue with this transaction, 
 kindly send a mail with the transaction ref 
-to  <Text style={{color: COLORS.blue6}}>disputes@feather.africa</Text> 
+to  <Text style={{color: COLORS.blue6}} onPress={() => sendEmail("disputes@feather.africa")}>disputes@feather.africa</Text> 
           </Text>
           {/* <View style={styles.eachDetailContainer}>
             <Text style={styles.eachDetailTitle}>Date & Time</Text>

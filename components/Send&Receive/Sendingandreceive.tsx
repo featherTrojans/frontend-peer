@@ -12,7 +12,9 @@ const {
   Receiverimage,
   Userdefaultmedium,
   Bonusiconlarge,
-  Utilitylarge
+  Utilitylarge,
+  Dashedline,
+  Greencheckicon
 } = icons;
 const { Trustedbadgepng } = images;
 
@@ -165,7 +167,9 @@ const Sendingandreceive = ({
   return (
     <View style={styles.container}>
       <Userdefaultmedium />
-
+    <View>
+      <Dashedline />
+    </View>
       {/* <View style={styles.arrowContainer}>
         <Sendingarrow />
         <Receivingarrow />
