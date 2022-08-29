@@ -14,7 +14,7 @@ import Animated, {
   withDelay
 } from "react-native-reanimated";
 
-const { Newlogo } = icons;
+const { Newlogowhite } = icons;
 
 const Loader = () => {
 
@@ -41,7 +41,7 @@ const Loader = () => {
       <Animated.View style={[styles.logoBg, bubblingCircle, {position: 'absolute'}]} />
       
         <View style={styles.logoBg}>
-          <Newlogo />
+          <Newlogowhite />
         </View>
     </View>
   );

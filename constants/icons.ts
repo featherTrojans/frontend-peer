@@ -164,6 +164,7 @@ import Greenphoneicon from "../assets/icons/Greenphoneicon";
 import Whitecheck from "../assets/icons/Whitecheck";
 import Bvndropicon from "../assets/icons/Bvndropicon";
 import Alertcancelicon from "../assets/icons/Alertcancelicon";
+import Newlogowhite from "../assets/icons/Newlogowhite";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
@@ -252,6 +253,7 @@ export default {
   Sendingarrow,
   Alertcancelicon,
   Whitebackarrow,
+  Newlogowhite,
   Chatdark,
   Cancelrequest,
   Renegotiate,
