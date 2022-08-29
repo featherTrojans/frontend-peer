@@ -1,57 +1,58 @@
+import { string } from "yup";
+
 export const assetsDB = {
     banks: {
-      GTB: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/guaranty_trust_bank/guaranty_trust_bank.png",
+      GTB: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGuaranty%20Trust%20Bank%20Logo%20(1).png?alt=media&token=d9a0af12-48d9-4ded-a612-543502ebc658",
       FIRST:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/first_bank/first_bank.png",
-      ZENITH:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/zenith_bank/zenith_bank.png",
-      ACCESS:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/access_bank/access_bank.png",
-      STANBIC:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/stanbic_ibtc/stanbic_ibtc.png",
+        "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFirst%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=c5699cab-aece-48fe-954e-578e534c942b",
+        ZENITH : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FZenith%20Bank%20Logo%20(1).png?alt=media&token=3624b4f7-cf2c-4afc-a684-55bcc7e267df",
+        ACCESS : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAccess%20Bank%20PLC%20Logo%20(2).png?alt=media&token=386e3b4c-f645-408b-89cb-0b3e7cfe9322",
+        STANBIC : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FStanbic%20IBTC%20Bank%20Logo%20(1).png?alt=media&token=c8261d8b-aff9-43cb-9bd5-3f69bcf0a025",
       DIAMOND:
         "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/access_bank/access_bank.png",
+
+
       SKYE: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/polaris_bank/polaris_bank.png",
-      WEMA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/wema_bank/wema_bank.png",
-      FCMB: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fcmb/fcmb.png",
-      FIDELITY:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fidelity_bank/fidelity_bank.png",
-      UBA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/united_bank_for_africa/united_bank_for_africa.png",
-      UNION:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fidelity_bank/fidelity_bank.png",
-      ECOBANK:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/ecobank/ecobank.png",
-      HERITAGE:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/heritage_bank/heritage_bank.png",
-      UNITY:
+
+
+      WEMA : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FWema%20Bank%20Logo%20(1).png?alt=media&token=4d398853-504c-4cac-84ff-cd6de0d83c36",
+        FCMB : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFirst%20City%20Monument%20Bank%20Ltd%20Logo%20(1).png?alt=media&token=24d59412-c43f-49cf-bf03-2a42cada86a2",
+        FIDELITY : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFidelity%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=b7ad1461-de90-4311-94d2-d2287f3d99fa",
+        UBA : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FUnited%20Bank%20for%20Africa%20Logo%20(1).png?alt=media&token=5dd8b1cf-89db-496b-9bb8-11dcd857291e",
+        UNION : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FUnion%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=cd2bd225-8ea9-481f-933d-188550bda056",
+        ECOBANK : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FEcobank%20Logo%20(1).png?alt=media&token=09741faa-a4cc-454a-952b-dbf4071784f8",
+        HERITAGE : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FHeritage%20Bank%20PLC%20Logo%20(1).png?alt=media&token=1ca06796-6dac-43aa-91f6-66c9cc4d9fee",
+      
+        UNITY:
         "https://explain.com.ng/wp-content/uploads/2021/03/WeChat-Image_20210323235401.jpg",
-      STERLING:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/sterling_bank/sterling_bank.png",
-      JAIZ: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSiQ7OKpP8Eys6O2KgXQLs80w6Gv1aO7NpXw&usqp=CAU",
-      KEYSTONE:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/keystone_bank/keystone_bank.png",
-      KUDA: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/kuda_bank/kuda_bank.png",
-      POLARIS:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/polaris_bank/polaris_bank.png",
-      PAYCOM: "https://asset.brandfetch.io/id2FbKPB40/idW2zUwfi4.png",
-      PROVIDUS:
-        "https://providusbank.com/wp-content/uploads/2022/02/Providus-Bank-Logo.png",
-      TAJ: "https://www.tajbank.com/site-assets/uploads/2019/08/tajbank-logo-xlarge-1024x426.png",
+
+
+        STERLING : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FSterling%20Bank%20Plc%20Logo%20(1).png?alt=media&token=ea1cac35-74e2-468c-8aed-cf60a357303b",
+        JAIZ : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSiQ7OKpP8Eys6O2KgXQLs80w6Gv1aO7NpXw&usqp=CAU",
+        KEYSTONE : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FKeystone%20Bank%20Limited%20Logo%20(1).png?alt=media&token=2916f8dd-3300-4388-b8fd-0eaf49c0edfc",
+        KUDA : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FKuda%20Bank%20Logo%20(1).png?alt=media&token=7e282329-f902-4814-83e6-948ab38d8261",
+        POLARIS : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FPolaris%20Bank%20Logo%20(1).png?alt=media&token=b25a8580-0c2b-4c31-ae77-ab66712f7216",
+        PAYCOM : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FidW2zUwfi4.png?alt=media&token=06c3e6c8-6eaf-45ad-af32-edae6f00b27e",
+        PROVIDUS : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FProvidus-Bank-Logo.png?alt=media&token=f6d17675-97d5-45bf-916b-aec50f6af9c1",
+        VFD : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fvfd.png?alt=media&token=edb7d867-00fc-4de0-b117-c2b0395965cb",
+        MOINIE : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fdownload%20(2).png?alt=media&token=0a07e1cb-d263-4b39-90d6-bf935e6f42c9",
+        TAJ : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Ftajbank-logo-xlarge-1024x426.png?alt=media&token=491f11db-a73d-4e31-be5d-572bcdf1c1ee"
     },
   
     fund: {
       paystack:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/paystack/paystack.png",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FPaystack%20Logo.png?alt=media&token=0e740a8b-136e-49ec-b109-8bec40881d77",
+      VFD : "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fvfd.png?alt=media&token=edb7d867-00fc-4de0-b117-c2b0395965cb"
     },
 
   
     bills: {
-      MTN: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/mtn/mtn.png",
+      MTN: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1",
       AIRTEL:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/airtel/airtel.png",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAirtel%20Nigeria%20Logo%20(1).png?alt=media&token=5dba1e6a-3cce-43fa-972f-df17926db7ff",
       ETISALAT:
-        "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/9mobile/9mobile.png",
-      GLO: "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/glo/glo.png",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2F9mobile%20Logo%20(1).png?alt=media&token=011b2934-d9b5-449d-89c5-66eb46fff497",
+      GLO: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGlobacom%20Limited%20Logo%20(2).png?alt=media&token=a1bf3984-a862-451e-a8b5-6f3b96b1fea4",
     },
     others:{
       bonus: "https://res.cloudinary.com/gyroscope/image/upload/v1649502844/star_4_apy8qg.svg",
@@ -95,7 +96,7 @@ export const assetsDB = {
     },
     {
       "name": "Access Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/access_bank/access_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAccess%20Bank%20PLC%20Logo%20(2).png?alt=media&token=386e3b4c-f645-408b-89cb-0b3e7cfe9322",
       "slug": "access-bank",
       "code": "044",
       "longcode": "044150149",
@@ -112,7 +113,7 @@ export const assetsDB = {
     },
     {
       "name": "Access Bank (Diamond)",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/access_bank/access_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAccess%20Bank%20PLC%20Logo%20(2).png?alt=media&token=386e3b4c-f645-408b-89cb-0b3e7cfe9322",
       "slug": "access-bank-diamond",
       "code": "063",
       "longcode": "063150162",
@@ -306,7 +307,7 @@ export const assetsDB = {
     },
     {
       "name": "Ecobank Nigeria",
-      "image":  "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/ecobank/ecobank.png",
+      "image":  "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FEcobank%20Logo%20(1).png?alt=media&token=09741faa-a4cc-454a-952b-dbf4071784f8",
       "slug": "ecobank-nigeria",
       "code": "050",
       "longcode": "050150010",
@@ -355,7 +356,7 @@ export const assetsDB = {
     },
     {
       "name": "Fidelity Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fidelity_bank/fidelity_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFidelity%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=b7ad1461-de90-4311-94d2-d2287f3d99fa",
       "slug": "fidelity-bank",
       "code": "070",
       "longcode": "070150003",
@@ -388,7 +389,7 @@ export const assetsDB = {
     },
     {
       "name": "First Bank of Nigeria",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/first_bank/first_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFirst%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=c5699cab-aece-48fe-954e-578e534c942b",
       "slug": "first-bank-of-nigeria",
       "code": "011",
       "longcode": "011151003",
@@ -405,7 +406,7 @@ export const assetsDB = {
     },
     {
       "name": "First City Monument Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fcmb/fcmb.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFirst%20City%20Monument%20Bank%20Ltd%20Logo%20(1).png?alt=media&token=24d59412-c43f-49cf-bf03-2a42cada86a2",
       "slug": "first-city-monument-bank",
       "code": "214",
       "longcode": "214150018",
@@ -486,7 +487,7 @@ export const assetsDB = {
     },
     {
       "name": "Guaranty Trust Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/guaranty_trust_bank/guaranty_trust_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGuaranty%20Trust%20Bank%20Logo%20(1).png?alt=media&token=d9a0af12-48d9-4ded-a612-543502ebc658",
       "slug": "guaranty-trust-bank",
       "code": "058",
       "longcode": "058152036",
@@ -535,7 +536,7 @@ export const assetsDB = {
     },
     {
       "name": "Heritage Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/heritage_bank/heritage_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FHeritage%20Bank%20PLC%20Logo%20(1).png?alt=media&token=1ca06796-6dac-43aa-91f6-66c9cc4d9fee",
       "slug": "heritage-bank",
       "code": "030",
       "longcode": "030159992",
@@ -617,7 +618,7 @@ export const assetsDB = {
     },
     {
       "name": "Keystone Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/keystone_bank/keystone_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FKeystone%20Bank%20Limited%20Logo%20(1).png?alt=media&token=2916f8dd-3300-4388-b8fd-0eaf49c0edfc",
       "slug": "keystone-bank",
       "code": "082",
       "longcode": "082150017",
@@ -650,7 +651,7 @@ export const assetsDB = {
     },
     {
       "name": "Kuda Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/kuda_bank/kuda_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FKuda%20Bank%20Logo%20(1).png?alt=media&token=7e282329-f902-4814-83e6-948ab38d8261",
       "slug": "kuda-bank",
       "code": "50211",
       "longcode": "",
@@ -811,7 +812,7 @@ export const assetsDB = {
     },
     {
       "name": "Paycom",
-      "image": "https://asset.brandfetch.io/id2FbKPB40/idW2zUwfi4.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FidW2zUwfi4.png?alt=media&token=06c3e6c8-6eaf-45ad-af32-edae6f00b27e",
       "slug": "paycom",
       "code": "999992",
       "longcode": "",
@@ -844,7 +845,7 @@ export const assetsDB = {
     },
     {
       "name": "Polaris Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/polaris_bank/polaris_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FPolaris%20Bank%20Logo%20(1).png?alt=media&token=b25a8580-0c2b-4c31-ae77-ab66712f7216",
       "slug": "polaris-bank",
       "code": "076",
       "longcode": "076151006",
@@ -861,7 +862,7 @@ export const assetsDB = {
     },
     {
       "name": "Providus Bank",
-      "image": "https://providusbank.com/wp-content/uploads/2022/02/Providus-Bank-Logo.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FProvidus-Bank-Logo.png?alt=media&token=f6d17675-97d5-45bf-916b-aec50f6af9c1",
       "slug": "providus-bank",
       "code": "101",
       "longcode": "",
@@ -958,7 +959,7 @@ export const assetsDB = {
     },
     {
       "name": "Stanbic IBTC Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/stanbic_ibtc/stanbic_ibtc.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FStanbic%20IBTC%20Bank%20Logo%20(1).png?alt=media&token=c8261d8b-aff9-43cb-9bd5-3f69bcf0a025",
       "slug": "stanbic-ibtc-bank",
       "code": "221",
       "longcode": "221159522",
@@ -1007,7 +1008,7 @@ export const assetsDB = {
     },
     {
       "name": "Sterling Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/sterling_bank/sterling_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FSterling%20Bank%20Plc%20Logo%20(1).png?alt=media&token=ea1cac35-74e2-468c-8aed-cf60a357303b",
       "slug": "sterling-bank",
       "code": "232",
       "longcode": "232150016",
@@ -1040,7 +1041,7 @@ export const assetsDB = {
     },
     {
       "name": "TAJ Bank",
-      "image": "https://www.tajbank.com/site-assets/uploads/2019/08/tajbank-logo-xlarge-1024x426.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Ftajbank-logo-xlarge-1024x426.png?alt=media&token=491f11db-a73d-4e31-be5d-572bcdf1c1ee",
       "slug": "taj-bank",
       "code": "302",
       "longcode": "",
@@ -1121,7 +1122,7 @@ export const assetsDB = {
     },
     {
       "name": "Union Bank of Nigeria",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/fidelity_bank/fidelity_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FUnion%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=cd2bd225-8ea9-481f-933d-188550bda056",
       "slug": "union-bank-of-nigeria",
       "code": "032",
       "longcode": "032080474",
@@ -1138,7 +1139,7 @@ export const assetsDB = {
     },
     {
       "name": "United Bank For Africa",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/united_bank_for_africa/united_bank_for_africa.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FUnited%20Bank%20for%20Africa%20Logo%20(1).png?alt=media&token=5dd8b1cf-89db-496b-9bb8-11dcd857291e",
       "slug": "united-bank-for-africa",
       "code": "033",
       "longcode": "033153513",
@@ -1155,6 +1156,7 @@ export const assetsDB = {
     },
     {
       "name": "Unity Bank",
+      "image": "https://explain.com.ng/wp-content/uploads/2021/03/WeChat-Image_20210323235401.jpg",
       "slug": "unity-bank",
       "code": "215",
       "longcode": "215154097",
@@ -1171,6 +1173,7 @@ export const assetsDB = {
     },
     {
       "name": "VFD Microfinance Bank Limited",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fvfd.png?alt=media&token=edb7d867-00fc-4de0-b117-c2b0395965cb",
       "slug": "vfd",
       "code": "566",
       "longcode": "",
@@ -1187,7 +1190,7 @@ export const assetsDB = {
     },
     {
       "name": "Wema Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/wema_bank/wema_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FWema%20Bank%20Logo%20(1).png?alt=media&token=4d398853-504c-4cac-84ff-cd6de0d83c36",
       "slug": "wema-bank",
       "code": "035",
       "longcode": "035150103",
@@ -1204,7 +1207,7 @@ export const assetsDB = {
     },
     {
       "name": "Zenith Bank",
-      "image": "https://raw.githubusercontent.com/PaystackHQ/nigerialogos/master/logos/zenith_bank/zenith_bank.png",
+      "image": "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FZenith%20Bank%20Logo%20(1).png?alt=media&token=3624b4f7-cf2c-4afc-a684-55bcc7e267df",
       "slug": "zenith-bank",
       "code": "057",
       "longcode": "057150013",
@@ -1220,3 +1223,6 @@ export const assetsDB = {
       "updatedAt": "2022-03-16T10:15:29.000Z"
     }
   ]
+
+
+
