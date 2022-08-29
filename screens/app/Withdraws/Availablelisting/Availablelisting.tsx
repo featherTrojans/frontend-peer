@@ -32,7 +32,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { Backheader, Horizontaline, InitialsBg, Requesterinfo } from "../../../../components";
+import { Backheader, Horizontaline, InitialsBg, Requesterinfo, Transactionsummary } from "../../../../components";
 import Comingsoonagent from "../../../../assets/Lottie/animations/comingSoonAgent.json";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -83,6 +83,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const [viewIndex, setViewIndex] = useState<number>(0);
   const [info, setInfo] = useState("More")
   const { CustomModal ,openModal, closeModal} = useCustomModal()
+  const { CustomModal:TransationSummaryModal ,openModal: openTransactionSummaryModal, closeModal:closeTransactionSummeryModal} = useCustomModal()
 
   // i removed changed from the params passed to this useRef below
   const onViewChangeRef = useRef<
@@ -232,9 +233,13 @@ const Availablelisting = ({ navigation, route }: any) => {
     >
       
       <CustomModal>
-        <Withdrawinfo />
+        <Withdrawinfo openTransationSummary={openTransactionSummaryModal}/>
       </CustomModal>
-      
+
+      <TransationSummaryModal>
+        <Transactionsummary />
+      </TransationSummaryModal>
+
       <Customstatusbar />
       <Map />
 

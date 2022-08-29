@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, fontsize, icons } from '../../constants'
-import Horizontaline from '../Horizontaline/Horizontaline'
 import Custombutton from '../Custombutton/Custombutton'
-const {Purplechaticon, Renegotiateicon, Cancelrequest, Greenphoneicon, Editicon} = icons
+const {Purplechaticon, Editicon} = icons
 
-const Withdrawinfo = () => {
+const Withdrawinfo = ({openTransationSummary}) => {
+  
   return (
     <View>
       <View style={{ alignItems: 'center', marginBottom: 40}}>
@@ -17,23 +17,14 @@ const Withdrawinfo = () => {
       </View>
 
 
-        <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>Meetup Point (your comfort/safe zone)</Text>
+        <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular, marginBottom: 10}}>Meetup Point (your comfort/safe zone)</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
             <View>
             <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>Gberigbe Field, Gberigbe Ikorodu</Text>
             </View>
-            <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>+N50,000.00</Text>
+            <Editicon />
         </View>
-
-      {/* More Actions */}
-
-
-
-      <Custombutton btntext='Yeah Proceed' onpress={() => console.log("Req")}/>
-
-
-
-
+      <Custombutton btntext='Yeah Proceed' onpress={openTransationSummary}/>
     </View>
   )
 }
