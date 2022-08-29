@@ -61,7 +61,7 @@ const Login = ({ navigation }: any) => {
   const [hidePassword, setHidePassword] = useState(true);
   const { setToken, allowBiometrics, setAllowBiometrics } =
     useContext(AuthContext);
-    const {errorAlert} = useAlert()
+    const {errorAlert, purpleAlert, blueAlert} = useAlert()
 
   const [isBiometricAllowed, setIsBiometricAllowed] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
