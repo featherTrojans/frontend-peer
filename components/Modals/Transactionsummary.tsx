@@ -1,9 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Sendingandreceive from '../Send&Receive/Sendingandreceive'
-import { COLORS, FONTS, fontsize } from '../../constants'
+import { COLORS, FONTS, fontsize, icons } from '../../constants'
 import Horizontaline from '../Horizontaline/Horizontaline'
 import Custombutton from '../Custombutton/Custombutton'
+
+
+
+
+
+
+
+const {Sendingarrow, Receivingarrow} = icons
   const Transactionsummary = () => {
   return (
     <View>
@@ -16,15 +24,18 @@ import Custombutton from '../Custombutton/Custombutton'
 
     <View style={{flexDirection: "row", width: 190, justifyContent: 'center', alignItems: "center", alignContent: "center"}}>
       <View style={{alignItems: "center"}}>
-        <View style={{width: 48, height: 48, backgroundColor: COLORS.lightBlue}}/>
-        <Text>You</Text>
+        <View style={{width: 48, height: 48, backgroundColor: COLORS.lightBlue, borderRadius: 24}}/>
+        <Text style={{...fontsize.smaller, ...FONTS.medium, marginTop: 14, color: COLORS.grey16}}>You</Text>
       </View>
       {/* Separator bg */}
-      <View style={{width: 24, height: 24}}/>
-      <View />
+      <View style={{marginHorizontal: 32}}>
+      <Sendingarrow />
+        <Receivingarrow />
+      </View>
+      
       <View style={{alignItems: "center"}}>
-        <View style={{width: 48, height: 48, backgroundColor: COLORS.lightBlue}}/>
-        <Text>Damilare</Text>
+        <View style={{width: 48, height: 48, backgroundColor: COLORS.lightBlue, borderRadius: 24}}/>
+        <Text style={{...fontsize.smaller, ...FONTS.medium, marginTop: 14, color: COLORS.grey16}}>Damilare</Text>
       </View>
     </View>
     </View>
@@ -61,7 +72,7 @@ import Custombutton from '../Custombutton/Custombutton'
 
 
     <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Amount you will receive in your wallet</Text>
-    <Text style={{marginBottom: 40, marginTop: 16, ...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N50,550.00</Text>
+    <Text style={{marginBottom: 40, marginTop: 16, ...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N50550.00</Text>
 
 
     <Custombutton btntext='Great, Continue' onpress={() => console.log("Transaction summary")} bg={COLORS.blue9}/>
