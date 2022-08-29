@@ -309,24 +309,28 @@ const Chatsdm = ({navigation,route}) => {
 
 
 
-          {messages.map(({data, time}) => {
+          {messages.map(({data, time}, index: number) => {
             return (
-              <>
+              <View key={index}>
               <View style={{justifyContent: "center", alignSelf: "center", backgroundColor: COLORS.purple3, paddingHorizontal: 16, paddingVertical: 9, borderRadius: 15}}>
                 <Text style={{textAlign: "center", ...fontsize.xsmallest, ...FONTS.regular, color: COLORS.purple2}}>{time}</Text>
               </View>
               
-              {data.map(dat => {
+              {data.map((dat, index) => {
                 if(dat.sender === userInfo.userUid){
                   return (
-                    renderSenderHTML(dat) 
+                    <View key={index}>
+                      {renderSenderHTML(dat) }
+                    </View>
                   )
                 }
                 return (
-                    renderReceiverHTML(dat) 
+                  <View key={index}>
+                    {renderReceiverHTML(dat) }
+                    </View>
                 )
               })}
-              </>
+              </View>
             )
           })}
         {/* {messages.map(mes=>{
