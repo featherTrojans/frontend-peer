@@ -19,6 +19,7 @@ import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { AuthContext } from "../../../../context/AuthContext";
 import { Custombutton, Horizontaline } from "../../../../components";
+import useAlert from "../../../../utils/useAlerts";
 
 const { Bvnlock, Whitebackarrow, Whitecheck,
   Bvndropicon } = icons;
@@ -31,8 +32,7 @@ const Addbvn = ({navigation}) => {
   const animatedHeight = useRef(new Animated.Value(0)).current;
   const [isShow, setIsShow] = useState(false);
   const [shownText, setShownText] = useState("View")
-
-  
+  const { errorAlert } = useAlert()
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -41,7 +41,7 @@ const Addbvn = ({navigation}) => {
       await axiosCustom.post("user/upgrade",{bvn});
       navigation.navigate("Verifybvn")
     }catch(err){
-      showerror(toast, err)
+      errorAlert(err)
     }finally{
       setLoading(false);
     }
@@ -230,8 +230,6 @@ const Addbvn = ({navigation}) => {
             </Text>
           </View>
 
-          </View>
-
           <TouchableOpacity
           activeOpacity={0.8}
           onPress={toggleHeight}
@@ -247,31 +245,15 @@ const Addbvn = ({navigation}) => {
           >
             {shownText}
           </Text>
-            </TouchableOpacity>
-        <View style={{ marginTop: 38 }}>
-          <TouchableOpacity
-            style={{
-              paddingVertical: 21,
-              backgroundColor: COLORS.green2,
-              borderRadius: 5,
-            }}
-            activeOpacity={0.8}
-            onPress={handleSubmit}
-          >
-            <Text
-              style={{
-                textAlign: "center",
-                color: COLORS.white,
-                ...fontsize.small,
-                ...FONTS.medium,
-              }}
-            >
-              Continue
-            </Text>
+
           <Animated.View style={[{transform: [{rotateX}]}]}>
             <Bvndropicon />
           </Animated.View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </View>
+
+        <View style={{ marginTop: 38 }}>
+          
 
           </View>
 
@@ -294,8 +276,8 @@ const Addbvn = ({navigation}) => {
               <Text style={{marginLeft: 10.6, ...fontsize.smallest, ...FONTS.regular, color: COLORS.white}}>Date of Birth</Text>
             </View>
 
-            <Horizontaline marginV={20}/>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.white, lineHeight: 20}}>Your BVN does not give us access to your bank accounts or transactions</Text>
+            <Horizontaline marginV={20}/>
           </Animated.View>
           </Animated.View>
         <View style={{ marginTop: 38 }}>

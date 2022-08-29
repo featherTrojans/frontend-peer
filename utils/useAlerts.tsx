@@ -11,11 +11,23 @@ const useAlert = () => {
   };
 
 
-  const errorAlert = (messageText: string) => {
+  const errorAlert = (err: any, customeerror?:string) => {
+    console.log(err)
+    console.log(err?.response)
+  
+    
+    let message:string = err?.response?.data?.message
+      if(message && typeof message ==="string"){
+          message = err.response.data.message
+      }else if(customeerror){
+        message = customeerror
+      }else{
+        message = "Padi something went wrong, try again"
+      }
     Toast.show({
       type: "errorToast",
       // And I can pass any custom props I want
-      props: { message: messageText, show: false },
+      props: { message: message, show: false },
     });
   };
 
