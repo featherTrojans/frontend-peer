@@ -40,30 +40,35 @@ import { getBottomSpace } from "react-native-iphone-x-helper";
 import Requestuser from "../../../shared/RequestUser";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Withdrawinfo from "../../../../components/Modals/Withdrawinfo";
+import RequestSummary from "../../../../components/Modals/RequestSummary";
 
 const {
-  Backarrow,
-  Forwardarrow,
-  Onmapicon,
-  Forwardarrowblue,
   Listingsdrop,
-  Emptynotification,
   Emptyicon,
-  Loadinglocationanimate,
-  Cryinganimate,
-  Comingsoonagentanimate,
+  Loadinglocationanimate
 } = icons;
-const { Mapimage } = images;
 
-const listingtypes = ["peers", "agents"];
+const datas = [
+  {
+    title: "Peers",
+    data: [] 
+  },
+  {
+    title: "Agents",
+    data: [],
+  },
+];
 
-const Emptyrequest = () => {
-  return (
-    <View>
-      <Text>Padi, you don’t have any pending withdrawal requests</Text>
-    </View>
-  );
-};
+interface agent {
+  "amount": string,
+  "duration": string,
+  "fullName": string,
+  "latitude": string,
+  "locationText": string,
+  "longitude": string,
+  "reference": string,
+  "username": string,
+}
 
 const Availablelisting = ({ navigation, route }: any) => {
   const amount = route.params;
@@ -80,6 +85,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
   const dotLength = Animated.divide(scrollX, SIZES.width);
+  const [activeAgent, setActiveAgent] = useState<agent | {}>({})
   const [viewIndex, setViewIndex] = useState<number>(0);
   const [info, setInfo] = useState("More")
   const { CustomModal ,openModal, closeModal} = useCustomModal()
@@ -116,7 +122,7 @@ const Availablelisting = ({ navigation, route }: any) => {
       });
     }
   };
-
+  
   const newHeight = animatedHeight.interpolate({
     inputRange: [0, 1],
     outputRange: ["50%", "100%"], // Variness in height
@@ -148,31 +154,7 @@ const Availablelisting = ({ navigation, route }: any) => {
     }
   };
 
-  const datas = [
-    {
-      title: "Peers",
-      data: [
-        { name: "Damilare Seyinde" },
-        { name: "Rasaq Momoh" },
-        { name: "Rasaq Momoh" },
-        { name: "Rasaq Momoh" },
-        { name: "Rasaq Momoh" },
-        { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Peterson Yeyejare" },
-      ],
-    },
-    {
-      title: "Agents",
-      data: [
-        
-      ],
-    },
-  ];
+  
 
   //This fucntion is to get the agents datas
   const getAllAgents = async (address: string) => {
@@ -184,12 +166,19 @@ const Availablelisting = ({ navigation, route }: any) => {
       });
       setAgents(response.data.data);
       setCharge(response.data.charges)
+      console.log(response)
     } catch (err) {
       console.log(err.response);
     } finally {
       setLoading(false);
     }
   };
+
+
+  const handleSelectAgent = (agentobj)=>{
+    setActiveAgent(agentobj)
+    openModal()
+  }
 
   const toggleActiveType = () => {
     if (activeType === "peers") {
@@ -233,11 +222,11 @@ const Availablelisting = ({ navigation, route }: any) => {
     >
       
       <CustomModal>
-        <Withdrawinfo openTransationSummary={openTransactionSummaryModal}/>
+        <Withdrawinfo withdrawInfo={activeAgent} openTransationSummary={openTransactionSummaryModal}/>
       </CustomModal>
 
       <TransationSummaryModal>
-        <Transactionsummary />
+        <RequestSummary withdrawInfo={activeAgent} />
       </TransationSummaryModal>
 
       <Customstatusbar />
@@ -333,7 +322,10 @@ const Availablelisting = ({ navigation, route }: any) => {
                 nestedScrollEnabled
                 renderItem={({ item, index }) => {
                   const isLast = datas.length === index + 1;
-                  const { title, data } = item;
+                  let data = agents;
+                  if(isLast){
+                    data = []
+                  }
                   return (
                     <ScrollView
                       nestedScrollEnabled
@@ -351,9 +343,9 @@ const Availablelisting = ({ navigation, route }: any) => {
                                 width: SIZES.width - 65,
                                 marginRight: 5,
                               }}
-                              onPress={()=>{openModal()}}
+                              onPress={()=>handleSelectAgent(info)}
                             >
-                              <Requestuser details={{name:"Ade"}} />
+                              <Requestuser details={{name:info.fullName, amount:info.amount, duration:info.duration}} />
                               {!isLastItem && <Horizontaline marginV={21} />}
                             </TouchableOpacity>
                           );
