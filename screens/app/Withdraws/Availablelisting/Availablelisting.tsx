@@ -337,9 +337,9 @@ const Availablelisting = ({ navigation, route }: any) => {
                           return (
                             <TouchableOpacity
                               key={index}
+                              activeOpacity={0.8}
                               style={{
                                 flex: 1,
-                                height: 100,
                                 width: SIZES.width - 65,
                                 marginRight: 5,
                               }}

@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Animated,
   } from "react-native";
+  import React from "react";
   import { COLORS, FONTS, fontsize, icons, SIZES } from "../../constants";
   import { withdrawstyles } from "../app/Withdraws/Withdraw/Withdraw.styles";
 
@@ -24,7 +25,7 @@ const Requestuser = ({
     const { name, duration, amount } = details;
     return (
       <View style={withdrawstyles.requesteeprofilewrap}>
-        <View style={withdrawstyles.requesteeprofilewrap}>
+        <View style={[withdrawstyles.requesteeprofilewrap]}>
           <View style={withdrawstyles.requesteeinitialsbg}>
             <Text style={withdrawstyles.requesteeinitialtext}>D</Text>
 
