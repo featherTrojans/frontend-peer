@@ -175,7 +175,7 @@ const Chatshome = ({ navigation }) => {
         {/* <TouchableOpacity  onPress={()=>navigation.navigate("Usersearch",{phoneContact:contactsResolved})} > */}
 
         <View style={{ flex: 1 }}>
-          
+        
           <Contact contactsResolved={contactsResolved} />
 
           <View

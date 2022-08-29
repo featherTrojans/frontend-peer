@@ -19,6 +19,7 @@ import {
   Horizontaline,
   Loader,
   Mainwrapper,
+  Negotiatecharge,
   Requesterinfo,
   Transactionpin,
   Transactionsummary,
@@ -285,9 +286,10 @@ const Depositupdate = ({ navigation, route }) => {
 
         <CustomModal>
           <View>
-            
           </View>
             {/* <Transactionpin /> */}
+            {/* <Negotiatecharge /> */}
+
           {/* <Requesterinfo /> */}
           {/* <Transactionsummary /> */}
         </CustomModal>

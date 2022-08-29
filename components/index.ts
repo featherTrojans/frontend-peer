@@ -17,6 +17,7 @@ import Keyboard from "./Keyboard/Keyboard";
 import Custombutton from "./Custombutton/Custombutton";
 import Mainwrapper from "./Mainwrapper/Mainwrapper";
 import Horizontaline from "./Horizontaline/Horizontaline";
+import Negotiatecharge from "./Negotiatecharge/Negotiatecharge";
 import Tableoption from "./Tableoption/Tableoption";
 import Copyaccountinfo from "./Copyaccountinfo/Copyaccountinfo";
 import Upgrademodal from "./Upgrademodal/Upgrademodal";
@@ -39,6 +40,7 @@ export {
     Bottombtn,
     Tableoption,
     Mainwrapper,
+    Negotiatecharge,
     Numberbtn,
     Requesterdetails,
     Priceandcharges,
