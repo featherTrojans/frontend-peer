@@ -22,7 +22,7 @@ const Verifybvn = ({navigation}) => {
       await axiosCustom.post("user/verify/upgrade",{code:otpCode})
       setAuthData({...authdata, userDetails:{userLevel: 2, ...authdata.userDetails}})
       setSucess(true);
-      blueAlert("")
+      blueAlert("bvn verification successful")
       setTimeout(()=>{
         navigation.navigate("Settings")
       },1000)
