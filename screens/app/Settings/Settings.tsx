@@ -141,7 +141,6 @@ const Settings = ({ navigation }) => {
         showArrow={false}
         rightComponent={<Rightside />}
       />
-      {/* <Text style={styles.settingText}>Settings</Text> */}
 
       <View style={{ paddingHorizontal: 15 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
