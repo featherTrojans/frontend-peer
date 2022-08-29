@@ -31,3 +31,5 @@ const Getstarted = ({navigation}) => {
 export default Getstarted
 
 const styles = StyleSheet.create({})
+
+
