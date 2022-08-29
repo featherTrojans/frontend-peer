@@ -264,7 +264,7 @@ const Deposit = ({ navigation,route}) => {
     <Mainwrapper >
       {/* <Backheader title="Deposit" /> */}
       <Customstatusbar />
-      <View style={{ flex: 1, paddingHorizontal: 15 }}>
+           <View style={{ flex: 1, paddingHorizontal: 15 }}>
         <Viewbalance />
 
         {loading ? (

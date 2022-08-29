@@ -8,7 +8,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import moment from "moment";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 const { Chatimage, chatbg } = images;
-import { Bottombtn, InitialsBg } from "../../../../components";
+import { Bottombtn, InitialsBg, Mainwrapper } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import LottieView from "lottie-react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -210,8 +210,8 @@ const Chatsdm = ({navigation,route}) => {
       )
     }
     return (
-      <View key={mes.createdAt} style={styles.chatToMe}>
-        <View>
+      <View key={mes.createdAt} style={[styles.chatToMe, {flex: 1}]}>
+        <View style={{maxWidth: "80%"}}>
             <View style={styles.chatToMeColor}><Text style={[styles.chatTextStyle,{color: COLORS.white}]} >{mes.message}</Text></View>
           <Text style={[styles.chatToMeTime, {textAlign: "right"}]}>{formatTime(mes.createdAt)}</Text>
         </View>
@@ -225,26 +225,23 @@ const Chatsdm = ({navigation,route}) => {
         <View style={{justifyContent: "center", alignItems: "center", marginBottom:50}}>
           <Successtranfericon />
           <View style={{borderWidth: 0.5, borderColor: COLORS.grey13, backgroundColor: COLORS.grey14, paddingHorizontal: 24, paddingTop: 9, paddingBottom: 13,marginTop: 10, borderRadius: 24 }}>
-            <Text style={{...fontsize.smallest, ...FONTS.bold, lineHeight: 24, color: COLORS.black, textAlign: "center"}}> 🎉 You just received  <Text style={{...FONTS.bold}}>N{mes.message}</Text> from this user</Text>
+            <Text style={{...fontsize.smallest, ...FONTS.bold, lineHeight: 24, color: COLORS.blue9, textAlign: "center"}}> 🎉 You just received  <Text style={{...FONTS.bold}}>N{mes.message}</Text> from this user</Text>
           </View>
         </View>
       )
     }
     return (
-      <View key={mes.createdAt} style={styles.chatNotMe}>
-        <View>
-          <View style={styles.chatNotMeColor}><Text  style={[styles.chatTextStyle,{color: COLORS.black}]}>{mes.message}</Text></View>
-          <Text style={[styles.chatToMeTime, {textAlign: "right"}]}>{formatTime(mes.createdAt)}</Text>
+      <View key={mes.createdAt} style={[styles.chatNotMe, {flex: 1}]}>
+        <View style={{ maxWidth: "80%"}}>
+          <View style={styles.chatNotMeColor}><Text  style={[styles.chatTextStyle,{color: COLORS.blue9}]}>{mes.message}</Text></View>
+          <Text style={[styles.chatToMeTime, {textAlign: "left"}]}>{formatTime(mes.createdAt)}</Text>
         </View>
       </View> 
     )
   }
   
   return (
-    <ImageBackground source={chatbg} style={{width:"100%", flex: 1}}>
-    <SafeAreaView
-    style={styles.container}>
-      <Customstatusbar />      
+    <Mainwrapper>   
 
 
 
@@ -360,8 +357,7 @@ const Chatsdm = ({navigation,route}) => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
-      </ImageBackground>
+      </Mainwrapper>
   );
 };
 
