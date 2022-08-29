@@ -42,6 +42,7 @@ import {
   saveCredentials,
 } from "../../../utils/biometrics";
 import Customstatusbar from "../../shared/Customstatusbar";
+import useAlert from "../../../utils/useAlerts";
 
 const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
 
@@ -60,6 +61,7 @@ const Login = ({ navigation }: any) => {
   const [hidePassword, setHidePassword] = useState(true);
   const { setToken, allowBiometrics, setAllowBiometrics } =
     useContext(AuthContext);
+    const {errorAlert} = useAlert()
 
   const [isBiometricAllowed, setIsBiometricAllowed] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -109,7 +111,9 @@ const Login = ({ navigation }: any) => {
         });
       }
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
+      console.log(err, "Here is the error");
+      errorAlert("The name")
     } finally {
       setLoading(false);
     }

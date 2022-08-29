@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useRef} from "react"
 import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity, StatusBar } from "react-native";
 import LottieView from 'lottie-react-native'
 import OTPInputView from '@twotalltotems/react-native-otp-input'
+import OTPTextInput from "react-native-otp-textinput";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
@@ -27,6 +28,7 @@ const Verification = ({route,navigation}) => {
   const [tokenn, setToken] = useState<string|null>(token)
   const [disable, setDisable] = useState(true)
   const [showModal, setShowModal] = useState<boolean>(false)
+  const otpInput = useRef(null);
 
     
   useEffect(() => {
@@ -122,10 +124,36 @@ const Verification = ({route,navigation}) => {
 
 
       {/* Verification input */}
-      <View style={styles.otpInputContainer}>
-        <TextInput keyboardType="number-pad" returnKeyType="done" value={otpCode} onChangeText={(text)=> setOtpCode(text)} style={styles.cutstomOtpInput} maxLength={6}/>
-      </View>
 
+      <View style={{justifyContent: "center", alignItems: "center", marginVertical: 40}}>
+      <View style={{ minWidth: 285, alignItems: "center", justifyContent: "center"}}>
+
+
+      <OTPTextInput
+            ref={otpInput}
+            handleTextChange={(text) => setOtpCode(text)}
+            inputCount={5}
+            tintColor={COLORS.green1}
+            offTintColor={COLORS.grey6}
+            textInputStyle={{
+              width: 40,
+              height: 50,
+              backgroundColor: COLORS.white,
+              borderWidth: 1,
+              borderBottomWidth: 1,
+              borderRadius: 4,
+            }}
+          />
+        {/* <TextInput 
+        keyboardType="number-pad" 
+        returnKeyType="done" 
+        value={otpCode} 
+        onChangeText={(text)=> setOtpCode(text)} 
+        style={styles.cutstomOtpInput} 
+        maxLength={6}
+        /> */}
+      </View>
+      </View>
 
 
 

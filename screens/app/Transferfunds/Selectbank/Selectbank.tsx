@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { Backheader, Custombutton, Horizontaline, Input, Mainwrapper } from '../../../../components'
 import { COLORS, FONTS, fontsize, icons } from '../../../../constants'
@@ -8,7 +8,7 @@ import useCustomModal from '../../../../utils/useCustomModal'
 const {Ashicon, Briefcaseicon, Forwardarrow}  =icons
 
 
-const Eachoption = ({ type }) => {
+const Eachoption = ({ type, image }) => {
     const { CustomModal, openModal } = useCustomModal();
     
     return (
@@ -48,9 +48,12 @@ const Eachoption = ({ type }) => {
         </CustomModal>
   
         <View style={electrictystyles.logoandtitlewrap}>
-          {/* {logo} */}
-          <View style={{backgroundColor: COLORS.lightBlue, width: 34, height: 34, borderRadius: 34/2}}/>
-          {/* {showLogo(logotype)} */}
+          <Image
+        style={{width: 34, height: 34, borderRadius: 34/2}}
+        source={{
+          uri: image
+        }}
+      />
           <Text style={electrictystyles.optiontitle}>{type}</Text>
         </View>
         <Forwardarrow />
@@ -64,27 +67,27 @@ const Selectbank = () => {
     const listOfbanks = [
         {
             name: "Access Bank",
-            logo: ""
+            logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAccess%20Bank%20PLC%20Logo%20(2).png?alt=media&token=386e3b4c-f645-408b-89cb-0b3e7cfe9322"
         },
         {
             name: "Alat by Wema",
-            logo: ""
+            logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FWema%20Bank%20Logo%20(1).png?alt=media&token=4d398853-504c-4cac-84ff-cd6de0d83c36"
         },
         {
             name: "Ecobank",
-            logo: ""
+            logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FEcobank%20Logo%20(1).png?alt=media&token=09741faa-a4cc-454a-952b-dbf4071784f8"
         },
         {
             name: "Fidelity Bank",
-            logo: ""
+            logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFidelity%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=b7ad1461-de90-4311-94d2-d2287f3d99fa"
         },
         {
             name: "First Bank",
-            logo: ""
+            logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFirst%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=c5699cab-aece-48fe-954e-578e534c942b"
         },
         {
             name: "First City Monument Bank",
-            logo: ""
+            logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFirst%20City%20Monument%20Bank%20Ltd%20Logo%20(1).png?alt=media&token=24d59412-c43f-49cf-bf03-2a42cada86a2"
         }
     ]
 
@@ -99,16 +102,14 @@ const Selectbank = () => {
 
         <View style={{paddingHorizontal: 15,}}>
 
-            <View style={{backgroundColor: COLORS.white, paddingHorizontal: 20, paddingBottom: 10, paddingTop: 22}}>
+            <View style={{backgroundColor: COLORS.white, paddingHorizontal: 20, paddingBottom: 10, paddingTop: 22, borderRadius: 15}}>
             <Text>Choose your destination bank</Text>
 
-
-
-            {listOfbanks.map(({name}, index) => {
+            {listOfbanks.map(({name, logo}, index) => {
                 const isLast = listOfbanks.length === index + 1;
                 return (
                     <View key={index}>
-                        <Eachoption type={name} />
+                        <Eachoption type={name} image={logo}/>
                         {!isLast && <Horizontaline marginV={0} />}
                     </View>
                 )

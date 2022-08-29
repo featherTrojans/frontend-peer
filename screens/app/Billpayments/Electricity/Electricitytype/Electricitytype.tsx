@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import {
   Backheader,
@@ -19,9 +19,8 @@ const Electricitytype = ({ navigation }) => {
   const providertypes = [
     {
       title: "Eko Electricity",
-      logo: <Ekoelectricityicon />,
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FekoElectrical.png?alt=media&token=38d87321-ca72-4c34-a21c-88ac94e12692",
       subroute: {
-        logotype: "eko",
         suboptions: [
           {
             type: "Eko Electricity Distribution Postpaid",
@@ -34,9 +33,8 @@ const Electricitytype = ({ navigation }) => {
     },
     {
       title: "Ibadan Disco",
-      logo: <IBelectricityicon />,
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fibedc.png?alt=media&token=d5269971-41f8-4b31-805f-f060f3151443",
       subroute: {
-        logotype: "ibadan",
         suboptions: [
           {
             type: "Ibadan Disco Distribution Postpaid",
@@ -49,9 +47,8 @@ const Electricitytype = ({ navigation }) => {
     },
     {
       title: "Ikeja Electric",
-      logo: <Ikejaelectricityicon />,
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FikejaElectric.png?alt=media&token=30f4eef9-6edb-4a61-b7aa-92b1a0324417",
       subroute: {
-        logotype: "ikeja",
         suboptions: [
           {
             type: "Ikeja Electricity Distribution Postpaid",
@@ -84,11 +81,17 @@ const Electricitytype = ({ navigation }) => {
                   onPress={() =>
                     navigation.navigate("Electricitymetertype", {
                       subdata: subroute,
+                      logo: logo,
                     })
                   }
                 >
                   <View style={electrictystyles.logoandtitlewrap}>
-                    {logo}
+                    <Image
+                      style={{ width: 34, height: 34, borderRadius: 34 / 2 }}
+                      source={{
+                        uri: logo,
+                      }}
+                    />
                     <Text style={electrictystyles.optiontitle}>{title}</Text>
                   </View>
                   <Forwardarrow />

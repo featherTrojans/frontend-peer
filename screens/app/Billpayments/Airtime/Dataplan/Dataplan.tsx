@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React from 'react'
 import { Backheader, Custombutton, Horizontaline, Input, Mainwrapper } from '../../../../../components'
 import { electrictystyles } from '../../Electricity/Electricitytype/Electricitytype.styles'
@@ -10,24 +10,9 @@ import { getBottomSpace } from 'react-native-iphone-x-helper';
 const {Ekoelectricityicon, Searcontacticon, Gloicon, Ikejaelectricityicon, Ashicon, Briefcaseicon, Forwardarrow, Mtnlogo} = icons
 
 
-const Eachoption = ({ logotype, type }) => {
+const Eachoption = ({ logo, type }) => {
     const { CustomModal, openModal } = useCustomModal();
-    const showLogo = (logotype: string) => {
-      switch (logotype) {
-        case "mtn":
-          return <Mtnlogo />;
-          break;
-        case "glo":
-          return <Gloicon />;
-          break;
-        case "ikeja":
-          return <Ikejaelectricityicon />;
-          break;
-  
-        default:
-          break;
-      }
-    };
+
     return (
       <TouchableOpacity
         activeOpacity={0.8}
@@ -38,7 +23,7 @@ const Eachoption = ({ logotype, type }) => {
           <View>
             <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", }}>
             <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Mobile Data Purchase</Text>
-            {showLogo(logotype)}
+            <Image source={{uri: logo}} style={{width: 34, height: 34, borderRadius: 34/2}}/>
             
             </View>
        
@@ -62,8 +47,7 @@ const Eachoption = ({ logotype, type }) => {
         </CustomModal>
   
         <View style={electrictystyles.logoandtitlewrap}>
-          {/* {logo} */}
-          {showLogo(logotype)}
+          <Image source={{uri: logo}} style={{width: 34, height: 34, borderRadius: 34/2}}/>
           <Text style={electrictystyles.optiontitle}>{type}</Text>
         </View>
         <Forwardarrow />
@@ -73,7 +57,8 @@ const Eachoption = ({ logotype, type }) => {
 
 
 const Dataplan = ({navigation, route}) => {
-    const { suboptions, logotype } = route?.params.subdata;
+    const { image, subdata } = route?.params;
+    const {suboptions} = subdata
 
 
 
@@ -81,19 +66,16 @@ const Dataplan = ({navigation, route}) => {
     <Mainwrapper>
         <Backheader title="Select a  Plan"/>
 
-
-
         <View style={{ paddingHorizontal: 15, flex: 1,paddingBottom: getBottomSpace()+60  }}>
         <View style={[electrictystyles.blockwrap, ]}>
           <Text style={electrictystyles.headertext}>Select Mobile Data Package</Text>
 
-          {/* {subdata.logo} */}
             <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
-          {suboptions.map(({ type, logo }, index) => {
+          {suboptions.map(({ type }, index) => {
             const isLast = suboptions.length === index + 1;
             return (
               <View key={index}>
-                <Eachoption logotype={logotype} type={type} />
+                <Eachoption logo={image} type={type} />
                 {!isLast && <Horizontaline marginV={0} />}
               </View>
             );

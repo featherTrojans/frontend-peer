@@ -4,9 +4,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../../constants";
 import Customstatusbar from "../../screens/shared/Customstatusbar";
 
-const Mainwrapper = ({ children }) => {
+const Mainwrapper = ({ children, bgColor="#F7F8FA" }: {children: React.ReactElement, bgColor?: string}) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white3 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
       <Customstatusbar />
 
       {children}

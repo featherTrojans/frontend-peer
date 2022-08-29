@@ -18,6 +18,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootStackParamList = {
   Onboarding: undefined;
   Personal: undefined;
+  Getstarted: undefined;
   Verification: undefined;
   Security: undefined;
   Securepin: undefined;
@@ -31,28 +32,23 @@ export type RootStackParamList = {
   Welcometochange: undefined;
   Welcome: undefined;
 
-
-
-
-
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
 
   //Transactions
   Transactions: undefined;
   Newtransactions: undefined;
-  Transactiondetails: {price: number};
+  Transactiondetails: { price: number };
   Transactiondispute: undefined;
 
-
-//Settings
-Editprofile: undefined;
-Securityprivacy: undefined;
-Changepassword: undefined;
-Changepin: undefined;
-Biometrics: undefined;
-Walletmanagement: undefined;
-Addbvn: undefined;
-
+  //Settings
+  Editprofile: undefined;
+  Securityprivacy: undefined;
+  Changepassword: undefined;
+  Changepin: undefined;
+  Biometrics: undefined;
+  Walletmanagement: undefined;
+  Addbvn: undefined;
+  Verifybvn: undefined;
 
   //Withdraw
   Requestnew: undefined;
@@ -84,7 +80,6 @@ Addbvn: undefined;
 
   //Notification
   Notifications: undefined;
-
 
   //Paybills
   Paybills: undefined;
@@ -119,7 +114,7 @@ Addbvn: undefined;
   Chatsdm: {};
   Usersearch: undefined;
   CustomWebView: undefined;
-  CustomWebViewSupport: undefined
+  CustomWebViewSupport: undefined;
 };
 
 export type RootTransactionScreen = {

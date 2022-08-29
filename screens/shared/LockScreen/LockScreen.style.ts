@@ -52,15 +52,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   pinView: {
-    width:  RFValue(50),
-    height: RFValue(60),
+    width: RFValue(12), 
+    height: RFValue(12),
+    borderRadius: RFValue(12/2),
     borderColor: COLORS.blue7,
-    borderWidth: 1,
-    borderRadius: RFValue(13),
-    paddingHorizontal: RFValue(15),
-    paddingVertical: RFValue(10),
-    justifyContent: "center",
-    alignItems: "center",
   },
   pinText: {
     ...fontsize.big,
@@ -99,9 +94,9 @@ export const styles = StyleSheet.create({
   ///Lock screen
 
   headerText: {
-    ...fontsize.big,
-    ...FONTS.bold,
-    color: COLORS.white,
+    ...fontsize.bbsmall,
+    ...FONTS.medium,
+    color: COLORS.blue9,
     textTransform: "capitalize",
   },
 });
