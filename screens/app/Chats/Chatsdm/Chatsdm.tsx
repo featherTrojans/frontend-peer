@@ -7,7 +7,6 @@ import { db } from "../../../../firebase";
 import { AuthContext } from "../../../../context/AuthContext";
 import moment from "moment";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-
 const { Chatimage, chatbg } = images;
 import { Bottombtn, InitialsBg } from "../../../../components";
 import Customstatusbar from "../../../shared/Customstatusbar";
@@ -15,6 +14,7 @@ import LottieView from "lottie-react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
 import AllChatsModal from "./AllChatsModal";
 import { usePushNotification } from "../../../../navigation";
+import formatData from "../../../../utils/fomatTrans";
 
 
 
@@ -23,7 +23,6 @@ const { Backarrow, SendIcon, Outlinedlock,Plusicon,
   Minusicon,
   Arrowupicon,
   Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate, Feathecomingsoonchatanimate, SendTF } = icons;
-
 
 
 
@@ -63,7 +62,13 @@ const Chatsdm = ({navigation,route}) => {
         docs.forEach((change) => { 
               newdata.push(change.data())
         });
-        setMessages(newdata)
+        setMessages(formatData(newdata))
+        // console.log(moment(newdata[0].createdAt), 'here is the propose message');
+        // console.log(moment(newdata[0], "her4e is the date"));
+        console.log(formatData(newdata), "formated data");
+        
+        
+        
         setFetchmessage(false)
       });
     }
@@ -141,7 +146,7 @@ const Chatsdm = ({navigation,route}) => {
       createdAt: createdAt,
       action:action
     }
-    console.log(messageData)
+    console.log(messageData, "Message data from the chats")
     try{
       setchattext("")   
       await addDoc(collection(db,"chatstwo",chatId,"messages"),messageData)
@@ -290,13 +295,41 @@ const Chatsdm = ({navigation,route}) => {
               <LottieView source={Feathecomingsoonchatanimate} autoPlay loop style={{ width: 160, height: 160 }}/>          
         </View>
         :
+
+
+
+
+
         <ScrollView 
         style={styles.messageAreaContainer} 
         ref={scrollViewRef}
         showsVerticalScrollIndicator={false}
         bounces={false}
         onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
-        {messages.map(mes=>{
+
+
+
+          {messages.map(({data, time}) => {
+            return (
+              <>
+              <View style={{justifyContent: "center", alignSelf: "center", backgroundColor: COLORS.purple3, paddingHorizontal: 16, paddingVertical: 9, borderRadius: 15}}>
+                <Text style={{textAlign: "center", ...fontsize.xsmallest, ...FONTS.regular, color: COLORS.purple2}}>{time}</Text>
+              </View>
+              
+              {data.map(dat => {
+                if(dat.sender === userInfo.userUid){
+                  return (
+                    renderSenderHTML(dat) 
+                  )
+                }
+                return (
+                    renderReceiverHTML(dat) 
+                )
+              })}
+              </>
+            )
+          })}
+        {/* {messages.map(mes=>{
             if(mes.sender === userInfo.userUid){
               return (
                 renderSenderHTML(mes) 
@@ -305,8 +338,11 @@ const Chatsdm = ({navigation,route}) => {
             return (
                 renderReceiverHTML(mes) 
             )
-          })}
+          })} */}
       </ScrollView>
+
+
+
       }
       <View style={styles.chatTextContainer}>
         <View style={styles.inputarea}>

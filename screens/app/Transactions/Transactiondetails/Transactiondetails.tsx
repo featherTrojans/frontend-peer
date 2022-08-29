@@ -476,10 +476,6 @@ const Transactiondetails = ({ navigation, route }) => {
   };
 
 
-  const openEmailPrompt = () => {
-    
-  }
-
   const RightComponent = ({onpress}) => {
     return (
       <TouchableOpacity onPress={onpress} style={{  paddingHorizontal: 10, height: "100%",}}>
