@@ -63,6 +63,7 @@ export const withdrawstyles = StyleSheet.create({
   requesteeprofilewrap: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center"
   },
   requesteedetailswrap: {
     flexDirection: "row",
