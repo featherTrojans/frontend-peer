@@ -32,7 +32,7 @@ const Addbvn = ({navigation}) => {
   const animatedHeight = useRef(new Animated.Value(0)).current;
   const [isShow, setIsShow] = useState(false);
   const [shownText, setShownText] = useState("View")
-  const {successAlert, errorAlert } = useAlert()
+  const { errorAlert } = useAlert()
 
   const handleSubmit = async () => {
     setLoading(true);
