@@ -117,6 +117,8 @@ const Withdraw = ({ navigation }) => {
     setLoading(true);
     try {
       const response = await axiosCustom.get("/request/pending");
+      console.log("-------------------------------RESPONSE---------------------------")
+      console.log(response.data.data)
       setPendingRequests(response?.data?.data);
     } catch (err) {
       console.log(err.response);
@@ -128,6 +130,8 @@ const Withdraw = ({ navigation }) => {
   const getAcceptedRequest = async () => {
     try {
       const response = await axiosCustom.get("/request/accepted");
+      console.log("-------------------------------RESPONSETWO---------------------------")
+      console.log(response.data.data)
       setAcceptedRequests(response?.data?.data);
     } catch (err) {
       console.log(err.response);
@@ -178,8 +182,9 @@ const Withdraw = ({ navigation }) => {
     );
   };
 
-  const handleWithdraw = ()=>{
-    navigation.navigate("Availablelisting");
+  const handleWithdraw = (amount)=>{
+      closeModal()
+      navigation.navigate("Availablelisting",amount);
   }
   return (
     <Mainwrapper>
@@ -202,8 +207,11 @@ const Withdraw = ({ navigation }) => {
         data={datas}
         renderItem={({ item, index }) => {
           const isLast = datas.length === index + 1;
-          const { title, data } = item;
-
+          const { title} = item;
+          let data = pendingRequests
+          if(isLast){
+            data = acceptedRequests
+          }  
           return (
             <View
               style={[withdrawstyles.requesteeblock, { marginRight: isLast ? 0 : 20 }]}
@@ -273,7 +281,7 @@ const Withdraw = ({ navigation }) => {
       <View style={withdrawstyles.bottombtnwrap}>
         <Custombutton
           btntext="Withdraw Cash"
-          onpress={handleWithdrawbtn}
+          onpress={()=>openModal()}
         />
       </View>
 

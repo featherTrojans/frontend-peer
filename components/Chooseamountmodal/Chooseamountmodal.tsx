@@ -5,7 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { styles } from "../../screens/app/Chats/Chatsdm/Chatsdm.styles";
 import Custombutton from "../Custombutton/Custombutton";
 
@@ -20,6 +20,10 @@ const amounts = [
 ];
 
 const Chooseamountmodal = ({ headerText, onpress }) => {
+  const [amount, setAmount] = useState("0")
+  const handleAmountChange = (value) =>{
+    setAmount(value)
+  }
   return (
     <View>
       <Text style={styles.chooseAmountHeader}>{headerText}</Text>
@@ -32,8 +36,8 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
             style={styles.addedAmountText}
             keyboardType="numeric"
             placeholder="N0.00"
-            //  value={amount.value}
-            //  onChangeText={handleAmountChange}
+             value={amount}
+             onChangeText={handleAmountChange}
           />
           {/* <Text style={styles.addedAmountText}>N0.00</Text> */}
           {/* Add icon */}
@@ -45,7 +49,7 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
         {amounts.map((item, index) => {
           return (
             <TouchableOpacity
-              onPress={() => console.log(item, "Amount clicked")}
+              onPress={() => handleAmountChange(item.name)}
               activeOpacity={0.8}
               key={index}
               style={styles.amountOption}
@@ -56,7 +60,7 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
         })}
       </View>
 
-        <Custombutton btntext="Continue" onpress={onpress}/>
+        <Custombutton btntext="Continue" onpress={()=>onpress(amount)}/>
 
       {/* <TouchableOpacity style={styles.buttonWrapper} onPress={onpress}>
         <Text style={styles.buttonTextValue}>Proceed</Text>
