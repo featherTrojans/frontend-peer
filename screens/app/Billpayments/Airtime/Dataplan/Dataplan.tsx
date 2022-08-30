@@ -10,55 +10,59 @@ import { getBottomSpace } from 'react-native-iphone-x-helper';
 const {Ekoelectricityicon, Searcontacticon, Gloicon, Ikejaelectricityicon, Ashicon, Briefcaseicon, Forwardarrow, Mtnlogo} = icons
 
 
-const Eachoption = ({ logo, type }) => {
-    const { CustomModal, openModal } = useCustomModal();
 
-    return (
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={electrictystyles.eachoption}
-        onPress={openModal}
-      >
-        <CustomModal>
-          <View>
-            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", }}>
-            <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Mobile Data Purchase</Text>
-            <Image source={{uri: logo}} style={{width: 34, height: 34, borderRadius: 34/2}}/>
-            
-            </View>
-       
-           
-  
-            <View style={{marginTop: 25, marginBottom: 35}}>
-            <Input icon={<Ashicon />} placeholder="Enter meter number" name="plan" inputbg={COLORS.inputBgColor}/>
-            <Input icon={<Briefcaseicon />} placeholder="Network Type" name="network" inputbg={COLORS.inputBgColor}/>
-            <Input icon={<Briefcaseicon />} placeholder="Enter Amount" name="phone" inputbg={COLORS.inputBgColor}/>
-            <View style={{flexDirection: "row", alignItems: "center", backgroundColor: COLORS.trasparentPurple, alignSelf: "flex-start", paddingVertical: 9, paddingHorizontal: 14, borderRadius: 18}}>
-                
-                <Searcontacticon />
-                <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple2, marginLeft:8}}>Search Contacts</Text>
-            </View>
-            </View>
-            
-            
-          <Custombutton btntext="Yeah, Continue" onpress={() => console.log("hellow")} />
-            
-          </View>
-        </CustomModal>
-  
-        <View style={electrictystyles.logoandtitlewrap}>
-          <Image source={{uri: logo}} style={{width: 34, height: 34, borderRadius: 34/2}}/>
-          <Text style={electrictystyles.optiontitle}>{type}</Text>
-        </View>
-        <Forwardarrow />
-      </TouchableOpacity>
-    );
-  };
 
 
 const Dataplan = ({navigation, route}) => {
-    const { image, subdata } = route?.params;
+    const { image, subdata, type: billType, title } = route?.params;
     const {suboptions} = subdata
+
+
+    const Eachoption = ({ logo, type }) => {
+      const { CustomModal, openModal } = useCustomModal();
+  
+  
+      return (
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={electrictystyles.eachoption}
+          onPress={openModal}
+        >
+          <CustomModal>
+            <View>
+              <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", }}>
+              <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Mobile Data Purchase</Text>
+              <Image source={{uri: logo}} style={{width: 34, height: 34, borderRadius: 34/2}}/>
+              
+              </View>
+         
+             
+    
+              <View style={{marginTop: 25, marginBottom: 35}}>
+              <Input icon={<Ashicon />} placeholder="Enter meter number" name="plan" inputbg={COLORS.inputBgColor}/>
+              <Input icon={<Briefcaseicon />} placeholder="Network Type" name="network" inputbg={COLORS.inputBgColor}/>
+              <Input icon={<Briefcaseicon />} placeholder="Enter Amount" name="phone" inputbg={COLORS.inputBgColor}/>
+              <View style={{flexDirection: "row", alignItems: "center", backgroundColor: COLORS.trasparentPurple, alignSelf: "flex-start", paddingVertical: 9, paddingHorizontal: 14, borderRadius: 18}}>
+                  
+                  <Searcontacticon />
+                  <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple2, marginLeft:8}}>Search Contacts</Text>
+              </View>
+              </View>
+              
+              
+            <Custombutton btntext="Yeah, Continue" onpress={() => navigation.navigate("Airtimepurchasepin", {type: billType, data: {title, dataplan: "500"}})} />
+              
+            </View>
+          </CustomModal>
+    
+          <View style={electrictystyles.logoandtitlewrap}>
+            <Image source={{uri: logo}} style={{width: 34, height: 34, borderRadius: 34/2}}/>
+            <Text style={electrictystyles.optiontitle}>{type}</Text>
+          </View>
+          <Forwardarrow />
+        </TouchableOpacity>
+      );
+    };
 
 
 

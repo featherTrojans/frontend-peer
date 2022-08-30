@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
-import { Backheader, Custombutton, Mainwrapper } from "../../../../../components";
+import { Backheader, Chooseamountmodal, Custombutton, Mainwrapper } from "../../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import useCustomModal from "../../../../../utils/useCustomModal";
 
@@ -8,7 +8,7 @@ const { Forwardarrow, Airtimeicon, Mobiledataicon } = icons;
 const Airtimeanddata = ({navigation}) => {
 
 
-  const {CustomModal, openModal} = useCustomModal()
+  const {CustomModal, openModal, closeModal} = useCustomModal()
 
 
   const typedatas = [
@@ -22,7 +22,7 @@ const Airtimeanddata = ({navigation}) => {
       bg: "#F1E5FF",
       icon: <Mobiledataicon />,
       title: "Mobile Data Purchase",
-      action: () => navigation.navigate("Dataprovider")
+      action: () => navigation.navigate("Dataprovider", {billType: "data"})
     },
   ];
 
@@ -34,9 +34,11 @@ const Airtimeanddata = ({navigation}) => {
 
     <CustomModal>
       <View>
-        <Text>Yes</Text>
-
-        <Custombutton btntext="Continue" onpress={() => navigation.navigate("Airtimeprovider")}/>
+          <Chooseamountmodal headerText="How much airtime do you want to purchase?" onpress={() => {
+            closeModal()
+            navigation.navigate("Airtimeprovider", {billType: "airtime"})
+          }}/>
+        {/* <Custombutton btntext="Continue" onpress={() => navigation.navigate("Airtimeprovider")}/> */}
       </View>
       
     </CustomModal>

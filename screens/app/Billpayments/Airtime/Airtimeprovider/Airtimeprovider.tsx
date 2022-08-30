@@ -21,109 +21,116 @@ const {
   Searcontacticon,
 } = icons;
 
-const Eachoption = ({ image, type }) => {
-  const { CustomModal, openModal } = useCustomModal();
 
-  return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      style={electrictystyles.eachoption}
-      onPress={openModal}
-    >
-      <CustomModal>
-        <View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{
-                ...fontsize.smallest,
-                ...FONTS.medium,
-                color: COLORS.blue9,
-              }}
-            >
-              Airtime Purchase
-            </Text>
-            {/* {showLogo(logotype)} */}
-            <Image
-        style={{width: 36, height: 36, borderRadius: 36/2}}
-        source={{
-          uri: image,
-        }}
-      />
-          </View>
+const Airtimeprovider = ({ navigation, route }) => {
 
-          <View style={{ marginTop: 25, marginBottom: 35 }}>
-            <Input
-              icon={<Ashicon />}
-              placeholder="Enter meter number"
-              name="plan"
-              inputbg={COLORS.inputBgColor}
-            />
-            <Input
-              icon={<Briefcaseicon />}
-              placeholder="Network Type"
-              name="network"
-              inputbg={COLORS.inputBgColor}
-            />
-            <Input
-              icon={<Briefcaseicon />}
-              placeholder="Enter Amount"
-              name="phone"
-              inputbg={COLORS.inputBgColor}
-            />
+
+  const {billType} = route.params
+
+
+
+  const Eachoption = ({ image, type }) => {
+    const { CustomModal, openModal } = useCustomModal();
+  
+    return (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={electrictystyles.eachoption}
+        onPress={openModal}
+      >
+        <CustomModal>
+          <View>
             <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
-                backgroundColor: COLORS.trasparentPurple,
-                alignSelf: "flex-start",
-                paddingVertical: 9,
-                paddingHorizontal: 14,
-                borderRadius: 18,
+                justifyContent: "space-between",
               }}
             >
-              <Searcontacticon />
               <Text
                 style={{
                   ...fontsize.smallest,
-                  ...FONTS.regular,
-                  color: COLORS.purple2,
-                  marginLeft: 8,
+                  ...FONTS.medium,
+                  color: COLORS.blue9,
                 }}
               >
-                Search Contacts
+                Airtime Purchase
               </Text>
+              {/* {showLogo(logotype)} */}
+              <Image
+          style={{width: 36, height: 36, borderRadius: 36/2}}
+          source={{
+            uri: image,
+          }}
+        />
             </View>
+  
+            <View style={{ marginTop: 25, marginBottom: 35 }}>
+              <Input
+                icon={<Ashicon />}
+                placeholder="Enter Amount"
+                name="plan"
+                inputbg={COLORS.inputBgColor}
+              />
+              <Input
+                icon={<Briefcaseicon />}
+                placeholder="Network Type"
+                name="network"
+                inputbg={COLORS.inputBgColor}
+              />
+              <Input
+                icon={<Briefcaseicon />}
+                placeholder="Phone Number"
+                name="phone"
+                inputbg={COLORS.inputBgColor}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  backgroundColor: COLORS.trasparentPurple,
+                  alignSelf: "flex-start",
+                  paddingVertical: 9,
+                  paddingHorizontal: 14,
+                  borderRadius: 18,
+                }}
+              >
+                <Searcontacticon />
+                <Text
+                  style={{
+                    ...fontsize.smallest,
+                    ...FONTS.regular,
+                    color: COLORS.purple2,
+                    marginLeft: 8,
+                  }}
+                >
+                  Search Contacts
+                </Text>
+              </View>
+            </View>
+  
+            <Custombutton
+              btntext="Yeah, Continue"
+              onpress={() => navigation.navigate("Airtimepurchasepin", {type:  billType, data: {network: "mtn", amount: 100}})}
+            />
           </View>
-
-          <Custombutton
-            btntext="Yeah, Continue"
-            onpress={() => console.log("hellow")}
-          />
+        </CustomModal>
+  
+        <View style={electrictystyles.logoandtitlewrap}>
+   
+          <Image
+          style={{width: 34, height: 34, borderRadius: 34/2}}
+          source={{
+            uri: image,
+          }}
+        />
+          <Text style={electrictystyles.optiontitle}>{type}</Text>
         </View>
-      </CustomModal>
-
-      <View style={electrictystyles.logoandtitlewrap}>
- 
-        <Image
-        style={{width: 34, height: 34, borderRadius: 34/2}}
-        source={{
-          uri: image,
-        }}
-      />
-        <Text style={electrictystyles.optiontitle}>{type}</Text>
-      </View>
-      <Forwardarrow />
-    </TouchableOpacity>
-  );
-};
-
-const Airtimeprovider = ({ navigation }) => {
+        <Forwardarrow />
+      </TouchableOpacity>
+    );
+  };
+  
   const providertypes = [
     {
       title: "MTN Nigeria",
@@ -142,6 +149,8 @@ const Airtimeprovider = ({ navigation }) => {
       logotype: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAirtel%20Nigeria%20Logo%20(1).png?alt=media&token=5dba1e6a-3cce-43fa-972f-df17926db7ff",
     },
   ];
+
+
 
   return (
     <Mainwrapper>

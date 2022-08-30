@@ -8,8 +8,9 @@ import { icons } from '../../../../../constants'
 
 const {Ekoelectricityicon, IBelectricityicon, Ikejaelectricityicon,Gloicon, Mtnlogo, Forwardarrow} = icons
 
-const Dataprovider = ({navigation}) => {
+const Dataprovider = ({navigation, route}) => {
 
+    const {billType} = route.params
 
     const providertypes = [
         {
@@ -259,7 +260,9 @@ const Dataprovider = ({navigation}) => {
                   onPress={() =>
                     navigation.navigate("Dataplan", {
                       subdata: subroute,
-                      image: logo
+                      image: logo,
+                      type: billType,
+                      title: title
                     })
                   }
                 >

@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LottieView from "lottie-react-native";
 import { styles } from "../../../Transferfunds/Transferpin/Transferpin.styles";
 import { useToast } from "react-native-toast-notifications";
@@ -14,12 +14,14 @@ import {
   Bottombtn,
   Keyboard,
   Loader,
+  Mainwrapper,
   Numberbtn,
 } from "../../../../../components";
 import amountFormatter from "../../../../../utils/formatMoney";
 import SecureDot from "../../../../../assets/icons/SecureDot";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { securepinstyles } from "../../../../auth/signup/Securepin/Securepin.styles";
 
 const { Successcheckanimate } = icons;
 
@@ -44,109 +46,106 @@ const Airtimepurchasepin = ({ navigation, route }) => {
       setPin(newdata);
     }
   };
+  useEffect(() => {
+    if(pin.length === 4){
+      handleSubmit()
+    }
+  }, [pin])
 
   
   const handleSubmit = async ()=>{
-    setLoading(true)
-    try{
-      if(type === "airtime"){
-        await axiosCustom.post("/bills/airtime",{...data, userPin: pin.join("")})
+    console.log("airtimeprchase datas", type, data);
+
+    // setLoading(true)
+    // try{
+    //   if(type === "airtime"){
+    //     console.log("airtimeprchase datas", data, airtime);
         
-      }else{
-        await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
+    //     // await axiosCustom.post("/bills/airtime",{...data, userPin: pin.join("")})
         
-      }
-      setShowModal(true)
-    }catch(err){
-      showerror(toast, err)
-    }finally{
-      setLoading(false)
-    }
+    //   }else{
+    //     await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
+        
+    //   }
+    //   setShowModal(true)
+    // }catch(err){
+    //   showerror(toast, err)
+    // }finally{
+    //   setLoading(false)
+    // }
   }
   return (
-    <SafeAreaView style={styles.container}>
-    <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
+    <Mainwrapper>
       {loading && <Loader />}
-      <Customstatusbar />
-      <Globalmodal
-        showState={showmodal}
-        btnFunction={() => {
-          setShowModal(false);
-          navigation.navigate("Root")
-        }}
-        onBgPress={() => setShowModal(true)}
-      >
-        <View style={{ alignItems: "center" }}>
-          <LottieView
-            source={Successcheckanimate}
-            autoPlay
-            loop
-            style={{ width: RFValue(148), height: RFValue(148) }}
-          />
 
-          <Text
-            style={{
-              textAlign: "center",
-              marginHorizontal: RFValue(40),
-              //  marginVertical: 40,
-              marginTop: RFValue(24),
-              marginBottom: RFValue(45),
-              ...fontsize.bsmall,
-              ...FONTS.regular,
-            }}
-          >
-            Airtime Purchase Successful!!
-          </Text>
-        </View>
-      </Globalmodal>
 
-      <Backheader />
-      <View style={styles.mainContainer}>
-        <View style={styles.descriptionContainer}>
-            {
-              type === "airtime" &&  <Text style={styles.descriptionText}>
-                You are about to purchase  <Text style={{...fontsize.bsmall, ...FONTS.bold}}>NGN {data.amount} - {data.network} </Text> to {data.phone}
-              </Text>
-            }
-          <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
+      <View style={{paddingHorizontal: 15, flex: 1}}>
+        <View style={{marginTop: 32}}>
+          <Text style={{...fontsize.bbsmall, ...FONTS.medium, color: COLORS.blue9, marginBottom: 20}}>Complete Transaction</Text>
+          {type === "airtime" && 
+          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to purchase <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue6}}>N5,000</Text> airtime from your Primary Wallet to <Text style={{color: COLORS.blue6}}>08133211658</Text></Text>
+          }
+          {type === "data" && 
+          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to purchase <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue6}}>N5,000</Text> data from your Primary Wallet to <Text style={{color: COLORS.blue6}}>08133211658</Text></Text>
+          }
+          
         </View>
 
-        <View style={styles.pinContainer}>
-          <View style={styles.pinInputContainer}>
-            <View style={styles.pinView}>{pin[0] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[1] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[2] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[3] && <SecureDot />}</View>
+
+
+          <View style={{ alignItems: "center", flex: 1, justifyContent: "center"}}>
+            <Text style={{marginBottom: 60, ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Enter your Feather PIN</Text>
+
+
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <View style={securepinstyles.pinInputContainer}>
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[0] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[1] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[2] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[3] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+              </View>
+            </View>
           </View>
+            
+
+        <View>
+
         </View>
+      </View>
+   
+
+     
 
 
 
-        {/* <View style={styles.numberBtnContainer}>
-          {numbers.map((number, index) => {
-            return (
-              <Numberbtn
-                key={index}
-                onpress={
-                  number !== "" ? () => handleSetAmount(number) : () => null
-                }
-              >
-                {number}
-              </Numberbtn>
-            );
-          })}
-
-          <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
-        </View> */}
+     
 
 
 
         <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
 
-      </View>
-      <Bottombtn title="PROCEED" onpress={handleSubmit} />
-    </ScrollView>
-    </SafeAreaView>
+      {/* <Bottombtn title="PROCEED" onpress={() => handleSubmit(data)} /> */}
+    </Mainwrapper>
   );
 };
 
