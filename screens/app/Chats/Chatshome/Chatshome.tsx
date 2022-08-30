@@ -205,6 +205,7 @@ const Chatshome = ({ navigation }) => {
                 <ActivityIndicator size="large" color="#000" />
               </View>
             ) : (
+              
               <Chat authId={authId} chattwos={chattwos} chats={chats} />
             )}
           </View>

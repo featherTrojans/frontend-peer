@@ -31,7 +31,7 @@ const Chat = ({userId, chatinfo}:chatProps) => {
       activeOpacity={0.8}
        onPress={()=>navigate.navigate("Chatsdm",{userInfo})}
        style={styles.chatContainer}>
-          <InitialsBg sideLength={34} bg="#f6f8ff" name={userInfo?.fullName || "0 0"} />
+          <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
 
 
         <View style={styles.chatInfo}>
@@ -40,7 +40,7 @@ const Chat = ({userId, chatinfo}:chatProps) => {
             <Text style={styles.chatTime}>{moment(chatinfo?.createdAt).format('LT')}</Text>
           </View>
           <View>
-            <Text style={styles.chatHintMessage}>{chatinfo?.lastMessage}</Text>
+            <Text  numberOfLines={1} ellipsizeMode="tail" style={styles.chatHintMessage}>{chatinfo?.lastMessage}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -77,6 +77,8 @@ const AllChats = ({chats, chattwos, authId})=>{
       }
   
     setAllChats(arranged);
+    console.log(allChats, "list of all chats");
+    
 
   },[chats, chattwos])
 

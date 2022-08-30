@@ -21,6 +21,7 @@ import {
   Mainwrapper,
   Negotiatecharge,
   Requesterinfo,
+  Successalert,
   Transactionpin,
   Transactionsummary,
   Viewbalance,
@@ -36,8 +37,6 @@ import { getCurrentLocation } from "../../../../utils/customLocation";
 import { RFValue } from "react-native-responsive-fontsize";
 import { withdrawstyles } from "../../Withdraws/Withdraw/Withdraw.styles";
 import useCustomModal from "../../../../utils/useCustomModal";
-
-
 const {
   TransferIcon,
   Location,
@@ -289,6 +288,8 @@ const Depositupdate = ({ navigation, route }) => {
           </View>
             {/* <Transactionpin /> */}
             {/* <Negotiatecharge /> */}
+            {/* <Successalert successMsg="Your request has been  submitted" btnText="yes continue" btnFunction={() => console.log("yes")}/> */}
+
 
           {/* <Requesterinfo /> */}
           {/* <Transactionsummary /> */}
