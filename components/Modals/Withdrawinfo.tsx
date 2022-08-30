@@ -2,10 +2,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, fontsize, icons } from '../../constants'
 import Custombutton from '../Custombutton/Custombutton'
+import { TouchableOpacity } from '@gorhom/bottom-sheet'
+import { useNavigation } from '@react-navigation/native'
 const {Purplechaticon, Editicon} = icons
 
-const Withdrawinfo = ({openTransationSummary, withdrawInfo}) => {
-  
+const Withdrawinfo = ({openNextModal, withdrawInfo}) => {
+  const navigation =useNavigation()
   return (
     <View>
       <View style={{ alignItems: 'center', marginBottom: 40}}>
@@ -22,9 +24,11 @@ const Withdrawinfo = ({openTransationSummary, withdrawInfo}) => {
             <View>
             <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>{withdrawInfo.locationText}</Text>
             </View>
-            <Editicon />
+            <TouchableOpacity onPress={()=>navigation.navigate("Meetuppoint")}>
+              <Editicon />
+            </TouchableOpacity>
         </View>
-      <Custombutton btntext='Yeah Proceed' onpress={openTransationSummary}/>
+      <Custombutton btntext='Yeah Proceed' onpress={openNextModal}/>
     </View>
   )
 }

@@ -106,6 +106,7 @@ import SecurepinAgain from "./auth/signup/Securepin/SecurepinAgain";
 import CustomWebView from "./shared/CustomWebView";
 import Depositinput from "./app/Deposit/DepositInput/Depositinput";
 import LockScreen from "./shared/LockScreen/LockScreen";
+import RequesterinfoScreen from "./shared/RequesterinfoScreen";
 
 export {
   Onboarding,
@@ -194,5 +195,6 @@ export {
   Electricitymetertype,
   Dataprovider,
   Dataplan,
-  DepositSummary
+  DepositSummary,
+  RequesterinfoScreen
 };

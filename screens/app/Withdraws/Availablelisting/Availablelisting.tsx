@@ -32,7 +32,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { Backheader, Horizontaline, InitialsBg, Requesterinfo, Transactionsummary } from "../../../../components";
+import { Backheader, Horizontaline, InitialsBg, Negotiatecharge, Requesterinfo, Transactionsummary } from "../../../../components";
 import Comingsoonagent from "../../../../assets/Lottie/animations/comingSoonAgent.json";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -77,6 +77,7 @@ const Availablelisting = ({ navigation, route }: any) => {
     1, 2, 2.4, 5, 6, 4, 3, 2, 4, 3, 4, 2, 2, 2, 3, 4, 2, 4, 3, 2,
   ]);
   const [charge, setCharge] = useState(0);
+  const [negotiatecharge, setNegotiateCharge] = useState(0);
   const [activeType, setActiveType] = useState("peers");
   const [loading, setLoading] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
@@ -90,6 +91,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const [info, setInfo] = useState("More")
   const { CustomModal ,openModal, closeModal} = useCustomModal()
   const { CustomModal:TransationSummaryModal ,openModal: openTransactionSummaryModal, closeModal:closeTransactionSummeryModal} = useCustomModal()
+  const { CustomModal:NegotiateChargeModal ,openModal: openNegotiateChargeModal, closeModal:closeNegotiateChargeModal} = useCustomModal()
 
   // i removed changed from the params passed to this useRef below
   const onViewChangeRef = useRef<
@@ -180,6 +182,19 @@ const Availablelisting = ({ navigation, route }: any) => {
     openModal()
   }
 
+  const handleNextNegotiateCharge = (amount)=>{
+    setNegotiateCharge(amount);
+    openTransactionSummaryModal()
+
+  }
+
+  const handleNextRequestSummary = ()=>{
+    closeTransactionSummeryModal()
+    closeNegotiateChargeModal()
+    closeModal()
+    //open sucess modal
+  }
+
   const toggleActiveType = () => {
     if (activeType === "peers") {
       setActiveType("agents");
@@ -222,11 +237,15 @@ const Availablelisting = ({ navigation, route }: any) => {
     >
       
       <CustomModal>
-        <Withdrawinfo withdrawInfo={activeAgent} openTransationSummary={openTransactionSummaryModal}/>
+        <Withdrawinfo withdrawInfo={activeAgent} openNextModal={openNegotiateChargeModal}/>
       </CustomModal>
 
+      <NegotiateChargeModal>
+        <Negotiatecharge openNextModal={handleNextNegotiateCharge} />
+      </NegotiateChargeModal>
+
       <TransationSummaryModal>
-        <RequestSummary withdrawInfo={activeAgent} />
+        <RequestSummary openNextModal={handleNextRequestSummary} withdrawInfo={activeAgent} baseCharge={charge} addedFee={negotiatecharge} />
       </TransationSummaryModal>
 
       <Customstatusbar />

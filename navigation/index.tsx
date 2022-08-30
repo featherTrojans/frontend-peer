@@ -143,7 +143,8 @@ import {
   Meetuppoint,
   Safetycautions,
   Getstarted,
-  Verifybvn
+  Verifybvn,
+  RequesterinfoScreen
 } from "../screens";
 // import { LockScreen } from "../screens";
 
@@ -618,6 +619,7 @@ const RootNavigator = ({ initialBoarded }) => {
               name="Pendingwithdraw"
               component={Pendingwithdraw}
             />
+            <AppStack.Screen name="RequesterinfoScreen" component={RequesterinfoScreen} />
             <AppStack.Screen name="Negotiate" component={Negotiate} />
             <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
             {/* TO MaKE AFTER ACCEPTING */}

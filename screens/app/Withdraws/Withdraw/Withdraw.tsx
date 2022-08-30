@@ -24,13 +24,10 @@ import amountFormatter from "../../../../utils/formatMoney";
 
 import { RFValue } from "react-native-responsive-fontsize";
 import useCustomModal from "../../../../utils/useCustomModal";
+import Requestuser from "../../../shared/RequestUser";
 
 const {
-  Backarrow,
-  Cryingicon,
-
   Acceptedcheck,
-  Emptyicon,
   Cryinganimate,
 } = icons;
 
@@ -40,6 +37,20 @@ type DataProps = {
   username: string;
   price: string;
 };
+
+interface withdrawobj {
+  "agent": string,
+  "agentUsername": string,
+  "amount":string,
+  "charges": string,
+  "createdAt": string,
+  "meetupPoint": string,
+  "negotiatedFee": string,
+  "phoneNumber": string,
+  "reference": string,
+  "status": string,
+  "total": string,
+}
 
 // Component to show when the list is empty
 const Emptyrequest = () => {
@@ -150,37 +161,7 @@ const Withdraw = ({ navigation }) => {
     { title: "Accepted Requests", data: [] },
   ];
 
-  const Requestuser = ({
-    details,
-    accepted,
-  }: {
-    details: any;
-    accepted: boolean;
-  }) => {
-    const { name } = details;
-    return (
-      <View style={withdrawstyles.requesteeprofilewrap}>
-        <View style={withdrawstyles.requesteeprofilewrap}>
-          <View style={withdrawstyles.requesteeinitialsbg}>
-            <Text style={withdrawstyles.requesteeinitialtext}>D</Text>
 
-            {accepted && (
-              <View style={{ position: "absolute", bottom: -3, right: 0 }}>
-                <Acceptedcheck />
-              </View>
-            )}
-          </View>
-
-          <View style={{ marginLeft: 12 }}>
-            <Text style={withdrawstyles.requesteename}>{name}</Text>
-            <Text style={withdrawstyles.requesteedistance}>12 Mins Away</Text>
-          </View>
-        </View>
-
-        <Text style={withdrawstyles.requestedamount}>N23,000</Text>
-      </View>
-    );
-  };
 
   const handleWithdraw = (amount)=>{
       closeModal()
@@ -223,10 +204,10 @@ const Withdraw = ({ navigation }) => {
                   const isLastItem = data.length === index + 1;
                   const accepted = title === "Accepted Requests";
                   return (
-                    <View key={index}>
-                      <Requestuser details={info} accepted={accepted} />
+                    <TouchableOpacity onPress={()=>navigation.navigate("RequesterinfoScreen")} key={index}>
+                      <Requestuser details={{name:info.agent, duration:info.meetupPoint, amount:info.amount}} accepted={accepted} />
                       {!isLastItem && <Horizontaline marginV={21} />}
-                    </View>
+                    </TouchableOpacity>
                   );
                 })
               ) : (

@@ -189,6 +189,19 @@ const Emptyrequest = () => {
   );
 };
 
+const datas = [
+  {
+    title: "Pending Requests",
+    data: [
+      { name: "Damilare Seyinde" },
+      { name: "Rasaq Momoh" },
+      { name: "Peterson Yeyejare" },
+    ],
+  },
+  { title: "Accepted Requests", data: [] },
+];
+
+
 const Depositupdate = ({ navigation, route }) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -210,66 +223,55 @@ const Depositupdate = ({ navigation, route }) => {
 
 
   // Previous version functions
-  // useEffect(() => {
-  //   getDepositStatus();
-  // },[route.params?.from]);
-  // useEffect(() => {
-  //   updateDepositLocation();
-  // }, [status, coords]);
-  // useEffect(() => {
-  //   getLocation();
-  // }, []);
+  useEffect(() => {
+    getDepositStatus();
+  },[route.params?.from]);
+  useEffect(() => {
+    updateDepositLocation();
+  }, [status, coords]);
+  useEffect(() => {
+    getLocation();
+  }, []);
 
-  // const getLocation = async () => {
-  //   try {
-  //     const { coordinates, address, locationObj }: any =
-  //       await getCurrentLocation();
-  //     setCoords({ ...coordinates, locationText: address });
-  //   } catch (err) {
-  //   } finally {
-  //   }
-  // };
+  const getLocation = async () => {
+    try {
+      const { coordinates, address, locationObj }: any =
+        await getCurrentLocation();
+      setCoords({ ...coordinates, locationText: address });
+    } catch (err) {
+    } finally {
+    }
+  };
 
-  // const getDepositStatus = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await axiosCustom.get("/status/get");
-  //     setStatus(response.data.data);
-  //   } catch (err) {
-  //     // maybe show the error
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  // const updateDepositLocation = async () => {
+  const getDepositStatus = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosCustom.get("/status/get");
+      setStatus(response.data.data);
+    } catch (err) {
+      // maybe show the error
+    } finally {
+      setLoading(false);
+    }
+  };
+  const updateDepositLocation = async () => {
 
-  //   try {
-  //     if (status && coords.longitude) {
-  //       const response = await axiosCustom.put("/status/location/update", {
-  //         longitude: coords.longitude,
-  //         latitude: coords.latitude,
-  //         locationText: coords.locationText,
-  //         reference: status?.status[0]?.reference,
-  //       });
-  //     }
-  //   } catch (err) {
-  //   } finally {
-  //   }
-  // };
+    try {
+      if (status && coords.longitude) {
+        const response = await axiosCustom.put("/status/location/update", {
+          longitude: coords.longitude,
+          latitude: coords.latitude,
+          locationText: coords.locationText,
+          reference: status?.status[0]?.reference,
+        });
+      }
+    } catch (err) {
+    } finally {
+    }
+  };
 
 
 
-  const datas = [
-    {
-      title: "Pending Requests",
-      data: [
-        { name: "Damilare Seyinde" },
-        { name: "Rasaq Momoh" },
-        { name: "Peterson Yeyejare" },
-      ],
-    },
-    { title: "Accepted Requests", data: [] },
-  ];
 
   const Requestuser = ({
     details,
@@ -348,7 +350,7 @@ const Depositupdate = ({ navigation, route }) => {
             </View>
             <Text style={{marginLeft: 12, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>My Earnings last 24hrs</Text>
           </View>
-          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>+ N150,700.50</Text>
+          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>+ N150</Text>
         </View>
         <Horizontaline marginV={20}/>
 
