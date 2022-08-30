@@ -10,11 +10,29 @@ import Custombutton from '../../../components/Custombutton/Custombutton'
 import Map from '../../shared/map/Map'
 import { Backheader } from '../../../components';
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const {Purplechaticon, Renegotiateicon, Cancelrequest, Greenphoneicon, Editicon} = icons
 
-const Requesterinfo = ({navigation}) => {
+interface withdrawobj {
+  "agent": string,
+  "agentUsername": string,
+  "amount":string,
+  "charges": string,
+  "createdAt": string,
+  "meetupPoint": string,
+  "negotiatedFee": string,
+  "phoneNumber": string,
+  "reference": string,
+  "status": string,
+  "total": string,
+}
+
+const Requesterinfo = ({navigation,route}) => {
+  const info = route.params as withdrawobj
+  console.log("----------------------INFO---------------------")
+  console.log(info)
 
   const snapPoints = useMemo(() => ['60%', '85%'], []);
   return (
@@ -36,24 +54,24 @@ const Requesterinfo = ({navigation}) => {
         <View style={{width: 48, height: 48, borderRadius: 48/2, justifyContent: 'center', alignItems: "center", backgroundColor: COLORS.blue9, marginBottom: 22}}>
           <Text style={{...fontsize.bbsmall, color: COLORS.white, ...FONTS.medium}}>D</Text>
         </View>
-        <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9}}>Damilare Seyinde</Text>
-        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 7}}>12 Mins Away</Text>
+        <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9}}>{info.agent}</Text>
+        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 7}}>{info.meetupPoint} Mins Away</Text>
       </View>
 
 
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>Amount</Text>
-        <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>+N50,000.00</Text>
+        <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>+N{info.amount}</Text>
       </View>
       <Horizontaline marginV={20}/>
       <Text style={{marginBottom: 16, ...fontsize.smallest, ...FONTS.regular}}>Total Charge (Base Charge + Your Charge)</Text>
-      <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.purple2}}>N550.00</Text>
+      <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.purple2}}>N{info.amount + info.charges + info.negotiatedFee}</Text>
 
       <View style={{marginTop: 32, marginBottom: 40}}>
           <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>Meetup Point (your comfort/safe zone)</Text>
           <View style={{marginTop: 15}}>
             <View>
-            <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Gberigbe Field, Gberigbe Ikorodu</Text>
+            <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>{info.meetupPoint}</Text>
             </View>
           </View>
       </View>
@@ -71,7 +89,7 @@ const Requesterinfo = ({navigation}) => {
             <Purplechaticon />
           </View>
           <View style={{marginLeft: 18}}>
-            <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Chat Damilare</Text>
+            <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Chat {info.agent.split(" ")}</Text>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, marginTop: 5}}>Discuss conversations via chat</Text>
           </View>
         </View>
@@ -116,7 +134,7 @@ const Requesterinfo = ({navigation}) => {
       <Horizontaline marginV={21}/>
 
       <View>
-        <View style={{flexDirection: 'row', alignItems: "center"}}>
+        <TouchableOpacity onPress={()=>navigation.navigate("Cancelrequest", info.reference)} style={{flexDirection: 'row', alignItems: "center"}}>
           <View style={{width: 32, height: 32, backgroundColor: COLORS.red2, borderRadius: 32/2, justifyContent: "center", alignItems: 'center'}}>
             <Cancelrequest />
           </View>
@@ -124,7 +142,7 @@ const Requesterinfo = ({navigation}) => {
             <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Cancel Request</Text>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, marginTop: 5}}>Cancel this transaction right now</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
       </View>
 

@@ -22,7 +22,7 @@ const Requestuser = ({
     details: any;
     accepted?: boolean;
   }) => {
-    const { name } = details;
+    const { name, duration, amount } = details;
     return (
       <View style={withdrawstyles.requesteeprofilewrap}>
         <View style={[withdrawstyles.requesteeprofilewrap]}>
@@ -38,11 +38,11 @@ const Requestuser = ({
 
           <View style={{ marginLeft: 12 }}>
             <Text style={withdrawstyles.requesteename}>{name}</Text>
-            <Text style={withdrawstyles.requesteedistance}>12 Mins Away</Text>
+            <Text style={withdrawstyles.requesteedistance}>{duration}</Text>
           </View>
         </View>
 
-        <Text style={withdrawstyles.requestedamount}>N23,000</Text>
+        <Text style={withdrawstyles.requestedamount}>N{amount}</Text>
       </View>
     );
   };

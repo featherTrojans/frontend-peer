@@ -2,29 +2,33 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, fontsize, icons } from '../../constants'
 import Custombutton from '../Custombutton/Custombutton'
+import { TouchableOpacity } from '@gorhom/bottom-sheet'
+import { useNavigation } from '@react-navigation/native'
 const {Purplechaticon, Editicon} = icons
 
-const Withdrawinfo = ({openTransationSummary}) => {
-  
+const Withdrawinfo = ({openNextModal, withdrawInfo}) => {
+  const navigation =useNavigation()
   return (
     <View>
       <View style={{ alignItems: 'center', marginBottom: 40}}>
         <View style={{width: 48, height: 48, borderRadius: 48/2, justifyContent: 'center', alignItems: "center", backgroundColor: COLORS.blue9, marginBottom: 22}}>
           <Text style={{...fontsize.bbsmall, color: COLORS.white, ...FONTS.medium}}>D</Text>
         </View>
-        <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9}}>Damilare Seyinde</Text>
-        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 7}}>12 Mins Away</Text>
+        <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9}}>{withdrawInfo.fullName}</Text>
+        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 7}}>{withdrawInfo.duration}</Text>
       </View>
 
 
         <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular, marginBottom: 10}}>Meetup Point (your comfort/safe zone)</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
             <View>
-            <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>Gberigbe Field, Gberigbe Ikorodu</Text>
+            <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>{withdrawInfo.locationText}</Text>
             </View>
-            <Editicon />
+            <TouchableOpacity onPress={()=>navigation.navigate("Meetuppoint")}>
+              <Editicon />
+            </TouchableOpacity>
         </View>
-      <Custombutton btntext='Yeah Proceed' onpress={openTransationSummary}/>
+      <Custombutton btntext='Yeah Proceed' onpress={openNextModal}/>
     </View>
   )
 }

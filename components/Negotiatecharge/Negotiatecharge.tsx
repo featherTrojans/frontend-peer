@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { COLORS, FONTS, fontsize } from '../../constants'
 import Horizontaline from '../Horizontaline/Horizontaline'
 import { styles } from '../../screens/app/Chats/Chatsdm/Chatsdm.styles'
@@ -13,7 +13,11 @@ const amounts = [
     { name: "200", value: 200 },
     { name: "500", value: 500 },
   ];
-const Negotiatecharge = () => {
+const Negotiatecharge = ({openNextModal}) => {
+  const [amount,setAmount] = useState("");
+  const handleAmountChange = (value)=>{
+    setAmount(value)
+  }
   return (
     <View>
       <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9, marginBottom: 10}}>Negotiate Charge</Text>
@@ -26,8 +30,8 @@ const Negotiatecharge = () => {
             style={styles.addedAmountText}
             keyboardType="numeric"
             placeholder="N0.00"
-            //  value={amount}
-            //  onChangeText={handleAmountChange}
+             value={amount}
+             onChangeText={handleAmountChange}
           />
         {/* pirce to pick */}
 
@@ -35,7 +39,7 @@ const Negotiatecharge = () => {
         {amounts.map((item, index) => {
           return (
             <TouchableOpacity
-              onPress={() => console.log(item.name)}
+              onPress={() => handleAmountChange(item.name)}
               activeOpacity={0.8}
               key={index}
               style={styles.amountOption}
@@ -58,7 +62,7 @@ const Negotiatecharge = () => {
       <Text style={{marginBottom: 16, ...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>Total Charge (Base Charge + Your Charge)</Text>
       <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue9}}>N550.00</Text>
       </View>
-      <Custombutton btntext='Yeah, Proceed' onpress={() => console.log('negotiate chnare')}/>
+      <Custombutton btntext='Yeah, Proceed' onpress={() => openNextModal(amount)}/>
     </View>
   )
 }
