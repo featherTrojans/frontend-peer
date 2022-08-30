@@ -79,6 +79,8 @@ export type RootStackParamList = {
   Bankaccount: undefined;
   Transferpin: undefined;
   TransferpinBank: undefined;
+  DepositSummary: undefined;
+  Depositstart: undefined;
 
   //Notification
   Notifications: undefined;

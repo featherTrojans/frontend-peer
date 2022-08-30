@@ -263,9 +263,9 @@ const Depositupdate = ({ navigation, route }) => {
     {
       title: "Pending Requests",
       data: [
-        { name: "Damilare Seyinde" },
-        { name: "Rasaq Momoh" },
-        { name: "Peterson Yeyejare" },
+        // { name: "Damilare Seyinde" },
+        // { name: "Rasaq Momoh" },
+        // { name: "Peterson Yeyejare" },
       ],
     },
     { title: "Accepted Requests", data: [] },
@@ -476,7 +476,7 @@ const Depositupdate = ({ navigation, route }) => {
         <Custombutton
               btntext="Create Deposit"
 
-          onpress={() => navigation.navigate("Meetuppoint")}
+          onpress={() => navigation.navigate("Depositstart")}
         />
       </View>
 
