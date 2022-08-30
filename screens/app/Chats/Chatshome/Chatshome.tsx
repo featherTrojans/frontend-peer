@@ -160,6 +160,7 @@ const Chatshome = ({ navigation }) => {
       });
       setChattwos(allchatTwo);
       setChats(allchats);
+      
       // console.log(chatsdata.docs)
     } catch (err) {
     } finally {

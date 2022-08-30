@@ -48,10 +48,23 @@ const Chat = ({userId, chatinfo}:chatProps) => {
   };
 
 
+
+  const colors = ["r", "g", "b", "y", "p"]
+  const datas = [{name: "Okikiola"}, {name: "Muyiwa"}, {name: "Shola"}, {name: "Debs"}, {name: "Mike"}, {name: "Tobi"}]
+  const newdata = []
+  let i = 0
+  datas.map((data, index) => {
+    i++
+    console.log(data.name+"--"+colors[i]);
+    
+  })
+
+
+
+
 const AllChats = ({chats, chattwos, authId})=>{
   const [allChats, setAllChats] = useState([]);
 
-  console.log(allChats);
   useEffect(()=>{
     //algorithm
     const arranged = [];
@@ -77,10 +90,15 @@ const AllChats = ({chats, chattwos, authId})=>{
       }
   
     setAllChats(arranged);
-    console.log(allChats, "list of all chats");
+  // console.log(allChats, "list of all chats");
+
+    
     
 
   },[chats, chattwos])
+
+
+
 
   
     return (

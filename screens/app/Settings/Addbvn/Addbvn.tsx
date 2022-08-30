@@ -10,16 +10,17 @@ import {
   Animated,
   Easing,
 } from "react-native";
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import { Loader } from "../../../../components";
+import { Loader, Mainwrapper } from "../../../../components";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { AuthContext } from "../../../../context/AuthContext";
 import { Custombutton, Horizontaline } from "../../../../components";
 import useAlert from "../../../../utils/useAlerts";
+
 
 const { Bvnlock, Whitebackarrow, Whitecheck,
   Bvndropicon } = icons;
@@ -33,6 +34,15 @@ const Addbvn = ({navigation}) => {
   const [isShow, setIsShow] = useState(false);
   const [shownText, setShownText] = useState("View")
   const { errorAlert } = useAlert()
+  const [disabled, setDisabled] = useState(true)
+
+
+  useEffect(() => {
+      if(bvn.length > 10 ){
+        setDisabled(false)
+      }
+      
+  }, [bvn])
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -76,7 +86,7 @@ const Addbvn = ({navigation}) => {
   //Interpolation for the height animation
   const newHeight = animatedHeight.interpolate({
     inputRange: [0, 1],
-    outputRange: [55, 270], // Variness in height
+    outputRange: [55, 260], // Variness in height
   });
 
   //Interpoltion for the toggled view opacirty
@@ -94,9 +104,8 @@ const Addbvn = ({navigation}) => {
 
   
   return (
-    <SafeAreaView style={{ backgroundColor: COLORS.blue6, flex: 1 }}>
+    <Mainwrapper bgColor={COLORS.blue6} >
       {loading && <Loader />}  
-      <Customstatusbar />
       
       <View style={{ paddingHorizontal: 16, marginTop: 30 }}></View>
       <ScrollView style={{ paddingHorizontal: 16, marginTop: 30 }} showsVerticalScrollIndicator={false} bounces={false}>
@@ -187,6 +196,7 @@ const Addbvn = ({navigation}) => {
             onChangeText={(text:string)=>setBvn(text)}
             placeholder="Enter BVN"
             placeholderTextColor={COLORS.inputBorderColor}
+            keyboardType="numeric"
           />
         </View>
 
@@ -233,7 +243,7 @@ const Addbvn = ({navigation}) => {
           <TouchableOpacity
           activeOpacity={0.8}
           onPress={toggleHeight}
-          style={{flexDirection: "row", alignItems: 'center'}}
+          style={{flexDirection: "row", alignItems: 'center',padding: 5}}
           >
           <Text
             style={{
@@ -252,10 +262,10 @@ const Addbvn = ({navigation}) => {
             </TouchableOpacity>
           </View>
 
-        <View style={{ marginTop: 38 }}>
+        {/* <View style={{ marginTop: 38 }}>
           
 
-          </View>
+          </View> */}
 
 
 
@@ -281,7 +291,7 @@ const Addbvn = ({navigation}) => {
           </Animated.View>
           </Animated.View>
         <View style={{ marginTop: 38 }}>
-          <Custombutton btntext="Upgrade Account" bg={COLORS.green2} onpress={handleSubmit}/>
+          <Custombutton disable={disabled} btntext="Upgrade Account" bg={COLORS.green2} onpress={handleSubmit}/>
           <Text
             style={{
               textAlign: "center",
@@ -300,7 +310,7 @@ const Addbvn = ({navigation}) => {
 
 
       </ScrollView>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

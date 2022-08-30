@@ -2,7 +2,7 @@ import {
   Text,
   View,
   ScrollView,
-
+  Image,
   TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -95,12 +95,12 @@ const Editprofile = ({}) => {
           formdata.append('file', {
             uri: result.uri,
             type: "Image/jpeg",
-            name: "from eht e e"
+            name: "image1"
           });
           formdata.append('name', 'Gyroscope');
           // console.log(result.uri, "this is the image url");
           const response = await axiosCustom.post("/upload/image",formdata);
-          console.log(response, "Uploaded response");
+          console.log(response.data, "Uploaded response");
                     
         } catch (err) {
           console.log(err.response.data);
@@ -165,11 +165,30 @@ const Editprofile = ({}) => {
       >
         <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
           <View style={{ paddingHorizontal: 15, marginBottom: 50 }}>
+
+
             <TouchableOpacity activeOpacity={0.8} onPress={handleImageUpload}>
+
+
               <View style={styles.avatarProfileWrap}>
+
+
                 <View style={styles.avatarBg}>
-                  <Defaultuseravatar />
+
+                  {authdata?.userDetails.imageUrl !== null ? (
+              <Image
+                style={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+                source={{
+                  uri: authdata?.userDetails.imageUrl,
+                }}
+              />
+            ) : (
+              <Defaultuseravatar />
+            )}
                 </View>
+
+
+
                 <View style={{ marginLeft: 15 }}>
                   <Text style={styles.avatarFullname}>
                     {authdata?.userDetails?.fullName}
@@ -184,7 +203,8 @@ const Editprofile = ({}) => {
             </TouchableOpacity>
   
             <CustomModal>
-                <Upgrademodal />
+              <View></View>
+                {/* <Upgrademodal /> */}
             </CustomModal>
   
   
