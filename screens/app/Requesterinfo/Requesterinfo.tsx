@@ -8,20 +8,23 @@ import { COLORS, FONTS, fontsize, icons } from '../../../constants'
 import Horizontaline from '../../../components/Horizontaline/Horizontaline'
 import Custombutton from '../../../components/Custombutton/Custombutton'
 import Map from '../../shared/map/Map'
-
+import { Backheader } from '../../../components';
+import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 
 const {Purplechaticon, Renegotiateicon, Cancelrequest, Greenphoneicon, Editicon} = icons
 
-const Requesterinfo = () => {
+const Requesterinfo = ({navigation}) => {
 
   const snapPoints = useMemo(() => ['60%', '85%'], []);
   return (
 
-    <>
-      <Map />
+    <View style={{paddingTop: getStatusBarHeight(true), flex: 1}}>
     
-    <View style={{flex: 1, justifyContent: 'flex-end', paddingHorizontal: 15, paddingBottom: 30}}>
+      <Map />
+      <Backheader title="Withdraw"/>
+    
+    <View style={{flex: 1, justifyContent: 'flex-end', paddingHorizontal: 15, paddingBottom: getBottomSpace()+20}}>
   <BottomSheet
   snapPoints={snapPoints}
   >
@@ -134,12 +137,12 @@ const Requesterinfo = () => {
     
 
   </BottomSheet>
-  <Custombutton btntext='Accept Request' onpress={() => console.log("Requsest details")}/>
+  <Custombutton btntext='Accept Request' onpress={() => navigation.navigate("Safetycautions")}/>
   </View>
 
 
 
-    </>
+    </View>
 
   )
 }
