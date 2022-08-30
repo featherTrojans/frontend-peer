@@ -25,8 +25,8 @@ import Chooseamountmodal from "./Chooseamountmodal/Chooseamountmodal";
 import Requesterinfo from "./Modals/Requesterinfo";
 import Transactionsummary from "./Modals/Transactionsummary";
 import Transactionpin from "./Modals/Transactionpin";
-import Successalert from "./Modals/Successalert";
-// import Successalert from "./Successalert/Successalert";
+import Successmodal from "./Modals/Successmodal";
+
 
 
 
@@ -48,7 +48,7 @@ export {
     Requesterdetails,
     Priceandcharges,
     Inputinsettings,
-    Successalert,
+    Successmodal,
     InitialsBg,
     Keyboard,
     Custombutton,

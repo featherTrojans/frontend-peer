@@ -21,7 +21,6 @@ import {
   Mainwrapper,
   Negotiatecharge,
   Requesterinfo,
-  Successalert,
   Transactionpin,
   Transactionsummary,
   Viewbalance,
