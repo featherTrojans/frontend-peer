@@ -29,15 +29,13 @@ const Contact = ({contactsResolved}) => {
 
 
       <FlatList 
-      data={contactsResolved}
-      // style={{flex: 1}}
-      
+      data={contactsResolved}      
       horizontal
       bounces={false}
       showsHorizontalScrollIndicator={false}
       initialNumToRender={5}
       maxToRenderPerBatch={5}
-      contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9, }}
+      contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9, flex: contactsResolved.length < 1 ? 1 : 0}}
       renderItem={({item, index}) => {
         const contact = item
         return (
@@ -46,7 +44,7 @@ const Contact = ({contactsResolved}) => {
       }}
       ListEmptyComponent={() => {
         return (
-          <View style={{flex: 1,width: "100%", flexDirection: 'row', alignItems: 'center', justifyContent: "center" }}>
+          <View style={{flex: 1,flexDirection: 'row', alignItems: 'center', justifyContent: "center", }}>
             <Text style={{textAlign: "center", ...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>No feather user in your contacts. <Text style={{color: COLORS.blue9, ...FONTS.bold}}>Invite</Text></Text>
             </View>
         )
