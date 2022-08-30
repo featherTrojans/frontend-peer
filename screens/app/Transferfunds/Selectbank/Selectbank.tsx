@@ -8,7 +8,11 @@ import useCustomModal from '../../../../utils/useCustomModal'
 const {Ashicon, Briefcaseicon, Forwardarrow}  =icons
 
 
-const Eachoption = ({ type, image }) => {
+
+
+const Selectbank = ({navigation}) => {
+
+  const Eachoption = ({ type, image }) => {
     const { CustomModal, openModal } = useCustomModal();
     
     return (
@@ -19,7 +23,7 @@ const Eachoption = ({ type, image }) => {
       >
         <CustomModal>
           <View>
-            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 35}}>
+            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between",}}>
                 <View>
                 <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9, marginBottom: 0}}>Transfer to bank</Text>
             <Text style={{...fontsize.smallest, ...FONTS.regular, lineHeight: 27, color: COLORS.grey16}}>Enter Account Details</Text>
@@ -42,7 +46,7 @@ const Eachoption = ({ type, image }) => {
 
             </View>
             
-          <Custombutton btntext="Yeah, Continue" onpress={() => console.log("Bank Type", type)} />
+          <Custombutton btntext="Yeah, Continue" onpress={() => navigation.navigate("Transferpin")} />
             
           </View>
         </CustomModal>
@@ -60,8 +64,6 @@ const Eachoption = ({ type, image }) => {
       </TouchableOpacity>
     );
   };
-
-const Selectbank = () => {
 
 
     const listOfbanks = [
@@ -103,7 +105,7 @@ const Selectbank = () => {
         <View style={{paddingHorizontal: 15,}}>
 
             <View style={{backgroundColor: COLORS.white, paddingHorizontal: 20, paddingBottom: 10, paddingTop: 22, borderRadius: 15}}>
-            <Text>Choose your destination bank</Text>
+            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9, lineHeight: 27}}>Choose your destination bank</Text>
 
             {listOfbanks.map(({name, logo}, index) => {
                 const isLast = listOfbanks.length === index + 1;

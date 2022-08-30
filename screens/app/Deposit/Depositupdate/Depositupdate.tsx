@@ -478,7 +478,7 @@ const Depositupdate = ({ navigation, route }) => {
         <Custombutton
               btntext="Create Deposit"
 
-          onpress={() => navigation.navigate("Meetuppoint")}
+          onpress={() => navigation.navigate("Depositstart")}
         />
       </View>
 

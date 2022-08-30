@@ -8,6 +8,7 @@ import {
   Bottombtn,
   Keyboard,
   Loader,
+  Mainwrapper,
   Numberbtn,
 } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
@@ -21,6 +22,8 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { ScrollView } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { securepinstyles } from "../../../auth/signup/Securepin/Securepin.styles";
+
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -28,7 +31,7 @@ const Transferpin = ({ route, navigation }) => {
   const { sendPushNotification } = usePushNotification();
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
-  const { amount, userinfo } = route.params;
+  // const { amount, userinfo } = route.params;
   const [pin, setPin] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
@@ -53,23 +56,13 @@ const Transferpin = ({ route, navigation }) => {
     }
     try {
       setLoading(true);
-      // console.log({
-      //   data: userinfo,
-      //   userToken: messageToken,
-      //   profile: authdata,
+  
+      // await axiosCustom.post("/transfer", {
+      //   amount,
+      //   transferTo: userinfo?.username,
+      //   userPin: joinpin,
       // });
-      await axiosCustom.post("/transfer", {
-        amount,
-        transferTo: userinfo?.username,
-        userPin: joinpin,
-      });
-      //I am to send a push notification here
-      // sendPushNotification(
-      //   userinfo.messageToken,
-      //   "Wallet Credit",
-      //   `Wallet Credit - N${amount} from “${authdata.username} - ${authdata.fullName}” `,
-      //   "Root"
-      // );
+
       setShowModal(true);
     } catch (err) {
       console.log(err.response);
@@ -80,57 +73,63 @@ const Transferpin = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.blue6}}>
-    <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
+    <Mainwrapper>
       {loading && <Loader />}
-      <Customstatusbar />
-      <Globalmodal
-        showState={showmodal}
-        btnFunction={() => navigation.navigate("Root")}
-        onBgPress={() => setShowModal(true)}
-      >
-        <View style={{ alignItems: "center" }}>
-          <LottieView
-            source={Successcheckanimate}
-            autoPlay
-            loop
-            style={{ width: RFValue(148), height: RFValue(148) }}
-          />
 
-          <Text
-            style={{
-              textAlign: "center",
-              marginHorizontal: RFValue(40),
-              //  marginVertical: 40,
-              marginTop: RFValue(24),
-              marginBottom: RFValue(45),
-              ...fontsize.bsmall,
-              ...FONTS.regular,
-            }}
-          >
-            You have successfully transfered{" "}
-            <Text style={{ ...FONTS.bold, ...fontsize.bsmall }}>
-              NGN {amountFormatter(amount)}
-            </Text>{" "}
-            to “
-            <Text style={{ textTransform: "lowercase" }}>
-              @{userinfo?.username}
-            </Text>{" "}
-            -{" "}
-            <Text style={{ textTransform: "capitalize" }}>
-              {" "}
-              {userinfo?.fullName}"
-            </Text>
-          </Text>
+
+
+      <View style={{paddingHorizontal: 15, flex: 1}}>
+        <View style={{marginTop: 32}}>
+          <Text style={{...fontsize.bbsmall, ...FONTS.medium, color: COLORS.blue9, marginBottom: 20}}>Complete Transaction</Text>
+          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to send NGN 35,750.00 from your Primary Wallet to @della007 - Adeyemi Adeola Gideon</Text>
         </View>
-      </Globalmodal>
 
+
+
+          <View style={{ alignItems: "center", flex: 1, justifyContent: "center"}}>
+            <Text style={{marginBottom: 60, ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Enter your Feather PIN</Text>
+
+
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <View style={securepinstyles.pinInputContainer}>
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[0] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[1] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[2] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[3] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+              </View>
+            </View>
+          </View>
+            
+
+        <View>
+
+        </View>
+      </View>
       
-      <Backheader title="PIN"/>
-      <View style={styles.mainContainer}>
+      {/* <Backheader title="PIN"/> */}
         
 
-        <View style={styles.descriptionContainer}>
+        {/* <View style={styles.descriptionContainer}>
           <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
         </View>
 
@@ -141,26 +140,16 @@ const Transferpin = ({ route, navigation }) => {
             <View style={styles.pinView}>{pin[2] && <SecureDot />}</View>
             <View style={styles.pinView}>{pin[3] && <SecureDot />}</View>
           </View>
-        </View>
-
-        {/* <View style={styles.numberBtnContainer}>
-          {numbers.map((number, index) => {
-            return (
-              <Numberbtn key={index} onpress={number !== ""? () => handleSetAmount(number): () => null}>
-                {number}
-              </Numberbtn>
-            );
-          })}
-          
-          <Numberbtn onpress={() => handleRemoveAmount()}>X</Numberbtn>
         </View> */}
+
+
       <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
 
+
+      {/* <Bottombtn title="PROCEED" onpress={handleSubmit} /> */}
+
         
-      </View>
-      <Bottombtn title="PROCEED" onpress={handleSubmit} />
-    </ScrollView>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

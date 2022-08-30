@@ -77,7 +77,6 @@ import Walletmanagement from "./app/Settings/Walletmanagement/Walletmanagement";
 import Addbvn from "./app/Settings/Addbvn/Addbvn";
 import Verifybvn from "./app/Settings/Verifybvn/Verifybvn";
 
-
 import Paybills from "./app/Billpayments/Paybills/Paybills";
 import Airtimeamount from "./app/Billpayments/Airtime/Airtimeamount/Airtimeamount";
 import Airtimeanddata from "./app/Billpayments/Airtime/Airtimeanddata/Airtimeanddata";
@@ -96,7 +95,7 @@ import Sendcash from "./app/Transferfunds/Sendcash/Sendcash";
 import Meetuppoint from "./app/Meetuppoint/Meetuppoint";
 import Safetycautions from "./app/Safetycautions/Safetycautions";
 import Requesterinfo from "./app/Requesterinfo/Requesterinfo";
-
+import Depositstart from "./app/Deposit/Depositstart/Depositstart";
 //This screen is for testing somne functionalities
  
 import Testings from "./Testings";
@@ -136,6 +135,7 @@ export {
   Editprofile,
   Securityprivacy,
   Changepassword,
+  Depositstart,
   Changepin,
   Requesterinfo,
   Addcash,

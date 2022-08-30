@@ -36,7 +36,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import useCustomModal from "../../../../utils/useCustomModal";
 import { sendEmail } from "../../../../utils/emailSender";
 
-// Sendingandreceive
 
 const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions, Detailsmoreicon } =
   icons;
@@ -58,10 +57,11 @@ const Transactiondetails = ({ navigation, route }) => {
     title,
     user,
     otherUser,
+    charges
   } = data;
+  const total = Number(amount)+Number(charges)
 
-
-  // console.log(data, "here is the");
+  console.log(data, "here is the");
   
 
   const dt = moment(dateTime);
@@ -570,14 +570,14 @@ const Transactiondetails = ({ navigation, route }) => {
 
         <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
           <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Transaction Charge</Text>
-          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9}}>+ NGN 00.00</Text>
+          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9}}>+ NGN {amountFormatter(charges)}</Text>
         </View>
 
         <Horizontaline marginV={22}/>
 
         <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
           <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Total</Text>
-          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue6}}>NGN {amountFormatter(amount)} </Text>
+          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue6}}>NGN {amountFormatter(total.toString())} </Text>
         </View>
         </View>
 
