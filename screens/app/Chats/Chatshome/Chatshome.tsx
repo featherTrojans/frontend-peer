@@ -160,6 +160,7 @@ const Chatshome = ({ navigation }) => {
       });
       setChattwos(allchatTwo);
       setChats(allchats);
+      
       // console.log(chatsdata.docs)
     } catch (err) {
     } finally {
@@ -205,6 +206,7 @@ const Chatshome = ({ navigation }) => {
                 <ActivityIndicator size="large" color="#000" />
               </View>
             ) : (
+              
               <Chat authId={authId} chattwos={chattwos} chats={chats} />
             )}
           </View>

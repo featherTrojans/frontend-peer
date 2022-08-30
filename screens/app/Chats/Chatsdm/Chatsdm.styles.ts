@@ -54,20 +54,20 @@ export const styles = StyleSheet.create({
     position: "relative",
   },
   inputarea: {
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
   },
   chatTextInput: {
     padding: 10,
     backgroundColor: "#fff",
     borderRadius: 10,
-    shadowColor: "#aaa",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2,
-    elevation: 3,
+    // shadowColor: "#aaa",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.22,
+    // shadowRadius: 2,
+    // elevation: 3,
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
@@ -102,7 +102,7 @@ export const styles = StyleSheet.create({
   },
   chatNotMeColor: {
     padding: 15,
-    backgroundColor: "#F7F8FA",
+    backgroundColor: COLORS.white,
     marginBottom: 10,
     borderRadius: 20,
     borderBottomLeftRadius: 0,

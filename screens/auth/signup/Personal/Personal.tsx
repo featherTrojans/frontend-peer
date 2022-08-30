@@ -145,6 +145,7 @@ const Personal = ({ navigation }) => {
                     name="lastName"
                     formikProps={formikProps}
                     icon={<Usericondark />}
+                    inputbg={COLORS.white}
                   />
 
                   <Input
@@ -152,6 +153,7 @@ const Personal = ({ navigation }) => {
                     name="email"
                     formikProps={formikProps}
                     icon={<Envelopeicon />}
+                    inputbg={COLORS.white}
                   />
 
                   <Input
@@ -159,6 +161,7 @@ const Personal = ({ navigation }) => {
                     name="phoneNumber"
                     formikProps={formikProps}
                     icon={<Phoneicon />}
+                    inputbg={COLORS.white}
                   />
 
                   <Input
@@ -166,6 +169,7 @@ const Personal = ({ navigation }) => {
                     name="referredBy"
                     formikProps={formikProps}
                     icon={<Phoneicon />}
+                    inputbg={COLORS.white}
                   />
 
                   {/* Proceed Btn */}

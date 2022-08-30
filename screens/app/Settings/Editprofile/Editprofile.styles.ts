@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     width: 62,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 92 / 2,
+    borderRadius: 62 / 2,
   },
   avatarText: {
     ...fontsize.smallest,

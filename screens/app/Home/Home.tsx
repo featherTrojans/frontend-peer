@@ -82,6 +82,7 @@ const {
   Ashicon,
   Briefcaseicon,
   Aticon,
+  Featherdefault,
   Searcontacticon,
 
   Cryinganimate,
@@ -184,7 +185,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       const response = await axiosCustom.get("/dashboard");
       // setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
-      console.log(response.data.data.imageUrl, "user image url")
+      console.log(response.data.data.userDetails.imageUrl, "user image url");
     } catch (err) {
     } finally {
       setLoading(false);
@@ -407,8 +408,17 @@ const Home = ({ navigation }: { navigation: any }) => {
             onPress={() => navigation.dispatch(jumpToSettings)}
             activeOpacity={0.8}
           >
-            {userDefaultImage()}
-            {/* <InitialsBg sideLength={51} name={authdata?.userDetails?.fullName} bg={userColor} /> */}
+            {authdata?.userDetails.imageUrl !== null ? (
+              <Image
+                style={{ width: 45, height: 45, borderRadius: 45 / 2 }}
+                source={{
+                  uri: authdata?.userDetails.imageUrl,
+                }}
+              />
+            ) : (
+              <Featherdefault />
+            )}
+
           </TouchableOpacity>
 
           <View style={styles.profileNameContainer}>
@@ -527,21 +537,25 @@ const Home = ({ navigation }: { navigation: any }) => {
           showsHorizontalScrollIndicator={false}
           bounces={false}
         >
-
-
           <View
             style={[
               styles.informationblockwrap,
-              { backgroundColor: "#8456FF", position: 'relative', overflow: "hidden", flex: 1 },
-
+              {
+                backgroundColor: "#8456FF",
+                position: "relative",
+                overflow: "hidden",
+                flex: 1,
+              },
             ]}
           >
-    
-            <View style={[StyleSheet.absoluteFill, {left: -200}]}>
-               <Image source={Waterwave}  style={{width: '200%', height: '120%',}}/>
-            </View>  
+            <View style={[StyleSheet.absoluteFill, { left: -200 }]}>
+              <Image
+                source={Waterwave}
+                style={{ width: "200%", height: "120%" }}
+              />
+            </View>
 
-             <View style={styles.informationiconswrap}>
+            <View style={styles.informationiconswrap}>
               <Goldenstaricon />
               <View style={{ marginRight: 3.4 }} />
               <Goldenstaricon />
@@ -552,7 +566,6 @@ const Home = ({ navigation }: { navigation: any }) => {
             <Text style={styles.informationblocktext}>
               Earn N10 each time you rate a successful withdraw transaction{" "}
             </Text>
-
           </View>
 
           <View

@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { Text, View, TouchableOpacity, Share } from "react-native";
+import { Text, View, TouchableOpacity, Share, Image } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
 import * as Sharing from "expo-sharing";
@@ -146,9 +146,19 @@ const Settings = ({ navigation }) => {
       <View style={{ paddingHorizontal: 15 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           {/* user image */}
-          <View style={{ width: 60, height: 60 }}>
-            <Defaultuseravatar />
-          </View>
+          {/* <View style={{ width: 60, height: 60 }}> */}
+            {/* <Defaultuseravatar /> */}
+            {authdata?.userDetails.imageUrl !== null ? (
+              <Image
+                style={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+                source={{
+                  uri: authdata?.userDetails.imageUrl,
+                }}
+              />
+            ) : (
+              <Defaultuseravatar />
+            )}
+          {/* </View> */}
           <View style={{ marginLeft: 15 }}>
             <Text style={styles.profileName}>
               {abbreviateName(authdata?.userDetails?.fullName)}
