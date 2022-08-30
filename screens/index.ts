@@ -46,7 +46,6 @@ import Security from "./auth/signup/Security/Security";
 import Securepin from "./auth/signup/Securepin/Securepin";
 import Newtransactions from "./app/Transactions/Newtransactions/Newtransactions";
 import TransferInput from "./app/Transferfunds/TransferInput/TransferInput";
-
 import Usersearch from "./app/Chats/Usersearch/Usersearch";
 import Chatsdm from "./app/Chats/Chatsdm/Chatsdm";
 import Chatshome from "./app/Chats/Chatshome/Chatshome";
@@ -96,6 +95,7 @@ import Becomeanagent from "./app/Becomeanagent/Becomeanagent";
 import Sendcash from "./app/Transferfunds/Sendcash/Sendcash";
 import Meetuppoint from "./app/Meetuppoint/Meetuppoint";
 import Safetycautions from "./app/Safetycautions/Safetycautions";
+import Requesterinfo from "./app/Requesterinfo/Requesterinfo";
 
 //This screen is for testing somne functionalities
  
@@ -136,6 +136,7 @@ export {
   Securityprivacy,
   Changepassword,
   Changepin,
+  Requesterinfo,
   Addcash,
   Choosewallet,
   Transfercash,

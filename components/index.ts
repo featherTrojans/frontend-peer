@@ -22,7 +22,7 @@ import Tableoption from "./Tableoption/Tableoption";
 import Copyaccountinfo from "./Copyaccountinfo/Copyaccountinfo";
 import Upgrademodal from "./Upgrademodal/Upgrademodal";
 import Chooseamountmodal from "./Chooseamountmodal/Chooseamountmodal";
-import Requesterinfo from "./Modals/Requesterinfo";
+// import Requesterinfo from "../screens/app/Requesterinfo/Requesterinfo";
 import Transactionsummary from "./Modals/Transactionsummary";
 import Transactionpin from "./Modals/Transactionpin";
 import Successmodal from "./Modals/Successmodal";
@@ -56,7 +56,7 @@ export {
     Copyaccountinfo,
     Upgrademodal,
     Chooseamountmodal,
-    Requesterinfo,
+    // Requesterinfo,
     Transactionsummary,
     Transactionpin
 

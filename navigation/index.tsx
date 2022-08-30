@@ -143,10 +143,10 @@ import {
   Meetuppoint,
   Safetycautions,
   Getstarted,
-  Verifybvn
+  Verifybvn,
+  Requesterinfo
 } from "../screens";
 // import { LockScreen } from "../screens";
-
 
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -612,6 +612,8 @@ const RootNavigator = ({ initialBoarded }) => {
               component={Withdrawpreview}
             />
             <AppStack.Screen name="Editmeetup" component={Editmeetup} />
+            <AppStack.Screen name="Requesterinfo" component={Requesterinfo} />
+
             {/* To Cancel */}
             {/* cancel requests */}
             <AppStack.Screen
