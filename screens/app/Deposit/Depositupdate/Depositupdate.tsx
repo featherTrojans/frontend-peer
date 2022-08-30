@@ -20,7 +20,7 @@ import {
   Loader,
   Mainwrapper,
   Negotiatecharge,
-  Requesterinfo,
+  // Requesterinfo,
   Transactionpin,
   Transactionsummary,
   Viewbalance,

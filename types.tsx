@@ -58,6 +58,8 @@ export type RootStackParamList = {
   Editmeetup: undefined;
   Pendingwithdraw: undefined;
   Acceptedwithdraw: undefined;
+  Requesterinfo: undefined;
+
   Requestsummary: undefined;
   Cancelrequest: undefined;
   Summary: undefined;

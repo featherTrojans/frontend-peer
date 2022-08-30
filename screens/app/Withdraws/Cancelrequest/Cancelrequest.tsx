@@ -11,23 +11,25 @@ import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 const { Backarrow, Successcheckanimate, Forwardarrow } = icons;
 const Cancelrequest = ({route, navigation}) => {
-  // const {reference} = route.params
+  const reference = route.params
   const toast = useToast()
   const [checked, setChecked] = useState(false);
-  const [reason, setReason] = useState("");
+  const [activereason, setReason] = useState({key:0, text:""});
+  const [writeReason, setWriteReason] = useState("")
   const [loading, setLoading] = useState(false)
   const [isModalVisible, setModalVisible] = useState(false)
   
   const reasons = [
-    "Mistake request",
-    "The agent didn’t accept my cash request",
-    "Long cash delivery time",
-    "The agent seemed suspicious during the meet-up conversation",
-    "Cash presented was in bad condition",
+    {text:"Mistake request", key:1},
+    {text:"The agent didn’t accept my cash request", key:2},
+    {text:"Long cash delivery time", key:3},
+    {text:"The agent seemed suspicious during the meet-up conversation", key:4},
+    {text:"Cash presented was in bad condition", key:5},
   ];
 
   const handleCancelRequest = async ()=>{
@@ -37,8 +39,8 @@ const Cancelrequest = ({route, navigation}) => {
         method:"DELETE",
         url:"/request/cancel",
         data:{
-          reference: "dummyreason",
-          reasonForCancel:reason
+          reference: reference,
+          reasonForCancel: checked ? writeReason: activereason.text
         }
       })
       setModalVisible(true)
@@ -51,11 +53,8 @@ const Cancelrequest = ({route, navigation}) => {
   return (
     <Mainwrapper >
       <Backheader title="Cancel Transaction"/>
-
-
-
-
       {loading && <Loader />}
+
       <Globalmodal
        showState={isModalVisible}
        
@@ -85,34 +84,21 @@ const Cancelrequest = ({route, navigation}) => {
           </View>
 
           <View style={{marginTop: 54}}>
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9, flex: 0.95}}> Mistake request </Text>
-               <Forwardarrow />
-            </View>
-            <Horizontaline marginV={23}/>
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9, flex: 0.95}}> Withdrawer wasn’t serious </Text>
-               <Forwardarrow />
-            </View>
-            <Horizontaline marginV={23}/>
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9, flex: 0.95}}> Long response time </Text>
-               <Forwardarrow />
-            </View>
-            <Horizontaline marginV={23}/>
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9, flex: 0.95}}> The withdrawer seemed suspicious during the then meet-up conversation </Text>
-               <Forwardarrow />
-            </View>
-            <Horizontaline marginV={23}/>
-
-
-            <Text style={{...fontsize.smaller, ...FONTS.regular, color: COLORS.purple2}}>Other Reason?</Text>
-
+            { !checked && reasons.map((reason)=><TouchableOpacity onPress={()=>setReason(reason)} activeOpacity={0.8}>
+              <View key={reason.key} style={{flexDirection: 'row',paddingVertical: 23, borderBottomColor: COLORS.borderColor2, borderBottomWidth: 0.5, alignItems: 'center', justifyContent: 'space-between', backgroundColor: reason.key === activereason.key ? "#003AD6": null} }>
+                <Text style={{...fontsize.smaller, ...FONTS.regular, color: reason.key === activereason.key ? "#fff": COLORS.blue9, flex: 0.95}}> {reason.text} </Text>
+                <Forwardarrow />
+              </View>
+            </TouchableOpacity>)
+            }
+            <Text onPress={()=>setChecked(!checked)} style={{...fontsize.smaller, ...FONTS.regular, color: COLORS.purple2}}>Other Reason?</Text>
                {/* Other reason is active */}
 
-               {false &&
-            <TextInput multiline style={{backgroundColor: COLORS.white, height: 174, paddingVertical: 20, paddingHorizontal: 15, ...fontsize.smallest, ...FONTS.regular}} placeholder="Enter your reason…" textAlignVertical="top"/>
+               {checked &&
+            <TextInput 
+              multiline
+              onChangeText={setWriteReason} 
+              style={{backgroundColor: COLORS.white, height: 174, marginVertical: 15, paddingVertical: 20, paddingHorizontal: 15, ...fontsize.smallest, ...FONTS.regular}} placeholder="Enter your reason…" textAlignVertical="top"/>
                }
           </View>
 
@@ -120,7 +106,7 @@ const Cancelrequest = ({route, navigation}) => {
    
       </View>
             <View style={{paddingHorizontal: 15, paddingBottom: 20}}>
-            <Custombutton  btntext="Submit Reason" onpress={() => console.log("cancel request")}/>
+            <Custombutton  btntext="Submit Reason" onpress={handleCancelRequest}/>
 
             </View>
 

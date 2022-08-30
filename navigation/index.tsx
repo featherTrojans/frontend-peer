@@ -144,10 +144,9 @@ import {
   Safetycautions,
   Getstarted,
   Verifybvn,
-  RequesterinfoScreen
+  Requesterinfo
 } from "../screens";
 // import { LockScreen } from "../screens";
-
 
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -613,13 +612,14 @@ const RootNavigator = ({ initialBoarded }) => {
               component={Withdrawpreview}
             />
             <AppStack.Screen name="Editmeetup" component={Editmeetup} />
+            <AppStack.Screen name="Requesterinfo" component={Requesterinfo} />
+
             {/* To Cancel */}
             {/* cancel requests */}
             <AppStack.Screen
               name="Pendingwithdraw"
               component={Pendingwithdraw}
             />
-            <AppStack.Screen name="RequesterinfoScreen" component={RequesterinfoScreen} />
             <AppStack.Screen name="Negotiate" component={Negotiate} />
             <AppStack.Screen name="Cancelrequest" component={Cancelrequest} />
             {/* TO MaKE AFTER ACCEPTING */}
