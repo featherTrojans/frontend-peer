@@ -135,6 +135,24 @@ const Transactiondetails = ({ navigation, route }) => {
     }
   };
 
+  const showUserImageOnReceipt = () => {
+      if(user.imageUrl !== null){
+        return `
+        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
+        <img src="${user.imageUrl}" style="width: 62px; height: 62px; border-radius: 32px"  />
+        </div>
+        `
+      }
+      else{
+        return `
+          <img class="user__image" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035185/62x62_feather_dibyrp.svg" />
+        `
+      }
+
+
+
+
+  }
   const showImageOnReceipt = (name: string, title: string, sender?: string) => {
     const targetLogo = bankLogo.filter((logo) => logo.name === sender);
     switch (title) {
@@ -189,6 +207,14 @@ const Transactiondetails = ({ navigation, route }) => {
         </div>
         `;
         } else {
+          if(otherUser.imageUrl !== null){
+            return `
+            <div style="min-width: 62px; min-height: 62px; border-radius: 32px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
+              <img src="${otherUser.imageUrl}" style="width: 62px; height: 62px; border-radius: 32px"  />
+            </div>
+            
+            `
+          }
           return `
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
         ${nameSplitter(otherUser ? otherUser.fullName : "Feather Africa Inc")}
@@ -397,7 +423,7 @@ const Transactiondetails = ({ navigation, route }) => {
   
     <div class="avatars__container">
     <div class="avatars">
-        <img class="user__image" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035185/62x62_feather_dibyrp.svg" />
+         ${showUserImageOnReceipt()}
         <div class="dashed__line"></div>
         <img class="checked__icon" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035323/greenyy_exqzbx.svg" />
         ${showImageOnReceipt(
@@ -433,11 +459,11 @@ const Transactiondetails = ({ navigation, route }) => {
       </li>
       <li class="item">
           <span class="item__left">Transaction Charge </span>
-          <span class="item__right">+ NGN 00.00</span>
+          <span class="item__right">+ NGN ${amountFormatter(charges)}</span>
       </li>
       <li class="item">
           <span class="item__left">Total</span>
-          <span class="item__right total">NGN ${amountFormatter(amount)}</span>
+          <span class="item__right total">NGN ${amountFormatter(total)}</span>
       </li>
    </ul>
   
@@ -530,6 +556,8 @@ const Transactiondetails = ({ navigation, route }) => {
           }}
         >
           <Sendingandreceive
+            user={user}
+            otherUser={otherUser}
             senderName={typeOfName(title)?.senderName}
             receiverName={typeOfName(title)?.receiverName}
             title={title}
@@ -543,7 +571,7 @@ const Transactiondetails = ({ navigation, route }) => {
         {/* The details container */}
         <View style={[styles.detailsContainer,]}>
 
-          <Text style={{textAlign: "center", marginTop: 34, marginBottom: 40,  ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>This is a transaction report between {`\n`} <Text style={{textTransform: 'capitalize'}}>{typeOfName(title)?.receiverName}</Text> and <Text style={{textTransform: "capitalize"}}>{typeOfName(title)?.senderName}</Text> </Text>
+          <Text style={{textAlign: "center", marginTop: 34, marginBottom: 40,  ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>This is a transaction report between {`\n`} <Text style={{textTransform: 'capitalize'}}>{typeOfName(title)?.senderName}</Text> and <Text style={{textTransform: "capitalize"}}> {typeOfName(title)?.receiverName}</Text> </Text>
 
 
         <View style={{ justifyContent: 'center', alignItems: 'center'}}>

@@ -27,6 +27,7 @@ const showImage = (
   receiverName: string,
   title: string | null,
   value?: string,
+  otherUser?: any
 ) => {
   switch (title) {
     case "funding":
@@ -55,7 +56,11 @@ const showImage = (
         );
         break;
     case "Wallet Debit":
-      return <InitialsBg name={receiverName} sideLength={62} />;
+      return (        
+          <InitialsBg name={receiverName} sideLength={62} />
+        
+        
+      ) 
       break;
     case "Wallet Credit":
       if(senderName === "Bonus"){
@@ -156,6 +161,8 @@ type SendingandreceiveProps = {
   receiverName?: string;
   title?: string;
   value?: string | null;
+  user?: any;
+  otherUser?: any
 };
 
 const Sendingandreceive = ({
@@ -163,21 +170,47 @@ const Sendingandreceive = ({
   receiverName,
   title,
   value,
+  user,
+  otherUser
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
+      {user.imageUrl !== null ?
+      <View>
+        <Image
+        style={{width: 62, height: 62, borderRadius: 62/2}}
+        source={{
+          uri: user.imageUrl,
+        }}
+      />
+      </View>  
+      :
+
       <Userdefaultmedium />
+        
+    
+    }
     <View>
       <Dashedline />
     </View>
-      {/* <View style={styles.arrowContainer}>
-        <Sendingarrow />
-        <Receivingarrow />
-      </View> */}
-      <View style={{ position: "relative" }}>
+     {((title == "Wallet Credit") || (title == "Wallet Debit")) && otherUser.imageUrl !== null ?
+          <View>
+          <Image
+          style={{width: 62, height: 62, borderRadius: 62/2}}
+          source={{
+            uri: otherUser.imageUrl,
+          }}
+        />
+        </View> 
+        :
+        
+        <View style={{ position: "relative" }}>
         {/* <Receiverimage /> */}
-        {showImage(senderName, receiverName, title, value)}
+        {showImage(senderName, receiverName, title, value, otherUser)}
       </View>
+    
+    }
+      
     </View>
   );
 };
