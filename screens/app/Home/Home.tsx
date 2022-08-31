@@ -141,7 +141,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       title: "Withdraw",
       link: "Withdraw",
       iconBg: "#E0EDD8",
-      onpress: () => navigation.navigate("Withdraw"),
+      onpress: () => navigation.navigate("WithdrawPin"),
     },
     {
       icon: <Depositicon />,

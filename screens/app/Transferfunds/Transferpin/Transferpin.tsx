@@ -42,6 +42,8 @@ const Transferpin = ({ route, navigation }) => {
       setPin((oldpin) => [...oldpin, value]);
     }
   };
+
+
   const handleRemoveAmount = () => {
     if (pin.length > 0) {
       const newdata = [...pin];
@@ -49,6 +51,7 @@ const Transferpin = ({ route, navigation }) => {
       setPin(newdata);
     }
   };
+
   const handleSubmit = async () => {
     const joinpin = pin.join("");
     if (joinpin.length < 4) {
@@ -125,22 +128,6 @@ const Transferpin = ({ route, navigation }) => {
 
         </View>
       </View>
-      
-      {/* <Backheader title="PIN"/> */}
-        
-
-        {/* <View style={styles.descriptionContainer}>
-          <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
-        </View>
-
-        <View style={styles.pinContainer}>
-          <View style={styles.pinInputContainer}>
-            <View style={styles.pinView}>{pin[0] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[1] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[2] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[3] && <SecureDot />}</View>
-          </View>
-        </View> */}
 
 
       <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>

@@ -4,9 +4,11 @@ import LottieView from "lottie-react-native";
 import { styles } from "./WithdrewPin.style";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import {
+  Backheader,
   Bottombtn,
   Keyboard,
   Loader,
+  Mainwrapper,
   Numberbtn,
   Sendingandreceive,
 } from "../../../../components";
@@ -20,17 +22,19 @@ import { AuthContext } from "../../../../context/AuthContext";
 import { justCharge, plusBase } from "../../../../utils/utils";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { securepinstyles } from "../../../auth/signup/Securepin/Securepin.styles";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const WithdrawPin = ({ navigation, route }) => {
-  const { amount, userInfo, baseCharge } = route.params;
+  // const { amount, userInfo, baseCharge } = route.params;
 
   const { coords } = useContext(LocationContext);
   const { authdata } = useContext(AuthContext);
   const toast = useToast();
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState(false);
   const [charges, setCharges] = useState<string>("");
+  const [pin, setPin] = useState<string[]>([]);
   const [showmodal, setShowModal] = useState(false);
   const [shownextmodal, setShowNextModal] = useState(false);
 
@@ -42,52 +46,50 @@ const WithdrawPin = ({ navigation, route }) => {
     );
   };
 
-  const handleRemoveAmount = () => {
-    if (charges.length > 0) {
-      const newdata = charges.substring(0, charges.length - 1);
-      setCharges(newdata);
-    }
-  };
   const handleSetAmount = (value: string) => {
-    setCharges((oldamount) => {
-      let newamount = oldamount.concat(value);
-      if (Number(newamount)) {
-        return newamount;
-      }
-      return oldamount;
-    });
-  };
-
-  const handleSubmit = async () => {
-    try {
-      setLoading(true);
-      setShowModal(false);
-      const data = {
-        amount: amount,
-        charges: baseCharge,
-        agentUsername: userInfo.username,
-        agent: userInfo.fullName,
-        statusId: userInfo.reference,
-        meetupPoint: coords.locationText,
-        negotiatedFee: charges,
-      };
-      console.log(data);
-      const response = await axiosCustom.post("/request/create", data);
-
-      setShowNextModal(true);
-    } catch (err) {
-      showerror(toast, err);
-    } finally {
-      setLoading(false);
+    if (pin.length < 4) {
+      setPin((oldpin) => [...oldpin, value]);
     }
   };
+
+
+  const handleRemoveAmount = () => {
+    if (pin.length > 0) {
+      const newdata = [...pin];
+      newdata.pop();
+      setPin(newdata);
+    }
+  };
+  // const handleSubmit = async () => {
+  //   try {
+  //     setLoading(true);
+  //     setShowModal(false);
+  //     const data = {
+  //       amount: amount,
+  //       charges: baseCharge,
+  //       agentUsername: userInfo.username,
+  //       agent: userInfo.fullName,
+  //       statusId: userInfo.reference,
+  //       meetupPoint: coords.locationText,
+  //       negotiatedFee: charges,
+  //     };
+  //     console.log(data);
+  //     const response = await axiosCustom.post("/request/create", data);
+
+  //     setShowNextModal(true);
+  //   } catch (err) {
+  //     showerror(toast, err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   return (
-    <SafeAreaView style={styles.container}>
+    <Mainwrapper>
       {loading && <Loader />}
+      <Backheader title="Complete Transaction" />
 
-      <Customstatusbar />
 
-      <Globalmodal
+      {/* <Globalmodal
         showState={showmodal}
         onBgPress={() => setShowModal(!showmodal)}
         btnFunction={handleSubmit}
@@ -106,24 +108,7 @@ const WithdrawPin = ({ navigation, route }) => {
               receiverName={userInfo?.fullName}
               title="Wallet Debit"
             />
-            {/* <View
-                style={{
-                  width: 80,
-                  height: 80,
-                  backgroundColor: COLORS.grey1,
-                  borderRadius: 40,
-                  marginHorizontal:10
-                }}
-                />
-                <View
-                style={{
-                  width: 80,
-                  height: 80,
-                  backgroundColor: COLORS.grey1,
-                  borderRadius: 40,
-                  marginHorizontal:10
-                }}
-              /> */}
+   
           </View>
           <Text style={{ ...fontsize.bmedium, ...FONTS.bold }}>
             NGN {amountFormatter(amount)}
@@ -183,40 +168,63 @@ const WithdrawPin = ({ navigation, route }) => {
             Your request has been sent, you will be notified once accepted
           </Text>
         </View>
-      </Globalmodal>
+      </Globalmodal> */}
 
-      <View style={{ flex: 1, backgroundColor: COLORS.white }}>
-        <View style={[styles.mainContainer]}>
-          <View style={[styles.backArrowConteiner, { marginLeft: 15 }]}>
-            <Backarrow />
-          </View>
+<View style={{paddingHorizontal: 15, flex: 1}}>
+        <View style={{marginTop: 0}}>
+          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 20, textAlign: "center"}}>Hey Damilare, kindly input your transaction pin to complete this transaction of N5,600.00</Text>
+        </View>
 
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>
-              Add a fair amount to the base charge as fee
-            </Text>
-            <Text style={styles.enterPinText}>Enter Amount</Text>
-          </View>
-          <View style={{ flex: 1, justifyContent: "center" }}>
-            <View style={{ alignItems: "center" }}>
-              <View style={styles.amountcont}>
-                <Text style={styles.amountTxt}>
-                  {" "}
-                  <Text style={{ color: COLORS.grey5 }}>N</Text>{" "}
-                  {amountFormatter(charges)}
-                </Text>
+
+
+          <View style={{ alignItems: "center", flex: 1, justifyContent: "center"}}>
+            <Text style={{marginBottom: 60, ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Enter your Feather PIN</Text>
+
+
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <View style={securepinstyles.pinInputContainer}>
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[0] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[1] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[2] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
+                <View
+                  style={[
+                    securepinstyles.pinView,
+                    { backgroundColor: pin[3] ? COLORS.blue6 : COLORS.grey3 },
+                  ]}
+                />
               </View>
             </View>
-
-
-            <Keyboard
-              array={[...numbers]}
-              setDigit={handleSetAmount}
-              removeDigit={handleRemoveAmount}
-            />
           </View>
+            
+
+        <View>
+
         </View>
-        <Bottombtn
+      </View>
+
+
+      <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
+
+      <View>
+        <Text style={{textAlign: "center", marginBottom: 20, ...fontsize.smaller, ...FONTS.medium, color: COLORS.red4}}>0 / 3 Attempts</Text>
+      </View>
+
+        {/* <Bottombtn
           title="PROCEED"
           onpress={() => {
             if (Number(charges) <= 0) {
@@ -229,9 +237,11 @@ const WithdrawPin = ({ navigation, route }) => {
             }
             setShowModal(true);
           }}
-        />
-      </View>
-    </SafeAreaView>
+        /> */}
+
+
+
+    </Mainwrapper>
   );
 };
 
