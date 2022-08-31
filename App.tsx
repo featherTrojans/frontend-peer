@@ -140,7 +140,7 @@ export default function App() {
         </ToastProvider>
         <Toast
           config={toastConfig}
-          autoHide={false}
+          // autoHide={false}
           topOffset={getStatusBarHeight(true)}
           onShow={() => console.log("Status shown")}
           onHide={() => console.log("Status hidden")}
