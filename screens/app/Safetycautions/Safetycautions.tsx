@@ -1,14 +1,43 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Backheader, Mainwrapper, Custombutton } from "../../../components";
+import { Backheader, Mainwrapper, Custombutton, Transactionsummary, Transactionpin } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import useCustomModal from "../../../utils/useCustomModal";
 
 const { Newlogo } = icons;
 
-const Safetycautions = () => {
+interface withdrawobj {
+  "fullName": string,
+  "username": string,
+  "amount":string,
+  "charges": string,
+  "createdAt": string,
+  "meetupPoint": string,
+  "negotiatedFee": string,
+  "phoneNumber": string,
+  "reference": string,
+  "status": string,
+  "total": string,
+  userUid:string
+}
+
+enum comingFromEnum { withdrawPending, withdrawAccepted, depositPending, depositAccepted}
+
+
+const Safetycautions = ({navigation, route}) => {
+  const info = route.params.info as withdrawobj
+  const comingFrom = route.params.comingFrom as comingFromEnum
+  const {CustomModal, closeModal, openModal} =useCustomModal()
+  const {CustomModal:PinModal, closeModal: pinCloseModal, openModal: pinOpenModal} =useCustomModal()
   return (
     <Mainwrapper>
       <Backheader title="Safety Precautions" />
+      <CustomModal>
+        <Transactionsummary info={info} openNextModal={()=>{closeModal(); pinOpenModal()}} />
+      </CustomModal>
+      <PinModal>
+        <Transactionpin />
+      </PinModal>
 
       <View style={{ paddingHorizontal: 15, flex: 1, }}>
         <Newlogo />
@@ -79,7 +108,7 @@ const Safetycautions = () => {
       <Custombutton
             btntext="I Understand, Proceed"
             bg={COLORS.blue9}
-            onpress={() => console.log("Safety cautions")}
+            onpress={openModal}
             />
             </View>
     </Mainwrapper>

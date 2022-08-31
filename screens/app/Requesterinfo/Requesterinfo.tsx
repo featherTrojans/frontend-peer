@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import BottomSheet, {
   BottomSheetScrollView,
   BottomSheetFlatList,
@@ -8,16 +8,18 @@ import { COLORS, FONTS, fontsize, icons } from '../../../constants'
 import Horizontaline from '../../../components/Horizontaline/Horizontaline'
 import Custombutton from '../../../components/Custombutton/Custombutton'
 import Map from '../../shared/map/Map'
-import { Backheader } from '../../../components';
+import { Backheader, Loader } from '../../../components';
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import axiosCustom from '../../../httpRequests/axiosCustom';
+import useAlert from '../../../utils/useAlerts';
 
 
 const {Purplechaticon, Renegotiateicon, Cancelrequest, Greenphoneicon, Editicon} = icons
 
 interface withdrawobj {
-  "agent": string,
-  "agentUsername": string,
+  "fullName": string,
+  "username": string,
   "amount":string,
   "charges": string,
   "createdAt": string,
@@ -27,34 +29,76 @@ interface withdrawobj {
   "reference": string,
   "status": string,
   "total": string,
+  userUid:string
 }
 
+enum comingFromEnum { withdrawPending, withdrawAccepted, depositPending, depositAccepted}
+
 const Requesterinfo = ({navigation,route}) => {
-  const info = route.params as withdrawobj
-  console.log("----------------------INFO---------------------")
-  console.log(info)
+  const info = route.params.info as withdrawobj
+  const comingFrom = route.params.comingFrom as comingFromEnum
 
+  const [screeninfoandprops, setScreeninfoandprops] = useState<{}>({})
+  const [loading, setLoading] = useState(false);
+
+  const {errorAlert} = useAlert()
   const snapPoints = useMemo(() => ['60%', '85%'], []);
-  return (
+  
+  console.log("----------------------INFO---------------------")
+  console.log(comingFromEnum.depositAccepted)
 
+  useEffect(()=>{
+    const datatosort:any = {
+      bottomButton: null,
+    }
+    switch (comingFrom){
+      case comingFromEnum.withdrawPending:
+        datatosort.bottomButton = null
+        break
+      case comingFromEnum.withdrawAccepted:
+        datatosort.bottomButton = <Custombutton bg="#11141A" btntext='Make Payment' onpress={() => navigation.navigate("Safetycautions",{info, comingFrom})}/>
+        break
+      case comingFromEnum.depositPending:
+        datatosort.bottomButton = <Custombutton btntext='Accept Request' onpress={handleAcceptRequest}/>
+        break
+      case comingFromEnum.depositAccepted :
+        datatosort.bottomButton = <Custombutton bg="#11141A" btntext='Receive Payment' onpress={() => navigation.navigate("Safetycautions",{info, comingFrom})}/>
+        break
+      default:
+        datatosort.bottomButton = null
+    }
+    setScreeninfoandprops(datatosort)
+  },[])
+
+  
+  const handleAcceptRequest = async () =>{
+    setLoading(true)
+    try{
+      await axiosCustom.put(`/request/accept/${info.reference}`)
+      navigation.navigate("Home")
+    }catch(err){
+      errorAlert(err)
+    }finally{
+      setLoading(false)
+    }
+  }
+
+
+
+  return (
     <View style={{paddingTop: getStatusBarHeight(true), flex: 1}}>
-    
       <Map />
       <Backheader title="Withdraw"/>
-    
+    {loading && <Loader />}
     <View style={{flex: 1, justifyContent: 'flex-end', paddingHorizontal: 15, paddingBottom: getBottomSpace()+20}}>
-  <BottomSheet
-  snapPoints={snapPoints}
-  >
-
+  <BottomSheet snapPoints={snapPoints}>
     <BottomSheetScrollView showsVerticalScrollIndicator={false}>
-
     <View style={{paddingHorizontal: 15, marginBottom: 100}}>
       <View style={{ alignItems: 'center', marginBottom: 40}}>
         <View style={{width: 48, height: 48, borderRadius: 48/2, justifyContent: 'center', alignItems: "center", backgroundColor: COLORS.blue9, marginBottom: 22}}>
           <Text style={{...fontsize.bbsmall, color: COLORS.white, ...FONTS.medium}}>D</Text>
         </View>
-        <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9}}>{info.agent}</Text>
+        <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9}}>{info.fullName}</Text>
         <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 7}}>{info.meetupPoint} Mins Away</Text>
       </View>
 
@@ -65,7 +109,7 @@ const Requesterinfo = ({navigation,route}) => {
       </View>
       <Horizontaline marginV={20}/>
       <Text style={{marginBottom: 16, ...fontsize.smallest, ...FONTS.regular}}>Total Charge (Base Charge + Your Charge)</Text>
-      <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.purple2}}>N{info.amount + info.charges + info.negotiatedFee}</Text>
+      <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.purple2}}>N{Number(info.amount) + Number(info.charges) + Number(info.negotiatedFee)}</Text>
 
       <View style={{marginTop: 32, marginBottom: 40}}>
           <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>Meetup Point (your comfort/safe zone)</Text>
@@ -89,7 +133,7 @@ const Requesterinfo = ({navigation,route}) => {
             <Purplechaticon />
           </View>
           <View style={{marginLeft: 18}}>
-            <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Chat {info.agent.split(" ")}</Text>
+            <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Chat {info.fullName.split(" ")[0]}</Text>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, marginTop: 5}}>Discuss conversations via chat</Text>
           </View>
         </View>
@@ -155,7 +199,10 @@ const Requesterinfo = ({navigation,route}) => {
     
 
   </BottomSheet>
-  <Custombutton btntext='Accept Request' onpress={() => navigation.navigate("Safetycautions")}/>
+  {
+    screeninfoandprops.bottomButton
+  }
+  
   </View>
 
 

@@ -36,6 +36,7 @@ import { getCurrentLocation } from "../../../../utils/customLocation";
 import { RFValue } from "react-native-responsive-fontsize";
 import { withdrawstyles } from "../../Withdraws/Withdraw/Withdraw.styles";
 import useCustomModal from "../../../../utils/useCustomModal";
+import Requestuser from "../../../shared/RequestUser";
 const {
   TransferIcon,
   Location,
@@ -190,20 +191,34 @@ const Emptyrequest = () => {
 };
 
 const datas = [
-  {
-    title: "Pending Requests",
-    data: [
-      { name: "Damilare Seyinde" },
-      { name: "Rasaq Momoh" },
-      { name: "Peterson Yeyejare" },
-    ],
-  },
+  {title: "Pending Requests",data: []},
   { title: "Accepted Requests", data: [] },
 ];
 
 
+
+
+// MODELS 
+
+
+interface statusInterface {
+  "username": string,
+  "fullName": string,
+  "longitude": string,
+  "latitude": string,
+  "locationText": string,
+  "amount": string,
+  "status": string,
+  "reference": string,
+  "createdAt": string,
+  "totalEarnings": number
+}
+
+
 const Depositupdate = ({ navigation, route }) => {
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState<statusInterface | null>(null);
+  const [acceptedDeposits, setAcceptedDeposits] = useState([]);
+  const [pendingDeposits, setPendingDeposits] = useState([]);
   const [loading, setLoading] = useState(false);
   const [coords, setCoords] = useState<any>({});
   const {CustomModal: DepositdetailsModal, openModal: openDepositdetailsModal} = useCustomModal()
@@ -220,7 +235,8 @@ const Depositupdate = ({ navigation, route }) => {
     setViewIndex(viewableItems[0]?.index);
   });
 
-
+ console.log('------------------------PENDING REQUEST--------------------------');
+console.log(pendingDeposits)
 
   // Previous version functions
   useEffect(() => {
@@ -247,7 +263,11 @@ const Depositupdate = ({ navigation, route }) => {
     try {
       setLoading(true);
       const response = await axiosCustom.get("/status/get");
-      setStatus(response.data.data);
+      if(response.data.data){
+        setStatus({...response.data.data.status[0], totalEarnings: response.data.data.totalEarnings });
+        setAcceptedDeposits(response.data.data.acceptedRequests)
+        setPendingDeposits(response.data.data.pendingRequests)
+      }
     } catch (err) {
       // maybe show the error
     } finally {
@@ -258,7 +278,7 @@ const Depositupdate = ({ navigation, route }) => {
 
     try {
       if (status && coords.longitude) {
-        const response = await axiosCustom.put("/status/location/update", {
+     await axiosCustom.put("/status/location/update", {
           longitude: coords.longitude,
           latitude: coords.latitude,
           locationText: coords.locationText,
@@ -273,49 +293,6 @@ const Depositupdate = ({ navigation, route }) => {
 
 
 
-  const Requestuser = ({
-    details,
-    accepted,
-  }: {
-    details: any;
-    accepted: boolean;
-  }) => {
-    const { name } = details;
-    return (
-      <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={withdrawstyles.requesteeprofilewrap}>
-
-        <CustomModal>
-          <View>
-          </View>
-            {/* <Transactionpin /> */}
-            {/* <Negotiatecharge /> */}
-            {/* <Successalert successMsg="Your request has been  submitted" btnText="yes continue" btnFunction={() => console.log("yes")}/> */}
-
-
-          {/* <Requesterinfo /> */}
-          {/* <Transactionsummary /> */}
-        </CustomModal>
-        <View style={withdrawstyles.requesteeprofilewrap}>
-          <View style={withdrawstyles.requesteeinitialsbg}>
-            <Text style={withdrawstyles.requesteeinitialtext}>D</Text>
-
-            {accepted && (
-              <View style={{ position: "absolute", bottom: -3, right: 0 }}>
-                <Acceptedcheck />
-              </View>
-            )}
-          </View>
-
-          <View style={{ marginLeft: 12 }}>
-            <Text style={withdrawstyles.requesteename}>{name}</Text>
-            <Text style={withdrawstyles.requesteedistance}>12 Mins Away</Text>
-          </View>
-        </View>
-
-        <Text style={withdrawstyles.requestedamount}>N23,000</Text>
-      </TouchableOpacity>
-    );
-  };
 
   return (
     <Mainwrapper>
@@ -339,7 +316,7 @@ const Depositupdate = ({ navigation, route }) => {
           </View>
           
           <Text style={{textAlign: "center", marginVertical: 22, ...fontsize.smaller, ...FONTS.medium, lineHeight: 22, color: COLORS.blue9}}>Last known location</Text>
-          <Text style={{textAlign: 'center', ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Destiny Restaurant, Makoko, Along Justice Jacobs Rd, Lekki, Lagos</Text>
+          <Text style={{textAlign: 'center', ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>{status?.locationText}</Text>
         </View>
 
         <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"}}>
@@ -350,7 +327,7 @@ const Depositupdate = ({ navigation, route }) => {
             </View>
             <Text style={{marginLeft: 12, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>My Earnings last 24hrs</Text>
           </View>
-          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>+ N150</Text>
+          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>+ N{status?.totalEarnings}</Text>
         </View>
         <Horizontaline marginV={20}/>
 
@@ -362,14 +339,14 @@ const Depositupdate = ({ navigation, route }) => {
             </View>
             <Text style={{marginLeft: 12, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Deposit Balance</Text>
           </View>
-          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>N12,560.00</Text>
+          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>N{status?.amount}</Text>
         </View>
         <Horizontaline marginV={20}/>
 
 
 
 
-        <Text style={{textAlign: "center", color: COLORS.red1, ...fontsize.smaller, ...FONTS.medium, marginBottom: 25}}>Expires 21 Sept. 2022, 18:35pm</Text>
+        <Text style={{textAlign: "center", color: COLORS.red1, ...fontsize.smaller, ...FONTS.medium, marginBottom: 25}}>Expires {moment(status?.createdAt).add(1, "days").calendar()}</Text>
 
         <Custombutton btntext="Update Deposit" bg={COLORS.blue9} onpress={() => console.log('Char')}/>
 
@@ -391,7 +368,8 @@ const Depositupdate = ({ navigation, route }) => {
         renderItem={({ item, index }) => {
           const isLast = datas.length === index + 1;
           const { title, data } = item;
-
+          let depositdata = isLast ? acceptedDeposits : pendingDeposits
+          const comingFrom = isLast ? 3:2
           return (
             <View
               style={[
@@ -399,15 +377,34 @@ const Depositupdate = ({ navigation, route }) => {
                 { marginRight: isLast ? 0 : 20 },
               ]}
             >
+              
               <Text style={withdrawstyles.requesteeblocktitle}>{title}</Text>
 
-              {data.length > 0 ? (
-                data.map((info, index) => {
+              {depositdata.length > 0 ? (
+                depositdata.map((info, index) => {
                   const isLastItem = data.length === index + 1;
                   const accepted = title === "Accepted Requests";
+                  const datainfo = {
+                    "amount": info.amount,
+                    "charges": info.charges,
+                    "createdAt": info.createdAt,
+                    "meetupPoint": info.meetupPoint,
+                    "negotiatedFee": info.negotiatedFee,
+                    "reference": info.reference,
+                    "status": info.status,
+                    "total": info.total,
+                    fullName: info.user.fullName,
+                    phoneNumber: info.user.phoneNumber,
+                    username: info.user.username,
+                    "userUid": info.userUid,
+                  }
+                  console.log(datainfo )
+                  
                   return (
                     <View key={index}>
-                      <Requestuser details={info} accepted={accepted} />
+                      <TouchableOpacity onPress={()=>navigation.navigate("Requesterinfo",{info:datainfo,comingFrom:comingFrom})} activeOpacity={0.8}>
+                        <Requestuser details={{name:datainfo.agent, duration: datainfo.meetupPoint,amount: datainfo.amount}} accepted={accepted} />
+                      </TouchableOpacity>
                       {!isLastItem && <Horizontaline marginV={21} />}
                     </View>
                   );
@@ -463,7 +460,7 @@ const Depositupdate = ({ navigation, route }) => {
 
          
 
-          {datas[0].data.length > 0?
+          {status?.createdAt?
             <View style={withdrawstyles.bottombtnwrap}>
             <Custombutton
             btntext="View Deposit Details"
@@ -477,8 +474,7 @@ const Depositupdate = ({ navigation, route }) => {
           <View style={withdrawstyles.bottombtnwrap}>
         <Custombutton
               btntext="Create Deposit"
-
-          onpress={() => navigation.navigate("Depositstart")}
+              onpress={() => navigation.navigate("Depositstart")}
         />
       </View>
 

@@ -15,44 +15,9 @@ const {Ashicon} = icons
 
 
 const Eachoption = ({name, phoneNumber}) => {
-    const {CustomModal: TransferdetailsModal, openModal: openTransferdetailsModal} = useCustomModal()
+    
     return(
-        <TouchableOpacity activeOpacity={0.8} onPress={openTransferdetailsModal} style={{flexDirection: "row", paddingVertical: 20,  alignItems: "center"}}>
-
-            <TransferdetailsModal>
-                <View>
-                    <View style={{ justifyContent: "center", alignItems: "center"}}>
-                        <View style={{width: 48, height: 48, borderRadius: 48/2,marginBottom: 22, backgroundColor: COLORS.blue9, justifyContent: "center", alignItems: "center"}}>
-                            <Text style={{color: COLORS.white}}>{nameSplitter(name)}</Text>
-                        </View>
-                        <Text style={{color: COLORS.blue9, ...fontsize.small, ...FONTS.medium, lineHeight: 27}}>{name}</Text>
-                        <Text style={{...fontsize.smallest, color: COLORS.halfBlack}}>@della007</Text>
-                    </View>
-
-
-                    <View style={{marginVertical: 36}}>
-                        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Amount to send</Text>
-                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>N50,00.00</Text>
-                        </View>
-                        <Horizontaline marginV={21}/>
-                        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Charges</Text>
-                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple4, lineHeight: 27}}>+N0.00</Text>
-                        </View>
-                        <Horizontaline marginV={21}/>
-                        <Text style={{...fontsize.smallest, lineHeight: 27, ...FONTS.regular}}>Total Amount to send to {nameToShow(name)}</Text>
-                        <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N50,000.00</Text>
-
-                    </View>
-
-
-                    <Custombutton btntext="Great, Proceed" onpress={() => console.log("Opoened")}/>
-                </View>
-            </TransferdetailsModal>
-
-
-
+        <View style={{flexDirection: "row", paddingVertical: 20,  alignItems: "center"}}>
             <View style={{backgroundColor: COLORS.green2, width: 34, height: 34, justifyContent: "center", alignItems: "center", borderRadius: 34/2,}}>
                 <Text style={{color: COLORS.white}}>G</Text>
             </View>
@@ -61,7 +26,7 @@ const Eachoption = ({name, phoneNumber}) => {
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 5}}>{phoneNumber}</Text>
             </View>
             
-        </TouchableOpacity>
+        </View>
     )
 }
 

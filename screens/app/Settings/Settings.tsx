@@ -148,11 +148,11 @@ const Settings = ({ navigation }) => {
           {/* user image */}
           {/* <View style={{ width: 60, height: 60 }}> */}
             {/* <Defaultuseravatar /> */}
-            {authdata?.userDetails.imageUrl !== null ? (
+            {authdata?.userDetails?.imageUrl !== null ? (
               <Image
                 style={{ width: 60, height: 60, borderRadius: 60 / 2 }}
                 source={{
-                  uri: authdata?.userDetails.imageUrl,
+                  uri: authdata?.userDetails?.imageUrl,
                 }}
               />
             ) : (

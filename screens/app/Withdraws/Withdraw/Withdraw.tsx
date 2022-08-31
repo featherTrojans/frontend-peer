@@ -152,11 +152,7 @@ const Withdraw = ({ navigation }) => {
   const datas = [
     {
       title: "Pending Requests",
-      data: [
-        // { name: "Damilare Seyinde" },
-        // { name: "Rasaq Momoh" },
-        // { name: "Peterson Yeyejare" },
-      ],
+      data: [],
     },
     { title: "Accepted Requests", data: [] },
   ];
@@ -188,6 +184,7 @@ const Withdraw = ({ navigation }) => {
         data={datas}
         renderItem={({ item, index }) => {
           const isLast = datas.length === index + 1;
+          const comingFrom = isLast ? 1 : 0;
           const { title} = item;
           let data = pendingRequests
           if(isLast){
@@ -204,7 +201,7 @@ const Withdraw = ({ navigation }) => {
                   const isLastItem = data.length === index + 1;
                   const accepted = title === "Accepted Requests";
                   return (
-                    <TouchableOpacity onPress={()=>navigation.navigate("Requesterinfo", info)} key={index}>
+                    <TouchableOpacity onPress={()=>navigation.navigate("Requesterinfo", {info:{...info,fullName:info.agent,username:info.agentUsername} , comingFrom:comingFrom })} key={index}>
                       <Requestuser details={{name:info.agent, duration:info.meetupPoint, amount:info.amount}} accepted={accepted} />
                       {!isLastItem && <Horizontaline marginV={21} />}
                     </TouchableOpacity>
