@@ -29,14 +29,24 @@ const Safetycautions = ({navigation, route}) => {
   const comingFrom = route.params.comingFrom as comingFromEnum
   const {CustomModal, closeModal, openModal} =useCustomModal()
   const {CustomModal:PinModal, closeModal: pinCloseModal, openModal: pinOpenModal} =useCustomModal()
+
+  const handleNext = ()=>{
+    closeModal()
+    if(comingFromEnum.withdrawAccepted === comingFrom) {
+      pinOpenModal()
+     }else{
+       navigation.navigate("WithdrawPin",info)
+     }
+  }
+
   return (
     <Mainwrapper>
       <Backheader title="Safety Precautions" />
       <CustomModal>
-        <Transactionsummary info={info} openNextModal={()=>{closeModal(); pinOpenModal()}} />
+        <Transactionsummary info={info} openNextModal={handleNext} />
       </CustomModal>
       <PinModal>
-        <Transactionpin />
+        <Transactionpin  info={info} />
       </PinModal>
 
       <View style={{ paddingHorizontal: 15, flex: 1, }}>

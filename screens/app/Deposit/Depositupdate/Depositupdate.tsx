@@ -384,20 +384,7 @@ console.log(pendingDeposits)
                 depositdata.map((info, index) => {
                   const isLastItem = data.length === index + 1;
                   const accepted = title === "Accepted Requests";
-                  const datainfo = {
-                    "amount": info.amount,
-                    "charges": info.charges,
-                    "createdAt": info.createdAt,
-                    "meetupPoint": info.meetupPoint,
-                    "negotiatedFee": info.negotiatedFee,
-                    "reference": info.reference,
-                    "status": info.status,
-                    "total": info.total,
-                    fullName: info.user.fullName,
-                    phoneNumber: info.user.phoneNumber,
-                    username: info.user.username,
-                    "userUid": info.userUid,
-                  }
+                  const datainfo = { ...info, ...info.user}
                   console.log(datainfo )
                   
                   return (

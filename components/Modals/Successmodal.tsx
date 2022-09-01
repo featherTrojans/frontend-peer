@@ -9,7 +9,7 @@ import { RFValue } from 'react-native-responsive-fontsize'
 
 
 const {Successcheckanimate} = icons
-const Successmodal = ({successMsg, btnText, btnFunction}: {successMsg: string, btnText: string, btnFunction: () => void}) => {
+const Successmodal = ({successMsg, btnText, btnFunction = ()=>{console.log("btn clicked")}}: {successMsg: string, btnText: string, btnFunction?: () => void}) => {
   return (
     <View>
 

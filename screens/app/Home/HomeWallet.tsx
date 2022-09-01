@@ -4,62 +4,80 @@ import React, { useContext, useState } from "react";
     Text,
     View,
     TouchableOpacity,
-    ActivityIndicator,
   } from "react-native";
   import * as Animatable from "react-native-animatable";
 import { Chooseamountmodal, Custombutton, Horizontaline, Iconwithdatas, Input } from "../../../components";
-  import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";
+  import { COLORS, FONTS, fontsize, icons} from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import amountFormatter from "../../../utils/formatMoney";
 import { nameSplitter } from "../../../utils/nameSplitter";
 import { nameToShow } from "../../../utils/nameToShow";
 import useCustomModal from "../../../utils/useCustomModal";
 import { styles } from "./Home.styles";
-import useDebounce from "../../../utils/debounce";  
-import Check from "../../../assets/icons/Check";
-import WrongIcon from "../../../assets/icons/WrongIcon";
+import TransferCash from "../../../components/Modals/TransferCash";
+import axiosCustom from "../../../httpRequests/axiosCustom";
 const {
-    Bell,
     Withdrawicon,
     Depositicon,
     Newtransfericon,
     Paybillicon,
-    Goldenstaricon,
-    Dollaricon,
     Bluebankicon,
     Bluewalleticon,
     Ashicon,
     Aticon,
-    Featherdefault,
-    Searcontacticon,
-    Cryinganimate,
+    Searcontacticon
   } = icons;
+
+
+
+  interface userObj {
+    "accountNo": string | null,
+    "address": null | string,
+    "createdAt": string,
+    "dateOfBirth": null | string,
+    "email": string,
+    "escrowBal": string,
+    "fullName": string,
+    "gender": null | string,
+    "imageUrl": null | string ,
+    "isVerified": boolean,
+    "lga": null | string,
+    "messageToken": string,
+    "phoneNumber": string,
+    "refId": string,
+    "userLevel": number,
+    "userUid": string,
+    "username": string,
+    "walletBal": number,
+  }
+
 const HomeWallet = () => {
     const [amount, setAmount] = useState(0);
-    const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
     const { setAuthData, authdata } = useContext(AuthContext);
-    const [username, setUsername] = useState("");
+    const [userinfo, setUserinfo] = useState<userObj|null>(null);
+    console.log('------------------------USERINFO--------------------------');
+    console.log(userinfo);
     const {
         CustomModal: TransferModal,
         openModal: openTransferModal,
         closeModal: closeTransferModal,
       } = useCustomModal();
-      const {
-        CustomModal: AmountToBankModal,
-        openModal: openBankAmountModal,
-        closeModal: closeBankAmountModal,
-      } = useCustomModal();
-      const {
-        CustomModal,
-        openModal: openAmountModal,
-        closeModal: closeAmountModal,
-      } = useCustomModal();
-      const {
-        CustomModal: TransfercashInfoModal,
-        openModal: openTransfercashInfoModal,
-        closeModal: closeTransfercashinfoModal,
-      } = useCustomModal();
-      const {CustomModal: TransferdetailsModal, openModal: openTransferdetailsModal} = useCustomModal()
+    const {
+      CustomModal: AmountToBankModal,
+      openModal: openBankAmountModal,
+      closeModal: closeBankAmountModal,
+    } = useCustomModal();
+    const {
+      CustomModal,
+      openModal: openAmountModal,
+      closeModal: closeAmountModal,
+    } = useCustomModal();
+    const {
+      CustomModal: TransfercashInfoModal,
+      openModal: openTransfercashInfoModal,
+      closeModal: closeTransfercashinfoModal,
+    } = useCustomModal();
+    const {CustomModal: TransferdetailsModal, openModal: openTransferdetailsModal, closeModal:closeTransferdetailsModal} = useCustomModal()
 
 
     const navigation = useNavigation()
@@ -114,12 +132,14 @@ const HomeWallet = () => {
     },
     ];
 
-    const handleUsernameChange = (text: string) => {
-    setUsername(text);
-    // and debound
-    getuserinfo(text);
-    };
-
+    const handleTransferToFeather = async (userPin)=>{
+      try{
+          return await axiosCustom.post("/transfer",{amount:Number(amount),transferTo:userinfo?.username, userPin})
+      }catch(err){
+        console.log(err.response)
+        throw err;
+      }
+    }
   return (
     <View style={styles.walletOptionsContainer}>
         {/* Transfer Modal */}
@@ -177,126 +197,24 @@ const HomeWallet = () => {
       </CustomModal>
             {/* Transfer cash inputs modal */}
       <TransfercashInfoModal>
-        <View>
-          <Text style={{ marginBottom: 10, ...fontsize.smaller, ...FONTS.medium }}>
-            Transfer Cash
-          </Text>
-          <View
-            style={{
-              justifyContent: "flex-end",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={{
-                ...fontsize.xsmallest,
-                ...FONTS.medium,
-                color: COLORS.grey16,
-              }}
-            >
-              Charges
-            </Text>
-            <View
-              style={{
-                paddingVertical: 8,
-                paddingHorizontal: 10,
-                backgroundColor: COLORS.trasparentBlue2,
-                marginLeft: 10,
-                borderRadius: 18,
-              }}
-            >
-              <Text
-                style={{
-                  ...fontsize.xsmallest,
-                  ...FONTS.bold,
-                  color: COLORS.blue6,
-                }}
-              >
-                + N100.00
-              </Text>
-            </View>
-          </View>
-
-          <View style={{ marginTop: 25, marginBottom: 35 }}>
-            <Input
-              icon={<Ashicon />}
-              placeholder="Enter amount"
-              value={amount}
-              name="plan"
-              inputbg={COLORS.inputBgColor}
-            />
-            <Input
-              icon={<Aticon />}
-              placeholder="Enter username of feather user"
-              name="network"
-              inputbg={COLORS.inputBgColor}
-              onChangeText={handleUsernameChange}
-
-            />
-               <View style={styles.namecont}>
-                {loadbounce ? (
-                <ActivityIndicator size={15} color={COLORS.blue6} />
-                ) : userinfo.fullName ? (
-                <>
-                    <Check />
-                    <Text style={styles.name}>{userinfo?.fullName}</Text>
-                </>
-                ) : null}
-                {error && (
-                <>
-                    <WrongIcon />
-                    <Text style={styles.name}>{username} does not exist</Text>
-                </>
-                )}
-            </View>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => {
-                closeTransfercashinfoModal();
-                navigation.navigate("Sendcash");
-              }}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                backgroundColor: COLORS.trasparentPurple,
-                alignSelf: "flex-start",
-                paddingVertical: 9,
-                paddingHorizontal: 14,
-                borderRadius: 18,
-              }}
-            >
-              <Searcontacticon />
-              <Text
-                style={{
-                  ...fontsize.smallest,
-                  ...FONTS.regular,
-                  color: COLORS.purple2,
-                  marginLeft: 8,
-                }}
-              >
-                Search Contacts
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <Custombutton
-            btntext="Yeah, Continue"
-            onpress={() => {
-              closeTransfercashinfoModal();
-                openTransferdetailsModal();
-            }}
-          />
-        </View>
+       <TransferCash 
+          closeTransfercashinfoModal={closeTransfercashinfoModal} 
+          onpress={(userinfo)=>{
+            openTransferdetailsModal()
+            setUserinfo(userinfo)
+          }} 
+          amount={amount}  
+        />
       </TransfercashInfoModal>
           {/* CONFIRM MODAL  */}
       <TransferdetailsModal>
                 <View>
                     <View style={{ justifyContent: "center", alignItems: "center"}}>
                         <View style={{width: 48, height: 48, borderRadius: 48/2,marginBottom: 22, backgroundColor: COLORS.blue9, justifyContent: "center", alignItems: "center"}}>
-                            <Text style={{color: COLORS.white}}>{nameSplitter("Ayo Bami")}</Text>
+                            <Text style={{color: COLORS.white}}>{nameSplitter(userinfo?.fullName || "  " )}</Text>
                         </View>
-                        <Text style={{color: COLORS.blue9, ...fontsize.small, ...FONTS.medium, lineHeight: 27}}>{"Ayo Bami"}</Text>
-                        <Text style={{...fontsize.smallest, color: COLORS.halfBlack}}>@della007</Text>
+                        <Text style={{color: COLORS.blue9, ...fontsize.small, ...FONTS.medium, lineHeight: 27}}>{userinfo?.fullName}</Text>
+                        <Text style={{...fontsize.smallest, color: COLORS.halfBlack}}>@{userinfo?.username}</Text>
                     </View>
 
 
@@ -311,10 +229,10 @@ const HomeWallet = () => {
                             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple4, lineHeight: 27}}>+N0.00</Text>
                         </View>
                         <Horizontaline marginV={21}/>
-                        <Text style={{...fontsize.smallest, lineHeight: 27, ...FONTS.regular}}>Total Amount to send to {nameToShow("Ayo Bami")}</Text>
-                        <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N50,000.00</Text>
+                        <Text style={{...fontsize.smallest, lineHeight: 27, ...FONTS.regular}}>Total Amount to send to {nameToShow(userinfo?.fullName || "  ")}</Text>
+                        <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amount}</Text>
                     </View>
-                    <Custombutton btntext="Great, Proceed" onpress={()=>{navigation.navigate("",)}}/>
+                    <Custombutton btntext="Great, Proceed" onpress={()=>{closeAmountModal();closeTransferdetailsModal(); navigation.navigate("Transferpin",{info: {...userinfo,amount}, onpress:handleTransferToFeather})}}/>
                 </View>
       </TransferdetailsModal>
 

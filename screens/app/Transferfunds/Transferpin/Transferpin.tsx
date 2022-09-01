@@ -10,6 +10,7 @@ import {
   Loader,
   Mainwrapper,
   Numberbtn,
+  Successmodal,
 } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { useToast } from "react-native-toast-notifications";
@@ -23,11 +24,16 @@ import { ScrollView } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { securepinstyles } from "../../../auth/signup/Securepin/Securepin.styles";
+import useCustomModal from "../../../../utils/useCustomModal";
+import useAlert from "../../../../utils/useAlerts";
 
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const Transferpin = ({ route, navigation }) => {
+  const info = route.params.info
+  console.log('------------------------INFO--------------------------');
+  const onpress = route.params.onpress
   const { sendPushNotification } = usePushNotification();
   const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
@@ -36,60 +42,63 @@ const Transferpin = ({ route, navigation }) => {
   const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
   const { messageToken, authdata } = useContext(AuthContext);
-
+  const {CustomModal, closeModal, openModal} = useCustomModal()
+  const {successAlert, errorAlert} = useAlert()
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
       setPin((oldpin) => [...oldpin, value]);
+      if(pin.length === 3){
+        handleSubmit([...pin, value])
+      }
     }
   };
+
   const handleRemoveAmount = () => {
     if (pin.length > 0) {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
+      
     }
   };
-  const handleSubmit = async () => {
+
+  const handleSubmit = async (pin) => {
     const joinpin = pin.join("");
     if (joinpin.length < 4) {
       return false;
     }
     try {
       setLoading(true);
-  
-      // await axiosCustom.post("/transfer", {
-      //   amount,
-      //   transferTo: userinfo?.username,
-      //   userPin: joinpin,
-      // });
-
-      setShowModal(true);
+      await onpress(joinpin);
+      successAlert('Your cash withdrawal transaction was successful and you depositor has been credited.')
+      openModal()
     } catch (err) {
-      console.log(err.response);
-      showerror(toast, err);
+      errorAlert(err);
     } finally {
       setLoading(false);
     }
   };
 
+
   return (
     <Mainwrapper>
       {loading && <Loader />}
 
-
+      <CustomModal>
+        <Successmodal 
+            btnText="Yeah, continue"
+            successMsg ={`You have successfully transfered  NGN ${info.amount} to ${info.fullName}`}
+            btnFunction={()=>navigation.navigate("Home")}
+        />
+      </CustomModal>
 
       <View style={{paddingHorizontal: 15, flex: 1}}>
         <View style={{marginTop: 32}}>
           <Text style={{...fontsize.bbsmall, ...FONTS.medium, color: COLORS.blue9, marginBottom: 20}}>Complete Transaction</Text>
-          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to send NGN 35,750.00 from your Primary Wallet to @della007 - Adeyemi Adeola Gideon</Text>
+          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to send NGN {Number(info.amount)} from your Primary Wallet to @{info.username} - {info.fullName}</Text>
         </View>
-
-
-
           <View style={{ alignItems: "center", flex: 1, justifyContent: "center"}}>
             <Text style={{marginBottom: 60, ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Enter your Feather PIN</Text>
-
-
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <View style={securepinstyles.pinInputContainer}>
                 <View
@@ -125,22 +134,6 @@ const Transferpin = ({ route, navigation }) => {
 
         </View>
       </View>
-      
-      {/* <Backheader title="PIN"/> */}
-        
-
-        {/* <View style={styles.descriptionContainer}>
-          <Text style={styles.enterPinText}>Enter Transaction PIN</Text>
-        </View>
-
-        <View style={styles.pinContainer}>
-          <View style={styles.pinInputContainer}>
-            <View style={styles.pinView}>{pin[0] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[1] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[2] && <SecureDot />}</View>
-            <View style={styles.pinView}>{pin[3] && <SecureDot />}</View>
-          </View>
-        </View> */}
 
 
       <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
