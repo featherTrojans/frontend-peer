@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
-import { COLORS, icons, images } from "../../constants";
+import { COLORS, FONTS, fontsize, icons, images } from "../../constants";
 import { styles } from "./Sendingandreceive.styles";
 import InitialsBg from "../InitialsBg/InitialsBg";
 import { assetsDB, bankLogo } from "../../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
+import { nameSplitToTwo } from "../../utils/nameSplitter";
 const {
   Senderimage,
   Sendingarrow,
@@ -21,6 +22,23 @@ const { Trustedbadgepng } = images;
 // Wallet Credit
 // Wallet Debit
 // Funding
+
+const InitialsBgColor = ({name}) => {
+  return (
+    <View
+  style={{
+    width:  50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.purple3,
+    borderRadius: 50 /2,
+  }}
+>
+  <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.purple4}}>{nameSplitToTwo(name)}</Text>
+</View> 
+  )
+}
 
 const showImage = (
   senderName: string,
@@ -57,8 +75,8 @@ const showImage = (
         break;
     case "Wallet Debit":
       return (        
-          <InitialsBg name={receiverName} sideLength={62} />
-        
+          // <InitialsBg name={receiverName} sideLength={50} />
+          <InitialsBgColor name={receiverName}/>
         
       ) 
       break;
@@ -70,7 +88,8 @@ const showImage = (
       }
       else{
         return(
-          <InitialsBg name={senderName} sideLength={62} />
+          <InitialsBgColor name={senderName}/>
+          // <InitialsBg name={senderName} sideLength={50} />
         )
       }
       break;
@@ -108,7 +127,7 @@ const showImage = (
       return (
         <View style={styles.typeContainer}>
           <Image
-            style={styles.imageStyle}
+            style={{width: "50%", height: "50%", borderRadius: 50/2}}
             source={{
               uri: assetsDB["banks"][title],
             }}
@@ -119,13 +138,17 @@ const showImage = (
 
     case "withdrawal":
       const targetLogo = bankLogo.filter((logo) => logo.name === value);
+      const isGt = value === "Guaranty Trust Bank"
+      const isFcmb = value === "First City Monument Bank"
       return (
         <View style={styles.typeContainer}>
           <Image
-            style={styles.imageStyle}
+            style={{width: "100%", height: "100%", borderRadius: 50/2}}
             source={{
               uri: targetLogo[0]["image"],
             }}
+            resizeMode={(isGt || isFcmb) ? "cover": "contain"}
+            resizeMethod="scale"
           />
         </View>
       );
@@ -136,7 +159,7 @@ const showImage = (
       return (
         <View style={[styles.typeContainer, {backgroundColor: "transparent"}]}>
           <Image
-            style={styles.imageStyle}
+            style={{width: "100%", height: "100%", borderRadius: 50/2 }}
             source={{
               uri: assetsDB["bills"][networkType],
             }}
@@ -175,7 +198,7 @@ const Sendingandreceive = ({
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
-      {user.imageUrl !== null ?
+      {/* {user.imageUrl !== null ?
       <View>
         <Image
         style={{width: 62, height: 62, borderRadius: 62/2}}
@@ -192,11 +215,13 @@ const Sendingandreceive = ({
     }
     <View>
       <Dashedline />
-    </View>
+    </View> */}
      {((title == "Wallet Credit") || (title == "Wallet Debit")) && otherUser.imageUrl !== null ?
           <View>
           <Image
-          style={{width: 62, height: 62, borderRadius: 62/2}}
+          style={{width: 50, height: 50, borderRadius: 62/2}}
+          resizeMethod="scale"
+          resizeMode="cover"
           source={{
             uri: otherUser.imageUrl,
           }}

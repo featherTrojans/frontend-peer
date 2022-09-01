@@ -37,7 +37,7 @@ import useCustomModal from "../../../../utils/useCustomModal";
 import { sendEmail } from "../../../../utils/emailSender";
 
 
-const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions, Detailsmoreicon } =
+const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions, Detailsmoreicon, Arrowin, Arrowout } =
   icons;
 
 const Transactiondetails = ({ navigation, route }) => {
@@ -57,17 +57,20 @@ const Transactiondetails = ({ navigation, route }) => {
     title,
     user,
     otherUser,
-    charges
+    charges,
+    direction
   } = data;
   const total = Number(amount)+Number(charges)
+  const isDebit = direction === "out"
+  const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
 
   console.log(data, "here is the");
   
 
   const dt = moment(dateTime);
-  const formatDateTime = `${dt.format("ddd")},  ${dt.format("Do")} ${dt.format(
-    "MMM"
-  )} '${dt.format("YY")} - ${dt.format('h:mm')}${dt.format('A')}`;
+  const formatDateTime = `${dt.format("ddd")}.  ${dt.format("Do")} ${dt.format(
+    "MMMM"
+  )}, ${dt.format("YYYY")}`;
 
   // useEffect(() => {
   //   console.log(data, "Transaction details");
@@ -511,9 +514,22 @@ const Transactiondetails = ({ navigation, route }) => {
   }
 
 
+  const Eachoption = ({title, value}) => {
+    return(
+      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16, textTransform: "capitalize"}}>{title}</Text>
+            <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9, textTransform: "capitalize"}}>{value}</Text>
+      </View>
+    )
+  }
+
+
   // const {price } = route?.params
   return (
     <Mainwrapper >
+
+
+      {/* More info about transaction */}
       <TransactiondetailsModal
         // showState={showModal}
         // onBgPress={() => setShowModal(!showModal)}
@@ -549,37 +565,83 @@ const Transactiondetails = ({ navigation, route }) => {
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingHorizontal: 15 }}
       >
+
+      <View style={{justifyContent: "center", alignItems: "center", marginBottom: 20}}>
+      <View style={{backgroundColor: COLORS.white, paddingHorizontal: 20, paddingVertical: 12, borderRadius: 25}}>
+        <Text style={{...fontsize.xsmallest, ...FONTS.medium, color: COLORS.blue9}}>{formatDateTime}</Text>
+      </View>
+      </View>
+
+
+        {/* Header section showing ref and receiver image */}
         <View
           style={{
             justifyContent: "center",
-            alignItems: "center",
+            // alignItems: "center",
+            backgroundColor: COLORS.white,
+            padding: 16,
+            paddingBottom: 30,
+            borderRadius: 15
           }}
         >
-          <Sendingandreceive
-            user={user}
-            otherUser={otherUser}
-            senderName={typeOfName(title)?.senderName}
-            receiverName={typeOfName(title)?.receiverName}
-            title={title}
-            value={title === "withdrawal" ? receiver : sender}
-          />
-          {/* <Text style={{ ...fontsize.bxmedium, ...FONTS.bold, marginTop: 8 }}>
-            NGN {amountFormatter(amount)}
-          </Text> */}
+
+          <View style={{flexDirection: "row", alignItems: "center", justifyContent: 'space-between', flex: 1}}>
+              <Sendingandreceive
+                user={user}
+                otherUser={otherUser}
+                senderName={typeOfName(title)?.senderName}
+                receiverName={typeOfName(title)?.receiverName}
+                title={title}
+                value={title === "withdrawal" ? receiver : sender}
+              />
+
+              <View style={{flexDirection: "row", alignItems: "center"}}>
+                <View style={{backgroundColor: isDebit ? COLORS.red2 : COLORS.green3, paddingHorizontal: 16, paddingVertical: 8, borderRadius: 18}}>
+                  <Text style={{...fontsize.xsmallest, ...FONTS.medium, color: isDebit ? COLORS.red4 : COLORS.green2}}>{isDebit ? "Debit": "Credit"}</Text>
+                </View>
+                <View style={{width: 28, height: 28, backgroundColor: isDebit ? COLORS.red2 : COLORS.green3, borderRadius: 28/2, justifyContent: "center", alignItems: "center", marginLeft: 6.5}}>
+                  {/* icons */}
+                  {Arrow}
+                </View>
+              </View>
+          </View>
+
+          <View style={{alignItems: "center"}}>
+            <View style={{alignItems: "center"}}>
+              <Text style={{...fontsize.smaller, ...FONTS.regular}}>Transaction Ref.</Text>
+              <Text style={{...fontsize.xmedium,...FONTS.bold, lineHeight: 39, color: COLORS.blue7, marginTop: 16, marginBottom: 8, textTransform: "uppercase" }}>{transactionRef}</Text>
+              <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>Tap to copy reference number</Text>
+            </View>
+          </View>
+          
         </View>
+
+
+
+          <View style={{marginTop: 10, backgroundColor: COLORS.white, paddingHorizontal: 18, paddingVertical: 30, borderRadius: 15}}>
+
+              <Eachoption title="Transaction Type" value={title}/>  
+              <Horizontaline marginV={18}/>
+              <Eachoption title="Amount" value={ `N${amountFormatter(amount)}`}/>  
+              <Horizontaline marginV={18}/>
+              <Eachoption title="Transaction Charges" value={ `N${amountFormatter(charges)}`}/>  
+              <Horizontaline marginV={18}/>
+              <Eachoption title="Total" value={ `N${amountFormatter(total)}`}/>  
+
+
+          </View>
+
+
+
 
         {/* The details container */}
-        <View style={[styles.detailsContainer,]}>
 
-          <Text style={{textAlign: "center", marginTop: 34, marginBottom: 40,  ...fontsize.small, ...FONTS.regular, lineHeight: 24}}>This is a transaction report between {`\n`} <Text style={{textTransform: 'capitalize'}}>{typeOfName(title)?.senderName}</Text> and <Text style={{textTransform: "capitalize"}}> {typeOfName(title)?.receiverName}</Text> </Text>
-
-
-        <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+        {/* <View style={{ justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{...fontsize.bsmall, ...FONTS.regular, marginBottom: 16}}>Transaction Ref.</Text>
         <Text style={{...fontsize.bmedium, ...FONTS.bold, color: COLORS.blue7, textTransform: "uppercase"}}>{transactionRef} </Text>
-        </View>
+        </View> */}
 
-          <View style={{marginTop: 62, marginBottom: 52}}>
+          {/* <View style={{marginTop: 62, marginBottom: 52}}>
         <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
           <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Receiver</Text>
           <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9, textTransform: "capitalize"}}>{typeOfName(title)?.receiverName}</Text>
@@ -607,17 +669,21 @@ const Transactiondetails = ({ navigation, route }) => {
           <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Total</Text>
           <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue6}}>NGN {amountFormatter(total.toString())} </Text>
         </View>
-        </View>
+        </View> */}
 
 
-          <Text style={{textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}
+          {/* <Text style={{textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}
           
           
           >
           If you have an issue with this transaction, 
 kindly send a mail with the transaction ref 
 to  <Text style={{color: COLORS.blue6}} onPress={() => sendEmail("disputes@feather.africa")}>disputes@feather.africa</Text> 
-          </Text>
+          </Text> */}
+
+
+
+
           {/* <View style={styles.eachDetailContainer}>
             <Text style={styles.eachDetailTitle}>Date & Time</Text>
             <Text style={{...fontsize.small, ...FONTS.regular}}>{formatDateTime}</Text>
@@ -692,7 +758,6 @@ to  <Text style={{color: COLORS.blue6}} onPress={() => sendEmail("disputes@feath
               <Text style={{ textTransform: "capitalize" }}> Charges</Text>
             </Text>
           </View> */}
-        </View>
       </ScrollView>
 
       {/* <Bottombtn

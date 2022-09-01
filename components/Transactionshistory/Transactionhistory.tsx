@@ -68,11 +68,14 @@ const History = ({ data }) => {
 
       case "withdrawal":
         const targetLogo = bankLogo.filter((logo) => logo.name === to);
+        const isGt = to === "Guaranty Trust Bank"
+        const isFcmb = to === "First City Monument Bank"
         return (
           <View style={styles.arrowBg}>
             <Image
               source={{ uri: targetLogo[0]["image"] }}
-              resizeMode="cover"
+              resizeMode={(isGt || isFcmb) ? "cover": "contain"}
+              resizeMethod="scale"
               style={{
                 width: "100%",
                 height: "100%",

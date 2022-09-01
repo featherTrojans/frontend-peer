@@ -22,8 +22,8 @@ export const styles = StyleSheet.create({
 
 
   typeContainer: {
-    width: 62,
-    height: 62,
+    width: 50,
+    height: 50,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
