@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
-import { COLORS, icons, images } from "../../constants";
+import { COLORS, FONTS, fontsize, icons, images } from "../../constants";
 import { styles } from "./Sendingandreceive.styles";
 import InitialsBg from "../InitialsBg/InitialsBg";
 import { assetsDB, bankLogo } from "../../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
+import { nameSplitToTwo } from "../../utils/nameSplitter";
 const {
   Senderimage,
   Sendingarrow,
@@ -21,6 +22,23 @@ const { Trustedbadgepng } = images;
 // Wallet Credit
 // Wallet Debit
 // Funding
+
+const InitialsBgColor = ({name}) => {
+  return (
+    <View
+  style={{
+    width:  50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.purple3,
+    borderRadius: 50 /2,
+  }}
+>
+  <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.purple4}}>{nameSplitToTwo(name)}</Text>
+</View> 
+  )
+}
 
 const showImage = (
   senderName: string,
@@ -57,8 +75,8 @@ const showImage = (
         break;
     case "Wallet Debit":
       return (        
-          <InitialsBg name={receiverName} sideLength={50} />
-        
+          // <InitialsBg name={receiverName} sideLength={50} />
+          <InitialsBgColor name={receiverName}/>
         
       ) 
       break;
@@ -70,7 +88,8 @@ const showImage = (
       }
       else{
         return(
-          <InitialsBg name={senderName} sideLength={50} />
+          <InitialsBgColor name={senderName}/>
+          // <InitialsBg name={senderName} sideLength={50} />
         )
       }
       break;
@@ -201,6 +220,8 @@ const Sendingandreceive = ({
           <View>
           <Image
           style={{width: 50, height: 50, borderRadius: 62/2}}
+          resizeMethod="scale"
+          resizeMode="cover"
           source={{
             uri: otherUser.imageUrl,
           }}
