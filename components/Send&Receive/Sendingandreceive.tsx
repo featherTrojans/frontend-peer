@@ -57,7 +57,7 @@ const showImage = (
         break;
     case "Wallet Debit":
       return (        
-          <InitialsBg name={receiverName} sideLength={62} />
+          <InitialsBg name={receiverName} sideLength={50} />
         
         
       ) 
@@ -70,7 +70,7 @@ const showImage = (
       }
       else{
         return(
-          <InitialsBg name={senderName} sideLength={62} />
+          <InitialsBg name={senderName} sideLength={50} />
         )
       }
       break;
@@ -108,7 +108,7 @@ const showImage = (
       return (
         <View style={styles.typeContainer}>
           <Image
-            style={styles.imageStyle}
+            style={{width: "50%", height: "50%", borderRadius: 50/2}}
             source={{
               uri: assetsDB["banks"][title],
             }}
@@ -119,13 +119,17 @@ const showImage = (
 
     case "withdrawal":
       const targetLogo = bankLogo.filter((logo) => logo.name === value);
+      const isGt = value === "Guaranty Trust Bank"
+      const isFcmb = value === "First City Monument Bank"
       return (
         <View style={styles.typeContainer}>
           <Image
-            style={styles.imageStyle}
+            style={{width: "100%", height: "100%", borderRadius: 50/2}}
             source={{
               uri: targetLogo[0]["image"],
             }}
+            resizeMode={(isGt || isFcmb) ? "cover": "contain"}
+            resizeMethod="scale"
           />
         </View>
       );
@@ -136,7 +140,7 @@ const showImage = (
       return (
         <View style={[styles.typeContainer, {backgroundColor: "transparent"}]}>
           <Image
-            style={styles.imageStyle}
+            style={{width: "100%", height: "100%", borderRadius: 50/2 }}
             source={{
               uri: assetsDB["bills"][networkType],
             }}
@@ -175,7 +179,7 @@ const Sendingandreceive = ({
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
-      {user.imageUrl !== null ?
+      {/* {user.imageUrl !== null ?
       <View>
         <Image
         style={{width: 62, height: 62, borderRadius: 62/2}}
@@ -192,11 +196,11 @@ const Sendingandreceive = ({
     }
     <View>
       <Dashedline />
-    </View>
+    </View> */}
      {((title == "Wallet Credit") || (title == "Wallet Debit")) && otherUser.imageUrl !== null ?
           <View>
           <Image
-          style={{width: 62, height: 62, borderRadius: 62/2}}
+          style={{width: 50, height: 50, borderRadius: 62/2}}
           source={{
             uri: otherUser.imageUrl,
           }}

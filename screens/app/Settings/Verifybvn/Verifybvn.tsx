@@ -6,6 +6,7 @@ import { COLORS, FONTS, fontsize, icons } from '../../../../constants'
 import axiosCustom from '../../../../httpRequests/axiosCustom';
 import { AuthContext } from '../../../../context/AuthContext';
 import useAlert from '../../../../utils/useAlerts';
+import useCustomModal from '../../../../utils/useCustomModal';
 
 
 const {Whitebackarrow} = icons
@@ -17,6 +18,7 @@ const Verifybvn = ({navigation}) => {
     const [otpCode, setOtpCode] = useState<any>("")
     const [success, setSucess] = useState(false)
     const {successAlert, errorAlert} = useAlert()
+    const {CustomModal, openModal} = useCustomModal()
    const handleOTPSubmit = async ()=>{
      try{
       await axiosCustom.post("user/verify/upgrade",{code:otpCode})
@@ -35,12 +37,18 @@ const Verifybvn = ({navigation}) => {
     <Mainwrapper bgColor={COLORS.blue6}>
 
 <ScrollView style={{ paddingHorizontal: 16, marginTop: 30 }} showsVerticalScrollIndicator={false} bounces={false}>
-    {success && (<View style={{backgroundColor:"green", 
+    
+    
+    
+    {/* {success && (<View style={{backgroundColor:"green", 
           padding:20, 
           borderRadius: 15,
           position:"absolute", width:"94%", marginHorizontal: "3%", marginTop: 40, zIndex:2}}>
             <Text style={{color:"#fff"}}>Upgrade succesful</Text>
-          </View>)}
+          </View>)} */}
+
+
+
        <View
           style={{
             flexDirection: "row",
