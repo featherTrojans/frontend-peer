@@ -113,7 +113,7 @@ const Login = ({ navigation }: any) => {
     } catch (err) {
       // showerror(toast, err);
       console.log(err, "Here is the error");
-      errorAlert("The name", "true", true)
+      errorAlert("The name", "", true)
     } finally {
       setLoading(false);
     }
