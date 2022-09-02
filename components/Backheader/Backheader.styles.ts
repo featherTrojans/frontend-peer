@@ -4,7 +4,8 @@ import { COLORS, FONTS, fontsize } from "../../constants";
 export const styles = StyleSheet.create({
   container: {
     paddingVertical: 18,
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
+    paddingRight: 15,
     // backgroundColor: COLORS.white,
     flexDirection: "row",
     justifyContent: "space-between",

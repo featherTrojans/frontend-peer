@@ -29,18 +29,21 @@ const Backheader = ({
   const navigation = useNavigation();
 
   return (
-    <View style={[styles.container, {marginBottom: mb, backgroundColor: bg}]}>
+    <View style={[styles.container, {marginBottom: mb, backgroundColor: bg }]}>
       <View style={styles.backArrowContainer}>
+
+
         {showArrow && (
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={styles.backArrowIcon}
+            style={[styles.backArrowIcon, {paddingLeft: 15, paddingRight: 10}]}
           >
             <Backarrow />
           </TouchableOpacity>
         )}
 
-        <Text style={styles.backArrowText}>{title}</Text>
+
+        <Text style={[styles.backArrowText, {paddingLeft: showArrow ? 0: 15}]}>{title}</Text>
       </View>
       {rightComponent}
     </View>

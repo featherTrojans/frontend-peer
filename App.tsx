@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from "react-native-toast-notifications";
 import Toast from "react-native-toast-message";
+
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { AuthProvider } from "./context/AuthContext";
@@ -15,14 +16,12 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const { Cancelicon, Alertcancelicon } = icons;
 
-let show = false;
 const toastConfig = {
   errorToast: ({ text1, props }: { text1: string; props: any }) => (
     <View style={[appStyles.alertWrapper, {backgroundColor: "#E00000"}]}>
       <View style={{ flex: 1 }}>
         <Text style={appStyles.alertText}>{props.message}</Text>
       </View>
-
       <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
         <Alertcancelicon />
       </TouchableOpacity>
@@ -66,6 +65,7 @@ const toastConfig = {
   ),
   
 };
+
 
 LogBox.ignoreLogs(["Setting a timer"]);
 
@@ -140,11 +140,11 @@ export default function App() {
         </ToastProvider>
         <Toast
           config={toastConfig}
-          // autoHide={false}
           topOffset={getStatusBarHeight(true)}
           onShow={() => console.log("Status shown")}
           onHide={() => console.log("Status hidden")}
         />
+        
       </>
     );
   }

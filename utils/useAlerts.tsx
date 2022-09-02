@@ -2,20 +2,20 @@ import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 
 const useAlert = () => {
 
-  const successAlert = (messageText: string) => {
+  const successAlert = (messageText: string, hide=false) => {
     Toast.show({
       type: "successToast",
       // And I can pass any custom props I want
       props: { message: messageText },
+      autoHide: hide
     });
   };
 
 
-  const errorAlert = (err: any, customeerror?:string) => {
+  const errorAlert = (err: any, customeerror?:string, hide=false) => {
     console.log(err)
     console.log(err?.response)
   
-    
     let message:string = err?.response?.data?.message
       if(message && typeof message ==="string"){
           message = err.response.data.message
@@ -27,30 +27,36 @@ const useAlert = () => {
     Toast.show({
       type: "errorToast",
       // And I can pass any custom props I want
-      props: { message: message, show: false },
+      props: { message: message},
+      autoHide: hide,
+      
     });
   };
 
-  const blueAlert = (messageText: string) => {
+  const blueAlert = (messageText: string, hide=false) => {
     Toast.show({
       type: "blueToast",
       // And I can pass any custom props I want
       props: { message: messageText, show: false },
+      autoHide: hide
     });
   };
 
-  const purpleAlert = (messageText: string) => {
+  const purpleAlert = (messageText: string, hide= false) => {
     Toast.show({
       type: "purpleToast",
       // And I can pass any custom props I want
       props: { message: messageText, show: false },
+      autoHide: hide
     });
   };
+
+
 
   
 
   return {
-    successAlert, errorAlert, blueAlert, purpleAlert
+    successAlert, errorAlert, blueAlert, purpleAlert,
   }
 
 };
