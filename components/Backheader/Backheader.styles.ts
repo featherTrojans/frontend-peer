@@ -13,13 +13,18 @@ export const styles = StyleSheet.create({
   backArrowContainer: {
     flexDirection: "row",
     alignItems: "center",
+    // backgroundColor: "red",
+    borderRadius: 15
   },
   backArrowIcon: {
-  
-    marginRight: 10.5
+    // marginRight: 10.5,
+    // backgroundColor: "red",
+    // padding: 8,
+    // paddingRight: 15
   },
   backArrowText: {
     ...fontsize.small,
     ...FONTS.medium,
+    color: COLORS.blue9
   },
 });

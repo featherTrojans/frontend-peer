@@ -132,7 +132,7 @@ const Verification = ({route,navigation}) => {
       <OTPTextInput
             ref={otpInput}
             handleTextChange={(text) => setOtpCode(text)}
-            inputCount={5}
+            inputCount={6}
             tintColor={COLORS.green1}
             offTintColor={COLORS.grey6}
             textInputStyle={{

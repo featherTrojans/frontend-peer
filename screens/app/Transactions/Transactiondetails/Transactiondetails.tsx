@@ -524,7 +524,7 @@ const Transactiondetails = ({ navigation, route }) => {
     )
   }
 
-
+ 
 
   const FeatherTransferDetails = () => {
     if((title === "Wallet Credit" || title === "Wallet Debit") ){
@@ -648,106 +648,10 @@ const Transactiondetails = ({ navigation, route }) => {
             <View style={{alignItems: "center"}}>
               <Text style={{...fontsize.smaller, ...FONTS.regular}}>Transaction Ref.</Text>
               <Text style={{...fontsize.xmedium,...FONTS.bold, lineHeight: 39, color: COLORS.blue7, marginTop: 16, marginBottom: 8, textTransform: "uppercase" }}>{transactionRef}</Text>
-              <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>Tap to copy reference number</Text>
-            </View>
-          </View>
-          
-        </View>
-
-
-
-          <View style={{marginTop: 10, backgroundColor: COLORS.white, paddingHorizontal: 18, paddingVertical: 30, borderRadius: 15}}>
-
-              <Eachoption title="Transaction Type" value={title}/>  
-              <Horizontaline marginV={18}/>
-              {FeatherTransferDetails()}
-              {BankTransferDetails()}
-              <Eachoption title="Amount" value={ `N${amountFormatter(amount)}`}/>  
-              <Horizontaline marginV={18}/>
-              <Eachoption title="Transaction Charges" value={ `N${amountFormatter(charges)}`}/>  
-              <Horizontaline marginV={18}/>
-              <Eachoption title="Total" value={ `N${amountFormatter(total)}`}/>  
+              <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>Tap to copy ref. number</Text>
               
               
-
-
-          </View>
-
-
-
-
-        {/* The details container */}
-
-        {/* <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{...fontsize.bsmall, ...FONTS.regular, marginBottom: 16}}>Transaction Ref.</Text>
-        <Text style={{...fontsize.bmedium, ...FONTS.bold, color: COLORS.blue7, textTransform: "uppercase"}}>{transactionRef} </Text>
-        </View> */}
-
-          {/* <View style={{marginTop: 62, marginBottom: 52}}>
-        <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
-          <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Receiver</Text>
-          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9, textTransform: "capitalize"}}>{typeOfName(title)?.receiverName}</Text>
-        </View>
-
-        <Horizontaline marginV={22}/>
-
-
-        <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
-          <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Amount</Text>
-          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9}}>NGN {amountFormatter(amount)}</Text>
-        </View>
-
-        <Horizontaline marginV={22}/>
-
-
-        <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
-          <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Transaction Charge</Text>
-          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue9}}>+ NGN {amountFormatter(charges)}</Text>
-        </View>
-
-        <Horizontaline marginV={22}/>
-
-        <View style={{flexDirection: 'row',  justifyContent: "space-between"}}>
-          <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}>Total</Text>
-          <Text style={{...fontsize.small, ...FONTS.bold, color: COLORS.blue6}}>NGN {amountFormatter(total.toString())} </Text>
-        </View>
-        </View> */}
-
-
-          {/* <Text style={{textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9}}
-          
-          
-          >
-          If you have an issue with this transaction, 
-kindly send a mail with the transaction ref 
-to  <Text style={{color: COLORS.blue6}} onPress={() => sendEmail("disputes@feather.africa")}>disputes@feather.africa</Text> 
-          </Text> */}
-
-
-
-
-          {/* <View style={styles.eachDetailContainer}>
-            <Text style={styles.eachDetailTitle}>Date & Time</Text>
-            <Text style={{...fontsize.small, ...FONTS.regular}}>{formatDateTime}</Text>
-          </View> */}
-
-          {/* <View
-            style={[
-              styles.eachDetailContainer,
-              { flexDirection: "row", alignItems: "center" },
-            ]}
-          >
-            <View>
-              <Text style={styles.eachDetailTitle}>Transaction Ref</Text>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text
-                  style={[
-                    styles.eachDetailValue,
-                    { textTransform: "uppercase" },
-                  ]}
-                >
-                  {transactionRef}
-                </Text>
+              {/* <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}>
                 <TouchableOpacity
                   style={styles.copyClipboardContainer}
                   onPress={() => copyToClipboard(transactionRef)}
@@ -759,54 +663,28 @@ to  <Text style={{color: COLORS.blue6}} onPress={() => sendEmail("disputes@feath
                     {copied ? "Copied" : "Copy"}
                   </Text>
                 </TouchableOpacity>
-              </View>
-            </View>
-            <View>
-              <Text style={styles.eachDetailTitle}>Status</Text>
-              <Text style={[styles.eachDetailValue, { color: COLORS.green1 }]}>
-                Successful
-              </Text>
-            </View>
-          </View> */}
+              </View> */}
 
-          {/* <View style={styles.eachDetailContainer}>
-            <Text style={styles.eachDetailTitle}>Receiver</Text>
-            <Text style={styles.eachDetailValue}>
-              {receiver} - {typeOfName(title)?.receiverName}
-            </Text>
+
+            </View>
           </View>
+        </View>
 
-          <View style={styles.eachDetailContainer}>
-            <Text style={styles.eachDetailTitle}>Sender</Text>
-            <Text style={styles.eachDetailValue}>
-              {sender} - {typeOfName(title)?.senderName}
-            </Text>
-          </View> */}
-          {/* <View style={styles.eachDetailContainer}>
-            {meetupPoint && (
-              <View style={styles.eachDetailContainer}>
-                <Text style={styles.eachDetailTitle}>{meetupPoint}</Text>
-                <Text style={styles.eachDetailValue}>
-                  Eric Moore, Ebutte Meta, Lagos
-                </Text>
-              </View>
-            )}
 
-            <Text style={styles.eachDetailTitle}>Total Amount</Text>
-            <Text
-              style={[styles.eachDetailValue, { textTransform: "uppercase" }]}
-            >
-              NGN {amountFormatter(amount)} + NGN 0.00
-              <Text style={{ textTransform: "capitalize" }}> Charges</Text>
-            </Text>
-          </View> */}
+
+          <View style={{marginTop: 10, backgroundColor: COLORS.white, paddingHorizontal: 18, paddingVertical: 30, borderRadius: 15}}>
+              <Eachoption title="Transaction Type" value={title}/>  
+              <Horizontaline marginV={18}/>
+              {FeatherTransferDetails()}
+              {BankTransferDetails()}
+              <Eachoption title="Amount" value={ `N${amountFormatter(amount)}`}/>  
+              <Horizontaline marginV={18}/>
+              <Eachoption title="Transaction Charges" value={ `N${amountFormatter(charges)}`}/>  
+              <Horizontaline marginV={18}/>
+              <Eachoption title="Total" value={ `N${amountFormatter(total)}`}/>  
+          </View>
+          
       </ScrollView>
-
-      {/* <Bottombtn
-        title="VIEW OPTIONS"
-        bg="#000"
-        onpress={() => setShowModal(true)}
-      /> */}
     </Mainwrapper>
   );
 };
