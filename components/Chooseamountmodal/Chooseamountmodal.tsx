@@ -49,7 +49,7 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
         {amounts.map((item, index) => {
           return (
             <TouchableOpacity
-              onPress={() => handleAmountChange(item.name)}
+              onPress={() => handleAmountChange(`${item.value}`)}
               activeOpacity={0.8}
               key={index}
               style={styles.amountOption}

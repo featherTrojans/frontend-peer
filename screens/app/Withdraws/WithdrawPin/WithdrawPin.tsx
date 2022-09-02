@@ -109,7 +109,7 @@ const WithdrawPin = ({ navigation, route }) => {
         await handlePrepareToTestUpdate("approved");
         console.log(4);
         //show success message
-        setSuccessModal(true);
+        openModal()
       } catch (err) {
         showerror(toast, err);
         // check the error, don't reject for pin error
