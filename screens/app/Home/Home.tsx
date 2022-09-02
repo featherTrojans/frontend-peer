@@ -171,14 +171,6 @@ const Home = ({ navigation }: { navigation: any }) => {
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <Customstatusbar />
 
-    
-      
-
-   
-
-
-
-    
 
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
