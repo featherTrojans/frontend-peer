@@ -58,7 +58,8 @@ const Transactiondetails = ({ navigation, route }) => {
     user,
     otherUser,
     charges,
-    direction
+    direction,
+    bankDetails
   } = data;
   const total = Number(amount)+Number(charges)
   const isDebit = direction === "out"
@@ -518,9 +519,44 @@ const Transactiondetails = ({ navigation, route }) => {
     return(
       <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16, textTransform: "capitalize"}}>{title}</Text>
-            <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9, textTransform: "capitalize"}}>{value}</Text>
+            <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9, textTransform: "capitalize"}}>{value}</Text>
       </View>
     )
+  }
+
+
+
+  const FeatherTransferDetails = () => {
+    if((title === "Wallet Credit" || title === "Wallet Debit") ){
+      const senderName = direction === "in" ? otherUser.fullName : user.fullName
+      const receiverName = direction === "out" ? otherUser.fullName : user.fullName
+      return(
+        <>
+          <Eachoption title="Sender Name" value={senderName}/>  
+          <Horizontaline marginV={18}/>
+          <Eachoption title="Receiver Name" value={receiverName}/>  
+          <Horizontaline marginV={18}/>
+        </>
+      )
+      
+    }
+  }
+
+
+  const BankTransferDetails = () => {
+    if(bankDetails){
+      return(
+        <>
+          <Eachoption title="Account Number" value={bankDetails.account_number}/>  
+          <Horizontaline marginV={18}/>
+          <Eachoption title="Account Name" value={bankDetails.account_name}/>  
+          <Horizontaline marginV={18}/>
+          <Eachoption title="Bank" value={bankDetails.bank_name}/>
+          <Horizontaline marginV={18}/>
+        </>
+      )
+      
+    }
   }
 
 
@@ -564,6 +600,8 @@ const Transactiondetails = ({ navigation, route }) => {
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingHorizontal: 15 }}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
       >
 
       <View style={{justifyContent: "center", alignItems: "center", marginBottom: 20}}>
@@ -592,7 +630,7 @@ const Transactiondetails = ({ navigation, route }) => {
                 senderName={typeOfName(title)?.senderName}
                 receiverName={typeOfName(title)?.receiverName}
                 title={title}
-                value={title === "withdrawal" ? receiver : sender}
+                value={(title === "withdrawal" || title === "Funds Transfer")  ? receiver : sender}
               />
 
               <View style={{flexDirection: "row", alignItems: "center"}}>
@@ -622,11 +660,15 @@ const Transactiondetails = ({ navigation, route }) => {
 
               <Eachoption title="Transaction Type" value={title}/>  
               <Horizontaline marginV={18}/>
+              {FeatherTransferDetails()}
+              {BankTransferDetails()}
               <Eachoption title="Amount" value={ `N${amountFormatter(amount)}`}/>  
               <Horizontaline marginV={18}/>
               <Eachoption title="Transaction Charges" value={ `N${amountFormatter(charges)}`}/>  
               <Horizontaline marginV={18}/>
               <Eachoption title="Total" value={ `N${amountFormatter(total)}`}/>  
+              
+              
 
 
           </View>

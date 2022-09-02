@@ -85,6 +85,27 @@ const History = ({ data }) => {
           </View>
         );
         break;
+
+
+      case "Funds Transfer":
+        const targetlogo = bankLogo.filter((logo) => logo.name === to);
+        const isGtb = to === "Guaranty Trust Bank"
+        const isFcmbc = to === "First City Monument Bank"
+        return (
+          <View style={styles.arrowBg}>
+            <Image
+              source={{ uri: targetlogo[0]["image"] }}
+              resizeMode={(isGtb || isFcmbc) ? "cover": "contain"}
+              resizeMethod="scale"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: RFValue(62 / 2),
+              }}
+            />
+          </View>
+        );
+        break;
       case "Utility Payment":
         return (
           <View style={styles.arrowBg}>

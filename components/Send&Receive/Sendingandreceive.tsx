@@ -153,6 +153,23 @@ const showImage = (
         </View>
       );
       break;
+      case "Funds Transfer":
+        const targetlogo = bankLogo.filter((logo) => logo.name === value);
+        const isGtb = value === "Guaranty Trust Bank"
+        const isFcmbc = value === "First City Monument Bank"
+        return (
+          <View style={styles.typeContainer}>
+            <Image
+              style={{width: "100%", height: "100%", borderRadius: 50/2}}
+              source={{
+                uri: targetlogo[0]["image"],
+              }}
+              resizeMode={(isGtb || isFcmbc) ? "cover": "contain"}
+              resizeMethod="scale"
+            />
+          </View>
+        );
+        break;
 
     case "Airtime Purchase":
       const networkType = value?.toUpperCase();
