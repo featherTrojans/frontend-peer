@@ -165,6 +165,7 @@ import Whitecheck from "../assets/icons/Whitecheck";
 import Bvndropicon from "../assets/icons/Bvndropicon";
 import Alertcancelicon from "../assets/icons/Alertcancelicon";
 import Newlogowhite from "../assets/icons/Newlogowhite";
+import Blackcautionicon from "../assets/icons/Blackcautionicon";
 import Dashedline from "../assets/icons/Dashedline";
 import Greencheckicon from "../assets/icons/Greencheckicon";
 ///Animated icons
@@ -326,6 +327,7 @@ Mobiledataicon,
   Defaultuseravatar,
   Memoji1,
   Upgradeicon,
+  Blackcautionicon,
   Memoji2,
   Lockicon,
   Shareappicon,

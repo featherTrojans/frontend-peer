@@ -16,6 +16,7 @@ import useCustomModal from "../../../utils/useCustomModal";
 import { styles } from "./Home.styles";
 import TransferCash from "../../../components/Modals/TransferCash";
 import axiosCustom from "../../../httpRequests/axiosCustom";
+import { handleOpenInBrowser, handleOpenWithLinking } from "../../../utils/handleOpenWithLinking";
 const {
     Withdrawicon,
     Depositicon,
@@ -25,7 +26,8 @@ const {
     Bluewalleticon,
     Ashicon,
     Aticon,
-    Searcontacticon
+    Searcontacticon,
+    Blackcautionicon
   } = icons;
 
 
@@ -253,16 +255,16 @@ const HomeWallet = () => {
               >
                 Padi, what do you want to do today?
               </Text>
-              <View
-                style={{ width: 4, height: 4, backgroundColor: COLORS.black }}
-              />
+              <TouchableOpacity activeOpacity={0.8} onPress={() => console.log("hellow")} style={{padding: 8, borderRadius: 20}}>
+                  <Blackcautionicon />
+              </TouchableOpacity>
             </View>
 
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
-                marginTop: 30,
+                marginTop: 22,
               }}
             >
               {walletOptions.map(

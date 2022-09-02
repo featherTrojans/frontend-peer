@@ -20,10 +20,10 @@ const Forgetpassword = ({ navigation }) => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const response = await axiosCustom.post("/forgot/password", { email });
+      const response = await axiosCustom.post("/forgot/password", { email: email.trim() });
       navigation.navigate("Forgetpasswordotp", {
         token: response?.data?.data?.token,
-        email: email,
+        email: email.trim(),
       });
     } catch (err) {
       showerror(toast, err);

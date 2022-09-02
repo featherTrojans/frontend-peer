@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     // marginBottom: 28,
-    marginVertical: 40
+    // marginVertical: 40
   },
   otpInput: {
     width: 51,
