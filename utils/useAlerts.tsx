@@ -50,9 +50,6 @@ const useAlert = () => {
       autoHide: hide
     });
   };
-
-
-
   
 
   return {
