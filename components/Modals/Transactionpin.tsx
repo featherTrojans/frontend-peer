@@ -22,8 +22,6 @@ const Transactionpin = ({ info }) => {
   const toast = useToast();
   const { authdata } = useContext(AuthContext);
   const [showmodal, setShowModal] = useState(false);
-  const [showSuccessmodal, setShowSuccessModal] = useState(false);
-  const [showFailuremodal, setShowFailureModal] = useState(false);
   const [agentInfo, setAgentInfo] = useState({});
   const [loading, setLoading] = useState(false);
   const {errorAlert,blueAlert,purpleAlert,successAlert} = useAlert()
@@ -85,12 +83,10 @@ const Transactionpin = ({ info }) => {
         doc(db, "withdrawtransfer", info.reference),
         (doc) => {
           if (doc?.data()?.status === "approved") {
-            setShowModal(false);
-            setShowSuccessModal(true);
+            handleSucccess()
           }
           if (doc?.data()?.status === "rejected") {
-            setShowModal(false);
-            setShowFailureModal(true);
+            errorAlert("unable to verify please try again")
           }
         }
       );

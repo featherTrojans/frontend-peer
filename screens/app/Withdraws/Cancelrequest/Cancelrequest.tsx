@@ -57,7 +57,6 @@ const Cancelrequest = ({route, navigation}) => {
 
       <Globalmodal
        showState={isModalVisible}
-       
        btnFunction={() => navigation.navigate("Home") }
        >
            <View style={{ alignItems: "center" }}>

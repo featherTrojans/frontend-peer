@@ -179,7 +179,7 @@ const HomeWallet = () => {
           headerText="How much do you want to transfer?"
           onpress={() => {
             closeBankAmountModal();
-            navigation.navigate("Selectbank");
+            navigation.navigate("Selectbank",amount);
           }}
         />
       </AmountToBankModal>
