@@ -78,7 +78,10 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
         onChangeText={handleUsernameChange}
 
       />
-         <DebounceLoading loadbounce={loadbounce} error={error} userinfo={userinfo} username={username}  />
+         
+
+      {/* Search contact and debounce */}
+      <View style={{ flexDirection: "row", justifyContent: 'space-between', alignItems: "center"}}>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
@@ -93,7 +96,7 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
           paddingVertical: 9,
           paddingHorizontal: 14,
           borderRadius: 18,
-          marginTop:20
+          // marginTop:20
         }}
       >
         <Searcontacticon />
@@ -108,7 +111,8 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
           Search Contacts
         </Text>
       </TouchableOpacity>
-
+      <DebounceLoading loadbounce={loadbounce} error={error} userinfo={userinfo} username={username}  />
+      </View>
       
     </View>
     <Custombutton

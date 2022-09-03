@@ -74,6 +74,7 @@ const Transferpin = ({ route, navigation }) => {
       openModal()
     } catch (err) {
       errorAlert(err);
+      setPin([])
     } finally {
       setLoading(false);
     }
@@ -95,7 +96,7 @@ const Transferpin = ({ route, navigation }) => {
       <View style={{paddingHorizontal: 15, flex: 1}}>
         <View style={{marginTop: 32}}>
           <Text style={{...fontsize.bbsmall, ...FONTS.medium, color: COLORS.blue9, marginBottom: 20}}>Complete Transaction</Text>
-          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to send NGN {Number(info.amount)} from your Primary Wallet to @{info.username} - {info.fullName}</Text>
+          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to send <Text style={{color: COLORS.blue6}}>NGN {Number(info.amount)}</Text> from your Primary Wallet to<Text style={{color: COLORS.blue6}}> @{info.username} - <Text style={{textTransform: "capitalize"}}>{info.fullName}</Text></Text></Text>
         </View>
           <View style={{ alignItems: "center", flex: 1, justifyContent: "center"}}>
             <Text style={{marginBottom: 60, ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Enter your Feather PIN</Text>

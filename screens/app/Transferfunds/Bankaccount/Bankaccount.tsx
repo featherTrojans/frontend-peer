@@ -47,6 +47,7 @@ const availableBanks = [
   { label: "PAYCOM", value: "PAYCOM" },
   { label: "PROVIDUS", value: "PROVIDUS" },
   { label: "TAJ", value: "TAJ" },
+  { label: "VFD", value: "VFD" },
 ];
 
 const Saveduser = ({ details }: any) => {
