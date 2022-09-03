@@ -54,25 +54,30 @@ const Airtimepurchasepin = ({ navigation, route }) => {
 
   
   const handleSubmit = async ()=>{
-    console.log("airtimeprchase datas", type, data);
+    console.log("airtimeprchase datas", type, data, pin);
 
-    // setLoading(true)
-    // try{
-    //   if(type === "airtime"){
-    //     console.log("airtimeprchase datas", data, airtime);
+    setLoading(true)
+    try{
+      if(type === "airtime"){
+        // console.log("airtimeprchase datas", data, airtime);
+        const sendingDatas = {
+            phone : data.phone,
+            network: data.network,
+            amount: data.amount,
+        }
+        await axiosCustom.post("/bills/airtime",{...sendingDatas, userPin: pin.join("")})
         
-    //     // await axiosCustom.post("/bills/airtime",{...data, userPin: pin.join("")})
+      }else{
+        await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
         
-    //   }else{
-    //     await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
-        
-    //   }
-    //   setShowModal(true)
-    // }catch(err){
-    //   showerror(toast, err)
-    // }finally{
-    //   setLoading(false)
-    // }
+      }
+      setShowModal(true)
+    }catch(err){
+      showerror(toast, err)
+      setPin([])
+    }finally{
+      setLoading(false)
+    }
   }
   return (
     <Mainwrapper>
@@ -83,7 +88,7 @@ const Airtimepurchasepin = ({ navigation, route }) => {
         <View style={{marginTop: 32}}>
           <Text style={{...fontsize.bbsmall, ...FONTS.medium, color: COLORS.blue9, marginBottom: 20}}>Complete Transaction</Text>
           {type === "airtime" && 
-          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to purchase <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue6}}>N5,000</Text> airtime from your Primary Wallet to <Text style={{color: COLORS.blue6}}>08133211658</Text></Text>
+          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to purchase <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue6}}>N{data.amount}</Text> airtime from your Primary Wallet to <Text style={{color: COLORS.blue6}}>{data.phone}</Text></Text>
           }
           {type === "data" && 
           <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to purchase <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue6}}>N5,000</Text> data from your Primary Wallet to <Text style={{color: COLORS.blue6}}>08133211658</Text></Text>
