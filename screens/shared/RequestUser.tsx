@@ -9,6 +9,7 @@ import {
   import React from "react";
   import { COLORS, FONTS, fontsize, icons, SIZES } from "../../constants";
   import { withdrawstyles } from "../app/Withdraws/Withdraw/Withdraw.styles";
+import amountFormatter from "../../utils/formatMoney";
 
   const {
     Acceptedcheck
@@ -42,7 +43,7 @@ const Requestuser = ({
           </View>
         </View>
 
-        <Text style={withdrawstyles.requestedamount}>N{amount}</Text>
+        <Text style={withdrawstyles.requestedamount}>N{amountFormatter(amount)}</Text>
       </View>
     );
   };

@@ -10,28 +10,17 @@ import {
   TouchableOpacity
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
-// import { styles } from "./Depositupdate.styles";
 import moment from "moment";
 import {
   Backheader,
-  Bottombtn,
   Custombutton,
   Horizontaline,
-  Loader,
   Mainwrapper,
-  Negotiatecharge,
-  // Requesterinfo,
-  Transactionpin,
-  Transactionsummary,
   Viewbalance,
 } from "../../../../components";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import amountFormatter from "../../../../utils/formatMoney";
-import { AuthContext } from "../../../../context/AuthContext";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import Customstatusbar from "../../../shared/Customstatusbar";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import { RFValue } from "react-native-responsive-fontsize";
 import { withdrawstyles } from "../../Withdraws/Withdraw/Withdraw.styles";
@@ -235,9 +224,6 @@ const Depositupdate = ({ navigation, route }) => {
     setViewIndex(viewableItems[0]?.index);
   });
 
- console.log('------------------------PENDING REQUEST--------------------------');
-console.log(pendingDeposits)
-
   // Previous version functions
   useEffect(() => {
     getDepositStatus();
@@ -291,9 +277,6 @@ console.log(pendingDeposits)
   };
 
 
-
-
-
   return (
     <Mainwrapper>
       <Backheader title="Deposit" />
@@ -301,8 +284,6 @@ console.log(pendingDeposits)
       <View style={{ paddingHorizontal: 15 }}>
         <Viewbalance />
       </View>
-
-
 
       {/* Deposit details and info modal */}
       <DepositdetailsModal>
@@ -348,7 +329,8 @@ console.log(pendingDeposits)
 
         <Text style={{textAlign: "center", color: COLORS.red1, ...fontsize.smaller, ...FONTS.medium, marginBottom: 25}}>Expires {moment(status?.createdAt).add(1, "days").calendar()}</Text>
 
-        <Custombutton btntext="Update Deposit" bg={COLORS.blue9} onpress={() => console.log('Char')}/>
+        <Custombutton btntext="Update Deposit" bg={COLORS.blue9} 
+        onpress={() => navigation.navigate("Depositstart",{type:"update", reference:status?.reference})}/>
 
 
 
@@ -390,7 +372,7 @@ console.log(pendingDeposits)
                   return (
                     <View key={index}>
                       <TouchableOpacity onPress={()=>navigation.navigate("Requesterinfo",{info:datainfo,comingFrom:comingFrom})} activeOpacity={0.8}>
-                        <Requestuser details={{name:datainfo.agent, duration: datainfo.meetupPoint,amount: datainfo.amount}} accepted={accepted} />
+                        <Requestuser details={{name:datainfo.fullName, duration: datainfo.meetupPoint,amount: datainfo.amount}} accepted={accepted} />
                       </TouchableOpacity>
                       {!isLastItem && <Horizontaline marginV={21} />}
                     </View>
@@ -461,7 +443,7 @@ console.log(pendingDeposits)
           <View style={withdrawstyles.bottombtnwrap}>
         <Custombutton
               btntext="Create Deposit"
-              onpress={() => navigation.navigate("Depositstart")}
+              onpress={() => navigation.navigate("Depositstart",{type:"create", reference:""})}
         />
       </View>
 

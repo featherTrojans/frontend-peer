@@ -81,14 +81,14 @@ const Chatsdm = ({navigation,route}) => {
   const getThisChats = async ()=>{  
     try{
       let document;
-      let id1id2 = `${authId}-${userInfo.userUid}`
+      let id1id2 = `${authId}-${userInfo?.userUid}`
       document = await getDoc(doc(db,"chatstwo",id1id2))
       
       if(document.exists()){
         setchatid(id1id2)
         return
       }
-      const id2id1 = `${userInfo.userUid}-${authId}`
+      const id2id1 = `${userInfo?.userUid}-${authId}`
       document = await getDoc(doc(db,"chatstwo",id2id1))
       if(document.exists()){
         setchatid(id2id1)
@@ -113,7 +113,7 @@ const Chatsdm = ({navigation,route}) => {
     try{
       await axiosCustom.post("/transfer",{
         amount:amount.value,
-        transferTo:userInfo.username,
+        transferTo:userInfo?.username,
         userPin:userPin
       })
       setchattext("")
@@ -131,10 +131,10 @@ const Chatsdm = ({navigation,route}) => {
     let chatId = chatid;
     if(!chatid){
       // first create document
-     chatId = `${authId}-${userInfo.userUid}`
+     chatId = `${authId}-${userInfo?.userUid}`
       await setDoc(doc(db,"chatstwo",chatId),{
         id1: authId,
-        id2: userInfo.userUid
+        id2: userInfo?.userUid
       })
       setchatid(chatId)
     }
@@ -150,7 +150,7 @@ const Chatsdm = ({navigation,route}) => {
     try{
       setchattext("")   
       await addDoc(collection(db,"chatstwo",chatId,"messages"),messageData)
-      sendPushNotification(userInfo.messageToken, authdata?.userDetails.fullName, message, "Chatshome" )
+      sendPushNotification(userInfo?.messageToken, authdata?.userDetails.fullName, message, "Chatshome" )
       if(action === "message"){
         await updateDoc(doc(db,"chatstwo",chatid),{
           lastMessage: message,
@@ -246,7 +246,7 @@ const Chatsdm = ({navigation,route}) => {
 
 
       <AllChatsModal 
-        nameOfActiveChat={userInfo.fullName}
+        nameOfActiveChat={userInfo?.fullName}
         sendcashModal={sendcashModal}
         chooseAmount={chooseAmount}
         enterPin={enterPin}
@@ -277,7 +277,7 @@ const Chatsdm = ({navigation,route}) => {
 
         <View style={styles.headerDetailsContainer}>
           <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
-            <Text style={styles.chatName}>{userInfo.fullName}</Text>
+            <Text style={styles.chatName}>{userInfo?.fullName}</Text>
           <TouchableOpacity activeOpacity={0.8} onPress={()=>setSendCashModal(true)}>
             <SendTF style={{marginRight: 10}} />
           </TouchableOpacity>
@@ -315,7 +315,7 @@ const Chatsdm = ({navigation,route}) => {
               </View>
               
               {data.map((dat, index) => {
-                if(dat.sender === userInfo.userUid){
+                if(dat.sender === userInfo?.userUid){
                   return (
                     <View key={index}>
                       {renderSenderHTML(dat) }

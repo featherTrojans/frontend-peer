@@ -128,8 +128,6 @@ const Withdraw = ({ navigation }) => {
     setLoading(true);
     try {
       const response = await axiosCustom.get("/request/pending");
-      console.log("-------------------------------RESPONSE---------------------------")
-      console.log(response.data.data)
       setPendingRequests(response?.data?.data);
     } catch (err) {
       console.log(err.response);
@@ -141,8 +139,6 @@ const Withdraw = ({ navigation }) => {
   const getAcceptedRequest = async () => {
     try {
       const response = await axiosCustom.get("/request/accepted");
-      console.log("-------------------------------RESPONSETWO---------------------------")
-      console.log(response.data.data)
       setAcceptedRequests(response?.data?.data);
     } catch (err) {
       console.log(err.response);

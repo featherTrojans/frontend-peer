@@ -13,6 +13,8 @@ import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import axiosCustom from '../../../httpRequests/axiosCustom';
 import useAlert from '../../../utils/useAlerts';
+import { makePhoneCall } from '../../../utils/userDeviceFunctions';
+import amountFormatter from '../../../utils/formatMoney';
 
 
 const {Purplechaticon, Renegotiateicon, Cancelrequest, Greenphoneicon, Editicon} = icons
@@ -105,11 +107,11 @@ const Requesterinfo = ({navigation,route}) => {
 
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>Amount</Text>
-        <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>+N{info.amount}</Text>
+        <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>+N{amountFormatter(info.amount)}</Text>
       </View>
       <Horizontaline marginV={20}/>
       <Text style={{marginBottom: 16, ...fontsize.smallest, ...FONTS.regular}}>Total Charge (Base Charge + Your Charge)</Text>
-      <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.purple2}}>N{Number(info.amount) + Number(info.charges) + Number(info.negotiatedFee)}</Text>
+      <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.purple2}}>N{amountFormatter((Number(info.amount) + Number(info.charges) + Number(info.negotiatedFee)).toString())} </Text>
 
       <View style={{marginTop: 32, marginBottom: 40}}>
           <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>Meetup Point (your comfort/safe zone)</Text>
@@ -128,7 +130,7 @@ const Requesterinfo = ({navigation,route}) => {
 
     <View style={{marginVertical: 30}}>
       <View>
-        <View style={{flexDirection: 'row', alignItems: "center"}}>
+        <TouchableOpacity onPress={()=>navigation.navigate("Chatsdm",{ userInfo: info})} style={{flexDirection: 'row', alignItems: "center"}}>
           <View style={{width: 32, height: 32, backgroundColor: COLORS.purple3, borderRadius: 32/2, justifyContent: "center", alignItems: 'center'}}>
             <Purplechaticon />
           </View>
@@ -136,7 +138,7 @@ const Requesterinfo = ({navigation,route}) => {
             <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Chat {info.fullName.split(" ")[0]}</Text>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, marginTop: 5}}>Discuss conversations via chat</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <Horizontaline marginV={21}/>
@@ -144,10 +146,10 @@ const Requesterinfo = ({navigation,route}) => {
 
 
 
-    {false ?
+    {comingFromEnum.withdrawAccepted === comingFrom ?
     
     <View>
-    <View style={{flexDirection: 'row', alignItems: "center"}}>
+    <TouchableOpacity onPress={()=>makePhoneCall(info?.phoneNumber)} style={{flexDirection: 'row', alignItems: "center"}}>
       <View style={{width: 32, height: 32, backgroundColor: COLORS.green3, borderRadius: 32/2, justifyContent: "center", alignItems: 'center'}}>
       <Greenphoneicon />
 
@@ -156,7 +158,7 @@ const Requesterinfo = ({navigation,route}) => {
         <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Phone Call</Text>
         <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, marginTop: 5}}>Make a phone call to communicate</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   </View>
   :
   <View>
@@ -200,7 +202,7 @@ const Requesterinfo = ({navigation,route}) => {
 
   </BottomSheet>
   {
-    screeninfoandprops.bottomButton
+    screeninfoandprops?.bottomButton
   }
   
   </View>
