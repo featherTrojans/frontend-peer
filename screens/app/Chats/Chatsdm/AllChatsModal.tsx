@@ -35,6 +35,7 @@ const Chatsmodal = ({children, showState, onBgPress=()=>{}}) => {
   
 
 const AllChatsModal = ({
+    nameOfActiveChat,
     handlePinChange,
     userPin,
     sendCash,
@@ -62,7 +63,7 @@ const AllChatsModal = ({
         {/* Send cash or keep typing modal */}
         <Chatsmodal showState={sendcashModal} onBgPress={clearModalsAll}>
           
-          <Text style={styles.sendCashHeader}>Hey Padi, want to send cash to Stephanie Okereke or is it just a text language?</Text>
+          <Text style={styles.sendCashHeader}>Hey Padi, want to send cash to <Text style={{textTransform: "capitalize"}}> {nameOfActiveChat}</Text> or is it just a text language?</Text>
 
               <View style={styles.sendCashWrapper}>
 

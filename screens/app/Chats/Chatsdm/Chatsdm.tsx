@@ -246,6 +246,7 @@ const Chatsdm = ({navigation,route}) => {
 
 
       <AllChatsModal 
+        nameOfActiveChat={userInfo.fullName}
         sendcashModal={sendcashModal}
         chooseAmount={chooseAmount}
         enterPin={enterPin}

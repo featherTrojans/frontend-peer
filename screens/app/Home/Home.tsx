@@ -116,7 +116,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       // setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
       // console.log(response.data.data.userDetails.imageUrl, "user image url");
-      console.log(response.data.data.transactions, "here is the transacxctions");
+      // console.log(response.data.data.transactions, "here is the transacxctions");
       
     } catch (err) {
     } finally {

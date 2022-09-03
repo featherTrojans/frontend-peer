@@ -99,9 +99,11 @@ const Editprofile = ({}) => {
             type: "Image/jpeg",
             name: "image1"
           });
-          formdata.append('name', 'Gyroscope');
+          formdata.append('name', authdata.userDetails.username);
           // console.log(result.uri, "this is the image url");
+          setAuthData({...authdata, userDetails: {...authdata.userDetails, imageUrl: result.uri}})
           const response = await axiosCustom.post("/upload/image",formdata);
+          
           console.log(response.data, "Uploaded response");
                     
         } catch (err) {
