@@ -56,7 +56,6 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().label("Last Name").required(),
   phone: Yup.string().label("email").required(),
 });
-const usertype = "newbie";
 
 
 
@@ -70,6 +69,9 @@ const Editprofile = ({}) => {
     const [usernamename, setusernamename] = useState(
       authdata?.userDetails?.username
     );
+    const {userLevel} = authdata.userDetails
+    const usertype = userLevel < 2 ? "newbie" : "odogwu"
+
     const [loading, setLoading] = useState(false);
     const handleUsernameChange = (text: string) => {
       setusernamename(text);

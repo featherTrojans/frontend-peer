@@ -9,7 +9,7 @@ import Horizontaline from "../Horizontaline/Horizontaline";
 
 const {Purplehouseicon} =icons
 
-const Copyaccountinfo = () => {
+const Copyaccountinfo = ({accName, accNumber}) => {
 
 
 
@@ -18,8 +18,8 @@ const Copyaccountinfo = () => {
     const result = await Share.share(
       {
         title: "Feather Account Details",
-        message: `${"Bank Name: VFD Microfiance Bank "} \n ${"Account Name: Feather / Sarah Obanikoro" } \n ${"Account Number: 8903792082"}`,
-        url: `${"Bank Name: VFD Microfiance Bank "} \n ${"Account Name: Feather / Sarah Obanikoro" } \n ${"Account Number: 8903792082"}`,
+        message: `${"Bank Name: VFD Microfiance Bank "} \n ${`Account Name: Feather / ${accName}` } \n ${`Account Number: ${accNumber}`}`,
+        url: `${"Bank Name: VFD Microfiance Bank "} \n ${`Account Name: Feather / ${accName}` } \n ${`Account Number: ${accNumber}`}`,
       },
       {
         dialogTitle: "Feather Account Details",
@@ -52,7 +52,7 @@ const Copyaccountinfo = () => {
         
       </View>
       <View style={{marginBottom: 52}}>
-            <Text style={{textAlign: "center", ...fontsize.big, ...FONTS.bold, color: COLORS.blue9, marginBottom: 12}}>8903792082</Text>
+            <Text style={{textAlign: "center", ...fontsize.big, ...FONTS.bold, color: COLORS.blue9, marginBottom: 12}}>{accNumber}</Text>
             <Text style={{textAlign: "center", ...fontsize.smallest, color: COLORS.grey16, ...FONTS.regular}}>Tap to copy account number</Text>
         </View>
 
@@ -64,7 +64,7 @@ const Copyaccountinfo = () => {
             <Horizontaline marginV={18}/>
         <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2}}>Account Name</Text>
-            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Feather / Sarah Obanikoro</Text>
+            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9, textTransform: "capitalize"}}>Feather / {accName}</Text>
         </View>
         </View>
 

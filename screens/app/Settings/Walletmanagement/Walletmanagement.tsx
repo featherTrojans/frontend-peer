@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Backheader, Copyaccountinfo, Horizontaline, Mainwrapper, Tableoption, Upgrademodal } from "../../../../components";
 import { walletmanangementstyles } from "./Walletmanagement.styles";
 import useCustomModal from "../../../../utils/useCustomModal";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const { Memoji2, Memoji1bigicon } = icons;
 
@@ -11,8 +12,10 @@ const { Memoji2, Memoji1bigicon } = icons;
 
 const Walletmanagement = () => {
   const {CustomModal, openModal} = useCustomModal()
-  const {CustomModal: UpgradeuserModal, openModal: openUpgradeModal} = useCustomModal()
-
+  const {CustomModal: UpgradeuserModal, openModal: openUpgradeModal, closeModal: closeUpgradeUserModal} = useCustomModal()
+  const {authdata} = useContext(AuthContext) 
+  const {fullName, accountNo, userLevel} = authdata.userDetails
+  const usertype = userLevel < 2 ? "newbie" : "Odogwu"
 
 
   const Curvedbutton = ({ btntext, onpress }) => {
@@ -59,7 +62,7 @@ const Walletmanagement = () => {
         break;
 
 
-      case "odogwu":
+      case "Odogwu":
           return (
             <>
               <View style={walletmanangementstyles.memojimainwrap}>
@@ -75,7 +78,7 @@ const Walletmanagement = () => {
                 <View style={walletmanangementstyles.bankinfowrap}>
                   <View>
                     <Text style={walletmanangementstyles.bankinfotitle}>Your Feather Account Number</Text>
-                    <Text style={walletmanangementstyles.bankinfovalue}>8903792082</Text>
+                    <Text style={walletmanangementstyles.bankinfovalue}>{accountNo}</Text>
                   </View>
                   <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={walletmanangementstyles.copybankinfobg}>
                     <Text style={walletmanangementstyles.copybankinfotext}>Copy</Text>
@@ -166,13 +169,13 @@ const Walletmanagement = () => {
         bounces={false}
       >
         <CustomModal>
-          <Copyaccountinfo />
+          <Copyaccountinfo accName={fullName} accNumber={accountNo}/>
         </CustomModal>
         <UpgradeuserModal>
-          <Upgrademodal />
+          <Upgrademodal closeUpgradeModal={closeUpgradeUserModal}/>
         </UpgradeuserModal>
 
-        {renderUsertable("newbie")}
+        {renderUsertable(usertype)}
       </ScrollView>
     </Mainwrapper>
   );

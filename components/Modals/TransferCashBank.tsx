@@ -60,7 +60,7 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
               </View>
             </View>
   
-            <View style={{marginTop: 25, marginBottom: 35}}>
+            <View style={{marginTop: 25, marginBottom: 10}}>
             <Input icon={<Ashicon />} placeholder="Enter Amount" value={amount} name="amount" inputbg={COLORS.inputBgColor}/>
             <Input icon={<Briefcaseicon />} placeholder="Bank Name" name="bankName" value={bank.name} inputbg={COLORS.inputBgColor}/>
             <Input icon={<Briefcaseicon />} placeholder="Enter Account Number" 
@@ -70,7 +70,9 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
             inputbg={COLORS.inputBgColor}/>
 
             </View>
-            <DebounceLoading error={false} loadbounce={loading} userinfo={{fullName:accountInformation?.account_name}} username="Bank" />
+              <View style={{ height: 25, marginBottom: 15, alignItems: "flex-end"}}>
+                  <DebounceLoading error={false} loadbounce={loading} userinfo={{fullName:accountInformation?.account_name}} username="Bank" />
+            </View>
           <Custombutton btntext="Yeah, Continue" onpress={()=>handleNext(accountInformation)} />
             
           </View>

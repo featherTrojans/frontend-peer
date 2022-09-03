@@ -170,7 +170,7 @@ const Settings = ({ navigation }) => {
         </View>
 
         <CustomModal>
-          <Copyaccountinfo />
+          <Copyaccountinfo accName={authdata.userDetails.fullName} accNumber={authdata.userDetails.accountNo} />
         </CustomModal>
         <UpgradeuserModal bg={COLORS.white3}>
             <Upgrademodal closeUpgradeModal={closeUpgradeModal} />
@@ -276,7 +276,7 @@ const Settings = ({ navigation }) => {
                     ...FONTS.bold,
                   }}
                 >
-                 {!isNewbie ?  "1000063012" : "* * * * * * * * * *"}
+                 {!isNewbie ?  authdata.userDetails.accountNo : "* * * * * * * * * *"}
                 </Text>
               </View>
               <View>
@@ -300,10 +300,13 @@ const Settings = ({ navigation }) => {
                 </Text>
               </View>
 
-
+                {!isNewbie ?
                 <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={{backgroundColor: COLORS.blue8,width: 35, height: 35, borderRadius: 30, justifyContent: "center", alignItems: "center"}}>
                   <Shareaccounticon />
                 </TouchableOpacity>
+                :
+                <View style={{}}/>
+                }
             </View>
           </View>
         </View>
