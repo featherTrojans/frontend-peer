@@ -41,7 +41,7 @@ const listOfbanks = [
       logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFirst%20Bank%20Nigeria%20Logo%20(1).png?alt=media&token=c5699cab-aece-48fe-954e-578e534c942b"
   },
   {
-      value: "",
+      value: "FCMB",
       name: "First City Monument Bank",
       logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FFirst%20City%20Monument%20Bank%20Ltd%20Logo%20(1).png?alt=media&token=24d59412-c43f-49cf-bf03-2a42cada86a2"
   }
@@ -82,12 +82,29 @@ const Selectbank = ({navigation, route}) => {
         openModal:openTransactionDetailsModal, 
         closeModal:closeTransactionDetailsModal} = useCustomModal()
   const [bank, setBank] = useState({name:"",logo:"",value:""})
-  const [accountNumber, setAccountNumber] = useState("");
   const [accountInformation, setAccountInformation] = useState({});
 
 
-  const handleNextBankCash = ()=>{
+  const handleNextBankCash = (bankinfo) => {
+    setAccountInformation(bankinfo)
+    openTransactionDetailsModal();
+  }
 
+  const handleTransferToFeather = async (pin)=>{
+    console.log('------------------------DEBUG--------------------------');
+    console.log(accountInformation)
+    console.log(amount)
+    console.log(pin)
+    try {
+      await axiosCustom.post("/withdraw", {
+        amount: Number(amount),
+        account_code: accountInformation?.account_code,
+        userPin: pin,
+      });
+      return 'Your cash transaction was successful';
+    } catch (err) {
+      throw err
+    }
   }
 
   return (
@@ -97,37 +114,42 @@ const Selectbank = ({navigation, route}) => {
           <TransferCashBank bank={bank} handleNext={handleNextBankCash} amount={amount}/>
         </CustomModal>
         <TransactiondetailsModal>
-        <View>
-              <View style={{ justifyContent: "center", alignItems: "center"}}>
-                  <View style={{width: 48, height: 48, borderRadius: 48/2,marginBottom: 22, backgroundColor: COLORS.blue9, justifyContent: "center", alignItems: "center"}}>
-                      <Text style={{color: COLORS.white}}>{nameSplitter(accountInformation?.account_name || "  " )}</Text>
-                  </View>
-                  <Text style={{color: COLORS.blue9, ...fontsize.small, ...FONTS.medium, lineHeight: 27}}>{accountInformation?.account_name}</Text>
-                  {/* <Text style={{...fontsize.smallest, color: COLORS.halfBlack}}>@{userinfo?.username}</Text> */}
-              </View>
-              <View style={{marginVertical: 36}}>
-                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                      <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Amount to send</Text>
-                      <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>N{amount}</Text>
-                  </View>
-                  <Horizontaline marginV={21}/>
-                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                      <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Charges</Text>
-                      <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple4, lineHeight: 27}}>+N100.00</Text>
-                  </View>
-                  <Horizontaline marginV={21}/>
-                  <Text style={{...fontsize.smallest, lineHeight: 27, ...FONTS.regular}}>Total Amount to send to {nameToShow(accountInformation?.account_name || "  ")}</Text>
-                  <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amount}</Text>
-              </View>
-              <Custombutton btntext="Great, Proceed" onpress={()=>{navigation.navigate("Transferpin",{info: {...accountInformation,amount}, onpress:handleTransferToFeather})}}/>
+          <View>
+                <View style={{ justifyContent: "center", alignItems: "center"}}>
+                    <View style={{width: 48, height: 48, borderRadius: 48/2,marginBottom: 22, backgroundColor: COLORS.blue9, justifyContent: "center", alignItems: "center"}}>
+                        <Text style={{color: COLORS.white}}>{nameSplitter(accountInformation?.account_name || "  " )}</Text>
+                    </View>
+                    <Text style={{color: COLORS.blue9, ...fontsize.small, ...FONTS.medium, lineHeight: 27}}>{accountInformation?.account_name}</Text>
+                    {/* <Text style={{...fontsize.smallest, color: COLORS.halfBlack}}>@{userinfo?.username}</Text> */}
+                </View>
+                <View style={{marginVertical: 36}}>
+                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Amount to send</Text>
+                        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>N{amount}</Text>
+                    </View>
+                    <Horizontaline marginV={21}/>
+                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Charges</Text>
+                        <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple4, lineHeight: 27}}>+N100.00</Text>
+                    </View>
+                    <Horizontaline marginV={21}/>
+                    <Text style={{...fontsize.smallest, lineHeight: 27, ...FONTS.regular}}>Total Amount to send to {nameToShow(accountInformation?.account_name || "  ")}</Text>
+                    <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amount}</Text>
+                </View>
+                <Custombutton 
+                btntext="Great, Proceed" 
+                onpress={()=>{
+                  navigation.navigate("Transferpin",{
+                    info: {username:bank.name, fullName:accountInformation?.account_name, amount},
+                    onpress:handleTransferToFeather
+                  })
+                }}
+                 />
           </View>
         </TransactiondetailsModal>
-
         <View style={{paddingHorizontal: 15,}}>
-
             <View style={{backgroundColor: COLORS.white, paddingHorizontal: 20, paddingBottom: 10, paddingTop: 22, borderRadius: 15}}>
             <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9, lineHeight: 27}}>Choose your destination bank</Text>
-
             {listOfbanks.map(({name, logo, value}, index) => {
                 const isLast = listOfbanks.length === index + 1;
                 return (

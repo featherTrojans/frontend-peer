@@ -28,13 +28,6 @@ import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
 import { useIsFocused, useScrollToTop } from "@react-navigation/native";
 
 import {
-  Chooseamountmodal,
-  Custombutton,
-  Horizontaline,
-  Iconwithdatas,
-  InitialsBg,
-  Input,
-  Service,
   Transactionhistory,
   Viewbalance,
 } from "../../../components";
@@ -170,16 +163,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   return (
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <Customstatusbar />
-
-    
-      
-
-   
-
-
-
-    
-
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
         <View style={styles.profileContainer}>
@@ -199,16 +182,15 @@ const Home = ({ navigation }: { navigation: any }) => {
             )}
 
           </TouchableOpacity>
-
           <View style={styles.profileNameContainer}>
-            <Text style={styles.profileName}>
-              {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
-            </Text>
-            <Text style={styles.profileUsername}>
-              @{authdata?.userDetails?.username}
-            </Text>
+              <Text style={styles.profileName}>
+                {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
+              </Text>
+              <Text style={styles.profileUsername}>
+                @{authdata?.userDetails?.username}
+              </Text>
+            </View>
           </View>
-        </View>
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Notifications")}

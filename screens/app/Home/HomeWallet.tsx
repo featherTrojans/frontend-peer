@@ -136,7 +136,8 @@ const HomeWallet = () => {
 
     const handleTransferToFeather = async (userPin)=>{
       try{
-          return await axiosCustom.post("/transfer",{amount:Number(amount),transferTo:userinfo?.username, userPin})
+          await axiosCustom.post("/transfer",{amount:Number(amount),transferTo:userinfo?.username, userPin})
+          return 'Your cash transfer was successful';
       }catch(err){
         console.log(err.response)
         throw err;
@@ -178,8 +179,8 @@ const HomeWallet = () => {
         {/* Chooose amount to send to bank amount  */}
       <AmountToBankModal>
         <Chooseamountmodal
-          headerText="How much do you want to transfer?"
-          onpress={() => {
+          headerText="How much do you want to transfer now?"
+          onpress={(amount) => {
             closeBankAmountModal();
             navigation.navigate("Selectbank",amount);
           }}

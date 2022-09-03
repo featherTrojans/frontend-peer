@@ -71,7 +71,7 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
 
             </View>
             <DebounceLoading error={false} loadbounce={loading} userinfo={{fullName:accountInformation?.account_name}} username="Bank" />
-          <Custombutton btntext="Yeah, Continue" onpress={()=>handleNext()} />
+          <Custombutton btntext="Yeah, Continue" onpress={()=>handleNext(accountInformation)} />
             
           </View>
   )

@@ -17,6 +17,9 @@ import { styles } from "../../screens/app/Home/Home.styles";
 import Iconwithdatas from "../Iconwithdatas/Iconwithdatas";
 import Horizontaline from "../Horizontaline/Horizontaline";
 import Chooseamountmodal from "../Chooseamountmodal/Chooseamountmodal";
+import axiosCustom from "../../httpRequests/axiosCustom";
+import useAlert from "../../utils/useAlerts";
+import Loader from "../Loader/Loader";
 
 
 const {
@@ -31,8 +34,10 @@ const Viewbalance = ({ navigate }: any) => {
   const navigation = useNavigation();
   const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
   const { CustomModal: AddCashModal, openModal, closeModal: closeAddCashModal } = useCustomModal();
-  const {CustomModal: ChooseamountModal, openModal: openAmountModal} = useCustomModal()
-
+  const {CustomModal: ChooseamountModal, openModal: openAmountModal, closeModal: closeAmountModal} = useCustomModal()
+  const [amount, setAmount] = useState("")
+  const [loading, setLoading] = useState(false);
+  const {errorAlert} = useAlert()
   const addcashoptions = [
     {
       icon: <Debitcardicon />,
@@ -57,18 +62,33 @@ const Viewbalance = ({ navigate }: any) => {
       action: () => console.log("Family Request")
     },
   ];
+  const handleFundWallet = async (amt) => {
+    setLoading(true); 
+    try {
+      setAmount(amt)
+      const response = await axiosCustom.post("/pay", { amount:amt });
+      closeAmountModal();
+      closeAddCashModal();
+      navigation.navigate("CustomWebView", {
+        url: response.data.data.authorization_url,
+        reference: response.data.data.reference,
+        amount: amt,
+      });
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={viewbalancestyles.container}>
-
+        {loading && <Loader />}
       {/* Choose amount modal */}
       <ChooseamountModal>
-          <Chooseamountmodal headerText="How much do you want to fund?" onpress={() => console.log("Amount Selected")}/>
+          <Chooseamountmodal headerText="How much do you want to fund?" onpress={handleFundWallet}/>
       </ChooseamountModal>
-
-
-
-
+   
       {/* Add cash modal */}
       <AddCashModal>
         <View>

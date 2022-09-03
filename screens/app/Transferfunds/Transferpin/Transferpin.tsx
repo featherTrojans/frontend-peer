@@ -69,8 +69,8 @@ const Transferpin = ({ route, navigation }) => {
     }
     try {
       setLoading(true);
-      await onpress(joinpin);
-      successAlert('Your cash withdrawal transaction was successful and you depositor has been credited.')
+      const responseMsg = await onpress(joinpin);
+      successAlert(responseMsg)
       openModal()
     } catch (err) {
       errorAlert(err);
@@ -128,10 +128,7 @@ const Transferpin = ({ route, navigation }) => {
               </View>
             </View>
           </View>
-            
-
         <View>
-
         </View>
       </View>
 

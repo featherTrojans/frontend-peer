@@ -48,28 +48,6 @@ const availableBanks = [
   { label: "PROVIDUS", value: "PROVIDUS" },
   { label: "TAJ", value: "TAJ" },
 ];
-const SAVEDACCOUNTS = [
-  {
-    name: "Haruna Boye",
-    bank: "Access Bank",
-  },
-  {
-    name: "Opeyemi Also",
-    bank: "GT Bank",
-  },
-  {
-    name: "Aisha Bello",
-    bank: "Polaris Bank",
-  },
-  {
-    name: "Popoola Maja",
-    bank: "Wema Bank",
-  },
-  {
-    name: "John Okafor",
-    bank: "Wema Bank",
-  },
-];
 
 const Saveduser = ({ details }: any) => {
   const { name, bank } = details;
