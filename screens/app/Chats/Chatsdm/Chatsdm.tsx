@@ -29,6 +29,8 @@ const { Backarrow, SendIcon, Outlinedlock,Plusicon,
 
 const Chatsdm = ({navigation,route}) => {
   const {userInfo} = route.params
+  console.log('------------------------USERINFO--------------------------');
+  console.log(userInfo);
   const {authdata} = useContext(AuthContext);
   const [messages, setMessages] =  useState<any>([]);
   const [chatid, setchatid] = useState("")

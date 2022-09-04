@@ -121,7 +121,7 @@ const Transactionpin = ({ info }) => {
         <Successmodal 
         btnText='Great continue'
         successMsg='Your transaction was successful, cash has been sent to receiver' 
-        btnFunction={()=>{navigation.navigate('Home')}}
+        btnFunction={()=>{navigation.navigate('Transactionsrating',info)}}
         />
       </CustomModal>
         <View style={{justifyContent: "center", alignItems: "center"}}>

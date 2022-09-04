@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, fontsize, icons } from '../../constants'
 import Custombutton from '../Custombutton/Custombutton'
-import { TouchableOpacity } from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 const {Purplechaticon, Editicon} = icons
 

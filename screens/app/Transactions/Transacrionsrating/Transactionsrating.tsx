@@ -38,7 +38,7 @@ const {
 } = icons;
 
 const Transactionsrating = ({navigation, route}:any) => {
-  const {userToRate,reference, username,fullname} = route.params
+  const info = route.params
   const toast = useToast()
   const [rating, setRating] = useState({
     rating: 0,
@@ -49,6 +49,7 @@ const Transactionsrating = ({navigation, route}:any) => {
   const [loading, setLoading] = useState(false);
   const numStars = 5;
   let stars = [];
+
 
   const rate = (star: number) => {
     setRating({ ...rating, rating: star });
@@ -97,8 +98,8 @@ const Transactionsrating = ({navigation, route}:any) => {
     const data = {
       rating:rating.rating,
       description:comment,
-      userToRate:userToRate,
-      reference:reference
+      userToRate:info.userUid,
+      reference:info?.reference
     } 
 
     setLoading(true)
@@ -106,6 +107,7 @@ const Transactionsrating = ({navigation, route}:any) => {
       await axiosCustom.post("/rating",data)
       setShowModal(true)
     }catch(err){
+      
       
       showerror(toast,err)
     }finally{
@@ -196,7 +198,7 @@ const Transactionsrating = ({navigation, route}:any) => {
               </View>
 
               {/* To replace this name with name of the receiver or sender */}
-              <InitialsBg sideLength={36} name={fullname} />
+              <InitialsBg sideLength={36} name={info.fullName} />
             </View>
           </View>
 
@@ -212,7 +214,7 @@ const Transactionsrating = ({navigation, route}:any) => {
                 }}
               >
                 Please rate your transaction with{" "}
-                <Text style={{ ...FONTS.bold }}>@{username}</Text>, rating attracts
+                <Text style={{ ...FONTS.bold }}>@{info?.username}</Text>, rating attracts
                 a gift oh 😎
               </Text>
             </View>

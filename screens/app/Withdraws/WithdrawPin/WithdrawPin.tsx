@@ -128,7 +128,7 @@ const WithdrawPin = ({ navigation, route }) => {
     <Mainwrapper>
       {loading && <Loader />}
       <CustomModal>
-        <Successmodal btnText="Great Continue" successMsg="Your transaction was successful, cash has been received from receiver" btnFunction={()=>navigation.navigate("Home")}/>
+        <Successmodal btnText="Great Continue" successMsg="Your transaction was successful, cash has been received from receiver" btnFunction={()=>navigation.navigate("Transactionsrating",info)}/>
       </CustomModal>
       <Backheader title="Complete Transaction" />
     <View style={{paddingHorizontal: 15, flex: 1}}>
