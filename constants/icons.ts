@@ -171,6 +171,7 @@ import Greencheckicon from "../assets/icons/Greencheckicon";
 ///Animated icons
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
+import Sentconfetti from "../assets/Lottie/animations/sendConfetti.json"
 import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.json";
 import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json";
 import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json";
@@ -370,5 +371,6 @@ Mobiledataicon,
   Loadinglocationanimate,
   Comingsoonagentanimate,
   Feathecomingsoonchatanimate,
-  Ratingsuccessanimate
+  Ratingsuccessanimate,
+  Sentconfetti
 };

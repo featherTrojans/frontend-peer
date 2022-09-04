@@ -61,11 +61,12 @@ const LockScreen = ({ modal, setModal }: any) => {
       const newnumoftrial = numoftrial + 1;
       setNumberTrial(newnumoftrial);
       setError(true);
+      setPin([]);
+
       if (newnumoftrial === 5) {
         setModal(false);
         setToken("");
         setNumberTrial(0);
-        setPin([]);
       }
       console.log(err.response);
       // setModal(false)

@@ -1,7 +1,7 @@
 import { TouchableOpacity, Text, View, ScrollView,TextInput, ImageBackground } from "react-native";
 import React, {useState, useEffect, useContext, useRef} from "react";
 import { styles } from "./Chatsdm.styles";
-import { COLORS, FONTS, fontsize, icons, images } from "../../../../constants";
+import { COLORS, FONTS, fontsize, icons, images, SIZES } from "../../../../constants";
 import { addDoc, collection, doc, getDoc, onSnapshot, setDoc, query, orderBy, updateDoc  } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { AuthContext } from "../../../../context/AuthContext";
@@ -22,7 +22,7 @@ import formatData from "../../../../utils/fomatTrans";
 const { Backarrow, SendIcon, Outlinedlock,Plusicon,
   Minusicon,
   Arrowupicon,
-  Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate, Feathecomingsoonchatanimate, SendTF } = icons;
+  Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate, Feathecomingsoonchatanimate, Sentconfetti, SendTF } = icons;
 
 
 
@@ -40,6 +40,7 @@ const Chatsdm = ({navigation,route}) => {
   const [sendSuccess, setSendSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
   const [fetchmessage, setFetchmessage] = useState(false)
+  const animationRef = useRef<Lottie>(null)
 
   const authId = authdata?.userDetails?.userUid
 
@@ -119,6 +120,7 @@ const Chatsdm = ({navigation,route}) => {
       setchattext("")
       setSendSuccess(true)
       await sendFireBaseMessage("transfer")
+      animationRef.current?.play()
     }catch(err){
       console.log(err)
     }finally{
@@ -201,10 +203,13 @@ const Chatsdm = ({navigation,route}) => {
   const renderReceiverHTML = (mes)=>{
     if(mes?.action === "transfer"){
       return (
-        <View style={{justifyContent: "center", alignItems: "center", marginBottom:50}}>
-          <Successtranfericon />
-          <View style={{borderWidth: 0.5, borderColor: COLORS.grey13, backgroundColor: COLORS.grey14, paddingHorizontal: 24, paddingTop: 9, paddingBottom: 13,marginTop: 10, borderRadius: 24 }}>
-            <Text style={{...fontsize.smallest, ...FONTS.bold, lineHeight: 24, color: COLORS.black, textAlign: "center"}}> 🎉 You sent  <Text style={{...FONTS.bold}}>N{mes.message}</Text> to this user</Text>
+        <View style={{justifyContent: "center", alignItems: "center", marginBottom:50,  flex: 1 }}>
+          <View style={{flex: 1}}>
+          <LottieView source={Sentconfetti} ref={animationRef} loop={false} style={{ width: "100%", height: 590, position: "absolute", left: -121,bottom: 0, zIndex: 1,  }}/>
+            <Successtranfericon />
+          </View>
+          <View style={{borderWidth: 0.5, borderColor: COLORS.grey13, backgroundColor: COLORS.grey14, paddingHorizontal: 24, paddingTop: 9, paddingBottom: 13,marginTop: 10, borderRadius: 24, position: "relative" }}>
+            <Text style={{...fontsize.smallest, ...FONTS.bold, lineHeight: 24, color: COLORS.black, textAlign: "center"}}> 🎉 You sent <Text style={{...FONTS.bold}}>N{mes.message}</Text> to this user</Text>
           </View>
         </View>
       )
@@ -223,7 +228,11 @@ const Chatsdm = ({navigation,route}) => {
     if(mes?.action === "transfer"){
       return (
         <View style={{justifyContent: "center", alignItems: "center", marginBottom:50}}>
-          <Successtranfericon />
+
+          <View style={{flex: 1}}>
+          <LottieView source={Sentconfetti} ref={animationRef} loop={false} style={{ width: "100%", height: 590, position: "absolute", left: -121,bottom: 0, zIndex: 1,  }}/>
+            <Successtranfericon />
+          </View>
           <View style={{borderWidth: 0.5, borderColor: COLORS.grey13, backgroundColor: COLORS.grey14, paddingHorizontal: 24, paddingTop: 9, paddingBottom: 13,marginTop: 10, borderRadius: 24 }}>
             <Text style={{...fontsize.smallest, ...FONTS.bold, lineHeight: 24, color: COLORS.blue9, textAlign: "center"}}> 🎉 You just received  <Text style={{...FONTS.bold}}>N{mes.message}</Text> from this user</Text>
           </View>
