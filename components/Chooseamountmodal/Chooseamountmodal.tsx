@@ -4,10 +4,12 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Pressable
 } from "react-native";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { styles } from "../../screens/app/Chats/Chatsdm/Chatsdm.styles";
 import Custombutton from "../Custombutton/Custombutton";
+import { COLORS, FONTS, fontsize } from "../../constants";
 
 const amounts = [
   { name: "50", value: 50 },
@@ -21,6 +23,9 @@ const amounts = [
 
 const Chooseamountmodal = ({ headerText, onpress }) => {
   const [amount, setAmount] = useState("0")
+  const textInputRef = useRef<TextInput>(null);
+
+
   const handleAmountChange = (value) =>{
     setAmount(value)
   }
@@ -33,16 +38,27 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
           {/* minus icon */}
           {/* <Minusicon /> */}
           <TextInput
+            ref={textInputRef}
             style={styles.addedAmountText}
             keyboardType="numeric"
             placeholder="N0.00"
              value={amount}
              onChangeText={handleAmountChange}
           />
-          {/* <Text style={styles.addedAmountText}>N0.00</Text> */}
           {/* Add icon */}
           {/* <Plusicon /> */}
         </View>
+
+        <Pressable
+        onPress={() => textInputRef?.current.focus()}
+        hitSlop={10}
+        >
+        {({ pressed }) => (
+          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>Tap to add custom amount</Text>  
+        )}
+      </Pressable>
+        
+
       </View>
       {/* Amount options */}
       <View style={[styles.amountOptionsContainer, {marginBottom: 40}]}>

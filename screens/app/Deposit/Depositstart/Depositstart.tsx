@@ -90,7 +90,7 @@ const Depositstart = ({navigation, route}) => {
       }
       closeLoadingModal()
       openSuccessModal()
-      successAlert(`You have successfully updated your deposit status to ${amount}`)
+      successAlert(`You have successfully updated your deposit status to ${amount}`, true)
     } catch (err) {
       errorAlert(err);
     } finally {
@@ -133,7 +133,7 @@ const Depositstart = ({navigation, route}) => {
             {states.map(({ logo, state }, index) => {
                 const isLast = states.length === index+1 
               return (
-                <>
+                <View key={index}>
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <Image
                       style={{ width: 35, height: 35, borderRadius: 35 / 2 }}
@@ -152,7 +152,7 @@ const Depositstart = ({navigation, route}) => {
                     </Text>
                   </View>
                   {!isLast && <Horizontaline marginV={20} />}
-                </>
+                </View>
               );
             })}
           </View>
@@ -167,9 +167,13 @@ const Depositstart = ({navigation, route}) => {
       </AmountModal>
       <LoadingModal>
         <View style={{alignItems: "center", paddingVertical: 20, paddingHorizontal:50}}>
+
+
           <View style={{width:50, height:50, 
             marginBottom: 20,
              borderRadius: 25, borderWidth: 10, borderColor:"#000", backgroundColor:"transparent"}} />
+
+
           <Text style={{textAlign:"center", color: COLORS.black,...FONTS.regular, ...fontsize.small}}>Fetching your current location to create your deposit</Text>
         </View>
       </LoadingModal>

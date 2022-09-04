@@ -1,5 +1,6 @@
 import { ProgressViewIOSBase, StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Modal from "react-native-modal";
 import { styles } from "./Loader.styles";
 import { COLORS, icons } from "../../constants";
 
@@ -17,6 +18,7 @@ import Animated, {
 const { Newlogowhite } = icons;
 
 const Loader = () => {
+  const [showState, setShowState] = useState(true);
 
 
   const opacity = useSharedValue(1);
@@ -37,6 +39,16 @@ const Loader = () => {
   }, []);
 
   return (
+    <Modal
+    isVisible={showState}
+    backdropColor="#fff"
+    backdropOpacity={0.7}
+    style={{margin: 0}}
+    animationIn="fadeIn"
+    animationOut="fadeOut"
+    onBackdropPress={() => setShowState(!showState)}
+    onBackButtonPress={() => setShowState(!showState)}
+    >
     <View style={styles.container}>
       <Animated.View style={[styles.logoBg, bubblingCircle, {position: 'absolute'}]} />
       
@@ -44,6 +56,7 @@ const Loader = () => {
           <Newlogowhite />
         </View>
     </View>
+    </Modal>
   );
 };
 

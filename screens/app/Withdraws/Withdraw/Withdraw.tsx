@@ -128,7 +128,9 @@ const Withdraw = ({ navigation }) => {
     setLoading(true);
     try {
       const response = await axiosCustom.get("/request/pending");
+      console.log(response.data.data, "Pending request datas");
       setPendingRequests(response?.data?.data);
+      
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -139,6 +141,7 @@ const Withdraw = ({ navigation }) => {
   const getAcceptedRequest = async () => {
     try {
       const response = await axiosCustom.get("/request/accepted");
+      console.log(response.data.data, "Pending request datas");
       setAcceptedRequests(response?.data?.data);
     } catch (err) {
       console.log(err.response);
@@ -197,7 +200,7 @@ const Withdraw = ({ navigation }) => {
                   const isLastItem = data.length === index + 1;
                   const accepted = title === "Accepted Requests";
                   return (
-                    <TouchableOpacity onPress={()=>navigation.navigate("Requesterinfo", {info:{...info,fullName:info.agent,username:info.agentUsername} , comingFrom:comingFrom })} key={index}>
+                    <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Requesterinfo", {info:{...info,fullName:info.agent,username:info.agentUsername} , comingFrom:comingFrom })} key={index}>
                       <Requestuser details={{name:info.agent, duration:info.meetupPoint, amount:info.amount}} accepted={accepted} />
                       {!isLastItem && <Horizontaline marginV={21} />}
                     </TouchableOpacity>

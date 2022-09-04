@@ -216,20 +216,20 @@ const HomeWallet = () => {
                         <View style={{width: 48, height: 48, borderRadius: 48/2,marginBottom: 22, backgroundColor: COLORS.blue9, justifyContent: "center", alignItems: "center"}}>
                             <Text style={{color: COLORS.white, ...fontsize.bbsmall, ...FONTS.medium}}>{nameSplitter(userinfo?.fullName || "  " )}</Text>
                         </View>
-                        <Text style={{color: COLORS.blue9, ...fontsize.small, ...FONTS.medium, lineHeight: 27}}>{userinfo?.fullName}</Text>
-                        <Text style={{...fontsize.smallest, color: COLORS.halfBlack, ...FONTS.regular}}>@{userinfo?.username}</Text>
+                        <Text style={{color: COLORS.blue9, ...fontsize.small, ...FONTS.medium, lineHeight: 27, textTransform: "capitalize"}}>{userinfo?.fullName}</Text>
+                        <Text style={{...fontsize.smallest, color: COLORS.halfBlack, ...FONTS.regular, textTransform: "capitalize"}}>@{userinfo?.username}</Text>
                     </View>
 
 
                     <View style={{marginVertical: 36}}>
                         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Amount to send</Text>
-                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>N{amount}</Text>
+                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27, }}>N{amountFormatter(amount)}</Text>
                         </View>
                         <Horizontaline marginV={21}/>
                         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Charges</Text>
-                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple4, lineHeight: 27}}>+N0.00</Text>
+                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple4, lineHeight: 27}}>+N{amountFormatter(0)}</Text>
                         </View>
                         <Horizontaline marginV={21}/>
                         <Text style={{...fontsize.smallest, lineHeight: 27, ...FONTS.regular}}>Total Amount to send to {nameToShow(userinfo?.fullName || "  ")}</Text>

@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
         right:0,
         left:0,
         zIndex:120,
-        backgroundColor: "rgba(255,255,255,0.7)"      
+        // backgroundColor: "rgba(255,255,255,0.7)"   
+        // backgroundColor: "red"   
     },
     logoBg: {
         width: 80,

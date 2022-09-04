@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
     // elevation: 3,
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    // marginBottom: 20,
     borderWidth: 1,
     borderColor: COLORS.grey1
   },

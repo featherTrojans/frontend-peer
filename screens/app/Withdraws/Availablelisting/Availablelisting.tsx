@@ -45,7 +45,8 @@ import RequestSummary from "../../../../components/Modals/RequestSummary";
 const {
   Listingsdrop,
   Emptyicon,
-  Loadinglocationanimate
+  Loadinglocationanimate,
+  Cryinganimate
 } = icons;
 
 const datas = [
@@ -381,7 +382,13 @@ const Availablelisting = ({ navigation, route }: any) => {
                             alignItems: "center",
                           }}
                         >
-                          <Emptyicon />
+                          {/* <Emptyicon /> */}
+                          <LottieView
+                            source={Cryinganimate}
+                            autoPlay
+                            loop
+                            style={{ height: 120, width: 120 }}
+                          />
                           <Text style={{marginTop: 20, paddingHorizontal: 40, textAlign: 'center', lineHeight: 20, ...fontsize.smallest, ...FONTS.regular}}>Padi, you don’t have any accepted withdrawal requests.</Text>
                         </View>
                       )}

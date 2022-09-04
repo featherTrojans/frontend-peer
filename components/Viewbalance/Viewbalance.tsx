@@ -51,7 +51,8 @@ const Viewbalance = ({ navigate }: any) => {
     {
       icon: <Featheragenticon />,
       title: "Feather Agents",
-      info: "Secured by Feather Technologies.",
+      info: "Coming Soon!",
+      infocolor: COLORS.purple2,
       action: () => console.log("Feather agents")
     },
     {
@@ -63,12 +64,13 @@ const Viewbalance = ({ navigate }: any) => {
     },
   ];
   const handleFundWallet = async (amt) => {
+    closeAmountModal();
+      closeAddCashModal();
     setLoading(true); 
     try {
       setAmount(amt)
       const response = await axiosCustom.post("/pay", { amount:amt });
-      closeAmountModal();
-      closeAddCashModal();
+      
       navigation.navigate("CustomWebView", {
         url: response.data.data.authorization_url,
         reference: response.data.data.reference,
@@ -82,6 +84,7 @@ const Viewbalance = ({ navigate }: any) => {
   };
 
   return (
+    <>
     <View style={viewbalancestyles.container}>
         {loading && <Loader />}
       {/* Choose amount modal */}
@@ -89,6 +92,8 @@ const Viewbalance = ({ navigate }: any) => {
           <Chooseamountmodal headerText="How much do you want to fund?" onpress={handleFundWallet}/>
       </ChooseamountModal>
    
+
+
       {/* Add cash modal */}
       <AddCashModal>
         <View>
@@ -120,6 +125,8 @@ const Viewbalance = ({ navigate }: any) => {
           })}
         </View>
       </AddCashModal>
+
+
       {/* Top part of the block */}
       <View style={viewbalancestyles.topContainer}>
         <View style={{ flex: 1, marginRight: 20 }}>
@@ -163,6 +170,7 @@ const Viewbalance = ({ navigate }: any) => {
         {/* Eye icon */}
       </View>
     </View>
+    </>
   );
 };
 

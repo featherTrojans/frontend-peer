@@ -15,6 +15,7 @@ import axiosCustom from '../../../httpRequests/axiosCustom';
 import useAlert from '../../../utils/useAlerts';
 import { makePhoneCall } from '../../../utils/userDeviceFunctions';
 import amountFormatter from '../../../utils/formatMoney';
+import { nameSplitter } from '../../../utils/nameSplitter';
 
 
 const {Purplechaticon, Renegotiateicon, Cancelrequest, Greenphoneicon, Editicon} = icons
@@ -98,7 +99,7 @@ const Requesterinfo = ({navigation,route}) => {
     <View style={{paddingHorizontal: 15, marginBottom: 100}}>
       <View style={{ alignItems: 'center', marginBottom: 40}}>
         <View style={{width: 48, height: 48, borderRadius: 48/2, justifyContent: 'center', alignItems: "center", backgroundColor: COLORS.blue9, marginBottom: 22}}>
-          <Text style={{...fontsize.bbsmall, color: COLORS.white, ...FONTS.medium}}>D</Text>
+          <Text style={{...fontsize.bbsmall, color: COLORS.white, ...FONTS.medium}}>{nameSplitter(info.fullName)}</Text>
         </View>
         <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.blue9}}>{info.fullName}</Text>
         <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 7}}>{info.meetupPoint} Mins Away</Text>

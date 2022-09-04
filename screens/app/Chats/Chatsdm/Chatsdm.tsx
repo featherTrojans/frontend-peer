@@ -301,6 +301,7 @@ const Chatsdm = ({navigation,route}) => {
         <ScrollView 
         style={styles.messageAreaContainer} 
         ref={scrollViewRef}
+        contentContainerStyle={{paddingTop: 20}}
         showsVerticalScrollIndicator={false}
         bounces={false}
         onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
@@ -349,7 +350,7 @@ const Chatsdm = ({navigation,route}) => {
       <View style={styles.chatTextContainer}>
         <View style={styles.inputarea}>
           <View style={styles.chatTextInput}>
-            <TextInput  placeholder="Enter Message" style={[styles.textinput, {...FONTS.regular, color: COLORS.grey7}]} value={chattext} onChangeText={handleTextChange}  />
+            <TextInput  placeholder="Enter Message" style={[styles.textinput, {...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest}]} value={chattext} onChangeText={handleTextChange}  />
             {chattext !== ""  &&
               <TouchableOpacity activeOpacity={0.8}  onPress={()=>sendFireBaseMessage()} >
                 <Sendmessageicon />

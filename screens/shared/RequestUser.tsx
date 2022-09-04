@@ -10,6 +10,7 @@ import {
   import { COLORS, FONTS, fontsize, icons, SIZES } from "../../constants";
   import { withdrawstyles } from "../app/Withdraws/Withdraw/Withdraw.styles";
 import amountFormatter from "../../utils/formatMoney";
+import { nameSplitter } from "../../utils/nameSplitter";
 
   const {
     Acceptedcheck
@@ -28,7 +29,7 @@ const Requestuser = ({
       <View style={withdrawstyles.requesteeprofilewrap}>
         <View style={[withdrawstyles.requesteeprofilewrap]}>
           <View style={withdrawstyles.requesteeinitialsbg}>
-            <Text style={withdrawstyles.requesteeinitialtext}>D</Text>
+            <Text style={withdrawstyles.requesteeinitialtext}>{nameSplitter(name)}</Text>
 
             {accepted && (
               <View style={{ position: "absolute", bottom: -3, right: 0 }}>

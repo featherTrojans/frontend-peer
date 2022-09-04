@@ -26,6 +26,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { withdrawstyles } from "../../Withdraws/Withdraw/Withdraw.styles";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Requestuser from "../../../shared/RequestUser";
+import amountFormatter from "../../../../utils/formatMoney";
 const {
   TransferIcon,
   Location,
@@ -308,7 +309,7 @@ const Depositupdate = ({ navigation, route }) => {
             </View>
             <Text style={{marginLeft: 12, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>My Earnings last 24hrs</Text>
           </View>
-          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>+ N{status?.totalEarnings}</Text>
+          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>+ N{amountFormatter(status?.totalEarnings)}</Text>
         </View>
         <Horizontaline marginV={20}/>
 
@@ -320,7 +321,7 @@ const Depositupdate = ({ navigation, route }) => {
             </View>
             <Text style={{marginLeft: 12, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Deposit Balance</Text>
           </View>
-          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>N{status?.amount}</Text>
+          <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>N{amountFormatter(status?.amount)}</Text>
         </View>
         <Horizontaline marginV={20}/>
 

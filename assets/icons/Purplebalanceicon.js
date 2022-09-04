@@ -6,7 +6,7 @@ function Purplebalanceicon() {
     <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={11.006}
-    height={8.255}
+    height={8.3}
   >
     <G data-name="credit-card (16)" transform="translate(0 -3)" fill="#7600ff">
       <Ellipse
