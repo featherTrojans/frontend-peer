@@ -1,10 +1,9 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import useDebounce from '../../utils/debounce';
 import { COLORS, FONTS, fontsize , icons} from '../../constants';
 import Input from '../Input/Input';
 import DebounceLoading from '../../screens/shared/DebounceLoading';
-import { TouchableOpacity } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import Custombutton from '../Custombutton/Custombutton';
 
@@ -86,7 +85,7 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
         activeOpacity={0.8}
         onPress={() => {
           closeTransfercashinfoModal();
-          navigation.navigate("Sendcash");
+          navigation.navigate("Sendcash", amount);
         }}
         style={{
           flexDirection: "row",

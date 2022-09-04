@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AllChatsModal from "./AllChatsModal";
 import { usePushNotification } from "../../../../navigation";
 import formatData from "../../../../utils/fomatTrans";
+import { date } from "yup";
 
 
 
@@ -120,7 +121,7 @@ const Chatsdm = ({navigation,route}) => {
       setchattext("")
       setSendSuccess(true)
       await sendFireBaseMessage("transfer")
-      animationRef.current?.play()
+      // animationRef.current?.play()
     }catch(err){
       console.log(err)
     }finally{
@@ -202,6 +203,9 @@ const Chatsdm = ({navigation,route}) => {
 
   const renderReceiverHTML = (mes)=>{
     if(mes?.action === "transfer"){
+      // if(Date.now() - 60000 < mes.createdAt){
+      //   animationRef?.current?.play()
+      // }
       return (
         <View style={{justifyContent: "center", alignItems: "center", marginBottom:50,  flex: 1 }}>
           <View style={{flex: 1}}>
@@ -226,6 +230,10 @@ const Chatsdm = ({navigation,route}) => {
 
   const renderSenderHTML = (mes)=>{
     if(mes?.action === "transfer"){
+      if(Date.now() - 60000 < mes.createdAt){
+        animationRef?.current?.play()
+      }
+
       return (
         <View style={{justifyContent: "center", alignItems: "center", marginBottom:50}}>
 
