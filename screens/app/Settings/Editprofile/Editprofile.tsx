@@ -69,7 +69,7 @@ const Editprofile = ({}) => {
     const [usernamename, setusernamename] = useState(
       authdata?.userDetails?.username
     );
-    const {userLevel} = authdata.userDetails
+    const {userLevel} = authdata?.userDetails
     const usertype = userLevel < 2 ? "newbie" : "odogwu"
 
     const [loading, setLoading] = useState(false);
@@ -99,9 +99,9 @@ const Editprofile = ({}) => {
             type: "Image/jpeg",
             name: "image1"
           });
-          formdata.append('name', authdata.userDetails.username);
+          formdata.append('name', authdata?.userDetails?.username);
           // console.log(result.uri, "this is the image url");
-          setAuthData({...authdata, userDetails: {...authdata.userDetails, imageUrl: result.uri}})
+          setAuthData({...authdata, userDetails: {...authdata?.userDetails, imageUrl: result.uri}})
           const response = await axiosCustom.post("/upload/image",formdata);
           
           console.log(response.data, "Uploaded response");

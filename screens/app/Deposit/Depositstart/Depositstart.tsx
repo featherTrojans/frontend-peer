@@ -174,7 +174,7 @@ const Depositstart = ({navigation, route}) => {
              borderRadius: 25, borderWidth: 10, borderColor:"#000", backgroundColor:"transparent"}} />
 
 
-          <Text style={{textAlign:"center", color: COLORS.black,...FONTS.regular, ...fontsize.small}}>Fetching your current location to create your deposit</Text>
+          <Text style={{textAlign:"center", color: COLORS.blue9,...FONTS.regular, ...fontsize.small}}>Fetching your current location to create your deposit</Text>
         </View>
       </LoadingModal>
       <SuccessContainerModal>

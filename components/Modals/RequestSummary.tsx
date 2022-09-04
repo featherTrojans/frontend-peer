@@ -23,7 +23,7 @@ const RequestSummary = ({withdrawInfo, baseCharge, addedFee, openNextModal}) => 
 const {errorAlert} = useAlert()
 const { coords } = useContext(LocationContext);
 const {authdata} = useContext(AuthContext)
-const {fullName, imageUrl} = authdata.userDetails
+const {fullName, imageUrl} = authdata?.userDetails
 
 const handleCreateWithdrawal = async ()=>{
 
