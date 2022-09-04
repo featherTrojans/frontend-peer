@@ -14,7 +14,7 @@ const Walletmanagement = () => {
   const {CustomModal, openModal} = useCustomModal()
   const {CustomModal: UpgradeuserModal, openModal: openUpgradeModal, closeModal: closeUpgradeUserModal} = useCustomModal()
   const {authdata} = useContext(AuthContext) 
-  const {fullName, accountNo, userLevel} = authdata.userDetails
+  const {fullName, accountNo, userLevel} = authdata?.userDetails
   const usertype = userLevel < 2 ? "newbie" : "Odogwu"
 
 

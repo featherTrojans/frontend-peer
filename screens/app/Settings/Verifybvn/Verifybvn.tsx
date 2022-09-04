@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native'
 import React, { useRef, useState, useContext } from 'react'
 import OTPTextInput from "react-native-otp-textinput";
+import LottieView from "lottie-react-native"
 import { Custombutton, Horizontaline, Mainwrapper } from '../../../../components'
 import { COLORS, FONTS, fontsize, icons } from '../../../../constants'
 import axiosCustom from '../../../../httpRequests/axiosCustom';
 import { AuthContext } from '../../../../context/AuthContext';
 import useAlert from '../../../../utils/useAlerts';
 import useCustomModal from '../../../../utils/useCustomModal';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 
-const {Whitebackarrow} = icons
+const {Whitebackarrow, Verifiedbvnanimate} = icons
 
 
 const Verifybvn = ({navigation}) => {
@@ -22,12 +24,13 @@ const Verifybvn = ({navigation}) => {
    const handleOTPSubmit = async ()=>{
      try{
       await axiosCustom.post("user/verify/upgrade",{code:otpCode})
-      setAuthData({...authdata, userDetails:{userLevel: 2, ...authdata.userDetails}})
+      setAuthData({...authdata, userDetails:{userLevel: 2, ...authdata?.userDetails}})
       setSucess(true);
-      successAlert("bvn verification successful")
-      setTimeout(()=>{
-        navigation.navigate("Settings")
-      },1000)
+      // successAlert("bvn verification successful")
+      openModal()
+      // setTimeout(()=>{
+      //   navigation.navigate("Settings")
+      // },1000)
      }catch(err){
        errorAlert(err)
      }
@@ -36,16 +39,19 @@ const Verifybvn = ({navigation}) => {
   return (
     <Mainwrapper bgColor={COLORS.blue6}>
 
-<ScrollView style={{ paddingHorizontal: 16, marginTop: 30 }} showsVerticalScrollIndicator={false} bounces={false}>
+    <ScrollView style={{ paddingHorizontal: 16, marginTop: 30 }} showsVerticalScrollIndicator={false} bounces={false}>
     
     
     
-    {/* {success && (<View style={{backgroundColor:"green", 
-          padding:20, 
-          borderRadius: 15,
-          position:"absolute", width:"94%", marginHorizontal: "3%", marginTop: 40, zIndex:2}}>
-            <Text style={{color:"#fff"}}>Upgrade succesful</Text>
-          </View>)} */}
+      <CustomModal>
+        <View>
+          <View>
+          <LottieView source={Verifiedbvnanimate} loop style={{ width: RFValue(264), height: 168,   }}/>
+            <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9, lineHeight: 22}}>Your BVN has been verified successfully and a bank account has been created for you</Text>
+          </View>
+          <Custombutton btntext='Thanks, Continue' onpress={() => navigation.navigate("Settings")}/>
+        </View>
+      </CustomModal>
 
 
 

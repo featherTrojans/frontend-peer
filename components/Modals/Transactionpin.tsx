@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { COLORS, FONTS, fontsize } from '../../constants'
+import { COLORS, FONTS, fontsize, icons } from '../../constants'
 import Horizontaline from '../Horizontaline/Horizontaline'
 import {
   doc,
   onSnapshot,
   setDoc,
 } from "firebase/firestore";
+import LottieView from "lottie-react-native"
 import { useToast } from "react-native-toast-notifications";
 import axiosCustom from '../../httpRequests/axiosCustom';
 import { AuthContext } from '../../context/AuthContext';
@@ -16,6 +17,10 @@ import Loader from '../Loader/Loader';
 import useAlert from '../../utils/useAlerts';
 import useCustomModal from '../../utils/useCustomModal';
 import { Successmodal } from '..';
+
+
+
+const {Transacntionpinanimate} = icons
 
 const Transactionpin = ({ info }) => {
   const navigation = useNavigation()
@@ -125,7 +130,7 @@ const Transactionpin = ({ info }) => {
         />
       </CustomModal>
         <View style={{justifyContent: "center", alignItems: "center"}}>
-            <View style={{width: 104, height: 104, backgroundColor: COLORS.lightBlue}}/>
+        <LottieView source={Transacntionpinanimate} loop style={{ width: 104, height: 104, }}/>
         </View>
         <View style={{marginTop: 34.5}}>
       <Text style={{textAlign: "center", lineHeight: 22, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Kindly input your transaction pin on Susan’s device to complete the transaction, don’t worry it’s safe✌🏽</Text>

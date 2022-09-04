@@ -170,7 +170,7 @@ const Settings = ({ navigation }) => {
         </View>
 
         <CustomModal>
-          <Copyaccountinfo accName={authdata?.userDetails?.fullName} accNumber={authdata.userDetails.accountNo} />
+          <Copyaccountinfo accName={authdata??.userDetails?.fullName} accNumber={authdata?.userDetails.accountNo} />
         </CustomModal>
         <UpgradeuserModal bg={COLORS.white3}>
             <Upgrademodal closeUpgradeModal={closeUpgradeModal} />
@@ -276,7 +276,7 @@ const Settings = ({ navigation }) => {
                     ...FONTS.bold,
                   }}
                 >
-                 {!isNewbie ?  authdata.userDetails.accountNo : "* * * * * * * * * *"}
+                 {!isNewbie ?  authdata?.userDetails?.accountNo : "* * * * * * * * * *"}
                 </Text>
               </View>
               <View>

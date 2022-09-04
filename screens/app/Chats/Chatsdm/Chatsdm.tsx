@@ -211,7 +211,7 @@ const Chatsdm = ({navigation,route}) => {
       return (
         <View style={{justifyContent: "center", alignItems: "center", marginBottom:50,  flex: 1 }}>
           <View style={{flex: 1}}>
-          <LottieView source={Sentconfetti} ref={animationRef} loop={false} style={{ width: "100%", height: 590, position: "absolute", left: -121,bottom: 0, zIndex: 1,  }}/>
+          <LottieView source={Sentconfetti} loop={false} style={{ width: "100%", height: 590, position: "absolute", left: -121,bottom: 0, zIndex: 1,  }}/>
             <Successtranfericon />
           </View>
           <View style={{borderWidth: 0.5, borderColor: COLORS.grey13, backgroundColor: COLORS.grey14, paddingHorizontal: 24, paddingTop: 9, paddingBottom: 13,marginTop: 10, borderRadius: 24, position: "relative" }}>
