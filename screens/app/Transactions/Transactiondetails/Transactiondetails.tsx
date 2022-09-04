@@ -578,6 +578,7 @@ const Transactiondetails = ({ navigation, route }) => {
             details="Share a copy of your transaction."
             onpress={() => shareReceipt(htmlContent)}
           />
+          <Horizontaline marginV={15}/>
           <Iconwithdatas
             icon={<Downloadreceipt />}
             iconBg="#001757"
@@ -585,6 +586,8 @@ const Transactiondetails = ({ navigation, route }) => {
             details="Generate a .pdf copy of this transaction."
             onpress={() => downloadReceipt(htmlContent)}
           />
+          <Horizontaline marginV={15}/>
+
           <Iconwithdatas
             icon={<Reporttransactions />}
             iconBg="#001757"
