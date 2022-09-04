@@ -170,7 +170,7 @@ const Settings = ({ navigation }) => {
         </View>
 
         <CustomModal>
-          <Copyaccountinfo accName={authdata??.userDetails?.fullName} accNumber={authdata?.userDetails.accountNo} />
+          <Copyaccountinfo accName={authdata?.userDetails?.fullName} accNumber={authdata?.userDetails?.accountNo} />
         </CustomModal>
         <UpgradeuserModal bg={COLORS.white3}>
             <Upgrademodal closeUpgradeModal={closeUpgradeModal} />

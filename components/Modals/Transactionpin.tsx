@@ -45,14 +45,6 @@ const Transactionpin = ({ info }) => {
     purpleAlert("Kindly note that 3 failed pin attempts - declines the transaction and cancels automatically.")
   },[])
 
-  useEffect(()=>{
-    setTimeout(() => {
-      handleSucccess()
-    }, 3000);
-  },[])
-
-
-
 
   const handleSucccess = ()=>{
     openModal()

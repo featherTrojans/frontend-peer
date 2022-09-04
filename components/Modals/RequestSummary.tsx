@@ -18,7 +18,7 @@ import { AuthContext } from '../../context/AuthContext'
 const {Sendingarrow, Receivingarrow} = icons
 
 
-const RequestSummary = ({withdrawInfo, baseCharge, addedFee, openNextModal}) => {
+const RequestSummary = ({amount, withdrawInfo, baseCharge, addedFee, openNextModal}) => {
 
 const {errorAlert} = useAlert()
 const { coords } = useContext(LocationContext);
@@ -89,7 +89,7 @@ return (
 
     <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
       <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>Withdraw Amount</Text>
-      <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>N{amountFormatter(withdrawInfo.amount)}</Text>
+      <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>N{amountFormatter(amount)}</Text>
     </View>
 
     <Horizontaline marginV={20}/>
@@ -110,7 +110,7 @@ return (
 
 
     <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Total amount to pay on meetup</Text>
-    <Text style={{marginBottom: 40, marginTop: 16, ...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amountFormatter(Number(addedFee) + Number(baseCharge) + Number(withdrawInfo.amount))}</Text>
+    <Text style={{marginBottom: 40, marginTop: 16, ...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amountFormatter(Number(addedFee) + Number(baseCharge) + Number(amount))}</Text>
 
 
     <Custombutton btntext='Yeah, Continue' onpress={handleCreateWithdrawal}/>
