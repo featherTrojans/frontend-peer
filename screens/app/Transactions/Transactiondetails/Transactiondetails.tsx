@@ -527,9 +527,9 @@ const Transactiondetails = ({ navigation, route }) => {
  
 
   const FeatherTransferDetails = () => {
-    if((title === "Wallet Credit" || title === "Wallet Debit") ){
-      const senderName = direction === "in" ? otherUser.fullName : user.fullName
-      const receiverName = direction === "out" ? otherUser.fullName : user.fullName
+    if(((title === "Wallet Credit") || (title === "Wallet Debit" ))){
+      const senderName = direction === "in" ? (sender === "Bonus" ? "Feather" : otherUser.fullName) : user.fullName
+      const receiverName = direction === "out" ? (sender === "Bonus" ? "Feather" : otherUser.fullName) : user.fullName
       return(
         <>
           <Eachoption title="Sender Name" value={senderName}/>  
