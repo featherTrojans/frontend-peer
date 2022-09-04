@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, Image, Animated, Easing } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import Svg, {G, Circle} from "react-native-svg" 
 import {
   Backheader,
   Chooseamountmodal,
@@ -49,6 +50,30 @@ const Depositstart = ({navigation, route}) => {
   const [locationLoading, setLocationLoading] = useState(false);
   const [coords, setCoords] = useState<any>({});
   const [loading, setLoading] = useState(false);
+  const halfCircle = 50
+  const radius = 30
+  const circleCircumference = 2* Math.PI * radius
+  const animatedValue = useRef(new Animated.Value(0)).current
+
+
+
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(
+        animatedValue,
+        {
+         toValue: 1,
+         duration: 2000,
+         easing: Easing.linear,
+         useNativeDriver: true
+        }
+      )
+     ).start();
+  }, [])
+
+    
+
 
   useEffect(() => {
     getLocation();
@@ -103,6 +128,14 @@ const Depositstart = ({navigation, route}) => {
     closeAmountModal()
     handleSubmit(amount)
   }
+
+
+  const rotation = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg']
+  });
+
+
   return (
     <Mainwrapper>
       <Backheader title="Deposit" />
@@ -166,15 +199,49 @@ const Depositstart = ({navigation, route}) => {
         <Chooseamountmodal headerText={'How much do you want to deposit'} onpress={handleAmountChnage} />
       </AmountModal>
       <LoadingModal>
-        <View style={{alignItems: "center", paddingVertical: 20, paddingHorizontal:50}}>
 
 
-          <View style={{width:50, height:50, 
+
+        <View style={{alignItems: "center", paddingVertical: 0, paddingHorizontal:50}}>
+            {/* Loading circle */}
+          {/* <View style={{width:50, height:50, 
             marginBottom: 20,
-             borderRadius: 25, borderWidth: 10, borderColor:"#000", backgroundColor:"transparent"}} />
+             borderRadius: 25, borderWidth: 10, borderColor:"#000", backgroundColor:"transparent"}} /> */}
+
+             <Animated.View style={{ transform: [{ rotate: rotation }], width: 50, height: 50 }}>
+               <Svg width={50} height={50} viewBox={`0 0 ${halfCircle* 2} ${halfCircle* 2}`} >
+                <G rotation="-90" origin={`${halfCircle}, ${halfCircle}`}>
+                  <Circle 
+                  cx="50%"
+                  cy="50%"
+                  stroke={COLORS.blue6}
+                  strokeWidth={10}
+                  r={radius}
+                  fill="transparent"
+                  strokeOpacity={0.2}
+                  />
+                  <Circle 
+                  cx="50%"
+                  cy="50%"
+                  stroke={COLORS.blue6}
+                  strokeWidth={10}
+                  r={radius}
+                  fill="transparent"
+                  strokeDasharray={circleCircumference/3}
+                  strokeLinecap="round"
+                  />
+ 
+                </G>
+               </Svg>
+             </Animated.View>
 
 
-          <Text style={{textAlign:"center", color: COLORS.blue9,...FONTS.regular, ...fontsize.small}}>Fetching your current location to create your deposit</Text>
+
+
+
+
+
+          <Text style={{textAlign:"center", color: COLORS.blue9,...FONTS.regular, ...fontsize.smaller, lineHeight: 20, marginTop: 28}}>Fetching your current location to create your deposit</Text>
         </View>
       </LoadingModal>
       <SuccessContainerModal>

@@ -53,12 +53,8 @@ return (
     <View style={{justifyContent: "center", alignItems: "center", marginTop: 35, marginBottom: 40, }}>
 
     <View style={{ flexDirection: "row", justifyContent: 'center', alignItems: "center",  }}>
-      
       <View style={{alignItems: "center", }}>
-
-
         {imageUrl ? 
-        
         <Image
         style={{width: 48, height: 48,borderRadius: 48/2, marginBottom: 14}}
         source={{
@@ -69,35 +65,22 @@ return (
         <View style={{width: 48, height: 48, backgroundColor: COLORS.green3, marginBottom: 14, justifyContent: "center", alignItems: "center", borderRadius: 48/2}}>
             <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.green1 }}>{nameSplitter(fullName)}</Text>
         </View>
-      
       }
-        
-
-
-
         <Text style={{...fontsize.smaller, ...FONTS.medium, textTransform: "capitalize", color: COLORS.blue9}}>You</Text>
       </View>
 
       {/* Separator bg */}
-
       <View style={{marginHorizontal: 32, height: 48,  alignSelf: "center"}}>
           <Sendingarrow />
         <Receivingarrow />
       </View>
         
-
-       
-
-     
-
-
       <View style={{alignItems: "center"}}>
       <View style={{width: 48, height: 48, backgroundColor: COLORS.purple3, marginBottom: 14, justifyContent: "center", alignItems: "center", borderRadius: 48/2}}>
             <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.purple4 }}>{nameSplitter(withdrawInfo.fullName)}</Text>
         </View>
         <Text style={{...fontsize.smaller, ...FONTS.medium, textTransform: "capitalize", color: COLORS.blue9}}>{getFirstName(withdrawInfo.fullName)}</Text>
       </View>
-
     </View>
 
 
