@@ -142,16 +142,20 @@ const Transactionsrating = ({navigation, route}:any) => {
       <View style={styles.container}>
         {/* HEader  */}
         {loading && <Loader />}
+
+
+
+
         <Globalmodal
         // To pass the state controlling the modal in
           showState={showModal}
           btnFunction={() => navigation.navigate('Home')}
           btnText="Continue"
         >
-          <View style={{justifyContent: "center", alignItems: "center"}}>
+          <View style={{justifyContent: "center", alignItems: "center", marginVertical: 30 }}>
             <LottieView
               source={Ratingsuccessanimate}
-              style={{ width: 186, height: 186,}}
+              style={{ width: 88, height: 88, }}
               autoPlay
               loop
             />
@@ -159,18 +163,22 @@ const Transactionsrating = ({navigation, route}:any) => {
               style={{
                 marginHorizontal: 40,
                 textAlign: "center",
-                marginBottom: RFValue(35),
-                marginTop: RFValue(55),
-                ...fontsize.bsmall,
+                marginTop: RFValue(32),
+                ...fontsize.smaller,
                 ...FONTS.regular,
-                color: COLORS.black,
+                color: COLORS.blue9,
               }}
             >
               Thanks for rating this transaction, you just recieved{" "}
-              <Text style={{ ...FONTS.bold }}>N10.00</Text>
+              <Text style={{ ...FONTS.medium }}>N10.00</Text>
             </Text>
           </View>
         </Globalmodal>
+
+
+
+
+
 
         <View style={{ paddingHorizontal: 15, flex: 0.7 }}>
           <View
@@ -209,7 +217,7 @@ const Transactionsrating = ({navigation, route}:any) => {
               <Text
                 style={{
                   textAlign: "center",
-                  ...fontsize.bsmall,
+                  ...fontsize.smaller,
                   ...FONTS.regular,
                 }}
               >

@@ -233,21 +233,29 @@ const Sendingandreceive = ({
     <View>
       <Dashedline />
     </View> */}
-     {((title == "Wallet Credit") || (title == "Wallet Debit")) && otherUser.imageUrl !== null ?
+     {
+     
+     ((title == "Wallet Credit" ) || (title == "Wallet Debit")) && otherUser ?
+
           <View>
-          <Image
-          style={{width: 50, height: 50, borderRadius: 62/2}}
-          resizeMethod="scale"
-          resizeMode="cover"
-          source={{
-            uri: otherUser.imageUrl,
-          }}
-        />
+            {otherUser.imageUrl !== null ? 
+            
+            <Image
+            style={{width: 50, height: 50, borderRadius: 62/2}}
+            resizeMethod="scale"
+            resizeMode="cover"
+            source={{
+              uri: otherUser.imageUrl,
+            }}
+          />
+          : 
+          <Text>BN</Text>
+          }
+          
         </View> 
         :
         
         <View style={{ position: "relative" }}>
-        {/* <Receiverimage /> */}
         {showImage(senderName, receiverName, title, value, otherUser)}
       </View>
     
