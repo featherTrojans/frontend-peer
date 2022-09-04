@@ -1,16 +1,17 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ColorPropType } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Backheader, Custombutton, Horizontaline, Input, Mainwrapper } from '../../../../components'
 import { COLORS, FONTS, fontsize, icons } from '../../../../constants'
 import useCustomModal from '../../../../utils/useCustomModal'
 import { nameSplitter } from '../../../../utils/nameSplitter'
 import { nameToShow } from '../../../../utils/nameToShow'
+import useContact from '../../../../utils/customContact'
+import axiosCustom from '../../../../httpRequests/axiosCustom'
+import useAlert from '../../../../utils/useAlerts'
+import amountFormatter from '../../../../utils/formatMoney'
 
 
 const {Ashicon} = icons
-
-
-
 
 
 
@@ -29,40 +30,60 @@ const Eachoption = ({name, phoneNumber}) => {
         </View>
     )
 }
-
-const Sendcash = () => {
-
-
-
-
-    const featherUsers = [
-        {
-            name: "Damilare Seyinde",
-            phonenumber: "08189346273"
-        },
-        {
-            name: "Rasaq Momoh",
-            phonenumber: "09037482910"
-        },
-        {
-            name: "Peterson Yeyejare",
-            phonenumber: "07033112278"
-        },
-  
-
    
-    ]
-  return (
+
+const Sendcash = ({navigation, route}) => {
+    const amount = route.params
+    const { contactsResolved} = useContact();
+    const {CustomModal: TransferdetailsModal, openModal: openTransferdetailsModal, closeModal:closeTransferdetailsModal} = useCustomModal()
+    const [activeContact, setActiveContact] = useState({})
+    
+    const handleTransferToFeather = async (userPin)=>{
+        try{
+            await axiosCustom.post("/transfer",{amount:Number(amount),transferTo:activeContact?.username, userPin})
+            return 'Your cash transfer was successful';
+        }catch(err){
+          console.log(err.response)
+          throw err;
+        }
+      }
+
+    return (
     <Mainwrapper>
         <Backheader title="Send Cash"/>
 
 
+        <TransferdetailsModal>
+                <View>
+                    <View style={{ justifyContent: "center", alignItems: "center"}}>
+                        <View style={{width: 48, height: 48, borderRadius: 48/2,marginBottom: 22, backgroundColor: COLORS.blue9, justifyContent: "center", alignItems: "center"}}>
+                            <Text style={{color: COLORS.white, ...fontsize.bbsmall, ...FONTS.medium}}>{nameSplitter(activeContact?.fullName || "  " )}</Text>
+                        </View>
+                        <Text style={{color: COLORS.blue9, ...fontsize.small, ...FONTS.medium, lineHeight: 27, textTransform: "capitalize"}}>{activeContact?.fullName}</Text>
+                        <Text style={{...fontsize.smallest, color: COLORS.halfBlack, ...FONTS.regular, textTransform: "capitalize"}}>@{activeContact?.username}</Text>
+                    </View>
+
+
+                    <View style={{marginVertical: 36}}>
+                        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Amount to send</Text>
+                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27, }}>N{amountFormatter(amount)}</Text>
+                        </View>
+                        <Horizontaline marginV={21}/>
+                        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Charges</Text>
+                            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.purple4, lineHeight: 27}}>+N{amountFormatter(0)}</Text>
+                        </View>
+                        <Horizontaline marginV={21}/>
+                        <Text style={{...fontsize.smallest, lineHeight: 27, ...FONTS.regular}}>Total Amount to send to {nameToShow(activeContact?.fullName || "  ")}</Text>
+                        <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amount}</Text>
+                    </View>
+                    <Custombutton btntext="Great, Proceed" onpress={()=>{closeTransferdetailsModal(); navigation.navigate("Transferpin",{info: {...activeContact,amount}, onpress:handleTransferToFeather})}}/>
+                </View>
+      </TransferdetailsModal>
 
         <View style={{paddingHorizontal: 15, flex: 1}}>
             <Input icon={<Ashicon />} placeholder='Search phone numbers' name="searchUsername" inputbg={COLORS.white}/>
-
-
-
 
 
             <View style={{paddingHorizontal: 16, paddingVertical: 22, backgroundColor: COLORS.white, borderRadius: 15, flex: 1, }}>
@@ -72,11 +93,13 @@ const Sendcash = () => {
                 <ScrollView showsVerticalScrollIndicator={false} >
 
                
-                {featherUsers.map(({name, phonenumber}, index) => {
-                    const isLast = featherUsers.length === index + 1;
+                {contactsResolved?.map((contact, index) => {
+                    const isLast = contactsResolved.length === index + 1;
                     return (
                         <View key={index}>
-                            <Eachoption name={name} phoneNumber={phonenumber}/>
+                            <TouchableOpacity onPress={()=>{openTransferdetailsModal(); setActiveContact(contact)}}>
+                                <Eachoption name={contact.fullName} phoneNumber={contact.phoneNumber}/>
+                            </TouchableOpacity>
                                 {!isLast && <Horizontaline marginV={0} />}
                         </View>
                     )

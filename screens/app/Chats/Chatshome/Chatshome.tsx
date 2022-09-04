@@ -48,27 +48,7 @@ const Chatshome = ({ navigation }) => {
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid;
 
-  const [contactsResolved, setContactResolved] = useState([]);
-  const { contacts } = useContact();
-
-  useEffect(() => {
-    const allcontacts = [];
-    contacts.forEach((contact) => {
-      const numbersArr = [];
-      contact?.phoneNumbers?.forEach((phone) => {
-        const number = phone.number.replace(/\s+/g, "");
-        if (!numbersArr.includes(number)) {
-          numbersArr.push(number);
-        }
-      });
-      for (let num of numbersArr) {
-        if (num) {
-          allcontacts.push(num);
-        }
-      }
-    });
-    getAllContactInFeather(allcontacts);
-  }, [contacts]);
+ 
 
   useEffect(() => {
     // getAllChats()
@@ -117,16 +97,6 @@ const Chatshome = ({ navigation }) => {
     };
   }, []);
 
-  const getAllContactInFeather = async (allcontacts) => {
-    try {
-      const response = await axiosCustom.post("/user/multiple", {
-        numbers: allcontacts,
-      });
-      setContactResolved(response.data.data);
-    } catch (err) {
-      // console.log(err.response)
-    }
-  };
 
   const getAllChats = async () => {
     setLoading(true);
@@ -177,7 +147,7 @@ const Chatshome = ({ navigation }) => {
 
         <View style={{ flex: 1 }}>
         
-          <Contact contactsResolved={contactsResolved} />
+          <Contact />
 
           <View
             style={{

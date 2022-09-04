@@ -11,9 +11,10 @@ import { COLORS, FONTS, fontsize } from '../../../../constants';
   
 
 
-const Contact = ({contactsResolved}) => {
+const Contact = () => {
     const navigate = useNavigation()
-  
+    const { contactsResolved } = useContact();
+
     return (
       <View style={{backgroundColor: COLORS.white, borderRadius: 15, paddingVertical: 20, paddingHorizontal: 16, minHeight: 162}}>
 
