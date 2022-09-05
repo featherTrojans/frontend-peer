@@ -108,7 +108,7 @@ const Addbvn = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         bounces={false}
       >
-        <CustomModal>
+        {/* <CustomModal>
           <View>
 
         <View style={{justifyContent: "center", alignItems: "center"}}>
@@ -145,7 +145,7 @@ const Addbvn = ({ navigation }) => {
               onpress={() => console.log("Hellow")}
             />
           </View>
-        </CustomModal>
+        </CustomModal> */}
 
         <View
           style={{
@@ -404,7 +404,7 @@ const Addbvn = ({ navigation }) => {
             disable={false}
             btntext="Upgrade Account"
             bg={COLORS.green2}
-            onpress={openModal}
+            onpress={handleSubmit}
           />
           <Text
             style={{

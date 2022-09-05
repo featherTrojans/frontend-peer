@@ -13,6 +13,8 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
     const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
     const [username, setUsername] = useState("");
     const [disable, setDisable] = useState(true)
+
+    
     const handleUsernameChange = (text: string) => {
         console.log(text)
         setUsername(text);

@@ -88,7 +88,7 @@ const Transferpin = ({ route, navigation }) => {
       <CustomModal>
         <Successmodal 
             btnText="Yeah, continue"
-            successMsg ={`You have successfully transfered  NGN ${info.amount} to ${info.fullName}`}
+            successMsg ={`You have successfully transfered  NGN ${info.amount} to  ${info.fullName}`}
             btnFunction={()=>navigation.navigate("Home")}
         />
       </CustomModal>
