@@ -10,6 +10,7 @@ import Osunbadge from "../assets/images/osun.png"
 import Oyobadge from "../assets/images/oyo.png"
 import chatbg from "../assets/images/chatbg.png"
 import Waterwave from "../assets/images/waterwave.png"
+import Getstartedimage from "../assets/images/getstartedPhotos.png"
 
 
 export default {
@@ -22,5 +23,6 @@ export default {
     Osunbadge,
     Oyobadge,
     chatbg,
-    Waterwave 
+    Waterwave,
+    Getstartedimage
 }
