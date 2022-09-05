@@ -23,6 +23,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
 import DropDownPicker from "react-native-dropdown-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Lock from "../../../../assets/icons/Lock";
 
 
 const { Usericondark, Phoneicon, Envelopeicon, Newlogo } = icons;
@@ -35,6 +36,7 @@ const validationSchema = Yup.object().shape({
   lastName: Yup.string().label("Last Name").required(),
   email: Yup.string().label("Email").email().required(),
   referredBy: Yup.string().label("Referrer"),
+  password:Yup.string().required().min(8),
   phoneNumber: Yup.string()
     .label("Phone Number")
     .matches(phoneRegExp, "This is not a valid phone number"),
@@ -83,6 +85,7 @@ const Personal = ({ navigation }) => {
               lastName: "",
               email: "",
               phoneNumber: "",
+              password:"",
               referredBy: "",
             }}
             validationSchema={validationSchema}
@@ -94,6 +97,7 @@ const Personal = ({ navigation }) => {
                   lastName: values.lastName.trim(),
                   email: values.email.trim(),
                   phoneNumber: values.phoneNumber.trim(),
+                  password: values.password,
                   referredBy: values.referredBy.trim(),
                 });
                 //store data in context
@@ -161,6 +165,14 @@ const Personal = ({ navigation }) => {
                     name="phoneNumber"
                     formikProps={formikProps}
                     icon={<Phoneicon />}
+                    inputbg={COLORS.white}
+                  />
+                   <Input
+                    placeholder="Password"
+                    name="password"
+                    formikProps={formikProps}
+                    icon={<Lock />}
+                    password={true}
                     inputbg={COLORS.white}
                   />
 

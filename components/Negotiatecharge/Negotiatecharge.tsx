@@ -4,6 +4,7 @@ import { COLORS, FONTS, fontsize } from '../../constants'
 import Horizontaline from '../Horizontaline/Horizontaline'
 import { styles } from '../../screens/app/Chats/Chatsdm/Chatsdm.styles'
 import Custombutton from '../Custombutton/Custombutton'
+import amountFormatter from '../../utils/formatMoney'
 
 
 
@@ -13,8 +14,8 @@ const amounts = [
     { name: "200", value: 200 },
     { name: "500", value: 500 },
   ];
-const Negotiatecharge = ({openNextModal}) => {
-  const [amount,setAmount] = useState("");
+const Negotiatecharge = ({openNextModal, info, defaultAmount = "0"}) => {
+  const [amount,setAmount] = useState(`${defaultAmount}`);
   const handleAmountChange = (value)=>{
     setAmount(value)
   }
@@ -56,11 +57,11 @@ const Negotiatecharge = ({openNextModal}) => {
         <View style={{marginBottom: 30}}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>Base Charge </Text>
-        <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.purple4}}>+N500.00</Text>
+        <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.purple4}}>+N{amountFormatter(info?.charges)}</Text>
       </View>
       <Horizontaline marginV={20}/>
       <Text style={{marginBottom: 16, ...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>Total Charge (Base Charge + Your Charge)</Text>
-      <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue9}}>N550.00</Text>
+      <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue9}}>N{amountFormatter( `${Number(amount) + Number(info?.charges)}` )}</Text>
       </View>
       <Custombutton btntext='Yeah, Proceed' onpress={() => openNextModal(amount)}/>
     </View>
