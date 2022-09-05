@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { useEffect, useMemo, useState } from 'react'
 import BottomSheet, {
   BottomSheetScrollView,
@@ -8,14 +8,14 @@ import { COLORS, FONTS, fontsize, icons } from '../../../constants'
 import Horizontaline from '../../../components/Horizontaline/Horizontaline'
 import Custombutton from '../../../components/Custombutton/Custombutton'
 import Map from '../../shared/map/Map'
-import { Backheader, Loader } from '../../../components';
+import { Backheader, Loader, Negotiatecharge, Successmodal } from '../../../components';
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import axiosCustom from '../../../httpRequests/axiosCustom';
 import useAlert from '../../../utils/useAlerts';
 import { makePhoneCall } from '../../../utils/userDeviceFunctions';
 import amountFormatter from '../../../utils/formatMoney';
 import { nameSplitter } from '../../../utils/nameSplitter';
+import useCustomModal from '../../../utils/useCustomModal';
 
 
 const {Purplechaticon, Renegotiateicon, Cancelrequest, Greenphoneicon, Editicon} = icons
@@ -40,15 +40,13 @@ enum comingFromEnum { withdrawPending, withdrawAccepted, depositPending, deposit
 const Requesterinfo = ({navigation,route}) => {
   const info = route.params.info as withdrawobj
   const comingFrom = route.params.comingFrom as comingFromEnum
-
   const [screeninfoandprops, setScreeninfoandprops] = useState<{}>({})
   const [loading, setLoading] = useState(false);
-
+  const { CustomModal:NegotiateChargeModal ,openModal: openNegotiateChargeModal, closeModal:closeNegotiateChargeModal} = useCustomModal()
+  const { CustomModal:SuccessCutomModal,openModal: openSuccessModal, closeModal:closeSuccessModal} = useCustomModal()
   const {errorAlert} = useAlert()
   const snapPoints = useMemo(() => ['60%', '85%'], []);
   
-  console.log("----------------------INFO---------------------")
-  console.log(comingFromEnum.depositAccepted)
 
   useEffect(()=>{
     const datatosort:any = {
@@ -86,6 +84,21 @@ const Requesterinfo = ({navigation,route}) => {
     }
   }
 
+  const handleNextNegotiateCharge = async (amount)=>{
+    try {
+      setLoading(true)
+     await axiosCustom.put('/request/negotiate', {negotiatedFee: amount, reference: info?.reference})
+     openSuccessModal()
+     closeNegotiateChargeModal()
+    }catch(err){
+      errorAlert(err)
+    }
+    setLoading(false)
+  }
+  const handleSuccessBtn = ()=>{
+    closeSuccessModal()
+    navigation.navigate("Home")
+  }
 
 
   return (
@@ -93,6 +106,14 @@ const Requesterinfo = ({navigation,route}) => {
       <Map />
       <Backheader title="Withdraw"/>
     {loading && <Loader />}
+
+    <SuccessCutomModal>
+      <Successmodal btnText='Yeah, Proceed' successMsg='Renegotiate Charge successful' btnFunction={handleSuccessBtn}  />
+    </SuccessCutomModal>
+    <NegotiateChargeModal>
+        <Negotiatecharge info={info} defaultAmount={info.negotiatedFee} openNextModal={handleNextNegotiateCharge} />
+      </NegotiateChargeModal>
+   
     <View style={{flex: 1, justifyContent: 'flex-end', paddingHorizontal: 15, paddingBottom: getBottomSpace()+20}}>
   <BottomSheet snapPoints={snapPoints}>
     <BottomSheetScrollView showsVerticalScrollIndicator={false}>
@@ -163,7 +184,7 @@ const Requesterinfo = ({navigation,route}) => {
   </View>
   :
   <View>
-        <View style={{flexDirection: 'row', alignItems: "center"}}>
+        <TouchableOpacity onPress={openNegotiateChargeModal} style={{flexDirection: 'row', alignItems: "center"}}>
           <View style={{width: 32, height: 32, backgroundColor: COLORS.yellow5, borderRadius: 32/2, justifyContent: "center",alignItems: "center"}}>
             <Renegotiateicon />
           </View>
@@ -171,7 +192,7 @@ const Requesterinfo = ({navigation,route}) => {
             <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Renegotiate Charges </Text>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, marginTop: 5}}>Send in a new charge for this request</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
   
   

@@ -7,8 +7,8 @@ const Server = {
 }
 
 const axiosCustom = axios.create({
-    // baseURL: serversettings.apiUrl
-    baseURL: Server.dev
+    baseURL: serversettings.apiUrl
+    // baseURL: Server.dev
 })
 
 

@@ -242,7 +242,7 @@ const Availablelisting = ({ navigation, route }: any) => {
       </CustomModal>
 
       <NegotiateChargeModal>
-        <Negotiatecharge openNextModal={handleNextNegotiateCharge} />
+        <Negotiatecharge info={{...activeAgent,charges:charge}} openNextModal={handleNextNegotiateCharge} />
       </NegotiateChargeModal>
 
       <TransationSummaryModal>
