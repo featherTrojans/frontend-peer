@@ -22,7 +22,7 @@ const useCopyclipboard = (alertText: string) => {
       successAlert(alertText, true)
     }
   );
-  Clipboard.removeClipboardListener(subscription);
+  // Clipboard.removeClipboardListener(subscription);
 
   return {
     copyToClipboard
