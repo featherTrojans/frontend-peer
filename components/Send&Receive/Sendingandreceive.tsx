@@ -240,7 +240,7 @@ const Sendingandreceive = ({
             }}
           />
           : 
-          <Text>BN</Text>
+          showImage(senderName, receiverName, title, value, otherUser)
           }
           
         </View> 

@@ -77,9 +77,6 @@ const Transactiondetails = ({ navigation, route }) => {
     "MMMM"
   )}, ${dt.format("YYYY")}`;
 
-  // useEffect(() => {
-  //   console.log(data, "Transaction details");
-  // });
 
   const nameSplitter = (name: string) => {
     const splitName = name?.split(" ");
@@ -91,18 +88,7 @@ const Transactiondetails = ({ navigation, route }) => {
     }
   };
 
-  // const copyToClipboard = (copiedTest: string) => {
-  //   Clipboard.setString(copiedTest);
-  // };
 
-  // const subscription = Clipboard.addClipboardListener(
-  //   ({ content }: ClipboardEvent) => {
-  //     setCopied(true);
-  //     successAlert("Transaction Reference copied, Successfully", true)
-  //   }
-  // );
-
-  // Clipboard.removeClipboardListener(subscription);
 
   const saveFile = async (filePath: string) => {
     const albumName = "Feather";
@@ -215,14 +201,7 @@ const Transactiondetails = ({ navigation, route }) => {
         </div>
         `;
         } else {
-          if(otherUser.imageUrl !== null){
-            return `
-            <div style="min-width: 62px; min-height: 62px; border-radius: 32px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-              <img src="${otherUser.imageUrl}" style="width: 62px; height: 62px; border-radius: 32px"  />
-            </div>
-            
-            `
-          }
+        
           return `
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
         ${nameSplitter(otherUser ? otherUser.fullName : "Feather Africa Inc")}
@@ -431,7 +410,9 @@ const Transactiondetails = ({ navigation, route }) => {
   
     <div class="avatars__container">
     <div class="avatars">
-         ${showUserImageOnReceipt()}
+    <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
+        ${nameSplitter(user ? user.fullName : "Feather Africa Inc")}
+        </div>
         <div class="dashed__line"></div>
         <img class="checked__icon" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035323/greenyy_exqzbx.svg" />
         ${showImageOnReceipt(
@@ -658,20 +639,6 @@ const Transactiondetails = ({ navigation, route }) => {
               <Text style={{...fontsize.xmedium,...FONTS.bold, lineHeight: 39, color: COLORS.blue7, marginTop: 16, marginBottom: 8, textTransform: "uppercase" }}>{transactionRef}</Text>
               <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>Tap to copy ref. number</Text>
               </TouchableOpacity>
-              
-              {/* <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}>
-                <TouchableOpacity
-                  style={styles.copyClipboardContainer}
-                  onPress={() => copyToClipboard(transactionRef)}
-                >
-                  <Copyclipboard />
-                  <Text
-                    style={[styles.copyClipboardText, { color: copyColor }]}
-                  >
-                    {copied ? "Copied" : "Copy"}
-                  </Text>
-                </TouchableOpacity>
-              </View> */}
 
 
             </View>
