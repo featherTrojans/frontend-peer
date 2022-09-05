@@ -1,15 +1,19 @@
-import { StyleSheet, Text, View, Share } from "react-native";
+import { StyleSheet, Text, View, Share, TouchableOpacity } from "react-native";
 import React from "react";
 import Mainwrapper from "../Mainwrapper/Mainwrapper";
 import Custombutton from "../Custombutton/Custombutton";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import Horizontaline from "../Horizontaline/Horizontaline";
+import useCopyclipboard from "../../utils/useCopyclipboard";
 
 
 
 const {Purplehouseicon} =icons
 
 const Copyaccountinfo = ({accName, accNumber}) => {
+
+
+  const {copyToClipboard} = useCopyclipboard("Account number copied successfully!")
 
 
 
@@ -51,10 +55,10 @@ const Copyaccountinfo = ({accName, accNumber}) => {
         </Text>
         
       </View>
-      <View style={{marginBottom: 52}}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => copyToClipboard(accNumber)} style={{marginBottom: 52}}>
             <Text style={{textAlign: "center", ...fontsize.big, ...FONTS.bold, color: COLORS.blue9, marginBottom: 12}}>{accNumber}</Text>
             <Text style={{textAlign: "center", ...fontsize.smallest, color: COLORS.grey16, ...FONTS.regular}}>Tap to copy account number</Text>
-        </View>
+        </TouchableOpacity>
 
         <View style={{marginBottom: 40}}>
         <View style={{flexDirection: "row", justifyContent: 'space-between'}}>

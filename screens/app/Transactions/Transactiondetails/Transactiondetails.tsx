@@ -35,6 +35,8 @@ import { AuthContext } from "../../../../context/AuthContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 import useCustomModal from "../../../../utils/useCustomModal";
 import { sendEmail } from "../../../../utils/emailSender";
+import useAlert from "../../../../utils/useAlerts";
+import useCopyclipboard from "../../../../utils/useCopyclipboard";
 
 
 const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions, Detailsmoreicon, Arrowin, Arrowout } =
@@ -43,6 +45,8 @@ const { Copyclipboard, Sharereceipt, Downloadreceipt, Reporttransactions, Detail
 const Transactiondetails = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  const {successAlert} = useAlert()
+  const {copyToClipboard} = useCopyclipboard("Transaction reference copied successfully")
   const {CustomModal: TransactiondetailsModal, openModal: openTransactiondetailsModal} = useCustomModal()
   const copyColor = copied ? COLORS.blue6 : COLORS.grey2;
   const { data } = route.params;
@@ -87,16 +91,16 @@ const Transactiondetails = ({ navigation, route }) => {
     }
   };
 
-  const copyToClipboard = (copiedTest: string) => {
-    Clipboard.setString(copiedTest);
-  };
+  // const copyToClipboard = (copiedTest: string) => {
+  //   Clipboard.setString(copiedTest);
+  // };
 
-  const subscription = Clipboard.addClipboardListener(
-    ({ content }: ClipboardEvent) => {
-      setCopied(true);
- 
-    }
-  );
+  // const subscription = Clipboard.addClipboardListener(
+  //   ({ content }: ClipboardEvent) => {
+  //     setCopied(true);
+  //     successAlert("Transaction Reference copied, Successfully", true)
+  //   }
+  // );
 
   // Clipboard.removeClipboardListener(subscription);
 
@@ -650,9 +654,10 @@ const Transactiondetails = ({ navigation, route }) => {
           <View style={{alignItems: "center"}}>
             <View style={{alignItems: "center"}}>
               <Text style={{...fontsize.smaller, ...FONTS.regular}}>Transaction Ref.</Text>
+              <TouchableOpacity activeOpacity={0.8} onPress={() => copyToClipboard(transactionRef)} style={{ justifyContent: "center", alignItems: "center"}}>
               <Text style={{...fontsize.xmedium,...FONTS.bold, lineHeight: 39, color: COLORS.blue7, marginTop: 16, marginBottom: 8, textTransform: "uppercase" }}>{transactionRef}</Text>
               <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>Tap to copy ref. number</Text>
-              
+              </TouchableOpacity>
               
               {/* <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}>
                 <TouchableOpacity

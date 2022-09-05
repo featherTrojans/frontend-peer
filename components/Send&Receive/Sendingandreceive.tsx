@@ -14,6 +14,7 @@ const {
   Userdefaultmedium,
   Bonusiconlarge,
   Utilitylarge,
+  Logoavatar,
   Dashedline,
   Greencheckicon
 } = icons;
@@ -62,15 +63,7 @@ const showImage = (
       break;
       case "Fund Reversal":
         return (
-          <View style={[styles.typeContainer, {backgroundColor: "#001757", borderRadius: RFValue(62 / 2)}]}>
-            <Image
-              style={styles.imageStyle}
-              resizeMode="contain"
-              source={{
-                uri: assetsDB["fund"]["paystack"],
-              }}
-            />
-          </View>
+          <Logoavatar />
         );
         break;
     case "Wallet Debit":
