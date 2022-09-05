@@ -46,8 +46,8 @@ const Loader = () => {
     style={{margin: 0}}
     animationIn="fadeIn"
     animationOut="fadeOut"
-    onBackdropPress={() => setShowState(!showState)}
-    onBackButtonPress={() => setShowState(!showState)}
+    // onBackdropPress={() => setShowState(!showState)}
+    // onBackButtonPress={() => setShowState(!showState)}
     >
     <View style={styles.container}>
       <Animated.View style={[styles.logoBg, bubblingCircle, {position: 'absolute'}]} />

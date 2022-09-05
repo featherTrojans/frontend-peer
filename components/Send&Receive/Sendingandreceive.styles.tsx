@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 62 / 2,
+    borderRadius: 50 / 2,
     // backgroundColor: "#001757",
   },
   imageStyle: {

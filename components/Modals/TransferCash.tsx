@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useDebounce from '../../utils/debounce';
 import { COLORS, FONTS, fontsize , icons} from '../../constants';
 import Input from '../Input/Input';
@@ -12,12 +12,33 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
     const navigation = useNavigation()
     const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
     const [username, setUsername] = useState("");
+    const [disable, setDisable] = useState(true)
     const handleUsernameChange = (text: string) => {
         console.log(text)
         setUsername(text);
     // and debound
          getuserinfo(text);
     };
+
+
+    useEffect(() => {
+
+      if((username.length > 1) && (error === false)){
+
+        if((loadbounce === false && JSON.stringify(userinfo) !== '{}')){
+          
+            console.log("You can process",  userinfo);
+            setDisable(false)
+        }
+        else{
+          setDisable(true)
+        }
+      }
+      else{
+        setDisable(true)
+      }
+      
+    }, [username, error, userinfo, loadbounce])
 
   return (
     <View>
@@ -62,6 +83,11 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
     </View>
 
     <View style={{ marginTop: 25, marginBottom: 35 }}>
+
+
+
+          {/* Formik start */}
+
       <Input
         icon={<Ashicon />}
         placeholder="Enter amount"
@@ -115,9 +141,16 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
       
     </View>
     <Custombutton
+      disable={disable}
       btntext="Yeah, Continue"
       onpress={() => {onpress(userinfo)}}
     />
+
+
+          {/* Formik Start */}
+
+
+
   </View>
   )
 }

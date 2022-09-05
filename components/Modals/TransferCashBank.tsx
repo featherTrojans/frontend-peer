@@ -13,6 +13,7 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
   const [accountNumber, setAccountNumber] = useState("")
   const [loading, setLoading] = useState(false);
   const [accountInformation, setAccountInformation] = useState({});
+  const [disable, setDisable] = useState(true)
   const {errorAlert} = useAlert();
   
   useEffect(()=>{
@@ -33,7 +34,7 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
       console.log(response.data) 
       setAccountInformation(response?.data?.data)
     }catch(err){
-      errorAlert(err)
+      errorAlert(err, false, true)
     }
     setLoading(false);
   }
@@ -41,6 +42,16 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
     const handleSelectAccountNumber = (acct)=>{
         setAccountNumber(acct)
     }
+
+    useEffect(() => {
+      if(accountNumber.length >= 10 && loading !== true){
+        setDisable(false)
+      }
+      else{
+        setDisable(true)
+      }
+
+    }, [accountNumber, loading])
 
   return (
     <View>
@@ -56,24 +67,27 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
             <View style={{justifyContent: "flex-end", flexDirection: "row", alignItems: "center"}}>
               <Text style={{...fontsize.xsmallest, ...FONTS.medium, color: COLORS.grey16}}>Charges</Text>
               <View style={{paddingVertical: 8,paddingHorizontal: 10, backgroundColor: COLORS.trasparentBlue2, marginLeft: 10, borderRadius: 18}}>
-                <Text style={{...fontsize.xsmallest, ...FONTS.bold, color: COLORS.blue6}}>+ N100.00</Text>
+                <Text style={{...fontsize.xsmallest, ...FONTS.bold, color: COLORS.blue6}}>+ N10.00</Text>
               </View>
             </View>
   
             <View style={{marginTop: 25, marginBottom: 10}}>
             <Input icon={<Ashicon />} placeholder="Enter Amount" value={amount} name="amount" inputbg={COLORS.inputBgColor}/>
-            <Input icon={<Briefcaseicon />} placeholder="Bank Name" name="bankName" value={bank.name} inputbg={COLORS.inputBgColor}/>
+            <Input icon={<Briefcaseicon />} placeholder="Bank Name" name="bankName" value={bank.name} inputbg={COLORS.inputBgColor} editable={false}/>
             <Input icon={<Briefcaseicon />} placeholder="Enter Account Number" 
             value={accountNumber} 
             onChangeText={handleSelectAccountNumber} 
+            keyboardType="numeric"
             name="accountNumber" 
-            inputbg={COLORS.inputBgColor}/>
+            inputbg={COLORS.inputBgColor}
+            
+            />
 
             </View>
               <View style={{ height: 25, marginBottom: 15, alignItems: "flex-end"}}>
                   <DebounceLoading error={false} loadbounce={loading} userinfo={{fullName:accountInformation?.account_name}} username="Bank" />
             </View>
-          <Custombutton btntext="Yeah, Continue" onpress={()=>handleNext(accountInformation)} />
+          <Custombutton disable={disable} btntext="Yeah, Continue" onpress={()=>handleNext(accountInformation)} />
             
           </View>
   )

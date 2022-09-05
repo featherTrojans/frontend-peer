@@ -246,7 +246,7 @@ const Availablelisting = ({ navigation, route }: any) => {
       </NegotiateChargeModal>
 
       <TransationSummaryModal>
-        <RequestSummary openNextModal={handleNextRequestSummary} amount={amount} withdrawInfo={activeAgent} baseCharge={charge} addedFee={negotiatecharge} />
+        <RequestSummary openNextModal={handleNextRequestSummary} withdrawInfo={activeAgent} baseCharge={charge} addedFee={negotiatecharge} />
       </TransationSummaryModal>
 
       <Customstatusbar />
@@ -365,7 +365,7 @@ const Availablelisting = ({ navigation, route }: any) => {
                               }}
                               onPress={()=>handleSelectAgent(info)}
                             >
-                              <Requestuser details={{name:info.fullName, amount:info.amount, duration:info.duration}} />
+                              <Requestuser details={{name:info?.fullName, amount:info?.amount, duration:info?.duration}} />
                               {!isLastItem && <Horizontaline marginV={21} />}
                             </TouchableOpacity>
                           );

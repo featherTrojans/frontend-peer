@@ -84,6 +84,7 @@ const LockScreen = ({ modal, setModal }: any) => {
       style={{ margin: 0, flex: 1 }}
       deviceHeight={SIZES.height}
       deviceWidth={SIZES.width}
+      animationOut="fadeOut"
       animationOutTiming={400}
     >
       <SafeAreaView style={{ flex: 1, paddingHorizontal: 15, paddingBottom: 20, backgroundColor: COLORS.white3 }}>

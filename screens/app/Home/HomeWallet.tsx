@@ -198,6 +198,8 @@ const HomeWallet = () => {
           }}
         />
       </CustomModal>
+
+
             {/* Transfer cash inputs modal */}
       <TransfercashInfoModal>
        <TransferCash 
@@ -233,7 +235,7 @@ const HomeWallet = () => {
                         </View>
                         <Horizontaline marginV={21}/>
                         <Text style={{...fontsize.smallest, lineHeight: 27, ...FONTS.regular}}>Total Amount to send to {nameToShow(userinfo?.fullName || "  ")}</Text>
-                        <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amount}</Text>
+                        <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amountFormatter(amount)}</Text>
                     </View>
                     <Custombutton btntext="Great, Proceed" onpress={()=>{closeAmountModal();closeTransferdetailsModal(); navigation.navigate("Transferpin",{info: {...userinfo,amount}, onpress:handleTransferToFeather})}}/>
                 </View>

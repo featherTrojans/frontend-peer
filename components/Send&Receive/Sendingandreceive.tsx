@@ -95,9 +95,7 @@ const showImage = (
       break;
       case "Utility Payment":
         return (
-          <View style={[styles.typeContainer, { borderRadius: RFValue(62 / 2)}]}>
             <Utilitylarge />
-          </View>
         );
         break;
 

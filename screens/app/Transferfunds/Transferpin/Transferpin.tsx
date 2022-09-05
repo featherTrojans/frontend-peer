@@ -70,10 +70,10 @@ const Transferpin = ({ route, navigation }) => {
     try {
       setLoading(true);
       const responseMsg = await onpress(joinpin);
-      successAlert(responseMsg)
+      successAlert(responseMsg, true)
       openModal()
     } catch (err) {
-      errorAlert(err);
+      errorAlert(err, true, true);
       setPin([])
     } finally {
       setLoading(false);
