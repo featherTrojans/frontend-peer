@@ -194,6 +194,7 @@ const Home = ({ navigation }: { navigation: any }) => {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Notifications")}
+          style={{ padding: 8, borderRadius: 20}}
         >
           <Bell />
         </TouchableOpacity>
