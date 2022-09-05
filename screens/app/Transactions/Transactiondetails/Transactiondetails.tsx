@@ -545,6 +545,23 @@ const Transactiondetails = ({ navigation, route }) => {
   }
 
 
+  const AirtimePurchase = () => {
+    if((title === "Airtime Purchase")){
+      const receiverPhone = receiver
+      const networkName = sender 
+      return(
+        <>
+          <Eachoption title="Phone Number" value={receiverPhone}/>  
+          <Horizontaline marginV={18}/>
+          <Eachoption title="Network Type" value={networkName}/>  
+          <Horizontaline marginV={18}/>
+        </>
+      )
+      
+    }
+  }
+
+
   // const {price } = route?.params
   return (
     <Mainwrapper >
@@ -652,6 +669,7 @@ const Transactiondetails = ({ navigation, route }) => {
               <Horizontaline marginV={18}/>
               {FeatherTransferDetails()}
               {BankTransferDetails()}
+              {AirtimePurchase()}
               <Eachoption title="Amount" value={ `N${amountFormatter(amount)}`}/>  
               <Horizontaline marginV={18}/>
               <Eachoption title="Transaction Charges" value={ `N${amountFormatter(charges)}`}/>  
