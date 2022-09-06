@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   TouchableNativeFeedback,
+  Pressable
 } from "react-native";
 import React, { useContext, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
@@ -154,12 +155,12 @@ const Viewbalance = ({ navigate }: any) => {
             }}
           >
             <Text style={viewbalancestyles.balanceText}>Feather Balance</Text>
-            <TouchableOpacity
+            <Pressable
+            hitSlop={16}
               onPress={() => setShowAmount(!showAmount)}
-              activeOpacity={0.8}
             >
               <Eyecrossed />
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <Text style={viewbalancestyles.balanceAmount}>

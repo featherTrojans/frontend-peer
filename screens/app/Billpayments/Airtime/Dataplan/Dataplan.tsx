@@ -39,7 +39,7 @@ const Dataplan = ({navigation, route}) => {
              
     
               <View style={{marginTop: 25, marginBottom: 35}}>
-              <Input icon={<Ashicon />} placeholder="Enter meter number" name="plan" inputbg={COLORS.inputBgColor}/>
+              <Input icon={<Ashicon />} placeholder="Data Plan" name="plan" inputbg={COLORS.inputBgColor}/>
               <Input icon={<Briefcaseicon />} placeholder="Network Type" name="network" inputbg={COLORS.inputBgColor}/>
               <Input icon={<Briefcaseicon />} placeholder="Enter Amount" name="phone" inputbg={COLORS.inputBgColor}/>
               <View style={{flexDirection: "row", alignItems: "center", backgroundColor: COLORS.trasparentPurple, alignSelf: "flex-start", paddingVertical: 9, paddingHorizontal: 14, borderRadius: 18}}>

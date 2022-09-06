@@ -11,6 +11,7 @@ import Oyobadge from "../assets/images/oyo.png"
 import chatbg from "../assets/images/chatbg.png"
 import Waterwave from "../assets/images/waterwave.png"
 import Getstartedimage from "../assets/images/getstartedPhotos.png"
+import Wavvy from "../assets/images/wavvy.png"
 
 
 export default {
@@ -24,5 +25,6 @@ export default {
     Oyobadge,
     chatbg,
     Waterwave,
-    Getstartedimage
+    Getstartedimage,
+    Wavvy
 }

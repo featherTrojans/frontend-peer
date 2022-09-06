@@ -1,11 +1,11 @@
 import React, { useContext, useMemo } from "react";
-import { Text, View, TouchableOpacity, Share, Image } from "react-native";
+import { Text, View, TouchableOpacity, Share, Image, StyleSheet } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
 import * as Sharing from "expo-sharing";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
-import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";
 import { styles } from "./Settings.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import Customstatusbar from "../../shared/Customstatusbar";
@@ -27,6 +27,8 @@ const {
   Shareaccounticon,
   Walletmanageicon,
 } = icons;
+
+const {Wavvy} = images
 
 type IconwithtitleProps = {
   bg: string;
@@ -176,6 +178,10 @@ const Settings = ({ navigation }) => {
             <Upgrademodal closeUpgradeModal={closeUpgradeModal} />
         </UpgradeuserModal>
 
+
+
+          {/* Blue background view */}
+
         <View
           style={{
             marginTop: 20,
@@ -184,8 +190,20 @@ const Settings = ({ navigation }) => {
             paddingTop: 20,
             paddingBottom: 18,
             borderRadius: 16,
+            overflow: 'hidden'
           }}
         >
+
+          <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
+            <Image
+              source={Wavvy}
+              style={{ width: "200%", height: "100%", opacity: 1,  }}
+              
+              
+            />
+          </View>
+
+          {/* The memoji */}
           <View
             style={{
               flexDirection: "row",
