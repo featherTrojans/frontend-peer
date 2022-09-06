@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StatusBar } from "react-native";
-import { useToast } from "react-native-toast-notifications";
 import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
 import LottieView from "lottie-react-native";
 
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-
-import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { securepinstyles } from "./Securepin.styles";
-
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useAlert from "../../../../utils/useAlerts";
+
+
+const setAuthorizationToken = (token: string) => {
+  if (token) {
+    axiosCustom.defaults.headers.common["token"] = token;
+  }
+};
+
 
 const { SecureDot, Successcheckanimate, Newlogo } = icons;
 const SecurepinAgain = ({ route, navigation }) => {
-  const toast = useToast();
+  const {errorAlert} = useAlert()
   const { token, pin, fromm } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,7 +32,7 @@ const SecurepinAgain = ({ route, navigation }) => {
 
   const handleSubmit = async () => {
     if (pin.join("") !== amount.join("")) {
-      return showerror(toast, null, "Pin doesn't match");
+      return errorAlert(null, "Pin doesn't match");
     }
     setLoading(true);
     try {
@@ -39,13 +43,14 @@ const SecurepinAgain = ({ route, navigation }) => {
         { headers: { token: token } }
       );
       setResult(response.data.data);
+      setAuthorizationToken(response?.data?.data?.token)
       setShowModal(true);
       // navigation.navigate("Setup", {
       //   token: response?.data?.data?.token,
       //   defaultUsername: response?.data?.data?.username,
       // });
     } catch (err) {
-      showerror(toast, err);
+      errorAlert(err);
     } finally {
       setLoading(false);
     }

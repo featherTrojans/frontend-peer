@@ -24,6 +24,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import DropDownPicker from "react-native-dropdown-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Lock from "../../../../assets/icons/Lock";
+import useAlert from "../../../../utils/useAlerts";
 
 
 const { Usericondark, Phoneicon, Envelopeicon, Newlogo } = icons;
@@ -45,6 +46,7 @@ const validationSchema = Yup.object().shape({
 const Personal = ({ navigation }) => {
   const { setAuthData } = useContext(AuthContext);
   const toast = useToast();
+  const {errorAlert } = useAlert()
 
   return (
     <Mainwrapper >
@@ -61,12 +63,6 @@ const Personal = ({ navigation }) => {
 
             <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 30}}>
               <Newlogo />
-
-              <View style={{ flexDirection: "row" }}>
-              <View style={[styles.activeDot, { marginRight: 10 }]} />
-              <View style={[styles.topDots, { marginRight: 10 }]} />
-              <View style={styles.topDots} />
-            </View>
             </View>
 
 
@@ -100,8 +96,6 @@ const Personal = ({ navigation }) => {
                   password: values.password,
                   referredBy: values.referredBy.trim(),
                 });
-                //store data in context
-                // setAuthData(response?.data?.data)
                 navigation.navigate("Verification", {
                   email: values.email,
                   phoneNumber: values.phoneNumber,
@@ -118,7 +112,7 @@ const Personal = ({ navigation }) => {
                     });
                   }
                 }
-                showerror(toast, err);
+                errorAlert(err);
               }
             }}
           >

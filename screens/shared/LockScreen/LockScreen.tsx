@@ -1,30 +1,21 @@
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
   SafeAreaView,
-  TouchableNativeFeedback,
-  StatusBar,
 } from "react-native";
 import React, { useContext, useState } from "react";
 import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize, SIZES, icons } from "../../../constants";
 import { styles } from "./LockScreen.style";
-import { JustifyBetween } from "../../../global/styles";
-import SecureDot from "../../../assets/icons/SecureDot";
 import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../components";
 import axiosCustom from "../../../httpRequests/axiosCustom";
-import { useToast } from "react-native-toast-notifications";
-import showerror from "../../../utils/errorMessage";
-import Globalmodal from "../Globalmodal/Globalmodal";
 import { AuthContext } from "../../../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
 import useAlert from "../../../utils/useAlerts";
 
 const { Cancelicon, Newlogo } = icons;
 const LockScreen = ({ modal, setModal }: any) => {
-  const toast = useToast();
   const {errorAlert} = useAlert()
   const { setToken, authdata } = useContext(AuthContext);
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];

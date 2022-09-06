@@ -4,6 +4,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
@@ -13,12 +14,10 @@ import { styles } from "./Editprofile.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
 import {
   Backheader,
-  Bottombtn,
   Custombutton,
   Input,
   Loader,
   Mainwrapper,
-  Upgrademodal,
 } from "../../../../components";
 import Defaultuseravatar from "../../../../assets/icons/Defaultuseravatar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -27,16 +26,14 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import { useNavigation } from "@react-navigation/native";
-import Customstatusbar from "../../../shared/Customstatusbar";
 import useDebounce from "../../../../utils/debounce";
-
-import { SafeAreaView } from "react-native-safe-area-context";
 import useCustomModal from "../../../../utils/useCustomModal";
+import DebounceLoading from "../../../shared/DebounceLoading";
+import Check from "../../../../assets/icons/Check";
+import WrongIcon from "../../../../assets/icons/WrongIcon";
+import useAlert from "../../../../utils/useAlerts";
 
 const {
-  Backarrow,
-  Check,
-  WrongIcon,
   Usericondark,
   Envelopeicon,
   Phoneicon,
@@ -50,7 +47,6 @@ const setAuthorizationToken = (token: string) => {
 };
 
 const validationSchema = Yup.object().shape({
-  userName: Yup.string().label("username").required(),
   firstName: Yup.string().label("First Name").required(),
   lastName: Yup.string().label("Last Name").required(),
   email: Yup.string().label("Last Name").required(),
@@ -61,7 +57,7 @@ const validationSchema = Yup.object().shape({
 
 const Editprofile = ({}) => {
 
-  const toast = useToast();
+    const {errorAlert} = useAlert()
     const navigation = useNavigation();
     const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
     const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
@@ -234,9 +230,13 @@ const Editprofile = ({}) => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values) => {
+              console.log("adfasfsafasfasfasfsfasfasffsafa")
+              if(userinfo.fullName && usernamename?.toLowerCase()){
+                return errorAlert(null, "Please provide a valid username")
+              }
               try {
                 const data = {
-                  newUsername: values.username.trim(),
+                  newUsername: usernamename,
                   firstName: values.firstName.trim(),
                   lastName: values.lastName.trim(),
                 };
@@ -261,12 +261,15 @@ const Editprofile = ({}) => {
                 navigation.navigate("Root");
               } catch (err) {
                 // send success toast message
-                showerror(toast, err);
+                errorAlert(err);
               }
             }}
           >
             {(formikProps) => {
               const { isSubmitting, handleSubmit, values } = formikProps;
+              console.log('------------------------ISSUBMITTING--------------------------');
+              console.log(isSubmitting)
+
               return (
                 <React.Fragment>
                   {isSubmitting && <Loader />}
@@ -293,15 +296,36 @@ const Editprofile = ({}) => {
                         </>
                       )}
                     </View> */}
+                    
   
                     <Input
                       placeholder="Username"
                       name="username"
-                      formikProps={formikProps}
+                      // formikProps={formikProps}
                       icon={<Usericondark />}
-                      value={values.username}
+                      value={usernamename}
+                      onChangeText={handleUsernameChange}
                     />
-  
+                       <View style={{flexDirection:"row", marginRight: 5, marginBottom: 10, alignItems:"flex-end", justifyContent:"flex-end"}}>
+                      {loadbounce ? (
+                        <ActivityIndicator size={15} color={COLORS.blue6} />
+                      ) : userinfo.fullName &&
+                        usernamename?.toLowerCase() !==
+                          authdata?.userDetails?.username?.toLowerCase() ? (
+                        <>
+                          <WrongIcon />
+                          <Text style={styles.name}>{usernamename} is taken</Text>
+                        </>
+                      ) : null}
+                      {(error ||
+                        usernamename.toLowerCase() ===
+                          authdata?.userDetails?.username.toLowerCase()) && (
+                        <>
+                          <Check />
+                          <Text style={styles.name}>{usernamename}</Text>
+                        </>
+                      )}
+                    </View>
                     <Input
                       placeholder="Firstname"
                       name="firstName"

@@ -20,7 +20,7 @@ const Eachoption = ({name, phoneNumber}) => {
     return(
         <View style={{flexDirection: "row", paddingVertical: 20,  alignItems: "center"}}>
             <View style={{backgroundColor: COLORS.green2, width: 34, height: 34, justifyContent: "center", alignItems: "center", borderRadius: 34/2,}}>
-                <Text style={{color: COLORS.white}}>G</Text>
+                <Text style={{color: COLORS.white}}>{nameSplitter(name)}</Text>
             </View>
             <View style={{marginLeft: 12}}>
             <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>{name}</Text>
@@ -35,8 +35,13 @@ const Eachoption = ({name, phoneNumber}) => {
 const Sendcash = ({navigation, route}) => {
     const amount = route.params
     const { contactsResolved} = useContact();
+    const [contacts, setContacts] = useState([]);
     const {CustomModal: TransferdetailsModal, openModal: openTransferdetailsModal, closeModal:closeTransferdetailsModal} = useCustomModal()
     const [activeContact, setActiveContact] = useState({})
+    const [phonenumbertext, setPhonenumbertext] = useState("");
+    useEffect(()=>{
+        setContacts(contactsResolved);
+    },[contactsResolved])
     
     const handleTransferToFeather = async (userPin)=>{
         try{
@@ -47,6 +52,11 @@ const Sendcash = ({navigation, route}) => {
           throw err;
         }
       }
+    
+     const handlePhonechange = (text)=>{
+        setPhonenumbertext(text)
+        setContacts(contacts.filter((contact)=> contact?.fullName?.includes(text) || contact?.phoneNumber?.includes(text)  ))
+     } 
 
     return (
     <Mainwrapper>
@@ -83,7 +93,7 @@ const Sendcash = ({navigation, route}) => {
       </TransferdetailsModal>
 
         <View style={{paddingHorizontal: 15, flex: 1}}>
-            <Input icon={<Ashicon />} placeholder='Search phone numbers' name="searchUsername" inputbg={COLORS.white}/>
+            <Input icon={<Ashicon />} value={phonenumbertext} onChangeText={handlePhonechange} placeholder='Search phone numbers' name="searchUsername" inputbg={COLORS.white}/>
 
 
             <View style={{paddingHorizontal: 16, paddingVertical: 22, backgroundColor: COLORS.white, borderRadius: 15, flex: 1, }}>
@@ -93,7 +103,7 @@ const Sendcash = ({navigation, route}) => {
                 <ScrollView showsVerticalScrollIndicator={false} >
 
                
-                {contactsResolved?.map((contact, index) => {
+                {contacts?.map((contact, index) => {
                     const isLast = contactsResolved.length === index + 1;
                     return (
                         <View key={index}>

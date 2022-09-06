@@ -2,49 +2,31 @@ import React, { useContext, useEffect } from "react";
 import { styles } from "./Login.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../constants";
 
-import { useToast } from "react-native-toast-notifications";
-
 import {
   View,
   Text,
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-  Alert,
-  StatusBar,
-  Platform,
-  KeyboardAvoidingView,
+  TouchableOpacity
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 // import * as Keychain from 'react-native-keychain';
-import {
-  setGenericPassword,
-  getGenericPassword,
-  ACCESS_CONTROL,
-  Options,
-  AuthenticationPrompt,
-} from "react-native-keychain";
+
 import * as LocalAuthentication from "expo-local-authentication";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Custombutton, Input, Loader, Mainwrapper } from "../../../components";
 import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
-import showerror from "../../../utils/errorMessage";
 import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
-import { SafeAreaView } from "react-native-safe-area-context";
 import {
   getBiometricsAccess,
   getCredentials,
   saveCredentials,
 } from "../../../utils/biometrics";
-import Customstatusbar from "../../shared/Customstatusbar";
 import useAlert from "../../../utils/useAlerts";
 
-const { Logo, Newlogo, Eyeicon, Usericon, Lock, Passwordhideicon } = icons;
+const { Newlogo, Usericon, Lock } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -67,7 +49,6 @@ const Login = ({ navigation }: any) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [enableBiometrics, setEnableBiometrics] = useState<null | string>(null);
-  const toast = useToast();
 
   const loginFunc = async (values) => {
     setLoading(true);
@@ -83,13 +64,8 @@ const Login = ({ navigation }: any) => {
         );
         setAllowBiometrics(true);
       }
-
-      //store token in ASYNC STORAGE
-      //store in context
       const token = response.data.data.token;
       setAuthorizationToken(token);
-
-      // check if token is using 0000
       try {
         await axiosCustom.post(
           "auth/pin/verify",
@@ -111,9 +87,7 @@ const Login = ({ navigation }: any) => {
         });
       }
     } catch (err) {
-      // showerror(toast, err);
-      console.log(err, "Here is the error");
-      errorAlert("The name", "", true)
+      errorAlert(err)
     } finally {
       setLoading(false);
     }

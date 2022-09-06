@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StatusBar, ScrollView } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useToast } from "react-native-toast-notifications";
 import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
 
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-
-import { JustifyBetween } from "../../../../global/styles";
-import showerror from "../../../../utils/errorMessage";
+import useAlert from "../../../../utils/useAlerts";
 import Customstatusbar from "../../../shared/Customstatusbar";
 
 import { securepinstyles } from "./Securepin.styles";
 
 const { SecureDot, Newlogo } = icons;
 const Securepin = ({ route, navigation }) => {
-  const toast = useToast();
   const { token, fromm } = route.params;
+  const { errorAlert } = useAlert()
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
 
@@ -37,7 +33,8 @@ const Securepin = ({ route, navigation }) => {
  
   const handleNext = () => {
     if (pin.join("") === "0000") {
-      return showerror(toast, null, "Pin cannot be set to 0000");
+
+      return errorAlert(null, "Pin cannot be set to 0000");
     }
     navigation.navigate("SecurepinAgain", { token, pin, fromm });
   };
@@ -77,9 +74,6 @@ const Securepin = ({ route, navigation }) => {
             <View style={securepinstyles.activeDot} />
           </View>
         </View>
-
-
-
         <View style={{ marginTop: 28, marginBottom: 80 }}>
           <Text
             style={{ ...fontsize.bsmall, ...FONTS.medium, marginBottom: 9 }}

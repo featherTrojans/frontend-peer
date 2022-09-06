@@ -20,9 +20,11 @@ import { nameSplitter } from "../../utils/nameSplitter";
 const Requestuser = ({
     details,
     accepted = false,
+    hideAmount = false
   }: {
     details: any;
     accepted?: boolean;
+    hideAmount?:boolean
   }) => {
     const { name, duration, amount } = details;
     return (
@@ -43,8 +45,8 @@ const Requestuser = ({
             <Text style={withdrawstyles.requesteedistance}>{duration}</Text>
           </View>
         </View>
-
-        <Text style={withdrawstyles.requestedamount}>N{amountFormatter(amount)}</Text>
+              {!hideAmount && <Text style={withdrawstyles.requestedamount}>N{amountFormatter(amount)}</Text>}
+        
       </View>
     );
   };

@@ -246,7 +246,7 @@ const Availablelisting = ({ navigation, route }: any) => {
       </NegotiateChargeModal>
 
       <TransationSummaryModal>
-        <RequestSummary openNextModal={handleNextRequestSummary} withdrawInfo={activeAgent} baseCharge={charge} addedFee={negotiatecharge} />
+        <RequestSummary amount={amount} openNextModal={handleNextRequestSummary} withdrawInfo={activeAgent} baseCharge={charge} addedFee={negotiatecharge} />
       </TransationSummaryModal>
 
       <Customstatusbar />

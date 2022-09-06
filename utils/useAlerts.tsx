@@ -2,7 +2,7 @@ import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 
 const useAlert = () => {
 
-  const successAlert = (messageText: string, hide=false) => {
+  const successAlert = (messageText: string, hide=true) => {
     Toast.show({
       type: "successToast",
       // And I can pass any custom props I want
@@ -12,7 +12,7 @@ const useAlert = () => {
   };
 
 
-  const errorAlert = (err: any, customeerror?:string, hide=false) => {
+  const errorAlert = (err: any, customeerror?:string, hide=true) => {
     console.log(err)
     console.log(err?.response)
   

@@ -1,33 +1,29 @@
 import React, {useState, useEffect, useRef} from "react"
 import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity, StatusBar } from "react-native";
-import LottieView from 'lottie-react-native'
-import OTPInputView from '@twotalltotems/react-native-otp-input'
 import OTPTextInput from "react-native-otp-textinput";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
-import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
 import { Backheader, Bottombtn, Custombutton, Loader } from "../../../components";
-import { useToast } from "react-native-toast-notifications";
-import showerror from "../../../utils/errorMessage";
-import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { RFValue } from "react-native-responsive-fontsize";
+import useAlert from "../../../utils/useAlerts";
+import useCustomModal from "../../../utils/useCustomModal";
+import Passwordpinlock from "../../../assets/icons/Passwordpinlock";
 
 // import { VerificationContainer, VerificationText } from "./Verification.styles";
 
 const { Cancelicon, Successcheckanimate } = icons;
 
 const Verification = ({route,navigation}) => {
-  const toast = useToast()
+  const {errorAlert} = useAlert()
   const [time, setTime] = useState<number>(30)
   const {email, phoneNumber, token} = route.params
   const [loading, setLoading] = useState<boolean>(false)
   const [otpCode, setOtpCode] = useState<any>("")
   const [tokenn, setToken] = useState<string|null>(token)
   const [disable, setDisable] = useState(true)
-  const [showModal, setShowModal] = useState<boolean>(false)
+  const {CustomModal, openModal, closeModal} = useCustomModal()
   const otpInput = useRef(null);
 
     
@@ -50,21 +46,25 @@ const Verification = ({route,navigation}) => {
 
 
 
-  
+  useEffect(()=>{
+    sendOtp()
+  },[])
   
   useEffect(()=>{
-    // handleResendOTP()
+    handleResendOTP()
   },[])
 
   const handleSubmit = async ()=>{
 
     setLoading(true)
     try{
-      await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
+      const response = await axiosCustom.post("auth/verify/code",{code:otpCode},{headers:{token:tokenn!}});
       // setShowModal(true)
-     return navigation.navigate("Security",{token:tokenn})
+      openModal()
+      // show modal skip the welcome to change
+     
     }catch(err){
-      showerror(toast, err)
+      errorAlert(err)
     }finally{
       setLoading(false)
     }
@@ -79,9 +79,21 @@ const Verification = ({route,navigation}) => {
       setDisable(false)
       setTime(30)
     }catch(err){
-      showerror(toast, err)
+      errorAlert(err)
     }finally{
       setLoading(false)
+    }
+  }
+  const sendOtp = async ()=>{
+    try{
+      const response = await axiosCustom.post("auth/resend/code",{email});
+      setToken(response?.data?.data?.token)
+      setDisable(false)
+      setTime(30)
+    }catch(err){
+      errorAlert(err)
+    }finally{
+      // setLoading(false)
     }
   }
 
@@ -93,7 +105,27 @@ const Verification = ({route,navigation}) => {
       <Backheader title="Verify Phone Number"/>
       <View style={{paddingHorizontal: 25, flex: 1}}>
 
+      <CustomModal>
+        <View>
 
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              marginVertical: 40,
+            }}
+            >
+
+            {/* icons is here */}
+            <Passwordpinlock />
+            <Text style={{ textAlign: "center", ...fontsize.smallest, ...FONTS.regular, color: COLORS.black, paddingHorizontal: 40, marginTop: 34 }}>
+              *We take your security and privacy serious, Kindly setup your pin
+              to continue on the app
+            </Text>
+          </View>
+            <Custombutton btntext=" Setup Transaction PIN" onpress={()=>{ closeModal(); navigation.navigate("Securepin",{token:token, fromm: "setup"}) }}  />
+            </View>
+      </CustomModal>
 
       {/* <Globalmodal
         showState={showModal}

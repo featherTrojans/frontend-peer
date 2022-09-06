@@ -10,8 +10,6 @@ import {
   Sendingandreceive,
 } from "../../../components";
 import axiosCustom from "../../../httpRequests/axiosCustom";
-import { useToast } from "react-native-toast-notifications";
-import showerror from "../../../utils/errorMessage";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import { LocationContext } from "../../../context/LocationContext";
 import Customstatusbar from "../../shared/Customstatusbar";
@@ -19,16 +17,17 @@ import { AuthContext } from "../../../context/AuthContext";
 import { plusBase } from "../../../utils/utils";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useAlert from "../../../utils/useAlerts";
 const { Backarrow, SecureDot } = icons;
 
 const Negotiate = ({ navigation, route }) => {
   const { requestInfo } = route.params;
   const { authdata } = useContext(AuthContext);
-  const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [loading, setLoading] = useState(false);
   const [charges, setCharges] = useState<string>(requestInfo.negotiatedFee);
   const [showmodal, setShowModal] = useState(false);
+  const {errorAlert} = useAlert()
 
   const amountFormatter = (value: string) => {
     return (
@@ -56,7 +55,7 @@ const Negotiate = ({ navigation, route }) => {
 
   const handleSubmit = async () => {
     if(Number(charges) <= 0 ){
-      showerror(toast,null ,"sorry you have to input a fair amount to continue");
+      errorAlert(undefined,"sorry you have to input a fair amount to continue")
       return
     }
     try {
@@ -68,7 +67,7 @@ const Negotiate = ({ navigation, route }) => {
       // console.log(response)
       setShowModal(true);
     } catch (err) {
-      showerror(toast, err);
+      errorAlert(err)
     } finally {
       setLoading(false);
     }

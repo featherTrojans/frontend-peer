@@ -28,7 +28,7 @@ const {fullName, imageUrl} = authdata?.userDetails
 const handleCreateWithdrawal = async ()=>{
 
     const data = {
-        amount: withdrawInfo.amount,
+        amount: amount,
         charges: baseCharge,
         agentUsername: withdrawInfo.username,
         agent: withdrawInfo.fullName,
@@ -110,7 +110,7 @@ return (
 
 
     <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 27}}>Total amount to pay on meetup</Text>
-    <Text style={{marginBottom: 40, marginTop: 16, ...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amountFormatter(Number(addedFee) + Number(baseCharge) + Number(amount))}</Text>
+    <Text style={{marginBottom: 40, marginTop: 16, ...fontsize.smaller, ...FONTS.bold, color: COLORS.green1}}>N{amountFormatter(`${Number(addedFee) + Number(baseCharge) + Number(amount)}`)}</Text>
 
 
     <Custombutton btntext='Yeah, Continue' onpress={handleCreateWithdrawal}/>

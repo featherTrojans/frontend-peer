@@ -1,26 +1,19 @@
 import React, { useState, useContext } from "react";
 import {
   View,
-  Text,
-  StyleSheet,
-  StatusBar,
-  TouchableOpacity,
+  Text
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Custombutton, Input, Loader } from "../../../../components/index";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Security.styles";
-import { AuthContext } from "../../../../context/AuthContext";
-import showerror from "../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import LottieView from "lottie-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useAlert from "../../../../utils/useAlerts";
 
 const { Lock, Newlogo, Successcheckanimate, Passwordpinlock } = icons;
 
@@ -34,7 +27,7 @@ const Security = ({ route, navigation }) => {
   const { token } = route.params;
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState<any>();
-  const toast = useToast();
+  const {errorAlert} = useAlert()
   const validationSchema = Yup.object().shape({
     password: Yup.string().label("Password").required(),
     confirmPassword: Yup.string()
@@ -133,14 +126,9 @@ const Security = ({ route, navigation }) => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values, { setSubmitting }) => {
-              console.log("Clikced");
 
               if (values.password.length < 8) {
-                return showerror(
-                  toast,
-                  null,
-                  "password should have a minimun of 8 characters"
-                );
+                errorAlert(null,"password should have a minimun of 8 characters");
               }
               try {
                 const response = await axiosCustom.put(
@@ -153,12 +141,8 @@ const Security = ({ route, navigation }) => {
                 setResult(response.data.data);
                 setAuthorizationToken(response?.data?.data?.token);
 
-
-
-                // navigation.navigate("Securepin",{token:result?.token});
-                // navigation.navigate("Welcome",{fromm:"setup", username:null,token:response?.data?.data?.token})
               } catch (err) {
-                showerror(toast, err);
+                errorAlert(err);
               }
             }}
           >

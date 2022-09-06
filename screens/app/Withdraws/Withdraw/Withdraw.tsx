@@ -25,6 +25,7 @@ import amountFormatter from "../../../../utils/formatMoney";
 import { RFValue } from "react-native-responsive-fontsize";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Requestuser from "../../../shared/RequestUser";
+import showerror from "../../../../utils/errorMessage";
 
 const {
   Acceptedcheck,
@@ -159,6 +160,10 @@ const Withdraw = ({ navigation }) => {
 
 
   const handleWithdraw = (amount)=>{
+      if(Number(amount) < 200 ){
+        showerror(null,"You can't make a withdraw request of less than NGN 200")
+        return
+      }
       closeModal()
       navigation.navigate("Availablelisting",amount);
   }
@@ -201,7 +206,7 @@ const Withdraw = ({ navigation }) => {
                   const accepted = title === "Accepted Requests";
                   return (
                     <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Requesterinfo", {info:{...info,fullName:info.agent,username:info.agentUsername, userUid: info.agentId} , comingFrom:comingFrom })} key={index}>
-                      <Requestuser details={{name:info.agent, duration:info.meetupPoint, amount:info.amount}} accepted={accepted} />
+                      <Requestuser hideAmount={true} details={{name:info.agent, duration:info.meetupPoint, amount:info.amount}} accepted={accepted} />
                       {!isLastItem && <Horizontaline marginV={21} />}
                     </TouchableOpacity>
                   );
