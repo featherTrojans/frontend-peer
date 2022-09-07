@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar,TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, StatusBar,TouchableOpacity, ScrollView } from "react-native";
 import React, { ReactElement, useEffect, useState, useContext } from "react";
 import { styles } from "./Chatshome.styles";
 import { useNavigation } from "@react-navigation/native";
@@ -49,15 +49,7 @@ const Chat = ({userId, chatinfo}:chatProps) => {
 
 
 
-  const colors = ["r", "g", "b", "y", "p"]
-  const datas = [{name: "Okikiola"}, {name: "Muyiwa"}, {name: "Shola"}, {name: "Debs"}, {name: "Mike"}, {name: "Tobi"}]
-  const newdata = []
-  let i = 0
-  datas.map((data, index) => {
-    i++
-    console.log(data.name+"--"+colors[i]);
-    
-  })
+
 
 
 
@@ -102,7 +94,7 @@ const AllChats = ({chats, chattwos, authId})=>{
 
   
     return (
-      <>
+      <ScrollView showsVerticalScrollIndicator={false} bounces={false} contentContainerStyle={{paddingVertical: 30}}>
         {
           allChats.map((chat, index)=>{
             let userid = chat.id1 !== authId? chat.id1 : chat.id2 
@@ -116,7 +108,7 @@ const AllChats = ({chats, chattwos, authId})=>{
             )
           })
         }
-      </>
+      </ScrollView>
     )
   }
 

@@ -634,6 +634,7 @@ const Transactiondetails = ({ navigation, route }) => {
                 otherUser={otherUser}
                 senderName={typeOfName(title)?.senderName}
                 receiverName={typeOfName(title)?.receiverName}
+                transId={transactionRef}
                 title={title}
                 value={(title === "withdrawal" || title === "Funds Transfer")  ? receiver : sender}
               />
@@ -653,7 +654,7 @@ const Transactiondetails = ({ navigation, route }) => {
             <View style={{alignItems: "center"}}>
               <Text style={{...fontsize.smaller, ...FONTS.regular}}>Transaction Ref.</Text>
               <TouchableOpacity activeOpacity={0.8} onPress={() => copyToClipboard(transactionRef)} style={{ justifyContent: "center", alignItems: "center"}}>
-              <Text style={{...fontsize.xmedium,...FONTS.bold, lineHeight: 39, color: COLORS.blue7, marginTop: 16, marginBottom: 8, textTransform: "uppercase" }}>{transactionRef}</Text>
+              <Text style={{...fontsize.xmedium,...FONTS.bold, lineHeight: 39, color: COLORS.blue7, marginTop: 16, marginBottom: 8, textTransform: "uppercase", textAlign: "center" }}>{transactionRef}</Text>
               <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>Tap to copy ref. number</Text>
               </TouchableOpacity>
 

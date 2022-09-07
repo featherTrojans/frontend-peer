@@ -111,7 +111,8 @@ const Usersearch = ({navigation, route}) => {
           />
         </View>
         { active === "phonecontact" && <Text style={styles.listHeader}>Feather Users In Your Contact</Text>  }
-        { active === "phonecontact" ? <FlatList
+        { active === "phonecontact" ? 
+        <FlatList
           data={filteredContact}
           bounces={false}
           showsHorizontalScrollIndicator={false}
@@ -127,7 +128,10 @@ const Usersearch = ({navigation, route}) => {
             <Text style={{...fontsize.bsmall, ...FONTS.regular, lineHeight: 25, color: COLORS.black, textAlign: "center"}}>Sorry, this contact is not a feather user</Text>        
           </View>
           }
-        />:userinfo?.fullName?<SingleUser userInfo={userinfo} name={userinfo?.fullName} username={`@${userinfo?.username}`} />: null}
+        />
+        
+        :
+        userinfo?.fullName?<SingleUser userInfo={userinfo} name={userinfo?.fullName} username={`@${userinfo?.username}`} />: null}
         {loadbounce && <ActivityIndicator color="#000" size="small" />}
       </View>
     </SafeAreaView>

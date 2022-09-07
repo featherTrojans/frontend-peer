@@ -34,6 +34,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import useContact from "../../../../utils/customContact";
 import { Backheader, Mainwrapper } from "../../../../components";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 
 const { Chatsearchicon, Cryinganimate, Emptynotification } = icons;
@@ -139,7 +140,9 @@ const Chatshome = ({ navigation }) => {
   };
 
   return (
-    <Mainwrapper>
+    <View style={{flex: 1, paddingTop: getStatusBarHeight(true) }}>
+      <Customstatusbar />
+
       <Backheader title="Chats" showArrow={false} />
 
       <View style={styles.container}>
@@ -154,13 +157,16 @@ const Chatshome = ({ navigation }) => {
               flex: 1,
               backgroundColor: COLORS.white,
               marginTop: 15,
-              borderRadius: 15,
+              // borderRadius: 15,
+              borderTopRightRadius: 15,
+              borderTopLeftRadius: 15,
              paddingHorizontal: 16, 
-             paddingVertical: 20
+            //  paddingVertical: 20
+            paddingTop: 20
             }}
           >
             {/* <Text>The an</Text> */}
-            <View style={{marginBottom: 50}}>
+            <View style={{marginBottom: 20}}>
               <Text style={{...fontsize.smaller, ...FONTS.medium}}>Recent Chats</Text>
               {/* icons */}
             </View>
@@ -182,7 +188,7 @@ const Chatshome = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </Mainwrapper>
+    </View>
   );
 };
 

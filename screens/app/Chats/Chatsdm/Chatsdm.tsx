@@ -289,12 +289,12 @@ const Chatsdm = ({navigation,route}) => {
 
 
       <View style={styles.chatHeader}>
-        <TouchableOpacity onPress={()=>navigation.goBack()}>
+        <TouchableOpacity style={{ paddingHorizontal: 11, paddingVertical: 8, }} onPress={()=>navigation.goBack()}>
           <Backarrow />
         </TouchableOpacity>
 
 
-        <View style={styles.headerDetailsContainer}>
+        <View style={[styles.headerDetailsContainer, ]}>
           <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
             <Text style={styles.chatName}>{userInfo?.fullName}</Text>
           <TouchableOpacity activeOpacity={0.8} onPress={()=>setSendCashModal(true)}>

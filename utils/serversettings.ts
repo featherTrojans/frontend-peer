@@ -6,12 +6,14 @@ import Constants from "expo-constants"
 const settings = {
     dev: {
         apiUrl: "https://feather.com.ng:3300/api/v1/" 
+
     },
     staging: {
         apiUrl: "https://featherafrica.co:3300/api/v1/" 
     },
     production: {
         apiUrl: "https://featherafrica.co:3300/api/v1/" 
+
     }
 }
 

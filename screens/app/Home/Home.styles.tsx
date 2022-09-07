@@ -98,6 +98,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
     paddingBottom: 24,
+    overflow: "hidden"
   },
   informationiconswrap: {
     marginBottom: 10,

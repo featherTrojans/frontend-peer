@@ -10,14 +10,15 @@ export const styles = StyleSheet.create({
   chatHeader: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 17,
-    paddingBottom: 12,
-    paddingHorizontal: 22,
+    paddingTop: 10,
+    paddingBottom: 10,
+    // paddingHorizontal: 22,
+    paddingRight: 30,
     backgroundColor: COLORS.white,
   },
   headerDetailsContainer: {
     flexDirection: "row",
-    marginLeft: 14,
+    marginLeft: 5,
     alignItems: "center",
   },
   chatName: {

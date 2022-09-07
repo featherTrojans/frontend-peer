@@ -68,7 +68,7 @@ const {
   Searcontacticon,
   Cryinganimate,
 } = icons;
-const { Waterwave } = images;
+const { Waterwave, Wavvy } = images;
 
 const Amountbtn = ({ amountText }) => {
   return (
@@ -240,12 +240,14 @@ const Home = ({ navigation }: { navigation: any }) => {
               },
             ]}
           >
-            <View style={[StyleSheet.absoluteFill, { left: -200 }]}>
-              <Image
-                source={Waterwave}
-                style={{ width: "200%", height: "120%" }}
-              />
-            </View>
+            <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
+                <Image
+                  source={Wavvy}
+                  style={{ width: "200%", height: "100%", opacity: .06,  }}
+                  
+                  
+                />
+              </View>
 
             <View style={styles.informationiconswrap}>
               <Goldenstaricon />
@@ -266,6 +268,15 @@ const Home = ({ navigation }: { navigation: any }) => {
               { backgroundColor: "#5676FF", marginRight: 0 },
             ]}
           >
+
+<View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
+                <Image
+                  source={Wavvy}
+                  style={{ width: "200%", height: "100%", opacity: .06,  }}
+                  
+                  
+                />
+              </View>
             <View style={styles.informationiconswrap}>
               <Dollaricon />
             </View>

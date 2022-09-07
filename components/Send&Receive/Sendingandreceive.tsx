@@ -46,16 +46,22 @@ const showImage = (
   receiverName: string,
   title: string | null,
   value?: string,
-  otherUser?: any
+  otherUser?: any,
+  transId?: string
 ) => {
+  // console.log(transId, "Heer is the iud");
+
+  const isVFD = transId?.includes("Feather", 0)
+  
+  
   switch (title) {
     case "funding":
       return (
-        <View style={[{backgroundColor: COLORS.blue7},styles.typeContainer]}>
+        <View style={[{backgroundColor: isVFD ? COLORS.white: COLORS.blue7},styles.typeContainer]}>
           <Image
-            style={styles.imageStyle}
+            style={{width: isVFD ? "100%" : "50%", height: isVFD ? "100%" :"50%"}}
             source={{
-              uri: assetsDB["fund"]["paystack"],
+              uri: !isVFD ? assetsDB["fund"]["paystack"]: assetsDB["fund"]["VFD"],
             }}
           />
         </View>
@@ -193,7 +199,8 @@ type SendingandreceiveProps = {
   title?: string;
   value?: string | null;
   user?: any;
-  otherUser?: any
+  otherUser?: any;
+  transId?: string
 };
 
 const Sendingandreceive = ({
@@ -202,7 +209,8 @@ const Sendingandreceive = ({
   title,
   value,
   user,
-  otherUser
+  otherUser,
+  transId
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
@@ -247,7 +255,7 @@ const Sendingandreceive = ({
         :
         
         <View style={{ position: "relative" }}>
-        {showImage(senderName, receiverName, title, value, otherUser)}
+        {showImage(senderName, receiverName, title, value, otherUser, transId)}
       </View>
     
     }

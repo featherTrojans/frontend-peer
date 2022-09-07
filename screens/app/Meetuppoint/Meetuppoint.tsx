@@ -21,6 +21,8 @@ const Meetuppoint = ({navigation}) => {
   return (
     <Mainwrapper>
       <Backheader title="Meetup Point" />
+
+      
       <View style={{ paddingHorizontal: 15, flex: 1 }}>
         <View
           style={{

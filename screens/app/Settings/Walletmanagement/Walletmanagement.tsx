@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Image } from "react-native";
 import React, { useContext } from "react";
-import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
+import { COLORS, FONTS, fontsize, icons, images } from "../../../../constants";
 import { Backheader, Copyaccountinfo, Horizontaline, Mainwrapper, Tableoption, Upgrademodal } from "../../../../components";
 import { walletmanangementstyles } from "./Walletmanagement.styles";
 import useCustomModal from "../../../../utils/useCustomModal";
 import { AuthContext } from "../../../../context/AuthContext";
 
 const { Memoji2, Memoji1bigicon } = icons;
-
-
+const {Wavvy} = images
 
 const Walletmanagement = () => {
   const {CustomModal, openModal} = useCustomModal()
@@ -50,6 +49,14 @@ const Walletmanagement = () => {
             </View>
 
             <View style={walletmanangementstyles.bottominfowrap}>
+            <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
+                <Image
+                  source={Wavvy}
+                  style={{ width: "200%", height: "100%", opacity: .06,  }}
+                  
+                  
+                />
+              </View>
               <Text style={walletmanangementstyles.bottominfotext}>
                 Hey 👋 Padi, upgrade your account today to enjoy more limits.{" "}
                 <Text style={{ color: COLORS.yellow4 }}>#wakeup #buga</Text>{" "}
@@ -100,6 +107,15 @@ const Walletmanagement = () => {
               </View>
   
               <View style={[walletmanangementstyles.bottominfowrap, {backgroundColor: COLORS.blue7}]}>
+                  <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
+                <Image
+                  source={Wavvy}
+                  style={{ width: "200%", height: "100%", opacity: .04,  }}
+                  
+                  
+                />
+              </View>
+
                 <Text style={walletmanangementstyles.bottominfotext}>
                 Hey 👋Odogwu, enjoy more earnings today and get better awoof as a feather agent. 
                   <Text style={{ color: COLORS.yellow4 }}> #leggo</Text>{" "}

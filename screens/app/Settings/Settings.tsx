@@ -197,7 +197,7 @@ const Settings = ({ navigation }) => {
           <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
             <Image
               source={Wavvy}
-              style={{ width: "200%", height: "100%", opacity: 1,  }}
+              style={{ width: "200%", height: "100%", opacity: .06,  }}
               
               
             />
