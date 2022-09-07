@@ -16,7 +16,7 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const { Cancelicon, Alertcancelicon } = icons;
 
-const toastConfig = {
+export const toastConfig = {
   errorToast: ({ text1, props }: { text1: string; props: any }) => (
     <View style={[appStyles.alertWrapper, {backgroundColor: "#E00000"}]}>
       <View style={{ flex: 1 }}>

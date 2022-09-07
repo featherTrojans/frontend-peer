@@ -23,7 +23,7 @@ const Eachoption = ({name, phoneNumber}) => {
                 <Text style={{color: COLORS.white}}>{nameSplitter(name)}</Text>
             </View>
             <View style={{marginLeft: 12}}>
-            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>{name}</Text>
+            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9, textTransform: "capitalize"}}>{name}</Text>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 5}}>{phoneNumber}</Text>
             </View>
             
