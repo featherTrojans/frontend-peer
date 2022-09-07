@@ -13,6 +13,8 @@ import { COLORS, FONTS, fontsize, icons } from "./constants";
 import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 
 const { Cancelicon, Alertcancelicon } = icons;
 
@@ -97,6 +99,7 @@ export default function App() {
     GTmedium: require("./assets/fonts/GTWalsheimPro-Medium.ttf"),
     GTbold: require("./assets/fonts/GTWalsheimPro-Bold.ttf"),
   });
+
 
   if (!fontsLoaded || onboarded === null) {
     return <AppLoading />;

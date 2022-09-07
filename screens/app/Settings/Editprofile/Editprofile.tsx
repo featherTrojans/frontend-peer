@@ -325,9 +325,10 @@ const Editprofile = ({}) => {
                       name="username"
                       // formikProps={formikProps}
                       icon={<Usericondark />}
+                      inputbg={"#fff"}
                       value={usernamename}
                       onChangeText={handleUsernameChange}
-                    />
+                      />
                        
                     <Input
                       placeholder="Firstname"
@@ -335,6 +336,7 @@ const Editprofile = ({}) => {
                       formikProps={formikProps}
                       icon={<Usericondark />}
                       value={values.firstName}
+                      editable={false}
                     />
   
                     <Input
@@ -343,6 +345,7 @@ const Editprofile = ({}) => {
                       formikProps={formikProps}
                       icon={<Usericondark />}
                       value={values.lastName}
+                      editable={false}
                     />
   
                     <Input

@@ -17,8 +17,10 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
   const {errorAlert} = useAlert();
   
   useEffect(()=>{
-    if(accountNumber.length >= 10){
+    if(accountNumber.length == 10){
       getAccountDetails()
+    }else{
+      setAccountInformation({})
     }
   },[accountNumber])
 
@@ -34,7 +36,8 @@ const TransferCashBank = ({amount,bank, handleNext}) => {
       console.log(response.data) 
       setAccountInformation(response?.data?.data)
     }catch(err){
-      errorAlert(err, false, true)
+      setAccountInformation({})
+      errorAlert(err)
     }
     setLoading(false);
   }
