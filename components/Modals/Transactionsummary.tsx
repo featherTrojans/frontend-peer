@@ -5,7 +5,7 @@ import { COLORS, FONTS, fontsize, icons } from '../../constants'
 import Horizontaline from '../Horizontaline/Horizontaline'
 import Custombutton from '../Custombutton/Custombutton'
 import amountFormatter from '../../utils/formatMoney'
-import { getFirstName, nameSplitter } from '../../utils/nameSplitter'
+import { getFirstName, nameSplitter, nameSplitterFirstName } from '../../utils/nameSplitter'
 import { AuthContext } from '../../context/AuthContext'
 
 
@@ -41,7 +41,7 @@ const {Sendingarrow, Receivingarrow} = icons
       />
         :
         <View style={{width: 48, height: 48, backgroundColor: COLORS.green3, marginBottom: 14, justifyContent: "center", alignItems: "center", borderRadius: 48/2}}>
-            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.green1 }}>{nameSplitter(authdata?.userDetails?.fullName)}</Text>
+            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.green1 }}>{nameSplitterFirstName(authdata?.userDetails?.fullName)}</Text>
         </View>
       }
         <Text style={{...fontsize.smaller, ...FONTS.medium, textTransform: "capitalize", color: COLORS.blue9}}>You</Text>

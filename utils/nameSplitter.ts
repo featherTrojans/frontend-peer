@@ -11,6 +11,18 @@
     }
   };
 
+
+  export const nameSplitterFirstName = (name: string) => {
+    // return "";
+    const splitName = name?.replace(/\s+/g, ' ').split(" ");
+
+    if (splitName.length >= 2) {
+      return `${splitName[0][1]}`;
+    }else{
+      return `${splitName[0][0]}`;
+    }
+  };
+
   export const nameSplitToTwo = (name: string) => {
     const splitName = name.replace(/\s+/g, ' ').split(" ");
 

@@ -34,6 +34,8 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
       <Text style={styles.chooseAmountHeader}>{headerText}</Text>
 
       <View style={styles.amountBlockWrap}>
+
+
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           {/* minus icon */}
           {/* <Minusicon /> */}
@@ -50,7 +52,7 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
         </View>
 
         <Pressable
-        onPress={() => textInputRef?.current.focus()}
+        onPress={() => textInputRef?.current?.focus()}
         hitSlop={10}
         >
         {({ pressed }) => (
@@ -60,6 +62,9 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
         
 
       </View>
+
+
+
       {/* Amount options */}
       <View style={[styles.amountOptionsContainer, {marginBottom: 40}]}>
         {amounts.map((item, index) => {
