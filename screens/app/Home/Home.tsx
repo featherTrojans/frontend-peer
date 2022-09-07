@@ -26,6 +26,8 @@ import LottieView from "lottie-react-native";
 import * as Animatable from "react-native-animatable";
 import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
 import { useIsFocused, useScrollToTop } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
+
 
 import {
   Transactionhistory,
@@ -51,6 +53,7 @@ import Alltransfermodal from "../../../components/Alltransfermodal/Alltransfermo
 import amountFormatter from "../../../utils/formatMoney";
 import { nameSplitter } from "../../../utils/nameSplitter";
 import HomeWallet from "./HomeWallet";
+import useAlert from "../../../utils/useAlerts";
 
 const {
   Bell,
@@ -80,7 +83,7 @@ const Amountbtn = ({ amountText }) => {
   );
 };
 
-const Home = ({ navigation }: { navigation: any }) => {
+const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   const { setAuthData, authdata } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
@@ -93,7 +96,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-  
+  const {updateAlert} = useAlert()
 
 
   const toTop = () => {
@@ -106,6 +109,18 @@ const Home = ({ navigation }: { navigation: any }) => {
   if (isFocused) {
     toTop();
   }
+
+  useEffect(() => {
+    if(route.name === "Home" && authdata.userDetails.userLevel <= 1){
+       updateAlert("Update your profile")
+    console.log(route, "here is my current route");
+       
+    }
+    return () => {
+      Toast.hide()
+    }
+    
+  }, [route])
 
   const getDashboardData = async () => {
     // console.log("I am fetching again from home");

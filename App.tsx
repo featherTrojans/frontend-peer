@@ -14,7 +14,7 @@ import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
-const { Cancelicon, Alertcancelicon } = icons;
+const { Cancelicon, Alertcancelicon, Updateprofileicon, Bluearrowrighticon, Updatealertcancelicon } = icons;
 
 export const toastConfig = {
   errorToast: ({ text1, props }: { text1: string; props: any }) => (
@@ -63,7 +63,21 @@ export const toastConfig = {
       </TouchableOpacity>
     </View>
   ),
-  
+  updateToast: ({ text1, props }: { text1: string; props: any }) => (
+    <View style={[appStyles.alertWrapper, {backgroundColor: "#fff", height: 54, paddingVertical: 18}]}>
+      <View style={{ flex: 1, flexDirection: "row", alignItems: "center"}}>
+        <Updateprofileicon />
+        <View style={{marginLeft: 12, flexDirection: 'row', alignItems: "center"}}>
+          <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9, marginRight: 12}}>Update your profile, <Text style={{color: COLORS.blue6, textDecorationColor: COLORS.blue6, textDecorationLine: "underline", textDecorationStyle: "solid"}}>go to settings</Text></Text>
+          <Bluearrowrighticon />
+        </View>
+      </View>
+
+      <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
+        <Updatealertcancelicon />
+      </TouchableOpacity>
+    </View>
+  ),
 };
 
 
@@ -152,6 +166,13 @@ export default function App() {
 
 const appStyles = StyleSheet.create({
   alertWrapper: {
+    width: "100%",
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+  },
+  updateAlertWrapper: {
     width: "100%",
     paddingHorizontal: 20,
     flexDirection: "row",
