@@ -27,6 +27,7 @@ import { withdrawstyles } from "../../Withdraws/Withdraw/Withdraw.styles";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Requestuser from "../../../shared/RequestUser";
 import amountFormatter from "../../../../utils/formatMoney";
+import useAlert from "../../../../utils/useAlerts";
 const {
   TransferIcon,
   Location,
@@ -215,6 +216,7 @@ const Depositupdate = ({ navigation, route }) => {
   const {CustomModal, openModal} = useCustomModal()
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
+  const {successAlert} = useAlert()
 
   const [viewIndex, setViewIndex] = useState<number>(0);
 
@@ -235,6 +237,14 @@ const Depositupdate = ({ navigation, route }) => {
   useEffect(() => {
     getLocation();
   }, []);
+
+useEffect(() => {
+  if(status?.status === "ACTIVE"){
+    successAlert("Click on the “View Deposit Details” button at the bottom to see the details of your current deposit", false)
+  }
+  
+}, [status])
+
 
   const getLocation = async () => {
     try {
