@@ -26,6 +26,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Requestuser from "../../../shared/RequestUser";
 import showerror from "../../../../utils/errorMessage";
+import useAlert from "../../../../utils/useAlerts";
 
 const {
   Acceptedcheck,
@@ -110,7 +111,7 @@ const Withdraw = ({ navigation }) => {
   const { CustomModal ,openModal, closeModal} = useCustomModal()
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
-
+  const {errorAlert} = useAlert()
   const [viewIndex, setViewIndex] = useState<number>(0);
 
   // i removed changed from the params passed to this useRef below
@@ -160,8 +161,8 @@ const Withdraw = ({ navigation }) => {
 
 
   const handleWithdraw = (amount)=>{
-      if(Number(amount) < 200 ){
-        showerror(null,"You can't make a withdraw request of less than NGN 200")
+      if(Number(amount) <= 200 ){
+        errorAlert(null,"You can't make a withdraw request of less than NGN 200")
         return
       }
       closeModal()

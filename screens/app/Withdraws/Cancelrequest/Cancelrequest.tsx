@@ -12,12 +12,14 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import useAlert from "../../../../utils/useAlerts";
 
 
 const { Backarrow, Successcheckanimate, Forwardarrow } = icons;
 const Cancelrequest = ({route, navigation}) => {
   const reference = route.params
   const toast = useToast()
+  const {errorAlert, } = useAlert()
   const [checked, setChecked] = useState(false);
   const [activereason, setReason] = useState({key:0, text:""});
   const [writeReason, setWriteReason] = useState("")
@@ -33,6 +35,9 @@ const Cancelrequest = ({route, navigation}) => {
   ];
 
   const handleCancelRequest = async ()=>{
+    if(writeReason.length < 10){
+      return errorAlert("Reason text must be greater than 10 characters")
+    }
     setLoading(true)
     try{
       await axiosCustom({
@@ -45,7 +50,7 @@ const Cancelrequest = ({route, navigation}) => {
       })
       setModalVisible(true)
     }catch(err){
-      showerror(toast,err)
+      errorAlert(err)
     }finally{
       setLoading(false)
     }

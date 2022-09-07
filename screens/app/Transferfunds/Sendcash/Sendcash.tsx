@@ -55,7 +55,8 @@ const Sendcash = ({navigation, route}) => {
     
      const handlePhonechange = (text)=>{
         setPhonenumbertext(text)
-        setContacts(contacts.filter((contact)=> contact?.fullName?.includes(text) || contact?.phoneNumber?.includes(text)  ))
+        const searchtext = text.toLowerCase()
+        setContacts(contactsResolved.filter((contact)=> contact?.fullName?.toLowerCase()?.includes(searchtext) || contact?.phoneNumber?.includes(text) || contact?.username?.toLowerCase().includes(text)  ))
      } 
 
     return (
