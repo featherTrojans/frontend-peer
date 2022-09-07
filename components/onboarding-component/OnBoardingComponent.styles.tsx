@@ -20,16 +20,14 @@ export const ImageContainer = styled.View`
 
 export const HeaderText = styled.Text`
   ${{...fontsize.big, ...FONTS.bold}}
-  text-align: center;
+  text-align: left;
   margin-bottom: 35px;
   line-height: 35px;
-  padding: 0px 15px;
 `;
 
 export const InformationText = styled.Text`
  ${{...fontsize.bsmall, ...FONTS.regular}}
-  text-align: center;
+  text-align: left;
   color: ${COLORS.grey5};
   line-height: 24px;
-  padding: 0px 25px;
 `;

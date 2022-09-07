@@ -79,7 +79,7 @@ const TransferCash = ({ amount, closeTransfercashinfoModal,onpress}) => {
             color: COLORS.blue6,
           }}
         >
-          + N100.00
+          + N0.00
         </Text>
       </View>
     </View>

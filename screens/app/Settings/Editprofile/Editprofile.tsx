@@ -18,6 +18,7 @@ import {
   Input,
   Loader,
   Mainwrapper,
+  Upgrademodal,
 } from "../../../../components";
 import Defaultuseravatar from "../../../../assets/icons/Defaultuseravatar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -61,7 +62,7 @@ const Editprofile = ({}) => {
     const navigation = useNavigation();
     const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
     const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
-    const {CustomModal, openModal} = useCustomModal()
+    const {CustomModal, openModal, closeModal: closeUpgradeModal} = useCustomModal()
     const [usernamename, setusernamename] = useState(
       authdata?.userDetails?.username
     );
@@ -203,8 +204,9 @@ const Editprofile = ({}) => {
             </TouchableOpacity>
   
             <CustomModal>
-              <View></View>
-                {/* <Upgrademodal /> */}
+              <View>
+                <Upgrademodal closeUpgradeModal={closeUpgradeModal} />
+              </View>
             </CustomModal>
   
   
@@ -296,17 +298,7 @@ const Editprofile = ({}) => {
                         </>
                       )}
                     </View> */}
-                    
-  
-                    <Input
-                      placeholder="Username"
-                      name="username"
-                      // formikProps={formikProps}
-                      icon={<Usericondark />}
-                      value={usernamename}
-                      onChangeText={handleUsernameChange}
-                    />
-                       <View style={{flexDirection:"row", marginRight: 5, marginBottom: 10, alignItems:"flex-end", justifyContent:"flex-end"}}>
+                    <View style={{flexDirection:"row", marginRight: 5, marginBottom: 10, alignItems:"flex-end", justifyContent:"flex-end"}}>
                       {loadbounce ? (
                         <ActivityIndicator size={15} color={COLORS.blue6} />
                       ) : userinfo.fullName &&
@@ -326,6 +318,17 @@ const Editprofile = ({}) => {
                         </>
                       )}
                     </View>
+                    
+  
+                    <Input
+                      placeholder="Username"
+                      name="username"
+                      // formikProps={formikProps}
+                      icon={<Usericondark />}
+                      value={usernamename}
+                      onChangeText={handleUsernameChange}
+                    />
+                       
                     <Input
                       placeholder="Firstname"
                       name="firstName"

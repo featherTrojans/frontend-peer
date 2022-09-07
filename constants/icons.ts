@@ -175,6 +175,7 @@ import Sentconfetti from "../assets/Lottie/animations/sendConfetti.json"
 import Transacntionpinanimate from "../assets/Lottie/animations/waitingForPIN.json"
 import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.json";
 import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json";
+import Trackinguseranimate from "../assets/Lottie/animations/featherOnboardingOne.json"
 import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json";
 import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json";
 import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json";
@@ -183,6 +184,7 @@ import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.
 import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json"
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
 import Verifiedbvnanimate from "../assets/Lottie/animations/verifybvn.json"
+
 import Dollaricon from "../assets/icons/Dollaricon";
 import Emptyicon from "../assets/icons/Emptyicon";
 import Aticon from "../assets/icons/Aticon";
@@ -376,5 +378,6 @@ Mobiledataicon,
   Ratingsuccessanimate,
   Sentconfetti,
   Transacntionpinanimate,
-  Verifiedbvnanimate
+  Verifiedbvnanimate,
+  Trackinguseranimate
 };
