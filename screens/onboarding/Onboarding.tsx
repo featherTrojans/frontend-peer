@@ -60,7 +60,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
 
   const navigateToLogin = () => {
     storeData();
-    navigation.replace("Personal");
+    navigation.replace("Getstarted");
   };
 
   const scrollTo = () => {
@@ -146,7 +146,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
             <NextText>Next</NextText>
           ) : (
             <GetStartedContainer>
-              <GetStartedText>Get Started</GetStartedText>
+              <GetStartedText>Launch Feather</GetStartedText>
             </GetStartedContainer>
           )}
         </GetStartedBtn>

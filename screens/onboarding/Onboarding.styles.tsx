@@ -39,7 +39,7 @@ export const DotContainer = styled.View``;
 
 export const GetStartedText = styled.Text`
   color: ${COLORS.white};
-  ${{...fontsize.small, ...FONTS.bold}}
+  ${{...fontsize.smallest, ...FONTS.medium}}
 
 `;
 
