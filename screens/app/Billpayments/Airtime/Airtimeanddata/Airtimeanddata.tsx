@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import { Backheader, Chooseamountmodal, Custombutton, Mainwrapper } from "../../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import useCustomModal from "../../../../../utils/useCustomModal";
+import useAlert from "../../../../../utils/useAlerts";
 
 const { Forwardarrow, Airtimeicon, Mobiledataicon } = icons;
 const Airtimeanddata = ({navigation}) => {
 
   const [amount, setAmount] = useState(0)
   const {CustomModal, openModal, closeModal} = useCustomModal()
+  const {purpleAlert} = useAlert()
 
 
   const typedatas = [
@@ -22,7 +24,9 @@ const Airtimeanddata = ({navigation}) => {
       bg: "#F1E5FF",
       icon: <Mobiledataicon />,
       title: "Mobile Data Purchase",
-      action: () => navigation.navigate("Dataprovider", {billType: "data"})
+      action: () => purpleAlert("Oops, Data purchase not available at the moment!", true)
+      // action: () => navigation.navigate("Dataprovider", {billType: "data"})
+
     },
   ];
 
