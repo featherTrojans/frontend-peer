@@ -88,6 +88,7 @@ export const withdrawstyles = StyleSheet.create({
     ...FONTS.medium,
     color: COLORS.blue9,
     lineHeight: 27,
+    textTransform: "capitalize"
   },
   requesteedistance: {
     ...fontsize.smallest,
