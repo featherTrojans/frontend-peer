@@ -20,7 +20,9 @@ const Contact = () => {
 
         <View style={{flexDirection: 'row', justifyContent: "space-between"}}>
           <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Feather users in your contact</Text>
-          <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.purple2}}>See more</Text>
+          <TouchableOpacity onPress={()=>navigate.navigate("Usersearch",contactsResolved)}>
+            <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.purple2}}>See more</Text>
+          </TouchableOpacity>
         </View>
 
 

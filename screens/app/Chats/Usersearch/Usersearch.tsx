@@ -51,10 +51,10 @@ const SingleUser = ({
 };
 
 const Usersearch = ({navigation, route}) => {
-  const phoneContact = route?.params?.phoneContact;
+  const contactsResolved = route?.params;
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
   console.log(userinfo,"found");
-  const [filteredContact, setFilteredContact] = useState(phoneContact);
+  const [filteredContact, setFilteredContact] = useState(contactsResolved);
   // const [userContact, setUserContact] = useState([phoneContact]);
   const [searchtext, setSearchText] = useState("");
   const [userSearch, setUserSearch] = useState("");
@@ -65,7 +65,7 @@ const Usersearch = ({navigation, route}) => {
     console.log(text)
     setSearchText(text);
     setFilteredContact(
-      phoneContact.filter((contact)=> contact?.phoneNumber?.includes(text) || contact?.username?.toLowerCase().includes(text) || contact?.fullName?.toLowerCase().includes(text))
+      contactsResolved.filter((contact)=> contact?.phoneNumber?.includes(text) || contact?.username?.toLowerCase().includes(text) || contact?.fullName?.toLowerCase().includes(text))
     )
   }
 
@@ -129,7 +129,6 @@ const Usersearch = ({navigation, route}) => {
           </View>
           }
         />
-        
         :
         userinfo?.fullName?<SingleUser userInfo={userinfo} name={userinfo?.fullName} username={`@${userinfo?.username}`} />: null}
         {loadbounce && <ActivityIndicator color="#000" size="small" />}
