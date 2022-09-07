@@ -32,6 +32,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useAlert from "../../../../utils/useAlerts";
 
 const {
   Ratingsstar,
@@ -43,7 +44,7 @@ const {
 
 const Transactionsrating = ({navigation, route}:any) => {
   const info = route.params
-  const toast = useToast()
+  const {errorAlert} = useAlert()
   const [rating, setRating] = useState({
     rating: 0,
     animation: new Animated.Value(1),
@@ -96,7 +97,7 @@ const Transactionsrating = ({navigation, route}:any) => {
   const handleSubmit = async ()=>{
 
     if(comment.length < 4 || rating.rating < 1){
-      showerror(toast,null,"Please provide a comment and rate ")
+      errorAlert(null, "Please provide a comment and rate ")
       return
     }
     const data = {
@@ -111,9 +112,7 @@ const Transactionsrating = ({navigation, route}:any) => {
       await axiosCustom.post("/rating",data)
       setShowModal(true)
     }catch(err){
-      
-      
-      showerror(toast,err)
+      errorAlert(err)
     }finally{
       setLoading(false)
     }
