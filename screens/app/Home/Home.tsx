@@ -113,12 +113,10 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   useEffect(() => {
     if(route.name === "Home" && authdata.userDetails.userLevel <= 1){
        updateAlert("Update your profile")
-    console.log(route, "here is my current route");
+        console.log(route, "here is my current route");
        
     }
-    return () => {
-      Toast.hide()
-    }
+ 
     
   }, [route])
 

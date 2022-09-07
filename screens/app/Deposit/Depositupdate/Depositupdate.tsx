@@ -202,6 +202,7 @@ interface statusInterface {
   "status": string,
   "reference": string,
   "createdAt": string,
+  "updatedAt": string,
   "totalEarnings": number
 }
 
@@ -338,7 +339,7 @@ useEffect(() => {
 
 
 
-        <Text style={{textAlign: "center", color: COLORS.red1, ...fontsize.smaller, ...FONTS.medium, marginBottom: 25}}>Expires {moment(status?.createdAt).add(1, "days").calendar()}</Text>
+        <Text style={{textAlign: "center", color: COLORS.red1, ...fontsize.smaller, ...FONTS.medium, marginBottom: 25}}>Expires {moment(status?.updatedAt).add(1, "days").calendar()}</Text>
 
         <Custombutton btntext="Update Deposit" bg={COLORS.blue9} 
         onpress={() => navigation.navigate("Depositstart",{type:"update", reference:status?.reference})}/>
