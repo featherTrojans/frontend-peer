@@ -161,7 +161,7 @@ const Withdraw = ({ navigation }) => {
 
 
   const handleWithdraw = (amount)=>{
-      if(Number(amount) <= 200 ){
+      if(Number(amount) < 200 ){
         errorAlert(null,"You can't make a withdraw request of less than NGN 200")
         return
       }
