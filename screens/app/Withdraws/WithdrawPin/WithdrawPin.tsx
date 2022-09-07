@@ -134,7 +134,7 @@ const WithdrawPin = ({ navigation, route }) => {
       <Backheader title="Complete Transaction" />
     <View style={{paddingHorizontal: 15, flex: 1}}>
             <View style={{marginTop: 0}}>
-              <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 20, textAlign: "center"}}>Hey {getFirstName(info?.fullName)}, kindly input your transaction pin to complete this transaction of {amountFormatter(info?.amount)} </Text>
+              <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 20, textAlign: "center"}}>Hey <Text style={{textTransform: "capitalize"}}>{getFirstName(info?.fullName)}</Text>, kindly input your transaction pin to complete this transaction of N{amountFormatter(info?.amount)} </Text>
             </View>
               <View style={{ alignItems: "center", flex: 1, justifyContent: "center"}}>
                 <Text style={{marginBottom: 60, ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Enter your Feather PIN</Text>

@@ -18,6 +18,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import {
   Backheader,
   Bottombtn,
+  Custombutton,
   InitialsBg,
   Loader,
   Mainwrapper,
@@ -243,23 +244,43 @@ const Transactionsrating = ({navigation, route}:any) => {
           </View>
         </View>
         <View style={{ flex: 0.3, justifyContent: "flex-end" }}>
-          <TextInput
+
+
+
+          
+
+            <View style={{paddingHorizontal: 15, marginBottom: 20}}>
+              <View style={{marginBottom: 22}}>
+            <TextInput
             style={{
-              paddingVertical: 20,
+              // paddingVertical: 20,
               paddingHorizontal: 20,
               borderColor: COLORS.grey1,
               borderWidth: 1,
               borderRadius: 10,
               ...fontsize.small,
               ...FONTS.light,
-              marginHorizontal: 25,
+              // marginHorizontal: 25,
+              height: 53,
+              ...fontsize.smallest
             }}
             placeholder="Comment (Optional)"
-            placeholderTextColor={COLORS.black}
+            placeholderTextColor={COLORS.grey16}
             onChangeText={(text)=>setComment(text)}
             value={comment}
           />
-          <Bottombtn title="rate" onpress={handleSubmit} />
+          </View>
+
+          <Custombutton 
+          btntext="Rate"
+          onpress={handleSubmit}
+          />
+          {/* <Bottombtn title="rate" onpress={handleSubmit} /> */}
+          </View>
+
+
+
+
         </View>
       </View>
     </KeyboardAvoidingView>
