@@ -188,6 +188,9 @@ import Verifiedbvnanimate from "../assets/Lottie/animations/verifybvn.json"
 import Dollaricon from "../assets/icons/Dollaricon";
 import Emptyicon from "../assets/icons/Emptyicon";
 import Aticon from "../assets/icons/Aticon";
+import Updateprofileicon from "../assets/icons/Updateprofileicon";
+import Bluearrowrighticon from "../assets/icons/Bluearrowrighticon";
+import Updatealertcancelicon from "../assets/icons/Updatealertcancelicon";
 
 // Receiverimage
 
@@ -238,6 +241,7 @@ export default {
   Bvndropicon,
   Cryingicon,
   Utilitylarge,
+  Updateprofileicon,
   Bluebankicon,
   Listingsdrop,
   Bluewalleticon,
@@ -278,6 +282,7 @@ export default {
   Passwordpinlock,
   Smallphone,
   Purplelockicon,
+  Updatealertcancelicon,
   Aticon,
   Bvnlock,
   Useravatar,
@@ -339,6 +344,7 @@ Mobiledataicon,
   Supporticon,
   Feathersmallicon,
   Outlinedlock,
+  Bluearrowrighticon,
   Forwardarrowblue,
   Withdrawalnotificationicon,
   Fingerprinticon,

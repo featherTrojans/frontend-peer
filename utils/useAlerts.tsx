@@ -51,9 +51,20 @@ const useAlert = () => {
     });
   };
   
+  const updateAlert = (messageText: string, hide= false) => {
+    Toast.show({
+      type: "updateToast",
+      // And I can pass any custom props I want
+      props: { message: messageText, show: false },
+      autoHide: hide,
+      position: "bottom",
+      bottomOffset: 84
+    });
+  };
+  
 
   return {
-    successAlert, errorAlert, blueAlert, purpleAlert,
+    successAlert, errorAlert, blueAlert, purpleAlert,updateAlert
   }
 
 };

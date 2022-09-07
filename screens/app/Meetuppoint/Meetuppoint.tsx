@@ -26,14 +26,15 @@ const Meetuppoint = ({navigation}) => {
       <View style={{ paddingHorizontal: 15, flex: 1 }}>
         <View
           style={{
-            // backgroundColor: COLORS.white,
             height: 53,
             borderRadius: 5,
-            paddingHorizontal: 15,
+            // paddingHorizontal: 15,
+            flexDirection: "row",
+            alignItems: "center"
           }}
         >
              <GooglePlacesAutocomplete
-          renderRightButton={() => <Clearinput />}
+          // renderRightButton={() => <Clearinput />}
           renderLeftButton={() => <Meetupdot />}
           placeholder="Search"
           onPress={(data, details = null) => {
@@ -44,25 +45,24 @@ const Meetuppoint = ({navigation}) => {
           fetchDetails={true}
           styles={{
             textInputContainer: {
-              borderColor: COLORS.borderColor3,
-              borderWidth: 0.5,
-              height: 56,
+              
+              height: 53,
               borderRadius: 10,
-              // flex: 1,
               flexDirection: "row",
               alignItems: "center",
-              paddingLeft: 14,
-              paddingRight: 20,
+              paddingHorizontal: 14,
+              backgroundColor: COLORS.white,
             },
             textInput: {
               flex: 1,
               paddingHorizontal: 13,
-              ...fontsize.smaller,
+              ...fontsize.smallest,
               ...FONTS.medium,
+              marginTop: 4
             },
           }}
           query={{
-            key: "AIzaSyBzIYA7wqNVTxq0LTO88-cIue_X9mXd5-w",
+            key: 'AIzaSyAgzIQS3AE66cvobouyA_hD4L62iMWsYT4',
             language: "en",
           }}
         />

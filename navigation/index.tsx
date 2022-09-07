@@ -501,7 +501,7 @@ const Tabs = () => {
           })}
         />
       </BottomTab.Navigator>
-
+  
       <Animated.View
         style={{
           width: getWidth(),
