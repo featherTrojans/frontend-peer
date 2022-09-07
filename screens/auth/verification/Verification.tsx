@@ -204,11 +204,11 @@ const Verification = ({route,navigation}) => {
 
 
       {/* Dashedline */}
-      <View style={styles.dashedLine} />
+      {/* <View style={styles.dashedLine} /> */}
       {/* Change number text */}
-      <TouchableOpacity onPress={()=>navigation.goBack()}>
+      {/* <TouchableOpacity onPress={()=>navigation.goBack()}>
         <Text style={styles.changeNumber}>Incorrect Number? <Text style={{color: COLORS.blue9}}>Change Number</Text></Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       </View>
 

@@ -17,6 +17,7 @@ import { securepinstyles } from "../../../auth/signup/Securepin/Securepin.styles
 import { db } from "../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import useCustomModal from "../../../../utils/useCustomModal";
+import { getFirstName } from "../../../../utils/nameSplitter";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
@@ -133,7 +134,7 @@ const WithdrawPin = ({ navigation, route }) => {
       <Backheader title="Complete Transaction" />
     <View style={{paddingHorizontal: 15, flex: 1}}>
             <View style={{marginTop: 0}}>
-              <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 20, textAlign: "center"}}>Hey Damilare, kindly input your transaction pin to complete this transaction of N5,600.00</Text>
+              <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9, lineHeight: 20, textAlign: "center"}}>Hey {getFirstName(info?.fullName)}, kindly input your transaction pin to complete this transaction of N5,600.00</Text>
             </View>
               <View style={{ alignItems: "center", flex: 1, justifyContent: "center"}}>
                 <Text style={{marginBottom: 60, ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Enter your Feather PIN</Text>

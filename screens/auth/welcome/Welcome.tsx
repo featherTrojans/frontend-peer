@@ -105,6 +105,13 @@ const Welcome = ({ navigation, route }) => {
       const response = await axiosCustom.get("/dashboard");
       await sendTokenToDB(messageToken);
 
+      if(!response?.data?.data?.userDetails?.isVerified){
+        return navigation.navigate("Verification",{
+          email: response?.data?.data?.email,
+          phoneNumber: response?.data?.data?.phoneNumber,
+          token: response?.data?.data?.token,
+        })
+      }
       setAuthData(response?.data?.data);
       // setTokenOnComplete()
       progressWidth.value = withTiming(
