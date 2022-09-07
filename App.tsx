@@ -13,7 +13,7 @@ import { COLORS, FONTS, fontsize, icons } from "./constants";
 import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
-
+import { customNavigation } from "./utils/customNavigation";
 const { Cancelicon, Alertcancelicon, Updateprofileicon, Bluearrowrighticon, Updatealertcancelicon } = icons;
 
 export const toastConfig = {
@@ -67,10 +67,10 @@ export const toastConfig = {
     <View style={[appStyles.alertWrapper, {backgroundColor: "#fff", height: 54, paddingVertical: 18}]}>
       <View style={{ flex: 1, flexDirection: "row", alignItems: "center"}}>
         <Updateprofileicon />
-        <View style={{marginLeft: 12, flexDirection: 'row', alignItems: "center"}}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => customNavigation("Settings", {})} style={{marginLeft: 12, flexDirection: 'row', alignItems: "center"}}>
           <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9, marginRight: 12}}>Update your profile, <Text style={{color: COLORS.blue6, textDecorationColor: COLORS.blue6, textDecorationLine: "underline", textDecorationStyle: "solid"}}>go to settings</Text></Text>
           <Bluearrowrighticon />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
