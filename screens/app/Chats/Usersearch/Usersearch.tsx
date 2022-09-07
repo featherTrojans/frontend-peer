@@ -15,7 +15,7 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { StringSchema } from "yup";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Eachprofile from "../Chatshome/EachProfile";
-import { InitialsBg } from "../../../../components";
+import { Backheader, Custombutton, Horizontaline, InitialsBg, Mainwrapper } from "../../../../components";
 import { useNavigation } from "@react-navigation/native";
 import useDebounce from "../../../../utils/debounce";
 import LottieView from "lottie-react-native"
@@ -37,15 +37,15 @@ const SingleUser = ({
     <TouchableOpacity activeOpacity={0.8} style={styles.userSearchContainer}  onPress={()=>navigate.navigate("Chatsdm",{userInfo})}>
       <View style={styles.userSearchData}>
         {/* To Replace this with the user image */}
-        <View style={styles.userSearchImage}>
-          <InitialsBg sideLength={56} name={name || "0 0"} />
+        <View >
+          <InitialsBg sideLength={34} name={name || "0 0"} />
         </View>
         <View style={{ marginLeft: 14 }}>
           <Text style={styles.userSearchName}>{name}</Text>
           <Text style={styles.userSearchUsername}>{username}</Text>
         </View>
       </View>
-      <Backarrowgrey />
+      {/* <Backarrowgrey /> */}
     </TouchableOpacity>
   );
 };
@@ -59,6 +59,11 @@ const Usersearch = ({navigation, route}) => {
   const [searchtext, setSearchText] = useState("");
   const [userSearch, setUserSearch] = useState("");
   const [active, setActive] = useState("username");
+
+  console.log(contactsResolved, "here are the contacts");
+
+
+  
 
   const handleChangeText = (text)=>{
     text = text.toLowerCase();
@@ -81,59 +86,98 @@ const Usersearch = ({navigation, route}) => {
   const activeTextStyleTwo = active !== "username" && styles.activeTypeBtnText;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar />
-      <View style={styles.headerSection}>
+    <Mainwrapper >
+
+
+      <Backheader title="Search Phone Number" />
+
+
+
+      {/* <View style={styles.headerSection}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Backarrow />
           <Text style={styles.searchText}>Search</Text>
         </View>
         <Chatsearchicon />
-      </View>
+      </View> */}
 
       <View style={[styles.mainContainer]}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+
+
+
+        {/* <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <TouchableOpacity activeOpacity={0.8} onPress={()=>setActive("username")} style={[styles.typeBtn, activeStyle]}>
             <Text style={[styles.typeBtnText, activeTextStyle]}>Username</Text>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.8} onPress={()=>setActive("phonecontact")} style={[styles.typeBtn, activeStyleTwo]}>
             <Text style={[styles.typeBtnText, activeTextStyleTwo]}>Phone Contact</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <View style={{ marginTop: 20, marginBottom: 28 }}>
           <TextInput
             placeholder={active === "phonecontact" ? "# Search phone numbers" : "@ Search username"}
             placeholderTextColor={COLORS.placeHolder2}
-            style={styles.textInput}
+            style={[styles.textInput, {backgroundColor: COLORS.white}]}
             value={active === "phonecontact" ? searchtext : userSearch}
             onChangeText={ active === "phonecontact" ? handleChangeText : handleFindUsername}
           />
         </View>
-        { active === "phonecontact" && <Text style={styles.listHeader}>Feather Users In Your Contact</Text>  }
+
+
+        {/* { active === "phonecontact" && <Text style={styles.listHeader}>Feather Users In Your Contact</Text>  } */}
         { active === "phonecontact" ? 
         <FlatList
           data={filteredContact}
           bounces={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ marginTop: 25, paddingHorizontal: 9 }}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 9, paddingBottom: 20, backgroundColor: COLORS.white, borderRadius: 15}}
+
           renderItem={({item, index}) => {
             const contact = item
+            const isLast = filteredContact.length === index+1
             return (
-              <SingleUser userInfo={contact} name={contact.fullName} username={`@${contact.username}`} key={index} />
+              <View key={index}>
+                <SingleUser userInfo={contact} name={contact.fullName} username={`@${contact.username}`} />
+                {!isLast && <Horizontaline marginV={0} />}
+              </View>
             )
           }}  
           ListEmptyComponent={<View style={{justifyContent: "center",  alignItems: "center"}}>
-            <LottieView source={Cryinganimate} style={{width: RFValue(190), height: RFValue(190)}}/>
-            <Text style={{...fontsize.bsmall, ...FONTS.regular, lineHeight: 25, color: COLORS.black, textAlign: "center"}}>Sorry, this contact is not a feather user</Text>        
+            <LottieView source={Cryinganimate} style={{width: RFValue(100), height: RFValue(100)}}/>
+            <Text style={{...fontsize.small, ...FONTS.regular, lineHeight: 25, color: COLORS.black, textAlign: "center"}}>Sorry, this contact is not a feather user</Text>        
           </View>
           }
+          keyExtractor={(item) => item.username}
         />
         :
         userinfo?.fullName?<SingleUser userInfo={userinfo} name={userinfo?.fullName} username={`@${userinfo?.username}`} />: null}
         {loadbounce && <ActivityIndicator color="#000" size="small" />}
       </View>
-    </SafeAreaView>
+
+          {/* Toggle button for the username or phoen number search */}
+          <View style={{paddingHorizontal: 15, marginBottom: 20}}>
+
+            {active !== "username" ? 
+            <Custombutton 
+            btntext="Search via Username"
+            onpress={() => setActive("username")}
+            bg={COLORS.blue13}
+            />
+            :
+            <Custombutton 
+            btntext="Search via Phone Number"
+            onpress={()=> setActive("phonecontact")}
+            bg={COLORS.blue12}
+            />
+            
+          
+          }
+          
+
+          </View>
+      
+    </Mainwrapper>
   );
 };
 
