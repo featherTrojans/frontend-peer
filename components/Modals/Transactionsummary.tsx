@@ -13,9 +13,9 @@ import { AuthContext } from '../../context/AuthContext'
 
 
 const {Sendingarrow, Receivingarrow} = icons
-  const Transactionsummary = ({openNextModal, info}) => {
+  const Transactionsummary = ({openNextModal, info, fromWithdraw = false}) => {
     const {authdata} = useContext(AuthContext)
-
+ 
 
     console.log(info, "here is the info from transaction summary");
     
@@ -24,7 +24,7 @@ const {Sendingarrow, Receivingarrow} = icons
   return (
     <View>
       <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Transaction Summary</Text>
-      <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16, marginTop: 10}}>You are about to receive payment from  <Text style={{color: COLORS.blue9}}>@loveyjay67</Text></Text>
+      <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16, marginTop: 10}}>You are about to {fromWithdraw?"send money to": "receive payment from" }  <Text style={{color: COLORS.blue9}}>@{info.username}</Text></Text>
 
 
     {/* <Sendingandreceive /> */}

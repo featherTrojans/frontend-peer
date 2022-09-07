@@ -206,7 +206,7 @@ const Withdraw = ({ navigation }) => {
                   const isLastItem = data.length === index + 1;
                   const accepted = title === "Accepted Requests";
                   return (
-                    <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Requesterinfo", {info:{...info,fullName:info.agent,username:info.agentUsername, userUid: info.agentId} , comingFrom:comingFrom })} key={index}>
+                    <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Requesterinfo", {info:{...info,fullName:info.agent,username:info.agentUsername, userUid: info.agentId } , comingFrom:comingFrom })} key={index}>
                       <Requestuser hideAmount={true} details={{name:info.agent, duration:info.meetupPoint, amount:info.amount}} accepted={accepted} />
                       {!isLastItem && <Horizontaline marginV={21} />}
                     </TouchableOpacity>

@@ -43,7 +43,7 @@ const Safetycautions = ({navigation, route}) => {
     <Mainwrapper>
       <Backheader title="Safety Precautions" />
       <CustomModal>
-        <Transactionsummary info={info} openNextModal={handleNext} />
+        <Transactionsummary info={info} openNextModal={handleNext} fromWithdraw={true} />
       </CustomModal>
       <PinModal>
         <Transactionpin  info={info} />
