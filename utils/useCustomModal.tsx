@@ -5,7 +5,8 @@ import { COLORS } from "../constants";
 
 type globalModalProps = {
   children: JSX.Element;
-  bg?: string
+  bg?: string,
+  hideOnTap?: boolean
 };
 
 const useCustomModal = () => {
@@ -19,7 +20,7 @@ const useCustomModal = () => {
     setShowState(false);
   };
 
-  const CustomModal = ({ children, bg="#fff" }: globalModalProps) => {
+  const CustomModal = ({ children, bg="#fff", hideOnTap=true }: globalModalProps) => {
     return (
       <Modal
         isVisible={showState}
@@ -31,8 +32,8 @@ const useCustomModal = () => {
         animationOut={"fadeOut"}
         animationOutTiming={150}
         style={{ margin: 0, justifyContent: "flex-end", zIndex: 100 }}
-        onBackdropPress={() => setShowState(!showState)}
-        onBackButtonPress={() => setShowState(!showState)}
+        onBackdropPress={hideOnTap ? () => setShowState(!showState) : () => null}
+        onBackButtonPress={hideOnTap ? () => setShowState(!showState) : () => null}
       >
         <View
           style={{
