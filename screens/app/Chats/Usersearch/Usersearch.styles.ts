@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     paddingHorizontal: 15,
   },
   typeBtn: {
@@ -41,12 +41,12 @@ export const styles = StyleSheet.create({
   },
   textInput: {
     height: 56,
-    borderColor: COLORS.borderColor2,
-    borderWidth: 0.5,
+    // borderColor: COLORS.borderColor2,
+    // borderWidth: 0.5,
     borderRadius: 10,
     paddingLeft: 20,
     paddingRight: 10,
-    ...fontsize.smaller,
+    ...fontsize.smallest,
     ...FONTS.regular,
   },
   listHeader: {
@@ -62,7 +62,9 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 21,
+    paddingVertical: 20
+    // marginBottom: 21,
+    // backgroundColor: "red"
   },
   userSearchData: {
     flexDirection: "row",
@@ -75,14 +77,14 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
   },
   userSearchName: {
-    ...fontsize.bsmall,
+    ...fontsize.smaller,
     ...FONTS.medium,
     color: `rgba(0,0,0, .8)`,
     textTransform:"capitalize"
   },
   userSearchUsername: {
-    ...fontsize.small,
-    ...FONTS.medium,
+    ...fontsize.smallest,
+    ...FONTS.regular,
     color: `rgba(112, 112,112, .8)`,
   },
 });
