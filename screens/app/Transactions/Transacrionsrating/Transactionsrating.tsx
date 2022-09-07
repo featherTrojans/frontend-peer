@@ -16,9 +16,11 @@ import { styles } from "./Transactionsrating.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import {
+  Backheader,
   Bottombtn,
   InitialsBg,
   Loader,
+  Mainwrapper,
   Sendingandreceive,
 } from "../../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -29,6 +31,7 @@ import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 const {
   Ratingsstar,
   Userdefaultsmaller,
@@ -132,9 +135,8 @@ const Transactionsrating = ({navigation, route}:any) => {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-        <Customstatusbar />
-
+    <Mainwrapper >
+      <Backheader title="Rate Transaction" /> 
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       contentContainerStyle={{ flex: 1 }}
@@ -181,7 +183,10 @@ const Transactionsrating = ({navigation, route}:any) => {
 
 
         <View style={{ paddingHorizontal: 15, flex: 0.7 }}>
-          <View
+
+
+          
+          {/* <View
             style={{
               marginVertical: RFValue(10),
               flexDirection: "row",
@@ -199,16 +204,14 @@ const Transactionsrating = ({navigation, route}:any) => {
                 marginRight: 10,
               }}
             >
-              {/* Sender and Receiver Image */}
               <Userdefaultsmaller />
               <View style={{ marginHorizontal: 18 }}>
                 <Sendingandreceivearrows />
               </View>
 
-              {/* To replace this name with name of the receiver or sender */}
               <InitialsBg sideLength={36} name={info.fullName} />
             </View>
-          </View>
+          </View> */}
 
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <View
@@ -260,7 +263,7 @@ const Transactionsrating = ({navigation, route}:any) => {
         </View>
       </View>
     </KeyboardAvoidingView>
-    </SafeAreaView>
+    </Mainwrapper>
   );
 };
 

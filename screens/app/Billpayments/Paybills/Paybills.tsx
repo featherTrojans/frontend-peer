@@ -22,21 +22,21 @@ const Paybills = ({ navigation }) => {
       subtitle: "Purchase",
       info: "Purchase airtime and data from your favourite network in Nigeria.",
       logo: <Networklogos/>,
-      route: "Airtimeanddata"
+      route: () => navigation.navigate("Airtimeanddata")
     },
     {
       title: "Electricity Bills",
       subtitle: "Payments",
       info: "Pay your power bills easily, no more power outage due to payments ",
       logo: <Electricitybillsicon/>,
-      route: "Electricitytype"
+      route: () => null
     },
     {
       title: "CableTV Subscriptions",
       subtitle: "Payment",
       info: "Purchase your cable tv subscriptions from your favorite providers",
       logo: <Cablestvicon/>,
-      route: "Electricityamount"
+      route: () => null
     },
   ];
 
@@ -55,7 +55,7 @@ const Paybills = ({ navigation }) => {
               key={index}
               style={styles.eachContainer}
               activeOpacity={0.8}
-              onPress={() => navigation.navigate(route)}
+              onPress={route}
             >
               <View style={styles.topRow}>
                 <View>
@@ -66,9 +66,15 @@ const Paybills = ({ navigation }) => {
                 {logo}
                 {/* images */}
               </View>
+
+              <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+
+
               <Text style={styles.headerInfo}>
                 {info}
               </Text>
+                 {subtitle !== "Purchase" && <Text style={{alignSelf: "flex-end", ...fontsize.smallest, ...FONTS.regular, color: COLORS.purple}}>Coming Soon!</Text>}
+              </View>
               
             </TouchableOpacity>
           );

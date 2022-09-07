@@ -31,6 +31,8 @@ const Transactionpin = ({ info }) => {
   const [loading, setLoading] = useState(false);
   const {errorAlert,blueAlert,purpleAlert,successAlert} = useAlert()
   const {CustomModal,closeModal,openModal} =useCustomModal()
+  console.log(info, "user info from  transaction pin");
+  
 
   useEffect(() => {
     firestoreListener();
