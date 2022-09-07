@@ -73,7 +73,7 @@ const Transferpin = ({ route, navigation }) => {
       successAlert(responseMsg, true)
       openModal()
     } catch (err) {
-      errorAlert(err, true, true);
+      errorAlert(err);
       setPin([])
     } finally {
       setLoading(false);

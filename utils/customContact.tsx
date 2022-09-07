@@ -5,7 +5,7 @@ import axiosCustom from '../httpRequests/axiosCustom';
 const useContact = () =>{
     const [contacts, setContacts] = useState([])
     const [contactsResolved, setContactResolved] = useState([]);
-
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -40,6 +40,7 @@ const useContact = () =>{
     }, [contacts]);
 
     const getAllContactInFeather = async (allcontacts) => {
+      setLoading(true)
       try {
         const response = await axiosCustom.post("/user/multiple", {
           numbers: allcontacts,
@@ -47,15 +48,12 @@ const useContact = () =>{
         setContactResolved(response.data.data);
       } catch (err) {
         // console.log(err.response)
+      }finally{
+        setLoading(false)
       }
     };
     
-
-
-    console.log('------------------------I FEAR O--------------------------');
-    console.log(contacts)
-    console.log('------------------------I FESR o--------------------------');
-    return {contacts, contactsResolved}
+    return {contacts, contactsResolved, loading}
 }
 
 export default useContact

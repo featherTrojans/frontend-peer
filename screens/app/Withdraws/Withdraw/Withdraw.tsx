@@ -1,10 +1,10 @@
 import {
-  StyleSheet,
   Text,
   View,
   FlatList,
   TouchableOpacity,
   Animated,
+  ActivityIndicator
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import LottieView from "lottie-react-native";
@@ -14,18 +14,14 @@ import {
   Chooseamountmodal,
   Custombutton,
   Horizontaline,
-  InitialsBg,
   Mainwrapper,
   Viewbalance,
 } from "../../../../components";
 import { withdrawstyles } from "./Withdraw.styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import amountFormatter from "../../../../utils/formatMoney";
-
 import { RFValue } from "react-native-responsive-fontsize";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Requestuser from "../../../shared/RequestUser";
-import showerror from "../../../../utils/errorMessage";
 import useAlert from "../../../../utils/useAlerts";
 
 const {
@@ -71,43 +67,12 @@ const Emptyrequest = () => {
   );
 };
 
-// Requestee profile
-// const Requesteeprofile = ({ list, onpress }: any) => {
-//   const { image, agent, agentUsername, total, status } = list;
-
-//   return (
-//     <TouchableOpacity
-//       style={styles.withdrawProfileContainer}
-//       activeOpacity={0.8}
-//       onPress={onpress}
-//     >
-//       <View style={{ flexDirection: "row", alignItems: "center" }}>
-//         <InitialsBg sideLength={44} name={agent} />
-//         <View style={styles.namesContainer}>
-//           <Text style={styles.withdrawProfileName}>{agent}</Text>
-//           <Text style={styles.withdrawProfileUsername}>
-//             @{agentUsername.toLowerCase()}
-//           </Text>
-//         </View>
-//       </View>
-
-//       <View style={styles.priceAndCheck}>
-//         <Text style={styles.withdrawProfilePrice}>
-//           N{amountFormatter(total)}
-//         </Text>
-
-//         {status === "ACCEPTED" && <Acceptedcheck />}
-//       </View>
-//     </TouchableOpacity>
-//   );
-// };
 
 const Withdraw = ({ navigation }) => {
   const [active, setActive] = useState("pending");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([]);
-  const [withdrawmodal, setWithdrawmodal] = useState(false)
   const { CustomModal ,openModal, closeModal} = useCustomModal()
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
@@ -141,12 +106,15 @@ const Withdraw = ({ navigation }) => {
   };
 
   const getAcceptedRequest = async () => {
+    setLoading(true)
     try {
       const response = await axiosCustom.get("/request/accepted");
       console.log(response.data.data, "Pending request datas");
       setAcceptedRequests(response?.data?.data);
     } catch (err) {
       console.log(err.response);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -179,6 +147,9 @@ const Withdraw = ({ navigation }) => {
         <Viewbalance />
       </View>
 
+      {loading? (<View style={{flex: 1, justifyContent:"center"}}>
+        <ActivityIndicator color={"#000"} size="large" />
+      </View>) :(
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -225,7 +196,7 @@ const Withdraw = ({ navigation }) => {
         )}
         keyExtractor={(item) => item.title}
       />
-
+      ) }
       {/* Dotes below the scrolls */}
       <View style={withdrawstyles.statusdotwrap}>
         <View style={withdrawstyles.statusdotwrapinner}>

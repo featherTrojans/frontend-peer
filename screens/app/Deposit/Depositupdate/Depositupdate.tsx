@@ -1,9 +1,6 @@
 import {
-  StyleSheet,
   Text,
   View,
-  StatusBar,
-  ScrollView,
   ActivityIndicator,
   Animated,
   FlatList,
@@ -29,141 +26,13 @@ import Requestuser from "../../../shared/RequestUser";
 import amountFormatter from "../../../../utils/formatMoney";
 import useAlert from "../../../../utils/useAlerts";
 const {
-  TransferIcon,
-  Location,
-  Accountbalanceicon,
-  Trendingupright,
-  Viewrequesteye,
-  Viewcashrequesticon,
+
   Purplebalanceicon,
   Greenarrowupicon,
   Depositpinlocationicon,
-  Acceptedcheck,
   Cryinganimate,
 } = icons;
 
-// const Emptyrequest = () => {
-//   return (
-//     <View style={styles.emptyListContainer}>
-//       {/* Crying icons */}
-//       <LottieView
-//         source={Cryinganimate}
-//         autoPlay
-//         loop
-//         style={{ width: 190, height: 190 }}
-//       />
-//       {/* Information text */}
-//       <Text style={styles.emptyListText}>
-//         Padi, you have not performed any cash deposits today, Start Now.
-//       </Text>
-//     </View>
-//   );
-// };
-
-// const StatusUpdate = ({ status, navigation }: any) => {
-//   const { authdata } = useContext(AuthContext);
-//   return (
-//     <>
-//       <Customstatusbar />
-//       <View style={{ flex: 1 }}>
-//         <View style={[styles.contentContainer]}>
-//           <View style={styles.topSection}>
-//             {/* Icons */}
-//             <View style={{ flexDirection: "row" }}>
-//               <TransferIcon />
-//               <View style={{ marginLeft: 24 }}>
-//                 <Text style={styles.lastAmountText}>Last Amount Update</Text>
-//                 <Text style={styles.updatedTimeText}>
-//                   Updated {moment(status.time).calendar()}
-//                 </Text>
-//               </View>
-//             </View>
-
-//             <Text style={styles.lastAmountPrice}>
-//               NGN {amountFormatter(status.status[0].amount)}
-//             </Text>
-
-//           </View>
-
-//           <View style={styles.horizontalLine} />
-
-//           <View>
-//             <View style={styles.locationIconandText}>
-//               {/* icons */}
-//               <Location />
-//               <Text style={styles.location}>
-//                 {status.status[0].locationText}
-//               </Text>
-//             </View>
-
-//             <View style={styles.expirationContainer}>
-//               <Text style={styles.expirationText}>
-//                 Expires{" "}
-//                 {moment(status.status[0].createdAt).add(1, "days").calendar()}
-//               </Text>
-//               <TouchableOpacity
-//                 onPress={() =>
-//                   navigation.navigate("Depositinput", {
-//                     type: "update",
-//                     reference: status.status[0].reference,
-//                   })
-//                 }
-//               >
-//                 <Text style={styles.updateText}>Update</Text>
-//               </TouchableOpacity>
-//             </View>
-//           </View>
-//         </View>
-
-//         <View style={styles.contentContainer}>
-//           <View style={styles.detailsRow}>
-//             <View style={styles.iconAndTitle}>
-//               <Accountbalanceicon />
-//               <Text style={styles.iconTitle}>Balance</Text>
-//             </View>
-//             <Text style={styles.iconValue}>
-//               N{" "}
-//               {amountFormatter(`${status.status[0].balance}`)}
-//             </Text>
-//           </View>
-//           <View style={styles.horizontalLine} />
-//           <View style={styles.detailsRow}>
-//             <View style={styles.iconAndTitle}>
-//               <Trendingupright />
-//               <Text style={styles.iconTitle}>My Earnings last 24hrs</Text>
-//             </View>
-//             <Text style={styles.iconValue}>
-//               N {amountFormatter(status.totalEarnings)}
-//             </Text>
-//           </View>
-//         </View>
-
-//         <TouchableOpacity
-//           onPress={() => {
-//             navigation.navigate("Deposit",{
-//               pendingRequests:status.pendingRequests,
-//               acceptedRequests:status.acceptedRequests
-//             });
-//           }}
-//           style={styles.bottomBtn}
-//           activeOpacity={0.8}
-//         >
-//           <View style={{ flexDirection: "row", alignItems: "center" }}>
-//             <View style={styles.eyeiconBg}>
-//               <Viewrequesteye />
-//             </View>
-//             <Text style={styles.viewRequestText}>
-//               View Cash Requests (
-//               {status.pendingRequests.length + status.acceptedRequests.length})
-//             </Text>
-//           </View>
-
-//           <Viewcashrequesticon />
-//         </TouchableOpacity>
-//       </View>
-//     </>
-//   );
-// };
 
 const Emptyrequest = () => {
   return (
@@ -211,7 +80,7 @@ const Depositupdate = ({ navigation, route }) => {
   const [status, setStatus] = useState<statusInterface | null>(null);
   const [acceptedDeposits, setAcceptedDeposits] = useState([]);
   const [pendingDeposits, setPendingDeposits] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [coords, setCoords] = useState<any>({});
   const {CustomModal: DepositdetailsModal, openModal: openDepositdetailsModal} = useCustomModal()
   const {CustomModal, openModal} = useCustomModal()
@@ -351,7 +220,10 @@ useEffect(() => {
         </View>
       </DepositdetailsModal>
 
-      <FlatList
+      {loading? (<View style={{flex: 1, justifyContent:"center"}}>
+        <ActivityIndicator color={"#000"} size="large" />
+      </View>) :
+      (<FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 15, marginTop: 15 }}
@@ -402,7 +274,8 @@ useEffect(() => {
           { useNativeDriver: false }
         )}
         keyExtractor={(item) => item.title}
-      />
+      />)
+        }
 
       {/* Dotes below the scrolls */}
       <View style={withdrawstyles.statusdotwrap}>
@@ -448,7 +321,6 @@ useEffect(() => {
             bg={COLORS.blue9}
             // onpress={() => navigation.navigate("Cancelrequest")}
               onpress={openDepositdetailsModal}
-
             />
           </View>
           :

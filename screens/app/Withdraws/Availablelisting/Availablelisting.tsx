@@ -1,42 +1,30 @@
 import {
-  StyleSheet,
   Text,
   View,
-  ImageBackground,
   TouchableOpacity,
-  ActivityIndicator,
   ScrollView,
   Animated,
   Easing,
   FlatList,
 } from "react-native";
-import BottomSheet, {
-  BottomSheetScrollView,
-  BottomSheetFlatList,
-} from "@gorhom/bottom-sheet";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import LottieView from "lottie-react-native";
 
 import {
-  images,
   icons,
   COLORS,
   fontsize,
   FONTS,
   SIZES,
 } from "../../../../constants";
-import { styles } from "./Availablelisting.styles";
 import Map from "../../../shared/map/Map";
-import * as Location from "expo-Obj";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { Backheader, Horizontaline, InitialsBg, Negotiatecharge, Requesterinfo, Successmodal, Transactionsummary } from "../../../../components";
-import Comingsoonagent from "../../../../assets/Lottie/animations/comingSoonAgent.json";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getBottomSpace } from "react-native-iphone-x-helper";
 import Requestuser from "../../../shared/RequestUser";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Withdrawinfo from "../../../../components/Modals/Withdrawinfo";
@@ -93,9 +81,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const { CustomModal:NegotiateChargeModal ,openModal: openNegotiateChargeModal, closeModal:closeNegotiateChargeModal} = useCustomModal()
   const {CustomModal:SuccessModalContainer, openModal: openSuccessModal, closeModal: closeSuccessModal} =  useCustomModal()
 
-  console.log('------------------------AGENTS--------------------------');
-  console.log(agents )
-  // i removed changed from the params passed to this useRef below
+
   const onViewChangeRef = useRef<
     ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
   >(({ viewableItems, changed }) => {
@@ -150,7 +136,6 @@ const Availablelisting = ({ navigation, route }: any) => {
         navigation.replace("Updatedeposit", { from: "withdrawal" });
       }
       setCoords({ ...coordinates, locationText: address });
-      // i commnet this line out cause i want to test
       await getAllAgents(address);
     } catch (err) {
     } finally {
@@ -159,8 +144,6 @@ const Availablelisting = ({ navigation, route }: any) => {
   };
 
   
-
-  //This fucntion is to get the agents datas
   const getAllAgents = async (address: string) => {
     try {
       setLoading(true);
@@ -187,7 +170,6 @@ const Availablelisting = ({ navigation, route }: any) => {
   const handleNextNegotiateCharge = (amount)=>{
     setNegotiateCharge(amount);
     openTransactionSummaryModal()
-
   }
 
   const handleNextRequestSummary = ()=>{
@@ -195,44 +177,8 @@ const Availablelisting = ({ navigation, route }: any) => {
     closeNegotiateChargeModal()
     closeModal()
     openSuccessModal()
-    //open sucess modal
   }
 
-  const toggleActiveType = () => {
-    if (activeType === "peers") {
-      setActiveType("agents");
-    } else if (activeType === "agents") {
-      setActiveType("peers");
-    }
-  };
-
-
-  ///This is for the single user component
-  const Singleuser = ({ profile }: any) => {
-    // const { fullName, duration } = profile;
-    const handleAgentSelect = () => {
-      // adding Location context
-      setDestinationCoords(profile);
-      // navigation.navigate("Withdrawpreview", { amount, userInfo: profile, baseCharge: charge });
-    };
-    return (
-      <TouchableOpacity
-        style={styles.userContainer}
-        activeOpacity={0.8}
-        onPress={handleAgentSelect}
-      >
-        <Text>name of the user</Text>
-        {/* <View style={styles.detailsContainer}>
-          <InitialsBg sideLength={44} name={fullName} />
-          <View style={styles.infoContainer}>
-            <Text style={styles.userName}>{fullName}</Text>
-            <Text style={styles.distance}>~{duration} away</Text>
-          </View>
-        </View>
-        <Forwardarrow /> */}
-      </TouchableOpacity>
-    );
-  };
 
   return (
     <SafeAreaView

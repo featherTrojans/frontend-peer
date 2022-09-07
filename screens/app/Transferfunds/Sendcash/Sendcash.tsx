@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ColorPropType } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ColorPropType , ActivityIndicator} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Backheader, Custombutton, Horizontaline, Input, Mainwrapper } from '../../../../components'
 import { COLORS, FONTS, fontsize, icons } from '../../../../constants'
@@ -26,7 +26,6 @@ const Eachoption = ({name, phoneNumber}) => {
             <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9, textTransform: "capitalize"}}>{name}</Text>
             <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.halfBlack, marginTop: 5}}>{phoneNumber}</Text>
             </View>
-            
         </View>
     )
 }
@@ -34,7 +33,7 @@ const Eachoption = ({name, phoneNumber}) => {
 
 const Sendcash = ({navigation, route}) => {
     const amount = route.params
-    const { contactsResolved} = useContact();
+    const { contactsResolved, loading} = useContact();
     const [contacts, setContacts] = useState([]);
     const {CustomModal: TransferdetailsModal, openModal: openTransferdetailsModal, closeModal:closeTransferdetailsModal} = useCustomModal()
     const [activeContact, setActiveContact] = useState({})
@@ -62,8 +61,6 @@ const Sendcash = ({navigation, route}) => {
     return (
     <Mainwrapper>
         <Backheader title="Send Cash"/>
-
-
         <TransferdetailsModal>
                 <View>
                     <View style={{ justifyContent: "center", alignItems: "center"}}>
@@ -100,6 +97,9 @@ const Sendcash = ({navigation, route}) => {
             <View style={{paddingHorizontal: 16, paddingVertical: 22, backgroundColor: COLORS.white, borderRadius: 15, flex: 1, }}>
                 <Text style={{marginBottom: 20, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Find feather users in your contact</Text>
 
+                {loading && (<View style={{flex:1, justifyContent:"center"}}>
+                    <ActivityIndicator color={"#000"} size="large" />
+                </View>)}
 
                 <ScrollView showsVerticalScrollIndicator={false} >
 

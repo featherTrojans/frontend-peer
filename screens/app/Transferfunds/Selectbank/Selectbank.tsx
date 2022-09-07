@@ -180,10 +180,6 @@ const Selectbank = ({ navigation, route }) => {
   };
 
   const handleTransferToFeather = async (pin) => {
-    console.log("------------------------DEBUG--------------------------");
-    console.log(accountInformation);
-    console.log(amount);
-    console.log(pin);
     try {
       await axiosCustom.post("/withdraw", {
         amount: Number(amount),

@@ -1,36 +1,24 @@
-import { TouchableOpacity, Text, View, ScrollView,TextInput, ImageBackground } from "react-native";
+import { TouchableOpacity, Text, View, ScrollView,TextInput } from "react-native";
 import React, {useState, useEffect, useContext, useRef} from "react";
 import { styles } from "./Chatsdm.styles";
-import { COLORS, FONTS, fontsize, icons, images, SIZES } from "../../../../constants";
+import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { addDoc, collection, doc, getDoc, onSnapshot, setDoc, query, orderBy, updateDoc  } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { AuthContext } from "../../../../context/AuthContext";
 import moment from "moment";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-const { Chatimage, chatbg } = images;
-import { Bottombtn, InitialsBg, Mainwrapper } from "../../../../components";
-import Customstatusbar from "../../../shared/Customstatusbar";
+import {InitialsBg, Mainwrapper } from "../../../../components";
 import LottieView from "lottie-react-native"
-import { SafeAreaView } from "react-native-safe-area-context";
 import AllChatsModal from "./AllChatsModal";
 import { usePushNotification } from "../../../../navigation";
 import formatData from "../../../../utils/fomatTrans";
-import { date } from "yup";
 
-
-
-
-const { Backarrow, SendIcon, Outlinedlock,Plusicon,
-  Minusicon,
-  Arrowupicon,
-  Lettercaseicon,Successtranfericon,Sendmessageicon, Successcheckanimate, Feathecomingsoonchatanimate, Sentconfetti, SendTF } = icons;
+const { Backarrow, Successtranfericon,Sendmessageicon,  Feathecomingsoonchatanimate, Sentconfetti, SendTF } = icons;
 
 
 
 const Chatsdm = ({navigation,route}) => {
   const {userInfo} = route.params
-  console.log('------------------------USERINFO--------------------------');
-  console.log(userInfo);
   const {authdata} = useContext(AuthContext);
   const [messages, setMessages] =  useState<any>([]);
   const [chatid, setchatid] = useState("")
@@ -67,14 +55,11 @@ const Chatsdm = ({navigation,route}) => {
               newdata.push(change.data())
         });
         setMessages(formatData(newdata))
-        // console.log(moment(newdata[0].createdAt), 'here is the propose message');
-        // console.log(moment(newdata[0], "her4e is the date"));
         console.log(formatData(newdata), "formated data");
-        
-        
-        
         setFetchmessage(false)
       });
+    }else{
+      setFetchmessage(false)
     }
 
     return ()=> {
@@ -98,12 +83,6 @@ const Chatsdm = ({navigation,route}) => {
         setchatid(id2id1)
         return
       }
-      // // create new document
-      // await setDoc(doc(db,"chatstwo",id1id2),{
-      //   id1: authId,
-      //   id2: userInfo.userUid
-      // })
-      // setchatid(id1id2)
     }catch(err){
       console.log(err)
     }
@@ -151,7 +130,6 @@ const Chatsdm = ({navigation,route}) => {
       createdAt: createdAt,
       action:action
     }
-    console.log(messageData, "Message data from the chats")
     try{
       setchattext("")   
       await addDoc(collection(db,"chatstwo",chatId,"messages"),messageData)
@@ -205,9 +183,6 @@ const Chatsdm = ({navigation,route}) => {
 
   const renderReceiverHTML = (mes)=>{
     if(mes?.action === "transfer"){
-      // if(Date.now() - 60000 < mes.createdAt){
-      //   animationRef?.current?.play()
-      // }
       return (
         <View style={{justifyContent: "center", alignItems: "center", marginBottom:50,  flex: 1 }}>
           <View style={{flex: 1}}>
@@ -261,9 +236,6 @@ const Chatsdm = ({navigation,route}) => {
   
   return (
     <Mainwrapper>   
-
-
-
       <AllChatsModal 
         nameOfActiveChat={userInfo?.fullName}
         sendcashModal={sendcashModal}
@@ -285,9 +257,6 @@ const Chatsdm = ({navigation,route}) => {
         userPin={userPin}
         sendCash={sendCash}
       />
-
-
-
       <View style={styles.chatHeader}>
         <TouchableOpacity style={{ paddingHorizontal: 11, paddingVertical: 8, }} onPress={()=>navigation.goBack()}>
           <Backarrow />
@@ -312,11 +281,6 @@ const Chatsdm = ({navigation,route}) => {
               <LottieView source={Feathecomingsoonchatanimate} autoPlay loop style={{ width: 160, height: 160 }}/>          
         </View>
         :
-
-
-
-
-
         <ScrollView 
         style={styles.messageAreaContainer} 
         ref={scrollViewRef}
@@ -324,9 +288,6 @@ const Chatsdm = ({navigation,route}) => {
         showsVerticalScrollIndicator={false}
         bounces={false}
         onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
-
-
-
           {messages.map(({data, time}, index: number) => {
             return (
               <View key={index}>
@@ -351,20 +312,7 @@ const Chatsdm = ({navigation,route}) => {
               </View>
             )
           })}
-        {/* {messages.map(mes=>{
-            if(mes.sender === userInfo.userUid){
-              return (
-                renderSenderHTML(mes) 
-              )
-            }
-            return (
-                renderReceiverHTML(mes) 
-            )
-          })} */}
       </ScrollView>
-
-
-
       }
       <View style={styles.chatTextContainer}>
         <View style={styles.inputarea}>

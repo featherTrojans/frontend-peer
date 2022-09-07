@@ -1,50 +1,37 @@
 import {
   ActivityIndicator,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useEffect, useState, useContext } from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { ScrollView } from "react-native-gesture-handler";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
 import {
-  doc,
   collection,
-  getDoc,
   getDocs,
-  collectionGroup,
-  QueryDocumentSnapshot,
-  DocumentData,
   query,
   where,
   onSnapshot,
   orderBy,
 } from "firebase/firestore";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../../../context/AuthContext";
-import LottieView from "lottie-react-native";
 import Chat from "./Chat";
 
 import Contact from "./Contact";
-import { RFValue } from "react-native-responsive-fontsize";
-import axiosCustom from "../../../../httpRequests/axiosCustom";
-import useContact from "../../../../utils/customContact";
-import { Backheader, Mainwrapper } from "../../../../components";
+import { Backheader } from "../../../../components";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 
-const { Chatsearchicon, Cryinganimate, Emptynotification } = icons;
+const { Emptynotification } = icons;
 
 const Chatshome = ({ navigation }) => {
   const { authdata } = useContext(AuthContext);
 
   const [chats, setChats] = useState<any>([]);
   const [chattwos, setChattwos] = useState<any>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid;
@@ -99,45 +86,45 @@ const Chatshome = ({ navigation }) => {
   }, []);
 
 
-  const getAllChats = async () => {
-    setLoading(true);
-    try {
-      // auery first where
-      const chatsRef = collection(db, "chatstwo");
-      const chatQuery1 = query(
-        chatsRef,
-        where("id1", "==", authId),
-        orderBy("createdAt")
-      );
-      const chatQuery2 = query(
-        chatsRef,
-        where("id2", "==", authId),
-        orderBy("createdAt")
-      );
-      // console.log(querysnaps.length)
-      const [chatdata1, chatdata2] = await Promise.all([
-        getDocs(chatQuery1),
-        getDocs(chatQuery2),
-      ]);
-      // const chatdata2 = await getDocs(chatQuery1)
+  // const getAllChats = async () => {
+  //   setLoading(true);
+  //   try {
+  //     // auery first where
+  //     const chatsRef = collection(db, "chatstwo");
+  //     const chatQuery1 = query(
+  //       chatsRef,
+  //       where("id1", "==", authId),
+  //       orderBy("createdAt")
+  //     );
+  //     const chatQuery2 = query(
+  //       chatsRef,
+  //       where("id2", "==", authId),
+  //       orderBy("createdAt")
+  //     );
+  //     // console.log(querysnaps.length)
+  //     const [chatdata1, chatdata2] = await Promise.all([
+  //       getDocs(chatQuery1),
+  //       getDocs(chatQuery2),
+  //     ]);
+  //     // const chatdata2 = await getDocs(chatQuery1)
 
-      const allchats = [];
-      const allchatTwo = [];
-      chatdata2.forEach((document) => {
-        allchatTwo.push(document.data());
-      });
-      chatdata1.forEach((document) => {
-        allchats.push(document.data());
-      });
-      setChattwos(allchatTwo);
-      setChats(allchats);
+  //     const allchats = [];
+  //     const allchatTwo = [];
+  //     chatdata2.forEach((document) => {
+  //       allchatTwo.push(document.data());
+  //     });
+  //     chatdata1.forEach((document) => {
+  //       allchats.push(document.data());
+  //     });
+  //     setChattwos(allchatTwo);
+  //     setChats(allchats);
       
-      // console.log(chatsdata.docs)
-    } catch (err) {
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     // console.log(chatsdata.docs)
+  //   } catch (err) {
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <View style={{flex: 1, paddingTop: getStatusBarHeight(true) }}>
