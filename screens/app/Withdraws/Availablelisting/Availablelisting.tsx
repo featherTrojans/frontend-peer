@@ -32,7 +32,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { Backheader, Horizontaline, InitialsBg, Negotiatecharge, Requesterinfo, Transactionsummary } from "../../../../components";
+import { Backheader, Horizontaline, InitialsBg, Negotiatecharge, Requesterinfo, Successmodal, Transactionsummary } from "../../../../components";
 import Comingsoonagent from "../../../../assets/Lottie/animations/comingSoonAgent.json";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -74,9 +74,7 @@ interface agent {
 const Availablelisting = ({ navigation, route }: any) => {
   const amount = route.params;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
-  const [agents, setAgents] = useState([
-    1, 2, 2.4, 5, 6, 4, 3, 2, 4, 3, 4, 2, 2, 2, 3, 4, 2, 4, 3, 2,
-  ]);
+  const [agents, setAgents] = useState([]);
   const [charge, setCharge] = useState(0);
   const [negotiatecharge, setNegotiateCharge] = useState(0);
   const [activeType, setActiveType] = useState("peers");
@@ -93,7 +91,10 @@ const Availablelisting = ({ navigation, route }: any) => {
   const { CustomModal ,openModal, closeModal} = useCustomModal()
   const { CustomModal:TransationSummaryModal ,openModal: openTransactionSummaryModal, closeModal:closeTransactionSummeryModal} = useCustomModal()
   const { CustomModal:NegotiateChargeModal ,openModal: openNegotiateChargeModal, closeModal:closeNegotiateChargeModal} = useCustomModal()
+  const {CustomModal:SuccessModalContainer, openModal: openSuccessModal, closeModal: closeSuccessModal} =  useCustomModal()
 
+  console.log('------------------------AGENTS--------------------------');
+  console.log(agents )
   // i removed changed from the params passed to this useRef below
   const onViewChangeRef = useRef<
     ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
@@ -193,6 +194,7 @@ const Availablelisting = ({ navigation, route }: any) => {
     closeTransactionSummeryModal()
     closeNegotiateChargeModal()
     closeModal()
+    openSuccessModal()
     //open sucess modal
   }
 
@@ -249,6 +251,9 @@ const Availablelisting = ({ navigation, route }: any) => {
         <RequestSummary amount={amount} openNextModal={handleNextRequestSummary} withdrawInfo={activeAgent} baseCharge={charge} addedFee={negotiatecharge} />
       </TransationSummaryModal>
 
+      <SuccessModalContainer>
+        <Successmodal btnText="Yeah, proceed" successMsg="Cash request successful" btnFunction={()=>{closeSuccessModal(); navigation.navigate("Home")}} />
+      </SuccessModalContainer>
       <Customstatusbar />
       <Map />
 
@@ -365,7 +370,7 @@ const Availablelisting = ({ navigation, route }: any) => {
                               }}
                               onPress={()=>handleSelectAgent(info)}
                             >
-                              <Requestuser details={{name:info?.fullName, amount:info?.amount, duration:info?.duration}} />
+                              <Requestuser hideAmount details={{name:info?.fullName, amount:info?.amount, duration:info?.duration}} />
                               {!isLastItem && <Horizontaline marginV={21} />}
                             </TouchableOpacity>
                           );
