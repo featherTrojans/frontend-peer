@@ -5,11 +5,13 @@ import Tableoption from "../Tableoption/Tableoption";
 import Custombutton from "../Custombutton/Custombutton";
 import { navigationRef } from "../../utils/customNavigation";
 import { useNavigation } from "@react-navigation/native";
+import useAlert from "../../utils/useAlerts";
 
 
 
 const Upgrademodal = ({closeUpgradeModal}) => {
   const navigate = useNavigation()
+  const {purpleAlert} = useAlert()
   return (
     <View>
       <Text

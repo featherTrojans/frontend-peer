@@ -1,7 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import Modal from "react-native-modal";
+import Toast from 'react-native-toast-message'
 import { COLORS } from "../constants";
+import { toastConfig } from "../App";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 type globalModalProps = {
   children: JSX.Element;
@@ -35,6 +38,7 @@ const useCustomModal = () => {
         onBackdropPress={hideOnTap ? () => setShowState(!showState) : () => null}
         onBackButtonPress={hideOnTap ? () => setShowState(!showState) : () => null}
       >
+        <>
         <View
           style={{
             paddingVertical: 36,
@@ -46,6 +50,11 @@ const useCustomModal = () => {
         >
           {children}
         </View>
+        <Toast 
+        config={toastConfig}
+        topOffset={0}
+        />
+        </>
       </Modal>
     );
   };
