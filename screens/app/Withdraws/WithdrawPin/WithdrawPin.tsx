@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import {
@@ -18,18 +18,24 @@ import { db } from "../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import useCustomModal from "../../../../utils/useCustomModal";
 import { getFirstName } from "../../../../utils/nameSplitter";
+import useAlert from "../../../../utils/useAlerts";
 
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const WithdrawPin = ({ navigation, route }) => {
   const info = route.params;
   const { authdata } = useContext(AuthContext);
-  const toast = useToast();
+  const {purpleAlert, errorAlert, successAlert} = useAlert()
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState(false);
   const [pin, setPin] = useState<string[]>([]);
   const [successModal, setSuccessModal] = useState(false);
   const {CustomModal,closeModal,openModal} = useCustomModal()
+
+
+  useEffect(()=>{
+    purpleAlert("Kindly note that 3 failed pin attempts - declines the transaction and cancels automatically.")
+  },[])
 
   const amountFormatter = (value: string) => {
     return (
@@ -111,8 +117,9 @@ const WithdrawPin = ({ navigation, route }) => {
         console.log(4);
         //show success message
         openModal()
+        successAlert("Your cash withdrawal transaction was successful and you've been credited.")
       } catch (err) {
-        showerror(toast, err);
+        errorAlert(err)
         // check the error, don't reject for pin error
         if (err?.response?.data?.message === "Incorrect Pin") {
           return;
@@ -128,7 +135,7 @@ const WithdrawPin = ({ navigation, route }) => {
   return (
     <Mainwrapper>
       {loading && <Loader />}
-      <CustomModal>
+      <CustomModal hideOnTap={false}>
         <Successmodal btnText="Great Continue" successMsg="Your transaction was successful, cash has been received from receiver" btnFunction={()=>navigation.navigate("Transactionsrating",info)}/>
       </CustomModal>
       <Backheader title="Complete Transaction" />

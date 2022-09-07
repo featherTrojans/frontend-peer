@@ -117,7 +117,7 @@ const Transactionpin = ({ info }) => {
   return (
     <View>
       {loading && <Loader /> }
-      <CustomModal>
+      <CustomModal hideOnTap={false}>
         <Successmodal 
         btnText='Great continue'
         successMsg='Your transaction was successful, cash has been sent to receiver' 
@@ -128,7 +128,7 @@ const Transactionpin = ({ info }) => {
         <LottieView source={Transacntionpinanimate} loop style={{ width: 104, height: 104, }}/>
         </View>
         <View style={{marginTop: 34.5}}>
-      <Text style={{textAlign: "center", lineHeight: 22, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Kindly input your transaction pin on {getFirstName(info?.fullName)} device to complete the transaction, don’t worry it’s safe✌🏽</Text>
+      <Text style={{textAlign: "center", lineHeight: 22, ...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>Kindly input your transaction pin on <Text style={{textTransform:"capitalize"}}>{getFirstName(info?.fullName)}</Text> device to complete the transaction, don’t worry it’s safe✌🏽</Text>
       
         <Horizontaline marginV={20}/>
         <Text onPress={handleCancelRequest} style={{color: COLORS.red4, textAlign: "center", ...fontsize.smallest, ...FONTS.medium}}>Cancel Request</Text>
