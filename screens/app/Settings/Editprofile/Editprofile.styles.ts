@@ -51,6 +51,7 @@ export const styles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.regular,
     color: COLORS.blue9,
+    textTransform: "lowercase"
   },
   avatarBg: {
     backgroundColor: COLORS.transparentBlue,

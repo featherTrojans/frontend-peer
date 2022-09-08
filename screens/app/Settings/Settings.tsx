@@ -265,8 +265,7 @@ const Settings = ({ navigation }) => {
                 lineHeight: 18,
               }}
             >
-              Hey 👋 Padi, upgrade your profile today and get a bank account
-              created for you to receive money.
+              Hey 👋 Padi, {isNewbie ? "upgrade your profile today and get a bank account created for you to receive money.": "we created an account number for you to receive money easily."}
             </Text>
 
             <View

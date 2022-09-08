@@ -38,7 +38,8 @@ export const styles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.regular,
     color: COLORS.grey8,
-    textTransform: "lowercase",
+    // textTransform: "lowercase",
+    textTransform: "lowercase"
   },
 
   alignedContainer: {
