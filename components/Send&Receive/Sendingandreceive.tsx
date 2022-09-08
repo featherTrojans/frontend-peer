@@ -170,12 +170,13 @@ const showImage = (
 
     case "Airtime Purchase":
       const networkType = value?.toUpperCase();
+      const isEtisalat = networkType === "9MOBILE"
       return (
         <View style={[styles.typeContainer, {backgroundColor: "transparent"}]}>
           <Image
             style={{width: "100%", height: "100%", borderRadius: 50/2 }}
             source={{
-              uri: assetsDB["bills"][networkType],
+              uri: isEtisalat ? assetsDB["bills"]["ETISALAT"] : assetsDB["bills"][networkType],
             }}
           />
         </View>

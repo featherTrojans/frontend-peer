@@ -27,6 +27,7 @@ const History = ({ data }) => {
   const amountSign = direction === "in" ? "+" : "-";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
   const networkType = from.toUpperCase();
+  const isEtisalat = networkType === "9MOBILE"
 
   const isUser = (title: string) => {
     const capital = title;
@@ -54,7 +55,7 @@ const History = ({ data }) => {
         return (
           <View style={[styles.arrowBg, { borderRadius: RFValue(30) }]}>
             <Image
-              source={{ uri: assetsDB["bills"][networkType] }}
+              source={{ uri:  isEtisalat ? assetsDB["bills"]["ETISALAT"] : assetsDB["bills"][networkType] }}
               resizeMode="cover"
               style={{
                 width: "100%",
