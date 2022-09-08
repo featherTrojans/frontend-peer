@@ -46,7 +46,7 @@ const Verifybvn = ({navigation}) => {
       <CustomModal>
         <View>
           <View>
-          <LottieView source={Verifiedbvnanimate} loop style={{ width: RFValue(264), height: 168,   }}/>
+          <LottieView source={Verifiedbvnanimate} autoPlay loop style={{ width: RFValue(264), height: 168,   }}/>
             <Text style={{...fontsize.small, ...FONTS.regular, color: COLORS.blue9, lineHeight: 22}}>Your BVN has been verified successfully and a bank account has been created for you</Text>
           </View>
           <Custombutton btntext='Thanks, Continue' onpress={() => navigation.navigate("Settings")}/>
