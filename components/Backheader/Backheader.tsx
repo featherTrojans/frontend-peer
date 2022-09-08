@@ -36,14 +36,15 @@ const Backheader = ({
         {showArrow && (
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={[styles.backArrowIcon, {paddingLeft: 15, paddingRight: 10}]}
+            style={[styles.backArrowIcon, {paddingLeft: 15, paddingRight: 10, }]}
           >
             <Backarrow />
           </TouchableOpacity>
         )}
 
-
+        <TouchableOpacity  onPress={showArrow ? () => navigation.goBack() : () => null}>
         <Text style={[styles.backArrowText, {paddingLeft: showArrow ? 0: 15}]}>{title}</Text>
+        </TouchableOpacity>
       </View>
       {rightComponent}
     </View>

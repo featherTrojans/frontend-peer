@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import {
   Backheader,
@@ -14,9 +14,12 @@ const Becomeanagent = () => {
   return (
     <Mainwrapper>
       <Backheader title="Become an agent" />
+
+
+      <ScrollView style={{flex:  1}} showsVerticalScrollIndicator={false} bounces={false}>
       <View style={{ paddingHorizontal: 15, flex: 1 }}>
 
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, }}>
 
         
         <View>
@@ -62,13 +65,23 @@ const Becomeanagent = () => {
           <Tableoption title="Max bank Transfers" value="N500,000 per day" />
           <Tableoption title="Receive" value="Unlimited" mb={false} />
         </View>
+
+        
         </View>
+      
+
+
+
+
+      </View>
+      </ScrollView>
+      <View style={{marginBottom: 20, paddingHorizontal: 15 }}>
         <Custombutton
           btntext="Start Application"
           onpress={() => console.log("Hellow")}
           bg={COLORS.blue9}
         />
-      </View>
+        </View>
     </Mainwrapper>
   );
 };

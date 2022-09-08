@@ -257,15 +257,21 @@ const Chatsdm = ({navigation,route}) => {
         userPin={userPin}
         sendCash={sendCash}
       />
-      <View style={styles.chatHeader}>
-        <TouchableOpacity style={{ paddingHorizontal: 11, paddingVertical: 8, }} onPress={()=>navigation.goBack()}>
+      <View  style={styles.chatHeader} >
+
+
+        <TouchableOpacity activeOpacity={0.8} style={{ paddingHorizontal: 11, paddingVertical: 8, }} onPress={()=>navigation.goBack()}>
           <Backarrow />
         </TouchableOpacity>
 
 
-        <View style={[styles.headerDetailsContainer, ]}>
-          <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
+        <View style={[styles.headerDetailsContainer,]}>
+
+          <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{flex: 1, flexDirection: 'row', alignItems: "center"}}>
+            <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
             <Text style={styles.chatName}>{userInfo?.fullName}</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity activeOpacity={0.8} onPress={()=>setSendCashModal(true)}>
             <SendTF style={{marginRight: 10}} />
           </TouchableOpacity>

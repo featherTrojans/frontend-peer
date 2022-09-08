@@ -677,6 +677,9 @@ const Transactiondetails = ({ navigation, route }) => {
               <Horizontaline marginV={18}/>
               <Eachoption title="Total" value={ `N${amountFormatter(total)}`}/>  
           </View>
+
+
+          
           
       </ScrollView>
     </Mainwrapper>
