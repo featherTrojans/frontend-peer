@@ -112,7 +112,7 @@ const Settings = ({ navigation }) => {
         <Text
           style={{ ...fontsize.small, ...FONTS.medium, color: COLORS.black }}
         >
-          Became an Agent
+          Become an Agent
         </Text>
         <TouchableOpacity
         activeOpacity={0.8}

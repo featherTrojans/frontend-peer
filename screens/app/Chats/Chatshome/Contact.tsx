@@ -12,7 +12,7 @@ import { COLORS, FONTS, fontsize } from '../../../../constants';
 
 
 const Contact = () => {
-    const navigate = useNavigation()
+    const navigation = useNavigation()
     const { contactsResolved } = useContact();
 
     return (
@@ -20,7 +20,7 @@ const Contact = () => {
 
         <View style={{flexDirection: 'row', justifyContent: "space-between"}}>
           <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9}}>Feather users in your contact</Text>
-          <TouchableOpacity onPress={()=>navigate.navigate("Usersearch",contactsResolved)}>
+          <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Usersearch",contactsResolved)}>
             <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.purple2}}>See more</Text>
           </TouchableOpacity>
         </View>

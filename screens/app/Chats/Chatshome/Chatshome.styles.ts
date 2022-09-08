@@ -93,7 +93,8 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     opacity: 0.8,
     marginBottom: 7,
-    textTransform:"capitalize"
+    textTransform:"capitalize",
+    color: COLORS.blue9
   },
   eachProfileUsername: {
     ...fontsize.xsmallest,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Pressable } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { icons, COLORS } from "../../constants";
 // import { inputContainer } from "../../global/styles";
@@ -75,12 +75,14 @@ const Input = ({
       />
 
       {password && (
-        <TouchableOpacity
+        <Pressable
           onPress={() => setShowPassword(!showPassword)}
-          activeOpacity={0.8}
+          // activeOpacity={0.8}
+          hitSlop={16}
+          style={{ padding: 8, paddingRight: 0,}}
         >
           {showPassword ? <Eyeicon /> : <Passwordhideicon />}
-        </TouchableOpacity>
+        </Pressable>
       )}
     </View>
   );
