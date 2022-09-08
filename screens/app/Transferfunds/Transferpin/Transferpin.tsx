@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LottieView from "lottie-react-native";
 import { styles } from "./Transferpin.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
@@ -53,6 +53,10 @@ const Transferpin = ({ route, navigation }) => {
     }
   };
 
+  // useEffect(()=>{
+  //   errorAlert("hhadhadhahdashhß afsg s sg d  s")
+  // },[])
+
   const handleRemoveAmount = () => {
     if (pin.length > 0) {
       const newdata = [...pin];
@@ -67,6 +71,7 @@ const Transferpin = ({ route, navigation }) => {
     if (joinpin.length < 4) {
       return false;
     }
+    
     try {
       setLoading(true);
       const responseMsg = await onpress(joinpin);

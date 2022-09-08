@@ -18,6 +18,7 @@ const Meetuppoint = ({navigation}) => {
     });
     navigation.goBack()
   }
+
   return (
     <Mainwrapper>
       <Backheader title="Meetup Point" />
@@ -26,7 +27,6 @@ const Meetuppoint = ({navigation}) => {
       <View style={{ paddingHorizontal: 15, flex: 1 }}>
         <View
           style={{
-            height: 53,
             borderRadius: 5,
             // paddingHorizontal: 15,
             flexDirection: "row",

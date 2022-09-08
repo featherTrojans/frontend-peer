@@ -135,10 +135,11 @@ import {
   Electricitytype,
   Electricitymetertype,
   Dataprovider,
-  Dataplan,
+  Dataplan, 
   Airtimeprovider,
   Becomeanagent,
   Sendcash,
+  BillContacts,
   Selectbank,
   Meetuppoint,
   Safetycautions,
@@ -653,6 +654,7 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Bankaccount" component={Bankaccount} />
             <AppStack.Screen name="Transferpin" component={Transferpin} />
             <AppStack.Screen name="Sendcash" component={Sendcash} />
+            <AppStack.Screen name="BillContacts" component={BillContacts} />
             <AppStack.Screen name="Selectbank" component={Selectbank} />
 
             <AppStack.Screen

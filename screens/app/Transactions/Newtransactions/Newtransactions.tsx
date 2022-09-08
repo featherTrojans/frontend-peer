@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View, ScrollView, StatusBar } from "react-native";
+import {  Text, View, ScrollView } from "react-native";
 import React, { useContext, useState } from "react";
 import { styles } from "./Newtransactions.styles";
 import { Backheader, Chooseamountmodal, Custombutton, Horizontaline, Iconwithdatas, Loader } from "../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import useCustomModal from "../../../../utils/useCustomModal";
 import TransferCash from "../../../../components/Modals/TransferCash";
 import Bluewalleticon from "../../../../assets/icons/Bluewalleticon";

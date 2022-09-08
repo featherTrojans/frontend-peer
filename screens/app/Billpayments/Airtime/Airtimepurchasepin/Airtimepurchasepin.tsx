@@ -16,12 +16,15 @@ import {
   Loader,
   Mainwrapper,
   Numberbtn,
+  Successmodal,
 } from "../../../../../components";
 import amountFormatter from "../../../../../utils/formatMoney";
 import SecureDot from "../../../../../assets/icons/SecureDot";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { securepinstyles } from "../../../../auth/signup/Securepin/Securepin.styles";
+import useAlert from "../../../../../utils/useAlerts";
+import useCustomModal from "../../../../../utils/useCustomModal";
 
 const { Successcheckanimate } = icons;
 
@@ -33,6 +36,8 @@ const Airtimepurchasepin = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
   const { messageToken, authdata } = useContext(AuthContext);
+  const {CustomModal, openModal, closeModal} = useCustomModal()
+  const {errorAlert} = useAlert()
 
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
@@ -69,11 +74,10 @@ const Airtimepurchasepin = ({ navigation, route }) => {
         
       }else{
         await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
-        
       }
-      setShowModal(true)
+      openModal()
     }catch(err){
-      showerror(toast, err)
+      errorAlert(err)
       setPin([])
     }finally{
       setLoading(false)
@@ -83,7 +87,9 @@ const Airtimepurchasepin = ({ navigation, route }) => {
     <Mainwrapper>
       {loading && <Loader />}
 
-
+      <CustomModal>
+        <Successmodal btnText="Yeah, proceed" successMsg="Transaction Succesfull" btnFunction={()=>navigation.navigate("Home")}/>
+      </CustomModal>
       <View style={{paddingHorizontal: 15, flex: 1}}>
         <View style={{marginTop: 32}}>
           <Text style={{...fontsize.bbsmall, ...FONTS.medium, color: COLORS.blue9, marginBottom: 20}}>Complete Transaction</Text>

@@ -165,7 +165,7 @@ const Selectbank = ({ navigation, route }) => {
   const amount = route.params;
   console.log("------------------------DEBUG--------------------------");
   console.log(amount);
-  const { CustomModal, openModal } = useCustomModal();
+  const { CustomModal, openModal, closeModal } = useCustomModal();
   const {
     CustomModal: TransactiondetailsModal,
     openModal: openTransactionDetailsModal,
@@ -279,7 +279,7 @@ const Selectbank = ({ navigation, route }) => {
                   lineHeight: 27,
                 }}
               >
-                +N100.00
+                +N10.00
               </Text>
             </View>
             <Horizontaline marginV={21} />
@@ -302,6 +302,8 @@ const Selectbank = ({ navigation, route }) => {
           <Custombutton
             btntext="Great, Proceed"
             onpress={() => {
+              closeModal()
+              closeTransactionDetailsModal()
               navigation.navigate("Transferpin", {
                 info: {
                   username: bank.name,

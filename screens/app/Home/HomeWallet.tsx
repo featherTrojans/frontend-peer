@@ -17,6 +17,7 @@ import { styles } from "./Home.styles";
 import TransferCash from "../../../components/Modals/TransferCash";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { handleOpenInBrowser, handleOpenWithLinking } from "../../../utils/handleOpenWithLinking";
+import useAlert from "../../../utils/useAlerts";
 const {
     Withdrawicon,
     Depositicon,
@@ -24,9 +25,6 @@ const {
     Paybillicon,
     Bluebankicon,
     Bluewalleticon,
-    Ashicon,
-    Aticon,
-    Searcontacticon,
     Blackcautionicon
   } = icons;
 
@@ -55,8 +53,9 @@ const {
 
 const HomeWallet = () => {
     const [amount, setAmount] = useState(0);
-    const { setAuthData, authdata } = useContext(AuthContext);
+    const { authdata } = useContext(AuthContext);
     const [userinfo, setUserinfo] = useState<userObj|null>(null);
+    const {errorAlert} = useAlert()
     console.log('------------------------USERINFO--------------------------');
     console.log(userinfo);
     const {
@@ -181,6 +180,9 @@ const HomeWallet = () => {
         <Chooseamountmodal
           headerText="How much do you want to transfer now?"
           onpress={(amount) => {
+            if(amount < 200){
+              return errorAlert(null,"You can't transfer amount less than 200 ")
+            }
             closeBankAmountModal();
             navigation.navigate("Selectbank",amount);
           }}

@@ -44,7 +44,7 @@ const Requesterinfo = ({navigation,route}) => {
   const [loading, setLoading] = useState(false);
   const { CustomModal:NegotiateChargeModal ,openModal: openNegotiateChargeModal, closeModal:closeNegotiateChargeModal} = useCustomModal()
   const { CustomModal:SuccessCutomModal,openModal: openSuccessModal, closeModal:closeSuccessModal} = useCustomModal()
-  const {errorAlert} = useAlert()
+  const {errorAlert, blueAlert} = useAlert()
   const snapPoints = useMemo(() => ['60%', '85%'], []);
   
 
@@ -100,6 +100,10 @@ const Requesterinfo = ({navigation,route}) => {
     navigation.navigate("Home")
   }
 
+  const handleOpenNegotiateModal = ()=>{
+    blueAlert('Renegotiate the charges for this transaction and the requester will be notified immediately.')
+    openNegotiateChargeModal()
+  }
 
   return (
     <View style={{paddingTop: getStatusBarHeight(true), flex: 1}}>
@@ -184,7 +188,7 @@ const Requesterinfo = ({navigation,route}) => {
   </View>
   :
   <View>
-        <TouchableOpacity onPress={openNegotiateChargeModal} style={{flexDirection: 'row', alignItems: "center"}}>
+        <TouchableOpacity onPress={handleOpenNegotiateModal} style={{flexDirection: 'row', alignItems: "center"}}>
           <View style={{width: 32, height: 32, backgroundColor: COLORS.yellow5, borderRadius: 32/2, justifyContent: "center",alignItems: "center"}}>
             <Renegotiateicon />
           </View>

@@ -129,30 +129,31 @@ const Airtimeprovider = ({ navigation, route }) => {
                         // onChangeText={handlePhoneChange}
                         // defaultValue={phone}
                       />
-
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          backgroundColor: COLORS.trasparentPurple,
-                          alignSelf: "flex-start",
-                          paddingVertical: 9,
-                          paddingHorizontal: 14,
-                          borderRadius: 18,
-                        }}
-                      >
-                        <Searcontacticon />
-                        <Text
-                          style={{
-                            ...fontsize.smallest,
-                            ...FONTS.regular,
-                            color: COLORS.purple2,
-                            marginLeft: 8,
-                          }}
-                        >
-                          Search Contacts
-                        </Text>
-                      </View>
+                      <TouchableOpacity onPress={()=>navigation.navigate("BillContacts", {amount,billType, network})}>
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "center",
+                              backgroundColor: COLORS.trasparentPurple,
+                              alignSelf: "flex-start",
+                              paddingVertical: 9,
+                              paddingHorizontal: 14,
+                              borderRadius: 18,
+                            }}
+                            >
+                            <Searcontacticon />
+                            <Text
+                              style={{
+                                ...fontsize.smallest,
+                                ...FONTS.regular,
+                                color: COLORS.purple2,
+                                marginLeft: 8,
+                              }}
+                              >
+                              Search Contacts
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
                     </View>
 
                     <Custombutton

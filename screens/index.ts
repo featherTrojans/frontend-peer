@@ -106,6 +106,7 @@ import CustomWebView from "./shared/CustomWebView";
 import Depositinput from "./app/Deposit/DepositInput/Depositinput";
 import LockScreen from "./shared/LockScreen/LockScreen";
 import RequesterinfoScreen from "./shared/RequesterinfoScreen";
+import BillContacts from "./app/Billpayments/Airtime/BillContacts/BillContacts";
 
 export {
   Onboarding,
@@ -150,6 +151,7 @@ export {
   Depositupdate,
   Updatedeposit,
   Sendcash,
+  BillContacts,
   Pendingdeposit,
   Accepteddeposit,
   Depositpin,

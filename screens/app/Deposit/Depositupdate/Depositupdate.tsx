@@ -149,7 +149,7 @@ useEffect(() => {
           longitude: coords.longitude,
           latitude: coords.latitude,
           locationText: coords.locationText,
-          reference: status?.status[0]?.reference,
+          reference: status?.reference,
         });
       }
     } catch (err) {

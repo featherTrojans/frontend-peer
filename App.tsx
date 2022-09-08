@@ -14,6 +14,8 @@ import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { customNavigation } from "./utils/customNavigation";
+import { TextInput } from "react-native-gesture-handler";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 const { Cancelicon, Alertcancelicon, Updateprofileicon, Bluearrowrighticon, Updatealertcancelicon } = icons;
 
 export const toastConfig = {
@@ -111,6 +113,7 @@ export default function App() {
     GTmedium: require("./assets/fonts/GTWalsheimPro-Medium.ttf"),
     GTbold: require("./assets/fonts/GTWalsheimPro-Bold.ttf"),
   });
+
 
 
   if (!fontsLoaded || onboarded === null) {
