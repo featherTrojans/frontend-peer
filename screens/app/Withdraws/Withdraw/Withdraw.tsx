@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import LottieView from "lottie-react-native";
-import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../../constants";
+import { COLORS, icons, SIZES } from "../../../../constants";
 import {
   Backheader,
   Chooseamountmodal,
@@ -134,7 +134,7 @@ const Withdraw = ({ navigation }) => {
         return
       }
       closeModal()
-      navigation.navigate("Availablelisting",amount);
+      navigation.navigate("Availablelisting",{amount,activate:false});
   }
   return (
     <Mainwrapper>

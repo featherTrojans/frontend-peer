@@ -22,14 +22,15 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { Backheader, Horizontaline, InitialsBg, Negotiatecharge, Requesterinfo, Successmodal, Transactionsummary } from "../../../../components";
+import { Backheader, Horizontaline, Negotiatecharge, Successmodal } from "../../../../components";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Requestuser from "../../../shared/RequestUser";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Withdrawinfo from "../../../../components/Modals/Withdrawinfo";
 import RequestSummary from "../../../../components/Modals/RequestSummary";
-
+import useAlert from "../../../../utils/useAlerts";
+import Toast from "react-native-toast-message";
 const {
   Listingsdrop,
   Emptyicon,
@@ -60,8 +61,10 @@ interface agent {
 }
 
 const Availablelisting = ({ navigation, route }: any) => {
-  const amount = route.params;
+  const amount = route.params?.amount;
+  const activate = route.params?.activate;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
+  const {blueAlert} = useAlert()
   const [agents, setAgents] = useState([]);
   const [charge, setCharge] = useState(0);
   const [negotiatecharge, setNegotiateCharge] = useState(0);
@@ -87,6 +90,21 @@ const Availablelisting = ({ navigation, route }: any) => {
   >(({ viewableItems, changed }) => {
     setViewIndex(viewableItems[0]?.index);
   });
+
+
+  useEffect(()=>{
+    if(activate){
+      handleSelectAgent(route.params?.activate)
+    }
+  },[activate])
+  useEffect(()=>{
+    blueAlert("Get cash easily from certified agents around you competitive transaction charges and fees")
+
+    return () =>{
+      Toast.hide()
+    }
+  },[])
+
 
   // This function is to toggle the listings height
   const toggleHeight = () => {
@@ -168,6 +186,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   }
 
   const handleNextNegotiateCharge = (amount)=>{
+    closeNegotiateChargeModal();
     setNegotiateCharge(amount);
     openTransactionSummaryModal()
   }
@@ -186,11 +205,11 @@ const Availablelisting = ({ navigation, route }: any) => {
     >
       
       <CustomModal>
-        <Withdrawinfo withdrawInfo={activeAgent} openNextModal={openNegotiateChargeModal}/>
+        <Withdrawinfo withdrawInfo={activeAgent} closeModal={closeModal} openNextModal={()=> {closeModal(); openNegotiateChargeModal()}}/>
       </CustomModal>
 
       <NegotiateChargeModal>
-        <Negotiatecharge info={{...activeAgent,charges:charge}} openNextModal={handleNextNegotiateCharge} />
+        <Negotiatecharge info={{...activeAgent,charges:charge}} withdrawAmount={amount} openNextModal={handleNextNegotiateCharge} />
       </NegotiateChargeModal>
 
       <TransationSummaryModal>

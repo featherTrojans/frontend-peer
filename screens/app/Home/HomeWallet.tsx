@@ -180,8 +180,8 @@ const HomeWallet = () => {
         <Chooseamountmodal
           headerText="How much do you want to transfer now?"
           onpress={(amount) => {
-            if(amount < 200){
-              return errorAlert(null,"You can't transfer amount less than 200 ")
+            if(amount < 100){
+              return errorAlert(null,"You can't transfer amount less than 100 ")
             }
             closeBankAmountModal();
             navigation.navigate("Selectbank",amount);

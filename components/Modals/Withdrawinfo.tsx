@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { COLORS, FONTS, fontsize, icons } from '../../constants'
 import Custombutton from '../Custombutton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { nameSplitter } from '../../utils/nameSplitter'
+import { LocationContext } from '../../context/LocationContext'
 const {Purplechaticon, Editicon} = icons
 
-const Withdrawinfo = ({openNextModal, withdrawInfo}) => {
+const Withdrawinfo = ({openNextModal, withdrawInfo, closeModal}) => {
+  const {coords} = useContext(LocationContext)
   const navigation =useNavigation()
   return (
     <View>
@@ -22,9 +24,9 @@ const Withdrawinfo = ({openNextModal, withdrawInfo}) => {
         <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular, marginBottom: 10}}>Meetup Point (your comfort/safe zone)</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
             <View>
-            <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>{withdrawInfo.locationText}</Text>
+            <Text style={{...fontsize.smallest, color: COLORS.blue9, ...FONTS.regular}}>{coords?.locationText}</Text>
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate("Meetuppoint")}>
+            <TouchableOpacity onPress={()=>{closeModal(); navigation.navigate("Meetuppoint", withdrawInfo)}}>
               <Editicon />
             </TouchableOpacity>
         </View>

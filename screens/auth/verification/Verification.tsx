@@ -88,6 +88,8 @@ const Verification = ({route,navigation}) => {
     try{
       const response = await axiosCustom.post("auth/resend/code",{email});
       setToken(response?.data?.data?.token)
+      console.log('------------------------TOKEN--------------------------');
+      console.log(response?.data?.data)
       setDisable(false)
       setTime(30)
     }catch(err){
@@ -100,11 +102,8 @@ const Verification = ({route,navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
-
-
       <Backheader title="Verify Phone Number"/>
       <View style={{paddingHorizontal: 25, flex: 1}}>
-
       <CustomModal>
         <View>
 
@@ -123,7 +122,7 @@ const Verification = ({route,navigation}) => {
               to continue on the app
             </Text>
           </View>
-            <Custombutton btntext=" Setup Transaction PIN" onpress={()=>{ closeModal(); navigation.navigate("Securepin",{token:token, fromm: "setup"}) }}  />
+            <Custombutton btntext=" Setup Transaction PIN" onpress={()=>{ closeModal(); navigation.navigate("Securepin",{token:tokenn, fromm: "setup"}) }}  />
             </View>
       </CustomModal>
 
@@ -211,9 +210,6 @@ const Verification = ({route,navigation}) => {
       </TouchableOpacity> */}
 
       </View>
-
-
-
       <Custombutton btntext="Verify" onpress={handleSubmit} disable={loading} />
  
 
