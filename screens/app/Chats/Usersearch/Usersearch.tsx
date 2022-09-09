@@ -145,7 +145,7 @@ const Usersearch = ({navigation, route}) => {
           }}  
           ListEmptyComponent={<View style={{justifyContent: "center",  alignItems: "center"}}>
             <LottieView source={Cryinganimate} style={{width: RFValue(100), height: RFValue(100)}}/>
-            <Text style={{...fontsize.small, ...FONTS.regular, lineHeight: 25, color: COLORS.black, textAlign: "center"}}>Sorry, this contact is not a feather user</Text>        
+            <Text style={{...fontsize.small, ...FONTS.regular, lineHeight: 25, color: COLORS.black, textAlign: "center"}}>Sorry, No feather users</Text>        
           </View>
           }
           keyExtractor={(item) => item.username}

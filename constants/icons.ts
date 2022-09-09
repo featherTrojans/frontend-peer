@@ -191,6 +191,7 @@ import Aticon from "../assets/icons/Aticon";
 import Updateprofileicon from "../assets/icons/Updateprofileicon";
 import Bluearrowrighticon from "../assets/icons/Bluearrowrighticon";
 import Updatealertcancelicon from "../assets/icons/Updatealertcancelicon";
+import Startnewchaticon from "../assets/icons/Startnewchaticon";
 
 // Receiverimage
 
@@ -275,6 +276,7 @@ export default {
   Trustedbadge,
   Greenphoneicon,
   Directionarrow,
+  Startnewchaticon,
   Successtranfericon,
   Ratingsstar,
   Smallcancel,

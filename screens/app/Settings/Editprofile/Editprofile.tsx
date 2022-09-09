@@ -373,7 +373,7 @@ const Editprofile = ({}) => {
           </Formik>
   
           {usertype === "odogwu" && <TouchableOpacity activeOpacity={0.8} style={styles.becomeandagentwrap}>
-            <Text style={styles.becomeanagenttext}>Became an Agent</Text>
+            <Text style={styles.becomeanagenttext}>Become an Agent</Text>
             <View style={styles.becomeagentredbg}>
               <Text style={styles.becomeagentnewtext}>New</Text>
             </View>

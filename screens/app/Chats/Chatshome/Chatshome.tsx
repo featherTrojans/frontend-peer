@@ -1,6 +1,7 @@
 import {
   ActivityIndicator,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useEffect, useState, useContext } from "react";
@@ -22,9 +23,10 @@ import Chat from "./Chat";
 import Contact from "./Contact";
 import { Backheader } from "../../../../components";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import useContact from "../../../../utils/customContact";
 
 
-const { Emptynotification } = icons;
+const { Emptynotification, Startnewchaticon } = icons;
 
 const Chatshome = ({ navigation }) => {
   const { authdata } = useContext(AuthContext);
@@ -32,6 +34,7 @@ const Chatshome = ({ navigation }) => {
   const [chats, setChats] = useState<any>([]);
   const [chattwos, setChattwos] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const {contactsResolved} = useContact()
 
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid;
@@ -174,6 +177,10 @@ const Chatshome = ({ navigation }) => {
             )}
           </View>
         </View>
+
+        <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Usersearch",contactsResolved)} style={{position: "absolute", bottom: 14, right: 28, height: 47, width: 47,borderRadius: 47/2, backgroundColor: COLORS.blue3, justifyContent: "center", alignItems: "center"}}>
+          <Startnewchaticon />
+        </TouchableOpacity>
       </View>
     </View>
   );
