@@ -107,6 +107,7 @@ import Depositinput from "./app/Deposit/DepositInput/Depositinput";
 import LockScreen from "./shared/LockScreen/LockScreen";
 import RequesterinfoScreen from "./shared/RequesterinfoScreen";
 import BillContacts from "./app/Billpayments/Airtime/BillContacts/BillContacts";
+import Agentform from "./app/Agentform/Agentform";
 
 export {
   Onboarding,
@@ -172,6 +173,7 @@ export {
   Verifybvn,
   Chatshome,
   Becomeanagent,
+  Agentform,
   Chatsoon,
   Usersearch,
   Safetycautions,

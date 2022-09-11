@@ -146,7 +146,8 @@ import {
   Getstarted,
   Verifybvn,
   Requesterinfo,
-  Depositstart
+  Depositstart,
+  Agentform
 } from "../screens";
 // import { LockScreen } from "../screens";
 
@@ -592,6 +593,7 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Changepassword" component={Changepassword} />
             <AppStack.Screen name="Walletmanagement" component={Walletmanagement} />
             <AppStack.Screen name="Becomeanagent" component={Becomeanagent} />
+            <AppStack.Screen name="Agentform" component={Agentform} />
 
             <AppStack.Screen name="Addbvn" component={Addbvn} />
           <AppStack.Screen name="Verifybvn" component={Verifybvn} />
