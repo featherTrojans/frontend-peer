@@ -1,9 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from "react-native-toast-notifications";
 import Toast from "react-native-toast-message";
-
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { AuthProvider } from "./context/AuthContext";
@@ -14,8 +12,6 @@ import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { customNavigation } from "./utils/customNavigation";
-import { TextInput } from "react-native-gesture-handler";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 const { Cancelicon, Alertcancelicon, Updateprofileicon, Bluearrowrighticon, Updatealertcancelicon } = icons;
 
 export const toastConfig = {

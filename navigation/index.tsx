@@ -1,22 +1,15 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import * as Notification from "expo-notifications";
-import Constants from "expo-constants";
 import {
   View,
   Animated,
   AppState,
-  Platform,
-  Button,
-  Image,
-  Text,
-  TouchableOpacity,
-  Alert,
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { customNavigation, navigationRef } from "../utils/customNavigation";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 // import axiosCustom from "../httpRequests/axiosCustom";÷
@@ -49,18 +42,12 @@ import {
   Setnewpassword,
   Welcome,
   Welcometochange,
-
-  //Dashboard Screens
   Home,
-
-  //Transactions
   Transactions,
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
   Transactionsrating,
-  // Pendingrequest, //This screen has changed
-  // Accepetedrequest, //This screen has changed too
   History,
 
   //User Settings
@@ -149,14 +136,9 @@ import {
   Depositstart
 } from "../screens";
 // import { LockScreen } from "../screens";
-
-import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
-
-// import App from "../App";
-import Map from "../screens/shared/map/Map";
 import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
@@ -164,9 +146,7 @@ import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 const {
   TabHome,
   Tabhistory,
-  Tabtransactions,
   Tabchats,
-  Tabsettings,
   Tabuser,
   Tabplusicon,
 } = icons;
@@ -308,8 +288,6 @@ const Tabs = () => {
           tabBarStyle: {
             backgroundColor: "white",
             height: 82,
-            // paddingHorizontal: 36.5,
-            // paddingVertical: 20,
             alignItems: "center",
             justifyContent: "center",
           },

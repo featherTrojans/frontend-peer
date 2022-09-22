@@ -6,26 +6,16 @@ import React, {
   useRef,
 } from "react";
 import {
-  StyleSheet,
   Text,
   View,
-  StatusBar,
   Image,
   ScrollView,
-  FlatList,
-  // SafeAreaView,
   TouchableOpacity,
   RefreshControl,
-  Platform,
-  ImageBackground,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
 import LottieView from "lottie-react-native";
-import * as Animatable from "react-native-animatable";
-import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
-import { useIsFocused, useScrollToTop } from "@react-navigation/native";
+import {getStatusBarHeight } from "react-native-iphone-x-helper";
+import { useIsFocused} from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
 
@@ -39,40 +29,22 @@ import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
-import { customNavigation } from "../../../utils/customNavigation";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
-import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 import DoubleTapToClose from "../../shared/DoubleBack";
-import { connectFirestoreEmulator } from "firebase/firestore";
-import { RFValue } from "react-native-responsive-fontsize";
 import { nameToShow } from "../../../utils/nameToShow";
 import { getPeriod } from "../../../utils/getDayPeriod";
-import Globalmodal from "../../shared/Globalmodal/Globalmodal";
-import useCustomModal from "../../../utils/useCustomModal";
-import Alltransfermodal from "../../../components/Alltransfermodal/Alltransfermodal";
-import amountFormatter from "../../../utils/formatMoney";
-import { nameSplitter } from "../../../utils/nameSplitter";
 import HomeWallet from "./HomeWallet";
 import useAlert from "../../../utils/useAlerts";
 
 const {
   Bell,
-  Withdrawicon,
-  Depositicon,
-  Newtransfericon,
-  Paybillicon,
   Goldenstaricon,
   Dollaricon,
-  Bluebankicon,
-  Bluewalleticon,
-  Ashicon,
-  Aticon,
   Featherdefault,
-  Searcontacticon,
   Cryinganimate,
 } = icons;
-const { Waterwave, Wavvy } = images;
+const { Wavvy } = images;
 
 const Amountbtn = ({ amountText }) => {
   return (
@@ -124,16 +96,10 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   }, [isFocused])
 
   const getDashboardData = async () => {
-    // console.log("I am fetching again from home");
-
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
-      // setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
-      // console.log(response.data.data.userDetails.imageUrl, "user image url");
-      // console.log(response.data.data.transactions, "here is the transacxctions");
-      
     } catch (err) {
     } finally {
       setLoading(false);
@@ -245,26 +211,10 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
           showsHorizontalScrollIndicator={false}
           bounces={false}
         >
-          <View
-            style={[
-              styles.informationblockwrap,
-              {
-                backgroundColor: "#8456FF",
-                position: "relative",
-                overflow: "hidden",
-                flex: 1,
-              },
-            ]}
-          >
+          <View style={[ styles.informationblockwrap, { backgroundColor: "#8456FF", position: "relative", overflow: "hidden", flex: 1,},]}>
             <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
-                <Image
-                  source={Wavvy}
-                  style={{ width: "200%", height: "100%", opacity: .06,  }}
-                  
-                  
-                />
-              </View>
-
+              <Image source={Wavvy} style={{ width: "200%", height: "100%", opacity: .06}} />
+            </View>
             <View style={styles.informationiconswrap}>
               <Goldenstaricon />
               <View style={{ marginRight: 3.4 }} />
@@ -272,19 +222,11 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
               <View style={{ marginRight: 3.4 }} />
               <Goldenstaricon />
             </View>
-
             <Text style={styles.informationblocktext}>
               Earn N10 each time you rate a successful withdraw transaction{" "}
             </Text>
           </View>
-
-          <View
-            style={[
-              styles.informationblockwrap,
-              { backgroundColor: "#5676FF", marginRight: 0 },
-            ]}
-          >
-
+          <View style={[styles.informationblockwrap,{ backgroundColor: "#5676FF", marginRight: 0 },]}>
             <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
                 <Image
                   source={Wavvy}
