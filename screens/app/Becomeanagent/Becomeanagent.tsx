@@ -7,10 +7,11 @@ import {
   Tableoption,
 } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { navigationRef } from "../../../utils/customNavigation";
 
 const { Newlogo } = icons;
 
-const Becomeanagent = () => {
+const Becomeanagent = ({navigation}) => {
   return (
     <Mainwrapper>
       <Backheader title="Become an agent" />
@@ -78,7 +79,7 @@ const Becomeanagent = () => {
       <View style={{marginBottom: 20, paddingHorizontal: 15 }}>
         <Custombutton
           btntext="Start Application"
-          onpress={() => console.log("Hellow")}
+          onpress={() => navigation.navigate("Agentform")}
           bg={COLORS.blue9}
         />
         </View>

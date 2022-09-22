@@ -95,6 +95,7 @@ export type RootStackParamList = {
   Electricitydetails: undefined;
   Electricitytype: undefined;
   Becomeanagent: undefined;
+  Agentform: undefined;
   Electricitymetertype: undefined;
   Dataprovider: undefined;
   Airtimeprovider: undefined;

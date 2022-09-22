@@ -54,7 +54,8 @@
         "SYSTEM_ALERT_WINDOW",
         "INTERNET",
         "ACCESS_NETWORK_STATE",
-        "RECORD_AUDIO"
+        "RECORD_AUDIO",
+        "USE_BIOMETRICS"
       ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon2.png",
