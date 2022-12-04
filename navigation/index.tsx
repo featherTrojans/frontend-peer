@@ -149,14 +149,12 @@ import {
   Depositstart,
   Agentform
 } from "../screens";
-// import { LockScreen } from "../screens";
 
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
 
-// import App from "../App";
 import Map from "../screens/shared/map/Map";
 import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -180,6 +178,10 @@ Notification.setNotificationHandler({
   }),
 });
 
+
+
+
+// Push notification function
 export function usePushNotification() {
   const [expoPushToken, setExpoPushToken] = useState<string>();
   const [notification, setNotification] = useState(false);
@@ -210,16 +212,6 @@ export function usePushNotification() {
     };
   }, []);
 
-  // const sendSchedulePushNotification = async () => {
-  //   await Notifications.scheduleNotificationAsync({
-  //     content: {
-  //       title: "You've got mail! 📬",
-  //       body: "Here is the notification body",
-  //       data: { data: "goes here", takeTo: "Newtransactions" },
-  //     },
-  //     trigger: { seconds: 5 },
-  //   });
-  // };
 
   //Instant Notifications
   const sendPushNotification = async (
@@ -577,11 +569,7 @@ const RootNavigator = ({ initialBoarded }) => {
             />
           </AppStack.Group>
 
-          {/* Settings,
-  Editprofile,
-  Securityprivacy,
-  Changepassword,
-  Changepin, */}
+
 
           {/* Settings Screens */}
           <AppStack.Group>

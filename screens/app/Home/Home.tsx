@@ -72,7 +72,7 @@ const {
   Searcontacticon,
   Cryinganimate,
 } = icons;
-const { Waterwave, Wavvy } = images;
+const { Wavvy } = images;
 
 const Amountbtn = ({ amountText }) => {
   return (
@@ -91,7 +91,7 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
-  const scrollViewRef = useRef(null);
+  const scrollViewRef = useRef<any>();
   const linkTo = useLinkTo();
   const isFocused = useIsFocused();
   const jumpToHistory = TabActions.jumpTo("History");

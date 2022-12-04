@@ -87,6 +87,7 @@ const Login = ({ navigation }: any) => {
         });
       }
     } catch (err) {
+      console.log("there is an err")
       errorAlert(err)
     } finally {
       setLoading(false);

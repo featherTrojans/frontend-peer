@@ -25,7 +25,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "feather.peer",
+      "bundleIdentifier": "com.feather.peer",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Feather needs to use Face ID to authenticate"
