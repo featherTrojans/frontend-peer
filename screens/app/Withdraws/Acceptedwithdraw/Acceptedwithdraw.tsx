@@ -66,7 +66,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   const toast = useToast();
   const { requestInfo } = route.params;
   const X = useSharedValue(0)
-  const { setCoords, setDestinationCoords } = useContext(LocationContext);
+  const { coords, setCoords, setDestinationCoords } = useContext(LocationContext);
   const [toggleShow, setToggleShow] = useState(true);
   const [userinfo, setUserinfo] = useState({ phoneNumber: "" });
   const [loading, setLoading] = useState(false);
@@ -216,7 +216,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
-      {/* <Map /> */}
+      {!coords?.latitude ?null: <Map /> }
       <View style={styles.previewContainer}>
         <View style={{ paddingHorizontal: 25 }}>
           {toggleShow ? (
