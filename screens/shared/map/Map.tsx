@@ -1,9 +1,10 @@
-import React, { useRef, useEffect, useContext } from 'react'
+import React, { useRef, useEffect, useContext, useState } from 'react'
 import { View, Text, Dimensions } from 'react-native'
 import MapView, {Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import * as Location from 'expo-location';
 import { LocationContext } from '../../../context/LocationContext';
+import { getCurrentLocation } from '../../../utils/customLocation';
 // import {} from "../../../constants/icons"
 const {width, height} = Dimensions.get("screen")
 
@@ -13,7 +14,11 @@ const {width, height} = Dimensions.get("screen")
 // }
 
 const Map = ({}) => {
+    
    const {coords , destinationCoords} = useContext(LocationContext);
+   
+    console.log(coords, "COORDS")
+    console.log(destinationCoords, "destinationCoords")
    const mapRef = useRef(null)
     // console.log("the map object",mapRef.current)
    useEffect(() => {
@@ -25,6 +30,17 @@ const Map = ({}) => {
             })   
         }
     }, [coords?.latitude, destinationCoords?.latitude])
+
+
+    
+    if(coords == undefined || coords == null){
+        return null
+    }
+    
+    if(destinationCoords == undefined || destinationCoords == null){
+        return null
+    }
+
     return (
         <View style={{position:"absolute", top:0, left:0, width:width, height:height}}>
             <MapView 
@@ -54,7 +70,7 @@ const Map = ({}) => {
                         />
                     }
                     {
-                        (coords.latitude && destinationCoords.latitude) && <MapViewDirections
+                        (coords?.latitude && destinationCoords?.latitude) && <MapViewDirections
                             origin={coords}
                             
                             destination={{latitude:Number(destinationCoords.latitude),

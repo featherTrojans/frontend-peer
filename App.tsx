@@ -12,6 +12,7 @@ import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { customNavigation } from "./utils/customNavigation";
+import Map from "./screens/shared/map/Map";
 const { Cancelicon, Alertcancelicon, Updateprofileicon, Bluearrowrighticon, Updatealertcancelicon } = icons;
 
 export const toastConfig = {

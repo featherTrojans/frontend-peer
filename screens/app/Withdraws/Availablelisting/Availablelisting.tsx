@@ -63,7 +63,7 @@ interface agent {
 const Availablelisting = ({ navigation, route }: any) => {
   const amount = route.params?.amount;
   const activate = route.params?.activate;
-  const { setCoords, setDestinationCoords } = useContext(LocationContext);
+  const { setCoords,coords, setDestinationCoords } = useContext(LocationContext);
   const {blueAlert} = useAlert()
   const [agents, setAgents] = useState([]);
   const [charge, setCharge] = useState(0);
@@ -83,7 +83,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   const { CustomModal:TransationSummaryModal ,openModal: openTransactionSummaryModal, closeModal:closeTransactionSummeryModal} = useCustomModal()
   const { CustomModal:NegotiateChargeModal ,openModal: openNegotiateChargeModal, closeModal:closeNegotiateChargeModal} = useCustomModal()
   const {CustomModal:SuccessModalContainer, openModal: openSuccessModal, closeModal: closeSuccessModal} =  useCustomModal()
-
+  console.log(coords,"*******CORDS********")
 
   const onViewChangeRef = useRef<
     ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
@@ -220,7 +220,7 @@ const Availablelisting = ({ navigation, route }: any) => {
         <Successmodal btnText="Yeah, proceed" successMsg="Cash request successful" btnFunction={()=>{closeSuccessModal(); navigation.navigate("Home")}} />
       </SuccessModalContainer>
       <Customstatusbar />
-      {/* <Map /> */}
+      {!coords?.latitude ?null: <Map /> }
 
 
 
