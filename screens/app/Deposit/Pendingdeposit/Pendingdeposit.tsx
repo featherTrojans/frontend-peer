@@ -110,7 +110,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
       <SafeAreaView style={styles.container}>
         <Customstatusbar /> 
         {loading && <Loader />}
-        <Map />
+        {/* <Map /> */}
           <View style={styles.previewContainer}>
             <View style={{ paddingHorizontal: 25 }}>
               {toggleShow ? (

@@ -84,7 +84,7 @@ const Pendingwithdraw = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
-        <Map />
+        {/* <Map /> */}
         <View style={styles.previewContainer}>
 
 

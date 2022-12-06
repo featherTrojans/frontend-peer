@@ -125,7 +125,7 @@ const Accepteddeposit = ({ navigation, route }) => {
     <SafeAreaView style={styles.container}>
       {loading && <Loader />}
       <Customstatusbar />
-      <Map />
+      {/* <Map /> */}
       <View style={styles.previewContainer}>
         <View style={{ paddingHorizontal: 25 }}>
           {toggleShow ? (

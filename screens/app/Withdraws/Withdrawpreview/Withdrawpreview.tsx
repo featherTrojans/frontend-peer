@@ -33,7 +33,7 @@ const Withdrawpreview = ({navigation, route}: any) => {
   const {coords,destinationCoords} = useContext(LocationContext)
   return (  
     <SafeAreaView style={styles.container}>
-      <Map />
+      {/* <Map /> */}
       <Customstatusbar />
         <View style={styles.previewContainer}>
           <View style={{ paddingHorizontal: 25 }}>

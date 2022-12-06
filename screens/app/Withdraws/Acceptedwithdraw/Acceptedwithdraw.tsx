@@ -216,7 +216,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
-      <Map />
+      {/* <Map /> */}
       <View style={styles.previewContainer}>
         <View style={{ paddingHorizontal: 25 }}>
           {toggleShow ? (

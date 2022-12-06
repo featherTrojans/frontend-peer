@@ -741,10 +741,10 @@ export default function MainNavigation({ initialBoarded = false }) {
   }, []);
 
   useEffect(() => {
-    AppState.addEventListener("change", lockLogic);
+    const subscription = AppState.addEventListener("change", lockLogic);
 
     return () => {
-      AppState.removeEventListener("change", lockLogic);
+      subscription.remove()
     };
   }, [token, modal]);
 

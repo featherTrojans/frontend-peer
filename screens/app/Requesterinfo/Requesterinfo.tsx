@@ -107,7 +107,7 @@ const Requesterinfo = ({navigation,route}) => {
 
   return (
     <View style={{paddingTop: getStatusBarHeight(true), flex: 1}}>
-      <Map />
+      {/* <Map /> */}
       <Backheader title="Withdraw"/>
     {loading && <Loader />}
 

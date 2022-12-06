@@ -220,7 +220,7 @@ const Availablelisting = ({ navigation, route }: any) => {
         <Successmodal btnText="Yeah, proceed" successMsg="Cash request successful" btnFunction={()=>{closeSuccessModal(); navigation.navigate("Home")}} />
       </SuccessModalContainer>
       <Customstatusbar />
-      <Map />
+      {/* <Map /> */}
 
 
 

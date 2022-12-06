@@ -6,7 +6,7 @@ import Map from './map/Map'
 const RequesterinfoScreen = () => {
   return (
     <View>
-      <Map />
+      
       <Requesterinfo />
     </View>
   )
