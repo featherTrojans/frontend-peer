@@ -11,11 +11,14 @@ import {
 } from "../../../../components";
 import { styles } from "./Bankaccount.styles";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import DropDownPicker from "react-native-dropdown-picker";
+
+// import DropDownPicker from "react-native-dropdown-picker";
+// import { useToast } from "react-native-toast-notifications";
+import showerror from "../../../../utils/errorMessage";
+
+
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import showerror from "../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
 import amountFormatter from "../../../../utils/formatMoney";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { AuthContext } from "../../../../context/AuthContext";
@@ -104,7 +107,7 @@ const Bankaccount = ({ navigation, route }) => {
   const { amount } = route.params;
   const { authdata } = useContext(AuthContext);
   // const amount=500
-  const toast = useToast();
+  // const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -137,7 +140,7 @@ const Bankaccount = ({ navigation, route }) => {
 
       setShowModal(true);
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }
@@ -215,23 +218,9 @@ const Bankaccount = ({ navigation, route }) => {
           value={amount}
         />
 
-        {/* <View style={styles.headerContainer}>
-          <Text style={styles.leftHeader}>Saved Accounts</Text>
-          <Text style={styles.rightHeader}>See More</Text>
-        </View> */}
+  
 
-        {/* <View style={{ marginVertical: 35 }}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={16}
-            data={SAVEDACCOUNTS}
-            keyExtractor={(item) => item.name}
-            renderItem={({ item }) => <Saveduser details={item} />}
-          />
-        </View> */}
-
-        <DropDownPicker
+        {/* <DropDownPicker
           open={open}
           value={value}
           items={items}
@@ -247,8 +236,14 @@ const Bankaccount = ({ navigation, route }) => {
             borderColor: COLORS.grey1,
             zIndex: 1,
           }}
-        />
-        {/* <Input icon={<At />} placeholder="--- Select Bank ---" /> */}
+        /> */}
+
+
+
+
+
+
+
         <Input
           icon={<At />}
           placeholder="Account Number"
@@ -256,28 +251,7 @@ const Bankaccount = ({ navigation, route }) => {
           onChangeText={(text) => setAccountnum(text)}
           keyboardType="number-pad"
         />
-        {/* <View style={styles.addAccountContainer}>
-          <BouncyCheckbox
-            size={18}
-            fillColor={COLORS.blue6}
-            unfillColor={COLORS.white}
-            text={"Add To Saved Accounts"}
-            iconStyle={[
-              styles.checkbox,
-              {
-                borderColor: checked ? COLORS.blue6 : COLORS.checkBorder,
-                borderRadius: 5,
-              },
-            ]}
-            onPress={(isChecked: boolean) => {
-              setChecked(!checked);
-            }}
-            textStyle={[styles.checkboxText, { textDecorationLine: "none" }]}
-            style={{
-              alignItems: "center",
-            }}
-          />
-        </View> */}
+        
       </View>
 
       <Bottombtn title="PROCEED" onpress={handleSubmit} />

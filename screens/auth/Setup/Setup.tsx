@@ -16,12 +16,12 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import useDebounce from "../../../utils/debounce";
 import { AuthContext } from "../../../context/AuthContext";
 import showerror from "../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// import { debounce } from "debounce";
+// import { debounce } from "debounce";s
 
 const { At, Check, WrongIcon, Successcheckanimate } = icons;
 
@@ -33,7 +33,7 @@ const setAuthorizationToken = (token: string) => {
 
 const Setup = ({ route, navigation }) => {
   const { token, defaultUsername } = route.params;
-  const toast = useToast();
+  // const toast = useToast();
   const [username, setUsername] = useState<string>(defaultUsername);
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce(token);
   const [loading, setLoading] = useState<boolean>(false);
@@ -66,7 +66,7 @@ const Setup = ({ route, navigation }) => {
       // setToken(response.data.data.token)
       navigation.navigate("Welcome",{fromm:"setup", username:null,token:response.data.data.token})
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

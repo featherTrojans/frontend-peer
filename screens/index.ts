@@ -4,7 +4,7 @@ import Onboarding from "./onboarding/Onboarding";
 
 // These are the auth screens
 import Login from "./auth/login/Login";
-import Signup from "./auth/signup/Signup";
+// import Signup from "./auth/signup/Signup";
 import Verification from "./auth/verification/Verification";
 import Setup from "./auth/Setup/Setup";
 import Welcome from "./auth/welcome/Welcome";
@@ -112,7 +112,6 @@ import Agentform from "./app/Agentform/Agentform";
 export {
   Onboarding,
   Login,
-  Signup,
   Verification,
   Setup,
   Personal,

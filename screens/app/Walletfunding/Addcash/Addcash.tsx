@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState, useContext } from "react";
-import DropDownPicker from "react-native-dropdown-picker";
+// import DropDownPicker from "react-native-dropdown-picker";
 
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "./Addcash.styles";
@@ -35,7 +35,7 @@ const Addcash = ({ navigation }) => {
         <View style={{ flex: 1, paddingHorizontal: 15 }}>
           {/* This will contain the dropdown to choose the wallet type needed */}
 
-          <DropDownPicker
+          {/* <DropDownPicker
             open={open}
             value={value}
             items={items}
@@ -50,7 +50,10 @@ const Addcash = ({ navigation }) => {
             dropDownContainerStyle={{
               borderColor: COLORS.grey1,
             }}
-          />
+          /> */}
+
+
+          
           {value !== null && (
             <View style={styles.balanceContainer}>
               <Text style={styles.balanceText}>Balance :</Text>

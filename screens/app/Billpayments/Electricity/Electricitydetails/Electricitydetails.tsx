@@ -5,9 +5,9 @@ import { Backheader, Bottombtn } from "../../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import Globalmodal from "../../../../shared/Globalmodal/Globalmodal";
 import LottieView from "lottie-react-native";
-import DropDownPicker from "react-native-dropdown-picker";
+// import DropDownPicker from "react-native-dropdown-picker";
+// import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
 import { AuthContext } from "../../../../../context/AuthContext";
 import { styles } from "../../Airtime/Airtimedetails/Airtimedetails.styles";
 import styled from "styled-components";
@@ -50,7 +50,7 @@ const Paybillsinput = ({
 
 const Electricitydetails = ({ navigation, route }) => {
   const { amount } = route.params;
-  const toast = useToast();
+  // const toast = useToast();
   const { authdata } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -80,7 +80,7 @@ const Electricitydetails = ({ navigation, route }) => {
 
   const handleToNext = () => {
     if (!amount || !phone || !value || !value2 || !meterNumber) {
-      return showerror(toast, null, "All fields are complusory");
+      // return showerror(toast, null, "All fields are complusory");
     }
     navigation.navigate("Airtimepurchasepin", {
       type: "electricity",
@@ -113,12 +113,12 @@ const Electricitydetails = ({ navigation, route }) => {
             placeholder={amount}
             editable={false}
           />
-          <DropDownPicker
+          {/* <DropDownPicker
             open={open}
             value={value}
             items={items}
             setOpen={setOpen}
-            setValue={setValue}
+            setValue={setValue}s
             setItems={setItems}
             placeholder="@    |    Electricity Company"
             placeholderStyle={styles.placeholderStyle}
@@ -138,7 +138,7 @@ const Electricitydetails = ({ navigation, route }) => {
             textStyle={styles.textStyle}
             style={[styles.dropDownStyle, { zIndex: 1 }]}
             dropDownContainerStyle={styles.dropdownContainerStyle}
-          />
+          /> */}
           <Paybillsinput
             inputSymbol="#"
             placeholder="Enter Meter Number"

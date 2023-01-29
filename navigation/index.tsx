@@ -754,7 +754,7 @@ export default function MainNavigation({ initialBoarded = false }) {
     AppState.addEventListener("change", lockLogic);
 
     return () => {
-      AppState.removeEventListener("change", lockLogic);
+      // AppState.removeEventListener("change", lockLogic);
     };
   }, [token, modal]);
 
