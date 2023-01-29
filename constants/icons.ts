@@ -168,7 +168,7 @@ import Newlogowhite from "../assets/icons/Newlogowhite";
 import Blackcautionicon from "../assets/icons/Blackcautionicon";
 import Dashedline from "../assets/icons/Dashedline";
 import Greencheckicon from "../assets/icons/Greencheckicon";
-///Animated icons
+///Animated iconsLoa
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
 import Sentconfetti from "../assets/Lottie/animations/sendConfetti.json"

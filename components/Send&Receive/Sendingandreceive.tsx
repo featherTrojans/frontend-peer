@@ -32,11 +32,11 @@ const InitialsBgColor = ({name}) => {
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: COLORS.purple3,
+    // backgroundColor: C,
     borderRadius: 50 /2,
   }}
 >
-  <Text style={{...fontsize.small, ...FONTS.medium, color: COLORS.purple4}}>{nameSplitToTwo(name)}</Text>
+  <Text >{nameSplitToTwo(name)}</Text>
 </View> 
   )
 }
@@ -215,24 +215,7 @@ const Sendingandreceive = ({
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
-      {/* {user.imageUrl !== null ?
-      <View>
-        <Image
-        style={{width: 62, height: 62, borderRadius: 62/2}}
-        source={{
-          uri: user.imageUrl,
-        }}
-      />
-      </View>  
-      :
 
-      <Userdefaultmedium />
-        
-    
-    }
-    <View>
-      <Dashedline />
-    </View> */}
      {
      
      ((title == "Wallet Credit" ) || (title == "Wallet Debit")) && otherUser ?

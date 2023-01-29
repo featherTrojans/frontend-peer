@@ -16,6 +16,7 @@ type KeyboardProps = {
 const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) => {
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>
+
       <View style={{ flexDirection: "row" }}>
         {[array[0], array[1], array[2]].map((number, index) => {
           return (
@@ -29,6 +30,7 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
           );
         })}
       </View>
+
       <View style={{ flexDirection: "row" }}>
         {[array[3], array[4], array[5]].map((number, index) => {
           return (
@@ -90,6 +92,9 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
         key="<"
         >{"<"}</Numberbtn>
       </View>
+
+
+      
     </View>
   );
 };

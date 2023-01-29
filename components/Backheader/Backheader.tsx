@@ -49,6 +49,8 @@ const Backheader = ({
         <Text style={[styles.backArrowText, {paddingLeft: showArrow ? 0: 15}]}>{title}</Text>
         </TouchableOpacity>
       </View>
+
+      
       {rightComponent}
     </View>
   );

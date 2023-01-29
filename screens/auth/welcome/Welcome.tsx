@@ -126,9 +126,13 @@ const Welcome = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+
+
       <View style={styles.container}>
         {/* Smiling Icon */}
         <Customstatusbar />
+
+
         <View
           style={{
             justifyContent: "center",
@@ -183,6 +187,9 @@ const Welcome = ({ navigation, route }) => {
               : "Hey welcome back to feather, transact more today, earn more with cash deposits."}
           </Text>
         </View>
+
+
+        
       </View>
     </SafeAreaView>
   );
