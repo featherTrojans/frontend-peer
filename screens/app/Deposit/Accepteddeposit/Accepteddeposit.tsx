@@ -54,7 +54,7 @@ const { Locationmap } = images;
 const Accepteddeposit = ({ navigation, route }) => {
   // const toast = useToast();
   const { requestInfo } = route.params;
-  const { setCoords, setDestinationCoords } = useContext(LocationContext);
+  const { coords, setCoords, setDestinationCoords } = useContext(LocationContext);
   const [toggleShow, setToggleShow] = useState(true);
   const [loading, setLoading] = useState(false);
   const [locationLoading, setLocationLoading] = useState(false);
@@ -125,7 +125,8 @@ const Accepteddeposit = ({ navigation, route }) => {
     <SafeAreaView style={styles.container}>
       {loading && <Loader />}
       <Customstatusbar />
-      <Map />
+      
+      {!coords?.latitude ?null: <Map /> }
       <View style={styles.previewContainer}>
         <View style={{ paddingHorizontal: 25 }}>
           {toggleShow ? (

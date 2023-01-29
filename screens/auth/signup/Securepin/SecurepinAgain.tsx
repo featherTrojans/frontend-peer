@@ -20,7 +20,9 @@ const setAuthorizationToken = (token: string) => {
 };
 
 
-const { SecureDot, Successcheckanimate, Newlogo } = icons;
+const { Successcheckanimate, Newlogo } = icons;
+
+ 
 const SecurepinAgain = ({ route, navigation }) => {
   const {errorAlert} = useAlert()
   const { token, pin, fromm } = route.params;
@@ -30,6 +32,8 @@ const SecurepinAgain = ({ route, navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState<any>();
 
+  console.log('------------------------TOKEN--------------------------');
+  console.log(token);
   const handleSubmit = async () => {
     if (pin.join("") !== amount.join("")) {
       return errorAlert(null, "Pin doesn't match");
@@ -45,10 +49,6 @@ const SecurepinAgain = ({ route, navigation }) => {
       setResult(response.data.data);
       setAuthorizationToken(response?.data?.data?.token)
       setShowModal(true);
-      // navigation.navigate("Setup", {
-      //   token: response?.data?.data?.token,
-      //   defaultUsername: response?.data?.data?.username,
-      // });
     } catch (err) {
       errorAlert(err);
     } finally {

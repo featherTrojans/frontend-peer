@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "1.0.7",
+    "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -25,14 +25,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.feather.peer",
+      "bundleIdentifier": "africa.feathermobile.com",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Feather needs to use Face ID to authenticate"
       }
     },
     "android": {
-      "versionCode":9,
+      "versionCode": 11,
       "package": "feather.peer",
       "googleServicesFile": "./google-services.json",
       "permissions": [
@@ -70,6 +70,11 @@
     "web": {
       "favicon": "./assets/images/notification.png"
     },
-    "description": ""
+    "description": "",
+    "extra": {
+      "eas": {
+        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
+      }
+    }
   }
 }

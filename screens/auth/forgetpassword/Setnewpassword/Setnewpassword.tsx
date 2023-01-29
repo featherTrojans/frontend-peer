@@ -28,7 +28,7 @@ const Setnewpassword = ({ navigation, route }) => {
       }),
   });
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white,}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <Customstatusbar />
     <View
       style={{  paddingHorizontal: 25, flex: 1 }}
@@ -138,36 +138,36 @@ const Setnewpassword = ({ navigation, route }) => {
                 />
               </View>
 
-              <View style={[styles.bottomContainer, { flex: 1 }]}>
-                <TouchableOpacity
-                  style={styles.proceedBtn}
-                  activeOpacity={0.8}
-                  onPress={handleSubmit}
-                  // onPress={handleSubmit}
-                  // disabled={isSubmitting}
-                >
-                  <Text style={styles.proceedText}>PROCEED</Text>
-                </TouchableOpacity>
-
-                {/* Have an account */}
-                <View style={styles.bottomTextContainer}>
-                  <Text style={styles.bottomText}>Have an account yet?</Text>
-
+                <View style={[styles.bottomContainer, { flex: 1 }]}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("Login")}
+                    style={styles.proceedBtn}
                     activeOpacity={0.8}
+                    onPress={handleSubmit}
+                    // onPress={handleSubmit}
+                    // disabled={isSubmitting}
                   >
-                    <Text style={[styles.bottomText, { ...FONTS.bold }]}>
-                      Login
-                    </Text>
+                    <Text style={styles.proceedText}>PROCEED</Text>
                   </TouchableOpacity>
+
+                  {/* Have an account */}
+                  <View style={styles.bottomTextContainer}>
+                    <Text style={styles.bottomText}>Have an account yet?</Text>
+
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Login")}
+                      activeOpacity={0.8}
+                    >
+                      <Text style={[styles.bottomText, { ...FONTS.bold }]}>
+                        Login
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            </React.Fragment>
-          );
-        }}
-      </Formik>
-    </View>
+              </React.Fragment>
+            );
+          }}
+        </Formik>
+      </View>
     </SafeAreaView>
   );
 };

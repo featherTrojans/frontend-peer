@@ -58,7 +58,7 @@ const Amountbtn = ({ amountText }) => {
   );
 };
 
-const Home = ({ navigation, route }: { navigation: any, route: any }) => {
+const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   const { setAuthData, authdata } = useContext(AuthContext);
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
@@ -70,7 +70,7 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-  const {updateAlert} = useAlert()
+  const { updateAlert } = useAlert();
 
   console.log(isFocused)
 
@@ -143,8 +143,6 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
     );
   };
 
- 
-
   return (
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <Customstatusbar />
@@ -165,21 +163,20 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
             ) : (
               <Featherdefault />
             )}
-
           </TouchableOpacity>
           <View style={styles.profileNameContainer}>
-              <Text style={styles.profileName}>
-                {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
-              </Text>
-              <Text style={styles.profileUsername}>
-                @{authdata?.userDetails?.username}
-              </Text>
-            </View>
+            <Text style={styles.profileName}>
+              {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
+            </Text>
+            <Text style={styles.profileUsername}>
+              @{authdata?.userDetails?.username}
+            </Text>
           </View>
+        </View>
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Notifications")}
-          style={{ padding: 8, borderRadius: 20}}
+          style={{ padding: 8, borderRadius: 20 }}
         >
           <Bell />
         </TouchableOpacity>
@@ -222,15 +219,20 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
               },
             ]}
           >
-            <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
-                <Image
-                  source={Wavvy}
-                  style={{ width: "200%", height: "100%", opacity: .06,  }}
-                  
-                  
-                />
-              </View>
-
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                left: -140,
+                bottom: 0,
+                right: 20,
+              }}
+            >
+              <Image
+                source={Wavvy}
+                style={{ width: "200%", height: "100%", opacity: 0.06 }}
+              />
+            </View>
             <View style={styles.informationiconswrap}>
               <Goldenstaricon />
               <View style={{ marginRight: 3.4 }} />
@@ -238,27 +240,30 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
               <View style={{ marginRight: 3.4 }} />
               <Goldenstaricon />
             </View>
-
             <Text style={styles.informationblocktext}>
               Earn N10 each time you rate a successful withdraw transaction{" "}
             </Text>
           </View>
-
           <View
             style={[
               styles.informationblockwrap,
               { backgroundColor: "#5676FF", marginRight: 0 },
             ]}
           >
-
-            <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
-                <Image
-                  source={Wavvy}
-                  style={{ width: "200%", height: "100%", opacity: .06,  }}
-                  
-                  
-                />
-              </View>
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                left: -140,
+                bottom: 0,
+                right: 20,
+              }}
+            >
+              <Image
+                source={Wavvy}
+                style={{ width: "200%", height: "100%", opacity: 0.06 }}
+              />
+            </View>
             <View style={styles.informationiconswrap}>
               <Dollaricon />
             </View>

@@ -2,11 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { styles } from "./Login.styles";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../constants";
 
-import {
-  View,
-  Text,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 // import * as Keychain from 'react-native-keychain';
@@ -43,7 +39,7 @@ const Login = ({ navigation }: any) => {
   const [hidePassword, setHidePassword] = useState(true);
   const { setToken, allowBiometrics, setAllowBiometrics } =
     useContext(AuthContext);
-    const {errorAlert, purpleAlert, blueAlert} = useAlert()
+  const { errorAlert, purpleAlert, blueAlert } = useAlert();
 
   const [isBiometricAllowed, setIsBiometricAllowed] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -131,8 +127,7 @@ const Login = ({ navigation }: any) => {
   };
 
   return (
-    <Mainwrapper >
-
+    <Mainwrapper>
       <KeyboardAwareScrollView>
         <View style={styles.container}>
           {/* Logo */}
@@ -163,9 +158,6 @@ const Login = ({ navigation }: any) => {
             </View>
           </View>
 
-
-
-
           {/* Form */}
           <Formik
             initialValues={{
@@ -190,7 +182,6 @@ const Login = ({ navigation }: any) => {
                   {/* {isSubmitting && checkIfSubmitting()} */}
                   {loading && <Loader />}
 
-
                   {/* Username input */}
                   <Input
                     placeholder="Phone Number / email / username"
@@ -198,7 +189,6 @@ const Login = ({ navigation }: any) => {
                     formikProps={formikProps}
                     icon={<Usericon />}
                   />
-
 
                   {/* Password input */}
                   <Input
@@ -208,7 +198,6 @@ const Login = ({ navigation }: any) => {
                     icon={<Lock />}
                     password={true}
                   />
-
 
                   {/* Bottom text */}
                   <JustifyBetween
@@ -249,10 +238,6 @@ const Login = ({ navigation }: any) => {
               );
             }}
           </Formik>
-
-
-
-
 
           <View style={styles.haveanaccount}>
             <Text style={styles.haveaccounttext}>Don’t have an account? </Text>

@@ -126,6 +126,7 @@ const Personal = ({ navigation }) => {
                 handleChange,
                 handleSubmit,
               } = formikProps;
+              
               return (
                 <React.Fragment>
                   {isSubmitting && <Loader />}
@@ -183,7 +184,13 @@ const Personal = ({ navigation }) => {
 
 
 
-                     <Custombutton btntext="Sign up" onpress={handleSubmit} disable={isSubmitting}/> 
+                     <Custombutton btntext="Sign up" onpress={()=>{
+                      const errorvalues = Object.values(errors)
+                      if(errorvalues.length > 0){
+                        return errorAlert(null, errorvalues[0])
+                      }
+                      handleSubmit()
+                      }} disable={isSubmitting}/> 
                     {/* <TouchableOpacity
                       style={styles.proceedBtn}
                       activeOpacity={0.8}

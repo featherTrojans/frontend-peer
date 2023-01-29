@@ -232,7 +232,7 @@ const Editprofile = ({}) => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values) => {
-              console.log("adfasfsafasfasfasfsfasfasffsafa")
+              
               if(userinfo.fullName && usernamename?.toLowerCase()){
                 return errorAlert(null, "Please provide a valid username")
               }

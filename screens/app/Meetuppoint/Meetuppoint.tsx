@@ -1,12 +1,15 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useContext, useState } from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import { Backheader, Custombutton, Mainwrapper } from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { LocationContext } from "../../../context/LocationContext";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import Toast from "react-native-toast-message";
 
 const { Cancelicon, Meetupdot, Clearinput } = icons;
-const Meetuppoint = ({navigation}) => {
+
+const Meetuppoint = ({navigation, route}) => {
+  const withdrawInfo = route.params;
   const { setCoords } = useContext(LocationContext);
   const [locationdata, setLocationdata] = useState({})
   const [locationdetails, setLocationdetails] = useState({})
@@ -16,13 +19,14 @@ const Meetuppoint = ({navigation}) => {
       longitude: locationdetails?.geometry?.location.lng,
       locationText: locationdata.description,
     });
-    navigation.goBack()
+    navigation.navigate("Availablelisting",{amount:"",activate:withdrawInfo}) 
   }
-
+  useEffect(()=>{
+    Toast.hide()
+  },[])
   return (
     <Mainwrapper>
-      <Backheader title="Meetup Point" />
-
+        <Backheader title="Meetup Point" />
       
       <View style={{ paddingHorizontal: 15, flex: 1 }}>
         <View

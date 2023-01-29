@@ -127,13 +127,12 @@ export default function App() {
               <MainNavigation initialBoarded={onboarded} />
             </LocationProvider>
           </AuthProvider>
-        <Toast
-          config={toastConfig}
-          topOffset={getStatusBarHeight(true)}
-          onShow={() => console.log("Status shown")}
-          onHide={() => console.log("Status hidden")}
-        />
-        
+          <Toast
+            config={toastConfig}
+            topOffset={getStatusBarHeight(true)}
+            onShow={() => console.log("Status shown")}
+            onHide={() => console.log("Status hidden")}
+          />
       </>
     );
   }
