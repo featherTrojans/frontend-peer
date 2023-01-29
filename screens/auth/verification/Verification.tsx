@@ -47,7 +47,7 @@ const Verification = ({route,navigation}) => {
 
 
   useEffect(()=>{
-    sendOtp()
+    // sendOtp()
   },[])
   
   useEffect(()=>{

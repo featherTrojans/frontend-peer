@@ -14,16 +14,10 @@ import {
   RefreshControl,
 } from "react-native";
 import LottieView from "lottie-react-native";
-import {getStatusBarHeight } from "react-native-iphone-x-helper";
-import { useIsFocused} from "@react-navigation/native";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { useIsFocused } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
-
-
-
-import {
-  Transactionhistory,
-  Viewbalance,
-} from "../../../components";
+import { Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
@@ -37,13 +31,8 @@ import { getPeriod } from "../../../utils/getDayPeriod";
 import HomeWallet from "./HomeWallet";
 import useAlert from "../../../utils/useAlerts";
 
-const {
-  Bell,
-  Goldenstaricon,
-  Dollaricon,
-  Featherdefault,
-  Cryinganimate,
-} = icons;
+const { Bell, Goldenstaricon, Dollaricon, Featherdefault, Cryinganimate } =
+  icons;
 const { Wavvy } = images;
 
 const Amountbtn = ({ amountText }) => {
@@ -56,7 +45,7 @@ const Amountbtn = ({ amountText }) => {
   );
 };
 
-const Home = ({ navigation, route }: { navigation: any, route: any }) => {
+const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   const { setAuthData, authdata } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
@@ -69,10 +58,10 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-  const {updateAlert} = useAlert()
+  const { updateAlert } = useAlert();
 
-  console.log('------------------------ROUTINGNGNG--------------------------');
-  console.log(isFocused)
+  console.log("------------------------ROUTINGNGNG--------------------------");
+  console.log(isFocused);
 
   const toTop = () => {
     scrollViewRef.current?.scrollTo({
@@ -86,14 +75,13 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   }
 
   useEffect(() => {
-    if(isFocused && authdata.userDetails.userLevel <= 1){
-       updateAlert("Update your profile")
-        console.log(route, "here is my current route");
-    }else{
-      Toast.hide()
+    if (isFocused && authdata.userDetails.userLevel <= 1) {
+      updateAlert("Update your profile");
+      console.log(route, "here is my current route");
+    } else {
+      Toast.hide();
     }
-    
-  }, [isFocused])
+  }, [isFocused]);
 
   const getDashboardData = async () => {
     setLoading(true);
@@ -140,8 +128,6 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
     );
   };
 
- 
-
   return (
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <Customstatusbar />
@@ -162,21 +148,20 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
             ) : (
               <Featherdefault />
             )}
-
           </TouchableOpacity>
           <View style={styles.profileNameContainer}>
-              <Text style={styles.profileName}>
-                {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
-              </Text>
-              <Text style={styles.profileUsername}>
-                @{authdata?.userDetails?.username}
-              </Text>
-            </View>
+            <Text style={styles.profileName}>
+              {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
+            </Text>
+            <Text style={styles.profileUsername}>
+              @{authdata?.userDetails?.username}
+            </Text>
           </View>
+        </View>
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Notifications")}
-          style={{ padding: 8, borderRadius: 20}}
+          style={{ padding: 8, borderRadius: 20 }}
         >
           <Bell />
         </TouchableOpacity>
@@ -211,9 +196,30 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
           showsHorizontalScrollIndicator={false}
           bounces={false}
         >
-          <View style={[ styles.informationblockwrap, { backgroundColor: "#8456FF", position: "relative", overflow: "hidden", flex: 1,},]}>
-            <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
-              <Image source={Wavvy} style={{ width: "200%", height: "100%", opacity: .06}} />
+          <View
+            style={[
+              styles.informationblockwrap,
+              {
+                backgroundColor: "#8456FF",
+                position: "relative",
+                overflow: "hidden",
+                flex: 1,
+              },
+            ]}
+          >
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                left: -140,
+                bottom: 0,
+                right: 20,
+              }}
+            >
+              <Image
+                source={Wavvy}
+                style={{ width: "200%", height: "100%", opacity: 0.06 }}
+              />
             </View>
             <View style={styles.informationiconswrap}>
               <Goldenstaricon />
@@ -226,15 +232,26 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
               Earn N10 each time you rate a successful withdraw transaction{" "}
             </Text>
           </View>
-          <View style={[styles.informationblockwrap,{ backgroundColor: "#5676FF", marginRight: 0 },]}>
-            <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
-                <Image
-                  source={Wavvy}
-                  style={{ width: "200%", height: "100%", opacity: .06,  }}
-                  
-                  
-                />
-              </View>
+          <View
+            style={[
+              styles.informationblockwrap,
+              { backgroundColor: "#5676FF", marginRight: 0 },
+            ]}
+          >
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                left: -140,
+                bottom: 0,
+                right: 20,
+              }}
+            >
+              <Image
+                source={Wavvy}
+                style={{ width: "200%", height: "100%", opacity: 0.06 }}
+              />
+            </View>
             <View style={styles.informationiconswrap}>
               <Dollaricon />
             </View>

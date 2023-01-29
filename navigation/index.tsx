@@ -1,15 +1,10 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import * as Notification from "expo-notifications";
-import {
-  View,
-  Animated,
-  AppState,
-} from "react-native";
+import { View, Animated, AppState } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { customNavigation, navigationRef } from "../utils/customNavigation";
-
 
 import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 // import axiosCustom from "../httpRequests/axiosCustom";÷
@@ -18,7 +13,6 @@ import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
-
 
 import {
   RootStackParamList,
@@ -112,7 +106,6 @@ import {
 
   //Paybills and Airtime
   Paybills,
-
   Airtimeamount,
   Airtimeanddata,
   Airtimedetails,
@@ -122,7 +115,7 @@ import {
   Electricitytype,
   Electricitymetertype,
   Dataprovider,
-  Dataplan, 
+  Dataplan,
   Airtimeprovider,
   Becomeanagent,
   Sendcash,
@@ -134,7 +127,7 @@ import {
   Verifybvn,
   Requesterinfo,
   Depositstart,
-  Agentform
+  Agentform,
 } from "../screens";
 // import { LockScreen } from "../screens";
 import { COLORS, icons, SIZES } from "../constants";
@@ -144,13 +137,7 @@ import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 
-const {
-  TabHome,
-  Tabhistory,
-  Tabchats,
-  Tabuser,
-  Tabplusicon,
-} = icons;
+const { TabHome, Tabhistory, Tabchats, Tabuser, Tabplusicon } = icons;
 
 Notification.setNotificationHandler({
   handleNotification: async () => ({
@@ -481,7 +468,7 @@ const Tabs = () => {
           })}
         />
       </BottomTab.Navigator>
-  
+
       <Animated.View
         style={{
           width: getWidth(),
@@ -532,7 +519,6 @@ const RootNavigator = ({ initialBoarded }) => {
         </AppStack.Group>
       ) : (
         <>
-          
           {/* Transaction Screens*/}
           <AppStack.Group>
             <AppStack.Screen
@@ -569,14 +555,15 @@ const RootNavigator = ({ initialBoarded }) => {
               component={Securityprivacy}
             />
             <AppStack.Screen name="Changepassword" component={Changepassword} />
-            <AppStack.Screen name="Walletmanagement" component={Walletmanagement} />
+            <AppStack.Screen
+              name="Walletmanagement"
+              component={Walletmanagement}
+            />
             <AppStack.Screen name="Becomeanagent" component={Becomeanagent} />
             <AppStack.Screen name="Agentform" component={Agentform} />
 
             <AppStack.Screen name="Addbvn" component={Addbvn} />
-          <AppStack.Screen name="Verifybvn" component={Verifybvn} />
-
-
+            <AppStack.Screen name="Verifybvn" component={Verifybvn} />
 
             <AppStack.Screen name="Changepin" component={Changepin} />
             <AppStack.Screen name="Biometrics" component={Biometrics} />
@@ -672,11 +659,8 @@ const RootNavigator = ({ initialBoarded }) => {
             name="Electricitydetails"
             component={Electricitydetails}
           />
+          <AppStack.Screen name="Electricitytype" component={Electricitytype} />
           <AppStack.Screen
-            name="Electricitytype"
-            component={Electricitytype}
-          />
-           <AppStack.Screen
             name="Electricitymetertype"
             component={Electricitymetertype}
           />
@@ -691,8 +675,6 @@ const RootNavigator = ({ initialBoarded }) => {
             <AppStack.Screen name="Meetuppoint" component={Meetuppoint} />
             <AppStack.Screen name="Safetycautions" component={Safetycautions} />
             <AppStack.Screen name="Depositstart" component={Depositstart} />
-
-
 
             <AppStack.Screen
               name="Accepteddeposit"
@@ -713,7 +695,6 @@ const RootNavigator = ({ initialBoarded }) => {
               component={CustomWebViewSupport}
             />
           </AppStack.Group>
-          
         </>
       )}
     </AppStack.Navigator>
@@ -744,7 +725,7 @@ export default function MainNavigation({ initialBoarded = false }) {
     const subscription = AppState.addEventListener("change", lockLogic);
 
     return () => {
-      subscription.remove()
+      subscription.remove();
     };
   }, [token, modal]);
 

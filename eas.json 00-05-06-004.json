@@ -1,6 +1,6 @@
 {
   "cli": {
-    "version": ">= 2.1.0"
+    "version": ">= 2.9.0"
   },
   "build": {
     "development": {
@@ -13,12 +13,6 @@
     "production": {}
   },
   "submit": {
-    "production": {
-      "ios":{
-        "appleId": "setongee@gmail.com",
-        "ascAppId": "6443868606",
-        "appleTeamId": "MAWXBLK8A7"
-      }
-    }
+    "production": {}
   }
 }
