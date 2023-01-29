@@ -28,7 +28,7 @@ import {
   makePhoneCall,
   sendMessage,
 } from "../../../../utils/userDeviceFunctions";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -52,7 +52,7 @@ const {
 const { Locationmap } = images;
 
 const Accepteddeposit = ({ navigation, route }) => {
-  const toast = useToast();
+  // const toast = useToast();
   const { requestInfo } = route.params;
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
   const [toggleShow, setToggleShow] = useState(true);
@@ -99,7 +99,7 @@ const Accepteddeposit = ({ navigation, route }) => {
       });
       navigation.navigate("Home");
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

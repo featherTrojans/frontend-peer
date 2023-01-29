@@ -35,7 +35,7 @@ import {
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { RFValue } from "react-native-responsive-fontsize";
 
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
@@ -45,7 +45,7 @@ const { Backarrow, Successcheckanimate } = icons;
 
 const Summary = ({ navigation, route }) => {
   const { requestInfo } = route.params;
-  const toast = useToast();
+  // const toast = useToast();
   const { authdata } = useContext(AuthContext);
   const [showmodal, setShowModal] = useState(false);
   const [showSuccessmodal, setShowSuccessModal] = useState(false);
@@ -122,7 +122,7 @@ const Summary = ({ navigation, route }) => {
       });
       navigation.navigate("Home");
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

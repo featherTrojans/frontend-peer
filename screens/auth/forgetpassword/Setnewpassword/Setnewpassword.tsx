@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Input, Loader } from "../../../../components";
 import { styles } from "../../signup/Personal/Personal.styles";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import showerror from "../../../../utils/errorMessage";
@@ -17,7 +17,7 @@ const { Lockicondark, Successcheckanimate } = icons;
 const Setnewpassword = ({ navigation, route }) => {
   const { code, token } = route.params;
   const [showModal, setShowModal] = useState<boolean>(false);
-  const toast = useToast();
+  // const toast = useToast();
   const validationSchema = Yup.object().shape({
     password: Yup.string().label("Password").required(),
     confirmPassword: Yup.string()
@@ -86,11 +86,11 @@ const Setnewpassword = ({ navigation, route }) => {
         onSubmit={async (values, { setSubmitting }) => {
           //  do validation
           if (values.password.length < 8) {
-            return showerror(
-              toast,
-              null,
-              "password should have a minimun of 8 characters"
-            );
+            // return showerror(
+            //   toast,
+            //   null,
+            //   "password should have a minimun of 8 characters"
+            // );
           }
           try {
             //send the request
@@ -105,7 +105,7 @@ const Setnewpassword = ({ navigation, route }) => {
             // navigation.navigate("Securepin",{token:response?.data?.data?.token});
           } catch (err) {
             // error handling
-            showerror(toast, err);
+            // showerror(toast, err);
           }
           //You want to call handleSubmitData here and pass in the values
         }}

@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import LottieView from "lottie-react-native";
 import { styles } from "../../../Transferfunds/Transferpin/Transferpin.styles";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import { AuthContext } from "../../../../../context/AuthContext";
 import Globalmodal from "../../../../shared/Globalmodal/Globalmodal";
 import showerror from "../../../../../utils/errorMessage";
@@ -29,7 +29,7 @@ import useCustomModal from "../../../../../utils/useCustomModal";
 const { Successcheckanimate } = icons;
 
 const Airtimepurchasepin = ({ navigation, route }) => {
-  const toast = useToast();
+  // const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const { type, data } = route.params;
   const [pin, setPin] = useState<string[]>([]);

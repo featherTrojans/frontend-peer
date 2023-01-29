@@ -7,7 +7,7 @@ import { styles } from "./Cancelrequest.styles";
 import { Backheader, Bottombtn, Custombutton, Horizontaline, Loader, Mainwrapper } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,7 +18,7 @@ import useAlert from "../../../../utils/useAlerts";
 const { Backarrow, Successcheckanimate, Forwardarrow } = icons;
 const Cancelrequest = ({route, navigation}) => {
   const reference = route.params
-  const toast = useToast()
+  // const toast = useToast()
   const {errorAlert, } = useAlert()
   const [checked, setChecked] = useState(false);
   const [activereason, setReason] = useState({key:0, text:""});

@@ -4,7 +4,7 @@ import { styles } from "./Transferpin.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
@@ -15,7 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const TransferpinBank = ({ route, navigation }) => {
-  const toast = useToast();
+  // const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const { amount, accountInfomation } = route.params;
   const [pin, setPin] = useState<string[]>([]);
@@ -45,7 +45,7 @@ const TransferpinBank = ({ route, navigation }) => {
 
       setShowModal(true);
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

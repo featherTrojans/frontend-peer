@@ -7,7 +7,7 @@ import { Numberbtn, Bottombtn, Loader, Keyboard } from "../../../../components";
 import { styles } from "../../Transferfunds/Transferpin/Transferpin.styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import LottieView from "lottie-react-native";
 import amountFormatter from "../../../../utils/formatMoney";
@@ -20,7 +20,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const Depositpin = ({ route, navigation }) => {
-  const toast = useToast();
+  // const toast = useToast();
   const { requestInfo } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
@@ -96,7 +96,7 @@ const Depositpin = ({ route, navigation }) => {
       //show success message
       setSuccessModal(true);
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
       // check the error, don't reject for pin error
       if (err?.response?.data?.message === "Incorrect Pin") {
         return;

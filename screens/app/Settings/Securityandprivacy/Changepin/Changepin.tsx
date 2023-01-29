@@ -26,12 +26,12 @@ import { useNavigation } from "@react-navigation/native";
 import Customstatusbar from "../../../../shared/Customstatusbar";
 import axiosCustom from "../../../../../httpRequests/axiosCustom";
 import showerror from "../../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 
 const { Backarrow, Lock } = icons;
 
 const Changepin = () => {
-  const toast = useToast();
+  // const toast = useToast();
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
 
@@ -43,10 +43,10 @@ const Changepin = () => {
     const {oldpin, newpin, confirmpin} = values
     // validation
     if (newpin.length !== 4 || oldpin.length !== 4 || confirmpin.length !== 4) {
-      return showerror(toast, null, "length of pin must be equal to 4");
+      // return showerror(toast, null, "length of pin must be equal to 4");
     }
     if (newpin !== confirmpin) {
-      return showerror(toast, null, "new pin and confirm pin don't match");
+      // return showerror(toast, null, "new pin and confirm pin don't match");
     }
     try {
       setLoading(true);
@@ -58,13 +58,13 @@ const Changepin = () => {
       } catch (err) {
         console.log(err.response);
         setLoading(false);
-        return showerror(toast, null, "current pin is incorrect");
+        // return showerror(toast, null, "current pin is incorrect");
       }
       await axiosCustom.put("/auth/pin/set", { pin: newpin, user_pin: newpin });
       navigation.navigate("Root");
     } catch (err) {
       console.log(err.response);
-      showerror(toast, null, "unable to reset pin, please try again later");
+      // showerror(toast, null, "unable to reset pin, please try again later");
     } finally {
       setLoading(false);
     }

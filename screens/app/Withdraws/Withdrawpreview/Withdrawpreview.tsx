@@ -15,7 +15,7 @@ import { styles } from "./Withdrawpreview.styles";
 import { COLORS, FONTS, fontsize, images, icons } from "../../../../constants";
 import { Bottombtn, Loader, Requesterdetails } from "../../../../components";
 import showerror from "../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import Map from "../../../shared/map/Map";
 import amountFormatter from "../../../../utils/formatMoney";
@@ -27,7 +27,7 @@ const { Locationmap } = images;
 const { Forwardarrow, Editicon, Meetupdot } = icons;
 
 const Withdrawpreview = ({navigation, route}: any) => {
-  const toast = useToast()
+  // const toast = useToast()
   const {userInfo, amount, baseCharge } = route.params
   const [loading, setLoading] = useState(false)
   const {coords,destinationCoords} = useContext(LocationContext)

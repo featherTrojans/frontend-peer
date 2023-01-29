@@ -26,7 +26,6 @@ const {
 const Airtimeprovider = ({ navigation, route }) => {
   const { billType, amount } = route.params;
 
-  console.log(billType, amount, "here are the datas");
 
   const Eachoption = ({ image, type, network }) => {
     const { CustomModal, openModal } = useCustomModal();

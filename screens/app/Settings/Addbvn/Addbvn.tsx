@@ -16,7 +16,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { Loader, Mainwrapper } from "../../../../components";
 import showerror from "../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import { AuthContext } from "../../../../context/AuthContext";
 import { Custombutton, Horizontaline } from "../../../../components";
 import useAlert from "../../../../utils/useAlerts";
@@ -27,7 +27,7 @@ const { Bvnlock, Whitebackarrow, Whitecheck, Bvndropicon } = icons;
 const Addbvn = ({ navigation }) => {
   const [bvn, setBvn] = useState("");
   const [loading, setLoading] = useState(false);
-  const toast = useToast();
+  // const toast = useToast();
   const animatedHeight = useRef(new Animated.Value(0)).current;
   const [isShow, setIsShow] = useState(false);
   const [shownText, setShownText] = useState("View");

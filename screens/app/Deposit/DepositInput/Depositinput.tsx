@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
   Bottombtn,
@@ -23,7 +23,7 @@ import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function Depositinput({ route, navigation }) {
-  const toast = useToast();
+  // const toast = useToast();
   const { type, reference } = route.params;
   const { authdata } = useContext(AuthContext);
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
@@ -89,7 +89,7 @@ function Depositinput({ route, navigation }) {
       }
       navigation.navigate("Depositupdate",{from:"depositpin"});
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

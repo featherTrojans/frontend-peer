@@ -49,6 +49,7 @@ export type RootStackParamList = {
   Walletmanagement: undefined;
   Addbvn: undefined;
   Verifybvn: undefined;
+  BillContacts: undefined;
 
   //Withdraw
   Requestnew: undefined;

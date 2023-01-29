@@ -8,7 +8,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import LottieView from "lottie-react-native"
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import axiosCustom from '../../httpRequests/axiosCustom';
 import { AuthContext } from '../../context/AuthContext';
 import { db } from '../../firebase';
@@ -25,7 +25,7 @@ const {Transacntionpinanimate} = icons
 
 const Transactionpin = ({ info }) => {
   const navigation = useNavigation()
-  const toast = useToast();
+  // const toast = useToast();
   const { authdata } = useContext(AuthContext);
   const [showmodal, setShowModal] = useState(false);
   const [agentInfo, setAgentInfo] = useState({});

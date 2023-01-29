@@ -11,7 +11,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "../../verification/Verification.styles";
 import {
@@ -27,7 +27,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 const { Successcheckanimate, Cancelicon } = icons;
 
 const Forgetpasswordotp = ({ navigation, route }) => {
-  const toast = useToast();
+  // const toast = useToast();
   const { email, token } = route.params;
   const [time, setTime] = useState<number>(30);
   // const {email, phoneNumber, token} = route.params
@@ -68,7 +68,7 @@ const Forgetpasswordotp = ({ navigation, route }) => {
       );
       navigation.navigate("Setnewpassword", { token: tokenn, code: otpCode });
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }
@@ -82,7 +82,7 @@ const Forgetpasswordotp = ({ navigation, route }) => {
       setDisable(false);
       setTime(30);
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

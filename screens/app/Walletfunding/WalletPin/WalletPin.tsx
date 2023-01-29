@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { WebView } from "react-native-webview";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import * as Linking from "expo-linking";
 import * as WebBrowser from "expo-web-browser";
 import {
@@ -28,7 +28,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function WalletPin({ route, navigation }) {
-  const toast = useToast();
+  // const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const [amount, setAmount] = useState<string>("");
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,7 @@ function WalletPin({ route, navigation }) {
       // Linking.openURL(response.data.data.authorization_url)
       // WebBrowser.openBrowserAsync(response.data.data.authorization_url);
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

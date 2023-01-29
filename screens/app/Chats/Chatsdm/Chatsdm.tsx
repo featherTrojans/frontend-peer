@@ -37,7 +37,7 @@ const Chatsdm = ({navigation,route}) => {
 
   const { sendPushNotification, expoPushToken } = usePushNotification();
 
-  const scrollViewRef = useRef<ScrollView>();
+  const scrollViewRef = useRef<ScrollView>(null);
   
   useEffect(() => {    
     getThisChats()

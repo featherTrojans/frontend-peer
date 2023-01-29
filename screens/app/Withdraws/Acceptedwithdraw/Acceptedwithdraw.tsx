@@ -30,7 +30,7 @@ import {
   sendMessage,
 } from "../../../../utils/userDeviceFunctions";
 import { PanGestureHandler, Swipeable } from "react-native-gesture-handler";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -63,7 +63,7 @@ const H_SWIPE_RANGE = BUTTON_WIDTH - 2 * BUTTON_PADDING - SWIPEABLE_DIMENSIONS;
 
 
 const Acceptedwithdraw = ({ navigation, route }) => {
-  const toast = useToast();
+  // const toast = useToast();
   const { requestInfo } = route.params;
   const X = useSharedValue(0)
   const { setCoords, setDestinationCoords } = useContext(LocationContext);
@@ -198,7 +198,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
       });
       navigation.navigate("Home");
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

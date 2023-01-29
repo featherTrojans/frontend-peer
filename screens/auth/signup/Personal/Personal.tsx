@@ -17,11 +17,11 @@ import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
 import { AuthContext } from "../../../../context/AuthContext";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
-import DropDownPicker from "react-native-dropdown-picker";
+// import DropDownPicker from "react-native-dropdown-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Lock from "../../../../assets/icons/Lock";
 import useAlert from "../../../../utils/useAlerts";
@@ -45,7 +45,7 @@ const validationSchema = Yup.object().shape({
 
 const Personal = ({ navigation }) => {
   const { setAuthData } = useContext(AuthContext);
-  const toast = useToast();
+  // const toast = useToast();
   const {errorAlert } = useAlert()
 
   return (

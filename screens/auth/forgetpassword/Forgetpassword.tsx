@@ -4,14 +4,14 @@ import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { Custombutton, Input, Loader, Mainwrapper } from "../../../components";
 import { styles } from "../signup/Personal/Personal.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../utils/errorMessage";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../../shared/Customstatusbar";
 const { Envelopeicon, Newlogo } = icons;
 
 const Forgetpassword = ({ navigation }) => {
-  const toast = useToast();
+  // const toast = useToast();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +26,7 @@ const Forgetpassword = ({ navigation }) => {
         email: email.trim(),
       });
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

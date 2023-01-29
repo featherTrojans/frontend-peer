@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
   Bottombtn,
@@ -17,7 +17,7 @@ import { styles } from "../../Transferfunds/TransferInput/TransferInput.styles";
 // import { styles } from "./TransferInput.styles";
 
 function Requestnew({ navigation }) {
-  const toast = useToast();
+  // const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0"];
   const [amount, setAmount] = useState<string>("");
   const { authdata } = useContext(AuthContext);
@@ -47,10 +47,10 @@ function Requestnew({ navigation }) {
   };
   const handleNextScreen = () => {
     if (authdata?.walletBal < amount) {
-      return showerror(toast, null, "insufficient amount");
+      // return showerror(toast, null, "insufficient amount");
     }
     if (200 > Number(amount)) {
-      return showerror(toast, null, "cash request is can't be lower than N200");
+      // return showerror(toast, null, "cash request is can't be lower than N200");
     }
     navigation.navigate("Availablelisting", { amount });
   };

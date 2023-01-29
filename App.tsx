@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ToastProvider } from "react-native-toast-notifications";
+// import { ToastProvider } from "react-native-toast-notifications";
 import Toast from "react-native-toast-message";
 
 import { useFonts } from "expo-font";
@@ -121,41 +121,12 @@ export default function App() {
   } else {
     return (
       <>
-        <ToastProvider
-          placement="top"
-          duration={3000}
-          type="normal"
-          animationType="slide-in"
-          renderToast={(props) => (
-            <View
-              style={{
-                backgroundColor: "#E00000",
-                paddingVertical: 18,
-                paddingHorizontal: 24,
-                borderRadius: 10,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "90%",
-                marginTop: getStatusBarHeight(true),
-                marginHorizontal: 25,
-              }}
-            >
-              <Text style={{ color: "#fff", fontSize: 14, lineHeight: 20 }}>
-                {props.message}
-              </Text>
-              <TouchableOpacity onPress={props.onHide}>
-                <Cancelicon />
-              </TouchableOpacity>
-            </View>
-          )}
-        >
+
           <AuthProvider>
             <LocationProvider>
               <MainNavigation initialBoarded={onboarded} />
             </LocationProvider>
           </AuthProvider>
-        </ToastProvider>
         <Toast
           config={toastConfig}
           topOffset={getStatusBarHeight(true)}

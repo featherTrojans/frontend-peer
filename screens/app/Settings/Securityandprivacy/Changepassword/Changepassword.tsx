@@ -23,7 +23,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import Customstatusbar from "../../../../shared/Customstatusbar";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../../utils/errorMessage";
 import axiosCustom from "../../../../../httpRequests/axiosCustom";
 import { AuthContext } from "../../../../../context/AuthContext";
@@ -31,7 +31,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const { Backarrow, Lock } = icons;
 
 const Changepassword = () => {
-  const toast = useToast();
+  // const toast = useToast();
   const { authdata, setAllowBiometrics } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   // const [oldpassword, setOldpassword] = useState("");
@@ -46,14 +46,14 @@ const Changepassword = () => {
     
     // validation
     if (!confirmpassword || !newpassword || !currentpassword) {
-      return showerror(toast, null, "all fields are required");
+      // return showerror(toast, null, "all fields are required");
     }
     if (confirmpassword !== newpassword) {
-      return showerror(
-        toast,
-        null,
-        "New password and Confirm password don't match"
-      );
+      // return showerror(
+      //   toast,
+      //   null,
+      //   "New password and Confirm password don't match"
+      // );
     }
     try {
       setLoading(true);
@@ -64,7 +64,7 @@ const Changepassword = () => {
       setAllowBiometrics(false)
       navigation.navigate("Root", {screen: "Settings"});
     } catch (err) {
-      showerror(toast, err);
+      // showerror(toast, err);
     } finally {
       setLoading(false);
     }

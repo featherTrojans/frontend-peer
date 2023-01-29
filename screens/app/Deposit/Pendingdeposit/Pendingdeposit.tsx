@@ -20,7 +20,7 @@ import Map from "../../../shared/map/Map";
 import { LocationContext } from "../../../../context/LocationContext";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import showerror from "../../../../utils/errorMessage";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import { getCoordinateFromAddress, getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { chatOnWhatsapp, makePhoneCall, sendMessage } from "../../../../utils/userDeviceFunctions";
@@ -34,7 +34,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
   const { Locationmap } = images;
   
   const Pendingdeposit = ({navigation, route}) => {
-    const toast = useToast()
+    // const toast = useToast()
     const {requestInfo} = route.params
     const {setCoords, setDestinationCoords} = useContext(LocationContext)
     const [toggleShow, setToggleShow] = useState(true);
@@ -72,7 +72,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
         await axiosCustom.put(`/request/accept/${requestInfo.reference}`)
         navigation.navigate("Home")
       }catch(err){
-        showerror(toast,err)
+        // showerror(toast,err)
       }finally{
         setLoading(false)
       }
@@ -91,7 +91,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
         })
         navigation.navigate("Home")
       }catch(err){
-        showerror(toast,err)
+        // showerror(toast,err)
       }finally{
         setLoading(false)
       }

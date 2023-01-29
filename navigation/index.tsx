@@ -19,8 +19,7 @@ import { customNavigation, navigationRef } from "../utils/customNavigation";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
-// import axiosCustom from "../httpRequests/axiosCustom";÷
-// import Animated from "react-native-reanimated";
+
 
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -34,7 +33,7 @@ import {
   RootAuthStackParamList,
 } from "../types";
 
-import {
+ import {
   Onboarding,
 
   // Auth Screens
@@ -181,12 +180,12 @@ Notification.setNotificationHandler({
 
 
 
-// Push notification function
+// To remove this Push notification function
 export function usePushNotification() {
   const [expoPushToken, setExpoPushToken] = useState<string>();
-  const [notification, setNotification] = useState(false);
-  const notificationListener = useRef();
-  const responseListener = useRef();
+  const [notification, setNotification] = useState<boolean>(false);
+  const notificationListener = useRef<any>();
+  const responseListener = useRef<any>();
 
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {
@@ -252,41 +251,7 @@ function getWidth() {
   return width / 5;
 }
 
-const horizontalAnimation = {
-  gestureDirection: "horizontal",
-  cardStyleInterpolator: ({ current, layouts }) => {
-    return {
-      cardStyle: {
-        transform: [
-          {
-            translateX: current.progress.interpolate({
-              inputRange: [0, 1],
-              outputRange: [layouts.screen.width, 0],
-            }),
-          },
-        ],
-      },
-    };
-  },
-};
 
-const verticalAnimation = {
-  gestureDirection: "vertical",
-  cardStyleInterpolator: ({ current, layouts }) => {
-    return {
-      cardStyle: {
-        transform: [
-          {
-            translateY: current.progress.interpolate({
-              inputRange: [0, 1],
-              outputRange: [layouts.screen.height, 0],
-            }),
-          },
-        ],
-      },
-    };
-  },
-};
 
 const Tabs = () => {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
@@ -517,12 +482,12 @@ const RootNavigator = ({ initialBoarded }) => {
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
       // initialRouteName="DepositSummary"
-      initialRouteName={initialBoarded ? "Getstarted" : "Onboarding"}
+      initialRouteName={false ? "Getstarted" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
       {!token ? (
-        <AppStack.Group screenOptions={verticalAnimation}>
+        <AppStack.Group >
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Getstarted" component={Getstarted} />
 
@@ -550,7 +515,7 @@ const RootNavigator = ({ initialBoarded }) => {
           {/* Transaction Screens*/}
           <AppStack.Group>
             <AppStack.Screen
-              options={horizontalAnimation}
+              
               name="Root"
               component={Tabs}
             />
@@ -657,7 +622,6 @@ const RootNavigator = ({ initialBoarded }) => {
           <AppStack.Screen
             name="Notifications"
             component={Notifications}
-            options={horizontalAnimation}
           />
 
           {/* Paybills Screen */}

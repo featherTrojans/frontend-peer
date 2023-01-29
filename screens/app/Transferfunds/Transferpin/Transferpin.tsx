@@ -13,7 +13,7 @@ import {
   Successmodal,
 } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import showerror from "../../../../utils/errorMessage";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import amountFormatter from "../../../../utils/formatMoney";
@@ -35,7 +35,7 @@ const Transferpin = ({ route, navigation }) => {
   console.log('------------------------INFO--------------------------');
   const onpress = route.params.onpress
   const { sendPushNotification } = usePushNotification();
-  const toast = useToast();
+  // const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   // const { amount, userinfo } = route.params;
   const [pin, setPin] = useState<string[]>([]);

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useToast } from "react-native-toast-notifications";
+// import { useToast } from "react-native-toast-notifications";
 import {
   Backheader,
   Bottombtn,
@@ -27,7 +27,7 @@ import { styles } from "./TransferInput.styles";
 function TransferInput({ route, navigation }) {
   const { nextscreen } = route.params;
   const {authdata} = useContext(AuthContext);
-  const toast = useToast()
+  // const toast = useToast()
   const [amount, setAmount] = useState<string>("");
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   
@@ -60,7 +60,7 @@ function TransferInput({ route, navigation }) {
 
   const handleToNext = ()=>{
     if(authdata?.walletBal < amount){
-      return showerror(toast, null, "insufficient amount")
+      // return showerror(toast, null, "insufficient amount")
     }
     navigation.navigate(nextscreen, { amount: amount })
   }

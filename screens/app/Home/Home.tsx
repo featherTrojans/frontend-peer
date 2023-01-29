@@ -6,30 +6,16 @@ import React, {
   useRef,
 } from "react";
 import {
-  StyleSheet,
   Text,
   View,
-  StatusBar,
   Image,
   ScrollView,
-  FlatList,
-  // SafeAreaView,
   TouchableOpacity,
   RefreshControl,
-  Platform,
-  ImageBackground,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import LottieView from "lottie-react-native";
-import * as Animatable from "react-native-animatable";
-import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
-import { useIsFocused, useScrollToTop } from "@react-navigation/native";
-import Toast from "react-native-toast-message";
-
-
-
+import { useIsFocused } from "@react-navigation/native";
 import {
   Transactionhistory,
   Viewbalance,
@@ -39,37 +25,25 @@ import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
-import { customNavigation } from "../../../utils/customNavigation";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
-import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 import DoubleTapToClose from "../../shared/DoubleBack";
-import { connectFirestoreEmulator } from "firebase/firestore";
-import { RFValue } from "react-native-responsive-fontsize";
+
+
 import { nameToShow } from "../../../utils/nameToShow";
 import { getPeriod } from "../../../utils/getDayPeriod";
-import Globalmodal from "../../shared/Globalmodal/Globalmodal";
-import useCustomModal from "../../../utils/useCustomModal";
-import Alltransfermodal from "../../../components/Alltransfermodal/Alltransfermodal";
-import amountFormatter from "../../../utils/formatMoney";
-import { nameSplitter } from "../../../utils/nameSplitter";
 import HomeWallet from "./HomeWallet";
 import useAlert from "../../../utils/useAlerts";
 
 const {
-  Bell,
-  Withdrawicon,
-  Depositicon,
-  Newtransfericon,
-  Paybillicon,
+
+ 
+
+
   Goldenstaricon,
+  Bell,
   Dollaricon,
-  Bluebankicon,
-  Bluewalleticon,
-  Ashicon,
-  Aticon,
   Featherdefault,
-  Searcontacticon,
   Cryinganimate,
 } = icons;
 const { Wavvy } = images;
@@ -86,7 +60,6 @@ const Amountbtn = ({ amountText }) => {
 
 const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   const { setAuthData, authdata } = useContext(AuthContext);
-  // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -99,7 +72,6 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
   const {updateAlert} = useAlert()
 
-  console.log('------------------------ROUTINGNGNG--------------------------');
   console.log(isFocused)
 
   const toTop = () => {
@@ -113,26 +85,23 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
     toTop();
   }
 
-  useEffect(() => {
-    if(isFocused && authdata.userDetails.userLevel <= 1){
-       updateAlert("Update your profile")
-        console.log(route, "here is my current route");
-    }else{
-      Toast.hide()
-    }
+  // useEffect(() => {
+  //   if(isFocused && authdata.userDetails.userLevel <= 1){
+  //      updateAlert("Update your profile")
+  //       console.log(route, "here is my current route");
+  //   }else{
+  //     Toast.hide()
+  //   }
     
-  }, [isFocused])
+  // }, [isFocused])
 
   const getDashboardData = async () => {
-    // console.log("I am fetching again from home");
 
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
-      // setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
-      // console.log(response.data.data.userDetails.imageUrl, "user image url");
-      // console.log(response.data.data.transactions, "here is the transacxctions");
+
       
     } catch (err) {
     } finally {
@@ -216,8 +185,6 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Start of the block */}
-      {/*  */}
 
       <ScrollView
         ref={scrollViewRef}
@@ -234,7 +201,6 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
           />
         }
       >
-        {/* Balance and sub pages */}
         <View style={styles.walletBlock}>
           <Viewbalance />
           <HomeWallet />
