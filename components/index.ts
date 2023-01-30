@@ -25,6 +25,7 @@ import Chooseamountmodal from "./Chooseamountmodal/Chooseamountmodal";
 import Transactionsummary from "./Modals/Transactionsummary";
 import Transactionpin from "./Modals/Transactionpin";
 import Successmodal from "./Modals/Successmodal";
+import Emptycomponent from "./Emptycomponent/Emptycomponent";
 
 
 
@@ -56,7 +57,8 @@ export {
     Upgrademodal,
     Chooseamountmodal,
     Transactionsummary,
-    Transactionpin
+    Transactionpin,
+    Emptycomponent
 
 
 }

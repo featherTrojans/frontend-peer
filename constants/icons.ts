@@ -44,7 +44,7 @@ import Bankaccount from "../assets/icons/Bankaccount";
 import Debitcard from "../assets/icons/Debitcard";
 import People from "../assets/icons/People";
 import Senderimage from "../assets/icons/Senderimage";
-import Receiverimage from "../assets/icons/Receiverimage";
+// import Receiverimage from "../assets/icons/Receiverimage";
 import Receivingarrow from "../assets/icons/Receivingarrow";
 import Sendingarrow from "../assets/icons/Sendingarrow";
 import Chatdark from "../assets/icons/Chatdark";
@@ -67,7 +67,13 @@ import Bonusicon from "../assets/icons/Bonusicon";
 import SadEmoji from "../assets/icons/SadEmoji";
 import TransferIcon from "../assets/icons/TransferIcon";
 import Location from "../assets/icons/Location";
-import Goldenstaricon from "../assets/icons/Goldenstaricon";
+
+
+
+
+
+
+
 import SecureDot from "../assets/icons/SecureDot";
 import Chatsearchicon from "../assets/icons/Chatsearchicon";
 import Copyclipboard from "../assets/icons/Copyclipboard";
@@ -140,7 +146,6 @@ import SendTF from "../assets/icons/SendTf"
 import Patternbg from "../assets/icons/Patternbg";
 import Whitebackarrow from "../assets/icons/Whitebackarrow";
 import Emptynotification from "../assets/icons/Emptynotification";
-// import passwordpinlock from "../assets/icons/passwordpinlock";
 import Passwordpinlock from "../assets/icons/Passwordpinlock";
 import Airtimeicon from "../assets/icons/Airtimeicon";
 import Mobiledataicon from "../assets/icons/Mobiledataicon";
@@ -185,7 +190,10 @@ import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-su
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
 import Verifiedbvnanimate from "../assets/Lottie/animations/verifybvn.json"
 
-import Dollaricon from "../assets/icons/Dollaricon";
+
+
+
+
 import Emptyicon from "../assets/icons/Emptyicon";
 import Aticon from "../assets/icons/Aticon";
 import Updateprofileicon from "../assets/icons/Updateprofileicon";
@@ -251,7 +259,6 @@ export default {
   Backarrow,
   Forwardarrow,
   Sendingandreceivearrows,
-  Goldenstaricon,
   Depositpinlocationicon,
   Purplebalanceicon,
   Greenarrowupicon,
@@ -262,7 +269,7 @@ export default {
   Bankaccount,
   Debitcard,
   People,
-  Receiverimage,
+  // Receiverimage,
   Senderimage,
   Receivingarrow,
   Sendingarrow,
@@ -329,7 +336,10 @@ export default {
   Check,
   WrongIcon,
   Newtransfericon,
-Dollaricon,
+
+
+
+
 Mobiledataicon,
   Fundwalleticon,
   Paybillicon,
