@@ -88,10 +88,7 @@ const Tabs = () => {
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
-            backgroundColor: "white",
-            height: 82,
-            alignItems: "center",
-            justifyContent: "center",
+            ...styles.tabBar
           },
         }}
         screenListeners={({ navigation, route }) => ({
@@ -107,8 +104,11 @@ const Tabs = () => {
               options={{
                 tabBarIcon: ({ focused, color, size }) => {
                   return (
-                    <View>
+                    <View
+                      style={{ justifyContent: "center", alignItems: "center" }}
+                    >
                       <Icon focused={focused} />
+                      <Text style={{ fontSize: 10 }}>{name}</Text>
                     </View>
                   );
                 },
@@ -133,6 +133,12 @@ const Tabs = () => {
 export default Tabs;
 
 const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: COLORS.white,
+    height: 82,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   animatedLine: {
     height: 1.5,
     backgroundColor: COLORS.blue6,

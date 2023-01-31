@@ -6,14 +6,12 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { makePhoneCall, sendMessage } from "../utils/userDeviceFunctions";
-import * as FileSystem from "expo-file-system";
+import React from "react";
+
 import * as Print from "expo-print";
-import * as Sharing from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
-import { usePushNotification } from "../navigation";
-// usePushNotification
+import { usePushNotification } from "../hooks/usePushNotifications";
+
 
 const Testings = () => {
   const { sendPushNotification, expoPushToken } = usePushNotification();
@@ -70,7 +68,7 @@ const Testings = () => {
     const albumName = "Downloads";
     const permission = await MediaLibrary.requestPermissionsAsync();
 
-    let asset = null;
+    let asset;
     if (permission.granted) {
       try {
         asset = await MediaLibrary.createAssetAsync(filePath);

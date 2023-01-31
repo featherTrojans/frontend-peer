@@ -152,7 +152,6 @@ Notification.setNotificationHandler({
 
 
 
-// Bottom Tabs navigation
 
 
 const RootNavigator = ({ initialBoarded }) => {
