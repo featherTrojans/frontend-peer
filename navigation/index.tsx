@@ -4,14 +4,21 @@ import { View, Animated, AppState } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { customNavigation, navigationRef } from "../utils/customNavigation";
+import {navigationRef } from "../utils/customNavigation";
+import { COLORS, icons, SIZES } from "../constants";
 
-import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
+import { AuthContext } from "../context/AuthContext";
+
+import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
+import axiosCustom from "../httpRequests/axiosCustom";
+import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
+import { usePushNotification } from "../hooks/usePushNotifications";
 
 
 const AppStack = createStackNavigator<RootStackParamList>();
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
+
 
 import {
   RootStackParamList,
@@ -128,18 +135,11 @@ import {
   Depositstart,
   Agentform,
 } from "../screens";
+import Tabs from "./Tabs";
 
-import { Loader, Tab } from "../components";
-import { COLORS, icons, SIZES } from "../constants";
 
-import { AuthContext } from "../context/AuthContext";
 
-import Map from "../screens/shared/map/Map";
-import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
-import axiosCustom from "../httpRequests/axiosCustom";
-import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 
-const { TabHome, Tabhistory, Tabchats, Tabuser, Tabplusicon } = icons;
 
 Notification.setNotificationHandler({
   handleNotification: async () => ({
@@ -152,298 +152,8 @@ Notification.setNotificationHandler({
 
 
 
-// To remove this Push notification function
-export function usePushNotification() {
-  const [expoPushToken, setExpoPushToken] = useState<string>();
-  const [notification, setNotification] = useState<boolean>(false);
-  const notificationListener = useRef<any>();
-  const responseListener = useRef<any>();
+// Bottom Tabs navigation
 
-  useEffect(() => {
-    registerForPushNotificationsAsync().then((token) => {
-      setExpoPushToken(token);
-    });
-
-    notificationListener.current = Notification.addNotificationReceivedListener(
-      (notification) => {
-        setNotification(notification);
-      }
-    );
-
-    responseListener.current =
-      Notification.addNotificationResponseReceivedListener((response) => {
-        const { data } = response.notification.request.content;
-        // console.log(data, "here is the notification data")
-        customNavigation(data.redirectTo, {});
-      });
-
-    return () => {
-      Notification.removeNotificationSubscription(notificationListener.current);
-      Notification.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
-
-
-  //Instant Notifications
-  const sendPushNotification = async (
-    receiverMsgToken: string,
-    title: string,
-    body: string,
-    redirectTo: string,
-    channelId?: string
-  ) => {
-    const message = {
-      to: receiverMsgToken,
-      sound: "default",
-      title: title,
-      body: body,
-      data: { someData: "here is the data", redirectTo: redirectTo },
-      channelId: channelId ? channelId : "default",
-    };
-
-    await fetch("https://exp.host/--/api/v2/push/send", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Accept-encoding": "gzip, deflate",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(message),
-    });
-  };
-
-  return {
-    sendPushNotification: sendPushNotification,
-    expoPushToken: expoPushToken,
-  };
-}
-
-function getWidth() {
-  let width = SIZES.width;
-  return width / 5;
-}
-
-
-
-const Tabs = () => {
-  const tabOffsetValue = useRef(new Animated.Value(0)).current;
-
-  return (
-    <>
-      <BottomTab.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarStyle: {
-            backgroundColor: "white",
-            height: 82,
-            alignItems: "center",
-            justifyContent: "center",
-          },
-        }}
-        screenListeners={({ navigation, route }) => ({
-          state: (e) => {
-            switch (route.name) {
-              case "Home":
-                Animated.spring(tabOffsetValue, {
-                  toValue: 0,
-                  useNativeDriver: true,
-                }).start();
-                break;
-              case "History":
-                Animated.spring(tabOffsetValue, {
-                  toValue: getWidth(),
-                  useNativeDriver: true,
-                }).start();
-                break;
-              case "Transactions":
-                Animated.spring(tabOffsetValue, {
-                  toValue: getWidth() * 2,
-                  useNativeDriver: true,
-                }).start();
-                break;
-              case "Chats":
-                Animated.spring(tabOffsetValue, {
-                  toValue: getWidth() * 3,
-                  useNativeDriver: true,
-                }).start();
-                break;
-              case "Settings":
-                Animated.spring(tabOffsetValue, {
-                  toValue: getWidth() * 4,
-                  useNativeDriver: true,
-                }).start();
-                break;
-
-              default:
-                break;
-            }
-          },
-        })}
-      >
-        <BottomTab.Screen
-          name="Home"
-          component={Home}
-          options={{
-            tabBarIcon: ({ focused, color, size }) => {
-              return (
-                <View
-                  style={
-                    {
-                      // position: "absolute",
-                    }
-                  }
-                >
-                  <TabHome focused={focused} />
-                </View>
-              );
-            },
-            // unmountOnBlur: true,
-          }}
-          listeners={({ navigation, route }) => ({
-            tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: 0,
-                useNativeDriver: true,
-              }).start();
-            },
-          })}
-        />
-
-        <BottomTab.Screen
-          name="History"
-          component={Transactions}
-          options={{
-            tabBarIcon: ({ focused, color, size }) => {
-              return (
-                <View
-                  style={{
-                    position: "absolute",
-                    // top: "50%"
-                  }}
-                >
-                  <Tabhistory focused={focused} />
-                </View>
-              );
-            },
-            // unmountOnBlur: true,
-          }}
-          listeners={({ navigation, route }) => ({
-            tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth(),
-                useNativeDriver: true,
-              }).start();
-            },
-          })}
-        />
-
-        <BottomTab.Screen
-          name="Transactions"
-          component={Newtransactions}
-          options={{
-            tabBarIcon: ({ focused, color, size }) => {
-              return (
-                <View
-                  style={{
-                    // position: "absolute",
-                    // top: "50%"
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: COLORS.blue6,
-                    padding: 13.4,
-                    borderRadius: 50,
-                    shadowColor: COLORS.blue6,
-                    shadowOpacity: 0.3,
-                    shadowOffset: { width: -5, height: -5 },
-                    shadowRadius: 10,
-                    elevation: 10,
-                  }}
-                >
-                  <Tabplusicon />
-                </View>
-              );
-            },
-            unmountOnBlur: true,
-          }}
-          listeners={({ navigation, route }) => ({
-            tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 2,
-                useNativeDriver: true,
-              }).start();
-            },
-          })}
-        />
-        <BottomTab.Screen
-          name="Chats"
-          component={Chatshome}
-          options={{
-            tabBarIcon: ({ focused, color, size }) => {
-              return (
-                <View
-                  style={{
-                    position: "absolute",
-                    // top: "50%"
-                  }}
-                >
-                  <Tabchats focused={focused} />
-                </View>
-              );
-            },
-            // unmountOnBlur: true,
-          }}
-          listeners={({ navigation, route }) => ({
-            tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 3,
-                useNativeDriver: true,
-              }).start();
-            },
-          })}
-        />
-        <BottomTab.Screen
-          name="Settings"
-          component={Settings}
-          options={{
-            tabBarIcon: ({ focused, color, size }) => {
-              return (
-                <View
-                  style={{
-                    position: "absolute",
-                    // top: "50%"
-                  }}
-                >
-                  <Tabuser focused={focused} />
-                </View>
-              );
-            },
-          }}
-          listeners={({ navigation, route }) => ({
-            tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 4,
-                useNativeDriver: true,
-              }).start();
-            },
-          })}
-        />
-      </BottomTab.Navigator>
-
-      <Animated.View
-        style={{
-          width: getWidth(),
-          height: 1.5,
-          backgroundColor: COLORS.blue6,
-          position: "absolute",
-          bottom: 82,
-          transform: [{ translateX: tabOffsetValue }, { scaleX: 0.3 }],
-        }}
-      ></Animated.View>
-    </>
-  );
-};
 
 const RootNavigator = ({ initialBoarded }) => {
   const { token } = useContext(AuthContext);
@@ -669,6 +379,10 @@ export default function MainNavigation({ initialBoarded = false }) {
     setMessageToken(expoPushToken);
   }, [expoPushToken]);
 
+
+
+
+
   useEffect(() => {
     axiosCustom.interceptors.response.use((response) => {
       if (response.status === 401) {
@@ -678,13 +392,18 @@ export default function MainNavigation({ initialBoarded = false }) {
     });
   }, []);
 
+
+
+
   useEffect(() => {
     const subscription = AppState.addEventListener("change", lockLogic);
-
     return () => {
       subscription.remove();
     };
   }, [token, modal]);
+
+
+
 
   const lockLogic = (nextAppState) => {
     if (

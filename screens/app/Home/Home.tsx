@@ -15,7 +15,6 @@ import {
 } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
-import { useIsFocused } from "@react-navigation/native";
 import {
   Emptycomponent,
   Transactionhistory,
@@ -59,11 +58,9 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
   const scrollViewRef = useRef<any>();
-  const isFocused = useIsFocused();
 
   const { updateAlert } = useAlert();
 
-  console.log(isFocused)
 
 
 
@@ -93,23 +90,9 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
 
 
 
-
-  
-
-
-
-
-
   return (
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
-
-
-
       <Customstatusbar />
-
-
-
-
         <View style={styles.headerContainer}>
 
           <View style={styles.profileContainer}>

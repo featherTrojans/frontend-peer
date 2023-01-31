@@ -24,9 +24,9 @@ const OnboardingComponent = ({ item }: EachOnboardingTypes) => {
       <View style={{flex: 0.7,}}>
       {icon}
       </View>
-      <View style={{width: "90%", }}>
-        <Text style={{...fontsize.big, ...FONTS.medium, lineHeight: 35, marginBottom: 35, color: COLORS.blue9}}>{header}</Text>
-        <Text style={{...fontsize.small, ...FONTS.regular, lineHeight: 24, color: COLORS.blue9}}>{information}</Text>
+      <View style={{ }}>
+        <Text style={{...fontsize.big, ...FONTS.medium, lineHeight: 35, marginBottom: 35, color: COLORS.blue9, textAlign: "center"}}>{header}</Text>
+        <Text style={{...fontsize.small, ...FONTS.regular, lineHeight: 24, color: COLORS.blue9, textAlign: "center"}}>{information}</Text>
       </View>
     </View>
   );

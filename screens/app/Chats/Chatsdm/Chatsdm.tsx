@@ -10,8 +10,8 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import {InitialsBg, Mainwrapper } from "../../../../components";
 import LottieView from "lottie-react-native"
 import AllChatsModal from "./AllChatsModal";
-import { usePushNotification } from "../../../../navigation";
 import formatData from "../../../../utils/fomatTrans";
+import { usePushNotification } from "../../../../hooks/usePushNotifications";
 
 const { Backarrow, Successtranfericon,Sendmessageicon,  Feathecomingsoonchatanimate, Sentconfetti, SendTF } = icons;
 
@@ -158,7 +158,7 @@ const Chatsdm = ({navigation,route}) => {
   }
   const handleAmountChange = text=>{
     const amount = Number(text).toFixed(2);
-    setAmount({value:amount, name:text});
+    setAmount({value:Number(amount), name:text});
   }
   const handleTextChange = (text)=>{
     setchattext(text)
@@ -296,7 +296,7 @@ const Chatsdm = ({navigation,route}) => {
         contentContainerStyle={{paddingTop: 20}}
         showsVerticalScrollIndicator={false}
         bounces={false}
-        onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
+        onContentSizeChange={() => scrollViewRef?.current.scrollToEnd({ animated: true })}>
           {messages.map(({data, time}, index: number) => {
             return (
               <View key={index}>

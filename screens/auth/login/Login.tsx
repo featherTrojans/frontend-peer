@@ -5,12 +5,10 @@ import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../constants";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
-// import * as Keychain from 'react-native-keychain';
 
 import * as LocalAuthentication from "expo-local-authentication";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Custombutton, Input, Loader, Mainwrapper } from "../../../components";
-import { JustifyBetween } from "../../../global/styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
@@ -39,7 +37,7 @@ const Login = ({ navigation }: any) => {
   const [hidePassword, setHidePassword] = useState(true);
   const { setToken, allowBiometrics, setAllowBiometrics } =
     useContext(AuthContext);
-  const { errorAlert, purpleAlert, blueAlert } = useAlert();
+  const { errorAlert} = useAlert();
 
   const [isBiometricAllowed, setIsBiometricAllowed] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -68,7 +66,6 @@ const Login = ({ navigation }: any) => {
           { user_pin: "0000" },
           { headers: { token: token } }
         );
-        // navigation.navigate("Securepin",{token:result?.token});
         navigation.navigate("Welcometochange", {
           fromm: "login",
           username: values.username,
@@ -200,8 +197,10 @@ const Login = ({ navigation }: any) => {
                   />
 
                   {/* Bottom text */}
-                  <JustifyBetween
+                  <View
                     style={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
                       marginTop: RFValue(16),
                       marginBottom: RFValue(22),
                     }}
@@ -231,7 +230,7 @@ const Login = ({ navigation }: any) => {
                         Forgot Password?
                       </Text>
                     </TouchableOpacity>
-                  </JustifyBetween>
+                  </View>
 
                   <Custombutton btntext="Sign in" onpress={handleSubmit} />
                 </>

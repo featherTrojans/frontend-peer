@@ -1,21 +1,10 @@
 import React, { useRef, useState } from "react";
-import { FlatList, Animated, StatusBar } from "react-native";
+import { FlatList, Animated, StatusBar, View, Text, TouchableOpacity } from "react-native";
 import { OnboardingScreenNavigationProps } from "../../types";
 import { COLORS, FONTS, fontsize, SIZES } from "../../constants";
 import onboardingdatas from "../../onboardingdatas";
 import EachOnboarding from "../../components/onboarding-component/OnBoardingComponent";
-import {
-  DotFlexRow,
-  FlexRow,
-  GetStartedBtn,
-  GetStartedContainer,
-  GetStartedText,
-  LoginBtn,
-  NextText,
-  OnboardingContainer,
-  OnboardingFlatlist,
-  SkipText,
-} from "./Onboarding.styles";
+
 import Customstatusbar from "../shared/Customstatusbar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -69,14 +58,12 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   };
 
   return (
-    <OnboardingContainer>
+    <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Customstatusbar />
 
-      <LoginBtn activeOpacity={0.6} onPress={navigateToLogin} style={{marginBottom: RFValue(32)}}>
-        <SkipText>Skip</SkipText>
-      </LoginBtn>
+     
 
-      <OnboardingFlatlist
+      <FlatList
         ref={flatListRef}
         horizontal
         pagingEnabled
@@ -95,8 +82,8 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
       />
 
       {/* Footer--Dots and the nxet button */}
-      <FlexRow>
-        <DotFlexRow>
+      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 32}}>
+        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
           {onboardingdatas.map((item, index) => {
             const dotPosition = Animated.divide(scrollX, SIZES.width);
 
@@ -121,7 +108,7 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
                 style={{
                   marginBottom: 10,
                   height: 8,
-                  borderRadius: 1000,
+                  borderRadius: 8/2,
                   marginRight: 10,
                   backgroundColor: dotColor,
                   opacity: dotOpacity,
@@ -130,19 +117,20 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
               />
             );
           })}
-        </DotFlexRow>
+        </View>
 
-        <GetStartedBtn activeOpacity={0.8} onPress={scrollTo}>
+        <View>
+        {/* <View onPress={scrollTo}> */}
           {viewIndex < onboardingdatas.length - 1 ? (
-            <NextText>Next</NextText>
+            <Text>Next</Text>
           ) : (
-            <GetStartedContainer>
-              <GetStartedText>Launch Feather</GetStartedText>
-            </GetStartedContainer>
+            <TouchableOpacity onPress={scrollTo} style={{paddingHorizontal: 41, paddingVertical: 21, backgroundColor: COLORS.black, borderRadius: 10}}>
+              <Text style={{color: COLORS.white}}>Launch Feather</Text>
+            </TouchableOpacity>
           )}
-        </GetStartedBtn>
-      </FlexRow>
-    </OnboardingContainer>
+        </View>
+      </View>
+    </View>
   );
 };
 

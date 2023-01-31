@@ -1,40 +1,23 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
-import LottieView from "lottie-react-native";
-import { styles } from "./Transferpin.styles";
+import { StyleSheet, Text, View } from "react-native";
+import React, { useContext, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import {
-  Backheader,
-  Bottombtn,
   Keyboard,
   Loader,
   Mainwrapper,
-  Numberbtn,
   Successmodal,
 } from "../../../../components";
-import axiosCustom from "../../../../httpRequests/axiosCustom";
-// import { useToast } from "react-native-toast-notifications";
-import showerror from "../../../../utils/errorMessage";
-import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import amountFormatter from "../../../../utils/formatMoney";
-import { usePushNotification } from "../../../../navigation";
+
 import { AuthContext } from "../../../../context/AuthContext";
-import Customstatusbar from "../../../shared/Customstatusbar";
-import { ScrollView } from "react-native-gesture-handler";
-import { RFValue } from "react-native-responsive-fontsize";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { securepinstyles } from "../../../auth/signup/Securepin/Securepin.styles";
 import useCustomModal from "../../../../utils/useCustomModal";
 import useAlert from "../../../../utils/useAlerts";
 
-const { Backarrow, SecureDot, Successcheckanimate } = icons;
+const { Backarrow, SecureDot } = icons;
 
 const Transferpin = ({ route, navigation }) => {
   const info = route.params.info
-  console.log('------------------------INFO--------------------------');
   const onpress = route.params.onpress
-  const { sendPushNotification } = usePushNotification();
-  // const toast = useToast();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   // const { amount, userinfo } = route.params;
   const [pin, setPin] = useState<string[]>([]);
@@ -52,9 +35,6 @@ const Transferpin = ({ route, navigation }) => {
     }
   };
 
-  // useEffect(()=>{
-  //   errorAlert("hhadhadhahdashhß afsg s sg d  s")
-  // },[])
 
   const handleRemoveAmount = () => {
     if (pin.length > 0) {
@@ -141,7 +121,6 @@ const Transferpin = ({ route, navigation }) => {
       <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
 
 
-      {/* <Bottombtn title="PROCEED" onpress={handleSubmit} /> */}
 
         
     </Mainwrapper>

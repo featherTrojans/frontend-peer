@@ -5,18 +5,21 @@ import { Backheader, Chooseamountmodal, Custombutton, Horizontaline, Iconwithdat
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
-import useCustomModal from "../../../../utils/useCustomModal";
 import TransferCash from "../../../../components/Modals/TransferCash";
-import Bluewalleticon from "../../../../assets/icons/Bluewalleticon";
-import Bluebankicon from "../../../../assets/icons/Bluebankicon";
-import amountFormatter from "../../../../utils/formatMoney";
 import { AuthContext } from "../../../../context/AuthContext";
+
+
+import useCustomModal from "../../../../utils/useCustomModal";
+import amountFormatter from "../../../../utils/formatMoney";
 import { nameSplitter } from "../../../../utils/nameSplitter";
 import { nameToShow } from "../../../../utils/nameToShow";
+
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import Debitcardicon from "../../../../assets/icons/Debitcardicon";
-import Featheragenticon from "../../../../assets/icons/Featheragenticon";
-import Familyrequesticon from "../../../../assets/icons/Familyrequesticon";
+
+
+
+
+
 import useAlert from "../../../../utils/useAlerts";
 
 const {
@@ -27,7 +30,14 @@ const {
   Newtransfericon,
   Fundwalleticon,
   Paybillicon,
+  Bluewalleticon,
+  Bluebankicon,
+  Debitcardicon,
+  Featheragenticon,
+  Familyrequesticon
 } = icons;
+
+
 interface userObj {
   "accountNo": string | null,
   "address": null | string,

@@ -1,10 +1,8 @@
 import { useCallback, useContext, useRef } from "react";
 import WebView from "react-native-webview";
 import { AuthContext } from "../../context/AuthContext";
-import { usePushNotification } from "../../navigation";
 
 const CustomWebView = ({ navigation, route }) => {
-  const { sendPushNotification } = usePushNotification();
   const { authdata, messageToken } = useContext(AuthContext);
 
   const webviewRef = useRef(null);
