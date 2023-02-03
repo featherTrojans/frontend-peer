@@ -34,6 +34,14 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     textTransform: "lowercase",
   },
+  notificationBell: {
+    width: 35,
+    height: 35,
+    borderRadius: 20,
+    backgroundColor: COLORS.grey17,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
   walletBlock: {
     marginTop: 20,
@@ -98,7 +106,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
     paddingBottom: 24,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   informationiconswrap: {
     marginBottom: 10,
@@ -112,23 +120,90 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
   },
 
-  //   Transactions history part
+  // transactionHistory: {
+  //   ...fontsize.smallest,
+  //   ...FONTS.medium,
+  // },
+
+  //Transactions
+
+  transactionWrap: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 18,
+    paddingVertical: 24,
+    borderRadius: 15,
+  },
   transactionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 22,
-    marginBottom: 20,
   },
-  transactionHistory: {
-    ...fontsize.smallest,
+  transactionIconWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  transactionText: {
+    marginLeft: 11,
+    ...fontsize.xsmallest,
     ...FONTS.medium,
   },
-  seeAll: {
+  viewAll: {
     ...fontsize.xsmallest,
-    ...FONTS.bold,
-    color: COLORS.blue6,
+    ...FONTS.medium,
   },
 
+  //Conversations
 
+  conversationWrap: {
+    backgroundColor: COLORS.white,
+    marginVertical: 15,
+    padding: 18,
+    borderRadius: 16,
+  },
+  conversationHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  recentIconWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  recentconvText: {
+    ...fontsize.xsmallest,
+    ...FONTS.medium,
+    color: COLORS.blue9,
+    marginLeft: 8.6,
+  },
+  numberOfUnread: {
+    ...fontsize.xsmallest,
+    ...FONTS.medium,
+    color: COLORS.blue9,
+  },
+
+  setupProfile: {
+    backgroundColor: COLORS.white,
+    marginVertical: 15,
+    padding: 18,
+    borderRadius: 16,
+  },
+  setupText: {
+    ...fontsize.xsmallest,
+    ...FONTS.medium,
+    color: COLORS.blue9,
+    marginLeft: 8.6,
+  },
+  setupInfoText: {
+    ...fontsize.xsmallest,
+    ...FONTS.medium,
+    color: COLORS.grey16,
+    lineHeight: 18,
+  },
+  setupIconWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  setupHeadSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });

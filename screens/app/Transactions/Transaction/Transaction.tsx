@@ -1,160 +1,39 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
-  StyleSheet,
   Text,
   View,
-  FlatList,
   RefreshControl,
-  Platform,
   ActivityIndicator,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Animated
+  Animated,
 } from "react-native";
-import LottieView from "lottie-react-native";
-import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
-import { useIsFocused, useScrollToTop } from "@react-navigation/native";
-import { TabActions, useLinkTo } from "@react-navigation/native";
-
-import { Backheader, Bottombtn, Transactionhistory } from "../../../../components";
-import { COLORS, icons, SIZES } from "../../../../constants";
+import BottomSheet from "@gorhom/bottom-sheet";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
+import {
+  Emptycomponent,
+  Horizontaline,
+  Transactionhistory,
+} from "../../../../components";
+import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
 
 import { styles } from "./Transaction.styles";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { RFValue } from "react-native-responsive-fontsize";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
-const { Cryinganimate } = icons;
-
-const DATA = [
-  {
-    transId: "WZsOkF2oWw",
-    initialBal: "2570",
-    amount: "150",
-    finalBal: "2420",
-    description: "#150 transferred to OBA",
-    from: "EZEKO",
-    to: "OBA",
-    direction: "out",
-    createdAt: "2022-02-15T16:51:40.000Z",
-  },
-  {
-    transId: "JFox9iGSKJ",
-    initialBal: "2420",
-    amount: "150",
-    finalBal: "2570",
-    description: "#150 transferred from EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "in",
-    createdAt: "2022-01-31T23:56:07.000Z",
-  },
-  {
-    transId: "FnF7XtyXrb",
-    initialBal: "2570",
-    amount: "150",
-    finalBal: "2420",
-    description: "#150 transferred to EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "out",
-    createdAt: "2022-01-31T23:56:00.000Z",
-  },
-  {
-    transId: "eZx81A14GE",
-    initialBal: "2420",
-    amount: "150",
-    finalBal: "2570",
-    description: "#150 transferred from EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "in",
-    createdAt: "2022-01-31T23:54:40.000Z",
-  },
-  {
-    transId: "QLkpxlyiSL",
-    initialBal: "2570",
-    amount: "150",
-    finalBal: "2420",
-    description: "#150 transferred to EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "out",
-    createdAt: "2022-01-31T23:54:39.000Z",
-  },
-  {
-    transId: "LdJexVcIIW",
-    initialBal: "2420",
-    amount: "150",
-    finalBal: "2570",
-    description: "#150 transferred from EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "in",
-    createdAt: "2022-01-31T23:52:49.000Z",
-  },
-  {
-    transId: "lirXTEm7Zs",
-    initialBal: "2720",
-    amount: "150",
-    finalBal: "2570",
-    description: "#150 transferred to ELON",
-    from: "EZEKO",
-    to: "ELON",
-    direction: "out",
-    createdAt: "2022-01-31T23:48:07.000Z",
-  },
-];
+const {
+  Withdrawicon,
+  TransferIcon,
+  Paybillicon,
+  Fundwalleticon,
+  Walletactionicon,
+  Historyicon,
+} = icons;
 
 const Transactions = ({ navigation }: any) => {
   const [transactions, setTransations] = useState();
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const flatlistRef = useRef(null);
-
-  ///States for the push notifications
-  const [expoPushToken, setExpoPushToken] = useState("");
-  const [notification, setNotification] = useState(false);
-  const notificationListener = useRef();
-  const responseListener = useRef();
-  const isFocused = useIsFocused();
-  const [pageVerticalOffset, setPageVerticalOffset] = useState<number>(0)
-  const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-  const PAGE_OFFSET_THRESHOLD = SIZES.height
-  const scrollX = useRef<any>(new Animated.Value(0)).current;
-
-  const EmptyComponent = () => {
-    return (
-      <View style={styles.emptyListContainer}>
-        {/* Crying icons */}
-        {/* <Cryingicon /> */}
-        <LottieView
-          source={Cryinganimate}
-          autoPlay
-          loop
-          style={{ width: RFValue(155), height: RFValue(155) }}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.emptyContainerText}>
-            Padi, you have not performed any transactions yet.{" "}
-            
-          </Text>
-        </View>
-      </View>
-    );
-  };
-
-  const toTop = () => {
-    flatlistRef.current?.scrollToOffset({ animated: true, offset: 0 });
-  };
-
-  if (isFocused) {
-    toTop();
-  }
 
   useEffect(() => {
     getAllTransactions();
@@ -167,8 +46,6 @@ const Transactions = ({ navigation }: any) => {
       setTransations(response?.data?.data?.transactions);
       console.log(transactions, "unfiltered");
       console.log(formatData(transactions), "filtered");
-      
-      
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -180,71 +57,126 @@ const Transactions = ({ navigation }: any) => {
   const handleRefresh = () => {
     setRefreshing(true);
     getAllTransactions();
-    
   };
 
-
+  const options = [
+    {
+      title: "Withdraw",
+      Icon: Withdrawicon,
+      color: "#E5FAF6",
+    },
+    {
+      title: "Transfer",
+      Icon: TransferIcon,
+      color: "#FFE3E3",
+    },
+    {
+      title: "Bills",
+      Icon: Paybillicon,
+      color: "#D2EAFD",
+    },
+    {
+      title: "Fund",
+      Icon: Fundwalleticon,
+      color: "#F1E5FF",
+    },
+  ];
+  const snapPoints = useMemo(() => ["45%", "65%", "98%"], []);
 
   return (
-    <View
-      style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}
-    >
-      <Backheader title="History" showArrow={false} />
+    <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <View style={styles.contentContainer}>
         <Customstatusbar />
 
-        
-
-        <View style={styles.listContainer}>
-          {loading ? (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <ActivityIndicator size="large" color={COLORS.blue6} />
+        <View style={styles.optionsContainer}>
+          <View style={styles.leftheaderWrapper}>
+            <View style={styles.leftHeader}>
+              {/* icons */}
+              <Walletactionicon />
+              <Text style={styles.walletActions}>Wallet Actions</Text>
             </View>
-          ) : (
-            <>
-              <Animated.FlatList
-                ref={flatlistRef}
-                // style={{ paddingTop: 10 }}
-                data={formatData(transactions)}
 
-                // scrollEventThrottle={16}
-                onScroll={event => {
-                  setPageVerticalOffset(event.nativeEvent.contentSize.height);
-                }}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={handleRefresh}
-                    progressBackgroundColor="white"
-                    colors={[COLORS.blue6]}
-                    tintColor={COLORS.blue6}
-                    title="Refreshing"
-                    titleColor={COLORS.blue6}
-                  />
-                }
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item, index }: any) => (
-                  <Transactionhistory
-                    date={item.time}
-                    datas={item.data}
-                    index={index}
-                  />
-                )}
-                keyExtractor={(item) => item.time}
-                ListEmptyComponent={<EmptyComponent />}
-              />
-            </>
-          )}
+            <Text style={styles.balance}>
+              Balance:
+              <Text style={styles.balanceAmount}> N24,458,890 </Text>
+            </Text>
+          </View>
+          <Horizontaline marginV={14} />
+
+          <View style={styles.optionWrapper}>
+            {options.map(({ title, color, Icon }, index) => {
+              return (
+                <View style={styles.optionBlock} key={index}>
+                  <View style={[styles.eachOption, { backgroundColor: color }]}>
+                    <Icon />
+                  </View>
+                  <Text style={styles.eachOptionTitle}>{title}</Text>
+                </View>
+              );
+            })}
+          </View>
         </View>
 
-        
+        <BottomSheet
+          index={0}
+          snapPoints={snapPoints}
+          style={{
+            paddingHorizontal: 24,
+          }}
+        >
+          <View style={styles.bottomsheetHeader}>
+            <View style={styles.historyIconWrap}>
+              {/* icons */}
+              <Historyicon />
+              <Text style={styles.historyText}>History</Text>
+            </View>
 
+            <Text style={styles.viewAll}>View All</Text>
+          </View>
+
+          <Horizontaline marginV={24} />
+
+          <View style={styles.listContainer}>
+            {loading ? (
+              <View style={styles.loaderWrapper}>
+                <ActivityIndicator size="large" color={COLORS.blue6} />
+              </View>
+            ) : (
+              <>
+                <Animated.FlatList
+                  data={formatData(transactions)}
+                  refreshControl={
+                    <RefreshControl
+                      refreshing={refreshing}
+                      onRefresh={handleRefresh}
+                      progressBackgroundColor="white"
+                      colors={[COLORS.blue6]}
+                      tintColor={COLORS.blue6}
+                      title="Refreshing"
+                      titleColor={COLORS.blue6}
+                    />
+                  }
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ item, index }: any) => (
+                    <Transactionhistory
+                      date={item.time}
+                      datas={item.data}
+                      index={index}
+                    />
+                  )}
+                  keyExtractor={(item: { time: string }) => item.time}
+                  ListEmptyComponent={
+                    <Emptycomponent
+                      size={135}
+                      msg="Padi, you have not performed 
+                any transactions yet. "
+                    />
+                  }
+                />
+              </>
+            )}
+          </View>
+        </BottomSheet>
       </View>
     </View>
   );

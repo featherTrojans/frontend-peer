@@ -5,50 +5,92 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white3,
-    // paddingTop: 22,
-    // paddingHorizontal: 15,
   },
   contentContainer: {
     flex: 1,
     paddingHorizontal: 15,
   },
-  headerText: {
-    ...fontsize.xmedium,
-    ...FONTS.bold,
-  },
+
   listContainer: {
     flex: 1,
-    // marginTop: 23,
   },
-  listHeaderContainer: {
+  optionsContainer: {
+    backgroundColor: COLORS.white,
+    marginVertical: 15,
+    borderRadius: 16,
+    paddingHorizontal: 18,
+    paddingTop: 18,
+    paddingBottom: 26,
+  },
+  leftheaderWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 25,
   },
-  leftsideHeader: {
-    ...fontsize.bsmall,
+  leftHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  walletActions: {
+    marginLeft: 12,
+    ...fontsize.xsmallest,
     ...FONTS.medium,
+    color: COLORS.grey16,
   },
-  rightsideHeader: {
-    ...fontsize.small,
-    ...FONTS.bold,
+  balance: {
+    ...fontsize.xsmallest,
+    ...FONTS.medium,
+    color: COLORS.grey16,
   },
-  emptyListContainer: {
+  balanceAmount: {
+    ...fontsize.smallest,
+    color: COLORS.black,
+  },
+  optionWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 12,
+  },
+  optionBlock: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 52,
   },
-  textContainer: {
-    marginHorizontal: 50,
+  eachOption: {
+    width: 45.5,
+    height: 45.5,
+    borderRadius: 45.5 / 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  emptyContainerText: {
-    color: COLORS.black,
-    textAlign: "center",
-    ...fontsize.smaller,
-    ...FONTS.regular,
+  eachOptionTitle: {
+    marginTop: 13,
+    ...fontsize.xxsmallest,
+    ...FONTS.medium,
+    color: COLORS.blue9,
   },
-  emptyContainerSubText: {
-    color: COLORS.blue6,
-    ...FONTS.bold,
+  bottomsheetHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 20,
+    alignItems: "center",
+  },
+  historyIconWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  historyText: {
+    marginLeft: 12,
+    ...fontsize.xsmallest,
+    ...FONTS.medium,
+    color: COLORS.grey16,
+  },
+  viewAll: {
+    ...fontsize.xxsmallest,
+    ...FONTS.medium,
+    color: COLORS.grey16,
+  },
+  loaderWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

@@ -43,6 +43,7 @@ export const COLORS = {
   grey14: "#FCFDFF",
   grey15: "#CBCBCB",
   grey16: "#696969",
+  grey17: "#DBDCDD",
 
   yellow1: "#FF9D00",
   yellow2: "#FFC84B",
@@ -103,10 +104,10 @@ export const SIZES = {
 };
 
 export const FONTS = {
-  light: { fontFamily: "GTlight" },
-  regular: { fontFamily: "GTregular" },
-  medium: { fontFamily: "GTmedium" },
-  bold: { fontFamily: "GTbold" },
+  light: { fontFamily: "BRlight" },
+  regular: { fontFamily: "BRregular" },
+  medium: { fontFamily: "BRmedium" },
+  bold: { fontFamily: "BRbold" },
 };
 
 export const Shadow = {
@@ -145,6 +146,9 @@ export const fontsize = {
   },
   xxsmallest: {
     fontSize: RFValue(10),
+  },
+  xxsmall:{
+    fontSize: RFValue(9),
   },
   medium: {
     fontSize: RFValue(20),

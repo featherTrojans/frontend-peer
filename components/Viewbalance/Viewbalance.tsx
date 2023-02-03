@@ -29,6 +29,7 @@ const {
   Debitcardicon,
   Featheragenticon,
   Familyrequesticon,
+  Balanceicon
 } = icons;
 
 const Viewbalance = ({ navigate }: any) => {
@@ -39,6 +40,9 @@ const Viewbalance = ({ navigate }: any) => {
   const [amount, setAmount] = useState("")
   const [loading, setLoading] = useState(false);
   const {errorAlert} = useAlert()
+
+
+
   const addcashoptions = [
     {
       icon: <Debitcardicon />,
@@ -96,7 +100,7 @@ const Viewbalance = ({ navigate }: any) => {
 
 
       {/* Add cash modal */}
-      <AddCashModal>
+      {/* <AddCashModal>
         <View>
           <View style={styles.headerWrapper}>
             <Text style={styles.addcashheadertext}>Add Cash Options</Text>
@@ -125,13 +129,16 @@ const Viewbalance = ({ navigate }: any) => {
             );
           })}
         </View>
-      </AddCashModal>
+      </AddCashModal> */}
 
 
       {/* Top part of the block */}
       <View style={viewbalancestyles.topContainer}>
         <View style={{ flex: 1, marginRight: 20 }}>
-          <Text style={viewbalancestyles.primaryText}>Primary Wallet</Text>
+          <View style={{flexDirection: "row", alignItems: "center"}}>
+            <Balanceicon />
+          <Text style={viewbalancestyles.primaryText}>My Balances</Text>
+          </View>
           <View style={viewbalancestyles.underLine} />
         </View>
 
@@ -151,10 +158,10 @@ const Viewbalance = ({ navigate }: any) => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              marginBottom: RFValue(6),
+              marginBottom: RFValue(15),
             }}
           >
-            <Text style={viewbalancestyles.balanceText}>Feather Balance</Text>
+            <Text style={viewbalancestyles.balanceText}>Primary Wallet</Text>
             <Pressable
             hitSlop={16}
               onPress={() => setShowAmount(!showAmount)}

@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     // paddingRight: 15
   },
   backArrowText: {
-    ...fontsize.small,
+    ...fontsize.smallest,
     ...FONTS.medium,
     color: COLORS.blue9
   },

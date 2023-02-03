@@ -9,6 +9,8 @@ export const viewbalancestyles = StyleSheet.create({
     paddingVertical: RFValue(20),
     borderRadius: 10,
     backgroundColor: COLORS.white,
+    marginTop: 20,
+    marginBottom: 15
   },
   //   Top part of the container
   topContainer: {
@@ -19,6 +21,7 @@ export const viewbalancestyles = StyleSheet.create({
     ...fontsize.xsmallest,
     ...FONTS.regular,
     color: COLORS.grey16,
+    marginLeft: 8.6
   },
   underLine: {
     height: 0.5,
@@ -51,9 +54,8 @@ export const viewbalancestyles = StyleSheet.create({
     alignItems: "flex-end",
   },
   balanceText: {
-    ...fontsize.smaller,
+    ...fontsize.xsmallest,
     ...FONTS.medium,
-    // marginBottom: RFValue(6),
     color: COLORS.blue9,
     marginRight: 16
   },

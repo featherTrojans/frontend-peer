@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
 } from "react-native";
-import React, { ReactChild, ReactElement } from "react";
+import React from "react";
 import { COLORS, icons } from "../../constants";
 import { styles } from "./Backheader.styles";
 import { useNavigation } from "@react-navigation/native";

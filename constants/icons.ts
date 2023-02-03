@@ -73,7 +73,6 @@ import Location from "../assets/icons/Location";
 
 
 
-
 import SecureDot from "../assets/icons/SecureDot";
 import Chatsearchicon from "../assets/icons/Chatsearchicon";
 import Copyclipboard from "../assets/icons/Copyclipboard";
@@ -200,8 +199,13 @@ import Updateprofileicon from "../assets/icons/Updateprofileicon";
 import Bluearrowrighticon from "../assets/icons/Bluearrowrighticon";
 import Updatealertcancelicon from "../assets/icons/Updatealertcancelicon";
 import Startnewchaticon from "../assets/icons/Startnewchaticon";
+import Walletactionicon from "../assets/icons/Walletactionicon";
+import Historyicon from "../assets/icons/Historyicon";
+import Balanceicon from "../assets/icons/Balanceicon";
+import Recentconvicon from "../assets/icons/Recentconvicon";
+import Setupprofileicon from "../assets/icons/Setupprofileicon";
 
-// Receiverimage
+
 
 export default {
   Logo,
@@ -210,6 +214,9 @@ export default {
   Lock,
   Usericon,
   Usericondark,
+  Setupprofileicon,
+  Recentconvicon,
+  Balanceicon,
   Phoneicon,
   Envelopeicon,
   Lockicondark,
@@ -220,6 +227,8 @@ export default {
   Greencheckicon,
   Familyrequesticon,
   At,
+  Walletactionicon,
+Historyicon,
   Gloicon,
   Mtnlogo,
   Detailsmoreicon,

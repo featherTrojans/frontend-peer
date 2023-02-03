@@ -10,7 +10,6 @@ const {
   Senderimage,
   Sendingarrow,
   Receivingarrow,
-  Receiverimage,
   Userdefaultmedium,
   Bonusiconlarge,
   Utilitylarge,
@@ -32,11 +31,11 @@ const InitialsBgColor = ({name}) => {
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: C,
+    backgroundColor: COLORS.purple3,
     borderRadius: 50 /2,
   }}
 >
-  <Text >{nameSplitToTwo(name)}</Text>
+  <Text style={{color: COLORS.purple2}} >{nameSplitToTwo(name)}</Text>
 </View> 
   )
 }
@@ -238,7 +237,7 @@ const Sendingandreceive = ({
         </View> 
         :
         
-        <View style={{ position: "relative" }}>
+        <View style={{ position: "relative", }}>
         {showImage(senderName, receiverName, title, value, otherUser, transId)}
       </View>
     

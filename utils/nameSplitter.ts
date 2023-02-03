@@ -1,7 +1,6 @@
 
 
   export const nameSplitter = (name: string) => {
-    // return "";
     const splitName = name?.replace(/\s+/g, ' ').split(" ");
 
     if (splitName.length >= 2) {

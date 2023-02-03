@@ -3,14 +3,24 @@ import Svg, { G, Path } from 'react-native-svg'
 
 function TransferIcon() {
     return (
-        <Svg xmlns="http://www.w3.org/2000/svg" width="30.469" height="29.119" viewBox="0 0 30.469 29.119">
-        <G id="send_2_" data-name="send (2)" transform="translate(0 -11.013)">
-            <Path id="Path_6763" data-name="Path 6763" d="M145.366,321.034l-9.184,5.79.99-7.059,2.56-3.336,4.326,1.227Z" transform="translate(-127.833 -286.693)" fill="#0092e2"/>
-            <Path id="Path_6764" data-name="Path 6764" d="M.677,19.672A.938.938,0,0,0,.345,21.3l4.78,3.907,10.807-3.712L30.469,11.013Z" transform="translate(0 0)" fill="#83deff"/>
-            <Path id="Path_6765" data-name="Path 6765" d="M194.094,29.737l7.119,5.819,3.7,3.027a.938.938,0,0,0,1.508-.516l6.239-27.054L198.377,21.667Z" transform="translate(-182.195)" fill="#83deff"/>
-            <Path id="Path_6766" data-name="Path 6766" d="M108.938,11.013,90.368,29.737l-3.55,10.395L83.594,25.206Z" transform="translate(-78.469 0)" fill="#00b4fd"/>
-        </G>
-        </Svg>
+        <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={28.277}
+    height={28.277}
+  >
+    <G data-name="send (4)">
+      <Path
+        data-name="Path 7384"
+        d="m21.93 10.14-4.942 14.842a3 3 0 0 1-5.642.128l-1.867-4.893-.234-.601a1.06 1.06 0 0 0-.58-.58l-.6-.234-4.894-1.866a2.954 2.954 0 0 1-1.916-2.864 2.966 2.966 0 0 1 .866-2.054 3.141 3.141 0 0 1 1.181-.729l14.842-4.942a2.993 2.993 0 0 1 3.79 3.79Z"
+        fill="#f69"
+      />
+      <Path
+        data-name="Path 7385"
+        d="M15.878 12.403a1 1 0 0 0-1.414 0l-6.4 6.4.602.233a1.06 1.06 0 0 1 .58.58l.233.6 6.4-6.399a1 1 0 0 0 0-1.414Z"
+        fill="#d81859"
+      />
+    </G>
+  </Svg>
     )
 }
 

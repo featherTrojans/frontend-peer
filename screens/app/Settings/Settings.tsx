@@ -2,7 +2,6 @@ import React, { useContext, useMemo } from "react";
 import { Text, View, TouchableOpacity, Share, Image, StyleSheet } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
-import * as Sharing from "expo-sharing";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
 import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";

@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-// import { SafeAreaProvider } from 'react-native-safe-area-context';
-// import { ToastProvider } from "react-native-toast-notifications";
+
 import Toast from "react-native-toast-message";
 
 import { useFonts } from "expo-font";
@@ -108,10 +107,10 @@ export default function App() {
   }, []);
 
   let [fontsLoaded] = useFonts({
-    GTlight: require("./assets/fonts/GTWalsheimPro-Light.ttf"),
-    GTregular: require("./assets/fonts/GTWalsheimPro-Regular.ttf"),
-    GTmedium: require("./assets/fonts/GTWalsheimPro-Medium.ttf"),
-    GTbold: require("./assets/fonts/GTWalsheimPro-Bold.ttf"),
+    BRlight: require("./assets/fonts/BRFirma-Light.otf"),
+    BRregular: require("./assets/fonts/BRFirma-Regular.otf"),
+    BRmedium: require("./assets/fonts/BRFirma-Medium.otf"),
+    BRbold: require("./assets/fonts/BRFirma-Bold.otf"),
   });
 
 

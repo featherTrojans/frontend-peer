@@ -4,18 +4,18 @@ import { COLORS, fontsize, FONTS } from "../../constants";
 import { Shadow } from "../../constants/theme";
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: RFValue(15),
-    paddingTop: RFValue(18),
-    paddingBottom: RFValue(24),
+    // paddingHorizontal: RFValue(15),
+    // paddingTop: RFValue(18),
+    // paddingBottom: RFValue(24),
     // borderColor: COLORS.borderColor,
     // borderWidth: 0.5,
     borderRadius: RFValue(15),
-    marginBottom:RFValue(10),
-    ...Shadow
+    marginBottom:RFValue(35),
+    // ...Shadow
   },
 
   dateText: {
-    ...fontsize.smallest,
+    ...fontsize.xsmallest,
     color: COLORS.blue9,
     ...FONTS.medium,
     lineHeight: 27,
@@ -36,30 +36,31 @@ export const styles = StyleSheet.create({
   historyDetailsContainer: {
     flexDirection: "row",
     alignItems: "center",
+
   },
   arrowBg: {
-    width: 39,
-    height: 39,
-    borderRadius: 39,
+    width: 31,
+    height: 31,
+    borderRadius: 31/2,
     justifyContent: "center",
     alignItems: "center",
     marginRight: RFValue(14),
   },
   title: {
-    ...fontsize.smaller,
+    ...fontsize.xsmallest,
     ...FONTS.medium,
     marginBottom: RFValue(3),
     textTransform:  'capitalize'
   },
   transactionType: {
-    ...fontsize.smallest,
+    ...fontsize.xxsmall,
     lineHeight: 27,
     ...FONTS.regular,
     color: COLORS.halfBlack,
     alignItems: "center"
   },
   amount: {
-    ...fontsize.smallest,
+    ...fontsize.xsmallest,
     ...FONTS.medium,
     lineHeight: 27
   },
