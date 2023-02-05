@@ -45,6 +45,57 @@ const {
   // Balanceicon
 } = icons;
 
+const scrollactions = [
+  {
+    bg: "#EDF3EB",
+    text: "Withdraw cash from business and agents near you.",
+    icon: "",
+  },
+  {
+    bg: "#F3EEFB",
+    text: "Transfer money to feather users and bank accounts.",
+    icon: "",
+  },
+  {
+    bg: "#D2EAFD",
+    text: "Pay Bills with speed and ease, at good rates.",
+    icon: "",
+  },
+];
+
+const Scrollactions = () => {
+  function Scrollaction({
+    bg,
+    text,
+    icon,
+    index
+  }: {
+    bg: string;
+    text: string;
+    icon: string;
+    index: number
+  }) {
+    const isLast = index+1 === scrollactions.length
+    return (
+      <View style={[styles.scrollaction, { backgroundColor: bg, marginRight: isLast ? 0 : 16 }]}>
+        <Text style={styles.scrollactionText}>{text}</Text>
+      </View>
+    );
+  }
+
+  return (
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      bounces={false}
+    >
+      {scrollactions.map(({ bg, text, icon }, index) => {
+        return <Scrollaction bg={bg} text={text} icon={icon} key={index} index={index} />;
+      })}
+    </ScrollView>
+  );
+};
+
 const Conversations = () => {
   return (
     <View style={styles.conversationWrap}>
@@ -54,9 +105,7 @@ const Conversations = () => {
           <Recentconvicon />
           <Text style={styles.recentconvText}>Recent Conversations</Text>
         </View>
-        <Text
-          style={styles.numberOfUnread}
-        >
+        <Text style={styles.numberOfUnread}>
           {" "}
           <Text style={{ ...FONTS.bold }}>2</Text> Unread
         </Text>
@@ -111,7 +160,7 @@ const SetupProfile = () => {
 
       <Text style={styles.setupInfoText}>
         Complete your profile today to enjoy all the benefits of feather without
-        limits.<Text style={{ color: COLORS.blue6 }}> Go to profile page.</Text>
+        limits.<Text style={styles.setupInfoSubText}> Go to profile page.</Text>
       </Text>
     </View>
   );
@@ -170,7 +219,7 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
 
           <View style={styles.profileNameContainer}>
             <Text style={styles.profileName}>
-              Hi,{nameToShow(authdata?.userDetails?.fullName)}✌🏽
+              Hi, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
             </Text>
             <Text style={styles.profileUsername}>
               @{authdata?.userDetails?.username}
@@ -203,6 +252,8 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
         }
       >
         <Viewbalance />
+
+        <Scrollactions />
 
         <Conversations />
 

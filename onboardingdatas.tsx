@@ -24,6 +24,11 @@ export default [
         image: "",
         header: "Pay your bills with speed, you never have to miss a thing again. ",
         information: "Earn cash and build income each time you give cash to peers, your financial freedom is here"
+    },
+    {
+        image: "",
+        header: "Enjoy amazing in-app conversations - send money where you are.",
+        information: "Feather is a modern digital wallet on steroids that helps you process your daily transactional needs."
     }
 ]
 

@@ -110,6 +110,7 @@ export default function App() {
     BRlight: require("./assets/fonts/BRFirma-Light.otf"),
     BRregular: require("./assets/fonts/BRFirma-Regular.otf"),
     BRmedium: require("./assets/fonts/BRFirma-Medium.otf"),
+    BRsemibold: require("./assets/fonts/BRFirma-Semibold.otf"),
     BRbold: require("./assets/fonts/BRFirma-Bold.otf"),
   });
 

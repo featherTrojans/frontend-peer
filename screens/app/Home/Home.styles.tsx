@@ -97,6 +97,19 @@ export const styles = StyleSheet.create({
     color: COLORS.purple2,
   },
 
+  scrollaction: {
+    width: 148,
+    height: 164,
+    borderRadius: 16,
+    padding: 18,
+    // marginRight: 16,
+  },
+  scrollactionText: {
+    ...fontsize.xsmallest,
+    ...FONTS.medium,
+    lineHeight: 14,
+  },
+
   // Horizontal information styles
 
   informationblockwrap: {
@@ -197,6 +210,12 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     color: COLORS.grey16,
     lineHeight: 18,
+  },
+  setupInfoSubText: {
+    color: COLORS.blue6,
+    textDecorationStyle: "solid",
+    textDecorationColor: COLORS.blue6,
+    textDecorationLine: "underline",
   },
   setupIconWrap: {
     flexDirection: "row",

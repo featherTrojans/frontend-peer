@@ -107,6 +107,7 @@ export const FONTS = {
   light: { fontFamily: "BRlight" },
   regular: { fontFamily: "BRregular" },
   medium: { fontFamily: "BRmedium" },
+  semibold: { fontFamily: "BRsemibold" },
   bold: { fontFamily: "BRbold" },
 };
 

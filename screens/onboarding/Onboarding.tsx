@@ -8,6 +8,7 @@ import EachOnboarding from "../../components/onboarding-component/OnBoardingComp
 import Customstatusbar from "../shared/Customstatusbar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RFValue } from "react-native-responsive-fontsize";
+import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper'
 
 const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
@@ -51,7 +52,6 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
         index: currentIndex + 1,
         animated: true,
       });
-      //   console.log("Right index", currentIndex);
     } else {
       navigateToLogin()
     }
@@ -61,35 +61,15 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Customstatusbar />
 
-     
 
-      <FlatList
-        ref={flatListRef}
-        horizontal
-        pagingEnabled
-        scrollEventThrottle={16}
-        snapToAlignment="center"
-        showsHorizontalScrollIndicator={false}
-        onViewableItemsChanged={onViewChangeRef.current}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: false }
-        )}
-        bounces={false}
-        keyExtractor={(item: any) => item.header}
-        data={onboardingdatas}
-        renderItem={({ item }: any) => <EachOnboarding item={item} />}
-      />
-
-      {/* Footer--Dots and the nxet button */}
-      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 32}}>
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+       {/* Animated Dots */}
+       <View style={{flexDirection: "row", justifyContent: "center", marginTop: getStatusBarHeight(true)+50,}}>
           {onboardingdatas.map((item, index) => {
             const dotPosition = Animated.divide(scrollX, SIZES.width);
 
             const dotColor = dotPosition.interpolate({
               inputRange: [index - 1, index, index + 1],
-              outputRange: [COLORS.grey3, COLORS.blue6, COLORS.grey3],
+              outputRange: [COLORS.grey3, COLORS.black, COLORS.grey3],
               extrapolate: "clamp",
             });
             const dotOpacity = dotPosition.interpolate({
@@ -119,16 +99,50 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
           })}
         </View>
 
-        <View>
-        {/* <View onPress={scrollTo}> */}
+     
+
+      <FlatList
+        ref={flatListRef}
+        horizontal
+        pagingEnabled
+        scrollEventThrottle={16}
+        snapToAlignment="center"
+        showsHorizontalScrollIndicator={false}
+        onViewableItemsChanged={onViewChangeRef.current}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: false }
+        )}
+        bounces={false}
+        keyExtractor={(item: any) => item.header}
+        data={onboardingdatas}
+        renderItem={({ item }: any) => <EachOnboarding item={item} />}
+      />
+
+      {/* Footer--Dots and the nxet button */}
+      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 32, marginBottom: getBottomSpace()+20}}>
+        
+       
+
+
+
+
+        <View style={{ flex: 1, minHeight: 60,  alignItems: "center", justifyContent: "center",}}>
           {viewIndex < onboardingdatas.length - 1 ? (
-            <Text>Next</Text>
+            <TouchableOpacity onPress={scrollTo} activeOpacity={0.8} style={{backgroundColor: COLORS.black, justifyContent: "center", alignSelf: "center", borderRadius: 16}}>
+              <Text style={{color: COLORS.white, paddingVertical: 10, paddingHorizontal: 21, ...fontsize.smallest, ...FONTS.bold }}>SKIP</Text>
+              </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={scrollTo} style={{paddingHorizontal: 41, paddingVertical: 21, backgroundColor: COLORS.black, borderRadius: 10}}>
-              <Text style={{color: COLORS.white}}>Launch Feather</Text>
+            <TouchableOpacity onPress={scrollTo} activeOpacity={0.8} style={{paddingHorizontal: 41, paddingVertical: 21, backgroundColor: COLORS.black, borderRadius: 10, alignSelf: "stretch"}}>
+              <Text style={{color: COLORS.white, textAlign: "center", textTransform: "uppercase", ...fontsize.smallest, ...FONTS.bold}}>Join the flock - Register</Text>
             </TouchableOpacity>
           )}
         </View>
+
+
+
+
+
       </View>
     </View>
   );
