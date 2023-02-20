@@ -56,7 +56,7 @@ import Chatsoon from "./app/Chats/Chatsoon/Chatsoon";
 import Withdraw from "./app/Withdraws/Withdraw/Withdraw";
 import Transfercash from "./app/Transferfunds/Transfercash/Transfercash";
 import Getdetails from "./app/Transferfunds/Getdetails/Getdetails";
-import Choosewallet from "./app/Walletfunding/Choosewallet/Choosewallet";
+// import Choosewallet from "./app/Walletfunding/Choosewallet/Choosewallet";
 import Transactiondetails from "./app/Transactions/Transactiondetails/Transactiondetails";
 import Transactiondispute from "./app/Transactions/Transactiondispute/Transactiondispute";
 import Transactionsrating from "./app/Transactions/Transacrionsrating/Transactionsrating";
@@ -86,7 +86,7 @@ import Verifybvn from "./app/Settings/Verifybvn/Verifybvn";
 import Electricitytype from "./app/Billpayments/Electricity/Electricitytype/Electricitytype";
 import Dataplan from "./app/Billpayments/Airtime/Dataplan/Dataplan";
 import Electricitydetails from "./app/Billpayments/Electricity/Electricitydetails/Electricitydetails";
-import Addcash from "./app/Walletfunding/Addcash/Addcash";
+// import Addcash from "./app/Walletfunding/Addcash/Addcash";
 
 
 
@@ -159,8 +159,8 @@ export {
   Depositstart,
   Changepin,
   Requesterinfo,
-  Addcash,
-  Choosewallet,
+  // Addcash,
+  // Choosewallet,
   Transfercash,
   TransferInput,
   Getdetails,

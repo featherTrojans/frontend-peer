@@ -6,16 +6,12 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import BottomSheet, {
-  BottomSheetScrollView,
-  BottomSheetFlatList,
-} from "@gorhom/bottom-sheet";
+
 import React, {useState, useContext} from "react";
 import { styles } from "./Withdrawpreview.styles";
 import { COLORS, FONTS, fontsize, images, icons } from "../../../../constants";
 import { Bottombtn, Loader, Requesterdetails } from "../../../../components";
 import showerror from "../../../../utils/errorMessage";
-// import { useToast } from "react-native-toast-notifications";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import Map from "../../../shared/map/Map";
 import amountFormatter from "../../../../utils/formatMoney";

@@ -73,8 +73,7 @@ import {
   Summary,
 
   //Wallet funding
-  Addcash,
-  Choosewallet,
+  // Choosewallet,
 
   //Transfer funds
   Transfercash,
@@ -275,8 +274,8 @@ const RootNavigator = ({ initialBoarded }) => {
 
           {/* Wallet Funding */}
           <AppStack.Group>
-            <AppStack.Screen name="Addcash" component={Addcash} />
-            <AppStack.Screen name="Choosewallet" component={Choosewallet} />
+            {/* <AppStack.Screen name="Addcash" component={Addcash} /> */}
+            {/* <AppStack.Screen name="Choosewallet" component={Choosewallet} /> */}
             <AppStack.Screen name="WalletPin" component={WalletPin} />
           </AppStack.Group>
 
