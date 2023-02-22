@@ -13,7 +13,6 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Custombutton, Input, Loader, Mainwrapper } from "../../../../components/index";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { styles } from "./Personal.styles";
 import { AuthContext } from "../../../../context/AuthContext";
@@ -23,11 +22,10 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { RFValue } from "react-native-responsive-fontsize";
 // import DropDownPicker from "react-native-dropdown-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Lock from "../../../../assets/icons/Lock";
 import useAlert from "../../../../utils/useAlerts";
 
 
-const { Usericondark, Phoneicon, Envelopeicon, Newlogo } = icons;
+const {Transfericon,  Newlogo } = icons;
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -135,7 +133,7 @@ const Personal = ({ navigation }) => {
                     placeholder="Firstname"
                     name="firstName"
                     formikProps={formikProps}
-                    icon={<Usericondark />}
+                    icon={<Transfericon />}
                     inputbg={COLORS.white}
                   />
 
@@ -143,7 +141,7 @@ const Personal = ({ navigation }) => {
                     placeholder="Lastname"
                     name="lastName"
                     formikProps={formikProps}
-                    icon={<Usericondark />}
+                    icon={<Transfericon />}
                     inputbg={COLORS.white}
                   />
 
@@ -151,7 +149,7 @@ const Personal = ({ navigation }) => {
                     placeholder="Email Address"
                     name="email"
                     formikProps={formikProps}
-                    icon={<Envelopeicon />}
+                    icon={<Transfericon />}
                     inputbg={COLORS.white}
                   />
 
@@ -159,14 +157,14 @@ const Personal = ({ navigation }) => {
                     placeholder="Phone Number"
                     name="phoneNumber"
                     formikProps={formikProps}
-                    icon={<Phoneicon />}
+                    icon={<Transfericon />}
                     inputbg={COLORS.white}
                   />
                    <Input
                     placeholder="Password"
                     name="password"
                     formikProps={formikProps}
-                    icon={<Lock />}
+                    icon={<Transfericon />}
                     password={true}
                     inputbg={COLORS.white}
                   />
@@ -175,7 +173,7 @@ const Personal = ({ navigation }) => {
                     placeholder="Referral Code (Optional)"
                     name="referredBy"
                     formikProps={formikProps}
-                    icon={<Phoneicon />}
+                    icon={<Transfericon />}
                     inputbg={COLORS.white}
                   />
 

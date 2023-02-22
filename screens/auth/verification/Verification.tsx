@@ -4,16 +4,13 @@ import OTPTextInput from "react-native-otp-textinput";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Verification.styles";
-import { Backheader, Bottombtn, Custombutton, Loader } from "../../../components";
+import { Bottombtn, Custombutton, Loader } from "../../../components";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import useAlert from "../../../utils/useAlerts";
 import useCustomModal from "../../../utils/useCustomModal";
-import Passwordpinlock from "../../../assets/icons/Passwordpinlock";
 
-// import { VerificationContainer, VerificationText } from "./Verification.styles";
 
-const { Cancelicon, Successcheckanimate } = icons;
 
 const Verification = ({route,navigation}) => {
   const {errorAlert} = useAlert()
@@ -102,7 +99,6 @@ const Verification = ({route,navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
-      <Backheader title="Verify Phone Number"/>
       <View style={{paddingHorizontal: 25, flex: 1}}>
       <CustomModal>
         <View>
@@ -116,7 +112,6 @@ const Verification = ({route,navigation}) => {
             >
 
             {/* icons is here */}
-            <Passwordpinlock />
             <Text style={{ textAlign: "center", ...fontsize.smallest, ...FONTS.regular, color: COLORS.black, paddingHorizontal: 40, marginTop: 34 }}>
               *We take your security and privacy serious, Kindly setup your pin
               to continue on the app
@@ -175,14 +170,7 @@ const Verification = ({route,navigation}) => {
               borderRadius: 4,
             }}
           />
-        {/* <TextInput 
-        keyboardType="number-pad" 
-        returnKeyType="done" 
-        value={otpCode} 
-        onChangeText={(text)=> setOtpCode(text)} 
-        style={styles.cutstomOtpInput} 
-        maxLength={6}
-        /> */}
+    
       </View>
       </View>
 
@@ -202,12 +190,7 @@ const Verification = ({route,navigation}) => {
 
 
 
-      {/* Dashedline */}
-      {/* <View style={styles.dashedLine} /> */}
-      {/* Change number text */}
-      {/* <TouchableOpacity onPress={()=>navigation.goBack()}>
-        <Text style={styles.changeNumber}>Incorrect Number? <Text style={{color: COLORS.blue9}}>Change Number</Text></Text>
-      </TouchableOpacity> */}
+      
 
       </View>
       <Custombutton btntext="Verify" onpress={handleSubmit} disable={loading} />

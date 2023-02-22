@@ -42,7 +42,7 @@ const {
   Historyicon,
   Recentconvicon,
   Setupprofileicon,
-  // Balanceicon
+  Balanceicon
 } = icons;
 
 const scrollactions = [

@@ -22,6 +22,8 @@ export const COLORS = {
   blue11: "#D2EAFD",
   blue12: "#56BEFF",
   blue13: "#8456FF",
+  blue14: "#E6ECFF",
+  blue15: "#1539CE",
   transparentBlue: "#F2F5FF",
 
 
@@ -44,6 +46,8 @@ export const COLORS = {
   grey15: "#CBCBCB",
   grey16: "#696969",
   grey17: "#DBDCDD",
+  grey18: "#A0A0A0",
+  grey19: "#F7F8FA",
 
   yellow1: "#FF9D00",
   yellow2: "#FFC84B",

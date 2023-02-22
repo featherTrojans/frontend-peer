@@ -93,9 +93,9 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   chatToMeTime: {
-    color: "#8456FF",
-    ...fontsize.smallest,
-    ...FONTS.regular,
+    color: COLORS.grey18,
+    ...fontsize.xsmallest,
+    ...FONTS.bold,
   },
   chatNotMe: {
     flexDirection: "row",

@@ -15,7 +15,7 @@ const Bottombtn = ({ title, bg = COLORS.blue6, onpress, ...rest }: Props) => {
       style={styles.btnSection}
       activeOpacity={0.8}
       onPress={onpress}
-      {...rest}
+      // {...rest}
     >
       <View style={[styles.btnBg, { backgroundColor: bg }]}>
         <Text style={styles.btnText}>{title}</Text>

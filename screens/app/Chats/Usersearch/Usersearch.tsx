@@ -15,13 +15,13 @@ import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { StringSchema } from "yup";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Eachprofile from "../Chatshome/EachProfile";
-import { Backheader, Custombutton, Horizontaline, InitialsBg, Mainwrapper } from "../../../../components";
+import { Custombutton, Horizontaline, InitialsBg, Mainwrapper } from "../../../../components";
 import { useNavigation } from "@react-navigation/native";
 import useDebounce from "../../../../utils/debounce";
 import LottieView from "lottie-react-native"
 import { RFValue } from "react-native-responsive-fontsize";
 
-const { Backarrow, Chatsearchicon, Backarrowgrey, Cryinganimate } = icons;
+const { Cryinganimate } = icons;
 
 const SingleUser = ({
   userInfo,
@@ -89,7 +89,7 @@ const Usersearch = ({navigation, route}) => {
     <Mainwrapper >
 
 
-      <Backheader title="Search Phone Number" />
+      {/* <Backheader title="Search Phone Number" /> */}
 
 
 

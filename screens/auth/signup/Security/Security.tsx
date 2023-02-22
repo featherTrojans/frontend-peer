@@ -15,7 +15,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import useAlert from "../../../../utils/useAlerts";
 
-const { Lock, Newlogo, Successcheckanimate, Passwordpinlock } = icons;
+const {TransferIcon, Newlogo, Successcheckanimate } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -71,7 +71,7 @@ const Security = ({ route, navigation }) => {
           >
 
             {/* icons is here */}
-            <Passwordpinlock />
+            <TransferIcon />
             <Text style={{ textAlign: "center", ...fontsize.smallest, ...FONTS.regular, color: COLORS.black, paddingHorizontal: 40, marginTop: 34 }}>
               *We take your security and privacy serious, Kindly setup your pin
               to continue on the app
@@ -156,7 +156,7 @@ const Security = ({ route, navigation }) => {
                     placeholder="Password"
                     name="password"
                     formikProps={formikProps}
-                    icon={<Lock />}
+                    icon={<TransferIcon />}
                     password
                   />
                   {/* {isSubmitting && <Loader />} */}
@@ -164,7 +164,7 @@ const Security = ({ route, navigation }) => {
                     placeholder="Confirm Password"
                     name="confirmPassword"
                     formikProps={formikProps}
-                    icon={<Lock />}
+                    icon={<TransferIcon />}
                     password
                   />
                   <View style={{ marginTop: 7 }}>

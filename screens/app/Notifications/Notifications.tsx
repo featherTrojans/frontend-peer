@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { styles } from "./Notifications.styles";
 import { icons, COLORS, SIZES } from "../../../constants";
-import { Backheader, Mainwrapper } from "../../../components";
+import { Mainwrapper } from "../../../components";
 import { string } from "yup";
 import { Shadow } from "../../../constants/theme";
 import Customstatusbar from "../../shared/Customstatusbar";
@@ -243,7 +243,7 @@ const Notifications = () => {
   return (
     <Mainwrapper>
       {/* Header title */}
-        <Backheader title="Notifications" />
+        {/* <Backheader title="Notifications" /> */}
 
       <View style={styles.listContainer}>
         {loading ? (

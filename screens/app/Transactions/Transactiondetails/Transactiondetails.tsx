@@ -15,14 +15,7 @@ import * as Sharing from "expo-sharing";
 import moment from "moment";
 import { styles } from "./Transactiondetails.styles";
 import { assetsDB, bankLogo } from "../../../../assetdatas";
-import {
-  Backheader,
-  Bottombtn,
-  Horizontaline,
-  Iconwithdatas,
-  InitialsBg,
-  Mainwrapper,
-  Sendingandreceive,
+import { Backheader, Horizontaline, Mainwrapper,Sendingandreceive,
 } from "../../../../components";
 import { FONTS, fontsize, COLORS, icons } from "../../../../constants";
 import { NavigationContainer } from "@react-navigation/native";
@@ -38,11 +31,9 @@ import useCopyclipboard from "../../../../utils/useCopyclipboard";
 import { nameSplitToTwo } from "../../../../utils/nameSplitter";
 
 const {
-  Copyclipboard,
   Sharereceipt,
   Downloadreceipt,
   Reporttransactions,
-  Detailsmoreicon,
   Arrowin,
   Arrowout,
 } = icons;
@@ -76,7 +67,6 @@ const Transactiondetails = ({ navigation, route }) => {
   const isDebit = direction === "out";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
 
-  // console.log(data, "here is the");
 
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")}.  ${dt.format("Do")} ${dt.format(

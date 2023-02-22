@@ -20,7 +20,7 @@ import {
 } from "../../../utils/biometrics";
 import useAlert from "../../../utils/useAlerts";
 
-const { Newlogo, Usericon, Lock } = icons;
+const { Newlogo, Transfericon } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -126,8 +126,9 @@ const Login = ({ navigation }: any) => {
   return (
     <Mainwrapper>
       <KeyboardAwareScrollView>
+
+        
         <View style={styles.container}>
-          {/* Logo */}
 
           <View style={{ marginTop: 30 }}>
             <Newlogo />
@@ -155,7 +156,6 @@ const Login = ({ navigation }: any) => {
             </View>
           </View>
 
-          {/* Form */}
           <Formik
             initialValues={{
               username: "",
@@ -176,27 +176,23 @@ const Login = ({ navigation }: any) => {
               } = formikProps;
               return (
                 <>
-                  {/* {isSubmitting && checkIfSubmitting()} */}
                   {loading && <Loader />}
 
-                  {/* Username input */}
                   <Input
                     placeholder="Phone Number / email / username"
                     name="username"
                     formikProps={formikProps}
-                    icon={<Usericon />}
+                    icon={<Transfericon />}
                   />
 
-                  {/* Password input */}
                   <Input
                     placeholder="Password"
                     name="password"
                     formikProps={formikProps}
-                    icon={<Lock />}
+                    icon={<Transfericon />}
                     password={true}
                   />
 
-                  {/* Bottom text */}
                   <View
                     style={{
                       justifyContent: "space-between",

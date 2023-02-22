@@ -30,7 +30,7 @@ import { getPeriod } from "../../../utils/getDayPeriod";
 import { nameToShow } from "../../../utils/nameToShow";
 
 
-const { Smile, Winkinganimate } = icons;
+const { Winkinganimate } = icons;
 
 const Welcome = ({ navigation, route }) => {
   const { fromm, username, token } = route.params;

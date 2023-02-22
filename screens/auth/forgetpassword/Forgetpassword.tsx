@@ -8,7 +8,7 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import showerror from "../../../utils/errorMessage";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../../shared/Customstatusbar";
-const { Envelopeicon, Newlogo } = icons;
+const { TransferIcon, Newlogo } = icons;
 
 const Forgetpassword = ({ navigation }) => {
   // const toast = useToast();
@@ -64,7 +64,7 @@ const Forgetpassword = ({ navigation }) => {
             value={email}
             onChangeText={(text) => setEmail(text)}
             //   formikProps={formikProps}
-            icon={<Envelopeicon />}
+            icon={<TransferIcon />}
           />
         </View>
 

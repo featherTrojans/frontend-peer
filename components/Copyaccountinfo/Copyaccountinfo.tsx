@@ -8,7 +8,7 @@ import useCopyclipboard from "../../utils/useCopyclipboard";
 
 
 
-const {Purplehouseicon} =icons
+const {TransferIcon} =icons
 
 const Copyaccountinfo = ({accName, accNumber}) => {
 
@@ -41,7 +41,7 @@ const Copyaccountinfo = ({accName, accNumber}) => {
 
     <View style={{justifyContent: "center", alignItems: "center"}}>
         <View style={{backgroundColor: COLORS.purple3, padding: 15, borderRadius: 30}}>
-            <Purplehouseicon />
+            <TransferIcon />
         </View>
     </View>
       

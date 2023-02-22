@@ -15,7 +15,6 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "../../verification/Verification.styles";
 import {
-  Backheader,
   Custombutton,
   Horizontaline,
   Loader,
@@ -24,7 +23,6 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RFValue } from "react-native-responsive-fontsize";
 
-const { Successcheckanimate, Cancelicon } = icons;
 
 const Forgetpasswordotp = ({ navigation, route }) => {
   // const toast = useToast();
@@ -90,7 +88,7 @@ const Forgetpasswordotp = ({ navigation, route }) => {
 
   return (
     <Mainwrapper>
-      <Backheader title="Verify Email Address" />
+      {/* <Backheader title="Verify Email Address" /> */}
 
       <View style={[{ paddingHorizontal: RFValue(25) }]}>
         {loading && <Loader />}

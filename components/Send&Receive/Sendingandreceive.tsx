@@ -7,21 +7,13 @@ import { assetsDB, bankLogo } from "../../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
 import { nameSplitToTwo } from "../../utils/nameSplitter";
 const {
-  Senderimage,
-  Sendingarrow,
-  Receivingarrow,
-  Userdefaultmedium,
+  
   Bonusiconlarge,
   Utilitylarge,
   Logoavatar,
-  Dashedline,
-  Greencheckicon
 } = icons;
-const { Trustedbadgepng } = images;
 
-// Wallet Credit
-// Wallet Debit
-// Funding
+
 
 const InitialsBgColor = ({name}) => {
   return (

@@ -10,7 +10,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 
 import { securepinstyles } from "./Securepin.styles";
 
-const { SecureDot, Newlogo } = icons;
+const {  Newlogo } = icons;
 const Securepin = ({ route, navigation }) => {
   const { token, fromm } = route.params;
   const { errorAlert } = useAlert()

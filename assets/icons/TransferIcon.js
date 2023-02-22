@@ -1,9 +1,11 @@
 import React from 'react'
-import Svg, { G, Path } from 'react-native-svg'
+import Svg, { G, Path } from "react-native-svg"
+
+
 
 function TransferIcon() {
-    return (
-        <Svg
+  return (
+    <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={28.277}
     height={28.277}
@@ -21,7 +23,7 @@ function TransferIcon() {
       />
     </G>
   </Svg>
-    )
+  )
 }
 
 export default TransferIcon

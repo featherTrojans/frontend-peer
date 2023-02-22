@@ -23,7 +23,7 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const {
   Withdrawicon,
-  TransferIcon,
+  Transfericon,
   Paybillicon,
   Fundwalleticon,
   Walletactionicon,
@@ -67,7 +67,7 @@ const Transactions = ({ navigation }: any) => {
     },
     {
       title: "Transfer",
-      Icon: TransferIcon,
+      Icon: Transfericon,
       color: "#FFE3E3",
     },
     {

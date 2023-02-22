@@ -6,7 +6,7 @@ import axiosCustom from "../../../../httpRequests/axiosCustom";
 import moment from "moment";
 import { Horizontaline, InitialsBg } from "../../../../components";
 
-type chatProps = {
+interface chatProps  {
   userId: string,
   chatinfo:any
 }
@@ -31,7 +31,7 @@ const Chat = ({userId, chatinfo}:chatProps) => {
       activeOpacity={0.8}
        onPress={()=>navigate.navigate("Chatsdm",{userInfo})}
        style={styles.chatContainer}>
-          <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
+          <InitialsBg sideLength={45} name={userInfo?.fullName || "0 0"} />
 
 
         <View style={styles.chatInfo}>

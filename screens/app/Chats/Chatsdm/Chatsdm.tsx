@@ -13,7 +13,7 @@ import AllChatsModal from "./AllChatsModal";
 import formatData from "../../../../utils/fomatTrans";
 import { usePushNotification } from "../../../../hooks/usePushNotifications";
 
-const { Backarrow, Successtranfericon,Sendmessageicon,  Feathecomingsoonchatanimate, Sentconfetti, SendTF } = icons;
+const { Backarrow, Feathecomingsoonchatanimate, Sentconfetti, Transfericon } = icons;
 
 
 
@@ -190,10 +190,10 @@ const Chatsdm = ({navigation,route}) => {
         <View style={{justifyContent: "center", alignItems: "center", marginBottom:50,  flex: 1 }}>
           <View style={{flex: 1}}>
           <LottieView source={Sentconfetti} loop={false} style={{ width: "100%", height: 590, position: "absolute", left: -121,bottom: 0, zIndex: 1,  }}/>
-            <Successtranfericon />
+            <Transfericon />
           </View>
           <View style={{borderWidth: 0.5, borderColor: COLORS.grey13, backgroundColor: COLORS.grey14, paddingHorizontal: 24, paddingTop: 9, paddingBottom: 13,marginTop: 10, borderRadius: 24, position: "relative" }}>
-            <Text style={{...fontsize.smallest, ...FONTS.bold, lineHeight: 24, color: COLORS.black, textAlign: "center"}}> 🎉 You sent <Text style={{...FONTS.bold}}>N{mes.message}</Text> to this user</Text>
+            <Text style={{...fontsize.smallest, ...FONTS.regular, lineHeight: 24, color: COLORS.black, textAlign: "center"}}> 🎉 You sent <Text style={{...FONTS.bold}}>N{mes.message}</Text> to this user</Text>
           </View>
         </View>
       )
@@ -219,10 +219,12 @@ const Chatsdm = ({navigation,route}) => {
 
           <View style={{flex: 1}}>
           <LottieView source={Sentconfetti} ref={animationRef} loop={false} style={{ width: "100%", height: 590, position: "absolute", left: -121,bottom: 0, zIndex: 1,  }}/>
-            <Successtranfericon />
+            {/* <Successtranfericon /> */}
+            <Transfericon />
+
           </View>
           <View style={{borderWidth: 0.5, borderColor: COLORS.grey13, backgroundColor: COLORS.grey14, paddingHorizontal: 24, paddingTop: 9, paddingBottom: 13,marginTop: 10, borderRadius: 24 }}>
-            <Text style={{...fontsize.smallest, ...FONTS.bold, lineHeight: 24, color: COLORS.blue9, textAlign: "center"}}> 🎉 You just received  <Text style={{...FONTS.bold}}>N{mes.message}</Text> from this user</Text>
+            <Text style={{...fontsize.smallest, ...FONTS.regular, lineHeight: 24, color: COLORS.blue9, textAlign: "center"}}> 🎉 You just received  <Text style={{...FONTS.bold}}>N{mes.message}</Text> from this user</Text>
           </View>
         </View>
       )
@@ -271,12 +273,12 @@ const Chatsdm = ({navigation,route}) => {
         <View style={[styles.headerDetailsContainer,]}>
 
           <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{flex: 1, flexDirection: 'row', alignItems: "center"}}>
-            <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
+            <InitialsBg sideLength={45} name={userInfo?.fullName || "0 0"} />
             <Text style={styles.chatName}>{userInfo?.fullName}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity activeOpacity={0.8} onPress={()=>setSendCashModal(true)}>
-            <SendTF style={{marginRight: 10}} />
+            <Transfericon  />
           </TouchableOpacity>
         </View>
 
@@ -300,8 +302,8 @@ const Chatsdm = ({navigation,route}) => {
           {messages.map(({data, time}, index: number) => {
             return (
               <View key={index}>
-              <View style={{justifyContent: "center", alignSelf: "center", backgroundColor: COLORS.purple3, paddingHorizontal: 16, paddingVertical: 9, borderRadius: 15}}>
-                <Text style={{textAlign: "center", ...fontsize.xsmallest, ...FONTS.regular, color: COLORS.purple2}}>{time}</Text>
+              <View style={{justifyContent: "center", alignSelf: "center", backgroundColor: COLORS.blue14, paddingHorizontal: 16, paddingVertical: 9, borderRadius: 15, marginVertical: 20}}>
+                <Text style={{textAlign: "center", ...fontsize.xsmallest, ...FONTS.regular, color: COLORS.blue15}}>{time}</Text>
               </View>
               
               {data.map((dat, index) => {
@@ -329,7 +331,7 @@ const Chatsdm = ({navigation,route}) => {
             <TextInput  placeholder="Enter Message" style={[styles.textinput, {...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest}]} value={chattext} onChangeText={handleTextChange}  />
             {chattext !== ""  &&
               <TouchableOpacity activeOpacity={0.8}  onPress={()=>sendFireBaseMessage()} >
-                <Sendmessageicon />
+                <Transfericon />
               </TouchableOpacity>
             }
           </View>

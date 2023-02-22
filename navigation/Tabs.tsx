@@ -5,15 +5,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   Chatshome,
   Home,
-  Newtransactions,
-  Settings,
   Transactions,
+  Cards,
+  Profile
 } from "../screens";
 import { RootTabParamList } from "../types";
+import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
-const { TabHome, Tabhistory, Tabchats, Tabuser, Tabplusicon } = icons;
+const {  Hometabicon, Transacttabicon, Chatstabicon, Cardstabicon, Profiletabicon } = icons;
 
 function getWidth() {
   let width = SIZES.width;
@@ -32,16 +33,16 @@ function TabListener(value, offSet) {
     case "Home":
       SpringAnimation(offSet, 0);
       break;
-    case "History":
+    case "Transact":
       SpringAnimation(offSet, 1);
       break;
-    case "Transactions":
+    case "Chats":
       SpringAnimation(offSet, 2);
       break;
-    case "Chats":
+    case "Cards":
       SpringAnimation(offSet, 3);
       break;
-    case "Settings":
+    case "Profile":
       SpringAnimation(offSet, 4);
       break;
     default:
@@ -53,27 +54,27 @@ const Tabscreens = [
   {
     name: "Home",
     component: Home,
-    Icon: TabHome,
+    Icon: Hometabicon,
   },
   {
-    name: "History",
+    name: "Transact",
     component: Transactions,
-    Icon: Tabchats,
-  },
-  {
-    name: "Transactions",
-    component: Newtransactions,
-    Icon: Tabhistory,
+    Icon: Transacttabicon,
   },
   {
     name: "Chats",
     component: Chatshome,
-    Icon: Tabchats,
+    Icon: Chatstabicon,
   },
   {
-    name: "Settings",
-    component: Settings,
-    Icon: Tabuser,
+    name: "Cards",
+    component: Cards,
+    Icon: Cardstabicon,
+  },
+  {
+    name: "Profile",
+    component: Profile,
+    Icon: Profiletabicon,
   },
 ];
 
@@ -105,10 +106,10 @@ const Tabs = () => {
                 tabBarIcon: ({ focused, color, size }) => {
                   return (
                     <View
-                      style={{ justifyContent: "center", alignItems: "center" }}
+                      style={{ justifyContent: "center", alignItems: "center", }}
                     >
                       <Icon focused={focused} />
-                      <Text style={{ fontSize: 10 }}>{name}</Text>
+                      <Text style={{ fontSize: 10, marginTop: 15 }}>{name}</Text>
                     </View>
                   );
                 },
@@ -135,7 +136,7 @@ export default Tabs;
 const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: COLORS.white,
-    height: 82,
+    height: 82 + getBottomSpace(),
     alignItems: "center",
     justifyContent: "center",
   },
@@ -143,6 +144,6 @@ const styles = StyleSheet.create({
     height: 1.5,
     backgroundColor: COLORS.blue6,
     position: "absolute",
-    bottom: 82,
+    bottom: 82 + getBottomSpace(),
   },
 });

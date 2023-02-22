@@ -6,7 +6,7 @@ import { styles } from "./InitialsBg.styles";
 import { RFValue } from "react-native-responsive-fontsize";
 // import UserAvatar from "@muhzi/react-native-user-avatar";
 
-type InitialsBgProps = {
+interface InitialsBgProps {
   sideLength: number;
   name: string;
   bg?: string;
@@ -16,18 +16,11 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
   const [defaultColor, setDefaultColor] = useState("gray")
 
   const colors = [
-    "#BBE0FD",
-    "#FFF5E5",
-    "#E5FAF6",
     "#F1E5FF",
-    "#FDD2DE",
-    "#E5FAE9",
-    "#F8FAE5",
     "#E0EDD8",
-    "#D2EAFD",
+    "#E6ECFF",
     "#FCF3D1",
-    "#DEE0E5",
-    "#E3CCFF",
+    "#DBDCDD",
   ];
   useEffect(()=>{
     const color = bg? bg : colors[Math.floor(Math.random() * colors.length)];
@@ -42,7 +35,10 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: defaultColor,
-        borderRadius: sideLength /2,
+        borderTopRightRadius: 17, 
+        borderBottomLeftRadius: 17,
+        borderBottomRightRadius: 17,
+        borderTopLeftRadius: 10,
       }}
     >
       <Text style={styles.initialText}>{nameSplitter(name).toUpperCase()}</Text>

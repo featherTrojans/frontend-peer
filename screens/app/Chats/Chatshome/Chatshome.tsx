@@ -1,6 +1,8 @@
 import {
   ActivityIndicator,
+  ScrollView,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -21,12 +23,11 @@ import { AuthContext } from "../../../../context/AuthContext";
 import Chat from "./Chat";
 
 import Contact from "./Contact";
-import { Backheader } from "../../../../components";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import useContact from "../../../../utils/customContact";
 
 
-const { Emptynotification, Startnewchaticon } = icons;
+const { Emptynotification, Addchatsicon } = icons;
 
 const Chatshome = ({ navigation }) => {
   const { authdata } = useContext(AuthContext);
@@ -130,37 +131,32 @@ const Chatshome = ({ navigation }) => {
   // };
 
   return (
-    <View style={{flex: 1, paddingTop: getStatusBarHeight(true) }}>
+    <View style={{flex: 1, paddingTop: getStatusBarHeight(true), backgroundColor: COLORS.white }}>
       <Customstatusbar />
 
-      <Backheader title="Chats" showArrow={false} />
 
       <View style={styles.container}>
-        {/* <TouchableOpacity  onPress={()=>navigation.navigate("Usersearch",{phoneContact:contactsResolved})} > */}
 
-        <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        >
         
-          <Contact />
+          {/* <Contact /> */}
+          <View style={{marginVertical: 30, justifyContent: "space-between", flexDirection: 'row'}}>
+            <Text style={{...fontsize.big, ...FONTS.bold}}>
+              Chats.
+            </Text>
 
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: COLORS.white,
-              marginTop: 15,
-              // borderRadius: 15,
-              borderTopRightRadius: 15,
-              borderTopLeftRadius: 15,
-             paddingHorizontal: 16, 
-            //  paddingVertical: 20
-            paddingTop: 20
-            }}
-          >
-            {/* <Text>The an</Text> */}
+            {/* add chat icons */}
+            <Addchatsicon />
+          </View>
+
+          <TextInput style={{height: 55, backgroundColor: COLORS.black, borderRadius: 10, paddingHorizontal: 20, ...fontsize.xsmallest, ...FONTS.regular, marginBottom: 50 }} placeholder="Type to search chat" placeholderTextColor={COLORS.white}/>
+     
             <View style={{marginBottom: 20}}>
-              <Text style={{...fontsize.smaller, ...FONTS.medium}}>Recent Chats</Text>
-              {/* icons */}
+              <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.black}}>Recent Chats</Text>
             </View>
-            {/* This is for when the recent chat is empty */}
             {!loading && chats.length === 0 && chattwos.length === 0 && (
               <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
                 <Emptynotification />
@@ -175,13 +171,18 @@ const Chatshome = ({ navigation }) => {
               
               <Chat authId={authId} chattwos={chattwos} chats={chats} />
             )}
-          </View>
-        </View>
+          </ScrollView>
 
-        <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Usersearch",contactsResolved)} style={{position: "absolute", bottom: 14, right: 28, height: 47, width: 47,borderRadius: 47/2, backgroundColor: COLORS.blue3, justifyContent: "center", alignItems: "center"}}>
-          <Startnewchaticon />
+        <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Usersearch",contactsResolved)} style={{position: "absolute", bottom: 14, right: 28,borderRadius: 47/2, backgroundColor: COLORS.grey19, justifyContent: "center", alignItems: "center", paddingVertical: 18.4, paddingHorizontal: 28.2}}>
+          {/* <Startnewchaticon /> */}
+          <Text style={{...fontsize.smallest, ...FONTS.bold}}>Explore</Text>
         </TouchableOpacity>
+
+
+
       </View>
+
+
     </View>
   );
 };

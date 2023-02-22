@@ -12,7 +12,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import LottieView from "lottie-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../../../shared/Customstatusbar";
-const { Lockicondark, Successcheckanimate } = icons;
+const {TransferIcon, Successcheckanimate } = icons;
 
 const Setnewpassword = ({ navigation, route }) => {
   const { code, token } = route.params;
@@ -128,13 +128,13 @@ const Setnewpassword = ({ navigation, route }) => {
                   placeholder="Password"
                   name="password"
                   formikProps={formikProps}
-                  icon={<Lockicondark />}
+                  icon={<TransferIcon />}
                 />
                 <Input
                   placeholder="Confirm Password"
                   name="confirmPassword"
                   formikProps={formikProps}
-                  icon={<Lockicondark />}
+                  icon={<TransferIcon />}
                 />
               </View>
 

@@ -135,7 +135,7 @@ export const styles = StyleSheet.create({
   },
   chatName: {
     ...fontsize.smaller,
-    ...FONTS.regular,
+    ...FONTS.semibold,
     color: COLORS.grey7,
     textTransform: "capitalize"
   },
