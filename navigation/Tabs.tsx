@@ -1,20 +1,23 @@
 import { StyleSheet, Text, View, Animated } from "react-native";
 import React, { useRef } from "react";
-import { icons, SIZES, COLORS } from "../constants";
+import { icons, SIZES, COLORS, fontsize, FONTS } from "../constants";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  Chatshome,
-  Home,
-  Transactions,
-  Cards,
-  Profile
-} from "../screens";
+import { Chatshome, Home, Transactions, Cards, Profile } from "../screens";
 import { RootTabParamList } from "../types";
-import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper";
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from "react-native-iphone-x-helper";
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
-const {  Hometabicon, Transacttabicon, Chatstabicon, Cardstabicon, Profiletabicon } = icons;
+const {
+  Hometabicon,
+  Transacttabicon,
+  Chatstabicon,
+  Cardstabicon,
+  Profiletabicon,
+} = icons;
 
 function getWidth() {
   let width = SIZES.width;
@@ -89,7 +92,7 @@ const Tabs = () => {
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
-            ...styles.tabBar
+            ...styles.tabBar,
           },
         }}
         screenListeners={({ navigation, route }) => ({
@@ -105,11 +108,9 @@ const Tabs = () => {
               options={{
                 tabBarIcon: ({ focused, color, size }) => {
                   return (
-                    <View
-                      style={{ justifyContent: "center", alignItems: "center", }}
-                    >
+                    <View style={styles.tabBarIconWrap}>
                       <Icon focused={focused} />
-                      <Text style={{ fontSize: 10, marginTop: 15 }}>{name}</Text>
+                      <Text style={styles.tabBariconText}>{name}</Text>
                     </View>
                   );
                 },
@@ -139,6 +140,16 @@ const styles = StyleSheet.create({
     height: 82 + getBottomSpace(),
     alignItems: "center",
     justifyContent: "center",
+  },
+  tabBarIconWrap: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tabBariconText: {
+    ...fontsize.xxsmallest,
+    ...FONTS.regular,
+    marginTop: 15,
+    color: COLORS.blue9,
   },
   animatedLine: {
     height: 1.5,

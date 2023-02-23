@@ -29,6 +29,8 @@
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Feather needs to use Face ID to authenticate"
+        
+      
       }
     },
     "android": {
@@ -40,6 +42,7 @@
         "ACCESS_COARSE_LOCATION",
         "VIBRATE",
         "MANAGE_DOCUMENTS",
+  
         "READ_INTERNAL_STORAGE",
         "MODIFY_AUDIO_SETTINGS",
         "READ_CALENDAR",

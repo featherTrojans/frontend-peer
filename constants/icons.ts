@@ -64,6 +64,15 @@ import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_com
 
 
 
+import Carddetailsicon from "../assets/icons/Cardactionicons/Carddetailsicon";
+import Cardfreezeicon from "../assets/icons/Cardactionicons/Cardfreezeicon";
+import Cardfundicon from "../assets/icons/Cardactionicons/Cardfundicon";
+import Cardlockicon from "../assets/icons/Cardactionicons/Cardlockicon";
+import Cardwithdrawicon from "../assets/icons/Cardactionicons/Cardwithdrawicon";
+import Vcardicon from "../assets/icons/Cardactionicons/Vcardicon";
+
+
+
 
 
 
@@ -110,6 +119,12 @@ export default {
   Chatstabicon,
   Profiletabicon,
   Addchatsicon,
+  Carddetailsicon,
+  Cardfreezeicon,
+  Cardfundicon,
+  Cardlockicon,
+  Cardwithdrawicon,
+  Vcardicon,
 
 
 
