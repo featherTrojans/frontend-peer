@@ -70,6 +70,7 @@ import Cardfundicon from "../assets/icons/Cardactionicons/Cardfundicon";
 import Cardlockicon from "../assets/icons/Cardactionicons/Cardlockicon";
 import Cardwithdrawicon from "../assets/icons/Cardactionicons/Cardwithdrawicon";
 import Vcardicon from "../assets/icons/Cardactionicons/Vcardicon";
+import Blacksendicon from "../assets/icons/Blacksendicon";
 
 
 
@@ -125,6 +126,8 @@ export default {
   Cardlockicon,
   Cardwithdrawicon,
   Vcardicon,
+  Blacksendicon,
+
 
 
 

@@ -34,6 +34,9 @@ const useCustomModal = () => {
         backdropTransitionInTiming={200}
         animationOut={"fadeOut"}
         animationOutTiming={150}
+        swipeThreshold={20}
+        swipeDirection="down"
+        onSwipeComplete={() => setShowState(false)}
         style={{ margin: 0, justifyContent: "flex-end", zIndex: 100 }}
         onBackdropPress={hideOnTap ? () => setShowState(!showState) : () => null}
         onBackButtonPress={hideOnTap ? () => setShowState(!showState) : () => null}

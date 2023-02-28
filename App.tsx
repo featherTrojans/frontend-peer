@@ -15,7 +15,7 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { customNavigation } from "./utils/customNavigation";
 import { TextInput } from "react-native-gesture-handler";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-const { Cancelicon, Alertcancelicon, Updateprofileicon, Bluearrowrighticon, Updatealertcancelicon } = icons;
+// const { Cancelicon, Alertcancelicon, Updateprofileicon, Bluearrowrighticon, Updatealertcancelicon } = icons;
 
 export const toastConfig = {
   errorToast: ({ text1, props }: { text1: string; props: any }) => (
@@ -24,7 +24,7 @@ export const toastConfig = {
         <Text style={appStyles.alertText}>{props.message}</Text>
       </View>
       <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
-        <Alertcancelicon />
+        {/* <Alertcancelicon /> */}
       </TouchableOpacity>
     </View>
   ),
@@ -36,7 +36,7 @@ export const toastConfig = {
       </View>
 
       <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
-        <Alertcancelicon />
+        {/* <Alertcancelicon /> */}
       </TouchableOpacity>
     </View>
   ),
@@ -48,7 +48,7 @@ export const toastConfig = {
       </View>
 
       <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
-        <Alertcancelicon />
+        {/* <Alertcancelicon /> */}
       </TouchableOpacity>
     </View>
   ),
@@ -60,22 +60,22 @@ export const toastConfig = {
       </View>
 
       <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
-        <Alertcancelicon />
+        {/* <Alertcancelicon /> */}
       </TouchableOpacity>
     </View>
   ),
   updateToast: ({ text1, props }: { text1: string; props: any }) => (
     <View style={[appStyles.alertWrapper, {backgroundColor: "#fff", height: 54, paddingVertical: 18}]}>
       <View style={{ flex: 1, flexDirection: "row", alignItems: "center"}}>
-        <Updateprofileicon />
+        {/* <Updateprofileicon /> */}
         <TouchableOpacity activeOpacity={0.8} onPress={() => customNavigation("Settings", {})} style={{marginLeft: 12, flexDirection: 'row', alignItems: "center"}}>
           <Text style={{...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9, marginRight: 12}}>Update your profile, <Text style={{color: COLORS.blue6, textDecorationColor: COLORS.blue6, textDecorationLine: "underline", textDecorationStyle: "solid"}}>go to settings</Text></Text>
-          <Bluearrowrighticon />
+          {/* <Bluearrowrighticon /> */}
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
-        <Updatealertcancelicon />
+        {/* <Updatealertcancelicon /> */}
       </TouchableOpacity>
     </View>
   ),
@@ -129,7 +129,7 @@ export default function App() {
           </AuthProvider>
           <Toast
             config={toastConfig}
-            topOffset={getStatusBarHeight(true)}
+            topOffset={0}
             onShow={() => console.log("Status shown")}
             onHide={() => console.log("Status hidden")}
           />
@@ -144,7 +144,7 @@ const appStyles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 12,
+    paddingTop: 12,
   },
   updateAlertWrapper: {
     width: "100%",

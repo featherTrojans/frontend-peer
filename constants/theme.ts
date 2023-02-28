@@ -48,6 +48,8 @@ export const COLORS = {
   grey17: "#DBDCDD",
   grey18: "#A0A0A0",
   grey19: "#F7F8FA",
+  grey20: "#575151",
+
 
   yellow1: "#FF9D00",
   yellow2: "#FFC84B",
@@ -67,6 +69,8 @@ export const COLORS = {
   purple3: "#F1E5FF",
   purple4: "#8456FF",
 
+
+  lightgray: `rgba(219, 220, 221, .5)`,
   paybillInput: "#E6E6E6",
   checkBorder: "#A5A5A5",
   errorBorder: `rgba(224, 0, 0, .5)`,

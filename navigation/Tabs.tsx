@@ -8,8 +8,10 @@ import {
   getBottomSpace,
   getStatusBarHeight,
 } from "react-native-iphone-x-helper";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
+
 
 const {
   Hometabicon,
@@ -30,6 +32,8 @@ function SpringAnimation(distance: any, index: number) {
     useNativeDriver: true,
   }).start();
 }
+
+
 
 function TabListener(value, offSet) {
   switch (value.name) {
@@ -81,6 +85,9 @@ const Tabscreens = [
   },
 ];
 
+
+
+
 const Tabs = () => {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
@@ -90,7 +97,11 @@ const Tabs = () => {
         initialRouteName="Home"
         screenOptions={{
           headerShown: false,
-          tabBarShowLabel: false,
+          tabBarShowLabel: true,
+          
+          tabBarLabelStyle: {
+            ...styles.tabBariconText,
+          },
           tabBarStyle: {
             ...styles.tabBar,
           },
@@ -106,12 +117,9 @@ const Tabs = () => {
               name={name}
               component={component}
               options={{
-                tabBarIcon: ({ focused, color, size }) => {
+                tabBarIcon: ({ focused }) => {
                   return (
-                    <View style={styles.tabBarIconWrap}>
                       <Icon focused={focused} />
-                      <Text style={styles.tabBariconText}>{name}</Text>
-                    </View>
                   );
                 },
               }}
@@ -137,24 +145,20 @@ export default Tabs;
 const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: COLORS.white,
-    height: 82 + getBottomSpace(),
+    height: 82,
     alignItems: "center",
     justifyContent: "center",
   },
-  tabBarIconWrap: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   tabBariconText: {
     ...fontsize.xxsmallest,
     ...FONTS.regular,
-    marginTop: 15,
     color: COLORS.blue9,
   },
   animatedLine: {
     height: 1.5,
     backgroundColor: COLORS.blue6,
     position: "absolute",
-    bottom: 82 + getBottomSpace(),
+    bottom: 82,
   },
 });

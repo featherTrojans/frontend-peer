@@ -10,43 +10,67 @@ export const styles = StyleSheet.create({
   chatHeader: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 10,
-    paddingBottom: 10,
-    // paddingHorizontal: 22,
-    paddingRight: 30,
+    padding: 16,
     backgroundColor: COLORS.white,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   headerDetailsContainer: {
     flexDirection: "row",
     marginLeft: 5,
     alignItems: "center",
   },
-  chatName: {
+  chatsDmProfileWrap: {
     flex: 1,
-    ...fontsize.smaller,
-    ...FONTS.medium,
-    color: COLORS.grey7,
-    lineHeight: 21,
-    textTransform: "capitalize",
-    marginLeft: 12
-  },
-  chatStatusContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 3,
   },
-  chatStatusDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: COLORS.blue6,
-    marginRight: 6,
+  chatName: {
+    ...fontsize.smaller,
+    ...FONTS.bold,
+    color: COLORS.grey7,
+    textTransform: "capitalize",
+    marginBottom: 6,
   },
-  chatStatusText: {
-    color: COLORS.blue6,
-    ...fontsize.small,
+  chatLastSeen: {
+    ...fontsize.xsmallest,
     ...FONTS.regular,
+    color: COLORS.grey20,
   },
+
+  chatTransferMsgWrap: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 50,
+    flex: 1,
+  },
+  chatTransferAnim: {
+    width: "100%",
+    height: 590,
+    position: "absolute",
+    left: -121,
+    bottom: 0,
+    zIndex: 1,
+  },
+  chatTransferTextBg: {
+    borderWidth: 0.5,
+    borderColor: COLORS.grey13,
+    backgroundColor: COLORS.grey14,
+    paddingHorizontal: 24,
+    paddingTop: 9,
+    paddingBottom: 13,
+    marginTop: 10,
+    borderRadius: 24,
+    position: "relative",
+  },
+  chatTransferText: {
+    ...fontsize.smallest,
+    ...FONTS.regular,
+    lineHeight: 24,
+    color: COLORS.black,
+    textAlign: "center",
+  },
+
   messageAreaContainer: {
     flex: 1,
     paddingHorizontal: 15,
@@ -54,32 +78,49 @@ export const styles = StyleSheet.create({
   chatTextContainer: {
     position: "relative",
   },
-  inputarea: {
-    // paddingHorizontal: 20,
-  },
+  inputarea: {},
   chatTextInput: {
     padding: 10,
     backgroundColor: "#fff",
     borderRadius: 10,
-    // shadowColor: "#aaa",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.22,
-    // shadowRadius: 2,
-    // elevation: 3,
     flexDirection: "row",
     alignItems: "center",
-    // marginBottom: 20,
     borderWidth: 1,
-    borderColor: COLORS.grey1
+    borderColor: COLORS.grey1,
+  },
+  messagesDateWrap: {
+    justifyContent: "center",
+    alignSelf: "center",
+    backgroundColor: COLORS.blue14,
+    paddingHorizontal: 16,
+    paddingVertical: 9,
+    borderRadius: 15,
+    marginVertical: 20,
+  },
+  messageDateText: {
+    textAlign: "center",
+    ...fontsize.xsmallest,
+    ...FONTS.regular,
+    color: COLORS.blue15,
   },
   textinput: {
     flex: 1,
     paddingHorizontal: 10,
     paddingVertical: 3,
+    ...FONTS.regular,
+    color: COLORS.grey7,
+    ...fontsize.smallest,
   },
+  emptyChatLoaderWrap: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyChatAnimation: {
+    width: 160,
+    height: 160,
+  },
+
   chatToMe: {
     flexDirection: "row-reverse",
     marginBottom: 15,
@@ -115,15 +156,64 @@ export const styles = StyleSheet.create({
     lineHeight: 21,
   },
 
+  // Profile details modal
+  dmActionsProfileWrap: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 24,
+  },
+  dmActionsProfileImage: {
+    width: 90,
+    height: 90,
+    borderRadius: 90 / 2,
+    backgroundColor: COLORS.grey1,
+    marginBottom: 30,
+  },
+  dmActionsProfileName: {
+    ...fontsize.bbsmall,
+    ...FONTS.bold,
+    color: COLORS.black,
+    marginBottom: 15,
+  },
+  dmActionsText: {
+    textAlign: "center",
+    ...fontsize.smaller,
+    ...FONTS.medium,
+    color: COLORS.grey16,
+  },
+  dmProfileActionsWrap: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 45,
+    marginVertical: 40,
+  },
+  dmProfileActionWrap: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  dmActionsBg: {
+    width: 48,
+    height: 48,
+    borderRadius: 48 / 2,
+    backgroundColor: COLORS.lightgray,
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  dmActionsTitle: {
+    ...fontsize.smaller,
+    ...FONTS.medium,
+  },
+
   ///Modals styling
 
-  viewWrapper: {
-    backgroundColor: COLORS.white,
-    paddingTop: 40,
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
-    paddingHorizontal: 15,
-  },
+  // viewWrapper: {
+  //   backgroundColor: COLORS.white,
+  //   paddingTop: 40,
+  //   borderTopRightRadius: 30,
+  //   borderTopLeftRadius: 30,
+  //   paddingHorizontal: 15,
+  // },
 
   //send cash modal styling
   sendCashHeader: {
@@ -145,7 +235,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     flexDirection: "row",
     flex: 0.48,
-    
+
     alignItems: "center",
     borderRadius: 6,
   },
@@ -155,7 +245,7 @@ export const styles = StyleSheet.create({
     borderRadius: 31 / 2,
     backgroundColor: COLORS.white,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonText: {
     marginLeft: 10,
@@ -183,7 +273,7 @@ export const styles = StyleSheet.create({
     ...FONTS.bold,
     lineHeight: 66,
     minWidth: 150,
-    textAlign: "center"
+    textAlign: "center",
   },
   amountOptionsContainer: {
     flexDirection: "row",
@@ -259,4 +349,3 @@ export const styles = StyleSheet.create({
     color: COLORS.black2,
   },
 });
-

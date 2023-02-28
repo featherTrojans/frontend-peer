@@ -26,8 +26,7 @@ import Contact from "./Contact";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import useContact from "../../../../utils/customContact";
 
-
-const { Emptynotification, Addchatsicon } = icons;
+const { Emptynotification, Addchatsicon, Blacksendicon } = icons;
 
 const Chatshome = ({ navigation }) => {
   const { authdata } = useContext(AuthContext);
@@ -35,12 +34,10 @@ const Chatshome = ({ navigation }) => {
   const [chats, setChats] = useState<any>([]);
   const [chattwos, setChattwos] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const {contactsResolved} = useContact()
+  const { contactsResolved } = useContact();
 
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid;
-
- 
 
   useEffect(() => {
     // getAllChats()
@@ -56,7 +53,7 @@ const Chatshome = ({ navigation }) => {
       orderBy("createdAt", "desc")
     );
     const unsub = onSnapshot(chatQuery1, (docs) => {
-      const newdata = [];
+      const newdata = [{}];
       docs.forEach((change) => {
         newdata.push(change.data());
       });
@@ -77,7 +74,7 @@ const Chatshome = ({ navigation }) => {
       orderBy("createdAt", "desc")
     );
     const unsub = onSnapshot(chatQuery1, (docs) => {
-      const newdata = [];
+      const newdata = [{}];
       docs.forEach((change) => {
         newdata.push(change.data());
       });
@@ -88,7 +85,6 @@ const Chatshome = ({ navigation }) => {
       unsub();
     };
   }, []);
-
 
   // const getAllChats = async () => {
   //   setLoading(true);
@@ -122,7 +118,7 @@ const Chatshome = ({ navigation }) => {
   //     });
   //     setChattwos(allchatTwo);
   //     setChats(allchats);
-      
+
   //     // console.log(chatsdata.docs)
   //   } catch (err) {
   //   } finally {
@@ -131,58 +127,60 @@ const Chatshome = ({ navigation }) => {
   // };
 
   return (
-    <View style={{flex: 1, paddingTop: getStatusBarHeight(true), backgroundColor: COLORS.white }}>
+    <View style={styles.container}>
       <Customstatusbar />
 
-
-      <View style={styles.container}>
-
-        <ScrollView style={{ flex: 1 }}
-        showsVerticalScrollIndicator={false}
-        bounces={false}
+      <View style={styles.subcontainer}>
+        <ScrollView
+          style={{ flex: 1 }}
+          showsVerticalScrollIndicator={false}
+          bounces={false}
         >
-        
           {/* <Contact /> */}
-          <View style={{marginVertical: 30, justifyContent: "space-between", flexDirection: 'row'}}>
-            <Text style={{...fontsize.big, ...FONTS.bold}}>
-              Chats.
-            </Text>
+
+          <View style={styles.chatshomeheader}>
+            <Text style={styles.chatsheaderText}>Chats.</Text>
 
             {/* add chat icons */}
             <Addchatsicon />
           </View>
 
-          <TextInput style={{height: 55, backgroundColor: COLORS.black, borderRadius: 10, paddingHorizontal: 20, ...fontsize.xsmallest, ...FONTS.regular, marginBottom: 50 }} placeholder="Type to search chat" placeholderTextColor={COLORS.white}/>
-     
-            <View style={{marginBottom: 20}}>
-              <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.black}}>Recent Chats</Text>
+          <TextInput
+            style={styles.chatSearchInput}
+            placeholder="Type to search chat"
+            placeholderTextColor={COLORS.white}
+          />
+
+          <View style={{ marginBottom: 20 }}>
+            <Text style={styles.recentChatsText}>Recent Chats</Text>
+          </View>
+          {!loading && chats.length === 0 && chattwos.length === 0 && (
+            <View style={styles.emptyChatsWrap}>
+              <Emptynotification />
+              <Text style={styles.emptyChatsTextInfo}>
+                Oops, you have no recent conversations here
+              </Text>
             </View>
-            {!loading && chats.length === 0 && chattwos.length === 0 && (
-              <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-                <Emptynotification />
-                <Text style={{...fontsize.smaller, ...FONTS.regular, marginTop: 30, paddingHorizontal: 35, textAlign: "center"}}>Oops, you have no recent conversations here</Text>
-              </View>
-            )}
-            {loading ? (
-              <View style={{ marginTop: 100 }}>
-                <ActivityIndicator size="large" color="#000" />
-              </View>
-            ) : (
-              
-              <Chat authId={authId} chattwos={chattwos} chats={chats} />
-            )}
-          </ScrollView>
+          )}
+          {loading ? (
+            <View style={{ marginTop: 100 }}>
+              <ActivityIndicator size="large" color="#000" />
+            </View>
+          ) : (
+            <Chat authId={authId} chattwos={chattwos} chats={chats} />
+          )}
+        </ScrollView>
 
-        <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Usersearch",contactsResolved)} style={{position: "absolute", bottom: 14, right: 28,borderRadius: 47/2, backgroundColor: COLORS.grey19, justifyContent: "center", alignItems: "center", paddingVertical: 18.4, paddingHorizontal: 28.2}}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("Usersearch", contactsResolved)}
+          style={styles.exploreBtnBg}
+        >
           {/* <Startnewchaticon /> */}
-          <Text style={{...fontsize.smallest, ...FONTS.bold}}>Explore</Text>
+          <Blacksendicon />
+          <Text style={styles.explorebtnText}>Explore</Text>
         </TouchableOpacity>
-
-
-
       </View>
-
-
     </View>
   );
 };

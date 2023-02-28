@@ -1,17 +1,75 @@
 import { StyleSheet } from "react-native";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { COLORS, FONTS, fontsize } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: getStatusBarHeight(true),
+    backgroundColor: COLORS.white,
+  },
+  subcontainer: {
+    flex: 1,
     paddingHorizontal: 15,
-    // backgroundColor: "white",
-    // paddingTop: 22,
+  },
+  chatshomeheader: {
+    marginVertical: 30,
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+  chatsheaderText: {
+    ...fontsize.big,
+    ...FONTS.bold,
+    color: COLORS.black,
+  },
+  chatSearchInput: {
+    height: 55,
+    backgroundColor: COLORS.black,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    ...fontsize.xsmallest,
+    ...FONTS.regular,
+    marginBottom: 50,
+  },
+  recentChatsText: {
+    ...fontsize.smaller,
+    ...FONTS.bold,
+    color: COLORS.black,
+  },
+  emptyChatsWrap: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  emptyChatsTextInfo: {
+    ...fontsize.smaller,
+    ...FONTS.regular,
+    marginTop: 30,
+    paddingHorizontal: 35,
+    textAlign: "center",
+  },
+  exploreBtnBg: {
+    position: "absolute",
+    bottom: 14,
+    right: 28,
+    borderRadius: 30,
+    backgroundColor: COLORS.grey19,
+    // justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 18.4,
+    paddingHorizontal: 28.2,
+  },
+  explorebtnText: {
+    ...fontsize.smallest,
+    ...FONTS.bold,
+    color: COLORS.black,
+    marginLeft: 6.5
   },
   topHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: 9,
     paddingVertical: 22,
     backgroundColor: COLORS.white,
@@ -30,21 +88,19 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.blue6,
     minHeight: 22,
     minWidth: 27,
-    paddingTop: 5, 
-    paddingBottom:  4,
+    paddingTop: 5,
+    paddingBottom: 4,
     paddingHorizontal: 6,
     width: "auto",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 100,
-
   },
   amountOfChats: {
     color: COLORS.white,
     ...fontsize.smaller,
     ...FONTS.medium,
   },
-
 
   seeMoreContainer: {
     width: "auto",
@@ -93,18 +149,15 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     opacity: 0.8,
     marginBottom: 7,
-    textTransform:"capitalize",
-    color: COLORS.blue9
+    textTransform: "capitalize",
+    color: COLORS.blue9,
   },
   eachProfileUsername: {
     ...fontsize.xsmallest,
     ...FONTS.regular,
     color: COLORS.grey16,
-    opacity: 0.8
+    opacity: 0.8,
   },
-
-
-
 
   //   For the chat screen
 
@@ -137,13 +190,13 @@ export const styles = StyleSheet.create({
     ...fontsize.smaller,
     ...FONTS.semibold,
     color: COLORS.grey7,
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   },
   chatTime: {
     ...fontsize.xsmallest,
     ...FONTS.regular,
     color: COLORS.blue9,
-    marginLeft: 10
+    marginLeft: 10,
   },
   chatHintMessage: {
     ...fontsize.xsmallest,

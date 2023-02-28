@@ -28,10 +28,10 @@ const Chat = ({userId}:chatProps) => {
       <TouchableOpacity
        onPress={()=>navigate.navigate("Chatsdm",{userId:userId, userInfo})}
        style={styles.chatContainer}>
-        <View style={styles.chatAvatar}>
+        {/* <View style={styles.chatAvatar}> */}
           {/* {online && <View style={styles.chatStatusDot} />} */}
           {/* Image */}
-        </View>
+        {/* </View> */}
         <View style={styles.chatInfo}>
           <View style={styles.chatNameAndTime}>
             <Text style={styles.chatName}>{userInfo.fullName}</Text>
