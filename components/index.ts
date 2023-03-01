@@ -17,6 +17,8 @@ import Copyaccountinfo from "./Copyaccountinfo/Copyaccountinfo";
 import Upgrademodal from "./Upgrademodal/Upgrademodal";
 import Emptycomponent from "./Emptycomponent/Emptycomponent";
 import Backheader from "./Backheader/Backheader";
+import Headerandsubheader from "./Headerandsubheader/Headerandsubheader";
+
 
 
 
@@ -40,7 +42,7 @@ export {
     Copyaccountinfo,
     Upgrademodal,
     Emptycomponent,
-    Backheader
-
+    Backheader,
+    Headerandsubheader
 
 }

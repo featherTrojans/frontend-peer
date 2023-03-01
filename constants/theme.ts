@@ -24,10 +24,12 @@ export const COLORS = {
   blue13: "#8456FF",
   blue14: "#E6ECFF",
   blue15: "#1539CE",
+  blue16: "#342AD5",
   transparentBlue: "#F2F5FF",
 
 
   lightBlue: "#F2F5FF",
+  lightBlue2: `rgba(210, 234, 254, .5)`,
 
   grey1: "#f0f0f0",
   grey2: "#707070",
@@ -176,6 +178,9 @@ export const fontsize = {
   },
   xbig:{
     fontSize: RFValue(32),
+  },
+  xbigger:{
+    fontSize: RFValue(35),
   },
   bigger:{
     fontSize: RFValue(38),

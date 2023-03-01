@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-} from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 import { COLORS, icons } from "../../constants";
 import { styles } from "./Backheader.styles";
@@ -16,41 +10,26 @@ const Backheader = ({
   title,
   showArrow = true,
   mb = 20,
-  bg= "#fff",
+  bg,
   rightComponent,
-
 }: {
   title?: string;
   showArrow?: boolean;
-  mb?: number,
-  bg?: string,
-  rightComponent?: any
+  mb?: number;
+  bg?: string;
+  rightComponent?: any;
 }) => {
   const navigation = useNavigation();
 
   return (
-    <View style={[styles.container, {marginBottom: mb, backgroundColor: bg }]}>
-      <View style={styles.backArrowContainer}>
+    <View style={[styles.container, { marginBottom: mb, backgroundColor: bg }]}>
+      <Pressable
+        onPress={() => navigation.goBack()}
+        style={styles.backArrowContainer}
+      >
+        {showArrow && <Backarrow />}
+      </Pressable>
 
-
-        {showArrow && (
-          <TouchableOpacity
-          activeOpacity={0.8}
-            onPress={() => navigation.goBack()}
-            style={[styles.backArrowIcon, {paddingLeft: 15, paddingRight: 10, }]}
-          >
-            <Backarrow />
-          </TouchableOpacity>
-        )}
-
-        <TouchableOpacity  
-        activeOpacity={0.8}
-        onPress={showArrow ? () => navigation.goBack() : () => null}>
-        <Text style={[styles.backArrowText, {paddingLeft: showArrow ? 0: 15}]}>{title}</Text>
-        </TouchableOpacity>
-      </View>
-
-      
       {rightComponent}
     </View>
   );

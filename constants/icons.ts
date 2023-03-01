@@ -71,6 +71,25 @@ import Cardlockicon from "../assets/icons/Cardactionicons/Cardlockicon";
 import Cardwithdrawicon from "../assets/icons/Cardactionicons/Cardwithdrawicon";
 import Vcardicon from "../assets/icons/Cardactionicons/Vcardicon";
 import Blacksendicon from "../assets/icons/Blacksendicon";
+import Profilerighticon from "../assets/icons/Profileicons/Profilerighticon";
+import Profilemanageicon from "../assets/icons/Profileicons/Profilemanageicon";
+import Securityprivicon from "../assets/icons/Profileicons/Securityprivicon";
+import Shareandearnicon from "../assets/icons/Profileicons/Shareandearnicon";
+import Supporticon from "../assets/icons/Profileicons/Supporticon";
+import Mywalleticon from "../assets/icons/Profileicons/Mywalleticon";
+import Abouticon from "../assets/icons/Profileicons/Abouticon";
+import Accountcopyicon from "../assets/icons/Profileicons/Accountcopyicon";
+import Greaterthanicon from "../assets/icons/Profileicons/Greaterthanicon";
+import Addressediticon from "../assets/icons/Withdrawlicons/Addressediticon";
+import Cancelwithdrawicon from "../assets/icons/Withdrawlicons/Cancelwithdrawicon";
+import Merchanticon from "../assets/icons/Withdrawlicons/Merchanticon";
+import Paymerchanticon from "../assets/icons/Withdrawlicons/Paymerchanticon";
+import Phoneicon from "../assets/icons/Withdrawlicons/Phoneicon";
+import Searchmerchanticon from "../assets/icons/Withdrawlicons/Searchmerchanticon";
+import Summaryicon from "../assets/icons/Withdrawlicons/Summaryicon";
+import Withdrawchaticon from "../assets/icons/Withdrawlicons/Withdrawchaticon";
+
+
 
 
 
@@ -127,8 +146,23 @@ export default {
   Cardwithdrawicon,
   Vcardicon,
   Blacksendicon,
-
-
+  Profilerighticon,
+Profilemanageicon,
+Securityprivicon,
+Shareandearnicon,
+Supporticon,
+Mywalleticon,
+Abouticon,
+Accountcopyicon,
+Greaterthanicon,
+Addressediticon,
+Cancelwithdrawicon,
+Merchanticon,
+Paymerchanticon,
+Phoneicon,
+Searchmerchanticon,
+Summaryicon,
+Withdrawchaticon,
 
 
 

@@ -52,68 +52,14 @@ export type RootStackParamList = {
   BillContacts: undefined;
 
   //Withdraw
-  Requestnew: undefined;
-  Availablelisting: undefined;
-  Withdraw: undefined; ///Requests(pending and accepted)
-  Withdrawpreview: undefined;
-  Editmeetup: undefined;
-  Pendingwithdraw: undefined;
-  Acceptedwithdraw: undefined;
-  Requesterinfo: undefined;
+  Withdrawal: undefined;
+  Withdrawlisting: undefined;
 
-  Requestsummary: undefined;
-  Cancelrequest: undefined;
-  Summary: undefined;
-  Negotiate: undefined;
-  WithdrawPin: undefined;
-  Transactionsrating: undefined;
 
-  //Wallet funding
-  Addcash: undefined;
-  Choosewallet: undefined;
-  WalletPin: undefined;
-
-  //Transfer funds
-  Transfercash: undefined;
-  TransferInput: undefined;
-  Getdetails: undefined;
-  Bankaccount: undefined;
-  Transferpin: undefined;
-  TransferpinBank: undefined;
-  DepositSummary: undefined;
-  Depositstart: undefined;
 
   //Notification
   Notifications: undefined;
 
-  //Paybills
-  Paybills: undefined;
-  Airtimeamount: undefined;
-  Airtimeanddata: undefined;
-  Airtimedetails: undefined;
-  Airtimepurchasepin: undefined;
-  Electricityamount: undefined;
-  Electricitydetails: undefined;
-  Electricitytype: undefined;
-  Becomeanagent: undefined;
-  Agentform: undefined;
-  Electricitymetertype: undefined;
-  Dataprovider: undefined;
-  Airtimeprovider: undefined;
-  Sendcash: undefined;
-  Selectbank: undefined;
-  Dataplan: undefined;
-  Meetuppoint: undefined;
-  Safetycautions: undefined;
-  //Deposit
-  Deposit: undefined;
-  Depositupdate: undefined;
-  Depositinput: undefined;
-  Updatedeposit: undefined;
-  Pendingdeposit: undefined;
-  Accepteddeposit: undefined;
-  Depositpin: undefined;
-  Canceldeposit: undefined;
 
   //Chats
   Chatshome: undefined;

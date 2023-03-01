@@ -38,6 +38,8 @@ import LockScreen from "./shared/LockScreen/LockScreen";
 import RequesterinfoScreen from "./shared/RequesterinfoScreen";
 import Profile from "./app/Profile/Profile";
 import Cards from "./app/Cards/Cards";
+import Withdrawal from "./app/Withdrawal/Withdrawal";
+import Withdrawlisting from "./app/Withdrawal/Withdrawlisting";
 
 
 
@@ -53,6 +55,8 @@ export {
   Setnewpassword,
   Welcome,
   Home,
+  Withdrawal,
+  Withdrawlisting,
   Profile,
   Cards,
   Transactions,

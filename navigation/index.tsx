@@ -61,6 +61,8 @@ import {
   Transactiondetails,
   Cards,
   Profile,
+  Withdrawal,
+  Withdrawlisting,
  
 } from "../screens";
 
@@ -142,6 +144,14 @@ const RootNavigator = ({ initialBoarded }) => {
             component={Notifications}
           />
 
+          <AppStack.Screen
+            name="Withdrawal"
+            component={Withdrawal}
+          />
+          <AppStack.Screen
+            name="Withdrawlisting"
+            component={Withdrawlisting}
+          />
 
      
 
