@@ -60,9 +60,6 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
   const { updateAlert } = useAlert();
 
-  console.log("------------------------ROUTINGNGNG--------------------------");
-  console.log(isFocused);
-
   const toTop = () => {
     scrollViewRef.current?.scrollTo({
       y: 0,

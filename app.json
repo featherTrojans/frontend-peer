@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -18,7 +18,8 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "enabled": false
+      "enabled": false,
+      "url": "https://u.expo.dev/93d5876e-2546-4e40-ad80-4fe20b9d48fa"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -28,11 +29,12 @@
       "bundleIdentifier": "africa.feathermobile.com",
       "buildNumber": "1.0.0",
       "infoPlist": {
-        "NSFaceIDUsageDescription": "Feather needs to use Face ID to authenticate"
+        "NSContactsUsageDescription": "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
+        "NSLocationUsageDescription": "Allow Feather access to your location to find the nearest agent close to you"
       }
     },
     "android": {
-      "versionCode": 11,
+      "versionCode": 13,
       "package": "feather.peer",
       "googleServicesFile": "./google-services.json",
       "permissions": [
@@ -60,11 +62,6 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"
-      },
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyBzIYA7wqNVTxq0LTO88-cIue_X9mXd5-w"
-        }
       }
     },
     "web": {
@@ -73,8 +70,11 @@
     "description": "",
     "extra": {
       "eas": {
-        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
+        "projectId": "93d5876e-2546-4e40-ad80-4fe20b9d48fa"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
