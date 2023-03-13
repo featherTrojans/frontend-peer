@@ -242,23 +242,7 @@ const Transactions = ({ navigation }: any) => {
             </>
           )}
         </View>
-{/* 
-        {pageVerticalOffset > 1000 ? (
-          <TouchableWithoutFeedback onPress={() => toTop()}>
-          <View
-            style={{
-              width: RFValue(30),
-              height: RFValue(30),
-              borderRadius: RFValue(30 / 2),
-              backgroundColor: COLORS.blue6,
-              position: "absolute",
-              right: 10,
-              bottom: 20,
-              // opacity: 0.2,
-            }}
-          />
-        </TouchableWithoutFeedback>
-        ): null} */}
+
         
 
       </View>

@@ -83,8 +83,8 @@ const Login = ({ navigation }: any) => {
         });
       }
     } catch (err) {
-      console.log(err.response, "the error is");
-      errorAlert(err);
+      console.log("there is an err")
+      errorAlert(err)
     } finally {
       setLoading(false);
     }

@@ -254,12 +254,8 @@ const Notifications = () => {
           </View>
         ) : (
           <FlatList
-            // contentContainerStyle={{flex: 1}}
             data={formatData(notifications)}
             showsVerticalScrollIndicator={false}
-            // pagingEnabled
-            // snapToAlignment="center"
-            // scrollEventThrottle={16}
             bounces={false}
             renderItem={({
               item,

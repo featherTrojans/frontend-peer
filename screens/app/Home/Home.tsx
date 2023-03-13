@@ -31,8 +31,16 @@ import { getPeriod } from "../../../utils/getDayPeriod";
 import HomeWallet from "./HomeWallet";
 import useAlert from "../../../utils/useAlerts";
 
-const { Bell, Goldenstaricon, Dollaricon, Featherdefault, Cryinganimate } =
-  icons;
+const {
+  Bell,
+
+  Goldenstaricon,
+  Dollaricon,
+
+  Featherdefault,
+
+  Cryinganimate,
+} = icons;
 const { Wavvy } = images;
 
 const Amountbtn = ({ amountText }) => {
@@ -52,7 +60,7 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
-  const scrollViewRef = useRef(null);
+  const scrollViewRef = useRef<any>();
   const linkTo = useLinkTo();
   const isFocused = useIsFocused();
   const jumpToHistory = TabActions.jumpTo("History");

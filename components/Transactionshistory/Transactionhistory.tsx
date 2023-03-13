@@ -166,6 +166,8 @@ const History = ({ data }) => {
           </Text>
         </View>
       </View>
+
+      
       <View>
         <Text style={[styles.amount, { color: priceColor }]}>
           {amountSign}N{amountFormatter(amount)}

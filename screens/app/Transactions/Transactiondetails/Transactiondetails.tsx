@@ -69,7 +69,7 @@ const Transactiondetails = ({ navigation, route }) => {
   const isDebit = direction === "out"
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
 
-  console.log(data, "here is the");
+  // console.log(data, "here is the");
   
 
   const dt = moment(dateTime);
@@ -147,6 +147,8 @@ const Transactiondetails = ({ navigation, route }) => {
 
 
   }
+
+  
   const showImageOnReceipt = (name: string, title: string, sender?: string) => {
     const targetLogo = bankLogo.filter((logo) => logo.name === sender);
     switch (title) {
@@ -650,6 +652,8 @@ const Transactiondetails = ({ navigation, route }) => {
               </View>
           </View>
 
+
+
           <View style={{alignItems: "center"}}>
             <View style={{alignItems: "center"}}>
               <Text style={{...fontsize.smaller, ...FONTS.regular}}>Transaction Ref.</Text>
@@ -661,6 +665,8 @@ const Transactiondetails = ({ navigation, route }) => {
 
             </View>
           </View>
+
+          
         </View>
 
 

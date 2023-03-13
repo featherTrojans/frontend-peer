@@ -34,6 +34,9 @@ export const registerForPushNotificationsAsync = async () => {
   return token;
 };
 
+
+
+
 //Schdeule Push Notifications
 
 export const sendSchedulePushNotification = async (title, message) => {
@@ -64,13 +67,3 @@ export const sendTokenToDB = async(token:string)=>{
   }
 }
 
-// export const  sendSchedulePushNotification = async (title) => {
-//   await Notifications.scheduleNotificationAsync({
-//     content: {
-//       title: 'Acccount Registration',
-//       body: `Hi ${name}, Welcome onboard to feather africa, Enjoy true freedom.`,
-//       data: { data: 'goes here', takeTo: "Root" },
-//     },
-//     trigger: { seconds: 4 },
-//   });
-// }

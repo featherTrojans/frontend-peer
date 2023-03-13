@@ -6,7 +6,7 @@ export const getCurrentLocation = async () => {
   let locationaddress: any = [];
   let location: any = {};
   try {
-    location = getpermission(
+    location = await getpermission(
       "Location",
       "Allow Feather access to your location to find the nearest agent close to you",
       "location",

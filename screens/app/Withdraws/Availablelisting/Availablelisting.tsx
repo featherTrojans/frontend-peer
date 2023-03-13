@@ -10,19 +10,18 @@ import {
 import React, { useState, useEffect, useContext, useRef } from "react";
 import LottieView from "lottie-react-native";
 
-import {
-  icons,
-  COLORS,
-  fontsize,
-  FONTS,
-  SIZES,
-} from "../../../../constants";
+import { icons, COLORS, fontsize, FONTS, SIZES } from "../../../../constants";
 import Map from "../../../shared/map/Map";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { Backheader, Horizontaline, Negotiatecharge, Successmodal } from "../../../../components";
+import {
+  Backheader,
+  Horizontaline,
+  Negotiatecharge,
+  Successmodal,
+} from "../../../../components";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Requestuser from "../../../shared/RequestUser";
@@ -31,17 +30,13 @@ import Withdrawinfo from "../../../../components/Modals/Withdrawinfo";
 import RequestSummary from "../../../../components/Modals/RequestSummary";
 import useAlert from "../../../../utils/useAlerts";
 import Toast from "react-native-toast-message";
-const {
-  Listingsdrop,
-  Emptyicon,
-  Loadinglocationanimate,
-  Cryinganimate
-} = icons;
+const { Listingsdrop, Emptyicon, Loadinglocationanimate, Cryinganimate } =
+  icons;
 
 const datas = [
   {
     title: "Peers",
-    data: [] 
+    data: [],
   },
   {
     title: "Agents",
@@ -50,21 +45,22 @@ const datas = [
 ];
 
 interface agent {
-  "amount": string,
-  "duration": string,
-  "fullName": string,
-  "latitude": string,
-  "locationText": string,
-  "longitude": string,
-  "reference": string,
-  "username": string,
+  amount: string;
+  duration: string;
+  fullName: string;
+  latitude: string;
+  locationText: string;
+  longitude: string;
+  reference: string;
+  username: string;
 }
 
 const Availablelisting = ({ navigation, route }: any) => {
   const amount = route.params?.amount;
   const activate = route.params?.activate;
-  const { setCoords,coords, setDestinationCoords } = useContext(LocationContext);
-  const {blueAlert} = useAlert()
+  const { setCoords, coords, setDestinationCoords } =
+    useContext(LocationContext);
+  const { blueAlert } = useAlert();
   const [agents, setAgents] = useState([]);
   const [charge, setCharge] = useState(0);
   const [negotiatecharge, setNegotiateCharge] = useState(0);
@@ -76,14 +72,25 @@ const Availablelisting = ({ navigation, route }: any) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
   const dotLength = Animated.divide(scrollX, SIZES.width);
-  const [activeAgent, setActiveAgent] = useState<agent | {}>({})
+  const [activeAgent, setActiveAgent] = useState<agent | {}>({});
   const [viewIndex, setViewIndex] = useState<number>(0);
-  const [info, setInfo] = useState("More")
-  const { CustomModal ,openModal, closeModal} = useCustomModal()
-  const { CustomModal:TransationSummaryModal ,openModal: openTransactionSummaryModal, closeModal:closeTransactionSummeryModal} = useCustomModal()
-  const { CustomModal:NegotiateChargeModal ,openModal: openNegotiateChargeModal, closeModal:closeNegotiateChargeModal} = useCustomModal()
-  const {CustomModal:SuccessModalContainer, openModal: openSuccessModal, closeModal: closeSuccessModal} =  useCustomModal()
-  console.log(coords,"*******CORDS********")
+  const [info, setInfo] = useState("More");
+  const { CustomModal, openModal, closeModal } = useCustomModal();
+  const {
+    CustomModal: TransationSummaryModal,
+    openModal: openTransactionSummaryModal,
+    closeModal: closeTransactionSummeryModal,
+  } = useCustomModal();
+  const {
+    CustomModal: NegotiateChargeModal,
+    openModal: openNegotiateChargeModal,
+    closeModal: closeNegotiateChargeModal,
+  } = useCustomModal();
+  const {
+    CustomModal: SuccessModalContainer,
+    openModal: openSuccessModal,
+    closeModal: closeSuccessModal,
+  } = useCustomModal();
 
   const onViewChangeRef = useRef<
     ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
@@ -91,20 +98,20 @@ const Availablelisting = ({ navigation, route }: any) => {
     setViewIndex(viewableItems[0]?.index);
   });
 
-
-  useEffect(()=>{
-    if(activate){
-      handleSelectAgent(route.params?.activate)
+  useEffect(() => {
+    if (activate) {
+      handleSelectAgent(route.params?.activate);
     }
-  },[activate])
-  useEffect(()=>{
-    blueAlert("Get cash easily from certified agents around you competitive transaction charges and fees")
+  }, [activate]);
+  useEffect(() => {
+    blueAlert(
+      "Get cash easily from certified agents around you competitive transaction charges and fees"
+    );
 
-    return () =>{
-      Toast.hide()
-    }
-  },[])
-
+    return () => {
+      Toast.hide();
+    };
+  }, []);
 
   // This function is to toggle the listings height
   const toggleHeight = () => {
@@ -116,7 +123,7 @@ const Availablelisting = ({ navigation, route }: any) => {
         useNativeDriver: false, // <-- neccessary
       }).start(() => {
         setIsShow(false);
-        setInfo("Less")
+        setInfo("Less");
       });
     } else {
       Animated.timing(animatedHeight, {
@@ -126,11 +133,11 @@ const Availablelisting = ({ navigation, route }: any) => {
         useNativeDriver: false, // <-- neccessary
       }).start(() => {
         setIsShow(true);
-        setInfo("More")
+        setInfo("More");
       });
     }
   };
-  
+
   const newHeight = animatedHeight.interpolate({
     inputRange: [0, 1],
     outputRange: ["50%", "100%"], // Variness in height
@@ -161,7 +168,6 @@ const Availablelisting = ({ navigation, route }: any) => {
     }
   };
 
-  
   const getAllAgents = async (address: string) => {
     try {
       setLoading(true);
@@ -169,9 +175,15 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: Number(amount),
         location: address,
       });
+      console.log(
+        "miracles on miracles",
+        response,
+        "I can't even count them all"
+      );
+
       setAgents(response.data.data);
-      setCharge(response.data.charges)
-      console.log(response)
+      setCharge(response.data.charges);
+      console.log(response);
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -179,56 +191,73 @@ const Availablelisting = ({ navigation, route }: any) => {
     }
   };
 
+  const handleSelectAgent = (agentobj) => {
+    setActiveAgent(agentobj);
+    openModal();
+  };
 
-  const handleSelectAgent = (agentobj)=>{
-    setActiveAgent(agentobj)
-    openModal()
-  }
-
-  const handleNextNegotiateCharge = (amount)=>{
+  const handleNextNegotiateCharge = (amount) => {
     closeNegotiateChargeModal();
     setNegotiateCharge(amount);
-    openTransactionSummaryModal()
-  }
+    openTransactionSummaryModal();
+  };
 
-  const handleNextRequestSummary = ()=>{
-    closeTransactionSummeryModal()
-    closeNegotiateChargeModal()
-    closeModal()
-    openSuccessModal()
-  }
-
+  const handleNextRequestSummary = () => {
+    closeTransactionSummeryModal();
+    closeNegotiateChargeModal();
+    closeModal();
+    openSuccessModal();
+  };
 
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: COLORS.white, marginBottom: 20 }}
     >
-      
       <CustomModal>
-        <Withdrawinfo withdrawInfo={activeAgent} closeModal={closeModal} openNextModal={()=> {closeModal(); openNegotiateChargeModal()}}/>
+        <Withdrawinfo
+          withdrawInfo={activeAgent}
+          closeModal={closeModal}
+          openNextModal={() => {
+            closeModal();
+            openNegotiateChargeModal();
+          }}
+        />
       </CustomModal>
 
       <NegotiateChargeModal>
-        <Negotiatecharge info={{...activeAgent,charges:charge}} withdrawAmount={amount} openNextModal={handleNextNegotiateCharge} />
+        <Negotiatecharge
+          info={{ ...activeAgent, charges: charge }}
+          withdrawAmount={amount}
+          openNextModal={handleNextNegotiateCharge}
+        />
       </NegotiateChargeModal>
 
       <TransationSummaryModal>
-        <RequestSummary amount={amount} openNextModal={handleNextRequestSummary} withdrawInfo={activeAgent} baseCharge={charge} addedFee={negotiatecharge} />
+        <RequestSummary
+          amount={amount}
+          openNextModal={handleNextRequestSummary}
+          withdrawInfo={activeAgent}
+          baseCharge={charge}
+          addedFee={negotiatecharge}
+        />
       </TransationSummaryModal>
 
       <SuccessModalContainer>
-        <Successmodal btnText="Yeah, proceed" successMsg="Cash request successful" btnFunction={()=>{closeSuccessModal(); navigation.navigate("Home")}} />
+        <Successmodal
+          btnText="Yeah, proceed"
+          successMsg="Cash request successful"
+          btnFunction={() => {
+            closeSuccessModal();
+            navigation.navigate("Home");
+          }}
+        />
       </SuccessModalContainer>
       <Customstatusbar />
-      {!coords?.latitude ?null: <Map /> }
-
-
+      {!coords?.latitude ? null : <Map />}
 
       <Backheader title="Withdraw" />
 
-      
-      
-      {(locationLoading || loading) ? (
+      {locationLoading || loading ? (
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <View
             style={{
@@ -267,7 +296,6 @@ const Availablelisting = ({ navigation, route }: any) => {
         </View>
       ) : (
         <>
-
           <View style={{ flex: 1, justifyContent: "flex-end" }}>
             <Animated.View
               style={{
@@ -283,19 +311,42 @@ const Availablelisting = ({ navigation, route }: any) => {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   marginBottom: 25,
-                  alignItems: 'center'
+                  alignItems: "center",
                 }}
               >
-                <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>{viewIndex === 0 ? "Peers" : "Agents"}</Text>
-                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center',  padding: 4}} onPress={toggleHeight}>
-                  <Text style={{marginRight: 8, ...fontsize.smaller, ...FONTS.medium, color: COLORS.purple4}}>View {info}</Text>
+                <Text
+                  style={{
+                    ...fontsize.smaller,
+                    ...FONTS.medium,
+                    color: COLORS.blue9,
+                  }}
+                >
+                  {viewIndex === 0 ? "Peers" : "Agents"}
+                </Text>
+                <TouchableOpacity
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    padding: 4,
+                  }}
+                  onPress={toggleHeight}
+                >
+                  <Text
+                    style={{
+                      marginRight: 8,
+                      ...fontsize.smaller,
+                      ...FONTS.medium,
+                      color: COLORS.purple4,
+                    }}
+                  >
+                    View {info}
+                  </Text>
                   <Animated.View
-                       style={[
-                        {
-                         
-                          transform: [{ rotateX }],
-                        },
-                      ]}
+                    style={[
+                      {
+                        transform: [{ rotateX }],
+                      },
+                    ]}
                   >
                     <Listingsdrop />
                   </Animated.View>
@@ -313,8 +364,8 @@ const Availablelisting = ({ navigation, route }: any) => {
                 renderItem={({ item, index }) => {
                   const isLast = datas.length === index + 1;
                   let data = agents;
-                  if(isLast){
-                    data = []
+                  if (isLast) {
+                    data = [];
                   }
                   return (
                     <ScrollView
@@ -333,9 +384,16 @@ const Availablelisting = ({ navigation, route }: any) => {
                                 width: SIZES.width - 65,
                                 marginRight: 5,
                               }}
-                              onPress={()=>handleSelectAgent(info)}
+                              onPress={() => handleSelectAgent(info)}
                             >
-                              <Requestuser hideAmount details={{name:info?.fullName, amount:info?.amount, duration:info?.duration}} />
+                              <Requestuser
+                                hideAmount
+                                details={{
+                                  name: info?.fullName,
+                                  amount: info?.amount,
+                                  duration: info?.duration,
+                                }}
+                              />
                               {!isLastItem && <Horizontaline marginV={21} />}
                             </TouchableOpacity>
                           );
@@ -359,7 +417,19 @@ const Availablelisting = ({ navigation, route }: any) => {
                             loop
                             style={{ height: 120, width: 120 }}
                           />
-                          <Text style={{marginTop: 20, paddingHorizontal: 40, textAlign: 'center', lineHeight: 20, ...fontsize.smallest, ...FONTS.regular}}>Padi, you don’t have any accepted withdrawal requests.</Text>
+                          <Text
+                            style={{
+                              marginTop: 20,
+                              paddingHorizontal: 40,
+                              textAlign: "center",
+                              lineHeight: 20,
+                              ...fontsize.smallest,
+                              ...FONTS.regular,
+                            }}
+                          >
+                            Padi, you don’t have any accepted withdrawal
+                            requests.
+                          </Text>
                         </View>
                       )}
                     </ScrollView>
@@ -379,14 +449,13 @@ const Availablelisting = ({ navigation, route }: any) => {
                   justifyContent: "center",
                   alignItems: "center",
                   paddingTop: 10,
-                }} 
+                }}
               >
                 <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
                     width: 38,
-
                   }}
                 >
                   {Array(2)
