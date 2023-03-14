@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Pressable } from "react-native";
 import React, { useMemo } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
-import { Horizontaline, Mainwrapper } from "../../../components";
+import { Horizontaline, Iconandinfo, Mainwrapper } from "../../../components";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { profilestyles } from "./Profile.styles";
 import { icons } from "../../../constants";
@@ -18,72 +18,85 @@ const {
   Greaterthanicon,
 } = icons;
 
-const settingoptions = [
-  {
-    Icon: Profilemanageicon,
-    title: "Profile Management",
-    info: "Customise & update your profile",
-  },
-  {
-    Icon: Mywalleticon,
-    title: "My Wallets",
-    info: "See your wallet capabilities",
-  },
-  {
-    Icon: Securityprivicon,
-    title: "Security & Privacy",
-    info: "Set your security preferences",
-  },
-  {
-    Icon: Shareandearnicon,
-    title: "Share & Earn",
-    info: "Set your security preferences",
-  },
-  {
-    Icon: Supporticon,
-    title: "Support & Help Desk",
-    info: "Set your security preferences",
-  },
-  {
-    Icon: Abouticon,
-    title: "About Feather App",
-    info: "Set your security preferences",
-  },
-];
 
-const SettingOptions = () => {
-  return (
-    <View>
-      <FlatList
-        data={settingoptions}
-        contentContainerStyle={{ paddingBottom: 60 }}
-        renderItem={({ item: { title, info, Icon } }) => {
-          return (
-            <>
-              <View style={profilestyles.settingOptionsWrap}>
-                <View style={profilestyles.settingAction}>
-                  <View style={profilestyles.settingActionIconBg}>
-                    <Icon />
-                  </View>
-                  <View style={{ marginLeft: 14 }}>
-                    <Text style={profilestyles.settingActionTitle}>
-                      {title}
-                    </Text>
-                    <Text style={profilestyles.settingActionInfo}>{info}</Text>
-                  </View>
-                </View>
-                <Greaterthanicon />
-              </View>
-              <Horizontaline marginV={20} />
-            </>
-          );
-        }}
-      />
-    </View>
-  );
-};
 
-const Profile = () => {
+
+
+
+
+const Profile = ({navigation}) => {
+
+
+
+
+  const SettingOptions = () => {
+
+
+
+    const settingoptions = [
+      {
+        Icon: Profilemanageicon,
+        title: "Profile Management",
+        info: "Customise & update your profile",
+        action: () => navigation.navigate("Changeappearance")
+      },
+      {
+        Icon: Mywalleticon,
+        title: "My Wallets",
+        info: "See your wallet capabilities",
+        action: () => navigation.navigate("Verifyemail")
+    
+      },
+      {
+        Icon: Securityprivicon,
+        title: "Security & Privacy",
+        info: "Set your security preferences",
+        action: () => navigation.navigate("Verifyemailcode")
+    
+      },
+      {
+        Icon: Shareandearnicon,
+        title: "Share & Earn",
+        info: "Set your security preferences",
+        action: () => navigation.navigate("Verifypersonalinfo")
+    
+      },
+      {
+        Icon: Supporticon,
+        title: "Support & Help Desk",
+        info: "Set your security preferences",
+        action: () => navigation.navigate("Changememoji")
+    
+      },
+      {
+        Icon: Abouticon,
+        title: "About Feather App",
+        info: "Set your security preferences",
+        action: () => console.log("Profile")
+    
+      },
+    ];
+  
+  
+    return (
+      <View>
+        <FlatList
+          data={settingoptions}
+          contentContainerStyle={{ paddingBottom: 60 }}
+          renderItem={({ item: { title, info, Icon, action } }) => {
+            return (
+              <>
+                <Iconandinfo action={action} title={title} info={info} Icon={Icon}/>
+                <Horizontaline marginV={20} />
+              </>
+            );
+          }}
+        />
+      </View>
+    );
+  };
+
+
   const snapPoints = useMemo(() => ["40%", "70%"], []);
 
   return (
@@ -107,7 +120,11 @@ const Profile = () => {
           </View>
 
           {/* icons */}
+          <Pressable
+          onPress={() => navigation.navigate("Personalinfo")}
+          >
           <Profilerighticon />
+          </Pressable>
         </View>
 
         <View style={profilestyles.accountDataWrap}>

@@ -4,7 +4,7 @@ import { View, Animated, AppState } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {navigationRef } from "../utils/customNavigation";
+import { navigationRef } from "../utils/customNavigation";
 import { COLORS, icons, SIZES } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
@@ -14,11 +14,9 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 import { usePushNotification } from "../hooks/usePushNotifications";
 
-
 const AppStack = createStackNavigator<RootStackParamList>();
 
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
-
 
 import {
   RootStackParamList,
@@ -27,7 +25,7 @@ import {
   RootAuthStackParamList,
 } from "../types";
 
- import {
+import {
   Onboarding,
 
   // Auth Screens
@@ -42,10 +40,7 @@ import {
   Welcome,
   Home,
   Transactions,
-
   Notifications,
-
-
 
   //Chats
   Chatshome,
@@ -55,22 +50,24 @@ import {
   CustomWebView,
   Testings,
   LockScreen,
-
-
   Getstarted,
   Transactiondetails,
   Cards,
   Profile,
   Withdrawal,
   Withdrawlisting,
- 
+  Accountlevel,
+  Verifyemail,
+  Verifyemailcode,
+  Verifypersonalinfo,
+  Personalinfo,
+  Changeappearance,
+  Changememoji,
+  Cardtopup,
+  Cardwithdraw,
 } from "../screens";
 
 import Tabs from "./Tabs";
-
-
-
-
 
 Notification.setNotificationHandler({
   handleNotification: async () => ({
@@ -80,11 +77,6 @@ Notification.setNotificationHandler({
   }),
 });
 
-
-
-
-
-
 const RootNavigator = ({ initialBoarded }) => {
   const { token } = useContext(AuthContext);
 
@@ -92,12 +84,12 @@ const RootNavigator = ({ initialBoarded }) => {
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
       // initialRouteName="DepositSummary"
-      initialRouteName={true ? "Getstarted" : "Onboarding"}
+      initialRouteName={false ? "Getstarted" : "Onboarding"}
     >
       {/* <AppStack.Screen name="map" component={Map} /> */}
       {/* SCREEN FOR AUTH */}
       {!token ? (
-        <AppStack.Group >
+        <AppStack.Group>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Getstarted" component={Getstarted} />
 
@@ -121,42 +113,38 @@ const RootNavigator = ({ initialBoarded }) => {
         <>
           {/* Transaction Screens*/}
           <AppStack.Group>
-            <AppStack.Screen
-              name="Root"
-              component={Tabs}
-            />
+            <AppStack.Screen name="Root" component={Tabs} />
             <AppStack.Screen name="Transactions" component={Transactions} />
-            <AppStack.Screen name="Transactiondetails" component={Transactiondetails} />
+            <AppStack.Screen
+              name="Transactiondetails"
+              component={Transactiondetails}
+            />
           </AppStack.Group>
 
-
-
-      
-
-
-
- 
-   
-
           {/* Notification Screen */}
+          <AppStack.Screen name="Notifications" component={Notifications} />
+
+          <AppStack.Screen name="Withdrawal" component={Withdrawal} />
+          <AppStack.Screen name="Withdrawlisting" component={Withdrawlisting} />
+
+          <AppStack.Screen name="Accountlevel" component={Accountlevel} />
+
+          <AppStack.Screen name="Verifyemail" component={Verifyemail} />
+          <AppStack.Screen name="Verifyemailcode" component={Verifyemailcode} />
           <AppStack.Screen
-            name="Notifications"
-            component={Notifications}
+            name="Verifypersonalinfo"
+            component={Verifypersonalinfo}
           />
+          <AppStack.Screen name="Personalinfo" component={Personalinfo} />
 
           <AppStack.Screen
-            name="Withdrawal"
-            component={Withdrawal}
+            name="Changeappearance"
+            component={Changeappearance}
           />
-          <AppStack.Screen
-            name="Withdrawlisting"
-            component={Withdrawlisting}
-          />
+          <AppStack.Screen name="Changememoji" component={Changememoji} />
+          <AppStack.Screen name="Cardtopup" component={Cardtopup} />
+          <AppStack.Screen name="Cardwithdraw" component={Cardwithdraw} />
 
-     
-
-
-          
           {/* Chats Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Chatshome" component={Chatshome} />
@@ -185,10 +173,6 @@ export default function MainNavigation({ initialBoarded = false }) {
     setMessageToken(expoPushToken);
   }, [expoPushToken]);
 
-
-
-
-
   useEffect(() => {
     axiosCustom.interceptors.response.use((response) => {
       if (response.status === 401) {
@@ -198,18 +182,12 @@ export default function MainNavigation({ initialBoarded = false }) {
     });
   }, []);
 
-
-
-
   useEffect(() => {
     const subscription = AppState.addEventListener("change", lockLogic);
     return () => {
       subscription.remove();
     };
   }, [token, modal]);
-
-
-
 
   const lockLogic = (nextAppState) => {
     if (

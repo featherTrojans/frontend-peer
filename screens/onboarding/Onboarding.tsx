@@ -3,7 +3,7 @@ import { FlatList, Animated, StatusBar, View, Text, TouchableOpacity } from "rea
 import { OnboardingScreenNavigationProps } from "../../types";
 import { COLORS, FONTS, fontsize, SIZES } from "../../constants";
 import onboardingdatas from "../../onboardingdatas";
-import EachOnboarding from "../../components/onboarding-component/OnBoardingComponent";
+import EachOnboarding from "./EachOnboarding";
 
 import Customstatusbar from "../shared/Customstatusbar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -98,6 +98,8 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
             );
           })}
         </View>
+
+{/* <View style={{backgroundColor: COLORS.red1, height: 200, width: 200}}/> */}
 
      
 

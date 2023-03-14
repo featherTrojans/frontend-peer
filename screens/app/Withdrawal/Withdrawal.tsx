@@ -18,7 +18,7 @@ const Withdrawal = ({ navigation }) => {
 
       <View style={withdrawstyles.subcontainer}>
         <View style={{ paddingHorizontal: 15 }}>
-          <Headerandsubheader />
+          <Headerandsubheader header="Merchant Withdrawal"  subHeader="Kindly input your active phone number that you can reach."/>
         </View>
 
         <View style={withdrawstyles.withdrawOptionWrap}>

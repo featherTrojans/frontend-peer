@@ -23,7 +23,7 @@ import { db } from "../../../../firebase";
 import { AuthContext } from "../../../../context/AuthContext";
 import moment from "moment";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import { InitialsBg, Mainwrapper } from "../../../../components";
+import { Backheader, InitialsBg, Mainwrapper } from "../../../../components";
 import LottieView from "lottie-react-native";
 import AllChatsModal from "./AllChatsModal";
 import formatData from "../../../../utils/fomatTrans";
@@ -337,6 +337,7 @@ const Chatsdm = ({ navigation, route }) => {
         {/* <TouchableOpacity activeOpacity={0.8} style={{  }} onPress={()=>navigation.goBack()}>
           <Backarrow />
         </TouchableOpacity> */}
+        {/* <Backheader /> */}
 
         <View style={[styles.headerDetailsContainer]}>
           <TouchableOpacity

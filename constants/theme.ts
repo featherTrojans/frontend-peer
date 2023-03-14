@@ -25,6 +25,7 @@ export const COLORS = {
   blue14: "#E6ECFF",
   blue15: "#1539CE",
   blue16: "#342AD5",
+  blue17: "#D8E3FF",
   transparentBlue: "#F2F5FF",
 
 
@@ -75,10 +76,9 @@ export const COLORS = {
   lightgray: `rgba(219, 220, 221, .5)`,
   paybillInput: "#E6E6E6",
   checkBorder: "#A5A5A5",
-  errorBorder: `rgba(224, 0, 0, .5)`,
+  borderColor: `rgba(31, 31, 65, .4)`,
   black: "#000000",
   black2: "#333333",
-  borderColor: "#EDEDED",
   inputBgColor: `rgba(240, 240, 240, .5)`,
   borderColor2: `rgba(112, 112, 112, .2)`,
   borderColor3: `rgba(112, 112, 112, .3)`,

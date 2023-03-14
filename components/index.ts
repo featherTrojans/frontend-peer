@@ -18,6 +18,7 @@ import Upgrademodal from "./Upgrademodal/Upgrademodal";
 import Emptycomponent from "./Emptycomponent/Emptycomponent";
 import Backheader from "./Backheader/Backheader";
 import Headerandsubheader from "./Headerandsubheader/Headerandsubheader";
+import Iconandinfo from "./Iconandinfo/Iconandinfo";
 
 
 
@@ -43,6 +44,7 @@ export {
     Upgrademodal,
     Emptycomponent,
     Backheader,
-    Headerandsubheader
+    Headerandsubheader,
+    Iconandinfo
 
 }

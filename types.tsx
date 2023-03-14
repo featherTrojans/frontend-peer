@@ -54,7 +54,15 @@ export type RootStackParamList = {
   //Withdraw
   Withdrawal: undefined;
   Withdrawlisting: undefined;
-
+  Accountlevel: undefined;
+  Verifyemail: undefined;
+  Verifyemailcode: undefined;
+  Verifypersonalinfo: undefined;
+  Personalinfo: undefined;
+  Changeappearance: undefined;
+  Changememoji: undefined;
+  Cardtopup: undefined;
+  Cardwithdraw: undefined;
 
 
   //Notification

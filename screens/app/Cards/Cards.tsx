@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Pressable } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { Horizontaline, Mainwrapper } from "../../../components";
-import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { icons } from "../../../constants";
 import Customstatusbar from "../../shared/Customstatusbar";
 import { cardstyles } from "./Cards.styles";
 import BottomSheet from "@gorhom/bottom-sheet";
+import useCustomModal from "../../../utils/useCustomModal";
 
 const {
   Carddetailsicon,
@@ -17,27 +18,37 @@ const {
   Historyicon,
 } = icons;
 
-const cardactions = [
-  {
-    title: "Details",
-    Icon: Carddetailsicon,
-  },
-  {
-    title: "Top-up",
-    Icon: Cardfundicon,
-  },
-  {
-    title: "Withdraw",
-    Icon: Cardwithdrawicon,
-  },
-  {
-    title: "Lock",
-    Icon: Cardlockicon,
-  },
-];
 
-function Cards() {
+
+function Cards({navigation}) {
   const snapPoints = useMemo(() => ["25%", "65%", "98%"], []);
+  const {openModal: openCardDetailsModal, closeModal, CustomModal: CardDetailsModal} = useCustomModal()
+  const {openModal: openCardLockModal,  CustomModal: CardLockModal} = useCustomModal()
+
+
+
+  const cardactions = [
+    {
+      title: "Details",
+      Icon: Carddetailsicon,
+      action: openCardDetailsModal
+    },
+    {
+      title: "Top-up",
+      Icon: Cardfundicon,
+      action: () => navigation.navigate("Cardtopup")
+    },
+    {
+      title: "Withdraw",
+      Icon: Cardwithdrawicon,
+      action: () => navigation.navigate("Cardwithdraw")
+    },
+    {
+      title: "Lock",
+      Icon: Cardlockicon,
+      action: openCardLockModal
+    },
+  ];
 
   return (
     <View
@@ -47,6 +58,25 @@ function Cards() {
 
       <View style={cardstyles.contentContainer}>
         <Text style={cardstyles.myCardsText}>My Cards</Text>
+
+
+
+    {/* Card Details Modal */}
+      <CardDetailsModal>
+
+        <View>
+          <Text>Card Details Modal</Text>
+        </View>
+      </CardDetailsModal>
+
+      {/* Card Lock Modal */}
+      <CardLockModal>
+        <View>
+          <Text>Card Lock Modal</Text>
+        </View>
+      </CardLockModal>
+
+
         <View>
           <FlatList
             data={[1, 2]}
@@ -66,12 +96,14 @@ function Cards() {
             <Horizontaline marginV={18} />
 
             <View style={cardstyles.actionsWrap}>
-              {cardactions.map(({ Icon, title }, index) => {
+              {cardactions.map(({ Icon, title, action }, index) => {
                 return (
                   <View key={index} style={cardstyles.actionIconWrap}>
-                    <View style={cardstyles.actionIconBg}>
+                    <Pressable 
+                    onPress={action} 
+                    style={cardstyles.actionIconBg}>
                       <Icon />
-                    </View>
+                    </Pressable>
                     <Text style={cardstyles.actionTitle}>{title}</Text>
                   </View>
                 );

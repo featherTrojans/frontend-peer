@@ -2,11 +2,11 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, fontsize } from '../../constants'
 
-const Headerandsubheader = () => {
+const Headerandsubheader = ({header, subHeader}) => {
   return (
     <View style={{width: "85%"}}>
-      <Text style={{...fontsize.xbigger, ...FONTS.bold, color: COLORS.black, marginBottom: 30}}>Merchant Withdrawal</Text>
-      <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>Kindly input your active phone number that you can reach.</Text>
+      <Text style={{...fontsize.xbigger, ...FONTS.bold, color: COLORS.black, marginBottom: 30}}>{header}</Text>
+      <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.blue9}}>{subHeader}</Text>
     </View>
   )
 }

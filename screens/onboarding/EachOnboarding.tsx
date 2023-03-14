@@ -1,9 +1,4 @@
-import {
-  HeaderText,
-  ImageContainer,
-  InformationText,
-  OnboardingComponentContainer,
-} from "./OnBoardingComponent.styles";
+
 import React from "react";
 import { View, Text } from "react-native";
 import { COLORS, FONTS, fontsize, SIZES } from "../../constants";
@@ -13,15 +8,17 @@ export type EachOnboardingTypes = {
     icon: JSX.Element;
     header: string;
     information: string;
+    imageBg: String;
+    page: number
   };
 };
 
-const OnboardingComponent = ({ item }: EachOnboardingTypes) => {
-  const { header, information, icon } = item;
+const EachOnboarding = ({ item }: EachOnboardingTypes) => {
+  const { header, information, icon, imageBg, page } = item;
   return (
     <View style={{flex: 1, width: SIZES.width, paddingHorizontal: 32, alignItems: "flex-start",}}>
       {/* <ImageContainer /> */}
-      <View style={{flex: 0.7, }}>
+      <View style={{height: 215, backgroundColor: `${imageBg}`, width: "100%", marginVertical: 50, borderRadius: 26, borderTopLeftRadius: page == 1 ? 100 : 26, borderTopRightRadius: page == 1 ? 26 : 100}}>
       {icon}
       </View>
       <View style={{ width: "100%", paddingHorizontal: 26 }}>
@@ -32,4 +29,4 @@ const OnboardingComponent = ({ item }: EachOnboardingTypes) => {
   );
 };
 
-export default OnboardingComponent;
+export default EachOnboarding;

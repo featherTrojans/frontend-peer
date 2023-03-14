@@ -40,6 +40,19 @@ import Profile from "./app/Profile/Profile";
 import Cards from "./app/Cards/Cards";
 import Withdrawal from "./app/Withdrawal/Withdrawal";
 import Withdrawlisting from "./app/Withdrawal/Withdrawlisting";
+import Accountlevel from "./app/Profile/Accountlevel";
+import Verifyemail from "./app/Profile/Verifyemail";
+import Verifyemailcode from "./app/Profile/Verifyemailcode";
+import Verifypersonalinfo from "./app/Profile/Verifypersonalinfo";
+import Personalinfo from "./app/Profile/Personalinfo";
+import Changeappearance from "./app/Profile/Changeappearance";
+import Changememoji from "./app/Profile/Changememoji";
+import Cardtopup from "./app/Cards/Cardtopup";
+import Cardwithdraw from "./app/Cards/Cardwithdraw";
+
+
+
+
 
 
 
@@ -70,5 +83,17 @@ export {
   CustomWebView,
   LockScreen,
   Transactiondetails,
-  RequesterinfoScreen
+  RequesterinfoScreen,
+  Accountlevel,
+  Verifyemail,
+  Verifyemailcode,
+  Verifypersonalinfo,
+  Personalinfo,
+Changeappearance,
+Changememoji,
+Cardtopup,
+Cardwithdraw
+
+
+
 };
