@@ -44,6 +44,17 @@ const datas = [
   },
 ];
 
+const agentobjj = {
+  amount: 200,
+  duration: 20,
+  fullName: "Lawal Ayobami",
+  latitude: 0.3,
+  locationText: "I am okay",
+  longitude: 1.2,
+  reference: "rdw424gar",
+  username: "spec",
+};
+
 interface agent {
   amount: string;
   duration: string;
@@ -92,12 +103,6 @@ const Availablelisting = ({ navigation, route }: any) => {
     closeModal: closeSuccessModal,
   } = useCustomModal();
 
-  const onViewChangeRef = useRef<
-    ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
-  >(({ viewableItems, changed }) => {
-    setViewIndex(viewableItems[0]?.index);
-  });
-
   useEffect(() => {
     if (activate) {
       handleSelectAgent(route.params?.activate);
@@ -112,31 +117,6 @@ const Availablelisting = ({ navigation, route }: any) => {
       Toast.hide();
     };
   }, []);
-
-  // This function is to toggle the listings height
-  const toggleHeight = () => {
-    if (isShow == true) {
-      Animated.timing(animatedHeight, {
-        toValue: 1,
-        duration: 200,
-        easing: Easing.linear,
-        useNativeDriver: false, // <-- neccessary
-      }).start(() => {
-        setIsShow(false);
-        setInfo("Less");
-      });
-    } else {
-      Animated.timing(animatedHeight, {
-        toValue: 0,
-        duration: 200,
-        easing: Easing.linear,
-        useNativeDriver: false, // <-- neccessary
-      }).start(() => {
-        setIsShow(true);
-        setInfo("More");
-      });
-    }
-  };
 
   const newHeight = animatedHeight.interpolate({
     inputRange: [0, 1],
@@ -175,12 +155,9 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: Number(amount),
         location: address,
       });
-      console.log(
-        "miracles on miracles",
-        response,
-        "I can't even count them all"
-      );
-
+      if (response) {
+        handleSelectAgent(agentobjj);
+      }
       setAgents(response.data.data);
       setCharge(response.data.charges);
       console.log(response);
@@ -213,17 +190,6 @@ const Availablelisting = ({ navigation, route }: any) => {
     <SafeAreaView
       style={{ flex: 1, backgroundColor: COLORS.white, marginBottom: 20 }}
     >
-      <CustomModal>
-        <Withdrawinfo
-          withdrawInfo={activeAgent}
-          closeModal={closeModal}
-          openNextModal={() => {
-            closeModal();
-            openNegotiateChargeModal();
-          }}
-        />
-      </CustomModal>
-
       <NegotiateChargeModal>
         <Negotiatecharge
           info={{ ...activeAgent, charges: charge }}
@@ -297,202 +263,68 @@ const Availablelisting = ({ navigation, route }: any) => {
       ) : (
         <>
           <View style={{ flex: 1, justifyContent: "flex-end" }}>
-            <Animated.View
+            <View
               style={{
-                height: newHeight,
+                height: 350,
                 backgroundColor: COLORS.white,
-                marginHorizontal: 15,
-                borderRadius: 15,
-                padding: 15,
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
               }}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 25,
-                  alignItems: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    ...fontsize.smaller,
-                    ...FONTS.medium,
-                    color: COLORS.blue9,
-                  }}
-                >
-                  {viewIndex === 0 ? "Peers" : "Agents"}
-                </Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    padding: 4,
-                  }}
-                  onPress={toggleHeight}
-                >
-                  <Text
-                    style={{
-                      marginRight: 8,
-                      ...fontsize.smaller,
-                      ...FONTS.medium,
-                      color: COLORS.purple4,
-                    }}
-                  >
-                    View {info}
-                  </Text>
-                  <Animated.View
-                    style={[
-                      {
-                        transform: [{ rotateX }],
-                      },
-                    ]}
-                  >
-                    <Listingsdrop />
-                  </Animated.View>
-                </TouchableOpacity>
-              </View>
-
-              <FlatList
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                snapToAlignment="center"
-                pagingEnabled
-                bounces={false}
-                data={datas}
-                nestedScrollEnabled
-                renderItem={({ item, index }) => {
-                  const isLast = datas.length === index + 1;
-                  let data = agents;
-                  if (isLast) {
-                    data = [];
-                  }
-                  return (
-                    <ScrollView
-                      nestedScrollEnabled
-                      showsVerticalScrollIndicator={false}
-                    >
-                      {data.length > 0 ? (
-                        data.map((info, index) => {
-                          const isLastItem = data.length === index + 1;
-                          return (
-                            <TouchableOpacity
-                              key={index}
-                              activeOpacity={0.8}
-                              style={{
-                                flex: 1,
-                                width: SIZES.width - 65,
-                                marginRight: 5,
-                              }}
-                              onPress={() => handleSelectAgent(info)}
-                            >
-                              <Requestuser
-                                hideAmount
-                                details={{
-                                  name: info?.fullName,
-                                  amount: info?.amount,
-                                  duration: info?.duration,
-                                }}
-                              />
-                              {!isLastItem && <Horizontaline marginV={21} />}
-                            </TouchableOpacity>
-                          );
-                        })
-                      ) : (
-                        <View
-                          style={{
-                            // backgroundColor: "blue",
-                            flex: 1,
-                            height: 200,
-                            width: SIZES.width - 60,
-                            marginBottom: 10,
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          {/* <Emptyicon /> */}
-                          <LottieView
-                            source={Cryinganimate}
-                            autoPlay
-                            loop
-                            style={{ height: 120, width: 120 }}
-                          />
-                          <Text
-                            style={{
-                              marginTop: 20,
-                              paddingHorizontal: 40,
-                              textAlign: "center",
-                              lineHeight: 20,
-                              ...fontsize.smallest,
-                              ...FONTS.regular,
-                            }}
-                          >
-                            Padi, you don’t have any accepted withdrawal
-                            requests.
-                          </Text>
-                        </View>
-                      )}
-                    </ScrollView>
-                  );
-                }}
-                onViewableItemsChanged={onViewChangeRef.current}
-                onScroll={Animated.event(
-                  [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                  { useNativeDriver: false }
-                )}
-                keyExtractor={(item) => item.title}
-              />
-
-              {/* Dots for scroll indicators */}
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  paddingTop: 10,
-                }}
-              >
+              {datas.length > 0 ? (
                 <View
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    width: 38,
+                    // backgroundColor: "blue",
+                    flex: 1,
+                    height: 200,
+
+                    marginBottom: 10,
+                    paddingHorizontal: 1,
                   }}
                 >
-                  {Array(2)
-                    .fill(1)
-                    .map((item, index) => {
-                      const dotPosition = Animated.divide(
-                        scrollX,
-                        SIZES.width - 60
-                      );
-
-                      const dotColor = dotPosition.interpolate({
-                        inputRange: [index - 1, index, index + 1],
-                        outputRange: [COLORS.grey3, COLORS.black, COLORS.grey3],
-                        extrapolate: "clamp",
-                      });
-                      const dotWidth = dotPosition.interpolate({
-                        inputRange: [index - 1, index, index + 1],
-                        outputRange: [8, 20, 8],
-                        extrapolate: "clamp",
-                      });
-                      return (
-                        <Animated.View
-                          key={index}
-                          style={[
-                            {
-                              height: 8,
-                              borderRadius: 8 / 2,
-                              backgroundColor: dotColor,
-                              width: dotWidth,
-                            },
-                          ]}
-                        />
-                      );
-                    })}
+                  <Withdrawinfo
+                    withdrawInfo={activeAgent}
+                    closeModal={closeModal}
+                    openNextModal={() => {
+                      closeModal();
+                      openNegotiateChargeModal();
+                    }}
+                  />
                 </View>
-              </View>
-            </Animated.View>
+              ) : (
+                <View
+                  style={{
+                    // backgroundColor: "blue",
+                    flex: 1,
+                    height: 200,
+                    width: SIZES.width - 60,
+                    marginBottom: 10,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {/* <Emptyicon /> */}
+                  <LottieView
+                    source={Cryinganimate}
+                    autoPlay
+                    loop
+                    style={{ height: 120, width: 120 }}
+                  />
+                  <Text
+                    style={{
+                      marginTop: 20,
+                      paddingHorizontal: 40,
+                      textAlign: "center",
+                      lineHeight: 20,
+                      ...fontsize.smallest,
+                      ...FONTS.regular,
+                    }}
+                  >
+                    Padi, you don’t have any accepted withdrawal requests.
+                  </Text>
+                </View>
+              )}
+            </View>
           </View>
         </>
       )}

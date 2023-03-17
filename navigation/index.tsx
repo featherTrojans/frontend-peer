@@ -79,15 +79,6 @@ import {
 
   //Notification
   Notifications,
-
-  //Deposit
-  Deposit, ///Requests(pending and accepted)
-  Depositupdate, ///
-  Pendingdeposit,
-  Accepteddeposit,
-  Depositpin,
-  DepositSummary,
-  Canceldeposit,
   WalletPin,
   Updatedeposit,
 
@@ -100,7 +91,6 @@ import {
   WithdrawPin,
   SecurepinAgain,
   CustomWebView,
-  Depositinput,
   Testings,
   LockScreen,
 
@@ -131,7 +121,6 @@ import {
 } from "../screens";
 // import { LockScreen } from "../screens";
 
-
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 
@@ -151,9 +140,6 @@ Notification.setNotificationHandler({
     shouldSetBadge: true,
   }),
 });
-
-
-
 
 // Push notification function
 export function usePushNotification() {
@@ -185,7 +171,6 @@ export function usePushNotification() {
       Notification.removeNotificationSubscription(responseListener.current);
     };
   }, []);
-
 
   //Instant Notifications
   const sendPushNotification = async (
@@ -540,8 +525,6 @@ const RootNavigator = ({ initialBoarded }) => {
             />
           </AppStack.Group>
 
-
-
           {/* Settings Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Editprofile" component={Editprofile} />
@@ -660,26 +643,14 @@ const RootNavigator = ({ initialBoarded }) => {
             component={Electricitymetertype}
           />
 
+          <AppStack.Screen name="Updatedeposit" component={Updatedeposit} />
           {/* Deposit Screens */}
           <AppStack.Group>
-            <AppStack.Screen name="Depositupdate" component={Depositupdate} />
-            <AppStack.Screen name="Deposit" component={Deposit} />
-            <AppStack.Screen name="Depositinput" component={Depositinput} />
-            <AppStack.Screen name="Updatedeposit" component={Updatedeposit} />
-            <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
             <AppStack.Screen name="Meetuppoint" component={Meetuppoint} />
             <AppStack.Screen name="Safetycautions" component={Safetycautions} />
-            <AppStack.Screen name="Depositstart" component={Depositstart} />
-
-            <AppStack.Screen
-              name="Accepteddeposit"
-              component={Accepteddeposit}
-            />
-            <AppStack.Screen name="Depositpin" component={Depositpin} />
-            <AppStack.Screen name="DepositSummary" component={DepositSummary} />
-            <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
           </AppStack.Group>
           {/* Chats Screens */}
+
           <AppStack.Group>
             <AppStack.Screen name="Chatshome" component={Chatshome} />
             <AppStack.Screen name="Chatsdm" component={Chatsdm} />

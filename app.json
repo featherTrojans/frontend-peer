@@ -26,11 +26,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-<<<<<<< HEAD
-      "bundleIdentifier": "africa.feathermobile.com",
-=======
       "bundleIdentifier": "com.feather.peer",
->>>>>>> 1247768809947d31872b1d685f2a33e4684d8abc
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSContactsUsageDescription": "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
