@@ -38,41 +38,41 @@ const Profile = ({navigation}) => {
         Icon: Profilemanageicon,
         title: "Profile Management",
         info: "Customise & update your profile",
-        action: () => navigation.navigate("Changeappearance")
+        action: () => navigation.navigate("Personalinfo")
       },
       {
         Icon: Mywalleticon,
-        title: "My Wallets",
+        title: "Wallet Limits",
         info: "See your wallet capabilities",
-        action: () => navigation.navigate("Verifyemail")
+        action: () => navigation.navigate("Walletlimits")
     
       },
       {
         Icon: Securityprivicon,
         title: "Security & Privacy",
         info: "Set your security preferences",
-        action: () => navigation.navigate("Verifyemailcode")
+        action: () => navigation.navigate("Securityandprivacy")
     
       },
       {
         Icon: Shareandearnicon,
         title: "Share & Earn",
         info: "Set your security preferences",
-        action: () => navigation.navigate("Verifypersonalinfo")
+        action: () => navigation.navigate("Shareandearn")
     
       },
       {
         Icon: Supporticon,
         title: "Support & Help Desk",
         info: "Set your security preferences",
-        action: () => navigation.navigate("Changememoji")
+        action: () => console.log("Support and help desk")
     
       },
       {
         Icon: Abouticon,
         title: "About Feather App",
         info: "Set your security preferences",
-        action: () => console.log("Profile")
+        action: () => console.log("About feather app")
     
       },
     ];

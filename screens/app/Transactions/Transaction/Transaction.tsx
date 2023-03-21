@@ -11,6 +11,7 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import {
   Emptycomponent,
   Horizontaline,
+  Iconandinfo,
   Transactionhistory,
 } from "../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
@@ -29,13 +30,17 @@ const {
   Fundwalleticon,
   Walletactionicon,
   Historyicon,
+  Walletblueicon,
+  Bankblueicon,
+  Paymerchanticon, Searchmerchanticon
 } = icons;
 
-const Transactions = ({ navigation }: any) => {
+const Transactions = ({ navigation }) => {
   const [transactions, setTransations] = useState();
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const { openModal, CustomModal } = useCustomModal();
+  const {openModal: openWithdrawModal, closeModal: closeWithdrawModal, CustomModal: WithdrawModal} = useCustomModal()
+  const { openModal: openTransferModal, closeModal: closeTransferModal, CustomModal: TransferModal } = useCustomModal();
 
   useEffect(() => {
     getAllTransactions();
@@ -66,19 +71,19 @@ const Transactions = ({ navigation }: any) => {
       title: "Withdraw",
       Icon: Withdrawicon,
       color: "#E5FAF6",
-      action: () => navigation.navigate("Withdrawal"),
+      action: openWithdrawModal,
     },
     {
       title: "Transfer",
       Icon: Transfericon,
       color: "#FFE3E3",
-      action: openModal,
+      action: openTransferModal,
     },
     {
       title: "Bills",
       Icon: Paybillicon,
       color: "#D2EAFD",
-      action: () => console.log("Paybills"),
+      action: () => navigation.navigate("Billsandutility"),
     },
     {
       title: "Fund",
@@ -89,70 +94,76 @@ const Transactions = ({ navigation }: any) => {
   ];
   const snapPoints = useMemo(() => ["45%", "65%", "98%"], []);
 
+  const reNavigate = (screenName: String) => {
+    closeTransferModal();
+    closeWithdrawModal()
+    navigation.navigate(screenName);
+  };
+
   return (
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <View style={styles.contentContainer}>
         <Customstatusbar />
 
-        <CustomModal>
+
+        {/* Transfer Modal */}
+        <TransferModal>
           <View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text
-                style={{
-                  ...fontsize.smaller,
-                  ...FONTS.semibold,
-                  color: COLORS.blue9,
-                }}
-              >
-                Transfer Cash
-              </Text>
+            <View style={styles.transferTypeModalHeader}>
+              <Text style={styles.transferCashText}>Transfer Cash</Text>
+
               <View style={{ alignItems: "flex-end" }}>
-                <Text
-                  style={{
-                    ...fontsize.xsmallest,
-                    ...FONTS.regular,
-                    color: COLORS.blue9,
-                  }}
-                >
+                <Text style={styles.primaryWalletText}>
                   Primary Wallet Balance
                 </Text>
-                <Text
-                  style={{
-                    ...fontsize.smaller,
-                    ...FONTS.bold,
-                    color: COLORS.blue6,
-                    marginTop: 9,
-                  }}
-                >
-                  N332,500.50
-                </Text>
+
+                <Text style={styles.primaryWalletBalanceText}>N332,500.50</Text>
               </View>
             </View>
 
             <View style={{ marginTop: 40 }}>
-              <View style={{ flexDirection: "row" }}>
-                <View
-                  style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: 36 / 2,
-                    backgroundColor: COLORS.lightBlue2,
-                  }}
-                >
-                  {/* icons */}
-                </View>
-                <View style={{ marginLeft: 18 }}>
-                  <Text>To Feather Wallet</Text>
-                  <Text>Send cash to other feather users.</Text>
-                </View>
-              </View>
-
+              <Iconandinfo
+                action={() => reNavigate("Feathertransfer")}
+                title="To Feather Wallet"
+                info="Send cash to other feather users."
+                Icon={Walletblueicon}
+              />
               <Horizontaline marginV={22} />
+              <Iconandinfo
+                action={() => reNavigate("Banktransfer")}
+                title="To Bank Account"
+                info="Transfer money to any bank in Nigeria."
+                Icon={Bankblueicon}
+              />
             </View>
           </View>
-        </CustomModal>
+        </TransferModal>
+
+
+      {/* Withdrawal Modal */}
+        <WithdrawModal>
+          <View>
+              <Text style={styles.transferCashText}>Withdraw Options</Text>
+
+            <View style={{ marginTop: 40 }}>
+              <Iconandinfo
+                action={() => reNavigate("Paymerchant")}
+                title="Pay Merchant (Agent/Business)"
+                info="Withdraw from feather verified merchants"
+                Icon={Paymerchanticon}
+              />
+              <Horizontaline marginV={22} />
+              <Iconandinfo
+                action={() => reNavigate("Withdrawlisting")}
+                title="Search Merchants"
+                info="Find merchants around you to withdraw."
+                Icon={Searchmerchanticon}
+              />
+            </View>
+          </View>
+        </WithdrawModal>
+
+
 
         <View style={styles.optionsContainer}>
           <View style={styles.leftheaderWrapper}>

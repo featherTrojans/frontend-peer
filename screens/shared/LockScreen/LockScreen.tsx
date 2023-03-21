@@ -14,7 +14,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
 import useAlert from "../../../utils/useAlerts";
 
-const { Cancelicon, Newlogo } = icons;
+const { Newlogo, Transfericon } = icons;
 const LockScreen = ({ modal, setModal }: any) => {
   const {errorAlert} = useAlert()
   const { setToken, authdata } = useContext(AuthContext);
@@ -106,7 +106,7 @@ const LockScreen = ({ modal, setModal }: any) => {
               Incorrect pin, try again
             </Text>
             <TouchableOpacity onPress={() => setError(false)}>
-              <Cancelicon />
+              <Transfericon />
             </TouchableOpacity>
           </View>
         )}

@@ -30,13 +30,6 @@ import {
 
   // Auth Screens
   Login,
-  Personal,
-  Security,
-  Securepin,
-  Verification,
-  Forgetpassword,
-  Forgetpasswordotp,
-  Setnewpassword,
   Welcome,
   Home,
   Transactions,
@@ -46,7 +39,6 @@ import {
   Chatshome,
   Chatsdm,
   Usersearch,
-  SecurepinAgain,
   CustomWebView,
   Testings,
   LockScreen,
@@ -54,7 +46,6 @@ import {
   Transactiondetails,
   Cards,
   Profile,
-  Withdrawal,
   Withdrawlisting,
   Accountlevel,
   Verifyemail,
@@ -65,6 +56,15 @@ import {
   Changememoji,
   Cardtopup,
   Cardwithdraw,
+  Banktransfer,
+  Feathertransfer,
+  Paymerchant,
+  Billsandutility,
+  Shareandearn,
+  Walletlimits,
+  Securityandprivacy,
+  Verifybvn,
+  Verifybvncode,
 } from "../screens";
 
 import Tabs from "./Tabs";
@@ -93,19 +93,6 @@ const RootNavigator = ({ initialBoarded }) => {
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Getstarted" component={Getstarted} />
 
-          {/* <AppStack.Screen name="Onboarding" component={Onboarding} /> */}
-          <AppStack.Screen name="Personal" component={Personal} />
-          <AppStack.Screen name="Verification" component={Verification} />
-          <AppStack.Screen name="Security" component={Security} />
-          <AppStack.Screen name="Securepin" component={Securepin} />
-          <AppStack.Screen name="Forgetpassword" component={Forgetpassword} />
-
-          <AppStack.Screen
-            name="Forgetpasswordotp"
-            component={Forgetpasswordotp}
-          />
-          <AppStack.Screen name="Setnewpassword" component={Setnewpassword} />
-          <AppStack.Screen name="SecurepinAgain" component={SecurepinAgain} />
           <AppStack.Screen name="Login" component={Login} />
           <AppStack.Screen name="Welcome" component={Welcome} />
         </AppStack.Group>
@@ -124,7 +111,6 @@ const RootNavigator = ({ initialBoarded }) => {
           {/* Notification Screen */}
           <AppStack.Screen name="Notifications" component={Notifications} />
 
-          <AppStack.Screen name="Withdrawal" component={Withdrawal} />
           <AppStack.Screen name="Withdrawlisting" component={Withdrawlisting} />
 
           <AppStack.Screen name="Accountlevel" component={Accountlevel} />
@@ -136,14 +122,29 @@ const RootNavigator = ({ initialBoarded }) => {
             component={Verifypersonalinfo}
           />
           <AppStack.Screen name="Personalinfo" component={Personalinfo} />
-
+          <AppStack.Screen name="Paymerchant" component={Paymerchant} />
           <AppStack.Screen
             name="Changeappearance"
             component={Changeappearance}
           />
+          <AppStack.Screen name="Billsandutility" component={Billsandutility} />
+
+          <AppStack.Screen name="Shareandearn" component={Shareandearn} />
+          <AppStack.Screen name="Walletlimits" component={Walletlimits} />
+          <AppStack.Screen
+            name="Securityandprivacy"
+            component={Securityandprivacy}
+          />
+          <AppStack.Screen name="Verifybvn" component={Verifybvn} />
+
+          <AppStack.Screen name="Verifybvncode" component={Verifybvncode} />
+
           <AppStack.Screen name="Changememoji" component={Changememoji} />
           <AppStack.Screen name="Cardtopup" component={Cardtopup} />
           <AppStack.Screen name="Cardwithdraw" component={Cardwithdraw} />
+
+          <AppStack.Screen name="Feathertransfer" component={Feathertransfer} />
+          <AppStack.Screen name="Banktransfer" component={Banktransfer} />
 
           {/* Chats Screens */}
           <AppStack.Group>

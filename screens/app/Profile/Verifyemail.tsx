@@ -1,14 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
-import { Backheader, Headerandsubheader, Mainwrapper } from '../../../components'
+import { Backheader, Custombutton, Headerandsubheader, Mainwrapper } from '../../../components'
+import { profilestyles } from './Profile.styles'
+import { COLORS } from '../../../constants'
 
-const Verifyemail = () => {
+const Verifyemail = ({navigation}) => {
   return (
     <Mainwrapper>
-        <Backheader />
-        <View style={{paddingHorizontal: 15}}>
+        <View style={{paddingHorizontal: 15,}}>
 
-        <Headerandsubheader header="Verify Email" subHeader="An OTP has been sent to your email to verify your email address"/>
+
+          <Text style={profilestyles.kycPersonalInfoText}>KYC - Personal Info.</Text>
+          <Text style={profilestyles.verifyEmailText}>Verify Email Address</Text>
+          <Text style={profilestyles.verifyEmailInfo}>Kindly choose from the questions above and provide appropriate answers to fully enable your MFA.</Text>
+
+          <View style={{marginBottom: 30}}>
+            <Text style={profilestyles.emailInputLabel}>Email Address</Text>
+            <TextInput style={profilestyles.emailTextInput} placeholder="Enter Email Address" placeholderTextColor={COLORS.grey1}/>
+            {/* Input box is here */}
+          </View>
+
+          <Custombutton btntext="Proceed" onpress={() => navigation.navigate("Verifyemailcode")}/>
+
         </View>
     </Mainwrapper>
   )

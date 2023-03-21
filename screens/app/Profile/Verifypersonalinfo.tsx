@@ -1,48 +1,27 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Backheader, Headerandsubheader, Horizontaline, Mainwrapper } from '../../../components'
-import { COLORS, FONTS, fontsize } from '../../../constants'
+import { Backheader, Headerandsubheader, Horizontaline, Iconandinfo, Mainwrapper } from '../../../components'
+import { COLORS, FONTS, fontsize, icons } from '../../../constants'
 
 
-const Verifypersonalinfo = () => {
+
+const {Bankblueicon} = icons
+
+const Verifypersonalinfo = ({navigation}) => {
   return (
     <Mainwrapper>
         <Backheader />
 
         <View style={{paddingHorizontal: 15}}>
-        <Headerandsubheader header="Verify Personal Info." subHeader="Kindly input your active phone number that you can reach."/>
-
-        <View style={{marginTop: 40}}>
-
-            <View style={{flexDirection: "row", alignItems: "center"}}>
-                <View style={{width: 44, height: 44, backgroundColor: COLORS.lightBlue, borderRadius: 44/2}}>
-                    {/* icons */}
-                </View>
-                <View style={{marginLeft: 14}}>
-                    <Text style={{...fontsize.smaller, ...FONTS.semibold, marginBottom: 9}}>Email Address</Text>
-                    <Text style={{...fontsize.xsmallest, ...FONTS.regular}}>Verify your email address</Text>
-                </View>
-            </View>
-
+            <Iconandinfo action={() => navigation.navigate("Verifyemail")} Icon={Bankblueicon} title="Email Address" info="Verify your email address"/>
             <Horizontaline marginV={20}/>
-
-            <View style={{flexDirection: "row", alignItems: "center"}}>
-                <View style={{width: 44, height: 44, backgroundColor: COLORS.lightBlue, borderRadius: 44/2}}>
-                    {/* icons */}
-                </View>
-                <View style={{marginLeft: 14}}>
-                    <Text style={{...fontsize.smaller, ...FONTS.semibold, marginBottom: 9}}>Selfie Validation</Text>
-                    <Text style={{...fontsize.xsmallest, ...FONTS.regular}}>Proceed to use a smart selfie</Text>
-                </View>
-            </View>
-
+            <Iconandinfo action={() => console.log("helws")} Icon={Bankblueicon} title="Adress Verification" info="Proceed to use a smart selfie"/>
+            <Horizontaline marginV={20}/>
+            <Iconandinfo action={() => console.log("helws")} Icon={Bankblueicon} title="Selfie Validation" info="Proceed to use a smart selfie"/>
 
 
         </View>
 
-
-
-      </View>
     </Mainwrapper>
   )
 }

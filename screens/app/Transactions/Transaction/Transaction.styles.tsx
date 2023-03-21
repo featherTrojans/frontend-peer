@@ -93,4 +93,26 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
+  //Transfer type modal
+  transferTypeModalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  transferCashText: {
+    ...fontsize.smaller,
+    ...FONTS.semibold,
+    color: COLORS.blue9,
+  },
+  primaryWalletText: {
+    ...fontsize.xsmallest,
+    ...FONTS.regular,
+    color: COLORS.blue9,
+  },
+  primaryWalletBalanceText: {
+    ...fontsize.smaller,
+    ...FONTS.bold,
+    color: COLORS.blue6,
+    marginTop: 9,
+  },
 });

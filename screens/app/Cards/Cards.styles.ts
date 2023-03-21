@@ -70,4 +70,54 @@ export const cardstyles = StyleSheet.create({
     ...FONTS.semibold,
     color: COLORS.black,
   },
+
+  ///Card details Modal
+
+  cardDetailsModalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  cardDetailSubHead: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  cardDetailsHeaderText: {
+    ...fontsize.xsmallest,
+    ...FONTS.semibold,
+    color: COLORS.blue9,
+  },
+  detailInfoTitle: {
+    ...fontsize.xsmallest,
+    color: COLORS.grey2,
+    ...FONTS.semibold,
+  },
+  detailInfoValueWrap: {
+    marginTop: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  detailInfoValueText: {
+    ...fontsize.smaller,
+    ...FONTS.regular,
+    color: COLORS.blue9,
+  },
+
+
+  //Card locked modal
+  cardLockHeader:{
+    textAlign: 'center', ...fontsize.small, ...FONTS.bold, color: COLORS.blue9
+  },
+  cardLockSvg:{
+    width: 300, height: 162, backgroundColor: COLORS.grey1, alignSelf: "center", marginBottom: 60, marginTop: 50
+  },
+  cardLockConfirmtext:{
+    ...fontsize.smaller, ...FONTS.regular, textAlign: 'center', marginBottom: 20
+  },
+  cardLockConfirmSubtext:{
+    ...fontsize.smaller, ...FONTS.regular, textAlign: "center", lineHeight: 20
+  } 
+
+
+
 });

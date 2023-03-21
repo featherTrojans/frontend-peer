@@ -4,11 +4,7 @@ import { icons, SIZES, COLORS, fontsize, FONTS } from "../constants";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Chatshome, Home, Transactions, Cards, Profile } from "../screens";
 import { RootTabParamList } from "../types";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
-import { createStackNavigator } from "@react-navigation/stack";
+
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 

@@ -108,23 +108,15 @@ export const profilestyles = StyleSheet.create({
   },
 
   //Accountlevel KYC
-  kycSubContainer: {
-    flex: 1,
-    justifyContent: "space-between",
-  },
-  kycOptionsWrap: {
-    paddingHorizontal: 30,
-    backgroundColor: COLORS.white,
-    paddingVertical: 45,
-    borderTopLeftRadius: 22,
-    borderTopRightRadius: 22,
-  },
-  kycOptionsText: {
-    ...fontsize.smaller,
-    ...FONTS.bold,
-  },
 
   ///Personal info
+  personalModalText: {
+    textAlign: "center",
+    ...fontsize.xsmallest,
+    ...FONTS.regular,
+    textTransform: "uppercase",
+    color: COLORS.blue9,
+  },
   personalUserImageWrap: {
     width: "100%",
     justifyContent: "center",
@@ -221,4 +213,136 @@ export const profilestyles = StyleSheet.create({
     textTransform: "uppercase",
     ...FONTS.medium,
   },
+
+  ///Verify email
+  kycPersonalInfoText: {
+    color: COLORS.blue9,
+    ...fontsize.bmedium,
+    ...FONTS.bold,
+    marginBottom: 10,
+    marginTop: 40,
+  },
+  verifyEmailText: {
+    ...fontsize.bmedium,
+    ...FONTS.regular,
+    color: COLORS.blue9,
+  },
+  verifyEmailInfo: {
+    ...fontsize.smaller,
+    ...FONTS.regular,
+    color: COLORS.grey16,
+    marginTop: 20,
+    marginBottom: 40,
+  },
+  emailInputLabel: {
+    ...FONTS.semibold,
+    color: COLORS.blue9,
+    ...fontsize.smallest,
+    marginBottom: 18,
+  },
+  emailTextInput: {
+    height: 53,
+    borderWidth: 1,
+    borderColor: COLORS.grey15,
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    color: COLORS.grey15,
+  },
+
+  //Wallet Lists
+  walletListHeader: {
+    ...fontsize.bxmedium,
+    ...FONTS.bold,
+    color: COLORS.blue6,
+    marginBottom: 10,
+  },
+  walletListSubHeader: {
+    ...fontsize.xsmallest,
+    ...FONTS.regular,
+    color: COLORS.grey16,
+  },
+
+  walletListOptionHeader: {
+    ...fontsize.smaller,
+    ...FONTS.bold,
+    marginBottom: 12,
+  },
+  walletListOptionSubHeader: {
+    ...fontsize.smaller,
+    ...FONTS.regular,
+    lineHeight: 20,
+    color: COLORS.grey16,
+  },
+
+  //Secuirty and privacy
+
+  securityPrivacyOptionHeader: {
+    ...fontsize.smallest,
+    ...FONTS.medium,
+    textTransform: "uppercase",
+    color: COLORS.grey16,
+  },
+  biometricOptionWrap: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  biometricsStatusBg: {
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    backgroundColor: COLORS.green1,
+    borderRadius: 18,
+  },
+  biometricStatusText: {
+    color: COLORS.white,
+    ...fontsize.smallest,
+    ...FONTS.bold,
+  },
+
+  //Share and earn
+
+  shareAndEarnSvgWrap: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  shareAndEarnMainText: {
+    ...fontsize.bmedium,
+    ...FONTS.bold,
+    textAlign: "center",
+    marginBottom: 24,
+    lineHeight: 30,
+  },
+  shareAndEarnSubText: {
+    textAlign: "center",
+    ...fontsize.smallest,
+    ...FONTS.regular,
+    color: COLORS.grey16,
+    lineHeight: 20,
+  },
+  shareAndEarchReferWrap: {
+    marginVertical: 40,
+    paddingVertical: 22,
+  },
+  shareAndEarnReferCode: {
+    ...fontsize.medium,
+    ...FONTS.bold,
+    color: COLORS.blue6,
+    marginBottom: 6,
+    textAlign: "center",
+  },
+  shareAndEarnTaptocopy: {
+    ...fontsize.xsmallest,
+    ...FONTS.regular,
+    textAlign: "center",
+    color: COLORS.grey16,
+  },
+
+  //Bank Verification Number
+
+  bvnTextinput:{
+    height: 53, borderWidth: 1, borderColor: COLORS.grey16, marginTop: 60, marginBottom: 30, borderRadius: 5, paddingHorizontal: 15
+  }
+
+
+
 });

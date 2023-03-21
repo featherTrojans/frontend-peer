@@ -40,7 +40,7 @@ export type RootStackParamList = {
   Transactiondetails: { price: number };
   Transactiondispute: undefined;
 
-  //Settings
+//Settings
   Editprofile: undefined;
   Securityprivacy: undefined;
   Changepassword: undefined;
@@ -63,6 +63,14 @@ export type RootStackParamList = {
   Changememoji: undefined;
   Cardtopup: undefined;
   Cardwithdraw: undefined;
+  Feathertransfer: undefined;
+  Banktransfer: undefined;
+  Paymerchant: undefined;
+  Billsandutility: undefined;
+  Walletlimits: undefined;
+  Shareandearn: undefined;
+Securityandprivacy: undefined;
+Verifybvncode: undefined;
 
 
   //Notification

@@ -17,3 +17,6 @@ const Mainwrapper = ({ children, bgColor="#F7F8FA" }: {children: any, bgColor?: 
 export default Mainwrapper;
 
 const styles = StyleSheet.create({});
+
+
+

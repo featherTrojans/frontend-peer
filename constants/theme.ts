@@ -170,6 +170,9 @@ export const fontsize = {
   bmedium: {
     fontSize: RFValue(24),
   },
+  bymedium: {
+    fontsize: RFValue(25),
+  },
   bxmedium: {
     fontSize: RFValue(28),
   },

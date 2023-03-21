@@ -1,6 +1,3 @@
-
-
-
 /// Active Icons
 import Bell from "../assets/icons/Bell";
 import Historyicon from "../assets/icons/Historyicon";
@@ -31,8 +28,8 @@ import Utilitylarge from "../assets/icons/Utilitylarge";
 import Utilitypayment from "../assets/icons/Utilitypayment";
 import Bonusicon from "../assets/icons/Bonusicon";
 import Bonusiconlarge from "../assets/icons/Bonusiconlarge";
-import Fingerprinticon from "../assets/icons/Fingerprinticon"
-import Bluefingerprinticon from "../assets/icons/Bluefingerprinticon"
+import Fingerprinticon from "../assets/icons/Fingerprinticon";
+import Bluefingerprinticon from "../assets/icons/Bluefingerprinticon";
 import Backarrow from "../assets/icons/Backarrow";
 
 import Hometabicon from "../assets/icons/Tabicons/Hometabicon";
@@ -42,27 +39,22 @@ import Chatstabicon from "../assets/icons/Tabicons/Chatstabicon";
 import Profiletabicon from "../assets/icons/Tabicons/Profiletabicon";
 import Addchatsicon from "../assets/icons/Addchatsicon";
 
-
 ///Animated icons
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
-import Sentconfetti from "../assets/Lottie/animations/sendConfetti.json"
+import Sentconfetti from "../assets/Lottie/animations/sendConfetti.json";
 import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.json";
 import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json";
 import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.json";
-import Verifiedbvnanimate from "../assets/Lottie/animations/verifybvn.json"
+import Verifiedbvnanimate from "../assets/Lottie/animations/verifybvn.json";
 
-
-
-import Transacntionpinanimate from "../assets/Lottie/animations/waitingForPIN.json"
+import Transacntionpinanimate from "../assets/Lottie/animations/waitingForPIN.json";
 import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json";
-import Trackinguseranimate from "../assets/Lottie/animations/featherOnboardingOne.json"
+import Trackinguseranimate from "../assets/Lottie/animations/featherOnboardingOne.json";
 import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json";
 import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json";
 import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json";
-import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json"
+import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json";
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
-
-
 
 import Carddetailsicon from "../assets/icons/Cardactionicons/Carddetailsicon";
 import Cardfreezeicon from "../assets/icons/Cardactionicons/Cardfreezeicon";
@@ -88,17 +80,11 @@ import Phoneicon from "../assets/icons/Withdrawlicons/Phoneicon";
 import Searchmerchanticon from "../assets/icons/Withdrawlicons/Searchmerchanticon";
 import Summaryicon from "../assets/icons/Withdrawlicons/Summaryicon";
 import Withdrawchaticon from "../assets/icons/Withdrawlicons/Withdrawchaticon";
-
-
-
-
-
-
-
-
-
-
-
+import Bankblueicon from "../assets/icons/Bankblueicon";
+import Walletblueicon from "../assets/icons/Walletblueicon";
+import Bluecardicon from "../assets/icons/Cardactionicons/Bluecardicon";
+import Usdcardicon from "../assets/icons/Cardactionicons/Usdcardicon";
+import Detailcopyicon from "../assets/icons/Cardactionicons/Detailcopyicon";
 
 export default {
   Logo,
@@ -147,24 +133,27 @@ export default {
   Vcardicon,
   Blacksendicon,
   Profilerighticon,
-Profilemanageicon,
-Securityprivicon,
-Shareandearnicon,
-Supporticon,
-Mywalleticon,
-Abouticon,
-Accountcopyicon,
-Greaterthanicon,
-Addressediticon,
-Cancelwithdrawicon,
-Merchanticon,
-Paymerchanticon,
-Phoneicon,
-Searchmerchanticon,
-Summaryicon,
-Withdrawchaticon,
-
-
+  Profilemanageicon,
+  Securityprivicon,
+  Shareandearnicon,
+  Supporticon,
+  Mywalleticon,
+  Abouticon,
+  Accountcopyicon,
+  Greaterthanicon,
+  Addressediticon,
+  Cancelwithdrawicon,
+  Merchanticon,
+  Paymerchanticon,
+  Phoneicon,
+  Searchmerchanticon,
+  Summaryicon,
+  Withdrawchaticon,
+  Bankblueicon,
+  Walletblueicon,
+  Bluecardicon,
+  Usdcardicon,
+  Detailcopyicon,
 
   //Animated icons
 
@@ -181,5 +170,5 @@ Withdrawchaticon,
   Sentconfetti,
   Transacntionpinanimate,
   Verifiedbvnanimate,
-  Trackinguseranimate
+  Trackinguseranimate,
 };

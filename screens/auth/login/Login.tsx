@@ -218,14 +218,6 @@ const Login = ({ navigation }: any) => {
                       Use Biometrics
                     </Text>
 
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate("Forgetpassword")}
-                      activeOpacity={0.8}
-                    >
-                      <Text style={styles.forgetPassword}>
-                        Forgot Password?
-                      </Text>
-                    </TouchableOpacity>
                   </View>
 
                   <Custombutton btntext="Sign in" onpress={handleSubmit} />
@@ -236,12 +228,6 @@ const Login = ({ navigation }: any) => {
 
           <View style={styles.haveanaccount}>
             <Text style={styles.haveaccounttext}>Don’t have an account? </Text>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => navigation.navigate("Personal")}
-            >
-              <Text style={styles.registerText}>Signup</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAwareScrollView>
