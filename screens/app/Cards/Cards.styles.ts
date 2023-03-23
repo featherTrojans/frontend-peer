@@ -103,21 +103,31 @@ export const cardstyles = StyleSheet.create({
     color: COLORS.blue9,
   },
 
-
   //Card locked modal
-  cardLockHeader:{
-    textAlign: 'center', ...fontsize.small, ...FONTS.bold, color: COLORS.blue9
+  cardLockHeader: {
+    textAlign: "center",
+    ...fontsize.small,
+    ...FONTS.bold,
+    color: COLORS.blue9,
   },
-  cardLockSvg:{
-    width: 300, height: 162, backgroundColor: COLORS.grey1, alignSelf: "center", marginBottom: 60, marginTop: 50
+  cardLockSvg: {
+    width: 300,
+    height: 162,
+    backgroundColor: COLORS.grey1,
+    alignSelf: "center",
+    marginBottom: 60,
+    marginTop: 50,
   },
-  cardLockConfirmtext:{
-    ...fontsize.smaller, ...FONTS.regular, textAlign: 'center', marginBottom: 20
+  cardLockConfirmtext: {
+    ...fontsize.smaller,
+    ...FONTS.regular,
+    textAlign: "center",
+    marginBottom: 20,
   },
-  cardLockConfirmSubtext:{
-    ...fontsize.smaller, ...FONTS.regular, textAlign: "center", lineHeight: 20
-  } 
-
-
-
+  cardLockConfirmSubtext: {
+    ...fontsize.smaller,
+    ...FONTS.regular,
+    textAlign: "center",
+    lineHeight: 20,
+  },
 });

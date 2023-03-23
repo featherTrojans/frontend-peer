@@ -33,7 +33,6 @@ const Personalinfo = ({navigation}) => {
         <Text style={profilestyles.personalModalText}>Edit fullname</Text>
           <Horizontaline marginV={20}/>
         <Text style={profilestyles.personalModalText}>Change @ Feather tag</Text>
-        {/* <Text></Text> */}
       </View>
     </CustomModal>
 
