@@ -52,7 +52,7 @@ const Input = ({
 
   const borderColor =
     errors[name] && touched[name]
-      ? COLORS.errorBorder
+      ? COLORS.inputBorderColorDark
       : COLORS.inputBorderColorDark;
 
   return (

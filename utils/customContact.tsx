@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axiosCustom from '../httpRequests/axiosCustom';
 
 const useContact = () =>{
-    const [contacts, setContacts] = useState([])
+    const [contacts, setContacts] = useState<any[]>([])
     const [contactsResolved, setContactResolved] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -21,9 +21,9 @@ const useContact = () =>{
     // console.log(contacts)
 
     useEffect(() => {
-      const allcontacts = [];
+      const allcontacts: string[] = [];
       contacts.forEach((contact) => {
-        const numbersArr = [];
+        const numbersArr: string[] = [];
         contact?.phoneNumbers?.forEach((phone) => {
           const number = phone.number.replace(/\s+/g, "");
           if (!numbersArr.includes(number)) {

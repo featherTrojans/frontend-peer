@@ -13,7 +13,6 @@ function Customstatusbar() {
     <StatusBar
       animated={true}
       backgroundColor="#F7F8FA"
-      // backgroundColor={COLORS.blue6}
       barStyle="dark-content"
       networkActivityIndicatorVisible={true}
       showHideTransition="fade"

@@ -1,4 +1,12 @@
-export const doesIncludeActiveStates = (locationObj:object)=>{
+
+interface IlocationObj{
+  region: string,
+  subregion: string,
+  city: string
+}
+
+
+export const doesIncludeActiveStates = (locationObj:IlocationObj)=>{
   return true
   // {
   //   "city": "Lagos",

@@ -32,9 +32,9 @@ import Customstatusbar from "../../shared/Customstatusbar";
 import DoubleTapToClose from "../../shared/DoubleBack";
 
 import formatData from "../../../utils/fomatTrans";
-import { nameToShow } from "../../../utils/nameToShow";
 import { getPeriod } from "../../../utils/getDayPeriod";
 import useAlert from "../../../utils/useAlerts";
+import { nameToShow } from "../../../utils/nameSplitter";
 
 const {
   Bell,
@@ -277,14 +277,17 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
             transactions yet. Transact Now"
             />
           ) : (
-            histories.map((history: { time: string; data: any }, index) => (
-              <Transactionhistory
+            histories.map((history, index) => {
+              const {data, time} = history
+              return (
+                <Transactionhistory
                 index={index}
-                date={history.time}
-                datas={history.data}
-                key={history.time}
-              />
-            ))
+                date={time}
+                datas={data}
+                key={time}
+              /> 
+              )
+            })
           )}
         </View>
         <DoubleTapToClose />
@@ -294,3 +297,10 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
 };
 
 export default Home;
+
+
+{/* <Transactionhistory
+    index={index}
+    date={historytime}
+    datas={data}
+    key={time} */}

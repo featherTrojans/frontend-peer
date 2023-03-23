@@ -27,7 +27,7 @@ import {
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getPeriod } from "../../../utils/getDayPeriod";
-import { nameToShow } from "../../../utils/nameToShow";
+import { nameToShow } from "../../../utils/nameSplitter";
 
 
 const { Winkinganimate } = icons;

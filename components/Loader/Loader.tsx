@@ -1,7 +1,6 @@
 import { ProgressViewIOSBase, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import Modal from "react-native-modal";
-import { styles } from "./Loader.styles";
 import { COLORS, icons } from "../../constants";
 
 import Animated, {
@@ -46,8 +45,6 @@ const Loader = () => {
     style={{margin: 0}}
     animationIn="fadeIn"
     animationOut="fadeOut"
-    // onBackdropPress={() => setShowState(!showState)}
-    // onBackButtonPress={() => setShowState(!showState)}
     >
     <View style={styles.container}>
       <Animated.View style={[styles.logoBg, bubblingCircle, {position: 'absolute'}]} />
@@ -61,3 +58,28 @@ const Loader = () => {
 };
 
 export default Loader;
+
+
+const styles = StyleSheet.create({
+
+  container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: "absolute",
+      top:0,
+      bottom:0,
+      right:0,
+      left:0,
+      zIndex:120,
+  },
+  logoBg: {
+      width: 80,
+      height: 80,
+      borderRadius: 40,
+      backgroundColor: COLORS.blue6,
+      justifyContent: "center",
+      alignItems: "center",
+    }
+
+})

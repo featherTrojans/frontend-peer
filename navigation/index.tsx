@@ -1,15 +1,12 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import * as Notification from "expo-notifications";
-import { View, Animated, AppState } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { AppState } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { navigationRef } from "../utils/customNavigation";
-import { COLORS, icons, SIZES } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
 
-import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 import { usePushNotification } from "../hooks/usePushNotifications";
@@ -18,12 +15,7 @@ const AppStack = createStackNavigator<RootStackParamList>();
 
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
 
-import {
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-  RootAuthStackParamList,
-} from "../types";
+import { RootStackParamList, RootAuthStackParamList } from "../types";
 
 import {
   Onboarding,
@@ -83,16 +75,12 @@ const RootNavigator = ({ initialBoarded }) => {
   return (
     <AppStack.Navigator
       screenOptions={{ headerShown: false }}
-      // initialRouteName="DepositSummary"
       initialRouteName={false ? "Getstarted" : "Onboarding"}
     >
-      {/* <AppStack.Screen name="map" component={Map} /> */}
-      {/* SCREEN FOR AUTH */}
       {!token ? (
         <AppStack.Group>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Getstarted" component={Getstarted} />
-
           <AppStack.Screen name="Login" component={Login} />
           <AppStack.Screen name="Welcome" component={Welcome} />
         </AppStack.Group>

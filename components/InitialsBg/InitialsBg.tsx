@@ -2,9 +2,6 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { COLORS, FONTS, fontsize } from "../../constants";
 import { nameSplitter } from "../../utils/nameSplitter";
-import { styles } from "./InitialsBg.styles";
-import { RFValue } from "react-native-responsive-fontsize";
-// import UserAvatar from "@muhzi/react-native-user-avatar";
 
 interface InitialsBgProps {
   sideLength: number;
@@ -29,17 +26,12 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
 
   return (
     <View
-      style={{
+      style={[styles.initialTextBg,{
         width:  sideLength,
         height: sideLength,
-        justifyContent: "center",
-        alignItems: "center",
         backgroundColor: defaultColor,
-        borderTopRightRadius: 17, 
-        borderBottomLeftRadius: 17,
-        borderBottomRightRadius: 17,
-        borderTopLeftRadius: 10,
-      }}
+        
+      }]}
     >
       <Text style={styles.initialText}>{nameSplitter(name).toUpperCase()}</Text>
     </View> 
@@ -48,4 +40,19 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
 
 export default InitialsBg;
 
+
+const styles = StyleSheet.create({
+  initialTextBg:{
+    justifyContent: "center",
+        alignItems: "center",
+        borderTopRightRadius: 17, 
+        borderBottomLeftRadius: 17,
+        borderBottomRightRadius: 17,
+        borderTopLeftRadius: 10,
+  },
+  initialText: {
+      ...fontsize.smallest, 
+      ...FONTS.medium
+  }
+})
 

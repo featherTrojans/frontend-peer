@@ -1,8 +1,11 @@
 import { View, Text, ActivityIndicator,StyleSheet } from 'react-native'
 import React from 'react'
-import WrongIcon from '../../assets/icons/WrongIcon'
-import Check from '../../assets/icons/Check'
-import { COLORS } from '../../constants'
+
+import { COLORS, icons } from '../../constants'
+
+
+// const {Wrong, Check} = icons
+const { Transfericon } = icons
 
 const DebounceLoading = ({loadbounce, userinfo, username, error}) => {
   return (
@@ -11,13 +14,13 @@ const DebounceLoading = ({loadbounce, userinfo, username, error}) => {
         <ActivityIndicator size={15} color={COLORS.blue6} />
         ) : userinfo?.fullName ? (
         <>
-            <Check />
+            <Transfericon />
             <Text style={styles.name}>{userinfo?.fullName}</Text>
         </>
         ) : null}
         {error && (
         <>
-            <WrongIcon />
+            <Transfericon />
             <Text style={styles.name}>{username} does not exist</Text>
         </>
         )}

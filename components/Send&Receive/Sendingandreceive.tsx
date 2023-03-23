@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { COLORS, FONTS, fontsize, icons, images } from "../../constants";
-import { styles } from "./Sendingandreceive.styles";
 import InitialsBg from "../InitialsBg/InitialsBg";
 import { assetsDB, bankLogo } from "../../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -12,6 +11,17 @@ const {
   Utilitylarge,
   Logoavatar,
 } = icons;
+
+interface SendingandreceiveProps {
+  senderName?: String;
+  receiverName?: String;
+  title?: String;
+  value?: String | null;
+  user?: any;
+  otherUser?: any;
+  transId?: String
+};
+
 
 
 
@@ -33,14 +43,12 @@ const InitialsBgColor = ({name}) => {
 }
 
 const showImage = (
-  senderName: string,
-  receiverName: string,
+  senderName: String,
+  receiverName: String,
   title: string | null,
-  value?: string,
+  value?: String,
   otherUser?: any,
-  transId?: string
-) => {
-  // console.log(transId, "Heer is the iud");
+  transId?: String) => {
 
   const isVFD = transId?.includes("Feather", 0)
   
@@ -65,7 +73,6 @@ const showImage = (
         break;
     case "Wallet Debit":
       return (        
-          // <InitialsBg name={receiverName} sideLength={50} />
           <InitialsBgColor name={receiverName}/>
         
       ) 
@@ -79,7 +86,6 @@ const showImage = (
       else{
         return(
           <InitialsBgColor name={senderName}/>
-          // <InitialsBg name={senderName} sideLength={50} />
         )
       }
       break;
@@ -160,7 +166,7 @@ const showImage = (
         break;
 
     case "Airtime Purchase":
-      const networkType = value?.toUpperCase();
+      const networkType = value?.toUpperCase() || "MTN";
       const isEtisalat = networkType === "9MOBILE"
       return (
         <View style={[styles.typeContainer, {backgroundColor: "transparent"}]}>
@@ -185,15 +191,7 @@ const showImage = (
   }
 };
 
-type SendingandreceiveProps = {
-  senderName?: string;
-  receiverName?: string;
-  title?: string;
-  value?: string | null;
-  user?: any;
-  otherUser?: any;
-  transId?: string
-};
+
 
 const Sendingandreceive = ({
   senderName,
@@ -240,3 +238,32 @@ const Sendingandreceive = ({
 };
 
 export default Sendingandreceive;
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  arrowContainer: {
+    marginHorizontal: RFValue(30),
+  },
+  badgeImage: {
+    position: "absolute",
+    left: -10,
+  },
+  ///Show Images styles
+  typeContainer: {
+    width: 50,
+    height: 50,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50 / 2,
+  },
+  imageStyle: {
+    width: "50%",
+    height: "50%",
+  },
+});

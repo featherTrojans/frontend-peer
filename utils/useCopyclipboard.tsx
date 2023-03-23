@@ -16,13 +16,7 @@ const useCopyclipboard = (alertText: string) => {
     Clipboard.setString(copiedTest);
   };
 
-  const subscription = Clipboard.addClipboardListener(
-    ({ content }: ClipboardEvent) => {
-    //   setCopied(true);
-      successAlert(alertText, true)
-    }
-  );
-  // Clipboard.removeClipboardListener(subscription);
+ 
 
   return {
     copyToClipboard

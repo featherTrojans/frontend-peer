@@ -15,9 +15,9 @@ const tofancyDate = (date:Date) => {
 const formatData = (data:any)=>{
   if(data === undefined) return []
   if(data.length < 1) return []
-  const finaldata = [];
+  const finaldata: {}[] = [];
   let currentdate = tofancyDate(data[0].createdAt);
-  let changingarr = []
+  let changingarr: string[] = []
   for(let dataitem of data){
     if(tofancyDate(dataitem.createdAt) === currentdate){
       changingarr.push(dataitem);

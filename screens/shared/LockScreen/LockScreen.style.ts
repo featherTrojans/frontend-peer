@@ -6,7 +6,16 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.blue6,
     paddingTop: RFValue(25),
-  
+  },
+  lockScreenContainer: {
+    flex: 1,
+    paddingBottom: 20,
+    backgroundColor: COLORS.white3,
+  },
+  lockScreenSubcontainer: {
+    paddingHorizontal: 15,
+    flex: 1,
+    paddingTop: 30,
   },
   header: {
     ...fontsize.big,
@@ -51,10 +60,16 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  pinViewWrap: {
+    width: RFValue(160),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignSelf: "center",
+  },
   pinView: {
-    width: RFValue(12), 
+    width: RFValue(12),
     height: RFValue(12),
-    borderRadius: RFValue(12/2),
+    borderRadius: RFValue(12 / 2),
     borderColor: COLORS.blue7,
   },
   pinText: {
@@ -98,5 +113,31 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     color: COLORS.blue9,
     textTransform: "capitalize",
+    marginTop: 36,
+  },
+  headerNameText: {
+    ...FONTS.bold,
+    color: COLORS.blue6,
+  },
+  subHeaderText: {
+    marginTop: 10,
+    ...fontsize.smaller,
+    ...FONTS.regular,
+    color: COLORS.grey2,
+    lineHeight: 20,
+  },
+  numberOfTrials: {
+    ...fontsize.small,
+    ...FONTS.medium,
+    color: COLORS.grey16,
+    alignSelf: "center",
+  },
+  enterPinText: {
+    textAlign: "center",
+    ...fontsize.smaller,
+    ...FONTS.regular,
+    color: COLORS.blue9,
+    marginTop: 40,
+    marginBottom: 60,
   },
 });

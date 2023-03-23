@@ -1,32 +1,19 @@
 //  i will export all screens inside here
 
 import Onboarding from "./onboarding/Onboarding";
-
-// These are the auth screens
 import Login from "./auth/login/Login";
-
 import Welcome from "./auth/welcome/Welcome";
-
-// These are the main app screens
 import Home from "./app/Home/Home";
 import Getstarted from "./app/Getstarted/Getstarted";
 import Transactions from "./app/Transactions/Transaction/Transaction";
 import Transactiondetails from "./app/Transactions/Transactiondetails/Transactiondetails";
-
 import Notifications from "./app/Notifications/Notifications";
-// These are the transactions sub screens
-
-
 import Usersearch from "./app/Chats/Usersearch/Usersearch";
 import Chatsdm from "./app/Chats/Chatsdm/Chatsdm";
 import Chatshome from "./app/Chats/Chatshome/Chatshome";
-
-//This screen is for testing somne functionalities
-
 import Testings from "./Testings";
 import CustomWebView from "./shared/CustomWebView";
 import LockScreen from "./shared/LockScreen/LockScreen";
-import RequesterinfoScreen from "./shared/RequesterinfoScreen";
 import Profile from "./app/Profile/Profile";
 import Cards from "./app/Cards/Cards";
 import Withdrawlisting from "./app/Withdrawal/Withdrawlisting";
@@ -68,7 +55,6 @@ export {
   CustomWebView,
   LockScreen,
   Transactiondetails,
-  RequesterinfoScreen,
   Accountlevel,
   Verifyemail,
   Verifyemailcode,

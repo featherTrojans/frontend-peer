@@ -1,14 +1,11 @@
 import {
-  StyleSheet,
   Text,
   View,
-  StatusBar,
   ScrollView,
   Platform,
   TouchableOpacity,
-  Image,
 } from "react-native";
-import React, { useCallback, useEffect, useState } from "react";
+import React, {useState } from "react";
 import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
@@ -17,15 +14,9 @@ import { styles } from "./Transactiondetails.styles";
 import { assetsDB, bankLogo } from "../../../../assetdatas";
 import { Backheader, Horizontaline, Mainwrapper,Sendingandreceive,
 } from "../../../../components";
-import { FONTS, fontsize, COLORS, icons } from "../../../../constants";
-import { NavigationContainer } from "@react-navigation/native";
+import {  COLORS, icons } from "../../../../constants";
 import amountFormatter from "../../../../utils/formatMoney";
-import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import Customstatusbar from "../../../shared/Customstatusbar";
-import { AuthContext } from "../../../../context/AuthContext";
-import { SafeAreaView } from "react-native-safe-area-context";
-import useCustomModal from "../../../../utils/useCustomModal";
-import { sendEmail } from "../../../../utils/emailSender";
+
 import useAlert from "../../../../utils/useAlerts";
 import useCopyclipboard from "../../../../utils/useCopyclipboard";
 import { nameSplitToTwo } from "../../../../utils/nameSplitter";
@@ -83,7 +74,7 @@ const Transactiondetails = ({ navigation, route }) => {
     const albumName = "Feather";
     const permission = await MediaLibrary.requestPermissionsAsync();
 
-    let asset = null;
+    let asset;
     if (permission.granted) {
       try {
         asset = await MediaLibrary.createAssetAsync(filePath);
@@ -161,7 +152,7 @@ const Transactiondetails = ({ navigation, route }) => {
         break;
       // assetsDB["bills"][sender]
       case "Airtime Purchase":
-        const networkType = sender?.toUpperCase();
+        const networkType = sender?.toUpperCase() || "MTN";
         return `
           <div style="min-width: 62px; min-height: 62px; border-radius: 32px;  display: flex; justify-content: center; align-items: center;">
             <img src="${assetsDB["bills"][networkType]}" style="width: 50px; height: 50px" />

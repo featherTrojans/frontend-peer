@@ -1,3 +1,4 @@
+import React from "react";
 import { useCallback, useContext, useRef } from "react";
 import WebView from "react-native-webview";
 import { AuthContext } from "../../context/AuthContext";
@@ -5,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 const CustomWebView = ({ navigation, route }) => {
   const { authdata, messageToken } = useContext(AuthContext);
 
-  const webviewRef = useRef(null);
+  const webviewRef = useRef<WebView>(null);
   const { url, reference, amount } = route.params;
   const callback_url = `https://featherwebview.com/?trxref=${reference}&reference=${reference}`;
   const onNavigationStateChange = (state: any) => {
@@ -13,14 +14,6 @@ const CustomWebView = ({ navigation, route }) => {
     const { url } = state;
     if (!url) return;
     if (url === callback_url) { 
-      
-        // sendPushNotification(
-        //   messageToken,
-        //   "Wallet Funding",
-        //   `Congrats🎉, You just funded your wallet with N${amount}`,
-        //   "Root"
-        // );
-   
 
       webviewRef.current?.stopLoading();
       navigation.navigate("Home");

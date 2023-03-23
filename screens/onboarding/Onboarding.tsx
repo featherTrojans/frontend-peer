@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
-import { FlatList, Animated, StatusBar, View, Text, TouchableOpacity } from "react-native";
+import { FlatList, Animated, View, Text, TouchableOpacity } from "react-native";
 import { OnboardingScreenNavigationProps } from "../../types";
 import { COLORS, FONTS, fontsize, SIZES } from "../../constants";
 import onboardingdatas from "../../onboardingdatas";
 import EachOnboarding from "./EachOnboarding";
-
 import Customstatusbar from "../shared/Customstatusbar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RFValue } from "react-native-responsive-fontsize";
-import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper'
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from "react-native-iphone-x-helper";
+import { onboardingstyles } from "./Onboarding.styles";
 
 const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
@@ -37,8 +39,6 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     }
   };
 
-
-
   const navigateToLogin = () => {
     storeData();
     navigation.replace("Getstarted");
@@ -53,55 +53,49 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
         animated: true,
       });
     } else {
-      navigateToLogin()
+      navigateToLogin();
     }
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.white}}>
+    <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       <Customstatusbar />
 
+      {/* Animated Dots */}
+      <View style={onboardingstyles.animatedDotsWrap}>
+        {onboardingdatas.map((item, index) => {
+          const dotPosition = Animated.divide(scrollX, SIZES.width);
 
-       {/* Animated Dots */}
-       <View style={{flexDirection: "row", justifyContent: "center", marginTop: getStatusBarHeight(true)+50,}}>
-          {onboardingdatas.map((item, index) => {
-            const dotPosition = Animated.divide(scrollX, SIZES.width);
-
-            const dotColor = dotPosition.interpolate({
-              inputRange: [index - 1, index, index + 1],
-              outputRange: [COLORS.grey3, COLORS.black, COLORS.grey3],
-              extrapolate: "clamp",
-            });
-            const dotOpacity = dotPosition.interpolate({
-              inputRange: [index - 1, index, index + 1],
-              outputRange: [0.2, 1, 0.2],
-              extrapolate: "clamp",
-            });
-            const dotWidth = dotPosition.interpolate({
-              inputRange: [index - 1, index, index + 1],
-              outputRange: [8, 20, 8],
-              extrapolate: "clamp",
-            });
-            return (
-              <Animated.View
-                key={index}
-                style={{
-                  marginBottom: 10,
-                  height: 8,
-                  borderRadius: 8/2,
-                  marginRight: 10,
+          const dotColor = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [COLORS.grey3, COLORS.black, COLORS.grey3],
+            extrapolate: "clamp",
+          });
+          const dotOpacity = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [0.2, 1, 0.2],
+            extrapolate: "clamp",
+          });
+          const dotWidth = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [8, 20, 8],
+            extrapolate: "clamp",
+          });
+          return (
+            <Animated.View
+              key={index}
+              style={[
+                onboardingstyles.animatedDots,
+                {
                   backgroundColor: dotColor,
                   opacity: dotOpacity,
                   width: dotWidth,
-                }}
-              />
-            );
-          })}
-        </View>
-
-{/* <View style={{backgroundColor: COLORS.red1, height: 200, width: 200}}/> */}
-
-     
+                },
+              ]}
+            />
+          );
+        })}
+      </View>
 
       <FlatList
         ref={flatListRef}
@@ -122,29 +116,28 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
       />
 
       {/* Footer--Dots and the nxet button */}
-      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 32, marginBottom: getBottomSpace()+20}}>
-        
-       
-
-
-
-
-        <View style={{ flex: 1, minHeight: 60,  alignItems: "center", justifyContent: "center",}}>
+      <View style={onboardingstyles.onboardingFooterWrap}>
+        <View style={onboardingstyles.onboardingFooterSubWrap}>
           {viewIndex < onboardingdatas.length - 1 ? (
-            <TouchableOpacity onPress={scrollTo} activeOpacity={0.8} style={{backgroundColor: COLORS.black, justifyContent: "center", alignSelf: "center", borderRadius: 16}}>
-              <Text style={{color: COLORS.white, paddingVertical: 10, paddingHorizontal: 21, ...fontsize.smallest, ...FONTS.bold }}>SKIP</Text>
-              </TouchableOpacity>
+            <TouchableOpacity
+              onPress={scrollTo}
+              activeOpacity={0.8}
+              style={onboardingstyles.skipBg}
+            >
+              <Text style={onboardingstyles.skipText}>SKIP</Text>
+            </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={scrollTo} activeOpacity={0.8} style={{paddingHorizontal: 41, paddingVertical: 21, backgroundColor: COLORS.black, borderRadius: 10, alignSelf: "stretch"}}>
-              <Text style={{color: COLORS.white, textAlign: "center", textTransform: "uppercase", ...fontsize.smallest, ...FONTS.bold}}>Join the flock - Register</Text>
+            <TouchableOpacity
+              onPress={scrollTo}
+              activeOpacity={0.8}
+              style={onboardingstyles.registerWrap}
+            >
+              <Text style={onboardingstyles.registerText}>
+                Join the flock - Register
+              </Text>
             </TouchableOpacity>
           )}
         </View>
-
-
-
-
-
       </View>
     </View>
   );
