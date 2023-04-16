@@ -29,7 +29,7 @@ const Airtimeprovider = ({ navigation, route }) => {
   console.log(billType, amount, "here are the datas");
 
   const Eachoption = ({ image, type, network }) => {
-    const { CustomModal, openModal } = useCustomModal();
+    const { CustomModal, openModal, closeModal } = useCustomModal();
 
     const [phone, setPhone] = useState<null | number>(null);
 
@@ -79,6 +79,7 @@ const Airtimeprovider = ({ navigation, route }) => {
                 phone: "",
               }}
               onSubmit={(values) => {
+                closeModal()
                 navigation.navigate("Airtimepurchasepin", {
                   type: billType,
                   data: {

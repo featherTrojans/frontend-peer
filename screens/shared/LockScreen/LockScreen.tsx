@@ -72,7 +72,7 @@ const LockScreen = ({ modal, setModal }: any) => {
       coverScreen={true}
       backdropColor={COLORS.white3}
       backdropOpacity={1}
-      style={{ margin: 0, flex: 1 }}
+      style={{ margin: 0, flex: 1, paddingHorizontal: 15 }}
       deviceHeight={SIZES.height}
       deviceWidth={SIZES.width}
       animationOut="fadeOut"
