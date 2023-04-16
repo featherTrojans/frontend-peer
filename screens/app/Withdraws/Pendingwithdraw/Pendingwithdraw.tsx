@@ -29,7 +29,7 @@ const { Forwardarrow, Meetupdot, Renegotiateicon, Chaticon, Dropswitch } = icons
 const { Locationmap } = images;
 
 const Pendingwithdraw = ({navigation, route}) => {
-  const {setCoords, setDestinationCoords} = useContext(LocationContext)
+  const {coords, setCoords, setDestinationCoords} = useContext(LocationContext)
   const {requestInfo} = route.params;
   const [toggleShow, setToggleShow] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
@@ -84,7 +84,7 @@ const Pendingwithdraw = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Customstatusbar />
-        <Map />
+        {!coords?.latitude ?null: <Map /> }
         <View style={styles.previewContainer}>
 
 

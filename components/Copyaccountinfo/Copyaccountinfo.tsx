@@ -6,24 +6,19 @@ import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import Horizontaline from "../Horizontaline/Horizontaline";
 import useCopyclipboard from "../../utils/useCopyclipboard";
 
+const { Purplehouseicon } = icons;
 
-
-const {Purplehouseicon} =icons
-
-const Copyaccountinfo = ({accName, accNumber}) => {
-
-
-  const {copyToClipboard} = useCopyclipboard("Account number copied successfully!")
-
-
-
+const Copyaccountinfo = ({ accName, accNumber }) => {
+  const { copyToClipboard } = useCopyclipboard(
+    "Account number copied successfully!"
+  );
 
   const shareAccountDetails = async () => {
     const result = await Share.share(
       {
         title: "Feather Account Details",
-        message: `${"Bank Name: VFD Microfiance Bank "} \n ${`Account Name: Feather / ${accName}` } \n ${`Account Number: ${accNumber}`}`,
-        url: `${"Bank Name: VFD Microfiance Bank "} \n ${`Account Name: Feather / ${accName}` } \n ${`Account Number: ${accNumber}`}`,
+        message: `${"Bank Name: VFD Microfinance Bank "} \n ${`Account Name: Feather / ${accName}`} \n ${`Account Number: ${accNumber}`}`,
+        url: `${"Bank Name: VFD Microfinance Bank "} \n ${`Account Name: Feather / ${accName}`} \n ${`Account Number: ${accNumber}`}`,
       },
       {
         dialogTitle: "Feather Account Details",
@@ -32,45 +27,117 @@ const Copyaccountinfo = ({accName, accNumber}) => {
     );
   };
 
-
-
-
-
   return (
     <View>
-
-    <View style={{justifyContent: "center", alignItems: "center"}}>
-        <View style={{backgroundColor: COLORS.purple3, padding: 15, borderRadius: 30}}>
-            <Purplehouseicon />
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <View
+          style={{
+            backgroundColor: COLORS.purple3,
+            padding: 15,
+            borderRadius: 30,
+          }}
+        >
+          <Purplehouseicon />
         </View>
-    </View>
-      
+      </View>
 
-
-      <View style={{paddingHorizontal: 40, marginTop: 32, marginBottom: 44}}>
-        <Text style={{textAlign: "center", ...fontsize.bbsmall,...FONTS.regular, marginTop: 32, marginBottom: 22}}>Copy, Share & Get Paid</Text>
-        <Text style={{textAlign: "center", ...fontsize.smaller, lineHeight: 20, color: COLORS.grey2, ...FONTS.regular,}}>
+      <View style={{ paddingHorizontal: 40, marginTop: 32, marginBottom: 44 }}>
+        <Text
+          style={{
+            textAlign: "center",
+            ...fontsize.bbsmall,
+            ...FONTS.regular,
+            marginTop: 32,
+            marginBottom: 22,
+          }}
+        >
+          Copy, Share & Get Paid
+        </Text>
+        <Text
+          style={{
+            textAlign: "center",
+            ...fontsize.smaller,
+            lineHeight: 20,
+            color: COLORS.grey2,
+            ...FONTS.regular,
+          }}
+        >
           Money sent to this account number, will be directly funded into your
           feather primary wallet
         </Text>
-        
       </View>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => copyToClipboard(accNumber)} style={{marginBottom: 52}}>
-            <Text style={{textAlign: "center", ...fontsize.big, ...FONTS.bold, color: COLORS.blue9, marginBottom: 12}}>{accNumber}</Text>
-            <Text style={{textAlign: "center", ...fontsize.smallest, color: COLORS.grey16, ...FONTS.regular}}>Tap to copy account number</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => copyToClipboard(accNumber)}
+        style={{ marginBottom: 52 }}
+      >
+        <Text
+          style={{
+            textAlign: "center",
+            ...fontsize.big,
+            ...FONTS.bold,
+            color: COLORS.blue9,
+            marginBottom: 12,
+          }}
+        >
+          {accNumber}
+        </Text>
+        <Text
+          style={{
+            textAlign: "center",
+            ...fontsize.smallest,
+            color: COLORS.grey16,
+            ...FONTS.regular,
+          }}
+        >
+          Tap to copy account number
+        </Text>
+      </TouchableOpacity>
 
-        <View style={{marginBottom: 40}}>
-        <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
-            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2}}>Bank Name</Text>
-            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>VFD Microfiance Bank</Text>
+      <View style={{ marginBottom: 40 }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text
+            style={{
+              ...fontsize.smallest,
+              ...FONTS.regular,
+              color: COLORS.grey2,
+            }}
+          >
+            Bank Name
+          </Text>
+          <Text
+            style={{
+              ...fontsize.smaller,
+              ...FONTS.medium,
+              color: COLORS.blue9,
+            }}
+          >
+            VFD Microfiance Bank
+          </Text>
         </View>
-            <Horizontaline marginV={18}/>
-        <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
-            <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2}}>Account Name</Text>
-            <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9, textTransform: "capitalize"}}>Feather / {accName}</Text>
+        <Horizontaline marginV={18} />
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text
+            style={{
+              ...fontsize.smallest,
+              ...FONTS.regular,
+              color: COLORS.grey2,
+            }}
+          >
+            Account Name
+          </Text>
+          <Text
+            style={{
+              ...fontsize.smaller,
+              ...FONTS.medium,
+              color: COLORS.blue9,
+              textTransform: "capitalize",
+            }}
+          >
+            Feather / {accName}
+          </Text>
         </View>
-        </View>
+      </View>
 
       <Custombutton
         btntext="Sure, Share Details"

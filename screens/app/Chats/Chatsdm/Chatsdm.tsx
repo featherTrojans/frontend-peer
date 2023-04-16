@@ -112,15 +112,18 @@ const Chatsdm = ({navigation,route}) => {
 
   const sendFireBaseMessage = async (action="message") =>{
     if(chattext === "" && action === "message") return 
+    if(fetchmessage) return
     let chatId = chatid;
     if(!chatid){
       // first create document
+      setFetchmessage(true)
      chatId = `${authId}-${userInfo?.userUid}`
       await setDoc(doc(db,"chatstwo",chatId),{
         id1: authId,
         id2: userInfo?.userUid
       })
       setchatid(chatId)
+      setFetchmessage(false)
     }
     let message = chattext;
     let createdAt =  Date.now();

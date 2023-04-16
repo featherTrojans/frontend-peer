@@ -1,55 +1,95 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Backheader, Mainwrapper, Custombutton, Transactionsummary, Transactionpin } from "../../../components";
+import {
+  Backheader,
+  Mainwrapper,
+  Custombutton,
+  Transactionsummarytwo,
+  Transactionpin,
+  Chooseamountmodal,
+} from "../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import useCustomModal from "../../../utils/useCustomModal";
 
 const { Newlogo } = icons;
 
 interface withdrawobj {
-  "fullName": string,
-  "username": string,
-  "amount":string,
-  "charges": string,
-  "createdAt": string,
-  "meetupPoint": string,
-  "negotiatedFee": string,
-  "phoneNumber": string,
-  "reference": string,
-  "status": string,
-  "total": string,
-  userUid:string
+  fullName: string;
+  username: string;
+  amount: string;
+  charges: string;
+  createdAt: string;
+  meetupPoint: string;
+  negotiatedFee: string;
+  phoneNumber: string;
+  reference: string;
+  status: string;
+  total: string;
+  userUid: string;
 }
 
-enum comingFromEnum { withdrawPending, withdrawAccepted, depositPending, depositAccepted}
+enum comingFromEnum {
+  withdrawPending,
+  withdrawAccepted,
+  depositPending,
+  depositAccepted,
+}
 
+const Safetycautions = ({ navigation, route }) => {
+  const info = route.params.info as withdrawobj;
+  const comingFrom = route.params.comingFrom as comingFromEnum;
+  const { CustomModal, closeModal, openModal } = useCustomModal();
+  const {
+    CustomModal: AmountModal,
+    closeModal: closeAmountModal,
+    openModal: openAmountModal,
+  } = useCustomModal();
+  const {
+    CustomModal: PinModal,
+    closeModal: pinCloseModal,
+    openModal: pinOpenModal,
+  } = useCustomModal();
 
-const Safetycautions = ({navigation, route}) => {
-  const info = route.params.info as withdrawobj
-  const comingFrom = route.params.comingFrom as comingFromEnum
-  const {CustomModal, closeModal, openModal} =useCustomModal()
-  const {CustomModal:PinModal, closeModal: pinCloseModal, openModal: pinOpenModal} =useCustomModal()
- 
-  const handleNext = ()=>{
-    closeModal()
-    if(comingFromEnum.withdrawAccepted === comingFrom) {
-      pinOpenModal()
-     }else{
-       navigation.navigate("WithdrawPin",info)
-     }
-  }
+  const handleNexttwo = (charge) => {
+    closeAmountModal();
+    navigation.navigate("WithdrawPin", { info: info, charge: charge });
+  };
+
+  const handleNext = () => {
+    closeModal();
+    if (comingFromEnum.withdrawAccepted === comingFrom) {
+      pinOpenModal();
+    } else {
+      openAmountModal();
+      // navigation.navigate("WithdrawPin", info);
+    }
+  };
 
   return (
     <Mainwrapper>
       <Backheader title="Safety Precautions" />
+      <AmountModal>
+        <Chooseamountmodal
+          headerText="Pls input the charge agreed between you and the merchant"
+          onpress={(amount) => {
+            handleNexttwo(amount);
+          }}
+        />
+      </AmountModal>
       <CustomModal>
-        <Transactionsummary info={info} openNextModal={handleNext} fromWithdraw={comingFromEnum.withdrawAccepted == comingFrom ? true : false} />
+        <Transactionsummarytwo
+          info={info}
+          openNextModal={handleNext}
+          fromWithdraw={
+            comingFromEnum.withdrawAccepted == comingFrom ? true : false
+          }
+        />
       </CustomModal>
       <PinModal>
-        <Transactionpin  info={info} />
+        <Transactionpin info={info} />
       </PinModal>
 
-      <View style={{ paddingHorizontal: 15, flex: 1, }}>
+      <View style={{ paddingHorizontal: 15, flex: 1 }}>
         <Newlogo />
 
         <View style={{ marginTop: 36 }}>
@@ -110,17 +150,27 @@ const Safetycautions = ({navigation, route}) => {
             personally, do not assist anyone with inputting the transaction PIN.
           </Text>
         </View>
-
-            
       </View>
-      <View style={{paddingHorizontal: 15, paddingBottom: 20}}>
-        <Text style={{textAlign: "center", marginBottom: 30, ...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16, lineHeight: 24}}>For more information visit <Text style={{color: COLORS.blue9}}>www.feather.africa/faq</Text></Text>
-      <Custombutton
-            btntext="I Understand, Proceed"
-            bg={COLORS.blue9}
-            onpress={openModal}
-            />
-            </View>
+      <View style={{ paddingHorizontal: 15, paddingBottom: 20 }}>
+        <Text
+          style={{
+            textAlign: "center",
+            marginBottom: 30,
+            ...fontsize.smallest,
+            ...FONTS.regular,
+            color: COLORS.grey16,
+            lineHeight: 24,
+          }}
+        >
+          For more information visit{" "}
+          <Text style={{ color: COLORS.blue9 }}>www.feather.africa/faq</Text>
+        </Text>
+        <Custombutton
+          btntext="I Understand, Proceed"
+          bg={COLORS.blue9}
+          onpress={openModal}
+        />
+      </View>
     </Mainwrapper>
   );
 };

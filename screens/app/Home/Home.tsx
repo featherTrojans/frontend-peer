@@ -6,70 +6,40 @@ import React, {
   useRef,
 } from "react";
 import {
-  StyleSheet,
   Text,
   View,
-  StatusBar,
   Image,
   ScrollView,
-  FlatList,
-  // SafeAreaView,
   TouchableOpacity,
   RefreshControl,
-  Platform,
-  ImageBackground,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import LottieView from "lottie-react-native";
-import * as Animatable from "react-native-animatable";
-import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
-import { useIsFocused, useScrollToTop } from "@react-navigation/native";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { useIsFocused } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
-
-
-
-import {
-  Transactionhistory,
-  Viewbalance,
-} from "../../../components";
+import { Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import formatData from "../../../utils/fomatTrans";
 import { styles } from "./Home.styles";
-import { customNavigation } from "../../../utils/customNavigation";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 import Customstatusbar from "../../shared/Customstatusbar";
-import { sendSchedulePushNotification } from "../../../utils/pushNotifications";
 import DoubleTapToClose from "../../shared/DoubleBack";
-import { connectFirestoreEmulator } from "firebase/firestore";
-import { RFValue } from "react-native-responsive-fontsize";
 import { nameToShow } from "../../../utils/nameToShow";
 import { getPeriod } from "../../../utils/getDayPeriod";
-import Globalmodal from "../../shared/Globalmodal/Globalmodal";
-import useCustomModal from "../../../utils/useCustomModal";
-import Alltransfermodal from "../../../components/Alltransfermodal/Alltransfermodal";
-import amountFormatter from "../../../utils/formatMoney";
-import { nameSplitter } from "../../../utils/nameSplitter";
 import HomeWallet from "./HomeWallet";
 import useAlert from "../../../utils/useAlerts";
 
 const {
   Bell,
-  Withdrawicon,
-  Depositicon,
-  Newtransfericon,
-  Paybillicon,
+
   Goldenstaricon,
   Dollaricon,
-  Bluebankicon,
-  Bluewalleticon,
-  Ashicon,
-  Aticon,
+
   Featherdefault,
-  Searcontacticon,
+
   Cryinganimate,
 } = icons;
 const { Wavvy } = images;
@@ -84,7 +54,7 @@ const Amountbtn = ({ amountText }) => {
   );
 };
 
-const Home = ({ navigation, route }: { navigation: any, route: any }) => {
+const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   const { setAuthData, authdata } = useContext(AuthContext);
   // const [info, setInfo] = useState({});
   const histories = formatData(authdata?.transactions);
@@ -97,10 +67,7 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   const jumpToHistory = TabActions.jumpTo("History");
   const jumpToSettings = TabActions.jumpTo("Settings");
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-  const {updateAlert} = useAlert()
-
-  console.log('------------------------ROUTINGNGNG--------------------------');
-  console.log(isFocused)
+  const { updateAlert } = useAlert();
 
   const toTop = () => {
     scrollViewRef.current?.scrollTo({
@@ -112,28 +79,28 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
   if (isFocused) {
     toTop();
   }
-
   useEffect(() => {
-    if(isFocused && authdata.userDetails.userLevel <= 1){
-       updateAlert("Update your profile")
-        console.log(route, "here is my current route");
-    }else{
-      Toast.hide()
+    (async () => {
+      const { status } = await requestTrackingPermissionsAsync();
+      if (status === "granted") {
+        // console.log("Yay! I have user permission to track data");
+      }
+    })();
+  }, []);
+  useEffect(() => {
+    if (isFocused && authdata.userDetails.userLevel <= 1) {
+      updateAlert("Update your profile");
+      console.log(route, "here is my current route");
+    } else {
+      Toast.hide();
     }
-    
-  }, [isFocused])
+  }, [isFocused]);
 
   const getDashboardData = async () => {
-    // console.log("I am fetching again from home");
-
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
-      // setInfo(response?.data?.data);
       setAuthData(response?.data?.data);
-      // console.log(response.data.data.userDetails.imageUrl, "user image url");
-      // console.log(response.data.data.transactions, "here is the transacxctions");
-      
     } catch (err) {
     } finally {
       setLoading(false);
@@ -174,8 +141,6 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
     );
   };
 
- 
-
   return (
     <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <Customstatusbar />
@@ -196,21 +161,20 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
             ) : (
               <Featherdefault />
             )}
-
           </TouchableOpacity>
           <View style={styles.profileNameContainer}>
-              <Text style={styles.profileName}>
-                {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
-              </Text>
-              <Text style={styles.profileUsername}>
-                @{authdata?.userDetails?.username}
-              </Text>
-            </View>
+            <Text style={styles.profileName}>
+              {getPeriod()}, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
+            </Text>
+            <Text style={styles.profileUsername}>
+              @{authdata?.userDetails?.username}
+            </Text>
           </View>
+        </View>
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Notifications")}
-          style={{ padding: 8, borderRadius: 20}}
+          style={{ padding: 8, borderRadius: 20 }}
         >
           <Bell />
         </TouchableOpacity>
@@ -240,69 +204,6 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
           <HomeWallet />
         </View>
 
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          bounces={false}
-        >
-          <View
-            style={[
-              styles.informationblockwrap,
-              {
-                backgroundColor: "#8456FF",
-                position: "relative",
-                overflow: "hidden",
-                flex: 1,
-              },
-            ]}
-          >
-            <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
-                <Image
-                  source={Wavvy}
-                  style={{ width: "200%", height: "100%", opacity: .06,  }}
-                  
-                  
-                />
-              </View>
-
-            <View style={styles.informationiconswrap}>
-              <Goldenstaricon />
-              <View style={{ marginRight: 3.4 }} />
-              <Goldenstaricon />
-              <View style={{ marginRight: 3.4 }} />
-              <Goldenstaricon />
-            </View>
-
-            <Text style={styles.informationblocktext}>
-              Earn N10 each time you rate a successful withdraw transaction{" "}
-            </Text>
-          </View>
-
-          <View
-            style={[
-              styles.informationblockwrap,
-              { backgroundColor: "#5676FF", marginRight: 0 },
-            ]}
-          >
-
-            <View style={{position: "absolute", top: 0, left: -140, bottom: 0, right: 20}}>
-                <Image
-                  source={Wavvy}
-                  style={{ width: "200%", height: "100%", opacity: .06,  }}
-                  
-                  
-                />
-              </View>
-            <View style={styles.informationiconswrap}>
-              <Dollaricon />
-            </View>
-            <Text style={styles.informationblocktext}>
-              Start your beta side hustle by making cash available for people to
-              withdraw
-            </Text>
-          </View>
-        </ScrollView>
-
         {/* End of the block */}
 
         {/* Transaction history lists header*/}
@@ -330,7 +231,7 @@ const Home = ({ navigation, route }: { navigation: any, route: any }) => {
             ))
           )}
         </View>
-        <DoubleTapToClose />
+        {/* <DoubleTapToClose /> */}
       </ScrollView>
     </View>
   );

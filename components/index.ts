@@ -23,40 +23,37 @@ import Copyaccountinfo from "./Copyaccountinfo/Copyaccountinfo";
 import Upgrademodal from "./Upgrademodal/Upgrademodal";
 import Chooseamountmodal from "./Chooseamountmodal/Chooseamountmodal";
 import Transactionsummary from "./Modals/Transactionsummary";
+import Transactionsummarytwo from "./Modals/Transactionsummarytwo";
 import Transactionpin from "./Modals/Transactionpin";
 import Successmodal from "./Modals/Successmodal";
 
-
-
-
 export {
-    Input,
-    Tab,
-    Service,
-    Transactionhistory,
-    Viewbalance,
-    Sendingandreceive,
-    Backheader,
-    Iconwithdatas,
-    Loader,
-    Bottombtn,
-    Tableoption,
-    Mainwrapper,
-    Negotiatecharge,
-    Numberbtn,
-    Requesterdetails,
-    Priceandcharges,
-    Inputinsettings,
-    Successmodal,
-    InitialsBg,
-    Keyboard,
-    Custombutton,
-    Horizontaline,
-    Copyaccountinfo,
-    Upgrademodal,
-    Chooseamountmodal,
-    Transactionsummary,
-    Transactionpin
-
-
-}
+  Input,
+  Tab,
+  Service,
+  Transactionhistory,
+  Viewbalance,
+  Sendingandreceive,
+  Backheader,
+  Iconwithdatas,
+  Loader,
+  Bottombtn,
+  Tableoption,
+  Mainwrapper,
+  Negotiatecharge,
+  Numberbtn,
+  Requesterdetails,
+  Priceandcharges,
+  Inputinsettings,
+  Successmodal,
+  InitialsBg,
+  Keyboard,
+  Custombutton,
+  Horizontaline,
+  Copyaccountinfo,
+  Upgrademodal,
+  Chooseamountmodal,
+  Transactionsummary,
+  Transactionsummarytwo,
+  Transactionpin,
+};

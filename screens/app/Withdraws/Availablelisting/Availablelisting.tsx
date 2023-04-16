@@ -10,59 +10,57 @@ import {
 import React, { useState, useEffect, useContext, useRef } from "react";
 import LottieView from "lottie-react-native";
 
-import {
-  icons,
-  COLORS,
-  fontsize,
-  FONTS,
-  SIZES,
-} from "../../../../constants";
+import { icons, COLORS, fontsize, FONTS, SIZES } from "../../../../constants";
 import Map from "../../../shared/map/Map";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import { LocationContext } from "../../../../context/LocationContext";
 import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
-import { Backheader, Horizontaline, InitialsBg, Negotiatecharge, Requesterinfo, Successmodal, Transactionsummary } from "../../../../components";
+import {
+  Backheader,
+  Horizontaline,
+  Negotiatecharge,
+  Successmodal,
+} from "../../../../components";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Requestuser from "../../../shared/RequestUser";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Withdrawinfo from "../../../../components/Modals/Withdrawinfo";
 import RequestSummary from "../../../../components/Modals/RequestSummary";
+import useAlert from "../../../../utils/useAlerts";
+import Toast from "react-native-toast-message";
+const { Listingsdrop, Emptyicon, Loadinglocationanimate, Cryinganimate } =
+  icons;
 
-const {
-  Listingsdrop,
-  Emptyicon,
-  Loadinglocationanimate,
-  Cryinganimate
-} = icons;
-
-const datas = [
-  {
-    title: "Peers",
-    data: [] 
-  },
-  {
-    title: "Agents",
-    data: [],
-  },
-];
+const agentobjj = {
+  amount: 200,
+  duration: 20,
+  fullName: "Lawal Ayobami",
+  latitude: 0.3,
+  locationText: "I am okay",
+  longitude: 1.2,
+  reference: "rdw424gar",
+  username: "spec",
+};
 
 interface agent {
-  "amount": string,
-  "duration": string,
-  "fullName": string,
-  "latitude": string,
-  "locationText": string,
-  "longitude": string,
-  "reference": string,
-  "username": string,
+  amount: string;
+  duration: string;
+  fullName: string;
+  latitude: string;
+  locationText: string;
+  longitude: string;
+  reference: string;
+  username: string;
 }
 
 const Availablelisting = ({ navigation, route }: any) => {
-  const amount = route.params;
-  const { setCoords, setDestinationCoords } = useContext(LocationContext);
-  const [agents, setAgents] = useState([]);
+  const amount = route.params?.amount;
+  const activate = route.params?.activate;
+  const { setCoords, coords, setDestinationCoords } =
+    useContext(LocationContext);
+  const { blueAlert } = useAlert();
   const [charge, setCharge] = useState(0);
   const [negotiatecharge, setNegotiateCharge] = useState(0);
   const [activeType, setActiveType] = useState("peers");
@@ -73,46 +71,41 @@ const Availablelisting = ({ navigation, route }: any) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
   const dotLength = Animated.divide(scrollX, SIZES.width);
-  const [activeAgent, setActiveAgent] = useState<agent | {}>({})
+  const [activeAgent, setActiveAgent] = useState<agent | {}>({});
   const [viewIndex, setViewIndex] = useState<number>(0);
-  const [info, setInfo] = useState("More")
-  const { CustomModal ,openModal, closeModal} = useCustomModal()
-  const { CustomModal:TransationSummaryModal ,openModal: openTransactionSummaryModal, closeModal:closeTransactionSummeryModal} = useCustomModal()
-  const { CustomModal:NegotiateChargeModal ,openModal: openNegotiateChargeModal, closeModal:closeNegotiateChargeModal} = useCustomModal()
-  const {CustomModal:SuccessModalContainer, openModal: openSuccessModal, closeModal: closeSuccessModal} =  useCustomModal()
+  const [info, setInfo] = useState("More");
+  const { CustomModal, openModal, closeModal } = useCustomModal();
+  const {
+    CustomModal: TransationSummaryModal,
+    openModal: openTransactionSummaryModal,
+    closeModal: closeTransactionSummeryModal,
+  } = useCustomModal();
+  const {
+    CustomModal: NegotiateChargeModal,
+    openModal: openNegotiateChargeModal,
+    closeModal: closeNegotiateChargeModal,
+  } = useCustomModal();
+  const {
+    CustomModal: SuccessModalContainer,
+    openModal: openSuccessModal,
+    closeModal: closeSuccessModal,
+  } = useCustomModal();
 
+  // useEffect(() => {
+  //   if (activate) {
+  //     handleSelectAgent(route.params?.activate);
+  //   }
+  // }, [activate]);
+  useEffect(() => {
+    blueAlert(
+      "Get cash easily from certified agents around you competitive transaction charges and fees"
+    );
 
-  const onViewChangeRef = useRef<
-    ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
-  >(({ viewableItems, changed }) => {
-    setViewIndex(viewableItems[0]?.index);
-  });
+    return () => {
+      Toast.hide();
+    };
+  }, []);
 
-  // This function is to toggle the listings height
-  const toggleHeight = () => {
-    if (isShow == true) {
-      Animated.timing(animatedHeight, {
-        toValue: 1,
-        duration: 200,
-        easing: Easing.linear,
-        useNativeDriver: false, // <-- neccessary
-      }).start(() => {
-        setIsShow(false);
-        setInfo("Less")
-      });
-    } else {
-      Animated.timing(animatedHeight, {
-        toValue: 0,
-        duration: 200,
-        easing: Easing.linear,
-        useNativeDriver: false, // <-- neccessary
-      }).start(() => {
-        setIsShow(true);
-        setInfo("More")
-      });
-    }
-  };
-  
   const newHeight = animatedHeight.interpolate({
     inputRange: [0, 1],
     outputRange: ["50%", "100%"], // Variness in height
@@ -143,7 +136,6 @@ const Availablelisting = ({ navigation, route }: any) => {
     }
   };
 
-  
   const getAllAgents = async (address: string) => {
     try {
       setLoading(true);
@@ -151,9 +143,13 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: Number(amount),
         location: address,
       });
-      setAgents(response.data.data);
-      setCharge(response.data.charges)
-      console.log(response)
+      console.log(response.data, "hi i am here");
+      if (response) {
+        if (response.data.data.length > 0) {
+          handleSelectAgent(response.data.data[0]);
+          setCharge(response.data.charges);
+        }
+      }
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -161,55 +157,60 @@ const Availablelisting = ({ navigation, route }: any) => {
     }
   };
 
+  const handleSelectAgent = (agentobj) => {
+    setActiveAgent(agentobj);
+  };
 
-  const handleSelectAgent = (agentobj)=>{
-    setActiveAgent(agentobj)
-    openModal()
-  }
-
-  const handleNextNegotiateCharge = (amount)=>{
+  const handleNextNegotiateCharge = (amount) => {
+    closeNegotiateChargeModal();
     setNegotiateCharge(amount);
-    openTransactionSummaryModal()
-  }
+    openTransactionSummaryModal();
+  };
 
-  const handleNextRequestSummary = ()=>{
-    closeTransactionSummeryModal()
-    closeNegotiateChargeModal()
-    closeModal()
-    openSuccessModal()
-  }
-
+  const handleNextRequestSummary = () => {
+    closeTransactionSummeryModal();
+    closeNegotiateChargeModal();
+    closeModal();
+    openSuccessModal();
+  };
 
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: COLORS.white, marginBottom: 20 }}
     >
-      
-      <CustomModal>
-        <Withdrawinfo withdrawInfo={activeAgent} openNextModal={openNegotiateChargeModal}/>
-      </CustomModal>
-
       <NegotiateChargeModal>
-        <Negotiatecharge info={{...activeAgent,charges:charge}} openNextModal={handleNextNegotiateCharge} />
+        <Negotiatecharge
+          info={{ ...activeAgent, charges: charge }}
+          withdrawAmount={amount}
+          openNextModal={handleNextNegotiateCharge}
+        />
       </NegotiateChargeModal>
 
       <TransationSummaryModal>
-        <RequestSummary amount={amount} openNextModal={handleNextRequestSummary} withdrawInfo={activeAgent} baseCharge={charge} addedFee={negotiatecharge} />
+        <RequestSummary
+          amount={amount}
+          openNextModal={handleNextRequestSummary}
+          withdrawInfo={activeAgent}
+          baseCharge={charge}
+        />
       </TransationSummaryModal>
 
       <SuccessModalContainer>
-        <Successmodal btnText="Yeah, proceed" successMsg="Cash request successful" btnFunction={()=>{closeSuccessModal(); navigation.navigate("Home")}} />
+        <Successmodal
+          btnText="Yeah, proceed"
+          successMsg="Cash request successful"
+          btnFunction={() => {
+            closeSuccessModal();
+            navigation.navigate("Home");
+          }}
+        />
       </SuccessModalContainer>
       <Customstatusbar />
-      <Map />
-
-
+      {!coords?.latitude ? null : <Map />}
 
       <Backheader title="Withdraw" />
 
-      
-      
-      {(locationLoading || loading) ? (
+      {locationLoading || loading ? (
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <View
             style={{
@@ -248,163 +249,68 @@ const Availablelisting = ({ navigation, route }: any) => {
         </View>
       ) : (
         <>
-
           <View style={{ flex: 1, justifyContent: "flex-end" }}>
-            <Animated.View
+            <View
               style={{
-                height: newHeight,
+                height: 400,
                 backgroundColor: COLORS.white,
-                marginHorizontal: 15,
-                borderRadius: 15,
-                padding: 15,
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
               }}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 25,
-                  alignItems: 'center'
-                }}
-              >
-                <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.blue9}}>{viewIndex === 0 ? "Peers" : "Agents"}</Text>
-                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center',  padding: 4}} onPress={toggleHeight}>
-                  <Text style={{marginRight: 8, ...fontsize.smaller, ...FONTS.medium, color: COLORS.purple4}}>View {info}</Text>
-                  <Animated.View
-                       style={[
-                        {
-                         
-                          transform: [{ rotateX }],
-                        },
-                      ]}
-                  >
-                    <Listingsdrop />
-                  </Animated.View>
-                </TouchableOpacity>
-              </View>
-
-              <FlatList
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                snapToAlignment="center"
-                pagingEnabled
-                bounces={false}
-                data={datas}
-                nestedScrollEnabled
-                renderItem={({ item, index }) => {
-                  const isLast = datas.length === index + 1;
-                  let data = agents;
-                  if(isLast){
-                    data = []
-                  }
-                  return (
-                    <ScrollView
-                      nestedScrollEnabled
-                      showsVerticalScrollIndicator={false}
-                    >
-                      {data.length > 0 ? (
-                        data.map((info, index) => {
-                          const isLastItem = data.length === index + 1;
-                          return (
-                            <TouchableOpacity
-                              key={index}
-                              activeOpacity={0.8}
-                              style={{
-                                flex: 1,
-                                width: SIZES.width - 65,
-                                marginRight: 5,
-                              }}
-                              onPress={()=>handleSelectAgent(info)}
-                            >
-                              <Requestuser hideAmount details={{name:info?.fullName, amount:info?.amount, duration:info?.duration}} />
-                              {!isLastItem && <Horizontaline marginV={21} />}
-                            </TouchableOpacity>
-                          );
-                        })
-                      ) : (
-                        <View
-                          style={{
-                            // backgroundColor: "blue",
-                            flex: 1,
-                            height: 200,
-                            width: SIZES.width - 60,
-                            marginBottom: 10,
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          {/* <Emptyicon /> */}
-                          <LottieView
-                            source={Cryinganimate}
-                            autoPlay
-                            loop
-                            style={{ height: 120, width: 120 }}
-                          />
-                          <Text style={{marginTop: 20, paddingHorizontal: 40, textAlign: 'center', lineHeight: 20, ...fontsize.smallest, ...FONTS.regular}}>Padi, you don’t have any accepted withdrawal requests.</Text>
-                        </View>
-                      )}
-                    </ScrollView>
-                  );
-                }}
-                onViewableItemsChanged={onViewChangeRef.current}
-                onScroll={Animated.event(
-                  [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                  { useNativeDriver: false }
-                )}
-                keyExtractor={(item) => item.title}
-              />
-
-              {/* Dots for scroll indicators */}
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  paddingTop: 10,
-                }} 
-              >
+              {activeAgent?.username ? (
                 <View
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    width: 38,
+                    // backgroundColor: "blue",
+                    flex: 1,
 
+                    marginBottom: 10,
+                    paddingHorizontal: 1,
                   }}
                 >
-                  {Array(2)
-                    .fill(1)
-                    .map((item, index) => {
-                      const dotPosition = Animated.divide(
-                        scrollX,
-                        SIZES.width - 60
-                      );
-
-                      const dotColor = dotPosition.interpolate({
-                        inputRange: [index - 1, index, index + 1],
-                        outputRange: [COLORS.grey3, COLORS.black, COLORS.grey3],
-                        extrapolate: "clamp",
-                      });
-                      const dotWidth = dotPosition.interpolate({
-                        inputRange: [index - 1, index, index + 1],
-                        outputRange: [8, 20, 8],
-                        extrapolate: "clamp",
-                      });
-                      return (
-                        <Animated.View
-                          key={index}
-                          style={[
-                            {
-                              height: 8,
-                              borderRadius: 8 / 2,
-                              backgroundColor: dotColor,
-                              width: dotWidth,
-                            },
-                          ]}
-                        />
-                      );
-                    })}
+                  <Withdrawinfo
+                    withdrawInfo={activeAgent}
+                    closeModal={closeModal}
+                    openNextModal={() => {
+                      closeModal();
+                      openTransactionSummaryModal();
+                    }}
+                  />
                 </View>
-              </View>
-            </Animated.View>
+              ) : (
+                <View
+                  style={{
+                    // backgroundColor: "blue",
+                    flex: 1,
+                    height: 200,
+                    // width: SIZES.width - 60,
+                    marginBottom: 10,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {/* <Emptyicon /> */}
+                  <LottieView
+                    source={Cryinganimate}
+                    autoPlay
+                    loop
+                    style={{ height: 120, width: 120 }}
+                  />
+                  <Text
+                    style={{
+                      marginTop: 20,
+                      paddingHorizontal: 40,
+                      textAlign: "center",
+                      lineHeight: 20,
+                      ...fontsize.smallest,
+                      ...FONTS.regular,
+                    }}
+                  >
+                    Padi, you don’t have any accepted withdrawal requests.
+                  </Text>
+                </View>
+              )}
+            </View>
           </View>
         </>
       )}

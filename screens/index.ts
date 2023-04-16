@@ -57,7 +57,6 @@ import Choosewallet from "./app/Walletfunding/Choosewallet/Choosewallet";
 import Transactiondetails from "./app/Transactions/Transactiondetails/Transactiondetails";
 import Transactiondispute from "./app/Transactions/Transactiondispute/Transactiondispute";
 import Transactionsrating from "./app/Transactions/Transacrionsrating/Transactionsrating";
-import Deposit from "./app/Deposit/Deposit";
 import Withdrawpreview from "./app/Withdraws/Withdrawpreview/Withdrawpreview";
 import Editmeetup from "./app/Withdraws/Editmeetup/Editmeetup";
 import Pendingwithdraw from "./app/Withdraws/Pendingwithdraw/Pendingwithdraw";
@@ -65,12 +64,6 @@ import Acceptedwithdraw from "./app/Withdraws/Acceptedwithdraw/Acceptedwithdraw"
 import Requestsummary from "./app/Withdraws/Requestsummary/Requestsummary";
 import Transferpin from "./app/Transferfunds/Transferpin/Transferpin";
 import Selectbank from "./app/Transferfunds/Selectbank/Selectbank";
-import Canceldeposit from "./app/Deposit/Canceldeposit/Canceldeposit";
-import Pendingdeposit from "./app/Deposit/Pendingdeposit/Pendingdeposit";
-import Accepteddeposit from "./app/Deposit/Accepteddeposit/Accepteddeposit";
-import Depositpin from "./app/Deposit/Depositpin/Depositpin";
-import Depositupdate from "./app/Deposit/Depositupdate/Depositupdate";
-import DepositSummary from "./app/Deposit/DepositSummary/DepositSummary";
 import Updatedeposit from "./app/Deposit/Updatedeposit/Updatedeposit";
 import WalletPin from "./app/Walletfunding/WalletPin/WalletPin";
 import Walletmanagement from "./app/Settings/Walletmanagement/Walletmanagement";
@@ -95,15 +88,15 @@ import Sendcash from "./app/Transferfunds/Sendcash/Sendcash";
 import Meetuppoint from "./app/Meetuppoint/Meetuppoint";
 import Safetycautions from "./app/Safetycautions/Safetycautions";
 import Requesterinfo from "./app/Requesterinfo/Requesterinfo";
-import Depositstart from "./app/Deposit/Depositstart/Depositstart";
+
 //This screen is for testing somne functionalities
- 
+
 import Testings from "./Testings";
 import TransferpinBank from "./app/Transferfunds/Transferpin/TransferPinBank";
 import WithdrawPin from "./app/Withdraws/WithdrawPin/WithdrawPin";
 import SecurepinAgain from "./auth/signup/Securepin/SecurepinAgain";
 import CustomWebView from "./shared/CustomWebView";
-import Depositinput from "./app/Deposit/DepositInput/Depositinput";
+
 import LockScreen from "./shared/LockScreen/LockScreen";
 import RequesterinfoScreen from "./shared/RequesterinfoScreen";
 import BillContacts from "./app/Billpayments/Airtime/BillContacts/BillContacts";
@@ -137,7 +130,6 @@ export {
   Editprofile,
   Securityprivacy,
   Changepassword,
-  Depositstart,
   Changepin,
   Requesterinfo,
   Addcash,
@@ -148,15 +140,9 @@ export {
   Bankaccount,
   Transferpin,
   Notifications,
-  Deposit,
-  Depositupdate,
   Updatedeposit,
   Sendcash,
   BillContacts,
-  Pendingdeposit,
-  Accepteddeposit,
-  Depositpin,
-  Canceldeposit,
   Requestnew,
   Availablelisting,
   Withdraw,
@@ -185,7 +171,6 @@ export {
   WithdrawPin,
   SecurepinAgain,
   CustomWebView,
-  Depositinput,
   LockScreen,
   Paybills,
   Airtimeamount,
@@ -200,6 +185,5 @@ export {
   Electricitymetertype,
   Dataprovider,
   Dataplan,
-  DepositSummary,
-  RequesterinfoScreen
+  RequesterinfoScreen,
 };

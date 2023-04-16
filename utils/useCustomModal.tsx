@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import Modal from "react-native-modal";
-import Toast from 'react-native-toast-message'
+import Toast from "react-native-toast-message";
 import { COLORS } from "../constants";
 import { toastConfig } from "../App";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 type globalModalProps = {
   children: JSX.Element;
-  bg?: string,
-  hideOnTap?: boolean
+  bg?: string;
+  hideOnTap?: boolean;
 };
 
 const useCustomModal = () => {
@@ -23,7 +23,11 @@ const useCustomModal = () => {
     setShowState(false);
   };
 
-  const CustomModal = ({ children, bg="#fff", hideOnTap=true }: globalModalProps) => {
+  const CustomModal = ({
+    children,
+    bg = "#fff",
+    hideOnTap = true,
+  }: globalModalProps) => {
     return (
       <Modal
         isVisible={showState}
@@ -32,28 +36,35 @@ const useCustomModal = () => {
         backdropOpacity={0.2}
         animationInTiming={400}
         backdropTransitionInTiming={200}
-        animationOut={"fadeOut"}
+        animationOut={"slideOutDown"}
         animationOutTiming={150}
         style={{ margin: 0, justifyContent: "flex-end", zIndex: 100 }}
-        onBackdropPress={hideOnTap ? () => setShowState(!showState) : () => null}
-        onBackButtonPress={hideOnTap ? () => setShowState(!showState) : () => null}
+        onBackdropPress={
+          hideOnTap ? () => setShowState(!showState) : () => null
+        }
+        onBackButtonPress={
+          hideOnTap ? () => setShowState(!showState) : () => null
+        }
+        avoidKeyboard={true}
+        onSwipeComplete={hideOnTap ? closeModal : () => {}}
+        panResponderThreshold={20}
+        swipeDirection={"down"}
+        useNativeDriver={true}
+        propagateSwipe={true}
       >
         <>
-        <View
-          style={{
-            paddingVertical: 36,
-            backgroundColor: bg,
-            paddingHorizontal: 15,
-            borderTopRightRadius: 22,
-            borderTopLeftRadius: 22,
-          }}
-        >
-          {children}
-        </View>
-        <Toast 
-        config={toastConfig}
-        topOffset={0}
-        />
+          <View
+            style={{
+              paddingVertical: 36,
+              backgroundColor: bg,
+              paddingHorizontal: 15,
+              borderTopRightRadius: 22,
+              borderTopLeftRadius: 22,
+            }}
+          >
+            {children}
+          </View>
+          <Toast config={toastConfig} topOffset={0} />
         </>
       </Modal>
     );

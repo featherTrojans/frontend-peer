@@ -42,9 +42,9 @@ const {
   Ratingsuccessanimate,
 } = icons;
 
-const Transactionsrating = ({navigation, route}:any) => {
-  const info = route.params
-  const {errorAlert} = useAlert()
+const Transactionsrating = ({ navigation, route }: any) => {
+  const info = route.params;
+  const { errorAlert } = useAlert();
   const [rating, setRating] = useState({
     rating: 0,
     animation: new Animated.Value(1),
@@ -54,7 +54,6 @@ const Transactionsrating = ({navigation, route}:any) => {
   const [loading, setLoading] = useState(false);
   const numStars = 5;
   let stars = [];
-
 
   const rate = (star: number) => {
     setRating({ ...rating, rating: star });
@@ -90,33 +89,32 @@ const Transactionsrating = ({navigation, route}:any) => {
     opacity: animatedOpacity,
     width: 40,
     height: 40,
-    justifyContent: 'center',
-    alignItems: "center"
+    justifyContent: "center",
+    alignItems: "center",
   };
-  
-  const handleSubmit = async ()=>{
 
-    if(comment.length < 4 || rating.rating < 1){
-      errorAlert(null, "Please provide a comment and rate ")
-      return
+  const handleSubmit = async () => {
+    if (comment.length < 4 || rating.rating < 1) {
+      errorAlert(null, "Please provide a comment and rate ");
+      return;
     }
     const data = {
-      rating:rating.rating,
-      description:comment,
-      userToRate:info.userUid,
-      reference:info?.reference
-    } 
+      rating: rating.rating,
+      description: comment,
+      userToRate: info.agentUsername,
+      reference: info?.reference,
+    };
 
-    setLoading(true)
-    try{
-      await axiosCustom.post("/rating",data)
-      setShowModal(true)
-    }catch(err){
-      errorAlert(err)
-    }finally{
-      setLoading(false)
+    setLoading(true);
+    try {
+      await axiosCustom.post("/rating", data);
+      setShowModal(true);
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
     }
-}
+  };
 
   for (let x = 1; x <= numStars; x++) {
     stars.push(
@@ -135,58 +133,53 @@ const Transactionsrating = ({navigation, route}:any) => {
   }
 
   return (
-    <Mainwrapper >
-      <Backheader title="Rate Transaction" /> 
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      contentContainerStyle={{ flex: 1 }}
-    >
-      <View style={styles.container}>
-        {/* HEader  */}
-        {loading && <Loader />}
+    <Mainwrapper>
+      <Backheader title="Rate Transaction" />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flex: 1 }}
+      >
+        <View style={styles.container}>
+          {/* HEader  */}
+          {loading && <Loader />}
 
-
-
-
-        <Globalmodal
-        // To pass the state controlling the modal in
-          showState={showModal}
-          btnFunction={() => navigation.navigate('Home')}
-          btnText="Continue"
-        >
-          <View style={{justifyContent: "center", alignItems: "center", marginVertical: 30 }}>
-            <LottieView
-              source={Ratingsuccessanimate}
-              style={{ width: 88, height: 88, }}
-              autoPlay
-              loop
-            />
-            <Text
+          <Globalmodal
+            // To pass the state controlling the modal in
+            showState={showModal}
+            btnFunction={() => navigation.navigate("Home")}
+            btnText="Continue"
+          >
+            <View
               style={{
-                marginHorizontal: 40,
-                textAlign: "center",
-                marginTop: RFValue(32),
-                ...fontsize.smaller,
-                ...FONTS.regular,
-                color: COLORS.blue9,
+                justifyContent: "center",
+                alignItems: "center",
+                marginVertical: 30,
               }}
             >
-              Thanks for rating this transaction, you just recieved{" "}
-              <Text style={{ ...FONTS.medium }}>N10.00</Text>
-            </Text>
-          </View>
-        </Globalmodal>
+              <LottieView
+                source={Ratingsuccessanimate}
+                style={{ width: 88, height: 88 }}
+                autoPlay
+                loop
+              />
+              <Text
+                style={{
+                  marginHorizontal: 40,
+                  textAlign: "center",
+                  marginTop: RFValue(32),
+                  ...fontsize.smaller,
+                  ...FONTS.regular,
+                  color: COLORS.blue9,
+                }}
+              >
+                Thanks for rating this transaction, you just recieved{" "}
+                <Text style={{ ...FONTS.medium }}>N10.00</Text>
+              </Text>
+            </View>
+          </Globalmodal>
 
-
-
-
-
-
-        <View style={{ paddingHorizontal: 15, flex: 0.7 }}>
-
-
-          
-          {/* <View
+          <View style={{ paddingHorizontal: 15, flex: 0.7 }}>
+            {/* <View
             style={{
               marginVertical: RFValue(10),
               flexDirection: "row",
@@ -213,76 +206,68 @@ const Transactionsrating = ({navigation, route}:any) => {
             </View>
           </View> */}
 
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <View
-              style={{ marginTop: RFValue(35), marginBottom: RFValue(35), paddingHorizontal: 48 }}
-            >
-              <Text
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <View
                 style={{
-                  textAlign: "center",
-                  ...fontsize.smaller,
-                  ...FONTS.regular,
+                  marginTop: RFValue(35),
+                  marginBottom: RFValue(35),
+                  paddingHorizontal: 48,
                 }}
               >
-                Please rate your transaction with{" "}
-                <Text style={{ ...FONTS.bold }}>@{info?.username}</Text>, rating attracts
-                a gift oh 😎
-              </Text>
-            </View>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    ...fontsize.smaller,
+                    ...FONTS.regular,
+                  }}
+                >
+                  Please rate your transaction with{" "}
+                  <Text style={{ ...FONTS.bold }}>@{info?.username}</Text>,
+                  rating attracts a gift oh 😎
+                </Text>
+              </View>
 
-            <View
-              style={{
-                width: RFValue(244),
-                justifyContent: "space-between",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              {stars}
+              <View
+                style={{
+                  width: RFValue(244),
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                {stars}
+              </View>
+            </View>
+          </View>
+          <View style={{ flex: 0.3, justifyContent: "flex-end" }}>
+            <View style={{ paddingHorizontal: 15, marginBottom: 20 }}>
+              <View style={{ marginBottom: 22 }}>
+                <TextInput
+                  style={{
+                    // paddingVertical: 20,
+                    paddingHorizontal: 20,
+                    borderColor: COLORS.grey1,
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    ...fontsize.small,
+                    ...FONTS.light,
+                    // marginHorizontal: 25,
+                    height: 53,
+                    ...fontsize.smallest,
+                  }}
+                  placeholder="Comment (Optional)"
+                  placeholderTextColor={COLORS.grey16}
+                  onChangeText={(text) => setComment(text)}
+                  value={comment}
+                />
+              </View>
+
+              <Custombutton btntext="Rate" onpress={handleSubmit} />
+              {/* <Bottombtn title="rate" onpress={handleSubmit} /> */}
             </View>
           </View>
         </View>
-        <View style={{ flex: 0.3, justifyContent: "flex-end" }}>
-
-
-
-          
-
-            <View style={{paddingHorizontal: 15, marginBottom: 20}}>
-              <View style={{marginBottom: 22}}>
-            <TextInput
-            style={{
-              // paddingVertical: 20,
-              paddingHorizontal: 20,
-              borderColor: COLORS.grey1,
-              borderWidth: 1,
-              borderRadius: 10,
-              ...fontsize.small,
-              ...FONTS.light,
-              // marginHorizontal: 25,
-              height: 53,
-              ...fontsize.smallest
-            }}
-            placeholder="Comment (Optional)"
-            placeholderTextColor={COLORS.grey16}
-            onChangeText={(text)=>setComment(text)}
-            value={comment}
-          />
-          </View>
-
-          <Custombutton 
-          btntext="Rate"
-          onpress={handleSubmit}
-          />
-          {/* <Bottombtn title="rate" onpress={handleSubmit} /> */}
-          </View>
-
-
-
-
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     </Mainwrapper>
   );
 };

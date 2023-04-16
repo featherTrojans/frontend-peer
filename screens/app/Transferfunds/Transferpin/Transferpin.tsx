@@ -27,7 +27,6 @@ import { securepinstyles } from "../../../auth/signup/Securepin/Securepin.styles
 import useCustomModal from "../../../../utils/useCustomModal";
 import useAlert from "../../../../utils/useAlerts";
 
-
 const { Backarrow, SecureDot, Successcheckanimate } = icons;
 
 const Transferpin = ({ route, navigation }) => {

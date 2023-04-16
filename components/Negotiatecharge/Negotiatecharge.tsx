@@ -6,12 +6,13 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS, fontsize } from "../../constants";
 import Horizontaline from "../Horizontaline/Horizontaline";
 import { styles } from "../../screens/app/Chats/Chatsdm/Chatsdm.styles";
 import Custombutton from "../Custombutton/Custombutton";
 import amountFormatter from "../../utils/formatMoney";
+import useAlert from "../../utils/useAlerts";
 
 const amounts = [
   { name: "50", value: 50 },
@@ -19,9 +20,16 @@ const amounts = [
   { name: "200", value: 200 },
   { name: "500", value: 500 },
 ];
-const Negotiatecharge = ({ openNextModal, info, defaultAmount = "0" }) => {
+const Negotiatecharge = ({ openNextModal, info, withdrawAmount, defaultAmount = "0" }) => {
+  const {blueAlert} = useAlert()
   const [amount, setAmount] = useState(`${defaultAmount}`);
   const textInputRef = useRef<TextInput>(null);
+  
+  
+  useEffect(()=>{
+    blueAlert(`Add shikini cash to the base charge to withdraw your amount of ${withdrawAmount}`)
+  },[])
+  
   const handleAmountChange = (value) => {
     setAmount(value);
   };

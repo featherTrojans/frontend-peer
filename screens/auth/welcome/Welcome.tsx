@@ -107,9 +107,9 @@ const Welcome = ({ navigation, route }) => {
 
       if(!response?.data?.data?.userDetails?.isVerified){
         return navigation.navigate("Verification",{
-          email: response?.data?.data?.email,
-          phoneNumber: response?.data?.data?.phoneNumber,
-          token: response?.data?.data?.token,
+          email: response?.data?.data?.userDetails?.email,
+          phoneNumber: response?.data?.data?.userDetails?.phoneNumber,
+          token: token,
         })
       }
       setAuthData(response?.data?.data);

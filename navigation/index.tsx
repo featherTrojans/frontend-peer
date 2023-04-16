@@ -1,22 +1,10 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import * as Notification from "expo-notifications";
-import Constants from "expo-constants";
-import {
-  View,
-  Animated,
-  AppState,
-  Platform,
-  Button,
-  Image,
-  Text,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, Animated, AppState } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { customNavigation, navigationRef } from "../utils/customNavigation";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 // import axiosCustom from "../httpRequests/axiosCustom";÷
@@ -25,7 +13,6 @@ import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 const AppStack = createStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 const AuthStack = createStackNavigator<RootAuthStackParamList>();
-
 
 import {
   RootStackParamList,
@@ -49,18 +36,12 @@ import {
   Setnewpassword,
   Welcome,
   Welcometochange,
-
-  //Dashboard Screens
   Home,
-
-  //Transactions
   Transactions,
   Newtransactions,
   Transactiondetails,
   Transactiondispute,
   Transactionsrating,
-  // Pendingrequest, //This screen has changed
-  // Accepetedrequest, //This screen has changed too
   History,
 
   //User Settings
@@ -98,15 +79,6 @@ import {
 
   //Notification
   Notifications,
-
-  //Deposit
-  Deposit, ///Requests(pending and accepted)
-  Depositupdate, ///
-  Pendingdeposit,
-  Accepteddeposit,
-  Depositpin,
-  DepositSummary,
-  Canceldeposit,
   WalletPin,
   Updatedeposit,
 
@@ -119,13 +91,11 @@ import {
   WithdrawPin,
   SecurepinAgain,
   CustomWebView,
-  Depositinput,
   Testings,
   LockScreen,
 
   //Paybills and Airtime
   Paybills,
-
   Airtimeamount,
   Airtimeanddata,
   Airtimedetails,
@@ -135,7 +105,7 @@ import {
   Electricitytype,
   Electricitymetertype,
   Dataprovider,
-  Dataplan, 
+  Dataplan,
   Airtimeprovider,
   Becomeanagent,
   Sendcash,
@@ -147,8 +117,9 @@ import {
   Verifybvn,
   Requesterinfo,
   Depositstart,
-  Agentform
+  Agentform,
 } from "../screens";
+// import { LockScreen } from "../screens";
 
 import { Loader, Tab } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
@@ -160,15 +131,7 @@ import Negotiate from "../screens/shared/NegotiateFee/Negotiate";
 import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 
-const {
-  TabHome,
-  Tabhistory,
-  Tabtransactions,
-  Tabchats,
-  Tabsettings,
-  Tabuser,
-  Tabplusicon,
-} = icons;
+const { TabHome, Tabhistory, Tabchats, Tabuser, Tabplusicon } = icons;
 
 Notification.setNotificationHandler({
   handleNotification: async () => ({
@@ -177,9 +140,6 @@ Notification.setNotificationHandler({
     shouldSetBadge: true,
   }),
 });
-
-
-
 
 // Push notification function
 export function usePushNotification() {
@@ -211,7 +171,6 @@ export function usePushNotification() {
       Notification.removeNotificationSubscription(responseListener.current);
     };
   }, []);
-
 
   //Instant Notifications
   const sendPushNotification = async (
@@ -301,8 +260,6 @@ const Tabs = () => {
           tabBarStyle: {
             backgroundColor: "white",
             height: 82,
-            // paddingHorizontal: 36.5,
-            // paddingVertical: 20,
             alignItems: "center",
             justifyContent: "center",
           },
@@ -495,7 +452,7 @@ const Tabs = () => {
           })}
         />
       </BottomTab.Navigator>
-  
+
       <Animated.View
         style={{
           width: getWidth(),
@@ -546,7 +503,6 @@ const RootNavigator = ({ initialBoarded }) => {
         </AppStack.Group>
       ) : (
         <>
-          
           {/* Transaction Screens*/}
           <AppStack.Group>
             <AppStack.Screen
@@ -569,8 +525,6 @@ const RootNavigator = ({ initialBoarded }) => {
             />
           </AppStack.Group>
 
-
-
           {/* Settings Screens */}
           <AppStack.Group>
             <AppStack.Screen name="Editprofile" component={Editprofile} />
@@ -579,14 +533,15 @@ const RootNavigator = ({ initialBoarded }) => {
               component={Securityprivacy}
             />
             <AppStack.Screen name="Changepassword" component={Changepassword} />
-            <AppStack.Screen name="Walletmanagement" component={Walletmanagement} />
+            <AppStack.Screen
+              name="Walletmanagement"
+              component={Walletmanagement}
+            />
             <AppStack.Screen name="Becomeanagent" component={Becomeanagent} />
             <AppStack.Screen name="Agentform" component={Agentform} />
 
             <AppStack.Screen name="Addbvn" component={Addbvn} />
-          <AppStack.Screen name="Verifybvn" component={Verifybvn} />
-
-
+            <AppStack.Screen name="Verifybvn" component={Verifybvn} />
 
             <AppStack.Screen name="Changepin" component={Changepin} />
             <AppStack.Screen name="Biometrics" component={Biometrics} />
@@ -682,37 +637,20 @@ const RootNavigator = ({ initialBoarded }) => {
             name="Electricitydetails"
             component={Electricitydetails}
           />
+          <AppStack.Screen name="Electricitytype" component={Electricitytype} />
           <AppStack.Screen
-            name="Electricitytype"
-            component={Electricitytype}
-          />
-           <AppStack.Screen
             name="Electricitymetertype"
             component={Electricitymetertype}
           />
 
+          <AppStack.Screen name="Updatedeposit" component={Updatedeposit} />
           {/* Deposit Screens */}
           <AppStack.Group>
-            <AppStack.Screen name="Depositupdate" component={Depositupdate} />
-            <AppStack.Screen name="Deposit" component={Deposit} />
-            <AppStack.Screen name="Depositinput" component={Depositinput} />
-            <AppStack.Screen name="Updatedeposit" component={Updatedeposit} />
-            <AppStack.Screen name="Pendingdeposit" component={Pendingdeposit} />
             <AppStack.Screen name="Meetuppoint" component={Meetuppoint} />
             <AppStack.Screen name="Safetycautions" component={Safetycautions} />
-            <AppStack.Screen name="Depositstart" component={Depositstart} />
-
-
-
-            <AppStack.Screen
-              name="Accepteddeposit"
-              component={Accepteddeposit}
-            />
-            <AppStack.Screen name="Depositpin" component={Depositpin} />
-            <AppStack.Screen name="DepositSummary" component={DepositSummary} />
-            <AppStack.Screen name="Canceldeposit" component={Canceldeposit} />
           </AppStack.Group>
           {/* Chats Screens */}
+
           <AppStack.Group>
             <AppStack.Screen name="Chatshome" component={Chatshome} />
             <AppStack.Screen name="Chatsdm" component={Chatsdm} />
@@ -723,7 +661,6 @@ const RootNavigator = ({ initialBoarded }) => {
               component={CustomWebViewSupport}
             />
           </AppStack.Group>
-          
         </>
       )}
     </AppStack.Navigator>
@@ -751,10 +688,10 @@ export default function MainNavigation({ initialBoarded = false }) {
   }, []);
 
   useEffect(() => {
-    AppState.addEventListener("change", lockLogic);
+    const subscription = AppState.addEventListener("change", lockLogic);
 
     return () => {
-      AppState.removeEventListener("change", lockLogic);
+      subscription.remove();
     };
   }, [token, modal]);
 

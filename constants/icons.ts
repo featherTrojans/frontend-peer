@@ -136,7 +136,7 @@ import Bvnlock from "../assets/icons/Bvnlock";
 import Withdrawalnotificationicon from "../assets/icons/Withdrawalnotificationicon";
 import Purplelockicon from "../assets/icons/Purplelockicon";
 import Greenlockicon from "../assets/icons/Greenlockicon";
-import SendTF from "../assets/icons/SendTf"
+import SendTF from "../assets/icons/SendTf";
 import Patternbg from "../assets/icons/Patternbg";
 import Whitebackarrow from "../assets/icons/Whitebackarrow";
 import Emptynotification from "../assets/icons/Emptynotification";
@@ -171,19 +171,19 @@ import Greencheckicon from "../assets/icons/Greencheckicon";
 ///Animated iconsLoa
 
 import Cryinganimate from "../assets/Lottie/animations/feather_cry_emoji.json";
-import Sentconfetti from "../assets/Lottie/animations/sendConfetti.json"
-import Transacntionpinanimate from "../assets/Lottie/animations/waitingForPIN.json"
+import Sentconfetti from "../assets/Lottie/animations/sendConfetti.json";
+import Transacntionpinanimate from "../assets/Lottie/animations/waitingForPIN.json";
 import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.json";
 import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json";
-import Trackinguseranimate from "../assets/Lottie/animations/featherOnboardingOne.json"
+import Trackinguseranimate from "../assets/Lottie/animations/featherOnboardingOne.json";
 import Phoneanimate from "../assets/Lottie/animations/SplashScreen2_Phone.json";
 import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json";
 import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json";
 import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.json";
 import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json";
-import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json"
+import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json";
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
-import Verifiedbvnanimate from "../assets/Lottie/animations/verifybvn.json"
+import Verifiedbvnanimate from "../assets/Lottie/animations/verifybvn.json";
 
 import Dollaricon from "../assets/icons/Dollaricon";
 import Emptyicon from "../assets/icons/Emptyicon";
@@ -329,8 +329,8 @@ export default {
   Check,
   WrongIcon,
   Newtransfericon,
-Dollaricon,
-Mobiledataicon,
+  Dollaricon,
+  Mobiledataicon,
   Fundwalleticon,
   Paybillicon,
   Passwordhideicon,
@@ -387,5 +387,5 @@ Mobiledataicon,
   Sentconfetti,
   Transacntionpinanimate,
   Verifiedbvnanimate,
-  Trackinguseranimate
+  Trackinguseranimate,
 };
