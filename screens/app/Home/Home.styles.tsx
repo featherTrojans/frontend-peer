@@ -42,10 +42,10 @@ export const styles = StyleSheet.create({
   },
 
   walletOptionsContainer: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     marginTop: 12,
-    borderRadius: 15,
-    padding: 20,
+    // borderRadius: 15,
+    // padding: 20,
   },
   optionContainer: {
     justifyContent: "center",
@@ -53,11 +53,11 @@ export const styles = StyleSheet.create({
   },
   optionIconBg: {
     marginBottom: 13,
-    width: 39,
-    height: 39,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 39,
+    width: 100,
+    height: 100,
   },
   optionTitle: {
     ...fontsize.xsmallest,
@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
     paddingBottom: 24,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   informationiconswrap: {
     marginBottom: 10,

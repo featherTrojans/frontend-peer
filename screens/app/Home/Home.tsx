@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from "react-native";
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import LottieView from "lottie-react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { useIsFocused } from "@react-navigation/native";
@@ -78,7 +79,14 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   if (isFocused) {
     toTop();
   }
-
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestTrackingPermissionsAsync();
+      if (status === "granted") {
+        // console.log("Yay! I have user permission to track data");
+      }
+    })();
+  }, []);
   useEffect(() => {
     if (isFocused && authdata.userDetails.userLevel <= 1) {
       updateAlert("Update your profile");
@@ -196,77 +204,6 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
           <HomeWallet />
         </View>
 
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          bounces={false}
-        >
-          <View
-            style={[
-              styles.informationblockwrap,
-              {
-                backgroundColor: "#8456FF",
-                position: "relative",
-                overflow: "hidden",
-                flex: 1,
-              },
-            ]}
-          >
-            <View
-              style={{
-                position: "absolute",
-                top: 0,
-                left: -140,
-                bottom: 0,
-                right: 20,
-              }}
-            >
-              <Image
-                source={Wavvy}
-                style={{ width: "200%", height: "100%", opacity: 0.06 }}
-              />
-            </View>
-            <View style={styles.informationiconswrap}>
-              <Goldenstaricon />
-              <View style={{ marginRight: 3.4 }} />
-              <Goldenstaricon />
-              <View style={{ marginRight: 3.4 }} />
-              <Goldenstaricon />
-            </View>
-            <Text style={styles.informationblocktext}>
-              Earn N10 each time you rate a successful withdraw transaction{" "}
-            </Text>
-          </View>
-          <View
-            style={[
-              styles.informationblockwrap,
-              { backgroundColor: "#5676FF", marginRight: 0 },
-            ]}
-          >
-            <View
-              style={{
-                position: "absolute",
-                top: 0,
-                left: -140,
-                bottom: 0,
-                right: 20,
-              }}
-            >
-              <Image
-                source={Wavvy}
-                style={{ width: "200%", height: "100%", opacity: 0.06 }}
-              />
-            </View>
-            <View style={styles.informationiconswrap}>
-              <Dollaricon />
-            </View>
-            <Text style={styles.informationblocktext}>
-              Start your beta side hustle by making cash available for people to
-              withdraw
-            </Text>
-          </View>
-        </ScrollView>
-
         {/* End of the block */}
 
         {/* Transaction history lists header*/}
@@ -294,7 +231,7 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
             ))
           )}
         </View>
-        <DoubleTapToClose />
+        {/* <DoubleTapToClose /> */}
       </ScrollView>
     </View>
   );

@@ -1,6 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useState } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
   Chooseamountmodal,
@@ -9,7 +15,7 @@ import {
   Iconwithdatas,
   Input,
 } from "../../../components";
-import { COLORS, FONTS, fontsize, icons } from "../../../constants";
+import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import amountFormatter from "../../../utils/formatMoney";
 import { nameSplitter } from "../../../utils/nameSplitter";
@@ -23,15 +29,9 @@ import {
   handleOpenWithLinking,
 } from "../../../utils/handleOpenWithLinking";
 import useAlert from "../../../utils/useAlerts";
-const {
-  Withdrawicon,
-  Depositicon,
-  Newtransfericon,
-  Paybillicon,
-  Bluebankicon,
-  Bluewalleticon,
-  Blackcautionicon,
-} = icons;
+import { ScrollView } from "react-native-gesture-handler";
+const { Bluebankicon, Bluewalleticon } = icons;
+const { Paybills, Transfer, withdraw } = images;
 
 interface userObj {
   accountNo: string | null;
@@ -90,32 +90,25 @@ const HomeWallet = () => {
   const navigation = useNavigation();
   const walletOptions = [
     {
-      icon: <Withdrawicon />,
-      title: "Withdraw",
+      icon: withdraw,
+      title: "Withdraw cash from feather agents near you.",
       link: "Withdraw",
-      iconBg: "#E0EDD8",
+      iconBg: "#EDF3EB",
       onpress: () => navigation.navigate("Withdraw"),
     },
-    // {
-    //   icon: <Depositicon />,
-    //   title: "Deposit",
-    //   link: "Depositupdate",
-    //   iconBg: "#D2EAFD",
-    //   onpress: () => navigation.navigate("Depositupdate"),
-    // },
     {
-      icon: <Newtransfericon />,
-      title: "Transfer",
-      link: "Transfercash",
-      iconBg: "#FCF3D1",
-      onpress: () => openTransferModal(),
+      icon: Paybills,
+      title: "Pay Bills with speed and ease, at good rates.",
+      link: "Paybills",
+      iconBg: "#D2EAFD",
+      onpress: () => navigation.navigate("Paybills"),
     },
     {
-      icon: <Paybillicon />,
-      title: "Paybills",
-      link: "Paybills",
-      iconBg: "#E3CCFF",
-      onpress: () => navigation.navigate("Paybills"),
+      icon: Transfer,
+      title: "Transfer money to feather users and bank accounts.",
+      link: "Transfercash",
+      iconBg: "#F3EEFB",
+      onpress: () => openTransferModal(),
     },
   ];
   const transfercashoptions = [
@@ -222,6 +215,7 @@ const HomeWallet = () => {
           closeTransfercashinfoModal={closeTransfercashinfoModal}
           onpress={(userinfo) => {
             openTransferdetailsModal();
+            closeTransfercashinfoModal();
             setUserinfo(userinfo);
           }}
           amount={amount}
@@ -355,38 +349,7 @@ const HomeWallet = () => {
         </View>
       </TransferdetailsModal>
 
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={{
-            ...fontsize.smallest,
-            ...FONTS.medium,
-            color: COLORS.black,
-          }}
-        >
-          Padi, what do you want to do today?
-        </Text>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => console.log("hellow")}
-          style={{ padding: 8, borderRadius: 20 }}
-        >
-          <Blackcautionicon />
-        </TouchableOpacity>
-      </View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          marginTop: 22,
-        }}
-      >
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {walletOptions.map(
           (
             {
@@ -408,23 +371,42 @@ const HomeWallet = () => {
               animation="bounceIn"
               delay={index * 100}
               key={title}
+              style={{ marginHorizontal: 5 }}
             >
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={onpress}
-                style={styles.optionContainer}
+                style={[
+                  styles.optionContainer,
+                  {
+                    width: 148,
+                    height: 168,
+                    backgroundColor: iconBg,
+                    padding: 10,
+                    paddingBottom: 20,
+                    borderRadius: 20,
+                    justifyContent: "flex-end",
+                  },
+                ]}
               >
-                <View
-                  style={[styles.optionIconBg, { backgroundColor: iconBg }]}
-                >
-                  {icon}
-                </View>
+                <ImageBackground
+                  source={icon}
+                  resizeMode="cover"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                  }}
+                ></ImageBackground>
+
                 <Text style={styles.optionTitle}>{title}</Text>
               </TouchableOpacity>
             </Animatable.View>
           )
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 };

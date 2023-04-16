@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -21,20 +21,23 @@
       "enabled": false,
       "url": "https://u.expo.dev/93d5876e-2546-4e40-ad80-4fe20b9d48fa"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.feather.peer",
+      "bundleIdentifier": "com.featherpeer.user",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSContactsUsageDescription": "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
-        "NSLocationUsageDescription": "Allow Feather access to your location to find the nearest agent close to you"
+        "NSLocationUsageDescription": "Allow Feather access to your location to find the nearest agent close to you",
+        "NSUserTrackingUsageDescription": "We will use your data to provide a better and personalized ads to you.",
+        "NSLocationWhenInUseUsageDescription": "We use it to show you nearby restaurants and a map to pick up orders",
+        "NSLocationAlwaysUsageDescription": "We use it to show you nearby restaurants and a map to pick up orders",
+        "NSCameraUsageDescription": "We access your camera to let you customize your user display picture.",
+        "NSPhotoLibraryUsageDescription": "We access your photos to let you customize your user display picture."
       }
     },
     "android": {
-      "versionCode": 13,
+      "versionCode": 15,
       "package": "feather.peer",
       "googleServicesFile": "./google-services.json",
       "permissions": [
@@ -69,9 +72,7 @@
     },
     "description": "",
     "extra": {
-      "eas": {
-        "projectId": "93d5876e-2546-4e40-ad80-4fe20b9d48fa"
-      }
+      "eas": {}
     },
     "runtimeVersion": {
       "policy": "sdkVersion"

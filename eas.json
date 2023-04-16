@@ -14,9 +14,9 @@
   },
   "submit": {
     "production": {
-      "ios":{
+      "ios": {
         "appleId": "setongee@gmail.com",
-        "ascAppd": "6443868606",
+        "ascAppId": "6447082427",
         "appleTeamId": "MAWXBLK8A7"
       }
     }

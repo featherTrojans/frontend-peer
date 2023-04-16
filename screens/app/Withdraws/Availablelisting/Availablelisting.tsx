@@ -33,17 +33,6 @@ import Toast from "react-native-toast-message";
 const { Listingsdrop, Emptyicon, Loadinglocationanimate, Cryinganimate } =
   icons;
 
-const datas = [
-  {
-    title: "Peers",
-    data: [],
-  },
-  {
-    title: "Agents",
-    data: [],
-  },
-];
-
 const agentobjj = {
   amount: 200,
   duration: 20,
@@ -72,7 +61,6 @@ const Availablelisting = ({ navigation, route }: any) => {
   const { setCoords, coords, setDestinationCoords } =
     useContext(LocationContext);
   const { blueAlert } = useAlert();
-  const [agents, setAgents] = useState([]);
   const [charge, setCharge] = useState(0);
   const [negotiatecharge, setNegotiateCharge] = useState(0);
   const [activeType, setActiveType] = useState("peers");
@@ -103,11 +91,11 @@ const Availablelisting = ({ navigation, route }: any) => {
     closeModal: closeSuccessModal,
   } = useCustomModal();
 
-  useEffect(() => {
-    if (activate) {
-      handleSelectAgent(route.params?.activate);
-    }
-  }, [activate]);
+  // useEffect(() => {
+  //   if (activate) {
+  //     handleSelectAgent(route.params?.activate);
+  //   }
+  // }, [activate]);
   useEffect(() => {
     blueAlert(
       "Get cash easily from certified agents around you competitive transaction charges and fees"
@@ -155,12 +143,13 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: Number(amount),
         location: address,
       });
+      console.log(response.data, "hi i am here");
       if (response) {
-        handleSelectAgent(agentobjj);
+        if (response.data.data.length > 0) {
+          handleSelectAgent(response.data.data[0]);
+          setCharge(response.data.charges);
+        }
       }
-      setAgents(response.data.data);
-      setCharge(response.data.charges);
-      console.log(response);
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -170,7 +159,6 @@ const Availablelisting = ({ navigation, route }: any) => {
 
   const handleSelectAgent = (agentobj) => {
     setActiveAgent(agentobj);
-    openModal();
   };
 
   const handleNextNegotiateCharge = (amount) => {
@@ -204,7 +192,6 @@ const Availablelisting = ({ navigation, route }: any) => {
           openNextModal={handleNextRequestSummary}
           withdrawInfo={activeAgent}
           baseCharge={charge}
-          addedFee={negotiatecharge}
         />
       </TransationSummaryModal>
 
@@ -265,18 +252,17 @@ const Availablelisting = ({ navigation, route }: any) => {
           <View style={{ flex: 1, justifyContent: "flex-end" }}>
             <View
               style={{
-                height: 350,
+                height: 400,
                 backgroundColor: COLORS.white,
                 borderTopLeftRadius: 30,
                 borderTopRightRadius: 30,
               }}
             >
-              {datas.length > 0 ? (
+              {activeAgent?.username ? (
                 <View
                   style={{
                     // backgroundColor: "blue",
                     flex: 1,
-                    height: 200,
 
                     marginBottom: 10,
                     paddingHorizontal: 1,
@@ -287,7 +273,7 @@ const Availablelisting = ({ navigation, route }: any) => {
                     closeModal={closeModal}
                     openNextModal={() => {
                       closeModal();
-                      openNegotiateChargeModal();
+                      openTransactionSummaryModal();
                     }}
                   />
                 </View>
@@ -297,7 +283,7 @@ const Availablelisting = ({ navigation, route }: any) => {
                     // backgroundColor: "blue",
                     flex: 1,
                     height: 200,
-                    width: SIZES.width - 60,
+                    // width: SIZES.width - 60,
                     marginBottom: 10,
                     justifyContent: "center",
                     alignItems: "center",

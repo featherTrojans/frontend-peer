@@ -15,9 +15,6 @@ const { width, height } = Dimensions.get("screen");
 
 const Map = ({}) => {
   const { coords, destinationCoords } = useContext(LocationContext);
-
-  console.log(coords, "COORDS");
-  console.log(destinationCoords, "destinationCoords");
   const mapRef = useRef(null);
   // console.log("the map object",mapRef.current)
   useEffect(() => {

@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Animated
+  Animated,
 } from "react-native";
 import LottieView from "lottie-react-native";
 import * as Device from "expo-device";
@@ -17,7 +17,11 @@ import * as Notifications from "expo-notifications";
 import { useIsFocused, useScrollToTop } from "@react-navigation/native";
 import { TabActions, useLinkTo } from "@react-navigation/native";
 
-import { Backheader, Bottombtn, Transactionhistory } from "../../../../components";
+import {
+  Backheader,
+  Bottombtn,
+  Transactionhistory,
+} from "../../../../components";
 import { COLORS, icons, SIZES } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
@@ -122,9 +126,9 @@ const Transactions = ({ navigation }: any) => {
   const notificationListener = useRef();
   const responseListener = useRef();
   const isFocused = useIsFocused();
-  const [pageVerticalOffset, setPageVerticalOffset] = useState<number>(0)
+  const [pageVerticalOffset, setPageVerticalOffset] = useState<number>(0);
   const jumpToNewtransactions = TabActions.jumpTo("Transactions");
-  const PAGE_OFFSET_THRESHOLD = SIZES.height
+  const PAGE_OFFSET_THRESHOLD = SIZES.height;
   const scrollX = useRef<any>(new Animated.Value(0)).current;
 
   const EmptyComponent = () => {
@@ -141,20 +145,11 @@ const Transactions = ({ navigation }: any) => {
         <View style={styles.textContainer}>
           <Text style={styles.emptyContainerText}>
             Padi, you have not performed any transactions yet.{" "}
-            
           </Text>
         </View>
       </View>
     );
   };
-
-  const toTop = () => {
-    flatlistRef.current?.scrollToOffset({ animated: true, offset: 0 });
-  };
-
-  if (isFocused) {
-    toTop();
-  }
 
   useEffect(() => {
     getAllTransactions();
@@ -167,8 +162,6 @@ const Transactions = ({ navigation }: any) => {
       setTransations(response?.data?.data?.transactions);
       console.log(transactions, "unfiltered");
       console.log(formatData(transactions), "filtered");
-      
-      
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -180,20 +173,13 @@ const Transactions = ({ navigation }: any) => {
   const handleRefresh = () => {
     setRefreshing(true);
     getAllTransactions();
-    
   };
 
-
-
   return (
-    <View
-      style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}
-    >
+    <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
       <Backheader title="History" showArrow={false} />
       <View style={styles.contentContainer}>
         <Customstatusbar />
-
-        
 
         <View style={styles.listContainer}>
           {loading ? (
@@ -212,9 +198,8 @@ const Transactions = ({ navigation }: any) => {
                 ref={flatlistRef}
                 // style={{ paddingTop: 10 }}
                 data={formatData(transactions)}
-
                 // scrollEventThrottle={16}
-                onScroll={event => {
+                onScroll={(event) => {
                   setPageVerticalOffset(event.nativeEvent.contentSize.height);
                 }}
                 refreshControl={
@@ -242,9 +227,6 @@ const Transactions = ({ navigation }: any) => {
             </>
           )}
         </View>
-
-        
-
       </View>
     </View>
   );

@@ -5,14 +5,21 @@ import Custombutton from "../Custombutton/Custombutton";
 import { useNavigation } from "@react-navigation/native";
 import { nameSplitter } from "../../utils/nameSplitter";
 import { LocationContext } from "../../context/LocationContext";
+import Horizontaline from "../Horizontaline/Horizontaline";
 const { Purplechaticon, Editicon } = icons;
 
 const Withdrawinfo = ({ openNextModal, withdrawInfo, closeModal }) => {
   const { coords } = useContext(LocationContext);
   const navigation = useNavigation();
   return (
-    <View>
-      <View style={{ alignItems: "center", marginBottom: 40 }}>
+    <View style={{ paddingHorizontal: 20, paddingVertical: 20 }}>
+      <View
+        style={{
+          alignItems: "center",
+          marginBottom: 40,
+          marginHorizontal: 10,
+        }}
+      >
         <View
           style={{
             width: 48,
@@ -21,7 +28,7 @@ const Withdrawinfo = ({ openNextModal, withdrawInfo, closeModal }) => {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: COLORS.blue9,
-            marginBottom: 22,
+            marginBottom: 10,
           }}
         >
           <Text
@@ -47,8 +54,26 @@ const Withdrawinfo = ({ openNextModal, withdrawInfo, closeModal }) => {
             marginTop: 7,
           }}
         >
-          {withdrawInfo.duration}
+          {withdrawInfo.duration} away
         </Text>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          marginBottom: 10,
+          justifyContent: "space-between",
+          // padding: 20,
+        }}
+      >
+        <Text>Amount</Text>
+        <Text>{withdrawInfo.amount}</Text>
+      </View>
+      <Horizontaline marginV={5} />
+      <View style={{ marginVertical: 25 }}>
+        <Text style={{ marginBottom: 10 }}>
+          Total Charge (Base Charge + Your Charge)
+        </Text>
+        <Text>{withdrawInfo.amount}</Text>
       </View>
 
       <Text
@@ -65,7 +90,7 @@ const Withdrawinfo = ({ openNextModal, withdrawInfo, closeModal }) => {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          marginBottom: 20,
+          marginBottom: 25,
         }}
       >
         <View>
@@ -88,7 +113,7 @@ const Withdrawinfo = ({ openNextModal, withdrawInfo, closeModal }) => {
           <Editicon />
         </TouchableOpacity>
       </View>
-      <Custombutton btntext="Yeah Proceed" onpress={openNextModal} />
+      <Custombutton btntext="Make Payment" onpress={openNextModal} />
     </View>
   );
 };

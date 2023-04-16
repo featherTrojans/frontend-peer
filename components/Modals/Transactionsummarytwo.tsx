@@ -35,7 +35,7 @@ const Transactionsummary = ({ openNextModal, info, fromWithdraw = false }) => {
       >
         You are about to{" "}
         {fromWithdraw ? "send money to" : "receive payment from"}{" "}
-        <Text style={{ color: COLORS.blue9 }}>@{info.username}</Text>
+        <Text style={{ color: COLORS.blue9 }}>@{info.agentUsername}</Text>
       </Text>
 
       {/* <Sendingandreceive /> */}
@@ -129,7 +129,7 @@ const Transactionsummary = ({ openNextModal, info, fromWithdraw = false }) => {
                   color: COLORS.purple4,
                 }}
               >
-                {nameSplitter(info?.fullName)}
+                {nameSplitter(info?.agent)}
               </Text>
             </View>
             <Text
@@ -140,7 +140,7 @@ const Transactionsummary = ({ openNextModal, info, fromWithdraw = false }) => {
                 color: COLORS.blue9,
               }}
             >
-              {getFirstName(info?.fullName)}
+              {getFirstName(info?.agent)}
             </Text>
           </View>
         </View>

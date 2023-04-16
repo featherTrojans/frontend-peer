@@ -133,7 +133,6 @@ const listOfbanks = [
     name: "Zenith Bank Plc",
     logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FZenith%20Bank%20Logo%20(1).png?alt=media&token=3624b4f7-cf2c-4afc-a684-55bcc7e267df",
   },
-
 ];
 
 const Eachoption = ({ type, image, value, setBank, openModal }) => {
@@ -177,6 +176,7 @@ const Selectbank = ({ navigation, route }) => {
 
   const handleNextBankCash = (bankinfo) => {
     setAccountInformation(bankinfo);
+    closeModal();
     openTransactionDetailsModal();
   };
 
@@ -255,7 +255,7 @@ const Selectbank = ({ navigation, route }) => {
                   lineHeight: 27,
                 }}
               >
-                N{ amountFormatter( `${amount}`) }
+                N{amountFormatter(`${amount}`)}
               </Text>
             </View>
             <Horizontaline marginV={21} />
@@ -297,14 +297,14 @@ const Selectbank = ({ navigation, route }) => {
                 color: COLORS.green1,
               }}
             >
-               N{ amountFormatter( `${Number(amount) + 10 }`) }
+              N{amountFormatter(`${Number(amount) + 10}`)}
             </Text>
           </View>
           <Custombutton
             btntext="Great, Proceed"
             onpress={() => {
-              closeModal()
-              closeTransactionDetailsModal()
+              closeModal();
+              closeTransactionDetailsModal();
               navigation.navigate("Transferpin", {
                 info: {
                   username: bank.name,

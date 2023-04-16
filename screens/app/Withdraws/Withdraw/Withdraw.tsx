@@ -14,6 +14,7 @@ import {
   Chooseamountmodal,
   Custombutton,
   Horizontaline,
+  Loader,
   Mainwrapper,
   Viewbalance,
 } from "../../../../components";
@@ -49,7 +50,8 @@ interface withdrawobj {
 
 const Withdraw = ({ navigation }) => {
   const { errorAlert } = useAlert();
-
+  const [pendingRequest, setPendingRequests] = useState([]);
+  const [loading, setLoading] = useState(false);
   // i removed changed from the params passed to this useRef below
   const onViewChangeRef = useRef<
     ({ viewableItems, changed }: { viewableItems: any; changed: any }) => void
@@ -59,15 +61,22 @@ const Withdraw = ({ navigation }) => {
 
   useEffect(() => {
     getPendingRequest();
-    getAcceptedRequest();
+    // getAcceptedRequest();
   }, []);
 
   const getPendingRequest = async () => {
     setLoading(true);
     try {
       const response = await axiosCustom.get("/request/pending");
-      console.log(response.data.data, "Pending request datas");
-      setPendingRequests(response?.data?.data);
+      // navigate and pass information
+      if (response.data && response.data.data.length > 0) {
+        console.log(response.data.data, "Pending request datas");
+        setPendingRequests(response?.data?.data);
+        navigation.navigate("Requesterinfo", {
+          info: response?.data?.data[0],
+          comingFrom: 0,
+        });
+      }
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -107,6 +116,20 @@ const Withdraw = ({ navigation }) => {
 
     navigation.navigate("Availablelisting", { amount, activate: false });
   };
+
+  if (loading) {
+    return (
+      <Mainwrapper>
+        <>
+          <Backheader title="Withdraw" />
+          <View style={{ justifyContent: "center", flex: 1 }}>
+            <ActivityIndicator />
+          </View>
+        </>
+      </Mainwrapper>
+    );
+  }
+
   return (
     <Mainwrapper>
       <>
