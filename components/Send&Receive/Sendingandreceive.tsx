@@ -5,6 +5,8 @@ import InitialsBg from "../InitialsBg/InitialsBg";
 import { assetsDB, bankLogo } from "../../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
 import { nameSplitToTwo } from "../../utils/nameSplitter";
+
+
 const {
   
   Bonusiconlarge,
@@ -13,13 +15,13 @@ const {
 } = icons;
 
 interface SendingandreceiveProps {
-  senderName?: String;
-  receiverName?: String;
-  title?: String;
-  value?: String | null;
+  senderName?: string;
+  receiverName?: string;
+  title?: string;
+  value?: string | null;
   user?: any;
   otherUser?: any;
-  transId?: String
+  transId?: string
 };
 
 
@@ -43,12 +45,12 @@ const InitialsBgColor = ({name}) => {
 }
 
 const showImage = (
-  senderName: String,
-  receiverName: String,
-  title: string | null,
-  value?: String,
-  otherUser?: any,
-  transId?: String) => {
+  senderName,
+  receiverName,
+  title,
+  value,
+  otherUser,
+  transId="") => {
 
   const isVFD = transId?.includes("Feather", 0)
   

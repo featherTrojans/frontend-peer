@@ -9,8 +9,7 @@ export const styles = StyleSheet.create({
 
   detailsContainer: {
     paddingHorizontal: 26,
-    // paddingTop: 20,
-    // marginTop: 25,
+   
   },
 
   eachDetailContainer: {
@@ -30,16 +29,7 @@ export const styles = StyleSheet.create({
     color: COLORS.blue9,
     textTransform: "capitalize",
   },
-  // copyClipboardContainer: {
-  //   marginLeft: 12,
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  // },
-  // copyClipboardText: {
-  //   ...fontsize.xsmallest,
-  //   ...FONTS.medium,
-  //   marginLeft: 5,
-  // },
+
   topHeaderWrap: {
     backgroundColor: COLORS.white,
     borderBottomLeftRadius: 42,

@@ -71,6 +71,7 @@ export type RootStackParamList = {
   Shareandearn: undefined;
 Securityandprivacy: undefined;
 Verifybvncode: undefined;
+Businessdetails: undefined;
 
 
   //Notification

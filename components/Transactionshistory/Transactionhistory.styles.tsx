@@ -1,17 +1,11 @@
 import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, fontsize, FONTS } from "../../constants";
-import { Shadow } from "../../constants/theme";
 export const styles = StyleSheet.create({
   container: {
-    // paddingHorizontal: RFValue(15),
-    // paddingTop: RFValue(18),
-    // paddingBottom: RFValue(24),
-    // borderColor: COLORS.borderColor,
-    // borderWidth: 0.5,
+    
     borderRadius: RFValue(15),
     marginBottom:RFValue(35),
-    // ...Shadow
   },
 
   dateText: {

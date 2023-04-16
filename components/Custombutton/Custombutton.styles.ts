@@ -4,7 +4,6 @@ import { COLORS, FONTS, fontsize } from "../../constants";
 export const custombtnstyles = StyleSheet.create({
   btnstyle: {
     paddingVertical: 20,
-    
     borderRadius: 5,
   },
   btntextstyle: {
