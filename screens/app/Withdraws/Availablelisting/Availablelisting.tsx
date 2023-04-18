@@ -1,12 +1,4 @@
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Animated,
-  Easing,
-  FlatList,
-} from "react-native";
+import { Text, View, Animated, FlatList } from "react-native";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import LottieView from "lottie-react-native";
 
@@ -18,13 +10,11 @@ import { getCurrentLocation } from "../../../../utils/customLocation";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import {
   Backheader,
-  Horizontaline,
   Negotiatecharge,
   Successmodal,
 } from "../../../../components";
 import { doesIncludeActiveStates } from "../../../../utils/utils";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Requestuser from "../../../shared/RequestUser";
 import useCustomModal from "../../../../utils/useCustomModal";
 import Withdrawinfo from "../../../../components/Modals/Withdrawinfo";
 import RequestSummary from "../../../../components/Modals/RequestSummary";
@@ -96,6 +86,7 @@ const Availablelisting = ({ navigation, route }: any) => {
   //     handleSelectAgent(route.params?.activate);
   //   }
   // }, [activate]);
+  console.log(amount, "there is power in the name of Jesus");
   useEffect(() => {
     blueAlert(
       "Get cash easily from certified agents around you competitive transaction charges and fees"
@@ -143,15 +134,15 @@ const Availablelisting = ({ navigation, route }: any) => {
         amount: Number(amount),
         location: address,
       });
-      console.log(response.data, "hi i am here");
+
       if (response) {
-        if (response.data.data.length > 0) {
-          handleSelectAgent(response.data.data[0]);
-          setCharge(response.data.charges);
+        if (response.data.data) {
+          navigation.replace("Requesterinfo");
+          return;
         }
       }
     } catch (err) {
-      console.log(err.response);
+      console.log(err.response, "no status found , can you believe that");
     } finally {
       setLoading(false);
     }

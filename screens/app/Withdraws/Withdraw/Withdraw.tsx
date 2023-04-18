@@ -1,31 +1,14 @@
-import {
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Animated,
-  ActivityIndicator,
-} from "react-native";
-import React, { useState, useEffect, useRef } from "react";
-import LottieView from "lottie-react-native";
-import { COLORS, icons, SIZES } from "../../../../constants";
+import { View, ActivityIndicator } from "react-native";
+import React, { useState, useRef } from "react";
+import { icons } from "../../../../constants";
 import {
   Backheader,
   Chooseamountmodal,
-  Custombutton,
-  Horizontaline,
   Loader,
   Mainwrapper,
   Viewbalance,
 } from "../../../../components";
-import { withdrawstyles } from "./Withdraw.styles";
-import axiosCustom from "../../../../httpRequests/axiosCustom";
-import { RFValue } from "react-native-responsive-fontsize";
-import useCustomModal from "../../../../utils/useCustomModal";
-import Requestuser from "../../../shared/RequestUser";
 import useAlert from "../../../../utils/useAlerts";
-
-const { Acceptedcheck, Cryinganimate } = icons;
 
 type DataProps = {
   image: JSX.Element;
@@ -50,7 +33,7 @@ interface withdrawobj {
 
 const Withdraw = ({ navigation }) => {
   const { errorAlert } = useAlert();
-  const [pendingRequest, setPendingRequests] = useState([]);
+  const [withdrawrequest, setWithdrawrequest] = useState([]);
   const [loading, setLoading] = useState(false);
   // i removed changed from the params passed to this useRef below
   const onViewChangeRef = useRef<
@@ -58,52 +41,6 @@ const Withdraw = ({ navigation }) => {
   >(({ viewableItems, changed }) => {
     setViewIndex(viewableItems[0]?.index);
   });
-
-  useEffect(() => {
-    getPendingRequest();
-    // getAcceptedRequest();
-  }, []);
-
-  const getPendingRequest = async () => {
-    setLoading(true);
-    try {
-      const response = await axiosCustom.get("/request/pending");
-      // navigate and pass information
-      if (response.data && response.data.data.length > 0) {
-        console.log(response.data.data, "Pending request datas");
-        setPendingRequests(response?.data?.data);
-        navigation.navigate("Requesterinfo", {
-          info: response?.data?.data[0],
-          comingFrom: 0,
-        });
-      }
-    } catch (err) {
-      console.log(err.response);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getAcceptedRequest = async () => {
-    setLoading(true);
-    try {
-      const response = await axiosCustom.get("/request/accepted");
-      console.log(response.data.data, "Pending request datas");
-      setAcceptedRequests(response?.data?.data);
-    } catch (err) {
-      console.log(err.response);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const datas = [
-    {
-      title: "Pending Requests",
-      data: [],
-    },
-    { title: "Accepted Requests", data: [] },
-  ];
 
   const handleWithdraw = (amount) => {
     if (Number(amount) < 200) {

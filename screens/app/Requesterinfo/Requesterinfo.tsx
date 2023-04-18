@@ -1,18 +1,24 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
-import BottomSheet, {
-  BottomSheetScrollView,
-  BottomSheetFlatList,
-} from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import Horizontaline from "../../../components/Horizontaline/Horizontaline";
 import Custombutton from "../../../components/Custombutton/Custombutton";
 import Map from "../../shared/map/Map";
 import {
   Backheader,
+  Chooseamountmodal,
   Loader,
+  Mainwrapper,
   Negotiatecharge,
   Successmodal,
+  Viewbalance,
 } from "../../../components";
 import {
   getBottomSpace,
@@ -34,18 +40,18 @@ const {
 } = icons;
 
 interface withdrawobj {
-  fullName: string;
-  username: string;
+  reference: string;
   amount: string;
   charges: string;
-  createdAt: string;
-  meetupPoint: string;
-  negotiatedFee: string;
-  phoneNumber: string;
-  reference: string;
-  status: string;
   total: string;
-  userUid: string;
+  negotiatedFee: string;
+  agent: string;
+  agentUsername: string;
+  phoneNumber: string;
+  status: string;
+  meetupPoint: string;
+  createdAt: string;
+  image: null;
 }
 
 enum comingFromEnum {
@@ -56,10 +62,9 @@ enum comingFromEnum {
 }
 
 const Requesterinfo = ({ navigation, route }) => {
-  const info = route.params.info as withdrawobj;
-  const comingFrom = route.params.comingFrom as comingFromEnum;
-  const [screeninfoandprops, setScreeninfoandprops] = useState<{}>({});
   const [loading, setLoading] = useState(false);
+  const [screenLoading, setScreenLoading] = useState(true);
+  const [withdrawscreen, setWithdrawrequest] = useState(true);
   const {
     CustomModal: NegotiateChargeModal,
     openModal: openNegotiateChargeModal,
@@ -72,60 +77,38 @@ const Requesterinfo = ({ navigation, route }) => {
   } = useCustomModal();
   const { errorAlert, blueAlert } = useAlert();
   const snapPoints = useMemo(() => ["60%", "85%"], []);
-
+  const [info, setInfo] = useState<withdrawobj>({
+    reference: "",
+    amount: "",
+    charges: "",
+    total: "",
+    negotiatedFee: "",
+    agent: "",
+    agentUsername: "",
+    phoneNumber: "",
+    status: "",
+    meetupPoint: "",
+    createdAt: "",
+    image: null,
+  });
   useEffect(() => {
-    const datatosort: any = {
-      bottomButton: null,
-    };
-    switch (comingFrom) {
-      case comingFromEnum.withdrawPending:
-        datatosort.bottomButton = null;
-        break;
-      case comingFromEnum.withdrawAccepted:
-        datatosort.bottomButton = (
-          <Custombutton
-            bg="#11141A"
-            btntext="Make Payment"
-            onpress={() =>
-              navigation.navigate("Safetycautions", { info, comingFrom })
-            }
-          />
-        );
-        break;
-      case comingFromEnum.depositPending:
-        datatosort.bottomButton = (
-          <Custombutton
-            btntext="Accept Request"
-            onpress={handleAcceptRequest}
-          />
-        );
-        break;
-      case comingFromEnum.depositAccepted:
-        datatosort.bottomButton = (
-          <Custombutton
-            bg="#11141A"
-            btntext="Receive Payment"
-            onpress={() =>
-              navigation.navigate("Safetycautions", { info, comingFrom })
-            }
-          />
-        );
-        break;
-      default:
-        datatosort.bottomButton = null;
-    }
-    setScreeninfoandprops(datatosort);
+    getWithdrawRequest();
   }, []);
-
-  const handleAcceptRequest = async () => {
-    setLoading(true);
+  const getWithdrawRequest = async () => {
+    setScreenLoading(true);
     try {
-      await axiosCustom.put(`/request/accept/${info.reference}`);
-      navigation.navigate("Home");
+      const response = await axiosCustom.get("/request/accepted");
+      setInfo(response?.data?.data);
+      console.log("should get here baah");
+      console.log(response.data.data, "request datas");
+      if (response.data && response.data.data.length > 0) {
+        setInfo(response?.data?.data[0]);
+        setWithdrawrequest(false);
+      }
     } catch (err) {
-      errorAlert(err);
+      console.log(err.response);
     } finally {
-      setLoading(false);
+      setScreenLoading(false);
     }
   };
 
@@ -147,17 +130,64 @@ const Requesterinfo = ({ navigation, route }) => {
     closeSuccessModal();
     navigation.navigate("Home");
   };
+  const handleWithdraw = (amount) => {
+    if (Number(amount) < 200) {
+      errorAlert(
+        null,
+        "You can't make a withdraw request of less than NGN 200"
+      );
+      return;
+    }
 
-  const handleOpenNegotiateModal = () => {
-    blueAlert(
-      "Renegotiate the charges for this transaction and the requester will be notified immediately."
-    );
-    openNegotiateChargeModal();
+    navigation.navigate("Availablelisting", { amount, activate: false });
   };
+
+  if (screenLoading) {
+    return (
+      <Mainwrapper>
+        <>
+          <Backheader title="Withdraw" />
+          <View style={{ justifyContent: "center", flex: 1 }}>
+            <ActivityIndicator />
+          </View>
+        </>
+      </Mainwrapper>
+    );
+  }
+
+  if (withdrawscreen) {
+    return (
+      <Mainwrapper>
+        <>
+          <Backheader title="Withdraw" />
+          <View style={{ justifyContent: "space-between", flex: 1 }}>
+            <View style={{ paddingHorizontal: 15 }}>
+              <Viewbalance />
+            </View>
+
+            <View
+              style={{
+                paddingVertical: 36,
+                backgroundColor: "#fff",
+                paddingHorizontal: 15,
+                borderTopRightRadius: 22,
+                borderTopLeftRadius: 22,
+              }}
+            >
+              <Chooseamountmodal
+                headerText={"How much do you want to withdraw?"}
+                onpress={handleWithdraw}
+              />
+            </View>
+          </View>
+        </>
+      </Mainwrapper>
+    );
+  }
 
   return (
     <View style={{ paddingTop: getStatusBarHeight(true), flex: 1 }}>
-      <Map />
+      <Map tolocation={info.meetupPoint} />
       <Backheader title="Withdraw" />
       {loading && <Loader />}
 
@@ -173,6 +203,7 @@ const Requesterinfo = ({ navigation, route }) => {
           info={info}
           defaultAmount={info.negotiatedFee}
           openNextModal={handleNextNegotiateCharge}
+          withdrawAmount={0}
         />
       </NegotiateChargeModal>
 
@@ -263,7 +294,7 @@ const Requesterinfo = ({ navigation, route }) => {
                   ...FONTS.regular,
                 }}
               >
-                Total Charge (Base Charge + Your Charge)
+                Total Charge (Base Charge)
               </Text>
               <Text
                 style={{
@@ -461,7 +492,13 @@ const Requesterinfo = ({ navigation, route }) => {
             </View>
           </BottomSheetScrollView>
         </BottomSheet>
-        {screeninfoandprops?.bottomButton}
+        <Custombutton
+          bg="#11141A"
+          btntext="Make Payment"
+          onpress={() =>
+            navigation.navigate("Safetycautions", { info, comingFrom: 1 })
+          }
+        />
       </View>
     </View>
   );
