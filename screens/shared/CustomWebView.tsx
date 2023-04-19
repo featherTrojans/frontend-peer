@@ -11,18 +11,15 @@ const CustomWebView = ({ navigation, route }) => {
   const { url, reference, amount } = route.params;
   const callback_url = `https://featherwebview.com/?trxref=${reference}&reference=${reference}`;
   const onNavigationStateChange = (state: any) => {
-    // console.log(state);
     const { url } = state;
     if (!url) return;
-    if (url === callback_url) { 
-      
-        // sendPushNotification(
-        //   messageToken,
-        //   "Wallet Funding",
-        //   `Congrats🎉, You just funded your wallet with N${amount}`,
-        //   "Root"
-        // );
-   
+    if (url === callback_url) {
+      // sendPushNotification(
+      //   messageToken,
+      //   "Wallet Funding",
+      //   `Congrats🎉, You just funded your wallet with N${amount}`,
+      //   "Root"
+      // );
 
       webviewRef.current?.stopLoading();
       navigation.navigate("Home");

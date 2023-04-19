@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
@@ -51,7 +52,7 @@ interface withdrawobj {
   status: string;
   meetupPoint: string;
   createdAt: string;
-  image: null;
+  agentImage: null;
 }
 
 enum comingFromEnum {
@@ -62,6 +63,7 @@ enum comingFromEnum {
 }
 
 const Requesterinfo = ({ navigation, route }) => {
+  const comingback = route?.params?.comingback;
   const [loading, setLoading] = useState(false);
   const [screenLoading, setScreenLoading] = useState(true);
   const [withdrawscreen, setWithdrawrequest] = useState(true);
@@ -89,11 +91,13 @@ const Requesterinfo = ({ navigation, route }) => {
     status: "",
     meetupPoint: "",
     createdAt: "",
-    image: null,
+    agentImage: null,
   });
+
+  console.log(comingback, "alright alright");
   useEffect(() => {
     getWithdrawRequest();
-  }, []);
+  }, [navigation]);
   const getWithdrawRequest = async () => {
     setScreenLoading(true);
     try {
@@ -187,7 +191,7 @@ const Requesterinfo = ({ navigation, route }) => {
 
   return (
     <View style={{ paddingTop: getStatusBarHeight(true), flex: 1 }}>
-      <Map tolocation={info.meetupPoint} />
+      {/* <Map tolocation={info.meetupPoint} /> */}
       <Backheader title="Withdraw" />
       {loading && <Loader />}
 
@@ -230,15 +234,24 @@ const Requesterinfo = ({ navigation, route }) => {
                     marginBottom: 22,
                   }}
                 >
-                  <Text
-                    style={{
-                      ...fontsize.bbsmall,
-                      color: COLORS.white,
-                      ...FONTS.medium,
-                    }}
-                  >
-                    {nameSplitter(info.agent)}
-                  </Text>
+                  {info.agentImage ? (
+                    <Image
+                      style={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+                      source={{
+                        uri: info.agentImage,
+                      }}
+                    />
+                  ) : (
+                    <Text
+                      style={{
+                        ...fontsize.bbsmall,
+                        color: COLORS.white,
+                        ...FONTS.medium,
+                      }}
+                    >
+                      {nameSplitter(info.agent)}
+                    </Text>
+                  )}
                 </View>
                 <Text
                   style={{
@@ -249,7 +262,7 @@ const Requesterinfo = ({ navigation, route }) => {
                 >
                   {info.agent}
                 </Text>
-                <Text
+                {/* <Text
                   style={{
                     ...fontsize.smallest,
                     ...FONTS.regular,
@@ -258,7 +271,7 @@ const Requesterinfo = ({ navigation, route }) => {
                   }}
                 >
                   {info.meetupPoint} Mins Away
-                </Text>
+                </Text> */}
               </View>
 
               <View
@@ -492,13 +505,6 @@ const Requesterinfo = ({ navigation, route }) => {
             </View>
           </BottomSheetScrollView>
         </BottomSheet>
-        <Custombutton
-          bg="#11141A"
-          btntext="Make Payment"
-          onpress={() =>
-            navigation.navigate("Safetycautions", { info, comingFrom: 1 })
-          }
-        />
       </View>
     </View>
   );

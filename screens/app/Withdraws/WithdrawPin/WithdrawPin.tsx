@@ -60,8 +60,7 @@ const WithdrawPin = ({ navigation, route }) => {
 
   const handleApproveRequest = async (pin) => {
     const joinpin = pin.join("");
-    console.log("------------------------PIN--------------------------");
-    console.log(pin);
+
     if (joinpin.length < 4) {
       return false;
     }
@@ -72,8 +71,6 @@ const WithdrawPin = ({ navigation, route }) => {
         user_pin: joinpin,
         agreedCharge: Number(charge),
       });
-
-      console.log(response, "Cancel, there's a something");
       openModal();
       successAlert(
         "Your cash withdrawal transaction was successful and you've been credited."
@@ -114,7 +111,8 @@ const WithdrawPin = ({ navigation, route }) => {
               textAlign: "center",
             }}
           >
-            You are about to send N{amountFormatter(info?.amount)} from your
+            You are about to send N
+            {amountFormatter(Number(info?.amount) + Number(charge))} from your
             Primary Wallet to @{info?.agentUsername} - {info?.agent}
           </Text>
         </View>

@@ -29,7 +29,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getPeriod } from "../../../utils/getDayPeriod";
 import { nameToShow } from "../../../utils/nameToShow";
 
-
 const { Smile, Winkinganimate } = icons;
 
 const Welcome = ({ navigation, route }) => {
@@ -54,7 +53,7 @@ const Welcome = ({ navigation, route }) => {
     const sendRegistrationMessage = () => {
       if (fromm == "setup" && authdata?.userDetails?.fullName) {
         // checked = false
-        console.log("push from setup");
+
         sendSchedulePushNotification(
           "Acccount Registration",
           `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
@@ -72,9 +71,6 @@ const Welcome = ({ navigation, route }) => {
   useEffect(() => {
     const sendMessage = () => {
       if (fromm !== "setup" && authdata?.userDetails?.fullName) {
-        console.log("push from login new");
-        // console.log(authdata, "Here is the authdata")
-        // console.log(authdata?.userDetails?.fullName)
         sendSchedulePushNotification(
           "Welcome Back Padi! 🎉",
           "Do more today. Enjoy financial flexibility"
@@ -105,12 +101,12 @@ const Welcome = ({ navigation, route }) => {
       const response = await axiosCustom.get("/dashboard");
       await sendTokenToDB(messageToken);
 
-      if(!response?.data?.data?.userDetails?.isVerified){
-        return navigation.navigate("Verification",{
+      if (!response?.data?.data?.userDetails?.isVerified) {
+        return navigation.navigate("Verification", {
           email: response?.data?.data?.userDetails?.email,
           phoneNumber: response?.data?.data?.userDetails?.phoneNumber,
           token: token,
-        })
+        });
       }
       setAuthData(response?.data?.data);
       // setTokenOnComplete()
@@ -126,12 +122,9 @@ const Welcome = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-
-
       <View style={styles.container}>
         {/* Smiling Icon */}
         <Customstatusbar />
-
 
         <View
           style={{
@@ -187,9 +180,6 @@ const Welcome = ({ navigation, route }) => {
               : "Hey welcome back to feather, transact more today, earn more with cash deposits."}
           </Text>
         </View>
-
-
-        
       </View>
     </SafeAreaView>
   );

@@ -16,8 +16,6 @@ const { Sendingarrow, Receivingarrow } = icons;
 const Transactionsummary = ({ openNextModal, info, fromWithdraw = false }) => {
   const { authdata } = useContext(AuthContext);
 
-  console.log(info, "here is the info from transaction summary");
-
   return (
     <View>
       <Text

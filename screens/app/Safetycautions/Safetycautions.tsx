@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
   Backheader,
   Mainwrapper,
@@ -38,6 +38,7 @@ enum comingFromEnum {
 const Safetycautions = ({ navigation, route }) => {
   const info = route.params.info as withdrawobj;
   const comingFrom = route.params.comingFrom as comingFromEnum;
+  const [negotiatedamount, setnegotiatedamount] = useState(0);
   const { CustomModal, closeModal, openModal } = useCustomModal();
   const {
     CustomModal: AmountModal,
@@ -51,18 +52,17 @@ const Safetycautions = ({ navigation, route }) => {
   } = useCustomModal();
 
   const handleNexttwo = (charge) => {
+    setnegotiatedamount(charge);
     closeAmountModal();
-    navigation.navigate("WithdrawPin", { info: info, charge: charge });
+    openModal();
   };
 
   const handleNext = () => {
     closeModal();
-    if (comingFromEnum.withdrawAccepted === comingFrom) {
-      pinOpenModal();
-    } else {
-      openAmountModal();
-      // navigation.navigate("WithdrawPin", info);
-    }
+    navigation.navigate("WithdrawPin", {
+      info: info,
+      charge: negotiatedamount,
+    });
   };
 
   return (
@@ -78,7 +78,7 @@ const Safetycautions = ({ navigation, route }) => {
       </AmountModal>
       <CustomModal>
         <Transactionsummarytwo
-          info={info}
+          info={{ ...info, negotiatedFee: negotiatedamount }}
           openNextModal={handleNext}
           fromWithdraw={
             comingFromEnum.withdrawAccepted == comingFrom ? true : false
@@ -168,7 +168,7 @@ const Safetycautions = ({ navigation, route }) => {
         <Custombutton
           btntext="I Understand, Proceed"
           bg={COLORS.blue9}
-          onpress={openModal}
+          onpress={openAmountModal}
         />
       </View>
     </Mainwrapper>

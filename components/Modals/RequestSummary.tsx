@@ -38,7 +38,7 @@ const RequestSummary = ({
       meetupPoint: coords.locationText,
       negotiatedFee: 0,
     };
-    console.log(data);
+
     try {
       await axiosCustom.post("/request/create", data);
       openNextModal();

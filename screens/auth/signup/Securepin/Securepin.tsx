@@ -13,7 +13,7 @@ import { securepinstyles } from "./Securepin.styles";
 const { SecureDot, Newlogo } = icons;
 const Securepin = ({ route, navigation }) => {
   const { token, fromm } = route.params;
-  const { errorAlert } = useAlert()
+  const { errorAlert } = useAlert();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
 
@@ -30,32 +30,24 @@ const Securepin = ({ route, navigation }) => {
     }
   };
 
- 
   const handleNext = () => {
     if (pin.join("") === "0000") {
-
       return errorAlert(null, "Pin cannot be set to 0000");
     }
     navigation.navigate("SecurepinAgain", { token, pin, fromm });
   };
 
   useEffect(() => {
-    if(pin.length === 4){
-      console.log(pin, "here is rhe pin");
-      handleNext()
+    if (pin.length === 4) {
+      handleNext();
     }
-    
-  }, [pin])
-
+  }, [pin]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <Customstatusbar />
 
       <View style={securepinstyles.container}>
-
-
-
         <View
           style={{
             flexDirection: "row",
@@ -91,10 +83,6 @@ const Securepin = ({ route, navigation }) => {
           </Text>
         </View>
 
-
-
-
-
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <View style={securepinstyles.pinInputContainer}>
             <View
@@ -124,15 +112,13 @@ const Securepin = ({ route, navigation }) => {
           </View>
         </View>
 
-        <View style={{ flex: 1, }} />
+        <View style={{ flex: 1 }} />
 
-          <Keyboard
-            array={[...numbers]}
-            setDigit={handleSetAmount}
-            removeDigit={handleRemoveAmount}
-          />
-
-    
+        <Keyboard
+          array={[...numbers]}
+          setDigit={handleSetAmount}
+          removeDigit={handleRemoveAmount}
+        />
       </View>
     </SafeAreaView>
   );

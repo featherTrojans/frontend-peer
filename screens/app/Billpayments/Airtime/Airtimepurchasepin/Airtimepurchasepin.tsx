@@ -36,8 +36,8 @@ const Airtimepurchasepin = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [showmodal, setShowModal] = useState(false);
   const { messageToken, authdata } = useContext(AuthContext);
-  const {CustomModal, openModal, closeModal} = useCustomModal()
-  const {errorAlert} = useAlert()
+  const { CustomModal, openModal, closeModal } = useCustomModal();
+  const { errorAlert } = useAlert();
 
   const handleSetAmount = (value: string) => {
     if (pin.length < 4) {
@@ -52,108 +52,162 @@ const Airtimepurchasepin = ({ navigation, route }) => {
     }
   };
   useEffect(() => {
-    if(pin.length === 4){
-      handleSubmit()
+    if (pin.length === 4) {
+      handleSubmit();
     }
-  }, [pin])
+  }, [pin]);
 
-  
-  const handleSubmit = async ()=>{
-    console.log("airtimeprchase datas", type, data, pin);
-
-    setLoading(true)
-    try{
-      if(type === "airtime"){
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      if (type === "airtime") {
         // console.log("airtimeprchase datas", data, airtime);
         const sendingDatas = {
-            phone : data.phone,
-            network: data.network,
-            amount: data.amount,
-        }
-        await axiosCustom.post("/bills/airtime",{...sendingDatas, userPin: pin.join("")})
-        
-      }else{
-        await axiosCustom.post("/bills/electricity",{...data, userPin: pin.join("")})
+          phone: data.phone,
+          network: data.network,
+          amount: data.amount,
+        };
+        await axiosCustom.post("/bills/airtime", {
+          ...sendingDatas,
+          userPin: pin.join(""),
+        });
+      } else {
+        await axiosCustom.post("/bills/electricity", {
+          ...data,
+          userPin: pin.join(""),
+        });
       }
-      openModal()
-    }catch(err){
-      errorAlert(err)
-      setPin([])
-    }finally{
-      setLoading(false)
+      openModal();
+    } catch (err) {
+      errorAlert(err);
+      setPin([]);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
   return (
     <Mainwrapper>
       {loading && <Loader />}
 
       <CustomModal>
-        <Successmodal btnText="Yeah, proceed" successMsg="Transaction Succesfull" btnFunction={()=>navigation.navigate("Home")}/>
+        <Successmodal
+          btnText="Yeah, proceed"
+          successMsg="Transaction Succesfull"
+          btnFunction={() => navigation.navigate("Home")}
+        />
       </CustomModal>
-      <View style={{paddingHorizontal: 15, flex: 1}}>
-        <View style={{marginTop: 32}}>
-          <Text style={{...fontsize.bbsmall, ...FONTS.medium, color: COLORS.blue9, marginBottom: 20}}>Complete Transaction</Text>
-          {type === "airtime" && 
-          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to purchase <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue6}}>N{data.amount}</Text> airtime from your Primary Wallet to <Text style={{color: COLORS.blue6}}>{data.phone}</Text></Text>
-          }
-          {type === "data" && 
-          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>You are about to purchase <Text style={{...fontsize.smaller, ...FONTS.bold, color: COLORS.blue6}}>N5,000</Text> data from your Primary Wallet to <Text style={{color: COLORS.blue6}}>08133211658</Text></Text>
-          }
-          
+      <View style={{ paddingHorizontal: 15, flex: 1 }}>
+        <View style={{ marginTop: 32 }}>
+          <Text
+            style={{
+              ...fontsize.bbsmall,
+              ...FONTS.medium,
+              color: COLORS.blue9,
+              marginBottom: 20,
+            }}
+          >
+            Complete Transaction
+          </Text>
+          {type === "airtime" && (
+            <Text
+              style={{
+                ...fontsize.smallest,
+                ...FONTS.regular,
+                color: COLORS.grey2,
+                lineHeight: 20,
+              }}
+            >
+              You are about to purchase{" "}
+              <Text
+                style={{
+                  ...fontsize.smaller,
+                  ...FONTS.bold,
+                  color: COLORS.blue6,
+                }}
+              >
+                N{data.amount}
+              </Text>{" "}
+              airtime from your Primary Wallet to{" "}
+              <Text style={{ color: COLORS.blue6 }}>{data.phone}</Text>
+            </Text>
+          )}
+          {type === "data" && (
+            <Text
+              style={{
+                ...fontsize.smallest,
+                ...FONTS.regular,
+                color: COLORS.grey2,
+                lineHeight: 20,
+              }}
+            >
+              You are about to purchase{" "}
+              <Text
+                style={{
+                  ...fontsize.smaller,
+                  ...FONTS.bold,
+                  color: COLORS.blue6,
+                }}
+              >
+                N5,000
+              </Text>{" "}
+              data from your Primary Wallet to{" "}
+              <Text style={{ color: COLORS.blue6 }}>08133211658</Text>
+            </Text>
+          )}
         </View>
 
+        <View
+          style={{ alignItems: "center", flex: 1, justifyContent: "center" }}
+        >
+          <Text
+            style={{
+              marginBottom: 60,
+              ...fontsize.smaller,
+              ...FONTS.regular,
+              color: COLORS.blue9,
+            }}
+          >
+            Enter your Feather PIN
+          </Text>
 
-
-          <View style={{ alignItems: "center", flex: 1, justifyContent: "center"}}>
-            <Text style={{marginBottom: 60, ...fontsize.smaller, ...FONTS.regular, color: COLORS.blue9}}>Enter your Feather PIN</Text>
-
-
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <View style={securepinstyles.pinInputContainer}>
-                <View
-                  style={[
-                    securepinstyles.pinView,
-                    { backgroundColor: pin[0] ? COLORS.blue6 : COLORS.grey3 },
-                  ]}
-                />
-                <View
-                  style={[
-                    securepinstyles.pinView,
-                    { backgroundColor: pin[1] ? COLORS.blue6 : COLORS.grey3 },
-                  ]}
-                />
-                <View
-                  style={[
-                    securepinstyles.pinView,
-                    { backgroundColor: pin[2] ? COLORS.blue6 : COLORS.grey3 },
-                  ]}
-                />
-                <View
-                  style={[
-                    securepinstyles.pinView,
-                    { backgroundColor: pin[3] ? COLORS.blue6 : COLORS.grey3 },
-                  ]}
-                />
-              </View>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <View style={securepinstyles.pinInputContainer}>
+              <View
+                style={[
+                  securepinstyles.pinView,
+                  { backgroundColor: pin[0] ? COLORS.blue6 : COLORS.grey3 },
+                ]}
+              />
+              <View
+                style={[
+                  securepinstyles.pinView,
+                  { backgroundColor: pin[1] ? COLORS.blue6 : COLORS.grey3 },
+                ]}
+              />
+              <View
+                style={[
+                  securepinstyles.pinView,
+                  { backgroundColor: pin[2] ? COLORS.blue6 : COLORS.grey3 },
+                ]}
+              />
+              <View
+                style={[
+                  securepinstyles.pinView,
+                  { backgroundColor: pin[3] ? COLORS.blue6 : COLORS.grey3 },
+                ]}
+              />
             </View>
           </View>
-            
-
-        <View>
-
         </View>
+
+        <View></View>
       </View>
-   
 
-     
-
-
-
-     
-
-
-
-        <Keyboard  array={[...numbers ]} setDigit={handleSetAmount} removeDigit={handleRemoveAmount}/>
+      <Keyboard
+        array={[...numbers]}
+        setDigit={handleSetAmount}
+        removeDigit={handleRemoveAmount}
+      />
 
       {/* <Bottombtn title="PROCEED" onpress={() => handleSubmit(data)} /> */}
     </Mainwrapper>

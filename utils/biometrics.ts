@@ -25,10 +25,9 @@ const getCredentials = async () => {
   }
 };
 
-
 const deleteCredentials = async () => {
   try {
-     await SecureStore.deleteItemAsync("credentials");
+    await SecureStore.deleteItemAsync("credentials");
   } catch (e) {
     console.log(e);
   }
@@ -37,7 +36,6 @@ const deleteCredentials = async () => {
 const saveBiometricsAccess = async () => {
   try {
     await SecureStore.setItemAsync("savebiometrics", "true");
-    console.log("Access stored")
   } catch (err) {
     console.log(err);
   }
@@ -45,9 +43,8 @@ const saveBiometricsAccess = async () => {
 
 const getBiometricsAccess = async () => {
   try {
-   const checkIfAccess = await SecureStore.getItemAsync("savebiometrics");
-   return checkIfAccess
-    console.log("Get Access Status", checkIfAccess)
+    const checkIfAccess = await SecureStore.getItemAsync("savebiometrics");
+    return checkIfAccess;
   } catch (err) {
     console.log(err);
   }
@@ -55,7 +52,6 @@ const getBiometricsAccess = async () => {
 const removeBiometricsAccess = async () => {
   try {
     await SecureStore.deleteItemAsync("savebiometrics");
-    console.log("Access locked")
   } catch (err) {
     console.log(err);
   }
@@ -67,5 +63,5 @@ export {
   deleteCredentials,
   saveBiometricsAccess,
   getBiometricsAccess,
-  removeBiometricsAccess
+  removeBiometricsAccess,
 };

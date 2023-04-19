@@ -15,9 +15,6 @@ import { AuthContext } from "../../context/AuthContext";
 const { Sendingarrow, Receivingarrow } = icons;
 const Transactionsummary = ({ openNextModal, info, fromWithdraw = false }) => {
   const { authdata } = useContext(AuthContext);
-
-  console.log(info, "here is the info from transaction summary");
-
   return (
     <View>
       <Text
@@ -196,7 +193,7 @@ const Transactionsummary = ({ openNextModal, info, fromWithdraw = false }) => {
             color: COLORS.blue9,
           }}
         >
-          My Added fee
+          Added fee
         </Text>
         <Text
           style={{

@@ -49,8 +49,6 @@ const showImage = (
   otherUser?: any,
   transId?: string
 ) => {
-  // console.log(transId, "Heer is the iud");
-
   const isVFD = transId?.includes("Feather", 0);
 
   switch (title) {

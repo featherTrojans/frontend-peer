@@ -1,23 +1,16 @@
-import { StyleSheet, Text, View, StatusBar, TextInput } from "react-native";
+import { Text, View, TextInput } from "react-native";
 import React, { useState } from "react";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { styles } from "./Cancelrequest.styles";
 import {
   Backheader,
-  Bottombtn,
   Custombutton,
-  Horizontaline,
   Loader,
   Mainwrapper,
 } from "../../../../components";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import showerror from "../../../../utils/errorMessage";
 import { useToast } from "react-native-toast-notifications";
 import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import Customstatusbar from "../../../shared/Customstatusbar";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import useAlert from "../../../../utils/useAlerts";
 

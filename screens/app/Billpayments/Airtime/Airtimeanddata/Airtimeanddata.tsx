@@ -1,32 +1,35 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import { Backheader, Chooseamountmodal, Custombutton, Mainwrapper } from "../../../../../components";
+import {
+  Backheader,
+  Chooseamountmodal,
+  Custombutton,
+  Mainwrapper,
+} from "../../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../../constants";
 import useCustomModal from "../../../../../utils/useCustomModal";
 import useAlert from "../../../../../utils/useAlerts";
 
 const { Forwardarrow, Airtimeicon, Mobiledataicon } = icons;
-const Airtimeanddata = ({navigation}) => {
-
-  const [amount, setAmount] = useState(0)
-  const {CustomModal, openModal, closeModal} = useCustomModal()
-  const {purpleAlert} = useAlert()
-
+const Airtimeanddata = ({ navigation }) => {
+  const [amount, setAmount] = useState(0);
+  const { CustomModal, openModal, closeModal } = useCustomModal();
+  const { purpleAlert } = useAlert();
 
   const typedatas = [
     {
       bg: "#D2EAFD",
       icon: <Airtimeicon />,
       title: "Airtime Purchase",
-      action: () => openModal()
+      action: () => openModal(),
     },
     {
       bg: "#F1E5FF",
       icon: <Mobiledataicon />,
       title: "Mobile Data Purchase",
-      action: () => purpleAlert("Oops, Data purchase not available at the moment!", true)
+      action: () =>
+        purpleAlert("Oops, Data purchase not available at the moment!", true),
       // action: () => navigation.navigate("Dataprovider", {billType: "data"})
-
     },
   ];
 
@@ -34,21 +37,21 @@ const Airtimeanddata = ({navigation}) => {
     <Mainwrapper>
       <Backheader title="Airtime & Data Purchase" />
 
-
-
-    <CustomModal>
-      <View>
-          <Chooseamountmodal 
-            headerText="How much airtime do you want to purchase?" 
+      <CustomModal>
+        <View>
+          <Chooseamountmodal
+            headerText="How much airtime do you want to purchase?"
             onpress={(amount) => {
-            console.log(amount, "Here is the amount");  
-            closeModal()
-            navigation.navigate("Airtimeprovider", {billType: "airtime", amount})
-          }}/>
-        {/* <Custombutton btntext="Continue" onpress={() => navigation.navigate("Airtimeprovider")}/> */}
-      </View>
-      
-    </CustomModal>
+              closeModal();
+              navigation.navigate("Airtimeprovider", {
+                billType: "airtime",
+                amount,
+              });
+            }}
+          />
+          {/* <Custombutton btntext="Continue" onpress={() => navigation.navigate("Airtimeprovider")}/> */}
+        </View>
+      </CustomModal>
 
       <View style={{ paddingHorizontal: 15 }}>
         <View
@@ -75,8 +78,8 @@ const Airtimeanddata = ({navigation}) => {
             return (
               <View key={index}>
                 <TouchableOpacity
-                onPress={action}
-                activeOpacity={0.8}
+                  onPress={action}
+                  activeOpacity={0.8}
                   style={{
                     flexDirection: "row",
                     alignItems: "center",

@@ -13,19 +13,17 @@ export const getCurrentLocation = async () => {
       async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
-          console.log("Permission to access location was denied");
           return;
         }
         return await Location.getCurrentPositionAsync({ accuracy: 6 });
       }
     );
 
-    console.log("SHOULD BE INSIDE HERE", location);
     Location.setGoogleApiKey("AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY");
     locationaddress = await Location.reverseGeocodeAsync(location.coords, {
       useGoogleMaps: true,
     });
-    console.log(locationaddress[0], "location address");
+
     locationText = `${locationaddress[0].name}, ${locationaddress[0].city}`;
   } catch (err) {
     console.log(err, "ERROROROROR");

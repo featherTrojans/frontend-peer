@@ -14,26 +14,29 @@ const { width, height } = Dimensions.get("screen");
 // }
 
 const Map = ({ tolocation = "" }) => {
-  const { coords, destinationCoords } = useContext(LocationContext);
+  const { coords } = useContext(LocationContext);
+  const [destinationCoords, setDestinationCoords] = useState({});
   const mapRef = useRef(null);
-  // console.log("the map object",mapRef.current)
+  useEffect(() => {
+    getLocationCoords(tolocation);
+  }, [tolocation]);
   useEffect(() => {
     //    if(!coords.latitude || !destinationCoords.latitude ) return false
     if (mapRef.current) {
-      //    console.log("should run again")
       mapRef.current.fitToSuppliedMarkers(["peer", "agent"], {
         edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
       });
     }
   }, [coords?.latitude, destinationCoords?.latitude]);
 
-  if (coords == undefined || coords == null) {
-    return null;
-  }
+  const getLocationCoords = async (address) => {
+    const destinationobj = await Location.geocodeAsync(address);
 
-  if (destinationCoords == undefined || destinationCoords == null) {
-    return null;
-  }
+    if (destinationobj.length > 0) {
+      const destination = destinationobj[0];
+      setDestinationCoords(destination);
+    }
+  };
 
   return (
     <View
@@ -84,9 +87,9 @@ const Map = ({ tolocation = "" }) => {
               latitude: Number(destinationCoords.latitude),
               longitude: Number(destinationCoords.longitude),
             }}
-            strokeWidth={4}
+            strokeWidth={5}
             strokeColor="blue"
-            apikey={"AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY"}
+            apikey={"AIzaSyAgzIQS3AE66cvobouyA_hD4L62iMWsYT4"}
           />
         )}
         {coords.latitude && destinationCoords.latitude && (

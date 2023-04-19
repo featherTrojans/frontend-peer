@@ -12,19 +12,16 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 import useAlert from "../../../../utils/useAlerts";
 
-
 const setAuthorizationToken = (token: string) => {
   if (token) {
     axiosCustom.defaults.headers.common["token"] = token;
   }
 };
 
-
 const { Successcheckanimate, Newlogo } = icons;
 
- 
 const SecurepinAgain = ({ route, navigation }) => {
-  const {errorAlert} = useAlert()
+  const { errorAlert } = useAlert();
   const { token, pin, fromm } = route.params;
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,8 +29,6 @@ const SecurepinAgain = ({ route, navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState<any>();
 
-  console.log('------------------------TOKEN--------------------------');
-  console.log(token);
   const handleSubmit = async () => {
     if (pin.join("") !== amount.join("")) {
       return errorAlert(null, "Pin doesn't match");
@@ -47,7 +42,7 @@ const SecurepinAgain = ({ route, navigation }) => {
         { headers: { token: token } }
       );
       setResult(response.data.data);
-      setAuthorizationToken(response?.data?.data?.token)
+      setAuthorizationToken(response?.data?.data?.token);
       setShowModal(true);
     } catch (err) {
       errorAlert(err);
@@ -71,7 +66,6 @@ const SecurepinAgain = ({ route, navigation }) => {
 
   useEffect(() => {
     if (amount.length === 4) {
-      console.log(pin, "here is rhe amount");
       handleSubmit();
     }
   }, [amount]);

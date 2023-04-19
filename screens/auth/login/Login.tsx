@@ -83,8 +83,7 @@ const Login = ({ navigation }: any) => {
         });
       }
     } catch (err) {
-      console.log("there is an err")
-      errorAlert(err)
+      errorAlert(err);
     } finally {
       setLoading(false);
     }
@@ -101,7 +100,6 @@ const Login = ({ navigation }: any) => {
   useEffect(() => {
     const checkStatus = async () => {
       const response = await getBiometricsAccess();
-      console.log(response, "here is it");
       setEnableBiometrics(response);
     };
 

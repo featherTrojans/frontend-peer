@@ -9,7 +9,7 @@ const permissiontypes = {
 const getAndroidPermission = async (title, message, type) => {
   if (Platform.OS == "android") {
     let statusbool = await PermissionsAndroid.check(permissiontypes[type]);
-    console.log(statusbool, "this is the status");
+
     if (statusbool) {
       return true;
     }

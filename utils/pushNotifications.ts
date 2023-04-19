@@ -15,12 +15,9 @@ export const registerForPushNotificationsAsync = async () => {
     finalStatus = status;
   }
   if (finalStatus !== "granted") {
-    console.log("Failed to get push token for push notification!");
     return;
   }
   token = (await Notifications.getExpoPushTokenAsync()).data;
-
-
 
   if (Platform.OS === "android") {
     Notifications.setNotificationChannelAsync("default", {
@@ -33,9 +30,6 @@ export const registerForPushNotificationsAsync = async () => {
 
   return token;
 };
-
-
-
 
 //Schdeule Push Notifications
 
@@ -50,20 +44,17 @@ export const sendSchedulePushNotification = async (title, message) => {
   });
 };
 
-export const sendTokenToDB = async(token:string)=>{
-  
+export const sendTokenToDB = async (token: string) => {
   const tokenExtractor = (string: any) => {
     const firstIndex = string.indexOf("[");
     return string.slice(firstIndex + 1, -1);
   };
   try {
-    
     const response = await axiosCustom.post("/auth/token/create", {
       messageToken: token,
     });
-    return response
+    return response;
   } catch (err) {
     console.log(err.response);
   }
-}
-
+};

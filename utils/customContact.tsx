@@ -27,8 +27,6 @@ const useContact = () => {
     })();
   }, []);
 
-  // console.log(contacts)
-
   useEffect(() => {
     const allcontacts = [];
     contacts.forEach((contact) => {

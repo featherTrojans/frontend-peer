@@ -1,9 +1,4 @@
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { Text, View, TouchableOpacity, SafeAreaView } from "react-native";
 import React, { useContext, useState } from "react";
 import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize, SIZES, icons } from "../../../constants";
@@ -16,7 +11,7 @@ import useAlert from "../../../utils/useAlerts";
 
 const { Cancelicon, Newlogo } = icons;
 const LockScreen = ({ modal, setModal }: any) => {
-  const {errorAlert} = useAlert()
+  const { errorAlert } = useAlert();
   const { setToken, authdata } = useContext(AuthContext);
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
@@ -59,7 +54,6 @@ const LockScreen = ({ modal, setModal }: any) => {
         setToken("");
         setNumberTrial(0);
       }
-      console.log(err.response);
       // setModal(false)
     } finally {
       setLoading(false);
@@ -78,7 +72,14 @@ const LockScreen = ({ modal, setModal }: any) => {
       animationOut="fadeOut"
       animationOutTiming={400}
     >
-      <SafeAreaView style={{ flex: 1, paddingHorizontal: 15, paddingBottom: 20, backgroundColor: COLORS.white3 }}>
+      <SafeAreaView
+        style={{
+          flex: 1,
+          paddingHorizontal: 15,
+          paddingBottom: 20,
+          backgroundColor: COLORS.white3,
+        }}
+      >
         {loading && <Loader />}
         {error && (
           <View
@@ -110,16 +111,34 @@ const LockScreen = ({ modal, setModal }: any) => {
             </TouchableOpacity>
           </View>
         )}
-   
+
         <View style={{ marginTop: RFValue(30) }}>
           <Newlogo />
-          <Text style={[styles.headerText, {marginTop: 36}]}>Welcome Back, <Text style={{...FONTS.bold, color: COLORS.blue6}}>{authdata?.userDetails?.fullName?.replace(/\s+/g, ' ').split(" ")[1]}.</Text>  </Text>
-          <Text style={{marginTop: 10, ...fontsize.smaller, ...FONTS.regular, color: COLORS.grey2, lineHeight: 20}}>Lets get you back to where {`\n`} you left off.</Text>
+          <Text style={[styles.headerText, { marginTop: 36 }]}>
+            Welcome Back,{" "}
+            <Text style={{ ...FONTS.bold, color: COLORS.blue6 }}>
+              {
+                authdata?.userDetails?.fullName
+                  ?.replace(/\s+/g, " ")
+                  .split(" ")[1]
+              }
+              .
+            </Text>{" "}
+          </Text>
+          <Text
+            style={{
+              marginTop: 10,
+              ...fontsize.smaller,
+              ...FONTS.regular,
+              color: COLORS.grey2,
+              lineHeight: 20,
+            }}
+          >
+            Lets get you back to where {`\n`} you left off.
+          </Text>
         </View>
 
-        <View >
-
-
+        <View>
           <Text
             style={{
               textAlign: "center",
@@ -127,16 +146,13 @@ const LockScreen = ({ modal, setModal }: any) => {
               ...FONTS.regular,
               color: COLORS.blue9,
               marginTop: 40,
-              marginBottom: 60
+              marginBottom: 60,
             }}
           >
             Enter your Feather PIN
           </Text>
 
-
-
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
             <View
               style={{
                 width: RFValue(160),
@@ -145,40 +161,35 @@ const LockScreen = ({ modal, setModal }: any) => {
               }}
             >
               <View
-              style={[
-                styles.pinView,
-                { backgroundColor: pin[0] ? COLORS.blue6 : COLORS.grey3 },
-              ]}
-            />
-            <View
-              style={[
-                styles.pinView,
-                { backgroundColor: pin[1] ? COLORS.blue6 : COLORS.grey3 },
-              ]}
-            />
-            <View
-              style={[
-                styles.pinView,
-                { backgroundColor: pin[2] ? COLORS.blue6 : COLORS.grey3 },
-              ]}
-            />
-            <View
-              style={[
-                styles.pinView,
-                { backgroundColor: pin[3] ? COLORS.blue6 : COLORS.grey3 },
-              ]}
-            />
-              
+                style={[
+                  styles.pinView,
+                  { backgroundColor: pin[0] ? COLORS.blue6 : COLORS.grey3 },
+                ]}
+              />
+              <View
+                style={[
+                  styles.pinView,
+                  { backgroundColor: pin[1] ? COLORS.blue6 : COLORS.grey3 },
+                ]}
+              />
+              <View
+                style={[
+                  styles.pinView,
+                  { backgroundColor: pin[2] ? COLORS.blue6 : COLORS.grey3 },
+                ]}
+              />
+              <View
+                style={[
+                  styles.pinView,
+                  { backgroundColor: pin[3] ? COLORS.blue6 : COLORS.grey3 },
+                ]}
+              />
             </View>
           </View>
-
-
-
         </View>
 
-        <View style={{flex: 1, }} />
+        <View style={{ flex: 1 }} />
 
-       
         <Keyboard
           array={[...numbers]}
           setDigit={handleSetAmount}
@@ -193,8 +204,6 @@ const LockScreen = ({ modal, setModal }: any) => {
             {numoftrial}/5 Attempts
           </Text>
         </View>
-
-
       </SafeAreaView>
     </Modal>
   );

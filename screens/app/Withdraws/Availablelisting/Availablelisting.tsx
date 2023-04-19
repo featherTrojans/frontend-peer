@@ -137,7 +137,7 @@ const Availablelisting = ({ navigation, route }: any) => {
 
       if (response) {
         if (response.data.data) {
-          navigation.replace("Requesterinfo");
+          navigation.navigate("Requesterinfo");
           return;
         }
       }

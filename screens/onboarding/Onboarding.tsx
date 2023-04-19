@@ -40,7 +40,6 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
         JSON.stringify({ onboard: true })
       );
       if (stored !== null) {
-        // console.log(stored, "this is the respone of trhe ");
       }
     } catch (e) {
       // saving error
@@ -71,9 +70,8 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
         index: currentIndex + 1,
         animated: true,
       });
-      //   console.log("Right index", currentIndex);
     } else {
-      navigateToLogin()
+      navigateToLogin();
     }
   };
 
@@ -81,7 +79,11 @@ const Onboarding = ({ navigation }: OnboardingScreenNavigationProps) => {
     <OnboardingContainer>
       <Customstatusbar />
 
-      <LoginBtn activeOpacity={0.6} onPress={navigateToLogin} style={{marginBottom: RFValue(32)}}>
+      <LoginBtn
+        activeOpacity={0.6}
+        onPress={navigateToLogin}
+        style={{ marginBottom: RFValue(32) }}
+      >
         <SkipText>Skip</SkipText>
       </LoginBtn>
 

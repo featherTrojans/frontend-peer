@@ -21,7 +21,9 @@
       "enabled": false,
       "url": "https://u.expo.dev/93d5876e-2546-4e40-ad80-4fe20b9d48fa"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.featherpeer.user",
@@ -72,7 +74,9 @@
     },
     "description": "",
     "extra": {
-      "eas": {}
+      "eas": {
+        "projectId": "93d5876e-2546-4e40-ad80-4fe20b9d48fa"
+      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"

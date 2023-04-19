@@ -26,8 +26,6 @@ const {
 const Airtimeprovider = ({ navigation, route }) => {
   const { billType, amount } = route.params;
 
-  console.log(billType, amount, "here are the datas");
-
   const Eachoption = ({ image, type, network }) => {
     const { CustomModal, openModal, closeModal } = useCustomModal();
 
@@ -79,7 +77,7 @@ const Airtimeprovider = ({ navigation, route }) => {
                 phone: "",
               }}
               onSubmit={(values) => {
-                closeModal()
+                closeModal();
                 navigation.navigate("Airtimepurchasepin", {
                   type: billType,
                   data: {
@@ -130,31 +128,39 @@ const Airtimeprovider = ({ navigation, route }) => {
                         // onChangeText={handlePhoneChange}
                         // defaultValue={phone}
                       />
-                      <TouchableOpacity onPress={()=>navigation.navigate("BillContacts", {amount,billType, network})}>
-                          <View
+                      <TouchableOpacity
+                        onPress={() =>
+                          navigation.navigate("BillContacts", {
+                            amount,
+                            billType,
+                            network,
+                          })
+                        }
+                      >
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            backgroundColor: COLORS.trasparentPurple,
+                            alignSelf: "flex-start",
+                            paddingVertical: 9,
+                            paddingHorizontal: 14,
+                            borderRadius: 18,
+                          }}
+                        >
+                          <Searcontacticon />
+                          <Text
                             style={{
-                              flexDirection: "row",
-                              alignItems: "center",
-                              backgroundColor: COLORS.trasparentPurple,
-                              alignSelf: "flex-start",
-                              paddingVertical: 9,
-                              paddingHorizontal: 14,
-                              borderRadius: 18,
+                              ...fontsize.smallest,
+                              ...FONTS.regular,
+                              color: COLORS.purple2,
+                              marginLeft: 8,
                             }}
-                            >
-                            <Searcontacticon />
-                            <Text
-                              style={{
-                                ...fontsize.smallest,
-                                ...FONTS.regular,
-                                color: COLORS.purple2,
-                                marginLeft: 8,
-                              }}
-                              >
-                              Search Contacts
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
+                          >
+                            Search Contacts
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
                     </View>
 
                     <Custombutton

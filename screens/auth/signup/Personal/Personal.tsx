@@ -11,7 +11,12 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Custombutton, Input, Loader, Mainwrapper } from "../../../../components/index";
+import {
+  Custombutton,
+  Input,
+  Loader,
+  Mainwrapper,
+} from "../../../../components/index";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { JustifyBetween } from "../../../../global/styles";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
@@ -26,7 +31,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Lock from "../../../../assets/icons/Lock";
 import useAlert from "../../../../utils/useAlerts";
 
-
 const { Usericondark, Phoneicon, Envelopeicon, Newlogo } = icons;
 
 const phoneRegExp =
@@ -37,7 +41,7 @@ const validationSchema = Yup.object().shape({
   lastName: Yup.string().label("Last Name").required(),
   email: Yup.string().label("Email").email().required(),
   referredBy: Yup.string().label("Referrer"),
-  password:Yup.string().required().min(8),
+  password: Yup.string().required().min(8),
   phoneNumber: Yup.string()
     .label("Phone Number")
     .matches(phoneRegExp, "This is not a valid phone number"),
@@ -46,34 +50,45 @@ const validationSchema = Yup.object().shape({
 const Personal = ({ navigation }) => {
   const { setAuthData } = useContext(AuthContext);
   const toast = useToast();
-  const {errorAlert } = useAlert()
+  const { errorAlert } = useAlert();
 
   return (
-    <Mainwrapper >
-
-
-
-
-
-
+    <Mainwrapper>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={{flex: 1, paddingHorizontal: 25}}>
-
-      
-
-            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 30}}>
-              <Newlogo />
-            </View>
-
-
-            <View style={{marginTop: 28, marginBottom: 40}}>
-            <Text style={{...fontsize.bsmall, ...FONTS.medium, color: COLORS.black, lineHeight: 21, marginBottom: 9}}>Signup, Join the flock.</Text>
-            <Text style={{...fontsize.smallest, color: COLORS.grey16, ...FONTS.regular}}>Personal Information</Text>
+        <View style={{ flex: 1, paddingHorizontal: 25 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginTop: 30,
+            }}
+          >
+            <Newlogo />
           </View>
 
-            
-          
-       
+          <View style={{ marginTop: 28, marginBottom: 40 }}>
+            <Text
+              style={{
+                ...fontsize.bsmall,
+                ...FONTS.medium,
+                color: COLORS.black,
+                lineHeight: 21,
+                marginBottom: 9,
+              }}
+            >
+              Signup, Join the flock.
+            </Text>
+            <Text
+              style={{
+                ...fontsize.smallest,
+                color: COLORS.grey16,
+                ...FONTS.regular,
+              }}
+            >
+              Personal Information
+            </Text>
+          </View>
 
           <Formik
             initialValues={{
@@ -81,7 +96,7 @@ const Personal = ({ navigation }) => {
               lastName: "",
               email: "",
               phoneNumber: "",
-              password:"",
+              password: "",
               referredBy: "",
             }}
             validationSchema={validationSchema}
@@ -102,7 +117,6 @@ const Personal = ({ navigation }) => {
                   token: response?.data?.data?.token,
                 });
               } catch (err) {
-                console.log(err.response);
                 if (err.response) {
                   if (!err?.response?.data?.data?.isVerified) {
                     return navigation.navigate("Verification", {
@@ -126,7 +140,7 @@ const Personal = ({ navigation }) => {
                 handleChange,
                 handleSubmit,
               } = formikProps;
-              
+
               return (
                 <React.Fragment>
                   {isSubmitting && <Loader />}
@@ -139,7 +153,7 @@ const Personal = ({ navigation }) => {
                     inputbg={COLORS.white}
                   />
 
-                  <Input  
+                  <Input
                     placeholder="Lastname"
                     name="lastName"
                     formikProps={formikProps}
@@ -162,7 +176,7 @@ const Personal = ({ navigation }) => {
                     icon={<Phoneicon />}
                     inputbg={COLORS.white}
                   />
-                   <Input
+                  <Input
                     placeholder="Password"
                     name="password"
                     formikProps={formikProps}
@@ -181,16 +195,17 @@ const Personal = ({ navigation }) => {
 
                   {/* Proceed Btn */}
                   <View style={styles.bottomContainer}>
-
-
-
-                     <Custombutton btntext="Sign up" onpress={()=>{
-                      const errorvalues = Object.values(errors)
-                      if(errorvalues.length > 0){
-                        return errorAlert(null, errorvalues[0])
-                      }
-                      handleSubmit()
-                      }} disable={isSubmitting}/> 
+                    <Custombutton
+                      btntext="Sign up"
+                      onpress={() => {
+                        const errorvalues = Object.values(errors);
+                        if (errorvalues.length > 0) {
+                          return errorAlert(null, errorvalues[0]);
+                        }
+                        handleSubmit();
+                      }}
+                      disable={isSubmitting}
+                    />
                     {/* <TouchableOpacity
                       style={styles.proceedBtn}
                       activeOpacity={0.8}
@@ -200,13 +215,10 @@ const Personal = ({ navigation }) => {
                       <Text style={styles.proceedText}>PROCEED</Text>
                     </TouchableOpacity> */}
 
-
-
-
                     {/* Have an account */}
                     <View style={styles.bottomTextContainer}>
                       <Text style={styles.bottomText}>
-                      Already have an account? {" "}
+                        Already have an account?{" "}
                       </Text>
 
                       <TouchableOpacity
