@@ -149,14 +149,18 @@ const AllChatsModal = ({
 
       </Chatsmodal>
 
-              {/* Sending success Modal */}
 
+
+      {/* Sending success Modal */}
       <Chatsmodal showState={sendSuccess} onBgPress={clearModalsAll}>
         <View style={{ alignItems: "center"}}>
         <LottieView source={Successcheckanimate} autoPlay loop style={{width: 118, height: 118, marginBottom: 15 }}/>
         <Text style={styles.sendingSuccessText}>Transaction Successful</Text>
         </View>
       </Chatsmodal>
+
+
+
       </>
   )
 }

@@ -4,6 +4,12 @@ import {
   View,
   ScrollView,
   TextInput,
+<<<<<<< HEAD
+=======
+  Pressable,
+  Platform,
+  KeyboardAvoidingView
+>>>>>>> 8886f145b981124fc495a978331e5996cc5c8b29
 } from "react-native";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { styles } from "./Chatsdm.styles";
@@ -76,6 +82,10 @@ const Chatsdm = ({ navigation, route }) => {
           newdata.push(change.data());
         });
         setMessages(formatData(newdata));
+<<<<<<< HEAD
+=======
+        console.log(formatData(newdata), "formated data");
+>>>>>>> 8886f145b981124fc495a978331e5996cc5c8b29
         setFetchmessage(false);
       });
     } else {
@@ -360,6 +370,7 @@ const Chatsdm = ({ navigation, route }) => {
 
   return (
     <Mainwrapper>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex: 1}}>
       <AllChatsModal
         nameOfActiveChat={userInfo?.fullName}
         sendcashModal={sendcashModal}
@@ -419,75 +430,78 @@ const Chatsdm = ({ navigation, route }) => {
           />
         </View>
       ) : (
-        <ScrollView
-          style={styles.messageAreaContainer}
-          ref={scrollViewRef}
-          contentContainerStyle={{ paddingTop: 20 }}
-          showsVerticalScrollIndicator={false}
-          bounces={false}
-          onContentSizeChange={() =>
-            scrollViewRef.current.scrollToEnd({ animated: true })
-          }
-        >
-          {messages.map(({ data, time }, index: number) => {
-            return (
-              <View key={index}>
-                <View
-                  style={{
-                    justifyContent: "center",
-                    alignSelf: "center",
-                    backgroundColor: COLORS.purple3,
-                    paddingHorizontal: 16,
-                    paddingVertical: 9,
-                    borderRadius: 15,
-                  }}
-                >
-                  <Text
+        <>
+          <ScrollView
+            style={styles.messageAreaContainer}
+            ref={scrollViewRef}
+            contentContainerStyle={{ paddingTop: 20 }}
+            showsVerticalScrollIndicator={false}
+            bounces={false}
+            onContentSizeChange={() =>
+              scrollViewRef.current.scrollToEnd({ animated: true })
+            }
+          >
+            {messages.map(({ data, time }, index: number) => {
+              return (
+                <View key={index}>
+                  <View
                     style={{
-                      textAlign: "center",
-                      ...fontsize.xsmallest,
-                      ...FONTS.regular,
-                      color: COLORS.purple2,
+                      justifyContent: "center",
+                      alignSelf: "center",
+                      backgroundColor: COLORS.purple3,
+                      paddingHorizontal: 16,
+                      paddingVertical: 9,
+                      borderRadius: 15,
                     }}
                   >
-                    {time}
-                  </Text>
-                </View>
+                    <Text
+                      style={{
+                        textAlign: "center",
+                        ...fontsize.xsmallest,
+                        ...FONTS.regular,
+                        color: COLORS.purple2,
+                      }}
+                    >
+                      {time}
+                    </Text>
+                  </View>
 
-                {data.map((dat, index) => {
-                  if (dat.sender === userInfo?.userUid) {
-                    return <View key={index}>{renderSenderHTML(dat)}</View>;
-                  }
-                  return <View key={index}>{renderReceiverHTML(dat)}</View>;
-                })}
-              </View>
-            );
-          })}
-        </ScrollView>
+                  {data.map((dat, index) => {
+                    if (dat.sender === userInfo?.userUid) {
+                      return <View key={index}>{renderSenderHTML(dat)}</View>;
+                    }
+                    return <View key={index}>{renderReceiverHTML(dat)}</View>;
+                  })}
+                </View>
+              );
+            })}
+          </ScrollView>
+        </>
       )}
-      <View style={styles.chatTextContainer}>
-        <View style={styles.inputarea}>
-          <View style={styles.chatTextInput}>
-            <TextInput
-              placeholder="Enter Message"
-              style={[
-                styles.textinput,
-                { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
-              ]}
-              value={chattext}
-              onChangeText={handleTextChange}
-            />
-            {chattext !== "" && (
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => sendFireBaseMessage()}
-              >
-                <Sendmessageicon />
-              </TouchableOpacity>
-            )}
-          </View>
-        </View>
+
+
+      <View style={styles.chatTextInput}>
+        <TextInput
+          placeholder="Enter Message..."
+          style={[
+            styles.textinput,
+            { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
+          ]}
+          placeholderTextColor={COLORS.grey5}
+          value={chattext}
+          onChangeText={handleTextChange}
+        />
+        {chattext !== "" && (
+          <Pressable
+          hitSlop={20}
+            onPress={() => sendFireBaseMessage()}
+          >
+            <Sendmessageicon />
+          </Pressable>
+        )}
       </View>
+
+      </KeyboardAvoidingView>
     </Mainwrapper>
   );
 };

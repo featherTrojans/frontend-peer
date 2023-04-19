@@ -8,6 +8,7 @@ import {
   Horizontaline,
   Iconwithdatas,
   Loader,
+  Mainwrapper,
 } from "../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import Customstatusbar from "../../../shared/Customstatusbar";
@@ -25,6 +26,7 @@ import Debitcardicon from "../../../../assets/icons/Debitcardicon";
 import Featheragenticon from "../../../../assets/icons/Featheragenticon";
 import Familyrequesticon from "../../../../assets/icons/Familyrequesticon";
 import useAlert from "../../../../utils/useAlerts";
+
 
 const {
   Withdrawicon,
@@ -211,7 +213,7 @@ const Newtransactions = ({ navigation }: any) => {
   };
 
   return (
-    <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
+    <Mainwrapper bottom={false}>
       <TransferModal>
         <View>
           <View style={styles.headerWrapper}>
@@ -450,7 +452,7 @@ const Newtransactions = ({ navigation }: any) => {
         </View>
       </AddCashModal>
 
-      <Customstatusbar />
+      {/* <Customstatusbar /> */}
       <Backheader title="Transactions" showArrow={false} />
 
       <View style={{ flex: 1, paddingHorizontal: 15 }}>
@@ -505,7 +507,7 @@ const Newtransactions = ({ navigation }: any) => {
         </ScrollView>
         {/* List of options */}
       </View>
-    </View>
+    </Mainwrapper>
   );
 };
 

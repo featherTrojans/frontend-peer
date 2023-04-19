@@ -21,9 +21,10 @@ import { AuthContext } from "../../../../context/AuthContext";
 import Chat from "./Chat";
 
 import Contact from "./Contact";
-import { Backheader } from "../../../../components";
+import { Backheader, Mainwrapper } from "../../../../components";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import useContact from "../../../../utils/customContact";
+
 
 
 const { Emptynotification, Startnewchaticon } = icons;
@@ -130,8 +131,7 @@ const Chatshome = ({ navigation }) => {
   // };
 
   return (
-    <View style={{flex: 1, paddingTop: getStatusBarHeight(true) }}>
-      <Customstatusbar />
+    <Mainwrapper bottom={false}>
 
       <Backheader title="Chats" showArrow={false} />
 
@@ -182,7 +182,7 @@ const Chatshome = ({ navigation }) => {
           <Startnewchaticon />
         </TouchableOpacity>
       </View>
-    </View>
+    </Mainwrapper>
   );
 };
 

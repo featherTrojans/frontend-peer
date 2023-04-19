@@ -10,7 +10,7 @@ import { COLORS, SIZES, FONTS, fontsize,  } from "../../../constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 25,
+    paddingHorizontal: 15,
   },
   logoWrapper: {
     width: SIZES.width - 50,

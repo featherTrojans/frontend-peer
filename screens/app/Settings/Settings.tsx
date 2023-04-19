@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { Text, View, TouchableOpacity, Share, Image, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, Share, Image, StyleSheet, Platform } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
 import * as Sharing from "expo-sharing";
@@ -9,9 +9,8 @@ import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";
 import { styles } from "./Settings.styles";
 import { AuthContext } from "../../../context/AuthContext";
 import Customstatusbar from "../../shared/Customstatusbar";
-import { Backheader, Copyaccountinfo, Upgrademodal } from "../../../components";
+import { Backheader, Copyaccountinfo, Mainwrapper, Upgrademodal } from "../../../components";
 import useCustomModal from "../../../utils/useCustomModal";
-// import { handleOpenWithLinking } from "../../../utils/handleOpenWithLinking";
 
 const {
   Defaultuseravatar,
@@ -136,13 +135,12 @@ const Settings = ({ navigation }) => {
   };
 
   return (
-    <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
-      <Customstatusbar />
+    <Mainwrapper bottom={false}>
 
       <Backheader
         title="Settings"
         showArrow={false}
-        rightComponent={<Rightside />}
+        // rightComponent={<Rightside />}
       />
 
       <View style={{ paddingHorizontal: 15 }}>
@@ -416,7 +414,7 @@ const Settings = ({ navigation }) => {
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
-    </View>
+    </Mainwrapper>
   );
 };
 
