@@ -94,7 +94,7 @@ const HomeWallet = () => {
       title: "Withdraw cash from feather agents near you.",
       link: "Withdraw",
       iconBg: "#EDF3EB",
-      onpress: () => navigation.navigate("Withdraw"),
+      onpress: () => navigation.navigate("Requesterinfo"),
     },
     {
       icon: Paybills,

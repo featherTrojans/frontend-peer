@@ -13,7 +13,7 @@ const { width, height } = Dimensions.get("screen");
 //     longitude?:number;
 // }
 
-const Map = ({}) => {
+const Map = ({ tolocation = "" }) => {
   const { coords, destinationCoords } = useContext(LocationContext);
   const mapRef = useRef(null);
   // console.log("the map object",mapRef.current)

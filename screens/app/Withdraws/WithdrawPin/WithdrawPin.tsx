@@ -70,7 +70,7 @@ const WithdrawPin = ({ navigation, route }) => {
       const response = await axiosCustom.post("/request/approve", {
         reference: info.reference,
         user_pin: joinpin,
-        agreedCharge: charge,
+        agreedCharge: Number(charge),
       });
 
       console.log(response, "Cancel, there's a something");
