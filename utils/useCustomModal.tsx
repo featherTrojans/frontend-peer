@@ -64,7 +64,7 @@ const useCustomModal = () => {
           >
             {children}
           </View>
-          <Toast config={toastConfig} topOffset={0} />
+          <Toast config={toastConfig} topOffset={getStatusBarHeight(true)} />
         </>
       </Modal>
     );

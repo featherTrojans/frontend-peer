@@ -4,12 +4,8 @@ import {
   View,
   ScrollView,
   TextInput,
-<<<<<<< HEAD
-=======
   Pressable,
-  Platform,
-  KeyboardAvoidingView
->>>>>>> 8886f145b981124fc495a978331e5996cc5c8b29
+  KeyboardAvoidingView, Platform
 } from "react-native";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { styles } from "./Chatsdm.styles";
@@ -82,10 +78,7 @@ const Chatsdm = ({ navigation, route }) => {
           newdata.push(change.data());
         });
         setMessages(formatData(newdata));
-<<<<<<< HEAD
-=======
         console.log(formatData(newdata), "formated data");
->>>>>>> 8886f145b981124fc495a978331e5996cc5c8b29
         setFetchmessage(false);
       });
     } else {
@@ -452,6 +445,7 @@ const Chatsdm = ({ navigation, route }) => {
                       paddingHorizontal: 16,
                       paddingVertical: 9,
                       borderRadius: 15,
+                      marginVertical: 20
                     }}
                   >
                     <Text

@@ -112,7 +112,7 @@ const Copyaccountinfo = ({ accName, accNumber }) => {
               color: COLORS.blue9,
             }}
           >
-            VFD Microfiance Bank
+            VFD Microfinance Bank
           </Text>
         </View>
         <Horizontaline marginV={18} />
