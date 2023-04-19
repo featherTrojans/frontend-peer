@@ -18,7 +18,7 @@ import LottieView from "lottie-react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { useIsFocused } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
-import { Transactionhistory, Viewbalance } from "../../../components";
+import { Mainwrapper, Transactionhistory, Viewbalance } from "../../../components";
 import { COLORS, FONTS, fontsize, icons, images } from "../../../constants";
 import { AuthContext } from "../../../context/AuthContext";
 import axiosCustom from "../../../httpRequests/axiosCustom";
@@ -31,6 +31,7 @@ import { nameToShow } from "../../../utils/nameToShow";
 import { getPeriod } from "../../../utils/getDayPeriod";
 import HomeWallet from "./HomeWallet";
 import useAlert from "../../../utils/useAlerts";
+
 
 const {
   Bell,
@@ -142,8 +143,8 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   };
 
   return (
-    <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
-      <Customstatusbar />
+    <Mainwrapper bottom={false}>
+      <View style={{ flex: 1, paddingHorizontal: 15,}}>
       <View style={styles.headerContainer}>
         {/* user profile and notification icon */}
         <View style={styles.profileContainer}>
@@ -233,7 +234,8 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
         </View>
         {/* <DoubleTapToClose /> */}
       </ScrollView>
-    </View>
+      </View>
+    </Mainwrapper>
   );
 };
 

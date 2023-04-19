@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { customNavigation, navigationRef } from "../utils/customNavigation";
-
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { registerForPushNotificationsAsync } from "../utils/pushNotifications";
 // import axiosCustom from "../httpRequests/axiosCustom";÷
 // import Animated from "react-native-reanimated";
@@ -724,9 +724,11 @@ export default function MainNavigation({ initialBoarded = false }) {
   };
 
   return (
-    <NavigationContainer ref={navigationRef}>
-      {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
-      <RootNavigator initialBoarded={initialBoarded} />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer ref={navigationRef}>
+        {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
+        <RootNavigator initialBoarded={initialBoarded} />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

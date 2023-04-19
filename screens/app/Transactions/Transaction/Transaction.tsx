@@ -20,6 +20,7 @@ import { TabActions, useLinkTo } from "@react-navigation/native";
 import {
   Backheader,
   Bottombtn,
+  Mainwrapper,
   Transactionhistory,
 } from "../../../../components";
 import { COLORS, icons, SIZES } from "../../../../constants";
@@ -32,87 +33,10 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
 
-const { Cryinganimate } = icons;
 
-const DATA = [
-  {
-    transId: "WZsOkF2oWw",
-    initialBal: "2570",
-    amount: "150",
-    finalBal: "2420",
-    description: "#150 transferred to OBA",
-    from: "EZEKO",
-    to: "OBA",
-    direction: "out",
-    createdAt: "2022-02-15T16:51:40.000Z",
-  },
-  {
-    transId: "JFox9iGSKJ",
-    initialBal: "2420",
-    amount: "150",
-    finalBal: "2570",
-    description: "#150 transferred from EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "in",
-    createdAt: "2022-01-31T23:56:07.000Z",
-  },
-  {
-    transId: "FnF7XtyXrb",
-    initialBal: "2570",
-    amount: "150",
-    finalBal: "2420",
-    description: "#150 transferred to EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "out",
-    createdAt: "2022-01-31T23:56:00.000Z",
-  },
-  {
-    transId: "eZx81A14GE",
-    initialBal: "2420",
-    amount: "150",
-    finalBal: "2570",
-    description: "#150 transferred from EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "in",
-    createdAt: "2022-01-31T23:54:40.000Z",
-  },
-  {
-    transId: "QLkpxlyiSL",
-    initialBal: "2570",
-    amount: "150",
-    finalBal: "2420",
-    description: "#150 transferred to EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "out",
-    createdAt: "2022-01-31T23:54:39.000Z",
-  },
-  {
-    transId: "LdJexVcIIW",
-    initialBal: "2420",
-    amount: "150",
-    finalBal: "2570",
-    description: "#150 transferred from EZEKO",
-    from: "EZEKO",
-    to: "EZEKO",
-    direction: "in",
-    createdAt: "2022-01-31T23:52:49.000Z",
-  },
-  {
-    transId: "lirXTEm7Zs",
-    initialBal: "2720",
-    amount: "150",
-    finalBal: "2570",
-    description: "#150 transferred to ELON",
-    from: "EZEKO",
-    to: "ELON",
-    direction: "out",
-    createdAt: "2022-01-31T23:48:07.000Z",
-  },
-];
+
+
+const { Cryinganimate } = icons;
 
 const Transactions = ({ navigation }: any) => {
   const [transactions, setTransations] = useState();
@@ -176,10 +100,9 @@ const Transactions = ({ navigation }: any) => {
   };
 
   return (
-    <View style={[styles.container, { paddingTop: getStatusBarHeight(true) }]}>
+    <Mainwrapper bottom={false}>
       <Backheader title="History" showArrow={false} />
       <View style={styles.contentContainer}>
-        <Customstatusbar />
 
         <View style={styles.listContainer}>
           {loading ? (
@@ -228,7 +151,7 @@ const Transactions = ({ navigation }: any) => {
           )}
         </View>
       </View>
-    </View>
+    </Mainwrapper>
   );
 };
 

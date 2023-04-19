@@ -3,9 +3,21 @@ import React from "react";
 import { Custombutton, Mainwrapper } from "../../../components";
 import { COLORS, FONTS, fontsize, images } from "../../../constants";
 import { RFValue } from "react-native-responsive-fontsize";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 const { Getstartedimage } = images;
 const Getstarted = ({ navigation }) => {
+
+
+
+
+  const insets = useSafeAreaInsets();
+
+
+
   return (
     <Mainwrapper>
       <Text

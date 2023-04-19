@@ -51,34 +51,22 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 15,
   },
-  chatTextContainer: {
-    position: "relative",
-  },
-  inputarea: {
-    // paddingHorizontal: 20,
-  },
+ 
+
   chatTextInput: {
     padding: 10,
     backgroundColor: "#fff",
     borderRadius: 10,
-    // shadowColor: "#aaa",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.22,
-    // shadowRadius: 2,
-    // elevation: 3,
     flexDirection: "row",
     alignItems: "center",
-    // marginBottom: 20,
     borderWidth: 1,
-    borderColor: COLORS.grey1
+    borderColor: COLORS.grey1,
   },
   textinput: {
     flex: 1,
     paddingHorizontal: 10,
     paddingVertical: 3,
+    height: 40
   },
   chatToMe: {
     flexDirection: "row-reverse",
