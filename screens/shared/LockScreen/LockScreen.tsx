@@ -49,8 +49,8 @@ const LockScreen = ({ modal, setModal }: any) => {
     } catch (err) {
       const newnumoftrial = numoftrial + 1;
       setNumberTrial(newnumoftrial);
-      setError(true);
-      console.log("From the error")
+      // setError(true);
+      // console.log("From the error")
       errorAlert(err)
       setPin([]);
 
