@@ -7,7 +7,10 @@ import { Bottombtn, Keyboard, Loader, Numberbtn } from "../../../components";
 import axiosCustom from "../../../httpRequests/axiosCustom";
 import { AuthContext } from "../../../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
+import Toast from "react-native-toast-message";
 import useAlert from "../../../utils/useAlerts";
+import { toastConfig } from "../../../App";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const { Cancelicon, Newlogo } = icons;
 const LockScreen = ({ modal, setModal }: any) => {
@@ -47,6 +50,8 @@ const LockScreen = ({ modal, setModal }: any) => {
       const newnumoftrial = numoftrial + 1;
       setNumberTrial(newnumoftrial);
       setError(true);
+      console.log("From the error")
+      errorAlert(err)
       setPin([]);
 
       if (newnumoftrial === 5) {
@@ -72,6 +77,7 @@ const LockScreen = ({ modal, setModal }: any) => {
       animationOut="fadeOut"
       animationOutTiming={400}
     >
+      <>
       <SafeAreaView
         style={{
           flex: 1,
@@ -81,7 +87,7 @@ const LockScreen = ({ modal, setModal }: any) => {
         }}
       >
         {loading && <Loader />}
-        {error && (
+        {/* {error && (
           <View
             style={{
               backgroundColor: "#E00000",
@@ -110,7 +116,7 @@ const LockScreen = ({ modal, setModal }: any) => {
               <Cancelicon />
             </TouchableOpacity>
           </View>
-        )}
+        )} */}
 
         <View style={{ marginTop: RFValue(30) }}>
           <Newlogo />
@@ -205,6 +211,8 @@ const LockScreen = ({ modal, setModal }: any) => {
           </Text>
         </View>
       </SafeAreaView>
+      <Toast config={toastConfig} topOffset={getStatusBarHeight(true)} />
+      </>
     </Modal>
   );
 };
