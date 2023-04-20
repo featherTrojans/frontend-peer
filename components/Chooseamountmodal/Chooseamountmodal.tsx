@@ -1,15 +1,16 @@
 import {
-  StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  Pressable
+  Pressable,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { styles } from "../../screens/app/Chats/Chatsdm/Chatsdm.styles";
 import Custombutton from "../Custombutton/Custombutton";
 import { COLORS, FONTS, fontsize } from "../../constants";
+import { AuthContext } from "../../context/AuthContext";
+import useAlert from "../../utils/useAlerts";
 
 const amounts = [
   { name: "50", value: 50 },
@@ -22,20 +23,25 @@ const amounts = [
 ];
 
 const Chooseamountmodal = ({ headerText, onpress }) => {
-  const [amount, setAmount] = useState("0")
+  const { authdata } = useContext(AuthContext);
+  const [amount, setAmount] = useState("0");
+  const { purpleAlert, errorAlert, successAlert } = useAlert();
   const textInputRef = useRef<TextInput>(null);
 
-
-  const handleAmountChange = (value) =>{
-    setAmount(value)
-  }
+  const handleAmountChange = (value) => {
+    if (value > authdata?.walletBal) {
+      errorAlert(
+        null,
+        "Padi, you can't request for an amount greater than your wallet amount"
+      );
+      return;
+    }
+    setAmount(value);
+  };
   return (
     <View>
       <Text style={styles.chooseAmountHeader}>{headerText}</Text>
-
       <View style={styles.amountBlockWrap}>
-
-
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           {/* minus icon */}
           {/* <Minusicon /> */}
@@ -44,29 +50,30 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
             style={styles.addedAmountText}
             keyboardType="numeric"
             placeholder="N0.00"
-             value={amount}
-             onChangeText={handleAmountChange}
+            value={amount}
+            onChangeText={handleAmountChange}
           />
           {/* Add icon */}
           {/* <Plusicon /> */}
         </View>
 
-        <Pressable
-        onPress={() => textInputRef?.current?.focus()}
-        hitSlop={10}
-        >
-        {({ pressed }) => (
-          <Text style={{...fontsize.smallest, ...FONTS.regular, color: COLORS.grey16}}>Tap to add custom amount</Text>  
-        )}
-      </Pressable>
-        
-
+        <Pressable onPress={() => textInputRef?.current?.focus()} hitSlop={10}>
+          {({ pressed }) => (
+            <Text
+              style={{
+                ...fontsize.smallest,
+                ...FONTS.regular,
+                color: COLORS.grey16,
+              }}
+            >
+              Tap to add custom amount
+            </Text>
+          )}
+        </Pressable>
       </View>
 
-
-
       {/* Amount options */}
-      <View style={[styles.amountOptionsContainer, {marginBottom: 40}]}>
+      <View style={[styles.amountOptionsContainer, { marginBottom: 40 }]}>
         {amounts.map((item, index) => {
           return (
             <TouchableOpacity
@@ -81,11 +88,7 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
         })}
       </View>
 
-        <Custombutton btntext="Continue" onpress={()=>onpress(amount)}/>
-
-      {/* <TouchableOpacity style={styles.buttonWrapper} onPress={onpress}>
-        <Text style={styles.buttonTextValue}>Proceed</Text>
-      </TouchableOpacity> */}
+      <Custombutton btntext="Continue" onpress={() => onpress(amount)} />
     </View>
   );
 };

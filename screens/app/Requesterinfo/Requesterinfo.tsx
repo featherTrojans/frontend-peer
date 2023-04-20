@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
@@ -32,13 +31,7 @@ import amountFormatter from "../../../utils/formatMoney";
 import { nameSplitter } from "../../../utils/nameSplitter";
 import useCustomModal from "../../../utils/useCustomModal";
 
-const {
-  Purplechaticon,
-  Renegotiateicon,
-  Cancelrequest,
-  Greenphoneicon,
-  Editicon,
-} = icons;
+const { Purplechaticon, Cancelrequest, Greenphoneicon } = icons;
 
 interface withdrawobj {
   reference: string;
@@ -53,13 +46,6 @@ interface withdrawobj {
   meetupPoint: string;
   createdAt: string;
   agentImage: null;
-}
-
-enum comingFromEnum {
-  withdrawPending,
-  withdrawAccepted,
-  depositPending,
-  depositAccepted,
 }
 
 const Requesterinfo = ({ navigation, route }) => {
@@ -97,7 +83,7 @@ const Requesterinfo = ({ navigation, route }) => {
   console.log(comingback, "alright alright");
   useEffect(() => {
     getWithdrawRequest();
-  }, [navigation]);
+  }, [comingback]);
   const getWithdrawRequest = async () => {
     setScreenLoading(true);
     try {
@@ -191,7 +177,7 @@ const Requesterinfo = ({ navigation, route }) => {
 
   return (
     <View style={{ paddingTop: getStatusBarHeight(true), flex: 1 }}>
-      {/* <Map tolocation={info.meetupPoint} /> */}
+      <Map tolocation={info.meetupPoint} />
       <Backheader title="Withdraw" />
       {loading && <Loader />}
 
@@ -511,5 +497,3 @@ const Requesterinfo = ({ navigation, route }) => {
 };
 
 export default Requesterinfo;
-
-const styles = StyleSheet.create({});

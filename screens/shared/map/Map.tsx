@@ -16,6 +16,7 @@ const { width, height } = Dimensions.get("screen");
 const Map = ({ tolocation = "" }) => {
   const { coords } = useContext(LocationContext);
   const [destinationCoords, setDestinationCoords] = useState({});
+  console.log(coords, destinationCoords);
   const mapRef = useRef(null);
   useEffect(() => {
     getLocationCoords(tolocation);
@@ -37,6 +38,10 @@ const Map = ({ tolocation = "" }) => {
       setDestinationCoords(destination);
     }
   };
+
+  if (!destinationCoords?.latitude) {
+    return null;
+  }
 
   return (
     <View
