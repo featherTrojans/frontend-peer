@@ -5,8 +5,8 @@ import {
   ScrollView,
   TextInput,
   Pressable,
-  Platform,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { styles } from "./Chatsdm.styles";

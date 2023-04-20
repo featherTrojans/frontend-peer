@@ -32,8 +32,8 @@
         "NSContactsUsageDescription": "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
         "NSLocationUsageDescription": "Allow Feather access to your location to find the nearest agent close to you",
         "NSUserTrackingUsageDescription": "We will use your data to provide a better and personalized ads to you.",
-        "NSLocationWhenInUseUsageDescription": "We use it to show you nearby restaurants and a map to pick up orders",
-        "NSLocationAlwaysUsageDescription": "We use it to show you nearby restaurants and a map to pick up orders",
+        "NSLocationWhenInUseUsageDescription": "We use it to show you nearby users and a map showing some agent locations",
+        "NSLocationAlwaysUsageDescription":  "We use it to show you nearby users and a map showing some agent locations",
         "NSCameraUsageDescription": "We access your camera to let you customize your user display picture.",
         "NSPhotoLibraryUsageDescription": "We access your photos to let you customize your user display picture."
       }
@@ -75,7 +75,6 @@
     "description": "",
     "extra": {
       "eas": {
-        "projectId": "93d5876e-2546-4e40-ad80-4fe20b9d48fa"
       }
     },
     "runtimeVersion": {

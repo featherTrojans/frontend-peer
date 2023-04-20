@@ -81,14 +81,12 @@ const rateAppOnPlayStore = () => {
 const shareAppLink = async () => {
   const result = await Share.share(
     {
-      title: "Feather Beta",
-      // message: "https://play.google.com/store/apps/details?id=feather.peer",
-      // message: `${"Account: 12333 "} \n ${"Age: 14" } \n ${"Job: Design"}`,
-      url: "https://play.google.com/store/apps/details?id=feather.peer",
+      title:"Feather- Cash on the GO",
+      message: `${"iOS: https://apps.apple.com/ng/app/feather-cash-on-the-go/id6447082427"} \n ${`Android: https://play.google.com/store/apps/details?id=feather.peer`}`,
     },
     {
-      dialogTitle: "Feather Beta",
-      subject: "Feather Beta",
+      dialogTitle: "Feather- Cash on the GO",
+      subject: "Feather- Cash on the GO",
     }
   );
 };
