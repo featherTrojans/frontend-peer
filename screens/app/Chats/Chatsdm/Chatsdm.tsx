@@ -5,7 +5,8 @@ import {
   ScrollView,
   TextInput,
   Pressable,
-  KeyboardAvoidingView, Platform
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { styles } from "./Chatsdm.styles";
@@ -30,6 +31,7 @@ import LottieView from "lottie-react-native";
 import AllChatsModal from "./AllChatsModal";
 import { usePushNotification } from "../../../../navigation";
 import formatData from "../../../../utils/fomatTrans";
+import useAlert from "../../../../utils/useAlerts";
 
 const {
   Backarrow,
@@ -43,6 +45,7 @@ const {
 const Chatsdm = ({ navigation, route }) => {
   const { userInfo } = route.params;
   const { authdata } = useContext(AuthContext);
+  const { errorAlert, successAlert } = useAlert();
   const [messages, setMessages] = useState<any>([]);
   const [chatid, setchatid] = useState("");
   const [chattext, setchattext] = useState("");
@@ -55,6 +58,13 @@ const Chatsdm = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [fetchmessage, setFetchmessage] = useState(false);
   const animationRef = useRef<Lottie>(null);
+  const textInputRef = useRef<TextInput>(null);
+
+  const focus = () => {
+    if (textInputRef.current !== null) {
+      textInputRef.current.focus();
+    }
+  };
 
   const authId = authdata?.userDetails?.userUid;
 
@@ -112,23 +122,32 @@ const Chatsdm = ({ navigation, route }) => {
   };
 
   const sendCash = async () => {
+    // console.log("Send details", amount.value, userInfo?.username, userPin)
+    console.log("Just tried to send money to a user");
     if (userPin.length !== 4) {
       return;
     }
     setLoading(true);
     try {
-      await axiosCustom.post("/transfer", {
+      let response = await axiosCustom.post("/transfer", {
         amount: amount.value,
         transferTo: userInfo?.username,
         userPin: userPin,
       });
+
+      setTimeout(() => {
+        successAlert(response?.data?.message);
+      }, 2000);
       setchattext("");
       setSendSuccess(true);
+      setEnterPin(false);
       await sendFireBaseMessage("transfer");
       // animationRef.current?.play()
     } catch (err) {
-      console.log(err);
+      errorAlert(err);
+      // console.log(err);
     } finally {
+      setUserPin("");
       setLoading(false);
     }
   };
@@ -363,138 +382,147 @@ const Chatsdm = ({ navigation, route }) => {
 
   return (
     <Mainwrapper>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex: 1}}>
-      <AllChatsModal
-        nameOfActiveChat={userInfo?.fullName}
-        sendcashModal={sendcashModal}
-        chooseAmount={chooseAmount}
-        enterPin={enterPin}
-        sendSuccess={sendSuccess}
-        clearModals={clearModals}
-        clearModalsAll={clearModalsAll}
-        setChooseAmount={setChooseAmount}
-        setSendCashModal={setSendCashModal}
-        amount={amount}
-        handleAmountChange={handleAmountChange}
-        setAmount={setAmount}
-        setEnterPin={setEnterPin}
-        loading={loading}
-        handlePinChange={handlePinChange}
-        userPin={userPin}
-        sendCash={sendCash}
-      />
-      <View style={styles.chatHeader}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={{ paddingHorizontal: 11, paddingVertical: 8 }}
-          onPress={() => navigation.goBack()}
-        >
-          <Backarrow />
-        </TouchableOpacity>
-
-        <View style={[styles.headerDetailsContainer]}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <AllChatsModal
+          nameOfActiveChat={userInfo?.fullName}
+          sendcashModal={sendcashModal}
+          chooseAmount={chooseAmount}
+          enterPin={enterPin}
+          sendSuccess={sendSuccess}
+          clearModals={clearModals}
+          clearModalsAll={clearModalsAll}
+          setChooseAmount={setChooseAmount}
+          setSendCashModal={setSendCashModal}
+          amount={amount}
+          handleAmountChange={handleAmountChange}
+          setAmount={setAmount}
+          setEnterPin={setEnterPin}
+          loading={loading}
+          handlePinChange={handlePinChange}
+          userPin={userPin}
+          sendCash={sendCash}
+          inputFocus={focus}
+        />
+        <View style={styles.chatHeader}>
           <TouchableOpacity
             activeOpacity={0.8}
+            style={{ paddingHorizontal: 10, paddingVertical: 8 }}
             onPress={() => navigation.goBack()}
-            style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
           >
-            <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
-            <Text style={styles.chatName}>{userInfo?.fullName}</Text>
+            <Backarrow />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => setSendCashModal(true)}
-          >
-            <SendTF style={{ marginRight: 10 }} />
-          </TouchableOpacity>
-        </View>
-      </View>
+          <View style={[styles.headerDetailsContainer]}>
+            <View style={{ flex: 1 }}>
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                activeOpacity={0.8}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  alignSelf: "flex-start",
+                }}
+              >
+                <InitialsBg
+                  sideLength={34}
+                  name={userInfo?.fullName || "0 0"}
+                />
+                <Text style={styles.chatName}>{userInfo?.fullName}</Text>
+              </TouchableOpacity>
+            </View>
 
-      {fetchmessage ? (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <LottieView
-            source={Feathecomingsoonchatanimate}
-            autoPlay
-            loop
-            style={{ width: 160, height: 160 }}
-          />
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => setSendCashModal(true)}
+            >
+              <SendTF style={{ marginRight: 10 }} />
+            </TouchableOpacity>
+          </View>
         </View>
-      ) : (
-        <>
-          <ScrollView
-            style={styles.messageAreaContainer}
-            ref={scrollViewRef}
-            contentContainerStyle={{ paddingTop: 20 }}
-            showsVerticalScrollIndicator={false}
-            bounces={false}
-            onContentSizeChange={() =>
-              scrollViewRef.current.scrollToEnd({ animated: true })
-            }
+
+        {fetchmessage ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            {messages.map(({ data, time }, index: number) => {
-              return (
-                <View key={index}>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      alignSelf: "center",
-                      backgroundColor: COLORS.purple3,
-                      paddingHorizontal: 16,
-                      paddingVertical: 9,
-                      borderRadius: 15,
-                      marginVertical: 20
-                    }}
-                  >
-                    <Text
+            <LottieView
+              source={Feathecomingsoonchatanimate}
+              autoPlay
+              loop
+              style={{ width: 160, height: 160 }}
+            />
+          </View>
+        ) : (
+          <>
+            <ScrollView
+              style={styles.messageAreaContainer}
+              ref={scrollViewRef}
+              contentContainerStyle={{ paddingTop: 20 }}
+              showsVerticalScrollIndicator={false}
+              bounces={false}
+              onContentSizeChange={() =>
+                scrollViewRef.current.scrollToEnd({ animated: true })
+              }
+            >
+              {messages.map(({ data, time }, index: number) => {
+                return (
+                  <View key={index}>
+                    <View
                       style={{
-                        textAlign: "center",
-                        ...fontsize.xsmallest,
-                        ...FONTS.regular,
-                        color: COLORS.purple2,
+                        justifyContent: "center",
+                        alignSelf: "center",
+                        backgroundColor: COLORS.purple3,
+                        paddingHorizontal: 16,
+                        paddingVertical: 9,
+                        borderRadius: 15,
+                        marginVertical: 20,
                       }}
                     >
-                      {time}
-                    </Text>
+                      <Text
+                        style={{
+                          textAlign: "center",
+                          ...fontsize.xsmallest,
+                          ...FONTS.regular,
+                          color: COLORS.purple2,
+                        }}
+                      >
+                        {time}
+                      </Text>
+                    </View>
+
+                    {data.map((dat, index) => {
+                      if (dat.sender === userInfo?.userUid) {
+                        return <View key={index}>{renderSenderHTML(dat)}</View>;
+                      }
+                      return <View key={index}>{renderReceiverHTML(dat)}</View>;
+                    })}
                   </View>
-
-                  {data.map((dat, index) => {
-                    if (dat.sender === userInfo?.userUid) {
-                      return <View key={index}>{renderSenderHTML(dat)}</View>;
-                    }
-                    return <View key={index}>{renderReceiverHTML(dat)}</View>;
-                  })}
-                </View>
-              );
-            })}
-          </ScrollView>
-        </>
-      )}
-
-
-      <View style={styles.chatTextInput}>
-        <TextInput
-          placeholder="Enter Message..."
-          style={[
-            styles.textinput,
-            { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
-          ]}
-          placeholderTextColor={COLORS.grey5}
-          value={chattext}
-          onChangeText={handleTextChange}
-        />
-        {chattext !== "" && (
-          <Pressable
-          hitSlop={20}
-            onPress={() => sendFireBaseMessage()}
-          >
-            <Sendmessageicon />
-          </Pressable>
+                );
+              })}
+            </ScrollView>
+          </>
         )}
-      </View>
 
+        <View style={styles.chatTextInput}>
+          <TextInput
+            ref={textInputRef}
+            placeholder="Enter Message..."
+            style={[
+              styles.textinput,
+              { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
+            ]}
+            placeholderTextColor={COLORS.grey5}
+            value={chattext}
+            onChangeText={handleTextChange}
+          />
+          {chattext !== "" && (
+            <Pressable hitSlop={20} onPress={() => sendFireBaseMessage()}>
+              <Sendmessageicon />
+            </Pressable>
+          )}
+        </View>
       </KeyboardAvoidingView>
     </Mainwrapper>
   );
