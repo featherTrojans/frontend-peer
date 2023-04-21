@@ -41,19 +41,19 @@ const AllChatsModal = ({
   userPin,
   sendCash,
   loading,
-  setAmount,
   handleAmountChange,
   amount,
-  setChooseAmount,
   setSendCashModal,
   setEnterPin,
+  sendcashModal,
+  enterPin,
+  inputFocus,
+  setChooseAmount,
+  setAmount,
   clearModalsAll,
   clearModals,
-  sendcashModal,
-  chooseAmount,
-  enterPin,
   sendSuccess,
-  inputFocus
+  chooseAmount,
 }: any) => {
   const [modalOneVisible, setModalOneState] = React.useState(false);
   const [modalTwoVisible, setModalTwoState] = React.useState(false);
