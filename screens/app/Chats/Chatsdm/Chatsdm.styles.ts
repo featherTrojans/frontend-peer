@@ -10,25 +10,27 @@ export const styles = StyleSheet.create({
   chatHeader: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 10,
-    paddingBottom: 10,
-    // paddingHorizontal: 22,
-    paddingRight: 30,
-    backgroundColor: COLORS.white,
+    // paddingTop: 10,
+    // paddingBottom: 10,
+    paddingVertical: 10,
+    // paddingHorizontal: 30,
+    paddingRight: 40,
+    // backgroundColor: COLORS.white,
   },
   headerDetailsContainer: {
     flexDirection: "row",
-    marginLeft: 5,
+    // marginLeft: 5,
     alignItems: "center",
+
   },
   chatName: {
-    flex: 1,
+    // flex: 1,
     ...fontsize.smaller,
     ...FONTS.medium,
     color: COLORS.grey7,
     lineHeight: 21,
     textTransform: "capitalize",
-    marginLeft: 12
+    marginLeft: 12,
   },
   chatStatusContainer: {
     flexDirection: "row",
@@ -235,8 +237,9 @@ export const styles = StyleSheet.create({
     marginLeft: 17,
     paddingHorizontal: 15,
     ...fontsize.smallest,
-    lineHeight: 24,
+    // lineHeight: 24,
     ...FONTS.regular,
+    // backgroundColor: "red"
   },
 
   sendingSuccessText: {

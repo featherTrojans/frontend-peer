@@ -78,12 +78,12 @@ const listOfbanks = [
     logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FKuda%20Bank%20Logo%20(1).png?alt=media&token=7e282329-f902-4814-83e6-948ab38d8261",
   },
   {
-    value: "Opay(PAYCOM)",
-    name: "Paycom",
+    value: "Paycom",
+    name: "Opay (Paycom)",
     logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FidW2zUwfi4.png?alt=media&token=06c3e6c8-6eaf-45ad-af32-edae6f00b27e",
   },
   {
-    value: "Moniepoint MFB",
+    value: "Moniepoint",
     name: "Moniepoint",
     logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmoniepoint.png?alt=media&token=0f2820ec-c043-4820-ae21-7e5c06185d84",
   },

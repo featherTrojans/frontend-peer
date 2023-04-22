@@ -767,7 +767,7 @@ export const bankLogo = [
     updatedAt: "2021-06-01T16:07:29.000Z",
   },
   {
-    name: "Moniepoint",
+    name: "Moniepoint MFB",
     image:
       "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmoniepoint.png?alt=media&token=0f2820ec-c043-4820-ae21-7e5c06185d84",
     slug: "Moniepoint",

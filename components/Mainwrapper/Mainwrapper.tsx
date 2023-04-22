@@ -10,7 +10,7 @@ import Customstatusbar from "../../screens/shared/Customstatusbar";
 const Mainwrapper = ({
   children,
   bgColor = "#F7F8FA",
-  bottom=true
+bottom=true
 }: {
   children: any;
   bgColor?: string;

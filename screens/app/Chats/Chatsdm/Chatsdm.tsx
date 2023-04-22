@@ -31,6 +31,7 @@ import LottieView from "lottie-react-native";
 import AllChatsModal from "./AllChatsModal";
 import { usePushNotification } from "../../../../navigation";
 import formatData from "../../../../utils/fomatTrans";
+import useAlert from "../../../../utils/useAlerts";
 
 const {
   Backarrow,
@@ -53,6 +54,7 @@ const Chatsdm = ({ navigation, route }) => {
   const chatwithid = route.params.chatwithid;
   const [userInfo, setuserInfo] = useState(userIn);
   const { authdata } = useContext(AuthContext);
+  const { errorAlert, successAlert } = useAlert();
   const [messages, setMessages] = useState<any>([]);
   const [chatid, setchatid] = useState("");
   const [chattext, setchattext] = useState("");
@@ -65,6 +67,13 @@ const Chatsdm = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [fetchmessage, setFetchmessage] = useState(false);
   const animationRef = useRef<Lottie>(null);
+  const textInputRef = useRef<TextInput>(null);
+
+  const focus = () => {
+    if (textInputRef.current !== null) {
+      textInputRef.current.focus();
+    }
+  };
 
   const authId = authdata?.userDetails?.userUid;
 
@@ -136,23 +145,32 @@ const Chatsdm = ({ navigation, route }) => {
   };
 
   const sendCash = async () => {
+    // console.log("Send details", amount.value, userInfo?.username, userPin)
+    console.log("Just tried to send money to a user");
     if (userPin.length !== 4) {
       return;
     }
     setLoading(true);
     try {
-      await axiosCustom.post("/transfer", {
+      let response = await axiosCustom.post("/transfer", {
         amount: amount.value,
         transferTo: userInfo?.username,
         userPin: userPin,
       });
+
+      setTimeout(() => {
+        successAlert(response?.data?.message);
+      }, 2000);
       setchattext("");
       setSendSuccess(true);
+      setEnterPin(false);
       await sendFireBaseMessage("transfer");
       // animationRef.current?.play()
     } catch (err) {
-      console.log(err);
+      errorAlert(err);
+      // console.log(err);
     } finally {
+      setUserPin("");
       setLoading(false);
     }
   };
@@ -409,25 +427,35 @@ const Chatsdm = ({ navigation, route }) => {
           handlePinChange={handlePinChange}
           userPin={userPin}
           sendCash={sendCash}
+          inputFocus={focus}
         />
         <View style={styles.chatHeader}>
           <TouchableOpacity
             activeOpacity={0.8}
-            style={{ paddingHorizontal: 11, paddingVertical: 8 }}
+            style={{ paddingHorizontal: 10, paddingVertical: 8 }}
             onPress={() => navigation.goBack()}
           >
             <Backarrow />
           </TouchableOpacity>
 
           <View style={[styles.headerDetailsContainer]}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => navigation.goBack()}
-              style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
-            >
-              <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
-              <Text style={styles.chatName}>{userInfo?.fullName}</Text>
-            </TouchableOpacity>
+            <View style={{ flex: 1 }}>
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                activeOpacity={0.8}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  alignSelf: "flex-start",
+                }}
+              >
+                <InitialsBg
+                  sideLength={34}
+                  name={userInfo?.fullName || "0 0"}
+                />
+                <Text style={styles.chatName}>{userInfo?.fullName}</Text>
+              </TouchableOpacity>
+            </View>
 
             <TouchableOpacity
               activeOpacity={0.8}
@@ -502,6 +530,7 @@ const Chatsdm = ({ navigation, route }) => {
 
         <View style={styles.chatTextInput}>
           <TextInput
+            ref={textInputRef}
             placeholder="Enter Message..."
             style={[
               styles.textinput,
