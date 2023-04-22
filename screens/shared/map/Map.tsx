@@ -13,14 +13,12 @@ const { width, height } = Dimensions.get("screen");
 //     longitude?:number;
 // }
 
-const Map = ({ tolocation = "" }) => {
-  const { coords } = useContext(LocationContext);
-  const [destinationCoords, setDestinationCoords] = useState({});
+const Map = ({}) => {
+  const { coords, destinationCoords } = useContext(LocationContext);
+
   console.log(coords, destinationCoords);
   const mapRef = useRef(null);
-  useEffect(() => {
-    getLocationCoords(tolocation);
-  }, [tolocation]);
+
   useEffect(() => {
     //    if(!coords.latitude || !destinationCoords.latitude ) return false
     if (mapRef.current) {
@@ -30,14 +28,13 @@ const Map = ({ tolocation = "" }) => {
     }
   }, [coords?.latitude, destinationCoords?.latitude]);
 
-  const getLocationCoords = async (address) => {
-    const destinationobj = await Location.geocodeAsync(address);
+  if (coords == undefined || coords == null) {
+    return null;
+  }
 
-    if (destinationobj.length > 0) {
-      const destination = destinationobj[0];
-      setDestinationCoords(destination);
-    }
-  };
+  if (destinationCoords == undefined || destinationCoords == null) {
+    return null;
+  }
 
   if (!destinationCoords?.latitude) {
     return null;

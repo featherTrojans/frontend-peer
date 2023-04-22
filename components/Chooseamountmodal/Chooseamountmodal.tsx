@@ -23,19 +23,11 @@ const amounts = [
 ];
 
 const Chooseamountmodal = ({ headerText, onpress }) => {
-  const { authdata } = useContext(AuthContext);
   const [amount, setAmount] = useState("0");
   const { purpleAlert, errorAlert, successAlert } = useAlert();
   const textInputRef = useRef<TextInput>(null);
 
   const handleAmountChange = (value) => {
-    if (value > authdata?.walletBal) {
-      errorAlert(
-        null,
-        "Padi, you can't request for an amount greater than your wallet amount"
-      );
-      return;
-    }
     setAmount(value);
   };
   return (

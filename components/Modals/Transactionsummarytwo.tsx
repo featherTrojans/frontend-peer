@@ -30,9 +30,8 @@ const Transactionsummary = ({ openNextModal, info, fromWithdraw = false }) => {
           marginTop: 10,
         }}
       >
-        You are about to{" "}
-        {fromWithdraw ? "send money to" : "receive payment from"}{" "}
-        <Text style={{ color: COLORS.blue9 }}>@{info.agentUsername}</Text>
+        You are about to make payment to
+        <Text style={{ color: COLORS.blue9 }}>{info.agent}</Text>
       </Text>
 
       {/* <Sendingandreceive /> */}
@@ -157,29 +156,6 @@ const Transactionsummary = ({ openNextModal, info, fromWithdraw = false }) => {
           style={{ ...fontsize.smallest, ...FONTS.medium, color: COLORS.blue9 }}
         >
           N{amountFormatter(info.amount)}
-        </Text>
-      </View>
-
-      <Horizontaline marginV={20} />
-
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <Text
-          style={{
-            ...fontsize.smallest,
-            ...FONTS.regular,
-            color: COLORS.blue9,
-          }}
-        >
-          Base Charge{" "}
-        </Text>
-        <Text
-          style={{
-            ...fontsize.smallest,
-            ...FONTS.medium,
-            color: COLORS.purple4,
-          }}
-        >
-          +N{amountFormatter(info.charges)}
         </Text>
       </View>
 

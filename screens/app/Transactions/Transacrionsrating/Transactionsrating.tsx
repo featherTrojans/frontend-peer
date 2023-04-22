@@ -173,7 +173,7 @@ const Transactionsrating = ({ navigation, route }: any) => {
                 }}
               >
                 Thanks for rating this transaction, you just recieved{" "}
-                <Text style={{ ...FONTS.medium }}>N10.00</Text>
+                <Text style={{ ...FONTS.medium }}>N1.00</Text>
               </Text>
             </View>
           </Globalmodal>

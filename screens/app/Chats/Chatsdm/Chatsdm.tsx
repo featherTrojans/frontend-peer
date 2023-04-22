@@ -41,8 +41,17 @@ const {
   SendTF,
 } = icons;
 
+type userinfoobj = {
+  userUid;
+  username;
+  fullName;
+  messageToken;
+};
+
 const Chatsdm = ({ navigation, route }) => {
-  const { userInfo } = route.params;
+  const userIn = route.params.userInfo as userinfoobj;
+  const chatwithid = route.params.chatwithid;
+  const [userInfo, setuserInfo] = useState(userIn);
   const { authdata } = useContext(AuthContext);
   const [messages, setMessages] = useState<any>([]);
   const [chatid, setchatid] = useState("");
@@ -64,8 +73,22 @@ const Chatsdm = ({ navigation, route }) => {
   const scrollViewRef = useRef<ScrollView>();
 
   useEffect(() => {
+    if (chatwithid) {
+      getUserInfo();
+    }
+  }, [chatwithid]);
+  useEffect(() => {
     getThisChats();
-  }, []);
+  }, [userInfo]);
+
+  const getUserInfo = async () => {
+    try {
+      setFetchmessage(true);
+      const response = await axiosCustom.get(`/merchant/detail/${chatwithid}`);
+      setuserInfo(response.data.data);
+      setFetchmessage(false);
+    } catch (err) {}
+  };
 
   useEffect(() => {
     let unsub = () => {};
@@ -362,214 +385,141 @@ const Chatsdm = ({ navigation, route }) => {
     );
   };
 
-  return null;
-  // return (
-  //     <Mainwrapper>
-  //       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex: 1}}>
-  //       <AllChatsModal
-  //         nameOfActiveChat={userInfo?.fullName}
-  //         sendcashModal={sendcashModal}
-  //         chooseAmount={chooseAmount}
-  //         enterPin={enterPin}
-  //         sendSuccess={sendSuccess}
-  //         clearModals={clearModals}
-  //         clearModalsAll={clearModalsAll}
-  //         setChooseAmount={setChooseAmount}
-  //         setSendCashModal={setSendCashModal}
-  //         amount={amount}
-  //         handleAmountChange={handleAmountChange}
-  //         setAmount={setAmount}
-  //         setEnterPin={setEnterPin}
-  //         loading={loading}
-  //         handlePinChange={handlePinChange}
-  //         userPin={userPin}
-  //         sendCash={sendCash}
-  //       />
-  //       <View style={styles.chatHeader}>
-  //         <TouchableOpacity
-  //           activeOpacity={0.8}
-  //           style={{ paddingHorizontal: 11, paddingVertical: 8 }}
-  //           onPress={() => navigation.goBack()}
-  //         >
-  //           <Backarrow />
-  //         </TouchableOpacity>
+  return (
+    <Mainwrapper>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <AllChatsModal
+          nameOfActiveChat={userInfo?.fullName}
+          sendcashModal={sendcashModal}
+          chooseAmount={chooseAmount}
+          enterPin={enterPin}
+          sendSuccess={sendSuccess}
+          clearModals={clearModals}
+          clearModalsAll={clearModalsAll}
+          setChooseAmount={setChooseAmount}
+          setSendCashModal={setSendCashModal}
+          amount={amount}
+          handleAmountChange={handleAmountChange}
+          setAmount={setAmount}
+          setEnterPin={setEnterPin}
+          loading={loading}
+          handlePinChange={handlePinChange}
+          userPin={userPin}
+          sendCash={sendCash}
+        />
+        <View style={styles.chatHeader}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={{ paddingHorizontal: 11, paddingVertical: 8 }}
+            onPress={() => navigation.goBack()}
+          >
+            <Backarrow />
+          </TouchableOpacity>
 
-  //         <View style={[styles.headerDetailsContainer]}>
-  //           <TouchableOpacity
-  //             activeOpacity={0.8}
-  //             onPress={() => navigation.goBack()}
-  //             style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
-  //           >
-  //             <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
-  //             <Text style={styles.chatName}>{userInfo?.fullName}</Text>
-  //           </TouchableOpacity>
+          <View style={[styles.headerDetailsContainer]}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.goBack()}
+              style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
+            >
+              <InitialsBg sideLength={34} name={userInfo?.fullName || "0 0"} />
+              <Text style={styles.chatName}>{userInfo?.fullName}</Text>
+            </TouchableOpacity>
 
-  //           <TouchableOpacity
-  //             activeOpacity={0.8}
-  //             onPress={() => setSendCashModal(true)}
-  //           >
-  //             <SendTF style={{ marginRight: 10 }} />
-  //           </TouchableOpacity>
-  //         </View>
-  //       </View>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => setSendCashModal(true)}
+            >
+              <SendTF style={{ marginRight: 10 }} />
+            </TouchableOpacity>
+          </View>
+        </View>
 
-  //       {fetchmessage ? (
-  //         <View
-  //           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-  //         >
-  //           <LottieView
-  //             source={Feathecomingsoonchatanimate}
-  //             autoPlay
-  //             loop
-  //             style={{ width: 160, height: 160 }}
-  //           />
-  //         </View>
-  //       ) : (
-  // <<<<<<< HEAD
-  //         <ScrollView
-  //           style={styles.messageAreaContainer}
-  //           ref={scrollViewRef}
-  //           contentContainerStyle={{ paddingTop: 20 }}
-  //           showsVerticalScrollIndicator={false}
-  //           bounces={false}
-  //           onContentSizeChange={() =>
-  //             scrollViewRef.current.scrollToEnd({ animated: true })
-  //           }
-  //         >
-  //           {messages.map(({ data, time }, index: number) => {
-  //             return (
-  //               <View key={index}>
-  //                 <View
-  //                   style={{
-  //                     justifyContent: "center",
-  //                     alignSelf: "center",
-  //                     backgroundColor: COLORS.purple3,
-  //                     paddingHorizontal: 16,
-  //                     paddingVertical: 9,
-  //                     borderRadius: 15,
-  //                   }}
-  //                 >
-  //                   <Text
-  //                     style={{
-  //                       textAlign: "center",
-  //                       ...fontsize.xsmallest,
-  //                       ...FONTS.regular,
-  //                       color: COLORS.purple2,
-  //                     }}
-  //                   >
-  //                     {time}
-  //                   </Text>
-  //                 </View>
+        {fetchmessage ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <LottieView
+              source={Feathecomingsoonchatanimate}
+              autoPlay
+              loop
+              style={{ width: 160, height: 160 }}
+            />
+          </View>
+        ) : (
+          <>
+            <ScrollView
+              style={styles.messageAreaContainer}
+              ref={scrollViewRef}
+              contentContainerStyle={{ paddingTop: 20 }}
+              showsVerticalScrollIndicator={false}
+              bounces={false}
+              onContentSizeChange={() =>
+                scrollViewRef.current.scrollToEnd({ animated: true })
+              }
+            >
+              {messages.map(({ data, time }, index: number) => {
+                return (
+                  <View key={index}>
+                    <View
+                      style={{
+                        justifyContent: "center",
+                        alignSelf: "center",
+                        backgroundColor: COLORS.purple3,
+                        paddingHorizontal: 16,
+                        paddingVertical: 9,
+                        borderRadius: 15,
+                        marginVertical: 20,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          textAlign: "center",
+                          ...fontsize.xsmallest,
+                          ...FONTS.regular,
+                          color: COLORS.purple2,
+                        }}
+                      >
+                        {time}
+                      </Text>
+                    </View>
 
-  //                 {data.map((dat, index) => {
-  //                   if (dat.sender === userInfo?.userUid) {
-  //                     return <View key={index}>{renderSenderHTML(dat)}</View>;
-  //                   }
-  //                   return <View key={index}>{renderReceiverHTML(dat)}</View>;
-  //                 })}
-  //               </View>
-  //             );
-  //           })}
-  //         </ScrollView>
-  //       )}
-  //       <View style={styles.chatTextContainer}>
-  //         <View style={styles.inputarea}>
-  //           <View style={styles.chatTextInput}>
-  //             <TextInput
-  //               placeholder="Enter Message"
-  //               style={[
-  //                 styles.textinput,
-  //                 { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
-  //               ]}
-  //               value={chattext}
-  //               onChangeText={handleTextChange}
-  //             />
-  //             {chattext !== "" && (
-  //               <TouchableOpacity
-  //                 activeOpacity={0.8}
-  //                 onPress={() => sendFireBaseMessage()}
-  //               >
-  //                 <Sendmessageicon />
-  //               </TouchableOpacity>
-  //             )}
-  //           </View>
-  //         </View>
-  //       </View>
-  // =======
-  //         <>
-  //           <ScrollView
-  //             style={styles.messageAreaContainer}
-  //             ref={scrollViewRef}
-  //             contentContainerStyle={{ paddingTop: 20 }}
-  //             showsVerticalScrollIndicator={false}
-  //             bounces={false}
-  //             onContentSizeChange={() =>
-  //               scrollViewRef.current.scrollToEnd({ animated: true })
-  //             }
-  //           >
-  //             {messages.map(({ data, time }, index: number) => {
-  //               return (
-  //                 <View key={index}>
-  //                   <View
-  //                     style={{
-  //                       justifyContent: "center",
-  //                       alignSelf: "center",
-  //                       backgroundColor: COLORS.purple3,
-  //                       paddingHorizontal: 16,
-  //                       paddingVertical: 9,
-  //                       borderRadius: 15,
-  //                     }}
-  //                   >
-  //                     <Text
-  //                       style={{
-  //                         textAlign: "center",
-  //                         ...fontsize.xsmallest,
-  //                         ...FONTS.regular,
-  //                         color: COLORS.purple2,
-  //                       }}
-  //                     >
-  //                       {time}
-  //                     </Text>
-  //                   </View>
+                    {data.map((dat, index) => {
+                      if (dat.sender === userInfo?.userUid) {
+                        return <View key={index}>{renderSenderHTML(dat)}</View>;
+                      }
+                      return <View key={index}>{renderReceiverHTML(dat)}</View>;
+                    })}
+                  </View>
+                );
+              })}
+            </ScrollView>
+          </>
+        )}
 
-  //                   {data.map((dat, index) => {
-  //                     if (dat.sender === userInfo?.userUid) {
-  //                       return <View key={index}>{renderSenderHTML(dat)}</View>;
-  //                     }
-  //                     return <View key={index}>{renderReceiverHTML(dat)}</View>;
-  //                   })}
-  //                 </View>
-  //               );
-  //             })}
-  //           </ScrollView>
-  //         </>
-  //       )}
-
-  //       <View style={styles.chatTextInput}>
-  //         <TextInput
-  //           placeholder="Enter Message..."
-  //           style={[
-  //             styles.textinput,
-  //             { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
-  //           ]}
-  //           placeholderTextColor={COLORS.grey5}
-  //           value={chattext}
-  //           onChangeText={handleTextChange}
-  //         />
-  //         {chattext !== "" && (
-  //           <Pressable
-  //           hitSlop={20}
-  //             onPress={() => sendFireBaseMessage()}
-  //           >
-  //             <Sendmessageicon />
-  //           </Pressable>
-  //         )}
-  //       </View>
-
-  //       </KeyboardAvoidingView>
-  // >>>>>>> 8886f145b981124fc495a978331e5996cc5c8b29
-  //     </Mainwrapper>
-  // );
+        <View style={styles.chatTextInput}>
+          <TextInput
+            placeholder="Enter Message..."
+            style={[
+              styles.textinput,
+              { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
+            ]}
+            placeholderTextColor={COLORS.grey5}
+            value={chattext}
+            onChangeText={handleTextChange}
+          />
+          {chattext !== "" && (
+            <Pressable hitSlop={20} onPress={() => sendFireBaseMessage()}>
+              <Sendmessageicon />
+            </Pressable>
+          )}
+        </View>
+      </KeyboardAvoidingView>
+    </Mainwrapper>
+  );
 };
 
 export default Chatsdm;
