@@ -10,20 +10,13 @@ const useContact = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getpermission(
-        "Contact",
-        "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
-        "contact",
-        async () => {
-          const { status } = await Contacts.requestPermissionsAsync();
-          if (status === "granted") {
-            const { data } = await Contacts.getContactsAsync();
-            return data;
-          }
-          return [];
-        }
-      ).catch((err) => {});
-      setContacts(data);
+      let datacontact: any = [];
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === "granted") {
+        const { data } = await Contacts.getContactsAsync();
+        datacontact = data;
+      }
+      setContacts(datacontact);
     })();
   }, []);
 

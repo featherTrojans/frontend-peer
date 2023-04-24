@@ -12,14 +12,14 @@ const usePermission = () => {
 
   const getConatctPermission = async () => {
     try {
-      await getpermission(
-        "Contact",
-        "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
-        "contact",
-        async () => {
-          await Contacts.requestPermissionsAsync();
-        }
-      );
+      await Contacts.requestPermissionsAsync();
+      // await getpermission(
+      //   "Contact",
+      //   "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
+      //   "contact",
+      //   async () => {
+      //   }
+      // );
     } catch (err) {
       console.log(err);
     }
@@ -27,14 +27,14 @@ const usePermission = () => {
 
   const getLocationPermission = async () => {
     try {
-      await getpermission(
-        "Location",
-        "Allow Feather access to your location to find the nearest agent close to you",
-        "location",
-        async () => {
-          await Location.requestForegroundPermissionsAsync();
-        }
-      );
+      await Location.requestForegroundPermissionsAsync();
+      // await getpermission(
+      //   "Location",
+      //   "Allow Feather access to your location to find the nearest agent close to you",
+      //   "location",
+      //   async () => {
+      //   }
+      // );
     } catch (err) {
       console.log(err);
     }

@@ -6,18 +6,12 @@ export const getCurrentLocation = async () => {
   let locationaddress: any = [];
   let location: any = {};
   try {
-    location = await getpermission(
-      "Location",
-      "Allow Feather access to your location to find the nearest agent close to you",
-      "location",
-      async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          return;
-        }
-        return await Location.getCurrentPositionAsync({ accuracy: 6 });
-      }
-    );
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      console.log("Permission to access location was denied");
+      return;
+    }
+    location = await Location.getCurrentPositionAsync({ accuracy: 6 });
 
     Location.setGoogleApiKey("AIzaSyAi-mitwXb4VYIZo9p-FXCwzMeHSsknCnY");
     locationaddress = await Location.reverseGeocodeAsync(location.coords, {
