@@ -22,7 +22,7 @@ const useContact = () => {
           }
           return [];
         }
-      );
+      ).catch((err) => {});
       setContacts(data);
     })();
   }, []);
