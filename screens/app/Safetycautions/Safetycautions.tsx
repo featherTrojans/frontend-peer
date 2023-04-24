@@ -14,18 +14,18 @@ import useCustomModal from "../../../utils/useCustomModal";
 const { Newlogo } = icons;
 
 interface withdrawobj {
-  fullName: string;
-  username: string;
+  reference: string;
   amount: string;
   charges: string;
-  createdAt: string;
-  meetupPoint: string;
-  negotiatedFee: string;
-  phoneNumber: string;
-  reference: string;
-  status: string;
   total: string;
-  userUid: string;
+  negotiatedFee: string;
+  agent: string;
+  agentUsername: string;
+  phoneNumber: string;
+  status: string;
+  meetupPoint: string;
+  createdAt: string;
+  agentImage: null;
 }
 
 enum comingFromEnum {

@@ -34,12 +34,7 @@ import Check from "../../../../assets/icons/Check";
 import WrongIcon from "../../../../assets/icons/WrongIcon";
 import useAlert from "../../../../utils/useAlerts";
 
-const {
-  Usericondark,
-  Envelopeicon,
-  Phoneicon,
-  Memoji1,
-} = icons;
+const { Usericondark, Envelopeicon, Phoneicon, Memoji1 } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -54,65 +49,65 @@ const validationSchema = Yup.object().shape({
   phone: Yup.string().label("email").required(),
 });
 
-
-
 const Editprofile = ({}) => {
+  const { errorAlert } = useAlert();
+  const navigation = useNavigation();
+  const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
+  const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
+  const {
+    CustomModal,
+    openModal,
+    closeModal: closeUpgradeModal,
+  } = useCustomModal();
+  const [usernamename, setusernamename] = useState(
+    authdata?.userDetails?.username
+  );
+  const { userLevel } = authdata?.userDetails;
+  const usertype = userLevel < 2 ? "newbie" : "odogwu";
 
-    const {errorAlert} = useAlert()
-    const navigation = useNavigation();
-    const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
-    const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
-    const {CustomModal, openModal, closeModal: closeUpgradeModal} = useCustomModal()
-    const [usernamename, setusernamename] = useState(
-      authdata?.userDetails?.username
-    );
-    const {userLevel} = authdata?.userDetails
-    const usertype = userLevel < 2 ? "newbie" : "odogwu"
+  const [loading, setLoading] = useState(false);
+  const handleUsernameChange = (text: string) => {
+    setusernamename(text);
+    // and debound
+    getuserinfo(text);
+  };
 
-    const [loading, setLoading] = useState(false);
-    const handleUsernameChange = (text: string) => {
-      setusernamename(text);
-      // and debound
-      getuserinfo(text);
-    };
-  
-    const handleImageUpload = async () => {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-  
-      // console.log(result);
+  const handleImageUpload = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-      if (!result.cancelled) {
-        try {
-          setLoading(true);
-          const formdata = new FormData();
-          console.log(result)
-          formdata.append('file', {
-            uri: result.uri,
-            type: "Image/jpeg",
-            name: "image1"
-          });
-          formdata.append('name', authdata?.userDetails?.username);
-          // console.log(result.uri, "this is the image url");
-          setAuthData({...authdata, userDetails: {...authdata?.userDetails, imageUrl: result.uri}})
-          const response = await axiosCustom.post("/upload/image",formdata);
-          
-          console.log(response.data, "Uploaded response");
-                    
-        } catch (err) {
-          console.log(err.response.data);
-        } finally {
-          setLoading(false);
-        }
-     
+    // console.log(result);
+
+    if (!result.cancelled) {
+      try {
+        setLoading(true);
+        const formdata = new FormData();
+        console.log(result);
+        formdata.append("file", {
+          uri: result.uri,
+          type: "Image/jpeg",
+          name: "image1",
+        });
+        formdata.append("name", authdata?.userDetails?.username);
+        // console.log(result.uri, "this is the image url");
+        setAuthData({
+          ...authdata,
+          userDetails: { ...authdata?.userDetails, imageUrl: result.uri },
+        });
+        const response = await axiosCustom.post("/upload/image", formdata);
+
+        console.log(response.data, "Uploaded response");
+      } catch (err) {
+        console.log(err.response.data);
+      } finally {
+        setLoading(false);
       }
-  
-      
-    };
+    }
+  };
 
   const HeaderRightSide = () => {
     const userTypeBg = (usertype: string) => {
@@ -149,8 +144,6 @@ const Editprofile = ({}) => {
     );
   };
 
-
-
   return (
     <Mainwrapper>
       <Backheader
@@ -166,29 +159,20 @@ const Editprofile = ({}) => {
       >
         <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
           <View style={{ paddingHorizontal: 15, marginBottom: 50 }}>
-
-
             <TouchableOpacity activeOpacity={0.8} onPress={handleImageUpload}>
-
-
               <View style={styles.avatarProfileWrap}>
-
-
                 <View style={styles.avatarBg}>
-
                   {authdata?.userDetails.imageUrl !== null ? (
-              <Image
-                style={{ width: 60, height: 60, borderRadius: 60 / 2 }}
-                source={{
-                  uri: authdata?.userDetails.imageUrl,
-                }}
-              />
-            ) : (
-              <Defaultuseravatar />
-            )}
+                    <Image
+                      style={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+                      source={{
+                        uri: authdata?.userDetails.imageUrl,
+                      }}
+                    />
+                  ) : (
+                    <Defaultuseravatar />
+                  )}
                 </View>
-
-
 
                 <View style={{ marginLeft: 15 }}>
                   <Text style={styles.avatarFullname}>
@@ -199,29 +183,29 @@ const Editprofile = ({}) => {
                   </Text>
                 </View>
               </View>
-  
+
               <Text style={styles.avatarText}>Tap to Edit</Text>
             </TouchableOpacity>
-  
+
             <CustomModal>
               <View>
                 <Upgrademodal closeUpgradeModal={closeUpgradeModal} />
               </View>
             </CustomModal>
-  
-  
-  
-            {usertype === "newbie" && 
+
+            {usertype === "newbie" && (
               <View style={styles.upgradeBtnWrap}>
-              <TouchableOpacity activeOpacity={0.8} onPress={openModal} style={styles.upgradeBtnBg}>
-                <Text style={styles.upgradeBtnText}>Upgrade</Text>
-              </TouchableOpacity>
-            </View>
-            
-            }
-            
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={openModal}
+                  style={styles.upgradeBtnBg}
+                >
+                  <Text style={styles.upgradeBtnText}>Upgrade</Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
-  
+
           <Formik
             initialValues={{
               username: authdata?.userDetails?.username,
@@ -232,9 +216,8 @@ const Editprofile = ({}) => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values) => {
-              
-              if(userinfo.fullName && usernamename?.toLowerCase()){
-                return errorAlert(null, "Please provide a valid username")
+              if (userinfo.fullName && usernamename?.toLowerCase()) {
+                return errorAlert(null, "Please provide a valid username");
               }
               try {
                 const data = {
@@ -255,7 +238,7 @@ const Editprofile = ({}) => {
                   ...authdata,
                   userDetails: userdetails,
                 });
-  
+
                 // set new token
                 setAuthorizationToken(response?.data?.data?.token);
                 //Disable Biometrics
@@ -269,13 +252,15 @@ const Editprofile = ({}) => {
           >
             {(formikProps) => {
               const { isSubmitting, handleSubmit, values } = formikProps;
-              console.log('------------------------ISSUBMITTING--------------------------');
-              console.log(isSubmitting)
+              console.log(
+                "------------------------ISSUBMITTING--------------------------"
+              );
+              console.log(isSubmitting);
 
               return (
                 <React.Fragment>
                   {isSubmitting && <Loader />}
-  
+
                   <View style={styles.editInputContainer}>
                     {/* Debounce check for username */}
                     {/* <View style={styles.namecont}>
@@ -298,7 +283,15 @@ const Editprofile = ({}) => {
                         </>
                       )}
                     </View> */}
-                    <View style={{flexDirection:"row", marginRight: 5, marginBottom: 10, alignItems:"flex-end", justifyContent:"flex-end"}}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        marginRight: 5,
+                        marginBottom: 10,
+                        alignItems: "flex-end",
+                        justifyContent: "flex-end",
+                      }}
+                    >
                       {loadbounce ? (
                         <ActivityIndicator size={15} color={COLORS.blue6} />
                       ) : userinfo.fullName &&
@@ -306,7 +299,9 @@ const Editprofile = ({}) => {
                           authdata?.userDetails?.username?.toLowerCase() ? (
                         <>
                           <WrongIcon />
-                          <Text style={styles.name}>{usernamename} is taken</Text>
+                          <Text style={styles.name}>
+                            {usernamename} is taken
+                          </Text>
                         </>
                       ) : null}
                       {(error ||
@@ -318,8 +313,7 @@ const Editprofile = ({}) => {
                         </>
                       )}
                     </View>
-                    
-  
+
                     <Input
                       placeholder="Username"
                       name="username"
@@ -328,8 +322,8 @@ const Editprofile = ({}) => {
                       inputbg={"#fff"}
                       value={usernamename}
                       onChangeText={handleUsernameChange}
-                      />
-                       
+                    />
+
                     <Input
                       placeholder="Firstname"
                       name="firstName"
@@ -338,7 +332,7 @@ const Editprofile = ({}) => {
                       value={values.firstName}
                       editable={false}
                     />
-  
+
                     <Input
                       placeholder="Lastname"
                       name="lastName"
@@ -347,7 +341,7 @@ const Editprofile = ({}) => {
                       value={values.lastName}
                       editable={false}
                     />
-  
+
                     <Input
                       placeholder="Phone Number"
                       name="phoneNumber"
@@ -356,30 +350,24 @@ const Editprofile = ({}) => {
                       value={values.phone}
                       editable={false}
                     />
-  
+
                     <Input
                       placeholder="Email Address"
                       name="email"
                       formikProps={formikProps}
                       icon={<Envelopeicon />}
-                      value={values.email}
+                      value={values?.email?.toLowerCase()}
                       editable={false}
                     />
-                    <Custombutton btntext="Save Changes" onpress={handleSubmit} />
+                    <Custombutton
+                      btntext="Save Changes"
+                      onpress={handleSubmit}
+                    />
                   </View>
                 </React.Fragment>
               );
             }}
           </Formik>
-  
-          {usertype === "odogwu" && <TouchableOpacity activeOpacity={0.8} style={styles.becomeandagentwrap}>
-            <Text style={styles.becomeanagenttext}>Become an Agent</Text>
-            <View style={styles.becomeagentredbg}>
-              <Text style={styles.becomeagentnewtext}>New</Text>
-            </View>
-          </TouchableOpacity>}
-  
-  
         </KeyboardAwareScrollView>
       </ScrollView>
     </Mainwrapper>

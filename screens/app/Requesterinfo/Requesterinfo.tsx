@@ -1,12 +1,11 @@
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
   ActivityIndicator,
   Image,
 } from "react-native";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import Horizontaline from "../../../components/Horizontaline/Horizontaline";
@@ -31,14 +30,11 @@ import { makePhoneCall } from "../../../utils/userDeviceFunctions";
 import amountFormatter from "../../../utils/formatMoney";
 import { nameSplitter } from "../../../utils/nameSplitter";
 import useCustomModal from "../../../utils/useCustomModal";
+import { LocationContext } from "../../../context/LocationContext";
+import { getCoordinateFromAddress } from "../../../utils/customLocation";
+import { AuthContext } from "../../../context/AuthContext";
 
-const {
-  Purplechaticon,
-  Renegotiateicon,
-  Cancelrequest,
-  Greenphoneicon,
-  Editicon,
-} = icons;
+const { Purplechaticon, Cancelrequest, Greenphoneicon } = icons;
 
 interface withdrawobj {
   reference: string;
@@ -55,18 +51,14 @@ interface withdrawobj {
   agentImage: null;
 }
 
-enum comingFromEnum {
-  withdrawPending,
-  withdrawAccepted,
-  depositPending,
-  depositAccepted,
-}
-
 const Requesterinfo = ({ navigation, route }) => {
   const comingback = route?.params?.comingback;
+  const { authdata } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [screenLoading, setScreenLoading] = useState(true);
   const [withdrawscreen, setWithdrawrequest] = useState(true);
+  const { destinationCoords, setDestinationCoords } =
+    useContext(LocationContext);
   const {
     CustomModal: NegotiateChargeModal,
     openModal: openNegotiateChargeModal,
@@ -97,7 +89,7 @@ const Requesterinfo = ({ navigation, route }) => {
   console.log(comingback, "alright alright");
   useEffect(() => {
     getWithdrawRequest();
-  }, [navigation]);
+  }, [comingback]);
   const getWithdrawRequest = async () => {
     setScreenLoading(true);
     try {
@@ -108,6 +100,12 @@ const Requesterinfo = ({ navigation, route }) => {
       if (response.data && response.data.data.length > 0) {
         setInfo(response?.data?.data[0]);
         setWithdrawrequest(false);
+        // get the other destination
+        const adddresscoord = await getCoordinateFromAddress(info.meetupPoint);
+        setDestinationCoords({
+          ...adddresscoord,
+          locationText: info.meetupPoint,
+        });
       }
     } catch (err) {
       console.log(err.response);
@@ -135,6 +133,10 @@ const Requesterinfo = ({ navigation, route }) => {
     navigation.navigate("Home");
   };
   const handleWithdraw = (amount) => {
+    if (amount > authdata?.walletBal) {
+      errorAlert(null, "insufficient wallet balance");
+      return;
+    }
     if (Number(amount) < 200) {
       errorAlert(
         null,
@@ -191,7 +193,7 @@ const Requesterinfo = ({ navigation, route }) => {
 
   return (
     <View style={{ paddingTop: getStatusBarHeight(true), flex: 1 }}>
-      {/* <Map tolocation={info.meetupPoint} /> */}
+      {!destinationCoords?.latitude ? null : <Map />}
       <Backheader title="Withdraw" />
       {loading && <Loader />}
 
@@ -365,7 +367,10 @@ const Requesterinfo = ({ navigation, route }) => {
                 <View>
                   <TouchableOpacity
                     onPress={() =>
-                      navigation.navigate("Chatsdm", { userInfo: info })
+                      navigation.navigate("Chatsdm", {
+                        userInfo: {},
+                        chatwithid: info.agentUsername,
+                      })
                     }
                     style={{ flexDirection: "row", alignItems: "center" }}
                   >
@@ -511,5 +516,3 @@ const Requesterinfo = ({ navigation, route }) => {
 };
 
 export default Requesterinfo;
-
-const styles = StyleSheet.create({});

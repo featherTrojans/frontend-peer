@@ -26,11 +26,11 @@ const Cancelrequest = ({ route, navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   console.log("I see you o");
   const reasons = [
-    { text: "Mistake request", key: 1 },
-    { text: "The agent didn’t accept my cash request", key: 2 },
-    { text: "Long cash delivery time", key: 3 },
+    { text: "Mistake cash request", key: 1 },
+    { text: "Merchant location distance is too far", key: 2 },
+    { text: "Merchant has poor behaviour", key: 3 },
     {
-      text: "The agent seemed suspicious during the meet-up conversation",
+      text: "Merchant seemed suspicious",
       key: 4,
     },
     { text: "Cash presented was in bad condition", key: 5 },

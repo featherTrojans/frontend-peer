@@ -42,8 +42,17 @@ const {
   SendTF,
 } = icons;
 
+type userinfoobj = {
+  userUid;
+  username;
+  fullName;
+  messageToken;
+};
+
 const Chatsdm = ({ navigation, route }) => {
-  const { userInfo } = route.params;
+  const userIn = route.params.userInfo as userinfoobj;
+  const chatwithid = route.params.chatwithid;
+  const [userInfo, setuserInfo] = useState(userIn);
   const { authdata } = useContext(AuthContext);
   const { errorAlert, successAlert } = useAlert();
   const [messages, setMessages] = useState<any>([]);
@@ -73,8 +82,22 @@ const Chatsdm = ({ navigation, route }) => {
   const scrollViewRef = useRef<ScrollView>();
 
   useEffect(() => {
+    if (chatwithid) {
+      getUserInfo();
+    }
+  }, [chatwithid]);
+  useEffect(() => {
     getThisChats();
-  }, []);
+  }, [userInfo]);
+
+  const getUserInfo = async () => {
+    try {
+      setFetchmessage(true);
+      const response = await axiosCustom.get(`/merchant/detail/${chatwithid}`);
+      setuserInfo(response.data.data);
+      setFetchmessage(false);
+    } catch (err) {}
+  };
 
   useEffect(() => {
     let unsub = () => {};
