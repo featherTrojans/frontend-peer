@@ -1,19 +1,16 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 import React, { useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../constants";
 import { Custombutton, Input, Loader, Mainwrapper } from "../../../components";
 import { styles } from "../signup/Personal/Personal.styles";
 import axiosCustom from "../../../httpRequests/axiosCustom";
-import { useToast } from "react-native-toast-notifications";
-import showerror from "../../../utils/errorMessage";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Customstatusbar from "../../shared/Customstatusbar";
+import useAlert from "../../../utils/useAlerts";
 const { Envelopeicon, Newlogo } = icons;
 
 const Forgetpassword = ({ navigation }) => {
-  const toast = useToast();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const {errorAlert} = useAlert()
 
 
   
@@ -26,7 +23,7 @@ const Forgetpassword = ({ navigation }) => {
         email: email.trim(),
       });
     } catch (err) {
-      showerror(toast, err);
+      errorAlert(err)
     } finally {
       setLoading(false);
     }
@@ -41,7 +38,7 @@ const Forgetpassword = ({ navigation }) => {
 
 
 
-      <View style={{ paddingHorizontal: 25, flex: 1 }}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ paddingHorizontal: 25, flex: 1 }}>
         {loading && <Loader />}
         <View style={{ marginTop: 30 }}>
           <View style={{marginBottom: 28}}>
@@ -89,7 +86,7 @@ const Forgetpassword = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
 
 
     </Mainwrapper>
