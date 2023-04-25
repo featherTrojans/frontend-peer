@@ -71,7 +71,7 @@ const Login = ({ navigation }: any) => {
         // navigation.navigate("Securepin",{token:result?.token});
         navigation.navigate("Welcometochange", {
           fromm: "login",
-          username: values.username,
+          username: response.data?.data?.username || values.username,
           token: token,
         });
       } catch (err) {
