@@ -215,7 +215,7 @@ const Login = ({ navigation }: any) => {
                       onPress={
                         isBiometricAllowed && enableBiometrics
                           ? biometricsLogin
-                          : null
+                          : () => null
                       }
                     >
                       Use Biometrics

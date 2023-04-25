@@ -12,12 +12,14 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import LottieView from "lottie-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../../../shared/Customstatusbar";
+import useAlert from "../../../../utils/useAlerts";
 const { Lockicondark, Successcheckanimate } = icons;
 
 const Setnewpassword = ({ navigation, route }) => {
   const { code, token } = route.params;
   const [showModal, setShowModal] = useState<boolean>(false);
   const toast = useToast();
+  const {errorAlert} = useAlert()
   const validationSchema = Yup.object().shape({
     password: Yup.string().label("Password").required(),
     confirmPassword: Yup.string()
@@ -105,7 +107,7 @@ const Setnewpassword = ({ navigation, route }) => {
               // navigation.navigate("Securepin",{token:response?.data?.data?.token});
             } catch (err) {
               // error handling
-              showerror(toast, err);
+              errorAlert(err);
             }
             //You want to call handleSubmitData here and pass in the values
           }}

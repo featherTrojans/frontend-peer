@@ -23,6 +23,7 @@ import {
 } from "../../../../components";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RFValue } from "react-native-responsive-fontsize";
+import useAlert from "../../../../utils/useAlerts";
 
 const { Successcheckanimate, Cancelicon } = icons;
 
@@ -36,6 +37,7 @@ const Forgetpasswordotp = ({ navigation, route }) => {
   const [tokenn, setToken] = useState<string | null>(token);
   const [disable, setDisable] = useState(true);
   const otpInput = useRef(null);
+  const {errorAlert} = useAlert()
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -68,7 +70,7 @@ const Forgetpasswordotp = ({ navigation, route }) => {
       );
       navigation.navigate("Setnewpassword", { token: tokenn, code: otpCode });
     } catch (err) {
-      showerror(toast, err);
+      errorAlert(err);
     } finally {
       setLoading(false);
     }
@@ -82,7 +84,7 @@ const Forgetpasswordotp = ({ navigation, route }) => {
       setDisable(false);
       setTime(30);
     } catch (err) {
-      showerror(toast, err);
+      errorAlert(err);
     } finally {
       setLoading(false);
     }
