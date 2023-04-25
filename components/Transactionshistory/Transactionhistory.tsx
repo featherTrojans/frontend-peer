@@ -27,7 +27,7 @@ const History = ({ data }) => {
   const amountSign = direction === "in" ? "+" : "-";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
   const networkType = from.toUpperCase();
-  const isEtisalat = networkType === "9MOBILE"
+  const isEtisalat = networkType === "9MOBILE";
 
   const isUser = (title: string) => {
     const capital = title;
@@ -38,8 +38,8 @@ const History = ({ data }) => {
     ) {
       return (
         <Text>
-          @
-          <Text style={{ textTransform: "lowercase" }}>{transactionValue}</Text>
+          
+          <Text style={{ textTransform: "capitalize" }}>{transactionValue}</Text>
         </Text>
       );
     } else {
@@ -55,7 +55,11 @@ const History = ({ data }) => {
         return (
           <View style={[styles.arrowBg, { borderRadius: RFValue(30) }]}>
             <Image
-              source={{ uri:  isEtisalat ? assetsDB["bills"]["ETISALAT"] : assetsDB["bills"][networkType] }}
+              source={{
+                uri: isEtisalat
+                  ? assetsDB["bills"]["ETISALAT"]
+                  : assetsDB["bills"][networkType],
+              }}
               resizeMode="cover"
               style={{
                 width: "100%",
@@ -69,13 +73,13 @@ const History = ({ data }) => {
 
       case "withdrawal":
         const targetLogo = bankLogo.filter((logo) => logo.name === to);
-        const isGt = to === "Guaranty Trust Bank"
-        const isFcmb = to === "First City Monument Bank"
+        const isGt = to === "Guaranty Trust Bank";
+        const isFcmb = to === "First City Monument Bank";
         return (
           <View style={styles.arrowBg}>
             <Image
               source={{ uri: targetLogo[0]["image"] }}
-              resizeMode={(isGt || isFcmb) ? "cover": "contain"}
+              resizeMode={isGt || isFcmb ? "cover" : "contain"}
               resizeMethod="scale"
               style={{
                 width: "100%",
@@ -87,16 +91,15 @@ const History = ({ data }) => {
         );
         break;
 
-
       case "Funds Transfer":
         const targetlogo = bankLogo.filter((logo) => logo.name === to);
-        const isGtb = to === "Guaranty Trust Bank"
-        const isFcmbc = to === "First City Monument Bank"
+        const isGtb = to === "Guaranty Trust Bank";
+        const isFcmbc = to === "First City Monument Bank";
         return (
           <View style={styles.arrowBg}>
             <Image
               source={{ uri: targetlogo[0]["image"] }}
-              resizeMode={(isGtb || isFcmbc) ? "cover": "contain"}
+              resizeMode={isGtb || isFcmbc ? "cover" : "contain"}
               resizeMethod="scale"
               style={{
                 width: "100%",
@@ -153,25 +156,23 @@ const History = ({ data }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={styles.historyContainer}
+      style={[styles.historyContainer]}
       onPress={() => customNavigation("Transactiondetails", { data: data })}
     >
-      <View style={styles.historyDetailsContainer}>
+      <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
         {transactionBadge()}
 
-        <View>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.transactionType}>
+        <View style={{ flex: 1 }}>
+          <View style={styles.titleAndAmount}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={[styles.amount, { color: priceColor }]}>
+              {amountSign}N{amountFormatter(amount)}
+            </Text>
+          </View>
+          <Text style={[styles.transactionType]}>
             {transactionType} : {isUser(title)}
           </Text>
         </View>
-      </View>
-
-      
-      <View>
-        <Text style={[styles.amount, { color: priceColor }]}>
-          {amountSign}N{amountFormatter(amount)}
-        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -192,7 +193,7 @@ const Transactionhistory = ({
       delay={index * 100}
       style={styles.container}
     >
-        <Text style={styles.dateText}>{date}</Text>
+      <Text style={styles.dateText}>{date}</Text>
       {datas.map((data, index) => {
         return (
           <Animatable.View animation="slideInUp" delay={index * 50} key={index}>

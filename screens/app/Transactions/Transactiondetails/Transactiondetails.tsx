@@ -97,6 +97,18 @@ const Transactiondetails = ({ navigation, route }) => {
     }
   };
 
+  function showMerchant (){
+    if(title === "Cash Withdrawal"){
+
+      let merchantInfo = receiver.split("-")
+      let merchantName = merchantInfo[0]
+      let merchantId = merchantInfo[1]
+
+
+      return {merchantName, merchantId}
+    }
+  }
+
   const saveFile = async (filePath: string) => {
     const albumName = "Feather";
     const permission = await MediaLibrary.requestPermissionsAsync();
@@ -561,6 +573,41 @@ const Transactiondetails = ({ navigation, route }) => {
     }
   };
 
+const Cashwithdrawal = () =>{
+  if(title === "Cash Withdrawal"){
+
+    const senderName =
+        direction === "in"
+          ? 
+          "Feather"
+            : user?.fullName
+          
+      const receiverName =
+        direction === "out"
+          ? showMerchant()?.merchantName
+            : user?.fullName
+
+
+            const receiverId =
+            direction === "out"
+              ? showMerchant()?.merchantId
+                : user?.fullName
+
+
+    return (
+      <>
+          <Eachoption title="Sender Name" value={senderName} />
+          <Horizontaline marginV={18} />
+          <Eachoption title="Merchant Name" value={receiverName} />
+          <Horizontaline marginV={18} />
+          <Eachoption title="Merchant ID" value={receiverId} />
+          <Horizontaline marginV={18} />
+
+        </>
+    )
+  }
+}
+
   const BankTransferDetails = () => {
     if (bankDetails) {
       return (
@@ -791,6 +838,7 @@ const Transactiondetails = ({ navigation, route }) => {
           {FeatherTransferDetails()}
           {BankTransferDetails()}
           {AirtimePurchase()}
+          {Cashwithdrawal()}
           <Eachoption title="Amount" value={`N${amountFormatter(amount)}`} />
           <Horizontaline marginV={18} />
           <Eachoption

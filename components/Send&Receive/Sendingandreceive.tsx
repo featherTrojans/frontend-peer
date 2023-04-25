@@ -24,6 +24,8 @@ const { Trustedbadgepng } = images;
 // Wallet Debit
 // Funding
 
+
+
 const InitialsBgColor = ({ name }) => {
   return (
     <View
@@ -32,11 +34,11 @@ const InitialsBgColor = ({ name }) => {
         height: 50,
         justifyContent: "center",
         alignItems: "center",
-        // backgroundColor: C,
+        backgroundColor: COLORS.purple3,
         borderRadius: 50 / 2,
       }}
     >
-      <Text>{nameSplitToTwo(name)}</Text>
+      <Text style={{...fontsize.smaller, ...FONTS.medium, color: COLORS.purple4}}>{nameSplitToTwo(name)}</Text>
     </View>
   );
 };
@@ -50,6 +52,7 @@ const showImage = (
   transId?: string
 ) => {
   const isVFD = transId?.includes("Feather", 0);
+
 
   switch (title) {
     case "funding":
@@ -96,6 +99,13 @@ const showImage = (
     case "Utility Payment":
       return <Utilitylarge />;
       break;
+
+      case "Cash Withdrawal":
+        return (
+          // <InitialsBg name={receiverName} sideLength={50} />
+          <InitialsBgColor name={receiverName} />
+        );
+        break;
 
     case "GTB":
     case "FIRST":

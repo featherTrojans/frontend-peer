@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
     // borderColor: COLORS.borderColor,
     // borderWidth: 0.5,
     borderRadius: RFValue(15),
-    marginBottom:RFValue(10),
-    ...Shadow
+    marginBottom: RFValue(10),
+    ...Shadow,
   },
 
   dateText: {
@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     ...FONTS.medium,
     lineHeight: 27,
     marginBottom: RFValue(18),
-
   },
   bottomLine: {
     height: 0.5,
@@ -34,8 +33,8 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   historyDetailsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    // flexDirection: "row",
+    // alignItems: "center",
   },
   arrowBg: {
     width: 39,
@@ -45,22 +44,28 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: RFValue(14),
   },
+  titleAndAmount: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flex: 1,
+    alignItems: "center",
+  },
   title: {
     ...fontsize.smaller,
     ...FONTS.medium,
     marginBottom: RFValue(3),
-    textTransform:  'capitalize'
+    textTransform: "capitalize",
   },
   transactionType: {
     ...fontsize.smallest,
     lineHeight: 27,
     ...FONTS.regular,
     color: COLORS.halfBlack,
-    alignItems: "center"
+    alignItems: "center",
   },
   amount: {
     ...fontsize.smallest,
     ...FONTS.medium,
-    lineHeight: 27
+    lineHeight: 27,
   },
 });
