@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Shadow } from "react-native-shadow-2";
 import { COLORS, FONTS, fontsize, icons } from "../../constants";
 import { styles } from "./Transactionhistory.styles";
 import { useNavigation } from "@react-navigation/native";
@@ -13,13 +12,9 @@ import * as Animatable from "react-native-animatable";
 const { Arrowin, Arrowout, Bonusicon, Utilitypayment, Utilitylarge } = icons;
 
 const History = ({ data }) => {
-  // const navigation = useNavigation()
+
+
   const { direction, description, to, amount, from, title } = data;
-
-  // useEffect(()=>{
-
-  // },[]);
-
   const priceColor = direction === "in" ? COLORS.green1 : COLORS.pink1;
   const circleColor = direction === "in" ? COLORS.green3 : COLORS.red2;
   const transactionType = direction === "in" ? "From" : "To";
