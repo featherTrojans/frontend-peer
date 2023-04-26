@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, {useState} from "react";
 import LottieView from "lottie-react-native"
-import { Backheader, Bottombtn } from "../../../../components";
+import { Backheader, Bottombtn, Custombutton, Mainwrapper } from "../../../../components";
 
 import { styles } from "./Transactiondispute.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
@@ -17,6 +17,7 @@ import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 
 
 const {Successcheckanimate} = icons
@@ -32,8 +33,7 @@ const Transactiondispute = () => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Customstatusbar />
+    <Mainwrapper>
 
       <Globalmodal
       showState={showModal}
@@ -50,10 +50,10 @@ const Transactiondispute = () => {
         </View>
       </Globalmodal>
 
-
-
-
       <Backheader title="Dispute" />
+
+
+      
       <KeyboardAwareScrollView style={styles.scrollContainer}>
         <View>
           <Text style={styles.disputeText}>Dispute this transaction</Text>
@@ -71,11 +71,17 @@ const Transactiondispute = () => {
           textAlignVertical="top"
         />
       </KeyboardAwareScrollView>
-      <Bottombtn
+
+
+      <Custombutton  btntext="Proceed" onpress={() => setShowModal(true)}/>
+
+      {/* <Bottombtn
         title="REPORT"
-        onpress={() => setShowModal(true)}
-      />
-    </SafeAreaView>
+        onpress={() => }
+      /> */}
+
+
+    </Mainwrapper>
   );
 };
 

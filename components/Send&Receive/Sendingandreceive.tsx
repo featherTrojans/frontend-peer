@@ -82,17 +82,16 @@ const showImage = (
       break;
     case "Wallet Debit":
       return (
-        // <InitialsBg name={receiverName} sideLength={50} />
         <InitialsBgColor name={receiverName} />
       );
       break;
     case "Wallet Credit":
       if (senderName === "Bonus") {
         return <Bonusiconlarge />;
+      
       } else {
         return (
           <InitialsBgColor name={senderName} />
-          // <InitialsBg name={senderName} sideLength={50} />
         );
       }
       break;
@@ -104,6 +103,13 @@ const showImage = (
         return (
           // <InitialsBg name={receiverName} sideLength={50} />
           <InitialsBgColor name={receiverName} />
+        );
+        break;
+
+        case "Cash Request":
+        return (
+          // <InitialsBg name={receiverName} sideLength={50} />
+          <InitialsBgColor name={senderName} />
         );
         break;
 
@@ -199,7 +205,7 @@ const showImage = (
     default:
       return (
         <View>
-          <Text>TH</Text>
+          <Text>FA</Text>
         </View>
       );
       break;
@@ -227,7 +233,7 @@ const Sendingandreceive = ({
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
-      {(title == "Wallet Credit" || title == "Wallet Debit") && otherUser ? (
+      {((title == "Wallet Credit" || title == "Wallet Debit") && otherUser.fullName) ? (
         <View>
           {otherUser.imageUrl !== null ? (
             <Image

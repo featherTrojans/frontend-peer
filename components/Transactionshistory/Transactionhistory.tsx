@@ -14,7 +14,7 @@ const { Arrowin, Arrowout, Bonusicon, Utilitypayment, Utilitylarge } = icons;
 const History = ({ data }) => {
 
 
-  const { direction, description, to, amount, from, title } = data;
+  const { direction, description, to, amount, from, title, trans_type} = data;
   const priceColor = direction === "in" ? COLORS.green1 : COLORS.pink1;
   const circleColor = direction === "in" ? COLORS.green3 : COLORS.red2;
   const transactionType = direction === "in" ? "From" : "To";
@@ -29,12 +29,13 @@ const History = ({ data }) => {
 
     if (
       (capital === "Wallet Credit" || capital === "Wallet Debit") &&
-      transactionValue.toUpperCase() !== "BONUS"
+      trans_type === "Feather2Feather"
+      // transactionValue.toUpperCase() !== "BONUS"
     ) {
       return (
         <Text>
-          
-          <Text style={{ textTransform: "capitalize" }}>{transactionValue}</Text>
+          @
+          <Text style={{ textTransform: "lowercase" }}>{transactionValue}</Text>
         </Text>
       );
     } else {

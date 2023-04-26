@@ -7,6 +7,7 @@ import {
   Platform,
   TouchableOpacity,
   Image,
+  Pressable
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import * as Print from "expo-print";
@@ -58,6 +59,7 @@ const Transactiondetails = ({ navigation, route }) => {
   const {
     CustomModal: TransactiondetailsModal,
     openModal: openTransactiondetailsModal,
+    closeModal
   } = useCustomModal();
   const copyColor = copied ? COLORS.blue6 : COLORS.grey2;
   const { data } = route.params;
@@ -75,6 +77,7 @@ const Transactiondetails = ({ navigation, route }) => {
     charges,
     direction,
     bankDetails,
+    trans_type
   } = data;
   const total = Number(amount) + Number(charges);
   const isDebit = direction === "out";
@@ -101,6 +104,18 @@ const Transactiondetails = ({ navigation, route }) => {
     if(title === "Cash Withdrawal"){
 
       let merchantInfo = receiver.split("-")
+      let merchantName = merchantInfo[0]
+      let merchantId = merchantInfo[1]
+
+
+      return {merchantName, merchantId}
+    }
+  }
+
+  function showDetails (){
+    if(title === "Wallet Credit" && trans_type === "Vfd Funding"){
+
+      let merchantInfo = sender.split("-")
       let merchantName = merchantInfo[0]
       let merchantId = merchantInfo[1]
 
@@ -481,12 +496,13 @@ const Transactiondetails = ({ navigation, route }) => {
 `;
 
   const shareReceipt = async (html) => {
-    setShowModal(!showModal);
+    closeModal()
     const { uri } = await Print.printToFileAsync({ html });
     Sharing.shareAsync(uri);
   };
 
   const downloadReceipt = async (html) => {
+    closeModal()
     try {
       const { uri } = await Print.printToFileAsync({ html });
       if (Platform.OS === "ios") {
@@ -500,18 +516,19 @@ const Transactiondetails = ({ navigation, route }) => {
   };
 
   const reportTransaction = () => {
-    setShowModal(false);
+    closeModal()
     navigation.navigate("Transactiondispute");
   };
 
   const RightComponent = ({ onpress }) => {
     return (
-      <TouchableOpacity
+      <Pressable
         onPress={onpress}
-        style={{ paddingHorizontal: 10, height: "100%" }}
+        hitSlop={20}
+        style={{ paddingHorizontal: 10, height: "100%",  }}
       >
         <Detailsmoreicon />
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
@@ -564,7 +581,7 @@ const Transactiondetails = ({ navigation, route }) => {
           : user.fullName;
       return (
         <>
-          <Eachoption title="Sender Name" value={senderName} />
+          <Eachoption title="Sender Name" value={trans_type === "Vfd Funding" ? showDetails()?.merchantName : senderName} />
           <Horizontaline marginV={18} />
           <Eachoption title="Receiver Name" value={receiverName} />
           <Horizontaline marginV={18} />
@@ -626,6 +643,8 @@ const Cashwithdrawal = () =>{
     }
   };
 
+
+
   const AirtimePurchase = () => {
     if (title === "Airtime Purchase") {
       const receiverPhone = receiver;
@@ -644,10 +663,7 @@ const Cashwithdrawal = () =>{
   // const {price } = route?.params
   return (
     <Mainwrapper>
-      {/* More info about transaction */}
       <TransactiondetailsModal
-      // showState={showModal}
-      // onBgPress={() => setShowModal(!showModal)}
       >
         <>
           <Iconwithdatas
@@ -664,15 +680,6 @@ const Cashwithdrawal = () =>{
             title="Download Receipt"
             details="Generate a .pdf copy of this transaction."
             onpress={() => downloadReceipt(htmlContent)}
-          />
-          <Horizontaline marginV={15} />
-
-          <Iconwithdatas
-            icon={<Reporttransactions />}
-            iconBg="#001757"
-            title="Report Transaction"
-            details="Have issues with this transaction?"
-            onpress={() => reportTransaction()}
           />
         </>
       </TransactiondetailsModal>
