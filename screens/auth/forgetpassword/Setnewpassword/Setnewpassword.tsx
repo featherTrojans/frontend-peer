@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 import React, { useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Input, Loader } from "../../../../components";
+import { Input, Loader, Mainwrapper } from "../../../../components";
 import { styles } from "../../signup/Personal/Personal.styles";
 import { useToast } from "react-native-toast-notifications";
 import { Formik } from "formik";
@@ -13,6 +13,7 @@ import LottieView from "lottie-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import useAlert from "../../../../utils/useAlerts";
+
 const { Lockicondark, Successcheckanimate } = icons;
 
 const Setnewpassword = ({ navigation, route }) => {
@@ -30,8 +31,10 @@ const Setnewpassword = ({ navigation, route }) => {
       }),
   });
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-      <Customstatusbar />
+    <Mainwrapper >
+      <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}
+      >
       <View style={{ paddingHorizontal: 25, flex: 1 }}>
         <Globalmodal
           showState={showModal}
@@ -170,7 +173,8 @@ const Setnewpassword = ({ navigation, route }) => {
           }}
         </Formik>
       </View>
-    </SafeAreaView>
+      </KeyboardAvoidingView>
+    </Mainwrapper>
   );
 };
 
