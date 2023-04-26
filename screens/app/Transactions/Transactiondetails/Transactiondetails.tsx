@@ -292,6 +292,7 @@ const Transactiondetails = ({ navigation, route }) => {
       <style>
           body {
               font-size: 16px;
+              font-family
               padding: 50px;
               display: flex;
               flex-direction: column;
@@ -755,6 +756,7 @@ const Cashwithdrawal = () =>{
                   ? receiver
                   : sender
               }
+              transType={trans_type}
             />
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>

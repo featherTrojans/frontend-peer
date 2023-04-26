@@ -14,7 +14,7 @@ const { Arrowin, Arrowout, Bonusicon, Utilitypayment, Utilitylarge } = icons;
 const History = ({ data }) => {
 
 
-  const { direction, description, to, amount, from, title, trans_type} = data;
+  const { direction, description, to, amount, from, title, trans_type } = data;
   const priceColor = direction === "in" ? COLORS.green1 : COLORS.pink1;
   const circleColor = direction === "in" ? COLORS.green3 : COLORS.red2;
   const transactionType = direction === "in" ? "From" : "To";
