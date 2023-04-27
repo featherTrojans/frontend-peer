@@ -26,6 +26,8 @@ import Loader from "../Loader/Loader";
 const {
   Eyecrossed,
   Arrowright,
+Amounthideicon,
+Amountshowicon,
   Debitcardicon,
   Featheragenticon,
   Familyrequesticon,
@@ -159,7 +161,7 @@ const Viewbalance = ({ navigate }: any) => {
             hitSlop={16}
               onPress={() => setShowAmount(!showAmount)}
             >
-              <Eyecrossed />
+              { showAmount ? <Amounthideicon /> : <Amountshowicon />}
             </Pressable>
           </View>
 

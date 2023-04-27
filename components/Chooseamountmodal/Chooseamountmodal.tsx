@@ -44,6 +44,8 @@ const Chooseamountmodal = ({ headerText, onpress }) => {
             placeholder="N0.00"
             value={amount}
             onChangeText={handleAmountChange}
+            returnKeyLabel="Done"
+             returnKeyType="done"
           />
           {/* Add icon */}
           {/* <Plusicon /> */}
