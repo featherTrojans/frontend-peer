@@ -14,6 +14,7 @@ import Customstatusbar from "../../../shared/Customstatusbar";
 import { useToast } from "react-native-toast-notifications";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { styles } from "../../verification/Verification.styles";
+
 import {
   Backheader,
   Custombutton,
@@ -24,6 +25,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RFValue } from "react-native-responsive-fontsize";
 import useAlert from "../../../../utils/useAlerts";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const { Successcheckanimate, Cancelicon } = icons;
 
@@ -94,7 +96,9 @@ const Forgetpasswordotp = ({ navigation, route }) => {
     <Mainwrapper>
       <Backheader title="Verify Email Address" />
 
-      <View style={[{ paddingHorizontal: RFValue(25) }]}>
+      <KeyboardAwareScrollView style={[{ paddingHorizontal: RFValue(25) }]}>
+
+
         {loading && <Loader />}
 
         <View style={{ marginTop: 30 }}>
@@ -168,7 +172,10 @@ const Forgetpasswordotp = ({ navigation, route }) => {
         {/* Submit button */}
 
         <Custombutton btntext="Verify" onpress={handleSubmit} />
-      </View>
+
+
+
+      </KeyboardAwareScrollView>
     </Mainwrapper>
   );
 };

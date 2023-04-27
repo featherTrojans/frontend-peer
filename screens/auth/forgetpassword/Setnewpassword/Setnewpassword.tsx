@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 import React, { useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import { Input, Loader, Mainwrapper } from "../../../../components";
+import { Custombutton, Input, Loader, Mainwrapper, Successmodal } from "../../../../components";
 import { styles } from "../../signup/Personal/Personal.styles";
 import { useToast } from "react-native-toast-notifications";
 import { Formik } from "formik";
@@ -13,6 +13,8 @@ import LottieView from "lottie-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../../../shared/Customstatusbar";
 import useAlert from "../../../../utils/useAlerts";
+import useCustomModal from "../../../../utils/useCustomModal";
+
 
 const { Lockicondark, Successcheckanimate } = icons;
 
@@ -21,6 +23,7 @@ const Setnewpassword = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const toast = useToast();
   const {errorAlert} = useAlert()
+  const {CustomModal, openModal, closeModal} = useCustomModal()
   const validationSchema = Yup.object().shape({
     password: Yup.string().label("Password").required(),
     confirmPassword: Yup.string()
@@ -30,53 +33,47 @@ const Setnewpassword = ({ navigation, route }) => {
         return this.parent.password === value;
       }),
   });
+
+
+
+
+  let closeSucessModal = () => {
+    closeModal()
+    navigation.navigate("Login");
+  }
+
+
+
   return (
     <Mainwrapper >
       <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}
       >
       <View style={{ paddingHorizontal: 25, flex: 1 }}>
-        <Globalmodal
-          showState={showModal}
-          onBgPress={() => setShowModal(true)}
-          btnFunction={() => {
-            navigation.navigate("Login");
-            setShowModal(false);
-          }}
-          btnText="Continue"
-        >
-          <View
-            style={{
-              marginBottom: 50,
-              justifyContent: "center",
-              alignItems: "center",
-              marginHorizontal: 85,
-            }}
-          >
-            <LottieView
-              source={Successcheckanimate}
-              style={{ width: 148, height: 148 }}
-              autoPlay
-              loop
-            />
-            <Text
-              style={{
-                ...fontsize.bsmall,
-                ...FONTS.regular,
-                marginTop: 17,
-                textAlign: "center",
-              }}
-            >
-              Your Pasword has been chnaged successfully{" "}
-            </Text>
-          </View>
-        </Globalmodal>
+
+
+      
+
+
+        <CustomModal>
+          <Successmodal 
+          successMsg="Your Pasword has been changed successfully"
+          btnText="Done, Proceed"
+          btnFunction={closeSucessModal}
+          />
+          </CustomModal>
+
+
+
+
+
+
         <View style={{ marginTop: 34 }}>
-          <Text style={{ ...fontsize.big, ...FONTS.bold, marginBottom: 30 }}>
+          <Text style={{ ...fontsize.bmedium, ...FONTS.bold, marginBottom: 20 }}>
             Set New Password
           </Text>
           <Text
-            style={{ ...fontsize.bsmall, ...FONTS.regular, lineHeight: 24 }}
+            style={{ ...fontsize.small, ...FONTS.regular, lineHeight: 24 }}
           >
             Set up your new password, to continue this process and have access
             to your account.
@@ -90,24 +87,19 @@ const Setnewpassword = ({ navigation, route }) => {
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             //  do validation
+            console.log(values.password.length, "here")
             if (values.password.length < 8) {
-              return showerror(
-                toast,
-                null,
-                "password should have a minimun of 8 characters"
-              );
+              return errorAlert("Password should have a minimun of 8 characters");
             }
             try {
               //send the request
               const response = await axiosCustom.put(
                 "/new/password",
-                { password: values.password, code: code },
+                { password: values.password.trim(), code: code },
                 { headers: { token: token } }
               );
               //store data in context
-              setShowModal(true);
-              // GLobal succss then to login
-              // navigation.navigate("Securepin",{token:response?.data?.data?.token});
+                openModal()
             } catch (err) {
               // error handling
               errorAlert(err);
@@ -144,15 +136,13 @@ const Setnewpassword = ({ navigation, route }) => {
                 </View>
 
                 <View style={[styles.bottomContainer, { flex: 1 }]}>
-                  <TouchableOpacity
-                    style={styles.proceedBtn}
-                    activeOpacity={0.8}
-                    onPress={handleSubmit}
-                    // onPress={handleSubmit}
-                    // disabled={isSubmitting}
-                  >
-                    <Text style={styles.proceedText}>PROCEED</Text>
-                  </TouchableOpacity>
+
+                  <Custombutton 
+                  btntext="Proceed"
+                  onpress={handleSubmit}
+                  disable={isSubmitting}
+                  />
+
 
                   {/* Have an account */}
                   <View style={styles.bottomTextContainer}>
