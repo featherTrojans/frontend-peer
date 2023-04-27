@@ -192,13 +192,14 @@ import Updateprofileicon from "../assets/icons/Updateprofileicon";
 import Bluearrowrighticon from "../assets/icons/Bluearrowrighticon";
 import Updatealertcancelicon from "../assets/icons/Updatealertcancelicon";
 import Startnewchaticon from "../assets/icons/Startnewchaticon";
+import Faceidicon from "../assets/icons/Faceidicon";
 import Amounthideicon from "../assets/icons/Amounthideicon";
 import Amountshowicon from "../assets/icons/Amountshowicon";
-
 
 // Receiverimage
 
 export default {
+  Faceidicon,
   Logo,
   Newlogo,
   Eyeicon,
@@ -224,7 +225,7 @@ export default {
   Tabchats,
   TabHome,
   Amounthideicon,
-Amountshowicon,
+  Amountshowicon,
   Tabtransactions,
   Tabhistory,
   Utilitypayment,

@@ -6,19 +6,17 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Backheader,
   Custombutton,
   Horizontaline,
-  Input,
   Mainwrapper,
 } from "../../../../components";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
 import { electrictystyles } from "../../Billpayments/Electricity/Electricitytype/Electricitytype.styles";
 import useCustomModal from "../../../../utils/useCustomModal";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
-import useAlert from "../../../../utils/useAlerts";
 import { nameSplitter } from "../../../../utils/nameSplitter";
 import { nameToShow } from "../../../../utils/nameToShow";
 import TransferCashBank from "../../../../components/Modals/TransferCashBank";
@@ -173,8 +171,7 @@ const Eachoption = ({ type, image, value, setBank, openModal }) => {
 
 const Selectbank = ({ navigation, route }) => {
   const amount = route.params;
-  console.log("------------------------DEBUG--------------------------");
-  console.log(amount);
+
   const { CustomModal, openModal, closeModal } = useCustomModal();
   const {
     CustomModal: TransactiondetailsModal,

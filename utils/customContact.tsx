@@ -1,7 +1,6 @@
 import * as Contacts from "expo-contacts";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axiosCustom from "../httpRequests/axiosCustom";
-import getpermission from "./getpermission";
 
 const useContact = () => {
   const [contacts, setContacts] = useState<any[]>([]);

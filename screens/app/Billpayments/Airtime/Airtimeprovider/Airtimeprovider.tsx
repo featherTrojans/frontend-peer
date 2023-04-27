@@ -109,6 +109,7 @@ const Airtimeprovider = ({ navigation, route }) => {
                         inputbg={COLORS.inputBgColor}
                         formikProps={formikProps}
                         value={amount}
+                        editable={false}
                       />
                       <Input
                         icon={<Briefcaseicon />}
@@ -117,6 +118,7 @@ const Airtimeprovider = ({ navigation, route }) => {
                         inputbg={COLORS.inputBgColor}
                         formikProps={formikProps}
                         value={network}
+                        editable={false}
                       />
                       <Input
                         icon={<Briefcaseicon />}

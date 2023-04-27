@@ -226,7 +226,7 @@ const Notifications = () => {
     try {
       setLoading(true);
       const response = await axiosCustom.get("/notifications");
-      console.log(response, "Here is the notifications");
+
       setNotifications(response?.data?.data?.notifications);
     } catch (err) {
       console.log(err.response);
@@ -243,7 +243,7 @@ const Notifications = () => {
   return (
     <Mainwrapper>
       {/* Header title */}
-        <Backheader title="Notifications" />
+      <Backheader title="Notifications" />
 
       <View style={styles.listContainer}>
         {loading ? (

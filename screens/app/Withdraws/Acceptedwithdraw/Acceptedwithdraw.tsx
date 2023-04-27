@@ -114,7 +114,7 @@ const Acceptedwithdraw = ({ navigation, route }) => {
       const response = await axiosCustom.get(
         `/user/${requestInfo.agentUsername}`
       );
-      console.log(response);
+
       setUserinfo(response.data);
     } catch (err) {}
   };

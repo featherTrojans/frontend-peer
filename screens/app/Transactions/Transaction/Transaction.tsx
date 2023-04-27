@@ -33,9 +33,6 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ifIphoneX, getStatusBarHeight } from "react-native-iphone-x-helper";
 
-
-
-
 const { Cryinganimate } = icons;
 
 const Transactions = ({ navigation }: any) => {
@@ -84,8 +81,6 @@ const Transactions = ({ navigation }: any) => {
       setLoading(true);
       const response = await axiosCustom.get("/transactions");
       setTransations(response?.data?.data?.transactions);
-      console.log(transactions, "unfiltered");
-      console.log(formatData(transactions), "filtered");
     } catch (err) {
       console.log(err.response);
     } finally {
@@ -103,7 +98,6 @@ const Transactions = ({ navigation }: any) => {
     <Mainwrapper bottom={false}>
       <Backheader title="History" showArrow={false} />
       <View style={styles.contentContainer}>
-
         <View style={styles.listContainer}>
           {loading ? (
             <View

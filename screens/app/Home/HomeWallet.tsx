@@ -1,12 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useState } from "react";
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-} from "react-native";
+import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
   Chooseamountmodal,
@@ -59,8 +53,7 @@ const HomeWallet = () => {
   const { authdata } = useContext(AuthContext);
   const [userinfo, setUserinfo] = useState<userObj | null>(null);
   const { errorAlert } = useAlert();
-  console.log("------------------------USERINFO--------------------------");
-  console.log(userinfo);
+
   const {
     CustomModal: TransferModal,
     openModal: openTransferModal,
