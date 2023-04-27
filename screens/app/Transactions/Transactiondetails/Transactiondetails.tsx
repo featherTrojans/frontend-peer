@@ -82,6 +82,7 @@ const Transactiondetails = ({ navigation, route }) => {
   const total = Number(amount) + Number(charges);
   const isDebit = direction === "out";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
+  const isVfdFunding = trans_type === "Vfd Funding"
 
   // console.log(data, "here is the");
 
@@ -113,7 +114,7 @@ const Transactiondetails = ({ navigation, route }) => {
   }
 
   function showDetails (){
-    if(title === "Wallet Credit" && trans_type === "Vfd Funding"){
+    if(title === "Wallet Credit" && isVfdFunding){
 
       let merchantInfo = sender.split("-")
       let merchantName = merchantInfo[0]
@@ -222,6 +223,14 @@ const Transactiondetails = ({ navigation, route }) => {
             
             `;
         break;
+        case "Cash Withdrawal":
+        return `
+        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
+        ${nameSplitter(showMerchant()?.merchantName)}
+        </div>
+            
+            `;
+        break;
       case "Wallet Debit":
       case "Wallet Credit":
         if (sender === "Bonus") {
@@ -233,7 +242,7 @@ const Transactiondetails = ({ navigation, route }) => {
         } else {
           return `
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-        ${nameSplitter(otherUser ? otherUser?.fullName : "Feather Africa Inc")}
+        ${nameSplitter(otherUser ? otherUser?.fullName : isVfdFunding ? showDetails()?.merchantName : "Feather Africa")}
         </div>
         `;
         }
@@ -257,7 +266,7 @@ const Transactiondetails = ({ navigation, route }) => {
           return { senderName: sender, receiverName: receiver };
         } else {
           return {
-            senderName: otherUser?.fullName,
+            senderName: isVfdFunding ? showDetails()?.merchantName : otherUser?.fullName,
             receiverName: user?.fullName,
           };
         }
@@ -266,8 +275,11 @@ const Transactiondetails = ({ navigation, route }) => {
       case "Wallet Debit":
         return { senderName: user.fullName, receiverName: otherUser?.fullName };
         break;
-      case "funding":
+        case "Funds Transfer":
+          return { senderName: user.fullName, receiverName: bankDetails ? bankDetails.account_name : "Feather Africa" };
+          break;
       case "Fund Reversal":
+      case "funding":
       case "escrow":
       case "Airtime Purchase":
       case "withdrawal":
@@ -466,8 +478,16 @@ const Transactiondetails = ({ navigation, route }) => {
    <p class="transaction__ref">${transactionRef}</p>
   
    <ul class="list">
+   <li class="item">
+   <span class="item__left">Sender Name </span>
+   <span class="item__right receiver">${
+    typeOfName(title)?.senderName !== "Bonus"
+    ? typeOfName(title)?.senderName
+    : "FEATHER"
+   }</span>
+</li>
        <li class="item">
-           <span class="item__left">Receiver </span>
+           <span class="item__left">Receiver Name</span>
            <span class="item__right receiver">${
              typeOfName(title)?.receiverName
            }</span>
@@ -582,7 +602,7 @@ const Transactiondetails = ({ navigation, route }) => {
           : user.fullName;
       return (
         <>
-          <Eachoption title="Sender Name" value={trans_type === "Vfd Funding" ? showDetails()?.merchantName : senderName} />
+          <Eachoption title="Sender Name" value={isVfdFunding ? showDetails()?.merchantName : senderName} />
           <Horizontaline marginV={18} />
           <Eachoption title="Receiver Name" value={receiverName} />
           <Horizontaline marginV={18} />
@@ -630,12 +650,17 @@ const Cashwithdrawal = () =>{
     if (bankDetails) {
       return (
         <>
+         <Eachoption
+            title="Sender Name"
+            value={user.fullName}
+          />
+          <Horizontaline marginV={18} />
           <Eachoption
             title="Account Number"
             value={bankDetails.account_number}
           />
           <Horizontaline marginV={18} />
-          <Eachoption title="Account Name" value={bankDetails.account_name} />
+          <Eachoption title="Receiver Name" value={bankDetails.account_name} />
           <Horizontaline marginV={18} />
           <Eachoption title="Bank" value={bankDetails.bank_name} />
           <Horizontaline marginV={18} />
