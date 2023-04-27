@@ -228,7 +228,6 @@ const Transactiondetails = ({ navigation, route }) => {
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
         ${nameSplitter(showMerchant()?.merchantName)}
         </div>
-            
             `;
         break;
       case "Wallet Debit":
