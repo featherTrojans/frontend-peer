@@ -130,6 +130,7 @@ const TransferCashBank = ({ amount, bank, handleNext }) => {
           value={amount}
           name="amount"
           inputbg={COLORS.inputBgColor}
+          editable={false}
         />
         <Input
           icon={<Briefcaseicon />}

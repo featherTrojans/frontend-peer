@@ -22,7 +22,7 @@ import {
 } from "../../../utils/biometrics";
 import useAlert from "../../../utils/useAlerts";
 
-const { Newlogo, Usericon, Lock } = icons;
+const { Newlogo, Usericon, Lock, Faceidicon } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -198,29 +198,12 @@ const Login = ({ navigation }: any) => {
                   />
 
                   {/* Bottom text */}
-                  <JustifyBetween
+                  <View
                     style={{
                       marginTop: RFValue(16),
                       marginBottom: RFValue(22),
                     }}
                   >
-                    <Text
-                      style={[
-                        styles.biometrics,
-                        {
-                          opacity:
-                            isBiometricAllowed && enableBiometrics ? 1 : 0.2,
-                        },
-                      ]}
-                      onPress={
-                        isBiometricAllowed && enableBiometrics
-                          ? biometricsLogin
-                          : () => null
-                      }
-                    >
-                      Use Biometrics
-                    </Text>
-
                     <TouchableOpacity
                       onPress={() => navigation.navigate("Forgetpassword")}
                       activeOpacity={0.8}
@@ -229,7 +212,7 @@ const Login = ({ navigation }: any) => {
                         Forgot Password?
                       </Text>
                     </TouchableOpacity>
-                  </JustifyBetween>
+                  </View>
 
                   <Custombutton btntext="Sign in" onpress={handleSubmit} />
                 </>
@@ -246,6 +229,32 @@ const Login = ({ navigation }: any) => {
               <Text style={styles.registerText}>Signup</Text>
             </TouchableOpacity>
           </View>
+          {isBiometricAllowed && enableBiometrics ? (
+            <TouchableOpacity
+              // onPress={
+              //   isBiometricAllowed && enableBiometrics ? biometricsLogin : null
+              // }
+              // onPress={() => console.log("Here is the error")}
+              onPress={
+                isBiometricAllowed && enableBiometrics
+                  ? biometricsLogin
+                  : () => null
+              }
+              activeOpacity={0.5}
+              style={{
+                backgroundColor: COLORS.white,
+                width: 64,
+                height: 64,
+                alignSelf: "center",
+                marginTop: 52,
+                borderRadius: 20,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Faceidicon />
+            </TouchableOpacity>
+          ) : null}
         </View>
       </KeyboardAwareScrollView>
     </Mainwrapper>

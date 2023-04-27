@@ -1,13 +1,7 @@
-import {
-  ActivityIndicator,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState, useContext } from "react";
 import { styles } from "./Chatshome.styles";
 import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import Customstatusbar from "../../../shared/Customstatusbar";
 import { db } from "../../../../firebase";
 import {
   collection,
@@ -19,13 +13,9 @@ import {
 } from "firebase/firestore";
 import { AuthContext } from "../../../../context/AuthContext";
 import Chat from "./Chat";
-
 import Contact from "./Contact";
 import { Backheader, Mainwrapper } from "../../../../components";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import useContact from "../../../../utils/customContact";
-
-
 
 const { Emptynotification, Startnewchaticon } = icons;
 
@@ -35,12 +25,10 @@ const Chatshome = ({ navigation }) => {
   const [chats, setChats] = useState<any>([]);
   const [chattwos, setChattwos] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const {contactsResolved} = useContact()
+  const { contactsResolved } = useContact();
 
   // find the detail of the user name by checking the reference
   const authId = authdata?.userDetails?.userUid;
-
- 
 
   useEffect(() => {
     // getAllChats()
@@ -89,7 +77,6 @@ const Chatshome = ({ navigation }) => {
     };
   }, []);
 
-
   // const getAllChats = async () => {
   //   setLoading(true);
   //   try {
@@ -122,7 +109,7 @@ const Chatshome = ({ navigation }) => {
   //     });
   //     setChattwos(allchatTwo);
   //     setChats(allchats);
-      
+
   //     // console.log(chatsdata.docs)
   //   } catch (err) {
   //   } finally {
@@ -132,14 +119,12 @@ const Chatshome = ({ navigation }) => {
 
   return (
     <Mainwrapper bottom={false}>
-
       <Backheader title="Chats" showArrow={false} />
 
       <View style={styles.container}>
         {/* <TouchableOpacity  onPress={()=>navigation.navigate("Usersearch",{phoneContact:contactsResolved})} > */}
 
         <View style={{ flex: 1 }}>
-        
           <Contact />
 
           <View
@@ -150,21 +135,39 @@ const Chatshome = ({ navigation }) => {
               // borderRadius: 15,
               borderTopRightRadius: 15,
               borderTopLeftRadius: 15,
-             paddingHorizontal: 16, 
-            //  paddingVertical: 20
-            paddingTop: 20
+              paddingHorizontal: 16,
+              //  paddingVertical: 20
+              paddingTop: 20,
             }}
           >
             {/* <Text>The an</Text> */}
-            <View style={{marginBottom: 20}}>
-              <Text style={{...fontsize.smaller, ...FONTS.medium}}>Recent Chats</Text>
+            <View style={{ marginBottom: 20 }}>
+              <Text style={{ ...fontsize.smaller, ...FONTS.medium }}>
+                Recent Chats
+              </Text>
               {/* icons */}
             </View>
             {/* This is for when the recent chat is empty */}
             {!loading && chats.length === 0 && chattwos.length === 0 && (
-              <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flex: 1,
+                }}
+              >
                 <Emptynotification />
-                <Text style={{...fontsize.smaller, ...FONTS.regular, marginTop: 30, paddingHorizontal: 35, textAlign: "center"}}>Oops, you have no recent conversations here</Text>
+                <Text
+                  style={{
+                    ...fontsize.smaller,
+                    ...FONTS.regular,
+                    marginTop: 30,
+                    paddingHorizontal: 35,
+                    textAlign: "center",
+                  }}
+                >
+                  Oops, you have no recent conversations here
+                </Text>
               </View>
             )}
             {loading ? (
@@ -172,13 +175,26 @@ const Chatshome = ({ navigation }) => {
                 <ActivityIndicator size="large" color="#000" />
               </View>
             ) : (
-              
               <Chat authId={authId} chattwos={chattwos} chats={chats} />
             )}
           </View>
         </View>
 
-        <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Usersearch",contactsResolved)} style={{position: "absolute", bottom: 14, right: 28, height: 47, width: 47,borderRadius: 47/2, backgroundColor: COLORS.blue3, justifyContent: "center", alignItems: "center"}}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("Usersearch", contactsResolved)}
+          style={{
+            position: "absolute",
+            bottom: 14,
+            right: 28,
+            height: 47,
+            width: 47,
+            borderRadius: 47 / 2,
+            backgroundColor: COLORS.blue3,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Startnewchaticon />
         </TouchableOpacity>
       </View>

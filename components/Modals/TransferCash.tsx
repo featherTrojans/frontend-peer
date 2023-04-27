@@ -83,6 +83,7 @@ const TransferCash = ({ amount, closeTransfercashinfoModal, onpress }) => {
           name="plan"
           value={amount}
           inputbg={COLORS.inputBgColor}
+          editable={false}
         />
         <Input
           icon={<Aticon />}

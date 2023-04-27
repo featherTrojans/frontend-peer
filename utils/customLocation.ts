@@ -1,5 +1,4 @@
 import * as Location from "expo-location";
-import getpermission from "./getpermission";
 
 export const getCurrentLocation = async () => {
   let locationText: any = "";

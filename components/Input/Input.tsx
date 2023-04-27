@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, TouchableOpacity, Pressable } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { View, TextInput, Pressable } from "react-native";
 import { icons, COLORS } from "../../constants";
 // import { inputContainer } from "../../global/styles";
 import { ReactNode } from "react";
@@ -14,7 +13,7 @@ type inputProps = {
   password?: boolean;
   name: string;
   formikProps?: any;
-  inputbg?: string
+  inputbg?: string;
 };
 
 const Input = ({
@@ -33,7 +32,11 @@ const Input = ({
       <View
         style={[
           styles.inputContainer,
-          { marginBottom: 15, borderColor: COLORS.inputBorderColorDark, backgroundColor: inputbg },
+          {
+            marginBottom: 15,
+            borderColor: COLORS.inputBorderColorDark,
+            backgroundColor: inputbg,
+          },
         ]}
       >
         <View style={styles.inputiconwrapper}>{icon}</View>
@@ -59,7 +62,11 @@ const Input = ({
     <View
       style={[
         styles.inputContainer,
-        { marginBottom: 15, borderColor: borderColor, backgroundColor: inputbg },
+        {
+          marginBottom: 15,
+          borderColor: borderColor,
+          backgroundColor: inputbg,
+        },
       ]}
     >
       <View style={styles.inputiconwrapper}>{icon}</View>
@@ -79,7 +86,7 @@ const Input = ({
           onPress={() => setShowPassword(!showPassword)}
           // activeOpacity={0.8}
           hitSlop={16}
-          style={{ padding: 8, paddingRight: 0,}}
+          style={{ padding: 8, paddingRight: 0 }}
         >
           {showPassword ? <Eyeicon /> : <Passwordhideicon />}
         </Pressable>

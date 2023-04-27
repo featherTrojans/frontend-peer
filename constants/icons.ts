@@ -192,10 +192,11 @@ import Updateprofileicon from "../assets/icons/Updateprofileicon";
 import Bluearrowrighticon from "../assets/icons/Bluearrowrighticon";
 import Updatealertcancelicon from "../assets/icons/Updatealertcancelicon";
 import Startnewchaticon from "../assets/icons/Startnewchaticon";
-
+import Faceidicon from "../assets/icons/Faceidicon";
 // Receiverimage
 
 export default {
+  Faceidicon,
   Logo,
   Newlogo,
   Eyeicon,
