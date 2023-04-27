@@ -5,7 +5,7 @@ import { icons, COLORS } from "../../constants";
 import { ReactNode } from "react";
 import { styles } from "./Input.styles";
 
-const { Eyeicon, Usericondark, Passwordhideicon } = icons;
+const { Eyeicon, Usericondark, Eyecrossed } = icons;
 
 type inputProps = {
   icon: ReactNode;
@@ -88,7 +88,7 @@ const Input = ({
           hitSlop={16}
           style={{ padding: 8, paddingRight: 0 }}
         >
-          {showPassword ? <Eyeicon /> : <Passwordhideicon />}
+          {showPassword ? <Eyeicon /> : <Eyecrossed />}
         </Pressable>
       )}
     </View>

@@ -53,8 +53,7 @@ const HomeWallet = () => {
   const { authdata } = useContext(AuthContext);
   const [userinfo, setUserinfo] = useState<userObj | null>(null);
   const { errorAlert } = useAlert();
-  console.log("------------------------USERINFO--------------------------");
-  console.log(userinfo);
+
   const {
     CustomModal: TransferModal,
     openModal: openTransferModal,

@@ -111,7 +111,7 @@ const Chatsdm = ({ navigation, route }) => {
           newdata.push(change.data());
         });
         setMessages(formatData(newdata));
-        console.log(formatData(newdata), "formated data");
+
         setFetchmessage(false);
       });
     } else {
@@ -146,7 +146,7 @@ const Chatsdm = ({ navigation, route }) => {
 
   const sendCash = async () => {
     // console.log("Send details", amount.value, userInfo?.username, userPin)
-    console.log("Just tried to send money to a user");
+
     if (userPin.length !== 4) {
       return;
     }

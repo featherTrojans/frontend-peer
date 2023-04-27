@@ -49,9 +49,12 @@ const showImage = (
   title: string | null,
   value?: string,
   otherUser?: any,
-  transId?: string
+  transId?: string,
+  transType?: string
 ) => {
   const isVFD = transId?.includes("Feather", 0);
+  let isVfdFunding = transType === "Vfd Funding"
+
 
 
   switch (title) {
@@ -91,7 +94,7 @@ const showImage = (
       
       } else {
         return (
-          <InitialsBgColor name={senderName} />
+          <InitialsBgColor name={isVfdFunding ? value : senderName} />
         );
       }
       break;
@@ -204,9 +207,7 @@ const showImage = (
 
     default:
       return (
-        <View>
-          <Text>FA</Text>
-        </View>
+        <Logoavatar />
       );
       break;
   }
@@ -220,6 +221,7 @@ type SendingandreceiveProps = {
   user?: any;
   otherUser?: any;
   transId?: string;
+  transType?: string
 };
 
 const Sendingandreceive = ({
@@ -230,6 +232,7 @@ const Sendingandreceive = ({
   user,
   otherUser = {},
   transId,
+  transType
 }: SendingandreceiveProps) => {
   return (
     <View style={styles.container}>
@@ -245,7 +248,7 @@ const Sendingandreceive = ({
               }}
             />
           ) : (
-            showImage(senderName, receiverName, title, value, otherUser)
+            showImage(senderName, receiverName, title, value, otherUser, transType)
           )}
         </View>
       ) : (
@@ -256,7 +259,8 @@ const Sendingandreceive = ({
             title,
             value,
             otherUser,
-            transId
+            transId,
+            transType
           )}
         </View>
       )}

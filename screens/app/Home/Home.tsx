@@ -85,7 +85,6 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   useEffect(() => {
     if (isFocused && authdata.userDetails.userLevel <= 1) {
       updateAlert("Update your profile");
-      console.log(route, "here is my current route");
     } else {
       Toast.hide();
     }

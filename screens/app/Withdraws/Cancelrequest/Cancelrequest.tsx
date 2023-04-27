@@ -24,7 +24,7 @@ const Cancelrequest = ({ route, navigation }) => {
   const [writeReason, setWriteReason] = useState("");
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
-  console.log("I see you o");
+
   const reasons = [
     { text: "Mistake cash request", key: 1 },
     { text: "Merchant location distance is too far", key: 2 },

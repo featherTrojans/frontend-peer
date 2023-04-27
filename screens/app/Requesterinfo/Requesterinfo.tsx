@@ -86,7 +86,6 @@ const Requesterinfo = ({ navigation, route }) => {
     agentImage: null,
   });
 
-  console.log(comingback, "alright alright");
   useEffect(() => {
     getWithdrawRequest();
   }, [comingback]);
@@ -95,8 +94,7 @@ const Requesterinfo = ({ navigation, route }) => {
     try {
       const response = await axiosCustom.get("/request/accepted");
       setInfo(response?.data?.data);
-      console.log("should get here baah");
-      console.log(response.data.data, "request datas");
+
       if (response.data && response.data.data.length > 0) {
         setInfo(response?.data?.data[0]);
         setWithdrawrequest(false);

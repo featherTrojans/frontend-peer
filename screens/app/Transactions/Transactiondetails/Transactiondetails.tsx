@@ -1,65 +1,41 @@
 import {
-  StyleSheet,
   Text,
   View,
-  StatusBar,
   ScrollView,
   Platform,
   TouchableOpacity,
-  Image,
-  Pressable
+  Pressable,
 } from "react-native";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
-import * as FileSystem from "expo-file-system";
-import * as Clipboard from "expo-clipboard";
 import moment from "moment";
-import { styles } from "./Transactiondetails.styles";
 import { assetsDB, bankLogo } from "../../../../assetdatas";
 import {
   Backheader,
-  Bottombtn,
   Horizontaline,
   Iconwithdatas,
-  InitialsBg,
   Mainwrapper,
   Sendingandreceive,
 } from "../../../../components";
 import { FONTS, fontsize, COLORS, icons } from "../../../../constants";
-import { NavigationContainer } from "@react-navigation/native";
 import amountFormatter from "../../../../utils/formatMoney";
-import Globalmodal from "../../../shared/Globalmodal/Globalmodal";
-import Customstatusbar from "../../../shared/Customstatusbar";
-import { AuthContext } from "../../../../context/AuthContext";
-import { SafeAreaView } from "react-native-safe-area-context";
 import useCustomModal from "../../../../utils/useCustomModal";
-import { sendEmail } from "../../../../utils/emailSender";
-import useAlert from "../../../../utils/useAlerts";
 import useCopyclipboard from "../../../../utils/useCopyclipboard";
 
-const {
-  Copyclipboard,
-  Sharereceipt,
-  Downloadreceipt,
-  Reporttransactions,
-  Detailsmoreicon,
-  Arrowin,
-  Arrowout,
-} = icons;
+const { Sharereceipt, Downloadreceipt, Detailsmoreicon, Arrowin, Arrowout } =
+  icons;
 
 const Transactiondetails = ({ navigation, route }) => {
-  const [showModal, setShowModal] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { successAlert } = useAlert();
   const { copyToClipboard } = useCopyclipboard(
     "Transaction reference copied successfully"
   );
   const {
     CustomModal: TransactiondetailsModal,
     openModal: openTransactiondetailsModal,
-    closeModal
+    closeModal,
   } = useCustomModal();
   const copyColor = copied ? COLORS.blue6 : COLORS.grey2;
   const { data } = route.params;
@@ -77,13 +53,13 @@ const Transactiondetails = ({ navigation, route }) => {
     charges,
     direction,
     bankDetails,
-    trans_type
+    trans_type,
   } = data;
-  const total = Number(amount) + Number(charges);
+  const total = Number(amount);
+  const amountcal = Number(amount) - Number(charges);
   const isDebit = direction === "out";
   const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
-
-  // console.log(data, "here is the");
+  const isVfdFunding = trans_type === "Vfd Funding";
 
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")}.  ${dt.format("Do")} ${dt.format(
@@ -100,27 +76,23 @@ const Transactiondetails = ({ navigation, route }) => {
     }
   };
 
-  function showMerchant (){
-    if(title === "Cash Withdrawal"){
+  function showMerchant() {
+    if (title === "Cash Withdrawal") {
+      let merchantInfo = receiver.split("-");
+      let merchantName = merchantInfo[0];
+      let merchantId = merchantInfo[1];
 
-      let merchantInfo = receiver.split("-")
-      let merchantName = merchantInfo[0]
-      let merchantId = merchantInfo[1]
-
-
-      return {merchantName, merchantId}
+      return { merchantName, merchantId };
     }
   }
 
-  function showDetails (){
-    if(title === "Wallet Credit" && trans_type === "Vfd Funding"){
+  function showDetails() {
+    if (title === "Wallet Credit" && isVfdFunding) {
+      let merchantInfo = sender.split("-");
+      let merchantName = merchantInfo[0];
+      let merchantId = merchantInfo[1];
 
-      let merchantInfo = sender.split("-")
-      let merchantName = merchantInfo[0]
-      let merchantId = merchantInfo[1]
-
-
-      return {merchantName, merchantId}
+      return { merchantName, merchantId };
     }
   }
 
@@ -222,6 +194,14 @@ const Transactiondetails = ({ navigation, route }) => {
             
             `;
         break;
+      case "Cash Withdrawal":
+        return `
+        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
+        ${nameSplitter(showMerchant()?.merchantName)}
+        </div>
+            
+            `;
+        break;
       case "Wallet Debit":
       case "Wallet Credit":
         if (sender === "Bonus") {
@@ -233,7 +213,13 @@ const Transactiondetails = ({ navigation, route }) => {
         } else {
           return `
         <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-        ${nameSplitter(otherUser ? otherUser?.fullName : "Feather Africa Inc")}
+        ${nameSplitter(
+          otherUser
+            ? otherUser?.fullName
+            : isVfdFunding
+            ? showDetails()?.merchantName
+            : "Feather Africa"
+        )}
         </div>
         `;
         }
@@ -257,7 +243,9 @@ const Transactiondetails = ({ navigation, route }) => {
           return { senderName: sender, receiverName: receiver };
         } else {
           return {
-            senderName: otherUser?.fullName,
+            senderName: isVfdFunding
+              ? showDetails()?.merchantName
+              : otherUser?.fullName,
             receiverName: user?.fullName,
           };
         }
@@ -266,8 +254,16 @@ const Transactiondetails = ({ navigation, route }) => {
       case "Wallet Debit":
         return { senderName: user.fullName, receiverName: otherUser?.fullName };
         break;
-      case "funding":
+      case "Funds Transfer":
+        return {
+          senderName: user.fullName,
+          receiverName: bankDetails
+            ? bankDetails.account_name
+            : "Feather Africa",
+        };
+        break;
       case "Fund Reversal":
+      case "funding":
       case "escrow":
       case "Airtime Purchase":
       case "withdrawal":
@@ -292,6 +288,7 @@ const Transactiondetails = ({ navigation, route }) => {
       <style>
           body {
               font-size: 16px;
+              font-family
               padding: 50px;
               display: flex;
               flex-direction: column;
@@ -465,15 +462,23 @@ const Transactiondetails = ({ navigation, route }) => {
    <p class="transaction__ref">${transactionRef}</p>
   
    <ul class="list">
+   <li class="item">
+   <span class="item__left">Sender Name </span>
+   <span class="item__right receiver">${
+     typeOfName(title)?.senderName !== "Bonus"
+       ? typeOfName(title)?.senderName
+       : "FEATHER"
+   }</span>
+</li>
        <li class="item">
-           <span class="item__left">Receiver </span>
+           <span class="item__left">Receiver Name</span>
            <span class="item__right receiver">${
              typeOfName(title)?.receiverName
            }</span>
        </li>
        <li class="item">
           <span class="item__left">Amount </span>
-          <span class="item__right">NGN ${amountFormatter(amount)}</span>
+          <span class="item__right">NGN ${amountFormatter(amountcal)}</span>
       </li>
       <li class="item">
           <span class="item__left">Transaction Charge </span>
@@ -496,13 +501,13 @@ const Transactiondetails = ({ navigation, route }) => {
 `;
 
   const shareReceipt = async (html) => {
-    closeModal()
+    closeModal();
     const { uri } = await Print.printToFileAsync({ html });
     Sharing.shareAsync(uri);
   };
 
   const downloadReceipt = async (html) => {
-    closeModal()
+    closeModal();
     try {
       const { uri } = await Print.printToFileAsync({ html });
       if (Platform.OS === "ios") {
@@ -516,7 +521,7 @@ const Transactiondetails = ({ navigation, route }) => {
   };
 
   const reportTransaction = () => {
-    closeModal()
+    closeModal();
     navigation.navigate("Transactiondispute");
   };
 
@@ -525,7 +530,7 @@ const Transactiondetails = ({ navigation, route }) => {
       <Pressable
         onPress={onpress}
         hitSlop={20}
-        style={{ paddingHorizontal: 10, height: "100%",  }}
+        style={{ paddingHorizontal: 10, height: "100%" }}
       >
         <Detailsmoreicon />
       </Pressable>
@@ -581,7 +586,10 @@ const Transactiondetails = ({ navigation, route }) => {
           : user.fullName;
       return (
         <>
-          <Eachoption title="Sender Name" value={trans_type === "Vfd Funding" ? showDetails()?.merchantName : senderName} />
+          <Eachoption
+            title="Sender Name"
+            value={isVfdFunding ? showDetails()?.merchantName : senderName}
+          />
           <Horizontaline marginV={18} />
           <Eachoption title="Receiver Name" value={receiverName} />
           <Horizontaline marginV={18} />
@@ -590,51 +598,41 @@ const Transactiondetails = ({ navigation, route }) => {
     }
   };
 
-const Cashwithdrawal = () =>{
-  if(title === "Cash Withdrawal"){
+  const Cashwithdrawal = () => {
+    if (title === "Cash Withdrawal") {
+      const senderName = direction === "in" ? "Feather" : user?.fullName;
 
-    const senderName =
-        direction === "in"
-          ? 
-          "Feather"
-            : user?.fullName
-          
       const receiverName =
-        direction === "out"
-          ? showMerchant()?.merchantName
-            : user?.fullName
+        direction === "out" ? showMerchant()?.merchantName : user?.fullName;
 
+      const receiverId =
+        direction === "out" ? showMerchant()?.merchantId : user?.fullName;
 
-            const receiverId =
-            direction === "out"
-              ? showMerchant()?.merchantId
-                : user?.fullName
-
-
-    return (
-      <>
+      return (
+        <>
           <Eachoption title="Sender Name" value={senderName} />
           <Horizontaline marginV={18} />
           <Eachoption title="Merchant Name" value={receiverName} />
           <Horizontaline marginV={18} />
           <Eachoption title="Merchant ID" value={receiverId} />
           <Horizontaline marginV={18} />
-
         </>
-    )
-  }
-}
+      );
+    }
+  };
 
   const BankTransferDetails = () => {
     if (bankDetails) {
       return (
         <>
+          <Eachoption title="Sender Name" value={user.fullName} />
+          <Horizontaline marginV={18} />
           <Eachoption
             title="Account Number"
             value={bankDetails.account_number}
           />
           <Horizontaline marginV={18} />
-          <Eachoption title="Account Name" value={bankDetails.account_name} />
+          <Eachoption title="Receiver Name" value={bankDetails.account_name} />
           <Horizontaline marginV={18} />
           <Eachoption title="Bank" value={bankDetails.bank_name} />
           <Horizontaline marginV={18} />
@@ -642,8 +640,6 @@ const Cashwithdrawal = () =>{
       );
     }
   };
-
-
 
   const AirtimePurchase = () => {
     if (title === "Airtime Purchase") {
@@ -663,8 +659,7 @@ const Cashwithdrawal = () =>{
   // const {price } = route?.params
   return (
     <Mainwrapper>
-      <TransactiondetailsModal
-      >
+      <TransactiondetailsModal>
         <>
           <Iconwithdatas
             icon={<Sharereceipt />}
@@ -755,6 +750,7 @@ const Cashwithdrawal = () =>{
                   ? receiver
                   : sender
               }
+              transType={trans_type}
             />
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -846,7 +842,7 @@ const Cashwithdrawal = () =>{
           {BankTransferDetails()}
           {AirtimePurchase()}
           {Cashwithdrawal()}
-          <Eachoption title="Amount" value={`N${amountFormatter(amount)}`} />
+          <Eachoption title="Amount" value={`N${amountFormatter(amountcal)}`} />
           <Horizontaline marginV={18} />
           <Eachoption
             title="Transaction Charges"

@@ -171,8 +171,7 @@ const Eachoption = ({ type, image, value, setBank, openModal }) => {
 
 const Selectbank = ({ navigation, route }) => {
   const amount = route.params;
-  console.log("------------------------DEBUG--------------------------");
-  console.log(amount);
+
   const { CustomModal, openModal, closeModal } = useCustomModal();
   const {
     CustomModal: TransactiondetailsModal,

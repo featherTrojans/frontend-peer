@@ -15,6 +15,7 @@ import TabHome from "../assets/icons/TabHome";
 import Detailsmoreicon from "../assets/icons/Detailsmoreicon";
 import Listingsdrop from "../assets/icons/Listingsdrop";
 import Tabtransactions from "../assets/icons/Tabtransactions";
+
 import Tabhistory from "../assets/icons/Tabhistory";
 import Tabsettings from "../assets/icons/Tabsettings";
 import Tabuser from "../assets/icons/Tabuser";
@@ -92,7 +93,6 @@ import WrongIcon from "../assets/icons/WrongIcon";
 import Newtransfericon from "../assets/icons/Newtransfericon";
 import Fundwalleticon from "../assets/icons/Fundwalleticon";
 import Paybillicon from "../assets/icons/Paybillicon";
-import Passwordhideicon from "../assets/icons/Passwordhideicon";
 import Defaultuseravatar from "../assets/icons/Defaultuseravatar";
 import Memoji1 from "../assets/icons/Memoji1";
 import Upgradeicon from "../assets/icons/Upgradeicon";
@@ -193,6 +193,9 @@ import Bluearrowrighticon from "../assets/icons/Bluearrowrighticon";
 import Updatealertcancelicon from "../assets/icons/Updatealertcancelicon";
 import Startnewchaticon from "../assets/icons/Startnewchaticon";
 import Faceidicon from "../assets/icons/Faceidicon";
+import Amounthideicon from "../assets/icons/Amounthideicon";
+import Amountshowicon from "../assets/icons/Amountshowicon";
+
 // Receiverimage
 
 export default {
@@ -221,6 +224,8 @@ export default {
   SendTF,
   Tabchats,
   TabHome,
+  Amounthideicon,
+  Amountshowicon,
   Tabtransactions,
   Tabhistory,
   Utilitypayment,
@@ -334,7 +339,6 @@ export default {
   Mobiledataicon,
   Fundwalleticon,
   Paybillicon,
-  Passwordhideicon,
   Tabplusicon,
   MarkerIcon,
   Defaultuseravatar,

@@ -86,7 +86,7 @@ const Editprofile = ({}) => {
       try {
         setLoading(true);
         const formdata = new FormData();
-        console.log(result);
+
         formdata.append("file", {
           uri: result.uri,
           type: "Image/jpeg",
@@ -99,8 +99,6 @@ const Editprofile = ({}) => {
           userDetails: { ...authdata?.userDetails, imageUrl: result.uri },
         });
         const response = await axiosCustom.post("/upload/image", formdata);
-
-        console.log(response.data, "Uploaded response");
       } catch (err) {
         console.log(err.response.data);
       } finally {
@@ -252,10 +250,6 @@ const Editprofile = ({}) => {
           >
             {(formikProps) => {
               const { isSubmitting, handleSubmit, values } = formikProps;
-              console.log(
-                "------------------------ISSUBMITTING--------------------------"
-              );
-              console.log(isSubmitting);
 
               return (
                 <React.Fragment>
