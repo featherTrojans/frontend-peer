@@ -98,7 +98,7 @@ const RootNavigator = ({ initialBoarded }) => {
 
 
         {/* New screens to tbe moved out after design */}
-        <AppStack.Screen name="Notifications" component={Notifications} />
+        {/* <AppStack.Screen name="Notifications" component={Notifications} /> */}
 
 
 

@@ -7,7 +7,7 @@ import Setupprofileicon from "../assets/icons/Setupprofileicon";
 import Arrowin from "../assets/icons/Arrowin";
 import Arrowout from "../assets/icons/Arrowout";
 import Withdrawicon from "../assets/icons/Withdrawicon";
-import Transfericon from "../assets/icons/Transfericon";
+import Transfericon from "../assets/icons/Fundwalleticon";
 import Fundwalleticon from "../assets/icons/Fundwalleticon";
 import Paybillicon from "../assets/icons/Paybillicon";
 import Featherdefault from "../assets/icons/Featherdefault";
