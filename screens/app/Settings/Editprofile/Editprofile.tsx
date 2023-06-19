@@ -80,8 +80,6 @@ const Editprofile = ({}) => {
       quality: 1,
     });
 
-    // console.log(result);
-
     if (!result.cancelled) {
       try {
         setLoading(true);
@@ -93,7 +91,6 @@ const Editprofile = ({}) => {
           name: "image1",
         });
         formdata.append("name", authdata?.userDetails?.username);
-        // console.log(result.uri, "this is the image url");
         setAuthData({
           ...authdata,
           userDetails: { ...authdata?.userDetails, imageUrl: result.uri },
