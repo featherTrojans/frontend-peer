@@ -5,8 +5,8 @@ function Setupprofileicon() {
   return (
     <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={19.96}
-    height={19.99}
+    width={20}
+    height={20}
   >
     <G
       data-name="profile (2)"

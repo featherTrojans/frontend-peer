@@ -39,14 +39,6 @@ const DoubleBack = () => {
 //     export default <></>
 // }
 
-export default function DoubleTapToClose() {
-    
-    // console.log(route, navigation.isFocused())
-    return Platform.OS !== 'ios' ? (
-      <DoubleBack/>
-    ) : (
-      <></>
-    );
-  }
+
 
 

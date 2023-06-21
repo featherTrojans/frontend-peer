@@ -10,7 +10,9 @@ export const viewbalancestyles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: COLORS.white,
     marginTop: 20,
-    marginBottom: 15
+    marginBottom: 15,
+    marginHorizontal: 15,
+
   },
   //   Top part of the container
   topContainer: {

@@ -29,12 +29,12 @@ import axiosCustom from "../../../httpRequests/axiosCustom";
 import { styles } from "./Home.styles";
 
 import Customstatusbar from "../../shared/Customstatusbar";
-import DoubleTapToClose from "../../shared/DoubleBack";
 
 import formatData from "../../../utils/fomatTrans";
 import { getPeriod } from "../../../utils/getDayPeriod";
 import useAlert from "../../../utils/useAlerts";
 import { nameToShow } from "../../../utils/nameSplitter";
+import { FlatList } from "react-native-gesture-handler";
 
 const {
   Bell,
@@ -42,7 +42,7 @@ const {
   Historyicon,
   Recentconvicon,
   Setupprofileicon,
-  Balanceicon
+  Balanceicon,
 } = icons;
 
 const scrollactions = [
@@ -63,36 +63,64 @@ const scrollactions = [
   },
 ];
 
-const Scrollactions = () => {
+const QuickActions = () => {
   function Scrollaction({
     bg,
     text,
     icon,
-    index
+   
   }: {
     bg: string;
     text: string;
     icon: string;
-    index: number
+   
   }) {
-    const isLast = index+1 === scrollactions.length
     return (
-      <View style={[styles.scrollaction, { backgroundColor: bg, marginRight: isLast ? 0 : 16 }]}>
+      <View
+        style={[
+          styles.scrollaction,
+          { backgroundColor: bg, },
+        ]}
+      >
         <Text style={styles.scrollactionText}>{text}</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      bounces={false}
-    >
-      {scrollactions.map(({ bg, text, icon }, index) => {
-        return <Scrollaction bg={bg} text={text} icon={icon} key={index} index={index} />;
-      })}
-    </ScrollView>
+
+    <FlatList 
+    data={scrollactions}
+    horizontal
+    contentContainerStyle={{gap: 16}}
+    renderItem={({item, index}) => {
+
+      let {bg, text, icon} = item
+      return (
+<Scrollaction
+            bg={bg}
+            text={text}
+            icon={icon}
+            key={index}
+            />
+      )
+    }}
+    
+    />
+    // <ScrollView
+    //   horizontal
+    //   showsHorizontalScrollIndicator={false}
+    //   bounces={false}
+    
+    // >
+    //   {scrollactions.map(({ bg, text, icon }, index) => {
+    //     return (
+    //       
+           
+    //       />
+    //     );
+    //   })}
+    // </ScrollView>
   );
 };
 
@@ -103,12 +131,9 @@ const Conversations = () => {
         <View style={styles.recentIconWrap}>
           {/* icon */}
           <Recentconvicon />
-          <Text style={styles.recentconvText}>Recent Conversations</Text>
+          <Text style={styles.recentconvText}>Conversations</Text>
         </View>
-        <Text style={styles.numberOfUnread}>
-          {" "}
-          <Text style={{ ...FONTS.bold }}>2</Text> Unread
-        </Text>
+        <Text style={styles.numberOfUnread}>You have 3 unreads</Text>
       </View>
 
       <Horizontaline marginV={15} />
@@ -121,23 +146,6 @@ const Conversations = () => {
             backgroundColor: COLORS.grey1,
             borderRadius: 32 / 2,
             marginRight: 10,
-          }}
-        />
-        <View
-          style={{
-            width: 32,
-            height: 32,
-            backgroundColor: COLORS.grey1,
-            borderRadius: 32 / 2,
-            marginRight: 10,
-          }}
-        />
-        <View
-          style={{
-            width: 32,
-            height: 32,
-            backgroundColor: COLORS.grey1,
-            borderRadius: 32 / 2,
           }}
         />
       </View>
@@ -162,6 +170,54 @@ const SetupProfile = () => {
         Complete your profile today to enjoy all the benefits of feather without
         limits.<Text style={styles.setupInfoSubText}> Go to profile page.</Text>
       </Text>
+    </View>
+  );
+};
+
+const ActiveCashWithdrawal = () => {
+  return (
+    <View style={styles.setupProfile}>
+      <View style={styles.conversationHeader}>
+        <View style={styles.recentIconWrap}>
+          {/* icon */}
+          <Recentconvicon />
+          <Text style={styles.recentconvText}>Cash Withdrawal</Text>
+        </View>
+        <Text style={styles.numberOfUnread}>15 Mins Away</Text>
+      </View>
+
+      <View style={{ marginTop: 20 }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View
+            style={{
+              width: 45,
+              height: 45,
+              backgroundColor: COLORS.lightgray,
+              borderRadius: 45 / 2,
+            }}
+          />
+          <View style={{ marginLeft: 18 }}>
+            <Text
+              style={{
+                ...fontsize.smallest,
+                ...FONTS.semibold,
+                lineHeight: 20,
+              }}
+            >
+              Suzzane Vibes Shoes
+            </Text>
+            <Text
+              style={{
+                ...fontsize.xxsmallest,
+                ...FONTS.regular,
+                lineHeight: 20,
+              }}
+            >
+              N45,500
+            </Text>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -253,10 +309,9 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
       >
         <Viewbalance />
 
-        <Scrollactions />
-
+        <QuickActions />
+        <ActiveCashWithdrawal />
         <Conversations />
-
         <SetupProfile />
 
         <View style={styles.transactionWrap}>
@@ -278,19 +333,18 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
             />
           ) : (
             histories.map((history, index) => {
-              const {data, time} = history
+              const { data, time } = history;
               return (
                 <Transactionhistory
-                index={index}
-                date={time}
-                datas={data}
-                key={time}
-              /> 
-              )
+                  index={index}
+                  date={time}
+                  datas={data}
+                  key={time}
+                />
+              );
             })
           )}
         </View>
-        <DoubleTapToClose />
       </ScrollView>
     </View>
   );
@@ -299,8 +353,3 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
 export default Home;
 
 
-{/* <Transactionhistory
-    index={index}
-    date={historytime}
-    datas={data}
-    key={time} */}

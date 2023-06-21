@@ -12,8 +12,9 @@ export const emptycompstyles = StyleSheet.create({
   emptyText: {
     color: COLORS.black,
     textAlign: "center",
-    ...fontsize.smaller,
+    ...fontsize.xsmallest,
     ...FONTS.regular,
+    lineHeight: 18
   },
   transactNow: {
     color: COLORS.blue6,

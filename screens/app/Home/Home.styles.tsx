@@ -5,7 +5,7 @@ import { COLORS, FONTS, fontsize } from "../../../constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
     backgroundColor: COLORS.white3,
   },
   headerContainer: {
@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 10,
+    paddingHorizontal: 15,
   },
   profileContainer: {
     flexDirection: "row",
@@ -108,6 +109,7 @@ export const styles = StyleSheet.create({
     ...fontsize.xsmallest,
     ...FONTS.medium,
     lineHeight: 14,
+   
   },
 
   // Horizontal information styles
@@ -146,6 +148,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 24,
     borderRadius: 15,
+    marginHorizontal: 15,
   },
   transactionHeader: {
     flexDirection: "row",
@@ -172,6 +175,8 @@ export const styles = StyleSheet.create({
     marginVertical: 15,
     padding: 18,
     borderRadius: 16,
+    marginHorizontal: 15,
+
   },
   conversationHeader: {
     flexDirection: "row",
@@ -198,6 +203,8 @@ export const styles = StyleSheet.create({
     marginVertical: 15,
     padding: 18,
     borderRadius: 16,
+    marginHorizontal: 15,
+
   },
   setupText: {
     ...fontsize.xsmallest,
