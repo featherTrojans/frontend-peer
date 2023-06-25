@@ -36,6 +36,7 @@ import useAlert from "../../../utils/useAlerts";
 import { nameToShow } from "../../../utils/nameSplitter";
 import { FlatList } from "react-native-gesture-handler";
 
+
 const {
   Bell,
   Featherdefault,
@@ -64,22 +65,24 @@ const scrollactions = [
 ];
 
 const QuickActions = () => {
+
   function Scrollaction({
     bg,
     text,
     icon,
-   
+   index
   }: {
     bg: string;
     text: string;
     icon: string;
-   
+   index: number
   }) {
+    let isLast = index+1 === scrollactions.length
     return (
       <View
         style={[
           styles.scrollaction,
-          { backgroundColor: bg, },
+          { backgroundColor: bg, marginRight: !isLast ? 16: 0},
         ]}
       >
         <Text style={styles.scrollactionText}>{text}</Text>
@@ -89,44 +92,26 @@ const QuickActions = () => {
 
   return (
 
-    <FlatList 
-    data={scrollactions}
+    <ScrollView
     horizontal
-    contentContainerStyle={{gap: 16}}
-    renderItem={({item, index}) => {
-
-      let {bg, text, icon} = item
+    showsHorizontalScrollIndicator={false}
+    contentContainerStyle={{paddingHorizontal: 16}}
+  >
+    {scrollactions.map((scrollaction, index) => {
+      let {bg, text, icon} = scrollaction
       return (
-<Scrollaction
-            bg={bg}
-            text={text}
-            icon={icon}
-            key={index}
-            />
+        <Scrollaction bg={bg} text={text} icon={icon} index={index} />
       )
-    }}
+    })}
+  </ScrollView>
+  )
+}
     
-    />
-    // <ScrollView
-    //   horizontal
-    //   showsHorizontalScrollIndicator={false}
-    //   bounces={false}
-    
-    // >
-    //   {scrollactions.map(({ bg, text, icon }, index) => {
-    //     return (
-    //       
-           
-    //       />
-    //     );
-    //   })}
-    // </ScrollView>
-  );
-};
+
 
 const Conversations = () => {
   return (
-    <View style={styles.conversationWrap}>
+    <View style={[styles.conversationWrap, {marginVertical: 0}]}>
       <View style={styles.conversationHeader}>
         <View style={styles.recentIconWrap}>
           {/* icon */}
@@ -141,10 +126,10 @@ const Conversations = () => {
       <View style={{ flexDirection: "row" }}>
         <View
           style={{
-            width: 32,
-            height: 32,
+            width: 45,
+            height: 45,
             backgroundColor: COLORS.grey1,
-            borderRadius: 32 / 2,
+            borderRadius: 45 / 2,
             marginRight: 10,
           }}
         />
@@ -307,8 +292,9 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
           />
         }
       >
-        <Viewbalance />
 
+
+        <Viewbalance />
         <QuickActions />
         <ActiveCashWithdrawal />
         <Conversations />
@@ -325,12 +311,17 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
           </View>
 
           <Horizontaline marginV={14} />
-          {histories.length === 0 ? (
+          {[].length === 0 ? (
+            <>
             <Emptycomponent
               size={110}
               msg="Padi, you have not performed any 
             transactions yet. Transact Now"
             />
+            <View style={{alignSelf: "center", marginTop: 37, paddingVertical: 11, paddingHorizontal: 24, backgroundColor: "#F3F5FE", borderRadius: 10}}>
+              <Text style={{...fontsize.xxsmallest, ...FONTS.semibold, color: COLORS.blue16}}>Perform a transaction</Text>
+            </View>
+            </>
           ) : (
             histories.map((history, index) => {
               const { data, time } = history;

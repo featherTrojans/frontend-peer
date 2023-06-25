@@ -198,24 +198,24 @@ const Transactions = ({ navigation }) => {
           </View>
         </View>
 
-        <BottomSheet
+        {/* <BottomSheet
           index={0}
           snapPoints={snapPoints}
           style={{
             paddingHorizontal: 24,
           }}
+        > */}
+        <View
+        
+        style={{
+          flex: 1,
+          paddingHorizontal: 24,
+          backgroundColor: COLORS.white,
+          paddingTop: 28,
+          borderRadius: 20
+        }}
         >
-          <View style={styles.bottomsheetHeader}>
-            <View style={styles.historyIconWrap}>
-              {/* icons */}
-              <Historyicon />
-              <Text style={styles.historyText}>History</Text>
-            </View>
-
-            <Text style={styles.viewAll}>View All</Text>
-          </View>
-
-          <Horizontaline marginV={24} />
+        
 
           <View style={styles.listContainer}>
             {loading ? (
@@ -256,7 +256,8 @@ const Transactions = ({ navigation }) => {
               </>
             )}
           </View>
-        </BottomSheet>
+          </View>
+        {/* </BottomSheet> */}
       </View>
     </View>
   );
