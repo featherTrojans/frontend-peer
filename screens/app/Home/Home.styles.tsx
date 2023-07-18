@@ -109,7 +109,6 @@ export const styles = StyleSheet.create({
     ...fontsize.xsmallest,
     ...FONTS.medium,
     lineHeight: 14,
-   
   },
 
   // Horizontal information styles
@@ -176,7 +175,6 @@ export const styles = StyleSheet.create({
     padding: 18,
     borderRadius: 16,
     marginHorizontal: 15,
-
   },
   conversationHeader: {
     flexDirection: "row",
@@ -204,7 +202,6 @@ export const styles = StyleSheet.create({
     padding: 18,
     borderRadius: 16,
     marginHorizontal: 15,
-
   },
   setupText: {
     ...fontsize.xsmallest,
@@ -231,5 +228,21 @@ export const styles = StyleSheet.create({
   setupHeadSection: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+
+  // Active Cash Withdrawal
+  activeWithdrawalProfile: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  activeWithdrawalName: {
+    ...fontsize.smallest,
+    ...FONTS.semibold,
+    lineHeight: 20,
+  },
+  activeWithdrawalAmount: {
+    ...fontsize.xxsmallest,
+    ...FONTS.regular,
+    lineHeight: 20,
   },
 });

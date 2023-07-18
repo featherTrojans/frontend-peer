@@ -7,14 +7,13 @@ import {
   Animated,
   Pressable,
 } from "react-native";
-import BottomSheet from "@gorhom/bottom-sheet";
 import {
   Emptycomponent,
   Horizontaline,
   Iconandinfo,
   Transactionhistory,
 } from "../../../../components";
-import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
+import { COLORS,icons } from "../../../../constants";
 import axiosCustom from "../../../../httpRequests/axiosCustom";
 import formatData from "../../../../utils/fomatTrans";
 
@@ -92,7 +91,6 @@ const Transactions = ({ navigation }) => {
       action: () => console.log("Fund"),
     },
   ];
-  const snapPoints = useMemo(() => ["45%", "65%", "98%"], []);
 
   const reNavigate = (screenName: String) => {
     closeTransferModal();
@@ -198,15 +196,8 @@ const Transactions = ({ navigation }) => {
           </View>
         </View>
 
-        {/* <BottomSheet
-          index={0}
-          snapPoints={snapPoints}
-          style={{
-            paddingHorizontal: 24,
-          }}
-        > */}
+ 
         <View
-        
         style={{
           flex: 1,
           paddingHorizontal: 24,
@@ -256,8 +247,7 @@ const Transactions = ({ navigation }) => {
               </>
             )}
           </View>
-          </View>
-        {/* </BottomSheet> */}
+        </View>
       </View>
     </View>
   );

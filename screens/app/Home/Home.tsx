@@ -31,11 +31,8 @@ import { styles } from "./Home.styles";
 import Customstatusbar from "../../shared/Customstatusbar";
 
 import formatData from "../../../utils/fomatTrans";
-import { getPeriod } from "../../../utils/getDayPeriod";
 import useAlert from "../../../utils/useAlerts";
 import { nameToShow } from "../../../utils/nameSplitter";
-import { FlatList } from "react-native-gesture-handler";
-
 
 const {
   Bell,
@@ -65,24 +62,23 @@ const scrollactions = [
 ];
 
 const QuickActions = () => {
-
   function Scrollaction({
     bg,
     text,
     icon,
-   index
+    index,
   }: {
     bg: string;
     text: string;
     icon: string;
-   index: number
+    index: number;
   }) {
-    let isLast = index+1 === scrollactions.length
+    let isLast = index + 1 === scrollactions.length;
     return (
       <View
         style={[
           styles.scrollaction,
-          { backgroundColor: bg, marginRight: !isLast ? 16: 0},
+          { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
         ]}
       >
         <Text style={styles.scrollactionText}>{text}</Text>
@@ -91,27 +87,22 @@ const QuickActions = () => {
   }
 
   return (
-
     <ScrollView
-    horizontal
-    showsHorizontalScrollIndicator={false}
-    contentContainerStyle={{paddingHorizontal: 16}}
-  >
-    {scrollactions.map((scrollaction, index) => {
-      let {bg, text, icon} = scrollaction
-      return (
-        <Scrollaction bg={bg} text={text} icon={icon} index={index} />
-      )
-    })}
-  </ScrollView>
-  )
-}
-    
-
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ paddingHorizontal: 16 }}
+    >
+      {scrollactions.map((scrollaction, index) => {
+        let { bg, text, icon } = scrollaction;
+        return <Scrollaction bg={bg} text={text} icon={icon} key={index} index={index} />;
+      })}
+    </ScrollView>
+  );
+};
 
 const Conversations = () => {
   return (
-    <View style={[styles.conversationWrap, {marginVertical: 0}]}>
+    <View style={[styles.conversationWrap, { marginVertical: 0 }]}>
       <View style={styles.conversationHeader}>
         <View style={styles.recentIconWrap}>
           {/* icon */}
@@ -172,7 +163,7 @@ const ActiveCashWithdrawal = () => {
       </View>
 
       <View style={{ marginTop: 20 }}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={styles.activeWithdrawalProfile}>
           <View
             style={{
               width: 45,
@@ -182,24 +173,8 @@ const ActiveCashWithdrawal = () => {
             }}
           />
           <View style={{ marginLeft: 18 }}>
-            <Text
-              style={{
-                ...fontsize.smallest,
-                ...FONTS.semibold,
-                lineHeight: 20,
-              }}
-            >
-              Suzzane Vibes Shoes
-            </Text>
-            <Text
-              style={{
-                ...fontsize.xxsmallest,
-                ...FONTS.regular,
-                lineHeight: 20,
-              }}
-            >
-              N45,500
-            </Text>
+            <Text style={styles.activeWithdrawalName}>Suzzane Vibes Shoes</Text>
+            <Text style={styles.activeWithdrawalAmount}>N45,500</Text>
           </View>
         </View>
       </View>
@@ -209,7 +184,7 @@ const ActiveCashWithdrawal = () => {
 
 const Home = ({ navigation, route }: { navigation: any; route: any }) => {
   const { setAuthData, authdata } = useContext(AuthContext);
-  const histories = formatData(authdata?.transactions);
+  const histories: any[] = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
@@ -292,8 +267,6 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
           />
         }
       >
-
-
         <Viewbalance />
         <QuickActions />
         <ActiveCashWithdrawal />
@@ -311,17 +284,12 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
           </View>
 
           <Horizontaline marginV={14} />
-          {[].length === 0 ? (
-            <>
+          {histories.length === 0 ? (
             <Emptycomponent
               size={110}
               msg="Padi, you have not performed any 
             transactions yet. Transact Now"
             />
-            <View style={{alignSelf: "center", marginTop: 37, paddingVertical: 11, paddingHorizontal: 24, backgroundColor: "#F3F5FE", borderRadius: 10}}>
-              <Text style={{...fontsize.xxsmallest, ...FONTS.semibold, color: COLORS.blue16}}>Perform a transaction</Text>
-            </View>
-            </>
           ) : (
             histories.map((history, index) => {
               const { data, time } = history;
@@ -342,5 +310,3 @@ const Home = ({ navigation, route }: { navigation: any; route: any }) => {
 };
 
 export default Home;
-
-

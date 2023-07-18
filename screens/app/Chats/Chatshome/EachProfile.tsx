@@ -22,9 +22,6 @@ const Eachprofile = ({
     return (
       <TouchableOpacity activeOpacity={0.8} style={styles.eachprofileContainer}
       onPress={()=>navigate.navigate("Chatsdm",{userInfo})}>
-        {/* <InitialsBg sideLength={31} name={name || "0 0"} /> */}
-
-
         <View style={{width: 32, height: 32,borderRadius: 32/2, justifyContent: "center", alignItems: "center", backgroundColor: COLORS.blue9}}>
           <Text style={{color: COLORS.white, ...fontsize.smallest, ...FONTS.medium}}>{nameSplitter(name).toUpperCase()}</Text>
         </View>

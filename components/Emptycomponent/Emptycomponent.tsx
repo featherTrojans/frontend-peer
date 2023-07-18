@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import LottieView from "lottie-react-native";
 import { emptycompstyles } from './Emptycomponent.styles'
-import { icons } from '../../constants';
+import { COLORS, FONTS, fontsize, icons } from '../../constants';
 
 
 
@@ -26,6 +26,10 @@ const Emptycomponent = ({size=110, msg}: {size: number, msg: string}) => {
                 {msg}
           </Text>
         </View>
+
+        <View style={{alignSelf: "center", marginTop: 37, paddingVertical: 11, paddingHorizontal: 24, backgroundColor: "#F3F5FE", borderRadius: 10}}>
+              <Text style={{...fontsize.xxsmallest, ...FONTS.semibold, color: COLORS.blue16}}>Perform a transaction</Text>
+            </View>
       </View>
   )
 }

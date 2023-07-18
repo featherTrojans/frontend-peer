@@ -7,11 +7,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingTop: getStatusBarHeight(true),
     backgroundColor: COLORS.white,
+    paddingHorizontal: 25,
   },
-  subcontainer: {
-    flex: 1,
-    paddingHorizontal: 15,
-  },
+
   chatshomeheader: {
     marginVertical: 30,
     justifyContent: "space-between",
@@ -29,12 +27,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     ...fontsize.xsmallest,
     ...FONTS.regular,
-    marginBottom: 50,
+    // marginBottom: 50,
   },
   recentChatsText: {
     ...fontsize.smaller,
     ...FONTS.bold,
     color: COLORS.black,
+    marginTop: 50,
+    marginBottom: 40
   },
   emptyChatsWrap: {
     justifyContent: "center",

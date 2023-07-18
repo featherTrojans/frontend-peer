@@ -54,7 +54,6 @@ const Chatsdm = ({ navigation, route }) => {
   const [fetchmessage, setFetchmessage] = useState(false);
   const animationRef = useRef<LottieView>(null);
 
-  const { openModal, closeModal, CustomModal } = useCustomModal();
 
   const authId = authdata?.userDetails?.userUid;
 
@@ -334,15 +333,11 @@ const Chatsdm = ({ navigation, route }) => {
       />
 
       <View style={styles.chatHeader}>
-        {/* <TouchableOpacity activeOpacity={0.8} style={{  }} onPress={()=>navigation.goBack()}>
-          <Backarrow />
-        </TouchableOpacity> */}
-        {/* <Backheader /> */}
-
+  
         <View style={[styles.headerDetailsContainer]}>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={openModal}
+            onPress={() => console.log("Clicked on the profile")}
             style={styles.chatsDmProfileWrap}
           >
             <InitialsBg sideLength={45} name={userInfo?.fullName || "0 0"} />
@@ -361,35 +356,7 @@ const Chatsdm = ({ navigation, route }) => {
         </View>
       </View>
 
-      <CustomModal>
-        <>
-          <View style={styles.dmActionsProfileWrap}>
-            <View style={styles.dmActionsProfileImage}>
-              {/* icons will be here */}
-            </View>
-            <Text style={styles.dmActionsProfileName}>David Vandu</Text>
-            <Text style={styles.dmActionsText}>Joined Aug. 15, 2025</Text>
-          </View>
-
-          <Text style={styles.dmActionsText}>
-            55 Messages Sent between you both
-          </Text>
-
-          <View style={styles.dmProfileActionsWrap}>
-            {profileactions.map(({ title, Icon }, index) => {
-              return (
-                <View style={styles.dmProfileActionWrap} key={index}>
-                  <View style={styles.dmActionsBg}>
-                    {/* icons */}
-                    <Icon />
-                  </View>
-                  <Text style={styles.dmActionsTitle}>{title}</Text>
-                </View>
-              );
-            })}
-          </View>
-        </>
-      </CustomModal>
+ 
 
       {fetchmessage ? (
         <View style={styles.emptyChatAnimation}>

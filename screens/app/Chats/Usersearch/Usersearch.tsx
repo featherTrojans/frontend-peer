@@ -53,9 +53,7 @@ const SingleUser = ({
 const Usersearch = ({navigation, route}) => {
   const contactsResolved = route?.params;
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
-  console.log(userinfo,"found");
   const [filteredContact, setFilteredContact] = useState(contactsResolved);
-  // const [userContact, setUserContact] = useState([phoneContact]);
   const [searchtext, setSearchText] = useState("");
   const [userSearch, setUserSearch] = useState("");
   const [active, setActive] = useState("username");
@@ -93,26 +91,11 @@ const Usersearch = ({navigation, route}) => {
 
 
 
-      {/* <View style={styles.headerSection}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Backarrow />
-          <Text style={styles.searchText}>Search</Text>
-        </View>
-        <Chatsearchicon />
-      </View> */}
+
 
       <View style={[styles.mainContainer]}>
 
 
-
-        {/* <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <TouchableOpacity activeOpacity={0.8} onPress={()=>setActive("username")} style={[styles.typeBtn, activeStyle]}>
-            <Text style={[styles.typeBtnText, activeTextStyle]}>Username</Text>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.8} onPress={()=>setActive("phonecontact")} style={[styles.typeBtn, activeStyleTwo]}>
-            <Text style={[styles.typeBtnText, activeTextStyleTwo]}>Phone Contact</Text>
-          </TouchableOpacity>
-        </View> */}
 
         <View style={{ marginTop: 20, marginBottom: 28 }}>
           <TextInput
@@ -125,7 +108,6 @@ const Usersearch = ({navigation, route}) => {
         </View>
 
 
-        {/* { active === "phonecontact" && <Text style={styles.listHeader}>Feather Users In Your Contact</Text>  } */}
         { active === "phonecontact" ? 
         <FlatList
           data={filteredContact}
