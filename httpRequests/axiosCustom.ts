@@ -7,8 +7,8 @@ const Server = {
 };
 
 const axiosCustom = axios.create({
-  // baseURL: serversettings.apiUrl
-  baseURL: Server.live,
+  baseURL: serversettings.apiUrl
+  // baseURL: Server.live,
 });
 
 // baseURL:"http://44.202.108.194/api/v1/"

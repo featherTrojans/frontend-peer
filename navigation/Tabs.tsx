@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, Animated } from "react-native";
+import { StyleSheet, Text, View, Animated, SafeAreaView } from "react-native";
 import React, { useRef } from "react";
 import { icons, SIZES, COLORS, fontsize, FONTS } from "../constants";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Chatshome, Home, Transactions, Cards, Profile } from "../screens";
+import {  Home, Transactions,  BlankScreen } from "../screens";
 import { RootTabParamList } from "../types";
+
 
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -56,27 +57,27 @@ function TabListener(value, offSet) {
 const Tabscreens = [
   {
     name: "Home",
-    component: Home,
+    component: BlankScreen,
     Icon: Hometabicon,
   },
   {
     name: "Transact",
-    component: Transactions,
+    component: BlankScreen,
     Icon: Transacttabicon,
   },
   {
     name: "Chats",
-    component: Chatshome,
+    component: BlankScreen,
     Icon: Chatstabicon,
   },
   {
     name: "Cards",
-    component: Cards,
+    component: BlankScreen,
     Icon: Cardstabicon,
   },
   {
     name: "Profile",
-    component: Profile,
+    component: BlankScreen,
     Icon: Profiletabicon,
   },
 ];

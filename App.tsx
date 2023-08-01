@@ -1,21 +1,25 @@
-import React, { useRef, useEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
-
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import Toast from "react-native-toast-message";
-
 import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-import { AuthProvider } from "./context/AuthContext";
-import MainNavigation from "./navigation";
-import { Text, View, LogBox, TouchableOpacity, StyleSheet } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import { Text, View, LogBox, TouchableOpacity, StyleSheet, StatusBar } from "react-native";
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import { COLORS, FONTS, fontsize, icons } from "./constants";
 import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { customNavigation } from "./utils/customNavigation";
-import { TextInput } from "react-native-gesture-handler";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-// const { Cancelicon, Alertcancelicon, Updateprofileicon, Bluearrowrighticon, Updatealertcancelicon } = icons;
+import { AuthProvider } from "./context/AuthContext";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import navigationService from "./utils/navigation"
+import {NavigatorSelector} from './navigation';
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'white',
+  },
+};
 
 export const toastConfig = {
   errorToast: ({ text1, props }: { text1: string; props: any }) => (
@@ -83,8 +87,9 @@ export const toastConfig = {
 
 
 LogBox.ignoreLogs(["Setting a timer"]);
-
+SplashScreen.preventAutoHideAsync();
 export default function App() {
+  const [routeName, setRouteName] = useState('');
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
 
   const checkOnboarding = async () => {
@@ -106,6 +111,8 @@ export default function App() {
     checkOnboarding();
   }, []);
 
+
+
   let [fontsLoaded] = useFonts({
     BRlight: require("./assets/fonts/BRFirma-Light.otf"),
     BRregular: require("./assets/fonts/BRFirma-Regular.otf"),
@@ -114,17 +121,38 @@ export default function App() {
     BRbold: require("./assets/fonts/BRFirma-Bold.otf"),
   });
 
+  async function getCurrentRoute(state: any) {
+    let _getCurrentRoute = await state?.getCurrentRoute()?.name;
+    setRouteName(_getCurrentRoute);
+    return _getCurrentRoute;
+  }
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
 
 
   if (!fontsLoaded || onboarded === null) {
-    return <AppLoading />;
-  } else {
+    return null;
+  } 
     return (
-      <>
-
+      <GestureHandlerRootView style={{flex: 1}} onLayout={onLayoutRootView}>
+        <View style={{flex: 1}}>
+        <StatusBar  />
+        <NavigationContainer
+          theme={MyTheme}
+          ref={(navigationRef: any) => {
+            navigationService.setTopLevelNavigator(navigationRef);
+          }}
+          onStateChange={async () => {
+            getCurrentRoute(navigationService.getNavigator());
+          }}>
           <AuthProvider>
             <LocationProvider>
-              <MainNavigation initialBoarded={onboarded} />
+               <NavigatorSelector routeName={routeName} />
             </LocationProvider>
           </AuthProvider>
           <Toast
@@ -133,10 +161,12 @@ export default function App() {
             onShow={() => console.log("Status shown")}
             onHide={() => console.log("Status hidden")}
           />
-      </>
+          </NavigationContainer>
+          </View>
+      </GestureHandlerRootView>
     );
   }
-}
+
 
 const appStyles = StyleSheet.create({
   alertWrapper: {

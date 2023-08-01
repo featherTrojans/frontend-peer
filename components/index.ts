@@ -1,38 +1,41 @@
-import Input from "./Input/Input";
-import Loader from "./Loader/Loader";
-import Numberbtn from "./Numberbtn/Numberbtn";
-import Sendingandreceive from "./Send&Receive/Sendingandreceive";
-import Transactionhistory from "./Transactionshistory/Transactionhistory";
-import Viewbalance from "./Viewbalance/Viewbalance";
-import InitialsBg from "./InitialsBg/InitialsBg";
-import Keyboard from "./Keyboard/Keyboard";
-import Custombutton from "./Custombutton/Custombutton";
-import Mainwrapper from "./Mainwrapper/Mainwrapper";
-import Horizontaline from "./Horizontaline/Horizontaline";
-import Emptycomponent from "./Emptycomponent/Emptycomponent";
-import Backheader from "./Backheader/Backheader";
-import Headerandsubheader from "./Headerandsubheader/Headerandsubheader";
-import Iconandinfo from "./Iconandinfo/Iconandinfo";
+import FTInput from "./FTInput";
+import FTLoader from "./FTLoader";
+import FTNumberbtn from "./FTNumberbtn";
+import FTSendingandreceive from "./FTSendingandreceive";
+import FTTransactionhistory from "./FTTransactionhistory";
+import FTViewbalance from "./FTViewbalance";
+import FTInitialsBg from "./FTInitialsBg";
+import FTCustombutton from "./FTCustombutton";
+import FTMainwrapper from "./FTMainwrapper";
+import FTHorizontaline from "./FTHorizontaline";
+import FTEmptycomponent from "./FTEmptycomponent";
+import FTBackheader from "./FTBackheader";
+import FTHeaderandsubheader from "./FTHeaderandsubheader";
+import FTIconandinfo from "./FTIconandinfo";
+import FTKeyboard from "./FTKeyboard";
+import FTEachonboarding from "./FTEachOnboarding";
+
 
 
 
 
 
 export {
-    Input,
-    Transactionhistory,
-    Viewbalance,
-    Sendingandreceive,
-    Loader,
-    Mainwrapper,
-    Numberbtn,
-    InitialsBg,
-    Keyboard,
-    Custombutton,
-    Horizontaline,
-    Emptycomponent,
-    Backheader,
-    Headerandsubheader,
-    Iconandinfo
+    FTInput,
+    FTTransactionhistory,
+    FTViewbalance,
+    FTSendingandreceive,
+    FTLoader,
+    FTMainwrapper,
+    FTNumberbtn,
+    FTInitialsBg,
+    FTKeyboard,
+    FTCustombutton,
+    FTHorizontaline,
+    FTEmptycomponent,
+    FTBackheader,
+    FTHeaderandsubheader,
+    FTIconandinfo,
+    FTEachonboarding
 
 }
