@@ -44,6 +44,9 @@ import TransactionsummaryScreen from "./TransactionsummaryScreen";
 import SearchmerchantidScreen from "./SearchmerchantidScreen";
 import FindmerchantScreen from "./FindmerchantScreen";
 import NetworkreceiverScreen from "./NetworkreceiverScreen";
+import PayknownmerchantScreen from "./PayknownmerchantScreen";
+PayknownmerchantScreen
+StartnewchatScreen
 
 
 

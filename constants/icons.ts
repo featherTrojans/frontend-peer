@@ -85,6 +85,9 @@ import Walletblueicon from "../assets/icons/Walletblueicon";
 import Bluecardicon from "../assets/icons/Cardactionicons/Bluecardicon";
 import Usdcardicon from "../assets/icons/Cardactionicons/Usdcardicon";
 import Detailcopyicon from "../assets/icons/Cardactionicons/Detailcopyicon";
+import Searchicon from "../assets/icons/Searchicon";
+
+
 
 export default {
   Logo,
@@ -154,6 +157,7 @@ export default {
   Bluecardicon,
   Usdcardicon,
   Detailcopyicon,
+  Searchicon,
 
   //Animated icons
 

@@ -16,6 +16,10 @@ import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { NotificationScreenStyles } from "../assets/styles/screens";
 
+
+
+
+
 const {container, listContainer, notificationContainer, iconBg, titleandtime, dateText, titleText, timeText, messageText, horizontalLine, upgradeNow, upgradeNowText, emptyListText} = NotificationScreenStyles
 const {
   Arrowin,

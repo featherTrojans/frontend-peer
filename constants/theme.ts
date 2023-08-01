@@ -1,4 +1,3 @@
-
 // import all themes and export everything
 
 import { Dimensions } from "react-native";
@@ -8,7 +7,9 @@ const { width, height } = Dimensions.get("window");
 export const COLORS = {
   white: "#FFFFFF",
   white2: "#f9fbff",
+
   white3: "#F7F8FA",
+
   blue1: "#1d00ff",
   blue2: "#2949b4",
   blue3: "#1f1f41",
@@ -18,10 +19,8 @@ export const COLORS = {
   blue7: "#001757",
   blue8: "#0548D7",
 
-  
   blue9: "#11141A",
-
-
+  blue18: "#F9F9FA",
 
   blue10: "#5676FF",
   blue11: "#D2EAFD",
@@ -32,7 +31,6 @@ export const COLORS = {
   blue16: "#342AD5",
   blue17: "#D8E3FF",
   transparentBlue: "#F2F5FF",
-
 
   lightBlue: "#F2F5FF",
   lightBlue2: `rgba(210, 234, 254, .5)`,
@@ -51,13 +49,17 @@ export const COLORS = {
   grey12: "#F2F5FF",
   grey13: "#DEDEDE",
   grey14: "#FCFDFF",
+
+
+
   grey15: "#CBCBCB",
-  grey16: "#696969",
-  grey17: "#DBDCDD",
   grey18: "#A0A0A0",
+  grey16: "#696969",
+
+
+  grey17: "#DBDCDD",
   grey19: "#F7F8FA",
   grey20: "#575151",
-
 
   yellow1: "#FF9D00",
   yellow2: "#FFC84B",
@@ -77,7 +79,6 @@ export const COLORS = {
   purple3: "#F1E5FF",
   purple4: "#8456FF",
 
-
   lightgray: `rgba(219, 220, 221, .5)`,
   paybillInput: "#E6E6E6",
   checkBorder: "#A5A5A5",
@@ -91,9 +92,9 @@ export const COLORS = {
   lineColor2: `rgba(112, 112, 112, .3)`,
   lineColor3: `rgba(112, 112, 112, .5)`,
   lineColor4: `rgba(112, 112, 112, .6)`,
-  switchOff:  `rgba(0, 23, 87, .1)`,
-  thumbOff:   `rgba(0, 58, 214, 1)`,
-  switchOn:  `rgba(0, 58, 214, .1)`,
+  switchOff: `rgba(0, 23, 87, .1)`,
+  thumbOff: `rgba(0, 58, 214, 1)`,
+  switchOn: `rgba(0, 58, 214, .1)`,
   trasparentBlue2: `rgba(230, 236, 255, .7)`,
   trasparentPurple: `rgba(241, 229, 255, .7)`,
   halfBlack: `rgba(0, 0, 0, .5)`,
@@ -106,7 +107,7 @@ export const COLORS = {
   withdraw: "#41D5E2",
   deposit: "#25DBA3",
   transfer: "#FFC100",
-  paybills: "#4D53E0"
+  paybills: "#4D53E0",
 };
 
 export const SIZES = {
@@ -115,7 +116,7 @@ export const SIZES = {
   // App Dimensions
   width,
   height,
-  respond: RFValue(1)
+  respond: RFValue(1),
 };
 
 export const FONTS = {
@@ -128,15 +129,14 @@ export const FONTS = {
 
 export const Shadow = {
   shadowColor: COLORS.borderColor2,
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 10, height: -10},
-    shadowRadius: 3,
-    elevation: 10,
-    backgroundColor: 'white'
-}
+  shadowOpacity: 0.3,
+  shadowOffset: { width: 10, height: -10 },
+  shadowRadius: 3,
+  elevation: 10,
+  backgroundColor: "white",
+};
 
 export const fontsize = {
-  
   bbsmall: {
     fontSize: RFValue(18),
   },
@@ -154,20 +154,26 @@ export const fontsize = {
   smaller: {
     fontSize: RFValue(13),
   },
+
+
   smallest: {
     fontSize: RFValue(12),
+  },
+  bmedium: {
+    fontSize: RFValue(24),
   },
   xsmallest: {
     fontSize: RFValue(11),
   },
 
+  
+ 
 
   xxsmallest: {
     fontSize: RFValue(10),
   },
 
-
-  xxsmall:{
+  xxsmall: {
     fontSize: RFValue(9),
   },
   medium: {
@@ -176,9 +182,7 @@ export const fontsize = {
   xmedium: {
     fontSize: RFValue(21),
   },
-  bmedium: {
-    fontSize: RFValue(24),
-  },
+ 
   bymedium: {
     fontsize: RFValue(25),
   },
@@ -188,18 +192,18 @@ export const fontsize = {
   big: {
     fontSize: RFValue(30),
   },
-  xbig:{
+  xbig: {
     fontSize: RFValue(32),
   },
-  xbigger:{
+  xbigger: {
     fontSize: RFValue(35),
   },
-  bigger:{
+  bigger: {
     fontSize: RFValue(38),
   },
-  biggest:{
+  biggest: {
     fontSize: RFValue(40),
-  }
+  },
 };
 
 const appTheme = { COLORS, SIZES, FONTS, fontsize, Shadow };

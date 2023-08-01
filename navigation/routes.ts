@@ -185,13 +185,6 @@ export const transactRoutes = [
   },
   {
     title: "",
-    screen: ChoosefeatheruserScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "choosefeatheruser_screen",
-  },
-  {
-    title: "",
     screen: ChoosenetworkScreen,
     showHeader: false,
     hideHiderTitle: false,

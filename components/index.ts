@@ -15,7 +15,8 @@ import FTIconandinfo from "./FTIconandinfo";
 import FTKeyboard from "./FTKeyboard";
 import FTEachonboarding from "./FTEachOnboarding";
 import FTTabWrapper from "./FTTabWrapper";
-
+import FTTitlepagewrapper from "./FTTitlepagewrapper";
+import FTSearchinput from "./FTSearchinput";
 
 
 
@@ -38,6 +39,7 @@ export {
     FTHeaderandsubheader,
     FTIconandinfo,
     FTEachonboarding,
-    FTTabWrapper
-
+    FTTabWrapper,
+    FTTitlepagewrapper,
+    FTSearchinput
 }

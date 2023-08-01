@@ -1,13 +1,12 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import * as Notification from "expo-notifications";
-import { AppState, Platform, Text, Animated } from "react-native";
+import { AppState, Platform, Text, Animated, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   CardStyleInterpolators,
   createStackNavigator,
 } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import { AuthContext } from "../context/AuthContext";
 
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -313,6 +312,10 @@ const AuthenticatedNavigator = ({ routeName }: { routeName: string }) => {
             bottom: 82,
             width: getWidth(),
             transform: [{ translateX: tabOffsetValue }, { scaleX: 0.3 }],
+            display:
+              routeName && !excluded_routes.includes(routeName)
+                ? "none"
+                : "flex",
           },
         ]}
       ></Animated.View>
@@ -375,7 +378,7 @@ export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
     }
   };
 
-  const authState = true;
+  const authState = false;
 
   if (authState) {
     return <NoAuthNavigator />;
