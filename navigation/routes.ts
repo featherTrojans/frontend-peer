@@ -41,6 +41,7 @@ import {
   TransactionsScreen,
   TransactionsummaryScreen,
   VerifybvnScreen,
+  WelcomeScreen,
 } from "../screens";
 
 export const authRoutes = [
@@ -64,6 +65,13 @@ export const authRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "login_screen",
+  },
+  {
+    title: "",
+    screen: WelcomeScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "welcome_screen",
   },
 ];
 

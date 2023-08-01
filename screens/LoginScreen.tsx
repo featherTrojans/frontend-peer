@@ -2,12 +2,17 @@ import React, { useContext, useEffect } from "react";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../constants";
 
 import { View, Text, TouchableOpacity } from "react-native";
-import { Formik } from "formik";
+import { Formik, replace } from "formik";
 import * as Yup from "yup";
 
 import * as LocalAuthentication from "expo-local-authentication";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { FTCustombutton, FTInput, FTLoader, FTMainwrapper } from "../components";
+import {
+  FTCustombutton,
+  FTInput,
+  FTLoader,
+  FTMainwrapper,
+} from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useState } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -19,6 +24,7 @@ import {
 } from "../utils/biometrics";
 import { LoginScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
+import { navigation } from "../utils";
 
 const {
   container,
@@ -48,7 +54,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().label("password").required(),
 });
 
-const LoginScreen = ({ navigation }: any) => {
+const LoginScreen = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const { setToken, allowBiometrics, setAllowBiometrics } =
     useContext(AuthContext);
@@ -88,7 +94,7 @@ const LoginScreen = ({ navigation }: any) => {
         });
       } catch (err) {
         // setToken(response.data.data.token)
-        navigation.replace("Welcome", {
+        navigation.navigate("welcome_screen", {
           fromm: "login",
           username: values.username,
           token: token,
