@@ -5,6 +5,8 @@ import React from "react";
 import { COLORS, FONTS, fontsize, images } from "../constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import { FTCustombutton, FTMainwrapper } from "../components";
+import { GetStartedScreenStyles } from "../assets/styles/screens";
+const {} = GetStartedScreenStyles
 
 const { Getstartedimage } = images;
 const GetstartedScreen = ({ navigation }) => {
@@ -34,7 +36,7 @@ const GetstartedScreen = ({ navigation }) => {
       <View style={{ paddingHorizontal: 10 }}>
         <FTCustombutton
           btntext="Sign In"
-          onpress={() => navigation.navigate("Login")}
+          onpress={() => navigation.navigate("login_screen")}
         />
         <View style={{ marginTop: 10, marginBottom: RFValue(40) }}>
           <FTCustombutton

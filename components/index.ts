@@ -14,6 +14,7 @@ import FTHeaderandsubheader from "./FTHeaderandsubheader";
 import FTIconandinfo from "./FTIconandinfo";
 import FTKeyboard from "./FTKeyboard";
 import FTEachonboarding from "./FTEachOnboarding";
+import FTTabWrapper from "./FTTabWrapper";
 
 
 
@@ -36,6 +37,7 @@ export {
     FTBackheader,
     FTHeaderandsubheader,
     FTIconandinfo,
-    FTEachonboarding
+    FTEachonboarding,
+    FTTabWrapper
 
 }

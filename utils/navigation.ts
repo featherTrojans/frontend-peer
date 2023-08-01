@@ -18,11 +18,15 @@ const navigate = (routeName: string, params = {}) => {
   }
 };
 
+
+
 const goBack = () => {
   if (_navigator.isReady()) {
     _navigator.dispatch(NavigationActions.goBack());
   }
 };
+
+
 
 const reset = (routeName: string) => {
   if (_navigator.isReady()) {
@@ -34,6 +38,7 @@ const reset = (routeName: string) => {
     );
   }
 };
+
 
 function getNavigator() {
   return _navigator;

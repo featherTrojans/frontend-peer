@@ -17,7 +17,12 @@ export const COLORS = {
   blue6: "#003AD6",
   blue7: "#001757",
   blue8: "#0548D7",
+
+  
   blue9: "#11141A",
+
+
+
   blue10: "#5676FF",
   blue11: "#D2EAFD",
   blue12: "#56BEFF",
@@ -155,9 +160,13 @@ export const fontsize = {
   xsmallest: {
     fontSize: RFValue(11),
   },
+
+
   xxsmallest: {
     fontSize: RFValue(10),
   },
+
+
   xxsmall:{
     fontSize: RFValue(9),
   },

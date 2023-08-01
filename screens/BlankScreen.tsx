@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { FTMainwrapper } from '../components'
+
 
 const BlankScreen = () => {
   return (
-    <View>
-      <Text>BlankScreen</Text>
-    </View>
+    <FTMainwrapper>
+    </FTMainwrapper>
   )
 }
 

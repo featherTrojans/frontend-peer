@@ -1,7 +1,7 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import * as Notification from "expo-notifications";
 import { AppState, Platform, Text, Animated } from "react-native";
-import {useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -17,12 +17,7 @@ import { usePushNotification } from "../hooks/usePushNotifications";
 const AppStack = createStackNavigator();
 const AuthStack = createStackNavigator();
 
-
-import {
-
-  LockScreen,
-
-} from "../screens";
+import { LockScreen } from "../screens";
 
 const DashboardStack = createStackNavigator();
 const TransactStack = createStackNavigator();
@@ -31,7 +26,6 @@ const ChatsStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const AuthenticatedTabs = createBottomTabNavigator();
 
-import Tabs from "./Tabs";
 import {
   authRoutes,
   cardsRoutes,
@@ -40,7 +34,7 @@ import {
   profileRoutes,
   transactRoutes,
 } from "./routes";
-import { COLORS, SIZES, icons } from "../constants";
+import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 const {
   Hometabicon,
   Transacttabicon,
@@ -270,11 +264,22 @@ const AuthenticatedNavigator = ({ routeName }: { routeName: string }) => {
       <AuthenticatedTabs.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => TabIcon(route.name, focused),
-          tabBarLabel: ({ focused }) => <Text>{route.name}</Text>,
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                ...fontsize.xxsmallest,
+                ...FONTS.regular,
+                color: COLORS.blue9,
+                marginTop: 15,
+              }}
+            >
+              {route.name}
+            </Text>
+          ),
           headerShown: false,
           tabBarStyle: {
-            minHeight: Platform.OS === "android" ? 70 : 80,
-            paddingBottom: Platform.OS === "android" ? 10 : 20,
+            minHeight: Platform.OS === "android" ? 70 : 84,
+            // paddingBottom: Platform.OS === "android" ? 10 : 20,
             backgroundColor: COLORS.white,
             alignItems: "center",
             justifyContent: "center",
@@ -314,8 +319,6 @@ const AuthenticatedNavigator = ({ routeName }: { routeName: string }) => {
     </>
   );
 };
-
-
 
 export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
   const [modal, setModal] = useState(false);
@@ -372,7 +375,7 @@ export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
     }
   };
 
-  const authState = false;
+  const authState = true;
 
   if (authState) {
     return <NoAuthNavigator />;
