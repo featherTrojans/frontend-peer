@@ -156,6 +156,8 @@ export const fontsize = {
   },
 
 
+  
+
   smallest: {
     fontSize: RFValue(12),
   },
@@ -166,12 +168,14 @@ export const fontsize = {
     fontSize: RFValue(11),
   },
 
-  
- 
-
   xxsmallest: {
     fontSize: RFValue(10),
   },
+
+
+
+
+
 
   xxsmall: {
     fontSize: RFValue(9),
