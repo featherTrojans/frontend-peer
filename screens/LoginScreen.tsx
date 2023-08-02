@@ -245,6 +245,7 @@ const LoginScreen = () => {
 
           <View style={haveanaccount}>
             <Text style={haveaccounttext}>Don’t have an account? </Text>
+            <Text>Sign up</Text>
           </View>
         </View>
       </KeyboardAwareScrollView>

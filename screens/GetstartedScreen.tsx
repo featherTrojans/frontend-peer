@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 
-
 import { COLORS, FONTS, fontsize, images } from "../constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import { FTCustombutton, FTMainwrapper } from "../components";
 import { GetStartedScreenStyles } from "../assets/styles/screens";
-const {} = GetStartedScreenStyles
+const {} = GetStartedScreenStyles;
 
 const { Getstartedimage } = images;
 const GetstartedScreen = ({ navigation }) => {
@@ -42,7 +41,7 @@ const GetstartedScreen = ({ navigation }) => {
           <FTCustombutton
             btntext="Create Account"
             bg={COLORS.blue9}
-            onpress={() => navigation.navigate("Personal")}
+            onpress={() => navigation.navigate("phone_screen")}
           />
         </View>
 

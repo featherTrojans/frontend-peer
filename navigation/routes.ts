@@ -43,6 +43,7 @@ import {
   VerifybvnScreen,
   WelcomeScreen,
 } from "../screens";
+import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 
 export const authRoutes = [
   {
@@ -72,6 +73,13 @@ export const authRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "welcome_screen",
+  },
+  {
+    title: "",
+    screen: PhoneRegisterScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "phone_screen",
   },
 ];
 
