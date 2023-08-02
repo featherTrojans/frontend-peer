@@ -197,14 +197,14 @@ const LoginScreen = () => {
                   {loading && <FTLoader />}
 
                   <FTInput
-                    placeholder="Phone Number / email / username"
+                    placeholderText="Phone Number / email / username"
                     name="username"
                     formikProps={formikProps}
                     icon={<Transfericon />}
                   />
 
                   <FTInput
-                    placeholder="Password"
+                    placeholderText="Password"
                     name="password"
                     formikProps={formikProps}
                     icon={<Transfericon />}
