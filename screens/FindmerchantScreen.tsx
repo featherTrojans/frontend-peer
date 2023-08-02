@@ -3,22 +3,30 @@ import React from "react";
 import { FindmerchantScreenStyles } from "../assets/styles/screens";
 import { FTIconwithtitleandinfo, FTSearchinput, FTTitlepagewrapper } from "../components";
 import { icons } from "../constants";
-
+import { useSwipemodal } from "../hooks";
 
 const {Searchicon} = icons
 
 const {} = FindmerchantScreenStyles;
 
 const FindmerchantScreen = () => {
+
+const {Swipemodal} = useSwipemodal()
+
+
   return (
     <FTTitlepagewrapper title="Find Merchant">
       <FTSearchinput placeholder="Search Phone Number" />
-      <FTIconwithtitleandinfo 
+      {/* <FTIconwithtitleandinfo 
       Icon = {<Searchicon />}
       bG="blue"
       title= "yes"
       onPress={() => console.log("Pressed")}
-      />
+      /> */}
+      
+
+
+      
     </FTTitlepagewrapper>
   );
 };
