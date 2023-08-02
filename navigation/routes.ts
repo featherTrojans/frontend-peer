@@ -117,7 +117,7 @@ export const dashboardRoutes = [
 export const transactRoutes = [
   {
     title: "",
-    screen: TransactionsScreen,
+    screen: BlankScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "transact_screen",
@@ -242,7 +242,7 @@ export const cardsRoutes = [
     screen: CardScreen,
     showHeader: false,
     hideHiderTitle: false,
-    route: "card_screen",
+    route: "cards_screen",
   },
   {
     title: "",
