@@ -35,6 +35,8 @@ export const COLORS = {
   lightBlue: "#F2F5FF",
   lightBlue2: `rgba(210, 234, 254, .5)`,
 
+  errorBorder: `rgba(224, 0, 0, .5)`,
+
   grey1: "#f0f0f0",
   grey2: "#707070",
   grey3: "#d6d6d6",
@@ -50,12 +52,9 @@ export const COLORS = {
   grey13: "#DEDEDE",
   grey14: "#FCFDFF",
 
-
-
   grey15: "#CBCBCB",
   grey18: "#A0A0A0",
   grey16: "#696969",
-
 
   grey17: "#DBDCDD",
   grey19: "#F7F8FA",
@@ -155,9 +154,6 @@ export const fontsize = {
     fontSize: RFValue(13),
   },
 
-
-  
-
   smallest: {
     fontSize: RFValue(12),
   },
@@ -172,11 +168,6 @@ export const fontsize = {
     fontSize: RFValue(10),
   },
 
-
-
-
-
-
   xxsmall: {
     fontSize: RFValue(9),
   },
@@ -186,7 +177,7 @@ export const fontsize = {
   xmedium: {
     fontSize: RFValue(21),
   },
- 
+
   bymedium: {
     fontsize: RFValue(25),
   },

@@ -45,10 +45,9 @@ import SearchmerchantidScreen from "./SearchmerchantidScreen";
 import FindmerchantScreen from "./FindmerchantScreen";
 import NetworkreceiverScreen from "./NetworkreceiverScreen";
 import PayknownmerchantScreen from "./PayknownmerchantScreen";
-PayknownmerchantScreen
-StartnewchatScreen
-
-
+// import PersonalRegisterScreen from "./PersonalRegisterScreen";
+PayknownmerchantScreen;
+StartnewchatScreen;
 
 export {
   OnboardingScreen,
@@ -57,6 +56,7 @@ export {
   GetstartedScreen,
   CustomWebView,
   LockScreen,
+  // PersonalRegisterScreen,
 
   // Dasboard Screens
   HomeScreen,
@@ -64,7 +64,6 @@ export {
   SearchmerchantidScreen,
   FindmerchantScreen,
   BlankScreen,
-
 
   //Profile screen
   ProfileScreen,
@@ -107,5 +106,5 @@ export {
   SendtobankScreen,
   SearchcontactScreen,
   TransactionsummaryScreen,
-  NetworkreceiverScreen
+  NetworkreceiverScreen,
 };

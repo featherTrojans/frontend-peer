@@ -30,6 +30,7 @@ import {
   MywalletScreen,
   NotificationsScreen,
   OnboardingScreen,
+  // PersonalRegisterScreen,
   ProfileScreen,
   SearchcontactScreen,
   SearchmerchantidScreen,
@@ -74,6 +75,13 @@ export const authRoutes = [
     hideHiderTitle: false,
     route: "welcome_screen",
   },
+  // {
+  //   title: "",
+  //   screen: PersonalRegisterScreen,
+  //   showHeader: false,
+  //   hideHiderTitle: false,
+  //   route: "personalregister_screen",
+  // },
   {
     title: "",
     screen: PhoneRegisterScreen,
