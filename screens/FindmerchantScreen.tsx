@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { FindmerchantScreenStyles } from '../assets/styles/screens'
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { FindmerchantScreenStyles } from "../assets/styles/screens";
+import { FTSearchinput, FTTitlepagewrapper } from "../components";
 
-
-const {} = FindmerchantScreenStyles
+const {} = FindmerchantScreenStyles;
 
 const FindmerchantScreen = () => {
   return (
-    <View>
-      <Text>FindmerchantScreen</Text>
-    </View>
-  )
-}
+    <FTTitlepagewrapper title="Find Merchant">
+      <FTSearchinput placeholder="Search Phone Number" />
+    </FTTitlepagewrapper>
+  );
+};
 
-export default FindmerchantScreen
+export default FindmerchantScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
