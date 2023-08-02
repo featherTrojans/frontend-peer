@@ -45,7 +45,7 @@ import SearchmerchantidScreen from "./SearchmerchantidScreen";
 import FindmerchantScreen from "./FindmerchantScreen";
 import NetworkreceiverScreen from "./NetworkreceiverScreen";
 import PayknownmerchantScreen from "./PayknownmerchantScreen";
-// import PersonalRegisterScreen from "./PersonalRegisterScreen";
+import PersonalRegisterScreen from "./PersonalRegisterScreen";
 PayknownmerchantScreen;
 StartnewchatScreen;
 
@@ -56,7 +56,7 @@ export {
   GetstartedScreen,
   CustomWebView,
   LockScreen,
-  // PersonalRegisterScreen,
+  PersonalRegisterScreen,
 
   // Dasboard Screens
   HomeScreen,

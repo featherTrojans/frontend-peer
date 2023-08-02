@@ -11,24 +11,19 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import {
-  Custombutton,
-  Input,
-  Loader,
-  Mainwrapper,
-} from "../../../../components/index";
-import { COLORS, FONTS, fontsize, icons } from "../../../../constants";
-import axiosCustom from "../../../../httpRequests/axiosCustom";
-import { styles } from "./Personal.styles";
-import { AuthContext } from "../../../../context/AuthContext";
-import { useToast } from "react-native-toast-notifications";
-import Lock from "../../../../assets/icons/Lock";
-import useAlert from "../../../../utils/useAlerts";
+
 import { PersonalRegisterScreenStyles } from "../assets/styles/screens/personalregister.style";
-import { FTCustombutton, FTInput } from "../components";
+import {
+  FTBackheader,
+  FTCustombutton,
+  FTInput,
+  FTMainwrapper,
+  FTTitlepagewrapper,
+} from "../components";
+import axiosCustom from "../httpRequests/axiosCustom";
+import Loader from "../components/FTLoader";
 
 PersonalRegisterScreenStyles;
-const { Usericondark, Phoneicon, Envelopeicon, Newlogo } = icons;
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -45,12 +40,12 @@ const validationSchema = Yup.object().shape({
 });
 
 const Personal = ({ navigation }) => {
-  const { setAuthData } = useContext(AuthContext);
-  const toast = useToast();
-  const { errorAlert } = useAlert();
+  //   const { setAuthData } = useContext(AuthContext);
+  //   const toast = useToast();
+  //   const { errorAlert } = useAlert();
 
   return (
-    <Mainwrapper>
+    <FTTitlepagewrapper>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, paddingHorizontal: 25 }}>
           <View
@@ -60,32 +55,7 @@ const Personal = ({ navigation }) => {
               justifyContent: "space-between",
               marginTop: 30,
             }}
-          >
-            <Newlogo />
-          </View>
-
-          <View style={{ marginTop: 28, marginBottom: 40 }}>
-            <Text
-              style={{
-                ...fontsize.bsmall,
-                ...FONTS.medium,
-                color: COLORS.black,
-                lineHeight: 21,
-                marginBottom: 9,
-              }}
-            >
-              Signup, Join the flock.
-            </Text>
-            <Text
-              style={{
-                ...fontsize.smallest,
-                color: COLORS.grey16,
-                ...FONTS.regular,
-              }}
-            >
-              Personal Information
-            </Text>
-          </View>
+          ></View>
 
           <Formik
             initialValues={{
@@ -123,7 +93,7 @@ const Personal = ({ navigation }) => {
                     });
                   }
                 }
-                errorAlert(err);
+                // errorAlert(err);
               }
             }}
           >
@@ -169,21 +139,21 @@ const Personal = ({ navigation }) => {
                   />
 
                   {/* Proceed Btn */}
-                  <View style={styles.bottomContainer}>
+                  <View>
                     <FTCustombutton
                       disable={isSubmitting}
                       btntext="Sign up"
                       onpress={() => {
                         const errorvalues = Object.values(errors);
                         if (errorvalues.length > 0) {
-                          return errorAlert(null, errorvalues[0]);
+                          //   return errorAlert(null, errorvalues[0]);
                         }
                         handleSubmit();
                       }}
                     />
 
                     {/* Have an account */}
-                    <View style={styles.bottomTextContainer}>
+                    {/* <View style={styles.bottomTextContainer}>
                       <Text style={styles.bottomText}>
                         Already have an account?{" "}
                       </Text>
@@ -196,7 +166,7 @@ const Personal = ({ navigation }) => {
                           Sign in
                         </Text>
                       </TouchableOpacity>
-                    </View>
+                    </View> */}
                   </View>
                 </React.Fragment>
               );
@@ -204,7 +174,7 @@ const Personal = ({ navigation }) => {
           </Formik>
         </View>
       </KeyboardAwareScrollView>
-    </Mainwrapper>
+    </FTTitlepagewrapper>
   );
 };
 
