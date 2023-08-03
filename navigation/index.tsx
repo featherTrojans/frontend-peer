@@ -12,6 +12,8 @@ import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 import { usePushNotification } from "../hooks/usePushNotifications";
+import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
+
 
 const AppStack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -33,7 +35,6 @@ import {
   profileRoutes,
   transactRoutes,
 } from "./routes";
-import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 const {
   Hometabicon,
   Transacttabicon,

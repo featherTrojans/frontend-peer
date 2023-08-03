@@ -165,7 +165,10 @@ const History = ({ data }) => {
       onPress={() => customNavigation("Transactiondetails", { data: data })}
     >
       <View style={historyDetailsContainer}>
-        {transactionBadge()}
+        {/* {transactionBadge()} */}
+        <View>
+          
+        </View>
 
         <View>
           <Text style={title}>{title}</Text>

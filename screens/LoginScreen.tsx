@@ -66,6 +66,7 @@ const LoginScreen = () => {
   const [enableBiometrics, setEnableBiometrics] = useState<null | string>(null);
 
   const loginFunc = async (values) => {
+    console.log("hiiiiiiiiiiiiiiiiiii");
     setLoading(true);
     try {
       const response = await axiosCustom.post("/auth/signin", {
@@ -180,7 +181,10 @@ const LoginScreen = () => {
               password: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={(values) => loginFunc(values)}
+            onSubmit={(values) => {
+              console.log(values);
+              loginFunc(values);
+            }}
           >
             {(formikProps) => {
               const {
@@ -237,7 +241,13 @@ const LoginScreen = () => {
                     </Text>
                   </View>
 
-                  <FTCustombutton btntext="Sign in" onpress={handleSubmit} />
+                  <FTCustombutton
+                    btntext="Sign in"
+                    onpress={() => {
+                      console.log("adfasvf");
+                      handleSubmit();
+                    }}
+                  />
                 </>
               );
             }}
@@ -245,7 +255,7 @@ const LoginScreen = () => {
 
           <View style={haveanaccount}>
             <Text style={haveaccounttext}>Don’t have an account? </Text>
-            <Text>Sign up</Text>
+            {/* <Text onPress={}>Sign up</Text> */}
           </View>
         </View>
       </KeyboardAwareScrollView>
