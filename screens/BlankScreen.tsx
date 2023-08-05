@@ -5,10 +5,11 @@ import { Pressable } from 'react-native'
 import { navigation } from '../utils'
 import { COLORS } from '../constants'
 
+
 const BlankScreen = () => {
   return (
     <FTMainwrapper>
-      <Pressable style={{paddingHorizontal: 24,paddingVertical: 15, marginTop: 40, backgroundColor: COLORS.blue1}} onPress={() => navigation.navigate("findmerchant_screen")}>
+      <Pressable style={{paddingHorizontal: 24,paddingVertical: 15, marginTop: 40, backgroundColor: COLORS.blue1}}>
           <Text style={{color: COLORS.white, textAlign: "center"}}>Check</Text>
       </Pressable>
     </FTMainwrapper>

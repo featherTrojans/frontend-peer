@@ -46,8 +46,8 @@ import FindmerchantScreen from "./FindmerchantScreen";
 import NetworkreceiverScreen from "./NetworkreceiverScreen";
 import PayknownmerchantScreen from "./PayknownmerchantScreen";
 import PersonalRegisterScreen from "./PersonalRegisterScreen";
-PayknownmerchantScreen;
-StartnewchatScreen;
+import CreatefeathertagScreen from "./CreatefeathertagScreen";
+
 
 export {
   OnboardingScreen,
@@ -57,6 +57,8 @@ export {
   CustomWebView,
   LockScreen,
   PersonalRegisterScreen,
+  CreatefeathertagScreen,
+  PayknownmerchantScreen,
 
   // Dasboard Screens
   HomeScreen,
@@ -107,4 +109,5 @@ export {
   SearchcontactScreen,
   TransactionsummaryScreen,
   NetworkreceiverScreen,
+  
 };

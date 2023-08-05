@@ -1,4 +1,4 @@
-import React, {createContext, FC, useState} from "react";
+import React, {createContext, FC, useContext, useState} from "react";
 import Featherdefault from "../assets/icons/Featherdefault";
 
 const AuthContext = createContext<any>({});
@@ -32,3 +32,5 @@ const AuthProvider:FC = ({children}) =>{
 }
 
 export {AuthContext, AuthProvider}
+
+

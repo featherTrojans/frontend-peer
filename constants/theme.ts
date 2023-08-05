@@ -21,6 +21,7 @@ export const COLORS = {
 
   blue9: "#11141A",
   blue18: "#F9F9FA",
+  blue19: "#F6F8FF",
 
   blue10: "#5676FF",
   blue11: "#D2EAFD",
@@ -34,10 +35,12 @@ export const COLORS = {
 
   lightBlue: "#F2F5FF",
   lightBlue2: `rgba(210, 234, 254, .5)`,
-
   errorBorder: `rgba(224, 0, 0, .5)`,
 
+
   grey1: "#f0f0f0",
+
+
   grey2: "#707070",
   grey3: "#d6d6d6",
   grey4: "#cecccc",
@@ -73,6 +76,14 @@ export const COLORS = {
   red2: "#FFE3E3",
   red3: "#FF5668",
   red4: "#F80000",
+
+
+  red5: "#D81859",
+  orange: "#FF8900",
+  orange2: "#FFF8ED",
+
+
+
   purple: "#6300AC",
   purple2: "#7600FF",
   purple3: "#F1E5FF",
@@ -136,12 +147,8 @@ export const Shadow = {
 };
 
 export const fontsize = {
-  bbsmall: {
-    fontSize: RFValue(18),
-  },
-  bsmall: {
-    fontSize: RFValue(16),
-  },
+  
+
 
   bmsmall: {
     fontSize: RFValue(15),
@@ -152,6 +159,11 @@ export const fontsize = {
   },
   smaller: {
     fontSize: RFValue(13),
+  },
+
+
+  bsmall: {
+    fontSize: RFValue(16),
   },
 
   smallest: {
@@ -167,6 +179,12 @@ export const fontsize = {
   xxsmallest: {
     fontSize: RFValue(10),
   },
+  bbsmall: {
+    fontSize: RFValue(18),
+  },
+
+
+
 
   xxsmall: {
     fontSize: RFValue(9),

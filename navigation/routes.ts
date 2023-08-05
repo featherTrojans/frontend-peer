@@ -278,7 +278,7 @@ export const cardsRoutes = [
 export const chatsRoutes = [
   {
     title: "",
-    screen: ChatsScreen,
+    screen: ProfileScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "chats_screen",

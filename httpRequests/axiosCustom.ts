@@ -1,5 +1,7 @@
 import axios from "axios";
 import serversettings from "../utils/serversettings";
+import { onChange } from "react-native-reanimated";
+import { useEffect } from "react";
 
 const Server = {
   live: "https://featherafrica.co:3300/api/v1/",
@@ -14,3 +16,5 @@ const axiosCustom = axios.create({
 // baseURL:"http://44.202.108.194/api/v1/"
 
 export default axiosCustom;
+
+
