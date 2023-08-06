@@ -11,7 +11,6 @@ const {} = FindmerchantScreenStyles;
 
 const FindmerchantScreen = () => {
 
-const {Swipemodal} = useSwipemodal()
 const [showModal, setShowModal] = useState(false)
 const [content, setContent] = useState<any>({ child: null})
 

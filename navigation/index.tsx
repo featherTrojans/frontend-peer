@@ -161,6 +161,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
             alignItems: "center",
             justifyContent: "center",
             paddingVertical: 16,
+            // display: "none"
           },
         })}
         screenListeners={({ navigation, route }) => ({
@@ -199,7 +200,9 @@ const AuthenticatedNavigator = () => {
     <AuthStack.Navigator
       screenOptions={{
         headerShown: false,
+        
       }}
+      
     >
       <AuthStack.Screen name="Dashboard" component={DashboardTabNavigator} />
       {/* Transact Screens */}

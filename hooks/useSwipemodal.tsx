@@ -11,6 +11,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
+import Modal from "react-native-modal";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 

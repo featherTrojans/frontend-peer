@@ -3,6 +3,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../screens/shared/Customstatusbar";
 import { useSwipemodal } from "../hooks";
+import { SIZES } from "../constants";
 
 const FTTabWrapper = ({
   children,

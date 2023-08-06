@@ -147,28 +147,7 @@ const CardScreen = () => {
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null });
 
-  const cardactions = [
-    {
-      title: "Details",
-      Icon: Carddetailsicon,
-      action: () => navigation.navigate("cardtopup_screen"),
-    },
-    {
-      title: "Top-up",
-      Icon: Cardfundicon,
-      action: () => navigation.navigate("cardtopup_screen"),
-    },
-    {
-      title: "Withdraw",
-      Icon: Cardwithdrawicon,
-      action: () => navigation.navigate("cardtopup_screen"),
-    },
-    {
-      title: "Lock",
-      Icon: Cardlockicon,
-      action: () => navigation.navigate("cardtopup_screen"),
-    },
-  ];
+
 
   const cardcreationinfos = [
     {
@@ -247,7 +226,11 @@ const CardScreen = () => {
         setShowModal((s) => !s);
         break;
       case 1:
-        setContent({ child: <ModalCon /> });
+        setContent({ child: <Carddetail /> });
+        setShowModal((s) => !s);
+        break;
+      case 2:
+        setContent({ child: <Cardlock /> });
         setShowModal((s) => !s);
         break;
 
@@ -255,6 +238,29 @@ const CardScreen = () => {
         break;
     }
   };
+
+  const cardactions = [
+    {
+      title: "Details",
+      Icon: Carddetailsicon,
+      action: () => switchModals(1),
+    },
+    {
+      title: "Top-up",
+      Icon: Cardfundicon,
+      action: () => navigation.navigate("cardtopup_screen"),
+    },
+    {
+      title: "Withdraw",
+      Icon: Cardwithdrawicon,
+      action: () => navigation.navigate("cardtopup_screen"),
+    },
+    {
+      title: "Lock",
+      Icon: Cardlockicon,
+      action: () => switchModals(2),
+    },
+  ];
 
   return (
     <FTTabWrapper
@@ -265,7 +271,7 @@ const CardScreen = () => {
     >
       <Text style={myCardsText}>My Cards</Text>
 
-      {false ? (
+      {true ? (
         <>
           <View style={demoCard} />
           <View style={actionsWrap}>
