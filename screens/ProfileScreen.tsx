@@ -28,7 +28,7 @@ const ProfileScreen = () => {
     {
       Icon: "",
       title: "My Wallets",
-      action: () => navigation.navigate("Profile", {screen: "setupmfa_screen"}),
+      action: () => navigation.navigate("setupmfa_screen"),
     },
     {
       Icon: "",

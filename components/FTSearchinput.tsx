@@ -7,9 +7,9 @@ const { searchInputWrap, searchTextInput } = FTSearchinputStyles;
 
 const { Searchicon } = icons;
 
-const FTSearchinput = ({ placeholder }) => {
+const FTSearchinput = ({ placeholder, bG="#F9F9FA" }) => {
   return (
-    <View style={searchInputWrap}>
+    <View style={[searchInputWrap, {backgroundColor: bG}]}>
       <TextInput
         placeholder={placeholder}
         placeholderTextColor={COLORS.grey2}

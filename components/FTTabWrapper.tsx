@@ -1,24 +1,49 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Customstatusbar from '../screens/shared/Customstatusbar';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Customstatusbar from "../screens/shared/Customstatusbar";
+import { useSwipemodal } from "../hooks";
+
+const FTTabWrapper = ({
+  children,
+  bgColor = "#FFF",
+  modalChildren,
+  setShowModal,
+  showModal,
+  modalHeight,
+}: {
+  children: any;
+  bgColor?: string;
+  modalChildren?: any;
+  showModal?: any;
+  setShowModal?: any;
+  modalHeight?: string | number;
+}) => {
+  const { Swipemodal } = useSwipemodal();
 
 
-const FTTabWrapper =({
-    children,
-    bgColor = "#FFF",
-  }: {
-    children: any;
-    bgColor?: string;
-  }) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }} edges={["top"]}>
-      <Customstatusbar />
-      <View style={{ flex: 1, paddingHorizontal: 15 }}>{children}</View>
-    </SafeAreaView>
-  )
-}
+    <>
+      <SafeAreaView
+        style={{ flex: 1, backgroundColor: bgColor }}
+        edges={["top"]}
+      >
+        <Customstatusbar />
+        <View style={{ flex: 1, paddingHorizontal: 25 }}>{children}</View>
+      </SafeAreaView>
+      {modalChildren && (
+        <Swipemodal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          modalHeight={modalHeight}
+        >
+          {modalChildren}
+        </Swipemodal>
+      )}
+    </>
+  );
+};
 
-export default FTTabWrapper
+export default FTTabWrapper;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

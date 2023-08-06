@@ -1,19 +1,29 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { ChatsScreenStyles } from '../assets/styles/screens'
-import { FTTabWrapper, FTTitlepagewrapper } from '../components'
+import { ChatsScreenStyles, ProfileScreenStyles } from '../assets/styles/screens'
+import { FTSearchinput, FTTabWrapper, FTTitlepagewrapper } from '../components'
 import { navigation } from '../utils'
+import { COLORS, icons } from '../constants'
 
-
+const {Startnewchaticon} = icons
 const {} = ChatsScreenStyles
+const {profileHeaderWrap, profileHeaderText} = ProfileScreenStyles
 
 const ChatsScreen = () => {
   return (
     <FTTabWrapper>
-      <Pressable onPress={() => navigation.navigate("chatsdm_screen")} style={{paddingHorizontal: 20, paddingVertical: 16, backgroundColor: "blue"}}>
-        <Text style={{textAlign: "center", color: "white"}}>Click</Text>
-      </Pressable>
-      <Text>ChatsScreen</Text>
+      <View style={profileHeaderWrap}>
+        <Text style={profileHeaderText}>Conversations</Text>
+        <View>
+          <Startnewchaticon />
+        </View>
+      </View>
+
+      <FTSearchinput 
+      placeholder="Type to search chat"
+      bG={COLORS.blue20}
+      />
+      
     </FTTabWrapper>
   )
 }

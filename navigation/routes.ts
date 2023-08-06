@@ -46,6 +46,9 @@ import {
 } from "../screens";
 import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 
+
+
+
 export const authRoutes = [
   {
     title: "",
@@ -268,7 +271,7 @@ export const cardsRoutes = [
   },
   {
     title: "",
-    screen: CarddisclosureScreen,
+    screen: CardtopupScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "cardtopup_screen",

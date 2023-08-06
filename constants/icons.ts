@@ -86,8 +86,11 @@ import Bluecardicon from "../assets/icons/Cardactionicons/Bluecardicon";
 import Usdcardicon from "../assets/icons/Cardactionicons/Usdcardicon";
 import Detailcopyicon from "../assets/icons/Cardactionicons/Detailcopyicon";
 import Searchicon from "../assets/icons/Searchicon";
-
-
+import Startnewchaticon from "../assets/icons/Startnewchaticon";
+import Emptycardicon from "../assets/icons/Emptycardicon";
+import Maintenancefeeicon from "../assets/icons/Maintenancefeeicon";
+import Transactionfeeicon from "../assets/icons/Transactionfeeicon";
+import Cardcreationicon from "../assets/icons/Cardcreationicon";
 
 export default {
   Logo,
@@ -158,6 +161,11 @@ export default {
   Usdcardicon,
   Detailcopyicon,
   Searchicon,
+  Startnewchaticon,
+  Emptycardicon,
+  Maintenancefeeicon,
+  Transactionfeeicon,
+  Cardcreationicon,
 
   //Animated icons
 

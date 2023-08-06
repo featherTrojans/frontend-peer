@@ -80,7 +80,7 @@ export default useSwipemodal;
 const styles = StyleSheet.create({
   sheet: {
     backgroundColor: "white",
-    padding: 16,
+    padding: 25,
     width: "100%",
     position: "absolute",
     bottom: -OVERDRAG * 1.1,

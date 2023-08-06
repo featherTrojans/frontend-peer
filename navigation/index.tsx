@@ -110,120 +110,7 @@ let TabIcon = (name: string, focused: boolean) => {
   }
 };
 
-const DashboardNavigator = () => {
-  return (
-    <DashboardStack.Navigator initialRouteName="dashboard_screen">
-      {dashboardRoutes?.map((route: any, index: number) => {
-        return (
-          <DashboardStack.Screen
-            component={route.screen}
-            key={index}
-            name={route.route}
-            options={() => ({
-              headerTitle: route.title,
-              headerShown: route.showHeader,
-              cardStyleInterpolator:
-                route?.animateFromBottom &&
-                CardStyleInterpolators.forBottomSheetAndroid,
-            })}
-          />
-        );
-      })}
-    </DashboardStack.Navigator>
-  );
-};
 
-const TransactNavigator = () => {
-  return (
-    <TransactStack.Navigator initialRouteName="dashboard_screen">
-      {transactRoutes?.map((route: any, index: number) => {
-        return (
-          <TransactStack.Screen
-            component={route.screen}
-            key={index}
-            name={route.route}
-            options={() => ({
-              headerTitle: route.title,
-              headerShown: route.showHeader,
-              cardStyleInterpolator:
-                route?.animateFromBottom &&
-                CardStyleInterpolators.forBottomSheetAndroid,
-            })}
-          />
-        );
-      })}
-    </TransactStack.Navigator>
-  );
-};
-
-const CardsNavigator = () => {
-  return (
-    <CardsStack.Navigator initialRouteName="dashboard_screen">
-      {cardsRoutes?.map((route: any, index: number) => {
-        return (
-          <CardsStack.Screen
-            component={route.screen}
-            key={index}
-            name={route.route}
-            options={() => ({
-              headerTitle: route.title,
-              headerShown: route.showHeader,
-              cardStyleInterpolator:
-                route?.animateFromBottom &&
-                CardStyleInterpolators.forBottomSheetAndroid,
-            })}
-          />
-        );
-      })}
-    </CardsStack.Navigator>
-  );
-};
-
-const ChatsNavigator = () => {
-  return (
-    <AuthStack.Group>
-      {chatsRoutes?.map((route: any, index: number) => {
-        return (
-          <AuthStack.Screen
-            component={route.screen}
-            key={index}
-            name={route.route}
-            options={() => ({
-              headerTitle: route.title,
-              headerShown: route.showHeader,
-              cardStyleInterpolator:
-                route?.animateFromBottom &&
-                CardStyleInterpolators.forBottomSheetAndroid,
-            })}
-          />
-        );
-      })}
-    </AuthStack.Group>
-  );
-};
-
-const ProfileNavigator = () => {
-  return (
-    <ProfileStack.Navigator initialRouteName="dashboard_screen">
-      {profileRoutes?.map((route: any, index: number) => {
-        return (
-          <ProfileStack.Screen
-            component={route.screen}
-            key={index}
-            name={route.route}
-            options={() => ({
-              headerTitle: route.title,
-              headerShown: route.showHeader,
-              cardStyleInterpolator:
-                route?.animateFromBottom &&
-                CardStyleInterpolators.forBottomSheetAndroid,
-            })}
-          />
-        );
-      })}
-    </ProfileStack.Navigator>
-  );
-};
 
 const NoAuthNavigator = () => {
   return (
@@ -334,7 +221,7 @@ const AuthenticatedNavigator = () => {
           );
         })}
       </AuthStack.Group>
-      
+
       {/* Chats Screens */}
       <AuthStack.Group>
         {chatsRoutes?.map((route: any, index: number) => {
