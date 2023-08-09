@@ -9,7 +9,7 @@ const PhoneRegisterScreen = () => {
   return (
     <FTMainwrapper>
       <Text>Enter Phone Number</Text>
-      <FTInput placeholder="Phone Number / email / username" name="username" />
+      {/* <FTInput placeholder="Phone Number / email / username" name="username" /> */}
       <FTCustombutton btntext="Proceed" onpress={handleSubmit} />
       <Text>
         Ensure you can reach this mobile number to get started as this number

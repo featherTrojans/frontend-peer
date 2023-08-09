@@ -54,8 +54,8 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().label("password").required(),
 });
 
+// /auth/signin/v2
 const LoginScreen = () => {
-  const [hidePassword, setHidePassword] = useState(true);
   const { setToken, allowBiometrics, setAllowBiometrics } =
     useContext(AuthContext);
   const { errorAlert } = useAlert();
@@ -88,6 +88,7 @@ const LoginScreen = () => {
           { user_pin: "0000" },
           { headers: { token: token } }
         );
+
         navigation.navigate("Welcometochange", {
           fromm: "login",
           username: values.username,
@@ -127,22 +128,8 @@ const LoginScreen = () => {
     checkStatus();
   }, []);
 
-  const biometricsLogin = async () => {
-    try {
-      const result = await LocalAuthentication.authenticateAsync({
-        promptMessage: "Login with Biometrics",
-        fallbackLabel: "Enter Password",
-        disableDeviceFallback: true,
-        cancelLabel: "Cancel",
-      });
-      setIsAuthenticated(result.success);
-      const loginCreds = await getCredentials();
-      if (result.success === true) {
-        loginFunc(loginCreds);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handlelogin = () => {
+    navigation.navigate("phone-verify_screen", { phonenumber: "08168890192" });
   };
 
   return (
@@ -182,8 +169,8 @@ const LoginScreen = () => {
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              console.log(values);
-              loginFunc(values);
+              handlelogin();
+              // loginFunc(values);
             }}
           >
             {(formikProps) => {
@@ -207,45 +194,12 @@ const LoginScreen = () => {
                     icon={<Transfericon />}
                   />
 
-                  <FTInput
-                    placeholderText="Password"
-                    name="password"
-                    formikProps={formikProps}
-                    icon={<Transfericon />}
-                    password={true}
-                  />
-
-                  <View
-                    style={{
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginTop: RFValue(16),
-                      marginBottom: RFValue(22),
-                    }}
-                  >
-                    <Text
-                      style={[
-                        biometrics,
-                        {
-                          opacity:
-                            isBiometricAllowed && enableBiometrics ? 1 : 0.2,
-                        },
-                      ]}
-                      onPress={
-                        isBiometricAllowed && enableBiometrics
-                          ? biometricsLogin
-                          : null
-                      }
-                    >
-                      Use Biometrics
-                    </Text>
-                  </View>
-
                   <FTCustombutton
-                    btntext="Sign in"
+                    btntext="PROCEED"
                     onpress={() => {
-                      console.log("adfasvf");
-                      handleSubmit();
+                      handlelogin();
+                      // console.log("adfasvf");
+                      // handleSubmit();
                     }}
                   />
                 </>
@@ -254,8 +208,10 @@ const LoginScreen = () => {
           </Formik>
 
           <View style={haveanaccount}>
-            <Text style={haveaccounttext}>Don’t have an account? </Text>
-            {/* <Text onPress={}>Sign up</Text> */}
+            <Text style={haveaccounttext}>
+              Ensure you can reach this mobile number to get started as this
+              number has to be verified.
+            </Text>
           </View>
         </View>
       </KeyboardAwareScrollView>

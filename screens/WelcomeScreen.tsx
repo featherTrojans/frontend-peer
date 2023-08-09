@@ -16,18 +16,18 @@ import Animated, {
   runOnUI,
 } from "react-native-reanimated";
 
-
-
 import { RFValue } from "react-native-responsive-fontsize";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getPeriod } from "../utils/getDayPeriod";
-
 
 import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
 import Customstatusbar from "./shared/Customstatusbar";
-import { sendSchedulePushNotification, sendTokenToDB } from "../utils/pushNotifications";
+import {
+  sendSchedulePushNotification,
+  sendTokenToDB,
+} from "../utils/pushNotifications";
 import { nameToShow } from "../utils/nameSplitter";
 import { WelcomeScreenStyles } from "../assets/styles/screens";
 const {
@@ -43,6 +43,7 @@ const {
 
 const { Winkinganimate } = icons;
 
+// /dashboard
 const WelcomeScreen = ({ navigation, route }) => {
   const { fromm, username, token } = route.params;
   const { setToken, authdata, messageToken } = useContext(AuthContext);

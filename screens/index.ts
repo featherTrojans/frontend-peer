@@ -47,7 +47,7 @@ import NetworkreceiverScreen from "./NetworkreceiverScreen";
 import PayknownmerchantScreen from "./PayknownmerchantScreen";
 import PersonalRegisterScreen from "./PersonalRegisterScreen";
 import CreatefeathertagScreen from "./CreatefeathertagScreen";
-
+import PhoneVerificationScreen from "./PhoneVerificationScreen";
 
 export {
   OnboardingScreen,
@@ -59,6 +59,7 @@ export {
   PersonalRegisterScreen,
   CreatefeathertagScreen,
   PayknownmerchantScreen,
+  PhoneVerificationScreen,
 
   // Dasboard Screens
   HomeScreen,
@@ -109,5 +110,4 @@ export {
   SearchcontactScreen,
   TransactionsummaryScreen,
   NetworkreceiverScreen,
-  
 };

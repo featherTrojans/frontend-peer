@@ -16,6 +16,7 @@ import { PersonalRegisterScreenStyles } from "../assets/styles/screens/personalr
 import {
   FTBackheader,
   FTCustombutton,
+  FTHeaderandsubheader,
   FTInput,
   FTMainwrapper,
   FTTitlepagewrapper,
@@ -45,9 +46,13 @@ const Personal = ({ navigation }) => {
   //   const { errorAlert } = useAlert();
 
   return (
-    <FTTitlepagewrapper>
+    <FTTitlepagewrapper title="Personal Information">
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ flex: 1, paddingHorizontal: 25 }}>
+        <FTHeaderandsubheader
+          header="Personal information"
+          subHeader="Kindly input your personal information to setup your profile"
+        />
+        <View style={{ flex: 1 }}>
           <View
             style={{
               flexDirection: "row",
@@ -117,18 +122,21 @@ const Personal = ({ navigation }) => {
                     name="firstName"
                     label="Legal Firstname"
                     formikProps={formikProps}
+                    mB={15}
                   />
                   <FTInput
                     placeholderText="Enter your name"
                     name="lastName"
                     label="Legal Lastname"
                     formikProps={formikProps}
+                    mB={15}
                   />
                   <FTInput
                     placeholderText="Enter valid email address"
                     name="email"
                     label="Email"
                     formikProps={formikProps}
+                    mB={15}
                   />
 
                   <FTInput
@@ -136,13 +144,14 @@ const Personal = ({ navigation }) => {
                     name="gender"
                     label="Gender"
                     formikProps={formikProps}
+                    mB={55}
                   />
 
                   {/* Proceed Btn */}
                   <View>
                     <FTCustombutton
                       disable={isSubmitting}
-                      btntext="Sign up"
+                      btntext="Continue"
                       onpress={() => {
                         const errorvalues = Object.values(errors);
                         if (errorvalues.length > 0) {

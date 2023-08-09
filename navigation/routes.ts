@@ -43,11 +43,9 @@ import {
   TransactionsummaryScreen,
   VerifybvnScreen,
   WelcomeScreen,
+  PhoneVerificationScreen,
 } from "../screens";
 import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
-
-
-
 
 export const authRoutes = [
   {
@@ -91,6 +89,13 @@ export const authRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "phone_screen",
+  },
+  {
+    title: "",
+    screen: PhoneVerificationScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "phone-verify_screen",
   },
 ];
 
