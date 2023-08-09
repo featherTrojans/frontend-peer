@@ -91,6 +91,13 @@ import Emptycardicon from "../assets/icons/Emptycardicon";
 import Maintenancefeeicon from "../assets/icons/Maintenancefeeicon";
 import Transactionfeeicon from "../assets/icons/Transactionfeeicon";
 import Cardcreationicon from "../assets/icons/Cardcreationicon";
+import Changememojicheckicon from "../assets/icons/Changememojicheckicon";
+import Levelcheckicon from "../assets/icons/Levelcheckicon";
+import Copydetailsicon from "../assets/icons/Copydetailsicon";
+import Leveloptioncancelicon from "../assets/icons/Leveloptioncancelicon";
+import Leveloptioncheckicon from "../assets/icons/Leveloptioncheckicon";
+
+
 
 export default {
   Logo,
@@ -166,6 +173,12 @@ export default {
   Maintenancefeeicon,
   Transactionfeeicon,
   Cardcreationicon,
+  Changememojicheckicon,
+  Levelcheckicon,
+  Copydetailsicon,
+  Leveloptioncancelicon,
+Leveloptioncheckicon,
+
 
   //Animated icons
 
