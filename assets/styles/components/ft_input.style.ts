@@ -17,7 +17,7 @@ export const FTInputStyles = StyleSheet.create({
     marginBottom: 15,
   },
   textInput: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     height: 52,
     borderRadius: 10,
     borderColor: COLORS.grey15,
@@ -26,9 +26,10 @@ export const FTInputStyles = StyleSheet.create({
     ...FONTS.regular,
     color: COLORS.blue9,
   },
-  inputiconwrapper: {
-    borderRightWidth: 0.5,
-    borderColor: COLORS.grey15,
-    paddingRight: 12,
+
+  errorMessageText: {
+    color: COLORS.pink1,
+    ...fontsize.xxsmallest,
+    fontStyle: "italic",
   },
 });

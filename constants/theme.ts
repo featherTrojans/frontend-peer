@@ -158,11 +158,13 @@ export const fontsize = {
   small: {
     fontSize: RFValue(14),
   },
+
+
+
+
   smaller: {
     fontSize: RFValue(13),
   },
-
-
   bsmall: {
     fontSize: RFValue(16),
   },
@@ -183,7 +185,9 @@ export const fontsize = {
   bbsmall: {
     fontSize: RFValue(18),
   },
-
+  xmedium: {
+    fontSize: RFValue(22),
+  },
 
 
 
@@ -193,9 +197,7 @@ export const fontsize = {
   medium: {
     fontSize: RFValue(20),
   },
-  xmedium: {
-    fontSize: RFValue(21),
-  },
+ 
 
   bymedium: {
     fontsize: RFValue(25),
