@@ -24,7 +24,9 @@ import {
 } from "../utils/biometrics";
 import { LoginScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
-import { navigation } from "../utils";
+import { VALIDATION, navigation } from "../utils";
+import { useForm } from "react-hook-form";
+
 
 const {
   container,
@@ -49,13 +51,11 @@ const setAuthorizationToken = (token: string) => {
   }
 };
 
-const validationSchema = Yup.object().shape({
-  username: Yup.string().label("username").required(),
-  password: Yup.string().label("password").required(),
-});
+
 
 // /auth/signin/v2
 const LoginScreen = () => {
+  const [hidePassword, setHidePassword] = useState(true);
   const { setToken, allowBiometrics, setAllowBiometrics } =
     useContext(AuthContext);
   const { errorAlert } = useAlert();
@@ -63,7 +63,7 @@ const LoginScreen = () => {
   const [isBiometricAllowed, setIsBiometricAllowed] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [enableBiometrics, setEnableBiometrics] = useState<null | string>(null);
+  const [enableBiometrics, setEnableBiometrics] = useState<any>(null);
 
   const loginFunc = async (values) => {
     console.log("hiiiiiiiiiiiiiiiiiii");
@@ -132,9 +132,15 @@ const LoginScreen = () => {
     navigation.navigate("phone-verify_screen", { phonenumber: "08168890192" });
   };
 
+  const onSubmit = ((data) => {
+    loginFunc(data)
+  });
+
   return (
     <FTMainwrapper>
       <KeyboardAwareScrollView>
+      {loading && <FTLoader />}
+
         <View style={container}>
           <View style={{ marginTop: 30 }}>
             <Newlogo />
@@ -169,8 +175,8 @@ const LoginScreen = () => {
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              handlelogin();
-              // loginFunc(values);
+              console.log(values);
+              loginFunc(values);
             }}
           >
             {(formikProps) => {
@@ -190,28 +196,57 @@ const LoginScreen = () => {
                   <FTInput
                     placeholderText="Phone Number / email / username"
                     name="username"
+                    control={control}
+                    rules={VALIDATION.USER_NAME_VALIDATION}
+                  />
+
+                  <FTInput
+                    placeholderText="Password"
+                    name="password"
                     formikProps={formikProps}
                     icon={<Transfericon />}
+                    password={true}
                   />
+
+                  <View
+                    style={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginTop: RFValue(16),
+                      marginBottom: RFValue(22),
+                    }}
+                  >
+                    <Text
+                      style={[
+                        biometrics,
+                        {
+                          opacity:
+                            isBiometricAllowed && enableBiometrics ? 1 : 0.2,
+                        },
+                      ]}
+                      onPress={
+                        isBiometricAllowed && enableBiometrics
+                          ? biometricsLogin
+                          : null
+                      }
+                    >
+                      Use Biometrics
+                    </Text>
+                  </View>
 
                   <FTCustombutton
-                    btntext="PROCEED"
+                    btntext="Sign in"
                     onpress={() => {
-                      handlelogin();
-                      // console.log("adfasvf");
-                      // handleSubmit();
+                      console.log("adfasvf");
+                      handleSubmit();
                     }}
                   />
-                </>
-              );
-            }}
-          </Formik>
+
+
 
           <View style={haveanaccount}>
-            <Text style={haveaccounttext}>
-              Ensure you can reach this mobile number to get started as this
-              number has to be verified.
-            </Text>
+            <Text style={haveaccounttext}>Don’t have an account? </Text>
+            {/* <Text onPress={}>Sign up</Text> */}
           </View>
         </View>
       </KeyboardAwareScrollView>
