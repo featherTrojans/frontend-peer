@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { EditprofileScreenStyles } from '../assets/styles/screens'
+import { FTTitlepagewrapper } from '../components'
 
 
 
@@ -8,9 +9,9 @@ import { EditprofileScreenStyles } from '../assets/styles/screens'
 const {} = EditprofileScreenStyles
 const EditprofileScreen = () => {
   return (
-    <View>
+    <FTTitlepagewrapper>
       <Text>EditprofileScreen</Text>
-    </View>
+    </FTTitlepagewrapper>
   )
 }
 

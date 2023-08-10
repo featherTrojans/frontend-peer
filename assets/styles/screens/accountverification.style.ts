@@ -69,6 +69,7 @@ export const AccountverificationScreenStyles = StyleSheet.create({
     padding: 33,
     borderWidth: 0.5,
     borderColor: COLORS.grey1,
+    borderRadius: 25
   },
   infoKeyText: {
     ...fontsize.smallest,

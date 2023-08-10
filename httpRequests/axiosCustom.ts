@@ -1,7 +1,5 @@
 import axios from "axios";
 import serversettings from "../utils/serversettings";
-import { onChange } from "react-native-reanimated";
-import { useEffect } from "react";
 
 const Server = {
   live: "https://featherafrica.co:3300/api/v1/",

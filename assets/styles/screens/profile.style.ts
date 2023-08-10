@@ -56,6 +56,8 @@ export const ProfileScreenStyles = StyleSheet.create({
     right: 0,
     borderWidth: 4,
     borderColor: COLORS.white,
+    justifyContent: "center",
+    alignItems: "center"
   },
   profileNameWrap: {
     marginVertical: 25,

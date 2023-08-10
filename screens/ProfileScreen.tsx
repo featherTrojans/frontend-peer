@@ -1,11 +1,11 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 import { ProfileScreenStyles } from "../assets/styles/screens";
 import { FTIconwithtitleandinfo, FTTabWrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { navigation } from "../utils";
+import { navigation, redirectTo } from "../utils";
 
-const { Transfericon } = icons;
+const { Transfericon, Editprofileicon } = icons;
 
 const {
   profileHeaderWrap,
@@ -67,7 +67,9 @@ const ProfileScreen = () => {
           <View style={profileOuterBorder}>
             <View style={profileInnerBorder}>
               <View style={userProfileBg}>
-                <View style={userEditiconBg}></View>
+                <Pressable onPress={() => redirectTo("editprofile_screen")} style={userEditiconBg}>
+                  <Editprofileicon />
+                </Pressable>
               </View>
             </View>
           </View>
