@@ -28,7 +28,7 @@ const ProfileScreen = () => {
     {
       Icon: "",
       title: "My Wallets",
-      action: () => navigation.navigate("setupmfa_screen"),
+      action: () => navigation.navigate("mywallet_screen"),
     },
     {
       Icon: "",
@@ -63,6 +63,7 @@ const ProfileScreen = () => {
 
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={profileDetailsWrap}>
+
           <View style={profileOuterBorder}>
             <View style={profileInnerBorder}>
               <View style={userProfileBg}>
@@ -70,6 +71,7 @@ const ProfileScreen = () => {
               </View>
             </View>
           </View>
+
           <View style={profileNameWrap}>
             <Text style={profileNameText}>Temitayo Danjuma</Text>
             <Text style={profileUsername}>@tayojumaa</Text>
