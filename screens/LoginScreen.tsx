@@ -27,7 +27,6 @@ import { useAlert } from "../hooks";
 import { VALIDATION, navigation } from "../utils";
 import { useForm } from "react-hook-form";
 
-
 const {
   container,
   logoWrapper,
@@ -51,10 +50,9 @@ const setAuthorizationToken = (token: string) => {
   }
 };
 
-
-
 // /auth/signin/v2
 const LoginScreen = () => {
+  const { control, handleSubmit } = useForm({ mode: "all" });
   const [hidePassword, setHidePassword] = useState(true);
   const { setToken, allowBiometrics, setAllowBiometrics } =
     useContext(AuthContext);
@@ -132,14 +130,14 @@ const LoginScreen = () => {
     navigation.navigate("phone-verify_screen", { phonenumber: "08168890192" });
   };
 
-  const onSubmit = ((data) => {
-    loginFunc(data)
-  });
+  const onSubmit = (data) => {
+    loginFunc(data);
+  };
 
   return (
     <FTMainwrapper>
       <KeyboardAwareScrollView>
-      {loading && <FTLoader />}
+        {loading && <FTLoader />}
 
         <View style={container}>
           <View style={{ marginTop: 30 }}>
@@ -168,81 +166,53 @@ const LoginScreen = () => {
             </View>
           </View>
 
-          <Formik
-            initialValues={{
-              username: "",
-              password: "",
-            }}
-            validationSchema={validationSchema}
-            onSubmit={(values) => {
-              console.log(values);
-              loginFunc(values);
+          {loading && <FTLoader />}
+
+          <FTInput
+            placeholderText="Phone Number / email / username"
+            name="username"
+            control={control}
+            rules={VALIDATION.USER_NAME_VALIDATION}
+          />
+
+          <FTInput
+            placeholderText="Password"
+            name="password"
+            formikProps={formikProps}
+            icon={<Transfericon />}
+            password={true}
+          />
+
+          <View
+            style={{
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginTop: RFValue(16),
+              marginBottom: RFValue(22),
             }}
           >
-            {(formikProps) => {
-              const {
-                isSubmitting,
-                isValid,
-                handleBlur,
-                errors,
-                touched,
-                handleChange,
-                handleSubmit,
-              } = formikProps;
-              return (
-                <>
-                  {loading && <FTLoader />}
+            <Text
+              style={[
+                biometrics,
+                {
+                  opacity: isBiometricAllowed && enableBiometrics ? 1 : 0.2,
+                },
+              ]}
+              onPress={
+                isBiometricAllowed && enableBiometrics ? biometricsLogin : null
+              }
+            >
+              Use Biometrics
+            </Text>
+          </View>
 
-                  <FTInput
-                    placeholderText="Phone Number / email / username"
-                    name="username"
-                    control={control}
-                    rules={VALIDATION.USER_NAME_VALIDATION}
-                  />
-
-                  <FTInput
-                    placeholderText="Password"
-                    name="password"
-                    formikProps={formikProps}
-                    icon={<Transfericon />}
-                    password={true}
-                  />
-
-                  <View
-                    style={{
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginTop: RFValue(16),
-                      marginBottom: RFValue(22),
-                    }}
-                  >
-                    <Text
-                      style={[
-                        biometrics,
-                        {
-                          opacity:
-                            isBiometricAllowed && enableBiometrics ? 1 : 0.2,
-                        },
-                      ]}
-                      onPress={
-                        isBiometricAllowed && enableBiometrics
-                          ? biometricsLogin
-                          : null
-                      }
-                    >
-                      Use Biometrics
-                    </Text>
-                  </View>
-
-                  <FTCustombutton
-                    btntext="Sign in"
-                    onpress={() => {
-                      console.log("adfasvf");
-                      handleSubmit();
-                    }}
-                  />
-
-
+          <FTCustombutton
+            btntext="Sign in"
+            onpress={() => {
+              console.log("adfasvf");
+              handleSubmit();
+            }}
+          />
 
           <View style={haveanaccount}>
             <Text style={haveaccounttext}>Don’t have an account? </Text>

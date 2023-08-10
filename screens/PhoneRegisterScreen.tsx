@@ -5,11 +5,16 @@ import { TextInput } from "react-native-gesture-handler";
 import { PhoneRegisterScreenStyles } from "../assets/styles/screens";
 
 const PhoneRegisterScreen = () => {
+  const { center } = PhoneRegisterScreenStyles;
   const handleSubmit = () => {};
   return (
     <FTMainwrapper>
-      <Text>Enter Phone Number</Text>
-      {/* <FTInput placeholder="Phone Number / email / username" name="username" /> */}
+      <Text style={center}>Enter Phone Number</Text>
+      <FTInput
+        label="phone"
+        placeholderText="Phone Number / email / username"
+        name="username"
+      />
       <FTCustombutton btntext="Proceed" onpress={handleSubmit} />
       <Text>
         Ensure you can reach this mobile number to get started as this number

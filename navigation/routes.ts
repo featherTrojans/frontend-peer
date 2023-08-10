@@ -50,7 +50,8 @@ import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 export const authRoutes = [
   {
     title: "",
-    screen: OnboardingScreen,
+    screen: PhoneRegisterScreen,
+    // screen: OnboardingScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "onboarding_screen",
