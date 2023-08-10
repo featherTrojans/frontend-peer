@@ -11,6 +11,7 @@ import {
   FTEmptycomponent,
   FTHorizontaline,
   FTIconandinfo,
+  FTTabWrapper,
   FTTransactionhistory,
 } from "../components";
 
@@ -23,6 +24,7 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import Customstatusbar from "./shared/Customstatusbar";
 import { TransactionScreenStyles } from "../assets/styles/screens";
 import { useCustomModal } from "../hooks";
+
 const {
   container,
   contentContainer,
@@ -134,9 +136,7 @@ const TransactionsScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={[container, { paddingTop: getStatusBarHeight(true) }]}>
-      <View style={contentContainer}>
-        <Customstatusbar />
+    <FTTabWrapper>
 
         {/* Transfer Modal */}
         <TransferModal>
@@ -270,8 +270,7 @@ const TransactionsScreen = ({ navigation }) => {
             )}
           </View>
         </View>
-      </View>
-    </View>
+    </FTTabWrapper>
   );
 };
 

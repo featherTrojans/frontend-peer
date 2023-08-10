@@ -19,7 +19,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import navigationService from "./utils/navigation";
 import { NavigatorSelector } from "./navigation";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 
 
@@ -208,18 +208,16 @@ export default function App() {
           >
             <AuthProvider>
               <LocationProvider>
-                <>
                 <NavigatorSelector routeName={routeName} />
-                {/* <Swipemodal /> */}
-                </>
               </LocationProvider>
             </AuthProvider>
             <Toast
               config={toastConfig}
-              topOffset={0}
+              topOffset={44}
               onShow={() => console.log("Status shown")}
               onHide={() => console.log("Status hidden")}
             />
+            
           </NavigationContainer>
 
           

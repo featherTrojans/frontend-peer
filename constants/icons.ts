@@ -96,6 +96,8 @@ import Levelcheckicon from "../assets/icons/Levelcheckicon";
 import Copydetailsicon from "../assets/icons/Copydetailsicon";
 import Leveloptioncancelicon from "../assets/icons/Leveloptioncancelicon";
 import Leveloptioncheckicon from "../assets/icons/Leveloptioncheckicon";
+import Editprofileicon from "../assets/icons/Editprofileicon";
+
 
 
 
@@ -178,6 +180,7 @@ export default {
   Copydetailsicon,
   Leveloptioncancelicon,
 Leveloptioncheckicon,
+Editprofileicon,
 
 
   //Animated icons
