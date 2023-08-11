@@ -1,16 +1,21 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../../../constants";
-export const VerifybvnScreenStyles = StyleSheet.create({
-  headerText: {
-    ...fontsize.bmedium,
-    ...FONTS.bold,
-    color: COLORS.blue9,
-    marginBottom: 5,
+
+export const PhoneVerificationScreenStyles = StyleSheet.create({
+  center: {
+    textAlign: "center",
+    marginBottom: 40,
+    marginTop: 50,
+  },
+  bottomtext: {
+    ...FONTS.regular,
+    lineHeight: 21,
+  },
+  margin: {
+    marginTop: 30,
+    marginBottom: 60,
   },
   flex: {
-    flex: 1,
-  },
-  flexrow: {
     flexDirection: "row",
   },
   flexspace: {
@@ -22,8 +27,5 @@ export const VerifybvnScreenStyles = StyleSheet.create({
   backlink: {
     color: COLORS.blue1,
     marginLeft: 5,
-  },
-  margin: {
-    marginBottom: 40,
   },
 });

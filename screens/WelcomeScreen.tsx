@@ -30,6 +30,7 @@ import {
 } from "../utils/pushNotifications";
 import { nameToShow } from "../utils/nameSplitter";
 import { WelcomeScreenStyles } from "../assets/styles/screens";
+import { getAuthorizationTokenFromAxois } from "../utils";
 const {
   container,
   welcomeTextContainer,
@@ -39,13 +40,16 @@ const {
   line,
   getStartedContainer,
   getStartedText,
+  info,
+  infotext,
+  link,
 } = WelcomeScreenStyles;
 
 const { Winkinganimate } = icons;
 
 // /dashboard
 const WelcomeScreen = ({ navigation, route }) => {
-  const { fromm, username, token } = route.params;
+  const fromm = route.params?.fromm || "login";
   const { setToken, authdata, messageToken } = useContext(AuthContext);
   const { setAuthData } = useContext(AuthContext);
   const [percentage, setPercentage] = useState(0);
@@ -104,12 +108,12 @@ const WelcomeScreen = ({ navigation, route }) => {
   }, []);
 
   const setTokenOnComplete = () => {
-    setToken(token);
+    setToken(getAuthorizationTokenFromAxois());
   };
 
   function callback() {
     "worklet";
-    runOnJS(setToken)(token);
+    runOnJS(setToken)(getAuthorizationTokenFromAxois());
   }
 
   const getDashboardData = async () => {
@@ -117,13 +121,6 @@ const WelcomeScreen = ({ navigation, route }) => {
       const response = await axiosCustom.get("/dashboard");
       await sendTokenToDB(messageToken);
 
-      if (!response?.data?.data?.userDetails?.isVerified) {
-        return navigation.navigate("Verification", {
-          email: response?.data?.data?.userDetails?.email,
-          phoneNumber: response?.data?.data?.userDetails?.phoneNumber,
-          token: token,
-        });
-      }
       setAuthData(response?.data?.data);
       // setTokenOnComplete()
       progressWidth.value = withTiming(
@@ -157,30 +154,24 @@ const WelcomeScreen = ({ navigation, route }) => {
           />
         </View>
 
-        {/* Welcome text */}
         <View style={welcomeTextContainer}>
-          {fromm === "setup" ? (
-            <Text style={welcomeText}>
-              welcome on board{" "}
-              <Text style={{ color: COLORS.blue6 }}>padi.</Text>
-            </Text>
-          ) : (
-            <>
-              <Text style={welcomeText}>{getPeriod()}</Text>
-
-              <Text
-                style={[
-                  welcomeTextSub,
-                  { marginTop: 16, textTransform: "uppercase" },
-                ]}
-              >
-                {authdata?.userDetails?.fullName &&
-                  nameToShow(authdata?.userDetails?.fullName)}
-              </Text>
-            </>
-          )}
+          <Text style={welcomeTextSub}>Welcome to the flock!</Text>
         </View>
 
+        {/* Welcome text */}
+        <View style={welcomeTextContainer}>
+          <Text style={welcomeText}>
+            Get cash, Pay bills & Make payments today
+          </Text>
+        </View>
+
+        {/* Get started text */}
+        <View style={getStartedContainer}>
+          <Text style={getStartedText}>
+            Yo! we are setting things up for you to get started, this usually
+            takes about one minute
+          </Text>
+        </View>
         {/* Progress Line */}
         <View style={{ flex: 0.4, justifyContent: "center" }}>
           <View style={lineBg}>
@@ -188,13 +179,9 @@ const WelcomeScreen = ({ navigation, route }) => {
           </View>
         </View>
 
-        {/* Get started text */}
-        <View style={getStartedContainer}>
-          <Text style={getStartedText}>
-            {fromm === "setup"
-              ? "Yo! we are setting things up for you to get started, this usually takes about one minute"
-              : "Hey welcome back to feather, transact more today, earn more with cash deposits."}
-          </Text>
+        <View style={info}>
+          <Text style={infotext}>For more information visit,</Text>
+          <Text style={link}> www.getfeather.africa</Text>
         </View>
       </View>
     </SafeAreaView>

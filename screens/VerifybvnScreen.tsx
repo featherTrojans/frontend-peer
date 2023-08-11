@@ -1,17 +1,97 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { VerifybvnScreenStyles } from '../assets/styles/screens'
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { VerifybvnScreenStyles } from "../assets/styles/screens";
+import { FTCustombutton, FTInput, FTTitlepagewrapper } from "../components";
+import { useForm } from "react-hook-form";
+import { VALIDATION, navigation } from "../utils";
+import Loader from "../components/FTLoader";
+import axiosCustom from "../httpRequests/axiosCustom";
+import { useAlert } from "../hooks";
 
-const {} = VerifybvnScreenStyles
+const { flex, headerText, backlink, flexspace, flexrow, margin } =
+  VerifybvnScreenStyles;
 
 const VerifybvnScreen = () => {
+  const { control, handleSubmit } = useForm({ mode: "all" });
+  const [loading, setLoading] = useState(false);
+  const [timecount, settimecount] = useState(30);
+  const { errorAlert } = useAlert();
+
+  const onsubmit = async (data) => {
+    try {
+      setLoading(true);
+      await axiosCustom.post("user/verify/upgrade", data);
+      navigation.navigate("bvn-verify_screen");
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      if (timecount < 1) {
+        clearInterval(timer);
+      } else {
+        settimecount((prev) => prev - 1);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timecount]);
+
+  const resendcode = async () => {
+    //   const url =   "auth/signup/resend";
+    //   try {
+    //     setLoading(true);
+    //     await axiosCustom.post(url, {
+    //       phoneNumber,
+    //     });
+    //     settimecount(30);
+    //   } catch (err) {
+    //     errorAlert(err);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+  };
   return (
-    <View>
-      <Text>VerifybvnScreen</Text>
-    </View>
-  )
-}
+    <FTTitlepagewrapper title="Verify BVN">
+      {loading && <Loader />}
+      <View style={flex}>
+        <Text style={headerText}>Enter code sent to your</Text>
+        <Text style={headerText}>mobile phone</Text>
+        <FTInput
+          placeholderText="Enter BVN"
+          name="code"
+          label="6 Digit Code"
+          control={control}
+          rules={VALIDATION.PHONE_NUMBER_VALIDATION}
+          mB={20}
+          mT={44}
+        />
+        <View style={margin}>
+          <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
+        </View>
+        <View style={flexspace}>
+          <Text>Didn’t receive the code yet?</Text>
+          {timecount > 0 ? (
+            <Text>00 : {timecount}s </Text>
+          ) : (
+            <Text onPress={resendcode}>Resend</Text>
+          )}
+        </View>
+        <View style={flexrow}>
+          <Text>Incorrect BVN?</Text>
+          <Text style={backlink} onPress={navigation.goBack}>
+            Change BVN
+          </Text>
+        </View>
+      </View>
+    </FTTitlepagewrapper>
+  );
+};
 
-export default VerifybvnScreen
+export default VerifybvnScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

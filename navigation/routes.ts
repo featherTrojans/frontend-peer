@@ -44,14 +44,16 @@ import {
   VerifybvnScreen,
   WelcomeScreen,
   PhoneVerificationScreen,
+  BVNScreen,
+  FeatherTagScreen,
 } from "../screens";
+
 import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 
 export const authRoutes = [
   {
     title: "",
-    screen: PhoneRegisterScreen,
-    // screen: OnboardingScreen,
+    screen: OnboardingScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "onboarding_screen",
@@ -97,6 +99,27 @@ export const authRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "phone-verify_screen",
+  },
+  {
+    title: "",
+    screen: BVNScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "bvn_screen",
+  },
+  {
+    title: "",
+    screen: VerifybvnScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "bvn-verify_screen",
+  },
+  {
+    title: "",
+    screen: FeatherTagScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "feathertag_screen",
   },
 ];
 

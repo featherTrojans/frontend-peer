@@ -48,7 +48,8 @@ import PayknownmerchantScreen from "./PayknownmerchantScreen";
 import PersonalRegisterScreen from "./PersonalRegisterScreen";
 import CreatefeathertagScreen from "./CreatefeathertagScreen";
 import PhoneVerificationScreen from "./PhoneVerificationScreen";
-
+import BVNScreen from "./BVNScreen";
+import FeatherTagScreen from "./FeatherTagScreen";
 export {
   OnboardingScreen,
   LoginScreen,
@@ -60,6 +61,8 @@ export {
   CreatefeathertagScreen,
   PayknownmerchantScreen,
   PhoneVerificationScreen,
+  BVNScreen,
+  FeatherTagScreen,
 
   // Dasboard Screens
   HomeScreen,
