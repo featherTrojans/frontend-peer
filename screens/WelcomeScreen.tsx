@@ -54,6 +54,13 @@ const WelcomeScreen = ({ navigation, route }) => {
   const { setAuthData } = useContext(AuthContext);
   const [percentage, setPercentage] = useState(0);
   const [sent, setSent] = useState(false);
+  const [authToken, setAuthToken] = useState("");
+
+  console.log(authToken, "yoo his is it");
+  useEffect(() => {
+    const token = getAuthorizationTokenFromAxois();
+    setAuthToken(token);
+  }, []);
 
   const progressWidth = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
@@ -108,12 +115,12 @@ const WelcomeScreen = ({ navigation, route }) => {
   }, []);
 
   const setTokenOnComplete = () => {
-    setToken(getAuthorizationTokenFromAxois());
+    setToken(authToken);
   };
 
   function callback() {
     "worklet";
-    runOnJS(setToken)(getAuthorizationTokenFromAxois());
+    runOnJS(setToken)(authToken);
   }
 
   const getDashboardData = async () => {

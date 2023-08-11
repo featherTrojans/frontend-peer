@@ -54,10 +54,9 @@ const PhoneVerificationScreen = ({ route }) => {
   };
 
   const resendcode = async () => {
-    const url = from == "login" ? "auth/signin/resend" : "auth/signup/resend";
     try {
       setLoading(true);
-      await axiosCustom.post(url, {
+      await axiosCustom.post("auth/resend/code", {
         phoneNumber,
       });
       settimecount(30);
