@@ -14,6 +14,7 @@ const { flex, headerText, backlink, flexspace, flexrow, margin } =
 const VerifybvnScreen = () => {
   const { control, handleSubmit } = useForm({ mode: "all" });
   const [loading, setLoading] = useState(false);
+  const [errorcount, seterrorcount] = useState(0);
   const [timecount, settimecount] = useState(30);
   const { errorAlert } = useAlert();
 
@@ -21,9 +22,14 @@ const VerifybvnScreen = () => {
     try {
       setLoading(true);
       await axiosCustom.post("user/verify/upgrade", data);
-      navigation.navigate("bvn-verify_screen");
+      navigation.navigate("bvn-success_screen");
     } catch (err) {
+      if (errorcount == 2) {
+        navigation.navigate("bvn-error_screen");
+        return;
+      }
       errorAlert(err);
+      seterrorcount(errorcount + 1);
     } finally {
       setLoading(false);
     }

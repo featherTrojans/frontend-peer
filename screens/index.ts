@@ -49,7 +49,11 @@ import PersonalRegisterScreen from "./PersonalRegisterScreen";
 import CreatefeathertagScreen from "./CreatefeathertagScreen";
 import PhoneVerificationScreen from "./PhoneVerificationScreen";
 import BVNScreen from "./BVNScreen";
+import BvnErrorScreen from "./BvnErrorScreen";
+import BVNSuccessScreen from "./BVNSuccessScreen";
 import FeatherTagScreen from "./FeatherTagScreen";
+import UploadDocScreen from "./UploadDocScreen";
+
 export {
   OnboardingScreen,
   LoginScreen,
@@ -62,6 +66,8 @@ export {
   PayknownmerchantScreen,
   PhoneVerificationScreen,
   BVNScreen,
+  BvnErrorScreen,
+  BVNSuccessScreen,
   FeatherTagScreen,
 
   // Dasboard Screens
@@ -81,6 +87,7 @@ export {
   SecurityandprivacyScreen,
   SetupmfaScreen,
   VerifybvnScreen,
+  UploadDocScreen,
 
   //Cards Screen
   CardScreen,

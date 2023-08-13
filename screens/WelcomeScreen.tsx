@@ -54,13 +54,10 @@ const WelcomeScreen = ({ navigation, route }) => {
   const { setAuthData } = useContext(AuthContext);
   const [percentage, setPercentage] = useState(0);
   const [sent, setSent] = useState(false);
-  const [authToken, setAuthToken] = useState("");
-
+  // const [authToken, setAuthToken] = useState("");
+  const authToken = getAuthorizationTokenFromAxois();
   console.log(authToken, "yoo his is it");
-  useEffect(() => {
-    const token = getAuthorizationTokenFromAxois();
-    setAuthToken(token);
-  }, []);
+  useEffect(() => {}, []);
 
   const progressWidth = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {

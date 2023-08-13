@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FTCustombutton,
   FTHeaderandsubheader,
@@ -13,6 +13,7 @@ import { BVNScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
 import Loader from "../components/FTLoader";
+import { AuthContext } from "../context/AuthContext";
 const {
   headerText,
   skip,
@@ -25,6 +26,7 @@ const {
   link,
 } = BVNScreenStyles;
 function BVNScreen() {
+  const { token } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();
@@ -62,13 +64,15 @@ function BVNScreen() {
           mT={44}
         />
         <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
-        <TouchableOpacity
-          activeOpacity={0.4}
-          style={skip}
-          onPress={skipToWelcome}
-        >
-          <Text>Skip for later</Text>
-        </TouchableOpacity>
+        {!token && (
+          <TouchableOpacity
+            activeOpacity={0.4}
+            style={skip}
+            onPress={skipToWelcome}
+          >
+            <Text>Skip for later</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <View style={flexdown}>
         <View style={bvnreason}>
