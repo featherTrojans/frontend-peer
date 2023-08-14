@@ -53,3 +53,4 @@ export * from "./phoneverification.style";
 export * from "./bvn.style";
 export * from "./feathertag.style";
 export * from "./BvnError.style";
+export * from "./pinscreen.style";

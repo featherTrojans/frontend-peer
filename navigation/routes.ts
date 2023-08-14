@@ -49,14 +49,20 @@ import {
   BvnErrorScreen,
   BVNSuccessScreen,
   UploadDocScreen,
+  PinScreen,
+  CardCreateSuccessScreen,
 } from "../screens";
 
 import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 
+// UploadDocScreen
+// BVNSuccessScreen
+// BvnErrorScreen
+// EditprofileScreen
 export const authRoutes = [
   {
     title: "",
-    screen: BVNSuccessScreen,
+    screen: WelcomeScreen,
     // screen: OnboardingScreen,
     showHeader: false,
     hideHiderTitle: false,
@@ -196,6 +202,13 @@ export const transactRoutes = [
   },
   {
     title: "",
+    screen: PinScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "pin_screen",
+  },
+  {
+    title: "",
     screen: BankaccountinformationScreen,
     showHeader: false,
     hideHiderTitle: false,
@@ -315,6 +328,13 @@ export const cardsRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "cardpendingverification_screen",
+  },
+  {
+    title: "",
+    screen: CardCreateSuccessScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "cardcreationsuccess_screen",
   },
   {
     title: "",

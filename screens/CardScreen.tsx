@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View, FlatList } from "react-native";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { CardScreenStyles } from "../assets/styles/screens";
 import {
   FTCustombutton,
@@ -11,6 +11,7 @@ import {
 import { navigation } from "../utils";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
+import axiosCustom from "../httpRequests/axiosCustom";
 
 const {
   Carddetailsicon,
@@ -142,75 +143,93 @@ function Cardlock() {
   );
 }
 
+const cardcreationinfos = [
+  {
+    Icon: Cardcreationicon,
+    bG: "#E9F7EA",
+    title: "Card creation fee",
+    info: "Non-refundable fee to create card",
+    priceBg: "#12AD2B",
+    price: "$4.00",
+  },
+  {
+    Icon: Transactionfeeicon,
+    bG: "#F3EEFB",
+    title: "Transaction fee",
+    info: "Fees on card transactions",
+    priceBg: "#7600FF",
+    price: "$1.00",
+  },
+  {
+    Icon: Maintenancefeeicon,
+    bG: "#FEF8E7",
+    title: "Maintenance fee",
+    info: "Monthly fee to keep card up",
+    priceBg: "#FF9D00",
+    price: "$3.50",
+  },
+];
+
+const RightComponent = ({ bG = "blue", amount }) => {
+  return (
+    <View style={[rightComponentBg, { backgroundColor: bG }]}>
+      <Text style={rightComponentText}>{amount}</Text>
+    </View>
+  );
+};
+
+const CreateCard = () => {
+  return (
+    <View style={{ paddingVertical: 12 }}>
+      <Text style={createVisaCardText}>Create a Visa card</Text>
+      <Text style={createCardSubInfo}>
+        Suitable for all online shopping and subscription services.
+      </Text>
+
+      {cardcreationinfos.map((cardcreationinfo, index) => {
+        const { title, info, bG, Icon, priceBg, price } = cardcreationinfo;
+        return (
+          <FTIconwithtitleandinfo
+            key={index}
+            title={title}
+            info={info}
+            bG={bG}
+            Icon={Icon}
+            onPress={() => null}
+            mB={25}
+            rightComponent={<RightComponent amount={price} bG={priceBg} />}
+          />
+        );
+      })}
+      <FTCustombutton
+        bg="#000"
+        btntext="Continue"
+        onpress={() => {
+          navigation.navigate("carddisclosure_screen");
+        }}
+      />
+    </View>
+  );
+};
 const CardScreen = () => {
   const snapPoints = useMemo(() => ["40%", "98%"], []);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null });
+  const [loading, setLoading] = useState(false);
+  const [carddetails, setCardetails] = useState({});
 
-
-
-  const cardcreationinfos = [
-    {
-      Icon: Cardcreationicon,
-      bG: "#E9F7EA",
-      title: "Card creation fee",
-      info: "Non-refundable fee to create card",
-      priceBg: "#12AD2B",
-      price: "$4.00",
-    },
-    {
-      Icon: Transactionfeeicon,
-      bG: "#F3EEFB",
-      title: "Transaction fee",
-      info: "Fees on card transactions",
-      priceBg: "#7600FF",
-      price: "$1.00",
-    },
-    {
-      Icon: Maintenancefeeicon,
-      bG: "#FEF8E7",
-      title: "Maintenance fee",
-      info: "Monthly fee to keep card up",
-      priceBg: "#FF9D00",
-      price: "$3.50",
-    },
-  ];
-
-  const RightComponent = ({ bG = "blue", amount }) => {
-    return (
-      <View style={[rightComponentBg, { backgroundColor: bG }]}>
-        <Text style={rightComponentText}>{amount}</Text>
-      </View>
-    );
-  };
-
-  const CreateCard = () => {
-    return (
-      <View style={{ paddingVertical: 12 }}>
-        <Text style={createVisaCardText}>Create a Visa card</Text>
-        <Text style={createCardSubInfo}>
-          Suitable for all online shopping and subscription services.
-        </Text>
-
-        {cardcreationinfos.map((cardcreationinfo, index) => {
-          const { title, info, bG, Icon, priceBg, price } = cardcreationinfo;
-          return (
-            <FTIconwithtitleandinfo
-              key={index}
-              title={title}
-              info={info}
-              bG={bG}
-              Icon={Icon}
-              onPress={() => null}
-              mB={25}
-              rightComponent={<RightComponent amount={price} bG={priceBg} />}
-            />
-          );
-        })}
-      </View>
-    );
-  };
-
+  useEffect(() => {
+    setLoading(true);
+    axiosCustom
+      .get("/user/card/get")
+      .then((response) => {
+        setCardetails(response?.data?.data);
+      })
+      .catch(() => {})
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
   const ModalCon = () => {
     return (
       <View style={{ backgroundColor: "#fff", height: 200 }}>
@@ -271,7 +290,7 @@ const CardScreen = () => {
     >
       <Text style={myCardsText}>My Cards</Text>
 
-      {true ? (
+      {carddetails?.card_id ? (
         <>
           <View style={demoCard} />
           <View style={actionsWrap}>

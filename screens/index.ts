@@ -53,6 +53,8 @@ import BvnErrorScreen from "./BvnErrorScreen";
 import BVNSuccessScreen from "./BVNSuccessScreen";
 import FeatherTagScreen from "./FeatherTagScreen";
 import UploadDocScreen from "./UploadDocScreen";
+import PinScreen from "./PinScreen";
+import CardCreateSuccessScreen from "./CardCreateSuccessScreen";
 
 export {
   OnboardingScreen,
@@ -94,6 +96,7 @@ export {
   CarddisclosureScreen,
   CardpendingverificationScreen,
   CardtopupScreen,
+  CardCreateSuccessScreen,
 
   //Chats Screen
   ChatsScreen,
@@ -120,4 +123,5 @@ export {
   SearchcontactScreen,
   TransactionsummaryScreen,
   NetworkreceiverScreen,
+  PinScreen,
 };
