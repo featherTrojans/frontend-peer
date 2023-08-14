@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet,} from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Animated, {
   FadeIn,
   FadeOut,
@@ -13,19 +13,23 @@ import Animated, {
 } from "react-native-reanimated";
 import Modal from "react-native-modal";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { AuthContext } from "../context/AuthContext";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const OVERDRAG = 20;
 
 const useSwipemodal = () => {
+
+
   const Swipemodal = ({ children, showModal, setShowModal, modalHeight }) => {
     const offset = useSharedValue(0);
     const x = useSharedValue(0);
     const HEIGHT = modalHeight ? modalHeight : 100;
-
+    const {setShowTabs} = useContext(AuthContext)
     const closeModal = () => {
       setShowModal((s) => !s);
       offset.value = withSpring(0);
+      setShowTabs(true)
     };
 
     const pan = Gesture.Pan()

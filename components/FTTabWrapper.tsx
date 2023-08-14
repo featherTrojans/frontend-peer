@@ -30,7 +30,7 @@ const FTTabWrapper = ({
         edges={["top"]}
       >
         <Customstatusbar />
-        <View style={{ flex: 1, paddingHorizontal: 25 }}>{children}</View>
+        <View style={{ flex: 1, paddingHorizontal: 16 }}>{children}</View>
       </SafeAreaView>
       {modalChildren && (
         <Swipemodal

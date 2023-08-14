@@ -30,7 +30,7 @@ import Loader from "../components/FTLoader";
 
 const { center, bottomtext } = LoginScreenStyles;
 
-const { Newlogo, Transfericon } = icons;
+const { Newlogo,  } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {

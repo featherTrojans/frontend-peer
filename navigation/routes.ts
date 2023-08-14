@@ -28,6 +28,7 @@ import {
   LoginScreen,
   MeternumberScreen,
   MywalletScreen,
+  NetworkreceiverScreen,
   NotificationsScreen,
   OnboardingScreen,
   PersonalRegisterScreen,
@@ -162,20 +163,6 @@ export const dashboardRoutes = [
     hideHiderTitle: false,
     route: "notifications_screen",
   },
-  {
-    title: "",
-    screen: FindmerchantScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "findmerchant_screen",
-  },
-  {
-    title: "",
-    screen: SearchmerchantidScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "searchmerchantid_screen",
-  },
 ];
 
 export const transactRoutes = [
@@ -195,17 +182,47 @@ export const transactRoutes = [
   },
   {
     title: "",
+    screen: FindmerchantScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "findmerchant_screen",
+  },
+  {
+    title: "",
+    screen: SearchmerchantidScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "searchmerchantid_screen",
+  },
+
+  {
+    title: "",
+    screen: ChoosenetworkScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "choosenetwork_screen",
+  },
+  {
+    title: "",
+    screen: NetworkreceiverScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "networkreceiver_screen",
+  },
+  {
+    title: "",
     screen: AirtimeordataScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "airtimeordata_screen",
   },
+
   {
     title: "",
-    screen: PinScreen,
+    screen: SendtobankScreen,
     showHeader: false,
     hideHiderTitle: false,
-    route: "pin_screen",
+    route: "sendtobank_screen",
   },
   {
     title: "",
@@ -213,6 +230,22 @@ export const transactRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "bankaccountinformation_screen",
+  },
+
+  {
+    title: "",
+    screen: ChoosebankScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "choosebank_screen",
+  },
+
+  {
+    title: "",
+    screen: ChoosebillerScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "choosebiller_screen",
   },
   {
     title: "",
@@ -223,25 +256,12 @@ export const transactRoutes = [
   },
   {
     title: "",
-    screen: CableiucnumberScreen,
+    screen: MeternumberScreen,
     showHeader: false,
     hideHiderTitle: false,
-    route: "cableiuc_screen",
+    route: "meternumber_screen",
   },
-  {
-    title: "",
-    screen: ChoosebankScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "choosebank_screen",
-  },
-  {
-    title: "",
-    screen: ChoosebillerScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "choosebiller_screen",
-  },
+
   {
     title: "",
     screen: ChoosecableScreen,
@@ -265,32 +285,20 @@ export const transactRoutes = [
   },
   {
     title: "",
+    screen: CableiucnumberScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "cableiuc_screen",
+  },
+
+  {
+    title: "",
     screen: ChoosefeatheruserScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "choosefeatheruser_screen",
   },
-  {
-    title: "",
-    screen: ChoosenetworkScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "choosenetwork_screen",
-  },
-  {
-    title: "",
-    screen: MeternumberScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "meternumber_screen",
-  },
-  {
-    title: "",
-    screen: SendtobankScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "sendtobank_screen",
-  },
+
   {
     title: "",
     screen: SearchcontactScreen,

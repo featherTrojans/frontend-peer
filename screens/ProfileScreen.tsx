@@ -6,7 +6,7 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { navigation, redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
 
-const { Transfericon, Editprofileicon } = icons;
+const {  Editprofileicon } = icons;
 
 const {
   profileHeaderWrap,
@@ -114,7 +114,7 @@ const ProfileScreen = () => {
           return (
             <FTIconwithtitleandinfo
               key={index}
-              Icon={Transfericon}
+              Icon={Editprofileicon}
               bG={COLORS.blue19}
               title={title}
               mB={20}

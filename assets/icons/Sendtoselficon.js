@@ -1,26 +1,23 @@
 import React from 'react'
 import Svg, { Path } from "react-native-svg"
 
-
-
-function Searchmerchanticon() {
+function Sendtoselficon() {
   return (
     <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={12.549}
-    height={12.549}
+    width={13.121}
+    height={14.644}
   >
     <Path
       fill="none"
-      stroke="#8456ff"
+      stroke="#fff"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
-      d="m9.102 9.102 2.386 2.386M.75 5.522A4.772 4.772 0 1 0 5.522.75 4.772 4.772 0 0 0 .75 5.522Z"
-      data-name="search (6)"
+      d="m1.061 8.394 5.5 5.5 5.5-5.5m-11-7.333 5.5 5.5 5.5-5.5"
     />
   </Svg>
   )
 }
 
-export default Searchmerchanticon
+export default Sendtoselficon

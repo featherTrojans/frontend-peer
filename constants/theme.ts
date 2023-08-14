@@ -84,6 +84,21 @@ export const COLORS = {
   orange: "#FF8900",
   orange2: "#FFF8ED",
 
+
+  // Light colors
+  Tyellow: "#FFF5E5",
+  Tyellow2: "#FDF5E7",
+  Tblue: "#F6F8FF",
+  Tblue2: "#D2EAFD",
+  Tblue3: "#F0F4FF",
+  Tred: "#FFE3E3",  
+  Tgreen: "#E9F9F6",
+  Tgreen2: "#E5FAF6",
+  Tpurple: "#F3EEFB",
+  Tpurple2: "#F1E5FF",
+
+
+
   purple: "#6300AC",
   purple2: "#7600FF",
   purple3: "#F1E5FF",

@@ -50,19 +50,13 @@ export const TransactionScreenStyles = StyleSheet.create({
       optionWrapper: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 12,
+        marginTop: 40,
       },
       optionBlock: {
         justifyContent: "center",
         alignItems: "center",
       },
-      eachOption: {
-        width: 45.5,
-        height: 45.5,
-        borderRadius: 45.5 / 2,
-        justifyContent: "center",
-        alignItems: "center",
-      },
+
       eachOptionTitle: {
         marginTop: 13,
         ...fontsize.xxsmallest,

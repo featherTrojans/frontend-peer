@@ -7,7 +7,7 @@ import Setupprofileicon from "../assets/icons/Setupprofileicon";
 import Arrowin from "../assets/icons/Arrowin";
 import Arrowout from "../assets/icons/Arrowout";
 import Withdrawicon from "../assets/icons/Withdrawicon";
-import Transfericon from "../assets/icons/Fundwalleticon";
+import Fundwallet from "../assets/icons/Fundwalleticon";
 import Fundwalleticon from "../assets/icons/Fundwalleticon";
 import Paybillicon from "../assets/icons/Paybillicon";
 import Featherdefault from "../assets/icons/Featherdefault";
@@ -97,7 +97,11 @@ import Copydetailsicon from "../assets/icons/Copydetailsicon";
 import Leveloptioncancelicon from "../assets/icons/Leveloptioncancelicon";
 import Leveloptioncheckicon from "../assets/icons/Leveloptioncheckicon";
 import Editprofileicon from "../assets/icons/Editprofileicon";
-
+import Airtimeicon from "../assets/icons/Airtimeicon";
+import Electricityicon from "../assets/icons/Electricityicon";
+import Cableicon from "../assets/icons/Cableicon";
+import Transfersicon from "../assets/icons/Transfersicon";
+import Sendtoselficon from "../assets/icons/Sendtoselficon";
 
 
 
@@ -120,7 +124,7 @@ export default {
   Upgradenowarrow,
   Emptynotification,
   Withdrawicon,
-  Transfericon,
+  Fundwallet,
   Bonusiconlarge,
   Fundwalleticon,
   Paybillicon,
@@ -132,6 +136,7 @@ export default {
   Reporttransactions,
   Featherdefault,
   Bonusicon,
+  Transfersicon,
   Arrowin,
   Arrowout,
   Hometabicon,
@@ -179,9 +184,12 @@ export default {
   Levelcheckicon,
   Copydetailsicon,
   Leveloptioncancelicon,
-Leveloptioncheckicon,
-Editprofileicon,
-
+  Leveloptioncheckicon,
+  Editprofileicon,
+  Airtimeicon,
+  Electricityicon,
+  Cableicon,
+  Sendtoselficon,
 
   //Animated icons
 
