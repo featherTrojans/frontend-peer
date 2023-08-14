@@ -61,6 +61,45 @@ export const assetsDB = {
   };
 
 
+  export const networkLogos = [
+    {
+      name: "MTN Nigeria",
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1"
+    },
+    {
+      name: "Airtel Nigeria",
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAirtel%20Nigeria%20Logo%20(1).png?alt=media&token=5dba1e6a-3cce-43fa-972f-df17926db7ff"
+    },
+    {
+      name: "Globacom",
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGlobacom%20Limited%20Logo%20(2).png?alt=media&token=a1bf3984-a862-451e-a8b5-6f3b96b1fea4"
+    },
+    {
+      name: "9Mobile",
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2F9mobile%20Logo%20(1).png?alt=media&token=011b2934-d9b5-449d-89c5-66eb46fff497"
+    }
+  ]
+
+  export const electricityLogos = [
+    {
+      name: "Eko Electric",
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1"
+    },
+    {
+      name: "Ikeja Electric",
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAirtel%20Nigeria%20Logo%20(1).png?alt=media&token=5dba1e6a-3cce-43fa-972f-df17926db7ff"
+    },
+    {
+      name: "IBEDC Electricity",
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGlobacom%20Limited%20Logo%20(2).png?alt=media&token=a1bf3984-a862-451e-a8b5-6f3b96b1fea4"
+    },
+    {
+      name: "Jos Electric",
+      logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2F9mobile%20Logo%20(1).png?alt=media&token=011b2934-d9b5-449d-89c5-66eb46fff497"
+    }
+  ]
+
+
   export const bankLogo = [
     {
       "name": "Abbey Mortgage Bank",

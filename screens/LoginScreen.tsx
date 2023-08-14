@@ -43,7 +43,7 @@ const {
   registerText,
 } = LoginScreenStyles;
 
-const { Newlogo, Transfericon } = icons;
+const { Newlogo,  } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {

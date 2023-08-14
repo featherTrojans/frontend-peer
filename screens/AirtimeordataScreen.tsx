@@ -1,12 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { AirtimeordataScreenStyles } from '../assets/styles/screens'
+import { FTTitlepagewrapper } from '../components'
 const {} = AirtimeordataScreenStyles
+
+
+
+
 const AirtimeordataScreen = () => {
   return (
-    <View>
+    <FTTitlepagewrapper title='Airtime or Data'>
       <Text>AirtimeordataScreen</Text>
-    </View>
+    </FTTitlepagewrapper>
+
   )
 }
 

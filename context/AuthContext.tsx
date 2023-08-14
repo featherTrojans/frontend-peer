@@ -11,6 +11,7 @@ const AuthProvider:FC = ({children}) =>{
     const [authdata, setAuthData] = useState({})
 
     const [allowBiometrics, setAllowBiometrics] = useState(false)
+    const [showTabs, setShowTabs] = useState(true)
 
 
     const userDefaultImage = () => {
@@ -25,7 +26,7 @@ const AuthProvider:FC = ({children}) =>{
     
     const [showAmount, setShowAmount] = useState<boolean>(true)
     return (
-        <AuthContext.Provider value={{authdata,setAuthData,token,setToken, messageToken, setMessageToken, showAmount, setShowAmount, userColor, userDefaultImage, allowBiometrics, setAllowBiometrics}}>
+        <AuthContext.Provider value={{authdata,setAuthData,token,setToken, messageToken, setMessageToken, showAmount, setShowAmount, userColor, userDefaultImage, allowBiometrics, setAllowBiometrics, showTabs, setShowTabs}}>
             {children}
         </AuthContext.Provider>
     )

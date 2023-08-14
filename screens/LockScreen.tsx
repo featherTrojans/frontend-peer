@@ -13,7 +13,7 @@ import { useAlert } from "../hooks";
 
 const {container, lockScreenContainer, lockScreenSubcontainer, header, topDots, activeDot, subText, subHeaderText, pinContainer, pinInputContainer, pinInput, pinView, pinViewWrap, pinText, enterPinText, proceedBtn, proceedText, numberBtn, numberBtnContainer, numberOfTrials, headerNameText, headerText} = LockScreenStyles
 
-const { Newlogo, Transfericon } = icons;
+const { Newlogo, } = icons;
 const LockScreen = ({ modal, setModal }: any) => {
   const { errorAlert } = useAlert();
   const { setToken, authdata } = useContext(AuthContext);
@@ -22,6 +22,8 @@ const LockScreen = ({ modal, setModal }: any) => {
   const [loading, setLoading] = useState(false);
   const [numoftrial, setNumberTrial] = useState(0);
   const [error, setError] = useState(false);
+
+
   const handleSetAmount = (value: string) => {
     const newpin = [...pin, value];
     if (pin.length < 4) {
@@ -38,6 +40,7 @@ const LockScreen = ({ modal, setModal }: any) => {
       setPin(newdata);
     }
   };
+  
   const handleSubmit = async (newpin: any) => {
     setLoading(true);
     try {
@@ -107,7 +110,7 @@ const LockScreen = ({ modal, setModal }: any) => {
               Incorrect pin, try again
             </Text>
             <TouchableOpacity onPress={() => setError(false)}>
-              <Transfericon />
+              {/* <Transfericon /> */}
             </TouchableOpacity>
           </View>
         )}

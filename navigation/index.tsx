@@ -26,11 +26,6 @@ import {
   TransactionsScreen,
 } from "../screens";
 
-const DashboardStack = createStackNavigator();
-const TransactStack = createStackNavigator();
-const CardsStack = createStackNavigator();
-const ChatsStack = createStackNavigator();
-const ProfileStack = createStackNavigator();
 const AuthStack = createStackNavigator();
 
 const DashboardTabs = createBottomTabNavigator();
@@ -134,6 +129,7 @@ const NoAuthNavigator = () => {
 
 const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
   const { getState, reset } = useNavigation();
+  const {showTabs} = useContext(AuthContext)
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
   return (
@@ -161,7 +157,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
             alignItems: "center",
             justifyContent: "center",
             paddingVertical: 16,
-            // display: "none"
+            display: showTabs ? "flex" : "none"
           },
         })}
         screenListeners={({ navigation, route }) => ({
@@ -184,10 +180,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
             bottom: 82,
             width: getWidth(),
             transform: [{ translateX: tabOffsetValue }, { scaleX: 0.3 }],
-            display:
-              routeName && !excluded_routes.includes(routeName)
-                ? "none"
-                : "flex",
+            display: showTabs ? "flex" : "none"
           },
         ]}
       ></Animated.View>

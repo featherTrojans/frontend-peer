@@ -9,13 +9,15 @@ const { mainWrap, iconandinfoWrap, iconBg, titleText, infoText } =
 const { Greaterthanicon } = icons;
 
 type IFTIconwithtitleandInfoProps = {
-  Icon: any;
+  Icon?: any;
   bG: string;
   title: string;
   info?: string;
   onPress: () => void;
   rightComponent?: ReactNode;
   mB?: number
+  imageUrl?: string
+  size?: number
 };
 
 const FTIconwithtitleandinfo = ({
@@ -25,12 +27,14 @@ const FTIconwithtitleandinfo = ({
   info,
   onPress,
   rightComponent,
-  mB
+  mB,
+  imageUrl,
+  size=45
 }: IFTIconwithtitleandInfoProps) => {
   return (
     <Pressable style={[mainWrap, {marginBottom: mB}]} onPress={onPress}>
       <View style={iconandinfoWrap}>
-        <FTIconwithbg Icon={Icon} bG={bG} />
+        <FTIconwithbg size={size} Icon={Icon} bG={bG} imageUrl={imageUrl}/>
         <View style={{ marginLeft: 20 }}>
           <Text style={titleText}>{title}</Text>
           {info && <Text style={infoText}>{info}</Text>}

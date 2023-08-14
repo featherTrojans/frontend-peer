@@ -1,18 +1,40 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { ChoosenetworkScreenStyles } from '../assets/styles/screens'
-
-
-const {} = ChoosenetworkScreenStyles
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { ChoosenetworkScreenStyles } from "../assets/styles/screens";
+import {
+  FTIconwithtitleandinfo,
+  FTSearchinput,
+  FTTitlepagewrapper,
+} from "../components";
+import { icons } from "../constants";
+import { redirectTo } from "../utils";
+import { networkLogos } from "../assetdatas";
+const {} = ChoosenetworkScreenStyles;
+const { Bluecardicon } = icons;
 
 const ChoosenetworkScreen = () => {
   return (
-    <View>
-      <Text>ChoosenetworkScreen</Text>
-    </View>
-  )
-}
+    <FTTitlepagewrapper title="Choose Network">
+      <FTSearchinput placeholder="Search network" />
 
-export default ChoosenetworkScreen
+        {networkLogos.map(({ name, logo }, index) => {
+          return (
+            <FTIconwithtitleandinfo
+              key={index}
+              bG="transparent"
+              title={name}
+              onPress={() => redirectTo("networkreceiver_screen")}
+              imageUrl={logo}
+              mB={28}
+              size={35}
+            />
+          );
+        })}
+        
+    </FTTitlepagewrapper>
+  );
+};
 
-const styles = StyleSheet.create({})
+export default ChoosenetworkScreen;
+
+const styles = StyleSheet.create({});

@@ -2,7 +2,9 @@
 // import Profilepics from "../assets/images/profile-pics.png"
 
 import Getstartedimage from "../assets/images/getstartedPhotos.png"
+import Notificationimage from "../assets/images/notification.png"
 
 export default {
     Getstartedimage,
+    Notificationimage
 }
