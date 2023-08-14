@@ -15,6 +15,7 @@ const AuthProvider: FC = ({ children }) => {
   };
 
   const [token, setToken] = useState("");
+  const [showTabs, setShowTabs] = useState(true)
 
   const [messageToken, setMessageToken] = useState("");
 
@@ -33,6 +34,8 @@ const AuthProvider: FC = ({ children }) => {
         userColor,
         userDefaultImage,
         allowBiometrics,
+        showTabs,
+        setShowTabs,
         setAllowBiometrics,
       }}
     >
