@@ -47,7 +47,12 @@ import NetworkreceiverScreen from "./NetworkreceiverScreen";
 import PayknownmerchantScreen from "./PayknownmerchantScreen";
 import PersonalRegisterScreen from "./PersonalRegisterScreen";
 import CreatefeathertagScreen from "./CreatefeathertagScreen";
-
+import PhoneVerificationScreen from "./PhoneVerificationScreen";
+import BVNScreen from "./BVNScreen";
+import BvnErrorScreen from "./BvnErrorScreen";
+import BVNSuccessScreen from "./BVNSuccessScreen";
+import FeatherTagScreen from "./FeatherTagScreen";
+import UploadDocScreen from "./UploadDocScreen";
 
 export {
   OnboardingScreen,
@@ -59,6 +64,11 @@ export {
   PersonalRegisterScreen,
   CreatefeathertagScreen,
   PayknownmerchantScreen,
+  PhoneVerificationScreen,
+  BVNScreen,
+  BvnErrorScreen,
+  BVNSuccessScreen,
+  FeatherTagScreen,
 
   // Dasboard Screens
   HomeScreen,
@@ -77,6 +87,7 @@ export {
   SecurityandprivacyScreen,
   SetupmfaScreen,
   VerifybvnScreen,
+  UploadDocScreen,
 
   //Cards Screen
   CardScreen,
@@ -109,5 +120,4 @@ export {
   SearchcontactScreen,
   TransactionsummaryScreen,
   NetworkreceiverScreen,
-  
 };

@@ -1,53 +1,49 @@
-import React, { useContext, useEffect } from "react";
-import {
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-  TouchableHighlight,
-  Alert,
-  ScrollView,
-} from "react-native";
+import React, { useState } from "react";
+import { View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Formik } from "formik";
-import * as Yup from "yup";
 
 import { PersonalRegisterScreenStyles } from "../assets/styles/screens/personalregister.style";
 import {
-  FTBackheader,
   FTCustombutton,
+  FTHeaderandsubheader,
   FTInput,
-  FTMainwrapper,
   FTTitlepagewrapper,
 } from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
 import Loader from "../components/FTLoader";
+import { useForm } from "react-hook-form";
+import { VALIDATION, navigation } from "../utils";
+import { useAlert } from "../hooks";
 
 PersonalRegisterScreenStyles;
 
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string().label("First Name").required(),
-  lastName: Yup.string().label("Last Name").required(),
-  email: Yup.string().label("Email").email().required(),
-  referredBy: Yup.string().label("Referrer"),
-  password: Yup.string().required().min(8),
-  phoneNumber: Yup.string()
-    .label("Phone Number")
-    .matches(phoneRegExp, "This is not a valid phone number"),
-});
-
-const Personal = ({ navigation }) => {
+const Personal = ({}) => {
+  const { errorAlert } = useAlert();
+  const [loading, setLoading] = useState(false);
+  const { control, handleSubmit } = useForm({ mode: "all" });
   //   const { setAuthData } = useContext(AuthContext);
-  //   const toast = useToast();
-  //   const { errorAlert } = useAlert();
+
+  const onsubmit = async (data) => {
+    try {
+      setLoading(true);
+      const response = await axiosCustom.post("/auth/data/update", data);
+      navigation.navigate("bvn_screen");
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <FTTitlepagewrapper>
+    <FTTitlepagewrapper title="Personal Information">
+      {loading && <Loader />}
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ flex: 1, paddingHorizontal: 25 }}>
+        <FTHeaderandsubheader
+          header="Personal information"
+          subHeader="Kindly input your personal information to setup your profile"
+        />
+        <View style={{ flex: 1 }}>
           <View
             style={{
               flexDirection: "row",
@@ -57,121 +53,50 @@ const Personal = ({ navigation }) => {
             }}
           ></View>
 
-          <Formik
-            initialValues={{
-              firstName: "",
-              lastName: "",
-              email: "",
-              phoneNumber: "",
-              password: "",
-              referredBy: "",
-            }}
-            validationSchema={validationSchema}
-            onSubmit={async (values, { setSubmitting }) => {
-              try {
-                //send the request
-                const response = await axiosCustom.post("auth/signup", {
-                  firstName: values.firstName.trim(),
-                  lastName: values.lastName.trim(),
-                  email: values.email.trim(),
-                  phoneNumber: values.phoneNumber.trim(),
-                  password: values.password,
-                  referredBy: values.referredBy.trim(),
-                });
-                navigation.navigate("Verification", {
-                  email: values.email,
-                  phoneNumber: values.phoneNumber,
-                  token: response?.data?.data?.token,
-                });
-              } catch (err) {
-                if (err.response) {
-                  if (!err?.response?.data?.data?.isVerified) {
-                    return navigation.navigate("Verification", {
-                      email: values.email,
-                      phoneNumber: values.phoneNumber,
-                      token: null,
-                    });
-                  }
-                }
-                // errorAlert(err);
-              }
-            }}
-          >
-            {(formikProps) => {
-              const {
-                isSubmitting,
-                isValid,
-                handleBlur,
-                errors,
-                touched,
-                handleChange,
-                handleSubmit,
-              } = formikProps;
+          <React.Fragment>
+            {/* Input */}
+            <FTInput
+              placeholderText="Enter your name"
+              name="firstName"
+              label="Legal Firstname"
+              control={control}
+              rules={VALIDATION.FIRST_NAME_VALIDATION}
+              mB={15}
+            />
+            <FTInput
+              placeholderText="Enter your name"
+              name="lastName"
+              label="Legal Lastname"
+              control={control}
+              rules={VALIDATION.LAST_NAME_VALIDATION}
+              mB={15}
+            />
+            <FTInput
+              placeholderText="Enter valid email address"
+              name="email"
+              label="Email"
+              control={control}
+              rules={VALIDATION.EMAIL_VALIDATION}
+              mB={15}
+            />
 
-              return (
-                <React.Fragment>
-                  {isSubmitting && <Loader />}
-                  {/* Input */}
-                  <FTInput
-                    placeholderText="Enter your name"
-                    name="firstName"
-                    label="Legal Firstname"
-                    formikProps={formikProps}
-                  />
-                  <FTInput
-                    placeholderText="Enter your name"
-                    name="lastName"
-                    label="Legal Lastname"
-                    formikProps={formikProps}
-                  />
-                  <FTInput
-                    placeholderText="Enter valid email address"
-                    name="email"
-                    label="Email"
-                    formikProps={formikProps}
-                  />
+            <FTInput
+              placeholderText="--- Select Gender ---"
+              name="gender"
+              label="Gender"
+              control={control}
+              rules={VALIDATION.LAST_NAME_VALIDATION}
+              mB={55}
+            />
 
-                  <FTInput
-                    placeholderText="--- Select Gender ---"
-                    name="gender"
-                    label="Gender"
-                    formikProps={formikProps}
-                  />
-
-                  {/* Proceed Btn */}
-                  <View>
-                    <FTCustombutton
-                      disable={isSubmitting}
-                      btntext="Sign up"
-                      onpress={() => {
-                        const errorvalues = Object.values(errors);
-                        if (errorvalues.length > 0) {
-                          //   return errorAlert(null, errorvalues[0]);
-                        }
-                        handleSubmit();
-                      }}
-                    />
-
-                    {/* Have an account */}
-                    {/* <View style={styles.bottomTextContainer}>
-                      <Text style={styles.bottomText}>
-                        Already have an account?{" "}
-                      </Text>
-
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("Login")}
-                        activeOpacity={0.8}
-                      >
-                        <Text style={[styles.bottomText, { ...FONTS.bold }]}>
-                          Sign in
-                        </Text>
-                      </TouchableOpacity>
-                    </View> */}
-                  </View>
-                </React.Fragment>
-              );
-            }}
-          </Formik>
+            {/* Proceed Btn */}
+            <View>
+              <FTCustombutton
+                btntext="Continue"
+                onpress={handleSubmit(onsubmit)}
+              />
+            </View>
+          </React.Fragment>
         </View>
       </KeyboardAwareScrollView>
     </FTTitlepagewrapper>

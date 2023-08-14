@@ -1,37 +1,44 @@
-import React, {createContext, FC, useContext, useState} from "react";
+import React, { createContext, FC, useContext, useState } from "react";
 import Featherdefault from "../assets/icons/Featherdefault";
 
 const AuthContext = createContext<any>({});
 
+const AuthProvider: FC = ({ children }) => {
+  const [userColor, setUSerColor] = useState("#E5EBFB");
 
+  const [authdata, setAuthData] = useState({});
 
-const AuthProvider:FC = ({children}) =>{
-    const [userColor, setUSerColor] = useState("#E5EBFB")
+  const [allowBiometrics, setAllowBiometrics] = useState(false);
 
-    const [authdata, setAuthData] = useState({})
+  const userDefaultImage = () => {
+    return <Featherdefault />;
+  };
 
-    const [allowBiometrics, setAllowBiometrics] = useState(false)
-    const [showTabs, setShowTabs] = useState(true)
+  const [token, setToken] = useState("");
 
+  const [messageToken, setMessageToken] = useState("");
 
-    const userDefaultImage = () => {
-        return (
-            <Featherdefault />
-        )
-    }
+  const [showAmount, setShowAmount] = useState<boolean>(true);
+  return (
+    <AuthContext.Provider
+      value={{
+        authdata,
+        setAuthData,
+        token,
+        setToken,
+        messageToken,
+        setMessageToken,
+        showAmount,
+        setShowAmount,
+        userColor,
+        userDefaultImage,
+        allowBiometrics,
+        setAllowBiometrics,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-    const [token,setToken] = useState("")
-
-    const [messageToken, setMessageToken] = useState("")
-    
-    const [showAmount, setShowAmount] = useState<boolean>(true)
-    return (
-        <AuthContext.Provider value={{authdata,setAuthData,token,setToken, messageToken, setMessageToken, showAmount, setShowAmount, userColor, userDefaultImage, allowBiometrics, setAllowBiometrics, showTabs, setShowTabs}}>
-            {children}
-        </AuthContext.Provider>
-    )
-}
-
-export {AuthContext, AuthProvider}
-
-
+export { AuthContext, AuthProvider };

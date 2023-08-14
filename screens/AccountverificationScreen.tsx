@@ -9,10 +9,18 @@ import {
   Pressable,
   FlatList,
 } from "react-native";
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useContext,
+} from "react";
 import { AccountverificationScreenStyles } from "../assets/styles/screens";
-import { FTTitlepagewrapper } from "../components";
+import { FTCustombutton, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
+import { AuthContext } from "../context/AuthContext";
+import { navigation } from "../utils";
 const { Levelcheckicon, Leveloptioncancelicon, Leveloptioncheckicon } = icons;
 
 const { width } = Dimensions.get("window");
@@ -32,14 +40,16 @@ const {
   infoValueText,
   dashedLine,
   statusText,
-  statusTextBg
+  statusTextBg,
 } = AccountverificationScreenStyles;
 
 const AccountverificationScreen = (props) => {
   const translateValue = 260 / 3;
+  const { authdata } = useContext(AuthContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [tabTranslate, setTabTranslate] = React.useState(new Animated.Value(0));
   const flatlistRef = useRef<FlatList>(null);
+  const userlevel = 1 || authdata?.userDetails?.userLevel;
 
   const onOptionPress = useCallback((index) => {
     setCurrentIndex(index);
@@ -68,32 +78,35 @@ const AccountverificationScreen = (props) => {
     {
       levelTitle: "Newbie",
       requirement: "Basic Personal Information",
-      status: true,
+      status: userlevel >= 1,
       fundinglimit: "Unlimited",
       cashrequest: "N30,000.00",
       transferout: "N50,000.00",
       accountnumber: false,
       usdcard: false,
+      upgradeLocation: "editprofile_screen",
     },
     {
       levelTitle: "Odogwu",
       requirement: "Bank Verification Number (BVN)",
-      status: false,
+      status: userlevel >= 2,
       fundinglimit: "Unlimited",
       cashrequest: "N200,000.00",
       transferout: "N500,000.00",
       accountnumber: true,
       usdcard: false,
+      upgradeLocation: "bvn_screen",
     },
     {
       levelTitle: "Veteran",
       requirement: "Identity Document Uploads",
-      status: false,
+      status: userlevel >= 3,
       fundinglimit: "Unlimited",
       cashrequest: "N500,000.00",
       transferout: "N1,000,000.00",
       accountnumber: true,
       usdcard: true,
+      upgradeLocation: "uploaddoc_screen",
     },
   ];
 
@@ -138,8 +151,17 @@ const AccountverificationScreen = (props) => {
         pagingEnabled
         scrollEnabled={false}
         renderItem={({ item }) => {
-          const {status, levelTitle, fundinglimit, cashrequest, transferout, accountnumber, usdcard } = item
-          
+          const {
+            status,
+            levelTitle,
+            fundinglimit,
+            cashrequest,
+            transferout,
+            accountnumber,
+            usdcard,
+            upgradeLocation,
+          } = item;
+
           return (
             <View style={{ width: width - 30, backgroundColor: COLORS.white }}>
               <View style={levelInfoWrap}>
@@ -156,9 +178,19 @@ const AccountverificationScreen = (props) => {
               <View style={blockWrap}>
                 <View style={BAlign}>
                   <Text style={infoKeyText}>Status</Text>
-                  <View style={[statusTextBg, {backgroundColor: status ? "#E9F7EA" : "#FDF3F7" }]}>
-                    <Text style={[statusText, { color: status ? COLORS.green4 : "#D81859" }]}>
-                     {status ?  "Completed" : "Not Started"}
+                  <View
+                    style={[
+                      statusTextBg,
+                      { backgroundColor: status ? "#E9F7EA" : "#FDF3F7" },
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        statusText,
+                        { color: status ? COLORS.green4 : "#D81859" },
+                      ]}
+                    >
+                      {status ? "Completed" : "Not Started"}
                     </Text>
                   </View>
                 </View>
@@ -179,13 +211,29 @@ const AccountverificationScreen = (props) => {
                 </View>
                 <View style={[BAlign, { marginVertical: 18 }]}>
                   <Text style={infoKeyText}>Free Bank Account Number</Text>
-                  {accountnumber ?  <Leveloptioncheckicon /> : <Leveloptioncancelicon />}
+                  {accountnumber ? (
+                    <Leveloptioncheckicon />
+                  ) : (
+                    <Leveloptioncancelicon />
+                  )}
                 </View>
                 <View style={BAlign}>
                   <Text style={infoKeyText}>Virtual USD Card</Text>
-                  {usdcard ?  <Leveloptioncheckicon /> : <Leveloptioncancelicon />}
+                  {usdcard ? (
+                    <Leveloptioncheckicon />
+                  ) : (
+                    <Leveloptioncancelicon />
+                  )}
                 </View>
               </View>
+              {!status && (
+                <FTCustombutton
+                  btntext={`Updrage to ${levelTitle}`}
+                  onpress={() => {
+                    navigation.navigate(upgradeLocation);
+                  }}
+                />
+              )}
             </View>
           );
         }}

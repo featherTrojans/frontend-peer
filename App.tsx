@@ -20,9 +20,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import navigationService from "./utils/navigation";
 import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-
-
-
+import { setAuthorizationToken } from "./utils";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -149,7 +147,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [routeName, setRouteName] = useState("");
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
-// const {Swipemodal} = useSwipemodal()
+  // const {Swipemodal} = useSwipemodal()
   const checkOnboarding = async () => {
     // await AsyncStorage.removeItem('@onboarded')
     try {
@@ -165,6 +163,26 @@ export default function App() {
     } finally {
     }
   };
+  // const persistLogin = async () => {
+  //   // await AsyncStorage.removeItem('@onboarded')
+  //   try {
+  //     const value = await AsyncStorage.getItem("@onboarded");
+
+  //     if (value !== null) {
+  //       setOnboarded(JSON.parse(value).onboard);
+  //     } else {
+  //       setOnboarded(false);
+  //     }
+  //   } catch (err) {
+  //     setOnboarded(false);
+  //   } finally {
+  //   }
+  // };
+  useEffect(() => {
+    setAuthorizationToken(
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjkxOTUwMTczLCJleHAiOjE2OTI1NTQ5NzN9.Mj1Af1ayAetpvK-0EIul7VHVXRn8W9yLmLdNm4V6BJI"
+    );
+  }, []);
   useEffect(() => {
     checkOnboarding();
   }, []);
@@ -195,7 +213,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <SafeAreaProvider>
-        <View style={{ flex: 1, }}>
+        <View style={{ flex: 1 }}>
           <StatusBar />
           <NavigationContainer
             theme={MyTheme}
@@ -217,10 +235,7 @@ export default function App() {
               onShow={() => console.log("Status shown")}
               onHide={() => console.log("Status hidden")}
             />
-            
           </NavigationContainer>
-
-          
         </View>
       </SafeAreaProvider>
     </GestureHandlerRootView>

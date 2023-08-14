@@ -10,6 +10,8 @@ export const COLORS = {
 
   white3: "#F7F8FA",
 
+  gray: "#F7F7F7",
+
   blue1: "#1d00ff",
   blue2: "#2949b4",
   blue3: "#1f1f41",
@@ -39,9 +41,7 @@ export const COLORS = {
   lightBlue2: `rgba(210, 234, 254, .5)`,
   errorBorder: `rgba(224, 0, 0, .5)`,
 
-
   grey1: "#f0f0f0",
-
 
   grey2: "#707070",
   grey3: "#d6d6d6",
@@ -79,7 +79,6 @@ export const COLORS = {
   red2: "#FFE3E3",
   red3: "#FF5668",
   red4: "#F80000",
-
 
   red5: "#D81859",
   orange: "#FF8900",
@@ -163,9 +162,6 @@ export const Shadow = {
 };
 
 export const fontsize = {
-  
-
-
   bmsmall: {
     fontSize: RFValue(15),
   },
@@ -173,9 +169,6 @@ export const fontsize = {
   small: {
     fontSize: RFValue(14),
   },
-
-
-
 
   smaller: {
     fontSize: RFValue(13),
@@ -204,15 +197,12 @@ export const fontsize = {
     fontSize: RFValue(22),
   },
 
-
-
   xxsmall: {
     fontSize: RFValue(9),
   },
   medium: {
     fontSize: RFValue(20),
   },
- 
 
   bymedium: {
     fontsize: RFValue(25),

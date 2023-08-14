@@ -26,22 +26,9 @@ import { LoginScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import { VALIDATION, navigation } from "../utils";
 import { useForm } from "react-hook-form";
+import Loader from "../components/FTLoader";
 
-
-const {
-  container,
-  logoWrapper,
-  inputContainer,
-  textInput,
-  inputiconwrapper,
-  biometrics,
-  forgetPassword,
-  loginbtn,
-  loginbtnText,
-  haveaccounttext,
-  haveanaccount,
-  registerText,
-} = LoginScreenStyles;
+const { center, bottomtext } = LoginScreenStyles;
 
 const { Newlogo,  } = icons;
 
@@ -51,193 +38,45 @@ const setAuthorizationToken = (token: string) => {
   }
 };
 
-
-
+// /auth/signin/v2
 const LoginScreen = () => {
-  const { control, handleSubmit } = useForm({mode: 'all'});
-  const [hidePassword, setHidePassword] = useState(true);
-  const { setToken, allowBiometrics, setAllowBiometrics } =
-    useContext(AuthContext);
+  const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();
-
-  const [isBiometricAllowed, setIsBiometricAllowed] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [enableBiometrics, setEnableBiometrics] = useState<any>(null);
-
-  const loginFunc = async (values) => {
-    console.log("hiiiiiiiiiiiiiiiiiii");
-    setLoading(true);
+  const onsubmit = async (data) => {
     try {
-      const response = await axiosCustom.post("/auth/signin", {
-        username: values.username.trim(),
-        password: values.password.trim(),
+      setLoading(true);
+      const response = await axiosCustom.post("/auth/signin/v2", data);
+      setAuthorizationToken(response.data.data.token);
+      navigation.navigate("phone-verify_screen", {
+        phonenumber: data.phoneNumber,
+        from: "login",
       });
-      if (response.status === 200) {
-        const savedDatas = await saveCredentials(
-          values.username.trim(),
-          values.password.trim()
-        );
-        setAllowBiometrics(true);
-      }
-      const token = response.data.data.token;
-      setAuthorizationToken(token);
-      try {
-        await axiosCustom.post(
-          "auth/pin/verify",
-          { user_pin: "0000" },
-          { headers: { token: token } }
-        );
-        navigation.navigate("Welcometochange", {
-          fromm: "login",
-          username: values.username,
-          token: token,
-        });
-      } catch (err) {
-        // setToken(response.data.data.token)
-        navigation.navigate("welcome_screen", {
-          fromm: "login",
-          username: values.username,
-          token: token,
-        });
-      }
     } catch (err) {
-      console.log("there is an err");
       errorAlert(err);
     } finally {
       setLoading(false);
     }
   };
 
-  ///To check if the device supports biometrics
-  useEffect(() => {
-    (async () => {
-      const compatible = await LocalAuthentication.hasHardwareAsync();
-      setIsBiometricAllowed(compatible);
-    })();
-  });
-
-  useEffect(() => {
-    const checkStatus = async () => {
-      const response = await getBiometricsAccess();
-      console.log(response, "here is it");
-      setEnableBiometrics(response);
-    };
-
-    checkStatus();
-  }, []);
-
-  const biometricsLogin = async () => {
-    try {
-      const result = await LocalAuthentication.authenticateAsync({
-        promptMessage: "Login with Biometrics",
-        fallbackLabel: "Enter Password",
-        disableDeviceFallback: true,
-        cancelLabel: "Cancel",
-      });
-      setIsAuthenticated(result.success);
-      const loginCreds = await getCredentials();
-      if (result.success === true) {
-        loginFunc(loginCreds);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onSubmit = ((data) => {
-    loginFunc(data)
-  });
-
   return (
     <FTMainwrapper>
-      <KeyboardAwareScrollView>
-      {loading && <FTLoader />}
-
-        <View style={container}>
-          <View style={{ marginTop: 30 }}>
-            <Newlogo />
-            <View style={{ marginTop: 28, marginBottom: 40 }}>
-              <Text
-                style={{
-                  ...fontsize.bsmall,
-                  ...FONTS.medium,
-                  color: COLORS.black,
-                  lineHeight: 21,
-                  marginBottom: 9,
-                }}
-              >
-                Padi, Welcome Back
-              </Text>
-              <Text
-                style={{
-                  ...fontsize.smallest,
-                  color: COLORS.grey16,
-                  ...FONTS.regular,
-                }}
-              >
-                Sign into your feather account
-              </Text>
-            </View>
-          </View>
-
-          
-    
-
-
-
-                  <FTInput
-                    placeholderText="Phone Number / email / username"
-                    name="username"
-                    control={control}
-                    rules={VALIDATION.USER_NAME_VALIDATION}
-                  />
-
-                  <FTInput
-                    placeholderText="Password"
-                    name="password"
-                    control={control}
-                    rules={VALIDATION.PASSWORD_VALIDATION}
-                  />
-
-                  <View
-                    style={{
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginTop: RFValue(16),
-                      marginBottom: RFValue(22),
-                    }}
-                  >
-                    <Text
-                      style={[
-                        biometrics,
-                        {
-                          opacity:
-                            isBiometricAllowed && enableBiometrics ? 1 : 0.2,
-                        },
-                      ]}
-                      onPress={
-                        isBiometricAllowed && enableBiometrics
-                          ? biometricsLogin
-                          : () => null
-                      }
-                    >
-                      Use Biometrics
-                    </Text>
-                  </View>
-
-                  <FTCustombutton
-                    btntext="Sign in"
-                    onpress={handleSubmit(onSubmit)}
-                  />
-
-
-
-          <View style={haveanaccount}>
-            <Text style={haveaccounttext}>Don’t have an account? </Text>
-          </View>
-        </View>
-      </KeyboardAwareScrollView>
+      <Text style={center}>Enter Phone Number</Text>
+      {loading && <Loader />}
+      <View>
+        <FTInput
+          placeholderText="Enter here.."
+          name="username"
+          control={control}
+          rules={VALIDATION.PHONE_NUMBER_VALIDATION}
+          mB={20}
+        />
+      </View>
+      <FTCustombutton btntext="PROCEED" onpress={handleSubmit(onsubmit)} />
+      <Text style={bottomtext}>
+        Ensure you can reach this mobile number to get started as this number
+        has to be verified.
+      </Text>
     </FTMainwrapper>
   );
 };

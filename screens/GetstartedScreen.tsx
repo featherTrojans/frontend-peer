@@ -41,7 +41,7 @@ const GetstartedScreen = ({ navigation }) => {
           <FTCustombutton
             btntext="Create Account"
             bg={COLORS.blue9}
-            onpress={() => navigation.navigate("personalregister_screen")}
+            onpress={() => navigation.navigate("phone_screen")}
           />
         </View>
 

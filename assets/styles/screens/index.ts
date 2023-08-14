@@ -49,3 +49,7 @@ export * from "./verifybvn.style";
 export * from "./welcome.style";
 export * from "./searchmerchantid.style";
 export * from "./phoneregister.style";
+export * from "./phoneverification.style";
+export * from "./bvn.style";
+export * from "./feathertag.style";
+export * from "./BvnError.style";
