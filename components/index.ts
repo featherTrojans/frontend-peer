@@ -19,6 +19,7 @@ import FTTitlepagewrapper from "./FTTitlepagewrapper";
 import FTSearchinput from "./FTSearchinput";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
 import FTIconwithbg from "./FTIconwithbg";
+import FTKeyboardwrapper from "./FTKeyboardwrapper";
 
 
 
@@ -45,5 +46,6 @@ export {
     FTTitlepagewrapper,
     FTSearchinput,
     FTIconwithtitleandinfo,
-    FTIconwithbg
+    FTIconwithbg,
+    FTKeyboardwrapper
 }

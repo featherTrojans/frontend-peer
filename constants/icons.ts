@@ -102,6 +102,7 @@ import Electricityicon from "../assets/icons/Electricityicon";
 import Cableicon from "../assets/icons/Cableicon";
 import Transfersicon from "../assets/icons/Transfersicon";
 import Sendtoselficon from "../assets/icons/Sendtoselficon";
+import Profileediticon from "../assets/icons/Profileediticon";
 
 
 
@@ -190,7 +191,7 @@ export default {
   Electricityicon,
   Cableicon,
   Sendtoselficon,
-
+  Profileediticon,
   //Animated icons
 
   Cryinganimate,
