@@ -63,7 +63,7 @@ import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 export const authRoutes = [
   {
     title: "",
-    screen: CardScreen,
+    screen: WelcomeScreen,
     // screen: OnboardingScreen,
     showHeader: false,
     hideHiderTitle: false,
