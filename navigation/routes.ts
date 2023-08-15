@@ -63,7 +63,7 @@ import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 export const authRoutes = [
   {
     title: "",
-    screen: WelcomeScreen,
+    screen: CardScreen,
     // screen: OnboardingScreen,
     showHeader: false,
     hideHiderTitle: false,
@@ -312,6 +312,13 @@ export const transactRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "transactionsummary_screen",
+  },
+  {
+    title: "",
+    screen: PinScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "pin_screen",
   },
 ];
 

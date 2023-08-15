@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View, FlatList } from "react-native";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { CardScreenStyles } from "../assets/styles/screens";
 import {
   FTCustombutton,
@@ -12,6 +12,8 @@ import { navigation } from "../utils";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
+import { AuthContext } from "../context/AuthContext";
+import { useAlert } from "../hooks";
 
 const {
   Carddetailsicon,
@@ -179,6 +181,8 @@ const RightComponent = ({ bG = "blue", amount }) => {
 };
 
 const CreateCard = () => {
+  const { authdata } = useContext(AuthContext);
+  const { errorAlert } = useAlert();
   return (
     <View style={{ paddingVertical: 12 }}>
       <Text style={createVisaCardText}>Create a Visa card</Text>
@@ -205,6 +209,17 @@ const CreateCard = () => {
         bg="#000"
         btntext="Continue"
         onpress={() => {
+          if (authdata.userDetails.userLevel < 3) {
+            errorAlert(
+              null,
+              "Padi you need to upgrade your account to create a virtual card"
+            );
+
+            setTimeout(() => {
+              navigation.navigate("accountverification_screen");
+            }, 500);
+            return;
+          }
           navigation.navigate("carddisclosure_screen");
         }}
       />
@@ -288,51 +303,66 @@ const CardScreen = () => {
       setShowModal={setShowModal}
       modalHeight={520}
     >
-      <Text style={myCardsText}>My Cards</Text>
-
-      {carddetails?.card_id ? (
+      {!carddetails?.card_id ? (
         <>
-          <View style={demoCard} />
-          <View style={actionsWrap}>
-            {cardactions.map(({ Icon, title, action }, index) => {
-              return (
-                <Pressable onPress={action} key={index} style={actionIconWrap}>
-                  <FTIconwithbg Icon={Icon} bG={COLORS.white} />
-                  <Text style={actionTitle}>{title}</Text>
-                </Pressable>
-              );
-            })}
-          </View>
+          {!carddetails?.is_active ? (
+            <>
+              <Text style={myCardsText}>My Cards</Text>
+              <View style={demoCard} />
+              <View style={actionsWrap}>
+                {cardactions.map(({ Icon, title, action }, index) => {
+                  return (
+                    <Pressable
+                      onPress={action}
+                      key={index}
+                      style={actionIconWrap}
+                    >
+                      <FTIconwithbg Icon={Icon} bG={COLORS.white} />
+                      <Text style={actionTitle}>{title}</Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
 
-          <BottomSheet
-            index={0}
-            snapPoints={snapPoints}
-            style={{
-              paddingHorizontal: 24,
-            }}
-          >
-            <View style={sheetHeader}>
-              <Historyicon />
-              <Text style={sheetHeaderText}>Recents Transactions</Text>
-            </View>
+              <BottomSheet
+                index={0}
+                snapPoints={snapPoints}
+                style={{
+                  paddingHorizontal: 24,
+                }}
+              >
+                <View style={sheetHeader}>
+                  <Historyicon />
+                  <Text style={sheetHeaderText}>Recents Transactions</Text>
+                </View>
 
-            <FTHorizontaline marginV={24} />
-          </BottomSheet>
+                <FTHorizontaline marginV={24} />
+              </BottomSheet>
+            </>
+          ) : (
+            <>
+              <Text style={{ textAlign: "center" }}>Pending Verification</Text>
+            </>
+          )}
         </>
       ) : (
-        <View style={emptyCardsWrap}>
-          <Emptycardicon />
-          <Text style={youHaveNoCard}>You have no card yet</Text>
-          <Text style={shopAndPay}>
-            Shop, Pay, Stream and Subscribe freely, Accepted Globally.
-          </Text>
-          <Pressable
-            onPress={() => switchModals(0)}
-            style={createVirtualCardWrap}
-          >
-            <Text style={createVirtualCardText}>Create Virtual Card</Text>
-          </Pressable>
-        </View>
+        <>
+          <Text style={myCardsText}>My Cards</Text>
+
+          <View style={emptyCardsWrap}>
+            <Emptycardicon />
+            <Text style={youHaveNoCard}>You have no card yet</Text>
+            <Text style={shopAndPay}>
+              Shop, Pay, Stream and Subscribe freely, Accepted Globally.
+            </Text>
+            <Pressable
+              onPress={() => switchModals(0)}
+              style={createVirtualCardWrap}
+            >
+              <Text style={createVirtualCardText}>Create Virtual Card</Text>
+            </Pressable>
+          </View>
+        </>
       )}
     </FTTabWrapper>
   );
