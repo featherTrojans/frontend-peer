@@ -105,11 +105,9 @@ let TabIcon = (name: string, focused: boolean) => {
   }
 };
 
-
-
-const NoAuthNavigator = () => {
+const NoAuthNavigator = ({ routeName }) => {
   return (
-    <AuthStack.Navigator initialRouteName="onboarding_screen">
+    <AuthStack.Navigator initialRouteName={routeName}>
       {authRoutes?.map((route: any, index: number) => {
         return (
           <AuthStack.Screen
@@ -129,7 +127,7 @@ const NoAuthNavigator = () => {
 
 const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
   const { getState, reset } = useNavigation();
-  const {showTabs} = useContext(AuthContext)
+  const { showTabs } = useContext(AuthContext);
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
   return (
@@ -157,7 +155,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
             alignItems: "center",
             justifyContent: "center",
             paddingVertical: 16,
-            display: showTabs ? "flex" : "none"
+            display: showTabs ? "flex" : "none",
           },
         })}
         screenListeners={({ navigation, route }) => ({
@@ -180,7 +178,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
             bottom: 82,
             width: getWidth(),
             transform: [{ translateX: tabOffsetValue }, { scaleX: 0.3 }],
-            display: showTabs ? "flex" : "none"
+            display: showTabs ? "flex" : "none",
           },
         ]}
       ></Animated.View>
@@ -193,9 +191,7 @@ const AuthenticatedNavigator = () => {
     <AuthStack.Navigator
       screenOptions={{
         headerShown: false,
-        
       }}
-      
     >
       <AuthStack.Screen name="Dashboard" component={DashboardTabNavigator} />
       {/* Transact Screens */}
@@ -340,7 +336,7 @@ export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
   console.log(!token, "I am token");
 
   if (!token) {
-    return <NoAuthNavigator />;
+    return <NoAuthNavigator routeName={routeName} />;
   }
 
   return (

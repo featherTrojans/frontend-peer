@@ -24,13 +24,13 @@ import {
 } from "../utils/biometrics";
 import { LoginScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
-import { VALIDATION, navigation } from "../utils";
+import { AWEEKAFTER, VALIDATION, navigation, setDataInstorage } from "../utils";
 import { useForm } from "react-hook-form";
 import Loader from "../components/FTLoader";
 
 const { center, bottomtext } = LoginScreenStyles;
 
-const { Newlogo,  } = icons;
+const { Newlogo } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -47,6 +47,10 @@ const LoginScreen = () => {
     try {
       setLoading(true);
       const response = await axiosCustom.post("/auth/signin/v2", data);
+      await setDataInstorage("@token", {
+        token: response.data.data.token,
+        time: Date.now(),
+      });
       setAuthorizationToken(response.data.data.token);
       navigation.navigate("phone-verify_screen", {
         phonenumber: data.phoneNumber,
