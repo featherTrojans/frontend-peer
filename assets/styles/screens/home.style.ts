@@ -146,7 +146,6 @@ export const HomeScreenStyles = StyleSheet.create({
         paddingHorizontal: 18,
         paddingVertical: 24,
         borderRadius: 15,
-        marginHorizontal: 15,
       },
       transactionHeader: {
         flexDirection: "row",
@@ -173,7 +172,7 @@ export const HomeScreenStyles = StyleSheet.create({
         marginVertical: 15,
         padding: 18,
         borderRadius: 16,
-        marginHorizontal: 15,
+        // marginHorizontal: 15,
       },
       conversationHeader: {
         flexDirection: "row",
@@ -200,7 +199,7 @@ export const HomeScreenStyles = StyleSheet.create({
         marginVertical: 15,
         padding: 18,
         borderRadius: 16,
-        marginHorizontal: 15,
+        // marginHorizontal: 15,
       },
       setupText: {
         ...fontsize.xsmallest,

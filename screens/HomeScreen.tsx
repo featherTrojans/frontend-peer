@@ -12,16 +12,19 @@ import {
   ScrollView,
   TouchableOpacity,
   RefreshControl,
+  FlatList,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 import {
   FTEmptycomponent,
   FTHorizontaline,
+  FTIconwithtitleandinfo,
+  FTTabWrapper,
   FTTransactionhistory,
   FTViewbalance,
 } from "../components";
-import { COLORS,icons } from "../constants";
+import { COLORS, SIZES, icons } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -33,8 +36,6 @@ import formatData from "../utils/fomatTrans";
 import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
-
-
 
 const {
   container,
@@ -85,6 +86,13 @@ const {
   Recentconvicon,
   Setupprofileicon,
   Balanceicon,
+  Walletblueicon,
+  Transactionpinsetupicon,
+  Profilesetupicon,
+  Personalsetupicon,
+  Createtagsetupicon,
+  Banksetupicon,
+  Documentsetupicon,
 } = icons;
 
 const scrollactions = [
@@ -134,7 +142,7 @@ const QuickActions = () => {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 16 }}
+      // contentContainerStyle={{ paddingHorizontal: 16 }}
     >
       {scrollactions.map((scrollaction, index) => {
         let { bg, text, icon } = scrollaction;
@@ -181,7 +189,7 @@ const Conversations = () => {
   );
 };
 
-const SetupProfile = () => {
+const SetupProfile = ({ onPress }) => {
   return (
     <View style={setupProfile}>
       <View style={setupHeadSection}>
@@ -196,7 +204,11 @@ const SetupProfile = () => {
 
       <Text style={setupInfoText}>
         Complete your profile today to enjoy all the benefits of feather without
-        limits.<Text style={setupInfoSubText}> Go to profile page.</Text>
+        limits.{" "}
+        <Text onPress={onPress} style={setupInfoSubText}>
+          {" "}
+          Check profile setup.
+        </Text>
       </Text>
     </View>
   );
@@ -235,12 +247,17 @@ const ActiveCashWithdrawal = () => {
 };
 
 const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
-  const { setAuthData, authdata } = useContext(AuthContext);
+  const { setAuthData, authdata, setShowTabs } = useContext(AuthContext);
   const histories: any[] = formatData(authdata?.transactions);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
   const scrollViewRef = useRef<any>();
+  const [showModal, setShowModal] = useState(false);
+  const [content, setContent] = useState<{
+    child: React.ReactNode;
+    height: number;
+  }>({ child: null, height: 200 });
 
   const { updateAlert } = useAlert();
 
@@ -264,9 +281,115 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     getDashboardData();
   }, []);
 
+  const profilesetupdatas = [
+    {
+      title: "Personal Information",
+      info: "Complete your personal user profile",
+      Icon: Personalsetupicon,
+      bg: COLORS.Tyellow,
+      onPress: () => console.log("here"),
+    },
+    {
+      title: "Create a feather tag",
+      info: "Create a custom feather tag",
+      Icon: Createtagsetupicon,
+      bg: COLORS.Tred,
+      onPress: () => console.log("here"),
+    },
+    {
+      title: "Profile Appearance",
+      info: "Manage your profile appearance",
+      Icon: Profilesetupicon,
+      bg: COLORS.Tgreen3,
+      onPress: () => console.log("here"),
+    },
+    {
+      title: "Transaction PIN",
+      info: "Secure your transactions with a PIN",
+      Icon: Transactionpinsetupicon,
+      bg: COLORS.Tred2,
+      onPress: () => console.log("here"),
+    },
+    {
+      title: "Bank Verification Number",
+      info: "Verify your BVN to get an account number",
+      Icon: Banksetupicon,
+      bg: COLORS.Tblue5,
+      onPress: () => console.log("here"),
+    },
+    {
+      title: "Document Verification",
+      info: "Verify your documents to level up",
+      Icon: Documentsetupicon,
+      bg: COLORS.Tpurple,
+      onPress: () => console.log("here"),
+    },
+  ];
+
+  const ProfileSetup = () => {
+    return (
+      <View style={{ backgroundColor: "#fff", flex: 1 }}>
+        <Text>Hi Mayowa,{`\n`}Complete your profile!</Text>
+        <Text>Completed 3 / 6</Text>
+
+        <View style={{ marginTop: 45, flex: 1 }}>
+          <FlatList
+            data={profilesetupdatas}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => {
+              const { title, info, Icon, bg, onPress } = item;
+              return (
+                <FTIconwithtitleandinfo
+                  title={title}
+                  info={info}
+                  Icon={Icon}
+                  onPress={onPress}
+                  bG={bg}
+                  mB={25}
+                />
+              );
+            }}
+            keyExtractor={(item) => item.title}
+          />
+        </View>
+      </View>
+    );
+  };
+
+  const ModalCon = () => {
+    return (
+      <View style={{ backgroundColor: "#fff", height: 200 }}>
+        <Text>The name two</Text>
+      </View>
+    );
+  };
+
+  const switchModals = (value) => {
+    switch (value) {
+      case 0:
+        setContent({ child: <ProfileSetup />, height: SIZES.height - 150 });
+        setShowModal((s) => !s);
+        setShowTabs(false);
+        break;
+      case 1:
+        setContent({ child: <ModalCon />, height: 300 });
+        setShowModal((s) => !s);
+        setShowTabs(false);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
-    <View style={[container, { paddingTop: getStatusBarHeight(true) }]}>
-      <Customstatusbar />
+    <FTTabWrapper
+      bgColor={COLORS.white3}
+      modalChildren={content.child}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      modalHeight={content.height}
+    >
       <View style={headerContainer}>
         <View style={profileContainer}>
           <TouchableOpacity
@@ -323,7 +446,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         <QuickActions />
         <ActiveCashWithdrawal />
         <Conversations />
-        <SetupProfile />
+        <SetupProfile onPress={() => switchModals(0)} />
 
         <View style={transactionWrap}>
           <View style={transactionHeader}>
@@ -357,7 +480,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
           )}
         </View>
       </ScrollView>
-    </View>
+    </FTTabWrapper>
   );
 };
 

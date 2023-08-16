@@ -103,8 +103,12 @@ import Cableicon from "../assets/icons/Cableicon";
 import Transfersicon from "../assets/icons/Transfersicon";
 import Sendtoselficon from "../assets/icons/Sendtoselficon";
 import Profileediticon from "../assets/icons/Profileediticon";
-
-
+import Transactionpinsetupicon from "../assets/icons/Transactionpinsetupicon";
+import Profilesetupicon from "../assets/icons/Profilesetupicon";
+import Personalsetupicon from "../assets/icons/Personalsetupicon";
+import Createtagsetupicon from "../assets/icons/Createtagsetupicon";
+import Banksetupicon from "../assets/icons/Banksetupicon";
+import Documentsetupicon from "../assets/icons/Documentsetupicon";
 
 export default {
   Logo,
@@ -192,6 +196,12 @@ export default {
   Cableicon,
   Sendtoselficon,
   Profileediticon,
+  Transactionpinsetupicon,
+  Profilesetupicon,
+  Personalsetupicon,
+  Createtagsetupicon,
+  Banksetupicon,
+  Documentsetupicon,
   //Animated icons
 
   Cryinganimate,
