@@ -181,6 +181,9 @@ export default function App() {
   // };
   useEffect(() => {
     // why don't I check here, then set Auth , and set tokem you know
+    setAuthorizationToken(
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjkxOTUwMTczLCJleHAiOjE2OTI1NTQ5NzN9.Mj1Af1ayAetpvK-0EIul7VHVXRn8W9yLmLdNm4V6BJI"
+    );
     getDataFromStorage("@token").then((response) => {
       if (response !== null) {
         if (Date.now() - response.time > AWEEKAFTER) {
@@ -188,7 +191,9 @@ export default function App() {
         }
         // response.token
         setRouteName("welcome_screen");
-        setAuthorizationToken(response.token);
+        setAuthorizationToken(
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjkxOTUwMTczLCJleHAiOjE2OTI1NTQ5NzN9.Mj1Af1ayAetpvK-0EIul7VHVXRn8W9yLmLdNm4V6BJI"
+        );
       }
     });
   }, []);
