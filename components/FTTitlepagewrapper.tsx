@@ -24,7 +24,7 @@ const FTTitlepagewrapper = ({
   title?: string;
   showArrow?: boolean;
   bg?: string;
-  rightComponent?: string;
+  rightComponent?: React.ReactNode | string;
   modalChildren?: any;
   showModal?: any;
   setShowModal?: any;

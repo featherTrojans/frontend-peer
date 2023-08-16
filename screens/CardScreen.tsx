@@ -245,13 +245,7 @@ const CardScreen = () => {
         setLoading(false);
       });
   }, []);
-  const ModalCon = () => {
-    return (
-      <View style={{ backgroundColor: "#fff", height: 200 }}>
-        <Text>The name two</Text>
-      </View>
-    );
-  };
+
 
   const switchModals = (value) => {
     switch (value) {
