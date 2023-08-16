@@ -1,10 +1,26 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { EditprofileScreenStyles } from "../assets/styles/screens";
-import { FTInput, FTKeyboardwrapper, FTTitlepagewrapper } from "../components";
+import {
+  FTCustombutton,
+  FTInput,
+  FTKeyboardwrapper,
+  FTTitlepagewrapper,
+} from "../components";
 import { useForm } from "react-hook-form";
-import { VALIDATION, redirectTo } from "../utils";
+import {
+  VALIDATION,
+  navigation,
+  redirectTo,
+  setAuthorizationToken,
+} from "../utils";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { AuthContext } from "../context/AuthContext";
+import useDebounce from "../utils/debounce";
+import { ActivityIndicator } from "react-native";
+import Changememojicheckicon from "../assets/icons/Changememojicheckicon";
+import axiosCustom from "../httpRequests/axiosCustom";
+import { useAlert } from "../hooks";
 const { Profileediticon } = icons;
 
 const {
@@ -17,14 +33,54 @@ const {
   pickOptionText,
 } = EditprofileScreenStyles;
 const EditprofileScreen = () => {
-  const { control, handleSubmit } = useForm({
+  const { authdata, setAuthData } = useContext(AuthContext);
+  const { errorAlert } = useAlert();
+  const name = authdata?.userDetails?.fullName.split(" ");
+  const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
+
+  const { control, handleSubmit, watch } = useForm({
     mode: "all",
     defaultValues: {
-      firstName: "Ayobami",
-      lastName: "Lawal",
+      featherTag: authdata?.userDetails?.username,
+      firstName: name[1],
+      lastName: name[0],
+      email: authdata?.userDetails?.email,
+      phoneNumber: authdata?.userDetails?.phoneNumber,
+      gender: authdata?.userDetails?.gender,
     },
   });
 
+  const usernamename = watch("featherTag", false) || "";
+  useEffect(() => {
+    getuserinfo(usernamename);
+  }, [usernamename]);
+
+  const onsubmit = async (values) => {
+    try {
+      const data = {
+        gender: values.gender,
+        newUsername: values.featherTag,
+        firstName: values.firstName.trim(),
+        lastName: values.lastName.trim(),
+      };
+      const response = await axiosCustom.put("/profile/update/basic", data);
+      const userdetails = {
+        ...authdata?.userDetails,
+        username: values.featherTag,
+        fullName: `${values.lastName} ${values.firstName}`,
+        gender: values.gender,
+      };
+      setAuthData({
+        ...authdata,
+        userDetails: userdetails,
+      });
+
+      setAuthorizationToken(response?.data?.data?.token);
+      navigation.navigate("Dashboard");
+    } catch (err) {
+      errorAlert(err);
+    }
+  };
   const HeaderRight = () => {
     return (
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -66,6 +122,49 @@ const EditprofileScreen = () => {
           control={control}
           rules={VALIDATION.USER_NAME_VALIDATION}
         />
+        <View
+          style={{
+            flexDirection: "row",
+            marginRight: 5,
+            marginBottom: 10,
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+          }}
+        >
+          {loadbounce ? (
+            <ActivityIndicator size={15} color={COLORS.blue6} />
+          ) : userinfo.fullName &&
+            usernamename?.toLowerCase() !==
+              authdata?.userDetails?.username?.toLowerCase() ? (
+            <>
+              {/* <WrongIcon /> */}
+              <Text
+                style={{
+                  color: "#0034CB",
+                  marginLeft: 10,
+                }}
+              >
+                {usernamename} is taken
+              </Text>
+            </>
+          ) : null}
+          {(error ||
+            usernamename?.toLowerCase() ===
+              authdata?.userDetails?.username.toLowerCase()) && (
+            <>
+              <Changememojicheckicon />
+              <Text
+                style={{
+                  color: "#0034CB",
+                  marginLeft: 10,
+                }}
+              >
+                {usernamename}
+              </Text>
+            </>
+          )}
+        </View>
+
         <FTInput
           label="Legal Firstname"
           placeholderText="Enter here.."
@@ -107,6 +206,7 @@ const EditprofileScreen = () => {
           rules={VALIDATION.PHONE_NUMBER_VALIDATION}
           mB={20}
         />
+        <FTCustombutton btntext="Submit" onpress={handleSubmit(onsubmit)} />
       </FTKeyboardwrapper>
     </FTTitlepagewrapper>
   );
