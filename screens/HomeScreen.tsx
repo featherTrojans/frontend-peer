@@ -281,52 +281,62 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     getDashboardData();
   }, []);
 
-  const profilesetupdatas = [
-    {
-      title: "Personal Information",
-      info: "Complete your personal user profile",
-      Icon: Personalsetupicon,
-      bg: COLORS.Tyellow,
-      onPress: () => console.log("here"),
-    },
-    {
-      title: "Create a feather tag",
-      info: "Create a custom feather tag",
-      Icon: Createtagsetupicon,
-      bg: COLORS.Tred,
-      onPress: () => console.log("here"),
-    },
-    {
-      title: "Profile Appearance",
-      info: "Manage your profile appearance",
-      Icon: Profilesetupicon,
-      bg: COLORS.Tgreen3,
-      onPress: () => console.log("here"),
-    },
-    {
-      title: "Transaction PIN",
-      info: "Secure your transactions with a PIN",
-      Icon: Transactionpinsetupicon,
-      bg: COLORS.Tred2,
-      onPress: () => console.log("here"),
-    },
-    {
-      title: "Bank Verification Number",
-      info: "Verify your BVN to get an account number",
-      Icon: Banksetupicon,
-      bg: COLORS.Tblue5,
-      onPress: () => console.log("here"),
-    },
-    {
-      title: "Document Verification",
-      info: "Verify your documents to level up",
-      Icon: Documentsetupicon,
-      bg: COLORS.Tpurple,
-      onPress: () => console.log("here"),
-    },
-  ];
-
   const ProfileSetup = () => {
+    const { authdata } = useContext(AuthContext);
+    const level = authdata?.userDetails?.userLevel;
+
+    const profilesetupdatas = [
+      {
+        title: "Personal Information",
+        info: "Complete your personal user profile",
+        Icon: Personalsetupicon,
+        bg: COLORS.Tyellow,
+        completed: !!authdata?.userDetails?.gender,
+        onPress: () => console.log("here"),
+      },
+      {
+        title: "Create a feather tag",
+        info: "Create a custom feather tag",
+        Icon: Createtagsetupicon,
+        bg: COLORS.Tred,
+        completed: !!authdata?.userDetails?.username,
+        onPress: () => console.log("here"),
+      },
+      {
+        title: "Profile Appearance",
+        info: "Manage your profile appearance",
+        Icon: Profilesetupicon,
+        bg: COLORS.Tgreen3,
+        completed:
+          authdata?.userDetails?.imageUrl || authdata?.userDetails?.isMemoji,
+        onPress: () => console.log("here"),
+      },
+      {
+        title: "Transaction PIN",
+        info: "Secure your transactions with a PIN",
+        Icon: Transactionpinsetupicon,
+        bg: COLORS.Tred2,
+        completed: !!authdata?.userDetails?.pin,
+        onPress: () => console.log("here"),
+      },
+      {
+        title: "Bank Verification Number",
+        info: "Verify your BVN to get an account number",
+        Icon: Banksetupicon,
+        bg: COLORS.Tblue5,
+        completed: level >= 2,
+        onPress: () => console.log("here"),
+      },
+      {
+        title: "Document Verification",
+        info: "Verify your documents to level up",
+        Icon: Documentsetupicon,
+        bg: COLORS.Tpurple,
+        completed: level == 3,
+        onPress: () => console.log("here"),
+      },
+    ];
+
     return (
       <View style={{ backgroundColor: "#fff", flex: 1 }}>
         <Text>Hi Mayowa,{`\n`}Complete your profile!</Text>
@@ -337,7 +347,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
             data={profilesetupdatas}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => {
-              const { title, info, Icon, bg, onPress } = item;
+              const { title, info, Icon, bg, onPress, completed } = item;
               return (
                 <FTIconwithtitleandinfo
                   title={title}
@@ -346,6 +356,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
                   onPress={onPress}
                   bG={bg}
                   mB={25}
+                  rightComponent={completed && <Text>check</Text>}
                 />
               );
             }}

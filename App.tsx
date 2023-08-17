@@ -192,7 +192,8 @@ export default function App() {
         // response.token
         setRouteName("welcome_screen");
         setAuthorizationToken(
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjkxOTUwMTczLCJleHAiOjE2OTI1NTQ5NzN9.Mj1Af1ayAetpvK-0EIul7VHVXRn8W9yLmLdNm4V6BJI"
+          response.token
+          // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJpcHM5aUtaNWlQIiwidXNlcm5hbWUiOiJkdWRlIiwiZW1haWwiOiJCQU1JQVlPOTBAR01BSUwuQ09NIiwiZnVsbE5hbWUiOiJMQVdBTCBBWU9CQU1JIiwiaWF0IjoxNjkxOTUwMTczLCJleHAiOjE2OTI1NTQ5NzN9.Mj1Af1ayAetpvK-0EIul7VHVXRn8W9yLmLdNm4V6BJI"
         );
       }
     });
