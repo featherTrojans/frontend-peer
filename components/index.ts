@@ -20,32 +20,30 @@ import FTSearchinput from "./FTSearchinput";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
 import FTIconwithbg from "./FTIconwithbg";
 import FTKeyboardwrapper from "./FTKeyboardwrapper";
-
-
-
-
+import FTChatList from "./FTChatList";
 
 export {
-    FTInput,
-    FTTransactionhistory,
-    FTViewbalance,
-    FTSendingandreceive,
-    FTLoader,
-    FTMainwrapper,
-    FTNumberbtn,
-    FTInitialsBg,
-    FTKeyboard,
-    FTCustombutton,
-    FTHorizontaline,
-    FTEmptycomponent,
-    FTBackheader,
-    FTHeaderandsubheader,
-    FTIconandinfo,
-    FTEachonboarding,
-    FTTabWrapper,
-    FTTitlepagewrapper,
-    FTSearchinput,
-    FTIconwithtitleandinfo,
-    FTIconwithbg,
-    FTKeyboardwrapper
-}
+  FTInput,
+  FTTransactionhistory,
+  FTViewbalance,
+  FTSendingandreceive,
+  FTLoader,
+  FTMainwrapper,
+  FTNumberbtn,
+  FTInitialsBg,
+  FTKeyboard,
+  FTCustombutton,
+  FTHorizontaline,
+  FTEmptycomponent,
+  FTBackheader,
+  FTHeaderandsubheader,
+  FTIconandinfo,
+  FTEachonboarding,
+  FTTabWrapper,
+  FTTitlepagewrapper,
+  FTSearchinput,
+  FTIconwithtitleandinfo,
+  FTIconwithbg,
+  FTKeyboardwrapper,
+  FTChatList,
+};
