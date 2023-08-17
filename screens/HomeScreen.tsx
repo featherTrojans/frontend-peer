@@ -19,6 +19,7 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import {
   FTEmptycomponent,
   FTHorizontaline,
+  FTIconwithbg,
   FTIconwithtitleandinfo,
   FTTabWrapper,
   FTTransactionhistory,
@@ -29,13 +30,12 @@ import { COLORS, SIZES, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
 
-import Customstatusbar from "./shared/Customstatusbar";
-
 import formatData from "../utils/fomatTrans";
 
 import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
+import { redirectTo } from "../utils";
 
 const {
   container,
@@ -74,9 +74,6 @@ const {
   setupInfoSubText,
   setupIconWrap,
   setupHeadSection,
-  activeWithdrawalAmount,
-  activeWithdrawalName,
-  activeWithdrawalProfile,
 } = HomeScreenStyles;
 
 const {
@@ -226,22 +223,14 @@ const ActiveCashWithdrawal = () => {
         <Text style={numberOfUnread}>15 Mins Away</Text>
       </View>
 
-      <View style={{ marginTop: 20 }}>
-        <View style={activeWithdrawalProfile}>
-          <View
-            style={{
-              width: 45,
-              height: 45,
-              backgroundColor: COLORS.lightgray,
-              borderRadius: 45 / 2,
-            }}
-          />
-          <View style={{ marginLeft: 18 }}>
-            <Text style={activeWithdrawalName}>Suzzane Vibes Shoes</Text>
-            <Text style={activeWithdrawalAmount}>N45,500</Text>
-          </View>
-        </View>
-      </View>
+      <FTIconwithtitleandinfo
+        title="Suzzane Vibes Shoes"
+        info="N45,500"
+        bG="blue"
+        mT={24}
+        onPress={() => console.log("yes")}
+        Icon={Banksetupicon}
+      />
     </View>
   );
 };
@@ -408,11 +397,10 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
             activeOpacity={0.8}
           >
             {authdata?.userDetails?.imageUrl !== null ? (
-              <Image
-                style={{ width: 45, height: 45, borderRadius: 45 / 2 }}
-                source={{
-                  uri: authdata?.userDetails?.imageUrl,
-                }}
+              <FTIconwithbg
+                imageUrl={authdata?.userDetails?.imageUrl}
+                size={45}
+                bG={COLORS.Tblue}
               />
             ) : (
               <Featherdefault />
@@ -431,7 +419,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
 
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => navigation.navigate("Notifications")}
+          onPress={() => redirectTo("notification_screen")}
           style={notificationBell}
         >
           <Bell />
@@ -491,6 +479,10 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
           )}
         </View>
       </ScrollView>
+
+
+
+
     </FTTabWrapper>
   );
 };

@@ -228,19 +228,4 @@ export const HomeScreenStyles = StyleSheet.create({
         justifyContent: "space-between",
       },
     
-      // Active Cash Withdrawal
-      activeWithdrawalProfile: {
-        flexDirection: "row",
-        alignItems: "center",
-      },
-      activeWithdrawalName: {
-        ...fontsize.smallest,
-        ...FONTS.semibold,
-        lineHeight: 20,
-      },
-      activeWithdrawalAmount: {
-        ...fontsize.xxsmallest,
-        ...FONTS.regular,
-        lineHeight: 20,
-      },
 })

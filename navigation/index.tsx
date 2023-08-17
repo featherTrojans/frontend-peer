@@ -37,6 +37,7 @@ import {
   dashboardRoutes,
   profileRoutes,
   transactRoutes,
+  otherRoutes,
 } from "./routes";
 const {
   Hometabicon,
@@ -257,6 +258,26 @@ const AuthenticatedNavigator = () => {
       {/* Profile Screens */}
       <AuthStack.Group>
         {profileRoutes?.map((route: any, index: number) => {
+          return (
+            <AuthStack.Screen
+              component={route.screen}
+              key={index}
+              name={route.route}
+              options={() => ({
+                headerTitle: route.title,
+                headerShown: route.showHeader,
+                cardStyleInterpolator:
+                  route?.animateFromBottom &&
+                  CardStyleInterpolators.forBottomSheetAndroid,
+              })}
+            />
+          );
+        })}
+      </AuthStack.Group>
+
+      {/* Other Screens */}
+      <AuthStack.Group>
+        {otherRoutes?.map((route: any, index: number) => {
           return (
             <AuthStack.Screen
               component={route.screen}

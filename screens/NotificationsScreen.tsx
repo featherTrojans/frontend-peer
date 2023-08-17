@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { icons, COLORS, SIZES } from "../constants";
-import { FTMainwrapper } from "../components";
+import { FTIconwithbg, FTMainwrapper, FTTitlepagewrapper } from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
 import formatData from "../utils/fomatTrans";
 import moment from "moment";
@@ -16,11 +16,25 @@ import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { NotificationScreenStyles } from "../assets/styles/screens";
 
-
-
-
-
-const {container, listContainer, notificationContainer, iconBg, titleandtime, dateText, titleText, timeText, messageText, horizontalLine, upgradeNow, upgradeNowText, emptyListText} = NotificationScreenStyles
+const {
+  container,
+  listContainer,
+  notificationContainer,
+  iconBg,
+  titleandtime,
+  iconAndTitleWrap,
+  titleAndTimeWrap,
+  emptyListWrap,
+  dateText,
+  titleText,
+  timeText,
+  messageText,
+  horizontalLine,
+  upgradeNow,
+  upgradeNowText,
+  emptyListText,
+  loadingWrap,
+} = NotificationScreenStyles;
 const {
   Arrowin,
   Useravatar,
@@ -106,38 +120,20 @@ type notificationProps = {
 const messageicon = (type: string) => {
   switch (type) {
     case "Wallet Credit":
-      return (
-        <View style={[iconBg, { backgroundColor: COLORS.green3 }]}>
-          <Arrowin />
-        </View>
-      );
+      return <FTIconwithbg size={29} Icon={Arrowin} bG={COLORS.green3} />;
       break;
 
     case "Wallet Debit":
-      return (
-        <View style={[iconBg, { backgroundColor: COLORS.red2 }]}>
-          <Arrowout />
-        </View>
-      );
-
+      return <FTIconwithbg size={29} Icon={Arrowout} bG={COLORS.red2} />;
       break;
     case "account":
       return <Useravatar />;
       break;
     case "Fund Reversal":
-      return (
-        <View style={[iconBg, { backgroundColor: COLORS.green3 }]}>
-          <Arrowin />
-        </View>
-      );
+      return <FTIconwithbg size={29} Icon={Arrowin} bG={COLORS.green3} />;
       break;
     case "Cash Withdrawal":
-      return (
-        <View style={[iconBg, { backgroundColor: COLORS.grey1 }]}>
-          <Withdrawalnotificationicon />
-        </View>
-      );
-
+      return <FTIconwithbg size={29} Icon={Arrowin} bG={COLORS.grey1} />;
       break;
     case "Cash Deposit":
       return <Logoavatar />;
@@ -149,7 +145,7 @@ const messageicon = (type: string) => {
   }
 };
 
-const NotificationScreen = ({
+const Notification = ({
   date,
   messages,
   index,
@@ -187,14 +183,8 @@ const NotificationScreen = ({
               ]}
               key={index}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={titleAndTimeWrap}>
+                <View style={iconAndTitleWrap}>
                   {messageicon(title)}
                   <Text style={titleText}>{title}</Text>
                 </View>
@@ -243,16 +233,22 @@ const NotificationsScreen = () => {
     getAllNotifications();
   }, []);
 
-  return (
-    <FTMainwrapper>
-      {/* Header title */}
-        {/* <Backheader title="Notifications" /> */}
+  const EmptyNotification = () => {
+    return (
+      <View style={emptyListWrap}>
+        <Emptynotification />
+        <Text style={emptyListText}>
+          Oops, you have no pending notifications here.{" "}
+        </Text>
+      </View>
+    );
+  };
 
+  return (
+    <FTTitlepagewrapper title="Notifications">
       <View style={listContainer}>
         {loading ? (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
+          <View style={loadingWrap}>
             <ActivityIndicator size="large" color={COLORS.blue6} />
           </View>
         ) : (
@@ -274,28 +270,11 @@ const NotificationsScreen = () => {
               />
             )}
             keyExtractor={(item) => item.time}
-            ListEmptyComponent={() => {
-              return (
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginTop: RFValue(100),
-                  }}
-                >
-                  <Emptynotification />
-                  <Text style={emptyListText}>
-                    Oops, you have no pending notifications here.{" "}
-                  </Text>
-                </View>
-              );
-            }}
+            ListEmptyComponent={() => <EmptyNotification />}
           />
         )}
-        {/* Flatlist list of notifications */}
       </View>
-    </FTMainwrapper>
+    </FTTitlepagewrapper>
   );
 };
 

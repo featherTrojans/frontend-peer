@@ -57,10 +57,11 @@ import {
 import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 
 // UploadDocScreen
+
 // BVNSuccessScreen
 // BvnErrorScreen
-// EditprofileScreen
 
+//The screens in the auth route are the screen that you can onlu see if you havent logged in
 
 export const authRoutes = [
   {
@@ -365,7 +366,7 @@ export const cardsRoutes = [
 export const chatsRoutes = [
   {
     title: "",
-    screen: ProfileScreen,
+    screen: ChatsScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "chats_screen",
@@ -390,6 +391,16 @@ export const chatsRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "startnewschat_screen",
+  },
+];
+
+export const otherRoutes = [
+  {
+    title: "",
+    screen: NotificationsScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "notification_screen",
   },
 ];
 

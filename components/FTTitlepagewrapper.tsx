@@ -12,13 +12,15 @@ const { backArrowContainer, backHeaderWrap, backHeaderTitle, childrenWrap } =
 const FTTitlepagewrapper = ({
   title,
   showArrow = true,
-  bg,
+  bg = "#fff",
   children,
   rightComponent,
   modalChildren,
   setShowModal,
   showModal,
   modalHeight,
+  headerBg = "#fff",
+  childBg = "#F7F8FA",
 }: {
   children: any;
   title?: string;
@@ -29,6 +31,8 @@ const FTTitlepagewrapper = ({
   showModal?: any;
   setShowModal?: any;
   modalHeight?: string | number;
+  headerBg?: string;
+  childBg?: string;
 }) => {
   const { Swipemodal } = useSwipemodal();
 
@@ -36,7 +40,7 @@ const FTTitlepagewrapper = ({
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: bg }}>
         <Customstatusbar />
-        <View style={backHeaderWrap}>
+        <View style={[backHeaderWrap, { backgroundColor: headerBg }]}>
           <Pressable
             onPress={() => navigation.goBack()}
             style={backArrowContainer}
@@ -47,7 +51,9 @@ const FTTitlepagewrapper = ({
           <Text style={backHeaderTitle}>{title}</Text>
           {rightComponent ? rightComponent : <View style={{ width: 45 }} />}
         </View>
-        <View style={childrenWrap}>{children}</View>
+        <View style={[childrenWrap, { backgroundColor: childBg }]}>
+          {children}
+        </View>
       </SafeAreaView>
       {modalChildren && (
         <Swipemodal
