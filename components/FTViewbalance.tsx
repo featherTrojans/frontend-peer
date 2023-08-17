@@ -47,7 +47,7 @@ const Viewbalance = ({ navigate }: any) => {
   return (
     <>
     <View style={container}>
-        {loading && <FTLoader />}
+        {/* {loading && <FTLoader />} */}
   
 
 
