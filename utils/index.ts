@@ -6,6 +6,7 @@ import getAuthorizationTokenFromAxois from "./getAuthorizationTokenFromAxois";
 import {
   getDataFromStorage,
   setDataInstorage,
+  clearDataFromStorage,
   AWEEKAFTER,
 } from "./localstorage";
 export {
@@ -16,5 +17,6 @@ export {
   getAuthorizationTokenFromAxois,
   setDataInstorage,
   getDataFromStorage,
+  clearDataFromStorage,
   AWEEKAFTER,
 };
