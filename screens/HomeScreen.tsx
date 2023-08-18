@@ -25,7 +25,7 @@ import {
   FTTransactionhistory,
   FTViewbalance,
 } from "../components";
-import { COLORS, SIZES, icons } from "../constants";
+import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -74,6 +74,9 @@ const {
   setupInfoSubText,
   setupIconWrap,
   setupHeadSection,
+  profileSetupHeader,
+  completedSetup,
+  profileSetupWrap,
 } = HomeScreenStyles;
 
 const {
@@ -90,6 +93,7 @@ const {
   Createtagsetupicon,
   Banksetupicon,
   Documentsetupicon,
+  Levelcheckicon,
 } = icons;
 
 const scrollactions = [
@@ -327,31 +331,32 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     ];
 
     return (
-      <View style={{ backgroundColor: "#fff", flex: 1 }}>
-        <Text>Hi Mayowa,{`\n`}Complete your profile!</Text>
-        <Text>Completed 3 / 6</Text>
+      <View style={profileSetupWrap}>
+        <Text style={profileSetupHeader}>
+          Hi Mayowa,{`\n`}Complete your profile!
+        </Text>
+        <Text style={completedSetup}>Completed 3 / 6</Text>
 
-        <View style={{ marginTop: 45, flex: 1 }}>
-          <FlatList
-            data={profilesetupdatas}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => {
-              const { title, info, Icon, bg, onPress, completed } = item;
-              return (
-                <FTIconwithtitleandinfo
-                  title={title}
-                  info={info}
-                  Icon={Icon}
-                  onPress={onPress}
-                  bG={bg}
-                  mB={25}
-                  rightComponent={completed && <Text>check</Text>}
-                />
-              );
-            }}
-            keyExtractor={(item) => item.title}
-          />
-        </View>
+        <FlatList
+          data={profilesetupdatas}
+          contentContainerStyle={{ paddingTop: 45 }}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => {
+            const { title, info, Icon, bg, onPress, completed } = item;
+            return (
+              <FTIconwithtitleandinfo
+                title={title}
+                info={info}
+                Icon={Icon}
+                onPress={onPress}
+                bG={bg}
+                mB={25}
+                rightComponent={completed && <Levelcheckicon />}
+              />
+            );
+          }}
+          keyExtractor={(item) => item.title}
+        />
       </View>
     );
   };
@@ -479,10 +484,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
           )}
         </View>
       </ScrollView>
-
-
-
-
     </FTTabWrapper>
   );
 };

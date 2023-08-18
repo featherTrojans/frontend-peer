@@ -54,6 +54,14 @@ export const GENDER_VALIDATION = {
   },
 };
 
+export const REMARKS_VALIDATION = {
+  required: false,
+  minLength: {
+    value: 3,
+    message: "At least three letters",
+  },
+};
+
 export const EMAIL_VALIDATION = {
   required: "Email is required",
 

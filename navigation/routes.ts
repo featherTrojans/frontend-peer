@@ -52,9 +52,10 @@ import {
   UploadDocScreen,
   PinScreen,
   CardCreateSuccessScreen,
+  AmounttosendScreen,
+  PhoneRegisterScreen,
+  TransactionpinScreen,
 } from "../screens";
-
-import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 
 // UploadDocScreen
 
@@ -323,6 +324,20 @@ export const transactRoutes = [
     hideHiderTitle: false,
     route: "pin_screen",
   },
+  {
+    title: "",
+    screen: AmounttosendScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "amounttosend_screen",
+  },
+  {
+    title: "",
+    screen: TransactionpinScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "transactionpin_screen",
+  },
 ];
 
 export const cardsRoutes = [
@@ -402,6 +417,7 @@ export const otherRoutes = [
     hideHiderTitle: false,
     route: "notification_screen",
   },
+
 ];
 
 export const profileRoutes = [

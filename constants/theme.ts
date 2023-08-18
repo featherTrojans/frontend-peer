@@ -104,6 +104,7 @@ export const COLORS = {
 
 
 
+
   purple: "#6300AC",
   purple2: "#7600FF",
   purple3: "#F1E5FF",
@@ -191,6 +192,13 @@ export const fontsize = {
   xsmallest: {
     fontSize: RFValue(11),
   },
+  xbigger: {
+    fontSize: RFValue(35),
+  },
+
+
+
+
 
   xxsmallest: {
     fontSize: RFValue(10),
@@ -221,14 +229,15 @@ export const fontsize = {
   xbig: {
     fontSize: RFValue(32),
   },
-  xbigger: {
-    fontSize: RFValue(35),
-  },
+ 
   bigger: {
     fontSize: RFValue(38),
   },
   biggest: {
     fontSize: RFValue(40),
+  },
+  xbiggest: {
+    fontSize: RFValue(44),
   },
 };
 

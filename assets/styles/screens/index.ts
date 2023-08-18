@@ -55,3 +55,4 @@ export * from "./feathertag.style";
 export * from "./BvnError.style";
 export * from "./pinscreen.style";
 export * from "./chatsdm.style"
+export * from "./transactionpin.style"

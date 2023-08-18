@@ -55,6 +55,11 @@ import FeatherTagScreen from "./FeatherTagScreen";
 import UploadDocScreen from "./UploadDocScreen";
 import PinScreen from "./PinScreen";
 import CardCreateSuccessScreen from "./CardCreateSuccessScreen";
+import AmounttosendScreen from "./AmounttosendScreen";
+import PhoneRegisterScreen from "./PhoneRegisterScreen";
+import TransactionpinScreen from "./TransactionpinScreen";
+
+
 
 
 export {
@@ -72,6 +77,7 @@ export {
   BvnErrorScreen,
   BVNSuccessScreen,
   FeatherTagScreen,
+  PhoneRegisterScreen,
 
   // Dasboard Screens
   HomeScreen,
@@ -125,4 +131,7 @@ export {
   TransactionsummaryScreen,
   NetworkreceiverScreen,
   PinScreen,
+  AmounttosendScreen,
+  TransactionpinScreen
+
 };

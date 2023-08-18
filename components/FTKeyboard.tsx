@@ -1,22 +1,25 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import Numberbtn from "./FTNumberbtn";
 import { RFValue } from "react-native-responsive-fontsize";
+import { icons } from "../constants";
 
-
-
+const { Keyboarddeleteicon } = icons;
 type KeyboardProps = {
-    array: any,
-    setDigit: any,
-    removeDigit: any,
-    textColor?: string
-}
+  array: any;
+  setDigit: any;
+  removeDigit: any;
+  textColor?: string;
+};
 
-
-const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) => {
+const Keyboard = ({
+  array,
+  setDigit,
+  removeDigit,
+  textColor,
+}: KeyboardProps) => {
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>
-
       <View style={{ flexDirection: "row" }}>
         {[array[0], array[1], array[2]].map((number, index) => {
           return (
@@ -60,20 +63,9 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
       <View style={{ flexDirection: "row" }}>
         {[array[9], array[10]].map((number, index) => {
           return (
-            <View key={number} style={{ flexDirection: "row"}}>
+            <View key={number} style={{ flexDirection: "row" }}>
               {number === "" ? (
-                <View
-                key={number}
-                  style={{
-                    width: RFValue(60),
-                    height: RFValue(60),
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: 30,
-                    marginHorizontal: RFValue(20),
-                    marginVertical: RFValue(10),
-                  }}
-                ></View>
+                <View key={number} style={styles.eachNumberWrap}></View>
               ) : (
                 <Numberbtn
                   key={number}
@@ -86,19 +78,28 @@ const Keyboard = ({ array, setDigit, removeDigit, textColor }: KeyboardProps) =>
             </View>
           );
         })}
-        <Numberbtn 
-        onpress={() => removeDigit()}
-        textColor={textColor}
-        key="<"
-        >{"<"}</Numberbtn>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={removeDigit}
+          style={styles.eachNumberWrap}
+        >
+          <Keyboarddeleteicon fill={textColor} />
+        </TouchableOpacity>
       </View>
-
-
-      
     </View>
   );
 };
 
 export default Keyboard;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  eachNumberWrap: {
+    width: RFValue(60),
+    height: RFValue(60),
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 30,
+    marginHorizontal: RFValue(20),
+    marginVertical: RFValue(10),
+  },
+});
