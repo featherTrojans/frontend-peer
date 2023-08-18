@@ -112,6 +112,8 @@ import Documentsetupicon from "../assets/icons/Documentsetupicon";
 import Smallphoneicon from "../assets/icons/Smallphoneicon";
 import Pinlockicon from "../assets/icons/Pinlockicon";
 import Keyboarddeleteicon from "../assets/icons/Keyboarddeleteicon";
+import Nairaicon from "../assets/icons/Nairaicon";
+
 
 export default {
   Logo,
@@ -208,6 +210,7 @@ export default {
   Smallphoneicon,
   Pinlockicon,
   Keyboarddeleteicon,
+  Nairaicon,
   //Animated icons
 
   Cryinganimate,
