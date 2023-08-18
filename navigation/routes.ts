@@ -59,8 +59,6 @@ import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
 // UploadDocScreen
 // BVNSuccessScreen
 // BvnErrorScreen
-// EditprofileScreen
-
 
 export const authRoutes = [
   {
