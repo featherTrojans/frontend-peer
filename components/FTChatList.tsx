@@ -23,7 +23,7 @@ const ChatMessage = ({ userId, chatinfo }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate("chatsdm_screen");
+        navigation.navigate("chatsdm_screen", { userInfo });
       }}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -417,7 +417,6 @@ export const otherRoutes = [
     hideHiderTitle: false,
     route: "notification_screen",
   },
-
 ];
 
 export const profileRoutes = [

@@ -35,7 +35,12 @@ import formatData from "../utils/fomatTrans";
 import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
-import { redirectTo } from "../utils";
+import {
+  VALIDATION,
+  navigation,
+  redirectTo,
+  setAuthorizationToken,
+} from "../utils";
 
 const {
   container,
@@ -239,6 +244,98 @@ const ActiveCashWithdrawal = () => {
   );
 };
 
+const ProfileSetup = () => {
+  const { authdata } = useContext(AuthContext);
+  const level = authdata?.userDetails?.userLevel;
+
+  const profilesetupdatas = [
+    {
+      title: "Personal Information",
+      info: "Complete your personal user profile",
+      Icon: Personalsetupicon,
+      bg: COLORS.Tyellow,
+      completed: !!authdata?.userDetails?.gender,
+      onPress: () => navigation.navigate("editprofile_screen"),
+    },
+    {
+      title: "Create a feather tag",
+      info: "Create a custom feather tag",
+      Icon: Createtagsetupicon,
+      bg: COLORS.Tred,
+      completed: !!authdata?.userDetails?.username,
+      onPress: () => navigation.navigate("editprofile_screen"),
+    },
+    {
+      title: "Profile Appearance",
+      info: "Manage your profile appearance",
+      Icon: Profilesetupicon,
+      bg: COLORS.Tgreen3,
+      completed:
+        authdata?.userDetails?.imageUrl || authdata?.userDetails?.isMemoji,
+      onPress: () => navigation.navigate("changeappearance_screen"),
+    },
+    {
+      title: "Transaction PIN",
+      info: "Secure your transactions with a PIN",
+      Icon: Transactionpinsetupicon,
+      bg: COLORS.Tred2,
+      completed: !!authdata?.userDetails?.pin,
+      onPress: () => navigation.navigate("securityandprivacy_screen"),
+    },
+    {
+      title: "Bank Verification Number",
+      info: "Verify your BVN to get an account number",
+      Icon: Banksetupicon,
+      bg: COLORS.Tblue5,
+      completed: level >= 2,
+      onPress: () => navigation.navigate("accountverification_screen"),
+    },
+    {
+      title: "Document Verification",
+      info: "Verify your documents to level up",
+      Icon: Documentsetupicon,
+      bg: COLORS.Tpurple,
+      completed: level == 3,
+      onPress: () => navigation.navigate("accountverification_screen"),
+    },
+  ];
+
+  return (
+    <View style={{ backgroundColor: "#fff", flex: 1 }}>
+      <Text style={{ textTransform: "capitalize" }}>
+        Hi {nameToShow(authdata?.userDetails?.fullName)},{`\n`}Complete your
+        profile!
+      </Text>
+      <Text>
+        Completed {profilesetupdatas.filter((item) => item.completed).length} /
+        6
+      </Text>
+
+      <View style={{ marginTop: 45, flex: 1 }}>
+        <FlatList
+          data={profilesetupdatas}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => {
+            const { title, info, Icon, bg, onPress, completed } = item;
+            return (
+              <FTIconwithtitleandinfo
+                title={title}
+                info={info}
+                Icon={Icon}
+                onPress={completed ? () => {} : onPress}
+                bG={bg}
+                mB={25}
+                rightComponent={completed && <Levelcheckicon />}
+              />
+            );
+          }}
+          keyExtractor={(item) => item.title}
+        />
+      </View>
+    </View>
+  );
+};
+
 const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const { setAuthData, authdata, setShowTabs } = useContext(AuthContext);
   const histories: any[] = formatData(authdata?.transactions);
@@ -273,93 +370,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     setRefreshing(true);
     getDashboardData();
   }, []);
-
-  const ProfileSetup = () => {
-    const { authdata } = useContext(AuthContext);
-    const level = authdata?.userDetails?.userLevel;
-
-    const profilesetupdatas = [
-      {
-        title: "Personal Information",
-        info: "Complete your personal user profile",
-        Icon: Personalsetupicon,
-        bg: COLORS.Tyellow,
-        completed: !!authdata?.userDetails?.gender,
-        onPress: () => console.log("here"),
-      },
-      {
-        title: "Create a feather tag",
-        info: "Create a custom feather tag",
-        Icon: Createtagsetupicon,
-        bg: COLORS.Tred,
-        completed: !!authdata?.userDetails?.username,
-        onPress: () => console.log("here"),
-      },
-      {
-        title: "Profile Appearance",
-        info: "Manage your profile appearance",
-        Icon: Profilesetupicon,
-        bg: COLORS.Tgreen3,
-        completed:
-          authdata?.userDetails?.imageUrl || authdata?.userDetails?.isMemoji,
-        onPress: () => console.log("here"),
-      },
-      {
-        title: "Transaction PIN",
-        info: "Secure your transactions with a PIN",
-        Icon: Transactionpinsetupicon,
-        bg: COLORS.Tred2,
-        completed: !!authdata?.userDetails?.pin,
-        onPress: () => console.log("here"),
-      },
-      {
-        title: "Bank Verification Number",
-        info: "Verify your BVN to get an account number",
-        Icon: Banksetupicon,
-        bg: COLORS.Tblue5,
-        completed: level >= 2,
-        onPress: () => console.log("here"),
-      },
-      {
-        title: "Document Verification",
-        info: "Verify your documents to level up",
-        Icon: Documentsetupicon,
-        bg: COLORS.Tpurple,
-        completed: level == 3,
-        onPress: () => console.log("here"),
-      },
-    ];
-
-    return (
-      <View style={profileSetupWrap}>
-        <Text style={profileSetupHeader}>
-          Hi Mayowa,{`\n`}Complete your profile!
-        </Text>
-        <Text style={completedSetup}>Completed 3 / 6</Text>
-
-        <FlatList
-          data={profilesetupdatas}
-          contentContainerStyle={{ paddingTop: 45 }}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => {
-            const { title, info, Icon, bg, onPress, completed } = item;
-            return (
-              <FTIconwithtitleandinfo
-                title={title}
-                info={info}
-                Icon={Icon}
-                onPress={onPress}
-                bG={bg}
-                mB={25}
-                rightComponent={completed && <Levelcheckicon />}
-              />
-            );
-          }}
-          keyExtractor={(item) => item.title}
-        />
-      </View>
-    );
-  };
 
   const ModalCon = () => {
     return (

@@ -76,6 +76,7 @@ const FTAllChatsModal = ({
   enterPin,
   sendSuccess,
 }: any) => {
+  console.log(chooseAmount, "choosinh");
   const handleToNext = () => {
     if (amount.value <= 0) {
       return;
@@ -101,7 +102,9 @@ const FTAllChatsModal = ({
           {/* First One */}
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => setChooseAmount(true)}
+            onPress={() => {
+              setChooseAmount(true);
+            }}
             style={[{ backgroundColor: COLORS.blue5 }, sendCashButton]}
           >
             <View style={buttonIconBg}>

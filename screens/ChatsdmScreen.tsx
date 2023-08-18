@@ -29,8 +29,6 @@ import formatData from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
 import moment from "moment";
 
-
-
 const {
   chatTransferMsgWrap,
   chatTransferAnim,
@@ -57,12 +55,12 @@ const {
   textinput,
 } = ChatsdmScreenStyles;
 
-const { Backarrow, Bluecardicon } =
-  icons;
-
+const { Backarrow, Bluecardicon } = icons;
 
 const ChatsdmScreen = ({ route }) => {
-  const { userInfo } = route.params;
+  const userIn = route?.params?.userInfo;
+  const chatwithid = route?.params?.chatwithid;
+  const [userInfo, setuserInfo] = useState(userIn);
   const { authdata } = useContext(AuthContext);
   const [messages, setMessages] = useState<any>([]);
   const [chatid, setchatid] = useState("");
@@ -76,6 +74,13 @@ const ChatsdmScreen = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const [fetchmessage, setFetchmessage] = useState(false);
   const animationRef = useRef<LottieView>(null);
+  const textInputRef = useRef<TextInput>(null);
+
+  const focus = () => {
+    if (textInputRef.current !== null) {
+      textInputRef.current.focus();
+    }
+  };
 
   const authId = authdata?.userDetails?.userUid;
 
@@ -99,11 +104,17 @@ const ChatsdmScreen = ({ route }) => {
   ];
 
   useEffect(() => {
+    if (chatwithid) {
+      getUserInfo();
+    }
+  }, [chatwithid]);
+  useEffect(() => {
     getThisChats();
-  }, []);
+  }, [userInfo]);
 
   useEffect(() => {
     let unsub = () => {};
+    console.log("a second one");
     setFetchmessage(true);
     if (chatid) {
       const chatRef = collection(db, "chatstwo", chatid, "messages");
@@ -126,7 +137,17 @@ const ChatsdmScreen = ({ route }) => {
     };
   }, [chatid]);
 
+  const getUserInfo = async () => {
+    try {
+      setFetchmessage(true);
+      const response = await axiosCustom.get(`/merchant/detail/${chatwithid}`);
+      setuserInfo(response.data.data);
+      setFetchmessage(false);
+    } catch (err) {}
+  };
+
   const getThisChats = async () => {
+    console.log("what is this inside here");
     try {
       let document;
       let id1id2 = `${authId}-${userInfo?.userUid}`;
@@ -251,8 +272,7 @@ const ChatsdmScreen = ({ route }) => {
     if (mes?.action === "transfer") {
       return (
         <View style={chatTransferMsgWrap}>
-          <View style={{ flex: 1 }}>
-          </View>
+          <View style={{ flex: 1 }}></View>
           <View style={chatTransferTextBg}>
             <Text style={chatTransferText}>
               {" "}
@@ -289,25 +309,25 @@ const ChatsdmScreen = ({ route }) => {
 
       return (
         <View style={chatTransferMsgWrap}>
-        <View style={{ flex: 1 }}>
-          {/* <LottieView
+          <View style={{ flex: 1 }}>
+            {/* <LottieView
             source={Sentconfetti}
             ref={animationRef}
             loop={false}
             style={chatTransferAnim}
           /> */}
-          {/* <Successtranfericon /> */}
-          <Bluecardicon />
+            {/* <Successtranfericon /> */}
+            <Bluecardicon />
+          </View>
+          <View style={chatTransferTextBg}>
+            <Text style={chatTransferText}>
+              {" "}
+              🎉 You just received{" "}
+              <Text style={{ ...FONTS.bold }}>N{mes.message}</Text> from this
+              user
+            </Text>
+          </View>
         </View>
-        <View style={chatTransferTextBg}>
-          <Text style={chatTransferText}>
-            {" "}
-            🎉 You just received{" "}
-            <Text style={{ ...FONTS.bold }}>N{mes.message}</Text> from this
-            user
-          </Text>
-        </View>
-      </View>
       );
     }
     return (
@@ -366,13 +386,12 @@ const ChatsdmScreen = ({ route }) => {
           >
             <Bluecardicon />
           </TouchableOpacity>
-          
         </View>
       </View>
 
       {fetchmessage ? (
         <View style={emptyChatAnimation}>
-             {/* <LottieView
+          {/* <LottieView
             source={Feathecomingsoonchatanimate}
             autoPlay
             loop
@@ -425,7 +444,6 @@ const ChatsdmScreen = ({ route }) => {
                 <Bluecardicon />
               </TouchableOpacity>
             )}
-            
           </View>
         </View>
       </View>
