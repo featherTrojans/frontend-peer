@@ -203,7 +203,7 @@ const EditprofileScreen = () => {
           placeholderText="Enter here.."
           name="gender"
           control={control}
-          rules={VALIDATION.PHONE_NUMBER_VALIDATION}
+          rules={VALIDATION.GENDER_VALIDATION}
           mB={20}
         />
         <FTCustombutton btntext="Submit" onpress={handleSubmit(onsubmit)} />

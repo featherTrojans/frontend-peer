@@ -1,42 +1,51 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
+import Animated, {
+    Layout,
+  } from "react-native-reanimated";
 import {
   FTCustombutton,
   FTKeyboard,
   FTTabWrapper,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, fontsize } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { navigation } from "../utils";
-import { TransactionpinScreenStyles } from "../assets/styles/screens";
+import {
+  AmounttosendScreenStyles,
+  TransactionpinScreenStyles,
+} from "../assets/styles/screens";
 import amountFormatter from "../utils/formatMoney";
+
 const {
-  headerSectionWrap,
-  startedInput,
   enterPinText,
   keyboardWrap,
-  staredInputWrap,
 } = TransactionpinScreenStyles;
 
+const { amountWrap, nairaIconWrap, amountValueText } = AmounttosendScreenStyles;
+
+const { Nairaicon } = icons;
+
 const AmounttosendScreen = ({ route }) => {
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const { nextScreen } = route.params;
-  const [pin, setPin] = useState<string[]>([]);
+  const [amount, setAmount] = useState([]);
+  //   const formatted = formatter.format(amount.join(""));
+  const formatted = amountFormatter(amount.join(""));
 
   const handleSetAmount = (value: string) => {
-    const newpin = [...pin, value];
-    if (pin.length < 4) {
-      setPin(newpin);
-    }
-    if (pin.length === 3) {
+    const newpin = [...amount, value];
+
+    setAmount(newpin);
+    if (amount.length === 3) {
       //   handleSubmit(newpin);
     }
   };
   const handleRemoveAmount = () => {
-    if (pin.length > 0) {
-      const newdata = [...pin];
+    if (amount.length > 0) {
+      const newdata = [...amount];
       newdata.pop();
-      setPin(newdata);
+      setAmount(newdata);
     }
   };
   return (
@@ -48,20 +57,21 @@ const AmounttosendScreen = ({ route }) => {
       invert
     >
       <View>
-        <View
-          style={{ height: 50, alignItems: "center", justifyContent: "center" }}
-        >
-          <Text
-            style={{ ...fontsize.xbiggest, ...FONTS.bold, color: COLORS.white }}
-          >
-            {pin}
-          </Text>
-        </View>
+        <Animated.View layout={Layout.springify()} style={amountWrap}>
+          <View style={nairaIconWrap}>
+            <Nairaicon />
+          </View>
 
-        <Text style={[enterPinText, { textAlign: "center" }]}>
-          Enter amount with the keypad
-        </Text>
+          <Animated.View layout={Layout.springify()}>
+            <Text style={amountValueText}>{formatted}</Text>
+          </Animated.View>
+        </Animated.View>
       </View>
+
+      <Text style={[enterPinText, { textAlign: "center" }]}>
+        Enter amount with the keypad
+      </Text>
+
       <View style={keyboardWrap}>
         <FTKeyboard
           array={[...numbers]}
