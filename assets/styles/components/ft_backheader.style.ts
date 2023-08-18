@@ -17,7 +17,7 @@ export const FTBackheaderStyles = StyleSheet.create({
     height: 45,
     borderRadius: 45 / 2,
     borderWidth: 1,
-    borderColor: COLORS.black,
+
   },
   backHeaderWrap: {
     flexDirection: "row",
@@ -31,7 +31,7 @@ export const FTBackheaderStyles = StyleSheet.create({
     textAlign: "center",
     ...fontsize.smallest,
     ...FONTS.regular,
-    color: COLORS.black,
+    
   },
   childrenWrap: {
     flex: 1,

@@ -15,9 +15,10 @@ type IFTIconwithtitleandInfoProps = {
   info?: string;
   onPress: () => void;
   rightComponent?: ReactNode;
-  mB?: number
-  imageUrl?: string
-  size?: number
+  mB?: number;
+  mT?: number;
+  imageUrl?: string;
+  size?: number;
 };
 
 const FTIconwithtitleandinfo = ({
@@ -28,13 +29,17 @@ const FTIconwithtitleandinfo = ({
   onPress,
   rightComponent,
   mB,
+  mT,
   imageUrl,
-  size=45
+  size = 45,
 }: IFTIconwithtitleandInfoProps) => {
   return (
-    <Pressable style={[mainWrap, {marginBottom: mB}]} onPress={onPress}>
+    <Pressable
+      style={[mainWrap, { marginBottom: mB, marginTop: mT }]}
+      onPress={onPress}
+    >
       <View style={iconandinfoWrap}>
-        <FTIconwithbg size={size} Icon={Icon} bG={bG} imageUrl={imageUrl}/>
+        <FTIconwithbg size={size} Icon={Icon} bG={bG} imageUrl={imageUrl} />
         <View style={{ marginLeft: 20 }}>
           <Text style={titleText}>{title}</Text>
           {info && <Text style={infoText}>{info}</Text>}

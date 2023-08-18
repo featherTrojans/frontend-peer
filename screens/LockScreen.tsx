@@ -55,6 +55,7 @@ const LockScreen = ({ modal, setModal }: any) => {
       setNumberTrial(newnumoftrial);
       setError(true);
       setPin([]);
+      errorAlert("Incorrect Pin Please try again")
 
       if (newnumoftrial === 5) {
         setModal(false);
@@ -84,37 +85,6 @@ const LockScreen = ({ modal, setModal }: any) => {
         {loading && <FTLoader />}
 
         {/* //Error Alert to be removed and changed to the new one */}
-        {error && (
-          <View
-            style={{
-              backgroundColor: "#E00000",
-              paddingVertical: RFValue(18),
-              paddingHorizontal: RFValue(24),
-              borderRadius: RFValue(10),
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "90%",
-              position: "absolute",
-              marginHorizontal: RFValue(25),
-            }}
-          >
-            <Text
-              style={{
-                color: "#fff",
-                ...fontsize.small,
-                lineHeight: 20,
-                ...FONTS.regular,
-              }}
-            >
-              Incorrect pin, try again
-            </Text>
-            <TouchableOpacity onPress={() => setError(false)}>
-              {/* <Transfericon /> */}
-            </TouchableOpacity>
-          </View>
-        )}
-
         <View style={lockScreenSubcontainer}>
           <Newlogo />
           <Text style={headerText}>

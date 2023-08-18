@@ -206,13 +206,13 @@ export const ChatsdmScreenStyles = StyleSheet.create({
 
   ///Modals styling
 
-  // viewWrapper: {
-  //   backgroundColor: COLORS.white,
-  //   paddingTop: 40,
-  //   borderTopRightRadius: 30,
-  //   borderTopLeftRadius: 30,
-  //   paddingHorizontal: 15,
-  // },
+  viewWrapper: {
+    backgroundColor: COLORS.white,
+    paddingTop: 40,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    paddingHorizontal: 15,
+  },
 
   //send cash modal styling
   sendCashHeader: {

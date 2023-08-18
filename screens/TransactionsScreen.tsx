@@ -23,7 +23,7 @@ import formatData from "../utils/fomatTrans";
 
 import { TransactionScreenStyles } from "../assets/styles/screens";
 import { AuthContext } from "../context/AuthContext";
-import { redirectTo } from "../utils";
+import { navigation, redirectTo } from "../utils";
 
 const {
   container,
@@ -121,7 +121,7 @@ const TransactionsScreen = ({ navigation }) => {
             title="To Feather Wallet"
             info="Send cash to other feather users."
             Icon={Walletblueicon}
-            onPress={() => console.log("yes")}
+            onPress={() => navigation.navigate("amounttosend_screen", {nextScreen: "choosefeatheruser_screen"})}
             bG={COLORS.Tblue}
           />
 
@@ -130,7 +130,7 @@ const TransactionsScreen = ({ navigation }) => {
             title="To Bank Account"
             info="Transfer money to any bank in Nigeria."
             Icon={Bankblueicon}
-            onPress={() => console.log("yes")}
+            onPress={() => navigation.navigate("amounttosend_screen", {nextScreen: "choosefeatheruser_screen"})}
             bG={COLORS.Tyellow}
           />
         </View>

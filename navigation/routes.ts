@@ -52,13 +52,17 @@ import {
   UploadDocScreen,
   PinScreen,
   CardCreateSuccessScreen,
+  AmounttosendScreen,
+  PhoneRegisterScreen,
+  TransactionpinScreen,
 } from "../screens";
 
-import PhoneRegisterScreen from "../screens/PhoneRegisterScreen";
-
 // UploadDocScreen
+
 // BVNSuccessScreen
 // BvnErrorScreen
+
+//The screens in the auth route are the screen that you can onlu see if you havent logged in
 
 export const authRoutes = [
   {
@@ -320,6 +324,20 @@ export const transactRoutes = [
     hideHiderTitle: false,
     route: "pin_screen",
   },
+  {
+    title: "",
+    screen: AmounttosendScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "amounttosend_screen",
+  },
+  {
+    title: "",
+    screen: TransactionpinScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "transactionpin_screen",
+  },
 ];
 
 export const cardsRoutes = [
@@ -363,7 +381,7 @@ export const cardsRoutes = [
 export const chatsRoutes = [
   {
     title: "",
-    screen: ProfileScreen,
+    screen: ChatsScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "chats_screen",
@@ -388,6 +406,16 @@ export const chatsRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "startnewschat_screen",
+  },
+];
+
+export const otherRoutes = [
+  {
+    title: "",
+    screen: NotificationsScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "notification_screen",
   },
 ];
 

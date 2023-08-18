@@ -96,17 +96,17 @@ export const TransactionScreenStyles = StyleSheet.create({
         justifyContent: "space-between",
       },
       transferCashText: {
-        ...fontsize.smaller,
+        ...fontsize.xsmallest,
         ...FONTS.semibold,
         color: COLORS.blue9,
       },
       primaryWalletText: {
-        ...fontsize.xsmallest,
+        ...fontsize.xxsmallest,
         ...FONTS.regular,
         color: COLORS.blue9,
       },
       primaryWalletBalanceText: {
-        ...fontsize.smaller,
+        ...fontsize.smallest,
         ...FONTS.bold,
         color: COLORS.blue6,
         marginTop: 9,

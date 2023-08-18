@@ -1,15 +1,94 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { TransactionsummaryScreenStyles } from '../assets/styles/screens'
-import { FTTitlepagewrapper } from '../components'
+import { FTCustombutton, FTHorizontaline, FTIconwithbg, FTInput, FTKeyboardwrapper, FTTitlepagewrapper } from '../components'
+import { COLORS, FONTS, fontsize, icons } from '../constants'
+import { useForm } from 'react-hook-form'
+import { VALIDATION, navigation, redirectTo } from '../utils'
 
 
 
-const {} = TransactionsummaryScreenStyles
+
+const {Bluecardicon} = icons
+
+const {amountText, amountValueText, summaryWrap, eachSummaryWrap, eachSummaryKey, eachSummaryValue} = TransactionsummaryScreenStyles
 const TransactionsummaryScreen = () => {
+  const { control, handleSubmit } = useForm({ mode: "all" });
+
+  const transactionDatas = [
+    {
+      leftSide: "Merchant Name",
+      rightSide: "Stephen Kayode. J",
+    },
+    {
+      leftSide: "Feather Tag",
+      rightSide: "@blvkcreator",
+    },
+    {
+      leftSide: "Charges",
+      rightSide: "Free",
+    },
+    {
+      leftSide: "Total to be sent",
+      rightSide: "N10,250.00",
+    }
+  ]
+
+  const EachRow = ({data}) => {
+    const {leftSide, rightSide} = data
+    let isFree = rightSide.toLowerCase() === "free"
+    let isTotal = leftSide.toLowerCase().includes("total")
+    return (
+      <View style={eachSummaryWrap}>
+        <Text style={eachSummaryKey}>{leftSide}</Text>
+        <Text style={[eachSummaryValue, {color: isFree ? COLORS.green4 :  COLORS.blue9}]}>{rightSide}</Text>
+      </View>
+    )
+  }
+
+
   return (
-    <FTTitlepagewrapper title='Transaction Summary'>
-      <Text>TransactionsummaryScreen</Text>
+    <FTTitlepagewrapper childBg={COLORS.white} title='Transaction Summary'>
+      <FTKeyboardwrapper>
+
+      <View style={summaryWrap}>
+
+        <View style={{alignItems: "center"}}>
+        <FTIconwithbg 
+        size={60}
+        Icon={Bluecardicon}
+        bG={COLORS.Tpurple2}
+        />
+        <Text style={amountText}>Amount</Text>
+        <Text style={amountValueText}>N100,000.00</Text>
+        </View>
+
+        <FTHorizontaline mT={30} mB={42} />
+     
+        <FlatList 
+        data={transactionDatas}
+        ItemSeparatorComponent={() => <View style={{height: 18}} />}
+        renderItem={({item}) => <EachRow data={item} />}
+        />
+      </View>
+
+      <FTInput 
+      label='Transaction Note'
+      placeholderText='Enter Note (Optional)'
+      name="remarks"
+      rules={VALIDATION.REMARKS_VALIDATION}
+      control={control}
+      mB={26}
+      />
+
+      
+      </FTKeyboardwrapper>
+
+      <FTCustombutton 
+      btntext='Great, Proceed to pay'
+      onpress={() => navigation.navigate("transactionpin_screen")}
+      bg={COLORS.blue9}
+      />
     </FTTitlepagewrapper>
   )
 }

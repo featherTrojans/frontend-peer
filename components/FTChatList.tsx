@@ -23,7 +23,7 @@ const ChatMessage = ({ userId, chatinfo }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate("chatsdm_screen");
+        navigation.navigate("chatsdm_screen", { userInfo });
       }}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -138,41 +138,40 @@ const FTChatList = ({ chats, chattwos, authId }) => {
   }, [chats, chattwos]);
 
   return (
-    <View>
-      <FlatList
-        data={allChats}
-        renderItem={({ item }) => {
-          let userid = item.id1 !== authId ? item.id1 : item.id2;
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      data={allChats}
+      renderItem={({ item }) => {
+        let userid = item.id1 !== authId ? item.id1 : item.id2;
 
-          return <ChatMessage userId={userid} chatinfo={item} />;
-        }}
-        ItemSeparatorComponent={() => {
-          return <View style={{ height: 40 }} />;
-        }}
-        ListHeaderComponent={() => {
-          return (
-            <>
-              <FTSearchinput
-                placeholder="Type to search chat"
-                bG={COLORS.blue20}
-                mB={30}
-                mT={30}
-              />
-              <Text
-                style={{
-                  marginBottom: 40,
-                  marginTop: 10,
-                  ...fontsize.smallest,
-                  ...FONTS.semibold,
-                }}
-              >
-                Recent Chats
-              </Text>
-            </>
-          );
-        }}
-      />
-    </View>
+        return <ChatMessage userId={userid} chatinfo={item} />;
+      }}
+      ItemSeparatorComponent={() => {
+        return <View style={{ height: 40 }} />;
+      }}
+      ListHeaderComponent={() => {
+        return (
+          <>
+            <FTSearchinput
+              placeholder="Type to search chat"
+              bG={COLORS.blue20}
+              mB={30}
+              mT={30}
+            />
+            <Text
+              style={{
+                marginBottom: 40,
+                marginTop: 10,
+                ...fontsize.smallest,
+                ...FONTS.semibold,
+              }}
+            >
+              Recent Chats
+            </Text>
+          </>
+        );
+      }}
+    />
   );
 };
 

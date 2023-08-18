@@ -19,17 +19,16 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import {
   FTEmptycomponent,
   FTHorizontaline,
+  FTIconwithbg,
   FTIconwithtitleandinfo,
   FTTabWrapper,
   FTTransactionhistory,
   FTViewbalance,
 } from "../components";
-import { COLORS, SIZES, icons } from "../constants";
+import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
-
-import Customstatusbar from "./shared/Customstatusbar";
 
 import formatData from "../utils/fomatTrans";
 
@@ -80,9 +79,9 @@ const {
   setupInfoSubText,
   setupIconWrap,
   setupHeadSection,
-  activeWithdrawalAmount,
-  activeWithdrawalName,
-  activeWithdrawalProfile,
+  profileSetupHeader,
+  completedSetup,
+  profileSetupWrap,
 } = HomeScreenStyles;
 
 const {
@@ -99,6 +98,7 @@ const {
   Createtagsetupicon,
   Banksetupicon,
   Documentsetupicon,
+  Levelcheckicon,
 } = icons;
 
 const scrollactions = [
@@ -232,22 +232,14 @@ const ActiveCashWithdrawal = () => {
         <Text style={numberOfUnread}>15 Mins Away</Text>
       </View>
 
-      <View style={{ marginTop: 20 }}>
-        <View style={activeWithdrawalProfile}>
-          <View
-            style={{
-              width: 45,
-              height: 45,
-              backgroundColor: COLORS.lightgray,
-              borderRadius: 45 / 2,
-            }}
-          />
-          <View style={{ marginLeft: 18 }}>
-            <Text style={activeWithdrawalName}>Suzzane Vibes Shoes</Text>
-            <Text style={activeWithdrawalAmount}>N45,500</Text>
-          </View>
-        </View>
-      </View>
+      <FTIconwithtitleandinfo
+        title="Suzzane Vibes Shoes"
+        info="N45,500"
+        bG="blue"
+        mT={24}
+        onPress={() => console.log("yes")}
+        Icon={Banksetupicon}
+      />
     </View>
   );
 };
@@ -333,7 +325,7 @@ const ProfileSetup = () => {
                 onPress={completed ? () => {} : onPress}
                 bG={bg}
                 mB={25}
-                rightComponent={completed && <Text>done</Text>}
+                rightComponent={completed && <Levelcheckicon />}
               />
             );
           }}
@@ -420,11 +412,10 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
             activeOpacity={0.8}
           >
             {authdata?.userDetails?.imageUrl !== null ? (
-              <Image
-                style={{ width: 45, height: 45, borderRadius: 45 / 2 }}
-                source={{
-                  uri: authdata?.userDetails?.imageUrl,
-                }}
+              <FTIconwithbg
+                imageUrl={authdata?.userDetails?.imageUrl}
+                size={45}
+                bG={COLORS.Tblue}
               />
             ) : (
               <Featherdefault />
@@ -443,7 +434,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
 
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => navigation.navigate("Notifications")}
+          onPress={() => redirectTo("notification_screen")}
           style={notificationBell}
         >
           <Bell />

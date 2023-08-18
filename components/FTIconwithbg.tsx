@@ -5,7 +5,7 @@ import { images } from "../constants";
 const { Notificationimage } = images;
 
 type IconWithBgProps = {
-  Icon: any;
+  Icon?: any;
   bG: string;
   size?: number | undefined;
   imageUrl?: string;

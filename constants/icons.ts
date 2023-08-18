@@ -109,6 +109,9 @@ import Personalsetupicon from "../assets/icons/Personalsetupicon";
 import Createtagsetupicon from "../assets/icons/Createtagsetupicon";
 import Banksetupicon from "../assets/icons/Banksetupicon";
 import Documentsetupicon from "../assets/icons/Documentsetupicon";
+import Smallphoneicon from "../assets/icons/Smallphoneicon";
+import Pinlockicon from "../assets/icons/Pinlockicon";
+import Keyboarddeleteicon from "../assets/icons/Keyboarddeleteicon";
 
 export default {
   Logo,
@@ -202,6 +205,9 @@ export default {
   Createtagsetupicon,
   Banksetupicon,
   Documentsetupicon,
+  Smallphoneicon,
+  Pinlockicon,
+  Keyboarddeleteicon,
   //Animated icons
 
   Cryinganimate,
