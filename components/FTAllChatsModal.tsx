@@ -89,93 +89,13 @@ const FTAllChatsModal = ({
     <>
       {/* Send cash or keep typing modal */}
       <Chatsmodal showState={sendcashModal} onBgPress={clearModalsAll}>
-        <Text style={sendCashHeader}>
-          Hey Padi, want to send cash to{" "}
-          <Text style={{ textTransform: "capitalize" }}>
-            {" "}
-            {nameOfActiveChat}
-          </Text>{" "}
-          or is it just a text language?
-        </Text>
-
-        <View style={sendCashWrapper}>
-          {/* First One */}
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => {
-              setChooseAmount(true);
-            }}
-            style={[{ backgroundColor: COLORS.blue5 }, sendCashButton]}
-          >
-            <View style={buttonIconBg}>
-              <Blacksendicon />
-            </View>
-            <Text style={buttonText}>Send Cash?</Text>
-          </TouchableOpacity>
-
-          {/* Second Button */}
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => setSendCashModal(false)}
-            style={[{ backgroundColor: COLORS.purple }, sendCashButton]}
-          >
-            <View style={buttonIconBg}>
-              <Blacksendicon />
-            </View>
-            <Text style={buttonText}>Keep Typing?</Text>
-          </TouchableOpacity>
-        </View>
+        
       </Chatsmodal>
 
       {/* Choose amount to send */}
 
       <Chatsmodal showState={chooseAmount} onBgPress={clearModalsAll}>
-        <Text style={chooseAmountHeader}>How much do you want to send?</Text>
-
-        <View style={amountBlockWrap}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {/* minus icon */}
-            {/* <Minusicon /> */}
-            <TextInput
-              style={addedAmountText}
-              keyboardType="numeric"
-              placeholder="N0.00"
-              //  value={amount.value}
-              onChangeText={handleAmountChange}
-            />
-            {/* <Text style={styles.addedAmountText}>N0.00</Text> */}
-            {/* Add icon */}
-            {/* <Plusicon /> */}
-          </View>
-        </View>
-        {/* Amount options */}
-        <View style={amountOptionsContainer}>
-          {amounts.map((item, index) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  setAmount(item);
-                  clearModals();
-                  setEnterPin(true);
-                }}
-                activeOpacity={0.8}
-                key={index}
-                style={amountOption}
-              >
-                <Text style={amountOptionText}>N{item.name}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-
-        <TouchableOpacity
-          style={buttonWrapper}
-          onPress={() => {
-            handleToNext;
-          }}
-        >
-          <Text style={buttonTextValue}>Proceed</Text>
-        </TouchableOpacity>
+       
       </Chatsmodal>
 
       {/* Enter Secure Pin */}

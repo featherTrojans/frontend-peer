@@ -113,6 +113,12 @@ import Smallphoneicon from "../assets/icons/Smallphoneicon";
 import Pinlockicon from "../assets/icons/Pinlockicon";
 import Keyboarddeleteicon from "../assets/icons/Keyboarddeleteicon";
 import Nairaicon from "../assets/icons/Nairaicon";
+import Successtransfericon from "../assets/icons/Successtransfericon";
+import Clearchaticon from "../assets/icons/Clearchaticon";
+import Sendcashicon from "../assets/icons/Sendcashicon";
+import Smalllockicon from "../assets/icons/Smalllockicon";
+
+
 
 
 export default {
@@ -211,6 +217,10 @@ export default {
   Pinlockicon,
   Keyboarddeleteicon,
   Nairaicon,
+  Successtransfericon,
+  Clearchaticon,
+  Sendcashicon,
+  Smalllockicon,
   //Animated icons
 
   Cryinganimate,

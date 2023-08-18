@@ -7,7 +7,7 @@ const { emptyContainer, emptyText } = FTEmptycomponentStyles;
 
 const { Cryinganimate } = icons;
 
-const Emptycomponent = ({ size = 110, msg }: { size: number; msg: string }) => {
+const Emptycomponent = ({ size = 110, msg }: { size?: number; msg: string }) => {
   return (
     <View style={emptyContainer}>
       {/* Crying icons */}

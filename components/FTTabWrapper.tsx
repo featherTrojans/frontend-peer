@@ -12,6 +12,8 @@ const FTTabWrapper = ({
   setShowModal,
   showModal,
   modalHeight,
+  childBg,
+  pH = 16,
 }: {
   children: any;
   bgColor?: string;
@@ -19,8 +21,11 @@ const FTTabWrapper = ({
   showModal?: any;
   setShowModal?: any;
   modalHeight?: string | number;
+  childBg?: string;
+  pH?: number;
 }) => {
   const { Swipemodal } = useSwipemodal();
+  
 
 
   return (
@@ -30,7 +35,11 @@ const FTTabWrapper = ({
         edges={["top"]}
       >
         <Customstatusbar />
-        <View style={{ flex: 1, paddingHorizontal: 16 }}>{children}</View>
+        <View
+          style={{ flex: 1, paddingHorizontal: pH, backgroundColor: childBg }}
+        >
+          {children}
+        </View>
       </SafeAreaView>
       {modalChildren && (
         <Swipemodal

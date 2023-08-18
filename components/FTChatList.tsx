@@ -1,10 +1,26 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
-import { COLORS, FONTS, fontsize } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import FTSearchinput from "./FTSearchinput";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { navigation } from "../utils";
+import { ChatsScreenStyles } from "../assets/styles/screens";
+import FTIconwithbg from "./FTIconwithbg";
+
+const { Blacksendicon } = icons;
+
+const {
+  recentChatText,
+  numberOfUnread,
+  numberOfUnreadBg,
+  chatLastMessage,
+  lastMessageTime,
+  chatDetailWrap,
+  senderNameText,
+  SAlign,
+  chatWrap,
+} = ChatsScreenStyles;
 
 const ChatMessage = ({ userId, chatinfo }) => {
   const [userInfo, setUserInfo] = useState({});
@@ -22,86 +38,48 @@ const ChatMessage = ({ userId, chatinfo }) => {
   };
   return (
     <TouchableOpacity
+      activeOpacity={0.8}
       onPress={() => {
         navigation.navigate("chatsdm_screen", { userInfo });
       }}
+      style={chatWrap}
     >
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <FTIconwithbg Icon={Blacksendicon} bG={COLORS.Tpurple} />
+      {/* userimage here */}
+      <View style={chatDetailWrap}>
         <View
-          style={{
-            width: 45,
-            height: 45,
-            backgroundColor: COLORS.Tpurple,
-            borderRadius: 45 / 2,
-          }}
-        ></View>
-        {/* userimage here */}
-        <View
-          style={{ flex: 1, marginLeft: 18, justifyContent: "space-between" }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
+          style={[
+            SAlign,
+            {
               marginBottom: 8,
-            }}
-          >
-            <Text
-              style={{
-                ...fontsize.smaller,
-                ...FONTS.semibold,
-                color: COLORS.blue9,
-              }}
-            >
-              {userInfo?.fullName}
-            </Text>
-            <Text
-              style={{
-                ...fontsize.xsmallest,
-                ...FONTS.regular,
-                color: COLORS.grey16,
-              }}
-            >
-              Yesterday
-            </Text>
-          </View>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Text
-              style={{
-                ...fontsize.smallest,
-                ...FONTS.medium,
-                color: COLORS.grey2,
-              }}
-            >
-              {chatinfo?.lastMessage}
-            </Text>
-            <View
-              style={{
-                backgroundColor: COLORS.blue9,
-                padding: 5,
-                minHeight: 20,
-                minWidth: 20,
-                borderRadius: 20 / 2,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{
-                  ...fontsize.xxsmallest,
-                  ...FONTS.bold,
-                  color: COLORS.white,
-                }}
-              >
-                2
-              </Text>
-            </View>
+            },
+          ]}
+        >
+          <Text style={senderNameText}>{userInfo?.fullName}</Text>
+          <Text style={lastMessageTime}>Yesterday</Text>
+        </View>
+        <View style={SAlign}>
+          <Text style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
+          <View style={numberOfUnreadBg}>
+            <Text style={numberOfUnread}>2</Text>
           </View>
         </View>
       </View>
     </TouchableOpacity>
+  );
+};
+
+const ListHeader = () => {
+  return (
+    <>
+      <FTSearchinput
+        placeholder="Type to search chat"
+        bG={COLORS.blue20}
+        mB={30}
+        mT={30}
+      />
+      <Text style={recentChatText}>Recent Chats</Text>
+    </>
   );
 };
 
@@ -149,28 +127,7 @@ const FTChatList = ({ chats, chattwos, authId }) => {
       ItemSeparatorComponent={() => {
         return <View style={{ height: 40 }} />;
       }}
-      ListHeaderComponent={() => {
-        return (
-          <>
-            <FTSearchinput
-              placeholder="Type to search chat"
-              bG={COLORS.blue20}
-              mB={30}
-              mT={30}
-            />
-            <Text
-              style={{
-                marginBottom: 40,
-                marginTop: 10,
-                ...fontsize.smallest,
-                ...FONTS.semibold,
-              }}
-            >
-              Recent Chats
-            </Text>
-          </>
-        );
-      }}
+      ListHeaderComponent={() => <ListHeader />}
     />
   );
 };

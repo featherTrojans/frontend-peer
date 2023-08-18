@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../../constants";
-import { getBottomSpace } from "react-native-iphone-x-helper";
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from "react-native-iphone-x-helper";
 
 export const ChatsdmScreenStyles = StyleSheet.create({
   container: {
@@ -9,20 +12,36 @@ export const ChatsdmScreenStyles = StyleSheet.create({
   chatHeader: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 16,
     backgroundColor: COLORS.white,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    zIndex: 2,
+  },
+  backArrowWrap: {
+    borderColor: COLORS.blue9,
+    borderWidth: 1,
+    width: 32,
+    height: 32,
+    borderRadius: 32 / 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerDetailsContainer: {
     flexDirection: "row",
     marginLeft: 5,
     alignItems: "center",
+    // justifyContent: "center",
+    // backgroundColor: "red"
   },
   chatsDmProfileWrap: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
+    // justifyContent: "center",
+    marginLeft: 15,
+    // backgroundColor: "red"
   },
   chatName: {
     ...fontsize.smaller,
@@ -52,40 +71,55 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     zIndex: 1,
   },
   chatTransferTextBg: {
-    borderWidth: 0.5,
-    borderColor: COLORS.grey13,
-    backgroundColor: COLORS.grey14,
-    paddingHorizontal: 24,
-    paddingTop: 9,
-    paddingBottom: 13,
     marginTop: 10,
     borderRadius: 24,
     position: "relative",
+    paddingVertical: 7,
+    paddingHorizontal: 32,
+    backgroundColor: COLORS.Tyellow,
   },
   chatTransferText: {
-    ...fontsize.smallest,
-    ...FONTS.regular,
+    ...fontsize.xxsmallest,
+    ...FONTS.semibold,
     lineHeight: 24,
-    color: COLORS.black,
+    color: COLORS.yellow1,
     textAlign: "center",
   },
 
   messageAreaContainer: {
     flex: 1,
     paddingHorizontal: 15,
+    // paddingBottom: 100,
   },
   chatTextContainer: {
-    position: "relative",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
   inputarea: {},
   chatTextInput: {
-    padding: 10,
-    backgroundColor: "#fff",
-    borderRadius: 10,
+    // padding: 10,
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 24,
+    paddingVertical: 20,
+    // borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: COLORS.grey1,
+    // borderWidth: 1,
+    // borderColor: COLORS.grey1,
+  },
+  textinput: {
+    flex: 1,
+    // height: 40,
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    ...FONTS.regular,
+    color: COLORS.grey7,
+    ...fontsize.smallest,
+    borderLeftColor: "",
+    borderLeftWidth: 1,
   },
   messagesDateWrap: {
     justifyContent: "center",
@@ -102,14 +136,7 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     ...FONTS.regular,
     color: COLORS.blue15,
   },
-  textinput: {
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    ...FONTS.regular,
-    color: COLORS.grey7,
-    ...fontsize.smallest,
-  },
+
   emptyChatLoaderWrap: {
     flex: 1,
     justifyContent: "center",
@@ -219,7 +246,7 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 30,
     marginBottom: 40,
-    ...fontsize.small,
+    ...fontsize.xsmallest,
     ...FONTS.medium,
     lineHeight: 24,
     color: COLORS.black2,
@@ -257,59 +284,25 @@ export const ChatsdmScreenStyles = StyleSheet.create({
   //Choose amount to send modal
   chooseAmountHeader: {
     textAlign: "center",
-    ...fontsize.small,
+    ...fontsize.smallest,
     ...FONTS.medium,
     color: COLORS.black2,
   },
-  amountBlockWrap: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 52,
-    marginBottom: 48,
-  },
-  addedAmountText: {
-    ...fontsize.biggest,
-    ...FONTS.bold,
-    lineHeight: 66,
-    minWidth: 150,
-    textAlign: "center",
-  },
-  amountOptionsContainer: {
+  chooseAmountInputWrap: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    marginBottom: 46,
-  },
-  amountOption: {
-    width: 76,
-    height: 41,
-    backgroundColor: COLORS.white3,
-    justifyContent: "center",
     alignItems: "center",
-    marginRight: 10,
-    marginBottom: 15,
-    borderRadius: 21,
+    borderWidth: 0.5,
+    borderColor: COLORS.grey2,
+    borderRadius: 10,
+    paddingHorizontal: 24,
+    height: 56,
+    marginTop: 25,
+    marginBottom: 16,
   },
-  amountOptionText: {
-    ...fontsize.small,
-    ...FONTS.regular,
-    color: COLORS.black,
-    lineHeight: 18,
-  },
-
-  buttonWrapper: {
-    paddingTop: 23,
-    paddingBottom: 20,
-    backgroundColor: COLORS.blue5,
-    marginBottom: getBottomSpace() + 27,
-    borderRadius: 6,
-  },
-  buttonTextValue: {
-    textAlign: "center",
-    color: COLORS.white,
-    ...fontsize.smallest,
-    ...FONTS.medium,
-    lineHeight: 18,
+  textInputStyle: {
+    height: "100%",
+    paddingHorizontal: 12,
+    flex: 1,
   },
 
   // Enter Secure pin styles
@@ -338,13 +331,5 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     ...fontsize.smallest,
     lineHeight: 24,
     ...FONTS.regular,
-  },
-
-  sendingSuccessText: {
-    marginBottom: getBottomSpace() + 50,
-    ...fontsize.small,
-    ...FONTS.regular,
-    lineHeight: 24,
-    color: COLORS.black2,
   },
 });

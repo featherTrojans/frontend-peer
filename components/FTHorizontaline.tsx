@@ -4,8 +4,8 @@ import { COLORS } from "../constants";
 
 type IHorizontalLineProps = {
   marginV?: number;
-  mT: number;
-  mB: number;
+  mT?: number;
+  mB?: number;
 };
 
 const Horizontaline = ({ marginV, mT, mB }: IHorizontalLineProps) => {

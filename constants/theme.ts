@@ -96,9 +96,11 @@ export const COLORS = {
   Tblue5: "#E3E9FB",
   Tred: "#FFE3E3",
   Tred2: "#FBEEEE",  
+  Tred3: "rgba(255, 227, 227, 0.3)",
   Tgreen: "#E9F9F6",
   Tgreen2: "#E5FAF6",
   Tgreen3: "#E9F7EA",
+  Tgreen4: "rgba(224, 237, 216, 0.3)",
   Tpurple: "#F3EEFB",
   Tpurple2: "#F1E5FF",
 

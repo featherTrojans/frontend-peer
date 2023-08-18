@@ -8,7 +8,15 @@ import {
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { ChatsdmScreenStyles } from "../assets/styles/screens";
-import { FTAllChatsModal, FTTitlepagewrapper } from "../components";
+import {
+  FTAllChatsModal,
+  FTCustombutton,
+  FTIconwithbg,
+  FTMainwrapper,
+  FTTabWrapper,
+  FTTitlepagewrapper,
+} from "../components";
+
 import { AuthContext } from "../context/AuthContext";
 import {
   addDoc,
@@ -28,6 +36,13 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import formatData from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
 import moment from "moment";
+import Animated, {
+  useAnimatedKeyboard,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { navigation } from "../utils";
 
 const {
   chatTransferMsgWrap,
@@ -53,9 +68,31 @@ const {
   inputarea,
   chatTextInput,
   textinput,
+  backArrowWrap,
+
+  viewWrapper,
+  sendCashHeader,
+  sendCashWrapper,
+  sendCashButton,
+  buttonIconBg,
+  buttonText,
+  chooseAmountHeader,
+  securePinHeader,
+  inputLockWrapper,
+  securePinTextInput,
+  chooseAmountInputWrap,
+  textInputStyle,
 } = ChatsdmScreenStyles;
 
-const { Backarrow, Bluecardicon } = icons;
+const {
+  Backarrow,
+  Bluecardicon,
+  Blacksendicon,
+  Addchatsicon,
+  Startnewchaticon,
+  Successtransfericon,
+  Smalllockicon,
+} = icons;
 
 const ChatsdmScreen = ({ route }) => {
   const userIn = route?.params?.userInfo;
@@ -75,6 +112,8 @@ const ChatsdmScreen = ({ route }) => {
   const [fetchmessage, setFetchmessage] = useState(false);
   const animationRef = useRef<LottieView>(null);
   const textInputRef = useRef<TextInput>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [content, setContent] = useState<any>({ child: null, height: 200 });
 
   const focus = () => {
     if (textInputRef.current !== null) {
@@ -87,6 +126,13 @@ const ChatsdmScreen = ({ route }) => {
   const { sendPushNotification, expoPushToken } = usePushNotification();
 
   const scrollViewRef = useRef<ScrollView>(null);
+
+  const keyboard = useAnimatedKeyboard();
+  const translateStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: -keyboard.height.value }],
+    };
+  });
 
   const profileactions = [
     {
@@ -272,7 +318,6 @@ const ChatsdmScreen = ({ route }) => {
     if (mes?.action === "transfer") {
       return (
         <View style={chatTransferMsgWrap}>
-          <View style={{ flex: 1 }}></View>
           <View style={chatTransferTextBg}>
             <Text style={chatTransferText}>
               {" "}
@@ -316,8 +361,8 @@ const ChatsdmScreen = ({ route }) => {
             loop={false}
             style={chatTransferAnim}
           /> */}
-            {/* <Successtranfericon /> */}
-            <Bluecardicon />
+            <Successtransfericon />
+            {/* <Bluecardicon /> */}
           </View>
           <View style={chatTransferTextBg}>
             <Text style={chatTransferText}>
@@ -346,108 +391,243 @@ const ChatsdmScreen = ({ route }) => {
     );
   };
 
-  return (
-    <FTTitlepagewrapper>
-      <FTAllChatsModal
-        nameOfActiveChat={userInfo?.fullName}
-        sendcashModal={sendcashModal}
-        chooseAmount={chooseAmount}
-        enterPin={enterPin}
-        sendSuccess={sendSuccess}
-        clearModals={clearModals}
-        clearModalsAll={clearModalsAll}
-        setChooseAmount={setChooseAmount}
-        setSendCashModal={setSendCashModal}
-        amount={amount}
-        handleAmountChange={handleAmountChange}
-        setAmount={setAmount}
-        setEnterPin={setEnterPin}
-        loading={loading}
-        handlePinChange={handlePinChange}
-        userPin={userPin}
-        sendCash={sendCash}
-      />
+  const switchModals = (value) => {
+    switch (value) {
+      case 0:
+        setContent({ child: <PickOption />, height: 220 });
+        setShowModal((s) => !s);
+        break;
+      case 1:
+        setContent({ child: <AmountToSend />, height: 250 });
+        setShowModal((s) => !s);
+        break;
+      case 2:
+        setContent({ child: <TransactionPin />, height: 250 });
+        setShowModal((s) => !s);
+        break;
+      case 3:
+        setContent({ child: <ActionSuccess />, height: 250 });
+        setShowModal((s) => !s);
+        break;
 
-      <View style={chatHeader}>
-        <View style={[headerDetailsContainer]}>
+      default:
+        break;
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    // switchModals(1)
+    console.log("Closed");
+  };
+
+  const openAmount = () => {
+    setShowModal(false);
+    switchModals(1);
+  };
+  const openTransactionPin = () => {
+    setShowModal(false);
+    switchModals(2);
+  };
+
+  const openSuccess = () => {
+    setShowModal(false);
+    switchModals(3);
+  };
+
+  const PickOption = () => {
+    return (
+      <View style={{ backgroundColor: "#fff" }}>
+        <Text style={sendCashHeader}>
+          Hey Padi, want to send cash to{" "}
+          <Text style={{ textTransform: "capitalize" }}> Ayobami</Text> or is it
+          just a text language?
+        </Text>
+
+        <View style={sendCashWrapper}>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => console.log("Clicked on the profile")}
+            onPress={openAmount}
+            style={[{ backgroundColor: COLORS.blue5 }, sendCashButton]}
+          >
+            <View style={buttonIconBg}>
+              <Blacksendicon />
+            </View>
+            <Text style={buttonText}>Send Cash?</Text>
+          </TouchableOpacity>
+
+          {/* Second Button */}
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={closeModal}
+            style={[{ backgroundColor: COLORS.purple }, sendCashButton]}
+          >
+            <View style={buttonIconBg}>
+              <Blacksendicon />
+            </View>
+            <Text style={buttonText}>Keep Typing?</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
+  const AmountToSend = () => {
+    return (
+      <View>
+        <Text style={chooseAmountHeader}>How much to send?</Text>
+
+        <View style={chooseAmountInputWrap}>
+          <Smalllockicon />
+          <TextInput
+            style={textInputStyle}
+            placeholder="Enter Amount"
+            placeholderTextColor={COLORS.grey2}
+            keyboardType="number-pad"
+          />
+        </View>
+
+        <FTCustombutton btntext="Transfer Cash" onpress={openTransactionPin} />
+      </View>
+    );
+  };
+
+  const TransactionPin = () => {
+    return (
+      <View style={{ backgroundColor: "#fff" }}>
+        <Text style={chooseAmountHeader}>
+          Amount to send : <Text style={{ ...FONTS.bold }}>N{amount.name}</Text>{" "}
+          + N0 Charges
+        </Text>
+
+        <View style={chooseAmountInputWrap}>
+        <Smalllockicon />
+          <TextInput
+            style={textInputStyle}
+            secureTextEntry={true}
+            placeholder="Enter your secure 4 digit PIN"
+            placeholderTextColor={COLORS.grey2}
+            onChangeText={handlePinChange}
+            value={userPin}
+            maxLength={4}
+            keyboardType="number-pad"
+          />
+        </View>
+
+        <FTCustombutton
+          disable={loading}
+          btntext="Transfer Cash"
+          onpress={() => console.log("Send the cash")}
+        />
+      </View>
+    );
+  };
+
+  const ActionSuccess = () => {
+    return (
+      <View style={{ backgroundColor: "#fff" }}>
+        <Text onPress={() => console.log("Yes bajhdb anndsk hj")}>
+          Scuessfull
+        </Text>
+      </View>
+    );
+  };
+
+  return (
+    <FTTabWrapper
+      pH={0}
+      bgColor={COLORS.white}
+      childBg={COLORS.white3}
+      modalChildren={content.child}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      modalHeight={content.height}
+    >
+      {/* Header Section */}
+      <View style={chatHeader}>
+        <View style={[headerDetailsContainer]}>
+          <View style={backArrowWrap}>
+            <Backarrow />
+          </View>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate("chatsprofile_screen")}
             style={chatsDmProfileWrap}
           >
+            <FTIconwithbg bG={COLORS.Tyellow} Icon={Blacksendicon} />
             <View style={{ marginLeft: 18 }}>
               <Text style={chatName}>{userInfo?.fullName}</Text>
               <Text style={chatLastSeen}>Last online : 2 hours ago</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => setSendCashModal(true)}
-          >
-            <Bluecardicon />
+          <TouchableOpacity activeOpacity={0.8} onPress={() => switchModals(0)}>
+            <Blacksendicon />
           </TouchableOpacity>
         </View>
       </View>
 
-      {fetchmessage ? (
-        <View style={emptyChatAnimation}>
-          {/* <LottieView
+      <Animated.View style={[translateStyle, { flex: 1 }]}>
+        {fetchmessage ? (
+          <View style={emptyChatAnimation}>
+            {/* <LottieView
             source={Feathecomingsoonchatanimate}
             autoPlay
             loop
             style={styles.emptyChatAnimation}
           /> */}
-        </View>
-      ) : (
-        <ScrollView
-          style={messageAreaContainer}
-          ref={scrollViewRef}
-          contentContainerStyle={{ paddingTop: 20 }}
-          showsVerticalScrollIndicator={false}
-          bounces={false}
-          onContentSizeChange={() =>
-            scrollViewRef?.current?.scrollToEnd({ animated: true })
-          }
-        >
-          {messages.map(({ data, time }, index: number) => {
-            return (
-              <View key={index}>
-                <View style={messagesDateWrap}>
-                  <Text style={messageDateText}>{time}</Text>
-                </View>
+          </View>
+        ) : (
+          <ScrollView
+            style={messageAreaContainer}
+            ref={scrollViewRef}
+            contentContainerStyle={{ paddingTop: 20, paddingBottom: 100 }}
+            showsVerticalScrollIndicator={false}
+            bounces={false}
+            onContentSizeChange={() =>
+              scrollViewRef?.current?.scrollToEnd({ animated: true })
+            }
+          >
+            {messages.map(({ data, time }, index: number) => {
+              return (
+                <View key={index}>
+                  <View style={messagesDateWrap}>
+                    <Text style={messageDateText}>{time}</Text>
+                  </View>
 
-                {data.map((dat, index) => {
-                  if (dat.sender === userInfo?.userUid) {
-                    return <View key={index}>{renderSenderHTML(dat)}</View>;
-                  }
-                  return <View key={index}>{renderReceiverHTML(dat)}</View>;
-                })}
-              </View>
-            );
-          })}
-        </ScrollView>
-      )}
-      <View style={chatTextContainer}>
-        <View style={inputarea}>
+                  {data.map((dat, index) => {
+                    if (dat.sender === userInfo?.userUid) {
+                      return <View key={index}>{renderSenderHTML(dat)}</View>;
+                    }
+                    return <View key={index}>{renderReceiverHTML(dat)}</View>;
+                  })}
+                </View>
+              );
+            })}
+          </ScrollView>
+        )}
+
+        {/* Bottom Input */}
+        <View style={[chatTextContainer]}>
           <View style={chatTextInput}>
             <TextInput
-              placeholder="Enter Message"
+              placeholder="Enter Message..."
               style={textinput}
               value={chattext}
               onChangeText={handleTextChange}
+              placeholderTextColor={COLORS.grey16}
             />
             {chattext !== "" && (
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => sendFireBaseMessage()}
               >
-                <Bluecardicon />
+                <Addchatsicon />
               </TouchableOpacity>
             )}
           </View>
         </View>
-      </View>
-    </FTTitlepagewrapper>
+      </Animated.View>
+    </FTTabWrapper>
   );
 };
 
