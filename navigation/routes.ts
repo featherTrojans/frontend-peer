@@ -67,8 +67,7 @@ import {
 export const authRoutes = [
   {
     title: "",
-    screen: WelcomeScreen,
-    // screen: OnboardingScreen,
+    screen: OnboardingScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "onboarding_screen",

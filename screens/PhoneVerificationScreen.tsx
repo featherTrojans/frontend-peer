@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
-import { navigation, setAuthorizationToken } from "../utils";
+import { navigation, setAuthorizationToken, setDataInstorage } from "../utils";
 import { FTCustombutton, FTTitlepagewrapper } from "../components";
 import OTPTextInput from "react-native-otp-textinput";
 import { COLORS } from "../constants";
@@ -43,6 +43,10 @@ const PhoneVerificationScreen = ({ route }) => {
       setLoading(true);
       const response = await axiosCustom.post(url, {
         code: otpCode,
+      });
+      await setDataInstorage("@token", {
+        token: response.data.data.token,
+        time: Date.now(),
       });
       setAuthorizationToken(response.data.data.token);
       navigation.navigate(navigateurl);

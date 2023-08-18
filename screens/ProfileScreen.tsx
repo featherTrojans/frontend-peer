@@ -3,10 +3,10 @@ import React, { useContext } from "react";
 import { ProfileScreenStyles } from "../assets/styles/screens";
 import { FTIconwithtitleandinfo, FTTabWrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { navigation, redirectTo } from "../utils";
+import { clearDataFromStorage, navigation, redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
 
-const {  Editprofileicon } = icons;
+const { Editprofileicon } = icons;
 
 const {
   profileHeaderWrap,
@@ -53,7 +53,7 @@ const profileActions = [
 ];
 
 const ProfileScreen = () => {
-  const { authdata } = useContext(AuthContext);
+  const { authdata, setAuthData, setToken } = useContext(AuthContext);
 
   const upgradeDecision = () => {
     switch (authdata?.userDetails?.userLevel) {
@@ -68,12 +68,20 @@ const ProfileScreen = () => {
 
   const upgrade = upgradeDecision();
 
+  const handlesignout = async () => {
+    await clearDataFromStorage("@token");
+    setAuthData({});
+    setToken("");
+  };
+
   return (
     <FTTabWrapper>
       <View style={profileHeaderWrap}>
         <Text style={profileHeaderText}>My Profile</Text>
         <View>
-          <Text style={signoutText}>Sign Out</Text>
+          <Text onPress={handlesignout} style={signoutText}>
+            Sign Out
+          </Text>
         </View>
       </View>
 
