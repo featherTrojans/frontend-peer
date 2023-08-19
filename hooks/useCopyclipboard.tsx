@@ -16,6 +16,10 @@ const useCopyclipboard = (alertText: string) => {
     Clipboard.setString(copiedTest);
   };
 
+  const subscription = Clipboard.addClipboardListener(() => {
+    successAlert(alertText);
+  });
+
  
 
   return {

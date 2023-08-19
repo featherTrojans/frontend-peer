@@ -14,14 +14,17 @@ import { assetsDB, bankLogo } from "../assetdatas";
 import {
   FTBackheader,
   FTHorizontaline,
+  FTIconwithbg,
   FTMainwrapper,
   FTSendingandreceive,
+  FTTitlepagewrapper,
 } from "../components";
 import { COLORS, icons } from "../constants";
 import amountFormatter from "../utils/formatMoney";
 import { nameSplitToTwo } from "../utils/nameSplitter";
 import { TransactiondetailsScreenStyles } from "../assets/styles/screens";
 import { useAlert, useCopyclipboard } from "../hooks";
+
 
 const {
   container,
@@ -31,7 +34,6 @@ const {
   typeAndIconWrap,
   eachDetailValue,
   topHeaderBlock,
-  topHeaderWrap,
   optionWrapper,
   optionBlock,
   eachOptionWrapper,
@@ -49,6 +51,7 @@ const {
   tapAndCopy,
   headerBlock,
 } = TransactiondetailsScreenStyles;
+
 
 const { Sharereceipt, Downloadreceipt, Reporttransactions, Arrowin, Arrowout } =
   icons;
@@ -555,47 +558,44 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     {
       title: "Share",
       Icon: Sharereceipt,
-      color: "#FFF5E5",
+      color: COLORS.Tyellow
     },
     {
       title: "Download",
       Icon: Downloadreceipt,
-      color: "#E5FAF6",
+      color: COLORS.Tgreen2
     },
     {
       title: "Report",
       Icon: Reporttransactions,
-      color: "#FFE3E3",
+      color: COLORS.Tred
     },
   ];
 
-  // const {price } = route?.params
   return (
-    <FTMainwrapper>
-      <FTBackheader mb={0} title="Transaction Details" />
-      <View style={topHeaderWrap}>
-        <FTHorizontaline marginV={0} />
-
-        <View style={optionWrapper}>
-          {options.map(({ title, color, Icon }, index) => {
-            return (
-              <View style={optionBlock} key={index}>
-                <View style={[eachOption, { backgroundColor: color }]}>
-                  <Icon />
-                </View>
-                <Text style={eachOptionTitle}>{title}</Text>
-              </View>
-            );
-          })}
-        </View>
-      </View>
+    <FTTitlepagewrapper title="Transaction Details" childBg={COLORS.white}>
+        
 
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingHorizontal: 15 }}
         showsVerticalScrollIndicator={false}
-        bounces={false}
       >
+        <View style={optionWrapper}>
+          {options.map(({ title, color, Icon }, index) => {
+            return (
+              <View style={optionBlock} key={index}>
+                <FTIconwithbg 
+                Icon={Icon}
+                size={40}
+                bG={color}
+                />
+                <Text style={eachOptionTitle}>{title}</Text>
+              </View>
+            );
+          })}
+        </View>
+
         <View style={dateWrapper}>
           <View style={dateWrap}>
             <Text style={dateText}>{formatDateTime}</Text>
@@ -678,7 +678,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
           />
         </View>
       </ScrollView>
-    </FTMainwrapper>
+
+
+    </FTTitlepagewrapper>
   );
 };
 

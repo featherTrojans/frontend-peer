@@ -8,6 +8,7 @@ import { assetsDB, bankLogo } from "../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { FTTransactionhistoryStyles } from "../assets/styles/components";
+import { navigation } from "../utils";
 const {
   container,
   dateText,
@@ -162,7 +163,7 @@ const History = ({ data }) => {
     <TouchableOpacity
       activeOpacity={0.8}
       style={historyContainer}
-      onPress={() => customNavigation("Transactiondetails", { data: data })}
+      onPress={() => navigation.navigate("transacttiondetails_screen", { data: data })}
     >
       <View style={historyDetailsContainer}>
         {/* {transactionBadge()} */}

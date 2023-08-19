@@ -6,7 +6,7 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { clearDataFromStorage, navigation, redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
 
-const { Editprofileicon } = icons;
+const { Editprofileicon, Mywalleticon, Abouticon, Securityprivicon, Supporticon } = icons;
 
 const {
   profileHeaderWrap,
@@ -26,29 +26,29 @@ const {
 
 const profileActions = [
   {
-    Icon: "",
+    Icon: Mywalleticon,
     title: "My Wallets",
     action: () => navigation.navigate("mywallet_screen"),
   },
   {
-    Icon: "",
+    Icon: Securityprivicon,
     title: "Account Verification",
     action: () => navigation.navigate("accountverification_screen"),
   },
   {
-    Icon: "",
+    Icon: Supporticon,
     title: "Support & Help Desk",
-    action: () => navigation.navigate("accountverification_screen"),
+    action: () => console.log("yes support"),
   },
   {
-    Icon: "",
+    Icon: Securityprivicon,
     title: "Security & Privacy",
     action: () => navigation.navigate("securityandprivacy_screen"),
   },
   {
-    Icon: "",
+    Icon: Abouticon,
     title: "About Feather App",
-    action: () => navigation.navigate("securityandprivacy_screen"),
+    action: () => console.log("yes about"),
   },
 ];
 
@@ -122,7 +122,7 @@ const ProfileScreen = () => {
           return (
             <FTIconwithtitleandinfo
               key={index}
-              Icon={Editprofileicon}
+              Icon={Icon}
               bG={COLORS.blue19}
               title={title}
               mB={20}
