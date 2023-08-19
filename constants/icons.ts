@@ -117,9 +117,7 @@ import Successtransfericon from "../assets/icons/Successtransfericon";
 import Clearchaticon from "../assets/icons/Clearchaticon";
 import Sendcashicon from "../assets/icons/Sendcashicon";
 import Smalllockicon from "../assets/icons/Smalllockicon";
-
-
-
+import Debitcardicon from "../assets/icons/Debitcardicon";
 
 export default {
   Logo,
@@ -222,6 +220,7 @@ export default {
   Sendcashicon,
   Smalllockicon,
   //Animated icons
+  Debitcardicon,
 
   Cryinganimate,
   Winkinganimate,

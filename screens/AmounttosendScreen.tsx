@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import Animated, {
-    Layout,
-  } from "react-native-reanimated";
+import Animated, { Layout } from "react-native-reanimated";
 import {
   FTCustombutton,
   FTKeyboard,
+  FTLoader,
   FTTabWrapper,
   FTTitlepagewrapper,
 } from "../components";
@@ -16,11 +15,9 @@ import {
   TransactionpinScreenStyles,
 } from "../assets/styles/screens";
 import amountFormatter from "../utils/formatMoney";
+import { useAlert } from "../hooks";
 
-const {
-  enterPinText,
-  keyboardWrap,
-} = TransactionpinScreenStyles;
+const { enterPinText, keyboardWrap } = TransactionpinScreenStyles;
 
 const { amountWrap, nairaIconWrap, amountValueText } = AmounttosendScreenStyles;
 
@@ -28,7 +25,11 @@ const { Nairaicon } = icons;
 
 const AmounttosendScreen = ({ route }) => {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
-  const { nextScreen } = route.params;
+  const nextScreen = route?.params?.nextScreen;
+  const onsubmit = route?.params?.onsubmit;
+  const { errorAlert } = useAlert();
+  const [loading, setLoading] = useState(false);
+
   const [amount, setAmount] = useState([]);
   //   const formatted = formatter.format(amount.join(""));
   const formatted = amountFormatter(amount.join(""));
@@ -48,6 +49,16 @@ const AmounttosendScreen = ({ route }) => {
       setAmount(newdata);
     }
   };
+  const handlesubmit = async () => {
+    setLoading(true);
+    try {
+      await onsubmit(amount.join(""));
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <FTTitlepagewrapper
       title="How Much?"
@@ -56,6 +67,7 @@ const AmounttosendScreen = ({ route }) => {
       childBg={COLORS.blue16}
       invert
     >
+      {loading && <FTLoader />}
       <View>
         <Animated.View layout={Layout.springify()} style={amountWrap}>
           <View style={nairaIconWrap}>
@@ -82,7 +94,7 @@ const AmounttosendScreen = ({ route }) => {
       </View>
       <FTCustombutton
         btntext="Fund Wallet"
-        onpress={() => navigation.navigate("choosefeatheruser_screen")}
+        onpress={handlesubmit}
         bg={COLORS.blue9}
       />
     </FTTitlepagewrapper>

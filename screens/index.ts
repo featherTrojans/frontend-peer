@@ -58,9 +58,7 @@ import CardCreateSuccessScreen from "./CardCreateSuccessScreen";
 import AmounttosendScreen from "./AmounttosendScreen";
 import PhoneRegisterScreen from "./PhoneRegisterScreen";
 import TransactionpinScreen from "./TransactionpinScreen";
-
-
-
+import CustomWebScreen from "./CustomWebScreen";
 
 export {
   OnboardingScreen,
@@ -85,6 +83,7 @@ export {
   SearchmerchantidScreen,
   FindmerchantScreen,
   BlankScreen,
+  CustomWebScreen,
 
   //Profile screen
   ProfileScreen,
@@ -132,6 +131,5 @@ export {
   NetworkreceiverScreen,
   PinScreen,
   AmounttosendScreen,
-  TransactionpinScreen
-
+  TransactionpinScreen,
 };

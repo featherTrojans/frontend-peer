@@ -55,6 +55,7 @@ import {
   AmounttosendScreen,
   PhoneRegisterScreen,
   TransactionpinScreen,
+  CustomWebScreen,
 } from "../screens";
 
 // UploadDocScreen
@@ -415,6 +416,13 @@ export const otherRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "notification_screen",
+  },
+  {
+    title: "",
+    screen: CustomWebScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "customweb_screen",
   },
 ];
 

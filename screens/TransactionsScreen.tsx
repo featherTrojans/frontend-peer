@@ -64,6 +64,7 @@ const {
   Cableicon,
   Electricityicon,
   Airtimeicon,
+  Debitcardicon,
 } = icons;
 
 const TransactionsScreen = ({ navigation }) => {
@@ -98,10 +99,10 @@ const TransactionsScreen = ({ navigation }) => {
     getAllTransactions();
   };
   const closeModalAndRedirect = (redirectScreenName) => {
-    redirectTo(redirectScreenName)
+    redirectTo(redirectScreenName);
     // setShowTabs(true)
     // setShowModal(false)
-  }
+  };
 
   const TransferModal = () => {
     return (
@@ -121,7 +122,11 @@ const TransactionsScreen = ({ navigation }) => {
             title="To Feather Wallet"
             info="Send cash to other feather users."
             Icon={Walletblueicon}
-            onPress={() => navigation.navigate("amounttosend_screen", {nextScreen: "choosefeatheruser_screen"})}
+            onPress={() =>
+              navigation.navigate("amounttosend_screen", {
+                nextScreen: "choosefeatheruser_screen",
+              })
+            }
             bG={COLORS.Tblue}
           />
 
@@ -130,7 +135,11 @@ const TransactionsScreen = ({ navigation }) => {
             title="To Bank Account"
             info="Transfer money to any bank in Nigeria."
             Icon={Bankblueicon}
-            onPress={() => navigation.navigate("amounttosend_screen", {nextScreen: "choosefeatheruser_screen"})}
+            onPress={() =>
+              navigation.navigate("amounttosend_screen", {
+                nextScreen: "choosefeatheruser_screen",
+              })
+            }
             bG={COLORS.Tyellow}
           />
         </View>
@@ -201,6 +210,56 @@ const TransactionsScreen = ({ navigation }) => {
     );
   };
 
+  const AddCashModal = () => {
+    const onsubmit = async (amount) => {
+      const response = await axiosCustom.post("/pay", { amount: amount });
+
+      navigation.navigate("customweb_screen", {
+        url: response.data.data.authorization_url,
+        reference: response.data.data.reference,
+        amount: amount,
+      });
+    };
+    return (
+      <View>
+        <Text style={transferCashText}>Add Cash</Text>
+
+        <View style={{ marginTop: 40 }}>
+          <FTIconwithtitleandinfo
+            title="Debit card, Bank or USSD"
+            info="Secured by Paystack."
+            Icon={Debitcardicon}
+            onPress={() =>
+              navigation.navigate("amounttosend_screen", {
+                nextScreen: "choosefeatheruser_screen",
+                onsubmit,
+              })
+            }
+            bG={COLORS.Tblue3}
+          />
+
+          <FTHorizontaline marginV={15} />
+          <FTIconwithtitleandinfo
+            title="Feather Agents"
+            info="Coming Soon!"
+            Icon={Debitcardicon}
+            onPress={() => console.log("Feather agents")}
+            bG={COLORS.Tblue3}
+          />
+
+          <FTHorizontaline marginV={15} />
+          <FTIconwithtitleandinfo
+            title="Request from family & friends"
+            info="Coming Soon!"
+            Icon={Debitcardicon}
+            onPress={() => console.log("Feather agents")}
+            bG={COLORS.Tblue3}
+          />
+        </View>
+      </View>
+    );
+  };
+
   const switchModals = (value) => {
     switch (value) {
       case 0:
@@ -218,7 +277,11 @@ const TransactionsScreen = ({ navigation }) => {
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
-
+      case 3:
+        setContent({ child: <AddCashModal />, height: 360 });
+        setShowModal((s) => !s);
+        setShowTabs(false);
+        break;
       default:
         break;
     }
@@ -247,7 +310,7 @@ const TransactionsScreen = ({ navigation }) => {
       title: "Add Cash",
       Icon: Fundwalleticon,
       color: COLORS.Tgreen2,
-      action: () => switchModals(0),
+      action: () => switchModals(3),
     },
   ];
 
@@ -277,10 +340,7 @@ const TransactionsScreen = ({ navigation }) => {
           {options.map(({ title, color, Icon, action }, index) => {
             return (
               <Pressable onPress={action} style={optionBlock} key={index}>
-                <FTIconwithbg 
-                Icon={Icon}
-                bG={color}
-                />
+                <FTIconwithbg Icon={Icon} bG={color} />
                 <Text style={eachOptionTitle}>{title}</Text>
               </Pressable>
             );
