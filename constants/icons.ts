@@ -120,6 +120,7 @@ import Smalllockicon from "../assets/icons/Smalllockicon";
 import Debitcardicon from "../assets/icons/Debitcardicon";
 import Transactionpinlockicon from "../assets/icons/Transactionpinlockicon";
 import Multifactoricon from "../assets/icons/Multifactoricon";
+import Dropdownicon from "../assets/icons/Dropdownicon";
 
 
 
@@ -228,7 +229,7 @@ export default {
   Debitcardicon,
   Transactionpinlockicon,
   Multifactoricon,
-
+  Dropdownicon,
   Cryinganimate,
   Winkinganimate,
   Mapanimate,

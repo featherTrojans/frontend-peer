@@ -32,4 +32,14 @@ export const FTInputStyles = StyleSheet.create({
     ...fontsize.xxsmallest,
     fontStyle: "italic",
   },
+  dropdownWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  dropdownPlaceholder: {
+    textTransform: "capitalize",
+    ...fontsize.smallest,
+    ...FONTS.medium,
+  },
 });

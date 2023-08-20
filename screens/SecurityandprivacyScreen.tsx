@@ -15,9 +15,9 @@ const {
 const RightComponent = ({ action }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => {
-    // You can perform and action here
-    action();
+    // You can perform any action here
     setIsEnabled((previousState) => !previousState);
+    action();
   };
 
   return (
@@ -63,7 +63,7 @@ const SecurityandprivacyScreen = () => {
             bG={COLORS.Tblue}
             title="Enable Multi Factor Authentication"
             info="Add a layer of security to your PIN"
-            onPress={() => console.log("")}
+            onPress={() => null}
             rightComponent={<RightComponent action={multifactorAction} />}
           />
         </View>
@@ -74,7 +74,7 @@ const SecurityandprivacyScreen = () => {
             bG={COLORS.Tgreen}
             title="Use biometrics for Transactions"
             info="Enable biometrics for security actions"
-            onPress={() => console.log("")}
+            onPress={() => null}
             rightComponent={<RightComponent action={biometricsTransaction} />}
             mB={30}
           />
@@ -83,7 +83,7 @@ const SecurityandprivacyScreen = () => {
             bG={COLORS.Tgreen}
             title="Use biometrics for Login"
             info="Enable biometrics for security actions"
-            onPress={() => console.log("")}
+            onPress={() => null}
             rightComponent={<RightComponent action={biometricsLogin} />}
           />
         </View>

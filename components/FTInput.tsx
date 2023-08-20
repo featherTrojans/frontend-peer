@@ -1,18 +1,17 @@
 import React from "react";
-import {
-  Text,
-  View,
-  TextInput,
-
-} from "react-native";
+import { Text, View, TextInput, Pressable } from "react-native";
 import { Controller } from "react-hook-form";
-import { icons, COLORS } from "../constants";
+import { icons, COLORS, fontsize, FONTS } from "../constants";
 import { FTInputStyles } from "../assets/styles/components";
 
-const {  textInput, errorMessageText, inputLabel } =
-  FTInputStyles;
-
-const { Transfericon } = icons;
+const {
+  textInput,
+  errorMessageText,
+  inputLabel,
+  dropdownPlaceholder,
+  dropdownWrap,
+} = FTInputStyles;
+const { Dropdownicon } = icons;
 
 type inputProps = {
   label?: string;
@@ -22,6 +21,9 @@ type inputProps = {
   control: any;
   name: string;
   rules?: any;
+  type?: "input" | "dropdown";
+  onPress?: () => void;
+  rightComponent?: any
 };
 
 const FTInput = ({
@@ -31,49 +33,101 @@ const FTInput = ({
   mB = 0,
   name,
   rules = {},
+  type = "input",
   control,
+  onPress,
+  rightComponent
 }: inputProps) => {
-  return (
-    <View
-      style={{
-        marginTop: mT,
-        marginBottom: mB,
-        borderColor: COLORS.inputBorderColorDark,
-      }}
-    >
-      <Text style={inputLabel}>{label}</Text>
+  const renderInputType = () => {
+    return (
+      <View
+        style={{
+          marginTop: mT,
+          marginBottom: mB,
+          borderColor: COLORS.inputBorderColorDark,
+        }}
+      >
+        <Text style={inputLabel}>{label}</Text>
 
-      <Controller
-        control={control}
-        name={name}
-        rules={rules}
-        render={({
-          field: { onChange, onBlur, value },
-          fieldState: { error },
-        }) => (
-          <>
-            <TextInput
+        <Controller
+          control={control}
+          name={name}
+          rules={rules}
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error },
+          }) => (
+            <>
+              <TextInput
+                style={[
+                  textInput,
+                  {
+                    borderColor: error
+                      ? COLORS.pink1
+                      : value && !error
+                      ? COLORS.blue16
+                      : COLORS.grey15,
+                  },
+                ]}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+                placeholder={placeholderText}
+                placeholderTextColor={COLORS.grey18}
+              />
+              {error && <Text style={errorMessageText}> {error.message}</Text>}
+            </>
+          )}
+        />
+      </View>
+    );
+  };
+  const renderDropdownType = () => {
+    let name = placeholderText?.toLowerCase();
+    let placeholders = ["enter", "name","upload", "select"];
+    let isActive = () => {
+      for (let sample of placeholders) {
+        if (name?.includes(sample.toLowerCase())) {
+          return true;
+        }
+      }
+    };
+
+    return (
+      <View
+        style={[
+          {
+            marginTop: mT,
+            marginBottom: mB,
+          },
+        ]}
+      >
+        <Text style={inputLabel}>{label}</Text>
+
+        <Pressable
+          onPress={onPress}
+          style={[textInput, { justifyContent: "center" }]}
+        >
+          <View style={dropdownWrap}>
+            <Text
               style={[
-                textInput,
-                {
-                  borderColor: error
-                    ? COLORS.pink1
-                    : value && !error
-                    ? COLORS.blue16
-                    : COLORS.grey15,
-                },
+                dropdownPlaceholder,
+                { color: isActive() ? COLORS.grey18 : COLORS.blue9 },
               ]}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              value={value}
-              placeholder={placeholderText}
-              placeholderTextColor={COLORS.grey18}
-            />
-            {error && <Text style={errorMessageText}> {error.message}</Text>}
-          </>
-        )}
-      />
-    </View>
+            >
+              {placeholderText}
+            </Text>
+            {rightComponent ? rightComponent : <Dropdownicon />}
+          </View>
+        </Pressable>
+      </View>
+    );
+  };
+  return (
+    <>
+      {type === "dropdown" && renderDropdownType()}
+      {type === "input" && renderInputType()}
+    </>
   );
 };
 

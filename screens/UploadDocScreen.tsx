@@ -4,109 +4,110 @@ import {
   FTCustombutton,
   FTHeaderandsubheader,
   FTInput,
+  FTKeyboardwrapper,
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
 import { VALIDATION, navigation } from "../utils";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native";
-import FTHorizontaline from "../components/FTHorizontaline";
 import { useAlert, useCustomModal } from "../hooks";
-import { COLORS, FONTS, fontsize } from "../constants";
 import { nigeriastates, stateslgs } from "../utils/countryandstate";
 import axiosCustom from "../httpRequests/axiosCustom";
-
-const CategoryOption = ({
-  option,
-  active,
-  setActive,
-  closeModal,
-}: {
-  option: string;
-  active: Boolean;
-  setActive: any;
-  closeModal: any;
-}) => {
-  return (
-    <>
-      <Pressable
-        onPress={() => {
-          setActive(option);
-          closeModal();
-        }}
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          // backgroundColor: "red",
-          // marginBottom: 25
-        }}
-      >
-        <Text style={{ ...fontsize.smaller, ...FONTS.regular }}>{option}</Text>
-        {/* {active == option && <Pickedoptioncheck />} */}
-      </Pressable>
-      <FTHorizontaline marginV={15} />
-    </>
-  );
-};
-
-const CustomPressible = ({
-  title,
-  value,
-  onchange,
-  placeholder,
-  options,
-}: any) => {
-  const { CustomModal, openModal, closeModal } = useCustomModal();
-
-  return (
-    <Pressable
-      onPress={openModal}
-      style={{
-        backgroundColor: COLORS.white,
-
-        paddingVertical: 15,
-        borderRadius: 6,
-        marginBottom: 10,
-      }}
-    >
-      <Text
-        style={{
-          ...fontsize.xsmallest,
-          ...FONTS.medium,
-        }}
-      >
-        {title}
-      </Text>
-      <FTHorizontaline marginV={14} />
-      <Text>{value === null ? "--- select ---" : value}</Text>
-
-      <CustomModal height="80%">
-        <FlatList
-          data={options}
-          renderItem={({ item: option, index }) => (
-            <CategoryOption
-              key={index + option}
-              option={option}
-              active={value}
-              setActive={onchange}
-              closeModal={closeModal}
-            />
-          )}
-          showsVerticalScrollIndicator={false}
-        />
-      </CustomModal>
-    </Pressable>
-  );
-};
+import { COLORS, FONTS, SIZES, fontsize } from "../constants";
 
 const UploadDocScreen = () => {
   const { control, handleSubmit } = useForm({ mode: "all" });
   const [id_image, setid_image] = useState({});
+  const [content, setContent] = useState<any>({ child: null, height: 400 });
   const [country_state, setCountrystate] = useState(null);
-  const [city, setcity] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [city, setCity] = useState("Select");
+  const [localGov, setLocalGov] = useState("Select");
+  const [selectDoc, setSelectDoc] = useState("Select Document");
+
   const [loading, setLoading] = useState(false);
   const { errorAlert } = useAlert();
+
+  const closeStateModal = (item) => {
+    setCity(item);
+    setShowModal(false);
+  };
+
+  const closeLocalGovModal = (item) => {
+    setLocalGov(item);
+    setShowModal(false);
+  };
+
+  const StateModal = () => {
+    return (
+      <FlatList
+        data={nigeriastates}
+        renderItem={({ item }) => {
+          return (
+            <Pressable onPress={() => closeStateModal(item)}>
+              <Text
+                style={{
+                  paddingVertical: 15,
+                  textTransform: "capitalize",
+                  ...fontsize.smallest,
+                  ...FONTS.medium,
+                }}
+              >
+                {item}
+              </Text>
+            </Pressable>
+          );
+        }}
+        keyExtractor={(item) => item}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: 40 }}
+      />
+    );
+  };
+
+  const LocalGovModal = () => {
+    return (
+      <FlatList
+        data={nigeriastates}
+        renderItem={({ item }) => {
+          return (
+            <Pressable onPress={() => closeLocalGovModal(item)}>
+              <Text
+                style={{
+                  paddingVertical: 15,
+                  textTransform: "capitalize",
+                  ...fontsize.smallest,
+                  ...FONTS.medium,
+                }}
+              >
+                {item}
+              </Text>
+            </Pressable>
+          );
+        }}
+        keyExtractor={(item) => item}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: 40 }}
+      />
+    );
+  };
+
+  const switchModals = (value: number) => {
+    switch (value) {
+      case 0:
+        setContent({ child: <StateModal />, height: SIZES.height - 200 });
+        setShowModal((s) => !s);
+        break;
+      case 1:
+        setContent({ child: <LocalGovModal />, height: SIZES.height - 200 });
+        setShowModal((s) => !s);
+        break;
+
+      default:
+        break;
+    }
+  };
 
   const handleImageUpload = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -147,29 +148,55 @@ const UploadDocScreen = () => {
       setLoading(false);
     }
   };
+
+
+  const UploadDocumentBtn = () => {
+    return (
+      <TouchableOpacity style={{backgroundColor: COLORS.green4, paddingVertical: 11, paddingHorizontal: 16, borderRadius: 12}} activeOpacity={0.8} onPress={handleImageUpload}>
+        <Text style={{...fontsize.smallest, ...FONTS.semibold, color: COLORS.white}}>Upload Document</Text>
+      </TouchableOpacity>
+    )
+  }
+
   return (
-    <FTTitlepagewrapper title="Upload Documents">
-      <ScrollView>
+    <FTTitlepagewrapper
+      title="Upload Documents"
+      modalChildren={content.child}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      modalHeight={content.height}
+    >
+      <FTKeyboardwrapper>
         <FTHeaderandsubheader
           header="Upload identity 
           documents"
           subHeader=""
         />
-        <CustomPressible
-          options={nigeriastates}
-          value={country_state}
-          onchange={setCountrystate}
-          title="State"
+
+        <FTInput
+          placeholderText={city}
+          name="state"
+          label="State"
+          control={control}
+          rules={VALIDATION.FIRST_NAME_VALIDATION}
+          mB={15}
+          type="dropdown"
+          onPress={() => switchModals(0)}
         />
-        <CustomPressible
-          options={stateslgs[country_state] || []}
-          value={city}
-          onchange={setcity}
-          title="Local Government"
+
+          <FTInput
+          placeholderText={localGov}
+          name="localgov"
+          label="Local Government"
+          control={control}
+          rules={VALIDATION.FIRST_NAME_VALIDATION}
+          mB={15}
+          type="dropdown"
+          onPress={() => switchModals(1)}
         />
 
         <FTInput
-          placeholderText="input House No"
+          placeholderText="Input House No"
           name="house_no"
           label="House No"
           control={control}
@@ -210,20 +237,19 @@ const UploadDocScreen = () => {
         />
 
         <FTInput
-          placeholderText="Upload Document"
+          placeholderText={selectDoc}
           name="id_image"
-          label="Upload Documen"
+          label="Upload Document"
           control={control}
           rules={VALIDATION.PHONE_NUMBER_VALIDATION}
           mB={15}
+          type="dropdown"
+          onPress={() => console.log("Yestys")}
+        rightComponent={<UploadDocumentBtn />}
         />
-        <View>
-          <TouchableOpacity onPress={handleImageUpload}>
-            <Text>Press Me</Text>
-          </TouchableOpacity>
-        </View>
+        
         <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
-      </ScrollView>
+      </FTKeyboardwrapper>
     </FTTitlepagewrapper>
   );
 };
