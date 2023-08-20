@@ -59,6 +59,8 @@ import AmounttosendScreen from "./AmounttosendScreen";
 import PhoneRegisterScreen from "./PhoneRegisterScreen";
 import TransactionpinScreen from "./TransactionpinScreen";
 import CustomWebScreen from "./CustomWebScreen";
+import WithdrawcashScreen from "./WithdrawcashScreen";
+
 
 export {
   OnboardingScreen,
@@ -132,4 +134,5 @@ export {
   PinScreen,
   AmounttosendScreen,
   TransactionpinScreen,
+  WithdrawcashScreen,
 };

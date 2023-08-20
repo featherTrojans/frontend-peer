@@ -121,9 +121,7 @@ import Debitcardicon from "../assets/icons/Debitcardicon";
 import Transactionpinlockicon from "../assets/icons/Transactionpinlockicon";
 import Multifactoricon from "../assets/icons/Multifactoricon";
 import Dropdownicon from "../assets/icons/Dropdownicon";
-
-
-
+import Chaticon from "../assets/icons/Chaticon";
 
 export default {
   Logo,
@@ -230,6 +228,8 @@ export default {
   Transactionpinlockicon,
   Multifactoricon,
   Dropdownicon,
+  Chaticon,
+  // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,
   Mapanimate,
