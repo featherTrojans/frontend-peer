@@ -8,11 +8,12 @@ import {
   Pressable,
 } from "react-native";
 import {
+  FTBillPayment,
+  FTWithdraw,
+  FTTransfer,
+  FTAddcash,
   FTEmptycomponent,
-  FTHorizontaline,
-  FTIconandinfo,
   FTIconwithbg,
-  FTIconwithtitleandinfo,
   FTTabWrapper,
   FTTransactionhistory,
 } from "../components";
@@ -23,11 +24,9 @@ import formatData from "../utils/fomatTrans";
 
 import { TransactionScreenStyles } from "../assets/styles/screens";
 import { AuthContext } from "../context/AuthContext";
-import { navigation, redirectTo } from "../utils";
+import { redirectTo } from "../utils";
 
 const {
-  container,
-  contentContainer,
   listContainer,
   optionsContainer,
   leftheaderWrapper,
@@ -38,10 +37,6 @@ const {
   optionWrapper,
   optionBlock,
   eachOptionTitle,
-  bottomsheetHeader,
-  historyIconWrap,
-  historyText,
-  viewAll,
   loaderWrapper,
   transferCashText,
   transferTypeModalHeader,
@@ -103,211 +98,36 @@ const TransactionsScreen = ({ navigation }) => {
     // setShowTabs(true)
     // setShowModal(false)
   };
-
-  const TransferModal = () => {
-    const onsubmitToFeatherWallet = async (amount) => {
-      navigation.navigate("choosefeatheruser_screen", { amount });
-    };
-    const onsubmitToBankAccount = async (amount) => {
-      navigation.navigate("choosebank_screen", { amount });
-    };
-
-    return (
-      <View>
-        <View style={transferTypeModalHeader}>
-          <Text style={transferCashText}>Transfer Cash</Text>
-
-          <View style={{ alignItems: "flex-end" }}>
-            <Text style={primaryWalletText}>Primary Wallet Balance</Text>
-
-            <Text style={primaryWalletBalanceText}>N332,500.50</Text>
-          </View>
-        </View>
-
-        <View style={{ marginTop: 40 }}>
-          <FTIconwithtitleandinfo
-            title="To Feather Wallet"
-            info="Send cash to other feather users."
-            Icon={Walletblueicon}
-            onPress={() =>
-              navigation.navigate("amounttosend_screen", {
-                nextScreen: "choosefeatheruser_screen",
-                onsubmit: onsubmitToFeatherWallet,
-              })
-            }
-            bG={COLORS.Tblue}
-          />
-
-          <FTHorizontaline marginV={15} />
-          <FTIconwithtitleandinfo
-            title="To Bank Account"
-            info="Transfer money to any bank in Nigeria."
-            Icon={Bankblueicon}
-            onPress={() =>
-              navigation.navigate("amounttosend_screen", {
-                nextScreen: "choosefeatheruser_screen",
-                onsubmit: onsubmitToBankAccount,
-              })
-            }
-            bG={COLORS.Tyellow}
-          />
-        </View>
-      </View>
-    );
-  };
-
-  const WithdrawModal = () => {
-    const onsubmitfindmerchant = (amount) => {
-      navigation.navigate("withdrawcash_screen", amount);
-    };
-
-    const onsubmitpaymerchant = (amount) => {
-      navigation.navigate("searchmerchantid_screen", { amount });
-    };
-    return (
-      <View>
-        <Text style={transferCashText}>Withdraw Options</Text>
-
-        <View style={{ marginTop: 40 }}>
-          <FTIconwithtitleandinfo
-            title="Pay Known Merchant"
-            info="Withdraw from feather verified merchants"
-            Icon={Paymerchanticon}
-            onPress={() =>
-              navigation.navigate("amounttosend_screen", {
-                nextScreen: "choosefeatheruser_screen",
-                onsubmit: onsubmitpaymerchant,
-              })
-            }
-            bG={COLORS.Tyellow}
-          />
-
-          <FTHorizontaline marginV={15} />
-          <FTIconwithtitleandinfo
-            title="Find Merchants"
-            info="Find merchants around you to withdraw."
-            Icon={Searchmerchanticon}
-            onPress={() =>
-              navigation.navigate("amounttosend_screen", {
-                nextScreen: "choosefeatheruser_screen",
-                onsubmit: onsubmitfindmerchant,
-              })
-            }
-            bG={COLORS.Tpurple}
-          />
-        </View>
-      </View>
-    );
-  };
-
-  const BillpaymentsModal = () => {
-    return (
-      <View>
-        <Text style={transferCashText}>Bill Payments</Text>
-
-        <View style={{ marginTop: 40 }}>
-          <FTIconwithtitleandinfo
-            title="Mobile Airtime & Data"
-            info="Airtime and data from your network."
-            Icon={Airtimeicon}
-            onPress={() => closeModalAndRedirect("choosenetwork_screen")}
-            bG={COLORS.Tblue3}
-          />
-
-          <FTHorizontaline marginV={15} />
-          <FTIconwithtitleandinfo
-            title="Electricity & Utility"
-            info="Pay your power bills easily"
-            Icon={Electricityicon}
-            onPress={() => closeModalAndRedirect("choosebiller_screen")}
-            bG={COLORS.Tyellow}
-          />
-          <FTHorizontaline marginV={15} />
-
-          <FTIconwithtitleandinfo
-            title="Cable TV Subscriptions"
-            info="Pay your cable tv subscriptions"
-            Icon={Cableicon}
-            onPress={() => closeModalAndRedirect("choosecable_screen")}
-            bG={COLORS.Tgreen}
-          />
-        </View>
-      </View>
-    );
-  };
-
-  const AddCashModal = () => {
-    const onsubmit = async (amount) => {
+  const onsubmit = (amount) => {
+    const action = async () => {
       const response = await axiosCustom.post("/pay", { amount: amount });
-
       navigation.navigate("customweb_screen", {
         url: response.data.data.authorization_url,
         reference: response.data.data.reference,
         amount: amount,
       });
     };
-    return (
-      <View>
-        <Text style={transferCashText}>Add Cash</Text>
-
-        <View style={{ marginTop: 40 }}>
-          <FTIconwithtitleandinfo
-            title="Debit card, Bank or USSD"
-            info="Secured by Paystack."
-            Icon={Debitcardicon}
-            onPress={() =>
-              navigation.navigate("amounttosend_screen", {
-                nextScreen: "choosefeatheruser_screen",
-                onsubmit,
-              })
-            }
-            bG={COLORS.Tblue3}
-          />
-
-          <FTHorizontaline marginV={15} />
-          <FTIconwithtitleandinfo
-            title="Feather Agents"
-            info="Coming Soon!"
-            Icon={Debitcardicon}
-            onPress={() => console.log("Feather agents")}
-            bG={COLORS.Tblue3}
-          />
-
-          <FTHorizontaline marginV={15} />
-          <FTIconwithtitleandinfo
-            title="Request from family & friends"
-            info="Coming Soon!"
-            Icon={Debitcardicon}
-            onPress={() => console.log("Feather agents")}
-            bG={COLORS.Tblue3}
-          />
-        </View>
-      </View>
-    );
+    navigation.navigate("walletfunding_screen", { action });
   };
 
   const switchModals = (value) => {
     switch (value) {
       case 0:
-        setContent({ child: <TransferModal />, height: 300 });
+        setContent({ child: <FTTransfer />, height: 300 });
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
       case 1:
-        setContent({ child: <WithdrawModal />, height: 300 });
+        setContent({ child: <FTWithdraw />, height: 300 });
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
       case 2:
-        setContent({ child: <BillpaymentsModal />, height: 360 });
+        setContent({ child: <FTBillPayment />, height: 360 });
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
-      case 3:
-        setContent({ child: <AddCashModal />, height: 360 });
-        setShowModal((s) => !s);
-        setShowTabs(false);
-        break;
+
       default:
         break;
     }
@@ -336,7 +156,11 @@ const TransactionsScreen = ({ navigation }) => {
       title: "Add Cash",
       Icon: Fundwalleticon,
       color: COLORS.Tgreen2,
-      action: () => switchModals(3),
+      action: () =>
+        navigation.navigate("amounttosend_screen", {
+          nextScreen: "choosefeatheruser_screen",
+          onsubmit,
+        }),
     },
   ];
 

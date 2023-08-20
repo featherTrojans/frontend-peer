@@ -24,10 +24,15 @@ import FTChatList from "./FTChatList";
 import FTAllChatsModal from "./FTAllChatsModal";
 import FTSwitchbtn from "./FTSwitchbtn";
 import FTDetailsModal from "./FTDetailsModal";
-
-
-
+import FTAddcash from "./FTAddcash";
+import FTTransfer from "./FTTransfer";
+import FTWithdraw from "./FTWithdraw";
+import FTBillPayment from "./FTBillPayment";
 export {
+  FTBillPayment,
+  FTAddcash,
+  FTTransfer,
+  FTWithdraw,
   FTInput,
   FTTransactionhistory,
   FTViewbalance,
@@ -53,5 +58,5 @@ export {
   FTChatList,
   FTAllChatsModal,
   FTSwitchbtn,
-  FTDetailsModal
+  FTDetailsModal,
 };

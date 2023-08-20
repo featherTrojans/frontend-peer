@@ -61,6 +61,7 @@ import TransactionpinScreen from "./TransactionpinScreen";
 import CustomWebScreen from "./CustomWebScreen";
 import WithdrawcashScreen from "./WithdrawcashScreen";
 import TransactionSuccessScreen from "./TransactionSuccessScreen";
+import WalletfundingScreen from "./WalletfundingScreen";
 
 export {
   OnboardingScreen,
@@ -136,4 +137,5 @@ export {
   TransactionpinScreen,
   WithdrawcashScreen,
   TransactionSuccessScreen,
+  WalletfundingScreen,
 };

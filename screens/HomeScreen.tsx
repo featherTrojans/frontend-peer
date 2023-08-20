@@ -17,6 +17,10 @@ import {
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 import {
+  FTBillPayment,
+  FTTransfer,
+  FTWithdraw,
+  FTAddcash,
   FTEmptycomponent,
   FTHorizontaline,
   FTIconwithbg,
@@ -35,12 +39,7 @@ import formatData from "../utils/fomatTrans";
 import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
-import {
-  VALIDATION,
-  navigation,
-  redirectTo,
-  setAuthorizationToken,
-} from "../utils";
+import { navigation, redirectTo } from "../utils";
 
 const {
   container,
@@ -106,41 +105,48 @@ const scrollactions = [
     bg: "#EDF3EB",
     text: "Withdraw cash from business and agents near you.",
     icon: "",
+    modal: 3,
   },
   {
     bg: "#F3EEFB",
     text: "Transfer money to feather users and bank accounts.",
     icon: "",
+    modal: 2,
   },
   {
     bg: "#D2EAFD",
     text: "Pay Bills with speed and ease, at good rates.",
     icon: "",
+    modal: 4,
   },
 ];
 
-const QuickActions = () => {
+const QuickActions = ({ onpress }) => {
   function Scrollaction({
     bg,
     text,
     icon,
     index,
+    modal,
   }: {
     bg: string;
     text: string;
     icon: string;
     index: number;
+    modal: number;
   }) {
     let isLast = index + 1 === scrollactions.length;
     return (
-      <View
-        style={[
-          scrollaction,
-          { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
-        ]}
-      >
-        <Text style={scrollactionText}>{text}</Text>
-      </View>
+      <TouchableOpacity onPress={() => onpress(modal)}>
+        <View
+          style={[
+            scrollaction,
+            { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
+          ]}
+        >
+          <Text style={scrollactionText}>{text}</Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 
@@ -151,7 +157,7 @@ const QuickActions = () => {
       // contentContainerStyle={{ paddingHorizontal: 16 }}
     >
       {scrollactions.map((scrollaction, index) => {
-        let { bg, text, icon } = scrollaction;
+        let { bg, text, icon, modal } = scrollaction;
         return (
           <Scrollaction
             bg={bg}
@@ -159,6 +165,7 @@ const QuickActions = () => {
             icon={icon}
             key={index}
             index={index}
+            modal={modal}
           />
         );
       })}
@@ -391,6 +398,21 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
+      case 2:
+        setContent({ child: <FTTransfer />, height: 300 });
+        setShowModal((s) => !s);
+        setShowTabs(false);
+        break;
+      case 3:
+        setContent({ child: <FTWithdraw />, height: 300 });
+        setShowModal((s) => !s);
+        setShowTabs(false);
+        break;
+      case 4:
+        setContent({ child: <FTBillPayment />, height: 360 });
+        setShowModal((s) => !s);
+        setShowTabs(false);
+        break;
 
       default:
         break;
@@ -457,7 +479,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         }
       >
         <FTViewbalance />
-        <QuickActions />
+        <QuickActions onpress={switchModals} />
         <ActiveCashWithdrawal />
         <Conversations />
         <SetupProfile onPress={() => switchModals(0)} />

@@ -58,6 +58,7 @@ import {
   CustomWebScreen,
   WithdrawcashScreen,
   TransactionSuccessScreen,
+  WalletfundingScreen,
 } from "../screens";
 
 // BVNSuccessScreen
@@ -344,6 +345,13 @@ export const transactRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "transactionpin_screen",
+  },
+  {
+    title: "",
+    screen: WalletfundingScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "walletfunding_screen",
   },
 ];
 
