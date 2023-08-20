@@ -54,8 +54,9 @@ export * from "./bvn.style";
 export * from "./feathertag.style";
 export * from "./BvnError.style";
 export * from "./pinscreen.style";
-export * from "./chatsdm.style"
-export * from "./transactionpin.style"
-export * from "./amounttosend.style"
-export * from "./uploaddoc.style"
-export * from "./withdrawcash.style"
+export * from "./chatsdm.style";
+export * from "./transactionpin.style";
+export * from "./amounttosend.style";
+export * from "./uploaddoc.style";
+export * from "./withdrawcash.style";
+export * from "./transactionsuccess.style";

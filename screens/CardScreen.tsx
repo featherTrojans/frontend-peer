@@ -246,7 +246,6 @@ const CardScreen = () => {
       });
   }, []);
 
-
   const switchModals = (value) => {
     switch (value) {
       case 0:
@@ -297,9 +296,9 @@ const CardScreen = () => {
       setShowModal={setShowModal}
       modalHeight={520}
     >
-      {!carddetails?.card_id ? (
+      {carddetails?.card_id ? (
         <>
-          {!carddetails?.is_active ? (
+          {carddetails?.is_active ? (
             <>
               <Text style={myCardsText}>My Cards</Text>
               <View style={demoCard} />

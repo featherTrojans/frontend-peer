@@ -35,7 +35,7 @@ const {
   headerText,
 } = PinScreenStyles;
 
-const { Newlogo, Transfericon } = icons;
+const { Newlogo, Transfersicon } = icons;
 const PinScreen = ({ route }) => {
   const action = route?.params?.action;
   const { errorAlert } = useAlert();
@@ -103,7 +103,7 @@ const PinScreen = ({ route }) => {
                 Incorrect pin, try again
               </Text>
               <TouchableOpacity onPress={() => setError(false)}>
-                <Transfericon />
+                <Transfersicon />
               </TouchableOpacity>
             </View>
           )}

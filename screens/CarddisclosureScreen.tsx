@@ -12,11 +12,11 @@ const CarddisclosureScreen = () => {
   const { authdata } = useContext(AuthContext);
   const action = async (pin) => {
     try {
-      // await axiosCustom.post("/auth/pin/verify", {
-      //   user_pin: pin,
-      //   pin: pin,
-      // });
-      // await createcard();
+      await axiosCustom.post("/auth/pin/verify", {
+        user_pin: pin,
+        pin: pin,
+      });
+      await createcard();
       navigation.navigate("cardcreatesuccess_screen");
     } catch (err) {
       throw err;

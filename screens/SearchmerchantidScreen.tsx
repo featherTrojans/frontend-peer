@@ -10,37 +10,73 @@ import {
 } from "../components";
 import { useForm } from "react-hook-form";
 import { icons } from "../constants";
-import { redirectTo } from "../utils";
+import { navigation, redirectTo } from "../utils";
+import axios from "axios";
+import { useAlert } from "../hooks";
+import axiosCustom from "../httpRequests/axiosCustom";
 const {} = SearchmerchantidScreenStyles;
-const {Bluecardicon} = icons
-const SearchmerchantidScreen = () => {
-  const { control, handleSubmit } = useForm({ mode: "all" });
+const { Bluecardicon } = icons;
 
+const SearchmerchantidScreen = ({ route }) => {
+  const amount = route?.params?.amount;
+  const { errorAlert } = useAlert();
+  const { control, handleSubmit } = useForm({ mode: "all" });
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
+  const [loading, setLoading] = useState(false);
+  const [merchantinfo, setmerchantinfo] = useState({});
 
-
+  const action = async (pin) => {
+    try {
+      await axiosCustom.post("/merchant/transfer", {
+        amount: Number(amount),
+        transferTo: merchantinfo.merchantid,
+        userPin: pin,
+      });
+      navigation.navigate("transactionsuccess_screen");
+    } catch (err) {
+      console.log(err.response);
+      throw err;
+    }
+  };
   const closeModalAndRedirect = () => {
-    setShowModal(false)
-    redirectTo("transactionsummary_screen")
-  }
+    const summaryinfo = {
+      amount: amount,
+      transactionDatas: [
+        {
+          leftSide: "Merchant Name",
+          rightSide: "Lingo Dunkin Pepper",
+        },
+        {
+          leftSide: "Merchant ID",
+          rightSide: "8033211658",
+        },
+        {
+          leftSide: "Charges",
+          rightSide: "free",
+        },
+        {
+          leftSide: "Total to be sent",
+          rightSide: `N${amount}`,
+        },
+      ],
+    };
+    setShowModal(false);
+    navigation.navigate("transactionsummary_screen", { action, summaryinfo });
+  };
 
   const ModalContent = () => {
     return (
       <View style={{ backgroundColor: "#fff" }}>
         <Text>Merchant Details</Text>
-        <View
-        style={{marginVertical: 35}}
-        >
-
-        
-        <FTIconwithtitleandinfo 
-        title="Lingo Dunkin Pepper & Soups"
-        info="33 Transactions"
-        onPress={() => console.log("Yes")}
-        Icon={Bluecardicon}
-        bG="red"
-        />
+        <View style={{ marginVertical: 35 }}>
+          <FTIconwithtitleandinfo
+            title="Lingo Dunkin Pepper & Soups"
+            info="33 Transactions"
+            onPress={() => console.log("Yes")}
+            Icon={Bluecardicon}
+            bG="red"
+          />
         </View>
         <FTCustombutton btntext="Continue" onpress={closeModalAndRedirect} />
       </View>
@@ -50,7 +86,7 @@ const SearchmerchantidScreen = () => {
   const switchModals = (value) => {
     switch (value) {
       case 0:
-        setContent({ child: <ModalContent />,height: 255 });
+        setContent({ child: <ModalContent />, height: 255 });
         setShowModal((s) => !s);
         break;
 
@@ -59,9 +95,17 @@ const SearchmerchantidScreen = () => {
     }
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    switchModals(0)
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      // const response = await axios.post("", {"merchantid":data.merchantid})
+      setmerchantinfo({ merchantid: data.merchantid });
+      switchModals(0);
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
