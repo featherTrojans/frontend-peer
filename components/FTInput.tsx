@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, TextInput, Pressable } from "react-native";
+import { Text, View, TextInput, Pressable, TextInputProps } from "react-native";
 import { Controller } from "react-hook-form";
 import { icons, COLORS, fontsize, FONTS } from "../constants";
 import { FTInputStyles } from "../assets/styles/components";
@@ -23,7 +23,8 @@ type inputProps = {
   rules?: any;
   type?: "input" | "dropdown";
   onPress?: () => void;
-  rightComponent?: any
+  rightComponent?: any;
+  textInputProps?: TextInputProps;
 };
 
 const FTInput = ({
@@ -36,7 +37,8 @@ const FTInput = ({
   type = "input",
   control,
   onPress,
-  rightComponent
+  rightComponent,
+  textInputProps,
 }: inputProps) => {
   const renderInputType = () => {
     return (
@@ -59,6 +61,7 @@ const FTInput = ({
           }) => (
             <>
               <TextInput
+                {...textInputProps}
                 style={[
                   textInput,
                   {
@@ -84,7 +87,7 @@ const FTInput = ({
   };
   const renderDropdownType = () => {
     let name = placeholderText?.toLowerCase();
-    let placeholders = ["enter", "name","upload", "select"];
+    let placeholders = ["enter", "name", "upload", "select"];
     let isActive = () => {
       for (let sample of placeholders) {
         if (name?.includes(sample.toLowerCase())) {

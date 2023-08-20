@@ -22,6 +22,10 @@ import FTIconwithbg from "./FTIconwithbg";
 import FTKeyboardwrapper from "./FTKeyboardwrapper";
 import FTChatList from "./FTChatList";
 import FTAllChatsModal from "./FTAllChatsModal";
+import FTSwitchbtn from "./FTSwitchbtn";
+import FTDetailsModal from "./FTDetailsModal";
+
+
 
 export {
   FTInput,
@@ -47,5 +51,7 @@ export {
   FTIconwithbg,
   FTKeyboardwrapper,
   FTChatList,
-  FTAllChatsModal
+  FTAllChatsModal,
+  FTSwitchbtn,
+  FTDetailsModal
 };

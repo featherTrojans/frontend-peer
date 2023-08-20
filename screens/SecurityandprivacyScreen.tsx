@@ -1,8 +1,10 @@
 import { ScrollView, StyleSheet, Text, View, Switch } from "react-native";
 import React, { useState } from "react";
 import { SecurityandprivacyScreenStyles } from "../assets/styles/screens";
-import { FTIconwithtitleandinfo, FTTitlepagewrapper } from "../components";
+import { FTIconwithtitleandinfo, FTSwitchbtn, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
+
+
 
 const { sectionHeader } = SecurityandprivacyScreenStyles;
 const {
@@ -12,24 +14,6 @@ const {
   Multifactoricon,
 } = icons;
 
-const RightComponent = ({ action }) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => {
-    // You can perform any action here
-    setIsEnabled((previousState) => !previousState);
-    action();
-  };
-
-  return (
-    <Switch
-      trackColor={{ false: COLORS.grey1, true: COLORS.blue17 }}
-      thumbColor={isEnabled ? COLORS.blue16 : COLORS.grey18}
-      ios_backgroundColor={COLORS.grey1}
-      onValueChange={toggleSwitch}
-      value={isEnabled}
-    />
-  );
-};
 
 const SecurityandprivacyScreen = () => {
   const multifactorAction = () => {
@@ -64,7 +48,7 @@ const SecurityandprivacyScreen = () => {
             title="Enable Multi Factor Authentication"
             info="Add a layer of security to your PIN"
             onPress={() => null}
-            rightComponent={<RightComponent action={multifactorAction} />}
+            rightComponent={<FTSwitchbtn action={multifactorAction} />}
           />
         </View>
         <View style={{ marginTop: 40 }}>
@@ -75,7 +59,7 @@ const SecurityandprivacyScreen = () => {
             title="Use biometrics for Transactions"
             info="Enable biometrics for security actions"
             onPress={() => null}
-            rightComponent={<RightComponent action={biometricsTransaction} />}
+            rightComponent={<FTSwitchbtn action={biometricsTransaction} />}
             mB={30}
           />
           <FTIconwithtitleandinfo
@@ -84,7 +68,7 @@ const SecurityandprivacyScreen = () => {
             title="Use biometrics for Login"
             info="Enable biometrics for security actions"
             onPress={() => null}
-            rightComponent={<RightComponent action={biometricsLogin} />}
+            rightComponent={<FTSwitchbtn action={biometricsLogin} />}
           />
         </View>
       </ScrollView>
