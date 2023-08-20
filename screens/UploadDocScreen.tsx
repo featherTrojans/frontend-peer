@@ -15,6 +15,10 @@ import { useAlert, useCustomModal } from "../hooks";
 import { nigeriastates, stateslgs } from "../utils/countryandstate";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { COLORS, FONTS, SIZES, fontsize } from "../constants";
+import { UploadDocScreenStyles } from "../assets/styles/screens";
+
+const { optionText, uploadDocBtnWrap, uploadDocBtnText } =
+  UploadDocScreenStyles;
 
 const UploadDocScreen = () => {
   const { control, handleSubmit } = useForm({ mode: "all" });
@@ -46,16 +50,7 @@ const UploadDocScreen = () => {
         renderItem={({ item }) => {
           return (
             <Pressable onPress={() => closeStateModal(item)}>
-              <Text
-                style={{
-                  paddingVertical: 15,
-                  textTransform: "capitalize",
-                  ...fontsize.smallest,
-                  ...FONTS.medium,
-                }}
-              >
-                {item}
-              </Text>
+              <Text style={optionText}>{item}</Text>
             </Pressable>
           );
         }}
@@ -69,20 +64,11 @@ const UploadDocScreen = () => {
   const LocalGovModal = () => {
     return (
       <FlatList
-        data={nigeriastates}
+        data={stateslgs[city] || []}
         renderItem={({ item }) => {
           return (
             <Pressable onPress={() => closeLocalGovModal(item)}>
-              <Text
-                style={{
-                  paddingVertical: 15,
-                  textTransform: "capitalize",
-                  ...fontsize.smallest,
-                  ...FONTS.medium,
-                }}
-              >
-                {item}
-              </Text>
+              <Text style={optionText}>{item}</Text>
             </Pressable>
           );
         }}
@@ -132,7 +118,7 @@ const UploadDocScreen = () => {
     const formdata = new FormData();
     formdata.append("address", values.address);
     formdata.append("city", city);
-    formdata.append("state", country_state);
+    formdata.append("state", localGov);
     formdata.append("country", "Nigeria");
     formdata.append("postal_code", values.postal_code);
     formdata.append("house_no", values.id_type);
@@ -149,14 +135,17 @@ const UploadDocScreen = () => {
     }
   };
 
-
   const UploadDocumentBtn = () => {
     return (
-      <TouchableOpacity style={{backgroundColor: COLORS.green4, paddingVertical: 11, paddingHorizontal: 16, borderRadius: 12}} activeOpacity={0.8} onPress={handleImageUpload}>
-        <Text style={{...fontsize.smallest, ...FONTS.semibold, color: COLORS.white}}>Upload Document</Text>
+      <TouchableOpacity
+        style={uploadDocBtnWrap}
+        activeOpacity={0.8}
+        onPress={handleImageUpload}
+      >
+        <Text style={uploadDocBtnText}>Upload Document</Text>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
   return (
     <FTTitlepagewrapper
@@ -184,7 +173,7 @@ const UploadDocScreen = () => {
           onPress={() => switchModals(0)}
         />
 
-          <FTInput
+        <FTInput
           placeholderText={localGov}
           name="localgov"
           label="Local Government"
@@ -245,9 +234,9 @@ const UploadDocScreen = () => {
           mB={15}
           type="dropdown"
           onPress={() => console.log("Yestys")}
-        rightComponent={<UploadDocumentBtn />}
+          rightComponent={<UploadDocumentBtn />}
         />
-        
+
         <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
       </FTKeyboardwrapper>
     </FTTitlepagewrapper>
