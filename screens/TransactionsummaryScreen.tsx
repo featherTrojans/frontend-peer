@@ -60,7 +60,7 @@ const TransactionsummaryScreen = ({ route }) => {
           <View style={{ alignItems: "center" }}>
             <FTIconwithbg size={60} Icon={Bluecardicon} bG={COLORS.Tpurple2} />
             <Text style={amountText}>Amount</Text>
-            <Text style={amountValueText}>N100,000.00</Text>
+            <Text style={amountValueText}>N{summaryinfo.amount}</Text>
           </View>
 
           <FTHorizontaline mT={30} mB={42} />

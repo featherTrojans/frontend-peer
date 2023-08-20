@@ -106,10 +106,10 @@ const TransactionsScreen = ({ navigation }) => {
 
   const TransferModal = () => {
     const onsubmitToFeatherWallet = async (amount) => {
-      navigation.navigate("choosefeatheruser_screen");
+      navigation.navigate("choosefeatheruser_screen", { amount });
     };
     const onsubmitToBankAccount = async (amount) => {
-      navigation.navigate("choosefeatheruser_screen");
+      navigation.navigate("choosebank_screen", { amount });
     };
 
     return (
@@ -132,7 +132,7 @@ const TransactionsScreen = ({ navigation }) => {
             onPress={() =>
               navigation.navigate("amounttosend_screen", {
                 nextScreen: "choosefeatheruser_screen",
-                onsubmit: onsubmitToBankAccount,
+                onsubmit: onsubmitToFeatherWallet,
               })
             }
             bG={COLORS.Tblue}
@@ -146,7 +146,7 @@ const TransactionsScreen = ({ navigation }) => {
             onPress={() =>
               navigation.navigate("amounttosend_screen", {
                 nextScreen: "choosefeatheruser_screen",
-                onsubmit: onsubmitToFeatherWallet,
+                onsubmit: onsubmitToBankAccount,
               })
             }
             bG={COLORS.Tyellow}
@@ -157,6 +157,13 @@ const TransactionsScreen = ({ navigation }) => {
   };
 
   const WithdrawModal = () => {
+    const onsubmitfindmerchant = (amount) => {
+      navigation.navigate("withdrawcash_screen", amount);
+    };
+
+    const onsubmitpaymerchant = (amount) => {
+      navigation.navigate("searchmerchantid_screen", { amount });
+    };
     return (
       <View>
         <Text style={transferCashText}>Withdraw Options</Text>
@@ -166,7 +173,12 @@ const TransactionsScreen = ({ navigation }) => {
             title="Pay Known Merchant"
             info="Withdraw from feather verified merchants"
             Icon={Paymerchanticon}
-            onPress={() => closeModalAndRedirect("withdrawcash_screen")}
+            onPress={() =>
+              navigation.navigate("amounttosend_screen", {
+                nextScreen: "choosefeatheruser_screen",
+                onsubmit: onsubmitpaymerchant,
+              })
+            }
             bG={COLORS.Tyellow}
           />
 
@@ -175,7 +187,12 @@ const TransactionsScreen = ({ navigation }) => {
             title="Find Merchants"
             info="Find merchants around you to withdraw."
             Icon={Searchmerchanticon}
-            onPress={() => closeModalAndRedirect("searchmerchantid_screen")}
+            onPress={() =>
+              navigation.navigate("amounttosend_screen", {
+                nextScreen: "choosefeatheruser_screen",
+                onsubmit: onsubmitfindmerchant,
+              })
+            }
             bG={COLORS.Tpurple}
           />
         </View>

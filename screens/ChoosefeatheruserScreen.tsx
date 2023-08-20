@@ -32,7 +32,7 @@ const ModalContent = ({ userinfo, amount }) => {
         transferTo: userinfo?.username,
         userPin: pin,
       });
-      navigation.navigate("summary");
+      navigation.navigate("transactionsuccess_screen");
     } catch (err) {
       console.log(err.response);
       throw err;
@@ -77,7 +77,8 @@ const ModalContent = ({ userinfo, amount }) => {
     </View>
   );
 };
-const ChoosefeatheruserScreen = () => {
+const ChoosefeatheruserScreen = ({ route }) => {
+  const amount = route?.params?.amount;
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
   const [beneficiaries, setbeneficiaries] = useState([]);
@@ -91,10 +92,13 @@ const ChoosefeatheruserScreen = () => {
       .catch((err) => {});
   }, []);
 
-  const switchModals = (value, data) => {
+  const switchModals = (value, data, amount) => {
     switch (value) {
       case 0:
-        setContent({ child: <ModalContent userinfo={data} />, height: 276 });
+        setContent({
+          child: <ModalContent userinfo={data} amount={amount} />,
+          height: 276,
+        });
         setShowModal((s) => !s);
         break;
 
@@ -106,6 +110,12 @@ const ChoosefeatheruserScreen = () => {
   const ListHeader = () => {
     const [searchval, setSearchval] = useState("");
     const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
+    const [usertosend, setusertosend] = useState({});
+    useEffect(() => {
+      if (userinfo?.fullName) {
+        setusertosend(userinfo);
+      }
+    }, [userinfo]);
 
     const onchange = (val: string) => {
       setSearchval(val);
@@ -119,11 +129,11 @@ const ChoosefeatheruserScreen = () => {
           onChange={onchange}
         />
         {loadbounce && <ActivityIndicator size={"small"} />}
-        {userinfo.fullName && (
+        {usertosend.fullName && (
           <FTIconwithtitleandinfo
-            title={userinfo.fullName}
-            info={userinfo.username}
-            onPress={() => switchModals(0, userinfo)}
+            title={usertosend.fullName}
+            info={usertosend.username}
+            onPress={() => switchModals(0, usertosend, amount)}
             bG={COLORS.Tblue4}
             Icon={Smallphoneicon}
             mB={40}

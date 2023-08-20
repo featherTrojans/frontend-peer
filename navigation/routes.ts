@@ -57,8 +57,8 @@ import {
   TransactionpinScreen,
   CustomWebScreen,
   WithdrawcashScreen,
+  TransactionSuccessScreen,
 } from "../screens";
-
 
 // BVNSuccessScreen
 // BvnErrorScreen
@@ -430,6 +430,13 @@ export const otherRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "customweb_screen",
+  },
+  {
+    title: "",
+    screen: TransactionSuccessScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "transactionsuccess_screen",
   },
 ];
 

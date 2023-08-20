@@ -9,6 +9,7 @@ import {
   clearDataFromStorage,
   AWEEKAFTER,
 } from "./localstorage";
+import { makePhoneCall } from "./phoneutils";
 export {
   navigation,
   redirectTo,
@@ -19,4 +20,5 @@ export {
   getDataFromStorage,
   clearDataFromStorage,
   AWEEKAFTER,
+  makePhoneCall,
 };
