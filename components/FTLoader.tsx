@@ -1,4 +1,10 @@
-import { ProgressViewIOSBase, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  ProgressViewIOSBase,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import Modal from "react-native-modal";
 import { COLORS, icons } from "../constants";
@@ -11,75 +17,28 @@ import Animated, {
   useDerivedValue,
   withTiming,
   withSpring,
-  withDelay
+  withDelay,
 } from "react-native-reanimated";
 
 const { Newlogowhite } = icons;
 
-const Loader = () => {
-  const [showState, setShowState] = useState(true);
-
-
-  const opacity = useSharedValue(1);
-  const bubblingCircle = useAnimatedStyle(() => {
-    return {
-      opacity: opacity.value,
-      transform: [
-        {
-          scale: interpolate(opacity.value, [1, 0], [0, 2]),
-        },
-      ],
-    };
-  });
-
-
-  useEffect(() => {
-    opacity.value = withRepeat(withTiming(0, {duration: 1200}), -1);
-  }, []);
-
+const Loader = ({ loading = false }) => {
   return (
     <Modal
-    isVisible={showState}
-    backdropColor="#fff"
-    backdropOpacity={0.7}
-    style={{margin: 0}}
-    animationIn="fadeIn"
-    animationOut="fadeOut"
+      isVisible={loading}
+      backdropColor="#11141A"
+      backdropOpacity={0.5}
+      style={{ margin: 0 }}
+      animationIn="fadeIn"
+      animationOut="fadeOut"
     >
-    <View style={styles.container}>
-      <Animated.View style={[styles.logoBg, bubblingCircle, {position: 'absolute'}]} />
-      
-        <View style={styles.logoBg}>
-          <Newlogowhite />
-        </View>
-    </View>
+      <View>
+        <ActivityIndicator size="large" color="#fff" />
+      </View>
     </Modal>
   );
 };
 
 export default Loader;
 
-
-const styles = StyleSheet.create({
-
-  container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: "absolute",
-      top:0,
-      bottom:0,
-      right:0,
-      left:0,
-      zIndex:120,
-  },
-  logoBg: {
-      width: 80,
-      height: 80,
-      borderRadius: 40,
-      backgroundColor: COLORS.blue6,
-      justifyContent: "center",
-      alignItems: "center",
-    }
-
-})
+const styles = StyleSheet.create({});
