@@ -1,11 +1,12 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
   ChoosefeatheruserScreenStyles,
   SendtobankScreenStyles,
 } from "../assets/styles/screens";
 import {
   FTIconwithtitleandinfo,
+  FTLoader,
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
@@ -20,6 +21,7 @@ const { Smallphoneicon, Nigerialogoicon, Whitebankicon } = icons;
 const {} = SendtobankScreenStyles;
 
 const SendtobankScreen = () => {
+  const [loading, setLoading] = useState(false)
   const ListHeader = () => {
     return (
       <>
@@ -40,6 +42,7 @@ const SendtobankScreen = () => {
   return (
     <FTTitlepagewrapper title="Send to bank account">
       <FTSearchinput placeholder="Enter feather tag" />
+      <FTLoader loading={loading} />
       <FlatList
         data={[1, 2, 2,]}
         showsVerticalScrollIndicator={false}
