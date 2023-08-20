@@ -127,6 +127,7 @@ const TransactionsScreen = ({ navigation }) => {
                 nextScreen: "choosefeatheruser_screen",
               })
             }
+            
             bG={COLORS.Tblue}
           />
 
@@ -135,11 +136,7 @@ const TransactionsScreen = ({ navigation }) => {
             title="To Bank Account"
             info="Transfer money to any bank in Nigeria."
             Icon={Bankblueicon}
-            onPress={() =>
-              navigation.navigate("amounttosend_screen", {
-                nextScreen: "choosefeatheruser_screen",
-              })
-            }
+            onPress={() => redirectTo("sendtobank_screen")}
             bG={COLORS.Tyellow}
           />
         </View>
@@ -171,7 +168,7 @@ const TransactionsScreen = ({ navigation }) => {
           />
         </View>
       </View>
-    );
+    )
   };
 
   const BillpaymentsModal = () => {

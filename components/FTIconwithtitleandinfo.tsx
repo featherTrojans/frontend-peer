@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React, { ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { FTIconwithtitleandinfoStyles } from "../assets/styles/components";
 import FTIconwithbg from "./FTIconwithbg";
@@ -10,7 +10,7 @@ const { Greaterthanicon } = icons;
 
 type IFTIconwithtitleandInfoProps = {
   Icon?: any;
-  bG: string;
+  bG?: string;
   title: string;
   info?: string;
   onPress: () => void;
@@ -19,11 +19,12 @@ type IFTIconwithtitleandInfoProps = {
   mT?: number;
   imageUrl?: string;
   size?: number;
+  badge?: ReactElement
 };
 
 const FTIconwithtitleandinfo = ({
   Icon,
-  bG,
+  bG="#fff",
   title,
   info,
   onPress,
@@ -32,6 +33,7 @@ const FTIconwithtitleandinfo = ({
   mT,
   imageUrl,
   size = 45,
+  badge
 }: IFTIconwithtitleandInfoProps) => {
   return (
     <Pressable
@@ -39,7 +41,7 @@ const FTIconwithtitleandinfo = ({
       onPress={onPress}
     >
       <View style={iconandinfoWrap}>
-        <FTIconwithbg size={size} Icon={Icon} bG={bG} imageUrl={imageUrl} />
+        <FTIconwithbg badge={badge} size={size} Icon={Icon} bG={bG} imageUrl={imageUrl} />
         <View style={{ marginLeft: 20 }}>
           <Text style={titleText}>{title}</Text>
           {info && <Text style={infoText}>{info}</Text>}

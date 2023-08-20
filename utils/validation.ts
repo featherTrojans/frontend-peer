@@ -62,6 +62,22 @@ export const REMARKS_VALIDATION = {
   },
 };
 
+export const ACCOUNT_NUMBER_INPUT_VALIDATION = {
+  required: 'Account numbers is required',
+  minLength: {
+    value: 11,
+    message: 'Must be eleven digits',
+  },
+  maxLength: {
+    value: 11,
+    message: 'Must be eleven digits',
+  },
+  pattern: {
+    value: /^[0-9]/,
+    message: 'Account number can only contain numbers',
+  },
+};
+
 export const EMAIL_VALIDATION = {
   required: "Email is required",
 

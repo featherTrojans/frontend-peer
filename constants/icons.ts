@@ -122,6 +122,9 @@ import Transactionpinlockicon from "../assets/icons/Transactionpinlockicon";
 import Multifactoricon from "../assets/icons/Multifactoricon";
 import Dropdownicon from "../assets/icons/Dropdownicon";
 import Chaticon from "../assets/icons/Chaticon";
+import Nigerialogoicon from "../assets/icons/Nigerialogoicon";
+import Whitebankicon from "../assets/icons/Whitebankicon";
+
 
 export default {
   Logo,
@@ -229,6 +232,8 @@ export default {
   Multifactoricon,
   Dropdownicon,
   Chaticon,
+  Nigerialogoicon,
+  Whitebankicon,
   // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,

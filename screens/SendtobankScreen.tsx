@@ -1,19 +1,67 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { SendtobankScreenStyles } from '../assets/styles/screens'
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import {
+  ChoosefeatheruserScreenStyles,
+  SendtobankScreenStyles,
+} from "../assets/styles/screens";
+import {
+  FTIconwithtitleandinfo,
+  FTSearchinput,
+  FTTitlepagewrapper,
+} from "../components";
+import { COLORS, icons } from "../constants";
+import { redirectTo } from "../utils";
 
 
+const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
-const {} = SendtobankScreenStyles
+const { Smallphoneicon, Nigerialogoicon, Whitebankicon } = icons;
+
+const {} = SendtobankScreenStyles;
 
 const SendtobankScreen = () => {
+  const ListHeader = () => {
+    return (
+      <>
+        <FTIconwithtitleandinfo
+          title="Send to a new bank"
+          info="Start a new transfer to a bank"
+          onPress={() => redirectTo("choosebank_screen")}
+          bG={COLORS.blue16}
+          Icon={Whitebankicon}
+          mB={40}
+          badge={<Nigerialogoicon />}
+        />
+        <Text style={listHeaderText}>Send Beneficiaries</Text>
+      </>
+    );
+  };
+
   return (
-    <View>
-      <Text>SendtobankScreen</Text>
-    </View>
-  )
-}
+    <FTTitlepagewrapper title="Send to bank account">
+      <FTSearchinput placeholder="Enter feather tag" />
+      <FlatList
+        data={[1, 2, 2,]}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
+        renderItem={() => {
+          return (
+            <FTIconwithtitleandinfo
+              title="Bolu Olatunji"
+              info="@eagleone"
+              onPress={() => console.log("Send to bank")}
+              bG={COLORS.Tblue4}
+              Icon={Smallphoneicon}
+            />
+          );
+        }}
+        ListHeaderComponent={ListHeader}
+      />
+    </FTTitlepagewrapper>
+  );
+};
 
-export default SendtobankScreen
+export default SendtobankScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
