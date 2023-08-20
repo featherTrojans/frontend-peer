@@ -1,8 +1,9 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { MywalletScreenStyles } from "../assets/styles/screens";
 import { FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { useCopyclipboard } from "../hooks";
 const { Levelcheckicon, Copydetailsicon } = icons;
 
 const {
@@ -26,6 +27,12 @@ const {
 } = MywalletScreenStyles;
 
 const MywalletScreen = () => {
+
+
+  const {copyToClipboard} = useCopyclipboard("Copied successfully!!")
+
+
+
   const SpendingLimit = ({
     mT = 0,
     limitTitle,
@@ -73,17 +80,17 @@ const MywalletScreen = () => {
         <View style={{ marginTop: 30 }}>
           <View style={BAlign}>
             <Text style={tableKey}>Bank Account Number</Text>
-            <View style={BAlign}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => copyToClipboard("9827456212")} style={[BAlign]}>
               <Text style={tableValue}>9827456212</Text>
               <Copydetailsicon />
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={[BAlign, { marginVertical: 22 }]}>
             <Text style={tableKey}>Bank Name</Text>
-            <View style={BAlign}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => copyToClipboard("VFD Microfinance Bank")} style={[BAlign]}>
               <Text style={tableValue}>VFD Microfinance Bank</Text>
               <Copydetailsicon />
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View style={BAlign}>

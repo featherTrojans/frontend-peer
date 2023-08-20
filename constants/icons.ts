@@ -118,6 +118,10 @@ import Clearchaticon from "../assets/icons/Clearchaticon";
 import Sendcashicon from "../assets/icons/Sendcashicon";
 import Smalllockicon from "../assets/icons/Smalllockicon";
 import Debitcardicon from "../assets/icons/Debitcardicon";
+import Transactionpinlockicon from "../assets/icons/Transactionpinlockicon";
+import Multifactoricon from "../assets/icons/Multifactoricon";
+import Dropdownicon from "../assets/icons/Dropdownicon";
+import Chaticon from "../assets/icons/Chaticon";
 
 export default {
   Logo,
@@ -221,7 +225,11 @@ export default {
   Smalllockicon,
   //Animated icons
   Debitcardicon,
-
+  Transactionpinlockicon,
+  Multifactoricon,
+  Dropdownicon,
+  Chaticon,
+  // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,
   Mapanimate,

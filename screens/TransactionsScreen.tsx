@@ -166,7 +166,7 @@ const TransactionsScreen = ({ navigation }) => {
             title="Pay Known Merchant"
             info="Withdraw from feather verified merchants"
             Icon={Paymerchanticon}
-            onPress={() => console.log("yes")}
+            onPress={() => closeModalAndRedirect("withdrawcash_screen")}
             bG={COLORS.Tyellow}
           />
 

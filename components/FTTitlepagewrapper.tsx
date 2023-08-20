@@ -20,7 +20,7 @@ const FTTitlepagewrapper = ({
   showModal,
   modalHeight,
   headerBg = "#fff",
-  childBg = "#F7F8FA",
+  childBg = "#fff",
   invert = false,
 }: {
   children: any;

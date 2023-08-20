@@ -7,22 +7,28 @@ import Svg, { G, Path } from "react-native-svg"
 
 function Mywalleticon() {
   return (
-    <Svg xmlns="http://www.w3.org/2000/svg" width={20} height={17.778} >
-    <G data-name="wallet (5)">
+    <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={15.44}
+    height={14.207}
+  >
+    <G stroke="#342ad5" strokeWidth={1.5} data-name="Group 9407">
       <Path
-        data-name="Path 7474"
-        d="M0 2.223a2.222 2.222 0 0 0 2.222 2.223h15.556A2.222 2.222 0 0 1 20 6.668v8.889a2.222 2.222 0 0 1-2.222 2.222H2.222A2.222 2.222 0 0 1 0 15.557V2.223"
-        fill="#ada9ee"
+        fill="none"
+        d="M13.141 13.457H2.299A1.549 1.549 0 0 1 .75 11.908v-6.97a1.549 1.549 0 0 1 1.549-1.549h10.842a1.549 1.549 0 0 1 1.549 1.549v6.97a1.549 1.549 0 0 1-1.549 1.549Z"
+        data-name="Path 7911"
       />
       <Path
-        data-name="Path 7475"
-        d="M2.222 4.446h13.334V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v.222a2.222 2.222 0 0 0 2.222 2.223Z"
-        fill="#857fe5"
-      />
-      <Path
-        data-name="Path 7476"
-        d="M20 13.89h-2.882a3.08 3.08 0 0 1-3.06-2.4A3 3 0 0 1 17 7.89h3Z"
         fill="#342ad5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M11.205 8.81a.387.387 0 1 1 .387-.387.387.387 0 0 1-.387.387Z"
+        data-name="Path 7912"
+      />
+      <Path
+        fill="none"
+        d="M12.367 3.389V2.307a1.549 1.549 0 0 0-1.948-1.5L1.9 3.082A1.549 1.549 0 0 0 .75 4.579v.359"
+        data-name="Path 7913"
       />
     </G>
   </Svg>

@@ -57,3 +57,5 @@ export * from "./pinscreen.style";
 export * from "./chatsdm.style"
 export * from "./transactionpin.style"
 export * from "./amounttosend.style"
+export * from "./uploaddoc.style"
+export * from "./withdrawcash.style"

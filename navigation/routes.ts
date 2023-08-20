@@ -56,9 +56,9 @@ import {
   PhoneRegisterScreen,
   TransactionpinScreen,
   CustomWebScreen,
+  WithdrawcashScreen,
 } from "../screens";
 
-// UploadDocScreen
 
 // BVNSuccessScreen
 // BvnErrorScreen
@@ -190,6 +190,13 @@ export const transactRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "findmerchant_screen",
+  },
+  {
+    title: "",
+    screen: WithdrawcashScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "withdrawcash_screen",
   },
   {
     title: "",

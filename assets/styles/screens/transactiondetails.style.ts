@@ -29,17 +29,11 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     textTransform: "capitalize",
   },
 
-  topHeaderWrap: {
-    backgroundColor: COLORS.white,
-    borderBottomLeftRadius: 42,
-    borderBottomRightRadius: 42,
-    paddingHorizontal: 15,
-  },
   optionWrapper: {
     flexDirection: "row",
+    width: 242,
+    alignSelf: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 66,
-    paddingVertical: 30,
   },
   optionBlock: {
     justifyContent: "center",
@@ -52,16 +46,10 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     paddingVertical: 30,
     borderRadius: 15,
   },
-  eachOption: {
-    width: 45.5,
-    height: 45.5,
-    borderRadius: 45.5 / 2,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   eachOptionTitle: {
     marginTop: 13,
-    ...fontsize.xxsmallest,
+    ...fontsize.xxsmall,
     ...FONTS.medium,
     color: COLORS.blue9,
   },
