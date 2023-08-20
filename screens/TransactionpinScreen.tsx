@@ -4,6 +4,7 @@ import { FTKeyboard, FTMainwrapper, FTTitlepagewrapper } from "../components";
 import { COLORS, fontsize, icons } from "../constants";
 import { TransactionpinScreenStyles } from "../assets/styles/screens";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import { useAlert } from "../hooks";
 
 const {
   headerSectionWrap,
@@ -15,9 +16,12 @@ const {
 
 const { Pinlockicon } = icons;
 
-const TransactionpinScreen = () => {
+const TransactionpinScreen = ({ route }) => {
+  const action = route?.params?.action;
+  const { errorAlert } = useAlert();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSetAmount = (value: string) => {
     const newpin = [...pin, value];
@@ -25,7 +29,7 @@ const TransactionpinScreen = () => {
       setPin(newpin);
     }
     if (pin.length === 3) {
-      //   handleSubmit(newpin);
+      handleSubmit(newpin);
     }
   };
   const handleRemoveAmount = () => {
@@ -33,6 +37,17 @@ const TransactionpinScreen = () => {
       const newdata = [...pin];
       newdata.pop();
       setPin(newdata);
+    }
+  };
+
+  const handleSubmit = async (newpin: any) => {
+    setLoading(true);
+    try {
+      await action(newpin.join(""));
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
     }
   };
   return (

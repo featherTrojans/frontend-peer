@@ -105,6 +105,13 @@ const TransactionsScreen = ({ navigation }) => {
   };
 
   const TransferModal = () => {
+    const onsubmitToFeatherWallet = async (amount) => {
+      navigation.navigate("choosefeatheruser_screen");
+    };
+    const onsubmitToBankAccount = async (amount) => {
+      navigation.navigate("choosefeatheruser_screen");
+    };
+
     return (
       <View>
         <View style={transferTypeModalHeader}>
@@ -125,6 +132,7 @@ const TransactionsScreen = ({ navigation }) => {
             onPress={() =>
               navigation.navigate("amounttosend_screen", {
                 nextScreen: "choosefeatheruser_screen",
+                onsubmit: onsubmitToBankAccount,
               })
             }
             bG={COLORS.Tblue}
@@ -138,6 +146,7 @@ const TransactionsScreen = ({ navigation }) => {
             onPress={() =>
               navigation.navigate("amounttosend_screen", {
                 nextScreen: "choosefeatheruser_screen",
+                onsubmit: onsubmitToFeatherWallet,
               })
             }
             bG={COLORS.Tyellow}
