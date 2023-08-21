@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { SecurityandprivacyScreenStyles } from "../assets/styles/screens";
 import { FTIconwithtitleandinfo, FTSwitchbtn, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { redirectTo } from "../utils";
 
 
 
@@ -39,7 +40,7 @@ const SecurityandprivacyScreen = () => {
             bG={COLORS.Tblue}
             title="Change Transaction PIN"
             info="Modify & manage your secure pin"
-            onPress={() => console.log("")}
+            onPress={() => redirectTo("setupmfa_screen")}
             mB={30}
           />
           <FTIconwithtitleandinfo

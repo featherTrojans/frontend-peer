@@ -1,10 +1,15 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { VerifybvnScreenStyles } from "../assets/styles/screens";
-import { FTCustombutton, FTInput, FTTitlepagewrapper } from "../components";
+import {
+  FTCustombutton,
+  FTInput,
+  FTLoader,
+  FTTitlepagewrapper,
+} from "../components";
 import { useForm } from "react-hook-form";
 import { VALIDATION, navigation } from "../utils";
-import Loader from "../components/FTLoader";
+// import Loader from "../components/FTLoader";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useAlert } from "../hooks";
 
@@ -63,7 +68,7 @@ const VerifybvnScreen = () => {
   };
   return (
     <FTTitlepagewrapper title="Verify BVN">
-      {loading && <Loader />}
+      <FTLoader loading={loading} />
       <View style={flex}>
         <Text style={headerText}>Enter code sent to your</Text>
         <Text style={headerText}>mobile phone</Text>

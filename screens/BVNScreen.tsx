@@ -3,17 +3,20 @@ import {
   FTCustombutton,
   FTHeaderandsubheader,
   FTInput,
+  FTLoader,
   FTTitlepagewrapper,
 } from "../components";
 import { VALIDATION, navigation } from "../utils";
 import { useForm } from "react-hook-form";
-import { Text, View } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Pressable, StyleSheet } from "react-native";
 import { BVNScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
-import Loader from "../components/FTLoader";
 import { AuthContext } from "../context/AuthContext";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
+import Animated, { FadeIn, FadeOut, SlideInDown, SlideInUp, SlideOutDown, SlideOutUp } from "react-native-reanimated";
+
+
 const {
   headerText,
   skip,
@@ -21,15 +24,22 @@ const {
   flexdown,
   bvnreason,
   bvntext,
-  info,
   infotext,
   link,
+  skipLaterText,
+  bvnIconTextWrap,
 } = BVNScreenStyles;
+
+const { Skiplatericon, Bvncommenticon, Bvnverifyicon } = icons;
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 function BVNScreen() {
   const { token } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();
+  const [showModal, setShowModal] = useState(false)
+  const [height, setHeight] = useState(56)
 
   const onsubmit = async (data) => {
     try {
@@ -42,26 +52,78 @@ function BVNScreen() {
       setLoading(false);
     }
   };
+  const closeModal = () => {
+    setShowModal(s => !s)
+    setHeight(240)
+  }
 
   const skipToWelcome = () => {
     navigation.navigate("welcome_screen", {
       fromm: "setup",
     });
   };
+
+
+
+  const BVNReasonModal = () => {
+    return (
+      <AnimatedPressable 
+      entering={FadeIn}
+      exiting={FadeOut}
+      onPress={closeModal}
+      style={{...StyleSheet.absoluteFillObject, backgroundColor: COLORS.halfBlack, zIndex: 1, paddingHorizontal: 16}}
+      >
+        <AnimatedPressable 
+        entering={SlideInDown}
+        exiting={SlideOutDown}
+        style={{position: "absolute", bottom: 80, left: 16, right: 16, height: height, backgroundColor: "#fff", borderRadius: 10}}
+        >
+          <TouchableOpacity activeOpacity={0.8} onPress={closeModal} style={[bvnreason]}>
+            <View style={bvnIconTextWrap}>
+              <Bvncommenticon />
+              <Text style={bvntext}>Why Should I verify my BVN?</Text>
+            </View>
+            <View style={{transform: [{rotate: "180deg"}]}}>
+              <Bvnverifyicon />
+            </View>
+          </TouchableOpacity>
+
+          <View style={{paddingHorizontal: 16}}>
+            
+          <Text style={{...fontsize.smallest, ...FONTS.medium, marginBottom: 25}}>1. Increased wallet limits </Text>
+          <Text style={{...fontsize.smallest, ...FONTS.medium, marginBottom: 25}}>2. Free bank account number for receiving money </Text>
+          <Text style={{...fontsize.smallest, ...FONTS.medium, marginBottom: 25}}>3. Access to discounted offers</Text>
+          </View>
+
+          
+
+
+        </AnimatedPressable>
+
+      </AnimatedPressable>
+    )
+  }
   return (
+    <>
     <FTTitlepagewrapper title="Verify BVN">
-      {loading && <Loader />}
+
+      <FTLoader loading={loading} />
       <View style={flex}>
-        <Text style={headerText}>HI Doyin</Text>
+        <Text style={headerText}>Hi Doyin</Text>
         <Text style={headerText}>Enter your BVN</Text>
         <FTInput
           placeholderText="Enter BVN"
           name="bvn"
-          label="Your 11 Digit BVN"
+          label="Your 12 Digit BVN"
+          textInputProps={{
+            maxLength: 11,
+            keyboardType: "number-pad",
+            returnKeyType: "done",
+          }}
           control={control}
-          rules={VALIDATION.PHONE_NUMBER_VALIDATION}
+          rules={VALIDATION.BVN_NUMBER_INPUT_VALIDATION}
           mB={20}
-          mT={44}
+          mT={50}
         />
         <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
         {!token && (
@@ -70,21 +132,31 @@ function BVNScreen() {
             style={skip}
             onPress={skipToWelcome}
           >
-            <Text>Skip for later</Text>
+            <Skiplatericon />
+            <Text style={skipLaterText}>Skip for later</Text>
           </TouchableOpacity>
         )}
       </View>
       <View style={flexdown}>
-        <View style={bvnreason}>
-          <Text style={bvntext}>Why Should I verify my BVN?</Text>
-        </View>
 
-        <View style={info}>
-          <Text style={infotext}>For more information visit,</Text>
+
+        <TouchableOpacity activeOpacity={0.8} onPress={closeModal} style={bvnreason}>
+          <View style={bvnIconTextWrap}>
+            <Bvncommenticon />
+            <Text style={bvntext}>Why Should I verify my BVN?</Text>
+          </View>
+          <Bvnverifyicon />
+        </TouchableOpacity>
+
+        <Text style={infotext}>
+          For more information visit,
           <Text style={link}> www.getfeather.africa</Text>
-        </View>
+        </Text>
       </View>
     </FTTitlepagewrapper>
+    {showModal && <BVNReasonModal />}
+
+    </>
   );
 }
 

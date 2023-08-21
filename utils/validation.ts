@@ -78,6 +78,22 @@ export const ACCOUNT_NUMBER_INPUT_VALIDATION = {
   },
 };
 
+export const BVN_NUMBER_INPUT_VALIDATION = {
+  required: 'Bvn number is required',
+  minLength: {
+    value: 12,
+    message: 'Must be twelve digits',
+  },
+  maxLength: {
+    value: 12,
+    message: 'Must be twelve digits',
+  },
+  pattern: {
+    value: /^[0-9]/,
+    message: 'Bvn number can only contain numbers',
+  },
+};
+
 export const EMAIL_VALIDATION = {
   required: "Email is required",
 
