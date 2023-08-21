@@ -53,7 +53,14 @@ const FTTitlepagewrapper = ({
             <Backarrow invert={invert} />
           </Pressable>
 
-          <Text style={[backHeaderTitle, {color: invert ? COLORS.white : COLORS.black}]}>{title}</Text>
+          <Text
+            style={[
+              backHeaderTitle,
+              { color: invert ? COLORS.white : COLORS.black },
+            ]}
+          >
+            {title}
+          </Text>
           {rightComponent ? rightComponent : <View style={{ width: 45 }} />}
         </View>
         <View style={[childrenWrap, { backgroundColor: childBg }]}>

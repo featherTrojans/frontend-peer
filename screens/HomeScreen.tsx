@@ -137,7 +137,7 @@ const QuickActions = ({ onpress }) => {
   }) {
     let isLast = index + 1 === scrollactions.length;
     return (
-      <TouchableOpacity onPress={() => onpress(modal)}>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => onpress(modal)}>
         <View
           style={[
             scrollaction,
@@ -175,7 +175,7 @@ const QuickActions = ({ onpress }) => {
 
 const Conversations = () => {
   return (
-    <View style={[conversationWrap, { marginVertical: 0 }]}>
+    <View style={[conversationWrap, { marginTop: 20 }]}>
       <View style={conversationHeader}>
         <View style={recentIconWrap}>
           {/* icon */}
@@ -228,6 +228,32 @@ const SetupProfile = ({ onPress }) => {
 };
 
 const ActiveCashWithdrawal = () => {
+  const [info, setInfo] = useState({
+    reference: "",
+    amount: "",
+    charges: "",
+    total: "",
+    negotiatedFee: "",
+    agent: "",
+    agentUsername: "",
+    phoneNumber: "",
+    status: "",
+    meetupPoint: "",
+    createdAt: "",
+    agentImage: null,
+  });
+
+  useEffect(() => {
+    axiosCustom.get("/request/accepted").then((response) => {
+      setInfo(response?.data?.data);
+      if (response.data && response.data.data.length > 0) {
+        setInfo(response?.data?.data[0]);
+      }
+    });
+  }, []);
+  if (!info.reference) {
+    return null;
+  }
   return (
     <View style={setupProfile}>
       <View style={conversationHeader}>
@@ -240,11 +266,16 @@ const ActiveCashWithdrawal = () => {
       </View>
 
       <FTIconwithtitleandinfo
-        title="Suzzane Vibes Shoes"
-        info="N45,500"
+        title={info.agent}
+        info={`N${info.total}`}
         bG="blue"
         mT={24}
-        onPress={() => console.log("yes")}
+        onPress={() =>
+          navigation.navigate("withdrawcash_screen", {
+            agentinfo: info,
+            amount: 0,
+          })
+        }
         Icon={Banksetupicon}
       />
     </View>

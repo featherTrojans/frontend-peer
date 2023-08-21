@@ -4,20 +4,40 @@ import { navigation } from "../utils";
 import { Pressable } from "react-native";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
-import { FTHorizontaline } from ".";
+import { FTHorizontaline, FTLoader } from ".";
+import axiosCustom from "../httpRequests/axiosCustom";
 
 const { Withdrawicon, Searchmerchanticon, Paymerchanticon } = icons;
 
 const FTWithdraw = () => {
-  const onsubmitfindmerchant = (amount) => {
+  const [loading, setLoading] = useState(false);
+
+  const onsubmitfindmerchant = async (amount) => {
     navigation.navigate("withdrawcash_screen", amount);
   };
 
   const onsubmitpaymerchant = (amount) => {
     navigation.navigate("searchmerchantid_screen", { amount });
   };
+
+  const findmerchant = async () => {
+    setLoading(true);
+    const response = await axiosCustom.get("/request/accepted");
+    if (response.data && response.data.data.length > 0) {
+      return navigation.navigate("withdrawcash_screen", {
+        agentinfo: response?.data?.data[0],
+        amount: 0,
+      });
+    }
+    return navigation.navigate("amounttosend_screen", {
+      nextScreen: "choosefeatheruser_screen",
+      onsubmit: onsubmitfindmerchant,
+    });
+  };
+
   return (
     <View>
+      <FTLoader loading={loading} />
       <Text style={styles.transferCashText}>Withdraw Options</Text>
 
       <View style={{ marginTop: 40 }}>
@@ -39,12 +59,7 @@ const FTWithdraw = () => {
           title="Find Merchants"
           info="Find merchants around you to withdraw."
           Icon={Searchmerchanticon}
-          onPress={() =>
-            navigation.navigate("amounttosend_screen", {
-              nextScreen: "choosefeatheruser_screen",
-              onsubmit: onsubmitfindmerchant,
-            })
-          }
+          onPress={findmerchant}
           bG={COLORS.Tpurple}
         />
       </View>

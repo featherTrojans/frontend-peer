@@ -9,7 +9,6 @@ import {
 } from "../components";
 import { useForm } from "react-hook-form";
 import { VALIDATION, navigation } from "../utils";
-// import Loader from "../components/FTLoader";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useAlert } from "../hooks";
 

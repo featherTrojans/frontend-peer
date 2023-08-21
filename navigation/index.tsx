@@ -206,9 +206,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  route?.animateFromBottom &&
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -226,9 +224,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  route?.animateFromBottom &&
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -246,9 +242,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  route?.animateFromBottom &&
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -266,9 +260,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  route?.animateFromBottom &&
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -286,9 +278,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  route?.animateFromBottom &&
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );

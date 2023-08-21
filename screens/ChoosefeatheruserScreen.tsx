@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { ChoosefeatheruserScreenStyles } from "../assets/styles/screens";
 import {
   FTCustombutton,
+  FTDetailsModal,
   FTIconwithtitleandinfo,
   FTSearchinput,
   FTTitlepagewrapper,
@@ -18,6 +19,7 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { navigation, redirectTo } from "../utils";
 import useDebounce from "../utils/debounce";
 import axiosCustom from "../httpRequests/axiosCustom";
+import amountFormatter from "../utils/formatMoney";
 
 const { Smallphoneicon } = icons;
 
@@ -39,7 +41,7 @@ const ModalContent = ({ userinfo, amount }) => {
     }
   };
   const summaryinfo = {
-    amount: amount,
+    amount: amountFormatter(amount),
     transactionDatas: [
       {
         leftSide: "Name",
@@ -55,25 +57,25 @@ const ModalContent = ({ userinfo, amount }) => {
       },
       {
         leftSide: "Total to be sent",
-        rightSide: `N${amount}`,
+        rightSide: `N${amountFormatter(amount)}`,
       },
     ],
   };
   const onpress = () => {
     navigation.navigate("transactionsummary_screen", { action, summaryinfo });
   };
+
   return (
     <View style={{ backgroundColor: "#fff" }}>
-      <Text>User Details</Text>
-      <FTIconwithtitleandinfo
+      <FTDetailsModal
+        modalTitle="User Details"
         title={userinfo.fullName}
         info={userinfo.username}
-        onPress={() => {}}
+        onPress={onpress}
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
         mB={40}
       />
-      <FTCustombutton btntext="Proceed" onpress={onpress} />
     </View>
   );
 };

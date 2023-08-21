@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   FTCustombutton,
   FTIconwithbg,
@@ -10,53 +10,72 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { makePhoneCall, navigation } from "../utils";
 import { useAlert } from "../hooks";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { LocationContext } from "../context/LocationContext";
+import { getCurrentLocation } from "../utils/customLocation";
 
 const { Blacksendicon, Cancelwithdrawicon, Phoneicon, Chaticon } = icons;
 
+// {
+//   reference: "",
+//   amount: "",
+//   charges: "",
+//   total: "",
+//   negotiatedFee: "",
+//   agent: "",
+//   agentUsername: "",
+//   phoneNumber: "",
+//   status: "",
+//   meetupPoint: "",
+//   createdAt: "",
+//   agentImage: null,
+// }
+
 const WithdrawcashScreen = ({ route }) => {
-  const amount = route.params.amount;
+  const amount = route.params?.amount;
+  const agentinfo = route.params?.info;
   const { errorAlert } = useAlert();
-  const [screenLoading, setScreenLoading] = useState(true);
-  const [withdrawscreen, setWithdrawrequest] = useState(true);
+  const { setCoords, coords, setDestinationCoords } =
+    useContext(LocationContext);
   const [loading, setLoading] = useState(false);
-  const [info, setInfo] = useState({
-    reference: "",
-    amount: "",
-    charges: "",
-    total: "",
-    negotiatedFee: "",
-    agent: "",
-    agentUsername: "",
-    phoneNumber: "",
-    status: "",
-    meetupPoint: "",
-    createdAt: "",
-    agentImage: null,
-  });
+  const [info, setInfo] = useState(agentinfo);
 
   useEffect(() => {
-    getWithdrawRequest();
+    if (!agentinfo) {
+      getLocationAndAgents();
+    }
   }, []);
-  const getWithdrawRequest = async () => {
-    setScreenLoading(true);
+
+  const getLocationAndAgents = async () => {
+    setDestinationCoords({});
     try {
+      setLoading(true);
+      const { coordinates, address, locationObj } = await getCurrentLocation();
+      setCoords({ ...coordinates, locationText: address });
+      await getAllAgents(address);
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getAllAgents = async (address: string) => {
+    try {
+      await axiosCustom.post("/status/find", {
+        amount: Number(amount),
+        location: address,
+      });
       const response = await axiosCustom.get("/request/accepted");
       setInfo(response?.data?.data);
-
       if (response.data && response.data.data.length > 0) {
         setInfo(response?.data?.data[0]);
-        setWithdrawrequest(false);
       }
     } catch (err) {
-      console.log(err.response);
+      console.log(err.response, "no status found , can you believe that");
     } finally {
-      setScreenLoading(false);
     }
   };
 
   const handleCancelRequest = async () => {
     setLoading(true);
-
     try {
       await axiosCustom({
         method: "DELETE",
@@ -146,7 +165,7 @@ const WithdrawcashScreen = ({ route }) => {
     },
   ];
 
-  if (screenLoading) {
+  if (loading) {
     return (
       <View>
         <Text>Searching for nearby merchants</Text>
