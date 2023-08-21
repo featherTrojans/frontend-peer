@@ -4,7 +4,7 @@ import { FTCustombutton, FTMainwrapper, FTSuccessOrError } from "../components";
 
 
 
-const TransactionSuccessScreen = () => {
+const TransactionSuccessScreen = ({navigation}) => {
   return (
     <FTMainwrapper>
       <View style={{flex: 1, justifyContent: "space-between"}}>
@@ -12,7 +12,7 @@ const TransactionSuccessScreen = () => {
 
       <FTCustombutton 
       btntext="back Home"
-      onpress={() => console.log("yes")}
+      onpress={() => navigation.navigate("Dashboard")}
       />
       </View>
 
