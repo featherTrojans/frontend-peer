@@ -124,7 +124,9 @@ import Dropdownicon from "../assets/icons/Dropdownicon";
 import Chaticon from "../assets/icons/Chaticon";
 import Nigerialogoicon from "../assets/icons/Nigerialogoicon";
 import Whitebankicon from "../assets/icons/Whitebankicon";
-
+import Skiplatericon from "../assets/icons/Skiplatericon";
+import Bvncommenticon from "../assets/icons/Bvncommenticon";
+import Bvnverifyicon from "../assets/icons/Bvnverifyicon";
 
 export default {
   Logo,
@@ -234,6 +236,9 @@ export default {
   Chaticon,
   Nigerialogoicon,
   Whitebankicon,
+  Skiplatericon,
+  Bvncommenticon,
+  Bvnverifyicon,
   // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,
