@@ -21,6 +21,21 @@ export const PHONE_NUMBER_VALIDATION = {
     message: "Phone number can only contain numbers",
   },
 };
+export const MERCHANTID_VALIDATION = {
+  required: "merchand id is required",
+  minLength: {
+    value: 10,
+    message: "Must be ten digits",
+  },
+  maxLength: {
+    value: 10,
+    message: "Must be ten digits",
+  },
+  pattern: {
+    value: /^[0-9]/,
+    message: "merchant id can only contain numbers",
+  },
+};
 
 export const USER_NAME_VALIDATION = {
   required: "Username is required",
@@ -63,34 +78,34 @@ export const REMARKS_VALIDATION = {
 };
 
 export const ACCOUNT_NUMBER_INPUT_VALIDATION = {
-  required: 'Account numbers is required',
+  required: "Account numbers is required",
   minLength: {
-    value: 11,
-    message: 'Must be eleven digits',
+    value: 10,
+    message: "Must be ten digits",
   },
   maxLength: {
-    value: 11,
-    message: 'Must be eleven digits',
+    value: 10,
+    message: "Must be ten digits",
   },
   pattern: {
     value: /^[0-9]/,
-    message: 'Account number can only contain numbers',
+    message: "Account number can only contain numbers",
   },
 };
 
 export const BVN_NUMBER_INPUT_VALIDATION = {
-  required: 'Bvn number is required',
+  required: "Bvn number is required",
   minLength: {
     value: 12,
-    message: 'Must be twelve digits',
+    message: "Must be twelve digits",
   },
   maxLength: {
     value: 12,
-    message: 'Must be twelve digits',
+    message: "Must be twelve digits",
   },
   pattern: {
     value: /^[0-9]/,
-    message: 'Bvn number can only contain numbers',
+    message: "Bvn number can only contain numbers",
   },
 };
 

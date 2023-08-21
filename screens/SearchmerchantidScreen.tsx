@@ -10,8 +10,7 @@ import {
 } from "../components";
 import { useForm } from "react-hook-form";
 import { icons } from "../constants";
-import { navigation, redirectTo } from "../utils";
-import axios from "axios";
+import { VALIDATION, navigation } from "../utils";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
 const {} = SearchmerchantidScreenStyles;
@@ -98,8 +97,10 @@ const SearchmerchantidScreen = ({ route }) => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      // const response = await axios.post("", {"merchantid":data.merchantid})
-      setmerchantinfo({ merchantid: data.merchantid });
+      const response = await axiosCustom.get(
+        `/merchant/detail/${data.merchantid}`
+      );
+      setmerchantinfo({ merchantid: data.merchantid, ...response.data });
       switchModals(0);
     } catch (err) {
       errorAlert(err);
@@ -126,6 +127,7 @@ const SearchmerchantidScreen = ({ route }) => {
         mT={40}
         placeholderText="Enter 10 digit ID"
         name="merchantid"
+        rules={VALIDATION.MERCHANTID_VALIDATION}
         control={control}
       />
       <View style={{ flex: 1 }}></View>

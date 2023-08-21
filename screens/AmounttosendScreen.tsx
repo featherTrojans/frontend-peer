@@ -25,7 +25,8 @@ const { Nairaicon } = icons;
 
 const AmounttosendScreen = ({ route }) => {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
-  const nextScreen = route?.params?.nextScreen;
+  const buttontext = route?.params?.buttontext || "Proceed";
+  const headtext = route?.params?.headtext || "How Much?";
   const onsubmit = route?.params?.onsubmit;
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
@@ -61,7 +62,7 @@ const AmounttosendScreen = ({ route }) => {
   };
   return (
     <FTTitlepagewrapper
-      title="How Much?"
+      title={headtext}
       headerBg={COLORS.blue16}
       bg={COLORS.blue16}
       childBg={COLORS.blue16}
@@ -93,7 +94,7 @@ const AmounttosendScreen = ({ route }) => {
         />
       </View>
       <FTCustombutton
-        btntext="Fund Wallet"
+        btntext={buttontext}
         onpress={handlesubmit}
         bg={COLORS.blue9}
       />

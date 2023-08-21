@@ -38,6 +38,7 @@ const WithdrawcashScreen = ({ route }) => {
     useContext(LocationContext);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(agentinfo);
+  const [noagent, setnoagent] = useState(false);
 
   useEffect(() => {
     if (!agentinfo) {
@@ -46,6 +47,7 @@ const WithdrawcashScreen = ({ route }) => {
   }, []);
 
   const getLocationAndAgents = async () => {
+    setnoagent(false);
     setDestinationCoords({});
     try {
       setLoading(true);
@@ -69,6 +71,7 @@ const WithdrawcashScreen = ({ route }) => {
         setInfo(response?.data?.data[0]);
       }
     } catch (err) {
+      setnoagent(true);
       console.log(err.response, "no status found , can you believe that");
     } finally {
     }
@@ -165,11 +168,35 @@ const WithdrawcashScreen = ({ route }) => {
     },
   ];
 
-  if (loading) {
+  if (noagent) {
     return (
-      <View>
-        <Text>Searching for nearby merchants</Text>
-      </View>
+      <FTTitlepagewrapper title="Withdraw Cash">
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text>Paid, sorry couldn’t find any merchants around you</Text>
+        </View>
+        <FTCustombutton
+          onpress={getLocationAndAgents}
+          btntext="Search Again"
+          bg={COLORS.blue9}
+        />
+      </FTTitlepagewrapper>
+    );
+  }
+
+  if (!info || loading) {
+    return (
+      <FTTitlepagewrapper title="Withdraw Cash">
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text>SearchIcons</Text>
+        </View>
+        <Text style={{ textAlign: "center", marginBottom: 20 }}>
+          Searching for nearby merchants...
+        </Text>
+      </FTTitlepagewrapper>
     );
   }
 
@@ -195,7 +222,7 @@ const WithdrawcashScreen = ({ route }) => {
                 marginTop: 35,
               }}
             >
-              {info.agent}
+              {info?.agent}
             </Text>
             <Text
               style={{

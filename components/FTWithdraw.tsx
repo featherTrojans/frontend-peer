@@ -1,22 +1,34 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { navigation } from "../utils";
 import { Pressable } from "react-native";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
 import { FTHorizontaline, FTLoader } from ".";
 import axiosCustom from "../httpRequests/axiosCustom";
+import { AuthContext } from "../context/AuthContext";
+import amountFormatter from "../utils/formatMoney";
+import { useAlert } from "../hooks";
 
 const { Withdrawicon, Searchmerchanticon, Paymerchanticon } = icons;
 
 const FTWithdraw = () => {
   const [loading, setLoading] = useState(false);
+  const { authdata } = useContext(AuthContext);
+  const { errorAlert } = useAlert();
+  const walletbalance = amountFormatter(authdata?.userDetails?.walletBal);
 
   const onsubmitfindmerchant = async (amount) => {
+    if (amount > authdata?.userDetails?.walletBal) {
+      return errorAlert(null, "amount is greater than wallet");
+    }
     navigation.navigate("withdrawcash_screen", amount);
   };
 
   const onsubmitpaymerchant = (amount) => {
+    if (amount > authdata?.userDetails?.walletBal) {
+      return errorAlert(null, "amount is greater than wallet");
+    }
     navigation.navigate("searchmerchantid_screen", { amount });
   };
 
@@ -30,7 +42,8 @@ const FTWithdraw = () => {
       });
     }
     return navigation.navigate("amounttosend_screen", {
-      nextScreen: "choosefeatheruser_screen",
+      buttontext: "Withdraw Cash",
+      headtext: `Balance : N${walletbalance}`,
       onsubmit: onsubmitfindmerchant,
     });
   };
@@ -47,7 +60,8 @@ const FTWithdraw = () => {
           Icon={Paymerchanticon}
           onPress={() =>
             navigation.navigate("amounttosend_screen", {
-              nextScreen: "choosefeatheruser_screen",
+              buttontext: "Withdraw Cash",
+              headtext: `Balance :  N${walletbalance}`,
               onsubmit: onsubmitpaymerchant,
             })
           }

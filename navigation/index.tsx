@@ -362,7 +362,7 @@ export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
 
   return (
     <>
-      {token ? <LockScreen modal={modal} setModal={setModal} /> : null}
+      {/* {token ? <LockScreen modal={modal} setModal={setModal} /> : null} */}
       <AuthenticatedNavigator />
     </>
   );

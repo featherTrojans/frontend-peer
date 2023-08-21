@@ -1,16 +1,27 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { navigation } from "../utils";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
 import { FTHorizontaline } from ".";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
+import amountFormatter from "../utils/formatMoney";
+import { AuthContext } from "../context/AuthContext";
+import { useAlert } from "../hooks";
 
 const { Walletblueicon, Bankblueicon } = icons;
 const FTTransfer = () => {
+  const { authdata } = useContext(AuthContext);
+  const { errorAlert } = useAlert();
   const onsubmitToFeatherWallet = async (amount) => {
+    if (amount > authdata?.userDetails?.walletBal) {
+      return errorAlert(null, "amount is greater than wallet");
+    }
     navigation.navigate("choosefeatheruser_screen", { amount });
   };
   const onsubmitToBankAccount = async (amount) => {
+    if (amount > authdata?.userDetails?.walletBal) {
+      return errorAlert(null, "amount is greater than wallet");
+    }
     navigation.navigate("choosebank_screen", { amount });
   };
 
@@ -22,7 +33,10 @@ const FTTransfer = () => {
         <View style={{ alignItems: "flex-end" }}>
           <Text style={styles.primaryWalletText}>Primary Wallet Balance</Text>
 
-          <Text style={styles.primaryWalletBalanceText}>N332,500.50</Text>
+          <Text style={styles.primaryWalletBalanceText}>
+            {" "}
+            N{amountFormatter(authdata?.userDetails?.walletBal)}
+          </Text>
         </View>
       </View>
 
@@ -33,7 +47,6 @@ const FTTransfer = () => {
           Icon={Walletblueicon}
           onPress={() =>
             navigation.navigate("amounttosend_screen", {
-              nextScreen: "choosefeatheruser_screen",
               onsubmit: onsubmitToFeatherWallet,
             })
           }
@@ -47,7 +60,6 @@ const FTTransfer = () => {
           Icon={Bankblueicon}
           onPress={() =>
             navigation.navigate("amounttosend_screen", {
-              nextScreen: "choosefeatheruser_screen",
               onsubmit: onsubmitToBankAccount,
             })
           }

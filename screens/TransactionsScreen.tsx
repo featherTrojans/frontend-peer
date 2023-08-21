@@ -25,6 +25,7 @@ import formatData from "../utils/fomatTrans";
 import { TransactionScreenStyles } from "../assets/styles/screens";
 import { AuthContext } from "../context/AuthContext";
 import { redirectTo } from "../utils";
+import amountFormatter from "../utils/formatMoney";
 
 const {
   listContainer,
@@ -63,7 +64,7 @@ const {
 } = icons;
 
 const TransactionsScreen = ({ navigation }) => {
-  const { setShowTabs } = useContext(AuthContext);
+  const { setShowTabs, authdata } = useContext(AuthContext);
   const [transactions, setTransations] = useState();
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -182,7 +183,9 @@ const TransactionsScreen = ({ navigation }) => {
 
           <Text style={balance}>
             Balance:
-            <Text style={balanceAmount}> N24,458,890 </Text>
+            <Text style={balanceAmount}>
+              N{amountFormatter(authdata?.userDetails?.walletBal)}
+            </Text>
           </Text>
         </View>
 

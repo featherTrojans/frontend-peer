@@ -10,8 +10,10 @@ const FTSwitchbtn = ({ action }: IFTSwitchProps) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => {
     // You can perform any action here
+    if (!isEnabled) {
+      action();
+    }
     setIsEnabled((previousState) => !previousState);
-    action();
   };
 
   return (

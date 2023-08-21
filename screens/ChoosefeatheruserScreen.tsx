@@ -12,6 +12,7 @@ import {
   FTCustombutton,
   FTIconwithtitleandinfo,
   FTSearchinput,
+  FTSwitchbtn,
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
@@ -62,9 +63,18 @@ const ModalContent = ({ userinfo, amount }) => {
   const onpress = () => {
     navigation.navigate("transactionsummary_screen", { action, summaryinfo });
   };
+
+  const addtobeneficiary = async () => {
+    try {
+      await axiosCustom.post("beneficiary/create", {
+        type: "transfer",
+        data: userinfo,
+      });
+    } catch (err) {}
+  };
   return (
     <View style={{ backgroundColor: "#fff" }}>
-      <Text>User Details</Text>
+      <Text style={{ marginBottom: 20, ...FONTS.bold }}>User Details</Text>
       <FTIconwithtitleandinfo
         title={userinfo.fullName}
         info={userinfo.username}
@@ -73,6 +83,19 @@ const ModalContent = ({ userinfo, amount }) => {
         Icon={Smallphoneicon}
         mB={40}
       />
+      {/* beneficiary */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 20,
+        }}
+      >
+        <Text style={{ ...FONTS.regular }}>Save to beneficiaries?</Text>
+        <FTSwitchbtn action={addtobeneficiary} />
+      </View>
+
       <FTCustombutton btntext="Proceed" onpress={onpress} />
     </View>
   );
@@ -85,9 +108,9 @@ const ChoosefeatheruserScreen = ({ route }) => {
 
   useEffect(() => {
     axiosCustom
-      .get("/getbeneficiaries")
+      .get("/beneficiary/get")
       .then((res) => {
-        setbeneficiaries(res.data.data);
+        setbeneficiaries(res.data.data?.beneficiaries);
       })
       .catch((err) => {});
   }, []);
@@ -155,16 +178,16 @@ const ChoosefeatheruserScreen = ({ route }) => {
       modalHeight={content.height}
     >
       <FlatList
-        data={[1, 2]}
+        data={beneficiaries}
         showsVerticalScrollIndicator={false}
         bounces={false}
         ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
         renderItem={({ item }) => {
           return (
             <FTIconwithtitleandinfo
-              title="Stephen Kayode. J"
-              info="@blvkcreator"
-              onPress={() => switchModals(0, item)}
+              title={userinfo.fullName}
+              info={userinfo.username}
+              onPress={() => switchModals(0, item, amount)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}
             />

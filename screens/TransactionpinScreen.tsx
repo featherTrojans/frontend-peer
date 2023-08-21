@@ -1,6 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import { FTKeyboard, FTMainwrapper, FTTitlepagewrapper } from "../components";
+import {
+  FTKeyboard,
+  FTLoader,
+  FTMainwrapper,
+  FTTitlepagewrapper,
+} from "../components";
 import { COLORS, fontsize, icons } from "../constants";
 import { TransactionpinScreenStyles } from "../assets/styles/screens";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
@@ -57,6 +62,7 @@ const TransactionpinScreen = ({ route }) => {
       childBg={COLORS.blue16}
       invert
     >
+      <FTLoader loading={loading} />
       <View style={headerSectionWrap}>
         <Pinlockicon />
 
