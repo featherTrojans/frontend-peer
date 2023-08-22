@@ -28,6 +28,8 @@ import FTAddcash from "./FTAddcash";
 import FTTransfer from "./FTTransfer";
 import FTWithdraw from "./FTWithdraw";
 import FTBillPayment from "./FTBillPayment";
+import FTSuccessOrError from "./FTSuccessOrError";
+
 export {
   FTBillPayment,
   FTAddcash,
@@ -59,4 +61,5 @@ export {
   FTAllChatsModal,
   FTSwitchbtn,
   FTDetailsModal,
+  FTSuccessOrError
 };

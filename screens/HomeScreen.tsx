@@ -137,7 +137,7 @@ const QuickActions = ({ onpress }) => {
   }) {
     let isLast = index + 1 === scrollactions.length;
     return (
-      <TouchableOpacity onPress={() => onpress(modal)}>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => onpress(modal)}>
         <View
           style={[
             scrollaction,
@@ -175,7 +175,7 @@ const QuickActions = ({ onpress }) => {
 
 const Conversations = () => {
   return (
-    <View style={[conversationWrap, { marginVertical: 0 }]}>
+    <View style={[conversationWrap, { marginTop: 20 }]}>
       <View style={conversationHeader}>
         <View style={recentIconWrap}>
           {/* icon */}

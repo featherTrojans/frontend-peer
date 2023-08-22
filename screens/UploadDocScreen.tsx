@@ -1,10 +1,11 @@
 import { View, Text, Pressable, FlatList, ScrollView } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FTCustombutton,
   FTHeaderandsubheader,
   FTInput,
   FTKeyboardwrapper,
+  FTLoader,
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
@@ -16,11 +17,13 @@ import { nigeriastates, stateslgs } from "../utils/countryandstate";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { COLORS, FONTS, SIZES, fontsize } from "../constants";
 import { UploadDocScreenStyles } from "../assets/styles/screens";
+import { AuthContext } from "../context/AuthContext";
 
 const { optionText, uploadDocBtnWrap, uploadDocBtnText } =
   UploadDocScreenStyles;
 
 const UploadDocScreen = () => {
+  const { authdata, setAuthData } = useContext(AuthContext);
   const { control, handleSubmit } = useForm({ mode: "all" });
   const [id_image, setid_image] = useState({});
   const [content, setContent] = useState<any>({ child: null, height: 400 });
@@ -29,6 +32,7 @@ const UploadDocScreen = () => {
   const [city, setCity] = useState("Select");
   const [localGov, setLocalGov] = useState("Select");
   const [selectDoc, setSelectDoc] = useState("Select Document");
+  const [id_type, setIdtype] = useState("Select");
 
   const [loading, setLoading] = useState(false);
   const { errorAlert } = useAlert();
@@ -40,6 +44,11 @@ const UploadDocScreen = () => {
 
   const closeLocalGovModal = (item) => {
     setLocalGov(item);
+    setShowModal(false);
+  };
+
+  const closeidtypeModal = (item) => {
+    setIdtype(item);
     setShowModal(false);
   };
 
@@ -79,6 +88,24 @@ const UploadDocScreen = () => {
     );
   };
 
+  const IdtypeModal = () => {
+    return (
+      <FlatList
+        data={["NIGERIAN_NIN"]}
+        renderItem={({ item }) => {
+          return (
+            <Pressable onPress={() => closeidtypeModal(item)}>
+              <Text style={optionText}>{item}</Text>
+            </Pressable>
+          );
+        }}
+        keyExtractor={(item) => item}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: 40 }}
+      />
+    );
+  };
+
   const switchModals = (value: number) => {
     switch (value) {
       case 0:
@@ -89,7 +116,10 @@ const UploadDocScreen = () => {
         setContent({ child: <LocalGovModal />, height: SIZES.height - 200 });
         setShowModal((s) => !s);
         break;
-
+      case 2:
+        setContent({ child: <IdtypeModal />, height: SIZES.height - 500 });
+        setShowModal((s) => !s);
+        break;
       default:
         break;
     }
@@ -114,6 +144,9 @@ const UploadDocScreen = () => {
   };
 
   const onsubmit = async (values) => {
+    console.log(values, city, localGov, id_image);
+
+    // return;
     setLoading(true);
     const formdata = new FormData();
     formdata.append("address", values.address);
@@ -121,12 +154,18 @@ const UploadDocScreen = () => {
     formdata.append("state", localGov);
     formdata.append("country", "Nigeria");
     formdata.append("postal_code", values.postal_code);
-    formdata.append("house_no", values.id_type);
-    formdata.append("id_type", values.address);
+    formdata.append("house_no", values.house_no);
+    formdata.append("id_type", id_type);
     formdata.append("id_no", values.id_no);
     formdata.append("id_image", id_image);
+
     try {
-      const response = await axiosCustom.post("user/upgrade/veteran", formdata);
+      await axiosCustom.post("user/upgrade/veteran", formdata);
+      setAuthData({
+        ...authdata,
+        userDetails: { ...authdata.userDetails, userLevel: 3 },
+      });
+
       navigation.navigate("Dashboard");
     } catch (err) {
       errorAlert(err);
@@ -155,6 +194,7 @@ const UploadDocScreen = () => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
+      <FTLoader loading={loading} />
       <FTKeyboardwrapper>
         <FTHeaderandsubheader
           header="Upload identity 
@@ -189,7 +229,7 @@ const UploadDocScreen = () => {
           name="house_no"
           label="House No"
           control={control}
-          rules={VALIDATION.FIRST_NAME_VALIDATION}
+          rules={VALIDATION.HOUSE_NO_VALIDATION}
           mB={15}
         />
         <FTInput
@@ -205,16 +245,18 @@ const UploadDocScreen = () => {
           name="postal_code"
           label="Postal Code"
           control={control}
-          rules={VALIDATION.PHONE_NUMBER_VALIDATION}
+          rules={VALIDATION.POSTAL_NO_VALIDATION}
           mB={15}
         />
         <FTInput
-          placeholderText="Enter ID Type"
+          placeholderText={id_type}
           name="id_type"
           label="ID Number"
           control={control}
           rules={VALIDATION.PHONE_NUMBER_VALIDATION}
           mB={15}
+          type="dropdown"
+          onPress={() => switchModals(2)}
         />
         <FTInput
           placeholderText="Enter ID Number"
@@ -226,7 +268,7 @@ const UploadDocScreen = () => {
         />
 
         <FTInput
-          placeholderText={selectDoc}
+          placeholderText={id_image.uri ? "image uploaded" : "Select Document"}
           name="id_image"
           label="Upload Document"
           control={control}

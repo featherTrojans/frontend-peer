@@ -27,17 +27,17 @@ const CarddisclosureScreen = () => {
   const createcard = async () => {
     const data = {
       address: {
-        address: authdata.address,
-        city: authdata.city,
-        state: authdata.state,
-        country: authdata.country,
-        postal_code: authdata.postal_code,
-        house_no: authdata.house_no,
+        address: authdata?.userDetails?.address,
+        city: authdata?.userDetails?.city,
+        state: authdata?.userDetails?.state,
+        country: authdata?.userDetails?.country,
+        postal_code: authdata?.userDetails?.postalCode,
+        house_no: authdata?.userDetails?.houseNo,
       },
       identity: {
-        id_type: authdata.id_type,
-        id_no: authdata.id_no,
-        id_image: authdata.id_image,
+        id_type: authdata?.userDetails?.id_type,
+        id_no: authdata?.userDetails?.id_no,
+        id_image: authdata?.userDetails?.id_image,
       },
     };
     try {
@@ -54,7 +54,7 @@ const CarddisclosureScreen = () => {
       <FTCustombutton
         btntext="I understand Proceed"
         onpress={() => {
-          navigation.navigate("pin_screen", { action });
+          navigation.navigate("transactionpin_screen", { action });
         }}
         bg="#000"
       />

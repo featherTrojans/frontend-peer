@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { ChoosefeatheruserScreenStyles } from "../assets/styles/screens";
 import {
   FTCustombutton,
+  FTDetailsModal,
   FTIconwithtitleandinfo,
   FTSearchinput,
   FTSwitchbtn,
@@ -19,6 +20,7 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { navigation, redirectTo } from "../utils";
 import useDebounce from "../utils/debounce";
 import axiosCustom from "../httpRequests/axiosCustom";
+import amountFormatter from "../utils/formatMoney";
 
 const { Smallphoneicon } = icons;
 
@@ -40,7 +42,7 @@ const ModalContent = ({ userinfo, amount }) => {
     }
   };
   const summaryinfo = {
-    amount: amount,
+    amount: amountFormatter(amount),
     transactionDatas: [
       {
         leftSide: "Name",
@@ -56,7 +58,7 @@ const ModalContent = ({ userinfo, amount }) => {
       },
       {
         leftSide: "Total to be sent",
-        rightSide: `N${amount}`,
+        rightSide: `N${amountFormatter(amount)}`,
       },
     ],
   };
@@ -74,29 +76,29 @@ const ModalContent = ({ userinfo, amount }) => {
   };
   return (
     <View style={{ backgroundColor: "#fff" }}>
-      <Text style={{ marginBottom: 20, ...FONTS.bold }}>User Details</Text>
-      <FTIconwithtitleandinfo
+      <FTDetailsModal
+        modalTitle="User Details"
         title={userinfo.fullName}
         info={userinfo.username}
-        onPress={() => {}}
+        onPress={onpress}
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
         mB={40}
+        extraComponent={
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 20,
+            }}
+          >
+            <Text style={{ ...FONTS.regular }}>Save to beneficiaries?</Text>
+            <FTSwitchbtn action={addtobeneficiary} />
+          </View>
+        }
       />
       {/* beneficiary */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 20,
-        }}
-      >
-        <Text style={{ ...FONTS.regular }}>Save to beneficiaries?</Text>
-        <FTSwitchbtn action={addtobeneficiary} />
-      </View>
-
-      <FTCustombutton btntext="Proceed" onpress={onpress} />
     </View>
   );
 };

@@ -6,7 +6,13 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { clearDataFromStorage, navigation, redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
 
-const { Editprofileicon, Mywalleticon, Abouticon, Securityprivicon, Supporticon } = icons;
+const {
+  Editprofileicon,
+  Mywalleticon,
+  Abouticon,
+  Securityprivicon,
+  Supporticon,
+} = icons;
 
 const {
   profileHeaderWrap,
@@ -70,8 +76,8 @@ const ProfileScreen = () => {
 
   const handlesignout = async () => {
     await clearDataFromStorage("@token");
-    setAuthData({});
     setToken("");
+    // setAuthData({});
   };
 
   return (

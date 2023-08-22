@@ -1,11 +1,20 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { FTCustombutton, FTMainwrapper, FTSuccessOrError } from "../components";
+import { navigation } from "../utils";
 
 const TransactionSuccessScreen = () => {
   return (
-    <View>
-      <Text>TransactionSuccessScreen</Text>
-    </View>
+    <FTMainwrapper>
+      <View style={{ flex: 1, justifyContent: "space-between" }}>
+        <FTSuccessOrError />
+
+        <FTCustombutton
+          btntext="back Home"
+          onpress={() => navigation.navigate("Dashboard")}
+        />
+      </View>
+    </FTMainwrapper>
   );
 };
 

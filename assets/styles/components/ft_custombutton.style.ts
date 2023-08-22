@@ -11,6 +11,6 @@ export const FTCustombuttonStyles = StyleSheet.create({
     ...FONTS.regular,
     textAlign: "center",
     color: COLORS.white,
-    textTransform: "uppercase",
+    textTransform: "capitalize",
   },
 });

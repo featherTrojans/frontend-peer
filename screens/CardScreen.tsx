@@ -17,13 +17,10 @@ import { useAlert } from "../hooks";
 
 const {
   Carddetailsicon,
-  Cardfreezeicon,
   Cardfundicon,
   Cardlockicon,
   Cardwithdrawicon,
-  Vcardicon,
   Historyicon,
-  Walletblueicon,
   Bluecardicon,
   Detailcopyicon,
   Usdcardicon,
@@ -34,7 +31,6 @@ const {
 } = icons;
 
 const {
-  contentContainer,
   myCardsText,
   demoCard,
   actionsWrap,
@@ -240,7 +236,9 @@ const CardScreen = () => {
       .then((response) => {
         setCardetails(response?.data?.data);
       })
-      .catch(() => {})
+      .catch((err) => {
+        // if(err.response){}
+      })
       .finally(() => {
         setLoading(false);
       });

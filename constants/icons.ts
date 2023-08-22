@@ -127,6 +127,8 @@ import Whitebankicon from "../assets/icons/Whitebankicon";
 import Skiplatericon from "../assets/icons/Skiplatericon";
 import Bvncommenticon from "../assets/icons/Bvncommenticon";
 import Bvnverifyicon from "../assets/icons/Bvnverifyicon";
+import Successicon from "../assets/icons/Successicon";
+import Erroricon from "../assets/icons/Erroricon";
 
 export default {
   Logo,
@@ -239,6 +241,8 @@ export default {
   Skiplatericon,
   Bvncommenticon,
   Bvnverifyicon,
+  Successicon,
+  Erroricon,
   // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,

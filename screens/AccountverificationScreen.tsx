@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  TouchableOpacity,
   Dimensions,
   Pressable,
   FlatList,
@@ -21,6 +19,7 @@ import { FTCustombutton, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import { navigation } from "../utils";
+import { useAlert } from "../hooks";
 const { Levelcheckicon, Leveloptioncancelicon, Leveloptioncheckicon } = icons;
 
 const { width } = Dimensions.get("window");
@@ -46,6 +45,7 @@ const {
 const AccountverificationScreen = (props) => {
   const translateValue = 260 / 3;
   const { authdata } = useContext(AuthContext);
+  const { errorAlert } = useAlert();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [tabTranslate, setTabTranslate] = React.useState(new Animated.Value(0));
   const flatlistRef = useRef<FlatList>(null);
@@ -77,6 +77,7 @@ const AccountverificationScreen = (props) => {
   const accountLevelDatas = [
     {
       levelTitle: "Newbie",
+      level: 1,
       requirement: "Basic Personal Information",
       status: userlevel >= 1,
       fundinglimit: "Unlimited",
@@ -88,6 +89,7 @@ const AccountverificationScreen = (props) => {
     },
     {
       levelTitle: "Odogwu",
+      level: 2,
       requirement: "Bank Verification Number (BVN)",
       status: userlevel >= 2,
       fundinglimit: "Unlimited",
@@ -99,6 +101,7 @@ const AccountverificationScreen = (props) => {
     },
     {
       levelTitle: "Veteran",
+      level: 3,
       requirement: "Identity Document Uploads",
       status: userlevel >= 3,
       fundinglimit: "Unlimited",
@@ -153,6 +156,7 @@ const AccountverificationScreen = (props) => {
         renderItem={({ item }) => {
           const {
             status,
+            level,
             levelTitle,
             fundinglimit,
             cashrequest,
@@ -230,6 +234,10 @@ const AccountverificationScreen = (props) => {
                 <FTCustombutton
                   btntext={`Updrage to ${levelTitle}`}
                   onpress={() => {
+                    if (userlevel < level - 1) {
+                      errorAlert(null, "Please upgrade to Odogwu");
+                      return;
+                    }
                     navigation.navigate(upgradeLocation);
                   }}
                 />

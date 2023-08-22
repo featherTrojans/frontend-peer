@@ -93,6 +93,30 @@ export const ACCOUNT_NUMBER_INPUT_VALIDATION = {
   },
 };
 
+export const HOUSE_NO_VALIDATION = {
+  required: "House number is required",
+  minLength: {
+    value: 1,
+    message: "Must be one digits",
+  },
+  maxLength: {
+    value: 1,
+    message: "Must be one digits",
+  },
+  pattern: {
+    value: /^[0-9]/,
+    message: "House number can only contain numbers",
+  },
+};
+
+export const POSTAL_NO_VALIDATION = {
+  required: "postal number is required",
+  minLength: {
+    value: 2,
+    message: "Must be two digits",
+  },
+};
+
 export const BVN_NUMBER_INPUT_VALIDATION = {
   required: "Bvn number is required",
   minLength: {
