@@ -1,6 +1,9 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useContext } from "react";
-import { NetworkreceiverScreenStyles } from "../assets/styles/screens";
+import {
+  ChoosefeatheruserScreenStyles,
+  NetworkreceiverScreenStyles,
+} from "../assets/styles/screens";
 import {
   FTIconwithtitleandinfo,
   FTSearchinput,
@@ -14,6 +17,7 @@ import useContact from "../hooks/useContact";
 const { Sendtoselficon } = icons;
 
 const {} = NetworkreceiverScreenStyles;
+const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
 const NetworkreceiverScreen = ({ route }) => {
   const network = route?.params?.network;
@@ -28,64 +32,55 @@ const NetworkreceiverScreen = ({ route }) => {
     network: network,
   };
 
-  // const renderContacts = ()=>{
+  const ListHeader = () => {
+    return (
+      <>
+        <FTSearchinput placeholder="Search Phone Number" />
+        <FTIconwithtitleandinfo
+          bG={COLORS.green2}
+          title="Send to self"
+          info={authdata?.userDetails?.phoneNumber}
+          onPress={() =>
+            navigation.navigate("airtimeordata_screen", { userinfo })
+          }
+          Icon={Sendtoselficon}
+          mB={40}
+        />
+        <Text style={listHeaderText}>My Beneficiaries</Text>
+      </>
+    );
+  };
 
-  //   const contacinfo = []
-  //   contacts.forEach((contact)=>{
-  //     const newcontact:[] = contact?.phoneNumbers?.map((phone)=>{
-  //       return (
-  //         <FTIconwithtitleandinfo
-  //         bG={COLORS.green2}
-  //         title="Send to self"
-  //         info={phone.phoneNumber}
-  //         onPress={() => redirectTo("airtimeordata_screen")}
-  //         Icon={Sendtoselficon}
-  //       />
-  //       )
-  //     })
-
-  //     contacinfo.push(...newcontact)
-  //   })
-  //   return contacinfo
-  // }
   return (
     <FTTitlepagewrapper title="Choose Receiver">
-      <FTSearchinput placeholder="Search Phone Number" />
-      <FTIconwithtitleandinfo
-        bG={COLORS.green2}
-        title="Send to self"
-        info={authdata?.userDetails?.phoneNumber}
-        onPress={() =>
-          navigation.navigate("airtimeordata_screen", { userinfo })
-        }
-        Icon={Sendtoselficon}
+      <FlatList
+        data={contactsResolved}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
+        renderItem={({ item: feathercontacts }) => {
+          const userinfo = {
+            fullName: feathercontacts?.fullName,
+            username: feathercontacts?.username,
+            phoneNumber: feathercontacts?.phoneNumber,
+            imageUrl: feathercontacts?.imageUrl,
+            network: network,
+          };
+          return (
+            <FTIconwithtitleandinfo
+              bG={COLORS.green2}
+              title={feathercontacts?.fullName}
+              info={feathercontacts?.username}
+              onPress={() =>
+                navigation.navigate("airtimeordata_screen", { userinfo })
+              }
+              Icon={Sendtoselficon}
+              imageUrl={feathercontacts?.imageUrl}
+            />
+          );
+        }}
+        ListHeaderComponent={ListHeader}
       />
-      <View>
-        <Text style={{ marginVertical: 30 }}>My Contacts</Text>
-        <ScrollView>
-          {contactsResolved.map((feathercontacts) => {
-            const userinfo = {
-              fullName: feathercontacts?.fullName,
-              username: feathercontacts?.username,
-              phoneNumber: feathercontacts?.phoneNumber,
-              imageUrl: feathercontacts?.imageUrl,
-              network: network,
-            };
-            return (
-              <FTIconwithtitleandinfo
-                bG={COLORS.green2}
-                title={feathercontacts?.fullName}
-                info={feathercontacts?.username}
-                onPress={() =>
-                  navigation.navigate("airtimeordata_screen", { userinfo })
-                }
-                Icon={Sendtoselficon}
-                imageUrl={feathercontacts?.imageUrl}
-              />
-            );
-          })}
-        </ScrollView>
-      </View>
     </FTTitlepagewrapper>
   );
 };

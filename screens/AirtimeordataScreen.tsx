@@ -1,19 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import { AirtimeordataScreenStyles } from "../assets/styles/screens";
+import {
+  AirtimeordataScreenStyles,
+  ChoosefeatheruserScreenStyles,
+} from "../assets/styles/screens";
 import {
   FTCustombutton,
   FTIconwithtitleandinfo,
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS } from "../constants";
+import { COLORS, FONTS, fontsize } from "../constants";
 import { navigation } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
 import Sendtoselficon from "../assets/icons/Sendtoselficon";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { color } from "react-native-reanimated";
+import amountFormatter from "../utils/formatMoney";
 const {} = AirtimeordataScreenStyles;
+const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
 const AirtimeordataScreen = ({ route }) => {
   const userinfo = route?.params?.userinfo;
@@ -60,6 +65,60 @@ const AirtimeordataScreen = ({ route }) => {
     };
   };
 
+  const airtimeDatas = [
+    {
+      amount: 50,
+      amountInfo: "You get N50.00"
+    },
+    {
+      amount: 100,
+      amountInfo: "You get N100.00"
+    },
+    {
+      amount: 200,
+      amountInfo: "You get N200.00"
+    },
+    {
+      amount: 500,
+      amountInfo: "You get N500.00"
+    }
+  ]
+
+  const ListHeader = () => {
+    return (
+      <>
+        <Text style={listHeaderText}>Purchase Recipient</Text>
+        <FTIconwithtitleandinfo
+          bG={COLORS.green2}
+          title={userinfo?.fullName}
+          info={userinfo.phoneNumber}
+          mB={40}
+          rightComponent={
+            <TouchableOpacity
+              style={{
+                justifyContent: "space-between",
+                alignItems: "center",
+                backgroundColor: COLORS.red2,
+                alignSelf: "flex-end",
+                paddingVertical: 11, paddingHorizontal: 18,
+                borderRadius: 10
+              }}
+              onPress={navigation.goBack}
+            >
+              <Text style={{ color: COLORS.red3, ...fontsize.xxsmallest, ...FONTS.semibold }}>Change</Text>
+            </TouchableOpacity>
+          }
+          onPress={() =>
+            navigation.navigate("airtimeordata_screen", { userinfo })
+          }
+          Icon={Sendtoselficon}
+          // imageUrl={userinfo?.imageUrl || ""}
+        />
+        <Text style={listHeaderText}>Preset Amount</Text>
+      </>
+    );
+  };
+
   return (
     <FTTitlepagewrapper title="Airtime or Data">
       <FTSearchinput
@@ -67,41 +126,37 @@ const AirtimeordataScreen = ({ route }) => {
         onChange={onamountchange}
         placeholder="Type in custom amount"
       />
-      <Text style={{ marginVertical: 20 }}>Purchase Recipient</Text>
-      <FTIconwithtitleandinfo
-        bG={COLORS.green2}
-        title={userinfo?.fullName}
-        info={userinfo.phoneNumber}
-        rightComponent={
-          <TouchableOpacity
-            style={{
-              width: 100,
-              height: 100,
-              justifyContent: "space-between",
-              alignItems: "center",
-              backgroundColor: "pink",
-            }}
-            onPress={navigation.goBack}
-          >
-            <Text style={{ color: "red" }}>Change</Text>
-          </TouchableOpacity>
-        }
-        onPress={() =>
-          navigation.navigate("airtimeordata_screen", { userinfo })
-        }
-        Icon={Sendtoselficon}
-        // imageUrl={userinfo?.imageUrl || ""}
-      />
-      <Text style={{ marginVertical: 20 }}>Preset Amount</Text>
 
-      <FTCustombutton
-        btntext="Proceed"
-        onpress={() =>
-          navigation.navigate("transactionpin_screen", {
-            action: actionairtime(amount),
-          })
-        }
+      <FlatList
+        data={airtimeDatas}
+        ItemSeparatorComponent={() => <View style={{ height: 30 }} />}
+        ListHeaderComponent={ListHeader}
+        renderItem={({item}) => {
+          const {amount, amountInfo} = item
+          return (
+            <FTIconwithtitleandinfo
+              bG={COLORS.green2}
+              title={amountFormatter(amount.toString())}
+              info={amountInfo}
+              onPress={() => console.log("yes")}
+              imageUrl="https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1"
+              size={35}
+            />
+          );
+        }}
       />
+
+      <View style={{ position: "absolute", bottom: 20, left: 20, right: 20 }}>
+        <FTCustombutton
+          btntext="Proceed"
+          bg={COLORS.blue9}
+          onpress={() =>
+            navigation.navigate("transactionpin_screen", {
+              action: actionairtime(amount),
+            })
+          }
+        />
+      </View>
     </FTTitlepagewrapper>
   );
 };

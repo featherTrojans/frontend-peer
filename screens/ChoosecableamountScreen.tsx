@@ -14,10 +14,14 @@ const ChoosecableamountScreen = () => {
      <FTSearchinput 
       placeholder="Search Biller"
       />
+
+
+
       <FTIconwithtitleandinfo 
       
       bG='red'
-      title="MTN Nigeria"
+      title="XTRA-BB2 50GB (1 Month)"
+      info='N24,500'
       onPress={() => redirectTo("cableiuc_screen")}
       Icon={Bluecardicon}
       
