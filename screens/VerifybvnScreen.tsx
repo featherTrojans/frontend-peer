@@ -69,8 +69,7 @@ const VerifybvnScreen = () => {
     <FTTitlepagewrapper title="Verify BVN">
       <FTLoader loading={loading} />
       <View style={flex}>
-        <Text style={headerText}>Enter code sent to your</Text>
-        <Text style={headerText}>mobile phone</Text>
+        <Text style={headerText}>Enter code sent to your {'\n'}mobile phone</Text>
         <FTInput
           placeholderText="Enter BVN"
           name="code"

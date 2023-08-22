@@ -7,10 +7,13 @@ import {
   FTCustombutton,
   FTHeaderandsubheader,
   FTInput,
+  FTKeyboardwrapper,
+  FTLoader,
   FTTitlepagewrapper,
 } from "../components";
+
 import axiosCustom from "../httpRequests/axiosCustom";
-import Loader from "../components/FTLoader";
+// import Loader from "../components/FTLoader";
 import { useForm } from "react-hook-form";
 import { VALIDATION, navigation } from "../utils";
 import { useAlert } from "../hooks";
@@ -37,68 +40,52 @@ const Personal = ({}) => {
 
   return (
     <FTTitlepagewrapper title="Personal Information">
-      {loading && <Loader />}
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+      <FTLoader loading={loading} />
+
+      <FTKeyboardwrapper>
         <FTHeaderandsubheader
           header="Personal information"
           subHeader="Kindly input your personal information to setup your profile"
         />
-        <View style={{ flex: 1 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginTop: 30,
-            }}
-          ></View>
 
-          <React.Fragment>
-            {/* Input */}
-            <FTInput
-              placeholderText="Enter your name"
-              name="firstName"
-              label="Legal Firstname"
-              control={control}
-              rules={VALIDATION.FIRST_NAME_VALIDATION}
-              mB={15}
-            />
-            <FTInput
-              placeholderText="Enter your name"
-              name="lastName"
-              label="Legal Lastname"
-              control={control}
-              rules={VALIDATION.LAST_NAME_VALIDATION}
-              mB={15}
-            />
-            <FTInput
-              placeholderText="Enter valid email address"
-              name="email"
-              label="Email"
-              control={control}
-              rules={VALIDATION.EMAIL_VALIDATION}
-              mB={15}
-            />
+        <FTInput
+          placeholderText="Enter your Firstname"
+          name="firstName"
+          label="Legal firstname"
+          control={control}
+          rules={VALIDATION.FIRST_NAME_VALIDATION}
+          mB={15}
+          mT={40}
+        />
+        <FTInput
+          placeholderText="Enter your lastname"
+          name="lastName"
+          label="Legal Lastname"
+          control={control}
+          rules={VALIDATION.LAST_NAME_VALIDATION}
+          mB={15}
+        />
+        <FTInput
+          placeholderText="Enter valid email address"
+          name="email"
+          label="Email"
+          control={control}
+          rules={VALIDATION.EMAIL_VALIDATION}
+          mB={15}
+        />
 
-            <FTInput
-              placeholderText="--- Select Gender ---"
-              name="gender"
-              label="Gender"
-              control={control}
-              rules={VALIDATION.LAST_NAME_VALIDATION}
-              mB={55}
-            />
+        <FTInput
+          placeholderText="--- Select Gender ---"
+          name="gender"
+          label="Gender"
+          control={control}
+          rules={VALIDATION.LAST_NAME_VALIDATION}
+          mB={55}
+        />
 
-            {/* Proceed Btn */}
-            <View>
-              <FTCustombutton
-                btntext="Continue"
-                onpress={handleSubmit(onsubmit)}
-              />
-            </View>
-          </React.Fragment>
-        </View>
-      </KeyboardAwareScrollView>
+        {/* Proceed Btn */}
+        <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
+      </FTKeyboardwrapper>
     </FTTitlepagewrapper>
   );
 };

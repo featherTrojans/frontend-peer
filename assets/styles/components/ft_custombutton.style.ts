@@ -4,7 +4,7 @@ import { COLORS, FONTS, fontsize } from "../../../constants";
 export const FTCustombuttonStyles = StyleSheet.create({
   btnstyle: {
     paddingVertical: 20,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   btntextstyle: {
     ...fontsize.xsmallest,
