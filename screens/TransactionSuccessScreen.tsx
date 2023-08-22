@@ -3,7 +3,7 @@ import React from "react";
 import { FTCustombutton, FTMainwrapper, FTSuccessOrError } from "../components";
 import { navigation } from "../utils";
 
-const TransactionSuccessScreen = () => {
+const TransactionSuccessScreen = ({ navigation }) => {
   return (
     <FTMainwrapper>
       <View style={{ flex: 1, justifyContent: "space-between" }}>

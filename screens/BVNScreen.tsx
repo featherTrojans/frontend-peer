@@ -121,8 +121,7 @@ function BVNScreen() {
       <FTTitlepagewrapper title="Verify BVN">
         <FTLoader loading={loading} />
         <View style={flex}>
-          <Text style={headerText}>Hi Doyin</Text>
-          <Text style={headerText}>Enter your BVN</Text>
+          <Text style={headerText}>Hi Doyin {'\n'}Enter your BVN</Text>
           <FTInput
             placeholderText="Enter BVN"
             name="bvn"
