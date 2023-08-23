@@ -19,6 +19,17 @@ const navigate = (routeName: string, params = {}) => {
 };
 
 
+const push = (routeName: string, params = {}) => {
+  if (_navigator.isReady()) {
+    _navigator.dispatch(
+      NavigationActions.push({
+        name: routeName,
+        params,
+      }),
+    );
+  }
+};
+
 
 const goBack = () => {
   if (_navigator.isReady()) {
@@ -51,4 +62,5 @@ export default {
   setTopLevelNavigator,
   getNavigator,
   goBack,
+  push
 };

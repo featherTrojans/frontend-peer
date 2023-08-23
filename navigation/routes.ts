@@ -59,6 +59,7 @@ import {
   WithdrawcashScreen,
   TransactionSuccessScreen,
   WalletfundingScreen,
+  MemojisuccessScreen,
 } from "../screens";
 
 // BVNSuccessScreen
@@ -484,6 +485,13 @@ export const profileRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "choosememoji_screen",
+  },
+  {
+    title: "",
+    screen: MemojisuccessScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "memojisuccess_screen",
   },
   {
     title: "",

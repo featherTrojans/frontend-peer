@@ -1,29 +1,63 @@
 import { StyleSheet } from "react-native";
-import { FONTS, fontsize } from "../../../constants";
+import { COLORS, FONTS, fontsize } from "../../../constants";
 
 export const ChoosememojiScreenStyles = StyleSheet.create({
-  topSectionWrap: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 15,
-    marginBottom: 35,
-  },
-  customizeText: {
-    ...fontsize.bmedium,
-    ...FONTS.bold,
-  },
   sectionHeader: {
     ...fontsize.smallest,
     ...FONTS.regular,
-    marginBottom: 35,
+    marginBottom: 15,
   },
   colorOptionBg: {
-    width: 46,
-    height: 46,
-    borderRadius: 46 / 2,
+    width: 36,
+    height: 36,
+    borderRadius: 36 / 2,
     marginRight: 24,
     justifyContent: "center",
     alignItems: "center",
+  },
+  profileWrap: {
+    marginTop: 46,
+    marginBottom: 20,
+    alignSelf: "center",
+  },
+  memojisWrapper: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  buttonWrap: {
+    backgroundColor: COLORS.blue16,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    paddingHorizontal: 40,
+    paddingVertical: 21,
+    borderRadius: 27,
+  },
+  buttonText: {
+    color: COLORS.white,
+    ...fontsize.xsmallest,
+    ...FONTS.bold,
+  },
+  memojiSuccessWrap: {
+    flex: 1,
+    alignItems: "center",
+    paddingVertical: 50,
+  },
+  successHeader: {
+    ...fontsize.bmedium,
+    textAlign: "center",
+    ...FONTS.bold,
+    lineHeight: 29,
+    color: COLORS.blue9,
+    marginTop: 78,
+    marginBottom: 40,
+  },
+  successMessageText: {
+    ...fontsize.small,
+    ...FONTS.medium,
+    lineHeight: 26,
+    textAlign: "center",
+    color: COLORS.blue9,
   },
 });

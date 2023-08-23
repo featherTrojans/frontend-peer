@@ -62,6 +62,7 @@ import CustomWebScreen from "./CustomWebScreen";
 import WithdrawcashScreen from "./WithdrawcashScreen";
 import TransactionSuccessScreen from "./TransactionSuccessScreen";
 import WalletfundingScreen from "./WalletfundingScreen";
+import MemojisuccessScreen from "./MemojisuccessScreen";
 
 export {
   OnboardingScreen,
@@ -138,4 +139,5 @@ export {
   WithdrawcashScreen,
   TransactionSuccessScreen,
   WalletfundingScreen,
+  MemojisuccessScreen
 };
