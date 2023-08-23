@@ -42,7 +42,7 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
   eachOptionWrapper: {
     marginTop: 10,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 18,
+    // paddingHorizontal: 18,
     paddingVertical: 30,
     borderRadius: 15,
   },
