@@ -178,7 +178,7 @@ const TransactionsScreen = ({ navigation }) => {
           </View>
 
           <Text style={balance}>
-            Balance:
+            Balance:{" "}
             <Text style={balanceAmount}>
               N{amountFormatter(authdata?.userDetails?.walletBal)}
             </Text>

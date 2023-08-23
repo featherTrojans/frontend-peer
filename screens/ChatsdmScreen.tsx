@@ -297,22 +297,6 @@ const ChatsdmScreen = ({ route }) => {
     }
   };
 
-  const clearModals = () => {
-    setSendCashModal(false);
-    setChooseAmount(false);
-    setEnterPin(false);
-    setSendSuccess(false);
-    setUserPin("");
-    // setAmount({value:0,name:""})
-  };
-  const clearModalsAll = () => {
-    setSendCashModal(false);
-    setChooseAmount(false);
-    setEnterPin(false);
-    setSendSuccess(false);
-    setUserPin("");
-    setAmount({ value: 0, name: "" });
-  };
 
   const renderReceiverHTML = (mes) => {
     if (mes?.action === "transfer") {

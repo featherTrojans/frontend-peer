@@ -35,7 +35,6 @@ const NetworkreceiverScreen = ({ route }) => {
   const ListHeader = () => {
     return (
       <>
-        <FTSearchinput placeholder="Search Phone Number" />
         <FTIconwithtitleandinfo
           bG={COLORS.green2}
           title="Send to self"
@@ -53,6 +52,7 @@ const NetworkreceiverScreen = ({ route }) => {
 
   return (
     <FTTitlepagewrapper title="Choose Receiver">
+      <FTSearchinput placeholder="Search Phone Number" />
       <FlatList
         data={contactsResolved}
         showsVerticalScrollIndicator={false}

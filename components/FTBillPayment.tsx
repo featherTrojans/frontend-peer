@@ -25,7 +25,6 @@ const FTBillPayment = () => {
           onPress={() => closeModalAndRedirect("choosenetwork_screen")}
           bG={COLORS.Tblue3}
         />
-
         <FTHorizontaline marginV={15} />
         <FTIconwithtitleandinfo
           title="Electricity & Utility"
@@ -35,7 +34,6 @@ const FTBillPayment = () => {
           bG={COLORS.Tyellow}
         />
         <FTHorizontaline marginV={15} />
-
         <FTIconwithtitleandinfo
           title="Cable TV Subscriptions"
           info="Pay your cable tv subscriptions"

@@ -1,13 +1,13 @@
 import { View, Text } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { navigation, setAuthorizationToken, setDataInstorage } from "../utils";
-import { FTCustombutton, FTTitlepagewrapper } from "../components";
+import { FTCustombutton, FTLoader, FTTitlepagewrapper } from "../components";
 import OTPTextInput from "react-native-otp-textinput";
 import { COLORS } from "../constants";
 import { PhoneVerificationScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
-import Loader from "../components/FTLoader";
+// import Loader from "../components/FTLoader";
 
 // auth/signin/confirm
 const PhoneVerificationScreen = ({ route }) => {
@@ -73,7 +73,7 @@ const PhoneVerificationScreen = ({ route }) => {
 
   return (
     <FTTitlepagewrapper title="Verify phone number">
-      {loading && <Loader />}
+      <FTLoader loading={loading} />
       <Text style={PhoneVerificationScreenStyles.center}>
         Enter the 6-digit code sent to you at {phoneNumber}.
       </Text>

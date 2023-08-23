@@ -1,9 +1,11 @@
 import {
+  Animated,
   FlatList,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  RefreshControl,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ChatsprofileScreenStyles } from "../assets/styles/screens";
@@ -11,10 +13,13 @@ import {
   FTEmptycomponent,
   FTIconwithbg,
   FTTitlepagewrapper,
+  FTTransactionhistory,
 } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { navigation } from "../utils";
+import { ActivityIndicator } from "react-native";
+import formatData from "../utils/fomatTrans";
 
 const { Bluecardicon, Blacksendicon, Clearchaticon, Sendcashicon } = icons;
 const {
@@ -44,18 +49,32 @@ const ChatsprofileScreen = ({ route }) => {
   const switchModals = route?.params?.switchModals;
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+
   useEffect(() => {
-    setLoading(true);
-    axiosCustom
-      .get("transactions/users")
-      .then((response) => {
-        setTransactions(response?.data?.data?.transactions);
-      })
-      .catch((err) => {})
-      .finally(() => {
-        setLoading(false);
-      });
+    getUserTransaction();
+    console.log(userInfo, "Here is the user info")
   }, []);
+
+  const getUserTransaction = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosCustom.get("transactions/users", {otherUsername: userInfo.username});
+      setTransactions(response?.data?.data?.transactions);
+      console.log(formatData(transactions))
+    } catch (error) {
+      console.log(error.response);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getUserTransaction();
+  };
+
   const ListHeader = () => {
     return (
       <View style={profileInfoWrap}>
@@ -91,15 +110,48 @@ const ChatsprofileScreen = ({ route }) => {
   };
 
   return (
-    <FTTitlepagewrapper title="Profile" headerBg={COLORS.white3}>
-      <FlatList
-        data={[]}
-        renderItem={() => <View />}
-        ListHeaderComponent={ListHeader}
-        ListEmptyComponent={() => (
-          <FTEmptycomponent msg="Sorry, You have not performed any transactions with this user" />
+    <FTTitlepagewrapper
+      title="Profile"
+      childBg={COLORS.white3}
+      headerBg={COLORS.white3}
+    >
+      <View style={{ flex: 1 }}>
+        {loading ? (
+          <View style={{}}>
+            <ActivityIndicator size="large" color={COLORS.blue6} />
+          </View>
+        ) : (
+          <>
+            <Animated.FlatList
+              data={formatData(transactions)}
+              ListHeaderComponent={ListHeader}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={handleRefresh}
+                  progressBackgroundColor="white"
+                  colors={[COLORS.blue6]}
+                  tintColor={COLORS.blue6}
+                  title="Refreshing"
+                  titleColor={COLORS.blue6}
+                />
+              }
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item, index }: any) => (
+                <FTTransactionhistory
+                  date={item.time}
+                  datas={item.data}
+                  index={index}
+                />
+              )}
+              keyExtractor={(item: { time: string }) => item.time}
+              ListEmptyComponent={
+                <FTEmptycomponent msg="Sorry, You have not performed any transactions with this user" />
+              }
+            />
+          </>
         )}
-      />
+      </View>
     </FTTitlepagewrapper>
   );
 };
