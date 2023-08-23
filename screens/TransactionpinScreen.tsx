@@ -23,6 +23,7 @@ const { Pinlockicon } = icons;
 
 const TransactionpinScreen = ({ route }) => {
   const action = route?.params?.action;
+  const toptext = route?.params?.toptext || "Enter Transaction Pin";
   const { errorAlert } = useAlert();
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0"];
   const [pin, setPin] = useState<string[]>([]);
@@ -80,7 +81,7 @@ const TransactionpinScreen = ({ route }) => {
           ))}
         </View>
 
-        <Text style={enterPinText}>Enter Transaction Pin</Text>
+        <Text style={enterPinText}>{toptext}</Text>
       </View>
       <View style={keyboardWrap}>
         <FTKeyboard

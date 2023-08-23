@@ -1,11 +1,19 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import React, { useEffect, useState } from "react";
 import { FeatherTagScreenStyles } from "../assets/styles/screens";
-import { FTCustombutton, FTInput, FTTitlepagewrapper } from "../components";
+import {
+  FTCustombutton,
+  FTInput,
+  FTLoader,
+  FTTitlepagewrapper,
+} from "../components";
 import { useForm } from "react-hook-form";
 import { VALIDATION, navigation } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useAlert } from "../hooks";
+import useDebounce from "../utils/debounce";
+import { COLORS } from "../constants";
+import Changememojicheckicon from "../assets/icons/Changememojicheckicon";
 
 const {
   headerText,
@@ -20,16 +28,32 @@ const {
   subHeaderText,
 } = FeatherTagScreenStyles;
 const FeatherTagScreen = () => {
-  const { control, handleSubmit } = useForm({ mode: "all" });
+  const { control, handleSubmit, watch } = useForm({ mode: "all" });
   const [loading, setLoading] = useState(false);
   const { errorAlert } = useAlert();
+  const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
+  const usernamename = watch("featherTag", false) || "";
+
+  useEffect(() => {
+    getuserinfo(usernamename);
+  }, [usernamename]);
 
   const onsubmit = async (data) => {
-    return;
+    console.log(data, error);
+
+    if (!error) {
+      errorAlert(null, "Feather tag is taken");
+      return;
+    }
+
     try {
       setLoading(true);
-      // await axiosCustom.post("/user/upgrade", data);
-      navigation.navigate("welcome_screen");
+      await axiosCustom.put("auth/username/set", {
+        newUsername: data.featherTag,
+      });
+      navigation.navigate("welcome_screen", {
+        fromm: "setup",
+      });
     } catch (err) {
       errorAlert(err);
     } finally {
@@ -45,6 +69,7 @@ const FeatherTagScreen = () => {
 
   return (
     <FTTitlepagewrapper title="Verify BVN">
+      <FTLoader loading={loading} />
       <View style={flex}>
         <View style={{ width: "80%" }}>
           <Text style={headerText}>Almost there!</Text>
@@ -55,13 +80,51 @@ const FeatherTagScreen = () => {
         </View>
         <FTInput
           placeholderText="Enter tag"
-          name="tag"
+          name="featherTag"
           label="Your custom feather tag"
           control={control}
           rules={VALIDATION.LAST_NAME_VALIDATION}
-          mB={20}
+          mB={10}
           mT={44}
         />
+        <View
+          style={{
+            flexDirection: "row",
+            marginRight: 5,
+            marginBottom: 20,
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+          }}
+        >
+          {loadbounce ? (
+            <ActivityIndicator size={15} color={COLORS.blue6} />
+          ) : userinfo.fullName ? (
+            <>
+              {/* <WrongIcon /> */}
+              <Text
+                style={{
+                  color: "#0034CB",
+                  marginLeft: 10,
+                }}
+              >
+                {usernamename} is taken
+              </Text>
+            </>
+          ) : null}
+          {error && (
+            <>
+              <Changememojicheckicon />
+              <Text
+                style={{
+                  color: "#0034CB",
+                  marginLeft: 10,
+                }}
+              >
+                {usernamename}
+              </Text>
+            </>
+          )}
+        </View>
         <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
         <TouchableOpacity
           activeOpacity={0.4}

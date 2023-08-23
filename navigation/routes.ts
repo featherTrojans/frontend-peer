@@ -90,6 +90,7 @@ export const authRoutes = [
   },
   {
     title: "",
+    // screen: FeatherTagScreen,
     screen: WelcomeScreen,
     showHeader: false,
     hideHiderTitle: false,

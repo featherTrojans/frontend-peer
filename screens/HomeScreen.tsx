@@ -282,6 +282,16 @@ const ActiveCashWithdrawal = () => {
   );
 };
 
+const action = (pin) => {
+  const action2 = async (newpin) => {
+    if (newpin !== pin) {
+      throw { response: { data: { message: "pins does not match" } } };
+    }
+    await axiosCustom.put("auth/pin/set", { pin });
+  };
+  () => navigation.navigate("transactionpin_screen", { action2 });
+};
+
 const ProfileSetup = () => {
   const { authdata } = useContext(AuthContext);
   const level = authdata?.userDetails?.userLevel;
@@ -317,8 +327,8 @@ const ProfileSetup = () => {
       info: "Secure your transactions with a PIN",
       Icon: Transactionpinsetupicon,
       bg: COLORS.Tred2,
-      completed: !!authdata?.userDetails?.pin,
-      onPress: () => navigation.navigate("securityandprivacy_screen"),
+      completed: !authdata?.userDetails?.pin,
+      onPress: () => navigation.navigate("transactionpin_screen", { action }),
     },
     {
       title: "Bank Verification Number",
