@@ -6,16 +6,17 @@ type IHorizontalLineProps = {
   marginV?: number;
   mT?: number;
   mB?: number;
+  bG?: string
 };
 
-const Horizontaline = ({ marginV, mT, mB }: IHorizontalLineProps) => {
+const Horizontaline = ({ marginV, mT, mB, bG=COLORS.borderColor2  }: IHorizontalLineProps) => {
   return (
     <View
       style={{
         marginTop: mT,
         marginBottom: mB,
         marginVertical: marginV,
-        backgroundColor: COLORS.borderColor2,
+        backgroundColor: bG,
         height: 0.5,
       }}
     />

@@ -33,24 +33,22 @@ const ChoosebillerScreen = () => {
 
   return (
     <FTTitlepagewrapper title="Choose Biller">
-
-      <FlatList 
-      data={[1,1,1,1,1]}
-      ListHeaderComponent={ListHeader}
-      ItemSeparatorComponent={() => <View style={{height: 28}}/>}
-      renderItem={() => {
-        return (
-          <FTIconwithtitleandinfo
-        bG={COLORS.Tyellow}
-        title="Pay a new bill"
-        info="Start a new electricity purchase"
-        onPress={() => redirectTo("billerstate_screen")}
-        Icon={Electricityicon}
+      <FlatList
+        data={[1, 1, 1, 1, 1]}
+        ListHeaderComponent={ListHeader}
+        ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
+        renderItem={() => {
+          return (
+            <FTIconwithtitleandinfo
+              bG={COLORS.Tyellow}
+              title="Pay a new bill"
+              info="Start a new electricity purchase"
+              onPress={() => redirectTo("billerstate_screen")}
+              Icon={Electricityicon}
+            />
+          );
+        }}
       />
-        )
-      }}      
-      />
-      
     </FTTitlepagewrapper>
   );
 };

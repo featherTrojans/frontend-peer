@@ -28,6 +28,7 @@ export const FTTransactionhistoryStyles = StyleSheet.create({
   historyDetailsContainer: {
     flexDirection: "row",
     alignItems: "center",
+    flex: 1
   },
   arrowBg: {
     width: 31,
@@ -35,7 +36,7 @@ export const FTTransactionhistoryStyles = StyleSheet.create({
     borderRadius: 31 / 2,
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 14,
+    // marginRight: 14,
   },
   titleText: {
     ...fontsize.xsmallest,

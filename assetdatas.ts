@@ -811,6 +811,25 @@ export const bankLogo = [
     updatedAt: "2021-06-01T16:07:29.000Z",
   },
   {
+    name: "Moniepoint MFB",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fdownload%20(2).png?alt=media&token=0a07e1cb-d263-4b39-90d6-bf935e6f42c9",
+    slug: "moniepoint-mfb",
+    code: "50563",
+    longcode: "",
+    gateway: null,
+    pay_with_bank: false,
+    active: true,
+    is_deleted: null,
+    country: "Nigeria",
+    currency: "NGN",
+    type: "nuban",
+    id: 175,
+    createdAt: "2021-02-02T08:28:38.000Z",
+    updatedAt: "2021-02-02T08:28:38.000Z",
+  },
+  
+  {
     name: "Paga",
     slug: "paga",
     code: "100002",
@@ -828,6 +847,8 @@ export const bankLogo = [
   },
   {
     name: "PalmPay",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FidW2zUwfi4.png?alt=media&token=06c3e6c8-6eaf-45ad-af32-edae6f00b27e",
     slug: "palmpay",
     code: "999991",
     longcode: "",
@@ -1044,6 +1065,8 @@ export const bankLogo = [
   },
   {
     name: "Standard Chartered Bank",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FStanbic%20IBTC%20Bank%20Logo%20(1).png?alt=media&token=c8261d8b-aff9-43cb-9bd5-3f69bcf0a025",
     slug: "standard-chartered-bank",
     code: "068",
     longcode: "068150015",
