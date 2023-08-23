@@ -1,21 +1,49 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useContext, useState } from "react";
 import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  // Animated,
+} from "react-native";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import Svg, { Defs, Pattern, Image, G, Rect, Path } from "react-native-svg";
+import {
+  AccountverificationScreenStyles,
   ChoosememojiScreenStyles,
   ProfileScreenStyles,
 } from "../assets/styles/screens";
 import { FTCustombutton, FTTitlepagewrapper } from "../components";
-import { icons } from "../constants";
+import { COLORS, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import { navigation } from "../utils";
 import { useAlert } from "../hooks";
+import Animated, {
+  SlideInLeft,
+  SlideInRight,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
+const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 
-const { Changememojicheckicon } = icons;
+const { Changememojicheckicon, Profilechangeicon } = icons;
 const { profileOuterBorder, profileInnerBorder, userProfileBg } =
   ProfileScreenStyles;
-const { topSectionWrap, customizeText, sectionHeader, colorOptionBg } =
-  ChoosememojiScreenStyles;
+const { sectionHeader, colorOptionBg } = ChoosememojiScreenStyles;
+const {
+  movingSegmentedbg,
+  segmentedWrap,
+  segmentedOptionText,
+  segmentedOptions,
+} = AccountverificationScreenStyles;
 
 const ColorOption = ({ color, active, setActive }) => {
   return (
@@ -33,31 +61,31 @@ const ColorOption = ({ color, active, setActive }) => {
 
 const profileColors = [
   {
-    color: "#342AD5",
+    color: "#D9D9D9",
   },
   {
-    color: "#12AD2B",
+    color: "#C8F1CE",
   },
   {
-    color: "#FC8EAC",
+    color: "#CFE9FB",
   },
   {
-    color: "#FDB702",
+    color: "#F8EBA7",
   },
   {
-    color: "#B06C49",
+    color: "#F5C3BC",
   },
   {
-    color: "#11141A",
+    color: "#DFD2FA",
   },
   {
-    color: "#9AD49A",
+    color: "#F7CDD7",
   },
   {
-    color: "#F4C8D5",
+    color: "#F6DEAC",
   },
   {
-    color: "#F8DC8D",
+    color: "#F8CDD7",
   },
 ];
 
@@ -67,6 +95,19 @@ const ChoosememojiScreen = () => {
   const [emojiindex, setEmojiIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const { authdata, setAuthData } = useContext(AuthContext);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const translateValue = 125;
+  const flatlistRef = useRef<FlatList>(null);
+  const tabTranslate = useSharedValue(0);
+  const rotateView = useSharedValue(0);
+
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [{ translateX: tabTranslate.value }],
+  }));
+
+  const rotateStyles = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${rotateView.value}deg` }],
+  }));
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -92,39 +133,80 @@ const ChoosememojiScreen = () => {
       setLoading(false);
     }
   };
+  const accountLevels = ["Light Skinned", "Dark Skinned"];
+  const onOptionPress = useCallback((index) => {
+    setCurrentIndex(index);
+  }, []);
+
+  useEffect(() => {
+    tabTranslate.value = withSpring(currentIndex * translateValue);
+    rotateView.value = withSpring(currentIndex * 360);
+
+    const scrollTo = () => {
+      flatlistRef?.current?.scrollToIndex({
+        index: currentIndex,
+        animated: true,
+      });
+    };
+    scrollTo();
+  }, [currentIndex]);
 
   return (
     <FTTitlepagewrapper title="Change Appearance">
-      <View style={topSectionWrap}>
-        <Text style={customizeText}>Customise {`\n`} your avatar</Text>
-        <View
-          style={[
-            profileOuterBorder,
-            {
-              alignSelf: "flex-end",
-              height: 140,
-              width: 140,
-              borderColor: active + "2f",
-            },
-          ]}
-        >
-          <View
-            style={[
-              profileInnerBorder,
-              { width: 112, height: 112, borderColor: active + "5f" },
-            ]}
-          >
-            <View
-              style={[
-                userProfileBg,
-                { width: 86, height: 86, backgroundColor: active },
-              ]}
-            ></View>
-          </View>
+      <View style={{ flex: 1 }}>
+        <View style={segmentedWrap}>
+          <Animated.View
+            style={[movingSegmentedbg, animatedStyles, { width: "45%" }]}
+          />
+          {accountLevels.map((accountLevel, index) => {
+            let isActive = index == currentIndex;
+            return (
+              <Pressable
+                key={index}
+                onPress={() => onOptionPress(index)}
+                style={segmentedOptions}
+              >
+                <Text
+                  style={[
+                    segmentedOptionText,
+                    { color: !isActive ? COLORS.blue9 : COLORS.white },
+                  ]}
+                >
+                  {accountLevel}
+                </Text>
+              </Pressable>
+            );
+          })}
         </View>
-      </View>
 
-      <View>
+
+        <View style={{marginTop: 46, marginBottom: 20, alignSelf: "center"}}>
+        <AnimatedSVG
+          width={150.649}
+          height={150.649}
+          style={rotateStyles}
+        >
+          <G data-name="Group 11713" transform="translate(.5 .5)">
+            <Rect
+              width={133}
+              height={133}
+              fill="url(#a)"
+              data-name="Rectangle 1403"
+              rx={66.5}
+              transform="translate(8.325 8.325)"
+            />
+            <Path
+              fill="none"
+              stroke="#2c2c2c"
+              strokeDasharray="2 9"
+              strokeLinecap="round"
+              d="M74.825 0A74.825 74.825 0 1 1 0 74.825 74.825 74.825 0 0 1 74.825 0Z"
+              data-name="Path 10102"
+            />
+          </G>
+        </AnimatedSVG>
+        </View>
+
         <Text style={sectionHeader}>Background Colour</Text>
         <FlatList
           data={profileColors}
@@ -142,8 +224,25 @@ const ChoosememojiScreen = () => {
             );
           }}
         />
+
+        <FlatList 
+        data={profileColors}
+        numColumns={3}
+        horizontal={false}
+        columnWrapperStyle={{justifyContent: "center", alignItems: "center", marginTop: 20,}}
+        renderItem={({item}) => {
+          return (
+            <View style={{width: 65, height: 65, backgroundColor: item.color, marginRight: 20}}/>
+          )
+        }}
+        />
+
+        <View style={{height: 53, backgroundColor: COLORS.Tblue}}>
+
+        </View>
+
+
       </View>
-      <FTCustombutton btntext="Save and proceed" onpress={handleSubmit} />
     </FTTitlepagewrapper>
   );
 };
