@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  // Animated,
+  TouchableOpacity
 } from "react-native";
 import React, {
   useCallback,
@@ -20,7 +20,7 @@ import {
   ProfileScreenStyles,
 } from "../assets/styles/screens";
 import { FTCustombutton, FTTitlepagewrapper } from "../components";
-import { COLORS, icons } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import { navigation } from "../utils";
@@ -35,9 +35,9 @@ import Animated, {
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 
 const { Changememojicheckicon, Profilechangeicon } = icons;
-const { profileOuterBorder, profileInnerBorder, userProfileBg } =
-  ProfileScreenStyles;
-const { sectionHeader, colorOptionBg } = ChoosememojiScreenStyles;
+
+
+const { sectionHeader, colorOptionBg, profileWrap, memojisWrapper, buttonWrap, buttonText } = ChoosememojiScreenStyles;
 const {
   movingSegmentedbg,
   segmentedWrap,
@@ -180,31 +180,31 @@ const ChoosememojiScreen = () => {
         </View>
 
 
-        <View style={{marginTop: 46, marginBottom: 20, alignSelf: "center"}}>
-        <AnimatedSVG
-          width={150.649}
-          height={150.649}
-          style={rotateStyles}
-        >
-          <G data-name="Group 11713" transform="translate(.5 .5)">
-            <Rect
-              width={133}
-              height={133}
-              fill="url(#a)"
-              data-name="Rectangle 1403"
-              rx={66.5}
-              transform="translate(8.325 8.325)"
-            />
-            <Path
-              fill="none"
-              stroke="#2c2c2c"
-              strokeDasharray="2 9"
-              strokeLinecap="round"
-              d="M74.825 0A74.825 74.825 0 1 1 0 74.825 74.825 74.825 0 0 1 74.825 0Z"
-              data-name="Path 10102"
-            />
-          </G>
-        </AnimatedSVG>
+        <View style={profileWrap}>
+          <AnimatedSVG
+            width={150.649}
+            height={150.649}
+            style={rotateStyles}
+          >
+            <G data-name="Group 11713" transform="translate(.5 .5)">
+              <Rect
+                width={133}
+                height={133}
+                fill="url(#a)"
+                data-name="Rectangle 1403"
+                rx={66.5}
+                transform="translate(8.325 8.325)"
+              />
+              <Path
+                fill="none"
+                stroke="#2c2c2c"
+                strokeDasharray="2 9"
+                strokeLinecap="round"
+                d="M74.825 0A74.825 74.825 0 1 1 0 74.825 74.825 74.825 0 0 1 74.825 0Z"
+                data-name="Path 10102"
+              />
+            </G>
+          </AnimatedSVG>
         </View>
 
         <Text style={sectionHeader}>Background Colour</Text>
@@ -229,7 +229,7 @@ const ChoosememojiScreen = () => {
         data={profileColors}
         numColumns={3}
         horizontal={false}
-        columnWrapperStyle={{justifyContent: "center", alignItems: "center", marginTop: 20,}}
+        columnWrapperStyle={memojisWrapper}
         renderItem={({item}) => {
           return (
             <View style={{width: 65, height: 65, backgroundColor: item.color, marginRight: 20}}/>
@@ -237,9 +237,9 @@ const ChoosememojiScreen = () => {
         }}
         />
 
-        <View style={{height: 53, backgroundColor: COLORS.Tblue}}>
-
-        </View>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("memojisuccess_screen")} style={buttonWrap}>
+            <Text style={buttonText}>Great Proceed</Text>
+        </TouchableOpacity>
 
 
       </View>
