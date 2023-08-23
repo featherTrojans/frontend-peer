@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ChatsprofileScreenStyles } from "../assets/styles/screens";
 import {
   FTEmptycomponent,
@@ -13,6 +13,8 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
+import axiosCustom from "../httpRequests/axiosCustom";
+import { navigation } from "../utils";
 
 const { Bluecardicon, Blacksendicon, Clearchaticon, Sendcashicon } = icons;
 const {
@@ -37,22 +39,41 @@ const QuickActionBtn = ({ icon, text, action, bG, color }) => {
   );
 };
 
-const ChatsprofileScreen = () => {
+const ChatsprofileScreen = ({ route }) => {
+  const userInfo = route?.params?.userInfo;
+  const switchModals = route?.params?.switchModals;
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    axiosCustom
+      .get("transactions/users")
+      .then((response) => {
+        setTransactions(response?.data?.data?.transactions);
+      })
+      .catch((err) => {})
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
   const ListHeader = () => {
     return (
       <View style={profileInfoWrap}>
-        <View style={{justifyContent: "center", alignItems: "center"}}>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
           <FTIconwithbg Icon={Bluecardicon} bG={COLORS.Tblue3} size={65} />
           <View style={profileDetailWrap}>
-            <Text style={profileNameText}>Robert Ziravandu</Text>
-            <Text style={profileDateJoined}>Joined Aug. 15, 2025</Text>
+            <Text style={profileNameText}>{userInfo?.fullName}</Text>
+            {/* <Text style={profileDateJoined}>Joined Aug. 15, 2025</Text> */}
           </View>
         </View>
         <View style={alignWrap}>
           <QuickActionBtn
             icon={<Sendcashicon />}
             text="Send Cash"
-            action={() => console.log("Send Cash")}
+            action={() => {
+              navigation.goBack();
+              switchModals(1);
+            }}
             bG={COLORS.Tgreen4}
             color={COLORS.green1}
           />

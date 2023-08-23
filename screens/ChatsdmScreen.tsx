@@ -501,7 +501,7 @@ const ChatsdmScreen = ({ route }) => {
         </Text>
 
         <View style={chooseAmountInputWrap}>
-        <Smalllockicon />
+          <Smalllockicon />
           <TextInput
             style={textInputStyle}
             secureTextEntry={true}
@@ -551,7 +551,12 @@ const ChatsdmScreen = ({ route }) => {
           </View>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("chatsprofile_screen")}
+            onPress={() =>
+              navigation.navigate("chatsprofile_screen", {
+                userInfo,
+                switchModals,
+              })
+            }
             style={chatsDmProfileWrap}
           >
             <FTIconwithbg bG={COLORS.Tyellow} Icon={Blacksendicon} />

@@ -24,6 +24,7 @@ type inputProps = {
   type?: "input" | "dropdown";
   onPress?: () => void;
   rightComponent?: any;
+  editable?: boolean;
   textInputProps?: TextInputProps;
 };
 
@@ -38,6 +39,7 @@ const FTInput = ({
   control,
   onPress,
   rightComponent,
+  editable = true,
   textInputProps,
 }: inputProps) => {
   const renderInputType = () => {
@@ -73,6 +75,7 @@ const FTInput = ({
                   },
                 ]}
                 onChangeText={onChange}
+                editable={editable}
                 onBlur={onBlur}
                 value={value}
                 placeholder={placeholderText}

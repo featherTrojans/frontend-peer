@@ -43,4 +43,10 @@ export const EditprofileScreenStyles = StyleSheet.create({
     textAlign: "center",
     textTransform: "uppercase",
   },
+  optionText: {
+    paddingVertical: 15,
+    textTransform: "capitalize",
+    ...fontsize.smallest,
+    ...FONTS.medium,
+  },
 });

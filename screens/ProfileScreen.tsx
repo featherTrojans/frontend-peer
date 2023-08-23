@@ -118,7 +118,14 @@ const ProfileScreen = () => {
           </View>
           {upgrade && (
             <View style={upgradeBg}>
-              <Text style={upgradeOdogwuText}>{upgrade}</Text>
+              <Text
+                onPress={() =>
+                  navigation.navigate("accountverification_screen")
+                }
+                style={upgradeOdogwuText}
+              >
+                {upgrade}
+              </Text>
             </View>
           )}
         </View>

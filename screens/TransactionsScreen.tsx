@@ -39,10 +39,6 @@ const {
   optionBlock,
   eachOptionTitle,
   loaderWrapper,
-  transferCashText,
-  transferTypeModalHeader,
-  primaryWalletBalanceText,
-  primaryWalletText,
 } = TransactionScreenStyles;
 
 const {

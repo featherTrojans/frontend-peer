@@ -21,6 +21,7 @@ import { ActivityIndicator } from "react-native";
 import Changememojicheckicon from "../assets/icons/Changememojicheckicon";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useAlert } from "../hooks";
+import { FlatList } from "react-native-gesture-handler";
 const { Profileediticon } = icons;
 
 const {
@@ -29,15 +30,16 @@ const {
   profileWrap,
   headerRightWrap,
   headerRightEditText,
-  pickOptionWrap,
-  pickOptionText,
+  optionText,
 } = EditprofileScreenStyles;
+
 const EditprofileScreen = () => {
   const { authdata, setAuthData } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   const name = authdata?.userDetails?.fullName.split(" ");
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
-
+  const [gender, setGender] = useState("Select");
+  const [showModal, setShowModal] = useState(false);
   const { control, handleSubmit, watch } = useForm({
     mode: "all",
     defaultValues: {
@@ -46,19 +48,53 @@ const EditprofileScreen = () => {
       lastName: name[0],
       email: authdata?.userDetails?.email,
       phoneNumber: authdata?.userDetails?.phoneNumber,
-      gender: authdata?.userDetails?.gender,
     },
   });
-
   const usernamename = watch("featherTag", false) || "";
+
+  useEffect(() => {
+    if (authdata?.userDetails?.gender) {
+      setGender(authdata?.userDetails?.gender);
+    }
+  }, [authdata?.userDetails?.gender]);
+
   useEffect(() => {
     getuserinfo(usernamename);
   }, [usernamename]);
 
+  const upgradeDecision = () => {
+    switch (authdata?.userDetails?.userLevel) {
+      case 1:
+        return "Upgrade to Odogwu";
+      case 2:
+        return "Upgrade to Veteran";
+      default:
+        return null;
+    }
+  };
+
+  const accountlevel = () => {
+    switch (authdata?.userDetails?.userLevel) {
+      case 1:
+        return "Newbie";
+      case 2:
+        return "Odogwu";
+      case 3:
+        return "Veteran";
+      default:
+        return null;
+    }
+  };
+
+  const closeGenderModal = (item) => {
+    setGender(item);
+    setShowModal(false);
+  };
+
   const onsubmit = async (values) => {
     try {
       const data = {
-        gender: values.gender,
+        gender: gender,
         newUsername: values.featherTag,
         firstName: values.firstName.trim(),
         lastName: values.lastName.trim(),
@@ -68,7 +104,7 @@ const EditprofileScreen = () => {
         ...authdata?.userDetails,
         username: values.featherTag,
         fullName: `${values.lastName} ${values.firstName}`,
-        gender: values.gender,
+        gender: gender,
       };
       setAuthData({
         ...authdata,
@@ -103,16 +139,45 @@ const EditprofileScreen = () => {
     );
   };
 
+  const GenderModal = () => {
+    return (
+      <FlatList
+        data={["male", "female"]}
+        renderItem={({ item }) => {
+          return (
+            <Pressable onPress={() => closeGenderModal(item)}>
+              <Text style={optionText}>{item}</Text>
+            </Pressable>
+          );
+        }}
+        keyExtractor={(item) => item}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: 40 }}
+      />
+    );
+  };
+
   return (
-    <FTTitlepagewrapper rightComponent={<HeaderRight />}>
+    <FTTitlepagewrapper
+      title="Upload Documents"
+      modalChildren={<GenderModal />}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      modalHeight={300}
+      rightComponent={<HeaderRight />}
+    >
       <FTKeyboardwrapper>
         <View style={headerWrap}>
           <View style={profileWrap}>
             <Text style={profileHeaderText}>My Profile</Text>
 
-            <Text>Upgrade to Odogwu</Text>
+            <Text
+              onPress={() => navigation.navigate("accountverification_screen")}
+            >
+              {upgradeDecision()}
+            </Text>
           </View>
-          <Text>Account Level : Newbie</Text>
+          <Text>Account Level : {accountlevel()}</Text>
         </View>
 
         <FTInput
@@ -187,24 +252,26 @@ const EditprofileScreen = () => {
           placeholderText="Enter here.."
           name="email"
           control={control}
-          rules={VALIDATION.EMAIL_VALIDATION}
           mB={20}
+          editable={false}
         />
         <FTInput
           label="Phone Number"
           placeholderText="Enter here.."
           name="phoneNumber"
           control={control}
-          rules={VALIDATION.PHONE_NUMBER_VALIDATION}
           mB={20}
+          editable={false}
         />
         <FTInput
           label="Gender"
-          placeholderText="Enter here.."
+          placeholderText={gender}
           name="gender"
           control={control}
-          rules={VALIDATION.GENDER_VALIDATION}
+          // rules={VALIDATION.GENDER_VALIDATION}
+          type="dropdown"
           mB={20}
+          onPress={() => setShowModal(true)}
         />
         <FTCustombutton btntext="Submit" onpress={handleSubmit(onsubmit)} />
       </FTKeyboardwrapper>

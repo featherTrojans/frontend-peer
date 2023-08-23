@@ -49,7 +49,7 @@ const AccountverificationScreen = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [tabTranslate, setTabTranslate] = React.useState(new Animated.Value(0));
   const flatlistRef = useRef<FlatList>(null);
-  const userlevel = 1 || authdata?.userDetails?.userLevel;
+  const userlevel = authdata?.userDetails?.userLevel;
 
   const onOptionPress = useCallback((index) => {
     setCurrentIndex(index);
