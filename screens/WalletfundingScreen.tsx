@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import {
   FTCustombutton,
   FTIconwithbg,
@@ -17,6 +17,8 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { navigation } from "../utils";
 import { WalletfundingScreenStyles } from "../assets/styles/screens";
 import { useCopyclipboard } from "../hooks";
+import axiosCustom from "../httpRequests/axiosCustom";
+import { AuthContext } from "../context/AuthContext";
 
 const {
   blockWrap,
@@ -32,16 +34,25 @@ const {
   upgradeAccountText,
 } = WalletfundingScreenStyles;
 
-
-
-
 const { Debitcardicon } = icons;
 const WalletfundingScreen = ({ route }) => {
-  const action = route?.params?.action;
+  const { authdata } = useContext(AuthContext);
+
+  const onsubmit = async (amount) => {
+    const response = await axiosCustom.post("/pay", { amount: amount });
+    navigation.navigate("customweb_screen", {
+      url: response.data.data.authorization_url,
+      reference: response.data.data.reference,
+      amount: amount,
+    });
+  };
+
   const { copyToClipboard } = useCopyclipboard("Account copied successfully!");
 
   const CopyAction = () => {
-    false ? copyToClipboard("Account NUmber") : () => null;
+    authdata?.userDetails?.accountNo
+      ? copyToClipboard(authdata?.userDetails?.accountNo)
+      : () => null;
   };
 
   return (
@@ -57,10 +68,12 @@ const WalletfundingScreen = ({ route }) => {
 
             <TouchableOpacity activeOpacity={0.8} onPress={CopyAction}>
               <Text style={accountNoText}>
-                {!true ? "9034561039" : "**********"}
+                {authdata?.userDetails?.accountNo
+                  ? authdata?.userDetails?.accountNo
+                  : "**********"}
               </Text>
               <Text style={tapToCopyText}>
-                {!true
+                {authdata?.userDetails?.accountNo
                   ? "Tap to copy account number"
                   : "Upgrade your profile to get this number"}
               </Text>
@@ -70,14 +83,23 @@ const WalletfundingScreen = ({ route }) => {
               into your feather primary wallet
             </Text>
 
-            {false ? (
+            {authdata?.userDetails?.accountNo ? (
               <View style={accountDetailWrap}>
                 <Text style={accountNameText}>Account Name</Text>
-                <Text style={accountNameValue}>Feather - Sarah Obanikoro</Text>
+                <Text style={accountNameValue}>
+                  Feather - {authdata?.userDetails?.fullName}
+                </Text>
               </View>
             ) : (
               <View style={upgradeAccountBg}>
-                <Text style={upgradeAccountText}>Upgrade account</Text>
+                <Text
+                  onPress={() =>
+                    navigation.navigate("accountverification_screen")
+                  }
+                  style={upgradeAccountText}
+                >
+                  Upgrade account
+                </Text>
               </View>
             )}
           </View>
@@ -89,7 +111,9 @@ const WalletfundingScreen = ({ route }) => {
             title="Debit card, Bank or USSD"
             info="Secured by Paystack."
             Icon={Debitcardicon}
-            onPress={action}
+            onPress={() =>
+              navigation.navigate("amounttosend_screen", { onsubmit: onsubmit })
+            }
             bG={COLORS.Tblue3}
           />
         </View>

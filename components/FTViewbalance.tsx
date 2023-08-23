@@ -67,12 +67,7 @@ const Viewbalance = ({}) => {
           <TouchableOpacity
             style={addCashBg}
             activeOpacity={0.8}
-            onPress={() =>
-              navigation.navigate("amounttosend_screen", {
-                nextScreen: "choosefeatheruser_screen",
-                onsubmit,
-              })
-            }
+            onPress={() => navigation.navigate("walletfunding_screen")}
           >
             <Text style={addCashText}>Add Cash</Text>
           </TouchableOpacity>

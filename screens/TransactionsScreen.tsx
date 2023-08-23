@@ -95,17 +95,6 @@ const TransactionsScreen = ({ navigation }) => {
     // setShowTabs(true)
     // setShowModal(false)
   };
-  const onsubmit = (amount) => {
-    const action = async () => {
-      const response = await axiosCustom.post("/pay", { amount: amount });
-      navigation.navigate("customweb_screen", {
-        url: response.data.data.authorization_url,
-        reference: response.data.data.reference,
-        amount: amount,
-      });
-    };
-    navigation.navigate("walletfunding_screen", { action });
-  };
 
   const switchModals = (value) => {
     switch (value) {
@@ -153,11 +142,7 @@ const TransactionsScreen = ({ navigation }) => {
       title: "Add Cash",
       Icon: Fundwalleticon,
       color: COLORS.Tgreen2,
-      action: () =>
-        navigation.navigate("amounttosend_screen", {
-          nextScreen: "choosefeatheruser_screen",
-          onsubmit,
-        }),
+      action: () => navigation.navigate("walletfunding_screen"),
     },
   ];
 
