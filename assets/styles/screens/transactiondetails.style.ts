@@ -90,9 +90,10 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  transactionRef: {
-    ...fontsize.smaller,
+  transactionRefText: {
+    ...fontsize.xsmallest,
     ...FONTS.regular,
+    color: COLORS.blue9
   },
   refAndCopyWrap: {
     justifyContent: "center",
@@ -120,10 +121,5 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     paddingBottom: 30,
     borderRadius: 15,
   },
-  topHeaderBlock: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flex: 1,
-  },
+
 });

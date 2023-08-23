@@ -9,6 +9,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { FTTransactionhistoryStyles } from "../assets/styles/components";
 import { navigation } from "../utils";
+import FTIconwithbg from "./FTIconwithbg";
 const {
   container,
   dateText,
@@ -24,27 +25,35 @@ const {
 const { Arrowin, Arrowout, Bonusicon, Utilitypayment, Utilitylarge } = icons;
 
 const History = ({ data }) => {
-  const { direction, description, to, amount, from, title } = data;
-
+  const {
+    direction,
+    description,
+    to,
+    amount,
+    from,
+    title,
+    trans_type,
+    otherUser,
+  } = data;
   const priceColor = direction === "in" ? COLORS.green1 : COLORS.pink1;
   const circleColor = direction === "in" ? COLORS.green3 : COLORS.red2;
   const transactionType = direction === "in" ? "From" : "To";
   const transactionValue = direction === "in" ? from : to;
   const amountSign = direction === "in" ? "+" : "-";
-  const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
+  const Arrow = direction === "in" ? Arrowin : Arrowout;
   const networkType = from.toUpperCase();
   const isEtisalat = networkType === "9MOBILE";
 
+
+  
   const isUser = (title: string) => {
     const capital = title;
 
-    if (
-      (capital === "Wallet Credit" || capital === "Wallet Debit") &&
-      transactionValue.toUpperCase() !== "BONUS"
-    ) {
+    if (trans_type === "Feather2Feather") {
       return (
-        <Text>
-          @
+        <Text style={{ textTransform: "capitalize" }}>
+          {" "}
+          {otherUser.fullName} - @
           <Text style={{ textTransform: "lowercase" }}>{transactionValue}</Text>
         </Text>
       );
@@ -58,62 +67,23 @@ const History = ({ data }) => {
   const transactionBadge = () => {
     switch (title) {
       case "Airtime Purchase":
-        return (
-          <View style={[arrowBg, { borderRadius: RFValue(30) }]}>
-            <Image
-              source={{
-                uri: isEtisalat
-                  ? assetsDB["bills"]["ETISALAT"]
-                  : assetsDB["bills"][networkType],
-              }}
-              resizeMode="cover"
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: RFValue(62 / 2),
-              }}
-            />
-          </View>
-        );
+        let airtimeLogo = isEtisalat
+          ? assetsDB["bills"]["ETISALAT"]
+          : assetsDB["bills"][networkType];
+        return <FTIconwithbg imageUrl={airtimeLogo} bG="" size={31} />;
         break;
 
       case "withdrawal":
         const targetLogo = bankLogo.filter((logo) => logo.name === to);
-        const isGt = to === "Guaranty Trust Bank";
-        const isFcmb = to === "First City Monument Bank";
         return (
-          <View style={arrowBg}>
-            <Image
-              source={{ uri: targetLogo[0]["image"] }}
-              resizeMode={isGt || isFcmb ? "cover" : "contain"}
-              resizeMethod="scale"
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: RFValue(62 / 2),
-              }}
-            />
-          </View>
+          <FTIconwithbg imageUrl={targetLogo[0]["image"]} bG="" size={31} />
         );
         break;
 
       case "Funds Transfer":
         const targetlogo = bankLogo.filter((logo) => logo.name === to);
-        const isGtb = to === "Guaranty Trust Bank";
-        const isFcmbc = to === "First City Monument Bank";
         return (
-          <View style={arrowBg}>
-            <Image
-              source={{ uri: targetlogo[0]["image"] }}
-              resizeMode={isGtb || isFcmbc ? "cover" : "contain"}
-              resizeMethod="scale"
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: RFValue(62 / 2),
-              }}
-            />
-          </View>
+          <FTIconwithbg imageUrl={targetlogo[0]["image"]} bG="" size={31} />
         );
         break;
       case "Utility Payment":
@@ -131,30 +101,12 @@ const History = ({ data }) => {
             </View>
           );
         } else {
-          return (
-            <View
-              style={[
-                arrowBg,
-                { backgroundColor: circleColor, borderRadius: 39 / 2 },
-              ]}
-            >
-              {Arrow}
-            </View>
-          );
+          return <FTIconwithbg Icon={Arrow} bG={circleColor} size={31} />;
         }
         break;
 
       default:
-        return (
-          <View
-            style={[
-              arrowBg,
-              { backgroundColor: circleColor, borderRadius: 39 / 2 },
-            ]}
-          >
-            {Arrow}
-          </View>
-        );
+        return <FTIconwithbg Icon={Arrow} bG={circleColor} size={31} />;
         break;
     }
   };
@@ -163,26 +115,23 @@ const History = ({ data }) => {
     <TouchableOpacity
       activeOpacity={0.8}
       style={historyContainer}
-      onPress={() => navigation.navigate("transacttiondetails_screen", { data: data })}
+      onPress={() =>
+        navigation.navigate("transacttiondetails_screen", { data: data })
+      }
     >
       <View style={historyDetailsContainer}>
-        {/* {transactionBadge()} */}
-        <View>
-          
-        </View>
-
-        <View>
-          <Text style={title}>{title}</Text>
+        {transactionBadge()}
+        <View style={{ flex: 1, marginLeft: 14 }}>
+          <View style={historyContainer}>
+            <Text style={title}>{title}</Text>
+            <Text style={[amount, { color: priceColor }]}>
+              {amountSign}N{amountFormatter(amount)}
+            </Text>
+          </View>
           <Text style={transactionTypeText}>
             {transactionType} : {isUser(title)}
           </Text>
         </View>
-      </View>
-
-      <View>
-        <Text style={[amount, { color: priceColor }]}>
-          {amountSign}N{amountFormatter(amount)}
-        </Text>
       </View>
     </TouchableOpacity>
   );

@@ -33,11 +33,9 @@ const {
   eachDetailTitle,
   typeAndIconWrap,
   eachDetailValue,
-  topHeaderBlock,
   optionWrapper,
   optionBlock,
   eachOptionWrapper,
-  eachOption,
   eachOptionTitle,
   dateWrapper,
   dateWrap,
@@ -45,7 +43,7 @@ const {
   transactionArrowBg,
   transactionTypeBg,
   transactionTypeText,
-  transactionRef,
+  transactionRefText,
   refAndCopyWrap,
   refText,
   tapAndCopy,
@@ -129,92 +127,6 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     }
   };
 
-  const showUserImageOnReceipt = () => {
-    if (user.imageUrl !== null) {
-      return `
-        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-        <img src="${user.imageUrl}" style="width: 62px; height: 62px; border-radius: 32px"  />
-        </div>
-        `;
-    } else {
-      return `
-          <img class="user__image" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035185/62x62_feather_dibyrp.svg" />
-        `;
-    }
-  };
-
-  const showImageOnReceipt = (name: string, title: string, sender?: string) => {
-    const targetLogo = bankLogo.filter((logo) => logo.name === sender);
-    switch (title) {
-      case "funding":
-        return `
-        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #001757; display: flex; justify-content: center; align-items: center;">
-          <img src="${assetsDB["fund"]["paystack"]}" style="width: 25px; height: 25px" />
-        </div>
-        
-        `;
-        break;
-      case "Fund Reversal":
-        return `
-          <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #001757; display: flex; justify-content: center; align-items: center;">
-            <img src="${assetsDB["fund"]["paystack"]}" style="width: 25px; height: 25px" />
-          </div>
-          
-          `;
-        break;
-      case "Utility Payment":
-        return `
-            <div style="min-width: 62px; min-height: 62px; border-radius: 32px; display: flex; justify-content: center; align-items: center;">
-              <img src="${assetsDB["others"]["utility"]}" style="width: 62px; height: 62px" />
-            </div>
-            
-            `;
-        break;
-      // assetsDB["bills"][sender]
-      case "Airtime Purchase":
-        const networkType = sender?.toUpperCase() || "MTN";
-        return `
-          <div style="min-width: 62px; min-height: 62px; border-radius: 32px;  display: flex; justify-content: center; align-items: center;">
-            <img src="${assetsDB["bills"][networkType]}" style="width: 50px; height: 50px" />
-          </div>
-          
-          `;
-        break;
-      case "withdrawal":
-        return `
-            <div style="min-width: 62px; min-height: 62px; border-radius: 32px;  display: flex; justify-content: center; align-items: center;">
-              <img src="${targetLogo[0]["image"]}" style="width: 50px; height: 50px" />
-            </div>
-            
-            `;
-        break;
-      case "Wallet Debit":
-      case "Wallet Credit":
-        if (sender === "Bonus") {
-          return `
-        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-        <img src="${assetsDB["others"]["bonus"]}" style="width: 50px; height: 50px" />
-        </div>
-        `;
-        } else {
-          return `
-        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-        ${nameSplitToTwo(otherUser ? otherUser.fullName : "Feather Africa Inc")}
-        </div>
-        `;
-        }
-
-        break;
-      default:
-        return `
-        <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-        ${nameSplitToTwo(user.fullName)}
-        </div>
-        `;
-
-        break;
-    }
-  };
 
   const typeOfName = (title: string) => {
     switch (title) {
@@ -223,7 +135,7 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
           return { senderName: sender, receiverName: receiver };
         } else {
           return {
-            senderName: otherUser.fullName,
+            senderName: otherUser ? otherUser.fullName : sender.split("-")[0],
             receiverName: user.fullName,
           };
         }
@@ -402,21 +314,6 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
 
     <div class="container">
     <h1 class="transaction">Transaction Summary</h1>
-  
-    <div class="avatars__container">
-    <div class="avatars">
-    <div style="min-width: 62px; min-height: 62px; border-radius: 32px; background: #7600FF;display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">
-        ${nameSplitToTwo(user ? user.fullName : "Feather Africa Inc")}
-        </div>
-        <div class="dashed__line"></div>
-        <img class="checked__icon" src="https://res.cloudinary.com/gyroscope/image/upload/v1648035323/greenyy_exqzbx.svg" />
-        ${showImageOnReceipt(
-          user.fullName,
-          title,
-          title === "withdrawal" ? receiver : sender
-        )}
-    </div>
-    </div>
 
 
     <p class="transaction__text">This is the transaction report between <span class="transaction__names">${
@@ -502,20 +399,20 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
         direction === "in"
           ? sender === "Bonus"
             ? "Feather"
-            : otherUser.fullName
+            : otherUser ? otherUser.fullName : sender.split("-")[0]
           : user.fullName;
       const receiverName =
         direction === "out"
           ? sender === "Bonus"
             ? "Feather"
-            : otherUser.fullName
+            : otherUser ? otherUser.fullName : sender.split("-")[0]
           : user.fullName;
       return (
         <>
           <Eachoption title="Sender Name" value={senderName} />
-          <FTHorizontaline marginV={18} />
+          <FTHorizontaline bG="transparent" marginV={18} />
           <Eachoption title="Receiver Name" value={receiverName} />
-          <FTHorizontaline marginV={18} />
+          <FTHorizontaline bG="transparent" marginV={18} />
         </>
       );
     }
@@ -529,11 +426,11 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
             title="Account Number"
             value={bankDetails.account_number}
           />
-          <FTHorizontaline marginV={18} />
+          <FTHorizontaline bG="transparent" marginV={18} />
           <Eachoption title="Account Name" value={bankDetails.account_name} />
-          <FTHorizontaline marginV={18} />
+          <FTHorizontaline bG="transparent" marginV={18} />
           <Eachoption title="Bank" value={bankDetails.bank_name} />
-          <FTHorizontaline marginV={18} />
+          <FTHorizontaline bG="transparent" marginV={18} />
         </>
       );
     }
@@ -558,17 +455,20 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     {
       title: "Share",
       Icon: Sharereceipt,
-      color: COLORS.Tyellow
+      color: COLORS.Tyellow,
+      onpress: () => shareReceipt(htmlContent)
     },
     {
       title: "Download",
       Icon: Downloadreceipt,
-      color: COLORS.Tgreen2
+      color: COLORS.Tgreen2,
+      onpress: () => downloadReceipt(htmlContent)
     },
     {
       title: "Report",
       Icon: Reporttransactions,
-      color: COLORS.Tred
+      color: COLORS.Tred,
+      onpresss: () => console.log("Report Transactions")
     },
   ];
 
@@ -582,72 +482,25 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
         showsVerticalScrollIndicator={false}
       >
         <View style={optionWrapper}>
-          {options.map(({ title, color, Icon }, index) => {
+          {options.map(({ title, color, Icon, onpress }, index) => {
             return (
-              <View style={optionBlock} key={index}>
+              <TouchableOpacity onPress={onpress} activeOpacity={0.7} style={optionBlock} key={index}>
                 <FTIconwithbg 
                 Icon={Icon}
                 size={40}
                 bG={color}
                 />
                 <Text style={eachOptionTitle}>{title}</Text>
-              </View>
+              </TouchableOpacity>
             );
           })}
         </View>
 
-        <View style={dateWrapper}>
-          <View style={dateWrap}>
-            <Text style={dateText}>{formatDateTime}</Text>
-          </View>
-        </View>
 
         {/* Header section showing ref and receiver image */}
-        <View style={headerBlock}>
-          <View style={topHeaderBlock}>
-            <FTSendingandreceive
-              user={user}
-              otherUser={otherUser}
-              senderName={typeOfName(title)?.senderName}
-              receiverName={typeOfName(title)?.receiverName}
-              transId={transactionRef}
-              title={title}
-              value={
-                title === "withdrawal" || title === "Funds Transfer"
-                  ? receiver
-                  : sender
-              }
-            />
-
-            <View style={typeAndIconWrap}>
-              <View
-                style={[
-                  transactionTypeBg,
-                  { backgroundColor: isDebit ? COLORS.red2 : COLORS.green3 },
-                ]}
-              >
-                <Text
-                  style={[
-                    transactionTypeText,
-                    { color: isDebit ? COLORS.red4 : COLORS.green2 },
-                  ]}
-                >
-                  {isDebit ? "Debit" : "Credit"}
-                </Text>
-              </View>
-              <View
-                style={[
-                  transactionArrowBg,
-                  { backgroundColor: isDebit ? COLORS.red2 : COLORS.green3 },
-                ]}
-              >
-                {Arrow}
-              </View>
-            </View>
-          </View>
-
-          <View style={{ alignItems: "center" }}>
-            <Text style={transactionRef}>Transaction Ref.</Text>
+            
+          <View style={{ alignItems: "center", marginTop: 50 }}>
+            <Text style={transactionRefText}>Transaction Ref.</Text>
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => copyToClipboard(transactionRef)}
@@ -657,26 +510,30 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
               <Text style={tapAndCopy}>Tap to copy ref. number</Text>
             </TouchableOpacity>
           </View>
-        </View>
 
         <View style={eachOptionWrapper}>
           <Eachoption title="Transaction Type" value={title} />
-          <FTHorizontaline marginV={18} />
+          <FTHorizontaline bG="transparent" marginV={18} />
+
+          <Eachoption title="Date" value={formatDateTime} />
+          <FTHorizontaline bG="transparent" marginV={18} />
           {FeatherTransferDetails()}
           {BankTransferDetails()}
           {AirtimePurchase()}
           <Eachoption title="Amount" value={`N${amountFormatter(amount)}`} />
-          <FTHorizontaline marginV={18} />
+          <FTHorizontaline bG="transparent" marginV={18} />
           <Eachoption
             title="Transaction Charges"
             value={`N${amountFormatter(charges)}`}
           />
-          <FTHorizontaline marginV={18} />
+          <FTHorizontaline bG="transparent" marginV={18} />
           <Eachoption
             title="Total"
             value={`N${amountFormatter(total.toString())}`}
           />
         </View>
+
+
       </ScrollView>
 
 

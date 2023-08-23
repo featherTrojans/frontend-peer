@@ -36,11 +36,12 @@ const FTIconwithbg = ({
       {imageUrl ? (
         <Image
           style={{
-            width: size,
-            height: size,
+            width: "100%",
+            height: "100%",
             borderRadius: size / 2,
           }}
           resizeMode="contain"
+          resizeMethod="scale"
           source={{ uri: imageUrl }}
         />
       ) : (
