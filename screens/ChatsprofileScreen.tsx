@@ -53,15 +53,17 @@ const ChatsprofileScreen = ({ route }) => {
 
   useEffect(() => {
     getUserTransaction();
-    console.log(userInfo, "Here is the user info")
+    console.log(userInfo, "Here is the user info");
   }, []);
 
   const getUserTransaction = async () => {
     setLoading(true);
     try {
-      const response = await axiosCustom.get("transactions/users", {otherUsername: userInfo.username});
+      const response = await axiosCustom.get(
+        `transactions/users/${userInfo.username}`
+      );
       setTransactions(response?.data?.data?.transactions);
-      console.log(formatData(transactions))
+      console.log(formatData(transactions));
     } catch (error) {
       console.log(error.response);
     } finally {

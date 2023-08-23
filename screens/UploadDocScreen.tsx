@@ -33,6 +33,7 @@ const UploadDocScreen = () => {
   const [localGov, setLocalGov] = useState("Select");
   const [selectDoc, setSelectDoc] = useState("Select Document");
   const [id_type, setIdtype] = useState("Select");
+  const { successAlert } = useAlert();
 
   const [loading, setLoading] = useState(false);
   const { errorAlert } = useAlert();
@@ -160,13 +161,27 @@ const UploadDocScreen = () => {
     formdata.append("id_image", id_image);
 
     try {
-      await axiosCustom.post("user/upgrade/veteran", formdata);
+      await axiosCustom.post("user/veteran/upgrade", formdata);
       setAuthData({
         ...authdata,
-        userDetails: { ...authdata.userDetails, userLevel: 3 },
+        userDetails: {
+          ...authdata.userDetails,
+          userLevel: 3,
+          address: values.address,
+          city,
+          state: localGov,
+          country: "Nigeria",
+          postalCode: values.postal_code,
+          houseNo: values.house_no,
+          id_type: id_type,
+          id_no: values.id_no,
+        },
       });
 
-      navigation.navigate("Dashboard");
+      successAlert("Document uploaded successfully");
+      setTimeout(() => {
+        navigation.navigate("Dashboard");
+      }, 1000);
     } catch (err) {
       errorAlert(err);
     } finally {
@@ -251,7 +266,7 @@ const UploadDocScreen = () => {
         <FTInput
           placeholderText={id_type}
           name="id_type"
-          label="ID Number"
+          label="ID Type"
           control={control}
           rules={VALIDATION.PHONE_NUMBER_VALIDATION}
           mB={15}
