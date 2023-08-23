@@ -282,19 +282,26 @@ const ActiveCashWithdrawal = () => {
   );
 };
 
-const action = (pin) => {
-  const action2 = async (newpin) => {
-    if (newpin !== pin) {
-      throw { response: { data: { message: "pins does not match" } } };
-    }
-    await axiosCustom.put("auth/pin/set", { pin });
-  };
-  () => navigation.navigate("transactionpin_screen", { action2 });
-};
-
-const ProfileSetup = () => {
+const ProfileSetup = ({ nav }) => {
   const { authdata } = useContext(AuthContext);
   const level = authdata?.userDetails?.userLevel;
+
+  const action = (pin) => {
+    const action2 = async (newpin) => {
+      if (newpin !== pin) {
+        throw { response: { data: { message: "pins does not match" } } };
+      }
+      try {
+        await axiosCustom.put("auth/pin/set", { pin });
+      } catch (err) {
+        throw err;
+      }
+    };
+    nav.push("transactionpin_screen", {
+      action: action2,
+      toptext: "Enter pin again",
+    });
+  };
 
   const profilesetupdatas = [
     {
@@ -303,7 +310,7 @@ const ProfileSetup = () => {
       Icon: Personalsetupicon,
       bg: COLORS.Tyellow,
       completed: !!authdata?.userDetails?.gender,
-      onPress: () => navigation.navigate("editprofile_screen"),
+      onPress: () => nav.navigate("editprofile_screen"),
     },
     {
       title: "Create a feather tag",
@@ -311,7 +318,7 @@ const ProfileSetup = () => {
       Icon: Createtagsetupicon,
       bg: COLORS.Tred,
       completed: !!authdata?.userDetails?.username,
-      onPress: () => navigation.navigate("editprofile_screen"),
+      onPress: () => nav.navigate("editprofile_screen"),
     },
     {
       title: "Profile Appearance",
@@ -320,15 +327,15 @@ const ProfileSetup = () => {
       bg: COLORS.Tgreen3,
       completed:
         authdata?.userDetails?.imageUrl || authdata?.userDetails?.isMemoji,
-      onPress: () => navigation.navigate("changeappearance_screen"),
+      onPress: () => nav.navigate("changeappearance_screen"),
     },
     {
       title: "Transaction PIN",
       info: "Secure your transactions with a PIN",
       Icon: Transactionpinsetupicon,
       bg: COLORS.Tred2,
-      completed: !authdata?.userDetails?.pin,
-      onPress: () => navigation.navigate("transactionpin_screen", { action }),
+      completed: !!authdata?.userDetails?.pin,
+      onPress: () => nav.navigate("transactionpin_screen", { action }),
     },
     {
       title: "Bank Verification Number",
@@ -336,15 +343,15 @@ const ProfileSetup = () => {
       Icon: Banksetupicon,
       bg: COLORS.Tblue5,
       completed: level >= 2,
-      onPress: () => navigation.navigate("accountverification_screen"),
+      onPress: () => nav.navigate("accountverification_screen"),
     },
     {
       title: "Document Verification",
       info: "Verify your documents to level up",
       Icon: Documentsetupicon,
       bg: COLORS.Tpurple,
-      completed: level == 3,
-      onPress: () => navigation.navigate("accountverification_screen"),
+      completed: level >= 3,
+      onPress: () => nav.navigate("accountverification_screen"),
     },
   ];
 
@@ -430,7 +437,10 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const switchModals = (value) => {
     switch (value) {
       case 0:
-        setContent({ child: <ProfileSetup />, height: SIZES.height - 150 });
+        setContent({
+          child: <ProfileSetup nav={navigation} />,
+          height: SIZES.height - 150,
+        });
         setShowModal((s) => !s);
         setShowTabs(false);
         break;

@@ -1,11 +1,14 @@
 import { ScrollView, StyleSheet, Text, View, Switch } from "react-native";
 import React, { useState } from "react";
 import { SecurityandprivacyScreenStyles } from "../assets/styles/screens";
-import { FTIconwithtitleandinfo, FTSwitchbtn, FTTitlepagewrapper } from "../components";
+import {
+  FTIconwithtitleandinfo,
+  FTSwitchbtn,
+  FTTitlepagewrapper,
+} from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { redirectTo } from "../utils";
-
-
+import { navigation, redirectTo } from "../utils";
+import axiosCustom from "../httpRequests/axiosCustom";
 
 const { sectionHeader } = SecurityandprivacyScreenStyles;
 const {
@@ -15,8 +18,7 @@ const {
   Multifactoricon,
 } = icons;
 
-
-const SecurityandprivacyScreen = () => {
+const SecurityandprivacyScreen = ({ navigation }) => {
   const multifactorAction = () => {
     console.log("Multifactor ");
   };
@@ -25,6 +27,28 @@ const SecurityandprivacyScreen = () => {
   };
   const biometricsLogin = () => {
     console.log("Login ");
+  };
+
+  const action2 = async (pin) => {
+    try {
+      await axiosCustom.put("auth/pin/set", {
+        pin: pin,
+      });
+      navigation.navigate("Dashboard");
+    } catch (err) {
+      throw err;
+    }
+  };
+  const action = async (oldpin) => {
+    try {
+      await axiosCustom.post("/auth/pin/verify", { user_pin: oldpin });
+      navigation.push("transactionpin_screen", {
+        action: action2,
+        toptext: "Enter New pin",
+      });
+    } catch (err) {
+      throw err;
+    }
   };
 
   return (
@@ -40,7 +64,12 @@ const SecurityandprivacyScreen = () => {
             bG={COLORS.Tblue}
             title="Change Transaction PIN"
             info="Modify & manage your secure pin"
-            onPress={() => redirectTo("setupmfa_screen")}
+            onPress={() =>
+              navigation.navigate("transactionpin_screen", {
+                action: action,
+                toptext: "Enter Old Pin",
+              })
+            }
             mB={30}
           />
           <FTIconwithtitleandinfo
