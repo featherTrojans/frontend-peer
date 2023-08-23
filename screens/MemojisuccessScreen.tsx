@@ -5,38 +5,26 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { ChoosememojiScreenStyles } from "../assets/styles/screens";
 import { navigation } from "../utils";
 
-const { buttonText, buttonWrap } = ChoosememojiScreenStyles;
+const {
+  buttonText,
+  buttonWrap,
+  memojiSuccessWrap,
+  successHeader,
+  successMessageText,
+} = ChoosememojiScreenStyles;
 
 const { Blacksendicon } = icons;
 
 const MemojisuccessScreen = () => {
   return (
     <FTMainwrapper>
-      <View style={{ flex: 1, alignItems: "center", paddingVertical: 50 }}>
+      <View style={memojiSuccessWrap}>
         <FTIconwithbg bG="#F6DEAC" Icon={Blacksendicon} size={150} />
-        <View style={{flex: 1}}>
-          <Text
-            style={{
-              ...fontsize.bmedium,
-              textAlign: "center",
-              ...FONTS.bold,
-              lineHeight: 29,
-              color: COLORS.blue9,
-              marginTop: 78,
-              marginBottom: 40,
-            }}
-          >
-            Padi, Memoji was {'\n'} created successfully{" "}
+        <View style={{ flex: 1 }}>
+          <Text style={successHeader}>
+            Padi, Memoji was {"\n"} created successfully{" "}
           </Text>
-          <Text
-            style={{
-              ...fontsize.small,
-              ...FONTS.medium,
-              lineHeight: 26,
-              textAlign: "center",
-              color: COLORS.blue9,
-            }}
-          >
+          <Text style={successMessageText}>
             Hey Padi, your custom Memoji has been created and saved to your
             account. This will update your profile image
           </Text>
@@ -45,7 +33,7 @@ const MemojisuccessScreen = () => {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => console.log("memojisuccess_screen")}
-          style={[buttonWrap, {backgroundColor: COLORS.blue9}]}
+          style={[buttonWrap, { backgroundColor: COLORS.blue9 }]}
         >
           <Text style={buttonText}>Continue</Text>
         </TouchableOpacity>

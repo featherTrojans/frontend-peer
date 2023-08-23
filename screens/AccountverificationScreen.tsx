@@ -115,14 +115,18 @@ const AccountverificationScreen = (props) => {
 
   return (
     <FTTitlepagewrapper title="Account Verification">
+
+
+
       <View style={segmentedWrap}>
+
+        
         <Animated.View
           style={[
             movingSegmentedbg,
             { transform: [{ translateX: tabTranslate }] },
           ]}
         />
-
         {accountLevels.map((accountLevel, index) => {
           let isActive = index == currentIndex;
           return (
