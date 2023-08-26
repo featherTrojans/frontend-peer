@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Linking, Platform, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
   FTCustombutton,
@@ -29,6 +29,20 @@ const { Blacksendicon, Cancelwithdrawicon, Phoneicon, Chaticon } = icons;
 //   createdAt: "",
 //   agentImage: null,
 // }
+
+const viewonmap = (lat, lng) => {
+  const scheme = Platform.select({
+    ios: "maps://0,0?q=",
+    android: "geo:0,0?q=",
+  });
+  const latLng = `${lat},${lng}`;
+  const label = "Merchant Location";
+  const url = Platform.select({
+    ios: `${scheme}${label}@${latLng}`,
+    android: `${scheme}${latLng}(${label})`,
+  });
+  Linking.openURL(url);
+};
 
 const WithdrawcashScreen = ({ route }) => {
   const amount = route.params?.amount;
@@ -72,7 +86,6 @@ const WithdrawcashScreen = ({ route }) => {
       }
     } catch (err) {
       setnoagent(true);
-      console.log(err.response, "no status found , can you believe that");
     } finally {
     }
   };
@@ -105,7 +118,6 @@ const WithdrawcashScreen = ({ route }) => {
       try {
         navigation.navigate("transactionsuccess_screen");
       } catch (err) {
-        console.log(err.response);
         throw err;
       }
     };
@@ -260,6 +272,7 @@ const WithdrawcashScreen = ({ route }) => {
               }}
             >
               <Text
+                onPress={() => viewonmap()}
                 style={{
                   ...fontsize.xxsmallest,
                   ...FONTS.semibold,

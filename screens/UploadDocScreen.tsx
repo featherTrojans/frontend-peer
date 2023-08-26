@@ -135,7 +135,6 @@ const UploadDocScreen = () => {
     });
 
     if (!result.canceled) {
-      console.log(result?.assets[0]?.uri, "result body");
       setid_image({
         uri: `${result?.assets[0]?.uri}`,
         type: "Image/jpeg",
@@ -145,8 +144,6 @@ const UploadDocScreen = () => {
   };
 
   const onsubmit = async (values) => {
-    console.log(values, city, localGov, id_image);
-
     // return;
     setLoading(true);
     const formdata = new FormData();

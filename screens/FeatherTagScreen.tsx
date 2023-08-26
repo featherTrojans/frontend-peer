@@ -39,8 +39,6 @@ const FeatherTagScreen = () => {
   }, [usernamename]);
 
   const onsubmit = async (data) => {
-    console.log(data, error);
-
     if (!error) {
       errorAlert(null, "Feather tag is taken");
       return;

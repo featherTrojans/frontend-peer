@@ -28,6 +28,7 @@ import {
   FTTabWrapper,
   FTTransactionhistory,
   FTViewbalance,
+  FTCustombutton,
 } from "../components";
 import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 
@@ -391,6 +392,51 @@ const ProfileSetup = ({ nav }) => {
   );
 };
 
+const SetupPin = ({ nav }) => {
+  const action = (pin) => {
+    const action2 = async (newpin) => {
+      if (newpin !== pin) {
+        throw { response: { data: { message: "pins does not match" } } };
+      }
+      try {
+        await axiosCustom.put("auth/pin/set", { pin });
+      } catch (err) {
+        throw err;
+      }
+    };
+    nav.push("transactionpin_screen", {
+      action: action2,
+      toptext: "Enter pin again",
+    });
+  };
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}></View>
+      <View style={{ marginBottom: 30 }}>
+        <Text style={{ textAlign: "center", marginBottom: 5 }}>
+          *We take your security and privacy serious,
+        </Text>
+        <Text style={{ textAlign: "center" }}>
+          Kindly setup your pin to continue on the app
+        </Text>
+      </View>
+      <FTCustombutton
+        btntext="Setup Transaction PIN"
+        onpress={() => nav.navigate("transactionpin_screen", { action })}
+      />
+      <Text
+        style={{
+          textAlign: "center",
+          ...fontsize.xxsmall,
+          marginTop: 20,
+          marginBottom: 20,
+        }}
+      >
+        Need Help? Learn More
+      </Text>
+    </View>
+  );
+};
 const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const { setAuthData, authdata, setShowTabs } = useContext(AuthContext);
   const histories: any[] = formatData(authdata?.transactions);
@@ -419,6 +465,13 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   };
   useEffect(() => {
     getDashboardData();
+  }, []);
+
+  useEffect(() => {
+    if (!authdata?.userDetails?.pin) {
+      setContent({ child: <SetupPin nav={navigation} />, height: 350 });
+      setShowModal(true);
+    }
   }, []);
 
   const onRefreshFunc = useCallback(() => {

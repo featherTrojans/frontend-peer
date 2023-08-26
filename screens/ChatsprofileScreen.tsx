@@ -53,7 +53,6 @@ const ChatsprofileScreen = ({ route }) => {
 
   useEffect(() => {
     getUserTransaction();
-    console.log(userInfo, "Here is the user info");
   }, []);
 
   const getUserTransaction = async () => {
@@ -63,9 +62,7 @@ const ChatsprofileScreen = ({ route }) => {
         `transactions/users/${userInfo.username}`
       );
       setTransactions(response?.data?.data?.transactions);
-      console.log(formatData(transactions));
     } catch (error) {
-      console.log(error.response);
     } finally {
       setLoading(false);
       setRefreshing(false);

@@ -33,7 +33,6 @@ const useSwipemodal = () => {
     useEffect(() => {
       const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
         setKeyboardStatus(true);
-        console.log("Keyboard is now visible");
       });
       const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
         setKeyboardStatus(false);

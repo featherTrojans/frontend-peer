@@ -189,7 +189,6 @@ export default function App() {
     // why don't I check here, then set Auth , and set tokem you know
 
     getDataFromStorage("@token").then((response) => {
-      console.log(response, "response");
       if (response !== null) {
         if (Date.now() - response.time > AWEEKAFTER) {
           return null;

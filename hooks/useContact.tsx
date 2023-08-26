@@ -38,7 +38,7 @@ const useContact = () => {
       "This will allow you to find friends and family using Feather with ease. The app uploads your contact list to the server but does not use the contact list sent to us for any other use than to provide you with users on your contact list using the app",
       Contacts
     );
-    console.log(status, "this is status stuff");
+
     if (status) {
       const { data } = await Contacts.getContactsAsync();
       datacontact = data;
@@ -53,7 +53,6 @@ const useContact = () => {
       });
       setContactResolved(response.data.data);
     } catch (err) {
-      // console.log(err.response)
     } finally {
       setLoading(false);
     }

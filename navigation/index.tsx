@@ -206,7 +206,8 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator:
+                  CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -224,7 +225,8 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator:
+                  CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -242,7 +244,8 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator:
+                  CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -260,7 +263,8 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator:
+                  CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -278,7 +282,8 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator:
+                  CardStyleInterpolators.forBottomSheetAndroid,
               })}
             />
           );
@@ -344,7 +349,6 @@ export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
   };
 
   // const authState = false;
-  console.log(!token, "I am token");
 
   if (!token) {
     return <NoAuthNavigator routeName={routeName} />;

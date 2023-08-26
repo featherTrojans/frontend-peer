@@ -34,7 +34,6 @@ const SearchmerchantidScreen = ({ route }) => {
       });
       navigation.navigate("transactionsuccess_screen");
     } catch (err) {
-      console.log(err.response);
       throw err;
     }
   };

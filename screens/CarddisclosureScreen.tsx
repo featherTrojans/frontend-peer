@@ -19,6 +19,7 @@ const CarddisclosureScreen = () => {
       await createcard();
       navigation.navigate("cardcreatesuccess_screen");
     } catch (err) {
+      console.log(err.response);
       throw err;
     } finally {
     }
@@ -43,6 +44,7 @@ const CarddisclosureScreen = () => {
     try {
       const response = await axiosCustom.post("user/card/create", data);
     } catch (err) {
+      console.log(err.response);
       throw err;
     }
   };

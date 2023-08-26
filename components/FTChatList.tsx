@@ -86,7 +86,6 @@ const ListHeader = () => {
 const FTChatList = ({ chats, chattwos, authId }) => {
   const [allChats, setAllChats] = useState([]);
 
-  console.log(allChats[0]);
   useEffect(() => {
     //algorithm
     const arranged = [];

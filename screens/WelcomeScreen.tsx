@@ -56,7 +56,7 @@ const WelcomeScreen = ({ navigation, route }) => {
   const [sent, setSent] = useState(false);
   // const [authToken, setAuthToken] = useState("");
   const authToken = getAuthorizationTokenFromAxois();
-  console.log(authToken, "yoo his is it");
+
   useEffect(() => {}, []);
 
   const progressWidth = useSharedValue(0);
@@ -74,7 +74,7 @@ const WelcomeScreen = ({ navigation, route }) => {
     const sendRegistrationMessage = () => {
       if (fromm == "setup" && authdata?.userDetails?.fullName) {
         // checked = false
-        console.log("push from setup");
+
         sendSchedulePushNotification(
           "Acccount Registration",
           `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
@@ -92,7 +92,6 @@ const WelcomeScreen = ({ navigation, route }) => {
   useEffect(() => {
     const sendMessage = () => {
       if (fromm !== "setup" && authdata?.userDetails?.fullName) {
-        console.log("push from login new");
         // console.log(authdata, "Here is the authdata")
         // console.log(authdata?.userDetails?.fullName)
         sendSchedulePushNotification(
@@ -132,9 +131,7 @@ const WelcomeScreen = ({ navigation, route }) => {
         { duration: 3000 },
         callback
       );
-    } catch (err) {
-      console.log(err.response);
-    }
+    } catch (err) {}
   };
 
   return (
