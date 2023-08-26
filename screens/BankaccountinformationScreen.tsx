@@ -80,7 +80,7 @@ const BankaccountinformationScreen = ({ route }) => {
                 })
               }
               imageUrl={bankimage}
-              bG={"red"}
+              bG={""}
             />
           ),
         });
@@ -127,6 +127,7 @@ const BankaccountinformationScreen = ({ route }) => {
         textInputProps={{
           maxLength: 11,
           keyboardType: "number-pad",
+          returnKeyType:"done"
         }}
         rules={VALIDATION.ACCOUNT_NUMBER_INPUT_VALIDATION}
         mB={20}

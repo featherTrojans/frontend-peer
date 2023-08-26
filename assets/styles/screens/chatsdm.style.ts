@@ -48,12 +48,13 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     ...FONTS.bold,
     color: COLORS.grey7,
     textTransform: "capitalize",
-    marginBottom: 6,
+    // marginBottom: 6,
   },
   chatLastSeen: {
     ...fontsize.xsmallest,
     ...FONTS.regular,
     color: COLORS.grey20,
+    marginTop: 6
   },
 
   chatTransferMsgWrap: {

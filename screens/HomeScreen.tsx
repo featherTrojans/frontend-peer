@@ -354,15 +354,16 @@ const ProfileSetup = ({ nav }) => {
       onPress: () => nav.navigate("accountverification_screen"),
     },
   ];
-
+  let completedProfileSetup = profilesetupdatas.filter((item) => item.completed).length
+  let isProfileSetupCompleted = completedProfileSetup === 6
   return (
-    <View style={{ backgroundColor: "#fff", flex: 1 }}>
-      <Text style={{ textTransform: "capitalize" }}>
-        Hi {nameToShow(authdata?.userDetails?.fullName)},{`\n`}Complete your
+    <View style={profileSetupWrap}>
+      <Text style={profileSetupHeader}>
+        Hi <Text style={{textTransform: "capitalize"}}>{nameToShow(authdata?.userDetails?.fullName)}</Text>,{`\n`}Complete your
         profile!
       </Text>
-      <Text>
-        Completed {profilesetupdatas.filter((item) => item.completed).length} /
+      <Text style={completedSetup}>
+        Completed {completedProfileSetup} /
         6
       </Text>
 
@@ -404,7 +405,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     height: number;
   }>({ child: null, height: 200 });
 
-  const { updateAlert } = useAlert();
 
   const getDashboardData = async () => {
     setLoading(true);
@@ -426,13 +426,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     getDashboardData();
   }, []);
 
-  const ModalCon = () => {
-    return (
-      <View style={{ backgroundColor: "#fff", height: 200 }}>
-        <Text>The name two</Text>
-      </View>
-    );
-  };
+
 
   const switchModals = (value) => {
     switch (value) {
@@ -441,11 +435,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
           child: <ProfileSetup nav={navigation} />,
           height: SIZES.height - 150,
         });
-        setShowModal((s) => !s);
-        setShowTabs(false);
-        break;
-      case 1:
-        setContent({ child: <ModalCon />, height: 300 });
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
@@ -533,7 +522,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         <QuickActions onpress={switchModals} />
         <ActiveCashWithdrawal />
         <Conversations />
-        <SetupProfile onPress={() => switchModals(0)} />
+       <SetupProfile onPress={() => switchModals(0)} />
 
         <View style={transactionWrap}>
           <View style={transactionHeader}>

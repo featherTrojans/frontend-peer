@@ -33,7 +33,9 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
+import * as Haptics from 'expo-haptics';
 import { allMemojis } from "../assetdatas";
+
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 
 
@@ -53,6 +55,7 @@ const ColorOption = ({ color, active, setActive }) => {
     <Pressable
       onPress={() => {
         setActive(color);
+        Haptics.selectionAsync()
       }}
     >
       <View style={[colorOptionBg, { backgroundColor: color }]}>
@@ -190,9 +193,7 @@ const ChoosememojiScreen = () => {
           })}
         </View>
 
-        {/* <View style={{backgroundColor: active, width: 150, height: 150, position: "absolute", borderRadius: 150/2,}}>
-
-</View> */}
+ 
         <View style={profileWrap}>
 
           <View style={{position: "absolute"}}>

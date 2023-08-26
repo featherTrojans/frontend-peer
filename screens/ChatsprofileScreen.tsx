@@ -148,7 +148,7 @@ const ChatsprofileScreen = ({ route }) => {
               )}
               keyExtractor={(item: { time: string }) => item.time}
               ListEmptyComponent={
-                <FTEmptycomponent msg="Sorry, You have not performed any transactions with this user" />
+                <FTEmptycomponent msg="Sorry, You have not performed any transactions with this user" showTransact={false}/>
               }
             />
           </>

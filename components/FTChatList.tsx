@@ -60,9 +60,6 @@ const ChatMessage = ({ userId, chatinfo }) => {
         </View>
         <View style={SAlign}>
           <Text style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
-          <View style={numberOfUnreadBg}>
-            <Text style={numberOfUnread}>2</Text>
-          </View>
         </View>
       </View>
     </TouchableOpacity>

@@ -130,6 +130,8 @@ import Bvnverifyicon from "../assets/icons/Bvnverifyicon";
 import Successicon from "../assets/icons/Successicon";
 import Erroricon from "../assets/icons/Erroricon";
 import Profilechangeicon from "../assets/icons/Profilechangeicon";
+import Smallbackarrow from "../assets/icons/Smallbackarrow";
+
 
 export default {
   Logo,
@@ -245,6 +247,7 @@ export default {
   Successicon,
   Erroricon,
   Profilechangeicon,
+  Smallbackarrow,
   // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,

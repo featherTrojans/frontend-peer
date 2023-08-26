@@ -65,4 +65,16 @@ export const WithdrawcashScreenStyles = StyleSheet.create({
     color: COLORS.blue9,
     marginTop: 15,
   },
+  loadingWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  searchingNearbyText: {
+    ...fontsize.smallest,
+    ...FONTS.semibold,
+    textAlign: "center",
+    marginBottom: 20,
+  },
 });

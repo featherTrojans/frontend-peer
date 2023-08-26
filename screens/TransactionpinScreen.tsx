@@ -52,6 +52,7 @@ const TransactionpinScreen = ({ route }) => {
       await action(newpin.join(""));
     } catch (err) {
       errorAlert(err);
+      setPin([])
     } finally {
       setLoading(false);
     }

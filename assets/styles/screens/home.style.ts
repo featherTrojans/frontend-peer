@@ -235,6 +235,7 @@ export const HomeScreenStyles = StyleSheet.create({
     ...FONTS.bold,
     lineHeight: 29,
     marginBottom: 30,
+    color: COLORS.blue9
   },
   completedSetup: {
     ...fontsize.smallest,
