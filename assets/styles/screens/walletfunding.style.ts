@@ -32,6 +32,7 @@ export const WalletfundingScreenStyles = StyleSheet.create({
     ...FONTS.medium,
     marginTop: 10,
     color: COLORS.grey16,
+    textAlign: "center"
   },
   extraInfotext: {
     ...fontsize.xxsmallest,

@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 import React, {
   useCallback,
@@ -13,13 +14,13 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Svg, { Defs, Pattern, Image, G, Rect, Path } from "react-native-svg";
+import Svg, {  G, Rect, Path } from "react-native-svg";
 import {
   AccountverificationScreenStyles,
   ChoosememojiScreenStyles,
   ProfileScreenStyles,
 } from "../assets/styles/screens";
-import { FTCustombutton, FTTitlepagewrapper } from "../components";
+import { FTCustombutton, FTIconwithbg, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
@@ -32,7 +33,9 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
+import { allMemojis } from "../assetdatas";
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
+
 
 const { Changememojicheckicon, Profilechangeicon } = icons;
 
@@ -100,6 +103,8 @@ const ChoosememojiScreen = () => {
   const flatlistRef = useRef<FlatList>(null);
   const tabTranslate = useSharedValue(0);
   const rotateView = useSharedValue(0);
+  const [skinColor, setSkinColor] = useState("lightSkinned")
+  const gender = "male"
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateX: tabTranslate.value }],
@@ -141,6 +146,12 @@ const ChoosememojiScreen = () => {
   useEffect(() => {
     tabTranslate.value = withSpring(currentIndex * translateValue);
     rotateView.value = withSpring(currentIndex * 360);
+    if(currentIndex === 0){
+      setSkinColor("lightSkinned")
+    }
+    else{
+      setSkinColor("darkSkinned")
+    }
 
     const scrollTo = () => {
       flatlistRef?.current?.scrollToIndex({
@@ -179,8 +190,19 @@ const ChoosememojiScreen = () => {
           })}
         </View>
 
+        {/* <View style={{backgroundColor: active, width: 150, height: 150, position: "absolute", borderRadius: 150/2,}}>
 
+</View> */}
         <View style={profileWrap}>
+
+          <View style={{position: "absolute"}}>
+          <FTIconwithbg 
+          imageUrl={allMemojis[gender][skinColor][0]}
+          bG={active}
+          size={150}
+          />
+          </View>
+   
           <AnimatedSVG
             width={150.649}
             height={150.649}
@@ -226,13 +248,17 @@ const ChoosememojiScreen = () => {
         />
 
         <FlatList 
-        data={profileColors}
+        data={allMemojis[gender][skinColor]}
         numColumns={3}
         horizontal={false}
         columnWrapperStyle={memojisWrapper}
         renderItem={({item}) => {
           return (
-            <View style={{width: 65, height: 65, backgroundColor: item.color, marginRight: 20}}/>
+            <FTIconwithbg 
+            imageUrl={item}
+            bG=""
+            size={65}
+            />
           )
         }}
         />

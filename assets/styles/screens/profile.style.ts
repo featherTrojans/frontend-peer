@@ -49,7 +49,7 @@ export const ProfileScreenStyles = StyleSheet.create({
   userEditiconBg: {
     height: 34,
     width: 34,
-    borderRadius: 96 / 2,
+    borderRadius: 34 / 2,
     backgroundColor: COLORS.blue16,
     position: "absolute",
     bottom: 0,
@@ -73,6 +73,7 @@ export const ProfileScreenStyles = StyleSheet.create({
     ...fontsize.smallest,
     ...FONTS.medium,
     marginTop: 12,
+    textTransform: "lowercase"
   },
   upgradeBg: {
     backgroundColor: COLORS.orange2,

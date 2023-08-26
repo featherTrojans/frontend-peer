@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Pressable, Image } from "react-native";
 import React, { useContext } from "react";
 import { ProfileScreenStyles } from "../assets/styles/screens";
 import { FTIconwithtitleandinfo, FTTabWrapper } from "../components";
@@ -95,14 +95,20 @@ const ProfileScreen = () => {
         <View style={profileDetailsWrap}>
           <View style={profileOuterBorder}>
             <View style={profileInnerBorder}>
-              <View style={userProfileBg}>
-                <Pressable
+              <View style={{}}>
+                <Image 
+                style={{width: 100, height: 100,}}
+                source={{uri: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Fo.png?alt=media&token=63eb2074-9d2c-4588-9f18-e940888414be"}}
+                />
+
+               
+              </View>
+              <Pressable
                   onPress={() => redirectTo("editprofile_screen")}
                   style={userEditiconBg}
                 >
                   <Editprofileicon />
                 </Pressable>
-              </View>
             </View>
           </View>
 

@@ -828,7 +828,7 @@ export const bankLogo = [
     createdAt: "2021-02-02T08:28:38.000Z",
     updatedAt: "2021-02-02T08:28:38.000Z",
   },
-  
+
   {
     name: "Paga",
     slug: "paga",
@@ -848,7 +848,7 @@ export const bankLogo = [
   {
     name: "PalmPay",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FidW2zUwfi4.png?alt=media&token=06c3e6c8-6eaf-45ad-af32-edae6f00b27e",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fpalmpay.png?alt=media&token=e82c7a0b-da32-46f6-8121-9e38165fd0b7",
     slug: "palmpay",
     code: "999991",
     longcode: "",
@@ -1322,3 +1322,55 @@ export const bankLogo = [
     updatedAt: "2022-03-16T10:15:29.000Z",
   },
 ];
+
+export const allMemojis = {
+  male: {
+    lightSkinned: [
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Fo.png?alt=media&token=63eb2074-9d2c-4588-9f18-e940888414be",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F1.png?alt=media&token=af21f215-e2e1-4a86-b01c-d9f95d7b3cf6",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F2.png?alt=media&token=543b2997-524c-4e04-ad1a-8450b05de201",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F3.png?alt=media&token=c415fb32-0723-4cbf-a288-bc0861e21f2f",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F4.png?alt=media&token=bb704a9a-e41e-4241-95a7-97c0f0176845",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F5.png?alt=media&token=24482d2c-b867-4aa4-8a66-959de3b73a4a",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F6.png?alt=media&token=785ca6db-d023-4023-8bbb-ef56683bdf1d",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F7.png?alt=media&token=d084b54a-4fb5-49ed-be2a-1fd07bb53544",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F8.png?alt=media&token=6cb797c4-95a0-4831-80bf-0b5ea8c71f30",
+    ],
+    darkSkinned: [
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F9.png?alt=media&token=94619332-08b8-4069-91d1-cb3725dbdc87",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F10.png?alt=media&token=a2a58ed2-4e8a-42f9-a018-74297a95f469",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F11.png?alt=media&token=bab26cae-c04e-42b2-9767-7054c366a467",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F12.png?alt=media&token=3505727d-a505-45d2-bfb3-a7c257aa6382",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F13.png?alt=media&token=268b2eed-9722-4af9-bca3-f24ceeb6de49",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F14.png?alt=media&token=71e2f32b-0aa4-42fb-99de-76f2685385ff",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F15.png?alt=media&token=a158f298-4cdc-48b1-b4ab-07e5ea3cb537",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F16.png?alt=media&token=2071608c-c165-427c-8dcf-6cb39600e92b",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2F17.png?alt=media&token=b04416b7-5ee6-4ad1-acd4-bb69bba2d535",
+    ],
+  },
+
+  female: {
+    lightSkinned: [
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F0.png?alt=media&token=5310dea1-9e7a-4679-b6fb-294c3c69d95a",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F1.png?alt=media&token=fad27266-85b8-4ee5-84fd-94053baeedbb",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F2.png?alt=media&token=0563962f-b0f7-44a9-87f8-24d5797c577a",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F3.png?alt=media&token=30db6217-77d3-474c-9ee1-dfc4e2a802db",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F4.png?alt=media&token=b1a897dd-eaba-4945-a5c3-4d57503f147c",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F5.png?alt=media&token=a5ba7c5b-568d-4410-8d75-6ed5d151188d",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F6.png?alt=media&token=78a38055-a52e-4138-840a-6cacd1570c16",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F7.png?alt=media&token=c455d88b-c3cf-44b1-b2de-2262c6c48d5a",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F8.png?alt=media&token=26f1b6aa-5321-4be3-80d5-50996c1a3ee2",
+    ],
+    darkSkinned: [
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F9.png?alt=media&token=92116a0a-ff7b-48ac-abb2-5bf780800905",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F10.png?alt=media&token=bb424424-b6c7-4909-acc2-9990f402636d",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F11.png?alt=media&token=b2846710-bc13-482c-8042-27f7264cd6f2",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F12.png?alt=media&token=47b5bfd4-30c8-4aae-b428-3ee0501ce9a7",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F13.png?alt=media&token=5d928408-bb83-40f2-9d00-166922b48913",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F14.png?alt=media&token=8d298abc-9641-4d4d-91b1-2fc30a9ce2d5",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F15.png?alt=media&token=eefa8181-940f-4117-b59a-a29f9b8c6cd9",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F16.png?alt=media&token=3ad1f5d9-ab33-4324-9f7b-e8e24bfbaadc",
+      "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Ffemale%2F17.png?alt=media&token=279153de-10d1-4715-bd7c-d3029c582882",
+    ],
+  },
+};
