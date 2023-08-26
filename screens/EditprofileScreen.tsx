@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { EditprofileScreenStyles } from "../assets/styles/screens";
 import {
@@ -119,7 +125,11 @@ const EditprofileScreen = () => {
   };
   const HeaderRight = () => {
     return (
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => redirectTo("changeappearance_screen")}
+        style={{ flexDirection: "row", alignItems: "center" }}
+      >
         <View
           style={{
             height: 35,
@@ -128,14 +138,11 @@ const EditprofileScreen = () => {
             backgroundColor: COLORS.Tblue4,
           }}
         ></View>
-        <Pressable
-          onPress={() => redirectTo("changeappearance_screen")}
-          style={headerRightWrap}
-        >
+        <View style={headerRightWrap}>
           <Profileediticon />
           <Text style={headerRightEditText}>Edit</Text>
-        </Pressable>
-      </View>
+        </View>
+      </TouchableOpacity>
     );
   };
 

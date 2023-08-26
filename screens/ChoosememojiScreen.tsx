@@ -97,7 +97,7 @@ const profileColors = [
 
 const ChoosememojiScreen = () => {
   const { errorAlert } = useAlert();
-  const [active, setActive] = useState("#342AD5");
+  const [active, setActive] = useState("transparent");
   const [emojiindex, setEmojiIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const { authdata, setAuthData } = useContext(AuthContext);
