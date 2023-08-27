@@ -77,7 +77,6 @@ const TransactionsScreen = ({ navigation }) => {
       const response = await axiosCustom.get("/transactions");
       setTransations(response?.data?.data?.transactions);
     } catch (err) {
-      console.log(err.response);
     } finally {
       setLoading(false);
       setRefreshing(false);

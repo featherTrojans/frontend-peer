@@ -1,23 +1,44 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable, TextInput } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { navigation, setAuthorizationToken, setDataInstorage } from "../utils";
 import { FTCustombutton, FTLoader, FTTitlepagewrapper } from "../components";
 import OTPTextInput from "react-native-otp-textinput";
-import { COLORS } from "../constants";
+import { COLORS, FONTS } from "../constants";
 import { PhoneVerificationScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
-// import Loader from "../components/FTLoader";
+import * as Clipboard from "expo-clipboard";
+
+const {
+  enterDigitText,
+  enterDigitSubText,
+  bottomtext,
+  otpInputWrap,
+  buttonWrap,
+  notReceiveText,
+  durationWrap,
+  changeNumberText,
+} = PhoneVerificationScreenStyles;
 
 // auth/signin/confirm
 const PhoneVerificationScreen = ({ route }) => {
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
-  const [otpCode, setOtpCode] = useState<any>("");
+  const [otpCode, setOtpCode] = useState("");
   const [timecount, settimecount] = useState(30);
-  const phoneNumber = route.params?.phoneNumber || "08168890192";
+  const phoneNumber = route.params?.phonenumber || "08168890192";
   const from = route.params?.from || "login";
   const otpInput = useRef(null);
+  const inputRef = useRef(TextInput);
+  const [text, setText] = useState("");
+  const [noOfInput, setNoOfInput] = useState(true);
+
+  useEffect(() => {
+    if (text.length === 6) {
+      console.log(text);
+      otpInput?.current?.setValue(text);
+    }
+  }, [text]);
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -31,6 +52,9 @@ const PhoneVerificationScreen = ({ route }) => {
     return () => clearInterval(timer);
   }, [timecount]);
 
+
+
+  
   const handlesubmit = async () => {
     const url = from == "login" ? "auth/signin/confirm" : "auth/signup/confirm";
     const navigateurl =
@@ -71,48 +95,54 @@ const PhoneVerificationScreen = ({ route }) => {
     }
   };
 
+
+  // let isChanging = (value) => {
+  //   console.log(value, "yya");
+  //   setNoOfInput(false);
+  //   otpInput?.current?.setValue(value);
+  // };
+
   return (
     <FTTitlepagewrapper title="Verify phone number">
       <FTLoader loading={loading} />
-      <Text style={PhoneVerificationScreenStyles.center}>
-        Enter the 6-digit code sent to you at {phoneNumber}.
+      <Text style={enterDigitText}>
+        Enter the 6-digit code sent to you at{" "}
+        <Text style={enterDigitSubText}>{phoneNumber}</Text>.
       </Text>
 
       <OTPTextInput
         ref={otpInput}
         handleTextChange={(text) => setOtpCode(text)}
+        // handleCellTextChange={(text) => console.log(text, "Single")}
         inputCount={6}
-        tintColor={COLORS.green1}
-        offTintColor={COLORS.grey6}
-        textInputStyle={{
-          width: 49,
-          height: 51,
-          backgroundColor: COLORS.white,
-          borderWidth: 1,
-          borderBottomWidth: 1,
-          borderRadius: 10,
-        }}
+        // inputCellLength={1}
+        tintColor={COLORS.blue16}
+        offTintColor={COLORS.grey21}
+        textInputStyle={otpInputWrap}
+        autoFocus={false}
       />
-      <View style={PhoneVerificationScreenStyles.margin}>
+      <View style={buttonWrap}>
         <FTCustombutton btntext="VERIFY" onpress={handlesubmit} />
       </View>
-      <View style={PhoneVerificationScreenStyles.flexspace}>
-        <Text>Didn’t receive the code yet?</Text>
+
+      <View style={durationWrap}>
+        <Text style={notReceiveText}>Didn’t receive the code yet?</Text>
         {timecount > 0 ? (
-          <Text>00 : {timecount}s </Text>
+          <Text style={notReceiveText}>00 : {timecount}s </Text>
         ) : (
-          <Text onPress={resendcode}>Resend</Text>
+          <Pressable onPress={resendcode}>
+            <Text style={[notReceiveText, { color: COLORS.blue16 }]}>
+              Resend
+            </Text>
+          </Pressable>
         )}
       </View>
-      <View style={PhoneVerificationScreenStyles.flex}>
-        <Text>Incorrect Number?</Text>
-        <Text
-          style={PhoneVerificationScreenStyles.backlink}
-          onPress={navigation.goBack}
-        >
+      <Text style={notReceiveText}>
+        Incorrect Number?{" "}
+        <Text style={changeNumberText} onPress={navigation.goBack}>
           Change Number
         </Text>
-      </View>
+      </Text>
     </FTTitlepagewrapper>
   );
 };

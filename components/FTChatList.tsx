@@ -12,8 +12,6 @@ const { Blacksendicon } = icons;
 
 const {
   recentChatText,
-  numberOfUnread,
-  numberOfUnreadBg,
   chatLastMessage,
   lastMessageTime,
   chatDetailWrap,
@@ -22,8 +20,26 @@ const {
   chatWrap,
 } = ChatsScreenStyles;
 
-const ChatMessage = ({ userId, chatinfo }) => {
+const ChatMessage = ({ search, userId, chatinfo }) => {
   const [userInfo, setUserInfo] = useState({});
+  const [show, setshow] = useState(true);
+  useEffect(() => {
+    console.log(search);
+    if (search == "") {
+      setshow(true);
+    } else {
+      let de = false;
+      if (userInfo?.fullName) {
+        de = userInfo?.fullName.toLowerCase().includes(search.toLowerCase());
+      }
+      if (userInfo?.username) {
+        de =
+          de || userInfo?.username.toLowerCase().includes(search.toLowerCase());
+      }
+      console.log(userInfo?.fullName, search, de);
+      setshow(de);
+    }
+  }, [search]);
   useEffect(() => {
     getUser();
   }, []);
@@ -36,6 +52,10 @@ const ChatMessage = ({ userId, chatinfo }) => {
       setUserInfo(response.data.data);
     }
   };
+
+  if (!show) {
+    return null;
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -60,19 +80,18 @@ const ChatMessage = ({ userId, chatinfo }) => {
         </View>
         <View style={SAlign}>
           <Text style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
-          <View style={numberOfUnreadBg}>
-            <Text style={numberOfUnread}>2</Text>
-          </View>
         </View>
       </View>
     </TouchableOpacity>
   );
 };
 
-const ListHeader = () => {
+const ListHeader = ({ value, onchange }) => {
   return (
     <>
       <FTSearchinput
+        value={value}
+        onChange={onchange}
         placeholder="Type to search chat"
         bG={COLORS.blue20}
         mB={30}
@@ -85,6 +104,7 @@ const ListHeader = () => {
 
 const FTChatList = ({ chats, chattwos, authId }) => {
   const [allChats, setAllChats] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     //algorithm
@@ -114,6 +134,9 @@ const FTChatList = ({ chats, chattwos, authId }) => {
     // console.log(allChats, "list of all chats");
   }, [chats, chattwos]);
 
+  const handleSearchChnage = (text) => {
+    // allChats
+  };
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
@@ -121,12 +144,14 @@ const FTChatList = ({ chats, chattwos, authId }) => {
       renderItem={({ item }) => {
         let userid = item.id1 !== authId ? item.id1 : item.id2;
 
-        return <ChatMessage userId={userid} chatinfo={item} />;
+        return <ChatMessage search={search} userId={userid} chatinfo={item} />;
       }}
       ItemSeparatorComponent={() => {
         return <View style={{ height: 40 }} />;
       }}
-      ListHeaderComponent={() => <ListHeader />}
+      ListHeaderComponent={() => (
+        <ListHeader value={search} onchange={setSearch} />
+      )}
     />
   );
 };

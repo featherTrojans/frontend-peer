@@ -25,7 +25,6 @@ import { nameSplitToTwo } from "../utils/nameSplitter";
 import { TransactiondetailsScreenStyles } from "../assets/styles/screens";
 import { useAlert, useCopyclipboard } from "../hooks";
 
-
 const {
   container,
   detailsContainer,
@@ -49,7 +48,6 @@ const {
   tapAndCopy,
   headerBlock,
 } = TransactiondetailsScreenStyles;
-
 
 const { Sharereceipt, Downloadreceipt, Reporttransactions, Arrowin, Arrowout } =
   icons;
@@ -127,7 +125,6 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     }
   };
 
-
   const typeOfName = (title: string) => {
     switch (title) {
       case "Wallet Credit":
@@ -161,6 +158,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
   <!DOCTYPE html>
   <html lang="en">
   <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Feather Transactions</title>
@@ -173,11 +173,12 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
               padding: 50px;
               display: flex;
               flex-direction: column;
+              font-family: 'Nunito Sans', sans-serif;
               
            
           }
           img.logo{
-            max-width: 106px;
+            max-width: 200px;
             width: 100%;
             object-fit: cover
             align-self: start;
@@ -280,6 +281,7 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
           .item{
               display: flex;
               justify-content: space-between;
+              align-items: center;
               margin-bottom: 10px;
               border-bottom: 0.5px;
               border-color: rgba(112, 112,112, .3);
@@ -328,6 +330,14 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
    <p class="transaction__ref">${transactionRef}</p>
   
    <ul class="list">
+        <li class="item">
+        <span class="item__left">Sender Name </span>
+        <span class="item__right receiver">${
+          typeOfName(title)?.senderName !== "Bonus"
+            ? typeOfName(title)?.senderName
+            : "FEATHER"
+        }</span>
+      </li>
        <li class="item">
            <span class="item__left">Receiver </span>
            <span class="item__right receiver">${
@@ -399,13 +409,17 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
         direction === "in"
           ? sender === "Bonus"
             ? "Feather"
-            : otherUser ? otherUser.fullName : sender.split("-")[0]
+            : otherUser
+            ? otherUser.fullName
+            : sender.split("-")[0]
           : user.fullName;
       const receiverName =
         direction === "out"
           ? sender === "Bonus"
             ? "Feather"
-            : otherUser ? otherUser.fullName : sender.split("-")[0]
+            : otherUser
+            ? otherUser.fullName
+            : sender.split("-")[0]
           : user.fullName;
       return (
         <>
@@ -456,26 +470,24 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
       title: "Share",
       Icon: Sharereceipt,
       color: COLORS.Tyellow,
-      onpress: () => shareReceipt(htmlContent)
+      onpress: () => shareReceipt(htmlContent),
     },
     {
       title: "Download",
       Icon: Downloadreceipt,
       color: COLORS.Tgreen2,
-      onpress: () => downloadReceipt(htmlContent)
+      onpress: () => downloadReceipt(htmlContent),
     },
     {
       title: "Report",
       Icon: Reporttransactions,
       color: COLORS.Tred,
-      onpresss: () => console.log("Report Transactions")
+      onpresss: () => console.log("Report Transactions"),
     },
   ];
 
   return (
     <FTTitlepagewrapper title="Transaction Details" childBg={COLORS.white}>
-        
-
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingHorizontal: 15 }}
@@ -484,32 +496,32 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
         <View style={optionWrapper}>
           {options.map(({ title, color, Icon, onpress }, index) => {
             return (
-              <TouchableOpacity onPress={onpress} activeOpacity={0.7} style={optionBlock} key={index}>
-                <FTIconwithbg 
-                Icon={Icon}
-                size={40}
-                bG={color}
-                />
+              <TouchableOpacity
+                onPress={onpress}
+                activeOpacity={0.7}
+                style={optionBlock}
+                key={index}
+              >
+                <FTIconwithbg Icon={Icon} size={40} bG={color} />
                 <Text style={eachOptionTitle}>{title}</Text>
               </TouchableOpacity>
             );
           })}
         </View>
 
-
         {/* Header section showing ref and receiver image */}
-            
-          <View style={{ alignItems: "center", marginTop: 50 }}>
-            <Text style={transactionRefText}>Transaction Ref.</Text>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => copyToClipboard(transactionRef)}
-              style={refAndCopyWrap}
-            >
-              <Text style={refText}>{transactionRef}</Text>
-              <Text style={tapAndCopy}>Tap to copy ref. number</Text>
-            </TouchableOpacity>
-          </View>
+
+        <View style={{ alignItems: "center", marginTop: 50 }}>
+          <Text style={transactionRefText}>Transaction Ref.</Text>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => copyToClipboard(transactionRef)}
+            style={refAndCopyWrap}
+          >
+            <Text style={refText}>{transactionRef}</Text>
+            <Text style={tapAndCopy}>Tap to copy ref. number</Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={eachOptionWrapper}>
           <Eachoption title="Transaction Type" value={title} />
@@ -532,11 +544,7 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
             value={`N${amountFormatter(total.toString())}`}
           />
         </View>
-
-
       </ScrollView>
-
-
     </FTTitlepagewrapper>
   );
 };

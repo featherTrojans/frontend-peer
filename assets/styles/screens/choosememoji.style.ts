@@ -21,7 +21,7 @@ export const ChoosememojiScreenStyles = StyleSheet.create({
     alignSelf: "center",
   },
   memojisWrapper: {
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
     marginTop: 20,
   },

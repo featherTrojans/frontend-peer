@@ -24,7 +24,7 @@ const Backheader = ({
 
   return (
     <View style={[container, { marginBottom: mb, backgroundColor: bg }]}>
-      <Pressable onPress={() => navigation.goBack()} style={backArrowContainer}>
+      <Pressable hitSlop={20} onPress={() => navigation.goBack()} style={backArrowContainer}>
         {showArrow && <Backarrow />}
       </Pressable>
 

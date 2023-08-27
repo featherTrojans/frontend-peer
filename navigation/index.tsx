@@ -206,8 +206,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               })}
             />
           );
@@ -225,8 +224,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               })}
             />
           );
@@ -244,8 +242,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               })}
             />
           );
@@ -263,8 +260,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               })}
             />
           );
@@ -282,8 +278,7 @@ const AuthenticatedNavigator = () => {
               options={() => ({
                 headerTitle: route.title,
                 headerShown: route.showHeader,
-                cardStyleInterpolator:
-                  CardStyleInterpolators.forBottomSheetAndroid,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               })}
             />
           );

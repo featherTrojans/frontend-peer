@@ -59,7 +59,7 @@ const ChatsprofileScreen = ({ route }) => {
     setLoading(true);
     try {
       const response = await axiosCustom.get(
-        `transactions/users/${userInfo.username}`
+        `transactions/users/${userInfo.phoneNumber}`
       );
       setTransactions(response?.data?.data?.transactions);
     } catch (error) {
@@ -145,7 +145,10 @@ const ChatsprofileScreen = ({ route }) => {
               )}
               keyExtractor={(item: { time: string }) => item.time}
               ListEmptyComponent={
-                <FTEmptycomponent msg="Sorry, You have not performed any transactions with this user" />
+                <FTEmptycomponent
+                  msg="Sorry, You have not performed any transactions with this user"
+                  showTransact={false}
+                />
               }
             />
           </>

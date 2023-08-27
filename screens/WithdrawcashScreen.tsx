@@ -2,6 +2,7 @@ import { Linking, Platform, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
   FTCustombutton,
+  FTEmptycomponent,
   FTIconwithbg,
   FTTitlepagewrapper,
 } from "../components";
@@ -11,24 +12,29 @@ import { makePhoneCall, navigation } from "../utils";
 import { useAlert } from "../hooks";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LocationContext } from "../context/LocationContext";
-import { getCurrentLocation } from "../utils/customLocation";
+import {
+  getCoordinateFromAddress,
+  getCurrentLocation,
+} from "../utils/customLocation";
+import { WithdrawcashScreenStyles } from "../assets/styles/screens";
+const {
+  container,
+  withdrawalInfoWrap,
+  withdrawalProfileWrap,
+  withdrawalProfileName,
+  amountOfTransaction,
+  locationInfoWrap,
+  locationDistance,
+  locationAddress,
+  viewOnMapWrap,
+  viewOnMapText,
+  withdrawalActionWrap,
+  withdrawalActionTitle,
+  loadingWrapper,
+  searchingNearbyText,
+} = WithdrawcashScreenStyles;
 
 const { Blacksendicon, Cancelwithdrawicon, Phoneicon, Chaticon } = icons;
-
-// {
-//   reference: "",
-//   amount: "",
-//   charges: "",
-//   total: "",
-//   negotiatedFee: "",
-//   agent: "",
-//   agentUsername: "",
-//   phoneNumber: "",
-//   status: "",
-//   meetupPoint: "",
-//   createdAt: "",
-//   agentImage: null,
-// }
 
 const viewonmap = (lat, lng) => {
   const scheme = Platform.select({
@@ -53,13 +59,20 @@ const WithdrawcashScreen = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(agentinfo);
   const [noagent, setnoagent] = useState(false);
-
+  const [latlong, setlatlong] = useState([]);
   useEffect(() => {
     if (!agentinfo) {
       getLocationAndAgents();
     }
   }, []);
 
+  useEffect(() => {
+    if (info?.meetupPoint) {
+      getCoordinateFromAddress(info?.meetupPoint).then((coords) =>
+        setlatlong({ lat: coords.latitude, long: coords.longitude })
+      );
+    }
+  }, [info]);
   const getLocationAndAgents = async () => {
     setnoagent(false);
     setDestinationCoords({});
@@ -183,10 +196,12 @@ const WithdrawcashScreen = ({ route }) => {
   if (noagent) {
     return (
       <FTTitlepagewrapper title="Withdraw Cash">
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Text>Paid, sorry couldn’t find any merchants around you</Text>
+        <View style={loadingWrapper}>
+          <FTEmptycomponent
+            msg="Padi, sorry couldn’t find any merchants around you."
+            showTransact={false}
+            size={150}
+          />
         </View>
         <FTCustombutton
           onpress={getLocationAndAgents}
@@ -200,12 +215,10 @@ const WithdrawcashScreen = ({ route }) => {
   if (!info || loading) {
     return (
       <FTTitlepagewrapper title="Withdraw Cash">
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
+        <View style={loadingWrapper}>
           <Text>SearchIcons</Text>
         </View>
-        <Text style={{ textAlign: "center", marginBottom: 20 }}>
+        <Text style={searchingNearbyText}>
           Searching for nearby merchants...
         </Text>
       </FTTitlepagewrapper>
@@ -214,37 +227,13 @@ const WithdrawcashScreen = ({ route }) => {
 
   return (
     <FTTitlepagewrapper title="Withdraw Cash">
-      <View style={{ flex: 1, paddingBottom: 60 }}>
-        <View
-          style={{
-            alignSelf: "center",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View style={{ alignSelf: "center", alignItems: "center" }}>
+      <View style={container}>
+        <View style={withdrawalInfoWrap}>
+          <View style={withdrawalProfileWrap}>
             <FTIconwithbg Icon={Blacksendicon} bG={COLORS.Tblue} size={86} />
 
-            <Text
-              style={{
-                ...fontsize.bsmall,
-                ...FONTS.bold,
-                color: COLORS.blue9,
-                marginBottom: 13,
-                marginTop: 35,
-              }}
-            >
-              {info?.agent}
-            </Text>
-            <Text
-              style={{
-                ...fontsize.smallest,
-                ...FONTS.semibold,
-                color: COLORS.grey2,
-              }}
-            >
-              33 Transactions
-            </Text>
+            <Text style={withdrawalProfileName}>{info?.agent}</Text>
+            <Text style={amountOfTransaction}>33 Transactions</Text>
           </View>
 
           <View style={{ flex: 1, justifyContent: "center" }}>
@@ -272,7 +261,7 @@ const WithdrawcashScreen = ({ route }) => {
               }}
             >
               <Text
-                onPress={() => viewonmap()}
+                onPress={() => viewonmap(latlong?.lat, latlong?.long)}
                 style={{
                   ...fontsize.xxsmallest,
                   ...FONTS.semibold,
@@ -284,28 +273,13 @@ const WithdrawcashScreen = ({ route }) => {
             </View>
           </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              width: 250,
-              justifyContent: "space-between",
-            }}
-          >
+          <View style={withdrawalActionWrap}>
             {withdrawcashActions.map(({ Icon, bg, title, action }) => {
               return (
-                <TouchableOpacity onPress={action}>
+                <TouchableOpacity activeOpacity={0.7} onPress={action}>
                   <View style={{ alignItems: "center" }}>
                     <FTIconwithbg Icon={Icon} bG={bg} />
-                    <Text
-                      style={{
-                        ...fontsize.xxsmallest,
-                        ...FONTS.medium,
-                        color: COLORS.blue9,
-                        marginTop: 15,
-                      }}
-                    >
-                      {title}
-                    </Text>
+                    <Text style={withdrawalActionTitle}>{title}</Text>
                   </View>
                 </TouchableOpacity>
               );

@@ -42,8 +42,10 @@ const FTTitlepagewrapper = ({
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: bg }}>
         <Customstatusbar />
+
         <View style={[backHeaderWrap, { backgroundColor: headerBg }]}>
           <Pressable
+            hitSlop={20}
             onPress={() => navigation.goBack()}
             style={[
               backArrowContainer,

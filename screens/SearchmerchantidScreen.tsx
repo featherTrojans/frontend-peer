@@ -63,7 +63,7 @@ const SearchmerchantidScreen = ({ route }) => {
     navigation.navigate("transactionsummary_screen", { action, summaryinfo });
   };
 
-  const ModalContent = () => {
+  const ModalContent = ({ merchantinfo }) => {
     return (
       <View style={{ backgroundColor: "#fff" }}>
         <Text>Merchant Details</Text>
@@ -84,7 +84,10 @@ const SearchmerchantidScreen = ({ route }) => {
   const switchModals = (value) => {
     switch (value) {
       case 0:
-        setContent({ child: <ModalContent />, height: 255 });
+        setContent({
+          child: <ModalContent merchantinfo={merchantinfo} />,
+          height: 255,
+        });
         setShowModal((s) => !s);
         break;
 
@@ -99,7 +102,7 @@ const SearchmerchantidScreen = ({ route }) => {
       const response = await axiosCustom.get(
         `/merchant/detail/${data.merchantid}`
       );
-      setmerchantinfo({ merchantid: data.merchantid, ...response.data });
+      setmerchantinfo({ merchantid: data.merchantid, ...response.data.data });
       switchModals(0);
     } catch (err) {
       errorAlert(err);

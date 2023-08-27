@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Image,
 } from "react-native";
 import React, {
   useCallback,
@@ -13,13 +14,18 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Svg, { Defs, Pattern, Image, G, Rect, Path } from "react-native-svg";
+import Svg, { G, Rect, Path } from "react-native-svg";
 import {
   AccountverificationScreenStyles,
   ChoosememojiScreenStyles,
   ProfileScreenStyles,
 } from "../assets/styles/screens";
-import { FTCustombutton, FTTitlepagewrapper } from "../components";
+import {
+  FTCustombutton,
+  FTIconwithbg,
+  FTLoader,
+  FTTitlepagewrapper,
+} from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
@@ -32,12 +38,21 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
+import * as Haptics from "expo-haptics";
+import { allMemojis } from "../assetdatas";
+
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 
 const { Changememojicheckicon, Profilechangeicon } = icons;
 
-
-const { sectionHeader, colorOptionBg, profileWrap, memojisWrapper, buttonWrap, buttonText } = ChoosememojiScreenStyles;
+const {
+  sectionHeader,
+  colorOptionBg,
+  profileWrap,
+  memojisWrapper,
+  buttonWrap,
+  buttonText,
+} = ChoosememojiScreenStyles;
 const {
   movingSegmentedbg,
   segmentedWrap,
@@ -50,6 +65,7 @@ const ColorOption = ({ color, active, setActive }) => {
     <Pressable
       onPress={() => {
         setActive(color);
+        Haptics.selectionAsync();
       }}
     >
       <View style={[colorOptionBg, { backgroundColor: color }]}>
@@ -91,8 +107,11 @@ const profileColors = [
 
 const ChoosememojiScreen = () => {
   const { errorAlert } = useAlert();
-  const [active, setActive] = useState("#342AD5");
-  const [emojiindex, setEmojiIndex] = useState(0);
+  const [active, setActive] = useState("transparent");
+  const [emojiindex, setEmojiIndex] = useState(
+    "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Fo.png?alt=media&token=63eb2074-9d2c-4588-9f18-e940888414be"
+  );
+
   const [loading, setLoading] = useState(false);
   const { authdata, setAuthData } = useContext(AuthContext);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -100,6 +119,8 @@ const ChoosememojiScreen = () => {
   const flatlistRef = useRef<FlatList>(null);
   const tabTranslate = useSharedValue(0);
   const rotateView = useSharedValue(0);
+  const [skinColor, setSkinColor] = useState("lightSkinned");
+  const gender = "male";
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateX: tabTranslate.value }],
@@ -126,7 +147,7 @@ const ChoosememojiScreen = () => {
           index: emojiindex,
         },
       });
-      return navigation.navigate("Dashboard");
+      return navigation.navigate("memojisuccess_screen");
     } catch (err) {
       errorAlert(err);
     } finally {
@@ -141,6 +162,11 @@ const ChoosememojiScreen = () => {
   useEffect(() => {
     tabTranslate.value = withSpring(currentIndex * translateValue);
     rotateView.value = withSpring(currentIndex * 360);
+    if (currentIndex === 0) {
+      setSkinColor("lightSkinned");
+    } else {
+      setSkinColor("darkSkinned");
+    }
 
     const scrollTo = () => {
       flatlistRef?.current?.scrollToIndex({
@@ -153,6 +179,7 @@ const ChoosememojiScreen = () => {
 
   return (
     <FTTitlepagewrapper title="Change Appearance">
+      <FTLoader loading={loading} />
       <View style={{ flex: 1 }}>
         <View style={segmentedWrap}>
           <Animated.View
@@ -179,13 +206,12 @@ const ChoosememojiScreen = () => {
           })}
         </View>
 
-
         <View style={profileWrap}>
-          <AnimatedSVG
-            width={150.649}
-            height={150.649}
-            style={rotateStyles}
-          >
+          <View style={{ position: "absolute" }}>
+            <FTIconwithbg imageUrl={emojiindex} bG={active} size={150} />
+          </View>
+
+          <AnimatedSVG width={150.649} height={150.649} style={rotateStyles}>
             <G data-name="Group 11713" transform="translate(.5 .5)">
               <Rect
                 width={133}
@@ -225,23 +251,30 @@ const ChoosememojiScreen = () => {
           }}
         />
 
-        <FlatList 
-        data={profileColors}
-        numColumns={3}
-        horizontal={false}
-        columnWrapperStyle={memojisWrapper}
-        renderItem={({item}) => {
-          return (
-            <View style={{width: 65, height: 65, backgroundColor: item.color, marginRight: 20}}/>
-          )
-        }}
+        <FlatList
+          data={allMemojis[gender][skinColor]}
+          numColumns={3}
+          horizontal={false}
+          columnWrapperStyle={memojisWrapper}
+          renderItem={({ item }) => {
+            return (
+              <FTIconwithbg
+                imageUrl={item}
+                bG=""
+                onpress={() => setEmojiIndex(item)}
+                size={65}
+              />
+            );
+          }}
         />
 
-        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("memojisuccess_screen")} style={buttonWrap}>
-            <Text style={buttonText}>Great Proceed</Text>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={handleSubmit}
+          style={buttonWrap}
+        >
+          <Text style={buttonText}>Great Proceed</Text>
         </TouchableOpacity>
-
-
       </View>
     </FTTitlepagewrapper>
   );

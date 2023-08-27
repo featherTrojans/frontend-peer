@@ -3,11 +3,20 @@ import React from "react";
 import LottieView from "lottie-react-native";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { FTEmptycomponentStyles } from "../assets/styles/components";
-const { emptyContainer, emptyText } = FTEmptycomponentStyles;
+const { emptyContainer, emptyText, performTransactText, performTransactBg } =
+  FTEmptycomponentStyles;
 
 const { Cryinganimate } = icons;
 
-const Emptycomponent = ({ size = 110, msg }: { size?: number; msg: string }) => {
+const Emptycomponent = ({
+  size = 110,
+  msg,
+  showTransact = true
+}: {
+  size?: number;
+  msg: string;
+  showTransact?: boolean
+}) => {
   return (
     <View style={emptyContainer}>
       {/* Crying icons */}
@@ -21,26 +30,9 @@ const Emptycomponent = ({ size = 110, msg }: { size?: number; msg: string }) => 
         <Text style={emptyText}>{msg}</Text>
       </View>
 
-      <View
-        style={{
-          alignSelf: "center",
-          marginTop: 37,
-          paddingVertical: 11,
-          paddingHorizontal: 24,
-          backgroundColor: "#F3F5FE",
-          borderRadius: 10,
-        }}
-      >
-        <Text
-          style={{
-            ...fontsize.xxsmallest,
-            ...FONTS.semibold,
-            color: COLORS.blue16,
-          }}
-        >
-          Perform a transaction
-        </Text>
-      </View>
+     {showTransact && <View style={performTransactBg}>
+        <Text style={performTransactText}>Perform a transaction</Text>
+      </View>}
     </View>
   );
 };

@@ -7,7 +7,7 @@ export const PASSWORD_VALIDATION = {
 };
 
 export const PHONE_NUMBER_VALIDATION = {
-  required: "Phone numbers is required",
+  required: "Phone number is required",
   minLength: {
     value: 11,
     message: "Must be eleven digits",

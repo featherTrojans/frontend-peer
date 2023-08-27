@@ -92,6 +92,7 @@ const {
   Startnewchaticon,
   Successtransfericon,
   Smalllockicon,
+  Smallbackarrow
 } = icons;
 
 const ChatsdmScreen = ({ route }) => {
@@ -522,9 +523,9 @@ const ChatsdmScreen = ({ route }) => {
       {/* Header Section */}
       <View style={chatHeader}>
         <View style={[headerDetailsContainer]}>
-          <View style={backArrowWrap}>
-            <Backarrow />
-          </View>
+          <TouchableOpacity activeOpacity={0.7} onPress={navigation.goBack} style={backArrowWrap}>
+            <Smallbackarrow /> 
+          </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() =>
@@ -538,7 +539,7 @@ const ChatsdmScreen = ({ route }) => {
             <FTIconwithbg bG={COLORS.Tyellow} Icon={Blacksendicon} />
             <View style={{ marginLeft: 18 }}>
               <Text style={chatName}>{userInfo?.fullName}</Text>
-              <Text style={chatLastSeen}>Last online : 2 hours ago</Text>
+              {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}
             </View>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.8} onPress={() => switchModals(0)}>
@@ -547,7 +548,7 @@ const ChatsdmScreen = ({ route }) => {
         </View>
       </View>
 
-      <Animated.View style={[translateStyle, { flex: 1 }]}>
+      <Animated.View style={[{ flex: 1 }]}>
         {fetchmessage ? (
           <View style={emptyChatAnimation}>
             {/* <LottieView
@@ -596,6 +597,7 @@ const ChatsdmScreen = ({ route }) => {
               value={chattext}
               onChangeText={handleTextChange}
               placeholderTextColor={COLORS.grey16}
+              returnKeyType="done"
             />
             {chattext !== "" && (
               <TouchableOpacity
