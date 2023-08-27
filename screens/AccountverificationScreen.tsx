@@ -191,7 +191,7 @@ const AccountverificationScreen = (props) => {
 <SegmentedControl
         values={["Newbie", "Odogwu", "Veteran"]}
         selectedIndex={selectedIndex}
-        tintColor={COLORS.blue6}
+        tintColor={COLORS.blue9}
         style={{
           width: "80%",
           alignSelf: "center",

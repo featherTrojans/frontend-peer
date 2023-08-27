@@ -69,6 +69,14 @@ const TransactionsScreen = ({ navigation }) => {
 
   useEffect(() => {
     getAllTransactions();
+
+
+
+    return () => {
+      console.log("yes")
+    }
+
+ 
   }, []);
 
   const getAllTransactions = async () => {
@@ -90,11 +98,7 @@ const TransactionsScreen = ({ navigation }) => {
     setRefreshing(true);
     getAllTransactions();
   };
-  const closeModalAndRedirect = (redirectScreenName) => {
-    redirectTo(redirectScreenName);
-    // setShowTabs(true)
-    // setShowModal(false)
-  };
+
 
   const switchModals = (value) => {
     switch (value) {
@@ -110,7 +114,6 @@ const TransactionsScreen = ({ navigation }) => {
         setContent({ child: <FTBillPayment />, height: 360 });
         setShowModal((s) => !s);
         break;
-
       default:
         break;
     }

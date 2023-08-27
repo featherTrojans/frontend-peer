@@ -6,12 +6,11 @@ export const WelcomeScreenStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     paddingHorizontal: 25,
-    paddingTop: 25,
+    // paddingTop: 25,
   },
   welcomeTextContainer: {
     justifyContent: "center",
     alignItems: "center",
-    // marginHorizontal: 58,
     flex: 0.2,
   },
   welcomeText: {
@@ -32,8 +31,6 @@ export const WelcomeScreenStyles = StyleSheet.create({
     backgroundColor: COLORS.animatedLine,
     height: 3.5,
     borderRadius: 3.5,
-    // marginBottom: RFValue(127),
-    // marginTop: RFValue(127),
   },
   line: {
     backgroundColor: COLORS.blue6,
@@ -51,17 +48,14 @@ export const WelcomeScreenStyles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 20,
   },
-  info: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   infotext: {
     ...FONTS.regular,
     ...fontsize.xsmallest,
+    alignSelf: "center",
+    paddingBottom: 20
   },
   link: {
     ...FONTS.bold,
-    ...fontsize.xsmallest,
   },
 });

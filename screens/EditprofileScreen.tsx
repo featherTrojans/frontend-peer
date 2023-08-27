@@ -170,7 +170,7 @@ const EditprofileScreen = () => {
       modalChildren={<GenderModal />}
       showModal={showModal}
       setShowModal={setShowModal}
-      modalHeight={300}
+      modalHeight={200}
       rightComponent={<HeaderRight />}
     >
       <FTKeyboardwrapper>
