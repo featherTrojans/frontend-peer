@@ -52,7 +52,7 @@ const useSwipemodal = () => {
     const closeModal = () => {
       setShowModal((s) => !s);
       offset.value = withSpring(0);
-      setShowTabs(true);
+      // setShowTabs(true);
     };
 
     const pan = Gesture.Pan()

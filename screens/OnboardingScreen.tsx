@@ -1,27 +1,24 @@
 import React, { useRef, useState } from "react";
 import { FlatList, Animated, View, Text, TouchableOpacity } from "react-native";
 import { OnboardingScreenNavigationProps } from "../types";
-import { COLORS, FONTS, fontsize, SIZES } from "../constants";
+import { COLORS, FONTS, fontsize, icons, SIZES } from "../constants";
 import onboardingdatas from "../onboardingdatas";
 import Customstatusbar from "./shared/Customstatusbar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OnboardingScreenStyles } from "../assets/styles/screens";
-import FTEachOnboarding from "../components/FTEachOnboarding";
-import { navigation } from "../utils";
+import { FTCustombutton, FTEachonboarding, FTMainwrapper } from "../components";
 
 
 const {
   animatedDots,
   animatedDotsWrap,
-  onboardingFooterSubWrap,
-  onboardingFooterWrap,
-  skipBg,
+  dotAndSkipWrap,
+  skipWrap,
   skipText,
-  registerText,
-  registerWrap,
 } = OnboardingScreenStyles;
+const { Skiplatericon } = icons;
 
-const OnboardingScreen = () => {
+const OnboardingScreen = ({navigation}) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
 
@@ -50,60 +47,54 @@ const OnboardingScreen = () => {
 
   const navigateToLogin = () => {
     storeData();
-    navigation.navigate("getstarted_screen");
+    navigation.replace("login_screen");
   };
 
-  const scrollTo = () => {
-    let currentIndex = Math.ceil(Number(scrollX._value / SIZES.width));
-    if (currentIndex < onboardingdatas.length - 1) {
-      // Scroll to the next item
-      flatListRef?.current?.scrollToIndex({
-        index: currentIndex + 1,
-        animated: true,
-      });
-    } else {
-      navigateToLogin();
-    }
-  };
+
+  let isLastIndex = viewIndex == onboardingdatas.length - 1
 
   return (
-    <View style={{ flex: 1, backgroundColor: COLORS.white }}>
-      <Customstatusbar />
+    <FTMainwrapper pH={0}>
+      <View style={dotAndSkipWrap}>
+        {/* Animated Dots */}
+        <View style={animatedDotsWrap}>
+          {onboardingdatas.map((item, index) => {
+            const dotPosition = Animated.divide(scrollX, SIZES.width);
 
-      {/* Animated Dots */}
-      <View style={animatedDotsWrap}>
-        {onboardingdatas.map((item, index) => {
-          const dotPosition = Animated.divide(scrollX, SIZES.width);
-
-          const dotColor = dotPosition.interpolate({
-            inputRange: [index - 1, index, index + 1],
-            outputRange: [COLORS.grey3, COLORS.black, COLORS.grey3],
-            extrapolate: "clamp",
-          });
-          const dotOpacity = dotPosition.interpolate({
-            inputRange: [index - 1, index, index + 1],
-            outputRange: [0.2, 1, 0.2],
-            extrapolate: "clamp",
-          });
-          const dotWidth = dotPosition.interpolate({
-            inputRange: [index - 1, index, index + 1],
-            outputRange: [8, 20, 8],
-            extrapolate: "clamp",
-          });
-          return (
-            <Animated.View
-              key={index}
-              style={[
-                animatedDots,
-                {
-                  backgroundColor: dotColor,
-                  opacity: dotOpacity,
-                  width: dotWidth,
-                },
-              ]}
-            />
-          );
-        })}
+            const dotColor = dotPosition.interpolate({
+              inputRange: [index - 1, index, index + 1],
+              outputRange: [COLORS.grey3, COLORS.blue6, COLORS.grey3],
+              extrapolate: "clamp",
+            });
+            const dotOpacity = dotPosition.interpolate({
+              inputRange: [index - 1, index, index + 1],
+              outputRange: [0.2, 1, 0.2],
+              extrapolate: "clamp",
+            });
+            const dotWidth = dotPosition.interpolate({
+              inputRange: [index - 1, index, index + 1],
+              outputRange: [8, 20, 8],
+              extrapolate: "clamp",
+            });
+            return (
+              <Animated.View
+                key={index}
+                style={[
+                  animatedDots,
+                  {
+                    backgroundColor: dotColor,
+                    opacity: dotOpacity,
+                    width: dotWidth,
+                  },
+                ]}
+              />
+            );
+          })}
+        </View>
+        {!isLastIndex ? <TouchableOpacity activeOpacity={0.7} onPress={navigateToLogin} style={skipWrap}>
+          <Skiplatericon />
+          <Text style={skipText}>Skip</Text>
+        </TouchableOpacity> : <View style={{height: 14}}/>}
       </View>
 
       <FlatList
@@ -121,32 +112,16 @@ const OnboardingScreen = () => {
         bounces={false}
         keyExtractor={(item: any) => item.header}
         data={onboardingdatas}
-        renderItem={({ item }: any) => <FTEachOnboarding item={item} />}
+        renderItem={({ item }: any) => <FTEachonboarding item={item} />}
       />
 
       {/* Footer--Dots and the nxet button */}
-      <View style={onboardingFooterWrap}>
-        <View style={onboardingFooterSubWrap}>
-          {viewIndex < onboardingdatas.length - 1 ? (
-            <TouchableOpacity
-              onPress={scrollTo}
-              activeOpacity={0.8}
-              style={skipBg}
-            >
-              <Text style={skipText}>SKIP</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={scrollTo}
-              activeOpacity={0.8}
-              style={registerWrap}
-            >
-              <Text style={registerText}>Join the flock - Register</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+      <View style={{ paddingHorizontal: 20, paddingBottom: 20 }}>
+        {isLastIndex && (
+          <FTCustombutton btntext="Get Started" onpress={navigateToLogin} />
+        )}
       </View>
-    </View>
+    </FTMainwrapper>
   );
 };
 

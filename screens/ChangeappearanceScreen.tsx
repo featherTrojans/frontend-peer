@@ -5,10 +5,10 @@ import {
   ProfileScreenStyles,
 } from "../assets/styles/screens";
 import { FTIconwithtitleandinfo, FTTitlepagewrapper } from "../components";
-import { icons } from "../constants";
+import { COLORS, icons } from "../constants";
 import { redirectTo } from "../utils";
 redirectTo
-const { Changememojicheckicon } = icons;
+const { Changememojicheckicon, Choosememojiicon } = icons;
 
 const {  } = ChangeappearanceScreenStyles;
 
@@ -20,10 +20,10 @@ const ChangeappearanceScreen = () => {
   return (
     <FTTitlepagewrapper title="Change Appearance">
       <FTIconwithtitleandinfo 
-      Icon={Changememojicheckicon}
+      Icon={Choosememojiicon}
       title="Choose Memoji"
       onPress={() => redirectTo("choosememoji_screen")}
-      bG="blue"
+      bG={COLORS.Tyellow3}
       mB={20}
       />
         <FTIconwithtitleandinfo 

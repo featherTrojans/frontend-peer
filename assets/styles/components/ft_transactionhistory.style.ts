@@ -24,6 +24,7 @@ export const FTTransactionhistoryStyles = StyleSheet.create({
   historyContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center"
   },
   historyDetailsContainer: {
     flexDirection: "row",
@@ -41,12 +42,11 @@ export const FTTransactionhistoryStyles = StyleSheet.create({
   titleText: {
     ...fontsize.xsmallest,
     ...FONTS.medium,
-    marginBottom: 3,
     textTransform: "capitalize",
   },
   transactionTypeText: {
     ...fontsize.xxsmall,
-    lineHeight: 27,
+    // lineHeight: 27,
     ...FONTS.regular,
     color: COLORS.halfBlack,
     alignItems: "center",

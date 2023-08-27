@@ -1,4 +1,3 @@
-import GetstartedScreen from "./GetstartedScreen";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "./LoginScreen";
 import NotificationsScreen from "./NotificationsScreen";
@@ -68,7 +67,6 @@ export {
   OnboardingScreen,
   LoginScreen,
   WelcomeScreen,
-  GetstartedScreen,
   CustomWebView,
   LockScreen,
   PersonalRegisterScreen,

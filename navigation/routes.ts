@@ -23,7 +23,6 @@ import {
   ChoosenetworkScreen,
   EditprofileScreen,
   FindmerchantScreen,
-  GetstartedScreen,
   HomeScreen,
   LoginScreen,
   MeternumberScreen,
@@ -74,13 +73,6 @@ export const authRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "onboarding_screen",
-  },
-  {
-    title: "",
-    screen: GetstartedScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "getstarted_screen",
   },
   {
     title: "",

@@ -101,17 +101,14 @@ const TransactionsScreen = ({ navigation }) => {
       case 0:
         setContent({ child: <FTTransfer />, height: 300 });
         setShowModal((s) => !s);
-        setShowTabs(false);
         break;
       case 1:
         setContent({ child: <FTWithdraw />, height: 300 });
         setShowModal((s) => !s);
-        setShowTabs(false);
         break;
       case 2:
         setContent({ child: <FTBillPayment />, height: 360 });
         setShowModal((s) => !s);
-        setShowTabs(false);
         break;
 
       default:
