@@ -2,8 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { COLORS, FONTS, fontsize, icons, SIZES } from "../constants";
 
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import { Formik, replace } from "formik";
-import * as Yup from "yup";
 
 import * as LocalAuthentication from "expo-local-authentication";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
