@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Linking, Platform, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
   FTCustombutton,
@@ -12,7 +12,10 @@ import { makePhoneCall, navigation } from "../utils";
 import { useAlert } from "../hooks";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LocationContext } from "../context/LocationContext";
-import { getCurrentLocation } from "../utils/customLocation";
+import {
+  getCoordinateFromAddress,
+  getCurrentLocation,
+} from "../utils/customLocation";
 import { WithdrawcashScreenStyles } from "../assets/styles/screens";
 const {
   container,
@@ -31,8 +34,21 @@ const {
   searchingNearbyText,
 } = WithdrawcashScreenStyles;
 
-
 const { Blacksendicon, Cancelwithdrawicon, Phoneicon, Chaticon } = icons;
+
+const viewonmap = (lat, lng) => {
+  const scheme = Platform.select({
+    ios: "maps://0,0?q=",
+    android: "geo:0,0?q=",
+  });
+  const latLng = `${lat},${lng}`;
+  const label = "Merchant Location";
+  const url = Platform.select({
+    ios: `${scheme}${label}@${latLng}`,
+    android: `${scheme}${latLng}(${label})`,
+  });
+  Linking.openURL(url);
+};
 
 const WithdrawcashScreen = ({ route }) => {
   const amount = route.params?.amount;
@@ -43,13 +59,20 @@ const WithdrawcashScreen = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(agentinfo);
   const [noagent, setnoagent] = useState(false);
-
+  const [latlong, setlatlong] = useState([]);
   useEffect(() => {
     if (!agentinfo) {
       getLocationAndAgents();
     }
   }, []);
 
+  useEffect(() => {
+    if (info?.meetupPoint) {
+      getCoordinateFromAddress(info?.meetupPoint).then((coords) =>
+        setlatlong({ lat: coords.latitude, long: coords.longitude })
+      );
+    }
+  }, [info]);
   const getLocationAndAgents = async () => {
     setnoagent(false);
     setDestinationCoords({});
@@ -76,7 +99,6 @@ const WithdrawcashScreen = ({ route }) => {
       }
     } catch (err) {
       setnoagent(true);
-      console.log(err.response, "no status found , can you believe that");
     } finally {
     }
   };
@@ -109,7 +131,6 @@ const WithdrawcashScreen = ({ route }) => {
       try {
         navigation.navigate("transactionsuccess_screen");
       } catch (err) {
-        console.log(err.response);
         throw err;
       }
     };
@@ -175,13 +196,12 @@ const WithdrawcashScreen = ({ route }) => {
   if (noagent) {
     return (
       <FTTitlepagewrapper title="Withdraw Cash">
-        
         <View style={loadingWrapper}>
-        <FTEmptycomponent 
-        msg="Padi, sorry couldn’t find any merchants around you."
-        showTransact={false}
-        size={150}
-        />
+          <FTEmptycomponent
+            msg="Padi, sorry couldn’t find any merchants around you."
+            showTransact={false}
+            size={150}
+          />
         </View>
         <FTCustombutton
           onpress={getLocationAndAgents}
@@ -216,11 +236,40 @@ const WithdrawcashScreen = ({ route }) => {
             <Text style={amountOfTransaction}>33 Transactions</Text>
           </View>
 
-          <View style={locationInfoWrap}>
-            <Text style={locationDistance}>15 Mins Away</Text>
-            <Text style={locationAddress}>{info.meetupPoint}</Text>
-            <View style={viewOnMapWrap}>
-              <Text style={viewOnMapText}>View on maps</Text>
+          <View style={{ flex: 1, justifyContent: "center" }}>
+            <Text style={{ ...fontsize.bxmedium, ...FONTS.bold }}>
+              15 Mins Away
+            </Text>
+            <Text
+              style={{
+                ...fontsize.smallest,
+                ...FONTS.regular,
+                color: COLORS.blue9,
+                marginTop: 25,
+                marginBottom: 30,
+              }}
+            >
+              {info.meetupPoint}
+            </Text>
+            <View
+              style={{
+                backgroundColor: COLORS.Tblue6,
+                paddingVertical: 12,
+                paddingHorizontal: 20,
+                alignSelf: "center",
+                borderRadius: 10,
+              }}
+            >
+              <Text
+                onPress={() => viewonmap(latlong?.lat, latlong?.long)}
+                style={{
+                  ...fontsize.xxsmallest,
+                  ...FONTS.semibold,
+                  color: COLORS.blue16,
+                }}
+              >
+                View on maps
+              </Text>
             </View>
           </View>
 

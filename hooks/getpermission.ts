@@ -13,17 +13,15 @@ function requestDevicePermission(title, message, DevicePermit) {
       {
         text: "Allow",
         onPress: async () => {
-          console.log("know if it should request ");
           try {
             const { status } = await DevicePermit.requestPermissionsAsync();
-            console.log(status, "know to grant access or not");
+
             if (status === "granted") {
               resolve(true);
             } else {
               resolve(false);
             }
           } catch (error) {
-            console.log(error);
             resolve(false);
           }
         },
@@ -34,7 +32,7 @@ function requestDevicePermission(title, message, DevicePermit) {
 
 const getAndroidPermission = async (title, message, DevicePermit) => {
   let { status } = await DevicePermit.getPermissionsAsync();
-  console.log(status, "know if is popping the alert");
+
   if (status == "granted") {
     return true;
   }

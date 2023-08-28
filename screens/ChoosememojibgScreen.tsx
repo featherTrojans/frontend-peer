@@ -6,12 +6,15 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
-import { FTTitlepagewrapper } from "../components";
+import React, { useContext, useState } from "react";
+import { FTIconwithbg, FTLoader, FTTitlepagewrapper } from "../components";
 import * as Haptics from "expo-haptics";
 import { FONTS, fontsize, icons } from "../constants";
 import { ChoosememojiScreenStyles } from "../assets/styles/screens";
 import { navigation } from "../utils";
+import axiosCustom from "../httpRequests/axiosCustom";
+import { AuthContext } from "../context/AuthContext";
+import { useAlert } from "../hooks";
 const { Changememojicheckicon } = icons;
 const { memojisWrapper, buttonText, buttonWrap } = ChoosememojiScreenStyles;
 
@@ -71,10 +74,46 @@ const ColorOption = ({ color, active, setActive }) => {
   );
 };
 
-const ChoosememojibgScreen = () => {
-  const [active, setActive] = useState("transparent");
+const ChoosememojibgScreen = ({ route }) => {
+  const [active, setActive] = useState("#D9D9D9");
+  const { authdata, setAuthData } = useContext(AuthContext);
+  const emojiindex = route?.params?.emojiindex;
+  const [loading, setLoading] = useState(false);
+  const { errorAlert } = useAlert();
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const formdata = new FormData();
+      formdata.append("color", active);
+      formdata.append("index", emojiindex);
+      formdata.append("isMemoji", "true");
+
+      await axiosCustom.post("/upload/image", formdata);
+      setAuthData({
+        ...authdata,
+        userDetails: {
+          ...authdata.userDetails,
+          memoji: {
+            index: emojiindex,
+            color: active,
+          },
+        },
+      });
+      return navigation.navigate("memojisuccess_screen", {
+        active,
+        emojiindex,
+      });
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  console.log(active);
   return (
     <FTTitlepagewrapper title="Background">
+      <FTLoader loading={loading} />
       <View style={{ alignItems: "center" }}>
         <Text style={{ marginTop: 15, ...fontsize.smallest, ...FONTS.regular }}>
           Select your preferred background colour
@@ -83,12 +122,14 @@ const ChoosememojibgScreen = () => {
           style={{
             width: 150,
             height: 150,
-            backgroundColor: "#D9D9D9",
+            backgroundColor: active,
             borderRadius: 150 / 2,
             marginTop: 66,
             marginBottom: 50,
           }}
-        ></View>
+        >
+          <FTIconwithbg imageUrl={emojiindex} bG={active} size={150} />
+        </View>
       </View>
 
       <FlatList
@@ -111,7 +152,7 @@ const ChoosememojibgScreen = () => {
 
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => navigation.navigate("memojisuccess_screen")}
+        onPress={handleSubmit}
         style={buttonWrap}
       >
         <Text style={buttonText}>Yay, Save Memoji</Text>

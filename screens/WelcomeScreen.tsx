@@ -44,7 +44,6 @@ const {
   link,
 } = WelcomeScreenStyles;
 
-
 const { Winkinganimate } = icons;
 
 // /dashboard
@@ -71,7 +70,7 @@ const WelcomeScreen = ({ navigation, route }) => {
     const sendRegistrationMessage = () => {
       if (fromm == "setup" && authdata?.userDetails?.fullName) {
         // checked = false
-        console.log("push from setup");
+
         sendSchedulePushNotification(
           "Acccount Registration",
           `Hi ${nameInNotification}, Welcome onboard to feather africa, Enjoy true freedom.`
@@ -89,7 +88,6 @@ const WelcomeScreen = ({ navigation, route }) => {
   useEffect(() => {
     const sendMessage = () => {
       if (fromm !== "setup" && authdata?.userDetails?.fullName) {
-        console.log("push from login new");
         // console.log(authdata, "Here is the authdata")
         // console.log(authdata?.userDetails?.fullName)
         sendSchedulePushNotification(
@@ -129,57 +127,57 @@ const WelcomeScreen = ({ navigation, route }) => {
         { duration: 3000 },
         callback
       );
-    } catch (err) {
-      console.log(err.response);
-    }
+    } catch (err) {}
   };
 
   return (
-    <FTMainwrapper pH={25} >
+    <FTMainwrapper pH={25}>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          flex: 0.4,
+          marginTop: 25,
+        }}
+      >
+        <LottieView
+          source={Winkinganimate}
+          autoPlay
+          loop
+          style={{ width: RFValue(176), height: RFValue(176) }}
+        />
+      </View>
 
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            flex: 0.4,
-            marginTop: 25
-          }}
-        >
-          <LottieView
-            source={Winkinganimate}
-            autoPlay
-            loop
-            style={{ width: RFValue(176), height: RFValue(176),}}
-          />
-        </View>
+      <View style={welcomeTextContainer}>
+        <Text style={welcomeTextSub}>Welcome to the flock!</Text>
+      </View>
 
-        <View style={welcomeTextContainer}>
-          <Text style={welcomeTextSub}>Welcome to the flock!</Text>
-        </View>
+      {/* Welcome text */}
+      <View style={welcomeTextContainer}>
+        <Text style={welcomeText}>
+          Get cash, Pay bills & Make payments today
+        </Text>
+      </View>
 
-        {/* Welcome text */}
-        <View style={welcomeTextContainer}>
-          <Text style={welcomeText}>
-            Get cash, Pay bills & Make payments today
-          </Text>
+      {/* Get started text */}
+      <View style={getStartedContainer}>
+        <Text style={getStartedText}>
+          Yo! we are setting things up for you to get started, this usually
+          takes about one minute
+        </Text>
+      </View>
+      {/* Progress Line */}
+      <View style={{ flex: 0.4, justifyContent: "center" }}>
+        <View style={lineBg}>
+          <Animated.View style={[line, animatedStyle]} />
         </View>
+      </View>
 
-        {/* Get started text */}
-        <View style={getStartedContainer}>
-          <Text style={getStartedText}>
-            Yo! we are setting things up for you to get started, this usually
-            takes about one minute
-          </Text>
-        </View>
-        {/* Progress Line */}
-        <View style={{ flex: 0.4, justifyContent: "center" }}>
-          <View style={lineBg}>
-            <Animated.View style={[line, animatedStyle]} />
-          </View>
-        </View>
+      <Text style={infotext}>
+        For more information visit,
+        <Text style={link}> www.getfeather.africa</Text>
+      </Text>
 
-          <Text style={infotext}>For more information visit,<Text style={link}> www.getfeather.africa</Text></Text>
-          
       {/* </View> */}
     </FTMainwrapper>
   );

@@ -29,6 +29,7 @@ import FTTransfer from "./FTTransfer";
 import FTWithdraw from "./FTWithdraw";
 import FTBillPayment from "./FTBillPayment";
 import FTSuccessOrError from "./FTSuccessOrError";
+import FTUserImage from "./FTUserImage";
 
 export {
   FTBillPayment,
@@ -61,5 +62,6 @@ export {
   FTAllChatsModal,
   FTSwitchbtn,
   FTDetailsModal,
-  FTSuccessOrError
+  FTSuccessOrError,
+  FTUserImage,
 };

@@ -54,19 +54,16 @@ const ChatsprofileScreen = ({ route }) => {
 
   useEffect(() => {
     getUserTransaction();
-    console.log(userInfo, "Here is the user info");
   }, []);
 
   const getUserTransaction = async () => {
     setLoading(true);
     try {
       const response = await axiosCustom.get(
-        `transactions/users/${userInfo.username}`
+        `transactions/users/${userInfo.phoneNumber}`
       );
       setTransactions(response?.data?.data?.transactions);
-      console.log(formatData(transactions));
     } catch (error) {
-      console.log(error.response);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -149,7 +146,10 @@ const ChatsprofileScreen = ({ route }) => {
               )}
               keyExtractor={(item: { time: string }) => item.time}
               ListEmptyComponent={
-                <FTEmptycomponent msg="Sorry, You have not performed any transactions with this user" showTransact={false}/>
+                <FTEmptycomponent
+                  msg="Sorry, You have not performed any transactions with this user"
+                  showTransact={false}
+                />
               }
             />
           </>

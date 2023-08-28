@@ -7,15 +7,13 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { navigation } from "../utils";
 import { ChatsScreenStyles } from "../assets/styles/screens";
 import FTIconwithbg from "./FTIconwithbg";
+import FTUserImage from "./FTUserImage";
 import { lastChatDate } from "../utils/fomatTrans";
-
 
 const { Blacksendicon } = icons;
 
 const {
   recentChatText,
-  numberOfUnread,
-  numberOfUnreadBg,
   chatLastMessage,
   lastMessageTime,
   chatDetailWrap,
@@ -24,8 +22,26 @@ const {
   chatWrap,
 } = ChatsScreenStyles;
 
-const ChatMessage = ({ userId, chatinfo }) => {
+const ChatMessage = ({ search, userId, chatinfo }) => {
   const [userInfo, setUserInfo] = useState({});
+  // const [show, setshow] = useState(true);
+  // useEffect(() => {
+  //   console.log(search);
+  //   if (search == "") {
+  //     setshow(true);
+  //   } else {
+  //     let de = false;
+  //     if (userInfo?.fullName) {
+  //       de = userInfo?.fullName.toLowerCase().includes(search.toLowerCase());
+  //     }
+  //     if (userInfo?.username) {
+  //       de =
+  //         de || userInfo?.username.toLowerCase().includes(search.toLowerCase());
+  //     }
+  //     console.log(userInfo?.fullName, search, de);
+  //     setshow(de);
+  //   }
+  // }, [search]);
   useEffect(() => {
     getUser();
   }, []);
@@ -38,6 +54,10 @@ const ChatMessage = ({ userId, chatinfo }) => {
       setUserInfo(response.data.data);
     }
   };
+
+  // if (!show) {
+  //   return null;
+  // }
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -46,7 +66,7 @@ const ChatMessage = ({ userId, chatinfo }) => {
       }}
       style={chatWrap}
     >
-      <FTIconwithbg Icon={Blacksendicon} bG={COLORS.Tpurple} />
+      <FTUserImage />
       {/* userimage here */}
       <View style={chatDetailWrap}>
         <View
@@ -58,7 +78,9 @@ const ChatMessage = ({ userId, chatinfo }) => {
           ]}
         >
           <Text style={senderNameText}>{userInfo?.fullName}</Text>
-          <Text style={lastMessageTime}>{lastChatDate(chatinfo?.createdAt)}</Text>
+          <Text style={lastMessageTime}>
+            {lastChatDate(chatinfo?.createdAt)}
+          </Text>
         </View>
         <View style={SAlign}>
           <Text style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
@@ -68,10 +90,12 @@ const ChatMessage = ({ userId, chatinfo }) => {
   );
 };
 
-const ListHeader = () => {
+const ListHeader = ({ value, onchange }) => {
   return (
     <>
       <FTSearchinput
+        value={value}
+        onChange={onchange}
         placeholder="Type to search chat"
         bG={COLORS.blue20}
         mB={30}
@@ -84,8 +108,8 @@ const ListHeader = () => {
 
 const FTChatList = ({ chats, chattwos, authId }) => {
   const [allChats, setAllChats] = useState([]);
+  const [search, setSearch] = useState("");
 
-  console.log(allChats[0]);
   useEffect(() => {
     //algorithm
     const arranged = [];
@@ -114,6 +138,9 @@ const FTChatList = ({ chats, chattwos, authId }) => {
     // console.log(allChats, "list of all chats");
   }, [chats, chattwos]);
 
+  const handleSearchChnage = (text) => {
+    // allChats
+  };
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
@@ -121,12 +148,14 @@ const FTChatList = ({ chats, chattwos, authId }) => {
       renderItem={({ item }) => {
         let userid = item.id1 !== authId ? item.id1 : item.id2;
 
-        return <ChatMessage userId={userid} chatinfo={item} />;
+        return <ChatMessage search={search} userId={userid} chatinfo={item} />;
       }}
       ItemSeparatorComponent={() => {
         return <View style={{ height: 40 }} />;
       }}
-      ListHeaderComponent={() => <ListHeader />}
+      ListHeaderComponent={() => (
+        <ListHeader value={search} onchange={setSearch} />
+      )}
     />
   );
 };

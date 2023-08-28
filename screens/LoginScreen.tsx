@@ -25,7 +25,6 @@ import { useAlert } from "../hooks";
 import { AWEEKAFTER, VALIDATION, navigation, setDataInstorage } from "../utils";
 import { Controller, useForm } from "react-hook-form";
 
-
 const {
   center,
   bottomtext,
@@ -35,7 +34,7 @@ const {
   initialStyle,
   lineSeparator,
   textInputStyles,
-  errorMessageText
+  errorMessageText,
 } = LoginScreenStyles;
 
 const { Newlogo } = icons;
@@ -52,7 +51,6 @@ const LoginScreen = () => {
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
 
-
   const onsubmit = async (data) => {
     try {
       setLoading(true);
@@ -61,6 +59,30 @@ const LoginScreen = () => {
       navigation.navigate("phone-verify_screen", {
         phonenumber: data.username,
         from: "login",
+      });
+    } catch (err) {
+      if (
+        "Aww padi! Incorrect feather tag/ phone number" ==
+        err.response.data.message
+      ) {
+        await onsignup({ phoneNumber: data.username });
+      } else {
+        errorAlert(err);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onsignup = async (data) => {
+    console.log("now sign up", data);
+    try {
+      setLoading(true);
+      const response = await axiosCustom.post("/auth/signup/v2", data);
+      setAuthorizationToken(response.data.data.token);
+      navigation.navigate("phone-verify_screen", {
+        phonenumber: data.phoneNumber,
+        from: "signup",
       });
     } catch (err) {
       errorAlert(err);
@@ -82,33 +104,38 @@ const LoginScreen = () => {
           field: { onChange, onBlur, value },
           fieldState: { error },
         }) => (
-          <View style={{marginBottom: 20}}>
-          <View style={[loginInputWrap, {
-                    borderColor: error
-                      ? COLORS.pink1
-                      : value && !error
-                      ? COLORS.blue16
-                      : COLORS.grey15,
-                  },]}>
-            <View style={logoAndInitialWrap}>
-              <View style={logoStyle} />
-              <Text style={initialStyle}>+234</Text>
+          <View style={{ marginBottom: 20 }}>
+            <View
+              style={[
+                loginInputWrap,
+                {
+                  borderColor: error
+                    ? COLORS.pink1
+                    : value && !error
+                    ? COLORS.blue16
+                    : COLORS.grey15,
+                },
+              ]}
+            >
+              <View style={logoAndInitialWrap}>
+                <View style={logoStyle} />
+                <Text style={initialStyle}>+234</Text>
+              </View>
+              <View style={lineSeparator} />
+              <TextInput
+                onChangeText={onChange}
+                editable
+                onBlur={onBlur}
+                keyboardType="number-pad"
+                returnKeyType="done"
+                value={value}
+                placeholder="Enter here..."
+                placeholderTextColor={COLORS.grey9}
+                style={textInputStyles}
+                maxLength={11}
+              />
             </View>
-            <View style={lineSeparator} />
-            <TextInput
-              onChangeText={onChange}
-              editable
-              onBlur={onBlur}
-              keyboardType="number-pad"
-              returnKeyType="done"
-              value={value}
-              placeholder="Enter here..."
-              placeholderTextColor={COLORS.grey9}
-              style={textInputStyles}
-              maxLength={11}
-            />
-          </View>
-          {error && <Text style={errorMessageText}> {error.message}</Text>}
+            {error && <Text style={errorMessageText}> {error.message}</Text>}
           </View>
         )}
       />

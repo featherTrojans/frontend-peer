@@ -15,6 +15,7 @@ import {
   FTMainwrapper,
   FTTabWrapper,
   FTTitlepagewrapper,
+  FTUserImage,
 } from "../components";
 
 import { AuthContext } from "../context/AuthContext";
@@ -92,7 +93,7 @@ const {
   Startnewchaticon,
   Successtransfericon,
   Smalllockicon,
-  Smallbackarrow
+  Smallbackarrow,
 } = icons;
 
 const ChatsdmScreen = ({ route }) => {
@@ -162,7 +163,7 @@ const ChatsdmScreen = ({ route }) => {
 
   useEffect(() => {
     let unsub = () => {};
-    console.log("a second one");
+
     setFetchmessage(true);
     if (chatid) {
       const chatRef = collection(db, "chatstwo", chatid, "messages");
@@ -173,7 +174,7 @@ const ChatsdmScreen = ({ route }) => {
           newdata.push(change.data());
         });
         setMessages(formatData(newdata));
-        console.log(formatData(newdata), "formated data");
+
         setFetchmessage(false);
       });
     } else {
@@ -195,7 +196,6 @@ const ChatsdmScreen = ({ route }) => {
   };
 
   const getThisChats = async () => {
-    console.log("what is this inside here");
     try {
       let document;
       let id1id2 = `${authId}-${userInfo?.userUid}`;
@@ -211,9 +211,7 @@ const ChatsdmScreen = ({ route }) => {
         setchatid(id2id1);
         return;
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   const sendCash = async () => {
@@ -232,7 +230,6 @@ const ChatsdmScreen = ({ route }) => {
       await sendFireBaseMessage("transfer");
       // animationRef.current?.play()
     } catch (err) {
-      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -276,9 +273,7 @@ const ChatsdmScreen = ({ route }) => {
           createdAt: createdAt,
         });
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   const formatTime = (time) => {
@@ -298,7 +293,6 @@ const ChatsdmScreen = ({ route }) => {
       setSendCashModal(true);
     }
   };
-
 
   const renderReceiverHTML = (mes) => {
     if (mes?.action === "transfer") {
@@ -404,7 +398,6 @@ const ChatsdmScreen = ({ route }) => {
   const closeModal = () => {
     setShowModal(false);
     // switchModals(1)
-    console.log("Closed");
   };
 
   const openAmount = () => {
@@ -532,8 +525,12 @@ const ChatsdmScreen = ({ route }) => {
       {/* Header Section */}
       <View style={chatHeader}>
         <View style={[headerDetailsContainer]}>
-          <TouchableOpacity activeOpacity={0.7} onPress={navigation.goBack} style={backArrowWrap}>
-            <Smallbackarrow /> 
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={navigation.goBack}
+            style={backArrowWrap}
+          >
+            <Smallbackarrow />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -545,7 +542,7 @@ const ChatsdmScreen = ({ route }) => {
             }
             style={chatsDmProfileWrap}
           >
-            <FTIconwithbg bG={COLORS.Tyellow} Icon={Blacksendicon} />
+            <FTUserImage />
             <View style={{ marginLeft: 18 }}>
               <Text style={chatName}>{userInfo?.fullName}</Text>
               {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}

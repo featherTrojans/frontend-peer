@@ -24,6 +24,7 @@ import {
 import {
   FTCustombutton,
   FTIconwithbg,
+  FTLoader,
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
@@ -70,79 +71,25 @@ const ColorOption = ({ color, active, setActive }) => {
   );
 };
 
-const profileColors = [
-  {
-    color: "#D9D9D9",
-  },
-  {
-    color: "#C8F1CE",
-  },
-  {
-    color: "#CFE9FB",
-  },
-  {
-    color: "#F8EBA7",
-  },
-  {
-    color: "#F5C3BC",
-  },
-  {
-    color: "#DFD2FA",
-  },
-  {
-    color: "#F7CDD7",
-  },
-  {
-    color: "#F6DEAC",
-  },
-  {
-    color: "#F8CDD7",
-  },
-];
-
 const ChoosememojiScreen = () => {
-  const { errorAlert } = useAlert();
   const [active, setActive] = useState("transparent");
-  const [emojiindex, setEmojiIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [skinColor, setSkinColor] = useState("lightSkinned");
+  const gender = "male";
+
   const { authdata, setAuthData } = useContext(AuthContext);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(
+    allMemojis[gender]["lightSkinned"][0]
+  );
   const translateValue = 125;
   const tabTranslate = useSharedValue(0);
   const rotateView = useSharedValue(0);
-  const [skinColor, setSkinColor] = useState("lightSkinned");
-  const gender = "male";
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const rotateStyles = useAnimatedStyle(() => ({
     transform: [{ rotate: `${rotateView.value}deg` }],
   }));
 
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      const data = {
-        color: active,
-        index: emojiindex,
-        isMemoji: true,
-      };
-      await axiosCustom.post("/upload/image", data);
-      setAuthData({
-        ...authdata,
-        userDetails: {
-          ...authdata.userDetails,
-          color: active,
-          index: emojiindex,
-        },
-      });
-      return navigation.navigate("Dashboard");
-    } catch (err) {
-      errorAlert(err);
-    } finally {
-      setLoading(false);
-    }
-  };
   const onOptionPress = useCallback((index) => {
     setCurrentIndex(index);
   }, []);
@@ -170,7 +117,7 @@ const ChoosememojiScreen = () => {
           fontStyle={{
             color: "#11141A",
             ...fontsize.smallest,
-            ...FONTS.regular
+            ...FONTS.regular,
           }}
           activeFontStyle={{
             color: "white",
@@ -183,11 +130,7 @@ const ChoosememojiScreen = () => {
 
         <View style={profileWrap}>
           <View style={{ position: "absolute" }}>
-            <FTIconwithbg
-              imageUrl={allMemojis[gender][skinColor][0]}
-              bG={active}
-              size={150}
-            />
+            <FTIconwithbg imageUrl={currentIndex} bG={active} size={150} />
           </View>
 
           <AnimatedSVG width={150.649} height={150.649} style={rotateStyles}>
@@ -212,20 +155,30 @@ const ChoosememojiScreen = () => {
           </AnimatedSVG>
         </View>
 
-
         <FlatList
           data={allMemojis[gender][skinColor]}
           numColumns={3}
           horizontal={false}
           columnWrapperStyle={[memojisWrapper]}
           renderItem={({ item }) => {
-            return <FTIconwithbg imageUrl={item} bG="" size={85} />;
+            return (
+              <FTIconwithbg
+                onpress={() => onOptionPress(item)}
+                imageUrl={item}
+                bG=""
+                size={85}
+              />
+            );
           }}
         />
 
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => navigation.navigate("choosememojibg_screen")}
+          onPress={() =>
+            navigation.navigate("choosememojibg_screen", {
+              emojiindex: currentIndex,
+            })
+          }
           style={buttonWrap}
         >
           <Text style={buttonText}>Great Proceed</Text>

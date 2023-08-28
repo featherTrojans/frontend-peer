@@ -38,7 +38,6 @@ const BankaccountinformationScreen = ({ route }) => {
         });
         navigation.navigate("transactionsuccess_screen");
       } catch (err) {
-        console.log(err.response);
         throw err;
       }
     };
@@ -93,8 +92,6 @@ const BankaccountinformationScreen = ({ route }) => {
   };
 
   const onSubmit = async (datas) => {
-    console.log(datas);
-
     setLoading(true);
     try {
       const response = await axiosCustom({
@@ -102,7 +99,7 @@ const BankaccountinformationScreen = ({ route }) => {
         url: "/account/get",
         data: { account_number: datas.accountNumber, bank_name: bankvalue },
       });
-      console.log(response.data, "this");
+
       setAccountInformation(response?.data?.data);
       switchModals(0, response?.data?.data);
     } catch (err) {

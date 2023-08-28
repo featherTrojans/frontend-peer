@@ -8,7 +8,7 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
-import { VALIDATION, navigation } from "../utils";
+import { VALIDATION } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useAlert } from "../hooks";
 import useDebounce from "../utils/debounce";
@@ -27,7 +27,8 @@ const {
   link,
   subHeaderText,
 } = FeatherTagScreenStyles;
-const FeatherTagScreen = () => {
+
+const FeatherTagScreen = ({ navigation }) => {
   const { control, handleSubmit, watch } = useForm({ mode: "all" });
   const [loading, setLoading] = useState(false);
   const { errorAlert } = useAlert();
@@ -39,22 +40,22 @@ const FeatherTagScreen = () => {
   }, [usernamename]);
 
   const onsubmit = async (data) => {
-    console.log(data, error);
-
     if (!error) {
       errorAlert(null, "Feather tag is taken");
       return;
     }
 
     try {
+      console.log(data.featherTag);
       setLoading(true);
       await axiosCustom.put("auth/username/set", {
         newUsername: data.featherTag,
       });
-      navigation.navigate("welcome_screen", {
+      navigation.replace("welcome_screen", {
         fromm: "setup",
       });
     } catch (err) {
+      console.log(err.response.data);
       errorAlert(err);
     } finally {
       setLoading(false);
@@ -62,7 +63,7 @@ const FeatherTagScreen = () => {
   };
 
   const skipToWelcome = () => {
-    navigation.navigate("welcome_screen", {
+    navigation.replace("welcome_screen", {
       fromm: "setup",
     });
   };

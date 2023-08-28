@@ -37,7 +37,6 @@ const ModalContent = ({ userinfo, amount }) => {
       });
       navigation.navigate("transactionsuccess_screen");
     } catch (err) {
-      console.log(err.response);
       throw err;
     }
   };

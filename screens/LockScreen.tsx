@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity, SafeAreaView } from "react-native";
 import React, { useContext, useState } from "react";
 import Modal from "react-native-modal";
 import { COLORS, FONTS, fontsize, SIZES, icons } from "../constants";
-import {  FTKeyboard, FTLoader } from "../components";
+import { FTKeyboard, FTLoader } from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -10,10 +10,32 @@ import { getFirstName } from "../utils/nameSplitter";
 import { LockScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 
+const {
+  container,
+  lockScreenContainer,
+  lockScreenSubcontainer,
+  header,
+  topDots,
+  activeDot,
+  subText,
+  subHeaderText,
+  pinContainer,
+  pinInputContainer,
+  pinInput,
+  pinView,
+  pinViewWrap,
+  pinText,
+  enterPinText,
+  proceedBtn,
+  proceedText,
+  numberBtn,
+  numberBtnContainer,
+  numberOfTrials,
+  headerNameText,
+  headerText,
+} = LockScreenStyles;
 
-const {container, lockScreenContainer, lockScreenSubcontainer, header, topDots, activeDot, subText, subHeaderText, pinContainer, pinInputContainer, pinInput, pinView, pinViewWrap, pinText, enterPinText, proceedBtn, proceedText, numberBtn, numberBtnContainer, numberOfTrials, headerNameText, headerText} = LockScreenStyles
-
-const { Newlogo, } = icons;
+const { Newlogo } = icons;
 const LockScreen = ({ modal, setModal }: any) => {
   const { errorAlert } = useAlert();
   const { setToken, authdata } = useContext(AuthContext);
@@ -22,7 +44,6 @@ const LockScreen = ({ modal, setModal }: any) => {
   const [loading, setLoading] = useState(false);
   const [numoftrial, setNumberTrial] = useState(0);
   const [error, setError] = useState(false);
-
 
   const handleSetAmount = (value: string) => {
     const newpin = [...pin, value];
@@ -40,7 +61,7 @@ const LockScreen = ({ modal, setModal }: any) => {
       setPin(newdata);
     }
   };
-  
+
   const handleSubmit = async (newpin: any) => {
     setLoading(true);
     try {
@@ -55,14 +76,14 @@ const LockScreen = ({ modal, setModal }: any) => {
       setNumberTrial(newnumoftrial);
       setError(true);
       setPin([]);
-      errorAlert("Incorrect Pin Please try again")
+      errorAlert("Incorrect Pin Please try again");
 
       if (newnumoftrial === 5) {
         setModal(false);
         setToken("");
         setNumberTrial(0);
       }
-      console.log(err.response);
+
       // setModal(false)
     } finally {
       setLoading(false);

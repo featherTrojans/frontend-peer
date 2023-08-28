@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { PersonalRegisterScreenStyles } from "../assets/styles/screens/personalregister.style";
@@ -17,29 +17,66 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { useForm } from "react-hook-form";
 import { VALIDATION, navigation } from "../utils";
 import { useAlert } from "../hooks";
+import { FlatList } from "react-native-gesture-handler";
+import { Text } from "react-native";
 
-PersonalRegisterScreenStyles;
+const { optionText } = PersonalRegisterScreenStyles;
 
 const Personal = ({}) => {
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });
+  const [gender, setGender] = useState("--- Select Gender ---");
+  const [showModal, setShowModal] = useState(false);
   //   const { setAuthData } = useContext(AuthContext);
 
   const onsubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axiosCustom.post("/auth/data/update", data);
+      const response = await axiosCustom.put("/auth/data/update", {
+        ...data,
+        gender: gender,
+      });
       navigation.navigate("bvn_screen");
     } catch (err) {
+      console.log(err.response);
       errorAlert(err);
     } finally {
       setLoading(false);
     }
   };
 
+  const closeGenderModal = (item) => {
+    setGender(item);
+    setShowModal(false);
+  };
+
+  const GenderModal = () => {
+    return (
+      <FlatList
+        data={["male", "female"]}
+        renderItem={({ item }) => {
+          return (
+            <Pressable onPress={() => closeGenderModal(item)}>
+              <Text style={optionText}>{item}</Text>
+            </Pressable>
+          );
+        }}
+        keyExtractor={(item) => item}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: 40 }}
+      />
+    );
+  };
+
   return (
-    <FTTitlepagewrapper title="Personal Information">
+    <FTTitlepagewrapper
+      title="Personal Information"
+      modalChildren={<GenderModal />}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      modalHeight={200}
+    >
       <FTLoader loading={loading} />
 
       <FTKeyboardwrapper>
@@ -75,12 +112,14 @@ const Personal = ({}) => {
         />
 
         <FTInput
-          placeholderText="--- Select Gender ---"
+          placeholderText={gender}
           name="gender"
           label="Gender"
           control={control}
-          rules={VALIDATION.LAST_NAME_VALIDATION}
+          type="dropdown"
+          // rules={VALIDATION.LAST_NAME_VALIDATION}
           mB={55}
+          onPress={() => setShowModal(true)}
         />
 
         {/* Proceed Btn */}

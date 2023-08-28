@@ -310,7 +310,6 @@ export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
   };
 
   // const authState = false;
-  console.log(!token, "I am token");
 
   if (!token) {
     return <NoAuthNavigator routeName={routeName} />;

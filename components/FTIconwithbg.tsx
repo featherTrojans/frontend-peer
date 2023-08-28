@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import React, { ReactElement } from "react";
 import { images } from "../constants";
 
@@ -10,6 +17,7 @@ type IconWithBgProps = {
   size?: number | undefined;
   imageUrl?: string;
   badge?: ReactElement;
+  onpress?: any;
 };
 
 const FTIconwithbg = ({
@@ -18,6 +26,7 @@ const FTIconwithbg = ({
   size = 45,
   imageUrl,
   badge,
+  onpress = () => {},
 }: IconWithBgProps) => {
   return (
     <View
@@ -34,16 +43,18 @@ const FTIconwithbg = ({
         <View style={{ position: "absolute", top: 0, right: 0 }}>{badge}</View>
       )}
       {imageUrl ? (
-        <Image
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: size / 2,
-          }}
-          resizeMode="contain"
-          resizeMethod="scale"
-          source={{ uri: imageUrl }}
-        />
+        <Pressable onPress={onpress} style={{ width: "100%", height: "100%" }}>
+          <Image
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: size / 2,
+            }}
+            resizeMode="contain"
+            resizeMethod="scale"
+            source={{ uri: imageUrl }}
+          />
+        </Pressable>
       ) : (
         <Icon />
       )}

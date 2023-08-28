@@ -84,10 +84,7 @@ const TransactionsScreen = ({ navigation }) => {
       setLoading(true);
       const response = await axiosCustom.get("/transactions");
       setTransations(response?.data?.data?.transactions);
-      console.log(transactions, "unfiltered");
-      console.log(formatData(transactions), "filtered");
     } catch (err) {
-      console.log(err.response);
     } finally {
       setLoading(false);
       setRefreshing(false);

@@ -76,7 +76,6 @@ const FTAllChatsModal = ({
   enterPin,
   sendSuccess,
 }: any) => {
-  console.log(chooseAmount, "choosinh");
   const handleToNext = () => {
     if (amount.value <= 0) {
       return;
@@ -88,15 +87,17 @@ const FTAllChatsModal = ({
   return (
     <>
       {/* Send cash or keep typing modal */}
-      <Chatsmodal showState={sendcashModal} onBgPress={clearModalsAll}>
-        
-      </Chatsmodal>
+      <Chatsmodal
+        showState={sendcashModal}
+        onBgPress={clearModalsAll}
+      ></Chatsmodal>
 
       {/* Choose amount to send */}
 
-      <Chatsmodal showState={chooseAmount} onBgPress={clearModalsAll}>
-       
-      </Chatsmodal>
+      <Chatsmodal
+        showState={chooseAmount}
+        onBgPress={clearModalsAll}
+      ></Chatsmodal>
 
       {/* Enter Secure Pin */}
 

@@ -219,10 +219,9 @@ const NotificationsScreen = () => {
     try {
       setLoading(true);
       const response = await axiosCustom.get("/notifications");
-      console.log(response, "Here is the notifications");
+
       setNotifications(response?.data?.data?.notifications);
     } catch (err) {
-      console.log(err.response);
     } finally {
       setLoading(false);
       // setRefreshing(false);

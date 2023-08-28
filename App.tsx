@@ -24,7 +24,6 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { enableFreeze } from "react-native-screens";
 enableFreeze(true);
 
-
 import {
   AWEEKAFTER,
   clearDataFromStorage,
@@ -72,7 +71,6 @@ export const toastConfig = {
       </TouchableOpacity>
     </View>
   ),
-
 };
 
 LogBox.ignoreLogs(["Setting a timer"]);
@@ -102,7 +100,6 @@ export default function App() {
     // why don't I check here, then set Auth , and set tokem you know
 
     getDataFromStorage("@token").then((response) => {
-      console.log(response, "response");
       if (response !== null) {
         if (Date.now() - response.time > AWEEKAFTER) {
           return null;

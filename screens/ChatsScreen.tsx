@@ -1,4 +1,11 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
   ChatsScreenStyles,
@@ -82,9 +89,13 @@ const ChatsScreen = () => {
     <FTTabWrapper>
       <View style={profileHeaderWrap}>
         <Text style={profileHeaderText}>Conversations</Text>
-        <View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("startnewschat_screen");
+          }}
+        >
           <Startnewchaticon />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <FTChatList chats={chats} chattwos={chattwos} authId={authId} />

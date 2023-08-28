@@ -33,7 +33,6 @@ const TransactionsummaryScreen = ({ route }) => {
   const action = route?.params?.action;
   const summaryinfo = route?.params?.summaryinfo;
   const { control, handleSubmit } = useForm({ mode: "all" });
-  console.log(summaryinfo, "sa");
 
   const EachRow = ({ data }) => {
     const { leftSide, rightSide } = data;
