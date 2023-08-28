@@ -129,7 +129,7 @@ const ChoosememojiScreen = () => {
         />
 
         <View style={profileWrap}>
-          <View style={{ position: "absolute" }}>
+          <View style={{ position: "absolute", justifyContent: "center", alignItems: "center" }}>
             <FTIconwithbg imageUrl={currentIndex} bG={active} size={150} />
           </View>
 

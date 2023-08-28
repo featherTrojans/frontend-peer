@@ -61,7 +61,6 @@ const ColorOption = ({ color, active, setActive }) => {
             width: 78,
             height: 78,
             borderRadius: 78 / 2,
-            // marginRight: 24,
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: color,
@@ -126,6 +125,8 @@ const ChoosememojibgScreen = ({ route }) => {
             borderRadius: 150 / 2,
             marginTop: 66,
             marginBottom: 50,
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
           <FTIconwithbg imageUrl={emojiindex} bG={active} size={150} />
