@@ -62,6 +62,8 @@ import WithdrawcashScreen from "./WithdrawcashScreen";
 import TransactionSuccessScreen from "./TransactionSuccessScreen";
 import WalletfundingScreen from "./WalletfundingScreen";
 import MemojisuccessScreen from "./MemojisuccessScreen";
+import ChoosememojibgScreen from "./ChoosememojibgScreen";
+
 
 export {
   OnboardingScreen,
@@ -137,5 +139,6 @@ export {
   WithdrawcashScreen,
   TransactionSuccessScreen,
   WalletfundingScreen,
-  MemojisuccessScreen
+  MemojisuccessScreen,
+  ChoosememojibgScreen
 };

@@ -5,7 +5,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image
+  Image,
 } from "react-native";
 import React, {
   useCallback,
@@ -14,13 +14,18 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Svg, {  G, Rect, Path } from "react-native-svg";
+import Svg, { G, Rect, Path } from "react-native-svg";
+import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import {
   AccountverificationScreenStyles,
   ChoosememojiScreenStyles,
   ProfileScreenStyles,
 } from "../assets/styles/screens";
-import { FTCustombutton, FTIconwithbg, FTTitlepagewrapper } from "../components";
+import {
+  FTCustombutton,
+  FTIconwithbg,
+  FTTitlepagewrapper,
+} from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
@@ -33,29 +38,29 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
-import * as Haptics from 'expo-haptics';
+import * as Haptics from "expo-haptics";
 import { allMemojis } from "../assetdatas";
 
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 
-
 const { Changememojicheckicon, Profilechangeicon } = icons;
 
-
-const { sectionHeader, colorOptionBg, profileWrap, memojisWrapper, buttonWrap, buttonText } = ChoosememojiScreenStyles;
 const {
-  movingSegmentedbg,
-  segmentedWrap,
-  segmentedOptionText,
-  segmentedOptions,
-} = AccountverificationScreenStyles;
+  sectionHeader,
+  colorOptionBg,
+  profileWrap,
+  memojisWrapper,
+  buttonWrap,
+  buttonText,
+} = ChoosememojiScreenStyles;
+const {} = AccountverificationScreenStyles;
 
 const ColorOption = ({ color, active, setActive }) => {
   return (
     <Pressable
       onPress={() => {
         setActive(color);
-        Haptics.selectionAsync()
+        Haptics.selectionAsync();
       }}
     >
       <View style={[colorOptionBg, { backgroundColor: color }]}>
@@ -103,15 +108,12 @@ const ChoosememojiScreen = () => {
   const { authdata, setAuthData } = useContext(AuthContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const translateValue = 125;
-  const flatlistRef = useRef<FlatList>(null);
   const tabTranslate = useSharedValue(0);
   const rotateView = useSharedValue(0);
-  const [skinColor, setSkinColor] = useState("lightSkinned")
-  const gender = "male"
+  const [skinColor, setSkinColor] = useState("lightSkinned");
+  const gender = "male";
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{ translateX: tabTranslate.value }],
-  }));
 
   const rotateStyles = useAnimatedStyle(() => ({
     transform: [{ rotate: `${rotateView.value}deg` }],
@@ -141,74 +143,54 @@ const ChoosememojiScreen = () => {
       setLoading(false);
     }
   };
-  const accountLevels = ["Light Skinned", "Dark Skinned"];
   const onOptionPress = useCallback((index) => {
     setCurrentIndex(index);
   }, []);
 
   useEffect(() => {
-    tabTranslate.value = withSpring(currentIndex * translateValue);
-    rotateView.value = withSpring(currentIndex * 360);
-    if(currentIndex === 0){
-      setSkinColor("lightSkinned")
+    rotateView.value = withSpring(selectedIndex * 360);
+    if (selectedIndex === 0) {
+      setSkinColor("lightSkinned");
+    } else {
+      setSkinColor("darkSkinned");
     }
-    else{
-      setSkinColor("darkSkinned")
-    }
-
-    const scrollTo = () => {
-      flatlistRef?.current?.scrollToIndex({
-        index: currentIndex,
-        animated: true,
-      });
-    };
-    scrollTo();
-  }, [currentIndex]);
+  }, [selectedIndex]);
 
   return (
     <FTTitlepagewrapper title="Change Appearance">
       <View style={{ flex: 1 }}>
-        <View style={segmentedWrap}>
-          <Animated.View
-            style={[movingSegmentedbg, animatedStyles, { width: "45%" }]}
-          />
-          {accountLevels.map((accountLevel, index) => {
-            let isActive = index == currentIndex;
-            return (
-              <Pressable
-                key={index}
-                onPress={() => onOptionPress(index)}
-                style={segmentedOptions}
-              >
-                <Text
-                  style={[
-                    segmentedOptionText,
-                    { color: !isActive ? COLORS.blue9 : COLORS.white },
-                  ]}
-                >
-                  {accountLevel}
-                </Text>
-              </Pressable>
-            );
-          })}
-        </View>
+        <SegmentedControl
+          values={["Light Skinned", "Dark Skinned"]}
+          selectedIndex={selectedIndex}
+          tintColor={COLORS.blue9}
+          style={{
+            width: "80%",
+            alignSelf: "center",
+          }}
+          fontStyle={{
+            color: "#11141A",
+            ...fontsize.smallest,
+            ...FONTS.regular
+          }}
+          activeFontStyle={{
+            color: "white",
+          }}
+          backgroundColor="#F0F0F0"
+          onChange={(event) => {
+            setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
+          }}
+        />
 
- 
         <View style={profileWrap}>
-
-          <View style={{position: "absolute"}}>
-          <FTIconwithbg 
-          imageUrl={allMemojis[gender][skinColor][0]}
-          bG={active}
-          size={150}
-          />
+          <View style={{ position: "absolute" }}>
+            <FTIconwithbg
+              imageUrl={allMemojis[gender][skinColor][0]}
+              bG={active}
+              size={150}
+            />
           </View>
-   
-          <AnimatedSVG
-            width={150.649}
-            height={150.649}
-            style={rotateStyles}
-          >
+
+          <AnimatedSVG width={150.649} height={150.649} style={rotateStyles}>
             <G data-name="Group 11713" transform="translate(.5 .5)">
               <Rect
                 width={133}
@@ -230,45 +212,24 @@ const ChoosememojiScreen = () => {
           </AnimatedSVG>
         </View>
 
-        <Text style={sectionHeader}>Background Colour</Text>
+
         <FlatList
-          data={profileColors}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ gap: 10 }}
-          renderItem={({ item: { color }, index }) => {
-            return (
-              <ColorOption
-                key={index}
-                color={color}
-                active={active}
-                setActive={setActive}
-              />
-            );
+          data={allMemojis[gender][skinColor]}
+          numColumns={3}
+          horizontal={false}
+          columnWrapperStyle={[memojisWrapper]}
+          renderItem={({ item }) => {
+            return <FTIconwithbg imageUrl={item} bG="" size={85} />;
           }}
         />
 
-        <FlatList 
-        data={allMemojis[gender][skinColor]}
-        numColumns={3}
-        horizontal={false}
-        columnWrapperStyle={memojisWrapper}
-        renderItem={({item}) => {
-          return (
-            <FTIconwithbg 
-            imageUrl={item}
-            bG=""
-            size={65}
-            />
-          )
-        }}
-        />
-
-        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("memojisuccess_screen")} style={buttonWrap}>
-            <Text style={buttonText}>Great Proceed</Text>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("choosememojibg_screen")}
+          style={buttonWrap}
+        >
+          <Text style={buttonText}>Great Proceed</Text>
         </TouchableOpacity>
-
-
       </View>
     </FTTitlepagewrapper>
   );

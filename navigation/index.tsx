@@ -18,6 +18,7 @@ import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 const AppStack = createStackNavigator();
 
 import {
+  BlankScreen,
   CardScreen,
   ChatsScreen,
   ChatsdmScreen,
@@ -28,7 +29,6 @@ import {
 } from "../screens";
 
 const AuthStack = createStackNavigator();
-
 const DashboardTabs = createBottomTabNavigator();
 
 import {
@@ -98,6 +98,18 @@ const NoAuthNavigator = ({ routeName }) => {
 const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
   const { getState, reset } = useNavigation();
 
+  useEffect(() => {
+    const state = getState?.();
+
+    if (state) {
+      reset({
+        ...state,
+        index: 0,
+        history: [],
+      });
+    }
+  }, []);
+
   return (
     <>
       <DashboardTabs.Navigator
@@ -127,8 +139,8 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
         })}
         initialRouteName="Home"
       >
-        <DashboardTabs.Screen name="Home" component={HomeScreen} />
-        <DashboardTabs.Screen name="Transact" component={TransactionsScreen} />
+        <DashboardTabs.Screen name="Home" component={BlankScreen} />
+        <DashboardTabs.Screen name="Transact" component={BlankScreen} />
         <DashboardTabs.Screen name="Cards" component={CardScreen} />
         <DashboardTabs.Screen name="Chats" component={ChatsScreen} />
         <DashboardTabs.Screen name="Profile" component={ProfileScreen} />

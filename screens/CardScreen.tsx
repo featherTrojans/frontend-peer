@@ -180,12 +180,14 @@ const CreateCard = () => {
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   return (
-    <View style={{ paddingVertical: 12 }}>
+    <View style={{ paddingVertical: 12, flex: 1 }}>
       <Text style={createVisaCardText}>Create a Visa card</Text>
       <Text style={createCardSubInfo}>
         Suitable for all online shopping and subscription services.
       </Text>
+      <View style={{flex: 1}}>
 
+      
       {cardcreationinfos.map((cardcreationinfo, index) => {
         const { title, info, bG, Icon, priceBg, price } = cardcreationinfo;
         return (
@@ -201,6 +203,7 @@ const CreateCard = () => {
           />
         );
       })}
+      </View>
       <FTCustombutton
         bg="#000"
         btntext="Continue"
