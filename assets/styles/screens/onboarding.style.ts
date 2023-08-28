@@ -15,7 +15,14 @@ export const OnboardingScreenStyles = StyleSheet.create({
   eachOnboardingImage: {
     height: 215,
     width: "100%",
-    marginVertical: 50,
+    marginVertical: 55,
+  },
+  eachOnboardingImageStyle: {
+    width: "100%",
+    height: 268,
+    position: "absolute",
+    bottom: 0,
+    alignSelf: "center",
   },
   eachOnboardingInfoWrap: {
     width: "100%",
