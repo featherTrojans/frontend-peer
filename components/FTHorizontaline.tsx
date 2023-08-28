@@ -9,7 +9,7 @@ type IHorizontalLineProps = {
   bG?: string
 };
 
-const Horizontaline = ({ marginV, mT, mB, bG=COLORS.borderColor2  }: IHorizontalLineProps) => {
+const Horizontaline = ({ marginV, mT, mB, bG="transaparent"  }: IHorizontalLineProps) => {
   return (
     <View
       style={{

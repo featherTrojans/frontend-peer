@@ -14,6 +14,8 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 import { usePushNotification } from "../hooks/usePushNotifications";
 import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
+import { enableFreeze } from "react-native-screens";
+enableFreeze(true);
 
 const AppStack = createStackNavigator();
 
@@ -139,8 +141,10 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
         })}
         initialRouteName="Home"
       >
-        <DashboardTabs.Screen name="Home" component={BlankScreen} />
-        <DashboardTabs.Screen name="Transact" component={BlankScreen} />
+        <DashboardTabs.Screen name="Home" component={HomeScreen} />
+        <DashboardTabs.Screen name="Transact" component={TransactionsScreen} options={{
+          unmountOnBlur: true
+        }}/>
         <DashboardTabs.Screen name="Cards" component={CardScreen} />
         <DashboardTabs.Screen name="Chats" component={ChatsScreen} />
         <DashboardTabs.Screen name="Profile" component={ProfileScreen} />

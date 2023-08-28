@@ -12,7 +12,6 @@ import { AuthContext } from "../context/AuthContext";
 import amountFormatter from "../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
 import { RFValue } from "react-native-responsive-fontsize";
-import Horizontaline from "./FTHorizontaline";
 import axiosCustom from "../httpRequests/axiosCustom";
 import useAlert from "../hooks/useAlerts";
 import FTLoader from "./FTLoader";
@@ -61,7 +60,7 @@ const Viewbalance = ({}) => {
               <Balanceicon />
               <Text style={primaryText}>My Balances</Text>
             </View>
-            <View style={underLine} />
+            {/* <View style={underLine} /> */}
           </View>
 
           <TouchableOpacity

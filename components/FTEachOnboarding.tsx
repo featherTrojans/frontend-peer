@@ -10,6 +10,7 @@ const {
   eachOnboardingInfoWrap,
   eachOnboardingHeader,
   eachOnboardingInfo,
+  eachOnboardingImageStyle,
 } = OnboardingScreenStyles;
 
 export type EachOnboardingTypes = {
@@ -39,13 +40,7 @@ const FTEachOnboarding = ({ item }: EachOnboardingTypes) => {
       >
         <Image
           source={image}
-          style={{
-            width: "100%",
-            height: 268,
-            position: "absolute",
-            bottom: 0,
-            alignSelf: "center",
-          }}
+          style={eachOnboardingImageStyle}
           resizeMode="contain"
         />
       </View>
