@@ -69,6 +69,11 @@ export const GENDER_VALIDATION = {
   },
 };
 
+export const ANSWER_VALIDATION = {
+  required: "Security answer is required",
+  
+};
+
 export const REMARKS_VALIDATION = {
   required: false,
   minLength: {

@@ -38,7 +38,7 @@ export const FTInputStyles = StyleSheet.create({
     justifyContent: "space-between",
   },
   dropdownPlaceholder: {
-    textTransform: "capitalize",
+    // textTransform: "capitalize",
     ...fontsize.smallest,
     ...FONTS.medium,
   },

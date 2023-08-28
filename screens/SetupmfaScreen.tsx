@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { SetupmfaScreenStyles } from "../assets/styles/screens";
 import {
+  FTCustombutton,
   FTHeaderandsubheader,
   FTHorizontaline,
   FTInput,
@@ -10,15 +11,98 @@ import {
 } from "../components";
 import { useForm } from "react-hook-form";
 import { VALIDATION } from "../utils";
+import { SIZES } from "../constants";
 
-const {} = SetupmfaScreenStyles;
+const {pickQuestionText, questionText} = SetupmfaScreenStyles;
 
 const SetupmfaScreen = () => {
   const { control, handleSubmit } = useForm({ mode: "all" });
-  const [city, setCity] = useState("Select Preferred Question 1");
+  const [answer1, setAnswer1] = useState("Select Preferred Question 1");
+  const [answer2, setAnswer2] = useState("Select Preferred Question 2");
+  const [showModal, setShowModal] = useState(false);
+  const [content, setContent] = useState<any>({ child: null, height: 400 });
+
+
+  const questions = [
+    "Where did you grow up?",
+    "How old are you",
+    "What is your maiden name",
+    "What is the name of your first car"
+  ]
+
+  const closeAnswer1modal = (item) => {
+    setAnswer1(item)
+    setShowModal(false)
+  }
+  const closeAnswer2modal = (item) => {
+    setAnswer2(item)
+    setShowModal(false)
+  }
+  const SecurityQuestion1 = () => {
+    return (
+      <View>
+        <Text style={pickQuestionText}>Pick a question</Text>
+        <FlatList 
+        data={questions}
+        renderItem={({item}) => {
+          return (
+            <TouchableOpacity onPress={() => closeAnswer1modal(item)} activeOpacity={0.7}>
+              <Text style={questionText}>{item}</Text>
+            </TouchableOpacity>
+          )
+        }}
+        
+        />
+      </View>
+    )
+  }
+
+  const SecurityQuestion2 = () => {
+    return (
+      <View>
+        <Text style={pickQuestionText}>Pick a question</Text>
+        <FlatList 
+        data={questions}
+        renderItem={({item}) => {
+          return (
+            <TouchableOpacity onPress={() => closeAnswer2modal(item)} activeOpacity={0.7}>
+              <Text style={questionText}>{item}</Text>
+            </TouchableOpacity>
+          )
+        }}
+        
+        />
+      </View>
+    )
+  }
+
+  const switchModals = (value: number) => {
+    switch (value) {
+      case 0:
+        setContent({ child: <SecurityQuestion1 />, height: SIZES.height / 2 });
+        setShowModal((s) => !s);
+        break;
+      case 1:
+        setContent({ child: <SecurityQuestion2 />, height: SIZES.height / 2 });
+        setShowModal((s) => !s);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const onsubmit = (data) => {
+      console.log(data, "Jsnsmm")
+  }
 
   return (
-    <FTTitlepagewrapper title="Setup MFA">
+    <FTTitlepagewrapper
+      title="Setup MFA"
+      modalChildren={content.child}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      modalHeight={content.height}
+    >
       <FTKeyboardwrapper>
         <FTHeaderandsubheader
           header="Setup your Security Questions and Answers"
@@ -26,15 +110,15 @@ const SetupmfaScreen = () => {
         />
 
         <FTInput
-          placeholderText={city}
+          placeholderText={answer1}
           name="state"
           label="Question 1"
           control={control}
-          rules={VALIDATION.FIRST_NAME_VALIDATION}
+          rules={VALIDATION.ANSWER_VALIDATION}
           mT={40}
           mB={15}
           type="dropdown"
-          onPress={() => console.log(0)}
+          onPress={() => switchModals(0)}
         />
 
         <FTInput
@@ -42,21 +126,21 @@ const SetupmfaScreen = () => {
           name="house_no"
           label="Answer 1"
           control={control}
-          rules={VALIDATION.FIRST_NAME_VALIDATION}
+          rules={VALIDATION.ANSWER_VALIDATION}
           mB={15}
         />
 
         <FTHorizontaline marginV={30} />
 
         <FTInput
-          placeholderText={city}
+          placeholderText={answer2}
           name="state"
           label="Question 2"
           control={control}
-          rules={VALIDATION.FIRST_NAME_VALIDATION}
+          rules={VALIDATION.ANSWER_VALIDATION}
           mB={15}
           type="dropdown"
-          onPress={() => console.log(0)}
+          onPress={() => switchModals(1)}
         />
 
         <FTInput
@@ -64,8 +148,13 @@ const SetupmfaScreen = () => {
           name="house_no"
           label="Answer 2"
           control={control}
-          rules={VALIDATION.FIRST_NAME_VALIDATION}
-          mB={15}
+          rules={VALIDATION.ANSWER_VALIDATION}
+          mB={30}
+        />
+
+        <FTCustombutton
+          btntext="Setup MFA"
+          onpress={handleSubmit(onsubmit)}
         />
       </FTKeyboardwrapper>
     </FTTitlepagewrapper>

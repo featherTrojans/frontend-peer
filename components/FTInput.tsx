@@ -90,7 +90,7 @@ const FTInput = ({
   };
   const renderDropdownType = () => {
     let name = placeholderText?.toLowerCase();
-    let placeholders = ["enter", "name", "upload", "select"];
+    let placeholders = ["enter", "upload", "select"];
     let isActive = () => {
       for (let sample of placeholders) {
         if (name?.includes(sample.toLowerCase())) {
