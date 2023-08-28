@@ -186,8 +186,6 @@ const CreateCard = () => {
         Suitable for all online shopping and subscription services.
       </Text>
       <View style={{flex: 1}}>
-
-      
       {cardcreationinfos.map((cardcreationinfo, index) => {
         const { title, info, bG, Icon, priceBg, price } = cardcreationinfo;
         return (

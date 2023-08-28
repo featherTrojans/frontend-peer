@@ -35,6 +35,7 @@ const {
 const QuickActionBtn = ({ icon, text, action, bG, color }) => {
   return (
     <TouchableOpacity
+    activeOpacity={0.7}
       style={[quickActionBtn, { backgroundColor: bG }]}
       onPress={action}
     >
