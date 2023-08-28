@@ -11,7 +11,7 @@ export const HomeScreenStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 10,
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
   },
   profileContainer: {
     flexDirection: "row",

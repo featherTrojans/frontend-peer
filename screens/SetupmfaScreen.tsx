@@ -24,10 +24,12 @@ const SetupmfaScreen = () => {
 
 
   const questions = [
-    "Where did you grow up?",
-    "How old are you",
-    "What is your maiden name",
-    "What is the name of your first car"
+    "What’s your mother’s maiden name ?",
+    "Where did you have your first kiss ?",
+    "What’s the name of your favorite pet ?",
+    "What’s the name of your favorite teacher?",
+    "What’s the name of your dream car?",
+    "What’s the name of your crush?",
   ]
 
   const closeAnswer1modal = (item) => {
@@ -79,11 +81,11 @@ const SetupmfaScreen = () => {
   const switchModals = (value: number) => {
     switch (value) {
       case 0:
-        setContent({ child: <SecurityQuestion1 />, height: SIZES.height / 2 });
+        setContent({ child: <SecurityQuestion1 />, height: SIZES.height / 1.8 });
         setShowModal((s) => !s);
         break;
       case 1:
-        setContent({ child: <SecurityQuestion2 />, height: SIZES.height / 2 });
+        setContent({ child: <SecurityQuestion2 />, height: SIZES.height / 1.8 });
         setShowModal((s) => !s);
         break;
       default:
@@ -114,7 +116,7 @@ const SetupmfaScreen = () => {
           name="state"
           label="Question 1"
           control={control}
-          rules={VALIDATION.ANSWER_VALIDATION}
+          rules={VALIDATION.ANSWER_ONE_VALIDATION}
           mT={40}
           mB={15}
           type="dropdown"
@@ -137,7 +139,7 @@ const SetupmfaScreen = () => {
           name="state"
           label="Question 2"
           control={control}
-          rules={VALIDATION.ANSWER_VALIDATION}
+          rules={VALIDATION.ANSWER_TWO_VALIDATION}
           mB={15}
           type="dropdown"
           onPress={() => switchModals(1)}

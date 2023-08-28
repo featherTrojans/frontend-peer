@@ -29,6 +29,7 @@ import {
   FTTransactionhistory,
   FTViewbalance,
   FTCustombutton,
+  FTUserImage,
 } from "../components";
 import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 
@@ -355,18 +356,20 @@ const ProfileSetup = ({ nav }) => {
       onPress: () => nav.navigate("accountverification_screen"),
     },
   ];
-  let completedProfileSetup = profilesetupdatas.filter((item) => item.completed).length
-  let isProfileSetupCompleted = completedProfileSetup === 6
+  let completedProfileSetup = profilesetupdatas.filter(
+    (item) => item.completed
+  ).length;
+  let isProfileSetupCompleted = completedProfileSetup === 6;
   return (
     <View style={profileSetupWrap}>
       <Text style={profileSetupHeader}>
-        Hi <Text style={{textTransform: "capitalize"}}>{nameToShow(authdata?.userDetails?.fullName)}</Text>,{`\n`}Complete your
-        profile!
+        Hi{" "}
+        <Text style={{ textTransform: "capitalize" }}>
+          {nameToShow(authdata?.userDetails?.fullName)}
+        </Text>
+        ,{`\n`}Complete your profile!
       </Text>
-      <Text style={completedSetup}>
-        Completed {completedProfileSetup} /
-        6
-      </Text>
+      <Text style={completedSetup}>Completed {completedProfileSetup} / 6</Text>
 
       <View style={{ marginTop: 45, flex: 1 }}>
         <FlatList
@@ -429,8 +432,8 @@ const SetupPin = ({ nav }) => {
         style={{
           textAlign: "center",
           ...fontsize.xxsmall,
-          marginTop: 20,
-          marginBottom: 20,
+          ...FONTS.regular,
+          marginVertical: 20
         }}
       >
         Need Help? Learn More
@@ -450,7 +453,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     child: React.ReactNode;
     height: number;
   }>({ child: null, height: 200 });
-
 
   const getDashboardData = async () => {
     setLoading(true);
@@ -478,8 +480,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     setRefreshing(true);
     getDashboardData();
   }, []);
-
-
 
   const switchModals = (value) => {
     switch (value) {
@@ -522,21 +522,9 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     >
       <View style={headerContainer}>
         <View style={profileContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Settings")}
-            activeOpacity={0.8}
-          >
-            {authdata?.userDetails?.imageUrl !== null ? (
-              <FTIconwithbg
-                imageUrl={authdata?.userDetails?.imageUrl}
-                size={45}
-                bG={COLORS.Tblue}
-              />
-            ) : (
-              <Featherdefault />
-            )}
-          </TouchableOpacity>
-
+          <FTUserImage 
+          size={45}
+          />
           <View style={profileNameContainer}>
             <Text style={profileName}>
               Hi, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
@@ -575,7 +563,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         <QuickActions onpress={switchModals} />
         <ActiveCashWithdrawal />
         <Conversations />
-       <SetupProfile onPress={() => switchModals(0)} />
+        <SetupProfile onPress={() => switchModals(0)} />
 
         <View style={transactionWrap}>
           <View style={transactionHeader}>

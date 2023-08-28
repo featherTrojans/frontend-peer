@@ -60,7 +60,6 @@ const Viewbalance = ({}) => {
               <Balanceicon />
               <Text style={primaryText}>My Balances</Text>
             </View>
-            {/* <View style={underLine} /> */}
           </View>
 
           <TouchableOpacity
@@ -74,7 +73,7 @@ const Viewbalance = ({}) => {
         {/* Bottom part of the block */}
         <View style={bottomContainer}>
           {/* Left text */}
-          <View>
+          <View style={{ marginTop: 10}}>
             <View
               style={{
                 flexDirection: "row",
@@ -96,7 +95,6 @@ const Viewbalance = ({}) => {
             </Text>
           </View>
 
-          {/* Eye icon */}
         </View>
       </View>
     </>

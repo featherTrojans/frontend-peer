@@ -30,19 +30,18 @@ export const FTViewbalanceStyles = StyleSheet.create({
   },
 
   addCashBg: {
-    backgroundColor: COLORS.blue10,
+    backgroundColor: COLORS.blue9,
     flexDirection: "row",
     alignSelf: "center",
     alignItems: "center",
     paddingVertical: 12,
-    paddingLeft: 16,
-    paddingRight: 12,
+    paddingHorizontal: 18,
     borderRadius: 22,
   },
   addCashText: {
     color: COLORS.white,
-    ...fontsize.smallest,
-    ...FONTS.medium,
+    ...fontsize.xxsmallest,
+    ...FONTS.semibold,
   },
 
   //   Bottom part of the container

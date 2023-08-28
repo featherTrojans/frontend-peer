@@ -9,6 +9,7 @@ import { ChatsScreenStyles } from "../assets/styles/screens";
 import FTIconwithbg from "./FTIconwithbg";
 import FTUserImage from "./FTUserImage";
 import { lastChatDate } from "../utils/fomatTrans";
+import FTOtherImage from "./FTOtherImage";
 
 const { Blacksendicon } = icons;
 
@@ -66,7 +67,11 @@ const ChatMessage = ({ search, userId, chatinfo }) => {
       }}
       style={chatWrap}
     >
-      <FTUserImage />
+      <FTOtherImage
+        imageurl={userInfo?.imageUrl}
+        memojiImage={userInfo?.memoji}
+        fullname={userInfo?.fullName}
+      />
       {/* userimage here */}
       <View style={chatDetailWrap}>
         <View

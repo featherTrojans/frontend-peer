@@ -69,9 +69,19 @@ export const GENDER_VALIDATION = {
   },
 };
 
-export const ANSWER_VALIDATION = {
+export const ANSWER_ONE_VALIDATION = {
   required: "Security answer is required",
-  
+  maxLength: {
+    value: 20,
+    message: "Must be below 20 characters",
+  },
+};
+export const ANSWER_TWO_VALIDATION = {
+  required: "Security answer is required",
+  maxLength: {
+    value: 20,
+    message: "Must be below 20 characters",
+  },
 };
 
 export const REMARKS_VALIDATION = {

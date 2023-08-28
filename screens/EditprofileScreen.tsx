@@ -131,7 +131,7 @@ const EditprofileScreen = () => {
         onPress={() => redirectTo("changeappearance_screen")}
         style={{ flexDirection: "row", alignItems: "center" }}
       >
-        <FTUserImage />
+        <FTUserImage size={35}/>
         <View style={headerRightWrap}>
           <Profileediticon />
           <Text style={headerRightEditText}>Edit</Text>
