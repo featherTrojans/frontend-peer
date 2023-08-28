@@ -2,7 +2,10 @@
 import moment from "moment"
 
 
-const tofancyDate = (date:Date) => {
+
+
+
+export const tofancyDate = (date:Date) => {
   const currentdate = moment(date).subtract(0, 'days').calendar().split(" ")[0]
 
   if(currentdate !== "Today" && currentdate !== "Yesterday"){
@@ -10,6 +13,17 @@ const tofancyDate = (date:Date) => {
   }
   
   return currentdate
+}
+
+export const lastChatDate = (date: Date) => {
+  const currentdate = moment(date).subtract(0, 'days').calendar().split(" ")[0]
+
+  if(currentdate !== "Today" && currentdate !== "Yesterday"){
+    return `${moment(date).format("DD/MM/YY")}`
+  }
+  
+  return currentdate
+
 }
 
 const formatData = (data:any)=>{

@@ -7,6 +7,8 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { navigation } from "../utils";
 import { ChatsScreenStyles } from "../assets/styles/screens";
 import FTIconwithbg from "./FTIconwithbg";
+import { lastChatDate } from "../utils/fomatTrans";
+
 
 const { Blacksendicon } = icons;
 
@@ -56,7 +58,7 @@ const ChatMessage = ({ userId, chatinfo }) => {
           ]}
         >
           <Text style={senderNameText}>{userInfo?.fullName}</Text>
-          <Text style={lastMessageTime}>Yesterday</Text>
+          <Text style={lastMessageTime}>{lastChatDate(chatinfo?.createdAt)}</Text>
         </View>
         <View style={SAlign}>
           <Text style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
