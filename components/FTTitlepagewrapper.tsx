@@ -1,13 +1,16 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Pressable,  StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Customstatusbar from "../screens/shared/Customstatusbar";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { navigation } from "../utils";
+// import { navigation } from "../utils";
 import { FTBackheaderStyles } from "../assets/styles/components";
 import { useSwipemodal } from "../hooks";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 const { Backarrow } = icons;
 const { backArrowContainer, backHeaderWrap, backHeaderTitle, childrenWrap } =
   FTBackheaderStyles;
+  
 
 const FTTitlepagewrapper = ({
   title,
@@ -37,6 +40,8 @@ const FTTitlepagewrapper = ({
   invert?: boolean;
 }) => {
   const { Swipemodal } = useSwipemodal();
+  const navigation = useNavigation()
+
 
   return (
     <>

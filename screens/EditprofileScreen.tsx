@@ -12,6 +12,7 @@ import {
   FTInput,
   FTKeyboardwrapper,
   FTTitlepagewrapper,
+  FTUserImage,
 } from "../components";
 import { useForm } from "react-hook-form";
 import {
@@ -130,14 +131,7 @@ const EditprofileScreen = () => {
         onPress={() => redirectTo("changeappearance_screen")}
         style={{ flexDirection: "row", alignItems: "center" }}
       >
-        <View
-          style={{
-            height: 35,
-            width: 35,
-            borderRadius: 35 / 2,
-            backgroundColor: COLORS.Tblue4,
-          }}
-        ></View>
+        <FTUserImage />
         <View style={headerRightWrap}>
           <Profileediticon />
           <Text style={headerRightEditText}>Edit</Text>
@@ -170,7 +164,7 @@ const EditprofileScreen = () => {
       modalChildren={<GenderModal />}
       showModal={showModal}
       setShowModal={setShowModal}
-      modalHeight={300}
+      modalHeight={200}
       rightComponent={<HeaderRight />}
     >
       <FTKeyboardwrapper>
@@ -222,7 +216,7 @@ const EditprofileScreen = () => {
           ) : null}
           {(error ||
             usernamename?.toLowerCase() ===
-              authdata?.userDetails?.username.toLowerCase()) && (
+              authdata?.userDetails?.username?.toLowerCase()) && (
             <>
               <Changememojicheckicon />
               <Text

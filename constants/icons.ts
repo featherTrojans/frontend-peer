@@ -131,6 +131,8 @@ import Successicon from "../assets/icons/Successicon";
 import Erroricon from "../assets/icons/Erroricon";
 import Profilechangeicon from "../assets/icons/Profilechangeicon";
 import Smallbackarrow from "../assets/icons/Smallbackarrow";
+import Choosememojiicon from "../assets/icons/Choosememojiicon";
+
 
 
 export default {
@@ -248,6 +250,7 @@ export default {
   Erroricon,
   Profilechangeicon,
   Smallbackarrow,
+  Choosememojiicon,
   // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,

@@ -15,11 +15,13 @@ const {
 
 const { Blacksendicon } = icons;
 
-const MemojisuccessScreen = () => {
+const MemojisuccessScreen = ({ route }) => {
+  const active = route?.params?.active;
+  const emojiindex = route?.params?.emojiindex;
   return (
     <FTMainwrapper>
       <View style={memojiSuccessWrap}>
-        <FTIconwithbg bG="#F6DEAC" Icon={Blacksendicon} size={150} />
+        <FTIconwithbg imageUrl={emojiindex} bG={active} size={150} />
         <View style={{ flex: 1 }}>
           <Text style={successHeader}>
             Padi, Memoji was {"\n"} created successfully{" "}
@@ -32,7 +34,7 @@ const MemojisuccessScreen = () => {
 
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => console.log("memojisuccess_screen")}
+          onPress={() => navigation.navigate("Dashboard")}
           style={[buttonWrap, { backgroundColor: COLORS.blue9 }]}
         >
           <Text style={buttonText}>Continue</Text>

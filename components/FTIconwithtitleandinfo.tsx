@@ -37,6 +37,7 @@ const FTIconwithtitleandinfo = ({
 }: IFTIconwithtitleandInfoProps) => {
   return (
     <Pressable
+      hitSlop={30}
       style={[mainWrap, { marginBottom: mB, marginTop: mT }]}
       onPress={onPress}
     >

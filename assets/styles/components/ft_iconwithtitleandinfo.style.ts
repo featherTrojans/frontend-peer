@@ -6,6 +6,7 @@ export const FTIconwithtitleandinfoStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    // backgroundColor: "red"
   },
   iconandinfoWrap: {
     flexDirection: "row",

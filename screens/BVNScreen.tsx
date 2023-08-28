@@ -6,7 +6,7 @@ import {
   FTLoader,
   FTTitlepagewrapper,
 } from "../components";
-import { VALIDATION, navigation } from "../utils";
+import { VALIDATION } from "../utils";
 import { useForm } from "react-hook-form";
 import {
   Text,
@@ -48,7 +48,7 @@ const {
 const { Skiplatericon, Bvncommenticon, Bvnverifyicon } = icons;
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-function BVNScreen() {
+function BVNScreen({ navigation }) {
   const { token } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });
@@ -73,9 +73,7 @@ function BVNScreen() {
   };
 
   const skipToWelcome = () => {
-    navigation.navigate("welcome_screen", {
-      fromm: "setup",
-    });
+    navigation.replace("feathertag_screen");
   };
 
   const BVNReasonModal = () => {
@@ -121,7 +119,7 @@ function BVNScreen() {
       <FTTitlepagewrapper title="Verify BVN">
         <FTLoader loading={loading} />
         <View style={flex}>
-          <Text style={headerText}>Hi Doyin {'\n'}Enter your BVN</Text>
+          <Text style={headerText}>Hi Doyin {"\n"}Enter your BVN</Text>
           <FTInput
             placeholderText="Enter BVN"
             name="bvn"

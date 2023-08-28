@@ -23,7 +23,6 @@ import {
   ChoosenetworkScreen,
   EditprofileScreen,
   FindmerchantScreen,
-  GetstartedScreen,
   HomeScreen,
   LoginScreen,
   MeternumberScreen,
@@ -60,6 +59,7 @@ import {
   TransactionSuccessScreen,
   WalletfundingScreen,
   MemojisuccessScreen,
+  ChoosememojibgScreen,
 } from "../screens";
 
 // BVNSuccessScreen
@@ -74,13 +74,6 @@ export const authRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "onboarding_screen",
-  },
-  {
-    title: "",
-    screen: GetstartedScreen,
-    showHeader: false,
-    hideHiderTitle: false,
-    route: "getstarted_screen",
   },
   {
     title: "",
@@ -492,6 +485,13 @@ export const profileRoutes = [
     showHeader: false,
     hideHiderTitle: false,
     route: "memojisuccess_screen",
+  },
+  {
+    title: "",
+    screen: ChoosememojibgScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "choosememojibg_screen",
   },
   {
     title: "",

@@ -15,6 +15,7 @@ import {
   FTMainwrapper,
   FTTabWrapper,
   FTTitlepagewrapper,
+  FTUserImage,
 } from "../components";
 
 import { AuthContext } from "../context/AuthContext";
@@ -92,7 +93,7 @@ const {
   Startnewchaticon,
   Successtransfericon,
   Smalllockicon,
-  Smallbackarrow
+  Smallbackarrow,
 } = icons;
 
 const ChatsdmScreen = ({ route }) => {
@@ -523,8 +524,12 @@ const ChatsdmScreen = ({ route }) => {
       {/* Header Section */}
       <View style={chatHeader}>
         <View style={[headerDetailsContainer]}>
-          <TouchableOpacity activeOpacity={0.7} onPress={navigation.goBack} style={backArrowWrap}>
-            <Smallbackarrow /> 
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={navigation.goBack}
+            style={backArrowWrap}
+          >
+            <Smallbackarrow />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -536,7 +541,7 @@ const ChatsdmScreen = ({ route }) => {
             }
             style={chatsDmProfileWrap}
           >
-            <FTIconwithbg bG={COLORS.Tyellow} Icon={Blacksendicon} />
+            <FTUserImage />
             <View style={{ marginLeft: 18 }}>
               <Text style={chatName}>{userInfo?.fullName}</Text>
               {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}

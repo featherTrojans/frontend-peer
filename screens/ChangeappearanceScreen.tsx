@@ -10,18 +10,24 @@ import {
   FTLoader,
   FTTitlepagewrapper,
 } from "../components";
-import { icons } from "../constants";
+
 import { redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
 redirectTo;
-const { Changememojicheckicon } = icons;
+
+import { COLORS, icons } from "../constants";
+import { useAlert } from "../hooks";
+
+redirectTo;
+const { Changememojicheckicon, Choosememojiicon } = icons;
 
 const {} = ChangeappearanceScreenStyles;
 
 const ChangeappearanceScreen = () => {
   const [loading, setLoading] = useState(false);
   const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
+  const { successAlert } = useAlert();
 
   const handleImageUpload = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -49,7 +55,12 @@ const ChangeappearanceScreen = () => {
           ...authdata,
           userDetails: { ...authdata?.userDetails, imageUrl: result.uri },
         });
-        const response = await axiosCustom.post("/upload/image", formdata);
+        await axiosCustom.post("/upload/image", formdata);
+
+        const form2 = new FormData();
+        form2.append("isMemoji", "false");
+        await axiosCustom.post("/upload/image", form2);
+        successAlert("Profile image succesfully updated");
       } catch (err) {
         console.log(err.response.data);
       } finally {
@@ -65,7 +76,7 @@ const ChangeappearanceScreen = () => {
         Icon={Changememojicheckicon}
         title="Choose Memoji"
         onPress={() => redirectTo("choosememoji_screen")}
-        bG="blue"
+        bG={COLORS.Tyellow3}
         mB={20}
       />
       <FTIconwithtitleandinfo

@@ -6,6 +6,7 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
 } from "@react-navigation/stack";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AuthContext } from "../context/AuthContext";
 
@@ -17,6 +18,7 @@ import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 const AppStack = createStackNavigator();
 
 import {
+  BlankScreen,
   CardScreen,
   ChatsScreen,
   ChatsdmScreen,
@@ -27,7 +29,6 @@ import {
 } from "../screens";
 
 const AuthStack = createStackNavigator();
-
 const DashboardTabs = createBottomTabNavigator();
 
 import {
@@ -55,39 +56,7 @@ Notification.setNotificationHandler({
   }),
 });
 
-function getWidth() {
-  let width = SIZES.width;
-  return width / 5;
-}
 
-function SpringAnimation(distance: any, index: number) {
-  Animated.spring(distance, {
-    toValue: getWidth() * index,
-    useNativeDriver: true,
-  }).start();
-}
-
-function TabListener(value, offSet) {
-  switch (value.name) {
-    case "Home":
-      SpringAnimation(offSet, 0);
-      break;
-    case "Transact":
-      SpringAnimation(offSet, 1);
-      break;
-    case "Cards":
-      SpringAnimation(offSet, 2);
-      break;
-    case "Chats":
-      SpringAnimation(offSet, 3);
-      break;
-    case "Profile":
-      SpringAnimation(offSet, 4);
-      break;
-    default:
-      break;
-  }
-}
 
 let TabIcon = (name: string, focused: boolean) => {
   switch (name) {
@@ -128,8 +97,18 @@ const NoAuthNavigator = ({ routeName }) => {
 
 const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
   const { getState, reset } = useNavigation();
-  const { showTabs } = useContext(AuthContext);
-  const tabOffsetValue = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const state = getState?.();
+
+    if (state) {
+      reset({
+        ...state,
+        index: 0,
+        history: [],
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -151,38 +130,21 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
           headerShown: false,
           tabBarStyle: {
             minHeight: Platform.OS === "android" ? 70 : 84,
-            // paddingBottom: Platform.OS === "android" ? 10 : 20,
+            paddingBottom: Platform.OS === "android" ? 10 : 20,
             backgroundColor: COLORS.white,
             alignItems: "center",
             justifyContent: "center",
             paddingVertical: 16,
-            display: showTabs ? "flex" : "none",
           },
         })}
-        screenListeners={({ navigation, route }) => ({
-          state: (e) => TabListener(route, tabOffsetValue),
-        })}
-        initialRouteName="home_screen"
+        initialRouteName="Home"
       >
-        <DashboardTabs.Screen name="Home" component={HomeScreen} />
-        <DashboardTabs.Screen name="Transact" component={TransactionsScreen} />
+        <DashboardTabs.Screen name="Home" component={BlankScreen} />
+        <DashboardTabs.Screen name="Transact" component={BlankScreen} />
         <DashboardTabs.Screen name="Cards" component={CardScreen} />
         <DashboardTabs.Screen name="Chats" component={ChatsScreen} />
         <DashboardTabs.Screen name="Profile" component={ProfileScreen} />
       </DashboardTabs.Navigator>
-      <Animated.View
-        style={[
-          {
-            height: 1.5,
-            backgroundColor: COLORS.blue6,
-            position: "absolute",
-            bottom: 82,
-            width: getWidth(),
-            transform: [{ translateX: tabOffsetValue }, { scaleX: 0.3 }],
-            display: showTabs ? "flex" : "none",
-          },
-        ]}
-      ></Animated.View>
     </>
   );
 };

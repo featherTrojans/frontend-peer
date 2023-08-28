@@ -20,6 +20,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import navigationService from "./utils/navigation";
 import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
+
 import {
   AWEEKAFTER,
   clearDataFromStorage,
@@ -67,85 +69,6 @@ export const toastConfig = {
       </TouchableOpacity>
     </View>
   ),
-
-  purpleToast: ({ text1, props }: { text1: string; props: any }) => (
-    <View style={[appStyles.alertWrapper, { backgroundColor: "#8456FF" }]}>
-      <View style={{ flex: 1 }}>
-        <Text style={appStyles.alertText}>{props.message} </Text>
-      </View>
-
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => Toast.hide()}
-        style={appStyles.cancelWrapper}
-      >
-        {/* <Alertcancelicon /> */}
-      </TouchableOpacity>
-    </View>
-  ),
-
-  blueToast: ({ text1, props }: { text1: string; props: any }) => (
-    <View style={[appStyles.alertWrapper, { backgroundColor: "#5676FF" }]}>
-      <View style={{ flex: 1 }}>
-        <Text style={appStyles.alertText}>{props.message} </Text>
-      </View>
-
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => Toast.hide()}
-        style={appStyles.cancelWrapper}
-      >
-        {/* <Alertcancelicon /> */}
-      </TouchableOpacity>
-    </View>
-  ),
-  updateToast: ({ text1, props }: { text1: string; props: any }) => (
-    <View
-      style={[
-        appStyles.alertWrapper,
-        { backgroundColor: "#fff", height: 54, paddingVertical: 18 },
-      ]}
-    >
-      <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-        {/* <Updateprofileicon /> */}
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => customNavigation("Settings", {})}
-          style={{ marginLeft: 12, flexDirection: "row", alignItems: "center" }}
-        >
-          <Text
-            style={{
-              ...fontsize.smallest,
-              ...FONTS.medium,
-              color: COLORS.blue9,
-              marginRight: 12,
-            }}
-          >
-            Update your profile,{" "}
-            <Text
-              style={{
-                color: COLORS.blue6,
-                textDecorationColor: COLORS.blue6,
-                textDecorationLine: "underline",
-                textDecorationStyle: "solid",
-              }}
-            >
-              go to settings
-            </Text>
-          </Text>
-          {/* <Bluearrowrighticon /> */}
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => Toast.hide()}
-        style={appStyles.cancelWrapper}
-      >
-        {/* <Updatealertcancelicon /> */}
-      </TouchableOpacity>
-    </View>
-  ),
 };
 
 LogBox.ignoreLogs(["Setting a timer"]);
@@ -170,21 +93,7 @@ export default function App() {
     } finally {
     }
   };
-  // const persistLogin = async () => {
-  //   // await AsyncStorage.removeItem('@onboarded')
-  //   try {
-  //     const value = await AsyncStorage.getItem("@onboarded");
 
-  //     if (value !== null) {
-  //       setOnboarded(JSON.parse(value).onboard);
-  //     } else {
-  //       setOnboarded(false);
-  //     }
-  //   } catch (err) {
-  //     setOnboarded(false);
-  //   } finally {
-  //   }
-  // };
   useEffect(() => {
     // why don't I check here, then set Auth , and set tokem you know
 
@@ -247,7 +156,7 @@ export default function App() {
             </AuthProvider>
             <Toast
               config={toastConfig}
-              topOffset={44}
+              topOffset={getStatusBarHeight(true)}
               onShow={() => console.log("Status shown")}
               onHide={() => console.log("Status hidden")}
             />
@@ -263,8 +172,9 @@ const appStyles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
-    paddingTop: 12,
+    paddingVertical: 15,
   },
   updateAlertWrapper: {
     width: "100%",

@@ -20,15 +20,12 @@ import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import { navigation } from "../utils";
 import { useAlert } from "../hooks";
+import SegmentedControl from "@react-native-segmented-control/segmented-control";
 const { Levelcheckicon, Leveloptioncancelicon, Leveloptioncheckicon } = icons;
 
 const { width } = Dimensions.get("window");
 
 const {
-  segmentedWrap,
-  movingSegmentedbg,
-  segmentedOptions,
-  segmentedOptionText,
   BAlign,
   levelInfoWrap,
   levelText,
@@ -43,36 +40,17 @@ const {
 } = AccountverificationScreenStyles;
 
 const AccountverificationScreen = (props) => {
-  const translateValue = 260 / 3;
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [tabTranslate, setTabTranslate] = React.useState(new Animated.Value(0));
-  const flatlistRef = useRef<FlatList>(null);
   const userlevel = authdata?.userDetails?.userLevel;
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const onOptionPress = useCallback((index) => {
-    setCurrentIndex(index);
-  }, []);
+
 
   useEffect(() => {
-    Animated.spring(tabTranslate, {
-      toValue: currentIndex * translateValue,
-      stiffness: 180,
-      damping: 20,
-      mass: 1,
-      useNativeDriver: true,
-    }).start();
-    const scrollTo = () => {
-      flatlistRef?.current?.scrollToIndex({
-        index: currentIndex,
-        animated: true,
-      });
-    };
-    scrollTo();
-  }, [currentIndex]);
+    console.log(selectedIndex, "here is the index")
+  }, [selectedIndex]);
 
-  const accountLevels = ["Newbie", "Odogwu", "Veteran"];
 
   const accountLevelDatas = [
     {
@@ -113,143 +91,126 @@ const AccountverificationScreen = (props) => {
     },
   ];
 
-  return (
-    <FTTitlepagewrapper title="Account Verification">
 
+  const ShowCurrentLevel = () => {
+    const {
+      status,
+      level,
+      levelTitle,
+      fundinglimit,
+      cashrequest,
+      transferout,
+      accountnumber,
+      usdcard,
+      requirement,
+      upgradeLocation,
+    } = accountLevelDatas[selectedIndex];
+    return (
+      <View style={{ width: width - 30, backgroundColor: COLORS.white }}>
+        <View style={levelInfoWrap}>
+          <View style={BAlign}>
+            <Text style={levelText}>{levelTitle} Level</Text>
+            <Levelcheckicon />
+          </View>
+          <Text style={requirementText}>Requirement</Text>
+          <Text style={requirementMainText}>
+            {requirement}
+          </Text>
+        </View>
 
-
-      <View style={segmentedWrap}>
-
-        
-        <Animated.View
-          style={[
-            movingSegmentedbg,
-            { transform: [{ translateX: tabTranslate }] },
-          ]}
-        />
-        {accountLevels.map((accountLevel, index) => {
-          let isActive = index == currentIndex;
-          return (
-            <Pressable
-              key={index}
-              onPress={() => onOptionPress(index)}
-              style={segmentedOptions}
-              onLayout={(e) => {
-                console.log(e.nativeEvent.layout.width);
-              }}
+        <View style={blockWrap}>
+          <View style={BAlign}>
+            <Text style={infoKeyText}>Status</Text>
+            <View
+              style={[
+                statusTextBg,
+                { backgroundColor: status ? "#E9F7EA" : "#FDF3F7" },
+              ]}
             >
               <Text
                 style={[
-                  segmentedOptionText,
-                  { color: !isActive ? COLORS.blue9 : COLORS.white },
+                  statusText,
+                  { color: status ? COLORS.green4 : "#D81859" },
                 ]}
               >
-                {accountLevel}
+                {status ? "Completed" : "Not Started"}
               </Text>
-            </Pressable>
-          );
-        })}
-      </View>
-
-      <FlatList
-        data={accountLevelDatas}
-        horizontal
-        ref={flatlistRef}
-        pagingEnabled
-        scrollEnabled={false}
-        renderItem={({ item }) => {
-          const {
-            status,
-            level,
-            levelTitle,
-            fundinglimit,
-            cashrequest,
-            transferout,
-            accountnumber,
-            usdcard,
-            upgradeLocation,
-          } = item;
-
-          return (
-            <View style={{ width: width - 30, backgroundColor: COLORS.white }}>
-              <View style={levelInfoWrap}>
-                <View style={BAlign}>
-                  <Text style={levelText}>{levelTitle} Level</Text>
-                  <Levelcheckicon />
-                </View>
-                <Text style={requirementText}>Requirement</Text>
-                <Text style={requirementMainText}>
-                  Basic Personal Information
-                </Text>
-              </View>
-
-              <View style={blockWrap}>
-                <View style={BAlign}>
-                  <Text style={infoKeyText}>Status</Text>
-                  <View
-                    style={[
-                      statusTextBg,
-                      { backgroundColor: status ? "#E9F7EA" : "#FDF3F7" },
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        statusText,
-                        { color: status ? COLORS.green4 : "#D81859" },
-                      ]}
-                    >
-                      {status ? "Completed" : "Not Started"}
-                    </Text>
-                  </View>
-                </View>
-
-                <View style={dashedLine} />
-
-                <View style={BAlign}>
-                  <Text style={infoKeyText}>Funding Limit</Text>
-                  <Text style={infoValueText}>{fundinglimit}</Text>
-                </View>
-                <View style={[BAlign, { marginVertical: 18 }]}>
-                  <Text style={infoKeyText}>Cash Request</Text>
-                  <Text style={infoValueText}>{cashrequest}</Text>
-                </View>
-                <View style={BAlign}>
-                  <Text style={infoKeyText}>Transfer Out</Text>
-                  <Text style={infoValueText}>{transferout}</Text>
-                </View>
-                <View style={[BAlign, { marginVertical: 18 }]}>
-                  <Text style={infoKeyText}>Free Bank Account Number</Text>
-                  {accountnumber ? (
-                    <Leveloptioncheckicon />
-                  ) : (
-                    <Leveloptioncancelicon />
-                  )}
-                </View>
-                <View style={BAlign}>
-                  <Text style={infoKeyText}>Virtual USD Card</Text>
-                  {usdcard ? (
-                    <Leveloptioncheckicon />
-                  ) : (
-                    <Leveloptioncancelicon />
-                  )}
-                </View>
-              </View>
-              {!status && (
-                <FTCustombutton
-                  btntext={`Updrage to ${levelTitle}`}
-                  onpress={() => {
-                    if (userlevel < level - 1) {
-                      errorAlert(null, "Please upgrade to Odogwu");
-                      return;
-                    }
-                    navigation.navigate(upgradeLocation);
-                  }}
-                />
-              )}
             </View>
-          );
+          </View>
+
+          <View style={dashedLine} />
+
+          <View style={BAlign}>
+            <Text style={infoKeyText}>Funding Limit</Text>
+            <Text style={infoValueText}>{fundinglimit}</Text>
+          </View>
+          <View style={[BAlign, { marginVertical: 18 }]}>
+            <Text style={infoKeyText}>Cash Request</Text>
+            <Text style={infoValueText}>{cashrequest}</Text>
+          </View>
+          <View style={BAlign}>
+            <Text style={infoKeyText}>Transfer Out</Text>
+            <Text style={infoValueText}>{transferout}</Text>
+          </View>
+          <View style={[BAlign, { marginVertical: 18 }]}>
+            <Text style={infoKeyText}>Free Bank Account Number</Text>
+            {accountnumber ? (
+              <Leveloptioncheckicon />
+            ) : (
+              <Leveloptioncancelicon />
+            )}
+          </View>
+          <View style={BAlign}>
+            <Text style={infoKeyText}>Virtual USD Card</Text>
+            {usdcard ? (
+              <Leveloptioncheckicon />
+            ) : (
+              <Leveloptioncancelicon />
+            )}
+          </View>
+        </View>
+        {!status && (
+          <FTCustombutton
+            btntext={`Updrage to ${levelTitle}`}
+            onpress={() => {
+              if (userlevel < level - 1) {
+                errorAlert(null, "Please upgrade to Odogwu");
+                return;
+              }
+              navigation.navigate(upgradeLocation);
+            }}
+          />
+        )}
+      </View>
+    );
+  }
+
+  return (
+    <FTTitlepagewrapper title="Account Verification">
+
+<SegmentedControl
+        values={["Newbie", "Odogwu", "Veteran"]}
+        selectedIndex={selectedIndex}
+        tintColor={COLORS.blue9}
+        style={{
+          width: "80%",
+          alignSelf: "center",
+        }}
+        fontStyle={{
+          color: "#11141A"
+        }}
+        activeFontStyle={{
+          color: "white"
+        }}
+        backgroundColor="#F0F0F0"
+        onChange={(event) => {
+          setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
         }}
       />
+
+
+
+        <ShowCurrentLevel />
     </FTTitlepagewrapper>
   );
 };

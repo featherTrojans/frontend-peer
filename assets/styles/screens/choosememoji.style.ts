@@ -23,6 +23,7 @@ export const ChoosememojiScreenStyles = StyleSheet.create({
   memojisWrapper: {
     justifyContent: "space-evenly",
     alignItems: "center",
+    // rowGap: 15
     marginTop: 20,
   },
   buttonWrap: {

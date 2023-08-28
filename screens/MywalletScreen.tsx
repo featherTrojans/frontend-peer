@@ -42,9 +42,9 @@ const MywalletScreen = () => {
     switch (authdata?.userDetails?.userLevel) {
       case 1:
         return "Newbie";
-      case 2:
-        return "Odogwu";
       case 3:
+        return "Odogwu";
+      case 4:
         return "Veteran";
       default:
         return null;

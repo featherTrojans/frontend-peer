@@ -8,7 +8,7 @@ const Custombutton = ({
   onpress,
   disable = false,
   btntext,
-  bg = "#003AD6",
+  bg = "#342AD5",
 }: {
   onpress: () => void;
   disable?: boolean;

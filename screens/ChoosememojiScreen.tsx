@@ -15,6 +15,7 @@ import React, {
   useState,
 } from "react";
 import Svg, { G, Rect, Path } from "react-native-svg";
+import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import {
   AccountverificationScreenStyles,
   ChoosememojiScreenStyles,
@@ -53,12 +54,7 @@ const {
   buttonWrap,
   buttonText,
 } = ChoosememojiScreenStyles;
-const {
-  movingSegmentedbg,
-  segmentedWrap,
-  segmentedOptionText,
-  segmentedOptions,
-} = AccountverificationScreenStyles;
+const {} = AccountverificationScreenStyles;
 
 const ColorOption = ({ color, active, setActive }) => {
   return (
@@ -75,140 +71,66 @@ const ColorOption = ({ color, active, setActive }) => {
   );
 };
 
-const profileColors = [
-  {
-    color: "#D9D9D9",
-  },
-  {
-    color: "#C8F1CE",
-  },
-  {
-    color: "#CFE9FB",
-  },
-  {
-    color: "#F8EBA7",
-  },
-  {
-    color: "#F5C3BC",
-  },
-  {
-    color: "#DFD2FA",
-  },
-  {
-    color: "#F7CDD7",
-  },
-  {
-    color: "#F6DEAC",
-  },
-  {
-    color: "#F8CDD7",
-  },
-];
-
 const ChoosememojiScreen = () => {
-  const { errorAlert } = useAlert();
   const [active, setActive] = useState("transparent");
-  const [emojiindex, setEmojiIndex] = useState(
-    "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Fo.png?alt=media&token=63eb2074-9d2c-4588-9f18-e940888414be"
-  );
-
-  const [loading, setLoading] = useState(false);
-  const { authdata, setAuthData } = useContext(AuthContext);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const translateValue = 125;
-  const flatlistRef = useRef<FlatList>(null);
-  const tabTranslate = useSharedValue(0);
-  const rotateView = useSharedValue(0);
   const [skinColor, setSkinColor] = useState("lightSkinned");
   const gender = "male";
 
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{ translateX: tabTranslate.value }],
-  }));
+  const { authdata, setAuthData } = useContext(AuthContext);
+  const [currentIndex, setCurrentIndex] = useState(
+    allMemojis[gender]["lightSkinned"][0]
+  );
+  const translateValue = 125;
+  const tabTranslate = useSharedValue(0);
+  const rotateView = useSharedValue(0);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const rotateStyles = useAnimatedStyle(() => ({
     transform: [{ rotate: `${rotateView.value}deg` }],
   }));
 
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      const data = {
-        color: active,
-        index: emojiindex,
-        isMemoji: true,
-      };
-      await axiosCustom.post("/upload/image", data);
-      setAuthData({
-        ...authdata,
-        userDetails: {
-          ...authdata.userDetails,
-          color: active,
-          index: emojiindex,
-        },
-      });
-      return navigation.navigate("memojisuccess_screen");
-    } catch (err) {
-      errorAlert(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const accountLevels = ["Light Skinned", "Dark Skinned"];
   const onOptionPress = useCallback((index) => {
     setCurrentIndex(index);
   }, []);
 
   useEffect(() => {
-    tabTranslate.value = withSpring(currentIndex * translateValue);
-    rotateView.value = withSpring(currentIndex * 360);
-    if (currentIndex === 0) {
+    rotateView.value = withSpring(selectedIndex * 360);
+    if (selectedIndex === 0) {
       setSkinColor("lightSkinned");
     } else {
       setSkinColor("darkSkinned");
     }
-
-    const scrollTo = () => {
-      flatlistRef?.current?.scrollToIndex({
-        index: currentIndex,
-        animated: true,
-      });
-    };
-    scrollTo();
-  }, [currentIndex]);
+  }, [selectedIndex]);
 
   return (
     <FTTitlepagewrapper title="Change Appearance">
-      <FTLoader loading={loading} />
       <View style={{ flex: 1 }}>
-        <View style={segmentedWrap}>
-          <Animated.View
-            style={[movingSegmentedbg, animatedStyles, { width: "45%" }]}
-          />
-          {accountLevels.map((accountLevel, index) => {
-            let isActive = index == currentIndex;
-            return (
-              <Pressable
-                key={index}
-                onPress={() => onOptionPress(index)}
-                style={segmentedOptions}
-              >
-                <Text
-                  style={[
-                    segmentedOptionText,
-                    { color: !isActive ? COLORS.blue9 : COLORS.white },
-                  ]}
-                >
-                  {accountLevel}
-                </Text>
-              </Pressable>
-            );
-          })}
-        </View>
+        <SegmentedControl
+          values={["Light Skinned", "Dark Skinned"]}
+          selectedIndex={selectedIndex}
+          tintColor={COLORS.blue9}
+          style={{
+            width: "80%",
+            alignSelf: "center",
+          }}
+          fontStyle={{
+            color: "#11141A",
+            ...fontsize.smallest,
+            ...FONTS.regular,
+          }}
+          activeFontStyle={{
+            color: "white",
+          }}
+          backgroundColor="#F0F0F0"
+          onChange={(event) => {
+            setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
+          }}
+        />
 
         <View style={profileWrap}>
           <View style={{ position: "absolute" }}>
-            <FTIconwithbg imageUrl={emojiindex} bG={active} size={150} />
+            <FTIconwithbg imageUrl={currentIndex} bG={active} size={150} />
           </View>
 
           <AnimatedSVG width={150.649} height={150.649} style={rotateStyles}>
@@ -233,36 +155,18 @@ const ChoosememojiScreen = () => {
           </AnimatedSVG>
         </View>
 
-        <Text style={sectionHeader}>Background Colour</Text>
-        <FlatList
-          data={profileColors}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ gap: 10 }}
-          renderItem={({ item: { color }, index }) => {
-            return (
-              <ColorOption
-                key={index}
-                color={color}
-                active={active}
-                setActive={setActive}
-              />
-            );
-          }}
-        />
-
         <FlatList
           data={allMemojis[gender][skinColor]}
           numColumns={3}
           horizontal={false}
-          columnWrapperStyle={memojisWrapper}
+          columnWrapperStyle={[memojisWrapper]}
           renderItem={({ item }) => {
             return (
               <FTIconwithbg
+                onpress={() => onOptionPress(item)}
                 imageUrl={item}
                 bG=""
-                onpress={() => setEmojiIndex(item)}
-                size={65}
+                size={85}
               />
             );
           }}
@@ -270,7 +174,11 @@ const ChoosememojiScreen = () => {
 
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={handleSubmit}
+          onPress={() =>
+            navigation.navigate("choosememojibg_screen", {
+              emojiindex: currentIndex,
+            })
+          }
           style={buttonWrap}
         >
           <Text style={buttonText}>Great Proceed</Text>

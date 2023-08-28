@@ -123,8 +123,8 @@ const History = ({ data }) => {
         {transactionBadge()}
         <View style={{ flex: 1, marginLeft: 14 }}>
           <View style={historyContainer}>
-            <Text style={title}>{title}</Text>
-            <Text style={[amount, { color: priceColor }]}>
+            <Text style={titleText}>{title}</Text>
+            <Text style={[amountText, { color: priceColor }]}>
               {amountSign}N{amountFormatter(amount)}
             </Text>
           </View>

@@ -20,7 +20,8 @@ export const EditprofileScreenStyles = StyleSheet.create({
   headerRightWrap: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 12,
+    // paddingVertical: 12,
+    height: 35,
     paddingHorizontal: 15,
     borderWidth: 1,
     borderColor: COLORS.black,

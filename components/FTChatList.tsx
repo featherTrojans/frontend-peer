@@ -7,6 +7,7 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { navigation } from "../utils";
 import { ChatsScreenStyles } from "../assets/styles/screens";
 import FTIconwithbg from "./FTIconwithbg";
+import FTUserImage from "./FTUserImage";
 
 const { Blacksendicon } = icons;
 
@@ -22,24 +23,24 @@ const {
 
 const ChatMessage = ({ search, userId, chatinfo }) => {
   const [userInfo, setUserInfo] = useState({});
-  const [show, setshow] = useState(true);
-  useEffect(() => {
-    console.log(search);
-    if (search == "") {
-      setshow(true);
-    } else {
-      let de = false;
-      if (userInfo?.fullName) {
-        de = userInfo?.fullName.toLowerCase().includes(search.toLowerCase());
-      }
-      if (userInfo?.username) {
-        de =
-          de || userInfo?.username.toLowerCase().includes(search.toLowerCase());
-      }
-      console.log(userInfo?.fullName, search, de);
-      setshow(de);
-    }
-  }, [search]);
+  // const [show, setshow] = useState(true);
+  // useEffect(() => {
+  //   console.log(search);
+  //   if (search == "") {
+  //     setshow(true);
+  //   } else {
+  //     let de = false;
+  //     if (userInfo?.fullName) {
+  //       de = userInfo?.fullName.toLowerCase().includes(search.toLowerCase());
+  //     }
+  //     if (userInfo?.username) {
+  //       de =
+  //         de || userInfo?.username.toLowerCase().includes(search.toLowerCase());
+  //     }
+  //     console.log(userInfo?.fullName, search, de);
+  //     setshow(de);
+  //   }
+  // }, [search]);
   useEffect(() => {
     getUser();
   }, []);
@@ -53,9 +54,9 @@ const ChatMessage = ({ search, userId, chatinfo }) => {
     }
   };
 
-  if (!show) {
-    return null;
-  }
+  // if (!show) {
+  //   return null;
+  // }
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -64,7 +65,7 @@ const ChatMessage = ({ search, userId, chatinfo }) => {
       }}
       style={chatWrap}
     >
-      <FTIconwithbg Icon={Blacksendicon} bG={COLORS.Tpurple} />
+      <FTUserImage />
       {/* userimage here */}
       <View style={chatDetailWrap}>
         <View

@@ -1,4 +1,3 @@
-import GetstartedScreen from "./GetstartedScreen";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "./LoginScreen";
 import NotificationsScreen from "./NotificationsScreen";
@@ -63,12 +62,13 @@ import WithdrawcashScreen from "./WithdrawcashScreen";
 import TransactionSuccessScreen from "./TransactionSuccessScreen";
 import WalletfundingScreen from "./WalletfundingScreen";
 import MemojisuccessScreen from "./MemojisuccessScreen";
+import ChoosememojibgScreen from "./ChoosememojibgScreen";
+
 
 export {
   OnboardingScreen,
   LoginScreen,
   WelcomeScreen,
-  GetstartedScreen,
   CustomWebView,
   LockScreen,
   PersonalRegisterScreen,
@@ -139,5 +139,6 @@ export {
   WithdrawcashScreen,
   TransactionSuccessScreen,
   WalletfundingScreen,
-  MemojisuccessScreen
+  MemojisuccessScreen,
+  ChoosememojibgScreen
 };

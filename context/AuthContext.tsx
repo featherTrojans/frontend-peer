@@ -10,9 +10,7 @@ const AuthProvider: FC = ({ children }) => {
 
   const [allowBiometrics, setAllowBiometrics] = useState(false);
 
-  const userDefaultImage = () => {
-    return <Featherdefault />;
-  };
+
 
   const [token, setToken] = useState("");
   const [showTabs, setShowTabs] = useState(true)
@@ -32,7 +30,6 @@ const AuthProvider: FC = ({ children }) => {
         showAmount,
         setShowAmount,
         userColor,
-        userDefaultImage,
         allowBiometrics,
         showTabs,
         setShowTabs,
