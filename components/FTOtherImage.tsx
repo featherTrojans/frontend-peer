@@ -1,33 +1,30 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
-import React, { ReactElement, useContext } from "react";
+import { StyleSheet, View, Image, Pressable } from "react-native";
+import React from "react";
 import { images } from "../constants";
-import { AuthContext } from "../context/AuthContext";
+
 import { allMemojis } from "../assetdatas";
+import { nameSplitToTwo } from "../utils/nameSplitter";
+import { Text } from "react-native";
 
 const { Notificationimage } = images;
 
 type IconWithBgProps = {
   size?: number | undefined;
-  onpress?: any;
+  imageurl: null | string;
   iconsize?: number;
+  memojiImage: object | string;
+  fullname?: string;
+  onpress?: any;
 };
 
-const FTUserImage = ({
+const FTOtherImage = ({
   size = 45,
+  imageurl = "",
+  memojiImage = {},
+  fullname = "A A",
   iconsize = 30,
   onpress = () => {},
 }: IconWithBgProps) => {
-  const { authdata } = useContext(AuthContext);
-  const imageurl = authdata?.userDetails?.imageUrl;
-  const memojiImage = authdata?.userDetails?.memoji;
-  const gender = authdata?.userDetails?.gender?.toLowerCase() || "male";
   let memojiobj = {};
 
   if (memojiImage) {
@@ -103,22 +100,21 @@ const FTUserImage = ({
         alignItems: "center",
       }}
     >
-      <Pressable onPress={onpress} style={{ width: "100%", height: "100%" }}>
-        <Image
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: size / 2,
-          }}
-          resizeMode="contain"
-          resizeMethod="scale"
-          source={{ uri: allMemojis[gender]["lightSkinned"][0] }}
-        />
+      <Pressable
+        onPress={onpress}
+        style={{
+          width: "100%",
+          height: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ textAlign: "center" }}>{nameSplitToTwo(fullname)}</Text>
       </Pressable>
     </View>
   );
 };
 
-export default FTUserImage;
+export default FTOtherImage;
 
 const styles = StyleSheet.create({});

@@ -30,6 +30,7 @@ import FTWithdraw from "./FTWithdraw";
 import FTBillPayment from "./FTBillPayment";
 import FTSuccessOrError from "./FTSuccessOrError";
 import FTUserImage from "./FTUserImage";
+import FTOtherImage from "./FTOtherImage";
 
 export {
   FTBillPayment,
@@ -64,4 +65,5 @@ export {
   FTDetailsModal,
   FTSuccessOrError,
   FTUserImage,
+  FTOtherImage,
 };

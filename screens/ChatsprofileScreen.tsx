@@ -12,6 +12,7 @@ import { ChatsprofileScreenStyles } from "../assets/styles/screens";
 import {
   FTEmptycomponent,
   FTIconwithbg,
+  FTOtherImage,
   FTTitlepagewrapper,
   FTTransactionhistory,
 } from "../components";
@@ -35,7 +36,7 @@ const {
 const QuickActionBtn = ({ icon, text, action, bG, color }) => {
   return (
     <TouchableOpacity
-    activeOpacity={0.7}
+      activeOpacity={0.7}
       style={[quickActionBtn, { backgroundColor: bG }]}
       onPress={action}
     >
@@ -79,7 +80,13 @@ const ChatsprofileScreen = ({ route }) => {
     return (
       <View style={profileInfoWrap}>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <FTIconwithbg Icon={Bluecardicon} bG={COLORS.Tblue3} size={65} />
+          <FTOtherImage
+            imageurl={userInfo?.imageUrl}
+            memojiImage={userInfo?.memoji}
+            size={65}
+            fullname={userInfo?.fullName}
+          />
+
           <View style={profileDetailWrap}>
             <Text style={profileNameText}>{userInfo?.fullName}</Text>
             {/* <Text style={profileDateJoined}>Joined Aug. 15, 2025</Text> */}

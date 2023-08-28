@@ -13,6 +13,7 @@ import {
   FTCustombutton,
   FTIconwithbg,
   FTMainwrapper,
+  FTOtherImage,
   FTTabWrapper,
   FTTitlepagewrapper,
   FTUserImage,
@@ -541,7 +542,11 @@ const ChatsdmScreen = ({ route }) => {
             }
             style={chatsDmProfileWrap}
           >
-            <FTUserImage />
+            <FTOtherImage
+              imageurl={userInfo?.imageUrl}
+              memojiImage={userInfo?.memoji}
+              fullname={userInfo?.fullName}
+            />
             <View style={{ marginLeft: 18 }}>
               <Text style={chatName}>{userInfo?.fullName}</Text>
               {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}

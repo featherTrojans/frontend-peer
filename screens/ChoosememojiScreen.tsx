@@ -74,9 +74,9 @@ const ColorOption = ({ color, active, setActive }) => {
 const ChoosememojiScreen = () => {
   const [active, setActive] = useState("transparent");
   const [skinColor, setSkinColor] = useState("lightSkinned");
-  const gender = "male";
 
   const { authdata, setAuthData } = useContext(AuthContext);
+  const gender = authdata?.userDetails?.gender?.toLowerCase() || "male";
   const [currentIndex, setCurrentIndex] = useState(
     allMemojis[gender]["lightSkinned"][0]
   );
