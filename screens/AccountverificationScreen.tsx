@@ -45,12 +45,9 @@ const AccountverificationScreen = (props) => {
   const userlevel = authdata?.userDetails?.userLevel;
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-
-
   useEffect(() => {
-    console.log(selectedIndex, "here is the index")
+    console.log(selectedIndex, "here is the index");
   }, [selectedIndex]);
-
 
   const accountLevelDatas = [
     {
@@ -91,7 +88,6 @@ const AccountverificationScreen = (props) => {
     },
   ];
 
-
   const ShowCurrentLevel = () => {
     const {
       status,
@@ -113,9 +109,7 @@ const AccountverificationScreen = (props) => {
             <Levelcheckicon />
           </View>
           <Text style={requirementText}>Requirement</Text>
-          <Text style={requirementMainText}>
-            {requirement}
-          </Text>
+          <Text style={requirementMainText}>{requirement}</Text>
         </View>
 
         <View style={blockWrap}>
@@ -162,11 +156,7 @@ const AccountverificationScreen = (props) => {
           </View>
           <View style={BAlign}>
             <Text style={infoKeyText}>Virtual USD Card</Text>
-            {usdcard ? (
-              <Leveloptioncheckicon />
-            ) : (
-              <Leveloptioncancelicon />
-            )}
+            {usdcard ? <Leveloptioncheckicon /> : <Leveloptioncancelicon />}
           </View>
         </View>
         {!status && (
@@ -183,12 +173,11 @@ const AccountverificationScreen = (props) => {
         )}
       </View>
     );
-  }
+  };
 
   return (
     <FTTitlepagewrapper title="Account Verification">
-
-<SegmentedControl
+      <SegmentedControl
         values={["Newbie", "Odogwu", "Veteran"]}
         selectedIndex={selectedIndex}
         tintColor={COLORS.blue9}
@@ -197,10 +186,10 @@ const AccountverificationScreen = (props) => {
           alignSelf: "center",
         }}
         fontStyle={{
-          color: "#11141A"
+          color: "#11141A",
         }}
         activeFontStyle={{
-          color: "white"
+          color: "white",
         }}
         backgroundColor="#F0F0F0"
         onChange={(event) => {
@@ -208,9 +197,7 @@ const AccountverificationScreen = (props) => {
         }}
       />
 
-
-
-        <ShowCurrentLevel />
+      <ShowCurrentLevel />
     </FTTitlepagewrapper>
   );
 };

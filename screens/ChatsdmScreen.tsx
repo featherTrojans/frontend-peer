@@ -117,6 +117,7 @@ const ChatsdmScreen = ({ route }) => {
   const textInputRef = useRef<TextInput>(null);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
+  
 
   const focus = () => {
     if (textInputRef.current !== null) {
@@ -513,7 +514,7 @@ const ChatsdmScreen = ({ route }) => {
   };
 
   return (
-    <FTTabWrapper
+    <FTMainwrapper
       pH={0}
       bgColor={COLORS.white}
       childBg={COLORS.white3}
@@ -620,7 +621,7 @@ const ChatsdmScreen = ({ route }) => {
           </View>
         </View>
       </Animated.View>
-    </FTTabWrapper>
+    </FTMainwrapper>
   );
 };
 

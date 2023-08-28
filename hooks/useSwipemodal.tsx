@@ -15,7 +15,6 @@ import Animated, {
 import Modal from "react-native-modal";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { AuthContext } from "../context/AuthContext";
-import { KeyboardAvoidingView } from "react-native";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const OVERDRAG = 20;
@@ -25,7 +24,6 @@ const useSwipemodal = () => {
     const offset = useSharedValue(0);
     const x = useSharedValue(0);
     const HEIGHT = modalHeight ? modalHeight : 100;
-    const { setShowTabs } = useContext(AuthContext);
     const keyboard = useAnimatedKeyboard();
 
     const [keyboardStatus, setKeyboardStatus] = useState(false);
@@ -43,15 +41,10 @@ const useSwipemodal = () => {
         hideSubscription.remove();
       };
     }, []);
-    const translateStyle = useAnimatedStyle(() => {
-      return {
-        transform: [{ translateY: -keyboard.height.value }],
-      };
-    });
+ 
     const closeModal = () => {
       setShowModal((s) => !s);
       offset.value = withSpring(0);
-      // setShowTabs(true);
     };
 
     const pan = Gesture.Pan()

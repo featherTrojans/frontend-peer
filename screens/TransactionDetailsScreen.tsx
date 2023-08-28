@@ -424,9 +424,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
       return (
         <>
           <Eachoption title="Sender Name" value={senderName} />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
           <Eachoption title="Receiver Name" value={receiverName} />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
         </>
       );
     }
@@ -440,11 +440,11 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
             title="Account Number"
             value={bankDetails.account_number}
           />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
           <Eachoption title="Account Name" value={bankDetails.account_name} />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
           <Eachoption title="Bank" value={bankDetails.bank_name} />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
         </>
       );
     }
@@ -525,20 +525,20 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
 
         <View style={eachOptionWrapper}>
           <Eachoption title="Transaction Type" value={title} />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
 
           <Eachoption title="Date" value={formatDateTime} />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
           {FeatherTransferDetails()}
           {BankTransferDetails()}
           {AirtimePurchase()}
           <Eachoption title="Amount" value={`N${amountFormatter(amount)}`} />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
           <Eachoption
             title="Transaction Charges"
             value={`N${amountFormatter(charges)}`}
           />
-          <FTHorizontaline bG="transparent" marginV={18} />
+          <FTHorizontaline  marginV={18} />
           <Eachoption
             title="Total"
             value={`N${amountFormatter(total.toString())}`}
