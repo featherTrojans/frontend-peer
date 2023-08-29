@@ -53,7 +53,7 @@ const EditprofileScreen = () => {
       featherTag: authdata?.userDetails?.username,
       firstName: name[1],
       lastName: name[0],
-      email: authdata?.userDetails?.email,
+      email: authdata?.userDetails?.email.toLowerCase(),
       phoneNumber: authdata?.userDetails?.phoneNumber,
     },
   });
