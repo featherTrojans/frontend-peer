@@ -11,6 +11,7 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { makePhoneCall, navigation } from "../utils";
 import { useAlert } from "../hooks";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import LottieView from "lottie-react-native";
 import { LocationContext } from "../context/LocationContext";
 import {
   getCoordinateFromAddress,
@@ -34,7 +35,14 @@ const {
   searchingNearbyText,
 } = WithdrawcashScreenStyles;
 
-const { Blacksendicon, Cancelwithdrawicon, Phoneicon, Chaticon } = icons;
+const {
+  Blacksendicon,
+  Cancelwithdrawicon,
+  Phoneicon,
+  Chaticon,
+  PulsingCircle,
+  Withdrawsearchicon,
+} = icons;
 
 const viewonmap = (lat, lng) => {
   const scheme = Platform.select({
@@ -216,7 +224,15 @@ const WithdrawcashScreen = ({ route }) => {
     return (
       <FTTitlepagewrapper title="Withdraw Cash">
         <View style={loadingWrapper}>
-          <Text>SearchIcons</Text>
+          <LottieView
+            source={PulsingCircle}
+            autoPlay
+            loop
+            style={{ width: 500, height: 500 }}
+          />
+          <View style={{ position: "absolute" }}>
+            <Withdrawsearchicon />
+          </View>
         </View>
         <Text style={searchingNearbyText}>
           Searching for nearby merchants...
@@ -236,37 +252,13 @@ const WithdrawcashScreen = ({ route }) => {
             <Text style={amountOfTransaction}>33 Transactions</Text>
           </View>
 
-          <View style={{ flex: 1, justifyContent: "center" }}>
-            <Text style={{ ...fontsize.bxmedium, ...FONTS.bold }}>
-              15 Mins Away
-            </Text>
-            <Text
-              style={{
-                ...fontsize.smallest,
-                ...FONTS.regular,
-                color: COLORS.blue9,
-                marginTop: 25,
-                marginBottom: 30,
-              }}
-            >
-              {info.meetupPoint}
-            </Text>
-            <View
-              style={{
-                backgroundColor: COLORS.Tblue6,
-                paddingVertical: 12,
-                paddingHorizontal: 20,
-                alignSelf: "center",
-                borderRadius: 10,
-              }}
-            >
+          <View style={locationInfoWrap}>
+            <Text style={locationDistance}>15 Mins Away</Text>
+            <Text style={locationAddress}>{info.meetupPoint}</Text>
+            <View style={viewOnMapWrap}>
               <Text
                 onPress={() => viewonmap(latlong?.lat, latlong?.long)}
-                style={{
-                  ...fontsize.xxsmallest,
-                  ...FONTS.semibold,
-                  color: COLORS.blue16,
-                }}
+                style={viewOnMapText}
               >
                 View on maps
               </Text>

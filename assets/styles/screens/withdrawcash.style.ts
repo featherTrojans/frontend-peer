@@ -34,6 +34,7 @@ export const WithdrawcashScreenStyles = StyleSheet.create({
   locationDistance: {
     ...fontsize.bxmedium,
     ...FONTS.bold,
+    backgroundColor: COLORS.blue6
   },
   locationAddress: {
     ...fontsize.smallest,

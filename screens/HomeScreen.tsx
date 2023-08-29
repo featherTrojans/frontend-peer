@@ -31,7 +31,7 @@ import {
   FTCustombutton,
   FTUserImage,
 } from "../components";
-import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
+import { COLORS, FONTS, SIZES, fontsize, icons, images } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -42,6 +42,7 @@ import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import { navigation, redirectTo } from "../utils";
+
 
 const {
   container,
@@ -83,6 +84,7 @@ const {
   profileSetupHeader,
   completedSetup,
   profileSetupWrap,
+  scrollActionImage
 } = HomeScreenStyles;
 
 const {
@@ -101,24 +103,24 @@ const {
   Documentsetupicon,
   Levelcheckicon,
 } = icons;
-
+const {Transferimage, Withdrawimage, Billsimage} = images
 const scrollactions = [
   {
     bg: "#EDF3EB",
     text: "Withdraw cash from business and agents near you.",
-    icon: "",
+    image: Withdrawimage,
     modal: 3,
   },
   {
     bg: "#F3EEFB",
     text: "Transfer money to feather users and bank accounts.",
-    icon: "",
+    image: Transferimage,
     modal: 2,
   },
   {
     bg: "#D2EAFD",
     text: "Pay Bills with speed and ease, at good rates.",
-    icon: "",
+    image: Billsimage,
     modal: 4,
   },
 ];
@@ -127,13 +129,13 @@ const QuickActions = ({ onpress }) => {
   function Scrollaction({
     bg,
     text,
-    icon,
+    image,
     index,
     modal,
   }: {
     bg: string;
     text: string;
-    icon: string;
+    image: any;
     index: number;
     modal: number;
   }) {
@@ -146,6 +148,10 @@ const QuickActions = ({ onpress }) => {
             { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
           ]}
         >
+          <Image 
+          style={scrollActionImage}
+          source={image}
+          />
           <Text style={scrollactionText}>{text}</Text>
         </View>
       </TouchableOpacity>
@@ -159,12 +165,12 @@ const QuickActions = ({ onpress }) => {
       // contentContainerStyle={{ paddingHorizontal: 16 }}
     >
       {scrollactions.map((scrollaction, index) => {
-        let { bg, text, icon, modal } = scrollaction;
+        let { bg, text, image, modal } = scrollaction;
         return (
           <Scrollaction
             bg={bg}
             text={text}
-            icon={icon}
+            image={image}
             key={index}
             index={index}
             modal={modal}

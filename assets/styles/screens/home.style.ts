@@ -101,12 +101,22 @@ export const HomeScreenStyles = StyleSheet.create({
     height: 164,
     borderRadius: 16,
     padding: 18,
+    alignSelf: "flex-end",
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
     // marginRight: 16,
+  },
+  scrollActionImage: {
+    width: 150,
+    height: 136,
+    position: "absolute",
+    top: 0,
   },
   scrollactionText: {
     ...fontsize.xsmallest,
     ...FONTS.medium,
     lineHeight: 14,
+    color: COLORS.blue9,
   },
 
   // Horizontal information styles
@@ -235,7 +245,7 @@ export const HomeScreenStyles = StyleSheet.create({
     ...FONTS.bold,
     lineHeight: 29,
     marginBottom: 30,
-    color: COLORS.blue9
+    color: COLORS.blue9,
   },
   completedSetup: {
     ...fontsize.smallest,

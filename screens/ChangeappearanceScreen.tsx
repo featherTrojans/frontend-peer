@@ -18,8 +18,9 @@ redirectTo;
 
 import { COLORS, icons } from "../constants";
 import { useAlert } from "../hooks";
+import { allMemojis } from "../assetdatas";
 
-redirectTo;
+
 const { Changememojicheckicon, Choosememojiicon } = icons;
 
 const {} = ChangeappearanceScreenStyles;
@@ -73,7 +74,7 @@ const ChangeappearanceScreen = () => {
     <FTTitlepagewrapper title="Change Appearance">
       <FTLoader loading={loading} />
       <FTIconwithtitleandinfo
-        Icon={Changememojicheckicon}
+        imageUrl={allMemojis['male']["darkSkinned"][0]}
         title="Choose Memoji"
         onPress={() => redirectTo("choosememoji_screen")}
         bG={COLORS.Tyellow3}

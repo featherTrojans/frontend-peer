@@ -46,6 +46,7 @@ import Winkinganimate from "../assets/Lottie/animations/feather_winking_emoji.js
 import Successcheckanimate from "../assets/Lottie/animations/feather-success-check.json";
 import Loadinglocationanimate from "../assets/Lottie/animations/loadingRequest.json";
 import Verifiedbvnanimate from "../assets/Lottie/animations/verifybvn.json";
+import PulsingCircle from "../assets/Lottie/animations/pulsing_circle.json";
 
 import Transacntionpinanimate from "../assets/Lottie/animations/waitingForPIN.json";
 import Mapanimate from "../assets/Lottie/animations/SplashScreen1_Map.json";
@@ -132,6 +133,8 @@ import Erroricon from "../assets/icons/Erroricon";
 import Profilechangeicon from "../assets/icons/Profilechangeicon";
 import Smallbackarrow from "../assets/icons/Smallbackarrow";
 import Choosememojiicon from "../assets/icons/Choosememojiicon";
+import Withdrawsearchicon from "../assets/icons/Withdrawsearchicon";
+
 
 
 
@@ -251,6 +254,7 @@ export default {
   Profilechangeicon,
   Smallbackarrow,
   Choosememojiicon,
+  Withdrawsearchicon,
   // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,
@@ -266,4 +270,5 @@ export default {
   Transacntionpinanimate,
   Verifiedbvnanimate,
   Trackinguseranimate,
+  PulsingCircle
 };
