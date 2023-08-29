@@ -453,7 +453,7 @@ const ChatsdmScreen = ({ route }) => {
         </View>
       </View>
     );
-  };
+  }; 
 
   const AmountToSend = () => {
     return (
