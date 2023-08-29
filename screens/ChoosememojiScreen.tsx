@@ -56,20 +56,6 @@ const {
 } = ChoosememojiScreenStyles;
 const {} = AccountverificationScreenStyles;
 
-const ColorOption = ({ color, active, setActive }) => {
-  return (
-    <Pressable
-      onPress={() => {
-        setActive(color);
-        Haptics.selectionAsync();
-      }}
-    >
-      <View style={[colorOptionBg, { backgroundColor: color }]}>
-        {active == color && <Changememojicheckicon />}
-      </View>
-    </Pressable>
-  );
-};
 
 const ChoosememojiScreen = () => {
   const [active, setActive] = useState("transparent");
@@ -80,8 +66,7 @@ const ChoosememojiScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(
     allMemojis[gender]["lightSkinned"][0]
   );
-  const translateValue = 125;
-  const tabTranslate = useSharedValue(0);
+ 
   const rotateView = useSharedValue(0);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -91,11 +76,12 @@ const ChoosememojiScreen = () => {
   }));
 
   const onOptionPress = useCallback((index) => {
+    Haptics.selectionAsync();
     setCurrentIndex(index);
   }, []);
 
   useEffect(() => {
-    rotateView.value = withSpring(selectedIndex * 360);
+    rotateView.value = withSpring(selectedIndex * 180);
     if (selectedIndex === 0) {
       setSkinColor("lightSkinned");
     } else {

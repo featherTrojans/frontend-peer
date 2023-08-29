@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { ChatsdmScreenStyles } from "../assets/styles/screens";
@@ -18,6 +19,7 @@ import {
   FTTitlepagewrapper,
   FTUserImage,
 } from "../components";
+
 
 import { AuthContext } from "../context/AuthContext";
 import {
@@ -84,6 +86,7 @@ const {
   securePinTextInput,
   chooseAmountInputWrap,
   textInputStyle,
+  emptyChatLoaderWrap
 } = ChatsdmScreenStyles;
 
 const {
@@ -95,6 +98,7 @@ const {
   Successtransfericon,
   Smalllockicon,
   Smallbackarrow,
+  Feathecomingsoonchatanimate
 } = icons;
 
 const ChatsdmScreen = ({ route }) => {
@@ -523,6 +527,7 @@ const ChatsdmScreen = ({ route }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
+      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
       {/* Header Section */}
       <View style={chatHeader}>
         <View style={[headerDetailsContainer]}>
@@ -559,15 +564,14 @@ const ChatsdmScreen = ({ route }) => {
         </View>
       </View>
 
-      <Animated.View style={[{ flex: 1 }]}>
         {fetchmessage ? (
-          <View style={emptyChatAnimation}>
-            {/* <LottieView
+          <View style={emptyChatLoaderWrap}>
+            <LottieView
             source={Feathecomingsoonchatanimate}
             autoPlay
             loop
-            style={styles.emptyChatAnimation}
-          /> */}
+            style={emptyChatAnimation}
+          />
           </View>
         ) : (
           <ScrollView
@@ -600,7 +604,7 @@ const ChatsdmScreen = ({ route }) => {
         )}
 
         {/* Bottom Input */}
-        <View style={[chatTextContainer]}>
+        
           <View style={chatTextInput}>
             <TextInput
               placeholder="Enter Message..."
@@ -619,8 +623,9 @@ const ChatsdmScreen = ({ route }) => {
               </TouchableOpacity>
             )}
           </View>
-        </View>
-      </Animated.View>
+        </KeyboardAvoidingView>
+
+
     </FTMainwrapper>
   );
 };
