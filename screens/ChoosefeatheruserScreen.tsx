@@ -9,7 +9,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { ChoosefeatheruserScreenStyles } from "../assets/styles/screens";
 import {
-  FTCustombutton,
   FTDetailsModal,
   FTIconwithtitleandinfo,
   FTSearchinput,
@@ -142,6 +141,7 @@ const ChoosefeatheruserScreen = ({ route }) => {
     }, [userinfo]);
 
     const onchange = (val: string) => {
+      console.log(val);
       setSearchval(val);
       getuserinfo(val);
     };

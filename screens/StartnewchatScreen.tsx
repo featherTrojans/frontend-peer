@@ -48,14 +48,17 @@ const StartnewchatScreen = () => {
   const [searchval, setSearchval] = useState("");
   const { contactsResolved, loading } = useContact();
 
+  console.log(featherContacts);
   useEffect(() => {
     setFeatherContacts(contactsResolved);
   }, [contactsResolved]);
 
   const handleSearch = (text) => {
+    setSearchval(text);
     const filtercontacts = contactsResolved.filter((contact) => {
       return (
-        contact.fullName.includes("text") || contact.username.includes("text")
+        contact?.fullName?.toLowerCase()?.includes(text.toLowerCase()) ||
+        contact?.username?.toLowerCase()?.includes(text.toLowerCase())
       );
     });
     setFeatherContacts(filtercontacts);
@@ -82,7 +85,7 @@ const StartnewchatScreen = () => {
           );
         }}
         ListHeaderComponent={
-          <ListHeader value={searchval} onChange={handleSearch} />
+          <ListHeader value={searchval} onchange={handleSearch} />
         }
       />
     </FTTitlepagewrapper>
