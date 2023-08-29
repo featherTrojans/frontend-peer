@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { ChatsdmScreenStyles } from "../assets/styles/screens";
@@ -19,7 +20,6 @@ import {
   FTTitlepagewrapper,
   FTUserImage,
 } from "../components";
-
 
 import { AuthContext } from "../context/AuthContext";
 import {
@@ -86,7 +86,7 @@ const {
   securePinTextInput,
   chooseAmountInputWrap,
   textInputStyle,
-  emptyChatLoaderWrap
+  emptyChatLoaderWrap,
 } = ChatsdmScreenStyles;
 
 const {
@@ -98,7 +98,7 @@ const {
   Successtransfericon,
   Smalllockicon,
   Smallbackarrow,
-  Feathecomingsoonchatanimate
+  Feathecomingsoonchatanimate,
 } = icons;
 
 const ChatsdmScreen = ({ route }) => {
@@ -121,7 +121,6 @@ const ChatsdmScreen = ({ route }) => {
   const textInputRef = useRef<TextInput>(null);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
-  
 
   const focus = () => {
     if (textInputRef.current !== null) {
@@ -527,51 +526,57 @@ const ChatsdmScreen = ({ route }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
-      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-      {/* Header Section */}
-      <View style={chatHeader}>
-        <View style={[headerDetailsContainer]}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={navigation.goBack}
-            style={backArrowWrap}
-          >
-            <Smallbackarrow />
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() =>
-              navigation.navigate("chatsprofile_screen", {
-                userInfo,
-                switchModals,
-              })
-            }
-            style={chatsDmProfileWrap}
-          >
-            <FTOtherImage
-              imageurl={userInfo?.imageUrl}
-              memojiImage={userInfo?.memoji}
-              fullname={userInfo?.fullName}
-            />
-            <View style={{ marginLeft: 18 }}>
-              <Text style={chatName}>{userInfo?.fullName}</Text>
-              {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.8} onPress={() => switchModals(0)}>
-            <Blacksendicon />
-          </TouchableOpacity>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        {/* Header Section */}
+        <View style={chatHeader}>
+          <View style={[headerDetailsContainer]}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={navigation.goBack}
+              style={backArrowWrap}
+            >
+              <Smallbackarrow />
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() =>
+                navigation.navigate("chatsprofile_screen", {
+                  userInfo,
+                  switchModals,
+                })
+              }
+              style={chatsDmProfileWrap}
+            >
+              <FTOtherImage
+                imageurl={userInfo?.imageUrl}
+                memojiImage={userInfo?.memoji}
+                fullname={userInfo?.fullName}
+              />
+              <View style={{ marginLeft: 18 }}>
+                <Text style={chatName}>{userInfo?.fullName}</Text>
+                {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => switchModals(0)}
+            >
+              <Blacksendicon />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
 
         {fetchmessage ? (
           <View style={emptyChatLoaderWrap}>
             <LottieView
-            source={Feathecomingsoonchatanimate}
-            autoPlay
-            loop
-            style={emptyChatAnimation}
-          />
+              source={Feathecomingsoonchatanimate}
+              autoPlay
+              loop
+              style={emptyChatAnimation}
+            />
           </View>
         ) : (
           <ScrollView
@@ -604,28 +609,26 @@ const ChatsdmScreen = ({ route }) => {
         )}
 
         {/* Bottom Input */}
-        
-          <View style={chatTextInput}>
-            <TextInput
-              placeholder="Enter Message..."
-              style={textinput}
-              value={chattext}
-              onChangeText={handleTextChange}
-              placeholderTextColor={COLORS.grey16}
-              returnKeyType="done"
-            />
-            {chattext !== "" && (
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => sendFireBaseMessage()}
-              >
-                <Addchatsicon />
-              </TouchableOpacity>
-            )}
-          </View>
-        </KeyboardAvoidingView>
 
-
+        <View style={chatTextInput}>
+          <TextInput
+            placeholder="Enter Message..."
+            style={{}}
+            value={chattext}
+            onChangeText={handleTextChange}
+            placeholderTextColor={COLORS.grey16}
+            returnKeyType="done"
+          />
+          {chattext !== "" && (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => sendFireBaseMessage()}
+            >
+              <Addchatsicon />
+            </TouchableOpacity>
+          )}
+        </View>
+      </KeyboardAvoidingView>
     </FTMainwrapper>
   );
 };

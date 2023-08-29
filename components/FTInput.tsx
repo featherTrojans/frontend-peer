@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, TextInput, Pressable, TextInputProps } from "react-native";
 import { Controller } from "react-hook-form";
 import { icons, COLORS, fontsize, FONTS } from "../constants";
@@ -43,6 +43,7 @@ const FTInput = ({
   textInputProps,
 }: inputProps) => {
   const renderInputType = () => {
+    const [isFocused, setIsFocused] = useState(false)
     return (
       <View
         style={{
@@ -69,14 +70,15 @@ const FTInput = ({
                   {
                     borderColor: error
                       ? COLORS.pink1
-                      : value && !error
+                      : isFocused && !error
                       ? COLORS.blue16
                       : COLORS.grey15,
                   },
                 ]}
                 onChangeText={onChange}
                 editable={editable}
-                onBlur={onBlur}
+                onBlur={e => setIsFocused(false)}
+                onFocus={e => setIsFocused(true)}
                 value={value}
                 placeholder={placeholderText}
                 placeholderTextColor={COLORS.grey18}
