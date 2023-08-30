@@ -1,14 +1,14 @@
 
 
   export const nameSplitter = (name: string) => {
-    // return "";
     const splitName = name?.replace(/\s+/g, ' ').split(" ");
+    return "OO";
 
-    if (splitName.length >= 2) {
-      return `${splitName[1][0]}`;
-    }else{
-      return `${splitName[0][0]}`;
-    }
+    // if (splitName.length >= 2) {
+    //   return `${splitName[1][0]}`;
+    // }else{
+    //   return `${splitName[0][0]}`;
+    // }
   };
 
 
