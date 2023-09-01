@@ -583,12 +583,13 @@ const ChatsdmScreen = ({ route }) => {
             />
           </View>
         ) : (
-          <ScrollView
+          <Animated.ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
-            contentContainerStyle={{ paddingTop: 20, paddingBottom: 100 }}
+            contentContainerStyle={{ paddingTop: 20,  justifyContent: "flex-end",  }}
             showsVerticalScrollIndicator={false}
             bounces={false}
+            snapToEnd={true}
             onContentSizeChange={() =>
               scrollViewRef?.current?.scrollToEnd({ animated: true })
             }
@@ -609,7 +610,7 @@ const ChatsdmScreen = ({ route }) => {
                 </View>
               );
             })}
-          </ScrollView>
+          </Animated.ScrollView>
         )}
 
         {/* Bottom Input */}
@@ -617,12 +618,12 @@ const ChatsdmScreen = ({ route }) => {
         <View style={chatTextInput}>
           <TextInput
             placeholder="Enter Message..."
-            style={{}}
+            style={textinput}
             value={chattext}
             onChangeText={handleTextChange}
             placeholderTextColor={COLORS.grey16}
             returnKeyType="done"
-            onFocus={() => console.log("Yes")}
+            onFocus={() => scrollViewRef?.current?.scrollToEnd({ animated: true })}
           />
           {chattext !== "" && (
             <TouchableOpacity
