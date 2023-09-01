@@ -13,6 +13,7 @@ import {
   FTIconwithbg,
   FTInput,
   FTKeyboardwrapper,
+  FTOtherImage,
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
@@ -31,6 +32,7 @@ const {
 } = TransactionsummaryScreenStyles;
 const TransactionsummaryScreen = ({ route }) => {
   const action = route?.params?.action;
+  const userInfo = route?.params?.userInfo;
   const summaryinfo = route?.params?.summaryinfo;
   const { control, handleSubmit } = useForm({ mode: "all" });
 
@@ -58,7 +60,20 @@ const TransactionsummaryScreen = ({ route }) => {
       <FTKeyboardwrapper>
         <View style={summaryWrap}>
           <View style={{ alignItems: "center" }}>
-            <FTIconwithbg size={60} Icon={Bluecardicon} bG={COLORS.Tpurple2} />
+            {userInfo ? (
+              <FTOtherImage
+                imageurl={userInfo?.imageUrl}
+                memojiImage={userInfo?.memoji}
+                fullname={userInfo?.fullName}
+                size={60}
+              />
+            ) : (
+              <FTIconwithbg
+                size={60}
+                Icon={Bluecardicon}
+                bG={COLORS.Tpurple2}
+              />
+            )}
             <Text style={amountText}>Amount</Text>
             <Text style={amountValueText}>N{summaryinfo.amount}</Text>
           </View>

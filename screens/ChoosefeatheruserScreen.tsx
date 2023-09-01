@@ -173,6 +173,12 @@ const ChoosefeatheruserScreen = ({ route }) => {
             bG={COLORS.Tblue4}
             Icon={Smallphoneicon}
             mB={40}
+            profile={true}
+            userInfo={{
+              imageUrl: usertosend?.imageUrl,
+              memoji: usertosend?.memoji,
+              fullName: usertosend?.fullName,
+            }}
           />
         )}
 
@@ -203,6 +209,12 @@ const ChoosefeatheruserScreen = ({ route }) => {
               onPress={() => switchModals(0, item, amount, true)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}
+              profile={true}
+              userInfo={{
+                imageUrl: item?.imageUrl,
+                memoji: item?.memoji,
+                fullName: item?.fullName,
+              }}
             />
           );
         }}

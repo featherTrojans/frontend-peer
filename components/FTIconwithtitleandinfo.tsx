@@ -3,6 +3,7 @@ import React, { ReactElement, ReactNode } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { FTIconwithtitleandinfoStyles } from "../assets/styles/components";
 import FTIconwithbg from "./FTIconwithbg";
+import FTOtherImage from "./FTOtherImage";
 const { mainWrap, iconandinfoWrap, iconBg, titleText, infoText } =
   FTIconwithtitleandinfoStyles;
 
@@ -19,12 +20,14 @@ type IFTIconwithtitleandInfoProps = {
   mT?: number;
   imageUrl?: string;
   size?: number;
-  badge?: ReactElement
+  badge?: ReactElement;
+  profile?: boolean;
+  userInfo?: {};
 };
 
 const FTIconwithtitleandinfo = ({
   Icon,
-  bG="#fff",
+  bG = "#fff",
   title,
   info,
   onPress,
@@ -33,7 +36,9 @@ const FTIconwithtitleandinfo = ({
   mT,
   imageUrl,
   size = 45,
-  badge
+  badge,
+  profile = false,
+  userInfo = {},
 }: IFTIconwithtitleandInfoProps) => {
   return (
     <Pressable
@@ -42,7 +47,22 @@ const FTIconwithtitleandinfo = ({
       onPress={onPress}
     >
       <View style={iconandinfoWrap}>
-        <FTIconwithbg badge={badge} size={size} Icon={Icon} bG={bG} imageUrl={imageUrl} />
+        {profile ? (
+          <FTOtherImage
+            imageurl={userInfo?.imageUrl}
+            memojiImage={userInfo?.memoji}
+            fullname={userInfo?.fullName}
+            size={size}
+          />
+        ) : (
+          <FTIconwithbg
+            badge={badge}
+            size={size}
+            Icon={Icon}
+            bG={bG}
+            imageUrl={imageUrl}
+          />
+        )}
         <View style={{ marginLeft: 20 }}>
           <Text style={titleText}>{title}</Text>
           {info && <Text style={infoText}>{info}</Text>}

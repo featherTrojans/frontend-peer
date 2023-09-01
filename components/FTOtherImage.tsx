@@ -99,7 +99,11 @@ const FTOtherImage = ({
       }}
       onPress={onpress}
     >
-      <Text style={{ textAlign: "center" }}>{nameSplitToTwo(fullname)}</Text>
+      {fullname ? (
+        <Text style={{ textAlign: "center" }}>{nameSplitToTwo(fullname)}</Text>
+      ) : (
+        <Text>AA</Text>
+      )}
     </Pressable>
   );
 };
