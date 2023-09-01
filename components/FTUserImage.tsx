@@ -30,7 +30,7 @@ const FTUserImage = ({
   const gender = authdata?.userDetails?.gender?.toLowerCase() || "male";
   let memojiobj = {};
 
-  if (typeof memojiImage == "string" || memojiImage.color) {
+  if (memojiImage) {
     if (typeof memojiImage == "string") {
       memojiobj = JSON.parse(memojiImage);
     } else {
@@ -38,32 +38,6 @@ const FTUserImage = ({
     }
   }
 
-  if (memojiImage.color) {
-    return (
-      <Pressable
-        style={{
-          width: size,
-          height: size,
-          borderRadius: size / 2,
-          backgroundColor: memojiobj?.color,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onPress={onpress}
-      >
-        <Image
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: size / 2,
-          }}
-          resizeMode="contain"
-          resizeMethod="scale"
-          source={{ uri: memojiobj?.index }}
-        />
-      </Pressable>
-    );
-  }
   if (imageurl) {
     return (
       <Pressable
@@ -87,6 +61,33 @@ const FTUserImage = ({
           source={{
             uri: imageurl,
           }}
+        />
+      </Pressable>
+    );
+  }
+
+  if (memojiobj.color) {
+    return (
+      <Pressable
+        style={{
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor: memojiobj?.color,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        onPress={onpress}
+      >
+        <Image
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: size / 2,
+          }}
+          resizeMode="contain"
+          resizeMethod="scale"
+          source={{ uri: memojiobj?.index }}
         />
       </Pressable>
     );
