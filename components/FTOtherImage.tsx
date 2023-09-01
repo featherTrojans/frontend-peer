@@ -35,32 +35,6 @@ const FTOtherImage = ({
     }
   }
 
-  if (imageurl) {
-    return (
-      <Pressable
-        style={{
-          width: size,
-          height: size,
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: size / 2,
-        }}
-        onPress={onpress}
-      >
-        <Image
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: size / 2,
-          }}
-          resizeMode="cover"
-          resizeMethod="scale"
-          source={{ uri: imageurl }}
-        />
-      </Pressable>
-    );
-  }
-
   if (memojiobj.color) {
     return (
       <Pressable
@@ -83,6 +57,32 @@ const FTOtherImage = ({
           resizeMode="contain"
           resizeMethod="scale"
           source={{ uri: memojiobj?.index }}
+        />
+      </Pressable>
+    );
+  }
+
+  if (imageurl) {
+    return (
+      <Pressable
+        style={{
+          width: size,
+          height: size,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: size / 2,
+        }}
+        onPress={onpress}
+      >
+        <Image
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: size / 2,
+          }}
+          resizeMode="cover"
+          resizeMethod="scale"
+          source={{ uri: imageurl }}
         />
       </Pressable>
     );
