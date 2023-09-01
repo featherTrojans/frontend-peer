@@ -59,7 +59,11 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     ],
   };
   const onpress = () => {
-    navigation.navigate("transactionsummary_screen", { action, summaryinfo });
+    navigation.navigate("transactionsummary_screen", {
+      action,
+      summaryinfo,
+      userInfo: userinfo,
+    });
   };
 
   const addtobeneficiary = async () => {
@@ -80,6 +84,12 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
         mB={40}
+        profile={true}
+        userInfo={{
+          imageUrl: userinfo?.imageUrl,
+          memoji: userinfo?.memoji,
+          fullName: userinfo?.fullName,
+        }}
         extraComponent={
           <View
             style={{
@@ -172,6 +182,12 @@ const SearchcontactScreen = ({ route }) => {
               onPress={() => switchModals(0, item, amount)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}
+              profile={true}
+              userInfo={{
+                imageUrl: item?.imageUrl,
+                memoji: item?.memoji,
+                fullName: item?.fullName,
+              }}
             />
           );
         }}
