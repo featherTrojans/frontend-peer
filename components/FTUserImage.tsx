@@ -30,7 +30,7 @@ const FTUserImage = ({
   const gender = authdata?.userDetails?.gender?.toLowerCase() || "male";
   let memojiobj = {};
 
-  if (memojiImage) {
+  if (typeof memojiImage == "string" || memojiImage.color) {
     if (typeof memojiImage == "string") {
       memojiobj = JSON.parse(memojiImage);
     } else {
@@ -38,7 +38,7 @@ const FTUserImage = ({
     }
   }
 
-  if (memojiImage) {
+  if (memojiImage.color) {
     return (
       <Pressable
         style={{
@@ -78,13 +78,15 @@ const FTUserImage = ({
       >
         <Image
           style={{
-            width: 100,
-            height: 100,
+            width: "100%",
+            height: "100%",
             borderRadius: size / 2,
           }}
           resizeMode="cover"
           resizeMethod="scale"
-          source={{ uri: "https://res.cloudinary.com/ezeko/image/upload/v1658144933/feather/ezeko.jpg" }}
+          source={{
+            uri: imageurl,
+          }}
         />
       </Pressable>
     );

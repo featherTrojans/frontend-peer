@@ -20,7 +20,6 @@ import { COLORS, icons } from "../constants";
 import { useAlert } from "../hooks";
 import { allMemojis } from "../assetdatas";
 
-
 const { Changememojicheckicon, Choosememojiicon } = icons;
 
 const {} = ChangeappearanceScreenStyles;
@@ -52,12 +51,17 @@ const ChangeappearanceScreen = () => {
         });
         formdata.append("name", authdata?.userDetails?.username);
         // console.log(result.uri, "this is the image url");
-        setAuthData({
-          ...authdata,
-          userDetails: { ...authdata?.userDetails, imageUrl: result.uri },
-        });
+
         await axiosCustom.post("/upload/image", formdata);
 
+        setAuthData({
+          ...authdata,
+          userDetails: {
+            ...authdata?.userDetails,
+            imageUrl: result.uri,
+            memoji: {},
+          },
+        });
         const form2 = new FormData();
         form2.append("isMemoji", "false");
         await axiosCustom.post("/upload/image", form2);
@@ -74,7 +78,7 @@ const ChangeappearanceScreen = () => {
     <FTTitlepagewrapper title="Change Appearance">
       <FTLoader loading={loading} />
       <FTIconwithtitleandinfo
-        imageUrl={allMemojis['male']["darkSkinned"][0]}
+        imageUrl={allMemojis["male"]["darkSkinned"][0]}
         title="Choose Memoji"
         onPress={() => redirectTo("choosememoji_screen")}
         bG={COLORS.Tyellow3}

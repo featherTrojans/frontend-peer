@@ -110,6 +110,7 @@ const PhoneVerificationScreen = ({ route }) => {
         <Text style={enterDigitSubText}>{phoneNumber}</Text>.
       </Text>
 
+      <View style={{alignContent: "center", alignSelf: "center"}}>
       <OTPTextInput
         ref={otpInput}
         handleTextChange={(text) => setOtpCode(text)}
@@ -121,6 +122,7 @@ const PhoneVerificationScreen = ({ route }) => {
         textInputStyle={otpInputWrap}
         autoFocus={false}
       />
+      </View>
       <View style={buttonWrap}>
         <FTCustombutton btntext="VERIFY" onpress={handlesubmit} />
       </View>

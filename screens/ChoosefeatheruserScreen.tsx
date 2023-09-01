@@ -26,7 +26,9 @@ const { Smallphoneicon } = icons;
 const { searchContactWrap, searchContactText, listHeaderText } =
   ChoosefeatheruserScreenStyles;
 
-const ModalContent = ({ userinfo, amount }) => {
+const BENEFICIARY_TYPE = "transferfeather";
+
+const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
   const action = async (pin) => {
     try {
       await axiosCustom.post("/transfer", {
@@ -67,7 +69,7 @@ const ModalContent = ({ userinfo, amount }) => {
   const addtobeneficiary = async () => {
     try {
       await axiosCustom.post("beneficiary/create", {
-        type: "transfer",
+        type: BENEFICIARY_TYPE,
         data: userinfo,
       });
     } catch (err) {}
@@ -91,8 +93,12 @@ const ModalContent = ({ userinfo, amount }) => {
               marginBottom: 20,
             }}
           >
-            <Text style={{ ...FONTS.regular }}>Save to beneficiaries?</Text>
-            <FTSwitchbtn action={addtobeneficiary} />
+            {isBenficairy ? null : (
+              <>
+                <Text style={{ ...FONTS.regular }}>Save to beneficiaries?</Text>
+                <FTSwitchbtn action={addtobeneficiary} />
+              </>
+            )}
           </View>
         }
       />
@@ -108,18 +114,24 @@ const ChoosefeatheruserScreen = ({ route }) => {
 
   useEffect(() => {
     axiosCustom
-      .get("/beneficiary/get")
+      .get(`/beneficiary/get/${BENEFICIARY_TYPE}`)
       .then((res) => {
         setbeneficiaries(res.data.data?.beneficiaries);
       })
       .catch((err) => {});
   }, []);
 
-  const switchModals = (value, data, amount) => {
+  const switchModals = (value, data, amount, isBenficairy) => {
     switch (value) {
       case 0:
         setContent({
-          child: <ModalContent userinfo={data} amount={amount} />,
+          child: (
+            <ModalContent
+              userinfo={data}
+              amount={amount}
+              isBenficairy={isBenficairy}
+            />
+          ),
           height: 276,
         });
         setShowModal((s) => !s);
@@ -157,7 +169,7 @@ const ChoosefeatheruserScreen = ({ route }) => {
           <FTIconwithtitleandinfo
             title={usertosend.fullName}
             info={usertosend.username}
-            onPress={() => switchModals(0, usertosend, amount)}
+            onPress={() => switchModals(0, usertosend, amount, false)}
             bG={COLORS.Tblue4}
             Icon={Smallphoneicon}
             mB={40}
@@ -186,9 +198,9 @@ const ChoosefeatheruserScreen = ({ route }) => {
         renderItem={({ item }) => {
           return (
             <FTIconwithtitleandinfo
-              title={userinfo.fullName}
-              info={userinfo.username}
-              onPress={() => switchModals(0, item, amount)}
+              title={item.fullName}
+              info={item.username}
+              onPress={() => switchModals(0, item, amount, true)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}
             />
@@ -199,7 +211,7 @@ const ChoosefeatheruserScreen = ({ route }) => {
 
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => redirectTo("searchcontact_screen")}
+        onPress={() => navigation.navigate("searchcontact_screen", { amount })}
         style={searchContactWrap}
       >
         <Smallphoneicon />
