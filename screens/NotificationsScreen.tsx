@@ -244,7 +244,7 @@ const NotificationsScreen = () => {
   };
 
   return (
-    <FTTitlepagewrapper title="Notifications">
+    <FTTitlepagewrapper childBg={COLORS.white3}  title="Notifications">
       <View style={listContainer}>
         {loading ? (
           <View style={loadingWrap}>

@@ -7,8 +7,10 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ChatsdmScreenStyles } from "../assets/styles/screens";
 import {
   FTAllChatsModal,
@@ -101,6 +103,153 @@ const {
   Feathecomingsoonchatanimate,
 } = icons;
 
+const PickOption = ({ userInfo, openAmount, closeModal }) => {
+  return (
+    <View style={{ backgroundColor: "#fff" }}>
+      <Text style={sendCashHeader}>
+        Hey Padi, want to send cash to{" "}
+        <Text style={{ textTransform: "capitalize" }}>
+          {" "}
+          {userInfo?.fullName}
+        </Text>{" "}
+        or is it just a text language?
+      </Text>
+
+      <View style={sendCashWrapper}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={openAmount}
+          style={[{ backgroundColor: COLORS.blue5 }, sendCashButton]}
+        >
+          <View style={buttonIconBg}>
+            <Blacksendicon />
+          </View>
+          <Text style={buttonText}>Send Cash?</Text>
+        </TouchableOpacity>
+
+        {/* Second Button */}
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={closeModal}
+          style={[{ backgroundColor: COLORS.purple }, sendCashButton]}
+        >
+          <View style={buttonIconBg}>
+            <Blacksendicon />
+          </View>
+          <Text style={buttonText}>Keep Typing?</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+const AmountToSend = ({ openTransactionPin, handlesetamount }) => {
+  const [amount, setAmount] = useState({ name: "0", value: 0 });
+  const handleAmountChange = (text) => {
+    const amount = Number(text).toFixed(2);
+    setAmount({ value: Number(amount), name: text });
+  };
+  // console.log(amount, "yeyey");
+  const handlenext = () => {
+    openTransactionPin(amount);
+    handlesetamount(amount);
+  };
+
+  return (
+    <View>
+      <Text style={chooseAmountHeader}>How much to send?</Text>
+
+      <View style={chooseAmountInputWrap}>
+        <Smalllockicon />
+        <TextInput
+          style={textInputStyle}
+          placeholder="Enter Amount"
+          placeholderTextColor={COLORS.grey2}
+          keyboardType="number-pad"
+          // value={amount.value}
+          onChangeText={handleAmountChange}
+        />
+      </View>
+
+      <FTCustombutton btntext="Transfer Cash" onpress={handlenext} />
+    </View>
+  );
+};
+
+const TransactionPin = ({
+  amount,
+  sendFireBaseMessage,
+  setchattext,
+  setSendSuccess,
+  userInfo,
+}) => {
+  console.log(amount, "get");
+  const [userPin, setUserPin] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handlePinChange = (text) => {
+    setUserPin(text);
+  };
+  const sendCash = async () => {
+    if (userPin.length !== 4) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await axiosCustom.post("/transfer", {
+        amount: amount.value,
+        transferTo: userInfo?.username,
+        userPin: userPin,
+      });
+      setchattext("");
+      setSendSuccess(true);
+      await sendFireBaseMessage("transfer");
+      // animationRef.current?.play()
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
+  };
+  return (
+    <View style={{ backgroundColor: "#fff" }}>
+      <Text style={chooseAmountHeader}>
+        Amount to send : <Text style={{ ...FONTS.bold }}>N{amount.name}</Text> +
+        N0 Charges
+      </Text>
+
+      <View style={chooseAmountInputWrap}>
+        <Smalllockicon />
+        <TextInput
+          style={textInputStyle}
+          secureTextEntry={true}
+          placeholder="Enter your secure 4 digit PIN"
+          placeholderTextColor={COLORS.grey2}
+          onChangeText={handlePinChange}
+          value={userPin}
+          maxLength={4}
+          keyboardType="number-pad"
+        />
+      </View>
+
+      <FTCustombutton
+        disable={loading}
+        btntext="Transfer Cash"
+        onpress={sendCash}
+      />
+    </View>
+  );
+};
+
+const ActionSuccess = () => {
+  return (
+    <View style={{ backgroundColor: "#fff" }}>
+      <Text onPress={() => console.log("Yes bajhdb anndsk hj")}>
+        Successfull
+      </Text>
+    </View>
+  );
+};
+
 const ChatsdmScreen = ({ route }) => {
   const userIn = route?.params?.userInfo;
   const chatwithid = route?.params?.chatwithid;
@@ -110,17 +259,15 @@ const ChatsdmScreen = ({ route }) => {
   const [chatid, setchatid] = useState("");
   const [chattext, setchattext] = useState("");
   const [amount, setAmount] = useState({ name: "0", value: 0 });
-  const [userPin, setUserPin] = useState("");
   const [sendcashModal, setSendCashModal] = useState(false);
   const [chooseAmount, setChooseAmount] = useState(false);
   const [enterPin, setEnterPin] = useState(false);
-  const [sendSuccess, setSendSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [fetchmessage, setFetchmessage] = useState(false);
   const animationRef = useRef<LottieView>(null);
   const textInputRef = useRef<TextInput>(null);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
+  const insets = useSafeAreaInsets();
 
   const focus = () => {
     if (textInputRef.current !== null) {
@@ -218,27 +365,6 @@ const ChatsdmScreen = ({ route }) => {
     } catch (err) {}
   };
 
-  const sendCash = async () => {
-    if (userPin.length !== 4) {
-      return;
-    }
-    setLoading(true);
-    try {
-      await axiosCustom.post("/transfer", {
-        amount: amount.value,
-        transferTo: userInfo?.username,
-        userPin: userPin,
-      });
-      setchattext("");
-      setSendSuccess(true);
-      await sendFireBaseMessage("transfer");
-      // animationRef.current?.play()
-    } catch (err) {
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const sendFireBaseMessage = async (action = "message") => {
     if (chattext === "" && action === "message") return;
     if (fetchmessage) return;
@@ -284,13 +410,6 @@ const ChatsdmScreen = ({ route }) => {
     return `${moment(time).format("h:mm")}${moment(time).format("a")}`;
   };
 
-  const handlePinChange = (text) => {
-    setUserPin(text);
-  };
-  const handleAmountChange = (text) => {
-    const amount = Number(text).toFixed(2);
-    setAmount({ value: Number(amount), name: text });
-  };
   const handleTextChange = (text) => {
     setchattext(text);
     if (text[text.length - 1] === "@") {
@@ -374,19 +493,54 @@ const ChatsdmScreen = ({ route }) => {
       </View>
     );
   };
+  const handlesetamount = (amount) => {
+    setAmount(amount);
+  };
 
-  const switchModals = (value) => {
+  const setSendSuccess = () => {
+    setShowModal(false);
+    switchModals(3);
+  };
+  const switchModals = (value, amount) => {
     switch (value) {
       case 0:
-        setContent({ child: <PickOption />, height: 220 });
+        setContent({
+          child: (
+            <PickOption
+              closeModal={closeModal}
+              openAmount={openAmount}
+              userInfo={userInfo}
+            />
+          ),
+          height: 220,
+        });
         setShowModal((s) => !s);
         break;
       case 1:
-        setContent({ child: <AmountToSend />, height: 250 });
+        setContent({
+          child: (
+            <AmountToSend
+              handlesetamount={handlesetamount}
+              openTransactionPin={openTransactionPin}
+            />
+          ),
+          height: 250,
+        });
         setShowModal((s) => !s);
         break;
       case 2:
-        setContent({ child: <TransactionPin />, height: 250 });
+        setContent({
+          child: (
+            <TransactionPin
+              amount={amount}
+              sendFireBaseMessage={sendFireBaseMessage}
+              setSendSuccess={setSendSuccess}
+              setchattext={setchattext}
+              userInfo={userInfo}
+            />
+          ),
+          height: 250,
+        });
         setShowModal((s) => !s);
         break;
       case 3:
@@ -408,112 +562,14 @@ const ChatsdmScreen = ({ route }) => {
     setShowModal(false);
     switchModals(1);
   };
-  const openTransactionPin = () => {
+  const openTransactionPin = (amount) => {
     setShowModal(false);
-    switchModals(2);
+    switchModals(2, amount);
   };
 
   const openSuccess = () => {
     setShowModal(false);
     switchModals(3);
-  };
-
-  const PickOption = () => {
-    return (
-      <View style={{ backgroundColor: "#fff" }}>
-        <Text style={sendCashHeader}>
-          Hey Padi, want to send cash to{" "}
-          <Text style={{ textTransform: "capitalize" }}> Ayobami</Text> or is it
-          just a text language?
-        </Text>
-
-        <View style={sendCashWrapper}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={openAmount}
-            style={[{ backgroundColor: COLORS.blue5 }, sendCashButton]}
-          >
-            <View style={buttonIconBg}>
-              <Blacksendicon />
-            </View>
-            <Text style={buttonText}>Send Cash?</Text>
-          </TouchableOpacity>
-
-          {/* Second Button */}
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={closeModal}
-            style={[{ backgroundColor: COLORS.purple }, sendCashButton]}
-          >
-            <View style={buttonIconBg}>
-              <Blacksendicon />
-            </View>
-            <Text style={buttonText}>Keep Typing?</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
-
-  const AmountToSend = () => {
-    return (
-      <View>
-        <Text style={chooseAmountHeader}>How much to send?</Text>
-
-        <View style={chooseAmountInputWrap}>
-          <Smalllockicon />
-          <TextInput
-            style={textInputStyle}
-            placeholder="Enter Amount"
-            placeholderTextColor={COLORS.grey2}
-            keyboardType="number-pad"
-          />
-        </View>
-
-        <FTCustombutton btntext="Transfer Cash" onpress={openTransactionPin} />
-      </View>
-    );
-  };
-
-  const TransactionPin = () => {
-    return (
-      <View style={{ backgroundColor: "#fff" }}>
-        <Text style={chooseAmountHeader}>
-          Amount to send : <Text style={{ ...FONTS.bold }}>N{amount.name}</Text>{" "}
-          + N0 Charges
-        </Text>
-
-        <View style={chooseAmountInputWrap}>
-          <Smalllockicon />
-          <TextInput
-            style={textInputStyle}
-            secureTextEntry={true}
-            placeholder="Enter your secure 4 digit PIN"
-            placeholderTextColor={COLORS.grey2}
-            onChangeText={handlePinChange}
-            value={userPin}
-            maxLength={4}
-            keyboardType="number-pad"
-          />
-        </View>
-
-        <FTCustombutton
-          disable={loading}
-          btntext="Transfer Cash"
-          onpress={() => console.log("Send the cash")}
-        />
-      </View>
-    );
-  };
-
-  const ActionSuccess = () => {
-    return (
-      <View style={{ backgroundColor: "#fff" }}>
-        <Text onPress={() => console.log("Yes bajhdb anndsk hj")}>
-          Scuessfull
-        </Text>
-      </View>
-    );
   };
 
   return (
@@ -527,6 +583,7 @@ const ChatsdmScreen = ({ route }) => {
       modalHeight={content.height}
     >
       <KeyboardAvoidingView
+        keyboardVerticalOffset={40}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
@@ -618,6 +675,7 @@ const ChatsdmScreen = ({ route }) => {
             onChangeText={handleTextChange}
             placeholderTextColor={COLORS.grey16}
             returnKeyType="done"
+            onFocus={() => console.log("Yes")}
           />
           {chattext !== "" && (
             <TouchableOpacity

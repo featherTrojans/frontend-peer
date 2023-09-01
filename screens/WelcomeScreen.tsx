@@ -13,11 +13,9 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
   runOnJS,
-  runOnUI,
 } from "react-native-reanimated";
 
 import { RFValue } from "react-native-responsive-fontsize";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";

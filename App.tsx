@@ -140,8 +140,6 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <SafeAreaProvider>
-        <View style={{ flex: 1 }}>
-          <StatusBar />
           <NavigationContainer
             theme={MyTheme}
             ref={(navigationRef: any) => {
@@ -163,7 +161,6 @@ export default function App() {
               onHide={() => console.log("Status hidden")}
             />
           </NavigationContainer>
-        </View>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

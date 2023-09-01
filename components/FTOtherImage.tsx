@@ -37,60 +37,58 @@ const FTOtherImage = ({
 
   if (memojiImage) {
     return (
-      <View
+      <Pressable
         style={{
           width: size,
           height: size,
-          borderRadius: size / 2,
           backgroundColor: memojiobj?.color,
           justifyContent: "center",
           alignItems: "center",
+          borderRadius: size / 2,
         }}
+        onPress={onpress}
       >
-        <Pressable onPress={onpress} style={{ width: "100%", height: "100%" }}>
-          <Image
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: size / 2,
-            }}
-            resizeMode="contain"
-            resizeMethod="scale"
-            source={{ uri: memojiobj?.index }}
-          />
-        </Pressable>
-      </View>
+        <Image
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: size / 2,
+          }}
+          resizeMode="contain"
+          resizeMethod="scale"
+          source={{ uri: memojiobj?.index }}
+        />
+      </Pressable>
     );
   }
   if (imageurl) {
     return (
-      <View
+      <Pressable
         style={{
           width: size,
           height: size,
-          borderRadius: size / 2,
           justifyContent: "center",
           alignItems: "center",
+          borderRadius: size / 2,
         }}
+        onPress={onpress}
       >
-        <Pressable onPress={onpress} style={{ width: "100%", height: "100%" }}>
-          <Image
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: size / 2,
-            }}
-            resizeMode="cover"
-            resizeMethod="scale"
-            source={{ uri: imageurl }}
-          />
-        </Pressable>
-      </View>
+        <Image
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: size / 2,
+          }}
+          resizeMode="cover"
+          resizeMethod="scale"
+          source={{ uri: imageurl }}
+        />
+      </Pressable>
     );
   }
 
   return (
-    <View
+    <Pressable
       style={{
         width: size,
         height: size,
@@ -99,19 +97,10 @@ const FTOtherImage = ({
         justifyContent: "center",
         alignItems: "center",
       }}
+      onPress={onpress}
     >
-      <Pressable
-        onPress={onpress}
-        style={{
-          width: "100%",
-          height: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ textAlign: "center" }}>{nameSplitToTwo(fullname)}</Text>
-      </Pressable>
-    </View>
+      <Text style={{ textAlign: "center" }}>{nameSplitToTwo(fullname)}</Text>
+    </Pressable>
   );
 };
 

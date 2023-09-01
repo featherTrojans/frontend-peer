@@ -40,7 +40,7 @@ const FTUserImage = ({
 
   if (memojiImage.color) {
     return (
-      <View
+      <Pressable
         style={{
           width: size,
           height: size,
@@ -49,63 +49,8 @@ const FTUserImage = ({
           justifyContent: "center",
           alignItems: "center",
         }}
+        onPress={onpress}
       >
-        <Pressable onPress={onpress} style={{ width: "100%", height: "100%" }}>
-          <Image
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: size / 2,
-            }}
-            resizeMode="contain"
-            resizeMethod="scale"
-            source={{ uri: memojiobj?.index }}
-          />
-        </Pressable>
-      </View>
-    );
-  }
-  if (imageurl) {
-    return (
-      <View
-        style={{
-          width: size,
-          height: size,
-          borderRadius: size / 2,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Pressable onPress={onpress} style={{ width: "100%", height: "100%" }}>
-          <Image
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: size / 2,
-            }}
-            resizeMode="cover"
-            resizeMethod="scale"
-            source={{
-              uri: imageurl,
-            }}
-          />
-        </Pressable>
-      </View>
-    );
-  }
-
-  return (
-    <View
-      style={{
-        width: size,
-        height: size,
-        borderRadius: size / 2,
-        backgroundColor: "#D9D9D9",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Pressable onPress={onpress} style={{ width: "100%", height: "100%" }}>
         <Image
           style={{
             width: "100%",
@@ -114,10 +59,62 @@ const FTUserImage = ({
           }}
           resizeMode="contain"
           resizeMethod="scale"
-          source={{ uri: allMemojis[gender]["lightSkinned"][0] }}
+          source={{ uri: memojiobj?.index }}
         />
       </Pressable>
-    </View>
+    );
+  }
+  if (imageurl) {
+    return (
+      <Pressable
+        style={{
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        onPress={onpress}
+      >
+        <Image
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: size / 2,
+          }}
+          resizeMode="cover"
+          resizeMethod="scale"
+          source={{
+            uri: imageurl,
+          }}
+        />
+      </Pressable>
+    );
+  }
+
+  return (
+    <Pressable
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        backgroundColor: "#D9D9D9",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      onPress={onpress}
+    >
+      <Image
+        style={{
+          width: "100%",
+          height: "100%",
+          borderRadius: size / 2,
+        }}
+        resizeMode="contain"
+        resizeMethod="scale"
+        source={{ uri: allMemojis[gender]["lightSkinned"][0] }}
+      />
+    </Pressable>
   );
 };
 
