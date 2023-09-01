@@ -78,13 +78,13 @@ const FTUserImage = ({
       >
         <Image
           style={{
-            width: "100%",
-            height: "100%",
+            width: 100,
+            height: 100,
             borderRadius: size / 2,
           }}
           resizeMode="cover"
           resizeMethod="scale"
-          source={{ uri: imageurl }}
+          source={{ uri: "https://res.cloudinary.com/ezeko/image/upload/v1658144933/feather/ezeko.jpg" }}
         />
       </Pressable>
     );

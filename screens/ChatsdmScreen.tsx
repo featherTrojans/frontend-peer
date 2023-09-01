@@ -7,11 +7,10 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
-import {
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ChatsdmScreenStyles } from "../assets/styles/screens";
 import {
   FTAllChatsModal,
@@ -457,7 +456,7 @@ const ChatsdmScreen = ({ route }) => {
         </View>
       </View>
     );
-  }; 
+  };
 
   const AmountToSend = () => {
     return (
@@ -521,8 +520,17 @@ const ChatsdmScreen = ({ route }) => {
   };
 
   return (
-    <View style={{flex: 1, paddingVertical: 50}}>
+    <FTMainwrapper
+      pH={0}
+      bgColor={COLORS.white}
+      childBg={COLORS.white3}
+      modalChildren={content.child}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      modalHeight={content.height}
+    >
       <KeyboardAvoidingView
+        keyboardVerticalOffset={40}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
@@ -575,7 +583,6 @@ const ChatsdmScreen = ({ route }) => {
             />
           </View>
         ) : (
-          <>
           <ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
@@ -603,7 +610,6 @@ const ChatsdmScreen = ({ route }) => {
               );
             })}
           </ScrollView>
-          </>
         )}
 
         {/* Bottom Input */}
@@ -611,14 +617,12 @@ const ChatsdmScreen = ({ route }) => {
         <View style={chatTextInput}>
           <TextInput
             placeholder="Enter Message..."
-            style={[
-              textinput,
-              { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
-            ]}
+            style={{}}
             value={chattext}
             onChangeText={handleTextChange}
             placeholderTextColor={COLORS.grey16}
             returnKeyType="done"
+            onFocus={() => console.log("Yes")}
           />
           {chattext !== "" && (
             <TouchableOpacity
@@ -630,7 +634,7 @@ const ChatsdmScreen = ({ route }) => {
           )}
         </View>
       </KeyboardAvoidingView>
-    </View>
+    </FTMainwrapper>
   );
 };
 

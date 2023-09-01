@@ -130,7 +130,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
             </Text>
           ),
           headerShown: false,
-          lady: true,
+          lazy: true,
           tabBarStyle: {
             minHeight: Platform.OS === "android" ? 70 : 84,
             paddingBottom: Platform.OS === "android" ? 10 : 20,
@@ -318,9 +318,6 @@ export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
   }
 
   return (
-    <>
-      {/* {token ? <LockScreen modal={modal} setModal={setModal} /> : null} */}
       <AuthenticatedNavigator />
-    </>
   );
 };
