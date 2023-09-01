@@ -130,6 +130,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
             </Text>
           ),
           headerShown: false,
+          lady: true,
           tabBarStyle: {
             minHeight: Platform.OS === "android" ? 70 : 84,
             paddingBottom: Platform.OS === "android" ? 10 : 20,
@@ -140,6 +141,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
           },
         })}
         initialRouteName="Home"
+        backBehavior="initialRoute"
       >
         <DashboardTabs.Screen name="Home" component={HomeScreen} />
         <DashboardTabs.Screen name="Transact" component={TransactionsScreen} options={{

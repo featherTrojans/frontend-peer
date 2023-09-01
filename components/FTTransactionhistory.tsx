@@ -53,7 +53,7 @@ const History = ({ data }) => {
       return (
         <Text style={{ textTransform: "capitalize" }}>
           {" "}
-          {otherUser.fullName} - @
+          {otherUser ? otherUser.fullName: "Fe Fe"} - @
           <Text style={{ textTransform: "lowercase" }}>{transactionValue}</Text>
         </Text>
       );

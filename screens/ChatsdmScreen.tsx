@@ -9,6 +9,9 @@ import {
   Platform,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
+import {
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { ChatsdmScreenStyles } from "../assets/styles/screens";
 import {
   FTAllChatsModal,
@@ -121,6 +124,7 @@ const ChatsdmScreen = ({ route }) => {
   const textInputRef = useRef<TextInput>(null);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
+  const insets = useSafeAreaInsets();
 
   const focus = () => {
     if (textInputRef.current !== null) {
@@ -517,15 +521,7 @@ const ChatsdmScreen = ({ route }) => {
   };
 
   return (
-    <FTMainwrapper
-      pH={0}
-      bgColor={COLORS.white}
-      childBg={COLORS.white3}
-      modalChildren={content.child}
-      showModal={showModal}
-      setShowModal={setShowModal}
-      modalHeight={content.height}
-    >
+    <View style={{flex: 1, paddingVertical: 50}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
@@ -579,6 +575,7 @@ const ChatsdmScreen = ({ route }) => {
             />
           </View>
         ) : (
+          <>
           <ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
@@ -606,6 +603,7 @@ const ChatsdmScreen = ({ route }) => {
               );
             })}
           </ScrollView>
+          </>
         )}
 
         {/* Bottom Input */}
@@ -613,7 +611,10 @@ const ChatsdmScreen = ({ route }) => {
         <View style={chatTextInput}>
           <TextInput
             placeholder="Enter Message..."
-            style={{}}
+            style={[
+              textinput,
+              { ...FONTS.regular, color: COLORS.grey7, ...fontsize.smallest },
+            ]}
             value={chattext}
             onChangeText={handleTextChange}
             placeholderTextColor={COLORS.grey16}
@@ -629,7 +630,7 @@ const ChatsdmScreen = ({ route }) => {
           )}
         </View>
       </KeyboardAvoidingView>
-    </FTMainwrapper>
+    </View>
   );
 };
 
