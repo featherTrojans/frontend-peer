@@ -6,7 +6,7 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
-import React, {  useContext } from "react";
+import React, { useContext } from "react";
 import { images } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import { allMemojis } from "../assetdatas";
@@ -30,7 +30,7 @@ const FTUserImage = ({
   const gender = authdata?.userDetails?.gender?.toLowerCase() || "male";
   let memojiobj = {};
 
-  if (memojiImage) {
+  if (typeof memojiImage == "string" || memojiImage.color) {
     if (typeof memojiImage == "string") {
       memojiobj = JSON.parse(memojiImage);
     } else {
@@ -38,7 +38,7 @@ const FTUserImage = ({
     }
   }
 
-  if (memojiImage) {
+  if (memojiImage.color) {
     return (
       <View
         style={{
@@ -85,7 +85,9 @@ const FTUserImage = ({
             }}
             resizeMode="cover"
             resizeMethod="scale"
-            source={{ uri: imageurl }}
+            source={{
+              uri: imageurl,
+            }}
           />
         </Pressable>
       </View>

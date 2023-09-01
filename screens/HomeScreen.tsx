@@ -20,10 +20,8 @@ import {
   FTBillPayment,
   FTTransfer,
   FTWithdraw,
-  FTAddcash,
   FTEmptycomponent,
   FTHorizontaline,
-  FTIconwithbg,
   FTIconwithtitleandinfo,
   FTTabWrapper,
   FTTransactionhistory,
@@ -42,29 +40,17 @@ import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import { navigation, redirectTo } from "../utils";
-
+import useChats from "../hooks/useChats";
 
 const {
-  container,
   headerContainer,
   profileContainer,
   profileName,
   profileNameContainer,
   profileUsername,
   notificationBell,
-  walletBlock,
-  optionContainer,
-  optionIconBg,
-  optionTitle,
-  headerWrapper,
-  addcashheadertext,
-  primarywallettext,
-  availablebalancetext,
   scrollaction,
   scrollactionText,
-  informationblockwrap,
-  informationiconswrap,
-  informationblocktext,
   transactionWrap,
   transactionHeader,
   transactionIconWrap,
@@ -84,7 +70,7 @@ const {
   profileSetupHeader,
   completedSetup,
   profileSetupWrap,
-  scrollActionImage
+  scrollActionImage,
 } = HomeScreenStyles;
 
 const {
@@ -103,7 +89,7 @@ const {
   Documentsetupicon,
   Levelcheckicon,
 } = icons;
-const {Transferimage, Withdrawimage, Billsimage} = images
+const { Transferimage, Withdrawimage, Billsimage } = images;
 const scrollactions = [
   {
     bg: "#EDF3EB",
@@ -148,10 +134,7 @@ const QuickActions = ({ onpress }) => {
             { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
           ]}
         >
-          <Image 
-          style={scrollActionImage}
-          source={image}
-          />
+          <Image style={scrollActionImage} source={image} />
           <Text style={scrollactionText}>{text}</Text>
         </View>
       </TouchableOpacity>
@@ -182,6 +165,18 @@ const QuickActions = ({ onpress }) => {
 };
 
 const Conversations = () => {
+  const { loading, chats, chattwos } = useChats();
+
+  let threechats = [];
+
+  if (chats.length >= 3) {
+    threechats = chats.slice(0, 3);
+  } else {
+    threechats = chats;
+    let remain = 3 - chats.length;
+    threechats = [...threechats, ...chattwos.slice(0, remain)];
+  }
+
   return (
     <View style={[conversationWrap, { marginTop: 20 }]}>
       <View style={conversationHeader}>
@@ -190,27 +185,46 @@ const Conversations = () => {
           <Recentconvicon />
           <Text style={recentconvText}>Conversations</Text>
         </View>
-        <Text style={numberOfUnread}>You have 3 unreads</Text>
+        {/* <Text style={numberOfUnread}>You have 3 unreads</Text> */}
       </View>
 
       <FTHorizontaline marginV={15} />
 
       <View style={{ flexDirection: "row" }}>
-        <View
-          style={{
-            width: 45,
-            height: 45,
-            backgroundColor: COLORS.grey1,
-            borderRadius: 45 / 2,
-            marginRight: 10,
-          }}
-        />
+        {threechats.map(() => {
+          return (
+            <View
+              style={{
+                width: 45,
+                height: 45,
+                backgroundColor: COLORS.grey1,
+                borderRadius: 45 / 2,
+                marginRight: 10,
+              }}
+            />
+          );
+        })}
       </View>
     </View>
   );
 };
 
 const SetupProfile = ({ onPress }) => {
+  const { authdata } = useContext(AuthContext);
+  const level = authdata?.userDetails?.userLevel;
+
+  let isProfileSetupCompleted =
+    !!authdata?.userDetails?.gender &&
+    !!authdata?.userDetails?.username &&
+    level >= 3 &&
+    level >= 2 &&
+    !!authdata?.userDetails?.pin &&
+    (authdata?.userDetails?.imageUrl || authdata?.userDetails?.isMemoji);
+
+  if (isProfileSetupCompleted) {
+    return null;
+  }
+
   return (
     <View style={setupProfile}>
       <View style={setupHeadSection}>
@@ -365,7 +379,7 @@ const ProfileSetup = ({ nav }) => {
   let completedProfileSetup = profilesetupdatas.filter(
     (item) => item.completed
   ).length;
-  let isProfileSetupCompleted = completedProfileSetup === 6;
+
   return (
     <View style={profileSetupWrap}>
       <Text style={profileSetupHeader}>
@@ -439,7 +453,7 @@ const SetupPin = ({ nav }) => {
           textAlign: "center",
           ...fontsize.xxsmall,
           ...FONTS.regular,
-          marginVertical: 20
+          marginVertical: 20,
         }}
       >
         Need Help? Learn More
@@ -528,9 +542,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     >
       <View style={headerContainer}>
         <View style={profileContainer}>
-          <FTUserImage 
-          size={45}
-          />
+          <FTUserImage size={45} />
           <View style={profileNameContainer}>
             <Text style={profileName}>
               Hi, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
