@@ -112,6 +112,8 @@ const scrollactions = [
 ];
 
 const QuickActions = ({ onpress }) => {
+  console.log("Qucik action rerendeing")
+
   function Scrollaction({
     bg,
     text,
@@ -134,12 +136,13 @@ const QuickActions = ({ onpress }) => {
             { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
           ]}
         >
-          <Image style={scrollActionImage} source={image} />
+          <Image style={scrollActionImage} source={image}  defaultSource={image}/>
           <Text style={scrollactionText}>{text}</Text>
         </View>
       </TouchableOpacity>
     );
   }
+
 
   return (
     <ScrollView

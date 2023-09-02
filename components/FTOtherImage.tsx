@@ -1,6 +1,6 @@
 import { StyleSheet, View, Image, Pressable } from "react-native";
 import React from "react";
-import { images } from "../constants";
+import { COLORS, FONTS, fontsize, images } from "../constants";
 
 import { allMemojis } from "../assetdatas";
 import { nameSplitToTwo } from "../utils/nameSplitter";
@@ -35,32 +35,6 @@ const FTOtherImage = ({
     }
   }
 
-  if (imageurl) {
-    return (
-      <Pressable
-        style={{
-          width: size,
-          height: size,
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: size / 2,
-        }}
-        onPress={onpress}
-      >
-        <Image
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: size / 2,
-          }}
-          resizeMode="cover"
-          resizeMethod="scale"
-          source={{ uri: imageurl }}
-        />
-      </Pressable>
-    );
-  }
-
   if (memojiobj.color) {
     return (
       <Pressable
@@ -88,6 +62,32 @@ const FTOtherImage = ({
     );
   }
 
+  if (imageurl) {
+    return (
+      <Pressable
+        style={{
+          width: size,
+          height: size,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: size / 2,
+        }}
+        onPress={onpress}
+      >
+        <Image
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: size / 2,
+          }}
+          resizeMode="cover"
+          resizeMethod="scale"
+          source={{ uri: imageurl }}
+        />
+      </Pressable>
+    );
+  }
+
   return (
     <Pressable
       style={{
@@ -101,7 +101,7 @@ const FTOtherImage = ({
       onPress={onpress}
     >
       {fullname ? (
-        <Text style={{ textAlign: "center" }}>{nameSplitToTwo(fullname)}</Text>
+        <Text style={{ textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9 }}>{nameSplitToTwo(fullname)}</Text>
       ) : (
         <Text>AA</Text>
       )}

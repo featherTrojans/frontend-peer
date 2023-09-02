@@ -114,9 +114,7 @@ const PhoneVerificationScreen = ({ route }) => {
       <OTPTextInput
         ref={otpInput}
         handleTextChange={(text) => setOtpCode(text)}
-        // handleCellTextChange={(text) => console.log(text, "Single")}
         inputCount={6}
-        // inputCellLength={1}
         tintColor={COLORS.blue16}
         offTintColor={COLORS.grey21}
         textInputStyle={otpInputWrap}

@@ -24,7 +24,7 @@ const { Changememojicheckicon, Choosememojiicon } = icons;
 
 const {} = ChangeappearanceScreenStyles;
 
-const ChangeappearanceScreen = () => {
+const ChangeappearanceScreen = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const { authdata, setAuthData, setAllowBiometrics } = useContext(AuthContext);
   const { successAlert } = useAlert();
@@ -66,6 +66,7 @@ const ChangeappearanceScreen = () => {
         form2.append("isMemoji", "false");
         await axiosCustom.post("/upload/image", form2);
         successAlert("Profile image succesfully updated");
+        navigation.navigate("Dashboard")
       } catch (err) {
         console.log(err.response.data);
       } finally {
