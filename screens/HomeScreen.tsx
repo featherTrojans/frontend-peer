@@ -28,6 +28,7 @@ import {
   FTViewbalance,
   FTCustombutton,
   FTUserImage,
+  FTOtherImage,
 } from "../components";
 import { COLORS, FONTS, SIZES, fontsize, icons, images } from "../constants";
 
@@ -38,7 +39,6 @@ import formatData from "../utils/fomatTrans";
 
 import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
-import { useAlert } from "../hooks";
 import { navigation, redirectTo } from "../utils";
 import useChats from "../hooks/useChats";
 
@@ -75,12 +75,9 @@ const {
 
 const {
   Bell,
-  Featherdefault,
   Historyicon,
   Recentconvicon,
   Setupprofileicon,
-  Balanceicon,
-  Walletblueicon,
   Transactionpinsetupicon,
   Profilesetupicon,
   Personalsetupicon,
@@ -168,17 +165,9 @@ const QuickActions = ({ onpress }) => {
 };
 
 const Conversations = () => {
-  const { loading, chats, chattwos } = useChats();
+  const { allchatdata, loading } = useChats();
 
-  let threechats = [];
-
-  if (chats.length >= 3) {
-    threechats = chats.slice(0, 3);
-  } else {
-    threechats = chats;
-    let remain = 3 - chats.length;
-    threechats = [...threechats, ...chattwos.slice(0, remain)];
-  }
+  // let threechats = allchatdata.slice(0, 3);
 
   return (
     <View style={[conversationWrap, { marginTop: 20 }]}>
@@ -193,21 +182,25 @@ const Conversations = () => {
 
       <FTHorizontaline marginV={15} />
 
-      <View style={{ flexDirection: "row" }}>
-        {threechats.map(() => {
+      <ScrollView horizontal>
+        {allchatdata.map((item) => {
           return (
-            <View
-              style={{
-                width: 45,
-                height: 45,
-                backgroundColor: COLORS.grey1,
-                borderRadius: 45 / 2,
-                marginRight: 10,
-              }}
-            />
+            <View style={{ marginHorizontal: 10 }}>
+              <FTOtherImage
+                size={45}
+                imageurl={item?.userInfo?.imageUrl}
+                memojiImage={item?.userInfo?.memoji}
+                fullname={item?.userInfo?.fullName}
+                onpress={() => {
+                  navigation.navigate("chatsdm_screen", {
+                    userInfo: item?.userInfo,
+                  });
+                }}
+              />
+            </View>
           );
         })}
-      </View>
+      </ScrollView>
     </View>
   );
 };

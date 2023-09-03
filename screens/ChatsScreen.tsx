@@ -15,9 +15,7 @@ const {} = ChatsScreenStyles;
 const { profileHeaderWrap, profileHeaderText } = ProfileScreenStyles;
 
 const ChatsScreen = () => {
-  const { authdata } = useContext(AuthContext);
-  const authId = authdata?.userDetails?.userUid;
-  const { loading, chats, chattwos } = useChats();
+  const { allchatdata } = useChats();
 
   return (
     <FTTabWrapper>
@@ -32,7 +30,7 @@ const ChatsScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <FTChatList chats={chats} chattwos={chattwos} authId={authId} />
+      <FTChatList allchatdata={allchatdata} />
     </FTTabWrapper>
   );
 };

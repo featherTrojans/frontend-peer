@@ -23,42 +23,9 @@ const {
   chatWrap,
 } = ChatsScreenStyles;
 
-const ChatMessage = ({ search, userId, chatinfo }) => {
-  const [userInfo, setUserInfo] = useState({});
-  // const [show, setshow] = useState(true);
-  // useEffect(() => {
-  //   console.log(search);
-  //   if (search == "") {
-  //     setshow(true);
-  //   } else {
-  //     let de = false;
-  //     if (userInfo?.fullName) {
-  //       de = userInfo?.fullName.toLowerCase().includes(search.toLowerCase());
-  //     }
-  //     if (userInfo?.username) {
-  //       de =
-  //         de || userInfo?.username.toLowerCase().includes(search.toLowerCase());
-  //     }
-  //     console.log(userInfo?.fullName, search, de);
-  //     setshow(de);
-  //   }
-  // }, [search]);
-  useEffect(() => {
-    getUser();
-  }, []);
-  const getUser = async () => {
-    try {
-      const response = await axiosCustom.get(`/user/${userId}`);
-      setUserInfo(response.data.data);
-    } catch (err) {
-      const response = await axiosCustom.get(`/merchant/detail/${userId}`);
-      setUserInfo(response.data.data);
-    }
-  };
+const ChatMessage = ({ chatinfo }) => {
+  const userInfo = chatinfo?.userInfo;
 
-  // if (!show) {
-  //   return null;
-  // }
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -111,55 +78,44 @@ const ListHeader = ({ value, onchange }) => {
   );
 };
 
-const FTChatList = ({ chats, chattwos, authId }) => {
+const FTChatList = ({ allchatdata }) => {
   const [allChats, setAllChats] = useState([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    //algorithm
-    const arranged = [];
-    let i = 0;
-    let j = 0;
-
-    while (i < chats.length && j < chattwos.length) {
-      if (chats[i].createdAt > chattwos[j].createdAt) {
-        arranged.push(chats[i]);
-        i++;
-      } else {
-        arranged.push(chattwos[j]);
-        j++;
-      }
-    }
-    while (i < chats.length) {
-      arranged.push(chats[i]);
-      i++;
-    }
-    while (j < chattwos.length) {
-      arranged.push(chattwos[j]);
-      j++;
-    }
-
-    setAllChats(arranged);
-    // console.log(allChats, "list of all chats");
-  }, [chats, chattwos]);
-
-  const handleSearchChnage = (text) => {
+    setAllChats(allchatdata);
+  }, [allchatdata]);
+  const handleSearchChange = (text) => {
     // allChats
+    setSearch(text);
+    const filterchat = allchatdata.filter((item) => {
+      const userInfo = item?.userInfo;
+      let de = false;
+      if (userInfo?.fullName) {
+        de = userInfo?.fullName.toLowerCase().includes(search.toLowerCase());
+      }
+      if (userInfo?.username) {
+        de =
+          de || userInfo?.username.toLowerCase().includes(search.toLowerCase());
+      }
+
+      return de;
+    });
+
+    setAllChats(filterchat);
   };
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
       data={allChats}
       renderItem={({ item }) => {
-        let userid = item.id1 !== authId ? item.id1 : item.id2;
-
-        return <ChatMessage search={search} userId={userid} chatinfo={item} />;
+        return <ChatMessage chatinfo={item} />;
       }}
       ItemSeparatorComponent={() => {
         return <View style={{ height: 40 }} />;
       }}
       ListHeaderComponent={() => (
-        <ListHeader value={search} onchange={setSearch} />
+        <ListHeader value={search} onchange={handleSearchChange} />
       )}
     />
   );
