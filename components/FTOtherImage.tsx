@@ -1,6 +1,6 @@
 import { StyleSheet, View, Image, Pressable } from "react-native";
 import React from "react";
-import { images } from "../constants";
+import { COLORS, FONTS, fontsize, images } from "../constants";
 
 import { allMemojis } from "../assetdatas";
 import { nameSplitToTwo } from "../utils/nameSplitter";
@@ -101,7 +101,7 @@ const FTOtherImage = ({
       onPress={onpress}
     >
       {fullname ? (
-        <Text style={{ textAlign: "center" }}>{nameSplitToTwo(fullname)}</Text>
+        <Text style={{ textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9 }}>{nameSplitToTwo(fullname)}</Text>
       ) : (
         <Text>AA</Text>
       )}

@@ -27,6 +27,7 @@ export const lastChatDate = (date: Date) => {
 }
 
 const formatData = (data:any)=>{
+  console.log("Format transaction rendering")
   if(data === undefined) return []
   if(data.length < 1) return []
   const finaldata: {}[] = [];

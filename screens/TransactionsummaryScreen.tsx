@@ -80,11 +80,14 @@ const TransactionsummaryScreen = ({ route }) => {
 
           <FTHorizontaline mT={30} mB={42} />
 
-          <FlatList
-            data={summaryinfo?.transactionDatas}
-            ItemSeparatorComponent={() => <View style={{ height: 18 }} />}
-            renderItem={({ item }) => <EachRow data={item} />}
-          />
+          {summaryinfo?.transactionDatas.map((summary) => {
+            return (
+              <>
+                <EachRow data={summary} />
+                <View style={{ height: 18 }} />
+              </>
+            );
+          })}
         </View>
 
         <FTInput

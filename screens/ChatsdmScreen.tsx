@@ -639,7 +639,7 @@ const ChatsdmScreen = ({ route }) => {
           <Animated.ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
-            contentContainerStyle={{ paddingTop: 20,  justifyContent: "flex-end",  }}
+            contentContainerStyle={{ paddingVertical: 20,  justifyContent: "flex-end",  }}
             showsVerticalScrollIndicator={false}
             bounces={false}
             snapToEnd={true}
