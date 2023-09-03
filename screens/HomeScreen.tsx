@@ -109,7 +109,7 @@ const scrollactions = [
 ];
 
 const QuickActions = ({ onpress }) => {
-  console.log("Qucik action rerendeing")
+  console.log("Qucik action rerendeing");
 
   function Scrollaction({
     bg,
@@ -133,19 +133,22 @@ const QuickActions = ({ onpress }) => {
             { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
           ]}
         >
-          <Image style={scrollActionImage} source={image}  defaultSource={image}/>
+          <Image
+            style={scrollActionImage}
+            source={image}
+            defaultSource={image}
+          />
           <Text style={scrollactionText}>{text}</Text>
         </View>
       </TouchableOpacity>
     );
   }
 
-
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      // contentContainerStyle={{ paddingHorizontal: 16 }}
+      contentContainerStyle={{ marginVertical: 15, paddingHorizontal: 15 }}
     >
       {scrollactions.map((scrollaction, index) => {
         let { bg, text, image, modal } = scrollaction;
@@ -170,7 +173,7 @@ const Conversations = () => {
   // let threechats = allchatdata.slice(0, 3);
 
   return (
-    <View style={[conversationWrap, { marginTop: 20 }]}>
+    <View style={[conversationWrap]}>
       <View style={conversationHeader}>
         <View style={recentIconWrap}>
           {/* icon */}
@@ -273,7 +276,7 @@ const ActiveCashWithdrawal = () => {
     return null;
   }
   return (
-    <View style={setupProfile}>
+    <View style={[setupProfile, { marginBottom: 0, marginTop: 15 }]}>
       <View style={conversationHeader}>
         <View style={recentIconWrap}>
           {/* icon */}
@@ -530,6 +533,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
 
   return (
     <FTTabWrapper
+      pH={0}
       bgColor={COLORS.white3}
       modalChildren={content.child}
       showModal={showModal}
@@ -574,10 +578,10 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         }
       >
         <FTViewbalance />
-        <QuickActions onpress={switchModals} />
         <ActiveCashWithdrawal />
-        <Conversations />
+        <QuickActions onpress={switchModals} />
         <SetupProfile onPress={() => switchModals(0)} />
+        <Conversations />
 
         <View style={transactionWrap}>
           <View style={transactionHeader}>
@@ -599,13 +603,18 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
           ) : (
             histories.map((history, index) => {
               const { data, time } = history;
+
+              let isLast = index + 1 !== histories.length;
               return (
-                <FTTransactionhistory
-                  index={index}
-                  date={time}
-                  datas={data}
-                  key={time}
-                />
+                <>
+                  <FTTransactionhistory
+                    index={index}
+                    date={time}
+                    datas={data}
+                    key={time}
+                  />
+                  {isLast && <FTHorizontaline marginV={15} />}
+                </>
               );
             })
           )}

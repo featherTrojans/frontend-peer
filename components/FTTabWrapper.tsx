@@ -33,7 +33,7 @@ const FTTabWrapper = ({
     <>
       <SafeAreaView
         style={{ flex: 1, backgroundColor: bgColor }}
-        edges={["top", "bottom"]}
+        edges={['top']}
       >
         <Customstatusbar bg={bgColor} />
         <View

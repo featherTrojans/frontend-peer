@@ -112,7 +112,7 @@ const FTChatList = ({ allchatdata }) => {
         return <ChatMessage chatinfo={item} />;
       }}
       ItemSeparatorComponent={() => {
-        return <View style={{ height: 40 }} />;
+        return <View style={{ height: 30 }} />;
       }}
       ListHeaderComponent={() => (
         <ListHeader value={search} onchange={handleSearchChange} />

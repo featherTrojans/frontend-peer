@@ -10,6 +10,7 @@ import * as Animatable from "react-native-animatable";
 import { FTTransactionhistoryStyles } from "../assets/styles/components";
 import { navigation } from "../utils";
 import FTIconwithbg from "./FTIconwithbg";
+import { FTHorizontaline } from ".";
 const {
   container,
   dateText,
@@ -21,6 +22,7 @@ const {
   transactionTypeText,
   amountText,
 } = FTTransactionhistoryStyles;
+
 
 const { Arrowin, Arrowout, Bonusicon, Utilitypayment, Utilitylarge } = icons;
 
@@ -146,18 +148,20 @@ const Transactionhistory = ({
   date: string;
   index: number;
 }) => {
+
+  
   return (
     <Animatable.View
       animation="slideInUp"
       delay={index * 100}
-      style={container}
+      style={[container]}
     >
       <Text style={dateText}>{date}</Text>
       {datas.map((data, index) => {
         return (
           <Animatable.View animation="slideInUp" delay={index * 50} key={index}>
             <History data={data} />
-            {index + 1 !== datas.length && <View style={bottomLine} />}
+            {index + 1 !== datas.length && <FTHorizontaline marginV={12} />}
           </Animatable.View>
         );
       })}

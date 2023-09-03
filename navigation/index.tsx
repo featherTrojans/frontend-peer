@@ -101,18 +101,6 @@ const NoAuthNavigator = ({ routeName }) => {
 const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
   const { getState, reset } = useNavigation();
 
-  useEffect(() => {
-    const state = getState?.();
-
-    if (state) {
-      reset({
-        ...state,
-        index: 0,
-        history: [],
-      });
-    }
-  }, []);
-
   return (
       <DashboardTabs.Navigator
         screenOptions={({ route }) => ({
@@ -144,9 +132,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
         backBehavior="initialRoute"
       >
         <DashboardTabs.Screen name="Home" component={HomeScreen} />
-        <DashboardTabs.Screen name="Transact" component={TransactionsScreen} options={{
-          unmountOnBlur: true
-        }}/>
+        <DashboardTabs.Screen name="Transact" component={TransactionsScreen} />
         <DashboardTabs.Screen name="Cards" component={CardScreen} />
         <DashboardTabs.Screen name="Chats" component={ChatsScreen} />
         <DashboardTabs.Screen name="Profile" component={ProfileScreen} />

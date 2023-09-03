@@ -79,7 +79,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [routeName, setRouteName] = useState("onboarding_screen");
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
-  let alertOffset = Platform.OS === 'ios' ?  getStatusBarHeight(true) : 0 
+  let alertOffset =  getStatusBarHeight(true)
 
   const checkOnboarding = async () => {
     // await AsyncStorage.removeItem('@onboarded')

@@ -78,7 +78,7 @@ const useSwipemodal = () => {
             entering={FadeIn}
             exiting={FadeOut}
             onPress={closeModal}
-            style={styles.backdrop}
+            style={[styles.backdrop,]}
           >
             <GestureDetector gesture={pan}>
               <AnimatedPressable
