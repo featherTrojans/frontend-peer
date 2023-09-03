@@ -52,9 +52,6 @@ const PhoneVerificationScreen = ({ route }) => {
     return () => clearInterval(timer);
   }, [timecount]);
 
-
-
-  
   const handlesubmit = async () => {
     const url = from == "login" ? "auth/signin/confirm" : "auth/signup/confirm";
     const navigateurl =
@@ -85,7 +82,7 @@ const PhoneVerificationScreen = ({ route }) => {
     try {
       setLoading(true);
       await axiosCustom.post("auth/resend/code", {
-        phoneNumber,
+        email: phoneNumber,
       });
       settimecount(30);
     } catch (err) {
@@ -94,7 +91,6 @@ const PhoneVerificationScreen = ({ route }) => {
       setLoading(false);
     }
   };
-
 
   // let isChanging = (value) => {
   //   console.log(value, "yya");

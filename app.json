@@ -18,11 +18,9 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "enabled": false
+      "enabled": true
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "africa.feathermobile.com",

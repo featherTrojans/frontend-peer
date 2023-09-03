@@ -63,7 +63,11 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     ],
   };
   const onpress = () => {
-    navigation.navigate("transactionsummary_screen", { action, summaryinfo });
+    navigation.navigate("transactionsummary_screen", {
+      action,
+      summaryinfo,
+      userInfo: userinfo,
+    });
   };
 
   const addtobeneficiary = async () => {
@@ -84,6 +88,12 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
         mB={40}
+        profile={true}
+        userInfo={{
+          fullName: userinfo.fullName,
+          memoji: userinfo.memoji,
+          imageUrl: userinfo.imageUrl,
+        }}
         extraComponent={
           <View
             style={{
@@ -106,6 +116,45 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     </View>
   );
 };
+
+const ListHeader = ({ amount, switchModals }) => {
+  const [searchval, setSearchval] = useState("");
+  const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
+
+  const onchange = (val: string) => {
+    setSearchval(val);
+    getuserinfo(val);
+  };
+  return (
+    <>
+      <FTSearchinput
+        placeholder="Enter feather tag"
+        value={searchval}
+        onChange={onchange}
+      />
+      {loadbounce && <ActivityIndicator size={"small"} />}
+      {userinfo?.fullName && (
+        <FTIconwithtitleandinfo
+          title={userinfo?.fullName}
+          info={userinfo?.username}
+          onPress={() => switchModals(0, userinfo, amount, false)}
+          bG={COLORS.Tblue4}
+          Icon={Smallphoneicon}
+          mB={40}
+          profile={true}
+          userInfo={{
+            imageUrl: userinfo?.imageUrl,
+            memoji: userinfo?.memoji,
+            fullName: userinfo?.fullName,
+          }}
+        />
+      )}
+
+      <Text style={listHeaderText}>My Beneficiaries</Text>
+    </>
+  );
+};
+
 const ChoosefeatheruserScreen = ({ route }) => {
   const amount = route?.params?.amount;
   const [showModal, setShowModal] = useState(false);
@@ -142,51 +191,6 @@ const ChoosefeatheruserScreen = ({ route }) => {
     }
   };
 
-  const ListHeader = () => {
-    const [searchval, setSearchval] = useState("");
-    const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
-    const [usertosend, setusertosend] = useState({});
-    useEffect(() => {
-      if (userinfo?.fullName) {
-        setusertosend(userinfo);
-      }
-    }, [userinfo]);
-
-    const onchange = (val: string) => {
-      console.log(val);
-      setSearchval(val);
-      getuserinfo(val);
-    };
-    return (
-      <>
-        <FTSearchinput
-          placeholder="Enter feather tag"
-          value={searchval}
-          onChange={onchange}
-        />
-        {loadbounce && <ActivityIndicator size={"small"} />}
-        {usertosend.fullName && (
-          <FTIconwithtitleandinfo
-            title={usertosend.fullName}
-            info={usertosend.username}
-            onPress={() => switchModals(0, usertosend, amount, false)}
-            bG={COLORS.Tblue4}
-            Icon={Smallphoneicon}
-            mB={40}
-            profile={true}
-            userInfo={{
-              imageUrl: usertosend?.imageUrl,
-              memoji: usertosend?.memoji,
-              fullName: usertosend?.fullName,
-            }}
-          />
-        )}
-
-        <Text style={listHeaderText}>My Beneficiaries</Text>
-      </>
-    );
-  };
-
   return (
     <FTTitlepagewrapper
       title="Choose Feather User"
@@ -218,7 +222,9 @@ const ChoosefeatheruserScreen = ({ route }) => {
             />
           );
         }}
-        ListHeaderComponent={ListHeader}
+        ListHeaderComponent={
+          <ListHeader amount={amount} switchModals={switchModals} />
+        }
       />
 
       <TouchableOpacity
