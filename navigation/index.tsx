@@ -42,6 +42,7 @@ import {
   transactRoutes,
   otherRoutes,
 } from "./routes";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 const {
   Hometabicon,
   Transacttabicon,
@@ -113,7 +114,6 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
   }, []);
 
   return (
-    <>
       <DashboardTabs.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => TabIcon(route.name, focused),
@@ -132,12 +132,12 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
           headerShown: false,
           lazy: true,
           tabBarStyle: {
-            minHeight: Platform.OS === "android" ? 70 : 84,
-            paddingBottom: Platform.OS === "android" ? 10 : 20,
-            backgroundColor: COLORS.white,
-            alignItems: "center",
+            height: 82,
             justifyContent: "center",
-            paddingVertical: 16,
+            alignItems: "center",
+            backgroundColor: COLORS.white,
+            paddingVertical: Platform.select({ios: 15, android: 15}),
+            paddingBottom: Platform.select({android: 15, ios: 25}),
           },
         })}
         initialRouteName="Home"
@@ -151,7 +151,6 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
         <DashboardTabs.Screen name="Chats" component={ChatsScreen} />
         <DashboardTabs.Screen name="Profile" component={ProfileScreen} />
       </DashboardTabs.Navigator>
-    </>
   );
 };
 

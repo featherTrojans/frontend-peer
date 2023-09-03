@@ -15,7 +15,9 @@ import Animated, {
 import Modal from "react-native-modal";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { AuthContext } from "../context/AuthContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 
 const OVERDRAG = 20;
 
@@ -108,11 +110,11 @@ const styles = StyleSheet.create({
     bottom: -OVERDRAG * 1.1,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    zIndex: 1,
+    zIndex: 2,
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.3)",
-    zIndex: 1,
+    zIndex: 2,
   },
 });

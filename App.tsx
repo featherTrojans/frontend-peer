@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
+  Platform,
 } from "react-native";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { COLORS, FONTS, fontsize, icons } from "./constants";
@@ -78,8 +79,8 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [routeName, setRouteName] = useState("onboarding_screen");
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
-  // const
-  // const {Swipemodal} = useSwipemodal()
+  let alertOffset = Platform.OS === 'ios' ?  getStatusBarHeight(true) : 0 
+
   const checkOnboarding = async () => {
     // await AsyncStorage.removeItem('@onboarded')
     try {
@@ -140,27 +141,27 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <SafeAreaProvider>
-          <NavigationContainer
-            theme={MyTheme}
-            ref={(navigationRef: any) => {
-              navigationService.setTopLevelNavigator(navigationRef);
-            }}
-            onStateChange={async () => {
-              getCurrentRoute(navigationService.getNavigator());
-            }}
-          >
-            <AuthProvider>
-              <LocationProvider>
-                <NavigatorSelector routeName={routeName} />
-              </LocationProvider>
-            </AuthProvider>
-            <Toast
-              config={toastConfig}
-              topOffset={getStatusBarHeight(true)}
-              onShow={() => console.log("Status shown")}
-              onHide={() => console.log("Status hidden")}
-            />
-          </NavigationContainer>
+        <NavigationContainer
+          theme={MyTheme}
+          ref={(navigationRef: any) => {
+            navigationService.setTopLevelNavigator(navigationRef);
+          }}
+          onStateChange={async () => {
+            getCurrentRoute(navigationService.getNavigator());
+          }}
+        >
+          <AuthProvider>
+            <LocationProvider>
+              <NavigatorSelector routeName={routeName} />
+            </LocationProvider>
+          </AuthProvider>
+          <Toast
+            config={toastConfig}
+            topOffset={alertOffset}
+            onShow={() => console.log("Status shown")}
+            onHide={() => console.log("Status hidden")}
+          />
+        </NavigationContainer>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

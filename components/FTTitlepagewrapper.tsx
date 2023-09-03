@@ -6,7 +6,9 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { FTBackheaderStyles } from "../assets/styles/components";
 import { useSwipemodal } from "../hooks";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useNavigation } from "@react-navigation/native";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 const { Backarrow } = icons;
 const { backArrowContainer, backHeaderWrap, backHeaderTitle, childrenWrap } =
   FTBackheaderStyles;
@@ -45,8 +47,8 @@ const FTTitlepagewrapper = ({
 
   return (
     <>
-      <SafeAreaView style={{ flex: 1, backgroundColor: bg }}>
-        <Customstatusbar />
+      <SafeAreaView style={{ flex: 1, backgroundColor: bg, paddingBottom: 20  }}>
+        <Customstatusbar bg={bg}/>
 
         <View style={[backHeaderWrap, { backgroundColor: headerBg }]}>
           <Pressable
