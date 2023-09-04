@@ -12,6 +12,7 @@ import {
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ChatsdmScreenStyles } from "../assets/styles/screens";
+
 import {
   FTAllChatsModal,
   FTCustombutton,
@@ -48,7 +49,8 @@ import Animated, {
 } from "react-native-reanimated";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { navigation } from "../utils";
+// import { navigation } from "../utils";
+import { useNavigation } from '@react-navigation/native';
 
 const {
   chatTransferMsgWrap,
@@ -268,6 +270,7 @@ const ChatsdmScreen = ({ route }) => {
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
 
   const focus = () => {
     if (textInputRef.current !== null) {

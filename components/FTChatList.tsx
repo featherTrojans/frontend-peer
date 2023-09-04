@@ -4,12 +4,13 @@ import { FlatList } from "react-native-gesture-handler";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import FTSearchinput from "./FTSearchinput";
 import axiosCustom from "../httpRequests/axiosCustom";
-import { navigation } from "../utils";
+// import { navigation } from "../utils";
 import { ChatsScreenStyles } from "../assets/styles/screens";
 import FTIconwithbg from "./FTIconwithbg";
 import FTUserImage from "./FTUserImage";
 import { lastChatDate } from "../utils/fomatTrans";
 import FTOtherImage from "./FTOtherImage";
+import { useNavigation } from '@react-navigation/native';
 
 const { Blacksendicon } = icons;
 
@@ -25,7 +26,7 @@ const {
 
 const ChatMessage = ({ chatinfo }) => {
   const userInfo = chatinfo?.userInfo;
-
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
       activeOpacity={0.8}

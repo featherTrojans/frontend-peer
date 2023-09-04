@@ -48,7 +48,7 @@ const FTTitlepagewrapper = ({
   return (
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: bg, paddingBottom: 20  }}>
-        <Customstatusbar bg={bg}/>
+        {/* <Customstatusbar bg={bg}/> */}
 
         <View style={[backHeaderWrap, { backgroundColor: headerBg }]}>
           <Pressable

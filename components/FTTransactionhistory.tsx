@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { useNavigation } from "@react-navigation/native";
 import amountFormatter from "../utils/formatMoney";
 import { customNavigation } from "../utils/customNavigation";
 import { assetsDB, bankLogo } from "../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { FTTransactionhistoryStyles } from "../assets/styles/components";
-import { navigation } from "../utils";
+// import { navigation } from "../utils";
+import { useNavigation } from '@react-navigation/native';
 import FTIconwithbg from "./FTIconwithbg";
 import { FTHorizontaline } from ".";
 const {
@@ -45,6 +45,8 @@ const History = ({ data }) => {
   const Arrow = direction === "in" ? Arrowin : Arrowout;
   const networkType = from.toUpperCase();
   const isEtisalat = networkType === "9MOBILE";
+  const navigation = useNavigation();
+
 
 
   

@@ -39,8 +39,11 @@ import formatData from "../utils/fomatTrans";
 
 import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
-import { navigation, redirectTo } from "../utils";
+// import { navigation, redirectTo } from "../utils";
+import {useNavigation} from '@react-navigation/native';
+
 import useChats from "../hooks/useChats";
+import Customstatusbar from "./shared/Customstatusbar";
 
 const {
   headerContainer,
@@ -169,6 +172,7 @@ const QuickActions = ({ onpress }) => {
 
 const Conversations = () => {
   const { allchatdata, loading } = useChats();
+  const navigation = useNavigation();
 
   // let threechats = allchatdata.slice(0, 3);
 
@@ -263,6 +267,7 @@ const ActiveCashWithdrawal = () => {
     createdAt: "",
     agentImage: null,
   });
+  const navigation = useNavigation();
 
   useEffect(() => {
     axiosCustom.get("/request/accepted").then((response) => {
@@ -540,6 +545,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
+      {/* <Customstatusbar /> */}
       <View style={headerContainer}>
         <View style={profileContainer}>
           <FTUserImage size={45} />
@@ -555,7 +561,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
 
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => redirectTo("notification_screen")}
+          onPress={() => navigation.navigate("notification_screen")}
           style={notificationBell}
         >
           <Bell />

@@ -141,15 +141,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <SafeAreaProvider>
-        <NavigationContainer
-          theme={MyTheme}
-          ref={(navigationRef: any) => {
-            navigationService.setTopLevelNavigator(navigationRef);
-          }}
-          onStateChange={async () => {
-            getCurrentRoute(navigationService.getNavigator());
-          }}
-        >
+        <NavigationContainer>
           <AuthProvider>
             <LocationProvider>
               <NavigatorSelector routeName={routeName} />

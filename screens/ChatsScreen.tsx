@@ -9,6 +9,7 @@ import { navigation } from "../utils";
 import { icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import useChats from "../hooks/useChats";
+import { useNavigation } from '@react-navigation/native';
 
 const { Startnewchaticon } = icons;
 const {} = ChatsScreenStyles;
@@ -16,6 +17,7 @@ const { profileHeaderWrap, profileHeaderText } = ProfileScreenStyles;
 
 const ChatsScreen = () => {
   const { allchatdata } = useChats();
+  const navigation = useNavigation();
 
   return (
     <FTTabWrapper>

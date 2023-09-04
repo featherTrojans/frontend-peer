@@ -1,4 +1,4 @@
-import {  StyleSheet, Text, View, } from "react-native";
+import {  StyleSheet, Text, View,} from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../screens/shared/Customstatusbar";
@@ -35,7 +35,7 @@ const FTTabWrapper = ({
         style={{ flex: 1, backgroundColor: bgColor }}
         edges={['top']}
       >
-        <Customstatusbar bg={bgColor} />
+   
         <View
           style={{ flex: 1, paddingHorizontal: pH, backgroundColor: childBg }}
         >
