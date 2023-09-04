@@ -10,13 +10,14 @@ import React, { useEffect, useState } from "react";
 import { ChoosefeatheruserScreenStyles } from "../assets/styles/screens";
 import {
   FTDetailsModal,
+  FTEmptycomponent,
   FTIconwithtitleandinfo,
   FTSearchinput,
   FTSwitchbtn,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { navigation, redirectTo } from "../utils";
+import { COLORS, FONTS, icons } from "../constants";
+import { navigation } from "../utils";
 import useDebounce from "../utils/debounce";
 import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
@@ -224,6 +225,12 @@ const ChoosefeatheruserScreen = ({ route }) => {
         }}
         ListHeaderComponent={
           <ListHeader amount={amount} switchModals={switchModals} />
+        }
+        ListEmptyComponent={
+          <FTEmptycomponent
+            msg="Padi, you don't have any beneficiary"
+            showTransact={false}
+          />
         }
       />
 
