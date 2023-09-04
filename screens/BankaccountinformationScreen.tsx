@@ -5,11 +5,13 @@ import {
   FTCustombutton,
   FTDetailsModal,
   FTInput,
+  FTLoader,
+  FTSwitchbtn,
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
 import { VALIDATION, navigation } from "../utils";
-import { icons } from "../constants";
+import { FONTS, icons } from "../constants";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
@@ -17,6 +19,7 @@ import amountFormatter from "../utils/formatMoney";
 const {} = BankaccountinformationScreenStyles;
 const { Blacksendicon } = icons;
 
+const BENEFICIARY_TYPE = "transferbank";
 const BankaccountinformationScreen = ({ route }) => {
   const bankvalue = route?.params?.bankvalue;
   const bankimage = route?.params?.bankimage;
@@ -29,6 +32,13 @@ const BankaccountinformationScreen = ({ route }) => {
   const { errorAlert } = useAlert();
 
   const switchModals = (value, acctdata) => {
+    const bankinfo = {
+      imageUrl: bankimage,
+      account_name: acctdata.account_name,
+      account_number: acctdata.account_number,
+      bank_fullname: acctdata.bank_name,
+      bank_name: acctdata.bank_code,
+    };
     const action = async (pin) => {
       try {
         await axiosCustom.post("/withdraw", {
@@ -55,7 +65,7 @@ const BankaccountinformationScreen = ({ route }) => {
         },
         {
           leftSide: "Charges",
-          rightSide: "250",
+          rightSide: "25",
         },
         {
           leftSide: "Total to be sent",
@@ -64,6 +74,14 @@ const BankaccountinformationScreen = ({ route }) => {
       ],
     };
 
+    const addtobeneficiary = async () => {
+      try {
+        await axiosCustom.post("beneficiary/create", {
+          type: BENEFICIARY_TYPE,
+          data: bankinfo,
+        });
+      } catch (err) {}
+    };
     switch (value) {
       case 0:
         setContent({
@@ -76,10 +94,26 @@ const BankaccountinformationScreen = ({ route }) => {
                 navigation.navigate("transactionsummary_screen", {
                   action,
                   summaryinfo,
+                  userInfo: bankinfo,
                 })
               }
               imageUrl={bankimage}
               bG={""}
+              extraComponent={
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: 20,
+                  }}
+                >
+                  <Text style={{ ...FONTS.regular }}>
+                    Save to beneficiaries?
+                  </Text>
+                  <FTSwitchbtn action={addtobeneficiary} />
+                </View>
+              }
             />
           ),
         });
@@ -101,12 +135,13 @@ const BankaccountinformationScreen = ({ route }) => {
       });
 
       setAccountInformation(response?.data?.data);
-      switchModals(0, response?.data?.data);
+      switchModals(0, { ...response?.data?.data, bank_code: bankvalue });
     } catch (err) {
       setAccountInformation({});
       errorAlert(err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
   return (
     <FTTitlepagewrapper
@@ -116,6 +151,7 @@ const BankaccountinformationScreen = ({ route }) => {
       setShowModal={setShowModal}
       modalHeight={276}
     >
+      <FTLoader loading={loading} />
       <FTInput
         placeholderText="Enter Number"
         label="Enter destination bank account"
@@ -124,7 +160,7 @@ const BankaccountinformationScreen = ({ route }) => {
         textInputProps={{
           maxLength: 11,
           keyboardType: "number-pad",
-          returnKeyType:"done"
+          returnKeyType: "done",
         }}
         rules={VALIDATION.ACCOUNT_NUMBER_INPUT_VALIDATION}
         mB={20}

@@ -22,7 +22,7 @@ const FTTransfer = () => {
     if (amount > authdata?.userDetails?.walletBal) {
       return errorAlert(null, "amount is greater than wallet");
     }
-    navigation.navigate("choosebank_screen", { amount });
+    navigation.navigate("sendtobank_screen", { amount });
   };
 
   return (

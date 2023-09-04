@@ -15,8 +15,8 @@ import { navigation } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
 import Sendtoselficon from "../assets/icons/Sendtoselficon";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { color } from "react-native-reanimated";
 import amountFormatter from "../utils/formatMoney";
+
 const {} = AirtimeordataScreenStyles;
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
@@ -67,22 +67,22 @@ const AirtimeordataScreen = ({ route }) => {
 
   const airtimeDatas = [
     {
-      amount: 50,
-      amountInfo: "You get N50.00"
-    },
-    {
       amount: 100,
-      amountInfo: "You get N100.00"
+      amountInfo: "You get N100.00",
     },
     {
       amount: 200,
-      amountInfo: "You get N200.00"
+      amountInfo: "You get N200.00",
     },
     {
       amount: 500,
-      amountInfo: "You get N500.00"
-    }
-  ]
+      amountInfo: "You get N500.00",
+    },
+    {
+      amount: 1000,
+      amountInfo: "You get N1,000.00",
+    },
+  ];
 
   const ListHeader = () => {
     return (
@@ -100,12 +100,21 @@ const AirtimeordataScreen = ({ route }) => {
                 alignItems: "center",
                 backgroundColor: COLORS.red2,
                 alignSelf: "flex-end",
-                paddingVertical: 11, paddingHorizontal: 18,
-                borderRadius: 10
+                paddingVertical: 11,
+                paddingHorizontal: 18,
+                borderRadius: 10,
               }}
               onPress={navigation.goBack}
             >
-              <Text style={{ color: COLORS.red3, ...fontsize.xxsmallest, ...FONTS.semibold }}>Change</Text>
+              <Text
+                style={{
+                  color: COLORS.red3,
+                  ...fontsize.xxsmallest,
+                  ...FONTS.semibold,
+                }}
+              >
+                Change
+              </Text>
             </TouchableOpacity>
           }
           onPress={() =>
@@ -131,8 +140,8 @@ const AirtimeordataScreen = ({ route }) => {
         data={airtimeDatas}
         ItemSeparatorComponent={() => <View style={{ height: 30 }} />}
         ListHeaderComponent={ListHeader}
-        renderItem={({item}) => {
-          const {amount, amountInfo} = item
+        renderItem={({ item }) => {
+          const { amount, amountInfo } = item;
           return (
             <FTIconwithtitleandinfo
               bG={COLORS.green2}
