@@ -4,7 +4,7 @@ import { COLORS, FONTS, fontsize } from "../../../constants";
 export const FTTransactionhistoryStyles = StyleSheet.create({
   container: {
     borderRadius: 15,
-    marginBottom: 35,
+    // marginBottom: 35,
   },
 
   dateText: {

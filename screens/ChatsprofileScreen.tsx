@@ -123,44 +123,42 @@ const ChatsprofileScreen = ({ route }) => {
       headerBg={COLORS.white3}
     >
       <View style={{ flex: 1 }}>
-        {loading ? (
-          <View style={{}}>
-            <ActivityIndicator size="large" color={COLORS.blue6} />
-          </View>
-        ) : (
-          <>
-            <Animated.FlatList
-              data={formatData(transactions)}
-              ListHeaderComponent={ListHeader}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refreshing}
-                  onRefresh={handleRefresh}
-                  progressBackgroundColor="white"
-                  colors={[COLORS.blue6]}
-                  tintColor={COLORS.blue6}
-                  title="Refreshing"
-                  titleColor={COLORS.blue6}
-                />
-              }
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item, index }: any) => (
+        <Animated.FlatList
+          data={formatData(transactions)}
+          ListHeaderComponent={ListHeader}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              progressBackgroundColor="white"
+              colors={[COLORS.blue6]}
+              tintColor={COLORS.blue6}
+              title="Refreshing"
+              titleColor={COLORS.blue6}
+            />
+          }
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item, index }: any) => (
+            <>
+              {loading ? (
+                <ActivityIndicator size="large" color={COLORS.blue6} />
+              ) : (
                 <FTTransactionhistory
                   date={item.time}
                   datas={item.data}
                   index={index}
                 />
               )}
-              keyExtractor={(item: { time: string }) => item.time}
-              ListEmptyComponent={
-                <FTEmptycomponent
-                  msg="Sorry, You have not performed any transactions with this user"
-                  showTransact={false}
-                />
-              }
+            </>
+          )}
+          keyExtractor={(item: { time: string }) => item.time}
+          ListEmptyComponent={
+            <FTEmptycomponent
+              msg="Sorry, You have not performed any transactions with this user"
+              showTransact={false}
             />
-          </>
-        )}
+          }
+        />
       </View>
     </FTTitlepagewrapper>
   );

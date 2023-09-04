@@ -29,6 +29,7 @@ const {
   eachSummaryWrap,
   eachSummaryKey,
   eachSummaryValue,
+  dashedLine,
 } = TransactionsummaryScreenStyles;
 const TransactionsummaryScreen = ({ route }) => {
   const action = route?.params?.action;
@@ -56,8 +57,8 @@ const TransactionsummaryScreen = ({ route }) => {
   };
 
   return (
-    <FTTitlepagewrapper childBg={COLORS.white} title="Transaction Summary">
-      <FTKeyboardwrapper>
+    <FTKeyboardwrapper>
+      <FTTitlepagewrapper childBg={COLORS.white} title="Transaction Summary">
         <View style={summaryWrap}>
           <View style={{ alignItems: "center" }}>
             {userInfo ? (
@@ -78,14 +79,14 @@ const TransactionsummaryScreen = ({ route }) => {
             <Text style={amountValueText}>N{summaryinfo.amount}</Text>
           </View>
 
-          <FTHorizontaline mT={30} mB={42} />
+          <View style={dashedLine} />
 
-          {summaryinfo?.transactionDatas.map((summary) => {
+          {summaryinfo?.transactionDatas.map((summary, index) => {
             return (
-              <>
+              <View key={index}>
                 <EachRow data={summary} />
                 <View style={{ height: 18 }} />
-              </>
+              </View>
             );
           })}
         </View>
@@ -98,14 +99,16 @@ const TransactionsummaryScreen = ({ route }) => {
           control={control}
           mB={26}
         />
-      </FTKeyboardwrapper>
 
-      <FTCustombutton
-        btntext="Great, Proceed to pay"
-        onpress={() => navigation.navigate("transactionpin_screen", { action })}
-        bg={COLORS.blue9}
-      />
-    </FTTitlepagewrapper>
+        <FTCustombutton
+          btntext="Great, Proceed to pay"
+          onpress={() =>
+            navigation.navigate("transactionpin_screen", { action })
+          }
+          bg={COLORS.blue9}
+        />
+      </FTTitlepagewrapper>
+    </FTKeyboardwrapper>
   );
 };
 

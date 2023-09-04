@@ -1,5 +1,4 @@
 import {CommonActions as NavigationActions} from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/native';
 
 let _navigator: any;
 
@@ -7,7 +6,8 @@ const setTopLevelNavigator = (navigatorRef: any) => {
   _navigator = navigatorRef;
 };
 
-const navigate = (routeName: string, params = {}) => {
+
+const navigate= (routeName: string, params = {}) => {
   if (_navigator.isReady()) {
     _navigator.dispatch(
       NavigationActions.navigate({

@@ -15,8 +15,12 @@ export const TransactionsummaryScreenStyles = StyleSheet.create({
     color: COLORS.blue9,
   },
   summaryWrap: {
-    paddingHorizontal: 33,
-    paddingVertical: 30,
+    paddingHorizontal: 30,
+    paddingTop: 30,
+    borderRadius: 25,
+    borderColor: COLORS.grey1,
+    borderWidth: 0.5,
+    marginBottom: 26
   },
   eachSummaryWrap: {
     flexDirection: "row",
@@ -32,5 +36,11 @@ export const TransactionsummaryScreenStyles = StyleSheet.create({
     ...fontsize.smallest,
     ...FONTS.semibold,
     textTransform: "capitalize",
+  },
+  dashedLine: {
+    borderWidth: 1,
+    borderStyle: "dashed",
+    borderColor: COLORS.grey1,
+    marginVertical: 32,
   },
 });

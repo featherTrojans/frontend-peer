@@ -69,32 +69,22 @@ import {
 
 export const authRoutes = [
   {
-    title: "",
     screen: OnboardingScreen,
-    showHeader: false,
-    hideHiderTitle: false,
     route: "onboarding_screen",
   },
   {
-    title: "",
     screen: LoginScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "login_screen",
   },
   {
-    title: "",
-    // screen: FeatherTagScreen,
     screen: WelcomeScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "welcome_screen",
   },
   {
-    title: "",
     screen: PersonalRegisterScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "personalregister_screen",
   },
   {
@@ -112,24 +102,18 @@ export const authRoutes = [
     route: "phone-verify_screen",
   },
   {
-    title: "",
     screen: BVNScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "bvn_screen",
   },
   {
-    title: "",
     screen: BvnErrorScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "bvn-error_screen",
   },
   {
-    title: "",
     screen: BVNSuccessScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "bvn-success_screen",
   },
   {
@@ -140,414 +124,296 @@ export const authRoutes = [
     route: "bvn-verify_screen",
   },
   {
-    title: "",
     screen: FeatherTagScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "feathertag_screen",
   },
 ];
 
 export const dashboardRoutes = [
   {
-    title: "",
     screen: BlankScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "dashboard_screen",
   },
   {
-    title: "",
     screen: BlankScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "notifications_screen",
   },
 ];
 
 export const transactRoutes = [
   {
-    title: "",
     screen: TransactionsScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "transact_screen",
   },
   {
-    title: "",
     screen: TransactionDetailsScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "transacttiondetails_screen",
   },
   {
-    title: "",
     screen: FindmerchantScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "findmerchant_screen",
   },
   {
-    title: "",
     screen: WithdrawcashScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "withdrawcash_screen",
   },
   {
-    title: "",
     screen: SearchmerchantidScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "searchmerchantid_screen",
   },
 
   {
-    title: "",
     screen: ChoosenetworkScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosenetwork_screen",
   },
   {
-    title: "",
     screen: NetworkreceiverScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "networkreceiver_screen",
   },
   {
-    title: "",
     screen: AirtimeordataScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "airtimeordata_screen",
   },
 
   {
-    title: "",
     screen: SendtobankScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "sendtobank_screen",
   },
   {
-    title: "",
     screen: BankaccountinformationScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "bankaccountinformation_screen",
   },
 
   {
-    title: "",
     screen: ChoosebankScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosebank_screen",
   },
 
   {
-    title: "",
     screen: ChoosebillerScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosebiller_screen",
   },
   {
-    title: "",
     screen: BillerstateScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "billerstate_screen",
   },
   {
-    title: "",
     screen: MeternumberScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "meternumber_screen",
   },
 
   {
-    title: "",
     screen: ChoosecableScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosecable_screen",
   },
   {
-    title: "",
     screen: ChoosecableamountScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosecableamount_screen",
   },
   {
-    title: "",
     screen: ChoosecablereceiverScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosecablereceiver_screen",
   },
   {
-    title: "",
     screen: CableiucnumberScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "cableiuc_screen",
   },
 
   {
-    title: "",
     screen: ChoosefeatheruserScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosefeatheruser_screen",
   },
 
   {
-    title: "",
     screen: SearchcontactScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "searchcontact_screen",
   },
   {
-    title: "",
     screen: TransactionsummaryScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "transactionsummary_screen",
   },
   {
-    title: "",
     screen: PinScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "pin_screen",
   },
   {
-    title: "",
     screen: AmounttosendScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "amounttosend_screen",
   },
   {
-    title: "",
     screen: TransactionpinScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "transactionpin_screen",
   },
   {
-    title: "",
     screen: WalletfundingScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "walletfunding_screen",
   },
-];
 
-export const cardsRoutes = [
   {
-    title: "",
     screen: CardScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "cards_screen",
   },
   {
-    title: "",
     screen: CarddisclosureScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "carddisclosure_screen",
   },
   {
-    title: "",
     screen: CarddisclosureScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "cardpendingverification_screen",
   },
   {
-    title: "",
     screen: CardCreateSuccessScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "cardcreationsuccess_screen",
   },
   {
-    title: "",
     screen: CardtopupScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "cardtopup_screen",
   },
-];
 
-export const chatsRoutes = [
   {
-    title: "",
     screen: ChatsScreen,
-    showHeader: false,
-    hideHiderTitle: false,
     route: "chats_screen",
   },
   {
-    title: "",
     screen: ChatsdmScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "chatsdm_screen",
   },
   {
-    title: "",
     screen: ChatsprofileScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "chatsprofile_screen",
   },
   {
     title: "",
     screen: StartnewchatScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "startnewschat_screen",
   },
-];
 
-export const otherRoutes = [
   {
-    title: "",
     screen: NotificationsScreen,
     showHeader: false,
     hideHiderTitle: false,
     route: "notification_screen",
   },
   {
-    title: "",
     screen: CustomWebScreen,
-    showHeader: false,
-    hideHiderTitle: false,
     route: "customweb_screen",
   },
   {
-    title: "",
     screen: TransactionSuccessScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "transactionsuccess_screen",
   },
-];
 
-export const profileRoutes = [
   {
-    title: "",
     screen: ProfileScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "profile_screen",
   },
   {
-    title: "",
     screen: EditprofileScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "editprofile_screen",
   },
   {
-    title: "",
     screen: ChangeappearanceScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "changeappearance_screen",
   },
   {
-    title: "",
     screen: AccountverificationScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "accountverification_screen",
   },
   {
-    title: "",
     screen: ChoosememojiScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosememoji_screen",
   },
   {
-    title: "",
     screen: MemojisuccessScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "memojisuccess_screen",
   },
   {
-    title: "",
     screen: ChoosememojibgScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "choosememojibg_screen",
   },
   {
-    title: "",
     screen: MywalletScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "mywallet_screen",
   },
   {
-    title: "",
     screen: SecurityandprivacyScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "securityandprivacy_screen",
   },
   {
-    title: "",
     screen: SetupmfaScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "setupmfa_screen",
   },
   {
-    title: "",
     screen: VerifybvnScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "verifybvn_screen",
   },
   {
-    title: "",
     screen: BVNScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "bvn_screen",
   },
 
   {
-    title: "",
     screen: BvnErrorScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "bvn-error_screen",
   },
   {
-    title: "",
     screen: BVNSuccessScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "bvn-success_screen",
   },
   {
-    title: "",
     screen: UploadDocScreen,
-    showHeader: false,
-    hideHiderTitle: false,
+
     route: "uploaddoc_screen",
   },
 ];

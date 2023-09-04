@@ -37,7 +37,7 @@ const {
   errorMessageText,
 } = LoginScreenStyles;
 
-const { Newlogo } = icons;
+const { Newlogo, Nigerialogoicon } = icons;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {

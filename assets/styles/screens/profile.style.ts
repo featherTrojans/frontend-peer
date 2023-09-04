@@ -50,7 +50,7 @@ export const ProfileScreenStyles = StyleSheet.create({
     height: 34,
     width: 34,
     borderRadius: 34 / 2,
-    backgroundColor: COLORS.blue16,
+    backgroundColor: COLORS.blue9,
     position: "absolute",
     bottom: 0,
     right: 0,

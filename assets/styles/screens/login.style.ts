@@ -45,7 +45,7 @@ export const LoginScreenStyles = StyleSheet.create({
     width: 0.5,
     height: 18,
     backgroundColor: COLORS.blue9,
-    marginHorizontal: 15,
+    marginLeft: 15,
   },
   textInputStyles: {
     height: "100%",

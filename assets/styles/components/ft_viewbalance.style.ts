@@ -5,11 +5,11 @@ export const FTViewbalanceStyles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingVertical: 20,
-    borderRadius: 10,
+    borderRadius: 20,
     backgroundColor: COLORS.white,
-    marginTop: 20,
-    marginBottom: 15,
-    // marginHorizontal: 15,
+    marginTop: 25,
+    marginHorizontal: 15
+
   },
   //   Top part of the container
   topContainer: {

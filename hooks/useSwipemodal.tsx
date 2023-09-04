@@ -15,6 +15,7 @@ import Animated, {
 import Modal from "react-native-modal";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { AuthContext } from "../context/AuthContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const OVERDRAG = 20;
@@ -23,7 +24,7 @@ const useSwipemodal = () => {
   const Swipemodal = ({ children, showModal, setShowModal, modalHeight }) => {
     const offset = useSharedValue(0);
     const x = useSharedValue(0);
-    const HEIGHT = modalHeight ? modalHeight : 100;
+    const HEIGHT = modalHeight ? modalHeight : 200;
     const keyboard = useAnimatedKeyboard();
 
     const [keyboardStatus, setKeyboardStatus] = useState(false);
@@ -41,7 +42,7 @@ const useSwipemodal = () => {
         hideSubscription.remove();
       };
     }, []);
- 
+
     const closeModal = () => {
       setShowModal((s) => !s);
       offset.value = withSpring(0);
@@ -76,7 +77,7 @@ const useSwipemodal = () => {
             entering={FadeIn}
             exiting={FadeOut}
             onPress={closeModal}
-            style={styles.backdrop}
+            style={[styles.backdrop]}
           >
             <GestureDetector gesture={pan}>
               <AnimatedPressable
@@ -108,11 +109,11 @@ const styles = StyleSheet.create({
     bottom: -OVERDRAG * 1.1,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    zIndex: 1,
+    zIndex: 2,
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.3)",
-    zIndex: 1,
+    zIndex: 2,
   },
 });

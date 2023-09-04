@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../screens/shared/Customstatusbar";
 import { useSwipemodal } from "../hooks";
 import { useNavigation } from "@react-navigation/native";
+import Modal from "react-native-modal";
 
 const Mainwrapper = ({
   children,
@@ -30,7 +31,7 @@ const Mainwrapper = ({
   return (
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
-        <Customstatusbar />
+        {/* <Customstatusbar bg={bgColor} /> */}
         <View
           style={{ flex: 1, paddingHorizontal: pH, backgroundColor: childBg }}
         >

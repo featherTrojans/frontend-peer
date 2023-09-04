@@ -35,13 +35,13 @@ const DashboardTabs = createBottomTabNavigator();
 
 import {
   authRoutes,
-  cardsRoutes,
-  chatsRoutes,
   dashboardRoutes,
-  profileRoutes,
   transactRoutes,
-  otherRoutes,
 } from "./routes";
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from "react-native-iphone-x-helper";
 const {
   Hometabicon,
   Transacttabicon,
@@ -57,8 +57,6 @@ Notification.setNotificationHandler({
     shouldSetBadge: true,
   }),
 });
-
-
 
 let TabIcon = (name: string, focused: boolean) => {
   switch (name) {
@@ -79,17 +77,19 @@ let TabIcon = (name: string, focused: boolean) => {
 
 const NoAuthNavigator = ({ routeName }) => {
   return (
-    <AuthStack.Navigator initialRouteName={routeName}>
+    <AuthStack.Navigator initialRouteName={routeName} 
+    
+    screenOptions={{
+      headerShown: false,
+    }}
+    >
       {authRoutes?.map((route: any, index: number) => {
         return (
           <AuthStack.Screen
             component={route.screen}
             key={index}
             name={route.route}
-            options={() => ({
-              headerTitle: route.title,
-              headerShown: route.showHeader,
-            })}
+            
           />
         );
       })}
@@ -113,45 +113,42 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
   }, []);
 
   return (
-    <>
-      <DashboardTabs.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused }) => TabIcon(route.name, focused),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={{
-                ...fontsize.xxsmallest,
-                ...FONTS.regular,
-                color: COLORS.blue9,
-                marginTop: 15,
-              }}
-            >
-              {route.name}
-            </Text>
-          ),
-          headerShown: false,
-          lazy: true,
-          tabBarStyle: {
-            minHeight: Platform.OS === "android" ? 70 : 84,
-            paddingBottom: Platform.OS === "android" ? 10 : 20,
-            backgroundColor: COLORS.white,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingVertical: 16,
-          },
-        })}
-        initialRouteName="Home"
-        backBehavior="initialRoute"
-      >
-        <DashboardTabs.Screen name="Home" component={HomeScreen} />
-        <DashboardTabs.Screen name="Transact" component={TransactionsScreen} options={{
-          unmountOnBlur: true
-        }}/>
-        <DashboardTabs.Screen name="Cards" component={CardScreen} />
-        <DashboardTabs.Screen name="Chats" component={ChatsScreen} />
-        <DashboardTabs.Screen name="Profile" component={ProfileScreen} />
-      </DashboardTabs.Navigator>
-    </>
+    <DashboardTabs.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused }) => TabIcon(route.name, focused),
+        tabBarLabel: ({ focused }) => (
+          <Text
+            style={{
+              ...fontsize.xxsmallest,
+              ...FONTS.regular,
+              color: COLORS.blue9,
+              marginTop: 15,
+            }}
+          >
+            {route.name}
+          </Text>
+        ),
+        headerShown: false,
+        lazy: true,
+        tabBarStyle:{
+          justifyContent: "center",
+          alignItems: "center",
+          paddingVertical: Platform.select({ ios: 15, android: 15 }),
+          paddingBottom: Platform.select({ android: 15, ios: 25 }),
+          height: 82,
+        },
+        
+      })}
+    
+      initialRouteName="Home"
+      backBehavior="initialRoute"
+    >
+      <DashboardTabs.Screen name="Home" component={HomeScreen} />
+      <DashboardTabs.Screen name="Transact" component={TransactionsScreen} />
+      <DashboardTabs.Screen name="Cards" component={CardScreen} />
+      <DashboardTabs.Screen name="Chats" component={ChatsScreen} />
+      <DashboardTabs.Screen name="Profile" component={ProfileScreen} />
+    </DashboardTabs.Navigator>
   );
 };
 
@@ -164,94 +161,18 @@ const AuthenticatedNavigator = () => {
     >
       <AuthStack.Screen name="Dashboard" component={DashboardTabNavigator} />
       {/* Transact Screens */}
-      <AuthStack.Group>
-        {transactRoutes?.map((route: any, index: number) => {
-          return (
-            <AuthStack.Screen
-              component={route.screen}
-              key={index}
-              name={route.route}
-              options={() => ({
-                headerTitle: route.title,
-                headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              })}
-            />
-          );
-        })}
-      </AuthStack.Group>
-
-      {/* Chats Screens */}
-      <AuthStack.Group>
-        {chatsRoutes?.map((route: any, index: number) => {
-          return (
-            <AuthStack.Screen
-              component={route.screen}
-              key={index}
-              name={route.route}
-              options={() => ({
-                headerTitle: route.title,
-                headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              })}
-            />
-          );
-        })}
-      </AuthStack.Group>
-
-      {/* Cards Screens */}
-      <AuthStack.Group>
-        {cardsRoutes?.map((route: any, index: number) => {
-          return (
-            <AuthStack.Screen
-              component={route.screen}
-              key={index}
-              name={route.route}
-              options={() => ({
-                headerTitle: route.title,
-                headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              })}
-            />
-          );
-        })}
-      </AuthStack.Group>
-
-      {/* Profile Screens */}
-      <AuthStack.Group>
-        {profileRoutes?.map((route: any, index: number) => {
-          return (
-            <AuthStack.Screen
-              component={route.screen}
-              key={index}
-              name={route.route}
-              options={() => ({
-                headerTitle: route.title,
-                headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              })}
-            />
-          );
-        })}
-      </AuthStack.Group>
-
-      {/* Other Screens */}
-      <AuthStack.Group>
-        {otherRoutes?.map((route: any, index: number) => {
-          return (
-            <AuthStack.Screen
-              component={route.screen}
-              key={index}
-              name={route.route}
-              options={() => ({
-                headerTitle: route.title,
-                headerShown: route.showHeader,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              })}
-            />
-          );
-        })}
-      </AuthStack.Group>
+      {transactRoutes?.map((route: any, index: number) => {
+        return (
+          <AuthStack.Screen
+            component={route.screen}
+            key={index}
+            name={route.route}
+            options={() => ({
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            })}
+          />
+        );
+      })}
     </AuthStack.Navigator>
   );
 };
@@ -317,7 +238,5 @@ export const NavigatorSelector = ({ routeName }: { routeName: string }) => {
     return <NoAuthNavigator routeName={routeName} />;
   }
 
-  return (
-      <AuthenticatedNavigator />
-  );
+  return <AuthenticatedNavigator />;
 };

@@ -11,7 +11,7 @@ export const HomeScreenStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 10,
-    // paddingHorizontal: 15,
+    paddingHorizontal: 15,
   },
   profileContainer: {
     flexDirection: "row",
@@ -117,6 +117,9 @@ export const HomeScreenStyles = StyleSheet.create({
     ...FONTS.medium,
     lineHeight: 14,
     color: COLORS.blue9,
+    position: "absolute",
+    left: 18,
+    bottom: 18
   },
 
   // Horizontal information styles
@@ -155,6 +158,7 @@ export const HomeScreenStyles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 24,
     borderRadius: 15,
+    marginHorizontal: 15
   },
   transactionHeader: {
     flexDirection: "row",
@@ -178,10 +182,10 @@ export const HomeScreenStyles = StyleSheet.create({
 
   conversationWrap: {
     backgroundColor: COLORS.white,
-    marginVertical: 15,
+    marginBottom: 15,
     padding: 18,
     borderRadius: 16,
-    // marginHorizontal: 15,
+    marginHorizontal: 15,
   },
   conversationHeader: {
     flexDirection: "row",
@@ -205,10 +209,10 @@ export const HomeScreenStyles = StyleSheet.create({
 
   setupProfile: {
     backgroundColor: COLORS.white,
-    marginVertical: 15,
+    marginBottom: 15,
     padding: 18,
     borderRadius: 16,
-    // marginHorizontal: 15,
+    marginHorizontal: 15,
   },
   setupText: {
     ...fontsize.xsmallest,

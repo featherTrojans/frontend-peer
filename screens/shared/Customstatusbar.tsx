@@ -6,13 +6,13 @@ import {
 } from "react-native-safe-area-context";
 import { COLORS } from "../../constants";
 
-function Customstatusbar() {
+function Customstatusbar({bg="#F7F8FA"}) {
   const insets = useSafeAreaInsets();
 
   return (
     <StatusBar
       animated={true}
-      backgroundColor="#F7F8FA"
+      backgroundColor={bg}
       barStyle="dark-content"
       networkActivityIndicatorVisible={true}
       showHideTransition="fade"

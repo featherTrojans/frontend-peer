@@ -51,7 +51,7 @@ const OnboardingScreen = ({navigation}) => {
   };
 
 
-  let isLastIndex = viewIndex == onboardingdatas.length - 1
+  let isLastIndex = viewIndex === onboardingdatas.length - 1
 
   return (
     <FTMainwrapper pH={0}>
@@ -117,8 +117,12 @@ const OnboardingScreen = ({navigation}) => {
 
       {/* Footer--Dots and the nxet button */}
       <View style={{ paddingHorizontal: 20, paddingBottom: 20 }}>
+      {/* <Text>{isLastIndex ? "tha s" : "Me"}</Text> */}
         {isLastIndex && (
+          <>
+          
           <FTCustombutton btntext="Get Started" onpress={navigateToLogin} />
+          </>
         )}
       </View>
     </FTMainwrapper>

@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { useNavigation } from "@react-navigation/native";
 import amountFormatter from "../utils/formatMoney";
 import { customNavigation } from "../utils/customNavigation";
 import { assetsDB, bankLogo } from "../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { FTTransactionhistoryStyles } from "../assets/styles/components";
-import { navigation } from "../utils";
+// import { navigation } from "../utils";
+import { useNavigation } from '@react-navigation/native';
 import FTIconwithbg from "./FTIconwithbg";
+import { FTHorizontaline } from ".";
 const {
   container,
   dateText,
@@ -21,6 +22,7 @@ const {
   transactionTypeText,
   amountText,
 } = FTTransactionhistoryStyles;
+
 
 const { Arrowin, Arrowout, Bonusicon, Utilitypayment, Utilitylarge } = icons;
 
@@ -43,6 +45,8 @@ const History = ({ data }) => {
   const Arrow = direction === "in" ? Arrowin : Arrowout;
   const networkType = from.toUpperCase();
   const isEtisalat = networkType === "9MOBILE";
+  const navigation = useNavigation();
+
 
 
   
@@ -146,18 +150,20 @@ const Transactionhistory = ({
   date: string;
   index: number;
 }) => {
+
+  
   return (
     <Animatable.View
       animation="slideInUp"
       delay={index * 100}
-      style={container}
+      style={[container]}
     >
       <Text style={dateText}>{date}</Text>
       {datas.map((data, index) => {
         return (
           <Animatable.View animation="slideInUp" delay={index * 50} key={index}>
             <History data={data} />
-            {index + 1 !== datas.length && <View style={bottomLine} />}
+            {index + 1 !== datas.length && <FTHorizontaline marginV={12} />}
           </Animatable.View>
         );
       })}

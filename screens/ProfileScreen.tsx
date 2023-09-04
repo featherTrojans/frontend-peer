@@ -108,10 +108,6 @@ const ProfileScreen = () => {
             <View style={profileInnerBorder}>
               <View style={{}}>
                 <FTUserImage size={100} />
-                {/* <Image 
-                style={{width: 100, height: 100,}}
-                source={{uri: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/memojis%2Fo.png?alt=media&token=63eb2074-9d2c-4588-9f18-e940888414be"}}
-                /> */}
               </View>
               <Pressable
                 onPress={() => redirectTo("editprofile_screen")}

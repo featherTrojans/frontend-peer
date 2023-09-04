@@ -30,6 +30,6 @@ export const FTIconwithtitleandinfoStyles = StyleSheet.create({
     ...fontsize.xxsmallest,
     ...FONTS.regular,
     color: COLORS.grey16,
-    marginTop: 9,
+    marginTop: 5,
   },
 });

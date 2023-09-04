@@ -36,7 +36,7 @@ const ChoosecablereceiverScreen = () => {
           const { name } = item;
           return (
             <FTIconwithtitleandinfo
-              bG="red"
+              bG=""
               title={name}
               onPress={() => redirectTo("choosecableamount_screen")}
               Icon={Bluecardicon}
