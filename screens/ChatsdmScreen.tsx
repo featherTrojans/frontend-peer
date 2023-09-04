@@ -593,33 +593,37 @@ const ChatsdmScreen = ({ route }) => {
         {/* Header Section */}
         <View style={chatHeader}>
           <View style={[headerDetailsContainer]}>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={navigation.goBack}
-              style={backArrowWrap}
-            >
-              <Smallbackarrow />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() =>
-                navigation.navigate("chatsprofile_screen", {
-                  userInfo,
-                  switchModals,
-                })
-              }
-              style={chatsDmProfileWrap}
-            >
-              <FTOtherImage
-                imageurl={userInfo?.imageUrl}
-                memojiImage={userInfo?.memoji}
-                fullname={userInfo?.fullName}
-              />
-              <View style={{ marginLeft: 18 }}>
-                <Text style={chatName}>{userInfo?.fullName}</Text>
-                {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}
-              </View>
-            </TouchableOpacity>
+            <View style={{flexDirection: "row", alignItems: "center"}}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={navigation.goBack}
+                style={backArrowWrap}
+              >
+                <Smallbackarrow />
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() =>
+                  navigation.navigate("chatsprofile_screen", {
+                    userInfo,
+                    switchModals,
+                  })
+                }
+                style={chatsDmProfileWrap}
+              >
+                <FTOtherImage
+                  imageurl={userInfo?.imageUrl}
+                  memojiImage={userInfo?.memoji}
+                  fullname={userInfo?.fullName}
+                />
+                <View style={{ marginLeft: 18 }}>
+                  <Text style={chatName}>{userInfo?.fullName}</Text>
+                  {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}
+                </View>
+              </TouchableOpacity>
+            </View>
+
+
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => switchModals(0)}
@@ -672,6 +676,7 @@ const ChatsdmScreen = ({ route }) => {
         {/* Bottom Input */}
 
         <View style={chatTextInput}>
+          <View style={{width: 1, height: 20, backgroundColor: "grey", alignSelf: "center"}}/>
           <TextInput
             placeholder="Enter Message..."
             style={textinput}

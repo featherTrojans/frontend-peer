@@ -100,15 +100,15 @@ const TransactionsScreen = ({ navigation }) => {
   const switchModals = (value) => {
     switch (value) {
       case 0:
-        setContent({ child: <FTTransfer />, height: 300 });
+        setContent({ child: <FTTransfer />, height: 270 });
         setShowModal((s) => !s);
         break;
       case 1:
-        setContent({ child: <FTWithdraw />, height: 300 });
+        setContent({ child: <FTWithdraw />, height: 270 });
         setShowModal((s) => !s);
         break;
       case 2:
-        setContent({ child: <FTBillPayment />, height: 360 });
+        setContent({ child: <FTBillPayment />, height: 330 });
         setShowModal((s) => !s);
         break;
       default:
