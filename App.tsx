@@ -79,7 +79,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [routeName, setRouteName] = useState("onboarding_screen");
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
-  let alertOffset =  getStatusBarHeight(true)
+  let alertOffset =  0
 
   const checkOnboarding = async () => {
     // await AsyncStorage.removeItem('@onboarded')
@@ -147,12 +147,6 @@ export default function App() {
               <NavigatorSelector routeName={routeName} />
             </LocationProvider>
           </AuthProvider>
-          <Toast
-            config={toastConfig}
-            topOffset={alertOffset}
-            onShow={() => console.log("Status shown")}
-            onHide={() => console.log("Status hidden")}
-          />
         </NavigationContainer>
       </SafeAreaProvider>
     </GestureHandlerRootView>

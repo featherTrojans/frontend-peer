@@ -88,7 +88,7 @@ const ProfileScreen = () => {
   const handlesignout = async () => {
     await clearDataFromStorage("@token");
     setToken("");
-    // setAuthData({});
+    setAuthData({});
   };
 
   return (

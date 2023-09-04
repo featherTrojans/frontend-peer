@@ -1,12 +1,13 @@
 import React from "react";
-import { StatusBar, View } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { COLORS } from "../../constants";
+import { StatusBar } from "react-native";
+// import { StatusBar } from 'expo-status-bar';
 
-function Customstatusbar({bg="#F7F8FA"}) {
+function Customstatusbar({ bg = "#F7F8FA" }) {
   const insets = useSafeAreaInsets();
 
   return (

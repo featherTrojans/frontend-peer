@@ -15,8 +15,9 @@ import Animated, {
 import Modal from "react-native-modal";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { AuthContext } from "../context/AuthContext";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 
 const OVERDRAG = 20;
 
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
   sheet: {
     backgroundColor: "white",
     padding: 25,
+    paddingTop: 44,
     width: "100%",
     position: "absolute",
     bottom: -OVERDRAG * 1.1,

@@ -30,8 +30,7 @@ const Mainwrapper = ({
 
   return (
     <>
-      <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
-        {/* <Customstatusbar bg={bgColor} /> */}
+      <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }} >
         <View
           style={{ flex: 1, paddingHorizontal: pH, backgroundColor: childBg }}
         >

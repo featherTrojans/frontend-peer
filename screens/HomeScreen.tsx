@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   FlatList,
+  StatusBar
 } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
@@ -548,6 +549,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       modalHeight={content.height}
     >
       {/* <Customstatusbar /> */}
+
       <View style={headerContainer}>
         <View style={profileContainer}>
           <FTUserImage size={45} />
