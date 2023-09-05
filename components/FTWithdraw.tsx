@@ -35,6 +35,7 @@ const FTWithdraw = () => {
   const findmerchant = async () => {
     setLoading(true);
     const response = await axiosCustom.get("/request/accepted");
+    setLoading(false);
     if (response.data && response.data.data.length > 0) {
       return navigation.navigate("withdrawcash_screen", {
         agentinfo: response?.data?.data[0],
