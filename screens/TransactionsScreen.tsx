@@ -22,6 +22,7 @@ import {
   FTTabWrapper,
   FTTransactionhistory,
   FTHorizontaline,
+  FTTransact,
 } from "../components";
 
 import { COLORS, icons } from "../constants";
@@ -56,32 +57,8 @@ const {
 
 const TransactionsScreen = ({ navigation }) => {
   const { setShowTabs, authdata } = useContext(AuthContext);
-  const [transactions, setTransations] = useState();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [refreshing, setRefreshing] = useState<boolean>(false);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 266 });
-
-  useEffect(() => {
-    getAllTransactions();
-  }, []);
-
-  const getAllTransactions = async () => {
-    try {
-      setLoading(true);
-      const response = await axiosCustom.get("/transactions");
-      setTransations(response?.data?.data?.transactions);
-    } catch (err) {
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  };
-
-  const handleRefresh = () => {
-    setRefreshing(true);
-    getAllTransactions();
-  };
 
   const switchModals = (value) => {
     switch (value) {
@@ -165,60 +142,7 @@ const TransactionsScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View
-        style={{
-          flex: 1,
-          paddingHorizontal: 24,
-          backgroundColor: COLORS.white,
-          paddingTop: 28,
-          borderRadius: 20,
-        }}
-      >
-        <View style={listContainer}>
-          {loading ? (
-            <View style={loaderWrapper}>
-              <ActivityIndicator size="large" color={COLORS.blue6} />
-            </View>
-          ) : (
-            <>
-              <Animated.FlatList
-                data={formatData(transactions)}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={handleRefresh}
-                    progressBackgroundColor="white"
-                    colors={[COLORS.blue6]}
-                    tintColor={COLORS.blue6}
-                    title="Refreshing"
-                    titleColor={COLORS.blue6}
-                  />
-                }
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item, index }: any) => {
-                  return (
-                    <>
-                      <FTTransactionhistory
-                        date={item.time}
-                        datas={item.data}
-                        index={index}
-                      />
-                      {true && <FTHorizontaline marginV={15} />}
-                    </>
-                  );
-                }}
-                keyExtractor={(item: { time: string }) => item.time}
-                ListEmptyComponent={
-                  <FTEmptycomponent
-                    size={135}
-                    msg="Padi, you have not performed any transactions yet. "
-                  />
-                }
-              />
-            </>
-          )}
-        </View>
-      </View>
+      <FTTransact />
     </FTTabWrapper>
   );
 };

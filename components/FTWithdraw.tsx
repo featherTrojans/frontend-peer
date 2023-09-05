@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useContext, useState } from "react";
-
-import { Pressable } from "react-native";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
 import { FTHorizontaline, FTLoader } from ".";
@@ -11,7 +9,7 @@ import amountFormatter from "../utils/formatMoney";
 import { useAlert } from "../hooks";
 import { useNavigation } from "@react-navigation/native";
 
-const { Withdrawicon, Searchmerchanticon, Paymerchanticon } = icons;
+const { Searchmerchanticon, Paymerchanticon } = icons;
 
 const FTWithdraw = () => {
   const navigation = useNavigation();
