@@ -10,7 +10,8 @@ export const FTDetailsModalStyles = StyleSheet.create({
   detailsWrap: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 30,
+    // marginVertical: 30,
+    marginTop: 30
   },
   dataTitle: {
     ...fontsize.smaller,

@@ -6,13 +6,15 @@ import {
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
-import { redirectTo } from "../utils";
+// import { redirectTo } from "../utils";
+import { useNavigation } from "@react-navigation/native";
 import { icons } from "../constants";
 
 const { Bluecardicon } = icons;
 
 const {} = ChoosecablereceiverScreenStyles;
 const ChoosecablereceiverScreen = () => {
+  const navigation = useNavigation();
   const cableTypes = [
     {
       name: "DSTV",
@@ -38,7 +40,7 @@ const ChoosecablereceiverScreen = () => {
             <FTIconwithtitleandinfo
               bG=""
               title={name}
-              onPress={() => redirectTo("choosecableamount_screen")}
+              onPress={() => navigation.navigate("choosecableamount_screen")}
               Icon={Bluecardicon}
             />
           );

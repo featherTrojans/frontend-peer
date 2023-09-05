@@ -14,7 +14,6 @@ import {
 import { redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
-redirectTo;
 
 import { COLORS, icons } from "../constants";
 import { useAlert } from "../hooks";
@@ -81,7 +80,7 @@ const ChangeappearanceScreen = ({navigation}) => {
       <FTIconwithtitleandinfo
         imageUrl={allMemojis["male"]["darkSkinned"][0]}
         title="Choose Memoji"
-        onPress={() => redirectTo("choosememoji_screen")}
+        onPress={() => navigation.navigate("choosememoji_screen")}
         bG={COLORS.Tyellow3}
         mB={20}
       />

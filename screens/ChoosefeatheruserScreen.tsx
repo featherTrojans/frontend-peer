@@ -16,7 +16,7 @@ import {
   FTSwitchbtn,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, icons } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import useDebounce from "../utils/debounce";
 import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
@@ -102,14 +102,13 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: 20,
             }}
           >
             {isBenficairy ? null : (
-              <>
-                <Text style={{ ...FONTS.regular }}>Save to beneficiaries?</Text>
+              <View style={{marginBottom: 20}}>
+                <Text style={{ ...FONTS.regular, ...fontsize.smallest }}>Save to beneficiaries?</Text>
                 <FTSwitchbtn action={addtobeneficiary} />
-              </>
+              </View>
             )}
           </View>
         }

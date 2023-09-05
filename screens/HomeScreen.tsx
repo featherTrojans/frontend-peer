@@ -624,6 +624,8 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
             })
           )}
         </View>
+
+        
       </ScrollView>
     </FTTabWrapper>
   );

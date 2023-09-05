@@ -11,7 +11,7 @@ import {
   FTSwitchbtn,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, icons } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 
 import useContact from "../hooks/useContact";
 import amountFormatter from "../utils/formatMoney";
@@ -76,7 +76,7 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     } catch (err) {}
   };
   return (
-    <View style={{ backgroundColor: "#fff" }}>
+    <View style={{ backgroundColor: "#fff",  }}>
       <FTDetailsModal
         modalTitle="User Details"
         title={userinfo.fullName}
@@ -84,7 +84,7 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
         onPress={onpress}
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
-        mB={40}
+        mB={0}
         profile={true}
         userInfo={{
           imageUrl: userinfo?.imageUrl,
@@ -100,7 +100,7 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
               marginBottom: 20,
             }}
           >
-            <Text style={{ ...FONTS.regular }}>Save to beneficiaries?</Text>
+            <Text style={{ ...FONTS.regular, ...fontsize.smallest }}>Save to beneficiaries?</Text>
             <FTSwitchbtn action={addtobeneficiary} />
           </View>
         }
