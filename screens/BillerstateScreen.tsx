@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { BillerstateScreenStyles } from "../assets/styles/screens";
 import {
   FTIconwithtitleandinfo,
@@ -13,9 +13,14 @@ const {} = BillerstateScreenStyles;
 const { Bluecardicon, Electricityicon } = icons;
 
 const BillerstateScreen = ({ navigation }) => {
+  const [search, setSearch] = useState("");
   return (
     <FTTitlepagewrapper title="Choose Biller State">
-      <FTSearchinput placeholder="Search Biller" />
+      <FTSearchinput
+        value={search}
+        onChange={setSearch}
+        placeholder="Search Biller"
+      />
 
       {electricityLogos.map(({ name, logo, service }, index) => {
         return (

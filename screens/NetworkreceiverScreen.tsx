@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ChoosefeatheruserScreenStyles,
   NetworkreceiverScreenStyles,
@@ -22,8 +22,9 @@ const { listHeaderText } = ChoosefeatheruserScreenStyles;
 const NetworkreceiverScreen = ({ route, navigation }) => {
   const network = route?.params?.network;
   const { authdata } = useContext(AuthContext);
+  const [filtercontact, setFiltercontact] = useState([]);
+  const [search, setSearch] = useState("");
   const { contacts, contactsResolved, loading: loadingcontacts } = useContact();
-
   const userinfo = {
     fullName: authdata?.userDetails?.fullName,
     username: authdata?.userDetails?.username,
@@ -32,13 +33,27 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
     network: network,
   };
 
+  const handlesearch = (text) => {
+    setSearch(text);
+    const filtered = contactsResolved.filter((contact) => {
+      return (
+        contact?.phoneNumber?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        contact?.fullName?.toLowerCase()?.includes(search?.toLowerCase())
+      );
+    });
+    setFiltercontact(filtered);
+  };
+
+  useEffect(() => {
+    setFiltercontact(contactsResolved);
+  }, [contactsResolved]);
   const ListHeader = () => {
     return (
       <>
         <FTIconwithtitleandinfo
           bG={COLORS.green2}
           title="Send to self"
-          info={authdata?.userDetails?.phoneNumber}
+          info={userinfo?.phoneNumber}
           onPress={() =>
             navigation.navigate("airtimeordata_screen", { userinfo })
           }
@@ -52,9 +67,13 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
 
   return (
     <FTTitlepagewrapper title="Choose Receiver">
-      <FTSearchinput placeholder="Search Phone Number" />
+      <FTSearchinput
+        value={search}
+        onChange={handlesearch}
+        placeholder="Search Phone Number"
+      />
       <FlatList
-        data={contactsResolved}
+        data={filtercontact}
         showsVerticalScrollIndicator={false}
         bounces={false}
         ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
@@ -64,18 +83,23 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
             username: feathercontacts?.username,
             phoneNumber: feathercontacts?.phoneNumber,
             imageUrl: feathercontacts?.imageUrl,
+
             network: network,
           };
           return (
             <FTIconwithtitleandinfo
               bG={COLORS.green2}
               title={feathercontacts?.fullName}
-              info={feathercontacts?.username}
+              info={feathercontacts?.phoneNumber}
+              profile={true}
+              userInfo={{
+                imageurl: feathercontacts?.imageUrl,
+                memojiImage: feathercontacts?.memoji,
+                fullname: feathercontacts?.fullName,
+              }}
               onPress={() =>
                 navigation.navigate("airtimeordata_screen", { userinfo })
               }
-              Icon={Sendtoselficon}
-              imageUrl={feathercontacts?.imageUrl}
             />
           );
         }}

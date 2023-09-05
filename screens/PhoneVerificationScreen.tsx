@@ -82,7 +82,7 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
     try {
       setLoading(true);
       await axiosCustom.post("auth/resend/code", {
-        email: phoneNumber,
+        detail: phoneNumber,
       });
       settimecount(30);
     } catch (err) {
