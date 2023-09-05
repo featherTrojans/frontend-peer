@@ -6,7 +6,6 @@ import Animated, {
   SlideInDown,
   SlideOutDown,
   runOnJS,
-  useAnimatedKeyboard,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -18,7 +17,6 @@ import { AuthContext } from "../context/AuthContext";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-
 const OVERDRAG = 20;
 
 const useSwipemodal = () => {
@@ -26,23 +24,6 @@ const useSwipemodal = () => {
     const offset = useSharedValue(0);
     const x = useSharedValue(0);
     const HEIGHT = modalHeight ? modalHeight : 200;
-    const keyboard = useAnimatedKeyboard();
-
-    const [keyboardStatus, setKeyboardStatus] = useState(false);
-
-    useEffect(() => {
-      const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-        setKeyboardStatus(true);
-      });
-      const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-        setKeyboardStatus(false);
-      });
-
-      return () => {
-        showSubscription.remove();
-        hideSubscription.remove();
-      };
-    }, []);
 
     const closeModal = () => {
       setShowModal((s) => !s);
@@ -66,9 +47,7 @@ const useSwipemodal = () => {
       });
 
     const translateY = useAnimatedStyle(() => ({
-      transform: !keyboardStatus
-        ? [{ translateY: offset.value }]
-        : [{ translateY: withSpring(-keyboard.height.value) }],
+      transform: [{ translateY: offset.value }],
     }));
 
     return (

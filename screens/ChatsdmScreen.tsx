@@ -284,12 +284,7 @@ const ChatsdmScreen = ({ route }) => {
 
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const keyboard = useAnimatedKeyboard();
-  const translateStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateY: -keyboard.height.value }],
-    };
-  });
+
 
   const profileactions = [
     {
@@ -590,7 +585,6 @@ const ChatsdmScreen = ({ route }) => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        {/* Header Section */}
         <View style={chatHeader}>
           <View style={[headerDetailsContainer]}>
             <View style={{flexDirection: "row", alignItems: "center"}}>
@@ -673,7 +667,6 @@ const ChatsdmScreen = ({ route }) => {
           </Animated.ScrollView>
         )}
 
-        {/* Bottom Input */}
 
         <View style={chatTextInput}>
           <View style={{width: 1, height: 20, backgroundColor: "grey", alignSelf: "center"}}/>
@@ -686,7 +679,7 @@ const ChatsdmScreen = ({ route }) => {
             returnKeyType="done"
             onFocus={() => scrollViewRef?.current?.scrollToEnd({ animated: true })}
           />
-          {chattext !== "" && (
+          {chattext.trim() !== "" && (
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => sendFireBaseMessage()}

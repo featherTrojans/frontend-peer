@@ -1,4 +1,4 @@
-import { Pressable,  StyleSheet, Text, View } from "react-native";
+import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Customstatusbar from "../screens/shared/Customstatusbar";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
@@ -12,7 +12,6 @@ import { getBottomSpace } from "react-native-iphone-x-helper";
 const { Backarrow } = icons;
 const { backArrowContainer, backHeaderWrap, backHeaderTitle, childrenWrap } =
   FTBackheaderStyles;
-  
 
 const FTTitlepagewrapper = ({
   title,
@@ -42,13 +41,12 @@ const FTTitlepagewrapper = ({
   invert?: boolean;
 }) => {
   const { Swipemodal } = useSwipemodal();
-  const navigation = useNavigation()
-
+  const navigation = useNavigation();
 
   return (
     <>
-      <SafeAreaView style={{ flex: 1, backgroundColor: bg, paddingBottom: 20  }}>
-        {/* <Customstatusbar bg={bg}/> */}
+      <SafeAreaView style={{ flex: 1, backgroundColor: bg, paddingBottom: 20 }}>
+        <Customstatusbar bg={bg} />
 
         <View style={[backHeaderWrap, { backgroundColor: headerBg }]}>
           <Pressable

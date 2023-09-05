@@ -8,11 +8,10 @@ import { StatusBar } from "react-native";
 // import { StatusBar } from 'expo-status-bar';
 
 function Customstatusbar({ bg = "#F7F8FA" }) {
-  const insets = useSafeAreaInsets();
 
   return (
     <StatusBar
-      animated={true}
+      animated={false}
       backgroundColor={bg}
       barStyle="dark-content"
       networkActivityIndicatorVisible={true}

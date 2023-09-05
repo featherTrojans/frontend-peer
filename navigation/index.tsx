@@ -98,23 +98,12 @@ const NoAuthNavigator = ({ routeName }) => {
 };
 
 const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
-  const { getState, reset } = useNavigation();
-
-  useEffect(() => {
-    const state = getState?.();
-
-    if (state) {
-      reset({
-        ...state,
-        index: 0,
-        history: [],
-      });
-    }
-  }, []);
 
   return (
     <DashboardTabs.Navigator
+    
       screenOptions={({ route }) => ({
+        
         tabBarIcon: ({ focused }) => TabIcon(route.name, focused),
         tabBarLabel: ({ focused }) => (
           <Text
@@ -158,6 +147,7 @@ const AuthenticatedNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}
+      
     >
       <AuthStack.Screen name="Dashboard" component={DashboardTabNavigator} />
       {/* Transact Screens */}

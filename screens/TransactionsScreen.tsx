@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   Text,
   View,
@@ -70,14 +70,6 @@ const TransactionsScreen = ({ navigation }) => {
 
   useEffect(() => {
     getAllTransactions();
-
-
-
-    return () => {
-      console.log("yes")
-    }
-
- 
   }, []);
 
   const getAllTransactions = async () => {
@@ -96,7 +88,6 @@ const TransactionsScreen = ({ navigation }) => {
     setRefreshing(true);
     getAllTransactions();
   };
-
 
   const switchModals = (value) => {
     switch (value) {
@@ -143,6 +134,9 @@ const TransactionsScreen = ({ navigation }) => {
       action: () => navigation.navigate("walletfunding_screen"),
     },
   ];
+
+
+
 
   return (
     <FTTabWrapper
@@ -211,17 +205,16 @@ const TransactionsScreen = ({ navigation }) => {
                 }
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item, index }: any) => {
-                  let isLast = index + 1 !== formatData(transactions).length;
                   return (
                     <>
-                  <FTTransactionhistory
-                    date={item.time}
-                    datas={item.data}
-                    index={index}
-                  />
-                  {isLast && <FTHorizontaline marginV={15} />}
-                  </>
-                  )
+                      <FTTransactionhistory
+                        date={item.time}
+                        datas={item.data}
+                        index={index}
+                      />
+                      {true && <FTHorizontaline marginV={15} />}
+                    </>
+                  );
                 }}
                 keyExtractor={(item: { time: string }) => item.time}
                 ListEmptyComponent={

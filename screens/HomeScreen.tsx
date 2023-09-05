@@ -548,7 +548,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
-      {/* <Customstatusbar /> */}
 
       <View style={headerContainer}>
         <View style={profileContainer}>
