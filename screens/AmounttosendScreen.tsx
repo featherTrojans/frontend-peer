@@ -66,9 +66,10 @@ const AmounttosendScreen = ({ route }) => {
       childBg={COLORS.blue16}
       invert
     >
-      {loading && <FTLoader />}
-      <View>
+       <FTLoader loading={loading} />
+       
         <Animated.View layout={Layout.springify()} style={amountWrap}>
+
           <View style={nairaIconWrap}>
             <Nairaicon />
           </View>
@@ -76,8 +77,8 @@ const AmounttosendScreen = ({ route }) => {
           <Animated.View layout={Layout.springify()}>
             <Text style={amountValueText}>{formatted}</Text>
           </Animated.View>
+
         </Animated.View>
-      </View>
 
       <Text style={[enterPinText, { textAlign: "center" }]}>
         Enter amount with the keypad

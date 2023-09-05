@@ -1,36 +1,36 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { ChoosecableamountScreenStyles } from '../assets/styles/screens'
-import { FTCustombutton, FTIconwithtitleandinfo, FTSearchinput, FTTitlepagewrapper } from '../components'
-import { redirectTo } from '../utils'
-import { icons } from '../constants'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { ChoosecableamountScreenStyles } from "../assets/styles/screens";
+import {
+  FTCustombutton,
+  FTIconwithtitleandinfo,
+  FTSearchinput,
+  FTTitlepagewrapper,
+} from "../components";
+import { redirectTo } from "../utils";
+import { icons } from "../constants";
+import { useNavigation } from "@react-navigation/native";
 
-const {Bluecardicon} = icons
-const {} = ChoosecableamountScreenStyles
+const { Bluecardicon } = icons;
+const {} = ChoosecableamountScreenStyles;
 
 const ChoosecableamountScreen = () => {
+  const navigation = useNavigation();
   return (
-    <FTTitlepagewrapper title='Choose Cable Amount'>
-     <FTSearchinput 
-      placeholder="Search Biller"
+    <FTTitlepagewrapper title="Choose Cable Amount">
+      <FTSearchinput placeholder="Search Biller" />
+
+      <FTIconwithtitleandinfo
+        bG="red"
+        title="XTRA-BB2 50GB (1 Month)"
+        info="N24,500"
+        onPress={() => navigation.navigate("cableiuc_screen")}
+        Icon={Bluecardicon}
       />
-
-
-
-      <FTIconwithtitleandinfo 
-      
-      bG='red'
-      title="XTRA-BB2 50GB (1 Month)"
-      info='N24,500'
-      onPress={() => redirectTo("cableiuc_screen")}
-      Icon={Bluecardicon}
-      
-      />
-      
     </FTTitlepagewrapper>
-  )
-}
+  );
+};
 
-export default ChoosecableamountScreen
+export default ChoosecableamountScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

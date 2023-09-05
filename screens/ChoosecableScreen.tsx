@@ -9,7 +9,7 @@ import {
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
-import { redirectTo } from "../utils";
+import { useNavigation } from "@react-navigation/native";
 import { COLORS, icons } from "../constants";
 
 const { Cableicon } = icons;
@@ -17,6 +17,7 @@ const {} = ChoosecableScreenStyles;
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
 const ChoosecableScreen = () => {
+  const navigation = useNavigation();
   const ListHeader = () => {
     return (
       <>
@@ -24,7 +25,7 @@ const ChoosecableScreen = () => {
           bG={COLORS.Tgreen2}
           title="Send to new account"
           info="Start a new cable tv subscription purchase"
-          onPress={() => redirectTo("choosecablereceiver_screen")}
+          onPress={() => navigation.navigate("choosecablereceiver_screen")}
           Icon={Cableicon}
           mB={40}
         />
@@ -45,7 +46,7 @@ const ChoosecableScreen = () => {
               bG={COLORS.Tgreen2}
               title="Send to new account"
               info="Start a new cable tv subscription purchase"
-              onPress={() => redirectTo("choosecablereceiver_screen")}
+              onPress={() => navigation.navigate("choosecablereceiver_screen")}
               Icon={Cableicon}
             />
           );

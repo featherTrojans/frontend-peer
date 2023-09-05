@@ -41,7 +41,7 @@ const FTDetailsModal = ({
   return (
     <View>
       <Text style={modalTitleText}>{modalTitle}</Text>
-      <View style={detailsWrap}>
+      <View style={[detailsWrap, {marginBottom: mB}]}>
         {profile ? (
           <FTOtherImage
             imageurl={userInfo?.imageUrl}

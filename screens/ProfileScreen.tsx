@@ -102,7 +102,7 @@ const ProfileScreen = ({ navigation }) => {
                 <FTUserImage size={100} />
               </View>
               <Pressable
-                onPress={() => redirectTo("editprofile_screen")}
+                onPress={() => navigation.navigate("editprofile_screen")}
                 style={userEditiconBg}
               >
                 <Editprofileicon />

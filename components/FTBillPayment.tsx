@@ -7,14 +7,16 @@ import { redirectTo } from "../utils";
 import { useNavigation } from "@react-navigation/native";
 const { Airtimeicon, Electricityicon, Cableicon } = icons;
 
-const closeModalAndRedirect = (redirectScreenName) => {
-  redirectTo(redirectScreenName);
-  // setShowTabs(true)
-  // setShowModal(false)
-};
+
 
 const FTBillPayment = () => {
+
   const navigation = useNavigation();
+
+  // const closeModalAndRedirect = (redirectScreenName) => {
+  //   navigation.navigate(redirectScreenName);
+  
+  // };
   return (
     <View>
       <Text style={styles.transferCashText}>Bill Payments</Text>

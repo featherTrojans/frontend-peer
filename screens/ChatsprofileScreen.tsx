@@ -6,11 +6,16 @@ import {
   TouchableOpacity,
   View,
   RefreshControl,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { ChatsprofileScreenStyles } from "../assets/styles/screens";
+import {
+  ChatsprofileScreenStyles,
+  HomeScreenStyles,
+} from "../assets/styles/screens";
 import {
   FTEmptycomponent,
+  FTHorizontaline,
   FTIconwithbg,
   FTOtherImage,
   FTTitlepagewrapper,
@@ -32,6 +37,8 @@ const {
   profileNameText,
   profileDateJoined,
 } = ChatsprofileScreenStyles;
+const { transactionWrap, transactionHeader, transactionText, viewAll } =
+  HomeScreenStyles;
 
 const QuickActionBtn = ({ icon, text, action, bG, color }) => {
   return (
@@ -78,7 +85,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
 
   const ListHeader = () => {
     return (
-      <View style={profileInfoWrap}>
+      <View style={[profileInfoWrap, { marginBottom: 30 }]}>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <FTOtherImage
             imageurl={userInfo?.imageUrl}
@@ -122,44 +129,69 @@ const ChatsprofileScreen = ({ route, navigation }) => {
       childBg={COLORS.white3}
       headerBg={COLORS.white3}
     >
-      <View style={{ flex: 1 }}>
-        <Animated.FlatList
-          data={formatData(transactions)}
-          ListHeaderComponent={ListHeader}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={handleRefresh}
-              progressBackgroundColor="white"
-              colors={[COLORS.blue6]}
-              tintColor={COLORS.blue6}
-              title="Refreshing"
-              titleColor={COLORS.blue6}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item, index }: any) => (
-            <>
-              {loading ? (
-                <ActivityIndicator size="large" color={COLORS.blue6} />
-              ) : (
-                <FTTransactionhistory
-                  date={item.time}
-                  datas={item.data}
-                  index={index}
-                />
-              )}
-            </>
-          )}
-          keyExtractor={(item: { time: string }) => item.time}
-          ListEmptyComponent={
-            <FTEmptycomponent
-              msg="Sorry, You have not performed any transactions with this user"
-              showTransact={false}
-            />
-          }
-        />
-      </View>
+      {/* <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+            progressBackgroundColor="white"
+            colors={[COLORS.blue6]}
+            tintColor={COLORS.blue6}
+            title="Refreshing"
+            titleColor={COLORS.blue6}
+          />
+        }
+      >
+        <ListHeader />
+        <View style={[transactionWrap, { marginHorizontal: 0 }]}>
+          {formatData(transactions).map((transaction, index) => {
+            const { time, data } = transaction;
+            return (
+              <View style={{ flex: 1 }}>
+                <FTTransactionhistory date={time} datas={data} index={index} />
+                {true && <FTHorizontaline marginV={15} />}
+              </View>
+            );
+          })}
+        </View>
+      </ScrollView> */}
+      {loading ? (
+          <ActivityIndicator size="large" color={COLORS.blue6} />
+        ) : (
+          <Animated.FlatList
+            data={formatData(transactions)}
+            ListHeaderComponent={ListHeader}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                progressBackgroundColor="white"
+                colors={[COLORS.blue6]}
+                tintColor={COLORS.blue6}
+                title="Refreshing"
+                titleColor={COLORS.blue6}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+            // style={transactionWrap}
+            renderItem={({ item, index }: any) => (
+                
+              <FTTransactionhistory
+                date={item.time}
+                datas={item.data}
+                index={index}
+              />
+            )}
+            keyExtractor={(item: { time: string }) => item.time}
+            ListEmptyComponent={
+              <FTEmptycomponent
+                msg="Sorry, You have not performed any transactions with this user"
+                showTransact={false}
+              />
+            }
+          />
+        )}
     </FTTitlepagewrapper>
   );
 };

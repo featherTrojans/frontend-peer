@@ -3,7 +3,7 @@ import React from "react";
 import { COLORS, FONTS, fontsize, images } from "../constants";
 
 import { allMemojis } from "../assetdatas";
-import { nameSplitToTwo } from "../utils/nameSplitter";
+import { nameSplitToTwo, nameSplitterFirstName } from "../utils/nameSplitter";
 import { Text } from "react-native";
 
 const { Notificationimage } = images;
@@ -112,7 +112,7 @@ const FTOtherImage = ({
             color: COLORS.blue9,
           }}
         >
-          {nameSplitToTwo(fullname)}
+          {nameSplitterFirstName(fullname)}
         </Text>
       ) : (
         <Text>AA</Text>

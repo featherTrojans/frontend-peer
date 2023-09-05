@@ -17,7 +17,7 @@ import useAlert from "../hooks/useAlerts";
 import FTLoader from "./FTLoader";
 import { FTViewbalanceStyles } from "../assets/styles/components";
 import { useCustomModal } from "../hooks";
-import { navigation } from "../utils";
+// import { navigation } from "../utils";
 
 const {
   container,
@@ -34,6 +34,7 @@ const {
 const { Eyecrossed, Balanceicon } = icons;
 
 const Viewbalance = ({}) => {
+  const navigation = useNavigation();
   const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
   const { errorAlert } = useAlert();
 

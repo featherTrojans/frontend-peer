@@ -123,7 +123,7 @@ const EditprofileScreen = ({ navigation }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => redirectTo("changeappearance_screen")}
+        onPress={() => navigation.navigate("changeappearance_screen")}
         style={{ flexDirection: "row", alignItems: "center" }}
       >
         <FTUserImage size={35} />
