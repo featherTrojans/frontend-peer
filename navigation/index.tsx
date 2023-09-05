@@ -1,7 +1,6 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import * as Notification from "expo-notifications";
-import { AppState, Platform, Text, Animated, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { AppState, Platform, Text } from "react-native";
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -11,21 +10,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AuthContext } from "../context/AuthContext";
 
 import axiosCustom from "../httpRequests/axiosCustom";
-import CustomWebViewSupport from "../screens/shared/CustomWebViewSupport";
 import { usePushNotification } from "../hooks/usePushNotifications";
-import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { enableFreeze } from "react-native-screens";
 enableFreeze(true);
 
 const AppStack = createStackNavigator();
 
 import {
-  BlankScreen,
   CardScreen,
   ChatsScreen,
-  ChatsdmScreen,
   HomeScreen,
-  LockScreen,
   ProfileScreen,
   TransactionsScreen,
 } from "../screens";
@@ -33,15 +28,8 @@ import {
 const AuthStack = createStackNavigator();
 const DashboardTabs = createBottomTabNavigator();
 
-import {
-  authRoutes,
-  dashboardRoutes,
-  transactRoutes,
-} from "./routes";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
+import { authRoutes, transactRoutes } from "./routes";
+
 const {
   Hometabicon,
   Transacttabicon,
@@ -76,12 +64,16 @@ let TabIcon = (name: string, focused: boolean) => {
 };
 
 const NoAuthNavigator = ({ routeName }) => {
+  const { token } = useContext(AuthContext);
+  if (token == null) {
+    routeName = "onboarding_screen";
+  }
   return (
-    <AuthStack.Navigator initialRouteName={routeName} 
-    
-    screenOptions={{
-      headerShown: false,
-    }}
+    <AuthStack.Navigator
+      initialRouteName={routeName}
+      screenOptions={{
+        headerShown: false,
+      }}
     >
       {authRoutes?.map((route: any, index: number) => {
         return (
@@ -89,7 +81,6 @@ const NoAuthNavigator = ({ routeName }) => {
             component={route.screen}
             key={index}
             name={route.route}
-            
           />
         );
       })}
@@ -98,12 +89,9 @@ const NoAuthNavigator = ({ routeName }) => {
 };
 
 const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
-
   return (
     <DashboardTabs.Navigator
-    
       screenOptions={({ route }) => ({
-        
         tabBarIcon: ({ focused }) => TabIcon(route.name, focused),
         tabBarLabel: ({ focused }) => (
           <Text
@@ -119,16 +107,14 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
         ),
         headerShown: false,
         lazy: true,
-        tabBarStyle:{
+        tabBarStyle: {
           justifyContent: "center",
           alignItems: "center",
           paddingVertical: Platform.select({ ios: 15, android: 15 }),
           paddingBottom: Platform.select({ android: 15, ios: 25 }),
           height: 82,
         },
-        
       })}
-    
       initialRouteName="Home"
       backBehavior="initialRoute"
     >
@@ -147,7 +133,6 @@ const AuthenticatedNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}
-      
     >
       <AuthStack.Screen name="Dashboard" component={DashboardTabNavigator} />
       {/* Transact Screens */}

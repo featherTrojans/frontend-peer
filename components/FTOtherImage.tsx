@@ -26,7 +26,9 @@ const FTOtherImage = ({
   onpress = () => {},
 }: IconWithBgProps) => {
   let memojiobj = {};
-
+  if (imageurl) {
+    console.log(imageurl, "there is a a a");
+  }
   if (memojiImage) {
     if (typeof memojiImage == "string") {
       memojiobj = JSON.parse(memojiImage);
@@ -63,6 +65,7 @@ const FTOtherImage = ({
   }
 
   if (imageurl) {
+    console.log("i should be here");
     return (
       <Pressable
         style={{
@@ -101,7 +104,16 @@ const FTOtherImage = ({
       onPress={onpress}
     >
       {fullname ? (
-        <Text style={{ textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9 }}>{nameSplitToTwo(fullname)}</Text>
+        <Text
+          style={{
+            textAlign: "center",
+            ...fontsize.small,
+            ...FONTS.regular,
+            color: COLORS.blue9,
+          }}
+        >
+          {nameSplitToTwo(fullname)}
+        </Text>
       ) : (
         <Text>AA</Text>
       )}

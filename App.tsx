@@ -1,37 +1,21 @@
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Toast from "react-native-toast-message";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import {
-  Text,
-  View,
-  LogBox,
-  TouchableOpacity,
-  StyleSheet,
-  StatusBar,
-  Platform,
-} from "react-native";
+import { Text, View, LogBox, TouchableOpacity, StyleSheet } from "react-native";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import { COLORS, FONTS, fontsize, icons } from "./constants";
+import { COLORS, FONTS, fontsize } from "./constants";
 import { LocationProvider } from "./context/LocationContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { customNavigation } from "./utils/customNavigation";
 import { AuthProvider } from "./context/AuthContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import navigationService from "./utils/navigation";
 import { NavigatorSelector } from "./navigation";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { enableFreeze } from "react-native-screens";
 enableFreeze(true);
 
-import {
-  AWEEKAFTER,
-  clearDataFromStorage,
-  getDataFromStorage,
-  setAuthorizationToken,
-  setDataInstorage,
-} from "./utils";
+import { AWEEKAFTER, getDataFromStorage, setAuthorizationToken } from "./utils";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -111,6 +95,7 @@ export default function App() {
       }
     });
   }, []);
+
   useEffect(() => {
     checkOnboarding();
   }, []);
@@ -150,11 +135,11 @@ export default function App() {
         </LocationProvider>
       </AuthProvider>
       <Toast
-          config={toastConfig}
-          topOffset={getStatusBarHeight(true)}
-          onShow={() => console.log("Status shown")}
-          onHide={() => console.log("Status hidden")}
-        />
+        config={toastConfig}
+        topOffset={getStatusBarHeight(true)}
+        onShow={() => console.log("Status shown")}
+        onHide={() => console.log("Status hidden")}
+      />
     </GestureHandlerRootView>
   );
 }
