@@ -90,11 +90,13 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       setCoords({ ...coordinates, locationText: address });
       await getAllAgents(address);
     } catch (err) {
+      console.log("maybe this is where it is failing, acan't get address");
     } finally {
       setLoading(false);
     }
   };
   const getAllAgents = async (address: string) => {
+    console.log("trying to get all agents");
     try {
       await axiosCustom.post("/status/find", {
         amount: Number(amount),
