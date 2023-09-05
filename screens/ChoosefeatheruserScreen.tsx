@@ -85,7 +85,7 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
       <FTDetailsModal
         modalTitle="User Details"
         title={userinfo.fullName}
-        info={userinfo.username}
+        info={`@${userinfo.username.toLowerCase()}`}
         onPress={onpress}
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
@@ -214,7 +214,7 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
           return (
             <FTIconwithtitleandinfo
               title={dataobject.fullName}
-              info={dataobject.username}
+              info={`@${dataobject.username.toLowerCase()}`}
               onPress={() => switchModals(0, dataobject, amount, true)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}

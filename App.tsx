@@ -151,7 +151,7 @@ export default function App() {
       </AuthProvider>
       <Toast
           config={toastConfig}
-          topOffset={getStatusBarHeight(true)}
+          topOffset={0}
           onShow={() => console.log("Status shown")}
           onHide={() => console.log("Status hidden")}
         />
@@ -167,6 +167,7 @@ const appStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingVertical: 15,
+    paddingTop: getStatusBarHeight(true) + 15
   },
   updateAlertWrapper: {
     width: "100%",

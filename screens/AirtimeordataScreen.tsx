@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import {
   AirtimeordataScreenStyles,
@@ -14,7 +14,6 @@ import { COLORS, FONTS, fontsize } from "../constants";
 
 import axiosCustom from "../httpRequests/axiosCustom";
 import Sendtoselficon from "../assets/icons/Sendtoselficon";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import amountFormatter from "../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
 
@@ -97,6 +96,7 @@ const AirtimeordataScreen = ({ route }) => {
           mB={40}
           rightComponent={
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -106,7 +106,7 @@ const AirtimeordataScreen = ({ route }) => {
                 paddingHorizontal: 18,
                 borderRadius: 10,
               }}
-              onPress={navigation.goBack}
+              onPress={() => navigation.goBack()}
             >
               <Text
                 style={{
@@ -131,7 +131,7 @@ const AirtimeordataScreen = ({ route }) => {
   };
 
   return (
-    <FTTitlepagewrapper title="Airtime or Data">
+    <FTTitlepagewrapper title="Airtime">
       <FTSearchinput
         value={amount}
         onChange={onamountchange}

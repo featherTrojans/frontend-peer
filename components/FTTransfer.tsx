@@ -41,7 +41,7 @@ const FTTransfer = () => {
         </View>
       </View>
 
-      <View style={{ marginTop: 40 }}>
+      <View style={{ marginTop: 24 }}>
         <FTIconwithtitleandinfo
           title="To Feather Wallet"
           info="Send cash to other feather users."

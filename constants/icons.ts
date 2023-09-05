@@ -134,6 +134,9 @@ import Profilechangeicon from "../assets/icons/Profilechangeicon";
 import Smallbackarrow from "../assets/icons/Smallbackarrow";
 import Choosememojiicon from "../assets/icons/Choosememojiicon";
 import Withdrawsearchicon from "../assets/icons/Withdrawsearchicon";
+import Chattransfericon from "../assets/icons/Chattransfericon";
+import Keeptypingicon from "../assets/icons/Keeptypingicon";
+
 
 
 
@@ -235,6 +238,8 @@ export default {
   Keyboarddeleteicon,
   Nairaicon,
   Successtransfericon,
+  Chattransfericon,
+  Keeptypingicon,
   Clearchaticon,
   Sendcashicon,
   Smalllockicon,
@@ -270,5 +275,5 @@ export default {
   Transacntionpinanimate,
   Verifiedbvnanimate,
   Trackinguseranimate,
-  PulsingCircle
+  PulsingCircle,
 };

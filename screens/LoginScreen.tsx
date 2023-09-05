@@ -93,7 +93,8 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <FTMainwrapper>
+    <FTMainwrapper
+    >
       <FTLoader loading={loading} />
       <Text style={center}>Enter Phone Number</Text>
 
