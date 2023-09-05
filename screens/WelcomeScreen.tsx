@@ -1,11 +1,5 @@
-import React, {
-  useRef,
-  useEffect,
-  useContext,
-  useState,
-  useCallback,
-} from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useContext, useState } from "react";
+import { Text, View } from "react-native";
 import LottieView from "lottie-react-native";
 
 import Animated, {
@@ -17,10 +11,9 @@ import Animated, {
 
 import { RFValue } from "react-native-responsive-fontsize";
 
-import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
+import { SIZES, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import axiosCustom from "../httpRequests/axiosCustom";
-import Customstatusbar from "./shared/Customstatusbar";
 import {
   sendSchedulePushNotification,
   sendTokenToDB,
@@ -30,7 +23,6 @@ import { WelcomeScreenStyles } from "../assets/styles/screens";
 import { getAuthorizationTokenFromAxois } from "../utils";
 import { FTMainwrapper } from "../components";
 const {
-  container,
   welcomeTextContainer,
   welcomeText,
   welcomeTextSub,
@@ -49,7 +41,6 @@ const WelcomeScreen = ({ navigation, route }) => {
   const fromm = route.params?.fromm || "login";
   const { setToken, authdata, messageToken } = useContext(AuthContext);
   const { setAuthData } = useContext(AuthContext);
-  const [percentage, setPercentage] = useState(0);
   const [sent, setSent] = useState(false);
   const authToken = getAuthorizationTokenFromAxois();
 

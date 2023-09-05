@@ -1,7 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { FTCustombutton, FTMainwrapper, FTSuccessOrError } from "../components";
-import { navigation } from "../utils";
 
 const TransactionSuccessScreen = ({ navigation }) => {
   return (

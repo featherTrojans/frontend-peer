@@ -1,5 +1,5 @@
 import React from "react";
-import { useCallback, useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import WebView from "react-native-webview";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -13,8 +13,7 @@ const CustomWebView = ({ navigation, route }) => {
     // console.log(state);
     const { url } = state;
     if (!url) return;
-    if (url === callback_url) { 
-
+    if (url === callback_url) {
       webviewRef.current?.stopLoading();
       navigation.navigate("Home");
     }

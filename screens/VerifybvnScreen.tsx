@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { VerifybvnScreenStyles } from "../assets/styles/screens";
 import {
@@ -8,14 +8,14 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
-import { VALIDATION, navigation } from "../utils";
+import { VALIDATION } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useAlert } from "../hooks";
 
 const { flex, headerText, backlink, flexspace, flexrow, margin } =
   VerifybvnScreenStyles;
 
-const VerifybvnScreen = () => {
+const VerifybvnScreen = ({ navigation }) => {
   const { control, handleSubmit } = useForm({ mode: "all" });
   const [loading, setLoading] = useState(false);
   const [errorcount, seterrorcount] = useState(0);
@@ -69,7 +69,9 @@ const VerifybvnScreen = () => {
     <FTTitlepagewrapper title="Verify BVN">
       <FTLoader loading={loading} />
       <View style={flex}>
-        <Text style={headerText}>Enter code sent to your {'\n'}mobile phone</Text>
+        <Text style={headerText}>
+          Enter code sent to your {"\n"}mobile phone
+        </Text>
         <FTInput
           placeholderText="Enter BVN"
           name="code"

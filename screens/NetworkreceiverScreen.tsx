@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useContext } from "react";
 import {
   ChoosefeatheruserScreenStyles,
@@ -9,7 +9,7 @@ import {
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
-import { navigation, redirectTo } from "../utils";
+
 import { COLORS, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import useContact from "../hooks/useContact";
@@ -19,7 +19,7 @@ const { Sendtoselficon } = icons;
 const {} = NetworkreceiverScreenStyles;
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
-const NetworkreceiverScreen = ({ route }) => {
+const NetworkreceiverScreen = ({ route, navigation }) => {
   const network = route?.params?.network;
   const { authdata } = useContext(AuthContext);
   const { contacts, contactsResolved, loading: loadingcontacts } = useContact();
@@ -45,7 +45,7 @@ const NetworkreceiverScreen = ({ route }) => {
           Icon={Sendtoselficon}
           mB={40}
         />
-        <Text style={listHeaderText}>My Beneficiaries</Text>
+        <Text style={listHeaderText}>My Contacts</Text>
       </>
     );
   };

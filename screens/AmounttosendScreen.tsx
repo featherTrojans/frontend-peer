@@ -1,15 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Animated, { Layout } from "react-native-reanimated";
 import {
   FTCustombutton,
   FTKeyboard,
   FTLoader,
-  FTTabWrapper,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { navigation } from "../utils";
+import { COLORS, icons } from "../constants";
 import {
   AmounttosendScreenStyles,
   TransactionpinScreenStyles,

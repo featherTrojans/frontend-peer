@@ -2,13 +2,15 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useContext } from "react";
 import { CarddisclosureScreenStyles } from "../assets/styles/screens";
 import { FTCustombutton, FTTitlepagewrapper } from "../components";
-import { navigation } from "../utils";
+
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigation } from "@react-navigation/native";
 
 const { texttitle } = CarddisclosureScreenStyles;
 
 const CarddisclosureScreen = () => {
+  const navigation = useNavigation();
   const { authdata } = useContext(AuthContext);
   const action = async (pin) => {
     try {

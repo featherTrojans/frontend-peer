@@ -1,24 +1,17 @@
-import {
-  FlatList,
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { TransactionsummaryScreenStyles } from "../assets/styles/screens";
 import {
   FTCustombutton,
-  FTHorizontaline,
   FTIconwithbg,
   FTInput,
   FTKeyboardwrapper,
   FTOtherImage,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { COLORS, icons } from "../constants";
 import { useForm } from "react-hook-form";
-import { VALIDATION, navigation, redirectTo } from "../utils";
+import { VALIDATION } from "../utils";
 
 const { Bluecardicon } = icons;
 
@@ -31,7 +24,7 @@ const {
   eachSummaryValue,
   dashedLine,
 } = TransactionsummaryScreenStyles;
-const TransactionsummaryScreen = ({ route }) => {
+const TransactionsummaryScreen = ({ route, navigation }) => {
   const action = route?.params?.action;
   const userInfo = route?.params?.userInfo;
   const summaryinfo = route?.params?.summaryinfo;

@@ -5,7 +5,6 @@ import {
   SearchcontactScreenStyles,
 } from "../assets/styles/screens";
 import {
-  FTCustombutton,
   FTDetailsModal,
   FTIconwithtitleandinfo,
   FTSearchinput,
@@ -13,10 +12,11 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, FONTS, icons } from "../constants";
-import { navigation } from "../utils";
+
 import useContact from "../hooks/useContact";
 import amountFormatter from "../utils/formatMoney";
 import axiosCustom from "../httpRequests/axiosCustom";
+import { useNavigation } from "@react-navigation/native";
 
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 const {} = SearchcontactScreenStyles;
@@ -25,6 +25,7 @@ const { Smallphoneicon } = icons;
 const BENEFICIARY_TYPE = "transferfeather";
 
 const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
+  const navigation = useNavigation();
   const action = async (pin) => {
     try {
       await axiosCustom.post("/transfer", {

@@ -11,16 +11,18 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, FONTS, fontsize } from "../constants";
-import { navigation } from "../utils";
+
 import axiosCustom from "../httpRequests/axiosCustom";
 import Sendtoselficon from "../assets/icons/Sendtoselficon";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import amountFormatter from "../utils/formatMoney";
+import { useNavigation } from "@react-navigation/native";
 
 const {} = AirtimeordataScreenStyles;
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
 const AirtimeordataScreen = ({ route }) => {
+  const navigation = useNavigation();
   const userinfo = route?.params?.userinfo;
   const [amount, setamount] = useState("");
 
@@ -147,7 +149,11 @@ const AirtimeordataScreen = ({ route }) => {
               bG={COLORS.green2}
               title={amountFormatter(amount.toString())}
               info={amountInfo}
-              onPress={() => console.log("yes")}
+              onPress={() =>
+                navigation.navigate("transactionpin_screen", {
+                  action: actionairtime(amount),
+                })
+              }
               imageUrl="https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1"
               size={35}
             />

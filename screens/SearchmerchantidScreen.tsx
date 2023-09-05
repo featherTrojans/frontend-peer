@@ -10,13 +10,13 @@ import {
 } from "../components";
 import { useForm } from "react-hook-form";
 import { icons } from "../constants";
-import { VALIDATION, navigation } from "../utils";
+import { VALIDATION } from "../utils";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
 const {} = SearchmerchantidScreenStyles;
 const { Bluecardicon } = icons;
 
-const SearchmerchantidScreen = ({ route }) => {
+const SearchmerchantidScreen = ({ route, navigation }) => {
   const amount = route?.params?.amount;
   const { errorAlert } = useAlert();
   const { control, handleSubmit } = useForm({ mode: "all" });

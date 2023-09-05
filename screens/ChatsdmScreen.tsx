@@ -36,25 +36,19 @@ import {
   orderBy,
   updateDoc,
 } from "firebase/firestore";
-import { useCustomModal, usePushNotification } from "../hooks";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { usePushNotification } from "../hooks";
+import { COLORS, FONTS, icons } from "../constants";
 import LottieView from "lottie-react-native";
 import axiosCustom from "../httpRequests/axiosCustom";
 import formatData from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
 import moment from "moment";
-import Animated, {
-  useAnimatedKeyboard,
-  useAnimatedStyle,
-} from "react-native-reanimated";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
-import { SafeAreaView } from "react-native-safe-area-context";
-// import { navigation } from "../utils";
-import { useNavigation } from '@react-navigation/native';
+import Animated from "react-native-reanimated";
+
+import { useNavigation } from "@react-navigation/native";
 
 const {
   chatTransferMsgWrap,
-  chatTransferAnim,
   chatTransferTextBg,
   chatTransferText,
   chatToMe,
@@ -67,27 +61,21 @@ const {
   headerDetailsContainer,
   chatsDmProfileWrap,
   chatName,
-  chatLastSeen,
   emptyChatAnimation,
   messageAreaContainer,
   messagesDateWrap,
   messageDateText,
-  chatTextContainer,
-  inputarea,
   chatTextInput,
   textinput,
   backArrowWrap,
 
-  viewWrapper,
   sendCashHeader,
   sendCashWrapper,
   sendCashButton,
   buttonIconBg,
   buttonText,
   chooseAmountHeader,
-  securePinHeader,
-  inputLockWrapper,
-  securePinTextInput,
+
   chooseAmountInputWrap,
   textInputStyle,
   emptyChatLoaderWrap,
@@ -283,8 +271,6 @@ const ChatsdmScreen = ({ route }) => {
   const { sendPushNotification, expoPushToken } = usePushNotification();
 
   const scrollViewRef = useRef<ScrollView>(null);
-
-
 
   const profileactions = [
     {
@@ -587,7 +573,7 @@ const ChatsdmScreen = ({ route }) => {
       >
         <View style={chatHeader}>
           <View style={[headerDetailsContainer]}>
-            <View style={{flexDirection: "row", alignItems: "center"}}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
               <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={navigation.goBack}
@@ -617,7 +603,6 @@ const ChatsdmScreen = ({ route }) => {
               </TouchableOpacity>
             </View>
 
-
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => switchModals(0)}
@@ -640,7 +625,10 @@ const ChatsdmScreen = ({ route }) => {
           <Animated.ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
-            contentContainerStyle={{ paddingVertical: 20,  justifyContent: "flex-end",  }}
+            contentContainerStyle={{
+              paddingVertical: 20,
+              justifyContent: "flex-end",
+            }}
             showsVerticalScrollIndicator={false}
             bounces={false}
             snapToEnd={true}
@@ -667,9 +655,15 @@ const ChatsdmScreen = ({ route }) => {
           </Animated.ScrollView>
         )}
 
-
         <View style={chatTextInput}>
-          <View style={{width: 1, height: 20, backgroundColor: "grey", alignSelf: "center"}}/>
+          <View
+            style={{
+              width: 1,
+              height: 20,
+              backgroundColor: "grey",
+              alignSelf: "center",
+            }}
+          />
           <TextInput
             placeholder="Enter Message..."
             style={textinput}
@@ -677,7 +671,9 @@ const ChatsdmScreen = ({ route }) => {
             onChangeText={handleTextChange}
             placeholderTextColor={COLORS.grey16}
             returnKeyType="done"
-            onFocus={() => scrollViewRef?.current?.scrollToEnd({ animated: true })}
+            onFocus={() =>
+              scrollViewRef?.current?.scrollToEnd({ animated: true })
+            }
           />
           {chattext.trim() !== "" && (
             <TouchableOpacity

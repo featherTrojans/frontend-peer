@@ -6,15 +6,12 @@ import {
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, icons } from "../constants";
-import { navigation, redirectTo } from "../utils";
+import { icons } from "../constants";
 import { bankDatas } from "../assetdatas";
 const { Smallphoneicon } = icons;
 const {} = ChoosebankScreenStyles;
 
-
-
-const ChoosebankScreen = ({ route }) => {
+const ChoosebankScreen = ({ route, navigation }) => {
   const amount = route?.params?.amount;
   const [search, setsearch] = useState("");
 
@@ -41,7 +38,7 @@ const ChoosebankScreen = ({ route }) => {
                   bankimage: logo,
                 })
               }
-              bG={''}
+              bG={""}
               imageUrl={logo}
             />
           );

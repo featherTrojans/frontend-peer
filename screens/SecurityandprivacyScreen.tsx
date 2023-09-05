@@ -1,22 +1,16 @@
 import { ScrollView, StyleSheet, Text, View, Switch } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { SecurityandprivacyScreenStyles } from "../assets/styles/screens";
 import {
   FTIconwithtitleandinfo,
   FTSwitchbtn,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { navigation, redirectTo } from "../utils";
+import { COLORS, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 
 const { sectionHeader } = SecurityandprivacyScreenStyles;
-const {
-  Bankblueicon,
-  Fingerprinticon,
-  Transactionpinlockicon,
-  Multifactoricon,
-} = icons;
+const { Fingerprinticon, Transactionpinlockicon, Multifactoricon } = icons;
 
 const SecurityandprivacyScreen = ({ navigation }) => {
   const multifactorAction = () => {

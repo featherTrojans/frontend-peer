@@ -6,9 +6,9 @@ import {
   FTIconwithbg,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { COLORS, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
-import { makePhoneCall, navigation } from "../utils";
+import { makePhoneCall } from "../utils";
 import { useAlert } from "../hooks";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import LottieView from "lottie-react-native";
@@ -58,7 +58,7 @@ const viewonmap = (lat, lng) => {
   Linking.openURL(url);
 };
 
-const WithdrawcashScreen = ({ route }) => {
+const WithdrawcashScreen = ({ route, navigation }) => {
   const amount = route.params?.amount;
   const agentinfo = route.params?.info;
   const { errorAlert } = useAlert();

@@ -8,12 +8,13 @@ import {
   FTIconwithtitleandinfo,
   FTTabWrapper,
 } from "../components";
-import { navigation } from "../utils";
+
 import BottomSheet from "@gorhom/bottom-sheet";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import { useAlert } from "../hooks";
+import { useNavigation } from "@react-navigation/native";
 
 const {
   Carddetailsicon,
@@ -177,6 +178,7 @@ const RightComponent = ({ bG = "blue", amount }) => {
 };
 
 const CreateCard = () => {
+  const navigation = useNavigation();
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   return (
@@ -185,22 +187,22 @@ const CreateCard = () => {
       <Text style={createCardSubInfo}>
         Suitable for all online shopping and subscription services.
       </Text>
-      <View style={{flex: 1}}>
-      {cardcreationinfos.map((cardcreationinfo, index) => {
-        const { title, info, bG, Icon, priceBg, price } = cardcreationinfo;
-        return (
-          <FTIconwithtitleandinfo
-            key={index}
-            title={title}
-            info={info}
-            bG={bG}
-            Icon={Icon}
-            onPress={() => null}
-            mB={25}
-            rightComponent={<RightComponent amount={price} bG={priceBg} />}
-          />
-        );
-      })}
+      <View style={{ flex: 1 }}>
+        {cardcreationinfos.map((cardcreationinfo, index) => {
+          const { title, info, bG, Icon, priceBg, price } = cardcreationinfo;
+          return (
+            <FTIconwithtitleandinfo
+              key={index}
+              title={title}
+              info={info}
+              bG={bG}
+              Icon={Icon}
+              onPress={() => null}
+              mB={25}
+              rightComponent={<RightComponent amount={price} bG={priceBg} />}
+            />
+          );
+        })}
       </View>
       <FTCustombutton
         bg="#000"
@@ -224,6 +226,7 @@ const CreateCard = () => {
   );
 };
 const CardScreen = () => {
+  const navigation = useNavigation();
   const snapPoints = useMemo(() => ["40%", "98%"], []);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null });

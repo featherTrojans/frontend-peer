@@ -18,7 +18,7 @@ import {
 } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
-import { navigation } from "../utils";
+
 import { ActivityIndicator } from "react-native";
 import formatData from "../utils/fomatTrans";
 
@@ -46,7 +46,7 @@ const QuickActionBtn = ({ icon, text, action, bG, color }) => {
   );
 };
 
-const ChatsprofileScreen = ({ route }) => {
+const ChatsprofileScreen = ({ route, navigation }) => {
   const userInfo = route?.params?.userInfo;
   const switchModals = route?.params?.switchModals;
   const [transactions, setTransactions] = useState([]);

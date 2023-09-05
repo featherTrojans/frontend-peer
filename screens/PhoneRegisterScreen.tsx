@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { FTCustombutton, FTInput, FTMainwrapper } from "../components";
 import { PhoneRegisterScreenStyles } from "../assets/styles/screens";
 import { useForm } from "react-hook-form";
-import { VALIDATION, navigation, setAuthorizationToken } from "../utils";
+import { VALIDATION, setAuthorizationToken } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useAlert } from "../hooks";
 import Loader from "../components/FTLoader";
 const { center, bottomtext } = PhoneRegisterScreenStyles;
 
-const PhoneRegisterScreen = () => {
+const PhoneRegisterScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();

@@ -5,7 +5,7 @@ import {
   ChoosefeatheruserScreenStyles,
 } from "../assets/styles/screens";
 import { FTIconwithtitleandinfo, FTTitlepagewrapper } from "../components";
-import { redirectTo } from "../utils";
+
 import { COLORS, icons } from "../constants";
 
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
@@ -13,7 +13,7 @@ const { listHeaderText } = ChoosefeatheruserScreenStyles;
 const { Electricityicon } = icons;
 const {} = ChoosebillerScreenStyles;
 
-const ChoosebillerScreen = () => {
+const ChoosebillerScreen = ({ navigation }) => {
   const ListHeader = () => {
     return (
       <>
@@ -21,7 +21,7 @@ const ChoosebillerScreen = () => {
           bG={COLORS.Tyellow}
           title="Pay a new bill"
           info="Start a new electricity purchase"
-          onPress={() => redirectTo("billerstate_screen")}
+          onPress={() => navigation.navigate("billerstate_screen")}
           Icon={Electricityicon}
           mB={40}
         />
@@ -43,7 +43,7 @@ const ChoosebillerScreen = () => {
               bG={COLORS.Tyellow}
               title="Pay a new bill"
               info="Start a new electricity purchase"
-              onPress={() => redirectTo("billerstate_screen")}
+              onPress={() => navigation.navigate("billerstate_screen")}
               Icon={Electricityicon}
             />
           );

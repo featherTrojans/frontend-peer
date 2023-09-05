@@ -1,40 +1,21 @@
 import {
   FlatList,
-  Pressable,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  Image,
 } from "react-native";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Svg, { G, Rect, Path } from "react-native-svg";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import {
   AccountverificationScreenStyles,
   ChoosememojiScreenStyles,
-  ProfileScreenStyles,
 } from "../assets/styles/screens";
-import {
-  FTCustombutton,
-  FTIconwithbg,
-  FTLoader,
-  FTTitlepagewrapper,
-} from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
-import axiosCustom from "../httpRequests/axiosCustom";
+import { FTIconwithbg, FTTitlepagewrapper } from "../components";
+import { COLORS, FONTS, fontsize } from "../constants";
 import { AuthContext } from "../context/AuthContext";
-import { navigation } from "../utils";
-import { useAlert } from "../hooks";
 import Animated, {
-  SlideInLeft,
-  SlideInRight,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -44,20 +25,11 @@ import { allMemojis } from "../assetdatas";
 
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 
-const { Changememojicheckicon, Profilechangeicon } = icons;
-
-const {
-  sectionHeader,
-  colorOptionBg,
-  profileWrap,
-  memojisWrapper,
-  buttonWrap,
-  buttonText,
-} = ChoosememojiScreenStyles;
+const { profileWrap, memojisWrapper, buttonWrap, buttonText } =
+  ChoosememojiScreenStyles;
 const {} = AccountverificationScreenStyles;
 
-
-const ChoosememojiScreen = () => {
+const ChoosememojiScreen = ({ navigation }) => {
   const [active, setActive] = useState("transparent");
   const [skinColor, setSkinColor] = useState("lightSkinned");
 
@@ -66,7 +38,7 @@ const ChoosememojiScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(
     allMemojis[gender]["lightSkinned"][0]
   );
- 
+
   const rotateView = useSharedValue(0);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -115,7 +87,13 @@ const ChoosememojiScreen = () => {
         />
 
         <View style={profileWrap}>
-          <View style={{ position: "absolute", justifyContent: "center", alignItems: "center" }}>
+          <View
+            style={{
+              position: "absolute",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <FTIconwithbg imageUrl={currentIndex} bG={active} size={150} />
           </View>
 

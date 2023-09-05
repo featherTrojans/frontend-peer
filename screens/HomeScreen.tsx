@@ -13,7 +13,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   FlatList,
-  StatusBar
+  StatusBar,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
@@ -40,8 +40,7 @@ import formatData from "../utils/fomatTrans";
 
 import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
-// import { navigation, redirectTo } from "../utils";
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 import useChats from "../hooks/useChats";
 import Customstatusbar from "./shared/Customstatusbar";
@@ -190,9 +189,7 @@ const Conversations = () => {
 
       <FTHorizontaline marginV={15} />
 
-      <ScrollView horizontal
-      showsHorizontalScrollIndicator={false}
-      >
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {allchatdata.map((item) => {
           return (
             <View style={{ marginHorizontal: 10 }}>
@@ -548,7 +545,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
-
       <View style={headerContainer}>
         <View style={profileContainer}>
           <FTUserImage size={45} />

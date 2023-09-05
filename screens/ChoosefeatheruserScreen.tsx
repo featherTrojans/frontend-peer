@@ -17,10 +17,10 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, FONTS, icons } from "../constants";
-import { navigation } from "../utils";
 import useDebounce from "../utils/debounce";
 import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
+import { useNavigation } from "@react-navigation/native";
 
 const { Smallphoneicon } = icons;
 
@@ -30,6 +30,7 @@ const { searchContactWrap, searchContactText, listHeaderText } =
 const BENEFICIARY_TYPE = "transferfeather";
 
 const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
+  const navigation = useNavigation();
   const action = async (pin) => {
     try {
       await axiosCustom.post("/transfer", {
@@ -156,12 +157,12 @@ const ListHeader = ({ amount, switchModals }) => {
   );
 };
 
-const ChoosefeatheruserScreen = ({ route }) => {
+const ChoosefeatheruserScreen = ({ route, navigation }) => {
   const amount = route?.params?.amount;
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
   const [beneficiaries, setbeneficiaries] = useState([]);
-
+  console.log(beneficiaries, "here");
   useEffect(() => {
     axiosCustom
       .get(`/beneficiary/get/${BENEFICIARY_TYPE}`)
@@ -207,18 +208,22 @@ const ChoosefeatheruserScreen = ({ route }) => {
         bounces={false}
         ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
         renderItem={({ item }) => {
+          let dataobject = {};
+          if (item?.data) {
+            dataobject = JSON.parse(item?.data);
+          }
           return (
             <FTIconwithtitleandinfo
-              title={item.fullName}
-              info={item.username}
-              onPress={() => switchModals(0, item, amount, true)}
+              title={dataobject.fullName}
+              info={dataobject.username}
+              onPress={() => switchModals(0, dataobject, amount, true)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}
               profile={true}
               userInfo={{
-                imageUrl: item?.imageUrl,
-                memoji: item?.memoji,
-                fullName: item?.fullName,
+                imageUrl: dataobject?.imageUrl,
+                memoji: dataobject?.memoji,
+                fullName: dataobject?.fullName,
               }}
             />
           );

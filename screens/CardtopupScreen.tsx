@@ -8,12 +8,14 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
-import { VALIDATION, navigation } from "../utils";
+import { VALIDATION } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
+import { useNavigation } from "@react-navigation/native";
 
 const {} = CardtopupScreenStyles;
 
 const CardtopupScreen = () => {
+  const navigation = useNavigation();
   const { control, handleSubmit } = useForm({ mode: "all" });
 
   const getfunction = (amount) => {

@@ -1,11 +1,4 @@
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Image,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
 import React, { useContext } from "react";
 import { ProfileScreenStyles } from "../assets/styles/screens";
 import {
@@ -13,8 +6,8 @@ import {
   FTTabWrapper,
   FTUserImage,
 } from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { clearDataFromStorage, navigation, redirectTo } from "../utils";
+import { COLORS, icons } from "../constants";
+import { clearDataFromStorage, redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
 
 const {
@@ -32,7 +25,6 @@ const {
   profileDetailsWrap,
   profileOuterBorder,
   profileInnerBorder,
-  userProfileBg,
   userEditiconBg,
   profileNameWrap,
   profileNameText,
@@ -41,36 +33,36 @@ const {
   upgradeOdogwuText,
 } = ProfileScreenStyles;
 
-const profileActions = [
-  {
-    Icon: Mywalleticon,
-    title: "My Wallets",
-    action: () => navigation.navigate("mywallet_screen"),
-  },
-  {
-    Icon: Securityprivicon,
-    title: "Account Verification",
-    action: () => navigation.navigate("accountverification_screen"),
-  },
-  {
-    Icon: Supporticon,
-    title: "Support & Help Desk",
-    action: () => console.log("yes support"),
-  },
-  {
-    Icon: Securityprivicon,
-    title: "Security & Privacy",
-    action: () => navigation.navigate("securityandprivacy_screen"),
-  },
-  {
-    Icon: Abouticon,
-    title: "About Feather App",
-    action: () => console.log("yes about"),
-  },
-];
-
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   const { authdata, setAuthData, setToken } = useContext(AuthContext);
+
+  const profileActions = [
+    {
+      Icon: Mywalleticon,
+      title: "My Wallets",
+      action: () => navigation.navigate("mywallet_screen"),
+    },
+    {
+      Icon: Securityprivicon,
+      title: "Account Verification",
+      action: () => navigation.navigate("accountverification_screen"),
+    },
+    {
+      Icon: Supporticon,
+      title: "Support & Help Desk",
+      action: () => console.log("yes support"),
+    },
+    {
+      Icon: Securityprivicon,
+      title: "Security & Privacy",
+      action: () => navigation.navigate("securityandprivacy_screen"),
+    },
+    {
+      Icon: Abouticon,
+      title: "About Feather App",
+      action: () => console.log("yes about"),
+    },
+  ];
 
   const upgradeDecision = () => {
     switch (authdata?.userDetails?.userLevel) {

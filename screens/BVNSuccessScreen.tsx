@@ -2,9 +2,11 @@ import { View, Text } from "react-native";
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { FTCustombutton, FTMainwrapper } from "../components";
-import { navigation } from "../utils";
+
+import { useNavigation } from "@react-navigation/native";
 
 const BVNSuccessScreen = () => {
+  const navigation = useNavigation();
   const { token } = useContext(AuthContext);
   const shareAccountDetails = () => {};
 

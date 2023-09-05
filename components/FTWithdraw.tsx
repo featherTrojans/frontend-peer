@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useContext, useState } from "react";
-import { navigation } from "../utils";
+
 import { Pressable } from "react-native";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
@@ -9,10 +9,12 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import amountFormatter from "../utils/formatMoney";
 import { useAlert } from "../hooks";
+import { useNavigation } from "@react-navigation/native";
 
 const { Withdrawicon, Searchmerchanticon, Paymerchanticon } = icons;
 
 const FTWithdraw = () => {
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();

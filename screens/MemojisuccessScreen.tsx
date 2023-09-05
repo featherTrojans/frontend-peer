@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { FTIconwithbg, FTMainwrapper } from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { COLORS, icons } from "../constants";
 import { ChoosememojiScreenStyles } from "../assets/styles/screens";
-import { navigation } from "../utils";
 
 const {
   buttonText,
@@ -15,7 +14,7 @@ const {
 
 const { Blacksendicon } = icons;
 
-const MemojisuccessScreen = ({ route }) => {
+const MemojisuccessScreen = ({ route, navigation }) => {
   const active = route?.params?.active;
   const emojiindex = route?.params?.emojiindex;
   return (

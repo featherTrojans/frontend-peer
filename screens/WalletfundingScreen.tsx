@@ -7,14 +7,12 @@ import {
 } from "react-native";
 import React, { useContext } from "react";
 import {
-  FTCustombutton,
   FTIconwithbg,
   FTIconwithtitleandinfo,
   FTTitlepagewrapper,
 } from "../components";
 
-import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { navigation } from "../utils";
+import { COLORS, icons } from "../constants";
 import { WalletfundingScreenStyles } from "../assets/styles/screens";
 import { useCopyclipboard } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -35,7 +33,7 @@ const {
 } = WalletfundingScreenStyles;
 
 const { Debitcardicon } = icons;
-const WalletfundingScreen = ({ route }) => {
+const WalletfundingScreen = ({ navigation }) => {
   const { authdata } = useContext(AuthContext);
 
   const onsubmit = async (amount) => {

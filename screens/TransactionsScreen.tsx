@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import {
   Text,
   View,
@@ -11,7 +17,6 @@ import {
   FTBillPayment,
   FTWithdraw,
   FTTransfer,
-  FTAddcash,
   FTEmptycomponent,
   FTIconwithbg,
   FTTabWrapper,
@@ -25,7 +30,6 @@ import formatData from "../utils/fomatTrans";
 
 import { TransactionScreenStyles } from "../assets/styles/screens";
 import { AuthContext } from "../context/AuthContext";
-import { redirectTo } from "../utils";
 import amountFormatter from "../utils/formatMoney";
 
 const {
@@ -44,20 +48,10 @@ const {
 
 const {
   Withdrawicon,
-  Fundwallet,
   Paybillicon,
   Fundwalleticon,
   Walletactionicon,
-  Historyicon,
   Transfersicon,
-  Walletblueicon,
-  Bankblueicon,
-  Paymerchanticon,
-  Searchmerchanticon,
-  Cableicon,
-  Electricityicon,
-  Airtimeicon,
-  Debitcardicon,
 } = icons;
 
 const TransactionsScreen = ({ navigation }) => {
@@ -134,9 +128,6 @@ const TransactionsScreen = ({ navigation }) => {
       action: () => navigation.navigate("walletfunding_screen"),
     },
   ];
-
-
-
 
   return (
     <FTTabWrapper

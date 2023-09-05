@@ -1,15 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useContext } from "react";
+import React from "react";
 import {
   ChatsScreenStyles,
   ProfileScreenStyles,
 } from "../assets/styles/screens";
 import { FTChatList, FTTabWrapper } from "../components";
-import { navigation } from "../utils";
 import { icons } from "../constants";
-import { AuthContext } from "../context/AuthContext";
 import useChats from "../hooks/useChats";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 const { Startnewchaticon } = icons;
 const {} = ChatsScreenStyles;

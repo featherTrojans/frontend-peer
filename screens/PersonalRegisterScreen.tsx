@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Pressable, View } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Pressable } from "react-native";
 
 import { PersonalRegisterScreenStyles } from "../assets/styles/screens/personalregister.style";
 import {
@@ -15,14 +14,16 @@ import {
 import axiosCustom from "../httpRequests/axiosCustom";
 // import Loader from "../components/FTLoader";
 import { useForm } from "react-hook-form";
-import { VALIDATION, navigation } from "../utils";
+import { VALIDATION } from "../utils";
 import { useAlert } from "../hooks";
 import { FlatList } from "react-native-gesture-handler";
 import { Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const { optionText } = PersonalRegisterScreenStyles;
 
 const Personal = ({}) => {
+  const navigation = useNavigation();
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });

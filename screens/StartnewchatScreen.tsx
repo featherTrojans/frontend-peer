@@ -1,34 +1,19 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { StartnewchatScreenStyles } from "../assets/styles/screens";
 
 import {
-  FTCustombutton,
-  FTDetailsModal,
   FTIconwithtitleandinfo,
   FTLoader,
   FTSearchinput,
-  FTSwitchbtn,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { navigation, redirectTo } from "../utils";
-import useDebounce from "../utils/debounce";
-import axiosCustom from "../httpRequests/axiosCustom";
-import amountFormatter from "../utils/formatMoney";
+import { COLORS, icons } from "../constants";
 import useContact from "../hooks/useContact";
 
 const { Smallphoneicon } = icons;
 
-const { searchContactWrap, searchContactText, listHeaderText } =
-  StartnewchatScreenStyles;
+const { listHeaderText } = StartnewchatScreenStyles;
 
 const ListHeader = ({ value, onchange }) => {
   return (
@@ -43,7 +28,7 @@ const ListHeader = ({ value, onchange }) => {
   );
 };
 
-const StartnewchatScreen = () => {
+const StartnewchatScreen = ({ navigation }) => {
   const [featherContacts, setFeatherContacts] = useState([]);
   const [searchval, setSearchval] = useState("");
   const { contactsResolved, loading } = useContact();

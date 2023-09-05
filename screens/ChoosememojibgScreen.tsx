@@ -11,7 +11,6 @@ import { FTIconwithbg, FTLoader, FTTitlepagewrapper } from "../components";
 import * as Haptics from "expo-haptics";
 import { FONTS, fontsize, icons } from "../constants";
 import { ChoosememojiScreenStyles } from "../assets/styles/screens";
-import { navigation } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import { useAlert } from "../hooks";
@@ -73,7 +72,7 @@ const ColorOption = ({ color, active, setActive }) => {
   );
 };
 
-const ChoosememojibgScreen = ({ route }) => {
+const ChoosememojibgScreen = ({ route, navigation }) => {
   const [active, setActive] = useState("#D9D9D9");
   const { authdata, setAuthData } = useContext(AuthContext);
   const emojiindex = route?.params?.emojiindex;
@@ -126,7 +125,7 @@ const ChoosememojibgScreen = ({ route }) => {
             marginTop: 66,
             marginBottom: 50,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <FTIconwithbg imageUrl={emojiindex} bG={active} size={150} />

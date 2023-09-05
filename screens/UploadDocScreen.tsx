@@ -1,4 +1,4 @@
-import { View, Text, Pressable, FlatList, ScrollView } from "react-native";
+import { Text, Pressable, FlatList } from "react-native";
 import React, { useContext, useState } from "react";
 import {
   FTCustombutton,
@@ -9,20 +9,20 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
-import { VALIDATION, navigation } from "../utils";
+import { VALIDATION } from "../utils";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native";
-import { useAlert, useCustomModal } from "../hooks";
+import { useAlert } from "../hooks";
 import { nigeriastates, stateslgs } from "../utils/countryandstate";
 import axiosCustom from "../httpRequests/axiosCustom";
-import { COLORS, FONTS, SIZES, fontsize } from "../constants";
+import { SIZES } from "../constants";
 import { UploadDocScreenStyles } from "../assets/styles/screens";
 import { AuthContext } from "../context/AuthContext";
 
 const { optionText, uploadDocBtnWrap, uploadDocBtnText } =
   UploadDocScreenStyles;
 
-const UploadDocScreen = () => {
+const UploadDocScreen = ({ navigation }) => {
   const { authdata, setAuthData } = useContext(AuthContext);
   const { control, handleSubmit } = useForm({ mode: "all" });
   const [id_image, setid_image] = useState({});

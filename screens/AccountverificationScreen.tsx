@@ -18,9 +18,10 @@ import { AccountverificationScreenStyles } from "../assets/styles/screens";
 import { FTCustombutton, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
-import { navigation } from "../utils";
+
 import { useAlert } from "../hooks";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
+import { useNavigation } from "@react-navigation/native";
 const { Levelcheckicon, Leveloptioncancelicon, Leveloptioncheckicon } = icons;
 
 const { width } = Dimensions.get("window");
@@ -40,6 +41,7 @@ const {
 } = AccountverificationScreenStyles;
 
 const AccountverificationScreen = (props) => {
+  const navigation = useNavigation();
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   const userlevel = authdata?.userDetails?.userLevel;

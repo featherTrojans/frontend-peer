@@ -4,6 +4,7 @@ import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
 import { FTHorizontaline } from ".";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { redirectTo } from "../utils";
+import { useNavigation } from "@react-navigation/native";
 const { Airtimeicon, Electricityicon, Cableicon } = icons;
 
 const closeModalAndRedirect = (redirectScreenName) => {
@@ -13,6 +14,7 @@ const closeModalAndRedirect = (redirectScreenName) => {
 };
 
 const FTBillPayment = () => {
+  const navigation = useNavigation();
   return (
     <View>
       <Text style={styles.transferCashText}>Bill Payments</Text>
@@ -22,7 +24,7 @@ const FTBillPayment = () => {
           title="Mobile Airtime & Data"
           info="Airtime and data from your network."
           Icon={Airtimeicon}
-          onPress={() => closeModalAndRedirect("choosenetwork_screen")}
+          onPress={() => navigation.navigate("choosenetwork_screen")}
           bG={COLORS.Tblue3}
         />
         <FTHorizontaline marginV={15} />
@@ -30,7 +32,7 @@ const FTBillPayment = () => {
           title="Electricity & Utility"
           info="Pay your power bills easily"
           Icon={Electricityicon}
-          onPress={() => closeModalAndRedirect("choosebiller_screen")}
+          onPress={() => navigation.navigate("choosebiller_screen")}
           bG={COLORS.Tyellow}
         />
         <FTHorizontaline marginV={15} />
@@ -38,7 +40,7 @@ const FTBillPayment = () => {
           title="Cable TV Subscriptions"
           info="Pay your cable tv subscriptions"
           Icon={Cableicon}
-          onPress={() => closeModalAndRedirect("choosecable_screen")}
+          onPress={() => navigation.navigate("choosecable_screen")}
           bG={COLORS.Tgreen}
         />
       </View>

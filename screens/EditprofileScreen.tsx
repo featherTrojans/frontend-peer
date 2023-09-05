@@ -15,12 +15,7 @@ import {
   FTUserImage,
 } from "../components";
 import { useForm } from "react-hook-form";
-import {
-  VALIDATION,
-  navigation,
-  redirectTo,
-  setAuthorizationToken,
-} from "../utils";
+import { VALIDATION, redirectTo, setAuthorizationToken } from "../utils";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import useDebounce from "../utils/debounce";
@@ -40,7 +35,7 @@ const {
   optionText,
 } = EditprofileScreenStyles;
 
-const EditprofileScreen = () => {
+const EditprofileScreen = ({ navigation }) => {
   const { authdata, setAuthData } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   const name = authdata?.userDetails?.fullName.split(" ");
@@ -131,7 +126,7 @@ const EditprofileScreen = () => {
         onPress={() => redirectTo("changeappearance_screen")}
         style={{ flexDirection: "row", alignItems: "center" }}
       >
-        <FTUserImage size={35}/>
+        <FTUserImage size={35} />
         <View style={headerRightWrap}>
           <Profileediticon />
           <Text style={headerRightEditText}>Edit</Text>

@@ -7,25 +7,24 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { icons } from "../constants";
-import { redirectTo } from "../utils";
 import { electricityLogos } from "../assetdatas";
 
 const {} = BillerstateScreenStyles;
-const { Bluecardicon } = icons;
+const { Bluecardicon, Electricityicon } = icons;
 
-const BillerstateScreen = () => {
+const BillerstateScreen = ({ navigation }) => {
   return (
     <FTTitlepagewrapper title="Choose Biller State">
       <FTSearchinput placeholder="Search Biller" />
 
-      {electricityLogos.map(({ name, logo }, index) => {
+      {electricityLogos.map(({ name, logo, service }, index) => {
         return (
           <FTIconwithtitleandinfo
             key={index}
             bG="transparent"
             title={name}
-            onPress={() => redirectTo("meternumber_screen")}
-            imageUrl={logo}
+            onPress={() => navigation.navigate("meternumber_screen")}
+            Icon={Electricityicon}
             mB={28}
             size={35}
           />

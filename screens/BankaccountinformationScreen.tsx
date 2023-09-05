@@ -10,7 +10,7 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
-import { VALIDATION, navigation } from "../utils";
+import { VALIDATION } from "../utils";
 import { FONTS, icons } from "../constants";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -20,7 +20,7 @@ const {} = BankaccountinformationScreenStyles;
 const { Blacksendicon } = icons;
 
 const BENEFICIARY_TYPE = "transferbank";
-const BankaccountinformationScreen = ({ route }) => {
+const BankaccountinformationScreen = ({ route, navigation }) => {
   const bankvalue = route?.params?.bankvalue;
   const bankimage = route?.params?.bankimage;
   const amount = route?.params?.amount;

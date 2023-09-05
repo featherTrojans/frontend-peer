@@ -6,13 +6,10 @@ import {
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
-import { icons } from "../constants";
-import { navigation, redirectTo } from "../utils";
 import { networkLogos } from "../assetdatas";
 const {} = ChoosenetworkScreenStyles;
-const { Bluecardicon } = icons;
 
-const ChoosenetworkScreen = () => {
+const ChoosenetworkScreen = ({ navigation }) => {
   return (
     <FTTitlepagewrapper title="Choose Network">
       <FTSearchinput placeholder="Search network" />

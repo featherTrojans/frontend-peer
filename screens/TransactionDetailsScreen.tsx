@@ -10,43 +10,28 @@ import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
 import moment from "moment";
-import { assetsDB, bankLogo } from "../assetdatas";
 import {
-  FTBackheader,
   FTHorizontaline,
   FTIconwithbg,
-  FTMainwrapper,
-  FTSendingandreceive,
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, icons } from "../constants";
 import amountFormatter from "../utils/formatMoney";
-import { nameSplitToTwo } from "../utils/nameSplitter";
 import { TransactiondetailsScreenStyles } from "../assets/styles/screens";
 import { useAlert, useCopyclipboard } from "../hooks";
 
 const {
-  container,
-  detailsContainer,
   eachDetailContainer,
   eachDetailTitle,
-  typeAndIconWrap,
   eachDetailValue,
   optionWrapper,
   optionBlock,
   eachOptionWrapper,
   eachOptionTitle,
-  dateWrapper,
-  dateWrap,
-  dateText,
-  transactionArrowBg,
-  transactionTypeBg,
-  transactionTypeText,
   transactionRefText,
   refAndCopyWrap,
   refText,
   tapAndCopy,
-  headerBlock,
 } = TransactiondetailsScreenStyles;
 
 const { Sharereceipt, Downloadreceipt, Reporttransactions, Arrowin, Arrowout } =
@@ -424,9 +409,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
       return (
         <>
           <Eachoption title="Sender Name" value={senderName} />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
           <Eachoption title="Receiver Name" value={receiverName} />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
         </>
       );
     }
@@ -440,11 +425,11 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
             title="Account Number"
             value={bankDetails.account_number}
           />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
           <Eachoption title="Account Name" value={bankDetails.account_name} />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
           <Eachoption title="Bank" value={bankDetails.bank_name} />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
         </>
       );
     }
@@ -525,20 +510,20 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
 
         <View style={eachOptionWrapper}>
           <Eachoption title="Transaction Type" value={title} />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
 
           <Eachoption title="Date" value={formatDateTime} />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
           {FeatherTransferDetails()}
           {BankTransferDetails()}
           {AirtimePurchase()}
           <Eachoption title="Amount" value={`N${amountFormatter(amount)}`} />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
           <Eachoption
             title="Transaction Charges"
             value={`N${amountFormatter(charges)}`}
           />
-          <FTHorizontaline  marginV={18} />
+          <FTHorizontaline marginV={18} />
           <Eachoption
             title="Total"
             value={`N${amountFormatter(total.toString())}`}

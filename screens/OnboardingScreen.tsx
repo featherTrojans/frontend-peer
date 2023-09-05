@@ -1,24 +1,16 @@
 import React, { useRef, useState } from "react";
 import { FlatList, Animated, View, Text, TouchableOpacity } from "react-native";
-import { OnboardingScreenNavigationProps } from "../types";
-import { COLORS, FONTS, fontsize, icons, SIZES } from "../constants";
+import { COLORS, icons, SIZES } from "../constants";
 import onboardingdatas from "../onboardingdatas";
-import Customstatusbar from "./shared/Customstatusbar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OnboardingScreenStyles } from "../assets/styles/screens";
 import { FTCustombutton, FTEachonboarding, FTMainwrapper } from "../components";
 
-
-const {
-  animatedDots,
-  animatedDotsWrap,
-  dotAndSkipWrap,
-  skipWrap,
-  skipText,
-} = OnboardingScreenStyles;
+const { animatedDots, animatedDotsWrap, dotAndSkipWrap, skipWrap, skipText } =
+  OnboardingScreenStyles;
 const { Skiplatericon } = icons;
 
-const OnboardingScreen = ({navigation}) => {
+const OnboardingScreen = ({ navigation }) => {
   const scrollX = useRef<any>(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList>(null);
 
@@ -50,8 +42,7 @@ const OnboardingScreen = ({navigation}) => {
     navigation.replace("login_screen");
   };
 
-
-  let isLastIndex = viewIndex === onboardingdatas.length - 1
+  let isLastIndex = viewIndex === onboardingdatas.length - 1;
 
   return (
     <FTMainwrapper pH={0}>
@@ -91,10 +82,18 @@ const OnboardingScreen = ({navigation}) => {
             );
           })}
         </View>
-        {!isLastIndex ? <TouchableOpacity activeOpacity={0.7} onPress={navigateToLogin} style={skipWrap}>
-          <Skiplatericon />
-          <Text style={skipText}>Skip</Text>
-        </TouchableOpacity> : <View style={{height: 14}}/>}
+        {!isLastIndex ? (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={navigateToLogin}
+            style={skipWrap}
+          >
+            <Skiplatericon />
+            <Text style={skipText}>Skip</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={{ height: 14 }} />
+        )}
       </View>
 
       <FlatList
@@ -117,11 +116,10 @@ const OnboardingScreen = ({navigation}) => {
 
       {/* Footer--Dots and the nxet button */}
       <View style={{ paddingHorizontal: 20, paddingBottom: 20 }}>
-      {/* <Text>{isLastIndex ? "tha s" : "Me"}</Text> */}
+        {/* <Text>{isLastIndex ? "tha s" : "Me"}</Text> */}
         {isLastIndex && (
           <>
-          
-          <FTCustombutton btntext="Get Started" onpress={navigateToLogin} />
+            <FTCustombutton btntext="Get Started" onpress={navigateToLogin} />
           </>
         )}
       </View>

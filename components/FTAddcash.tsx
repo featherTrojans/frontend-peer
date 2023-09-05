@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { navigation } from "../utils";
+
 import axiosCustom from "../httpRequests/axiosCustom";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
 import { FTHorizontaline } from ".";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { useNavigation } from "@react-navigation/native";
 const { Debitcardicon } = icons;
 const FTAddcash = () => {
+  const navigation = useNavigation();
   const onsubmit = (amount) => {
     const action = async () => {
       const response = await axiosCustom.post("/pay", { amount: amount });

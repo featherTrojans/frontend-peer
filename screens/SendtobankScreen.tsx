@@ -12,10 +12,10 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, icons } from "../constants";
-import { navigation, redirectTo } from "../utils";
 import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
 import { useAlert } from "../hooks";
+import { useNavigation } from "@react-navigation/native";
 
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
@@ -26,6 +26,7 @@ const {} = SendtobankScreenStyles;
 const BENEFICIARY_TYPE = "transferbank";
 
 const ListHeader = ({ amount }) => {
+  const navigation = useNavigation();
   return (
     <>
       <FTIconwithtitleandinfo
@@ -42,7 +43,7 @@ const ListHeader = ({ amount }) => {
   );
 };
 
-const SendtobankScreen = ({ route }) => {
+const SendtobankScreen = ({ route, navigation }) => {
   const { errorAlert } = useAlert();
   const amount = route.params?.amount;
   const [loading, setLoading] = useState(false);
@@ -73,6 +74,7 @@ const SendtobankScreen = ({ route }) => {
       });
       const acctdata = response?.data?.data;
       const action = async (pin) => {
+        console.log(Number(amount));
         try {
           await axiosCustom.post("/withdraw", {
             amount: Number(amount),
@@ -102,7 +104,7 @@ const SendtobankScreen = ({ route }) => {
           },
           {
             leftSide: "Total to be sent",
-            rightSide: `N${Number(amount) + 250}`,
+            rightSide: `N${Number(amount) + 25}`,
           },
         ],
       };
@@ -144,13 +146,17 @@ const SendtobankScreen = ({ route }) => {
         bounces={false}
         ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
         renderItem={({ item }) => {
+          let dataobject = {};
+          if (item?.data) {
+            dataobject = JSON.parse(item?.data);
+          }
           return (
             <FTIconwithtitleandinfo
-              title={item?.account_name}
-              info={item?.account_number}
-              onPress={() => handleToSendToBeneficiary(item)}
+              title={dataobject?.account_name}
+              info={dataobject?.account_number}
+              onPress={() => handleToSendToBeneficiary(dataobject)}
               bG={COLORS.Tblue4}
-              imageUrl={item?.imageUrl}
+              imageUrl={dataobject?.imageUrl}
             />
           );
         }}
