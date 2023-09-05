@@ -31,8 +31,10 @@ import FTBillPayment from "./FTBillPayment";
 import FTSuccessOrError from "./FTSuccessOrError";
 import FTUserImage from "./FTUserImage";
 import FTOtherImage from "./FTOtherImage";
+import FTTransact from "./FTTransact";
 
 export {
+  FTTransact,
   FTBillPayment,
   FTAddcash,
   FTTransfer,
