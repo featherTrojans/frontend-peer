@@ -53,7 +53,7 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     ...fontsize.xsmallest,
     ...FONTS.regular,
     color: COLORS.grey20,
-    marginTop: 6
+    marginTop: 6,
   },
 
   chatTransferMsgWrap: {
@@ -104,7 +104,6 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     paddingVertical: 20,
     flexDirection: "row",
     alignItems: "center",
-
   },
   textinput: {
     flex: 1,
@@ -251,7 +250,7 @@ export const ChatsdmScreenStyles = StyleSheet.create({
   sendCashWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: getBottomSpace() + 20,
+    // marginBottom: getBottomSpace() + 20,
   },
   sendCashButton: {
     paddingHorizontal: 15,
@@ -276,6 +275,11 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     ...fontsize.smallest,
     ...FONTS.medium,
     lineHeight: 18,
+  },
+  transactionSuccessText: {
+    ...fontsize.small,
+    ...FONTS.regular,
+    color: COLORS.blue9,
   },
 
   //Choose amount to send modal

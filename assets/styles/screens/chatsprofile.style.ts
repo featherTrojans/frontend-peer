@@ -33,11 +33,17 @@ export const ChatsprofileScreenStyles = StyleSheet.create({
     marginBottom: 11,
     ...fontsize.small,
     ...FONTS.bold,
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   },
   profileDateJoined: {
     ...fontsize.xsmallest,
     ...FONTS.medium,
     color: COLORS.grey16,
+  },
+  recentTransactText: {
+    marginBottom: 32,
+    ...fontsize.xxsmallest,
+    ...FONTS.semibold,
+    color: COLORS.blue9,
   },
 });

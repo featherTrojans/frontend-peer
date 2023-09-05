@@ -117,11 +117,7 @@ const OnboardingScreen = ({ navigation }) => {
       {/* Footer--Dots and the nxet button */}
       <View style={{ paddingHorizontal: 20, paddingBottom: 20 }}>
         {/* <Text>{isLastIndex ? "tha s" : "Me"}</Text> */}
-        {isLastIndex && (
-          <>
-            <FTCustombutton btntext="Get Started" onpress={navigateToLogin} />
-          </>
-        )}
+        {isLastIndex && <FTCustombutton btntext="Get Started" onpress={navigateToLogin} />}
       </View>
     </FTMainwrapper>
   );

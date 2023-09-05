@@ -13,8 +13,8 @@ export const FTBackheaderStyles = StyleSheet.create({
   backArrowContainer: {
     justifyContent: "center",
     alignItems: "center",
-    width: 45,
-    height: 45,
+    width: 32,
+    height: 32,
     borderRadius: 45 / 2,
     borderWidth: 1,
 
