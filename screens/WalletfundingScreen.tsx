@@ -61,7 +61,13 @@ const WalletfundingScreen = ({ navigation }) => {
             <Text style={blockHeader}>Recommended</Text>
           </View>
           <View style={{ alignItems: "center" }}>
-            <FTIconwithbg Icon={Debitcardicon} bG={COLORS.blue10} size={52} />
+
+            <FTIconwithbg 
+            bG={''} 
+            size={52} 
+            imageUrl="https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fvfd.png?alt=media&token=edb7d867-00fc-4de0-b117-c2b0395965cb"
+            />
+
             <Text style={bankNameText}>VFD Microfinance Bank</Text>
 
             <TouchableOpacity activeOpacity={0.8} onPress={CopyAction}>

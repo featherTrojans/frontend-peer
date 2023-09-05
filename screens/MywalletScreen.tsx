@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useContext } from "react";
 import { MywalletScreenStyles } from "../assets/styles/screens";
-import { FTTitlepagewrapper } from "../components";
+import { FTIconwithbg, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { useCopyclipboard } from "../hooks";
 import { AuthContext } from "../context/AuthContext";
@@ -42,9 +42,9 @@ const MywalletScreen = () => {
     switch (authdata?.userDetails?.userLevel) {
       case 1:
         return "Newbie";
-      case 3:
+      case 2:
         return "Odogwu";
-      case 4:
+      case 3:
         return "Veteran";
       default:
         return null;
@@ -91,7 +91,11 @@ const MywalletScreen = () => {
         <View style={blockWrap}>
           <View style={BAlign}>
             <Text style={receiveMoneyText}>Receive Money</Text>
-            <View style={vfgLogo} />
+            <FTIconwithbg
+              bG=""
+              size={42}
+              imageUrl="https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fvfd.png?alt=media&token=edb7d867-00fc-4de0-b117-c2b0395965cb"
+            />
           </View>
 
           <View style={{ marginTop: 30 }}>

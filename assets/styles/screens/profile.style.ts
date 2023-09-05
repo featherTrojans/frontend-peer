@@ -60,7 +60,7 @@ export const ProfileScreenStyles = StyleSheet.create({
     alignItems: "center"
   },
   profileNameWrap: {
-    marginVertical: 25,
+    marginVertical: 20,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -72,7 +72,7 @@ export const ProfileScreenStyles = StyleSheet.create({
   profileUsername: {
     ...fontsize.smallest,
     ...FONTS.medium,
-    marginTop: 12,
+    marginTop: 5,
     textTransform: "lowercase"
   },
   upgradeBg: {

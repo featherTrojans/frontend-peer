@@ -7,6 +7,8 @@ import { FTHorizontaline } from ".";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 const { Debitcardicon } = icons;
+
+
 const FTAddcash = () => {
   const navigation = useNavigation();
   const onsubmit = (amount) => {

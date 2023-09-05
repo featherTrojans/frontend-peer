@@ -135,11 +135,11 @@ export default function App() {
         </LocationProvider>
       </AuthProvider>
       <Toast
-        config={toastConfig}
-        topOffset={getStatusBarHeight(true)}
-        onShow={() => console.log("Status shown")}
-        onHide={() => console.log("Status hidden")}
-      />
+          config={toastConfig}
+          topOffset={0}
+          onShow={() => console.log("Status shown")}
+          onHide={() => console.log("Status hidden")}
+        />
     </GestureHandlerRootView>
   );
 }
@@ -152,6 +152,7 @@ const appStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingVertical: 15,
+    paddingTop: getStatusBarHeight(true) + 15
   },
   updateAlertWrapper: {
     width: "100%",

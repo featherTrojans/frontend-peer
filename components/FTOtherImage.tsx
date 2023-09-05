@@ -3,7 +3,7 @@ import React from "react";
 import { COLORS, FONTS, fontsize, images } from "../constants";
 
 import { allMemojis } from "../assetdatas";
-import { nameSplitToTwo, nameSplitterFirstName } from "../utils/nameSplitter";
+import { nameSplitToTwo, nameSplitter, nameSplitterFirstName } from "../utils/nameSplitter";
 import { Text } from "react-native";
 
 const { Notificationimage } = images;
@@ -104,16 +104,7 @@ const FTOtherImage = ({
       onPress={onpress}
     >
       {fullname ? (
-        <Text
-          style={{
-            textAlign: "center",
-            ...fontsize.small,
-            ...FONTS.regular,
-            color: COLORS.blue9,
-          }}
-        >
-          {nameSplitterFirstName(fullname)}
-        </Text>
+        <Text style={{ textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9 }}>{nameSplitter(fullname)}</Text>
       ) : (
         <Text>AA</Text>
       )}

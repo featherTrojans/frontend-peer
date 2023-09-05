@@ -90,6 +90,9 @@ const {
   Successtransfericon,
   Smalllockicon,
   Smallbackarrow,
+  Sendcashicon,
+  Chattransfericon,
+  Keeptypingicon,
   Feathecomingsoonchatanimate,
 } = icons;
 
@@ -109,10 +112,10 @@ const PickOption = ({ userInfo, openAmount, closeModal }) => {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={openAmount}
-          style={[{ backgroundColor: COLORS.blue5 }, sendCashButton]}
+          style={[{ backgroundColor: COLORS.blue6 }, sendCashButton]}
         >
           <View style={buttonIconBg}>
-            <Blacksendicon />
+            <Chattransfericon />
           </View>
           <Text style={buttonText}>Send Cash?</Text>
         </TouchableOpacity>
@@ -121,10 +124,10 @@ const PickOption = ({ userInfo, openAmount, closeModal }) => {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={closeModal}
-          style={[{ backgroundColor: COLORS.purple }, sendCashButton]}
+          style={[{ backgroundColor: COLORS.grey16 }, sendCashButton]}
         >
           <View style={buttonIconBg}>
-            <Blacksendicon />
+            <Keeptypingicon />
           </View>
           <Text style={buttonText}>Keep Typing?</Text>
         </TouchableOpacity>
@@ -496,7 +499,7 @@ const ChatsdmScreen = ({ route }) => {
               userInfo={userInfo}
             />
           ),
-          height: 220,
+          height: 250,
         });
         setShowModal((s) => !s);
         break;

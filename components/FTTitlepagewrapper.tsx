@@ -1,4 +1,11 @@
-import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import Customstatusbar from "../screens/shared/Customstatusbar";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
@@ -26,6 +33,7 @@ const FTTitlepagewrapper = ({
   headerBg = "#fff",
   childBg = "#fff",
   invert = false,
+  pB = 20,
 }: {
   children: any;
   title?: string;
@@ -39,13 +47,20 @@ const FTTitlepagewrapper = ({
   headerBg?: string;
   childBg?: string;
   invert?: boolean;
+  pB?: number;
 }) => {
   const { Swipemodal } = useSwipemodal();
   const navigation = useNavigation();
 
   return (
     <>
-      <SafeAreaView style={{ flex: 1, backgroundColor: bg, paddingBottom: 20 }}>
+      <SafeAreaView
+        style={{
+          flex: 1,
+          backgroundColor: bg,
+          paddingBottom: Platform.select({ android: pB }),
+        }}
+      >
         <Customstatusbar bg={bg} />
 
         <View style={[backHeaderWrap, { backgroundColor: headerBg }]}>
