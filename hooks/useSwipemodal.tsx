@@ -6,7 +6,6 @@ import Animated, {
   SlideInDown,
   SlideOutDown,
   runOnJS,
-  useAnimatedKeyboard,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -15,7 +14,7 @@ import Animated, {
 import Modal from "react-native-modal";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { AuthContext } from "../context/AuthContext";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const OVERDRAG = 20;
@@ -25,23 +24,6 @@ const useSwipemodal = () => {
     const offset = useSharedValue(0);
     const x = useSharedValue(0);
     const HEIGHT = modalHeight ? modalHeight : 200;
-    const keyboard = useAnimatedKeyboard();
-
-    const [keyboardStatus, setKeyboardStatus] = useState(false);
-
-    useEffect(() => {
-      const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-        setKeyboardStatus(true);
-      });
-      const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-        setKeyboardStatus(false);
-      });
-
-      return () => {
-        showSubscription.remove();
-        hideSubscription.remove();
-      };
-    }, []);
 
     const closeModal = () => {
       setShowModal((s) => !s);
@@ -65,9 +47,7 @@ const useSwipemodal = () => {
       });
 
     const translateY = useAnimatedStyle(() => ({
-      transform: !keyboardStatus
-        ? [{ translateY: offset.value }]
-        : [{ translateY: withSpring(-keyboard.height.value) }],
+      transform: [{ translateY: offset.value }],
     }));
 
     return (
@@ -104,6 +84,7 @@ const styles = StyleSheet.create({
   sheet: {
     backgroundColor: "white",
     padding: 25,
+    paddingTop: 44,
     width: "100%",
     position: "absolute",
     bottom: -OVERDRAG * 1.1,

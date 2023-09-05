@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   Text,
   View,
@@ -16,6 +16,7 @@ import {
   FTIconwithbg,
   FTTabWrapper,
   FTTransactionhistory,
+  FTHorizontaline,
 } from "../components";
 
 import { COLORS, icons } from "../constants";
@@ -69,14 +70,6 @@ const TransactionsScreen = ({ navigation }) => {
 
   useEffect(() => {
     getAllTransactions();
-
-
-
-    return () => {
-      console.log("yes")
-    }
-
- 
   }, []);
 
   const getAllTransactions = async () => {
@@ -96,19 +89,18 @@ const TransactionsScreen = ({ navigation }) => {
     getAllTransactions();
   };
 
-
   const switchModals = (value) => {
     switch (value) {
       case 0:
-        setContent({ child: <FTTransfer />, height: 300 });
+        setContent({ child: <FTTransfer />, height: 270 });
         setShowModal((s) => !s);
         break;
       case 1:
-        setContent({ child: <FTWithdraw />, height: 300 });
+        setContent({ child: <FTWithdraw />, height: 270 });
         setShowModal((s) => !s);
         break;
       case 2:
-        setContent({ child: <FTBillPayment />, height: 360 });
+        setContent({ child: <FTBillPayment />, height: 330 });
         setShowModal((s) => !s);
         break;
       default:
@@ -142,6 +134,9 @@ const TransactionsScreen = ({ navigation }) => {
       action: () => navigation.navigate("walletfunding_screen"),
     },
   ];
+
+
+
 
   return (
     <FTTabWrapper
@@ -209,13 +204,18 @@ const TransactionsScreen = ({ navigation }) => {
                   />
                 }
                 showsVerticalScrollIndicator={false}
-                renderItem={({ item, index }: any) => (
-                  <FTTransactionhistory
-                    date={item.time}
-                    datas={item.data}
-                    index={index}
-                  />
-                )}
+                renderItem={({ item, index }: any) => {
+                  return (
+                    <>
+                      <FTTransactionhistory
+                        date={item.time}
+                        datas={item.data}
+                        index={index}
+                      />
+                      {true && <FTHorizontaline marginV={15} />}
+                    </>
+                  );
+                }}
                 keyExtractor={(item: { time: string }) => item.time}
                 ListEmptyComponent={
                   <FTEmptycomponent

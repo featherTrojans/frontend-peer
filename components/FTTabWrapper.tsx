@@ -1,10 +1,10 @@
-import {  StyleSheet, Text, View,} from "react-native";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../screens/shared/Customstatusbar";
 import { useSwipemodal } from "../hooks";
 import { SIZES } from "../constants";
-
+import Modal from "react-native-modal";
 
 const FTTabWrapper = ({
   children,
@@ -26,16 +26,14 @@ const FTTabWrapper = ({
   pH?: number;
 }) => {
   const { Swipemodal } = useSwipemodal();
-  
-
 
   return (
     <>
+      <Customstatusbar />
       <SafeAreaView
         style={{ flex: 1, backgroundColor: bgColor }}
-        edges={['top']}
+        edges={["top"]}
       >
-   
         <View
           style={{ flex: 1, paddingHorizontal: pH, backgroundColor: childBg }}
         >

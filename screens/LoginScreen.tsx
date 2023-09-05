@@ -22,7 +22,11 @@ import {
 } from "../utils/biometrics";
 import { LoginScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
+<<<<<<< HEAD
 import { AWEEKAFTER, VALIDATION, setDataInstorage } from "../utils";
+=======
+import { AWEEKAFTER, VALIDATION,  setDataInstorage } from "../utils";
+>>>>>>> ac83b88acfa99a1c75a71ef4d4c39c9d4b3ec57f
 import { Controller, useForm } from "react-hook-form";
 
 const {
@@ -46,12 +50,13 @@ const setAuthorizationToken = (token: string) => {
 };
 
 // /auth/signin/v2
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({navigation}) => {
   const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
 
   const onsubmit = async (data) => {
+    console.log(data, "here is login data")
     try {
       setLoading(true);
       const response = await axiosCustom.post("/auth/signin/v2", data);

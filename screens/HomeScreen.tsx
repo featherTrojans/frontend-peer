@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   FlatList,
+  StatusBar
 } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
@@ -189,7 +190,9 @@ const Conversations = () => {
 
       <FTHorizontaline marginV={15} />
 
-      <ScrollView horizontal>
+      <ScrollView horizontal
+      showsHorizontalScrollIndicator={false}
+      >
         {allchatdata.map((item) => {
           return (
             <View style={{ marginHorizontal: 10 }}>
@@ -516,17 +519,17 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         setShowTabs(false);
         break;
       case 2:
-        setContent({ child: <FTTransfer />, height: 300 });
+        setContent({ child: <FTTransfer />, height: 270 });
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
       case 3:
-        setContent({ child: <FTWithdraw />, height: 300 });
+        setContent({ child: <FTWithdraw />, height: 270 });
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
       case 4:
-        setContent({ child: <FTBillPayment />, height: 360 });
+        setContent({ child: <FTBillPayment />, height: 330 });
         setShowModal((s) => !s);
         setShowTabs(false);
         break;
@@ -545,7 +548,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
-      {/* <Customstatusbar /> */}
+
       <View style={headerContainer}>
         <View style={profileContainer}>
           <FTUserImage size={45} />

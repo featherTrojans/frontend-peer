@@ -60,10 +60,6 @@ const switchModals = (value) => {
       <Pressable onPress={() => switchModals(1)} style={{paddingHorizontal: 20, paddingVertical: 15, backgroundColor: "blue"}}>
         <Text style={{color: "#fff", textAlign: "center"}}>Toggle Modal</Text>
       </Pressable>
-      
-    
-
-      
     </FTTitlepagewrapper>
     
     </>

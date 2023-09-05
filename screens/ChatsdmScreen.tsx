@@ -284,12 +284,7 @@ const ChatsdmScreen = ({ route }) => {
 
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const keyboard = useAnimatedKeyboard();
-  const translateStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateY: -keyboard.height.value }],
-    };
-  });
+
 
   const profileactions = [
     {
@@ -590,36 +585,39 @@ const ChatsdmScreen = ({ route }) => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        {/* Header Section */}
         <View style={chatHeader}>
           <View style={[headerDetailsContainer]}>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={navigation.goBack}
-              style={backArrowWrap}
-            >
-              <Smallbackarrow />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() =>
-                navigation.navigate("chatsprofile_screen", {
-                  userInfo,
-                  switchModals,
-                })
-              }
-              style={chatsDmProfileWrap}
-            >
-              <FTOtherImage
-                imageurl={userInfo?.imageUrl}
-                memojiImage={userInfo?.memoji}
-                fullname={userInfo?.fullName}
-              />
-              <View style={{ marginLeft: 18 }}>
-                <Text style={chatName}>{userInfo?.fullName}</Text>
-                {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}
-              </View>
-            </TouchableOpacity>
+            <View style={{flexDirection: "row", alignItems: "center"}}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={navigation.goBack}
+                style={backArrowWrap}
+              >
+                <Smallbackarrow />
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() =>
+                  navigation.navigate("chatsprofile_screen", {
+                    userInfo,
+                    switchModals,
+                  })
+                }
+                style={chatsDmProfileWrap}
+              >
+                <FTOtherImage
+                  imageurl={userInfo?.imageUrl}
+                  memojiImage={userInfo?.memoji}
+                  fullname={userInfo?.fullName}
+                />
+                <View style={{ marginLeft: 18 }}>
+                  <Text style={chatName}>{userInfo?.fullName}</Text>
+                  {/* <Text style={chatLastSeen}>Last online : 2 hours ago</Text> */}
+                </View>
+              </TouchableOpacity>
+            </View>
+
+
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => switchModals(0)}
@@ -669,9 +667,9 @@ const ChatsdmScreen = ({ route }) => {
           </Animated.ScrollView>
         )}
 
-        {/* Bottom Input */}
 
         <View style={chatTextInput}>
+          <View style={{width: 1, height: 20, backgroundColor: "grey", alignSelf: "center"}}/>
           <TextInput
             placeholder="Enter Message..."
             style={textinput}
@@ -681,7 +679,7 @@ const ChatsdmScreen = ({ route }) => {
             returnKeyType="done"
             onFocus={() => scrollViewRef?.current?.scrollToEnd({ animated: true })}
           />
-          {chattext !== "" && (
+          {chattext.trim() !== "" && (
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => sendFireBaseMessage()}

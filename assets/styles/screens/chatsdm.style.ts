@@ -29,19 +29,18 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     alignItems: "center",
   },
   headerDetailsContainer: {
+    flex: 1,
     flexDirection: "row",
     marginLeft: 5,
     alignItems: "center",
-    // justifyContent: "center",
-    // backgroundColor: "red"
+    justifyContent: "space-between",
   },
   chatsDmProfileWrap: {
-    flex: 1,
+    // flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    // justifyContent: "center",
+    alignSelf: "flex-start",
     marginLeft: 15,
-    // backgroundColor: "red"
   },
   chatName: {
     ...fontsize.smaller,
@@ -114,10 +113,10 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 3,
     ...FONTS.regular,
-    color: COLORS.grey7,
     ...fontsize.smallest,
-    borderLeftColor: "",
-    borderLeftWidth: 1,
+    color: COLORS.grey7,
+    // borderLeftColor: "",
+    // borderLeftWidth: 1,
   },
   messagesDateWrap: {
     justifyContent: "center",

@@ -45,68 +45,7 @@ const {
   Emptynotification,
 } = icons;
 
-const DATA = [
-  {
-    date: "Today",
-    messages: [
-      {
-        type: "credit",
-        title: "Wallet credit",
-        time: "2:39pm",
-        message:
-          "Hey, you just got credited NGN 15,650 in your Primary Wallet from @akinthomas23",
-      },
-    ],
-  },
-  {
-    date: "Yesterday",
-    messages: [
-      {
-        type: "account",
-        title: "Upgrade Account Type",
-        time: "2:39pm",
-        message:
-          "Hey padi, upgrade your account today, do more with the feather app.",
-      },
-    ],
-  },
-  {
-    date: "",
-    messages: [
-      {
-        type: "withdrawal",
-        title: "Cash Withdrawal",
-        time: "2:39pm",
-        message:
-          "Hey padi, upgrade your account today, do more with the feather app.",
-      },
-    ],
-  },
-  {
-    date: "",
-    messages: [
-      {
-        type: "withdrawal",
-        title: "Cash Withdrawal",
-        time: "2:39pm",
-        message:
-          "Hey padi, upgrade your account today, do more with the feather app.",
-      },
-    ],
-  },
-  {
-    date: "",
-    messages: [
-      {
-        type: "account",
-        title: "Upgrade Account Type",
-        time: "2:39pm",
-        message:
-          "Hey padi, upgrade your account today, do more with the feather app.",
-      },
-    ],
-  },
-];
+
 
 type notificationProps = {
   type: string;
