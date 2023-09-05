@@ -1,6 +1,6 @@
 import { View, Text, Pressable, TextInput } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
-import { navigation, setAuthorizationToken, setDataInstorage } from "../utils";
+import { setAuthorizationToken, setDataInstorage } from "../utils";
 import { FTCustombutton, FTLoader, FTTitlepagewrapper } from "../components";
 import OTPTextInput from "react-native-otp-textinput";
 import { COLORS, FONTS } from "../constants";
@@ -21,7 +21,7 @@ const {
 } = PhoneVerificationScreenStyles;
 
 // auth/signin/confirm
-const PhoneVerificationScreen = ({ route }) => {
+const PhoneVerificationScreen = ({ navigation, route }) => {
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
   const [otpCode, setOtpCode] = useState("");
@@ -106,16 +106,16 @@ const PhoneVerificationScreen = ({ route }) => {
         <Text style={enterDigitSubText}>{phoneNumber}</Text>.
       </Text>
 
-      <View style={{alignContent: "center", alignSelf: "center"}}>
-      <OTPTextInput
-        ref={otpInput}
-        handleTextChange={(text) => setOtpCode(text)}
-        inputCount={6}
-        tintColor={COLORS.blue16}
-        offTintColor={COLORS.grey21}
-        textInputStyle={otpInputWrap}
-        autoFocus={false}
-      />
+      <View style={{ alignContent: "center", alignSelf: "center" }}>
+        <OTPTextInput
+          ref={otpInput}
+          handleTextChange={(text) => setOtpCode(text)}
+          inputCount={6}
+          tintColor={COLORS.blue16}
+          offTintColor={COLORS.grey21}
+          textInputStyle={otpInputWrap}
+          autoFocus={false}
+        />
       </View>
       <View style={buttonWrap}>
         <FTCustombutton btntext="VERIFY" onpress={handlesubmit} />

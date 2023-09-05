@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useContext } from "react";
-import { navigation } from "../utils";
 import FTIconwithtitleandinfo from "./FTIconwithtitleandinfo";
 import { FTHorizontaline } from ".";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import amountFormatter from "../utils/formatMoney";
 import { AuthContext } from "../context/AuthContext";
 import { useAlert } from "../hooks";
+import { useNavigation } from "@react-navigation/native";
 
 const { Walletblueicon, Bankblueicon } = icons;
 const FTTransfer = () => {
+  const navigation = useNavigation();
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   const onsubmitToFeatherWallet = async (amount) => {

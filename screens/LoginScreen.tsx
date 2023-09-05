@@ -22,7 +22,7 @@ import {
 } from "../utils/biometrics";
 import { LoginScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
-import { AWEEKAFTER, VALIDATION, navigation, setDataInstorage } from "../utils";
+import { AWEEKAFTER, VALIDATION, setDataInstorage } from "../utils";
 import { Controller, useForm } from "react-hook-form";
 
 const {
@@ -46,7 +46,7 @@ const setAuthorizationToken = (token: string) => {
 };
 
 // /auth/signin/v2
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
@@ -63,7 +63,7 @@ const LoginScreen = () => {
     } catch (err) {
       if (
         "Aww padi! Incorrect feather tag/ phone number" ==
-        err.response.data.message
+        err?.response?.data?.message
       ) {
         await onsignup({ phoneNumber: data.username });
       } else {
