@@ -30,6 +30,7 @@ function useChats() {
       orderBy("createdAt", "desc")
     );
     const unsub = onSnapshot(chatQuery1, (docs) => {
+      setallchatdata([]);
       const newdata = [];
       docs.forEach((change) => {
         newdata.push(change.data());
@@ -58,6 +59,7 @@ function useChats() {
       orderBy("createdAt", "desc")
     );
     const unsub = onSnapshot(chatQuery1, (docs) => {
+      setallchatdata([]);
       const newdata = [];
       docs.forEach((change) => {
         newdata.push(change.data());
