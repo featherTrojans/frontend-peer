@@ -36,6 +36,7 @@ const {
   profileDetailWrap,
   profileNameText,
   profileDateJoined,
+  recentTransactText
 } = ChatsprofileScreenStyles;
 const { transactionWrap, transactionHeader, transactionText, viewAll } =
   HomeScreenStyles;
@@ -129,69 +130,53 @@ const ChatsprofileScreen = ({ route, navigation }) => {
       childBg={COLORS.white3}
       headerBg={COLORS.white3}
     >
-      {/* <ScrollView
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-            progressBackgroundColor="white"
-            colors={[COLORS.blue6]}
-            tintColor={COLORS.blue6}
-            title="Refreshing"
-            titleColor={COLORS.blue6}
-          />
-        }
-      >
-        <ListHeader />
-        <View style={[transactionWrap, { marginHorizontal: 0 }]}>
-          {formatData(transactions).map((transaction, index) => {
-            const { time, data } = transaction;
-            return (
-              <View style={{ flex: 1 }}>
-                <FTTransactionhistory date={time} datas={data} index={index} />
-                {true && <FTHorizontaline marginV={15} />}
-              </View>
-            );
-          })}
-        </View>
-      </ScrollView> */}
+  
       {loading ? (
-          <ActivityIndicator size="large" color={COLORS.blue6} />
-        ) : (
-          <Animated.FlatList
-            data={formatData(transactions)}
-            ListHeaderComponent={ListHeader}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={handleRefresh}
-                progressBackgroundColor="white"
-                colors={[COLORS.blue6]}
-                tintColor={COLORS.blue6}
-                title="Refreshing"
-                titleColor={COLORS.blue6}
-              />
-            }
-            showsVerticalScrollIndicator={false}
-            // style={transactionWrap}
-            renderItem={({ item, index }: any) => (
-                
-              <FTTransactionhistory
-                date={item.time}
-                datas={item.data}
-                index={index}
-              />
-            )}
-            keyExtractor={(item: { time: string }) => item.time}
-            ListEmptyComponent={
-              <FTEmptycomponent
-                msg="Sorry, You have not performed any transactions with this user"
-                showTransact={false}
-              />
-            }
-          />
-        )}
+        <ActivityIndicator size="large" color={COLORS.blue6} />
+      ) : (
+        <Animated.FlatList
+          data={formatData(transactions)}
+          ListHeaderComponent={ListHeader}
+          initialNumToRender={10}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              progressBackgroundColor="white"
+              colors={[COLORS.blue6]}
+              tintColor={COLORS.blue6}
+              title="Refreshing"
+              titleColor={COLORS.blue6}
+            />
+          }
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item, index }: any) => (
+            <View
+              style={{
+                backgroundColor: "white",
+                paddingHorizontal: 20,
+                paddingTop: 25,
+              }}
+            >
+              <Text style={recentTransactText}>Recent Transactions</Text>
+              <View style={{ marginBottom: 30 }}>
+                <FTTransactionhistory
+                  date={item.time}
+                  datas={item.data}
+                  index={index}
+                />
+              </View>
+            </View>
+          )}
+          keyExtractor={(item: { time: string }) => item.time}
+          ListEmptyComponent={
+            <FTEmptycomponent
+              msg="Sorry, You have not performed any transactions with this user"
+              showTransact={false}
+            />
+          }
+        />
+      )}
     </FTTitlepagewrapper>
   );
 };

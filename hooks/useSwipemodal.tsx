@@ -51,11 +51,8 @@ const useSwipemodal = () => {
     }));
 
     return (
-      <Modal
-      isVisible={showModal}
-      avoidKeyboard={true}
-      >
-        {/* {showModal && ( */}
+      <>
+        {showModal && (
           <AnimatedPressable
             entering={FadeIn}
             exiting={FadeOut}
@@ -73,8 +70,8 @@ const useSwipemodal = () => {
               </AnimatedPressable>
             </GestureDetector>
           </AnimatedPressable>
-        {/* )} */}
-      </Modal>
+        )}
+      </>
     );
   };
 

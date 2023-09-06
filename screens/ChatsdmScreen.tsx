@@ -36,8 +36,8 @@ import {
   orderBy,
   updateDoc,
 } from "firebase/firestore";
-import { usePushNotification } from "../hooks";
-import { COLORS, FONTS, icons } from "../constants";
+import { useCustomModal, usePushNotification } from "../hooks";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import LottieView from "lottie-react-native";
 import axiosCustom from "../httpRequests/axiosCustom";
 import formatData from "../utils/fomatTrans";
@@ -75,6 +75,7 @@ const {
   buttonIconBg,
   buttonText,
   chooseAmountHeader,
+  transactionSuccessText,
 
   chooseAmountInputWrap,
   textInputStyle,
@@ -94,11 +95,14 @@ const {
   Chattransfericon,
   Keeptypingicon,
   Feathecomingsoonchatanimate,
+  Successcheckanimate,
 } = icons;
 
 const PickOption = ({ userInfo, openAmount, closeModal }) => {
   return (
     <View style={{ backgroundColor: "#fff" }}>
+      {/* <TextInput style={{height: 50, borderColor: "red", borderWidth: 1}}/> */}
+
       <Text style={sendCashHeader}>
         Hey Padi, want to send cash to{" "}
         <Text style={{ textTransform: "capitalize" }}>
@@ -235,10 +239,14 @@ const TransactionPin = ({
 
 const ActionSuccess = () => {
   return (
-    <View style={{ backgroundColor: "#fff" }}>
-      <Text onPress={() => console.log("Yes bajhdb anndsk hj")}>
-        Successfull
-      </Text>
+    <View style={{ backgroundColor: "#fff", alignSelf: "center" }}>
+      <LottieView
+        source={Successcheckanimate}
+        autoPlay
+        loop
+        style={emptyChatAnimation}
+      />
+      <Text style={transactionSuccessText}>Transaction Successful</Text>
     </View>
   );
 };
@@ -260,8 +268,9 @@ const ChatsdmScreen = ({ route }) => {
   const textInputRef = useRef<TextInput>(null);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
+
+  const { CustomModal, openModal, closeModal } = useCustomModal();
 
   const focus = () => {
     if (textInputRef.current !== null) {
@@ -484,13 +493,10 @@ const ChatsdmScreen = ({ route }) => {
     setAmount(amount);
   };
 
-  const setSendSuccess = () => {
-    setShowModal(false);
-    switchModals(3);
-  };
   const switchModals = (value, amount) => {
     switch (value) {
       case 0:
+        openModal();
         setContent({
           child: (
             <PickOption
@@ -499,7 +505,7 @@ const ChatsdmScreen = ({ route }) => {
               userInfo={userInfo}
             />
           ),
-          height: 250,
+          height: 200,
         });
         setShowModal((s) => !s);
         break;
@@ -511,7 +517,7 @@ const ChatsdmScreen = ({ route }) => {
               openTransactionPin={openTransactionPin}
             />
           ),
-          height: 250,
+          height: 200,
         });
         setShowModal((s) => !s);
         break;
@@ -521,12 +527,12 @@ const ChatsdmScreen = ({ route }) => {
             <TransactionPin
               amount={amount}
               sendFireBaseMessage={sendFireBaseMessage}
-              setSendSuccess={setSendSuccess}
+              setSendSuccess={openSuccess}
               setchattext={setchattext}
               userInfo={userInfo}
             />
           ),
-          height: 250,
+          height: 200,
         });
         setShowModal((s) => !s);
         break;
@@ -538,11 +544,6 @@ const ChatsdmScreen = ({ route }) => {
       default:
         break;
     }
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    // switchModals(1)
   };
 
   const openAmount = () => {
@@ -560,20 +561,16 @@ const ChatsdmScreen = ({ route }) => {
   };
 
   return (
-    <FTMainwrapper
-      pH={0}
-      bgColor={COLORS.white}
-      childBg={COLORS.white3}
-      modalChildren={content.child}
-      showModal={showModal}
-      setShowModal={setShowModal}
-      modalHeight={content.height}
-    >
+    <FTMainwrapper pH={0} bgColor={COLORS.white} childBg={COLORS.white3}>
       <KeyboardAvoidingView
         keyboardVerticalOffset={40}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
+        <CustomModal>
+          <View style={{ height: content.height }}>{content.child}</View>
+        </CustomModal>
+
         <View style={chatHeader}>
           <View style={[headerDetailsContainer]}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -582,7 +579,7 @@ const ChatsdmScreen = ({ route }) => {
                 onPress={navigation.goBack}
                 style={backArrowWrap}
               >
-                <Smallbackarrow />
+                <Backarrow />
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.8}

@@ -64,8 +64,10 @@ const FTTitlepagewrapper = ({
         <Customstatusbar bg={bg} />
 
         <View style={[backHeaderWrap, { backgroundColor: headerBg }]}>
+
+          
           <Pressable
-            hitSlop={20}
+            hitSlop={25}
             onPress={() => navigation.goBack()}
             style={[
               backArrowContainer,
