@@ -215,7 +215,9 @@ const CreateCard = () => {
             );
 
             setTimeout(() => {
-              navigation.navigate("accountverification_screen");
+              navigation.navigate("accountverification_screen", {
+                index: authdata.userDetails.userLevel,
+              });
             }, 500);
             return;
           }

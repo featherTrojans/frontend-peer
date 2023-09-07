@@ -67,9 +67,9 @@ const ProfileScreen = ({ navigation }) => {
   const upgradeDecision = () => {
     switch (authdata?.userDetails?.userLevel) {
       case 1:
-        return "Upgrade to Odogwu";
+        return { text: "Upgrade to Odogwu", index: 1 };
       case 2:
-        return "Upgrade to Veteran";
+        return { text: "Upgrade to Veteran", index: 2 };
       default:
         return null;
     }
@@ -124,11 +124,13 @@ const ProfileScreen = ({ navigation }) => {
             <View style={upgradeBg}>
               <Text
                 onPress={() =>
-                  navigation.navigate("accountverification_screen")
+                  navigation.navigate("accountverification_screen", {
+                    index: upgrade.index,
+                  })
                 }
                 style={upgradeOdogwuText}
               >
-                {upgrade}
+                {upgrade.text}
               </Text>
             </View>
           )}

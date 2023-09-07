@@ -14,6 +14,7 @@ import {
   RefreshControl,
   FlatList,
   StatusBar,
+  ActivityIndicator,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
@@ -189,25 +190,31 @@ const Conversations = () => {
 
       <FTHorizontaline marginV={15} />
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {allchatdata.map((item) => {
-          return (
-            <View style={{ marginHorizontal: 10 }}>
-              <FTOtherImage
-                size={45}
-                imageurl={item?.userInfo?.imageUrl}
-                memojiImage={item?.userInfo?.memoji}
-                fullname={item?.userInfo?.fullName}
-                onpress={() => {
-                  navigation.navigate("chatsdm_screen", {
-                    userInfo: item?.userInfo,
-                  });
-                }}
-              />
-            </View>
-          );
-        })}
-      </ScrollView>
+      {loading ? (
+        <View style={{ height: 45 }}>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {allchatdata.map((item) => {
+            return (
+              <View style={{ marginHorizontal: 10 }}>
+                <FTOtherImage
+                  size={45}
+                  imageurl={item?.userInfo?.imageUrl}
+                  memojiImage={item?.userInfo?.memoji}
+                  fullname={item?.userInfo?.fullName}
+                  onpress={() => {
+                    navigation.navigate("chatsdm_screen", {
+                      userInfo: item?.userInfo,
+                    });
+                  }}
+                />
+              </View>
+            );
+          })}
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -624,8 +631,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
             })
           )}
         </View>
-
-        
       </ScrollView>
     </FTTabWrapper>
   );

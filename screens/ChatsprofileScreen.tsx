@@ -36,7 +36,7 @@ const {
   profileDetailWrap,
   profileNameText,
   profileDateJoined,
-  recentTransactText
+  recentTransactText,
 } = ChatsprofileScreenStyles;
 const { transactionWrap, transactionHeader, transactionText, viewAll } =
   HomeScreenStyles;
@@ -120,7 +120,6 @@ const ChatsprofileScreen = ({ route, navigation }) => {
             color={COLORS.red3}
           />
         </View>
-        
       </View>
     );
   };
@@ -131,11 +130,9 @@ const ChatsprofileScreen = ({ route, navigation }) => {
       childBg={COLORS.white3}
       headerBg={COLORS.white3}
     >
-  
       {loading ? (
         <ActivityIndicator size="large" color={COLORS.blue6} />
       ) : (
-        
         <Animated.FlatList
           data={formatData(transactions)}
           ListHeaderComponent={ListHeader}
@@ -160,7 +157,6 @@ const ChatsprofileScreen = ({ route, navigation }) => {
                 paddingTop: 25,
               }}
             >
-              
               <View style={{ marginBottom: 30 }}>
                 <FTTransactionhistory
                   date={item.time}

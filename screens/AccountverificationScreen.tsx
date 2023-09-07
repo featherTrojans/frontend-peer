@@ -40,15 +40,16 @@ const {
   statusTextBg,
 } = AccountverificationScreenStyles;
 
-const AccountverificationScreen = (props) => {
+const AccountverificationScreen = ({ route }) => {
   const navigation = useNavigation();
+  const index = route?.params?.index || 0;
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   const userlevel = authdata?.userDetails?.userLevel;
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(index);
 
   useEffect(() => {
-    console.log(selectedIndex, "here is the index");
+    // setSelectedIndex
   }, [selectedIndex]);
 
   const accountLevelDatas = [
@@ -108,7 +109,7 @@ const AccountverificationScreen = (props) => {
         <View style={levelInfoWrap}>
           <View style={BAlign}>
             <Text style={levelText}>{levelTitle} Level</Text>
-            <Levelcheckicon />
+            {status && <Levelcheckicon />}
           </View>
           <Text style={requirementText}>Requirement</Text>
           <Text style={requirementMainText}>{requirement}</Text>
