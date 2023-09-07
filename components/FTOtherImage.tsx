@@ -3,7 +3,11 @@ import React from "react";
 import { COLORS, FONTS, fontsize, images } from "../constants";
 
 import { allMemojis } from "../assetdatas";
-import { nameSplitToTwo, nameSplitter, nameSplitterFirstName } from "../utils/nameSplitter";
+import {
+  nameSplitToTwo,
+  nameSplitter,
+  nameSplitterFirstName,
+} from "../utils/nameSplitter";
 import { Text } from "react-native";
 
 const { Notificationimage } = images;
@@ -26,9 +30,7 @@ const FTOtherImage = ({
   onpress = () => {},
 }: IconWithBgProps) => {
   let memojiobj = {};
-  if (imageurl) {
-    console.log(imageurl, "there is a a a");
-  }
+
   if (memojiImage) {
     if (typeof memojiImage == "string") {
       memojiobj = JSON.parse(memojiImage);
@@ -104,7 +106,16 @@ const FTOtherImage = ({
       onPress={onpress}
     >
       {fullname ? (
-        <Text style={{ textAlign: "center", ...fontsize.small, ...FONTS.regular, color: COLORS.blue9 }}>{nameSplitter(fullname)}</Text>
+        <Text
+          style={{
+            textAlign: "center",
+            ...fontsize.small,
+            ...FONTS.regular,
+            color: COLORS.blue9,
+          }}
+        >
+          {nameSplitter(fullname)}
+        </Text>
       ) : (
         <Text>AA</Text>
       )}
