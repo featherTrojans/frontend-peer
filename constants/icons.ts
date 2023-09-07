@@ -136,6 +136,9 @@ import Choosememojiicon from "../assets/icons/Choosememojiicon";
 import Withdrawsearchicon from "../assets/icons/Withdrawsearchicon";
 import Chattransfericon from "../assets/icons/Chattransfericon";
 import Keeptypingicon from "../assets/icons/Keeptypingicon";
+import Eyeopenicon from "../assets/icons/Eyeopenicon";
+import Odogwubirdicon from "../assets/icons/Odogwubirdicon";
+import Odogwuarrowup from "../assets/icons/Odogwuarrowup";
 
 
 
@@ -211,6 +214,7 @@ export default {
   Usdcardicon,
   Detailcopyicon,
   Searchicon,
+  Eyeopenicon,
   Startnewchaticon,
   Emptycardicon,
   Maintenancefeeicon,
@@ -260,6 +264,8 @@ export default {
   Smallbackarrow,
   Choosememojiicon,
   Withdrawsearchicon,
+  Odogwubirdicon,
+  Odogwuarrowup,
   // Cancelwithdrawicon,
   Cryinganimate,
   Winkinganimate,

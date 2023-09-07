@@ -75,9 +75,9 @@ const SecurityandprivacyScreen = ({ navigation }) => {
             rightComponent={<FTSwitchbtn action={multifactorAction} />}
           />
         </View>
-        <View style={{ marginTop: 40 }}>
+        {/* <View style={{ marginTop: 40 }}>
           <Text style={sectionHeader}>Biometrics</Text>
-          {/* <FTIconwithtitleandinfo
+          <FTIconwithtitleandinfo
             Icon={Fingerprinticon}
             bG={COLORS.Tgreen}
             title="Use biometrics for Transactions"
@@ -85,7 +85,7 @@ const SecurityandprivacyScreen = ({ navigation }) => {
             onPress={() => null}
             rightComponent={<FTSwitchbtn action={biometricsTransaction} />}
             mB={30}
-          /> */}
+          />
           <FTIconwithtitleandinfo
             Icon={Fingerprinticon}
             bG={COLORS.Tgreen}
@@ -94,7 +94,7 @@ const SecurityandprivacyScreen = ({ navigation }) => {
             onPress={() => null}
             rightComponent={<FTSwitchbtn action={biometricsLogin} />}
           />
-        </View>
+        </View> */}
       </ScrollView>
     </FTTitlepagewrapper>
   );

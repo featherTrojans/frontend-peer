@@ -60,6 +60,7 @@ const FTUserImage = ({
           resizeMode="contain"
           resizeMethod="scale"
           source={{ uri: memojiobj?.index }}
+          // defaultSource={{ uri: memojiobj?.index }}
         />
       </Pressable>
     );
@@ -88,6 +89,9 @@ const FTUserImage = ({
           source={{
             uri: imageurl,
           }}
+          // defaultSource={{
+          //   uri: imageurl
+          // }}
         />
       </Pressable>
     );
@@ -114,6 +118,7 @@ const FTUserImage = ({
         resizeMode="contain"
         resizeMethod="scale"
         source={{ uri: allMemojis[gender]["lightSkinned"][0] }}
+        // defaultSource={{ uri: allMemojis[gender]["lightSkinned"][0]}}
       />
     </Pressable>
   );

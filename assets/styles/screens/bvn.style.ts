@@ -5,8 +5,8 @@ export const BVNScreenStyles = StyleSheet.create({
   headerText: {
     ...fontsize.bmedium,
     ...FONTS.bold,
+    lineHeight: 30,
     color: COLORS.blue9,
-    marginBottom: 5,
   },
   skip: {
     justifyContent: "center",

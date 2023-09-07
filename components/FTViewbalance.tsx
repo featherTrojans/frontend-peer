@@ -31,7 +31,7 @@ const {
   balanceAmount,
 } = FTViewbalanceStyles;
 
-const { Eyecrossed, Balanceicon } = icons;
+const { Eyecrossed, Balanceicon, Eyeopenicon } = icons;
 
 const Viewbalance = ({}) => {
   const navigation = useNavigation();
@@ -84,10 +84,10 @@ const Viewbalance = ({}) => {
             >
               <Text style={balanceText}>Primary Wallet</Text>
               <Pressable
-                hitSlop={16}
+                hitSlop={20}
                 onPress={() => setShowAmount(!showAmount)}
               >
-                <Eyecrossed />
+               {showAmount ? <Eyeopenicon /> : <Eyecrossed />}
               </Pressable>
             </View>
 

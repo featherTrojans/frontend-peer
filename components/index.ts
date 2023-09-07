@@ -32,6 +32,8 @@ import FTSuccessOrError from "./FTSuccessOrError";
 import FTUserImage from "./FTUserImage";
 import FTOtherImage from "./FTOtherImage";
 import FTTransact from "./FTTransact";
+import FTUpgradetag from "./FTUpgradetag";
+
 
 export {
   FTTransact,
@@ -68,4 +70,5 @@ export {
   FTSuccessOrError,
   FTUserImage,
   FTOtherImage,
+  FTUpgradetag
 };

@@ -186,6 +186,7 @@ export const HomeScreenStyles = StyleSheet.create({
     padding: 18,
     borderRadius: 16,
     marginHorizontal: 15,
+    minHeight: 132
   },
   conversationHeader: {
     flexDirection: "row",

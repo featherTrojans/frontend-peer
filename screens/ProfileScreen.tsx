@@ -4,6 +4,7 @@ import { ProfileScreenStyles } from "../assets/styles/screens";
 import {
   FTIconwithtitleandinfo,
   FTTabWrapper,
+  FTUpgradetag,
   FTUserImage,
 } from "../components";
 import { COLORS, icons } from "../constants";
@@ -35,6 +36,7 @@ const {
 
 const ProfileScreen = ({ navigation }) => {
   const { authdata, setAuthData, setToken } = useContext(AuthContext);
+  const userLevel = authdata?.userDetails?.userLevel;
 
   const profileActions = [
     {
@@ -63,19 +65,6 @@ const ProfileScreen = ({ navigation }) => {
       action: () => console.log("yes about"),
     },
   ];
-
-  const upgradeDecision = () => {
-    switch (authdata?.userDetails?.userLevel) {
-      case 1:
-        return { text: "Upgrade to Odogwu", index: 1 };
-      case 2:
-        return { text: "Upgrade to Veteran", index: 2 };
-      default:
-        return null;
-    }
-  };
-
-  const upgrade = upgradeDecision();
 
   const handlesignout = async () => {
     await clearDataFromStorage("@token");
@@ -120,20 +109,7 @@ const ProfileScreen = ({ navigation }) => {
               </Text>
             )}
           </View>
-          {upgrade && (
-            <View style={upgradeBg}>
-              <Text
-                onPress={() =>
-                  navigation.navigate("accountverification_screen", {
-                    index: upgrade.index,
-                  })
-                }
-                style={upgradeOdogwuText}
-              >
-                {upgrade.text}
-              </Text>
-            </View>
-          )}
+          <FTUpgradetag />
         </View>
 
         {profileActions.map((profileAction, index) => {

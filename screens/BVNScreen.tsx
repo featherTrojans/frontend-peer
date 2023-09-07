@@ -28,6 +28,7 @@ import Animated, {
   SlideOutDown,
   SlideOutUp,
 } from "react-native-reanimated";
+import { getFirstName } from "../utils/nameSplitter";
 
 const {
   headerText,
@@ -50,6 +51,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 function BVNScreen({ navigation }) {
   const { token } = useContext(AuthContext);
+  const { setToken, authdata: {userDetails} } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();
@@ -119,11 +121,11 @@ function BVNScreen({ navigation }) {
       <FTTitlepagewrapper title="Verify BVN">
         <FTLoader loading={loading} />
         <View style={flex}>
-          <Text style={headerText}>Hi Doyin {"\n"}Enter your BVN</Text>
+          <Text style={headerText}>Hi {getFirstName(userDetails?.fullName)}{"\n"}Enter your BVN</Text>
           <FTInput
             placeholderText="Enter BVN"
             name="bvn"
-            label="Your 12 Digit BVN"
+            label="Your 11 Digit BVN"
             textInputProps={{
               maxLength: 11,
               keyboardType: "number-pad",

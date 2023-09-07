@@ -135,12 +135,12 @@ export const POSTAL_NO_VALIDATION = {
 export const BVN_NUMBER_INPUT_VALIDATION = {
   required: "Bvn number is required",
   minLength: {
-    value: 12,
-    message: "Must be twelve digits",
+    value: 11,
+    message: "Must be eleven digits",
   },
   maxLength: {
-    value: 12,
-    message: "Must be twelve digits",
+    value: 11,
+    message: "Must be eleven digits",
   },
   pattern: {
     value: /^[0-9]/,
