@@ -120,6 +120,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
             color={COLORS.red3}
           />
         </View>
+        
       </View>
     );
   };
@@ -134,6 +135,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
       {loading ? (
         <ActivityIndicator size="large" color={COLORS.blue6} />
       ) : (
+        
         <Animated.FlatList
           data={formatData(transactions)}
           ListHeaderComponent={ListHeader}
@@ -158,7 +160,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
                 paddingTop: 25,
               }}
             >
-              <Text style={recentTransactText}>Recent Transactions</Text>
+              
               <View style={{ marginBottom: 30 }}>
                 <FTTransactionhistory
                   date={item.time}

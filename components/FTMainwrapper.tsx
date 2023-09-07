@@ -26,11 +26,11 @@ const Mainwrapper = ({
   modalHeight?: string | number;
 }) => {
   const { Swipemodal } = useSwipemodal();
-  const navigation = useNavigation();
 
   return (
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
+        <Customstatusbar />
         <View
           style={{ flex: 1, paddingHorizontal: pH, backgroundColor: childBg }}
         >
