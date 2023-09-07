@@ -47,9 +47,7 @@ const AccountverificationScreen = (props) => {
   const userlevel = authdata?.userDetails?.userLevel;
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  useEffect(() => {
-    console.log(selectedIndex, "here is the index");
-  }, [selectedIndex]);
+
 
   const accountLevelDatas = [
     {
@@ -108,7 +106,7 @@ const AccountverificationScreen = (props) => {
         <View style={levelInfoWrap}>
           <View style={BAlign}>
             <Text style={levelText}>{levelTitle} Level</Text>
-            <Levelcheckicon />
+            {status && <Levelcheckicon />}
           </View>
           <Text style={requirementText}>Requirement</Text>
           <Text style={requirementMainText}>{requirement}</Text>

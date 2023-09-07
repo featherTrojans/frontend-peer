@@ -125,10 +125,10 @@ const SetupmfaScreen = () => {
 
         <FTInput
           placeholderText="Type Preferred Answer 1"
-          name="house_no"
+          name="answer1"
           label="Answer 1"
           control={control}
-          rules={VALIDATION.ANSWER_VALIDATION}
+          rules={VALIDATION.ANSWER_ONE_VALIDATION}
           mB={15}
         />
 
@@ -147,7 +147,7 @@ const SetupmfaScreen = () => {
 
         <FTInput
           placeholderText="Type Preferred Answer 2"
-          name="house_no"
+          name="answer2"
           label="Answer 2"
           control={control}
           rules={VALIDATION.ANSWER_VALIDATION}

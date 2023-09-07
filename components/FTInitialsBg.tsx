@@ -11,6 +11,7 @@ interface InitialsBgProps {
 
 const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
   const [defaultColor, setDefaultColor] = useState("gray")
+  
 
   const colors = [
     "#F1E5FF",
@@ -18,6 +19,10 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
     "#E6ECFF",
     "#FCF3D1",
     "#DBDCDD",
+    "#E6ECFF",
+    "#FFE3E3",
+    "#FFF5E5",
+    "#E5FAF6"
   ];
   useEffect(()=>{
     const color = bg? bg : colors[Math.floor(Math.random() * colors.length)];
@@ -30,6 +35,7 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
         width:  sideLength,
         height: sideLength,
         backgroundColor: defaultColor,
+        borderRadius: sideLength /2 
         
       }]}
     >
@@ -44,15 +50,12 @@ export default InitialsBg;
 const styles = StyleSheet.create({
   initialTextBg:{
     justifyContent: "center",
-        alignItems: "center",
-        borderTopRightRadius: 17, 
-        borderBottomLeftRadius: 17,
-        borderBottomRightRadius: 17,
-        borderTopLeftRadius: 10,
+    alignItems: "center",
   },
   initialText: {
-      ...fontsize.smallest, 
-      ...FONTS.medium
+      ...fontsize.small, 
+      ...FONTS.medium,
+      color: COLORS.blue9
   }
 })
 

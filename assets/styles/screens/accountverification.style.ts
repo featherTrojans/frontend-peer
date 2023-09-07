@@ -21,7 +21,7 @@ export const AccountverificationScreenStyles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     marginTop: 50,
-    marginBottom: 30,
+    // marginBottom: 30,
   },
   levelText: {
     marginRight: 10,
@@ -45,7 +45,8 @@ export const AccountverificationScreenStyles = StyleSheet.create({
     padding: 33,
     borderWidth: 0.5,
     borderColor: COLORS.grey1,
-    borderRadius: 25
+    borderRadius: 25,
+    marginVertical: 30
   },
   infoKeyText: {
     ...fontsize.smallest,

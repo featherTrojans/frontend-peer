@@ -14,6 +14,7 @@ import {
   RefreshControl,
   FlatList,
   StatusBar,
+  Pressable,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
@@ -182,7 +183,7 @@ const Conversations = () => {
         <View style={recentIconWrap}>
           {/* icon */}
           <Recentconvicon />
-          <Text style={recentconvText}>Conversations</Text>
+          <Text style={recentconvText}>Recent Chats</Text>
         </View>
         {/* <Text style={numberOfUnread}>You have 3 unreads</Text> */}
       </View>
@@ -229,7 +230,7 @@ const SetupProfile = ({ onPress }) => {
   }
 
   return (
-    <View style={setupProfile}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={setupProfile}>
       <View style={setupHeadSection}>
         <View style={setupIconWrap}>
           {/* icon */}
@@ -248,7 +249,7 @@ const SetupProfile = ({ onPress }) => {
           Check profile setup.
         </Text>
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

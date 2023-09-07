@@ -9,6 +9,7 @@ import {
   nameSplitterFirstName,
 } from "../utils/nameSplitter";
 import { Text } from "react-native";
+import { FTInitialsBg } from ".";
 
 const { Notificationimage } = images;
 
@@ -94,31 +95,8 @@ const FTOtherImage = ({
   }
 
   return (
-    <Pressable
-      style={{
-        width: size,
-        height: size,
-        borderRadius: size / 2,
-        backgroundColor: "#D9D9D9",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      onPress={onpress}
-    >
-      {fullname ? (
-        <Text
-          style={{
-            textAlign: "center",
-            ...fontsize.small,
-            ...FONTS.regular,
-            color: COLORS.blue9,
-          }}
-        >
-          {nameSplitter(fullname)}
-        </Text>
-      ) : (
-        <Text>AA</Text>
-      )}
+    <Pressable onPress={onpress} hitSlop={25}>
+      <FTInitialsBg sideLength={45} name={nameSplitter(fullname)} />
     </Pressable>
   );
 };
@@ -126,3 +104,4 @@ const FTOtherImage = ({
 export default FTOtherImage;
 
 const styles = StyleSheet.create({});
+// {nameSplitter(fullname)}

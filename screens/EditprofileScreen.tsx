@@ -4,6 +4,7 @@ import {
   View,
   Pressable,
   TouchableOpacity,
+  FlatList
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { EditprofileScreenStyles } from "../assets/styles/screens";
@@ -23,7 +24,6 @@ import { ActivityIndicator } from "react-native";
 import Changememojicheckicon from "../assets/icons/Changememojicheckicon";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useAlert } from "../hooks";
-import { FlatList } from "react-native-gesture-handler";
 const { Profileediticon } = icons;
 
 const {
@@ -167,11 +167,11 @@ const EditprofileScreen = ({ navigation }) => {
           <View style={profileWrap}>
             <Text style={profileHeaderText}>My Profile</Text>
 
-            <Text
+            {/* <Text
               onPress={() => navigation.navigate("accountverification_screen")}
             >
               {upgradeDecision()}
-            </Text>
+            </Text> */}
           </View>
           <Text>Account Level : {accountlevel()}</Text>
         </View>
