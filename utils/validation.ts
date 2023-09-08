@@ -112,11 +112,11 @@ export const HOUSE_NO_VALIDATION = {
   required: "House number is required",
   minLength: {
     value: 1,
-    message: "Must be one digits",
+    message: "Must be atleast 1 digits",
   },
   maxLength: {
-    value: 1,
-    message: "Must be one digits",
+    value: 10,
+    message: "Must be less than 10 digits",
   },
   pattern: {
     value: /^[0-9]/,

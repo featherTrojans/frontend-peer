@@ -81,7 +81,7 @@ const AccountverificationScreen = ({ route }) => {
       levelTitle: "Veteran",
       level: 3,
       requirement: "Identity Document Uploads",
-      status: userlevel >= 3,
+      status: userlevel >= 4,
       fundinglimit: "Unlimited",
       cashrequest: "N500,000.00",
       transferout: "N1,000,000.00",

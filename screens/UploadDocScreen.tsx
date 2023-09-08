@@ -133,6 +133,7 @@ const UploadDocScreen = ({ navigation }) => {
       aspect: [4, 3],
       quality: 1,
     });
+    console.log(result);
 
     if (!result.canceled) {
       setid_image({
@@ -180,6 +181,7 @@ const UploadDocScreen = ({ navigation }) => {
         navigation.navigate("Dashboard");
       }, 1000);
     } catch (err) {
+      console.log(err);
       errorAlert(err);
     } finally {
       setLoading(false);
