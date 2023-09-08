@@ -656,14 +656,7 @@ const ChatsdmScreen = ({ route }) => {
         )}
 
         <View style={chatTextInput}>
-          <View
-            style={{
-              width: 1,
-              height: 20,
-              backgroundColor: "grey",
-              alignSelf: "center",
-            }}
-          />
+       
           <TextInput
             placeholder="Enter Message..."
             style={textinput}

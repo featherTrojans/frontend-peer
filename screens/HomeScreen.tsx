@@ -4,6 +4,7 @@ import React, {
   useContext,
   useCallback,
   useRef,
+  useMemo,
 } from "react";
 import {
   Text,
@@ -89,6 +90,7 @@ const {
   Banksetupicon,
   Documentsetupicon,
   Levelcheckicon,
+  
 } = icons;
 const { Transferimage, Withdrawimage, Billsimage } = images;
 const scrollactions = [
@@ -128,13 +130,13 @@ const QuickActions = ({ onpress }) => {
     index: number;
     modal: number;
   }) {
-    let isLast = index + 1 === scrollactions.length;
+    // let isLast = index + 1 === scrollactions.length;
     return (
       <TouchableOpacity activeOpacity={0.8} onPress={() => onpress(modal)}>
         <View
           style={[
             scrollaction,
-            { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
+            { backgroundColor: bg, marginRight: true ? 16 : 0 },
           ]}
         >
           <Image
@@ -175,7 +177,8 @@ const Conversations = () => {
   const { allchatdata, loading } = useChats();
   const navigation = useNavigation();
 
-  // let threechats = allchatdata.slice(0, 3);
+  console.log('conversations rerendering')
+
 
   return (
     <View style={[conversationWrap]}>
@@ -228,6 +231,7 @@ const SetupProfile = ({ onPress }) => {
   if (isProfileSetupCompleted) {
     return null;
   }
+  console.log('setup profile rerendering')
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={setupProfile}>
@@ -468,7 +472,7 @@ const SetupPin = ({ nav }) => {
 };
 const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const { setAuthData, authdata, setShowTabs } = useContext(AuthContext);
-  const histories: any[] = formatData(authdata?.transactions);
+  
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
@@ -478,6 +482,12 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     child: React.ReactNode;
     height: number;
   }>({ child: null, height: 200 });
+
+  const histories: any[] = useMemo(
+    () => formatData(authdata?.transactions),
+    [authdata?.transactions]
+  );
+
 
   const getDashboardData = async () => {
     setLoading(true);

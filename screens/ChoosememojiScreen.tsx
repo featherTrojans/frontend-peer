@@ -92,6 +92,7 @@ const ChoosememojiScreen = ({ navigation }) => {
               position: "absolute",
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor: "transaparent"
             }}
           >
             <FTIconwithbg imageUrl={currentIndex} bG={active} size={150} />
@@ -102,7 +103,7 @@ const ChoosememojiScreen = ({ navigation }) => {
               <Rect
                 width={133}
                 height={133}
-                fill="url(#a)"
+                fill="none"
                 data-name="Rectangle 1403"
                 rx={66.5}
                 transform="translate(8.325 8.325)"

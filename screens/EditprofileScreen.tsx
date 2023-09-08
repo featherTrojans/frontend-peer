@@ -64,16 +64,7 @@ const EditprofileScreen = ({ navigation }) => {
     getuserinfo(usernamename);
   }, [usernamename]);
 
-  const upgradeDecision = () => {
-    switch (authdata?.userDetails?.userLevel) {
-      case 1:
-        return "Upgrade to Odogwu";
-      case 2:
-        return "Upgrade to Veteran";
-      default:
-        return null;
-    }
-  };
+
 
   const accountlevel = () => {
     switch (authdata?.userDetails?.userLevel) {
@@ -164,7 +155,7 @@ const EditprofileScreen = ({ navigation }) => {
     >
       <FTKeyboardwrapper>
         <View style={headerWrap}>
-          <View style={profileWrap}>
+          
             <Text style={profileHeaderText}>My Profile</Text>
 
             {/* <Text
@@ -172,8 +163,9 @@ const EditprofileScreen = ({ navigation }) => {
             >
               {upgradeDecision()}
             </Text> */}
+          <View style={profileWrap}>
+              <Text>Account Level : {accountlevel()}</Text>
           </View>
-          <Text>Account Level : {accountlevel()}</Text>
         </View>
 
         <FTInput
@@ -201,8 +193,11 @@ const EditprofileScreen = ({ navigation }) => {
               {/* <WrongIcon /> */}
               <Text
                 style={{
-                  color: "#0034CB",
+                  color: COLORS.blue6,
                   marginLeft: 10,
+                  ...fontsize.smaller,
+                  ...FONTS.regular
+
                 }}
               >
                 {usernamename} is taken
@@ -216,8 +211,11 @@ const EditprofileScreen = ({ navigation }) => {
               <Changememojicheckicon />
               <Text
                 style={{
-                  color: "#0034CB",
+                  color: COLORS.blue6,
                   marginLeft: 10,
+                  ...fontsize.smaller,
+                  ...FONTS.regular
+
                 }}
               >
                 {usernamename}

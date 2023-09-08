@@ -109,7 +109,7 @@ const ProfileScreen = ({ navigation }) => {
               </Text>
             )}
           </View>
-          <FTUpgradetag level={1} />
+          <FTUpgradetag level={userLevel} />
         </View>
 
         {profileActions.map((profileAction, index) => {
