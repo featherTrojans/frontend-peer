@@ -40,14 +40,17 @@ const {
   statusTextBg,
 } = AccountverificationScreenStyles;
 
-const AccountverificationScreen = (props) => {
+const AccountverificationScreen = ({ route }) => {
   const navigation = useNavigation();
+  const index = route?.params?.index || 0;
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   const userlevel = authdata?.userDetails?.userLevel;
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(index);
 
-
+  useEffect(() => {
+    // setSelectedIndex
+  }, [selectedIndex]);
 
   const accountLevelDatas = [
     {

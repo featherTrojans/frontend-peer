@@ -1,10 +1,16 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import {
   ChatsScreenStyles,
   ProfileScreenStyles,
 } from "../assets/styles/screens";
-import { FTChatList, FTTabWrapper } from "../components";
+import { FTChatList, FTLoader, FTTabWrapper } from "../components";
 import { icons } from "../constants";
 import useChats from "../hooks/useChats";
 import { useNavigation } from "@react-navigation/native";
@@ -14,7 +20,7 @@ const {} = ChatsScreenStyles;
 const { profileHeaderWrap, profileHeaderText } = ProfileScreenStyles;
 
 const ChatsScreen = () => {
-  const { allchatdata } = useChats();
+  const { allchatdata, loading } = useChats();
   const navigation = useNavigation();
 
   return (
@@ -29,6 +35,8 @@ const ChatsScreen = () => {
           <Startnewchaticon />
         </TouchableOpacity>
       </View>
+
+      <FTLoader loading={loading} />
 
       <FTChatList allchatdata={allchatdata} />
     </FTTabWrapper>

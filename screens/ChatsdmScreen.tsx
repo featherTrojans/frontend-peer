@@ -36,7 +36,7 @@ import {
   orderBy,
   updateDoc,
 } from "firebase/firestore";
-import { useCustomModal, usePushNotification } from "../hooks";
+import { useAlert, useCustomModal, usePushNotification } from "../hooks";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import LottieView from "lottie-react-native";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -140,7 +140,7 @@ const PickOption = ({ userInfo, openAmount, closeModal }) => {
   );
 };
 
-const AmountToSend = ({ openTransactionPin, handlesetamount }) => {
+const AmountToSend = ({ openTransactionPin }) => {
   const [amount, setAmount] = useState({ name: "0", value: 0 });
   const handleAmountChange = (text) => {
     const amount = Number(text).toFixed(2);
@@ -149,7 +149,6 @@ const AmountToSend = ({ openTransactionPin, handlesetamount }) => {
   // console.log(amount, "yeyey");
   const handlenext = () => {
     openTransactionPin(amount);
-    handlesetamount(amount);
   };
 
   return (
@@ -183,6 +182,7 @@ const TransactionPin = ({
   console.log(amount, "get");
   const [userPin, setUserPin] = useState("");
   const [loading, setLoading] = useState(false);
+  const { errorAlert } = useAlert();
 
   const handlePinChange = (text) => {
     setUserPin(text);
@@ -200,9 +200,10 @@ const TransactionPin = ({
       });
       setchattext("");
       setSendSuccess(true);
-      await sendFireBaseMessage("transfer");
+      await sendFireBaseMessage("transfer", amount);
       // animationRef.current?.play()
     } catch (err) {
+      errorAlert(err);
     } finally {
       setLoading(false);
     }
@@ -260,9 +261,6 @@ const ChatsdmScreen = ({ route }) => {
   const [chatid, setchatid] = useState("");
   const [chattext, setchattext] = useState("");
   const [amount, setAmount] = useState({ name: "0", value: 0 });
-  const [sendcashModal, setSendCashModal] = useState(false);
-  const [chooseAmount, setChooseAmount] = useState(false);
-  const [enterPin, setEnterPin] = useState(false);
   const [fetchmessage, setFetchmessage] = useState(false);
   const animationRef = useRef<LottieView>(null);
   const textInputRef = useRef<TextInput>(null);
@@ -361,7 +359,7 @@ const ChatsdmScreen = ({ route }) => {
     } catch (err) {}
   };
 
-  const sendFireBaseMessage = async (action = "message") => {
+  const sendFireBaseMessage = async (action = "message", amount) => {
     if (chattext === "" && action === "message") return;
     if (fetchmessage) return;
     let chatId = chatid;
@@ -409,7 +407,7 @@ const ChatsdmScreen = ({ route }) => {
   const handleTextChange = (text) => {
     setchattext(text);
     if (text[text.length - 1] === "@") {
-      setSendCashModal(true);
+      switchModals(0);
     }
   };
 
@@ -489,9 +487,6 @@ const ChatsdmScreen = ({ route }) => {
       </View>
     );
   };
-  const handlesetamount = (amount) => {
-    setAmount(amount);
-  };
 
   const switchModals = (value, amount) => {
     switch (value) {
@@ -511,12 +506,7 @@ const ChatsdmScreen = ({ route }) => {
         break;
       case 1:
         setContent({
-          child: (
-            <AmountToSend
-              handlesetamount={handlesetamount}
-              openTransactionPin={openTransactionPin}
-            />
-          ),
+          child: <AmountToSend openTransactionPin={openTransactionPin} />,
           height: 200,
         });
         setShowModal((s) => !s);

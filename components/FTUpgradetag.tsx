@@ -1,22 +1,25 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
 
 const { Odogwubirdicon, Odogwuarrowup } = icons;
 
-const FTUpgradetag = ({ level }) => {
+const FTUpgradetag = () => {
+  const { authdata } = useContext(AuthContext);
+  const level = 2 || authdata.userDetails.userLevel;
   const navigation = useNavigation();
 
-  let redirectTo = () => {
-    navigation.navigate("accountverification_screen");
+  let redirectTo = (index) => {
+    navigation.navigate("accountverification_screen", { index });
   };
 
   const UpgradeToOdogwu = () => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={redirectTo}
+        onPress={() => redirectTo(1)}
         style={{
           backgroundColor: COLORS.Tyellow5,
           paddingVertical: 12,
@@ -43,7 +46,7 @@ const FTUpgradetag = ({ level }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={redirectTo}
+        onPress={() => redirectTo(2)}
         style={{
           backgroundColor: COLORS.grey19,
           paddingVertical: 9,
@@ -82,7 +85,6 @@ const FTUpgradetag = ({ level }) => {
         return null;
     }
   };
-
 
   return <>{upgradeDecision(level)}</>;
 };
