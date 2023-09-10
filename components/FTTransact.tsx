@@ -12,7 +12,6 @@ const FTTransact = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [transactions, setTransations] = useState();
 
-  console.log("did you render");
   useEffect(() => {
     getAllTransactions();
   }, []);

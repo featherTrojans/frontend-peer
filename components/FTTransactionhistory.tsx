@@ -37,12 +37,13 @@ const History = ({ data }) => {
     trans_type,
     otherUser,
   } = data;
-  const priceColor = direction === "in" ? COLORS.green1 : COLORS.pink1;
-  const circleColor = direction === "in" ? COLORS.green3 : COLORS.red2;
-  const transactionType = direction === "in" ? "From" : "To";
-  const transactionValue = direction === "in" ? from : to;
-  const amountSign = direction === "in" ? "+" : "-";
-  const Arrow = direction === "in" ? Arrowin : Arrowout;
+  const isCredit = direction === "in"
+  const priceColor = isCredit ? COLORS.green1 : COLORS.pink1;
+  const circleColor = isCredit ? COLORS.green3 : COLORS.red2;
+  const transactionType = isCredit ? "From" : "To";
+  const transactionValue = isCredit ? from : to;
+  const amountSign = isCredit ? "+" : "-";
+  const Arrow = isCredit ? Arrowin : Arrowout;
   const networkType = from.toUpperCase();
   const isEtisalat = networkType === "9MOBILE";
   const navigation = useNavigation();

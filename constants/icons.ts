@@ -139,6 +139,8 @@ import Keeptypingicon from "../assets/icons/Keeptypingicon";
 import Eyeopenicon from "../assets/icons/Eyeopenicon";
 import Odogwubirdicon from "../assets/icons/Odogwubirdicon";
 import Odogwuarrowup from "../assets/icons/Odogwuarrowup";
+import Dashedlineicon from "../assets/icons/Dashedlineicon";
+
 
 
 
@@ -206,6 +208,7 @@ export default {
   Paymerchanticon,
   Phoneicon,
   Searchmerchanticon,
+  Dashedlineicon,
   Summaryicon,
   Withdrawchaticon,
   Bankblueicon,
