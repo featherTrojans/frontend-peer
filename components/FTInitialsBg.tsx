@@ -39,7 +39,7 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
         
       }]}
     >
-      <Text style={styles.initialText}>{nameSplitter(name).toUpperCase()}</Text>
+      <Text style={styles.initialText}>{name.toUpperCase()}</Text>
     </View> 
   );
 };

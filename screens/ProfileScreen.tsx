@@ -10,7 +10,7 @@ import {
 import { COLORS, icons } from "../constants";
 import { clearDataFromStorage, redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
-
+import { nameCapitalize } from "../utils/nameSplitter";
 const {
   Editprofileicon,
   Mywalleticon,
@@ -36,7 +36,6 @@ const {
 
 const ProfileScreen = ({ navigation }) => {
   const { authdata, setAuthData, setToken } = useContext(AuthContext);
-  const userLevel = authdata?.userDetails?.userLevel;
 
   const profileActions = [
     {
@@ -101,7 +100,7 @@ const ProfileScreen = ({ navigation }) => {
 
           <View style={profileNameWrap}>
             <Text style={profileNameText}>
-              {authdata?.userDetails?.fullName}
+             {nameCapitalize(authdata?.userDetails?.fullName)}
             </Text>
             {authdata?.userDetails?.username && (
               <Text style={profileUsername}>

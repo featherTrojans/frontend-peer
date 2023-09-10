@@ -21,11 +21,17 @@ import useDebounce from "../utils/debounce";
 import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
+import { nameCapitalize } from "../utils/nameSplitter";
 
 const { Smallphoneicon } = icons;
 
-const { searchContactWrap, searchContactText, listHeaderText } =
-  ChoosefeatheruserScreenStyles;
+const {
+  searchContactWrap,
+  searchContactText,
+  listHeaderText,
+  addBeneficiaryWrap,
+  saveBeneficiaryText,
+} = ChoosefeatheruserScreenStyles;
 
 const BENEFICIARY_TYPE = "transferfeather";
 
@@ -47,12 +53,12 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     amount: amountFormatter(amount),
     transactionDatas: [
       {
-        leftSide: "Name",
-        rightSide: userinfo.fullName,
+        leftSide: "Merchant Name",
+        rightSide: nameCapitalize(userinfo.fullName),
       },
       {
         leftSide: "Feather Tag",
-        rightSide: `${userinfo.username}`,
+        rightSide: `@${userinfo.username.toLowerCase()}`,
       },
       {
         leftSide: "Charges",
@@ -84,12 +90,12 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     <View style={{ backgroundColor: "#fff" }}>
       <FTDetailsModal
         modalTitle="User Details"
-        title={userinfo.fullName}
+        title={nameCapitalize(userinfo.fullName)}
         info={`@${userinfo.username.toLowerCase()}`}
         onPress={onpress}
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
-        mB={40}
+        mB={25}
         profile={true}
         userInfo={{
           fullName: userinfo.fullName,
@@ -105,8 +111,8 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
             }}
           >
             {isBenficairy ? null : (
-              <View style={{marginBottom: 20}}>
-                <Text style={{ ...FONTS.regular, ...fontsize.smallest }}>Save to beneficiaries?</Text>
+              <View style={addBeneficiaryWrap}>
+                <Text style={saveBeneficiaryText}>Save to beneficiaries?</Text>
                 <FTSwitchbtn action={addtobeneficiary} />
               </View>
             )}
@@ -136,9 +142,9 @@ const ListHeader = ({ amount, switchModals }) => {
       {loadbounce && <ActivityIndicator size={"small"} />}
       {userinfo?.fullName && (
         <FTIconwithtitleandinfo
-          title={userinfo?.fullName}
-          info={userinfo?.username}
-          onPress={() => switchModals(0, userinfo, amount, false)}
+          title={nameCapitalize(userinfo?.fullName)}
+          info={`@${userinfo?.username.toLowerCase()}`}
+          onPress={() => switchModals(1, userinfo, amount, false)}
           bG={COLORS.Tblue4}
           Icon={Smallphoneicon}
           mB={40}
@@ -186,6 +192,19 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
         });
         setShowModal((s) => !s);
         break;
+      case 1:
+        setContent({
+          child: (
+            <ModalContent
+              userinfo={data}
+              amount={amount}
+              isBenficairy={isBenficairy}
+            />
+          ),
+          height: 320,
+        });
+        setShowModal((s) => !s);
+        break;
 
       default:
         break;
@@ -213,7 +232,7 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
           }
           return (
             <FTIconwithtitleandinfo
-              title={dataobject.fullName}
+              title={nameCapitalize(dataobject.fullName)}
               info={`@${dataobject.username.toLowerCase()}`}
               onPress={() => switchModals(0, dataobject, amount, true)}
               bG={COLORS.Tblue4}

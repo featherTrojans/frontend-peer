@@ -18,7 +18,8 @@ import amountFormatter from "../utils/formatMoney";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useNavigation } from "@react-navigation/native";
 
-const { listHeaderText } = ChoosefeatheruserScreenStyles;
+const { listHeaderText, addBeneficiaryWrap, saveBeneficiaryText } =
+  ChoosefeatheruserScreenStyles;
 const {} = SearchcontactScreenStyles;
 const { Smallphoneicon } = icons;
 
@@ -76,7 +77,7 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     } catch (err) {}
   };
   return (
-    <View style={{ backgroundColor: "#fff",  }}>
+    <View style={{ backgroundColor: "#fff" }}>
       <FTDetailsModal
         modalTitle="User Details"
         title={userinfo.fullName}
@@ -92,20 +93,12 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
           fullName: userinfo?.fullName,
         }}
         extraComponent={
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 20,
-            }}
-          >
-            <Text style={{ ...FONTS.regular, ...fontsize.smallest }}>Save to beneficiaries?</Text>
+          <View style={addBeneficiaryWrap}>
+            <Text style={saveBeneficiaryText}>Save to beneficiaries?</Text>
             <FTSwitchbtn action={addtobeneficiary} />
           </View>
         }
       />
-      {/* beneficiary */}
     </View>
   );
 };

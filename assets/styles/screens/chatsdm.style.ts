@@ -1,9 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONTS, fontsize } from "../../../constants";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
+
 
 export const ChatsdmScreenStyles = StyleSheet.create({
   container: {
