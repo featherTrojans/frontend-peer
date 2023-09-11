@@ -29,7 +29,9 @@ const FTIconwithbg = ({
   onpress = () => {},
 }: IconWithBgProps) => {
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={onpress}
       style={{
         width: size,
         height: size,
@@ -43,7 +45,7 @@ const FTIconwithbg = ({
         <View style={{ position: "absolute", top: 0, right: 0 }}>{badge}</View>
       )}
       {imageUrl ? (
-        <Pressable onPress={onpress} style={{ width: "100%", height: "100%" }}>
+        <View style={{ width: "100%", height: "100%" }}>
           <Image
             style={{
               width: "100%",
@@ -54,11 +56,11 @@ const FTIconwithbg = ({
             resizeMethod="scale"
             source={{ uri: imageUrl }}
           />
-        </Pressable>
+        </View>
       ) : (
         <Icon />
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 

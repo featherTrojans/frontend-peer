@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
+import LottieView from "lottie-react-native";
 import { FTIconwithbg, FTMainwrapper } from "../components";
 import { COLORS, icons } from "../constants";
 import { ChoosememojiScreenStyles } from "../assets/styles/screens";
@@ -10,15 +11,22 @@ const {
   memojiSuccessWrap,
   successHeader,
   successMessageText,
+  succesAnimation,
 } = ChoosememojiScreenStyles;
 
-const { Blacksendicon } = icons;
+const { Blacksendicon, Memojisuccessanimated } = icons;
 
 const MemojisuccessScreen = ({ route, navigation }) => {
   const active = route?.params?.active;
   const emojiindex = route?.params?.emojiindex;
   return (
     <FTMainwrapper>
+      <LottieView
+        source={Memojisuccessanimated}
+        autoPlay
+        loop
+        style={succesAnimation}
+      />
       <View style={memojiSuccessWrap}>
         <FTIconwithbg imageUrl={emojiindex} bG={active} size={150} />
         <View style={{ flex: 1 }}>

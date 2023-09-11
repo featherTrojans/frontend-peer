@@ -13,7 +13,7 @@ import {
   ChoosememojiScreenStyles,
 } from "../assets/styles/screens";
 import { FTIconwithbg, FTTitlepagewrapper } from "../components";
-import { COLORS, FONTS, fontsize } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import Animated, {
   useAnimatedStyle,
@@ -28,6 +28,7 @@ const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 const { profileWrap, memojisWrapper, buttonWrap, buttonText } =
   ChoosememojiScreenStyles;
 const {} = AccountverificationScreenStyles;
+const { Activememojiicon } = icons;
 
 const ChoosememojiScreen = ({ navigation }) => {
   const [active, setActive] = useState("transparent");
@@ -92,7 +93,7 @@ const ChoosememojiScreen = ({ navigation }) => {
               position: "absolute",
               justifyContent: "center",
               alignItems: "center",
-              backgroundColor: "transaparent"
+              backgroundColor: "transaparent",
             }}
           >
             <FTIconwithbg imageUrl={currentIndex} bG={active} size={150} />
@@ -127,12 +128,19 @@ const ChoosememojiScreen = ({ navigation }) => {
           columnWrapperStyle={[memojisWrapper]}
           renderItem={({ item }) => {
             return (
-              <FTIconwithbg
-                onpress={() => onOptionPress(item)}
-                imageUrl={item}
-                bG=""
-                size={85}
-              />
+              <View>
+                <FTIconwithbg
+                  onpress={() => onOptionPress(item)}
+                  imageUrl={item}
+                  bG=""
+                  size={85}
+                />
+                {currentIndex === item && (
+                  <View style={{ position: "absolute", right: 18, bottom: 15 }}>
+                    <Activememojiicon />
+                  </View>
+                )}
+              </View>
             );
           }}
         />

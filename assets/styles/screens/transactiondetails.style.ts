@@ -92,4 +92,31 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     paddingBottom: 30,
     borderRadius: 15,
   },
+
+  transactionStatusWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  statusThumpBg: {
+    width: 30,
+    height: 30,
+    borderRadius: 30 / 2,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  statusThumbText: {
+    ...fontsize.bsmall,
+    ...FONTS.medium,
+    lineHeight: 20,
+  },
+  statusTextBg: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 32,
+  },
+  statusText: {
+    ...fontsize.xsmallest,
+    ...FONTS.semibold,
+  },
 });

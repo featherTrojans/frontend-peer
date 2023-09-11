@@ -18,7 +18,7 @@ import {
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import amountFormatter from "../utils/formatMoney";
 import { TransactiondetailsScreenStyles } from "../assets/styles/screens";
-import { useAlert, useCopyclipboard } from "../hooks";
+import { transactionBadge } from "../components/FTTransactionhistory";
 
 const {
   eachDetailContainer,
@@ -27,7 +27,71 @@ const {
   eachOptionWrapper,
   amountText,
   amountTextValue,
+  transactionStatusWrap,
+  statusThumpBg,
+  statusThumbText,
+  statusTextBg,
+  statusText,
 } = TransactiondetailsScreenStyles;
+
+type IStatusProps=  "success" | "failed" | "pending"
+
+
+
+const transactionStatus = (status: IStatusProps) => {
+  switch (status.toLowerCase()) {
+    case "success":
+      return (
+        <View style={transactionStatusWrap}>
+          <View style={[statusThumpBg, { backgroundColor: COLORS.Tgreen }]}>
+            <Text style={statusThumbText}>👍🏽</Text>
+          </View>
+          <View style={[statusTextBg, { backgroundColor: COLORS.Tgreen }]}>
+            <Text style={[statusText, { color: COLORS.green1 }]}>
+              Successful
+            </Text>
+          </View>
+        </View>
+      );
+      break;
+    case "pending":
+      return (
+        <View style={transactionStatusWrap}>
+          <View style={[statusThumpBg, { backgroundColor: COLORS.Tyellow }]}>
+            <Text style={statusThumbText}>👍🏽</Text>
+          </View>
+          <View style={[statusTextBg, { backgroundColor: COLORS.Tyellow }]}>
+            <Text style={[statusText, { color: COLORS.yellow1 }]}>
+              Pending
+            </Text>
+          </View>
+        </View>
+      );
+      break;
+    case "failed":
+      return (
+        <View style={transactionStatusWrap}>
+          <View style={[statusThumpBg, { backgroundColor: COLORS.Tred }]}>
+            <Text style={statusThumbText}>👍🏽</Text>
+          </View>
+          <View style={[statusTextBg, { backgroundColor: COLORS.Tred }]}>
+            <Text style={[statusText, { color: COLORS.red5 }]}>
+              Failed
+            </Text>
+          </View>
+        </View>
+      );
+      break;
+
+    default:
+      return (
+        <View>
+          <Text>Successful</Text>
+        </View>
+      );
+      break;
+  }
+};
 
 const {
   Sharereceipt,
@@ -58,13 +122,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     bankDetails,
   } = data;
   const total = Number(amount) + Number(charges);
-  const isCredit = direction === "in";
-  const Arrow = isCredit ? <Arrowin /> : <Arrowout />;
 
   const dt = moment(dateTime);
-  const formatDateTime = `${dt.format("ddd")}.  ${dt.format("Do")} ${dt.format(
-    "MMMM"
-  )}, ${dt.format("YYYY")}`;
+  const formatDateTime = `${dt.format("ddd")}. ${dt.format( "MMM")}, ${dt.format("YYYY")}`;
 
   const saveFile = async (filePath: string) => {
     const albumName = "Feather";
@@ -451,6 +511,24 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
         contentContainerStyle={{ paddingHorizontal: 20 }}
         showsVerticalScrollIndicator={false}
       >
+        <View
+          style={{
+            justifyContent: "space-between",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          {transactionBadge(title, direction, sender, receiver, 50)}
+
+          {transactionStatus("failed")}
+
+          <FTIconwithbg
+            bG={COLORS.blue9}
+            Icon={Sharereceipt}
+            onpress={() => shareReceipt(htmlContent)}
+          />
+        </View>
+
         <View style={eachOptionWrapper}>
           <View
             style={{
