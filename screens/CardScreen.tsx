@@ -144,93 +144,8 @@ function Cardlock() {
   );
 }
 
-const cardcreationinfos = [
-  {
-    Icon: Cardcreationicon,
-    bG: "#E9F7EA",
-    title: "Card creation fee",
-    info: "Non-refundable fee to create card",
-    priceBg: "#12AD2B",
-    price: "$4.00",
-  },
-  {
-    Icon: Transactionfeeicon,
-    bG: "#F3EEFB",
-    title: "Transaction fee",
-    info: "Fees on card transactions",
-    priceBg: "#7600FF",
-    price: "$1.00",
-  },
-  {
-    Icon: Maintenancefeeicon,
-    bG: "#FEF8E7",
-    title: "Maintenance fee",
-    info: "Monthly fee to keep card up",
-    priceBg: "#FF9D00",
-    price: "$3.50",
-  },
-];
 
-const RightComponent = ({ bG = "blue", amount }) => {
-  return (
-    <View style={[rightComponentBg, { backgroundColor: bG }]}>
-      <Text style={rightComponentText}>{amount}</Text>
-    </View>
-  );
-};
-
-const CreateCard = () => {
-  const navigation = useNavigation();
-  const { authdata } = useContext(AuthContext);
-  const { errorAlert } = useAlert();
-  return (
-    <View style={{ paddingVertical: 12, flex: 1 }}>
-      <Text style={createVisaCardText}>Create a Visa card</Text>
-      <Text style={createCardSubInfo}>
-        Suitable for all online shopping and subscription services.
-      </Text>
-      <View style={{ flex: 1 }}>
-        {cardcreationinfos.map((cardcreationinfo, index) => {
-          const { title, info, bG, Icon, priceBg, price } = cardcreationinfo;
-          return (
-            <FTIconwithtitleandinfo
-              key={index}
-              title={title}
-              info={info}
-              bG={bG}
-              Icon={Icon}
-              onPress={() => null}
-              mB={25}
-              rightComponent={<RightComponent amount={price} bG={priceBg} />}
-            />
-          );
-        })}
-      </View>
-      <FTCustombutton
-        bg="#000"
-        btntext="Continue"
-        onpress={() => {
-          if (authdata.userDetails.userLevel < 3) {
-            errorAlert(
-              null,
-              "Padi you need to upgrade your account to create a virtual card"
-            );
-
-            setTimeout(() => {
-              navigation.navigate("accountverification_screen", {
-                index: authdata.userDetails.userLevel,
-              });
-            }, 500);
-            return;
-          }
-          navigation.navigate("carddisclosure_screen");
-        }}
-      />
-    </View>
-  );
-};
-const CardScreen = () => {
-  const navigation = useNavigation();
+const CardScreen = ({navigation}) => {
   const snapPoints = useMemo(() => ["40%", "98%"], []);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null });
@@ -254,10 +169,6 @@ const CardScreen = () => {
 
   const switchModals = (value) => {
     switch (value) {
-      case 0:
-        setContent({ child: <CreateCard /> });
-        setShowModal((s) => !s);
-        break;
       case 1:
         setContent({ child: <Carddetail /> });
         setShowModal((s) => !s);
@@ -360,7 +271,7 @@ const CardScreen = () => {
               Shop, Pay, Stream and Subscribe freely, Accepted Globally.
             </Text>
             <Pressable
-              onPress={() => switchModals(0)}
+              onPress={() => navigation.navigate("createcard_screen")}
               style={createVirtualCardWrap}
             >
               <Text style={createVirtualCardText}>Create Virtual Card</Text>

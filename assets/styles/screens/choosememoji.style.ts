@@ -29,7 +29,7 @@ export const ChoosememojiScreenStyles = StyleSheet.create({
     marginTop: 20,
   },
   buttonWrap: {
-    backgroundColor: COLORS.blue16,
+    backgroundColor: COLORS.blue9,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
