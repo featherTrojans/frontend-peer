@@ -1,4 +1,7 @@
 const amountFormatter = (value: string) => {
+  if (!value) {
+    return "0.00";
+  }
   return (
     Number(value)
       .toFixed(2)

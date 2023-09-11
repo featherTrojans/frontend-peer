@@ -203,14 +203,18 @@ const UploadDocScreen = ({ navigation }) => {
     }
   };
 
-  const UploadDocumentBtn = () => {
+  const UploadDocumentBtn = ({ picked }) => {
     return (
       <TouchableOpacity
         style={uploadDocBtnWrap}
         activeOpacity={0.8}
         onPress={handleImageUpload}
       >
-        <Text style={uploadDocBtnText}>Upload Document</Text>
+        {picked ? (
+          <Text style={uploadDocBtnText}>Change Document</Text>
+        ) : (
+          <Text style={uploadDocBtnText}>Upload Document</Text>
+        )}
       </TouchableOpacity>
     );
   };
@@ -297,7 +301,7 @@ const UploadDocScreen = ({ navigation }) => {
         />
 
         <FTInput
-          placeholderText={id_image.uri ? "image uploaded" : "Select Document"}
+          placeholderText={id_image.uri ? "image picked" : "Select Document"}
           name="id_image"
           label="Upload Document"
           control={control}
@@ -305,7 +309,7 @@ const UploadDocScreen = ({ navigation }) => {
           mB={15}
           type="dropdown"
           onPress={() => console.log("Yestys")}
-          rightComponent={<UploadDocumentBtn />}
+          rightComponent={<UploadDocumentBtn picked={!!id_image.uri} />}
         />
 
         <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />

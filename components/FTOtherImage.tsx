@@ -93,6 +93,13 @@ const FTOtherImage = ({
     );
   }
 
+  if (!fullname) {
+    return (
+      <Pressable onPress={onpress} hitSlop={25}>
+        <FTInitialsBg sideLength={size} name={""} />
+      </Pressable>
+    );
+  }
   return (
     <Pressable onPress={onpress} hitSlop={25}>
       <FTInitialsBg sideLength={size} name={nameSplitter(fullname)} />

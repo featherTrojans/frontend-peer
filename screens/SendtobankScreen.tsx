@@ -16,6 +16,7 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
 import { useAlert } from "../hooks";
 import { useNavigation } from "@react-navigation/native";
+import useBeneficiary from "../hooks/useBeneficiary";
 
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
@@ -47,20 +48,17 @@ const SendtobankScreen = ({ route, navigation }) => {
   const { errorAlert } = useAlert();
   const amount = route.params?.amount;
   const [loading, setLoading] = useState(false);
-  const [beneficiaries, setbeneficiaries] = useState([]);
+
   const [filteredbeneficiaries, setFilteredbeneficiaries] = useState([]);
   const [search, setSearch] = useState("");
+  const { beneficiaries, loading: beneficiary_loading } = useBeneficiary(
+    BENEFICIARY_TYPE,
+    "account_number"
+  );
 
   useEffect(() => {
-    axiosCustom
-      .get(`/beneficiary/get/${BENEFICIARY_TYPE}`)
-      .then((res) => {
-        setbeneficiaries(res.data.data?.beneficiaries);
-        setFilteredbeneficiaries(res.data.data?.beneficiaries);
-      })
-      .catch((err) => {});
-  }, []);
-
+    setFilteredbeneficiaries(beneficiaries);
+  }, [beneficiaries]);
   const handleToSendToBeneficiary = async (bank) => {
     try {
       setLoading(true);
@@ -146,17 +144,13 @@ const SendtobankScreen = ({ route, navigation }) => {
         bounces={false}
         ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
         renderItem={({ item }) => {
-          let dataobject = {};
-          if (item?.data) {
-            dataobject = JSON.parse(item?.data);
-          }
           return (
             <FTIconwithtitleandinfo
-              title={dataobject?.account_name}
-              info={dataobject?.account_number}
-              onPress={() => handleToSendToBeneficiary(dataobject)}
+              title={item?.account_name}
+              info={item?.account_number}
+              onPress={() => handleToSendToBeneficiary(item)}
               bG={COLORS.Tblue4}
-              imageUrl={dataobject?.imageUrl}
+              imageUrl={item?.imageUrl}
             />
           );
         }}

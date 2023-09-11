@@ -64,6 +64,12 @@ const StartnewchatScreen = ({ navigation }) => {
               onPress={() =>
                 navigation.navigate("chatsdm_screen", { userInfo: item })
               }
+              profile={true}
+              userInfo={{
+                imageUrl: item.imageUrl,
+                memoji: item.memoji,
+                fullName: item.fullName,
+              }}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}
             />

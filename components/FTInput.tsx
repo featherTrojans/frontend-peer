@@ -43,7 +43,7 @@ const FTInput = ({
   textInputProps,
 }: inputProps) => {
   const renderInputType = () => {
-    const [isFocused, setIsFocused] = useState(false)
+    const [isFocused, setIsFocused] = useState(false);
     return (
       <View
         style={{
@@ -77,8 +77,8 @@ const FTInput = ({
                 ]}
                 onChangeText={onChange}
                 editable={editable}
-                onBlur={e => setIsFocused(false)}
-                onFocus={e => setIsFocused(true)}
+                onBlur={(e) => setIsFocused(false)}
+                onFocus={(e) => setIsFocused(true)}
                 value={value}
                 placeholder={placeholderText}
                 placeholderTextColor={COLORS.grey18}

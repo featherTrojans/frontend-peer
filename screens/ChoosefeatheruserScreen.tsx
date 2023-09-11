@@ -22,6 +22,7 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
 import { nameCapitalize } from "../utils/nameSplitter";
+import useBeneficiary from "../hooks/useBeneficiary";
 
 const { Smallphoneicon } = icons;
 
@@ -166,16 +167,11 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
   const amount = route?.params?.amount;
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
-  const [beneficiaries, setbeneficiaries] = useState([]);
-  console.log(beneficiaries, "here");
-  useEffect(() => {
-    axiosCustom
-      .get(`/beneficiary/get/${BENEFICIARY_TYPE}`)
-      .then((res) => {
-        setbeneficiaries(res.data.data?.beneficiaries);
-      })
-      .catch((err) => {});
-  }, []);
+
+  const { beneficiaries, loading } = useBeneficiary(
+    BENEFICIARY_TYPE,
+    "userUid"
+  );
 
   const switchModals = (value, data, amount, isBenficairy) => {
     switch (value) {
@@ -226,22 +222,18 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
         bounces={false}
         ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
         renderItem={({ item }) => {
-          let dataobject = {};
-          if (item?.data) {
-            dataobject = JSON.parse(item?.data);
-          }
           return (
             <FTIconwithtitleandinfo
-              title={nameCapitalize(dataobject.fullName)}
-              info={`@${dataobject.username.toLowerCase()}`}
-              onPress={() => switchModals(0, dataobject, amount, true)}
+              title={nameCapitalize(item?.fullName)}
+              info={`@${item?.username?.toLowerCase()}`}
+              onPress={() => switchModals(0, item, amount, true)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}
               profile={true}
               userInfo={{
-                imageUrl: dataobject?.imageUrl,
-                memoji: dataobject?.memoji,
-                fullName: dataobject?.fullName,
+                imageUrl: item?.imageUrl,
+                memoji: item?.memoji,
+                fullName: item?.fullName,
               }}
             />
           );

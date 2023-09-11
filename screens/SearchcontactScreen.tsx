@@ -7,6 +7,7 @@ import {
 import {
   FTDetailsModal,
   FTIconwithtitleandinfo,
+  FTLoader,
   FTSearchinput,
   FTSwitchbtn,
   FTTitlepagewrapper,
@@ -163,6 +164,7 @@ const SearchcontactScreen = ({ route }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
+      <FTLoader loading={loading} />
       <FlatList
         data={featherContacts}
         bounces={false}

@@ -30,13 +30,20 @@ const {
   profileNameWrap,
   profileNameText,
   profileUsername,
-  upgradeBg,
-  upgradeOdogwuText,
 } = ProfileScreenStyles;
 
 const ProfileScreen = ({ navigation }) => {
   const { authdata, setAuthData, setToken } = useContext(AuthContext);
 
+  const memojiImage = authdata?.userDetails?.memoji;
+  let memojiobj = {};
+  if (memojiImage) {
+    if (typeof memojiImage == "string") {
+      memojiobj = JSON.parse(memojiImage);
+    } else {
+      memojiobj = memojiImage;
+    }
+  }
   const profileActions = [
     {
       Icon: Mywalleticon,
@@ -84,8 +91,26 @@ const ProfileScreen = ({ navigation }) => {
 
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={profileDetailsWrap}>
-          <View style={profileOuterBorder}>
-            <View style={profileInnerBorder}>
+          <View
+            style={[
+              profileOuterBorder,
+              {
+                borderColor: memojiobj?.color
+                  ? memojiobj?.color + "55"
+                  : "#F4F4FF",
+              },
+            ]}
+          >
+            <View
+              style={[
+                profileInnerBorder,
+                {
+                  borderColor: memojiobj?.color
+                    ? memojiobj?.color + "AA"
+                    : "#DFDDFF",
+                },
+              ]}
+            >
               <View style={{}}>
                 <FTUserImage size={100} />
               </View>
@@ -100,7 +125,7 @@ const ProfileScreen = ({ navigation }) => {
 
           <View style={profileNameWrap}>
             <Text style={profileNameText}>
-             {nameCapitalize(authdata?.userDetails?.fullName)}
+              {nameCapitalize(authdata?.userDetails?.fullName)}
             </Text>
             {authdata?.userDetails?.username && (
               <Text style={profileUsername}>

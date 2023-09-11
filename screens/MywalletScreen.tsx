@@ -5,12 +5,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MywalletScreenStyles } from "../assets/styles/screens";
 import { FTIconwithbg, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { useCopyclipboard } from "../hooks";
 import { AuthContext } from "../context/AuthContext";
+import amountFormatter from "../utils/formatMoney";
+import axiosCustom from "../httpRequests/axiosCustom";
 const { Levelcheckicon, Copydetailsicon } = icons;
 
 const {
@@ -35,8 +37,22 @@ const {
 
 const MywalletScreen = () => {
   const { authdata } = useContext(AuthContext);
-
+  const [walletlimit, setWalletlimit] = useState({});
+  const [loading, setLoading] = useState(false);
   const { copyToClipboard } = useCopyclipboard("Copied successfully!!");
+
+  useEffect(() => {
+    setLoading(true);
+    axiosCustom
+      .get("api/v1/limitrange")
+      .then((res) => {
+        setWalletlimit(res.data.data);
+      })
+      .catch(() => {})
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const accountlevel = () => {
     switch (authdata?.userDetails?.userLevel) {
@@ -147,24 +163,40 @@ const MywalletScreen = () => {
 
           <SpendingLimit
             limitTitle="Cash Request"
-            totalAmount="N30,000"
-            amountLeft="N8,500"
-            amountSpent="N22,560"
+            totalAmount={`N${amountFormatter(walletlimit?.cashRequest?.total)}`}
+            amountLeft={`N${amountFormatter(
+              walletlimit?.cashRequest?.total - walletlimit?.cashRequest?.spent
+            )}`}
+            amountSpent={`N${amountFormatter(walletlimit?.cashRequest?.spent)}`}
             progressLevel={73}
           />
           <SpendingLimit
             mT={40}
             limitTitle="Daily Transfer Out"
-            totalAmount="N50,000"
-            amountLeft="N45,000"
-            amountSpent="N5,000"
+            totalAmount={`N${amountFormatter(
+              walletlimit?.dailyTransfer?.total
+            )}`}
+            amountLeft={`N${amountFormatter(
+              walletlimit?.dailyTransfer?.total -
+                walletlimit?.dailyTransfer?.spent
+            )}`}
+            amountSpent={`N${amountFormatter(
+              walletlimit?.dailyTransfer?.spent
+            )}`}
             progressLevel={36}
           />
           <SpendingLimit
             limitTitle="Monthly Transfer Out"
-            totalAmount="N100,000"
-            amountLeft="N50,000"
-            amountSpent="N50,000"
+            totalAmount={`N${amountFormatter(
+              walletlimit?.monthlyTransfer?.total
+            )}`}
+            amountLeft={`N${amountFormatter(
+              walletlimit?.monthlyTransfer?.total -
+                walletlimit?.monthlyTransfer?.spent
+            )}`}
+            amountSpent={`N${amountFormatter(
+              walletlimit?.monthlyTransfer?.spent
+            )}`}
             progressLevel={50}
           />
         </View>
