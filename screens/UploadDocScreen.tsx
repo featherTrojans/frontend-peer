@@ -92,15 +92,29 @@ const UploadDocScreen = ({ navigation }) => {
   const IdtypeModal = () => {
     return (
       <FlatList
-        data={["NIGERIAN_NIN"]}
+        data={[
+          { name: "National Identity", value: "NIGERIAN_NIN" },
+          {
+            name: "International Passport",
+            value: "NIGERIAN_INTERNATIONAL_PASSPORT",
+          },
+          {
+            name: "Permanent Voters Card",
+            value: "NIGERIAN_PVC",
+          },
+          {
+            name: "Drivers License",
+            value: "NIGERIAN_DRIVERS_LICENSE",
+          },
+        ]}
         renderItem={({ item }) => {
           return (
             <Pressable onPress={() => closeidtypeModal(item)}>
-              <Text style={optionText}>{item}</Text>
+              <Text style={optionText}>{item.name}</Text>
             </Pressable>
           );
         }}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.value}
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 40 }}
       />
@@ -154,7 +168,7 @@ const UploadDocScreen = ({ navigation }) => {
     formdata.append("country", "Nigeria");
     formdata.append("postal_code", values.postal_code);
     formdata.append("house_no", values.house_no);
-    formdata.append("id_type", id_type);
+    formdata.append("id_type", id_type.value);
     formdata.append("id_no", values.id_no);
     formdata.append("id_image", id_image);
 
@@ -263,7 +277,7 @@ const UploadDocScreen = ({ navigation }) => {
           mB={15}
         />
         <FTInput
-          placeholderText={id_type}
+          placeholderText={id_type.name}
           name="id_type"
           label="ID Type"
           control={control}
