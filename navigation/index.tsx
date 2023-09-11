@@ -66,7 +66,7 @@ let TabIcon = (name: string, focused: boolean) => {
 const NoAuthNavigator = ({ routeName }) => {
   const { token } = useContext(AuthContext);
   if (token == null) {
-    routeName = "onboarding_screen";
+    routeName = "login_screen";
   }
   return (
     <AuthStack.Navigator

@@ -42,7 +42,7 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     try {
       await axiosCustom.post("/transfer", {
         amount: Number(amount),
-        transferTo: userinfo?.username,
+        transferTo: userinfo?.phoneNumber,
         userPin: pin,
       });
       navigation.navigate("transactionsuccess_screen");
