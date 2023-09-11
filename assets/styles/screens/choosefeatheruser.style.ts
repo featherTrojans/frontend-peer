@@ -3,7 +3,7 @@ import { COLORS, FONTS, fontsize } from "../../../constants";
 
 export const ChoosefeatheruserScreenStyles = StyleSheet.create({
   searchContactWrap: {
-    backgroundColor: COLORS.Tblue2,
+    backgroundColor: COLORS.Tblue7,
     borderRadius: 10,
     position: "absolute",
     bottom: 20,
@@ -23,6 +23,18 @@ export const ChoosefeatheruserScreenStyles = StyleSheet.create({
     marginBottom: 30,
     ...fontsize.smallest,
     ...FONTS.semibold,
+    color: COLORS.blue9,
+  },
+  addBeneficiaryWrap: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+    flex: 1,
+  },
+  saveBeneficiaryText: {
+    ...FONTS.regular,
+    ...fontsize.smallest,
     color: COLORS.blue9,
   },
 });

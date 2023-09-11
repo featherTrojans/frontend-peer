@@ -10,6 +10,7 @@ const Mainwrapper = ({
   children,
   bgColor = "#FFF",
   pH = 15,
+  pB=0,
   childBg,
   modalChildren,
   setShowModal,
@@ -19,6 +20,7 @@ const Mainwrapper = ({
   children: any;
   bgColor?: string;
   pH?: number;
+  pB?: number;
   childBg?: string;
   modalChildren?: any;
   showModal?: any;
@@ -32,7 +34,7 @@ const Mainwrapper = ({
       <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
         <Customstatusbar />
         <View
-          style={{ flex: 1, paddingHorizontal: pH, backgroundColor: childBg }}
+          style={{ flex: 1, paddingHorizontal: pH, paddingBottom: pB, backgroundColor: childBg }}
         >
           {children}
         </View>

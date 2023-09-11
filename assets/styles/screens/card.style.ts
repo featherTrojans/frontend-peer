@@ -129,6 +129,7 @@ export const CardScreenStyles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 50,
     lineHeight: 31,
+    paddingHorizontal: 50
   },
   createVirtualCardWrap: {
     paddingVertical: 12,

@@ -15,37 +15,96 @@ import {
   FTIconwithbg,
   FTTitlepagewrapper,
 } from "../components";
-import { COLORS, icons } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import amountFormatter from "../utils/formatMoney";
 import { TransactiondetailsScreenStyles } from "../assets/styles/screens";
-import { useAlert, useCopyclipboard } from "../hooks";
+import { transactionBadge } from "../components/FTTransactionhistory";
 
 const {
   eachDetailContainer,
   eachDetailTitle,
   eachDetailValue,
-  optionWrapper,
-  optionBlock,
   eachOptionWrapper,
-  eachOptionTitle,
-  transactionRefText,
-  refAndCopyWrap,
-  refText,
-  tapAndCopy,
+  amountText,
+  amountTextValue,
+  transactionStatusWrap,
+  statusThumpBg,
+  statusThumbText,
+  statusTextBg,
+  statusText,
 } = TransactiondetailsScreenStyles;
 
-const { Sharereceipt, Downloadreceipt, Reporttransactions, Arrowin, Arrowout } =
-  icons;
+type IStatusProps=  "success" | "failed" | "pending"
+
+
+
+const transactionStatus = (status: IStatusProps) => {
+  switch (status.toLowerCase()) {
+    case "success":
+      return (
+        <View style={transactionStatusWrap}>
+          <View style={[statusThumpBg, { backgroundColor: COLORS.Tgreen }]}>
+            <Text style={statusThumbText}>👍🏽</Text>
+          </View>
+          <View style={[statusTextBg, { backgroundColor: COLORS.Tgreen }]}>
+            <Text style={[statusText, { color: COLORS.green1 }]}>
+              Successful
+            </Text>
+          </View>
+        </View>
+      );
+      break;
+    case "pending":
+      return (
+        <View style={transactionStatusWrap}>
+          <View style={[statusThumpBg, { backgroundColor: COLORS.Tyellow }]}>
+            <Text style={statusThumbText}>👍🏽</Text>
+          </View>
+          <View style={[statusTextBg, { backgroundColor: COLORS.Tyellow }]}>
+            <Text style={[statusText, { color: COLORS.yellow1 }]}>
+              Pending
+            </Text>
+          </View>
+        </View>
+      );
+      break;
+    case "failed":
+      return (
+        <View style={transactionStatusWrap}>
+          <View style={[statusThumpBg, { backgroundColor: COLORS.Tred }]}>
+            <Text style={statusThumbText}>👍🏽</Text>
+          </View>
+          <View style={[statusTextBg, { backgroundColor: COLORS.Tred }]}>
+            <Text style={[statusText, { color: COLORS.red5 }]}>
+              Failed
+            </Text>
+          </View>
+        </View>
+      );
+      break;
+
+    default:
+      return (
+        <View>
+          <Text>Successful</Text>
+        </View>
+      );
+      break;
+  }
+};
+
+const {
+  Sharereceipt,
+  Downloadreceipt,
+  Reporttransactions,
+  Arrowin,
+  Arrowout,
+  Dashedlineicon,
+} = icons;
 
 const TransactionDetailsScreen = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const { successAlert } = useAlert();
-  const { copyToClipboard } = useCopyclipboard(
-    "Transaction reference copied successfully"
-  );
 
-  const copyColor = copied ? COLORS.blue6 : COLORS.grey2;
   const { data } = route.params;
 
   const {
@@ -63,13 +122,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     bankDetails,
   } = data;
   const total = Number(amount) + Number(charges);
-  const isDebit = direction === "out";
-  const Arrow = direction === "in" ? <Arrowin /> : <Arrowout />;
 
   const dt = moment(dateTime);
-  const formatDateTime = `${dt.format("ddd")}.  ${dt.format("Do")} ${dt.format(
-    "MMMM"
-  )}, ${dt.format("YYYY")}`;
+  const formatDateTime = `${dt.format("ddd")}. ${dt.format( "MMM")}, ${dt.format("YYYY")}`;
 
   const saveFile = async (filePath: string) => {
     const albumName = "Feather";
@@ -374,14 +429,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     }
   };
 
-  const reportTransaction = () => {
-    setShowModal(false);
-    navigation.navigate("Transactiondispute");
-  };
-
-  const Eachoption = ({ title, value }) => {
+  const Eachoption = ({ title, value, mT = 0, mB = 0 }) => {
     return (
-      <View style={eachDetailContainer}>
+      <View style={[eachDetailContainer, { marginTop: mT, marginBottom: mB }]}>
         <Text style={eachDetailTitle}>{title}</Text>
         <Text style={eachDetailValue}>{value}</Text>
       </View>
@@ -408,10 +458,8 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
           : user.fullName;
       return (
         <>
-          <Eachoption title="Sender Name" value={senderName} />
-          <FTHorizontaline marginV={18} />
+          <Eachoption title="Sender Name" mB={18} mT={18} value={senderName} />
           <Eachoption title="Receiver Name" value={receiverName} />
-          <FTHorizontaline marginV={18} />
         </>
       );
     }
@@ -422,14 +470,17 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
       return (
         <>
           <Eachoption
+            title="Account Name"
+            mB={18}
+            mT={18}
+            value={bankDetails.account_name}
+          />
+          <Eachoption
             title="Account Number"
             value={bankDetails.account_number}
+            mB={18}
           />
-          <FTHorizontaline marginV={18} />
-          <Eachoption title="Account Name" value={bankDetails.account_name} />
-          <FTHorizontaline marginV={18} />
           <Eachoption title="Bank" value={bankDetails.bank_name} />
-          <FTHorizontaline marginV={18} />
         </>
       );
     }
@@ -441,91 +492,70 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
       const networkName = sender;
       return (
         <>
-          <Eachoption title="Phone Number" value={receiverPhone} />
-          <FTHorizontaline marginV={18} />
+          <Eachoption
+            title="Phone Number"
+            mB={18}
+            mT={18}
+            value={receiverPhone}
+          />
           <Eachoption title="Network Type" value={networkName} />
-          <FTHorizontaline marginV={18} />
         </>
       );
     }
   };
 
-  const options = [
-    {
-      title: "Share",
-      Icon: Sharereceipt,
-      color: COLORS.Tyellow,
-      onpress: () => shareReceipt(htmlContent),
-    },
-    {
-      title: "Download",
-      Icon: Downloadreceipt,
-      color: COLORS.Tgreen2,
-      onpress: () => downloadReceipt(htmlContent),
-    },
-    {
-      title: "Report",
-      Icon: Reporttransactions,
-      color: COLORS.Tred,
-      onpresss: () => console.log("Report Transactions"),
-    },
-  ];
-
   return (
     <FTTitlepagewrapper title="Transaction Details" childBg={COLORS.white}>
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingHorizontal: 15 }}
+        contentContainerStyle={{ paddingHorizontal: 20 }}
         showsVerticalScrollIndicator={false}
       >
-        <View style={optionWrapper}>
-          {options.map(({ title, color, Icon, onpress }, index) => {
-            return (
-              <TouchableOpacity
-                onPress={onpress}
-                activeOpacity={0.7}
-                style={optionBlock}
-                key={index}
-              >
-                <FTIconwithbg Icon={Icon} size={40} bG={color} />
-                <Text style={eachOptionTitle}>{title}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+        <View
+          style={{
+            justifyContent: "space-between",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          {transactionBadge(title, direction, sender, receiver, 50)}
 
-        {/* Header section showing ref and receiver image */}
+          {transactionStatus("failed")}
 
-        <View style={{ alignItems: "center", marginTop: 50 }}>
-          <Text style={transactionRefText}>Transaction Ref.</Text>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => copyToClipboard(transactionRef)}
-            style={refAndCopyWrap}
-          >
-            <Text style={refText}>{transactionRef}</Text>
-            <Text style={tapAndCopy}>Tap to copy ref. number</Text>
-          </TouchableOpacity>
+          <FTIconwithbg
+            bG={COLORS.blue9}
+            Icon={Sharereceipt}
+            onpress={() => shareReceipt(htmlContent)}
+          />
         </View>
 
         <View style={eachOptionWrapper}>
-          <Eachoption title="Transaction Type" value={title} />
-          <FTHorizontaline marginV={18} />
-
-          <Eachoption title="Date" value={formatDateTime} />
-          <FTHorizontaline marginV={18} />
+          <View
+            style={{
+              alignSelf: "center",
+              alignItems: "center",
+              marginBottom: 40,
+            }}
+          >
+            <Text style={amountText}>Amount</Text>
+            <Text style={amountTextValue}>N{amountFormatter(amount)}</Text>
+          </View>
+          <Dashedlineicon />
+          <Eachoption mT={24} title="Ref. Number" value={transactionRef} />
           {FeatherTransferDetails()}
           {BankTransferDetails()}
           {AirtimePurchase()}
-          <Eachoption title="Amount" value={`N${amountFormatter(amount)}`} />
-          <FTHorizontaline marginV={18} />
+          <Eachoption title="Payment Method" mB={18} mT={18} value={title} />
+          <Eachoption title="Payment Time" value={formatDateTime} mB={24} />
+          <Dashedlineicon />
           <Eachoption
-            title="Transaction Charges"
+            title="Charges"
             value={`N${amountFormatter(charges)}`}
+            mT={24}
+            mB={18}
           />
-          <FTHorizontaline marginV={18} />
           <Eachoption
-            title="Total"
+            title="Total Paid"
             value={`N${amountFormatter(total.toString())}`}
           />
         </View>

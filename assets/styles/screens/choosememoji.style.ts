@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLORS, FONTS, fontsize } from "../../../constants";
-
+import { COLORS, FONTS, SIZES, fontsize } from "../../../constants";
 export const ChoosememojiScreenStyles = StyleSheet.create({
   sectionHeader: {
     ...fontsize.smallest,
@@ -63,5 +62,12 @@ export const ChoosememojiScreenStyles = StyleSheet.create({
     lineHeight: 26,
     textAlign: "center",
     color: COLORS.blue9,
+  },
+  succesAnimation: {
+    width: SIZES.width,
+    height: 390,
+    // backgroundColor: "red",
+    position: "absolute",
+    alignSelf: "center",
   },
 });

@@ -23,35 +23,17 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     textTransform: "capitalize",
   },
   eachDetailValue: {
-    ...fontsize.smaller,
+    ...fontsize.smallest,
     ...FONTS.medium,
     color: COLORS.blue9,
     textTransform: "capitalize",
   },
 
-  optionWrapper: {
-    flexDirection: "row",
-    width: 242,
-    alignSelf: "center",
-    justifyContent: "space-between",
-  },
-  optionBlock: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
   eachOptionWrapper: {
-    marginTop: 10,
+    marginTop: 25,
     backgroundColor: COLORS.white,
-    // paddingHorizontal: 18,
-    paddingVertical: 30,
+    padding: 30,
     borderRadius: 15,
-  },
-
-  eachOptionTitle: {
-    marginTop: 13,
-    ...fontsize.xxsmall,
-    ...FONTS.medium,
-    color: COLORS.blue9,
   },
   dateWrapper: {
     justifyContent: "center",
@@ -90,30 +72,19 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  transactionRefText: {
-    ...fontsize.xsmallest,
-    ...FONTS.regular,
-    color: COLORS.blue9
+
+  amountText: {
+    ...fontsize.xxsmallest,
+    ...FONTS.medium,
+    color: COLORS.blue9,
+    marginBottom: 10,
   },
-  refAndCopyWrap: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  refText: {
-    ...fontsize.xmedium,
+  amountTextValue: {
+    ...fontsize.xbigger,
     ...FONTS.bold,
-    lineHeight: 39,
-    color: COLORS.blue7,
-    marginTop: 16,
-    marginBottom: 8,
-    textTransform: "uppercase",
-    textAlign: "center",
+    color: COLORS.blue9,
   },
-  tapAndCopy: {
-    ...fontsize.smallest,
-    ...FONTS.regular,
-    color: COLORS.grey16,
-  },
+
   headerBlock: {
     justifyContent: "center",
     backgroundColor: COLORS.white,
@@ -122,4 +93,30 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     borderRadius: 15,
   },
 
+  transactionStatusWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  statusThumpBg: {
+    width: 30,
+    height: 30,
+    borderRadius: 30 / 2,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  statusThumbText: {
+    ...fontsize.bsmall,
+    ...FONTS.medium,
+    lineHeight: 20,
+  },
+  statusTextBg: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 32,
+  },
+  statusText: {
+    ...fontsize.xsmallest,
+    ...FONTS.semibold,
+  },
 });

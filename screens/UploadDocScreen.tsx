@@ -1,4 +1,4 @@
-import { Text, Pressable, FlatList } from "react-native";
+import { Text, Pressable, FlatList, ScrollView } from "react-native";
 import React, { useContext, useState } from "react";
 import {
   FTCustombutton,
@@ -18,6 +18,7 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { SIZES } from "../constants";
 import { UploadDocScreenStyles } from "../assets/styles/screens";
 import { AuthContext } from "../context/AuthContext";
+import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 
 const { optionText, uploadDocBtnWrap, uploadDocBtnText } =
   UploadDocScreenStyles;

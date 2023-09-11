@@ -30,7 +30,7 @@ export const FTBackheaderStyles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     ...fontsize.smallest,
-    ...FONTS.regular,
+    ...FONTS.semibold,
     
   },
   childrenWrap: {

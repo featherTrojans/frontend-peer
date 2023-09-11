@@ -8,7 +8,6 @@ import {
   nameSplitter,
   nameSplitterFirstName,
 } from "../utils/nameSplitter";
-import { Text } from "react-native";
 import { FTInitialsBg } from ".";
 
 const { Notificationimage } = images;
@@ -96,7 +95,7 @@ const FTOtherImage = ({
 
   return (
     <Pressable onPress={onpress} hitSlop={25}>
-      <FTInitialsBg sideLength={45} name={nameSplitter(fullname)} />
+      <FTInitialsBg sideLength={size} name={nameSplitter(fullname)} />
     </Pressable>
   );
 };

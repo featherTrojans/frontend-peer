@@ -24,4 +24,5 @@ export const FTDetailsModalStyles = StyleSheet.create({
     ...FONTS.medium,
     color: COLORS.grey2,
   },
+  
 });

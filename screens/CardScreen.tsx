@@ -8,6 +8,7 @@ import {
   FTIconwithtitleandinfo,
   FTTabWrapper,
 } from "../components";
+import LottieView from "lottie-react-native";
 
 import BottomSheet from "@gorhom/bottom-sheet";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
@@ -25,10 +26,11 @@ const {
   Bluecardicon,
   Detailcopyicon,
   Usdcardicon,
-  Emptycardicon,
   Cardcreationicon,
   Transactionfeeicon,
   Maintenancefeeicon,
+  Visacardanimated,
+  Memojisuccessanimated
 } = icons;
 
 const {
@@ -347,7 +349,12 @@ const CardScreen = () => {
           <Text style={myCardsText}>My Cards</Text>
 
           <View style={emptyCardsWrap}>
-            <Emptycardicon />
+            <LottieView
+              source={Visacardanimated}
+              autoPlay
+              loop
+              style={{width: 234, height: 234}}
+            />
             <Text style={youHaveNoCard}>You have no card yet</Text>
             <Text style={shopAndPay}>
               Shop, Pay, Stream and Subscribe freely, Accepted Globally.

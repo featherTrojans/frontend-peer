@@ -35,7 +35,7 @@ export const TransactionsummaryScreenStyles = StyleSheet.create({
   eachSummaryValue: {
     ...fontsize.smallest,
     ...FONTS.semibold,
-    textTransform: "capitalize",
+    // textTransform: "capitalize",
   },
   dashedLine: {
     borderWidth: 1,

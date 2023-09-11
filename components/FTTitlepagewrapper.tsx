@@ -85,7 +85,7 @@ const FTTitlepagewrapper = ({
           >
             {title}
           </Text>
-          {rightComponent ? rightComponent : <View style={{ width: 45 }} />}
+          {rightComponent ? rightComponent : <View style={{ width: 32 }} />}
         </View>
         <View style={[childrenWrap, { backgroundColor: childBg }]}>
           {children}

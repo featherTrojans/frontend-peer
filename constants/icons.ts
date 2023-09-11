@@ -56,6 +56,8 @@ import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json";
 import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json";
 import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json";
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
+import Visacardanimated from "../assets/Lottie/animations/visa-card-feather.json"
+import Memojisuccessanimated from "../assets/Lottie/animations/animation_llcojtuk.json"
 
 import Carddetailsicon from "../assets/icons/Cardactionicons/Carddetailsicon";
 import Cardfreezeicon from "../assets/icons/Cardactionicons/Cardfreezeicon";
@@ -88,7 +90,6 @@ import Usdcardicon from "../assets/icons/Cardactionicons/Usdcardicon";
 import Detailcopyicon from "../assets/icons/Cardactionicons/Detailcopyicon";
 import Searchicon from "../assets/icons/Searchicon";
 import Startnewchaticon from "../assets/icons/Startnewchaticon";
-import Emptycardicon from "../assets/icons/Emptycardicon";
 import Maintenancefeeicon from "../assets/icons/Maintenancefeeicon";
 import Transactionfeeicon from "../assets/icons/Transactionfeeicon";
 import Cardcreationicon from "../assets/icons/Cardcreationicon";
@@ -139,6 +140,10 @@ import Keeptypingicon from "../assets/icons/Keeptypingicon";
 import Eyeopenicon from "../assets/icons/Eyeopenicon";
 import Odogwubirdicon from "../assets/icons/Odogwubirdicon";
 import Odogwuarrowup from "../assets/icons/Odogwuarrowup";
+import Dashedlineicon from "../assets/icons/Dashedlineicon";
+import Activememojiicon from "../assets/icons/Activememojiicon";
+
+
 
 
 
@@ -198,6 +203,7 @@ export default {
   Supporticon,
   Mywalleticon,
   Abouticon,
+  Activememojiicon,
   Accountcopyicon,
   Greaterthanicon,
   Addressediticon,
@@ -206,6 +212,7 @@ export default {
   Paymerchanticon,
   Phoneicon,
   Searchmerchanticon,
+  Dashedlineicon,
   Summaryicon,
   Withdrawchaticon,
   Bankblueicon,
@@ -216,7 +223,6 @@ export default {
   Searchicon,
   Eyeopenicon,
   Startnewchaticon,
-  Emptycardicon,
   Maintenancefeeicon,
   Transactionfeeicon,
   Cardcreationicon,
@@ -281,5 +287,7 @@ export default {
   Transacntionpinanimate,
   Verifiedbvnanimate,
   Trackinguseranimate,
+  Visacardanimated,
+  Memojisuccessanimated,
   PulsingCircle,
 };
