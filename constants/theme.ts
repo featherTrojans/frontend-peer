@@ -81,7 +81,6 @@ export const COLORS = {
   red2: "#FFE3E3",
   red3: "#FF5668",
   red4: "#F80000",
-
   red5: "#D81859",
   orange: "#FF8900",
   orange2: "#FFF8ED",

@@ -60,6 +60,8 @@ import {
   WalletfundingScreen,
   MemojisuccessScreen,
   ChoosememojibgScreen,
+  CreatecardScreen,
+  JoinwaitlistScreen,
 } from "../screens";
 
 // BVNSuccessScreen
@@ -288,6 +290,16 @@ export const transactRoutes = [
     route: "carddisclosure_screen",
   },
   {
+    screen: CreatecardScreen,
+
+    route: "createcard_screen",
+  },
+  {
+    screen: JoinwaitlistScreen,
+
+    route: "joinwaitlist_screen",
+  },
+  {
     screen: CarddisclosureScreen,
 
     route: "cardpendingverification_screen",
@@ -323,7 +335,6 @@ export const transactRoutes = [
 
     route: "startnewschat_screen",
   },
-
   {
     screen: NotificationsScreen,
     showHeader: false,
@@ -339,7 +350,6 @@ export const transactRoutes = [
 
     route: "transactionsuccess_screen",
   },
-
   {
     screen: ProfileScreen,
 

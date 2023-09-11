@@ -63,7 +63,8 @@ import TransactionSuccessScreen from "./TransactionSuccessScreen";
 import WalletfundingScreen from "./WalletfundingScreen";
 import MemojisuccessScreen from "./MemojisuccessScreen";
 import ChoosememojibgScreen from "./ChoosememojibgScreen";
-
+import CreatecardScreen from "./CreatecardScreen";
+import JoinwaitlistScreen from "./JoinwaitlistScreen";
 
 export {
   OnboardingScreen,
@@ -140,5 +141,7 @@ export {
   TransactionSuccessScreen,
   WalletfundingScreen,
   MemojisuccessScreen,
-  ChoosememojibgScreen
+  ChoosememojibgScreen,
+  CreatecardScreen,
+  JoinwaitlistScreen,
 };
