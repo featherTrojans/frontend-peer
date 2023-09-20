@@ -560,9 +560,9 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     <FTTabWrapper
       pH={0}
       bgColor={COLORS.white3}
-      modalChildren={content.child}
       showModal={showModal}
       setShowModal={setShowModal}
+      modalChildren={content.child}
       modalHeight={content.height}
     >
       <View style={headerContainer}>

@@ -19,7 +19,7 @@ import { COLORS, icons } from "../constants";
 import { useAlert } from "../hooks";
 import { allMemojis } from "../assetdatas";
 
-const { Changememojicheckicon, Choosememojiicon } = icons;
+const { Changememojicheckicon, Choosememojiicon, Cameraicon } = icons;
 
 const {} = ChangeappearanceScreenStyles;
 
@@ -38,7 +38,7 @@ const ChangeappearanceScreen = ({navigation}) => {
 
     // console.log(result);
 
-    if (!result.cancelled) {
+    if (!result.canceled) {
       try {
         setLoading(true);
         const formdata = new FormData();
@@ -85,10 +85,10 @@ const ChangeappearanceScreen = ({navigation}) => {
         mB={20}
       />
       <FTIconwithtitleandinfo
-        Icon={Changememojicheckicon}
+        Icon={Cameraicon}
         title="Choose Photo"
         onPress={handleImageUpload}
-        bG="blue"
+        bG={COLORS.white3}
       />
     </FTTitlepagewrapper>
   );

@@ -17,7 +17,7 @@ import { useAlert } from "../hooks";
 
 const { enterPinText, keyboardWrap } = TransactionpinScreenStyles;
 
-const { amountWrap, nairaIconWrap, amountValueText } = AmounttosendScreenStyles;
+const { amountWrap, ngnText, amountValueText } = AmounttosendScreenStyles;
 
 const { Nairaicon } = icons;
 
@@ -70,9 +70,7 @@ const AmounttosendScreen = ({ route }) => {
        
         <Animated.View layout={Layout.springify()} style={amountWrap}>
 
-          <View style={nairaIconWrap}>
-            <Nairaicon />
-          </View>
+          <Animated.Text layout={Layout.springify()} style={ngnText}>NGN</Animated.Text>
 
           <Animated.View layout={Layout.springify()}>
             <Text style={amountValueText}>{formatted}</Text>

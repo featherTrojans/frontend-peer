@@ -166,6 +166,7 @@ const appStyles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.regular,
     color: COLORS.white3,
+    lineHeight: 27
   },
   cancelWrapper: {
     padding: 10,

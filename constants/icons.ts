@@ -142,6 +142,9 @@ import Odogwubirdicon from "../assets/icons/Odogwubirdicon";
 import Odogwuarrowup from "../assets/icons/Odogwuarrowup";
 import Dashedlineicon from "../assets/icons/Dashedlineicon";
 import Activememojiicon from "../assets/icons/Activememojiicon";
+import Cameraicon from "../assets/icons/Cameraicon";
+import Recommendedcheckicon from "../assets/icons/Recommendedcheckicon";
+
 
 
 
@@ -245,6 +248,7 @@ export default {
   Documentsetupicon,
   Smallphoneicon,
   Pinlockicon,
+  Cameraicon,
   Keyboarddeleteicon,
   Nairaicon,
   Successtransfericon,
@@ -270,6 +274,7 @@ export default {
   Smallbackarrow,
   Choosememojiicon,
   Withdrawsearchicon,
+  Recommendedcheckicon,
   Odogwubirdicon,
   Odogwuarrowup,
   // Cancelwithdrawicon,

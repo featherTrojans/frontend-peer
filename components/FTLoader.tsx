@@ -9,16 +9,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-native-modal";
 import { COLORS, icons } from "../constants";
 
-import Animated, {
-  withRepeat,
-  useSharedValue,
-  interpolate,
-  useAnimatedStyle,
-  useDerivedValue,
-  withTiming,
-  withSpring,
-  withDelay,
-} from "react-native-reanimated";
+
 
 const { Newlogowhite } = icons;
 

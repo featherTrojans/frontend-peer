@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../screens/shared/Customstatusbar";
 import { useSwipemodal } from "../hooks";
 import { SIZES } from "../constants";
-import Modal from "react-native-modal";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const FTTabWrapper = ({
   children,
@@ -30,16 +30,19 @@ const FTTabWrapper = ({
   return (
     <>
       <Customstatusbar />
-      <SafeAreaView
-        style={{ flex: 1, backgroundColor: bgColor }}
-        edges={["top"]}
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: bgColor,
+          paddingTop: getStatusBarHeight(true),
+        }}
       >
         <View
           style={{ flex: 1, paddingHorizontal: pH, backgroundColor: childBg }}
         >
           {children}
         </View>
-      </SafeAreaView>
+      </View>
       {modalChildren && (
         <Swipemodal
           showModal={showModal}
