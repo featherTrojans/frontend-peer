@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Animated, { Layout } from "react-native-reanimated";
 import {
   FTCustombutton,
@@ -14,6 +14,7 @@ import {
 } from "../assets/styles/screens";
 import amountFormatter from "../utils/formatMoney";
 import { useAlert } from "../hooks";
+import { AuthContext } from "../context/AuthContext";
 
 const { enterPinText, keyboardWrap } = TransactionpinScreenStyles;
 
@@ -26,8 +27,10 @@ const AmounttosendScreen = ({ route }) => {
   const buttontext = route?.params?.buttontext || "Proceed";
   const headtext = route?.params?.headtext || "How Much?";
   const onsubmit = route?.params?.onsubmit;
-  const { errorAlert } = useAlert();
+  const { errorAlert, purpleAlert } = useAlert();
   const [loading, setLoading] = useState(false);
+
+  const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
 
   const [amount, setAmount] = useState([]);
   //   const formatted = formatter.format(amount.join(""));
@@ -37,10 +40,18 @@ const AmounttosendScreen = ({ route }) => {
     const newpin = [...amount, value];
 
     setAmount(newpin);
-    if (amount.length === 3) {
-      //   handleSubmit(newpin);
-    }
   };
+
+  let typedAmount = Number(amount.join(""))
+  let typedAmountGreaterThanBal = typedAmount > authdata.walletBal
+
+  useEffect(() => {
+    if (typedAmountGreaterThanBal){
+      purpleAlert(`Sorry, Your current balance is ${authdata.walletBal}`)
+    }    
+  }, [typedAmount])
+
+
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
       const newdata = [...amount];
@@ -85,7 +96,7 @@ const AmounttosendScreen = ({ route }) => {
       <View style={keyboardWrap}>
         <FTKeyboard
           array={[...numbers]}
-          setDigit={handleSetAmount}
+          setDigit={typedAmountGreaterThanBal ? () => null : handleSetAmount}
           removeDigit={handleRemoveAmount}
           textColor={COLORS.white}
         />
@@ -94,6 +105,7 @@ const AmounttosendScreen = ({ route }) => {
         btntext={buttontext}
         onpress={handlesubmit}
         bg={COLORS.blue9}
+        disable={typedAmountGreaterThanBal || typedAmount <= 0}
       />
     </FTTitlepagewrapper>
   );

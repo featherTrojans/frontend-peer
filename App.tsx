@@ -56,6 +56,18 @@ export const toastConfig = {
       </TouchableOpacity>
     </View>
   ),
+
+  purpleToast: ({ text1, props }: { text1: string; props: any }) => (
+    <View style={[appStyles.alertWrapper, {backgroundColor: "#8456FF"}]}>
+      <View style={{ flex: 1 }}>
+        <Text style={appStyles.alertText}>{props.message} </Text>
+      </View>
+
+      <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
+        {/* <Alertcancelicon /> */}
+      </TouchableOpacity>
+    </View>
+  ),
 };
 
 LogBox.ignoreLogs(["Setting a timer"]);
