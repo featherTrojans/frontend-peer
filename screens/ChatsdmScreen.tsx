@@ -613,6 +613,8 @@ const ChatsdmScreen = ({ route }) => {
             />
           </View>
         ) : (
+
+
           <Animated.ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
@@ -644,6 +646,9 @@ const ChatsdmScreen = ({ route }) => {
               );
             })}
           </Animated.ScrollView>
+
+
+
         )}
 
         <View style={chatTextInput}>

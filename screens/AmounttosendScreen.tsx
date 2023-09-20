@@ -33,7 +33,6 @@ const AmounttosendScreen = ({ route }) => {
   const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
 
   const [amount, setAmount] = useState([]);
-  //   const formatted = formatter.format(amount.join(""));
   const formatted = amountFormatter(amount.join(""));
 
   const handleSetAmount = (value: string) => {
@@ -42,15 +41,18 @@ const AmounttosendScreen = ({ route }) => {
     setAmount(newpin);
   };
 
-  let typedAmount = Number(amount.join(""))
-  let typedAmountGreaterThanBal = typedAmount > authdata.walletBal
+  let typedAmount = Number(amount.join(""));
+  let typedAmountGreaterThanBal = typedAmount > authdata.walletBal;
 
   useEffect(() => {
-    if (typedAmountGreaterThanBal){
-      purpleAlert(`Sorry, Your current balance is ${authdata.walletBal}`)
-    }    
-  }, [typedAmount])
-
+    if (typedAmountGreaterThanBal) {
+      purpleAlert(
+        `Sorry, Your current balance is ${amountFormatter(
+          authdata.walletBal
+        )}, Kindly enter a lesser amount.`
+      );
+    }
+  }, [typedAmount]);
 
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
@@ -77,17 +79,17 @@ const AmounttosendScreen = ({ route }) => {
       childBg={COLORS.blue16}
       invert
     >
-       <FTLoader loading={loading} />
-       
-        <Animated.View layout={Layout.springify()} style={amountWrap}>
+      <FTLoader loading={loading} />
 
-          <Animated.Text layout={Layout.springify()} style={ngnText}>NGN</Animated.Text>
+      <Animated.View layout={Layout.springify()} style={amountWrap}>
+        <Animated.Text layout={Layout.springify()} style={ngnText}>
+          NGN
+        </Animated.Text>
 
-          <Animated.View layout={Layout.springify()}>
-            <Text style={amountValueText}>{formatted}</Text>
-          </Animated.View>
-
+        <Animated.View layout={Layout.springify()}>
+          <Text style={amountValueText}>{formatted}</Text>
         </Animated.View>
+      </Animated.View>
 
       <Text style={[enterPinText, { textAlign: "center" }]}>
         Enter amount with the keypad

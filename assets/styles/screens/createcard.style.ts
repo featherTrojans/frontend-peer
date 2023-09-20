@@ -7,7 +7,7 @@ export const CreatecardScreenStyles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 24,
     borderRadius: 20,
-    backgroundColor: COLORS.white
+    backgroundColor: COLORS.white,
   },
   createBlockHeader: {
     marginBottom: 25,
@@ -50,5 +50,20 @@ export const CreatecardScreenStyles = StyleSheet.create({
     lineHeight: 20,
     textAlign: "center",
     color: COLORS.blue9,
+  },
+  waitlistCardsWrap: {
+    height: 300,
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  waitlistInfoWrap: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  waitlistCards: {
+    width: 158,
+    height: 253,
   },
 });

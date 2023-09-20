@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { COLORS, FONTS, fontsize, icons, SIZES } from "../constants";
+import { COLORS, FONTS, fontsize, icons, images, SIZES } from "../constants";
 
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 
 import * as LocalAuthentication from "expo-local-authentication";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -38,6 +38,7 @@ const {
 } = LoginScreenStyles;
 
 const { Newlogo, Nigerialogoicon } = icons;
+const {NigeriaflagImage} = images
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -120,7 +121,7 @@ const LoginScreen = ({ navigation }) => {
               ]}
             >
               <View style={logoAndInitialWrap}>
-                <View style={logoStyle} />
+                <Image source={NigeriaflagImage} style={logoStyle}/>
                 <Text style={initialStyle}>+234</Text>
               </View>
               <View style={lineSeparator} />

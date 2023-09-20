@@ -58,7 +58,7 @@ export const toastConfig = {
   ),
 
   purpleToast: ({ text1, props }: { text1: string; props: any }) => (
-    <View style={[appStyles.alertWrapper, {backgroundColor: "#8456FF"}]}>
+    <View style={[appStyles.alertWrapper, {backgroundColor: "#f80000"}]}>
       <View style={{ flex: 1 }}>
         <Text style={appStyles.alertText}>{props.message} </Text>
       </View>
