@@ -505,6 +505,7 @@ const ChatsdmScreen = ({ route }) => {
         setShowModal((s) => !s);
         break;
       case 1:
+        openModal();
         setContent({
           child: <AmountToSend openTransactionPin={openTransactionPin} />,
           height: 200,

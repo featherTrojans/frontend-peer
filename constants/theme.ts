@@ -85,7 +85,6 @@ export const COLORS = {
   orange: "#FF8900",
   orange2: "#FFF8ED",
 
-
   // Light colors
   Tyellow: "#FFF5E5",
   Tyellow2: "#FDF5E7",
@@ -100,7 +99,7 @@ export const COLORS = {
   Tblue6: "#F3F5FE",
   Tblue7: "rgba(210, 234, 253, 0.25)",
   Tred: "#FFE3E3",
-  Tred2: "#FBEEEE",  
+  Tred2: "#FBEEEE",
   Tred3: "rgba(255, 227, 227, 0.3)",
   Tred4: "#FDF3F7",
   Tgreen: "#E9F9F6",
@@ -109,9 +108,6 @@ export const COLORS = {
   Tgreen4: "rgba(224, 237, 216, 0.3)",
   Tpurple: "#F3EEFB",
   Tpurple2: "#F1E5FF",
-
-
-
 
   purple: "#6300AC",
   purple2: "#7600FF",
@@ -167,12 +163,16 @@ export const FONTS = {
 };
 
 export const Shadow = {
-  shadowColor: COLORS.borderColor2,
-  shadowOpacity: 0.3,
-  shadowOffset: { width: 10, height: -10 },
-  shadowRadius: 3,
-  elevation: 10,
+  // shadowColor: COLORS.blue9,
+  // shadowOpacity: 0.3,
+  // shadowOffset: { width: 0, height: 0 },
+  // shadowRadius: 3,
+  elevation: 5,
   backgroundColor: "white",
+  shadowColor: "#171717",
+  shadowOffset: { width: 0, height: 0 },
+  shadowOpacity: 0.2,
+  shadowRadius: 3,
 };
 
 export const fontsize = {
@@ -210,18 +210,12 @@ export const fontsize = {
   xxsmallest: {
     fontSize: RFValue(10),
   },
-
-
-
-
-
-  
+  xmedium: {
+    fontSize: RFValue(22),
+  },
 
   bbsmall: {
     fontSize: RFValue(18),
-  },
-  xmedium: {
-    fontSize: RFValue(22),
   },
 
   xxsmall: {
@@ -241,7 +235,7 @@ export const fontsize = {
   xbig: {
     fontSize: RFValue(32),
   },
- 
+
   bigger: {
     fontSize: RFValue(38),
   },

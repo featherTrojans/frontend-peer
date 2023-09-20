@@ -7,6 +7,7 @@ export const CreatecardScreenStyles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 24,
     borderRadius: 20,
+    backgroundColor: COLORS.white
   },
   createBlockHeader: {
     marginBottom: 25,

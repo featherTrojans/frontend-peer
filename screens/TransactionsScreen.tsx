@@ -12,7 +12,9 @@ import {
   ActivityIndicator,
   Animated,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
+
 import {
   FTBillPayment,
   FTWithdraw,
@@ -133,10 +135,10 @@ const TransactionsScreen = ({ navigation }) => {
         <View style={optionWrapper}>
           {options.map(({ title, color, Icon, action }, index) => {
             return (
-              <Pressable onPress={action} style={optionBlock} key={index}>
-                <FTIconwithbg Icon={Icon} bG={color} />
+              <TouchableOpacity activeOpacity={0.8} onPress={action} style={optionBlock} key={index}>
+                <FTIconwithbg onpress={action} Icon={Icon} bG={color} />
                 <Text style={eachOptionTitle}>{title}</Text>
-              </Pressable>
+              </TouchableOpacity>
             );
           })}
         </View>

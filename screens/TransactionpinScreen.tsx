@@ -78,7 +78,7 @@ const TransactionpinScreen = ({ route }) => {
               ]}
             >
               *
-            </Text>
+          </Text>
           ))}
         </View>
 

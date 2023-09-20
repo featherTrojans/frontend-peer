@@ -57,7 +57,7 @@ const AccountverificationScreen = ({ route }) => {
       levelTitle: "Newbie",
       level: 1,
       requirement: "Basic Personal Information",
-      status: userlevel >= 1,
+      status: userlevel == 1,
       fundinglimit: "Unlimited",
       cashrequest: "N30,000.00",
       transferout: "N50,000.00",
@@ -69,7 +69,7 @@ const AccountverificationScreen = ({ route }) => {
       levelTitle: "Odogwu",
       level: 2,
       requirement: "Bank Verification Number (BVN)",
-      status: userlevel >= 2,
+      status: userlevel == 2,
       fundinglimit: "Unlimited",
       cashrequest: "N200,000.00",
       transferout: "N500,000.00",
@@ -105,7 +105,7 @@ const AccountverificationScreen = ({ route }) => {
       upgradeLocation,
     } = accountLevelDatas[selectedIndex];
     return (
-      <View style={{ width: width - 30, backgroundColor: COLORS.white }}>
+      <View style={{ width: width - 30, }}>
         <View style={levelInfoWrap}>
           <View style={BAlign}>
             <Text style={levelText}>{levelTitle} Level</Text>
@@ -179,7 +179,7 @@ const AccountverificationScreen = ({ route }) => {
   };
 
   return (
-    <FTTitlepagewrapper title="Account Verification">
+    <FTTitlepagewrapper headerBg={COLORS.white3} childBg={COLORS.white3} title="Account Verification">
       <SegmentedControl
         values={["Newbie", "Odogwu", "Veteran"]}
         selectedIndex={selectedIndex}

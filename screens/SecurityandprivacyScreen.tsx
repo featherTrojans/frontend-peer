@@ -9,7 +9,7 @@ import {
 import { COLORS, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 
-const { sectionHeader } = SecurityandprivacyScreenStyles;
+const { sectionHeader, blockWrap } = SecurityandprivacyScreenStyles;
 const { Fingerprinticon, Transactionpinlockicon, Multifactoricon } = icons;
 
 const SecurityandprivacyScreen = ({ navigation }) => {
@@ -46,12 +46,12 @@ const SecurityandprivacyScreen = ({ navigation }) => {
   };
 
   return (
-    <FTTitlepagewrapper title="Security & Privacy">
+    <FTTitlepagewrapper headerBg={COLORS.white3} childBg={COLORS.white3} title="Security & Privacy">
       <ScrollView
         contentContainerStyle={{ paddingTop: 30 }}
         showsVerticalScrollIndicator={false}
       >
-        <View>
+        <View style={blockWrap}>
           <Text style={sectionHeader}>Transaction PIN</Text>
           <FTIconwithtitleandinfo
             Icon={Transactionpinlockicon}

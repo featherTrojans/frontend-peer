@@ -43,8 +43,7 @@ export const AccountverificationScreenStyles = StyleSheet.create({
   },
   blockWrap: {
     padding: 33,
-    borderWidth: 0.5,
-    borderColor: COLORS.grey1,
+    backgroundColor: COLORS.white,
     borderRadius: 25,
     marginVertical: 30
   },

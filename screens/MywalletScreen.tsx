@@ -13,7 +13,7 @@ import { useCopyclipboard } from "../hooks";
 import { AuthContext } from "../context/AuthContext";
 import amountFormatter from "../utils/formatMoney";
 import axiosCustom from "../httpRequests/axiosCustom";
-const { Levelcheckicon, Copydetailsicon } = icons;
+const { Levelcheckicon, Copydetailsicon, Dashedlineicon } = icons;
 
 const {
   accountLeveltext,
@@ -94,7 +94,7 @@ const MywalletScreen = () => {
   };
 
   return (
-    <FTTitlepagewrapper title="My Wallet">
+    <FTTitlepagewrapper headerBg={COLORS.white3} childBg={COLORS.white3} title="My Wallet">
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={accountLevelWrap}>
           <Text style={accountLeveltext}>Account Level</Text>
@@ -159,7 +159,9 @@ const MywalletScreen = () => {
             <Text style={unlimitedText}>Unlimited</Text>
           </View>
 
-          <View style={dashedLine} />
+          <View style={dashedLine}>
+            <Dashedlineicon />
+          </View>
 
           <SpendingLimit
             limitTitle="Cash Request"

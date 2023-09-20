@@ -18,8 +18,7 @@ export const TransactionsummaryScreenStyles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingTop: 30,
     borderRadius: 25,
-    borderColor: COLORS.grey1,
-    borderWidth: 0.5,
+    backgroundColor: COLORS.white,
     marginBottom: 26
   },
   eachSummaryWrap: {

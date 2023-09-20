@@ -58,7 +58,7 @@ const transactionStatus = (status: IStatusProps) => {
       return (
         <View style={transactionStatusWrap}>
           <View style={[statusThumpBg, { backgroundColor: COLORS.Tyellow }]}>
-            <Text style={statusThumbText}>👍🏽</Text>
+            <Text style={statusThumbText}>✍🏽</Text>
           </View>
           <View style={[statusTextBg, { backgroundColor: COLORS.Tyellow }]}>
             <Text style={[statusText, { color: COLORS.yellow1 }]}>
@@ -72,7 +72,7 @@ const transactionStatus = (status: IStatusProps) => {
       return (
         <View style={transactionStatusWrap}>
           <View style={[statusThumpBg, { backgroundColor: COLORS.Tred }]}>
-            <Text style={statusThumbText}>👍🏽</Text>
+            <Text style={statusThumbText}>👎🏽</Text>
           </View>
           <View style={[statusTextBg, { backgroundColor: COLORS.Tred }]}>
             <Text style={[statusText, { color: COLORS.red5 }]}>
@@ -104,6 +104,7 @@ const {
 
 const TransactionDetailsScreen = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
+
 
   const { data } = route.params;
 
@@ -520,7 +521,7 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
         >
           {transactionBadge(title, direction, sender, receiver, 50)}
 
-          {transactionStatus("failed")}
+          {transactionStatus("pending")}
 
           <FTIconwithbg
             bG={COLORS.blue9}

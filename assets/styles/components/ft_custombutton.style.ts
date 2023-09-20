@@ -8,7 +8,7 @@ export const FTCustombuttonStyles = StyleSheet.create({
   },
   btntextstyle: {
     ...fontsize.xsmallest,
-    ...FONTS.regular,
+    ...FONTS.semibold,
     textAlign: "center",
     color: COLORS.white,
     textTransform: "capitalize",

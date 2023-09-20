@@ -79,9 +79,22 @@ const ChatsprofileScreen = ({ route, navigation }) => {
     }
   };
 
+  const getUserTransactionWhenRefresh = async () => {
+    try {
+      const response = await axiosCustom.get(
+        `transactions/users/${userInfo.phoneNumber}`
+      );
+      setTransactions(response?.data?.data?.transactions);
+    } catch (error) {
+    } finally {
+      // setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
   const handleRefresh = () => {
     setRefreshing(true);
-    getUserTransaction();
+    getUserTransactionWhenRefresh();
   };
 
   const ListHeader = () => {

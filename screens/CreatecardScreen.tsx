@@ -10,7 +10,7 @@ import { useAlert } from "../hooks";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { CardScreenStyles } from "../assets/styles/screens";
 import { CreatecardScreenStyles } from "../assets/styles/screens/createcard.style";
-
+import { Shadow } from "../constants/theme";
 const { rightComponentBg, rightComponentText } = CardScreenStyles;
 const {
   createBlockWrap,
@@ -91,7 +91,7 @@ const CreatecardScreen = ({ navigation }) => {
   const { errorAlert } = useAlert();
 
   return (
-    <FTTitlepagewrapper title="Create a Visa card">
+    <FTTitlepagewrapper headerBg={COLORS.white3} childBg={COLORS.white3} title="Create a Visa card">
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={createBlockWrap}>
           <Text style={createBlockHeader}>Fees & Charges</Text>
@@ -134,19 +134,19 @@ const CreatecardScreen = ({ navigation }) => {
           bg={COLORS.blue9} 
           btntext="Create a Visa card"
           onpress={() => {
-            // if (authdata.userDetails.userLevel < 3) {
-            //   errorAlert(
-            //     null,
-            //     "Padi you need to upgrade your account to create a virtual card"
-            //   );
+            if (authdata.userDetails.userLevel < 3) {
+              errorAlert(
+                null,
+                "Padi you need to upgrade your account to create a virtual card"
+              );
 
-            //   setTimeout(() => {
-            //     navigation.navigate("accountverification_screen", {
-            //       index: authdata.userDetails.userLevel,
-            //     });
-            //   }, 500);
-            //   return;
-            // }
+              setTimeout(() => {
+                navigation.navigate("accountverification_screen", {
+                  index: authdata.userDetails.userLevel,
+                });
+              }, 500);
+              return;
+            }
             navigation.navigate("joinwaitlist_screen");
           }}
         />
