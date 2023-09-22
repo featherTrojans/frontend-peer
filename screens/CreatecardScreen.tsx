@@ -134,19 +134,19 @@ const CreatecardScreen = ({ navigation }) => {
           bg={COLORS.blue9} 
           btntext="Create a Visa card"
           onpress={() => {
-            if (authdata.userDetails.userLevel < 3) {
-              errorAlert(
-                null,
-                "Padi you need to upgrade your account to create a virtual card"
-              );
+            // if (authdata.userDetails.userLevel < 3) {
+            //   errorAlert(
+            //     null,
+            //     "Padi you need to upgrade your account to create a virtual card"
+            //   );
 
-              setTimeout(() => {
-                navigation.navigate("accountverification_screen", {
-                  index: authdata.userDetails.userLevel,
-                });
-              }, 500);
-              return;
-            }
+            //   setTimeout(() => {
+            //     navigation.navigate("accountverification_screen", {
+            //       index: authdata.userDetails.userLevel,
+            //     });
+            //   }, 500);
+            //   return;
+            // }
             navigation.navigate("joinwaitlist_screen");
           }}
         />

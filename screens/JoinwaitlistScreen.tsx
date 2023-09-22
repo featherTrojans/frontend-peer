@@ -6,9 +6,16 @@ import { CreatecardScreenStyles } from "../assets/styles/screens/createcard.styl
 import Animated, {
   runOnJS,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withSpring,
+  withTiming,
 } from "react-native-reanimated";
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
 const { width } = SIZES;
 
@@ -19,14 +26,16 @@ const JoinwaitlistScreen = ({ navigation }) => {
   const translatedValue = useSharedValue(0);
   const [active, setActive] = useState(false)
 
-  const handleToggle = () => {
-      if(active){
-        translatedValue.value = withSpring(25, {}, () => runOnJS(setActive)(false))
-      }
-      else{
-        translatedValue.value = withSpring(0, {},  () => runOnJS(setActive)(true))
-      }
-  };
+
+
+  useEffect(() => {
+    if(active){
+      translatedValue.value = withSpring(25)
+    }
+    else{
+      translatedValue.value = withSpring(0)
+    }
+  }, [active, translatedValue])
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: translatedValue.value }],
@@ -39,8 +48,9 @@ const JoinwaitlistScreen = ({ navigation }) => {
 
   return (
     <FTTitlepagewrapper title="Join Waitlist">
+
       <Pressable
-        onPress={handleToggle}
+        onPress={() => setActive(!active)}
         style={waitlistCardsWrap}
       >
         <Animated.View style={{ position: "absolute", left: -width / 4 }}>
@@ -54,6 +64,7 @@ const JoinwaitlistScreen = ({ navigation }) => {
           />
         </Animated.View>
       </Pressable>
+
 
       <View style={waitlistInfoWrap}>
         <Text style={joinWaitlistText}>Hey padi, join the waitlist!</Text>
