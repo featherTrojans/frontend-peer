@@ -35,35 +35,40 @@ const {
   accountLevelWrap,
 } = MywalletScreenStyles;
 
-
-
 type IWalletRangeProps = {
-  cashRequest: {spent: number, total: number}, 
-  dailyTransfer: {spent: number, total: number}, 
-  monthlyTransfer: {spent: number, total: number}, 
-}
+  cashRequest: { spent: number; total: number };
+  dailyTransfer: { spent: number; total: number };
+  monthlyTransfer: { spent: number; total: number };
+};
 
 const MywalletScreen = () => {
   const { authdata } = useContext(AuthContext);
-  const [walletlimit, setWalletlimit] = useState<IWalletRangeProps>({cashRequest: {spent: 0, total: 0}, dailyTransfer: {spent: 0, total: 0}, monthlyTransfer: {spent: 0, total: 0}, });
+  const [walletlimit, setWalletlimit] = useState<IWalletRangeProps>({
+    cashRequest: { spent: 0, total: 0 },
+    dailyTransfer: { spent: 0, total: 0 },
+    monthlyTransfer: { spent: 0, total: 0 },
+  });
   const [loading, setLoading] = useState(false);
   const { copyToClipboard } = useCopyclipboard("Copied successfully!!");
-  const {purpleAlert} = useAlert()
+  const { purpleAlert } = useAlert();
   const CopyAction = () => {
-    authdata?.userDetails?.accountNo 
+    authdata?.userDetails?.accountNo
       ? copyToClipboard(authdata?.userDetails?.accountNo)
       : purpleAlert("Kindly upgrade your account to get this account.");
   };
 
-  const {cashRequest: {total: requestTotal, spent: requestSpent}, dailyTransfer: {total: dailyTotal, spent: dailySpent}, monthlyTransfer: {total: monthlyTotal, spent: monthlySpent}} = walletlimit
-  
+  const {
+    cashRequest: { total: requestTotal, spent: requestSpent },
+    dailyTransfer: { total: dailyTotal, spent: dailySpent },
+    monthlyTransfer: { total: monthlyTotal, spent: monthlySpent },
+  } = walletlimit;
 
   useEffect(() => {
     setLoading(true);
     axiosCustom
       .get("/limitrange")
       .then((res) => {
-        console.log(res.data.data, "heree is the lii")
+        console.log(res.data.data, "heree is the lii");
         setWalletlimit(res.data.data);
       })
       .catch(() => {})
@@ -93,12 +98,12 @@ const MywalletScreen = () => {
     amountLeft,
     progressLevel = 0,
   }: {
-    mT?: number,
-    limitTitle: string,
-    amountSpent: string,
-    totalAmount: string,
-    amountLeft: string,
-    progressLevel: number,
+    mT?: number;
+    limitTitle: string;
+    amountSpent: string;
+    totalAmount: string;
+    amountLeft: string;
+    progressLevel: number;
   }) => {
     return (
       <View style={{ marginTop: mT, marginBottom: mT }}>
@@ -119,7 +124,11 @@ const MywalletScreen = () => {
   };
 
   return (
-    <FTTitlepagewrapper headerBg={COLORS.white3} childBg={COLORS.white3} title="My Wallet">
+    <FTTitlepagewrapper
+      headerBg={COLORS.white3}
+      childBg={COLORS.white3}
+      title="My Wallet"
+    >
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={accountLevelWrap}>
           <Text style={accountLeveltext}>Account Level</Text>
@@ -148,9 +157,9 @@ const MywalletScreen = () => {
                 style={[BAlign]}
               >
                 <Text style={tableValue}>
-                {authdata?.userDetails?.accountNo
-                  ? authdata?.userDetails?.accountNo
-                  : "**********"}
+                  {authdata?.userDetails?.accountNo
+                    ? authdata?.userDetails?.accountNo
+                    : "**********"}
                 </Text>
                 <Copydetailsicon />
               </TouchableOpacity>
@@ -191,46 +200,27 @@ const MywalletScreen = () => {
           <SpendingLimit
             limitTitle="Cash Request"
             totalAmount={`N${amountFormatter(`${requestTotal}`)}`}
-            amountLeft={`N${amountFormatter(
-              `${requestTotal - requestSpent}`
-            )}`}
+            amountLeft={`N${amountFormatter(`${requestTotal - requestSpent}`)}`}
             amountSpent={`N${amountFormatter(`${requestSpent}`)}`}
-            progressLevel={(requestSpent/requestTotal)*100}
+            progressLevel={(requestSpent / requestTotal) * 100}
           />
-
 
           <SpendingLimit
             mT={40}
             limitTitle="Daily Transfer Out"
-            totalAmount={`N${amountFormatter(
-              `${dailyTotal}`
-            )}`}
-            amountLeft={`N${amountFormatter(
-             `${ dailyTotal -
-                dailySpent}`
-            )}`}
-            amountSpent={`N${amountFormatter(
-              `${dailySpent}`
-            )}`}
-            progressLevel={(dailySpent/dailyTotal)*100}
+            totalAmount={`N${amountFormatter(`${dailyTotal}`)}`}
+            amountLeft={`N${amountFormatter(`${dailyTotal - dailySpent}`)}`}
+            amountSpent={`N${amountFormatter(`${dailySpent}`)}`}
+            progressLevel={(dailySpent / dailyTotal) * 100}
           />
-
 
           <SpendingLimit
             limitTitle="Monthly Transfer Out"
-            totalAmount={`N${amountFormatter(
-              `${monthlyTotal}`
-            )}`}
-            amountLeft={`N${amountFormatter(`${
-              monthlyTotal -
-               monthlySpent
-            }`)}`}
-            amountSpent={`N${amountFormatter(
-              `${monthlySpent}`
-            )}`}
-            progressLevel={(monthlySpent/monthlyTotal)*100}
+            totalAmount={`N${amountFormatter(`${monthlyTotal}`)}`}
+            amountLeft={`N${amountFormatter(`${monthlyTotal - monthlySpent}`)}`}
+            amountSpent={`N${amountFormatter(`${monthlySpent}`)}`}
+            progressLevel={(monthlySpent / monthlyTotal) * 100}
           />
-          
         </View>
       </ScrollView>
     </FTTitlepagewrapper>

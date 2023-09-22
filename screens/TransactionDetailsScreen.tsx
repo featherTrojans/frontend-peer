@@ -85,9 +85,7 @@ const transactionStatus = (status: IStatusProps) => {
 
     default:
       return (
-        <View>
-          <Text>Successful</Text>
-        </View>
+        null
       );
       break;
   }
@@ -121,8 +119,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     charges,
     direction,
     bankDetails,
+    status
   } = data;
-  const total = Number(amount) + Number(charges);
+  const total = Number(amount);
 
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")}. ${dt.format( "MMM")}, ${dt.format("YYYY")}`;
@@ -520,7 +519,8 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
         >
           {transactionBadge(title, direction, sender, receiver, 50)}
 
-          {transactionStatus("pending")}
+          {transactionStatus("success")}
+
 
           <FTIconwithbg
             bG={COLORS.blue9}
