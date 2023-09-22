@@ -149,8 +149,6 @@ export default function App() {
       <Toast
           config={toastConfig}
           topOffset={0}
-          onShow={() => console.log("Status shown")}
-          onHide={() => console.log("Status hidden")}
         />
     </GestureHandlerRootView>
   );

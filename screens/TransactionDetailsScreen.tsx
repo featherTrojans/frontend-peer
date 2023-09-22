@@ -506,10 +506,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
   };
 
   return (
-    <FTTitlepagewrapper title="Transaction Details" childBg={COLORS.white}>
+    <FTTitlepagewrapper title="Transaction Details" childBg={COLORS.white3} headerBg={COLORS.white3}>
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingHorizontal: 20 }}
         showsVerticalScrollIndicator={false}
       >
         <View

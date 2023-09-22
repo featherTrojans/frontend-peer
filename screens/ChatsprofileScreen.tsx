@@ -8,7 +8,7 @@ import {
   RefreshControl,
   ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ChatsprofileScreenStyles,
   HomeScreenStyles,
@@ -61,6 +61,11 @@ const ChatsprofileScreen = ({ route, navigation }) => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
+  const histories: any[] = useMemo(
+    () => formatData(transactions),
+    [transactions]
+  );
+
   useEffect(() => {
     getUserTransaction();
   }, []);
@@ -69,7 +74,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
     setLoading(true);
     try {
       const response = await axiosCustom.get(
-        `transactions/users/${userInfo.phoneNumber}`
+        `transactions/users/${userInfo.username}`
       );
       setTransactions(response?.data?.data?.transactions);
     } catch (error) {
@@ -82,7 +87,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
   const getUserTransactionWhenRefresh = async () => {
     try {
       const response = await axiosCustom.get(
-        `transactions/users/${userInfo.phoneNumber}`
+        `transactions/users/${userInfo.username}`
       );
       setTransactions(response?.data?.data?.transactions);
     } catch (error) {
@@ -137,57 +142,61 @@ const ChatsprofileScreen = ({ route, navigation }) => {
     );
   };
 
+  const renderEachTransaction = useCallback(({ item, index }) => {
+    return (
+      <View
+        style={{
+          backgroundColor: "white",
+          paddingHorizontal: 20,
+          paddingTop: 25,
+        }}
+      >
+        <View style={{ marginBottom: 30 }}>
+          <FTTransactionhistory
+            date={item.time}
+            datas={item.data}
+            index={index}
+          />
+        </View>
+      </View>
+    );
+  }, []);
+
   return (
     <FTTitlepagewrapper
       title="Profile"
       childBg={COLORS.white3}
       headerBg={COLORS.white3}
     >
-      {loading ? (
-        <ActivityIndicator size="large" color={COLORS.blue6} />
-      ) : (
-        <Animated.FlatList
-          data={formatData(transactions)}
-          ListHeaderComponent={ListHeader}
-          initialNumToRender={10}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={handleRefresh}
-              progressBackgroundColor="white"
-              colors={[COLORS.blue6]}
-              tintColor={COLORS.blue6}
-              title="Refreshing"
-              titleColor={COLORS.blue6}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item, index }: any) => (
-            <View
-              style={{
-                backgroundColor: "white",
-                paddingHorizontal: 20,
-                paddingTop: 25,
-              }}
-            >
-              <View style={{ marginBottom: 30 }}>
-                <FTTransactionhistory
-                  date={item.time}
-                  datas={item.data}
-                  index={index}
-                />
-              </View>
-            </View>
-          )}
-          keyExtractor={(item: { time: string }) => item.time}
-          ListEmptyComponent={
+      <Animated.FlatList
+        data={histories}
+        ListHeaderComponent={ListHeader}
+        initialNumToRender={10}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+            progressBackgroundColor="white"
+            colors={[COLORS.blue6]}
+            tintColor={COLORS.blue6}
+            title="Refreshing"
+            titleColor={COLORS.blue6}
+          />
+        }
+        showsVerticalScrollIndicator={false}
+        renderItem={renderEachTransaction}
+        keyExtractor={(item: { time: string }) => item.time}
+        ListEmptyComponent={
+          loading ? (
+            <ActivityIndicator size="large" color={COLORS.blue6} />
+          ) : (
             <FTEmptycomponent
               msg="Sorry, You have not performed any transactions with this user"
               showTransact={false}
             />
-          }
-        />
-      )}
+          )
+        }
+      />
     </FTTitlepagewrapper>
   );
 };

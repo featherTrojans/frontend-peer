@@ -9,7 +9,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { MywalletScreenStyles } from "../assets/styles/screens";
 import { FTIconwithbg, FTTitlepagewrapper } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
-import { useCopyclipboard } from "../hooks";
+import { useAlert, useCopyclipboard } from "../hooks";
 import { AuthContext } from "../context/AuthContext";
 import amountFormatter from "../utils/formatMoney";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -35,17 +35,35 @@ const {
   accountLevelWrap,
 } = MywalletScreenStyles;
 
+
+
+type IWalletRangeProps = {
+  cashRequest: {spent: number, total: number}, 
+  dailyTransfer: {spent: number, total: number}, 
+  monthlyTransfer: {spent: number, total: number}, 
+}
+
 const MywalletScreen = () => {
   const { authdata } = useContext(AuthContext);
-  const [walletlimit, setWalletlimit] = useState({});
+  const [walletlimit, setWalletlimit] = useState<IWalletRangeProps>({cashRequest: {spent: 0, total: 0}, dailyTransfer: {spent: 0, total: 0}, monthlyTransfer: {spent: 0, total: 0}, });
   const [loading, setLoading] = useState(false);
   const { copyToClipboard } = useCopyclipboard("Copied successfully!!");
+  const {purpleAlert} = useAlert()
+  const CopyAction = () => {
+    authdata?.userDetails?.accountNo 
+      ? copyToClipboard(authdata?.userDetails?.accountNo)
+      : purpleAlert("Kindly upgrade your account to get this account.");
+  };
+
+  const {cashRequest: {total: requestTotal, spent: requestSpent}, dailyTransfer: {total: dailyTotal, spent: dailySpent}, monthlyTransfer: {total: monthlyTotal, spent: monthlySpent}} = walletlimit
+  
 
   useEffect(() => {
     setLoading(true);
     axiosCustom
-      .get("api/v1/limitrange")
+      .get("/limitrange")
       .then((res) => {
+        console.log(res.data.data, "heree is the lii")
         setWalletlimit(res.data.data);
       })
       .catch(() => {})
@@ -74,6 +92,13 @@ const MywalletScreen = () => {
     totalAmount,
     amountLeft,
     progressLevel = 0,
+  }: {
+    mT?: number,
+    limitTitle: string,
+    amountSpent: string,
+    totalAmount: string,
+    amountLeft: string,
+    progressLevel: number,
   }) => {
     return (
       <View style={{ marginTop: mT, marginBottom: mT }}>
@@ -119,13 +144,13 @@ const MywalletScreen = () => {
               <Text style={tableKey}>Bank Account Number</Text>
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() =>
-                  copyToClipboard(authdata?.userDetails?.accountNo)
-                }
+                onPress={CopyAction}
                 style={[BAlign]}
               >
                 <Text style={tableValue}>
-                  {authdata?.userDetails?.accountNo}
+                {authdata?.userDetails?.accountNo
+                  ? authdata?.userDetails?.accountNo
+                  : "**********"}
                 </Text>
                 <Copydetailsicon />
               </TouchableOpacity>
@@ -165,42 +190,47 @@ const MywalletScreen = () => {
 
           <SpendingLimit
             limitTitle="Cash Request"
-            totalAmount={`N${amountFormatter(walletlimit?.cashRequest?.total)}`}
+            totalAmount={`N${amountFormatter(`${requestTotal}`)}`}
             amountLeft={`N${amountFormatter(
-              walletlimit?.cashRequest?.total - walletlimit?.cashRequest?.spent
+              `${requestTotal - requestSpent}`
             )}`}
-            amountSpent={`N${amountFormatter(walletlimit?.cashRequest?.spent)}`}
-            progressLevel={73}
+            amountSpent={`N${amountFormatter(`${requestSpent}`)}`}
+            progressLevel={(requestSpent/requestTotal)*100}
           />
+
+
           <SpendingLimit
             mT={40}
             limitTitle="Daily Transfer Out"
             totalAmount={`N${amountFormatter(
-              walletlimit?.dailyTransfer?.total
+              `${dailyTotal}`
             )}`}
             amountLeft={`N${amountFormatter(
-              walletlimit?.dailyTransfer?.total -
-                walletlimit?.dailyTransfer?.spent
+             `${ dailyTotal -
+                dailySpent}`
             )}`}
             amountSpent={`N${amountFormatter(
-              walletlimit?.dailyTransfer?.spent
+              `${dailySpent}`
             )}`}
-            progressLevel={36}
+            progressLevel={(dailySpent/dailyTotal)*100}
           />
+
+
           <SpendingLimit
             limitTitle="Monthly Transfer Out"
             totalAmount={`N${amountFormatter(
-              walletlimit?.monthlyTransfer?.total
+              `${monthlyTotal}`
             )}`}
-            amountLeft={`N${amountFormatter(
-              walletlimit?.monthlyTransfer?.total -
-                walletlimit?.monthlyTransfer?.spent
-            )}`}
+            amountLeft={`N${amountFormatter(`${
+              monthlyTotal -
+               monthlySpent
+            }`)}`}
             amountSpent={`N${amountFormatter(
-              walletlimit?.monthlyTransfer?.spent
+              `${monthlySpent}`
             )}`}
-            progressLevel={50}
+            progressLevel={(monthlySpent/monthlyTotal)*100}
           />
+          
         </View>
       </ScrollView>
     </FTTitlepagewrapper>
