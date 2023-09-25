@@ -93,20 +93,18 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    // why don't I check here, then set Auth , and set tokem you know
+  // useEffect(() => {
 
-    getDataFromStorage("@token").then((response) => {
-      if (response !== null) {
-        if (Date.now() - response.time > AWEEKAFTER) {
-          return null;
-        }
-        // response.token
-        setRouteName("welcome_screen");
-        setAuthorizationToken(response.token);
-      }
-    });
-  }, []);
+  //   getDataFromStorage("@token").then((response) => {
+  //     if (response !== null) {
+  //       if (Date.now() - response.time > AWEEKAFTER) {
+  //         return null;
+  //       }
+  //       setRouteName("welcome_screen");
+  //       setAuthorizationToken(response.token);
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
     checkOnboarding();

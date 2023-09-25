@@ -9,12 +9,14 @@ import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
 import * as Clipboard from "expo-clipboard";
 import { useFocusEffect } from "@react-navigation/native";
+import OTPInputView from "@twotalltotems/react-native-otp-input";
 
 const {
   enterDigitText,
   enterDigitSubText,
   bottomtext,
   otpInputWrap,
+  otpHighlightInputWrap,
   buttonWrap,
   notReceiveText,
   durationWrap,
@@ -32,8 +34,7 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
   const inputRef = useRef(TextInput);
   const [text, setText] = useState("");
   const [noOfInput, setNoOfInput] = useState(true);
-  const [focusInput, setFocusInput] = useState(false)
-
+  const [focusInput, setFocusInput] = useState(false);
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -87,10 +88,6 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
     }
   };
 
-
-
-
-
   return (
     <FTTitlepagewrapper title="Verify phone number">
       <FTLoader loading={loading} />
@@ -99,18 +96,18 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
         <Text style={enterDigitSubText}>{phoneNumber}</Text>.
       </Text>
 
-      <View style={{ alignContent: "center", alignSelf: "center" }}>
-        <OTPTextInput
-          ref={otpInput}
-          handleTextChange={(text) => setOtpCode(text)}
-          inputCount={6}
-          tintColor={COLORS.blue16}
-          offTintColor={COLORS.grey21}
-          textInputStyle={otpInputWrap}
+
+        <OTPInputView
+          style={{ width: "100%", height: 52,}}
+          pinCount={6}
           autoFocusOnLoad
+          codeInputFieldStyle={otpInputWrap}
+          codeInputHighlightStyle={otpHighlightInputWrap}
+          onCodeFilled={(code) => setOtpCode(code)}
         />
-        
-      </View>
+
+
+
       <View style={buttonWrap}>
         <FTCustombutton btntext="VERIFY" onpress={handlesubmit} />
       </View>

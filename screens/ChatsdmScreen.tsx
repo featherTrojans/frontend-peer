@@ -459,7 +459,6 @@ const ChatsdmScreen = ({ route }) => {
             style={chatTransferAnim}
           /> */}
             <Successtransfericon />
-            {/* <Bluecardicon /> */}
           </View>
           <View style={chatTransferTextBg}>
             <Text style={chatTransferText}>
@@ -674,6 +673,8 @@ const ChatsdmScreen = ({ route }) => {
           )}
         </View>
       </KeyboardAvoidingView>
+
+      
     </FTMainwrapper>
   );
 };
