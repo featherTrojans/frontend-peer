@@ -5,7 +5,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { icons, COLORS, SIZES } from "../constants";
 import { FTIconwithbg, FTMainwrapper, FTTitlepagewrapper } from "../components";
@@ -44,8 +44,6 @@ const {
   Withdrawalnotificationicon,
   Emptynotification,
 } = icons;
-
-
 
 type notificationProps = {
   type: string;
@@ -150,6 +148,17 @@ const Notification = ({
   );
 };
 
+const EmptyNotification = () => {
+  return (
+    <View style={emptyListWrap}>
+      <Emptynotification />
+      <Text style={emptyListText}>
+        Oops, you have no pending notifications here.{" "}
+      </Text>
+    </View>
+  );
+};
+
 const NotificationsScreen = () => {
   const [loading, setLoading] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -171,19 +180,17 @@ const NotificationsScreen = () => {
     getAllNotifications();
   }, []);
 
-  const EmptyNotification = () => {
-    return (
-      <View style={emptyListWrap}>
-        <Emptynotification />
-        <Text style={emptyListText}>
-          Oops, you have no pending notifications here.{" "}
-        </Text>
-      </View>
-    );
-  };
+  const notificationsList: any[] = useMemo(
+    () => formatData(notifications),
+    [notifications]
+  );
+
+  const renderEachNotification = useCallback(({ item, index }) => {
+    return <Notification date={item.time} messages={item.data} index={index} />;
+  }, []);
 
   return (
-    <FTTitlepagewrapper childBg={COLORS.white3}  title="Notifications" pB={0}>
+    <FTTitlepagewrapper childBg={COLORS.white3} title="Notifications" pB={0}>
       <View style={listContainer}>
         {loading ? (
           <View style={loadingWrap}>
@@ -191,22 +198,10 @@ const NotificationsScreen = () => {
           </View>
         ) : (
           <FlatList
-            data={formatData(notifications)}
+            data={notificationsList}
             showsVerticalScrollIndicator={false}
             bounces={false}
-            renderItem={({
-              item,
-              index,
-            }: {
-              item: { time: string; data: any };
-              index: number;
-            }) => (
-              <Notification
-                date={item.time}
-                messages={item.data}
-                index={index}
-              />
-            )}
+            renderItem={renderEachNotification}
             keyExtractor={(item) => item.time}
             ListEmptyComponent={() => <EmptyNotification />}
           />

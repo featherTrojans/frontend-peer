@@ -21,6 +21,7 @@ export const lastChatDate = (date: Date) => {
   if(currentdate !== "Today" && currentdate !== "Yesterday"){
     return `${moment(date).format("DD/MM/YY")}`
   }
+            {/* <Bluecardicon /> */}
   
   return currentdate
 

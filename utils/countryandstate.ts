@@ -1,44 +1,44 @@
 export const nigeriastates = [
-  "abia",
-  "abuja",
-  "adamawa",
-  "akwa_ibom",
-  "anambra",
-  "bauchi",
-  "bayelsa",
-  "benue",
-  "borno",
-  "cross_river",
-  "delta",
-  "ebonyi",
-  "edo",
-  "ekiti",
-  "enugu",
-  "gombe",
-  "imo",
-  "jigawa",
-  "kaduna",
-  "kano",
-  "katsina",
-  "kebbi",
-  "kogi",
-  "kwara",
-  "lagos",
-  "nasarawa",
-  "niger",
-  "ogun",
-  "ondo",
-  "osun",
-  "oyo",
-  "plateau",
-  "rivers",
-  "sokoto",
-  "taraba",
-  "yobe",
-  "zamfara",
+  "Abia",
+  "Abuja",
+  "Adamawa",
+  "Akwa ibom",
+  "Anambra",
+  "Bauchi",
+  "Bayelsa",
+  "Benue",
+  "Borno",
+  "Cross River",
+  "Delta",
+  "Ebonyi",
+  "Edo",
+  "Ekiti",
+  "Enugu",
+  "Gombe",
+  "Imo",
+  "Jigawa",
+  "Kaduna",
+  "Kano",
+  "Katsina",
+  "Kebbi",
+  "Kogi",
+  "Kwara",
+  "Lagos",
+  "Nasarawa",
+  "Niger",
+  "Ogun",
+  "Ondo",
+  "Osun",
+  "Oyo",
+  "Plateau",
+  "Rivers",
+  "Sokoto",
+  "Taraba",
+  "Yobe",
+  "Zamfara",
 ];
 export const stateslgs = {
-  abia: [
+  Abia: [
     "Aba North",
     "Aba South",
     "Arochukwu",
@@ -54,7 +54,7 @@ export const stateslgs = {
     "Umu Nneochi",
     "Umuahia",
   ],
-  abuja: [
+  Abuja: [
     "Abaji",
     "Apo District",
     "Asokoro",
@@ -113,7 +113,7 @@ export const stateslgs = {
     "Wuye",
     "Zuba",
   ],
-  adamawa: [
+  Adamawa: [
     "Demsa",
     "Fufore",
     "Ganye",
@@ -136,7 +136,7 @@ export const stateslgs = {
     "Yola North",
     "Yola South",
   ],
-  akwa_ibom: [
+  "Akwa Ibom": [
     "Abak",
     "Eastern Obolo",
     "Esit-Eket",
@@ -169,7 +169,7 @@ export const stateslgs = {
     "Urue-Offong/Oruko",
     "Uyo",
   ],
-  anambra: [
+  Anambra: [
     "Aghamelu",
     "Aguata",
     "Anambra East",
@@ -187,7 +187,7 @@ export const stateslgs = {
     "Onitsha",
     "Orumba",
   ],
-  bauchi: [
+  Bauchi: [
     "Alkaleri",
     "Bauchi LGA",
     "Bogoro",
@@ -208,7 +208,7 @@ export const stateslgs = {
     "Warji",
     "Zaki",
   ],
-  bayelsa: [
+  Bayelsa: [
     "Brass",
     "Ekeremor",
     "Kolokuma/Opokuma",
@@ -218,7 +218,7 @@ export const stateslgs = {
     "Southern Ijaw",
     "Yenagoa",
   ],
-  benue: [
+  Benue: [
     "Ado",
     "Agatu",
     "Apa",
@@ -242,7 +242,7 @@ export const stateslgs = {
     "Ushongo",
     "Vandeikya",
   ],
-  borno: [
+  Borno: [
     "Abadam",
     "Askira/Uba",
     "Bama",
@@ -271,7 +271,7 @@ export const stateslgs = {
     "Nganzai",
     "Shani",
   ],
-  cross_river: [
+  "Cross River": [
     "Abi",
     "Akamkpa",
     "Akpabuyo",
@@ -290,7 +290,7 @@ export const stateslgs = {
     "Yakuur",
     "Yala",
   ],
-  delta: [
+  Delta: [
     "Aniocha North",
     "Aniocha South",
     "Bomadi",
@@ -312,7 +312,7 @@ export const stateslgs = {
     "Uvwie",
     "Warri",
   ],
-  ebonyi: [
+  Ebonyi: [
     "Abakaliki",
     "Afikpo North",
     "Afikpo South",
@@ -326,7 +326,7 @@ export const stateslgs = {
     "Ohaukwu",
     "Onicha",
   ],
-  edo: [
+  Edo: [
     "Akoko-Edo",
     "Auchi",
     "Benin City",
@@ -344,7 +344,7 @@ export const stateslgs = {
     "Ubiaja",
     "Uhunmwonde",
   ],
-  ekiti: [
+  Ekiti: [
     "Ado Ekiti",
     "Aiyekire (Gbonyin)",
     "Aramoko",
@@ -362,7 +362,7 @@ export const stateslgs = {
     "Omuo",
     "Oye",
   ],
-  enugu: [
+  Enugu: [
     "Aninri",
     "Awgu",
     "Enugu",
@@ -379,7 +379,7 @@ export const stateslgs = {
     "Udi",
     "Uzo-Uwani",
   ],
-  gombe: [
+  Gombe: [
     "Akko",
     "Balanga",
     "Billiri",
@@ -392,7 +392,7 @@ export const stateslgs = {
     "Shomgom",
     "Yamaltu/Deba",
   ],
-  imo: [
+  Imo: [
     "Aboh-Mbaise",
     "Ahiazu-Mbaise",
     "Ehime-Mbano",
@@ -419,7 +419,7 @@ export const stateslgs = {
     "Oru",
     "Owerri",
   ],
-  jigawa: [
+  Jigawa: [
     "Auyo",
     "Babura",
     "Biriniwa",
@@ -447,7 +447,7 @@ export const stateslgs = {
     "Taura",
     "Yankwashi",
   ],
-  kaduna: [
+  Kaduna: [
     "Birnin-Gwari",
     "Chikun",
     "Giwa",
@@ -470,7 +470,7 @@ export const stateslgs = {
     "Zango-Kataf",
     "Zaria",
   ],
-  kano: [
+  Kano: [
     "Ajingi",
     "Albasu",
     "Bagwai",
@@ -517,7 +517,7 @@ export const stateslgs = {
     "Warawa",
     "Wudil",
   ],
-  katsina: [
+  Katsina: [
     "Bakori",
     "Batagarawa",
     "Batsari",
@@ -553,7 +553,7 @@ export const stateslgs = {
     "Sandamu",
     "Zango",
   ],
-  kebbi: [
+  Kebbi: [
     "Aleiro",
     "Arewa-Dandi",
     "Argungu",
@@ -576,7 +576,7 @@ export const stateslgs = {
     "Yauri",
     "Zuru",
   ],
-  kogi: [
+  Kogi: [
     "Adavi",
     "Ajaokuta",
     "Ankpa",
@@ -601,7 +601,7 @@ export const stateslgs = {
     "Yagba East",
     "Yagba West",
   ],
-  kwara: [
+  Kwara: [
     "Asa",
     "Baruten",
     "Edu",
@@ -618,7 +618,7 @@ export const stateslgs = {
     "Oyun",
     "Pategi",
   ],
-  lagos: [
+  Lagos: [
     "Abule Egba",
     "Agbara-Igbesan",
     "Agboyi/Ketu",
@@ -661,7 +661,7 @@ export const stateslgs = {
     "Victoria Island",
     "Yaba",
   ],
-  nasarawa: [
+  Nasarawa: [
     "Akwanga",
     "Awe",
     "Doma",
@@ -675,7 +675,7 @@ export const stateslgs = {
     "Obi-Nasarawa",
     "Toto",
   ],
-  niger: [
+  Niger: [
     "Agaie",
     "Agwara",
     "Bida",
@@ -702,7 +702,7 @@ export const stateslgs = {
     "Tafa",
     "Wushishi",
   ],
-  ogun: [
+  Ogun: [
     "Abeokuta North",
     "Abeokuta South",
     "Ado-Odo/Ota",
@@ -722,7 +722,7 @@ export const stateslgs = {
     "Remo North",
     "Sagamu",
   ],
-  ondo: [
+  Ondo: [
     "Akungba",
     "Akure",
     "Ese-Odo",
@@ -743,7 +743,7 @@ export const stateslgs = {
     "Ose",
     "Owo",
   ],
-  osun: [
+  Osun: [
     "Aiyedade",
     "Aiyedire",
     "Atakumosa East",
@@ -767,7 +767,7 @@ export const stateslgs = {
     "Orolu",
     "Osogbo",
   ],
-  oyo: [
+  Oyo: [
     "Afijio",
     "Akinyele",
     "Atiba",
@@ -797,7 +797,7 @@ export const stateslgs = {
     "Saki West",
     "Surulere-Oyo",
   ],
-  plateau: [
+  Plateau: [
     "Barkin Ladi",
     "Bassa-Plateau",
     "Bokkos",
@@ -814,7 +814,7 @@ export const stateslgs = {
     "Shendam",
     "Wase",
   ],
-  rivers: [
+  Rivers: [
     "Abua/Odual",
     "Ahoada",
     "Akuku Toru",
@@ -837,7 +837,7 @@ export const stateslgs = {
     "Port-Harcourt",
     "Tai",
   ],
-  sokoto: [
+  Sokoto: [
     "Binji",
     "Bodinga",
     "Dange-Shuni",
@@ -862,7 +862,7 @@ export const stateslgs = {
     "Wurno",
     "Yabo",
   ],
-  taraba: [
+  Taraba: [
     "Ardo-Kola",
     "Bali",
     "Donga",
@@ -880,7 +880,7 @@ export const stateslgs = {
     "Yorro",
     "Zing",
   ],
-  yobe: [
+  Yobe: [
     "Bade",
     "Bursari",
     "Damaturu",
@@ -899,7 +899,7 @@ export const stateslgs = {
     "Yunusari",
     "Yusufari",
   ],
-  zamfara: [
+  Zamfara: [
     "Anka",
     "Bakura",
     "Birnin Magaji",

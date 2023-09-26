@@ -13,7 +13,7 @@ import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { enableFreeze } from "react-native-screens";
-enableFreeze(true);
+// enableFreeze(true);
 
 import { AWEEKAFTER, getDataFromStorage, setAuthorizationToken } from "./utils";
 

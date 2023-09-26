@@ -1,4 +1,4 @@
-import { Text, Pressable, FlatList, ScrollView } from "react-native";
+import { Text, Pressable, ScrollView } from "react-native";
 import React, { useContext, useState } from "react";
 import {
   FTCustombutton,
@@ -18,7 +18,7 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { SIZES } from "../constants";
 import { UploadDocScreenStyles } from "../assets/styles/screens";
 import { AuthContext } from "../context/AuthContext";
-import { gestureHandlerRootHOC } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 
 const { optionText, uploadDocBtnWrap, uploadDocBtnText } =
   UploadDocScreenStyles;
@@ -34,10 +34,15 @@ const UploadDocScreen = ({ navigation }) => {
   const [localGov, setLocalGov] = useState("Select");
   const [selectDoc, setSelectDoc] = useState("Select Document");
   const [id_type, setIdtype] = useState("Select");
-  const { successAlert } = useAlert();
+  const { successAlert, errorAlert } = useAlert();
 
   const [loading, setLoading] = useState(false);
-  const { errorAlert } = useAlert();
+
+
+  let shortenTextLength = (text: string, maxlenght: number) => {
+    return text.length > maxlenght ? text.substring(0, maxlenght) + "..." : text;  
+  }
+
 
   const closeStateModal = (item) => {
     setCity(item);
@@ -122,6 +127,9 @@ const UploadDocScreen = ({ navigation }) => {
     );
   };
 
+
+
+
   const switchModals = (value: number) => {
     switch (value) {
       case 0:
@@ -154,7 +162,7 @@ const UploadDocScreen = ({ navigation }) => {
       setid_image({
         uri: `${result?.assets[0]?.uri}`,
         type: "Image/jpeg",
-        name: "id_image",
+        name: `${result?.assets[0]?.fileName}`,
       });
     }
   };
@@ -301,7 +309,7 @@ const UploadDocScreen = ({ navigation }) => {
         />
 
         <FTInput
-          placeholderText={id_image.uri ? "image picked" : "Select Document"}
+          placeholderText={id_image.uri ? shortenTextLength(id_image?.name, 20) : "Select Document"}
           name="id_image"
           label="Upload Document"
           control={control}

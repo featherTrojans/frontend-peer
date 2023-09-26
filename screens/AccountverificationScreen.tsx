@@ -166,10 +166,10 @@ const AccountverificationScreen = ({ route }) => {
           <FTCustombutton
             btntext={`Updrage to ${levelTitle}`}
             onpress={() => {
-              if (userlevel < level - 1) {
-                errorAlert(null, "Please upgrade to Odogwu");
-                return;
-              }
+              // if (userlevel < level - 1) {
+              //   errorAlert(null, "Please upgrade to Odogwu");
+              //   return;
+              // }
               navigation.navigate(upgradeLocation);
             }}
           />
