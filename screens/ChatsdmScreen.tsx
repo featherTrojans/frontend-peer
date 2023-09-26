@@ -459,7 +459,6 @@ const ChatsdmScreen = ({ route }) => {
             style={chatTransferAnim}
           /> */}
             <Successtransfericon />
-            {/* <Bluecardicon /> */}
           </View>
           <View style={chatTransferTextBg}>
             <Text style={chatTransferText}>
@@ -505,6 +504,7 @@ const ChatsdmScreen = ({ route }) => {
         setShowModal((s) => !s);
         break;
       case 1:
+        openModal();
         setContent({
           child: <AmountToSend openTransactionPin={openTransactionPin} />,
           height: 200,
@@ -612,6 +612,8 @@ const ChatsdmScreen = ({ route }) => {
             />
           </View>
         ) : (
+
+
           <Animated.ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
@@ -643,6 +645,9 @@ const ChatsdmScreen = ({ route }) => {
               );
             })}
           </Animated.ScrollView>
+
+
+
         )}
 
         <View style={chatTextInput}>
@@ -668,6 +673,8 @@ const ChatsdmScreen = ({ route }) => {
           )}
         </View>
       </KeyboardAvoidingView>
+
+      
     </FTMainwrapper>
   );
 };

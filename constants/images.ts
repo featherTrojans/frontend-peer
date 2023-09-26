@@ -9,6 +9,12 @@ import Splashimage4 from "../assets/images/splash4-min.png"
 import Withdrawimage from "../assets/images/withdraw_icon.png"
 import Transferimage from "../assets/images/transfer_icon.png"
 import Billsimage from "../assets/images/bills_icon.png"
+import NigeriaflagImage from "../assets/images/nigerianFlag.png"
+import NetlifylogoImage from "../assets/images/netflix-logo.png"
+import SpotifylogoImage from "../assets/images/spotify-logo.png"
+import YoutubelogoImage from "../assets/images/youtube-logo.png"
+import BluecardImage from "../assets/images/blue-card.png"
+import LilaccardImage from "../assets/images/lilac-card.png"
 
 
 
@@ -20,5 +26,11 @@ export default {
     Splashimage4,
     Withdrawimage,
     Transferimage,
-    Billsimage
+    Billsimage,
+    NigeriaflagImage,
+    NetlifylogoImage,
+    SpotifylogoImage,
+    YoutubelogoImage,
+    BluecardImage,
+    LilaccardImage
 }

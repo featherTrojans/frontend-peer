@@ -36,7 +36,7 @@ const useAlert = () => {
     });
   };
 
-  const purpleAlert = (messageText: string, hide = false) => {
+  const purpleAlert = (messageText: string, hide = true) => {
     Toast.show({
       type: "purpleToast",
       // And I can pass any custom props I want

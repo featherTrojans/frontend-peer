@@ -1,5 +1,5 @@
 import { View, Text, Pressable, TextInput } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { setAuthorizationToken, setDataInstorage } from "../utils";
 import { FTCustombutton, FTLoader, FTTitlepagewrapper } from "../components";
 import OTPTextInput from "react-native-otp-textinput";
@@ -8,19 +8,21 @@ import { PhoneVerificationScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
 import * as Clipboard from "expo-clipboard";
+import { useFocusEffect } from "@react-navigation/native";
+import OTPInputView from "@twotalltotems/react-native-otp-input";
 
 const {
   enterDigitText,
   enterDigitSubText,
   bottomtext,
   otpInputWrap,
+  otpHighlightInputWrap,
   buttonWrap,
   notReceiveText,
   durationWrap,
   changeNumberText,
 } = PhoneVerificationScreenStyles;
 
-// auth/signin/confirm
 const PhoneVerificationScreen = ({ navigation, route }) => {
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
@@ -32,13 +34,7 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
   const inputRef = useRef(TextInput);
   const [text, setText] = useState("");
   const [noOfInput, setNoOfInput] = useState(true);
-
-  useEffect(() => {
-    if (text.length === 6) {
-      console.log(text);
-      otpInput?.current?.setValue(text);
-    }
-  }, [text]);
+  const [focusInput, setFocusInput] = useState(false);
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -92,12 +88,6 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
     }
   };
 
-  // let isChanging = (value) => {
-  //   console.log(value, "yya");
-  //   setNoOfInput(false);
-  //   otpInput?.current?.setValue(value);
-  // };
-
   return (
     <FTTitlepagewrapper title="Verify phone number">
       <FTLoader loading={loading} />
@@ -106,17 +96,18 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
         <Text style={enterDigitSubText}>{phoneNumber}</Text>.
       </Text>
 
-      <View style={{ alignContent: "center", alignSelf: "center" }}>
-        <OTPTextInput
-          ref={otpInput}
-          handleTextChange={(text) => setOtpCode(text)}
-          inputCount={6}
-          tintColor={COLORS.blue16}
-          offTintColor={COLORS.grey21}
-          textInputStyle={otpInputWrap}
-          autoFocus={false}
+
+        <OTPInputView
+          style={{ width: "100%", height: 52,}}
+          pinCount={6}
+          autoFocusOnLoad
+          codeInputFieldStyle={otpInputWrap}
+          codeInputHighlightStyle={otpHighlightInputWrap}
+          onCodeFilled={(code) => setOtpCode(code)}
         />
-      </View>
+
+
+
       <View style={buttonWrap}>
         <FTCustombutton btntext="VERIFY" onpress={handlesubmit} />
       </View>

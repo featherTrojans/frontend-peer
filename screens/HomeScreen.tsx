@@ -45,6 +45,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import useChats from "../hooks/useChats";
 import Customstatusbar from "./shared/Customstatusbar";
+import { FlatList as AnimatedFlatlist } from "react-native-gesture-handler";
 
 const {
   headerContainer,
@@ -410,7 +411,7 @@ const ProfileSetup = ({ nav }) => {
       <Text style={completedSetup}>Completed {completedProfileSetup} / 6</Text>
 
       <View style={{ marginTop: 45, flex: 1 }}>
-        <FlatList
+        <AnimatedFlatlist
           data={profilesetupdatas}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => {
@@ -560,9 +561,9 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     <FTTabWrapper
       pH={0}
       bgColor={COLORS.white3}
-      modalChildren={content.child}
       showModal={showModal}
       setShowModal={setShowModal}
+      modalChildren={content.child}
       modalHeight={content.height}
     >
       <View style={headerContainer}>

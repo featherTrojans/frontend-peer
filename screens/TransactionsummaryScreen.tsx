@@ -50,7 +50,7 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
   };
 
   return (
-    <FTTitlepagewrapper childBg={COLORS.white} title="Transaction Summary">
+    <FTTitlepagewrapper headerBg={COLORS.white3} childBg={COLORS.white3} title="Transaction Summary">
       <FTKeyboardwrapper>
         <View style={summaryWrap}>
           <View style={{ alignItems: "center" }}>

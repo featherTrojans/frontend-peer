@@ -216,7 +216,8 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
-      <FlatList
+      
+        <FlatList
         data={beneficiaries}
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -241,11 +242,13 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
         ListHeaderComponent={
           <ListHeader amount={amount} switchModals={switchModals} />
         }
-        ListEmptyComponent={
+        ListEmptyComponent={loading ?
           <FTEmptycomponent
             msg="Padi, you don't have any beneficiary"
             showTransact={false}
           />
+          :
+          null
         }
       />
 

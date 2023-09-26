@@ -10,14 +10,12 @@ export const AmounttosendScreenStyles = StyleSheet.create({
     overflow: "hidden",
     marginBottom: 33,
   },
-  nairaIconWrap: {
-    height: 49,
-    width: 49,
-    backgroundColor: COLORS.blue9,
-    borderRadius: 12,
-    marginRight: 20,
-    justifyContent: "center",
-    alignItems: "center",
+  ngnText: {
+    textTransform: "uppercase",
+    color: COLORS.white,
+    ...fontsize.small,
+    ...FONTS.regular,
+    // marginRight: 0
   },
   amountValueText: {
     ...fontsize.xbiggest,

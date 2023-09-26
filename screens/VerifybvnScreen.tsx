@@ -25,7 +25,8 @@ const VerifybvnScreen = ({ navigation }) => {
   const onsubmit = async (data) => {
     try {
       setLoading(true);
-      await axiosCustom.post("user/verify/upgrade", data);
+     const response = await axiosCustom.post("user/verify/upgrade", data);
+     console.log(response.data, "Here is the bvn response")
       navigation.navigate("bvn-success_screen");
     } catch (err) {
       if (errorcount == 2) {

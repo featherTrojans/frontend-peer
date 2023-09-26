@@ -58,7 +58,7 @@ const transactionStatus = (status: IStatusProps) => {
       return (
         <View style={transactionStatusWrap}>
           <View style={[statusThumpBg, { backgroundColor: COLORS.Tyellow }]}>
-            <Text style={statusThumbText}>👍🏽</Text>
+            <Text style={statusThumbText}>✍🏽</Text>
           </View>
           <View style={[statusTextBg, { backgroundColor: COLORS.Tyellow }]}>
             <Text style={[statusText, { color: COLORS.yellow1 }]}>
@@ -72,7 +72,7 @@ const transactionStatus = (status: IStatusProps) => {
       return (
         <View style={transactionStatusWrap}>
           <View style={[statusThumpBg, { backgroundColor: COLORS.Tred }]}>
-            <Text style={statusThumbText}>👍🏽</Text>
+            <Text style={statusThumbText}>👎🏽</Text>
           </View>
           <View style={[statusTextBg, { backgroundColor: COLORS.Tred }]}>
             <Text style={[statusText, { color: COLORS.red5 }]}>
@@ -85,9 +85,7 @@ const transactionStatus = (status: IStatusProps) => {
 
     default:
       return (
-        <View>
-          <Text>Successful</Text>
-        </View>
+        null
       );
       break;
   }
@@ -105,6 +103,7 @@ const {
 const TransactionDetailsScreen = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
 
+
   const { data } = route.params;
 
   const {
@@ -120,8 +119,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     charges,
     direction,
     bankDetails,
+    status
   } = data;
-  const total = Number(amount) + Number(charges);
+  const total = Number(amount);
 
   const dt = moment(dateTime);
   const formatDateTime = `${dt.format("ddd")}. ${dt.format( "MMM")}, ${dt.format("YYYY")}`;
@@ -505,10 +505,9 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
   };
 
   return (
-    <FTTitlepagewrapper title="Transaction Details" childBg={COLORS.white}>
+    <FTTitlepagewrapper title="Transaction Details" childBg={COLORS.white3} headerBg={COLORS.white3}>
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingHorizontal: 20 }}
         showsVerticalScrollIndicator={false}
       >
         <View
@@ -520,7 +519,8 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
         >
           {transactionBadge(title, direction, sender, receiver, 50)}
 
-          {transactionStatus("failed")}
+          {transactionStatus("success")}
+
 
           <FTIconwithbg
             bG={COLORS.blue9}

@@ -13,7 +13,7 @@ import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { enableFreeze } from "react-native-screens";
-enableFreeze(true);
+// enableFreeze(true);
 
 import { AWEEKAFTER, getDataFromStorage, setAuthorizationToken } from "./utils";
 
@@ -56,6 +56,18 @@ export const toastConfig = {
       </TouchableOpacity>
     </View>
   ),
+
+  purpleToast: ({ text1, props }: { text1: string; props: any }) => (
+    <View style={[appStyles.alertWrapper, {backgroundColor: "#f80000"}]}>
+      <View style={{ flex: 1 }}>
+        <Text style={appStyles.alertText}>{props.message} </Text>
+      </View>
+
+      <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
+        {/* <Alertcancelicon /> */}
+      </TouchableOpacity>
+    </View>
+  ),
 };
 
 LogBox.ignoreLogs(["Setting a timer"]);
@@ -81,20 +93,18 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    // why don't I check here, then set Auth , and set tokem you know
+  // useEffect(() => {
 
-    getDataFromStorage("@token").then((response) => {
-      if (response !== null) {
-        if (Date.now() - response.time > AWEEKAFTER) {
-          return null;
-        }
-        // response.token
-        setRouteName("welcome_screen");
-        setAuthorizationToken(response.token);
-      }
-    });
-  }, []);
+  //   getDataFromStorage("@token").then((response) => {
+  //     if (response !== null) {
+  //       if (Date.now() - response.time > AWEEKAFTER) {
+  //         return null;
+  //       }
+  //       setRouteName("welcome_screen");
+  //       setAuthorizationToken(response.token);
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
     checkOnboarding();
@@ -137,8 +147,6 @@ export default function App() {
       <Toast
           config={toastConfig}
           topOffset={0}
-          onShow={() => console.log("Status shown")}
-          onHide={() => console.log("Status hidden")}
         />
     </GestureHandlerRootView>
   );
@@ -166,6 +174,7 @@ const appStyles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.regular,
     color: COLORS.white3,
+    lineHeight: 27
   },
   cancelWrapper: {
     padding: 10,

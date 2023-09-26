@@ -1,4 +1,11 @@
-import { Pressable, StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Image,
+} from "react-native";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { CardScreenStyles } from "../assets/styles/screens";
 import {
@@ -11,11 +18,12 @@ import {
 import LottieView from "lottie-react-native";
 
 import BottomSheet from "@gorhom/bottom-sheet";
-import { COLORS, FONTS, fontsize, icons } from "../constants";
+import { COLORS, FONTS, SIZES, fontsize, icons, images } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import { useAlert } from "../hooks";
 import { useNavigation } from "@react-navigation/native";
+const { width, height } = SIZES;
 
 const {
   Carddetailsicon,
@@ -30,8 +38,10 @@ const {
   Transactionfeeicon,
   Maintenancefeeicon,
   Visacardanimated,
-  Memojisuccessanimated
+  Memojisuccessanimated,
 } = icons;
+
+const { NetlifylogoImage, SpotifylogoImage, YoutubelogoImage } = images;
 
 const {
   myCardsText,
@@ -60,6 +70,7 @@ const {
   createCardSubInfo,
   rightComponentBg,
   rightComponentText,
+  logosStyle,
 } = CardScreenStyles;
 
 // Fot the card details Modal
@@ -144,8 +155,7 @@ function Cardlock() {
   );
 }
 
-
-const CardScreen = ({navigation}) => {
+const CardScreen = ({ navigation }) => {
   const snapPoints = useMemo(() => ["40%", "98%"], []);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null });
@@ -258,13 +268,25 @@ const CardScreen = ({navigation}) => {
       ) : (
         <>
           <Text style={myCardsText}>My Cards</Text>
+          <Image
+            source={NetlifylogoImage}
+            style={[logosStyle, { right: -50, top: -30 }]}
+          />
+          <Image
+            source={YoutubelogoImage}
+            style={[logosStyle, { right: -50, top: height / 3 }]}
+          />
+          <Image
+            source={SpotifylogoImage}
+            style={[logosStyle, { left: -50, top: height / 5 }]}
+          />
 
           <View style={emptyCardsWrap}>
             <LottieView
               source={Visacardanimated}
               autoPlay
               loop
-              style={{width: 234, height: 234}}
+              style={{ width: 234, height: 234 }}
             />
             <Text style={youHaveNoCard}>You have no card yet</Text>
             <Text style={shopAndPay}>

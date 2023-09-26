@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Animated, { Layout } from "react-native-reanimated";
 import {
   FTCustombutton,
@@ -14,10 +14,11 @@ import {
 } from "../assets/styles/screens";
 import amountFormatter from "../utils/formatMoney";
 import { useAlert } from "../hooks";
+import { AuthContext } from "../context/AuthContext";
 
 const { enterPinText, keyboardWrap } = TransactionpinScreenStyles;
 
-const { amountWrap, nairaIconWrap, amountValueText } = AmounttosendScreenStyles;
+const { amountWrap, ngnText, amountValueText } = AmounttosendScreenStyles;
 
 const { Nairaicon } = icons;
 
@@ -26,21 +27,33 @@ const AmounttosendScreen = ({ route }) => {
   const buttontext = route?.params?.buttontext || "Proceed";
   const headtext = route?.params?.headtext || "How Much?";
   const onsubmit = route?.params?.onsubmit;
-  const { errorAlert } = useAlert();
+  const { errorAlert, purpleAlert } = useAlert();
   const [loading, setLoading] = useState(false);
 
+  const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
+
   const [amount, setAmount] = useState([]);
-  //   const formatted = formatter.format(amount.join(""));
   const formatted = amountFormatter(amount.join(""));
 
   const handleSetAmount = (value: string) => {
     const newpin = [...amount, value];
 
     setAmount(newpin);
-    if (amount.length === 3) {
-      //   handleSubmit(newpin);
-    }
   };
+
+  let typedAmount = Number(amount.join(""));
+  let typedAmountGreaterThanBal = typedAmount > authdata.walletBal;
+
+  useEffect(() => {
+    if (typedAmountGreaterThanBal) {
+      purpleAlert(
+        `Sorry, Your current balance is ${amountFormatter(
+          authdata.walletBal
+        )}, Kindly enter a lesser amount.`
+      );
+    }
+  }, [typedAmount]);
+
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
       const newdata = [...amount];
@@ -66,19 +79,17 @@ const AmounttosendScreen = ({ route }) => {
       childBg={COLORS.blue16}
       invert
     >
-       <FTLoader loading={loading} />
-       
-        <Animated.View layout={Layout.springify()} style={amountWrap}>
+      <FTLoader loading={loading} />
 
-          <View style={nairaIconWrap}>
-            <Nairaicon />
-          </View>
+      <Animated.View layout={Layout.springify()} style={amountWrap}>
+        <Animated.Text layout={Layout.springify()} style={ngnText}>
+          NGN
+        </Animated.Text>
 
-          <Animated.View layout={Layout.springify()}>
-            <Text style={amountValueText}>{formatted}</Text>
-          </Animated.View>
-
+        <Animated.View layout={Layout.springify()}>
+          <Text style={amountValueText}>{formatted}</Text>
         </Animated.View>
+      </Animated.View>
 
       <Text style={[enterPinText, { textAlign: "center" }]}>
         Enter amount with the keypad
@@ -87,7 +98,7 @@ const AmounttosendScreen = ({ route }) => {
       <View style={keyboardWrap}>
         <FTKeyboard
           array={[...numbers]}
-          setDigit={handleSetAmount}
+          setDigit={typedAmountGreaterThanBal ? () => null : handleSetAmount}
           removeDigit={handleRemoveAmount}
           textColor={COLORS.white}
         />
@@ -96,6 +107,7 @@ const AmounttosendScreen = ({ route }) => {
         btntext={buttontext}
         onpress={handlesubmit}
         bg={COLORS.blue9}
+        disable={typedAmountGreaterThanBal || typedAmount <= 0}
       />
     </FTTitlepagewrapper>
   );

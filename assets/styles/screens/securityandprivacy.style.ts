@@ -8,4 +8,10 @@ export const SecurityandprivacyScreenStyles = StyleSheet.create({
     marginBottom: 30,
     color: COLORS.grey16,
   },
+  blockWrap: {
+    padding: 24,
+    borderRadius: 25,
+    backgroundColor: COLORS.white,
+    // marginTop: 58,
+  },
 });

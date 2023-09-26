@@ -1,5 +1,5 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useMemo, useState, memo } from "react";
+import React, { useEffect, useMemo, useState, memo, useCallback } from "react";
 import { FTEmptycomponent, FTHorizontaline, FTTransactionhistory } from ".";
 import Animated from "react-native-reanimated";
 import { RefreshControl } from "react-native-gesture-handler";
@@ -33,10 +33,24 @@ const FTTransact = () => {
     }
   };
 
-  const formattedtransaction = useMemo(
+  const histories: any[] = useMemo(
     () => formatData(transactions),
     [transactions]
   );
+
+  const renderEachTransaction = useCallback(({ item, index }) => {
+    return (
+      <>
+        <FTTransactionhistory
+          date={item.time}
+          datas={item.data}
+          index={index}
+        />
+        <FTHorizontaline marginV={15} />
+      </>
+    );
+  }, []);
+
   return (
     <View
       style={{
@@ -65,7 +79,7 @@ const FTTransact = () => {
         ) : (
           <>
             <Animated.FlatList
-              data={formattedtransaction}
+              data={histories}
               initialNumToRender={10}
               refreshControl={
                 <RefreshControl
@@ -79,18 +93,7 @@ const FTTransact = () => {
                 />
               }
               showsVerticalScrollIndicator={false}
-              renderItem={({ item, index }: any) => {
-                return (
-                  <>
-                    <FTTransactionhistory
-                      date={item.time}
-                      datas={item.data}
-                      index={index}
-                    />
-                    {true && <FTHorizontaline marginV={15} />}
-                  </>
-                );
-              }}
+              renderItem={renderEachTransaction}
               keyExtractor={(item: { time: string }) => item.time}
               ListEmptyComponent={
                 <FTEmptycomponent

@@ -21,6 +21,25 @@ export const PhoneVerificationScreenStyles = StyleSheet.create({
     borderWidth: 1,
     borderBottomWidth: 1,
     borderRadius: 10,
+    borderColor: COLORS.grey21,
+    ...fontsize.medium,
+    ...FONTS.bold,
+    color: COLORS.blue9,
+    overflow: "hidden"
+  },
+  otpHighlightInputWrap: {
+    width: 49,
+    height: 51,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderBottomWidth: 1,
+    borderRadius: 10,
+    borderColor: COLORS.blue16,
+    ...fontsize.medium,
+    ...FONTS.bold,
+    color: COLORS.blue9,
+    overflow: "hidden"
+
   },
   bottomtext: {
     ...FONTS.regular,

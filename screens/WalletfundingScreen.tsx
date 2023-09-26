@@ -21,6 +21,7 @@ import { AuthContext } from "../context/AuthContext";
 const {
   blockWrap,
   blockHeader,
+  blockHeaderWrap,
   bankNameText,
   accountNoText,
   tapToCopyText,
@@ -32,7 +33,7 @@ const {
   upgradeAccountText,
 } = WalletfundingScreenStyles;
 
-const { Debitcardicon } = icons;
+const { Debitcardicon, Recommendedcheckicon } = icons;
 const WalletfundingScreen = ({ navigation }) => {
   const { authdata } = useContext(AuthContext);
 
@@ -57,15 +58,15 @@ const WalletfundingScreen = ({ navigation }) => {
     <FTTitlepagewrapper childBg={COLORS.white3} title="Wallet Funding">
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={blockWrap}>
-          <View>
+          <View style={blockHeaderWrap}>
             <Text style={blockHeader}>Recommended</Text>
+            <Recommendedcheckicon />
           </View>
           <View style={{ alignItems: "center" }}>
-
-            <FTIconwithbg 
-            bG={''} 
-            size={52} 
-            imageUrl="https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fvfd.png?alt=media&token=edb7d867-00fc-4de0-b117-c2b0395965cb"
+            <FTIconwithbg
+              bG={""}
+              size={52}
+              imageUrl="https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fvfd.png?alt=media&token=edb7d867-00fc-4de0-b117-c2b0395965cb"
             />
 
             <Text style={bankNameText}>VFD Microfinance Bank</Text>
@@ -95,16 +96,15 @@ const WalletfundingScreen = ({ navigation }) => {
                 </Text>
               </View>
             ) : (
-              <View style={upgradeAccountBg}>
-                <Text
-                  onPress={() =>
-                    navigation.navigate("accountverification_screen")
-                  }
-                  style={upgradeAccountText}
-                >
-                  Upgrade account
-                </Text>
-              </View>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() =>
+                  navigation.navigate("accountverification_screen")
+                }
+                style={upgradeAccountBg}
+              >
+                <Text style={upgradeAccountText}>Upgrade account</Text>
+              </TouchableOpacity>
             )}
           </View>
         </View>

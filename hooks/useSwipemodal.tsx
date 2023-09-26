@@ -11,10 +11,14 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import Modal from "react-native-modal";
-import { Gesture, GestureDetector, gestureHandlerRootHOC } from "react-native-gesture-handler";
+import {
+  Gesture,
+  GestureDetector,
+  gestureHandlerRootHOC,
+} from "react-native-gesture-handler";
 import { AuthContext } from "../context/AuthContext";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const OVERDRAG = 20;
@@ -49,7 +53,6 @@ const useSwipemodal = () => {
     const translateY = useAnimatedStyle(() => ({
       transform: [{ translateY: offset.value }],
     }));
- 
 
     return (
       <>

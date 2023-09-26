@@ -8,11 +8,17 @@ export const WalletfundingScreenStyles = StyleSheet.create({
     padding: 25,
     borderRadius: 30,
   },
+  blockHeaderWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 42,
+  },
+
   blockHeader: {
     ...fontsize.xsmallest,
     ...FONTS.semibold,
     color: COLORS.blue9,
-    marginBottom: 42,
+    marginRight: 10,
   },
   bankNameText: {
     marginTop: 20,
@@ -26,13 +32,14 @@ export const WalletfundingScreenStyles = StyleSheet.create({
     ...FONTS.bold,
     color: COLORS.blue9,
     letterSpacing: 4,
+    textAlign: "center",
   },
   tapToCopyText: {
     ...fontsize.xxsmallest,
     ...FONTS.medium,
     marginTop: 10,
     color: COLORS.grey16,
-    textAlign: "center"
+    textAlign: "center",
   },
   extraInfotext: {
     ...fontsize.xxsmallest,

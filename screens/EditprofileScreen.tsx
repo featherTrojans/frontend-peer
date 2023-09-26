@@ -129,7 +129,7 @@ const EditprofileScreen = ({ navigation }) => {
   const GenderModal = () => {
     return (
       <FlatList
-        data={["male", "female"]}
+        data={["Male", "Female"]}
         renderItem={({ item }) => {
           return (
             <Pressable onPress={() => closeGenderModal(item)}>

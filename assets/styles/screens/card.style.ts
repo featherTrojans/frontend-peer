@@ -116,6 +116,11 @@ export const CardScreenStyles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  logosStyle: {
+    width: 150,
+    height: 150,
+    position: "absolute",
+  },
   youHaveNoCard: {
     ...fontsize.smaller,
     ...FONTS.regular,
@@ -129,7 +134,7 @@ export const CardScreenStyles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 50,
     lineHeight: 31,
-    paddingHorizontal: 50
+    paddingHorizontal: 50,
   },
   createVirtualCardWrap: {
     paddingVertical: 12,

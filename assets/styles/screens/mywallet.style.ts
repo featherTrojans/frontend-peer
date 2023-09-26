@@ -24,8 +24,7 @@ export const MywalletScreenStyles = StyleSheet.create({
   blockWrap: {
     padding: 24,
     borderRadius: 25,
-    borderColor: COLORS.grey1,
-    borderWidth: 0.5,
+    backgroundColor: COLORS.white,
     marginTop: 58,
   },
   BAlign: {
@@ -65,9 +64,9 @@ export const MywalletScreenStyles = StyleSheet.create({
     color: COLORS.green4,
   },
   dashedLine: {
-    borderWidth: 1,
-    borderStyle: "dashed",
-    borderColor: COLORS.grey2,
+    // borderWidth: 1,
+    // borderStyle: "dashed",
+    // borderColor: COLORS.grey2,
     marginVertical: 32,
   },
   limitTitleText: {
