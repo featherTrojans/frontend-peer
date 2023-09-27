@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Pressable,
+  FlatList,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -42,7 +43,7 @@ import LottieView from "lottie-react-native";
 import axiosCustom from "../httpRequests/axiosCustom";
 import formatData from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
-import moment from "moment";
+import dayjs from 'dayjs';
 import Animated from "react-native-reanimated";
 
 import { useNavigation } from "@react-navigation/native";
@@ -270,6 +271,11 @@ const ChatsdmScreen = ({ route }) => {
 
   const { CustomModal, openModal, closeModal } = useCustomModal();
 
+
+    const formatTime = (time) => {
+    return `${dayjs(time).format("h:mm")} ${dayjs(time).format("a")}`;
+  };
+
   const focus = () => {
     if (textInputRef.current !== null) {
       textInputRef.current.focus();
@@ -400,9 +406,7 @@ const ChatsdmScreen = ({ route }) => {
     } catch (err) {}
   };
 
-  const formatTime = (time) => {
-    return `${moment(time).format("h:mm")}${moment(time).format("a")}`;
-  };
+
 
   const handleTextChange = (text) => {
     setchattext(text);
@@ -549,6 +553,7 @@ const ChatsdmScreen = ({ route }) => {
     setShowModal(false);
     switchModals(3);
   };
+  
 
   return (
     <FTMainwrapper pH={0} bgColor={COLORS.white} childBg={COLORS.white3}>
@@ -614,37 +619,59 @@ const ChatsdmScreen = ({ route }) => {
         ) : (
 
 
-          <Animated.ScrollView
+          // <Animated.ScrollView
+          //   style={messageAreaContainer}
+          //   ref={scrollViewRef}
+          //   contentContainerStyle={{
+          //     paddingVertical: 20,
+          //     justifyContent: "flex-end",
+          //   }}
+          //   showsVerticalScrollIndicator={false}
+          //   bounces={false}
+          //   snapToEnd={true}
+          //   onContentSizeChange={() =>
+          //     scrollViewRef?.current?.scrollToEnd({ animated: true })
+          //   }
+          // >
+
+
+          //   {messages.map(({ data, time }, index: number) => {
+          //     return (
+          //       <View key={index}>
+          //         <View style={messagesDateWrap}>
+          //           <Text style={messageDateText}>{time}</Text>
+          //         </View>
+
+          //         {data.map((dat, index) => {
+          //           if (dat.sender === userInfo?.userUid) {
+          //             return <View key={index}>{renderSenderHTML(dat)}</View>;
+          //           }
+          //           return <View key={index}>{renderReceiverHTML(dat)}</View>;
+          //         })}
+          //       </View>
+          //     );
+          //   })}
+
+
+          // </Animated.ScrollView>
+          <FlatList 
+            data={messages}
             style={messageAreaContainer}
             ref={scrollViewRef}
             contentContainerStyle={{
               paddingVertical: 20,
-              justifyContent: "flex-end",
+              // justifyContent: "flex-end",
             }}
             showsVerticalScrollIndicator={false}
-            bounces={false}
-            snapToEnd={true}
             onContentSizeChange={() =>
               scrollViewRef?.current?.scrollToEnd({ animated: true })
             }
-          >
-            {messages.map(({ data, time }, index: number) => {
-              return (
-                <View key={index}>
-                  <View style={messagesDateWrap}>
-                    <Text style={messageDateText}>{time}</Text>
-                  </View>
-
-                  {data.map((dat, index) => {
-                    if (dat.sender === userInfo?.userUid) {
-                      return <View key={index}>{renderSenderHTML(dat)}</View>;
-                    }
-                    return <View key={index}>{renderReceiverHTML(dat)}</View>;
-                  })}
-                </View>
-              );
-            })}
-          </Animated.ScrollView>
+          renderItem={() => {
+            return (
+              <Text>The</Text>
+            )
+          }}
+          />
 
 
 

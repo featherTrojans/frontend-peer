@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-
+import dayjs from 'dayjs';
 import { icons, COLORS, SIZES } from "../constants";
 import { FTIconwithbg, FTMainwrapper, FTTitlepagewrapper } from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -107,9 +107,7 @@ const Notification = ({
         ) => {
           const isLastItem = index === messages.length;
           const isUpgrade = type === "account";
-          const formattedTime = `${moment(time).format("h:mm")}${moment(
-            time
-          ).format("a")}`;
+          const formattedTime = `${dayjs(time).format("h:mm")} ${dayjs(time).format("a")}`;
           return (
             <Animatable.View
               animation="slideInUp"

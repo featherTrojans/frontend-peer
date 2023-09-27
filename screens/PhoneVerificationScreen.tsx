@@ -2,7 +2,7 @@ import { View, Text, Pressable, TextInput } from "react-native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { setAuthorizationToken, setDataInstorage } from "../utils";
 import { FTCustombutton, FTLoader, FTTitlepagewrapper } from "../components";
-import OTPTextInput from "react-native-otp-textinput";
+// import OTPTextInput from "react-native-otp-textinput";
 import { COLORS, FONTS } from "../constants";
 import { PhoneVerificationScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
