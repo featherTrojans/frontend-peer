@@ -34,7 +34,7 @@ const ChoosebillerScreen = ({ navigation }) => {
   return (
     <FTTitlepagewrapper title="Choose Biller">
       <FlatList
-        data={[1, 1, 1, 1, 1]}
+        data={[]}
         ListHeaderComponent={ListHeader}
         ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
         renderItem={() => {

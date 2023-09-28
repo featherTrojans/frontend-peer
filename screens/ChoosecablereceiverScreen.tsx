@@ -31,6 +31,11 @@ const cableTypes = [
     value: "startimes",
     logo: startimeslogo,
   },
+  {
+    name: "Spectranet",
+    value: "spectranet",
+    logo: startimeslogo,
+  },
   // {
   //   name: "WAEC",
   //   value: "waec",
@@ -39,11 +44,6 @@ const cableTypes = [
   //   name: "NECO",
   //   value: "neco",
   // },
-  {
-    name: "Spectranet",
-    value: "spectranet",
-    logo: startimeslogo,
-  },
   // {
   //   name: "Jamb",
   //   value: "jamb",
@@ -81,6 +81,7 @@ const ChoosecablereceiverScreen = () => {
               onPress={() =>
                 navigation.navigate("choosecableamount_screen", {
                   biller: value,
+                  logo: logo
                 })
               }
               imageUrl={logo}

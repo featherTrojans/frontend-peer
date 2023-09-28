@@ -15,6 +15,7 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { FlatList } from "react-native-gesture-handler";
 import { useAlert } from "../hooks";
 import amountFormatter from "../utils/formatMoney";
+import { FTIconwithtitleandinfoCustom } from "../components/FTIconwithtitleandinfo";
 
 const { Bluecardicon } = icons;
 const {} = ChoosecableamountScreenStyles;
@@ -24,7 +25,7 @@ function isObject(value) {
 }
 
 const ChoosecableamountScreen = ({ route }) => {
-  const biller = route?.params?.biller;
+  const {biller, logo} = route?.params;
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [billeramount, setbilleramount] = useState([]);
@@ -78,14 +79,14 @@ const ChoosecableamountScreen = ({ route }) => {
         renderItem={({ item }) => {
           const { name, price } = item;
           return (
-            <FTIconwithtitleandinfo
-              bG="red"
+            <FTIconwithtitleandinfoCustom
+              bG=""
               title={name}
               info={amountFormatter(price)}
               onPress={() =>
                 navigation.navigate("cableiuc_screen", { biller, price })
               }
-              Icon={Bluecardicon}
+              imageUrl={logo}
             />
           );
         }}

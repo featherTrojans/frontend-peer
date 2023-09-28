@@ -39,7 +39,7 @@ const ChoosecableScreen = () => {
       <FTSearchinput placeholder="Search Biller" />
 
       <FlatList
-        data={[1, 1, 2]}
+        data={[]}
         renderItem={() => {
           return (
             <FTIconwithtitleandinfo
