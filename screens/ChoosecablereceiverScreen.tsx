@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { ChoosecablereceiverScreenStyles } from "../assets/styles/screens";
 import {
   FTIconwithtitleandinfo,
+  FTIconwithtitleandinfoCustom,
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
-// import { redirectTo } from "../utils";
 import { useNavigation } from "@react-navigation/native";
 import { icons, images } from "../constants";
-import { FTIconwithtitleandinfoCustom } from "../components/FTIconwithtitleandinfo";
+
 
 const { gotvlogo, dstvlogo, startimeslogo } = images;
 const { Bluecardicon } = icons;

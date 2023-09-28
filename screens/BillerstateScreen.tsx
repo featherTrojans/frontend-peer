@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { BillerstateScreenStyles } from "../assets/styles/screens";
 import {
   FTIconwithtitleandinfo,
+  FTIconwithtitleandinfoCustom,
   FTSearchinput,
   FTTitlepagewrapper,
 } from "../components";
 import { icons } from "../constants";
 import { electricityLogos } from "../assetdatas";
-import { FTIconwithtitleandinfoCustom } from "../components/FTIconwithtitleandinfo";
 import joselectric from "../assets/images/jos_electric_logo.png";
 import { FlatList } from "react-native-gesture-handler";
 
