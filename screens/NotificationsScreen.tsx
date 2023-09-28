@@ -10,8 +10,7 @@ import dayjs from 'dayjs';
 import { icons, COLORS, SIZES } from "../constants";
 import { FTIconwithbg, FTMainwrapper, FTTitlepagewrapper } from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
-import formatData from "../utils/fomatTrans";
-import moment from "moment";
+import formatData, { formatTime } from "../utils/fomatTrans";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { NotificationScreenStyles } from "../assets/styles/screens";
@@ -107,7 +106,6 @@ const Notification = ({
         ) => {
           const isLastItem = index === messages.length;
           const isUpgrade = type === "account";
-          const formattedTime = `${dayjs(time).format("h:mm")} ${dayjs(time).format("a")}`;
           return (
             <Animatable.View
               animation="slideInUp"
@@ -123,7 +121,7 @@ const Notification = ({
                   {messageicon(title)}
                   <Text style={titleText}>{title}</Text>
                 </View>
-                <Text style={timeText}>{formattedTime}</Text>
+                <Text style={timeText}>{formatTime(time)}</Text>
               </View>
 
               <View style={horizontalLine} />

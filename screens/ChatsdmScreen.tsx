@@ -41,10 +41,11 @@ import { useAlert, useCustomModal, usePushNotification } from "../hooks";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import LottieView from "lottie-react-native";
 import axiosCustom from "../httpRequests/axiosCustom";
-import formatData from "../utils/fomatTrans";
+import formatData, { formatTime } from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
 import dayjs from 'dayjs';
 import Animated from "react-native-reanimated";
+
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -272,9 +273,7 @@ const ChatsdmScreen = ({ route }) => {
   const { CustomModal, openModal, closeModal } = useCustomModal();
 
 
-    const formatTime = (time) => {
-    return `${dayjs(time).format("h:mm")} ${dayjs(time).format("a")}`;
-  };
+  
 
   const focus = () => {
     if (textInputRef.current !== null) {
@@ -619,62 +618,42 @@ const ChatsdmScreen = ({ route }) => {
         ) : (
 
 
-          // <Animated.ScrollView
-          //   style={messageAreaContainer}
-          //   ref={scrollViewRef}
-          //   contentContainerStyle={{
-          //     paddingVertical: 20,
-          //     justifyContent: "flex-end",
-          //   }}
-          //   showsVerticalScrollIndicator={false}
-          //   bounces={false}
-          //   snapToEnd={true}
-          //   onContentSizeChange={() =>
-          //     scrollViewRef?.current?.scrollToEnd({ animated: true })
-          //   }
-          // >
-
-
-          //   {messages.map(({ data, time }, index: number) => {
-          //     return (
-          //       <View key={index}>
-          //         <View style={messagesDateWrap}>
-          //           <Text style={messageDateText}>{time}</Text>
-          //         </View>
-
-          //         {data.map((dat, index) => {
-          //           if (dat.sender === userInfo?.userUid) {
-          //             return <View key={index}>{renderSenderHTML(dat)}</View>;
-          //           }
-          //           return <View key={index}>{renderReceiverHTML(dat)}</View>;
-          //         })}
-          //       </View>
-          //     );
-          //   })}
-
-
-          // </Animated.ScrollView>
-          <FlatList 
-            data={messages}
+          <Animated.ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
             contentContainerStyle={{
               paddingVertical: 20,
-              // justifyContent: "flex-end",
+              justifyContent: "flex-end",
             }}
             showsVerticalScrollIndicator={false}
+            bounces={false}
+            snapToEnd={true}
             onContentSizeChange={() =>
               scrollViewRef?.current?.scrollToEnd({ animated: true })
             }
-          renderItem={() => {
-            return (
-              <Text>The</Text>
-            )
-          }}
-          />
+          >
 
 
+            {messages.map(({ data, time }, index: number) => {
+              return (
+                <View key={index}>
+                  <View style={messagesDateWrap}>
+                    <Text style={messageDateText}>{time}</Text>
+                  </View>
 
+                  {data.map((dat, index) => {
+                    if (dat.sender === userInfo?.userUid) {
+                      return <View key={index}>{renderSenderHTML(dat)}</View>;
+                    }
+                    return <View key={index}>{renderReceiverHTML(dat)}</View>;
+                  })}
+                </View>
+              );
+            })}
+
+
+          </Animated.ScrollView>
+  
         )}
 
         <View style={chatTextInput}>
