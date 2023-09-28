@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Pressable,
+  FlatList,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -40,10 +41,11 @@ import { useAlert, useCustomModal, usePushNotification } from "../hooks";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import LottieView from "lottie-react-native";
 import axiosCustom from "../httpRequests/axiosCustom";
-import formatData from "../utils/fomatTrans";
+import formatData, { formatTime } from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
-import moment from "moment";
+import dayjs from 'dayjs';
 import Animated from "react-native-reanimated";
+
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -270,6 +272,9 @@ const ChatsdmScreen = ({ route }) => {
 
   const { CustomModal, openModal, closeModal } = useCustomModal();
 
+
+  
+
   const focus = () => {
     if (textInputRef.current !== null) {
       textInputRef.current.focus();
@@ -400,9 +405,7 @@ const ChatsdmScreen = ({ route }) => {
     } catch (err) {}
   };
 
-  const formatTime = (time) => {
-    return `${moment(time).format("h:mm")}${moment(time).format("a")}`;
-  };
+
 
   const handleTextChange = (text) => {
     setchattext(text);
@@ -549,6 +552,7 @@ const ChatsdmScreen = ({ route }) => {
     setShowModal(false);
     switchModals(3);
   };
+  
 
   return (
     <FTMainwrapper pH={0} bgColor={COLORS.white} childBg={COLORS.white3}>
@@ -628,6 +632,8 @@ const ChatsdmScreen = ({ route }) => {
               scrollViewRef?.current?.scrollToEnd({ animated: true })
             }
           >
+
+
             {messages.map(({ data, time }, index: number) => {
               return (
                 <View key={index}>
@@ -644,10 +650,10 @@ const ChatsdmScreen = ({ route }) => {
                 </View>
               );
             })}
+
+
           </Animated.ScrollView>
-
-
-
+  
         )}
 
         <View style={chatTextInput}>

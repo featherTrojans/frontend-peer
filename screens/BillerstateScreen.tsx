@@ -20,7 +20,7 @@ const BillerstateScreen = ({ navigation }) => {
   const onsubmitToMeterScreen = (amount) => {
     navigation.navigate("meternumber_screen", { amount });
   };
-  console.log(joselectric, "what is going on");
+
   return (
     <FTTitlepagewrapper title="Choose Biller State">
       <FTSearchinput

@@ -84,7 +84,7 @@ export const ChatsdmScreenStyles = StyleSheet.create({
   },
 
   messageAreaContainer: {
-    flex: 1,
+    // flex: 1,
     paddingHorizontal: 15,
     // paddingBottom: 100,
   },

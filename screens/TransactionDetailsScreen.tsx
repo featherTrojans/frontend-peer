@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
-import moment from "moment";
+import dayjs from 'dayjs';
 import {
   FTHorizontaline,
   FTIconwithbg,
@@ -123,7 +123,7 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
   } = data;
   const total = Number(amount);
 
-  const dt = moment(dateTime);
+  const dt = dayjs(dateTime);
   const formatDateTime = `${dt.format("ddd")}. ${dt.format( "MMM")}, ${dt.format("YYYY")}`;
 
   const saveFile = async (filePath: string) => {

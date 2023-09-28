@@ -96,11 +96,11 @@ export const ACCOUNT_NUMBER_INPUT_VALIDATION = {
   required: "Account numbers is required",
   minLength: {
     value: 10,
-    message: "Must be ten digits",
+    message: "Must be atleast 10 digits",
   },
   maxLength: {
     value: 10,
-    message: "Must be ten digits",
+    message: "Must be atmost 10 digits",
   },
   pattern: {
     value: /^[0-9]/,

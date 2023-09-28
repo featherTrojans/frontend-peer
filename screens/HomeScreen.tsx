@@ -9,15 +9,10 @@ import React, {
 import {
   Text,
   View,
-  Image,
   ScrollView,
   TouchableOpacity,
   RefreshControl,
-  FlatList,
-  ActivityIndicator,
 } from "react-native";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
-
 import {
   FTBillPayment,
   FTTransfer,
@@ -30,7 +25,8 @@ import {
   FTViewbalance,
   FTCustombutton,
   FTUserImage,
-  FTOtherImage,
+  FTConversations,
+  FTQuickactions,
 } from "../components";
 import { COLORS, FONTS, SIZES, fontsize, icons, images } from "../constants";
 
@@ -43,8 +39,6 @@ import { nameToShow } from "../utils/nameSplitter";
 import { HomeScreenStyles } from "../assets/styles/screens";
 import { useNavigation } from "@react-navigation/native";
 
-import useChats from "../hooks/useChats";
-import Customstatusbar from "./shared/Customstatusbar";
 import { FlatList as AnimatedFlatlist } from "react-native-gesture-handler";
 
 const {
@@ -54,14 +48,11 @@ const {
   profileNameContainer,
   profileUsername,
   notificationBell,
-  scrollaction,
-  scrollactionText,
   transactionWrap,
   transactionHeader,
   transactionIconWrap,
   transactionText,
   viewAll,
-  conversationWrap,
   conversationHeader,
   recentIconWrap,
   recentconvText,
@@ -75,7 +66,6 @@ const {
   profileSetupHeader,
   completedSetup,
   profileSetupWrap,
-  scrollActionImage,
 } = HomeScreenStyles;
 
 const {
@@ -90,137 +80,8 @@ const {
   Banksetupicon,
   Documentsetupicon,
   Levelcheckicon,
-  
 } = icons;
-const { Transferimage, Withdrawimage, Billsimage } = images;
-const scrollactions = [
-  {
-    bg: "#EDF3EB",
-    text: "Withdraw cash from business and agents near you.",
-    image: Withdrawimage,
-    modal: 3,
-  },
-  {
-    bg: "#F3EEFB",
-    text: "Transfer money to feather users and bank accounts.",
-    image: Transferimage,
-    modal: 2,
-  },
-  {
-    bg: "#D2EAFD",
-    text: "Pay Bills with speed and ease, at good rates.",
-    image: Billsimage,
-    modal: 4,
-  },
-];
 
-const QuickActions = ({ onpress }) => {
-  console.log("Qucik action rerendeing");
-
-  function Scrollaction({
-    bg,
-    text,
-    image,
-    index,
-    modal,
-  }: {
-    bg: string;
-    text: string;
-    image: any;
-    index: number;
-    modal: number;
-  }) {
-    // let isLast = index + 1 === scrollactions.length;
-    return (
-      <TouchableOpacity activeOpacity={0.8} onPress={() => onpress(modal)}>
-        <View
-          style={[
-            scrollaction,
-            { backgroundColor: bg, marginRight: true ? 16 : 0 },
-          ]}
-        >
-          <Image
-            style={scrollActionImage}
-            source={image}
-            defaultSource={image}
-          />
-          <Text style={scrollactionText}>{text}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
-  return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ marginVertical: 15, paddingHorizontal: 15 }}
-    >
-      {scrollactions.map((scrollaction, index) => {
-        let { bg, text, image, modal } = scrollaction;
-        return (
-          <Scrollaction
-            bg={bg}
-            text={text}
-            image={image}
-            key={index}
-            index={index}
-            modal={modal}
-          />
-        );
-      })}
-    </ScrollView>
-  );
-};
-
-const Conversations = () => {
-  const { allchatdata, loading } = useChats();
-  const navigation = useNavigation();
-
-  console.log('conversations rerendering')
-
-
-  return (
-    <View style={[conversationWrap]}>
-      <View style={conversationHeader}>
-        <View style={recentIconWrap}>
-          {/* icon */}
-          <Recentconvicon />
-          <Text style={recentconvText}>Recent Chats</Text>
-        </View>
-        {/* <Text style={numberOfUnread}>You have 3 unreads</Text> */}
-      </View>
-
-      <FTHorizontaline marginV={15} />
-
-      {loading ? (
-        <View style={{ height: 45 }}>
-          <ActivityIndicator />
-        </View>
-      ) : (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {allchatdata.map((item) => {
-            return (
-              <View style={{ marginHorizontal: 10 }}>
-                <FTOtherImage
-                  size={45}
-                  imageurl={item?.userInfo?.imageUrl}
-                  memojiImage={item?.userInfo?.memoji}
-                  fullname={item?.userInfo?.fullName}
-                  onpress={() => {
-                    navigation.navigate("chatsdm_screen", {
-                      userInfo: item?.userInfo,
-                    });
-                  }}
-                />
-              </View>
-            );
-          })}
-        </ScrollView>
-      )}
-    </View>
-  );
-};
 
 const SetupProfile = ({ onPress }) => {
   const { authdata } = useContext(AuthContext);
@@ -237,7 +98,7 @@ const SetupProfile = ({ onPress }) => {
   if (isProfileSetupCompleted) {
     return null;
   }
-  console.log('setup profile rerendering')
+  console.log("setup profile rerendering");
 
   return (
     <TouchableOpacity
@@ -481,8 +342,8 @@ const SetupPin = ({ nav }) => {
   );
 };
 const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
-  const { setAuthData, authdata, setShowTabs } = useContext(AuthContext);
-  
+  const { setAuthData, authdata } = useContext(AuthContext);
+
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
@@ -497,7 +358,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     () => formatData(authdata?.transactions),
     [authdata?.transactions]
   );
-
 
   const getDashboardData = async () => {
     setLoading(true);
@@ -534,22 +394,18 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
           height: SIZES.height - 150,
         });
         setShowModal((s) => !s);
-        setShowTabs(false);
         break;
       case 2:
         setContent({ child: <FTTransfer />, height: 270 });
         setShowModal((s) => !s);
-        setShowTabs(false);
         break;
       case 3:
         setContent({ child: <FTWithdraw />, height: 270 });
         setShowModal((s) => !s);
-        setShowTabs(false);
         break;
       case 4:
         setContent({ child: <FTBillPayment />, height: 330 });
         setShowModal((s) => !s);
-        setShowTabs(false);
         break;
 
       default:
@@ -605,9 +461,9 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       >
         <FTViewbalance />
         <ActiveCashWithdrawal />
-        <QuickActions onpress={switchModals} />
+        <FTQuickactions onpress={switchModals} />
         <SetupProfile onPress={() => switchModals(0)} />
-        <Conversations />
+        <FTConversations />
 
         <View style={transactionWrap}>
           <View style={transactionHeader}>
