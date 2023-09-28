@@ -18,6 +18,7 @@ import { useAlert } from "../hooks";
 import { useNavigation } from "@react-navigation/native";
 import useBeneficiary from "../hooks/useBeneficiary";
 
+
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
 const { Smallphoneicon, Nigerialogoicon, Whitebankicon } = icons;
@@ -98,11 +99,11 @@ const SendtobankScreen = ({ route, navigation }) => {
           },
           {
             leftSide: "Charges",
-            rightSide: "25",
+            rightSide: `N${amountFormatter("25")}`,
           },
           {
             leftSide: "Total to be sent",
-            rightSide: `N${Number(amount) + 25}`,
+            rightSide: `N${amountFormatter(Number(amount) + 25)}`,
           },
         ],
       };
@@ -149,7 +150,7 @@ const SendtobankScreen = ({ route, navigation }) => {
               title={item?.account_name}
               info={item?.account_number}
               onPress={() => handleToSendToBeneficiary(item)}
-              bG={COLORS.Tblue4}
+              bG={COLORS.white}
               imageUrl={item?.imageUrl}
             />
           );

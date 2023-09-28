@@ -51,7 +51,7 @@ const FTIconwithtitleandinfo = ({
           <FTOtherImage
             imageurl={userInfo?.imageUrl}
             memojiImage={userInfo?.memoji}
-            fullname={userInfo?.fullName}
+            fullname={userInfo?.fullName || title}
             size={size}
           />
         ) : (

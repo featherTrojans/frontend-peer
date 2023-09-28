@@ -83,12 +83,11 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
             username: feathercontacts?.username,
             phoneNumber: feathercontacts?.phoneNumber,
             imageUrl: feathercontacts?.imageUrl,
-
             network: network,
           };
           return (
             <FTIconwithtitleandinfo
-              bG={COLORS.green2}
+              bG={""}
               title={feathercontacts?.fullName}
               info={feathercontacts?.phoneNumber}
               profile={true}
