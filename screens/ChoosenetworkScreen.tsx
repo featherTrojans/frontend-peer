@@ -21,7 +21,9 @@ const ChoosenetworkScreen = ({ navigation }) => {
             bG="transparent"
             title={name}
             onPress={() =>
-              navigation.navigate("networkreceiver_screen", { network })
+              navigation.navigate("networkreceiver_screen", {
+                network: { name, logo, network },
+              })
             }
             imageUrl={logo}
             mB={28}

@@ -58,12 +58,16 @@ export const toastConfig = {
   ),
 
   purpleToast: ({ text1, props }: { text1: string; props: any }) => (
-    <View style={[appStyles.alertWrapper, {backgroundColor: "#f80000"}]}>
+    <View style={[appStyles.alertWrapper, { backgroundColor: "#f80000" }]}>
       <View style={{ flex: 1 }}>
         <Text style={appStyles.alertText}>{props.message} </Text>
       </View>
 
-      <TouchableOpacity activeOpacity={0.8} onPress={() => Toast.hide()} style={appStyles.cancelWrapper}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => Toast.hide()}
+        style={appStyles.cancelWrapper}
+      >
         {/* <Alertcancelicon /> */}
       </TouchableOpacity>
     </View>
@@ -93,18 +97,17 @@ export default function App() {
     }
   };
 
-  // useEffect(() => {
-
-  //   getDataFromStorage("@token").then((response) => {
-  //     if (response !== null) {
-  //       if (Date.now() - response.time > AWEEKAFTER) {
-  //         return null;
-  //       }
-  //       setRouteName("welcome_screen");
-  //       setAuthorizationToken(response.token);
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    getDataFromStorage("@token").then((response) => {
+      if (response !== null) {
+        if (Date.now() - response.time > AWEEKAFTER) {
+          return null;
+        }
+        setRouteName("welcome_screen");
+        setAuthorizationToken(response.token);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     checkOnboarding();
@@ -144,10 +147,7 @@ export default function App() {
           </SafeAreaProvider>
         </LocationProvider>
       </AuthProvider>
-      <Toast
-          config={toastConfig}
-          topOffset={0}
-        />
+      <Toast config={toastConfig} topOffset={0} />
     </GestureHandlerRootView>
   );
 }
@@ -160,7 +160,7 @@ const appStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingVertical: 15,
-    paddingTop: getStatusBarHeight(true) + 15
+    paddingTop: getStatusBarHeight(true) + 15,
   },
   updateAlertWrapper: {
     width: "100%",
@@ -174,7 +174,7 @@ const appStyles = StyleSheet.create({
     ...fontsize.small,
     ...FONTS.regular,
     color: COLORS.white3,
-    lineHeight: 27
+    lineHeight: 27,
   },
   cancelWrapper: {
     padding: 10,

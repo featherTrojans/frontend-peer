@@ -1,3 +1,6 @@
+import { images } from "./constants";
+
+const { ibadanelectric, ekoelectric, ikejaelectric, joselectric } = images;
 export const assetsDB = {
   banks: {
     GTB: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGuaranty%20Trust%20Bank%20Logo%20(1).png?alt=media&token=d9a0af12-48d9-4ded-a612-543502ebc658",
@@ -96,42 +99,42 @@ export const electricityLogos = [
   {
     name: "Abuja Electric",
     service: "abuja-electric",
-    logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1",
+    logo: ibadanelectric,
   },
   {
     name: "Eko Electric",
     service: "eko-electric",
-    logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAirtel%20Nigeria%20Logo%20(1).png?alt=media&token=5dba1e6a-3cce-43fa-972f-df17926db7ff",
+    logo: ekoelectric,
   },
   {
     name: "Ibadan Electricity",
     service: "ibadan-electric",
-    logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGlobacom%20Limited%20Logo%20(2).png?alt=media&token=a1bf3984-a862-451e-a8b5-6f3b96b1fea4",
+    logo: ibadanelectric,
   },
   {
     name: "Ikeja Electric",
     service: "ikeja-electric",
-    logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2F9mobile%20Logo%20(1).png?alt=media&token=011b2934-d9b5-449d-89c5-66eb46fff497",
+    logo: ikejaelectric,
   },
   {
     name: "Jos Electric",
     service: "jos-electric",
-    logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1",
+    logo: joselectric,
   },
   {
     name: "Kaduna Electric",
     service: "kaduna-electric",
-    logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FAirtel%20Nigeria%20Logo%20(1).png?alt=media&token=5dba1e6a-3cce-43fa-972f-df17926db7ff",
+    logo: ibadanelectric,
   },
   {
     name: "Kano Electricity",
     service: "kano-electric",
-    logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGlobacom%20Limited%20Logo%20(2).png?alt=media&token=a1bf3984-a862-451e-a8b5-6f3b96b1fea4",
+    logo: ibadanelectric,
   },
   {
     name: "Porthacourt Electric",
     service: "portharcourt-electric",
-    logo: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2F9mobile%20Logo%20(1).png?alt=media&token=011b2934-d9b5-449d-89c5-66eb46fff497",
+    logo: ibadanelectric,
   },
 ];
 

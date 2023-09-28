@@ -8,8 +8,10 @@ import {
 } from "../components";
 // import { redirectTo } from "../utils";
 import { useNavigation } from "@react-navigation/native";
-import { icons } from "../constants";
+import { icons, images } from "../constants";
+import { FTIconwithtitleandinfoCustom } from "../components/FTIconwithtitleandinfo";
 
+const { gotvlogo, dstvlogo, startimeslogo } = images;
 const { Bluecardicon } = icons;
 
 const {} = ChoosecablereceiverScreenStyles;
@@ -17,31 +19,35 @@ const cableTypes = [
   {
     name: "DSTV",
     value: "dstv",
+    logo: dstvlogo,
   },
   {
     name: "GOTV",
     value: "gotv",
+    logo: gotvlogo,
   },
   {
     name: "Startimes",
     value: "startimes",
+    logo: startimeslogo,
   },
-  {
-    name: "WAEC",
-    value: "waec",
-  },
-  {
-    name: "NECO",
-    value: "neco",
-  },
+  // {
+  //   name: "WAEC",
+  //   value: "waec",
+  // },
+  // {
+  //   name: "NECO",
+  //   value: "neco",
+  // },
   {
     name: "Spectranet",
     value: "spectranet",
+    logo: startimeslogo,
   },
-  {
-    name: "Jamb",
-    value: "jamb",
-  },
+  // {
+  //   name: "Jamb",
+  //   value: "jamb",
+  // },
 ];
 
 const ChoosecablereceiverScreen = () => {
@@ -65,19 +71,22 @@ const ChoosecablereceiverScreen = () => {
 
       <FlatList
         data={filteredcabletype}
-        ItemSeparatorComponent={() => <View style={{ height: 28 }} />}
+        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
         renderItem={({ item }) => {
-          const { name, value } = item;
+          const { name, value, logo } = item;
           return (
-            <FTIconwithtitleandinfo
-              bG=""
+            <FTIconwithtitleandinfoCustom
+              bG="transparent"
               title={name}
               onPress={() =>
                 navigation.navigate("choosecableamount_screen", {
                   biller: value,
                 })
               }
-              Icon={Bluecardicon}
+              imageUrl={logo}
+              // Icon={Electricityicon}
+              mB={28}
+              size={35}
             />
           );
         }}

@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import React, { ReactElement, ReactNode } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { FTIconwithtitleandinfoStyles } from "../assets/styles/components";
@@ -69,6 +69,43 @@ const FTIconwithtitleandinfo = ({
         </View>
       </View>
       <View>{rightComponent ? rightComponent : <Greaterthanicon />}</View>
+    </Pressable>
+  );
+};
+
+export const FTIconwithtitleandinfoCustom = ({
+  title,
+  info,
+  onPress,
+  mB,
+  mT,
+  imageUrl,
+  size = 45,
+}: any) => {
+  return (
+    <Pressable
+      hitSlop={30}
+      style={[mainWrap, { marginBottom: mB, marginTop: mT }]}
+      onPress={onPress}
+    >
+      <View style={iconandinfoWrap}>
+        <View>
+          <Image
+            style={{
+              width: 45,
+              height: 45,
+              borderRadius: size / 2,
+            }}
+            resizeMode="contain"
+            resizeMethod="scale"
+            source={imageUrl}
+          />
+        </View>
+        <View style={{ marginLeft: 20 }}>
+          <Text style={titleText}>{title}</Text>
+          {info && <Text style={infoText}>{info}</Text>}
+        </View>
+      </View>
     </Pressable>
   );
 };

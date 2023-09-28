@@ -1,4 +1,10 @@
-import { FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
 import {
   AirtimeordataScreenStyles,
@@ -37,7 +43,7 @@ const AirtimeordataScreen = ({ route }) => {
       try {
         await axiosCustom.post("/bills/airtime", {
           phone: userinfo.phoneNumber,
-          network: userinfo.network,
+          network: userinfo?.network?.network,
           amount: amount,
           userPin: pin,
         });
@@ -146,7 +152,7 @@ const AirtimeordataScreen = ({ route }) => {
           const { amount, amountInfo } = item;
           return (
             <FTIconwithtitleandinfo
-              bG={COLORS.green2}
+              // bG={COLORS.green2}
               title={amountFormatter(amount.toString())}
               info={amountInfo}
               onPress={() =>
@@ -154,7 +160,7 @@ const AirtimeordataScreen = ({ route }) => {
                   action: actionairtime(amount),
                 })
               }
-              imageUrl="https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2Fmtn-logo-40644FC8B0-seeklogo.com.png?alt=media&token=a45a8f22-f6ee-42da-b048-7bb26295d7a1"
+              imageUrl={userinfo?.network?.logo}
               size={35}
             />
           );
