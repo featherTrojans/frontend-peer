@@ -4,19 +4,11 @@ import Featherdefault from "../assets/icons/Featherdefault";
 const AuthContext = createContext<any>({});
 
 const AuthProvider: FC = ({ children }) => {
-  const [userColor, setUSerColor] = useState("#E5EBFB");
 
   const [authdata, setAuthData] = useState({});
-
   const [allowBiometrics, setAllowBiometrics] = useState(false);
-
-
-
   const [token, setToken] = useState("");
-  const [showTabs, setShowTabs] = useState(true)
-
   const [messageToken, setMessageToken] = useState("");
-
   const [showAmount, setShowAmount] = useState<boolean>(true);
   return (
     <AuthContext.Provider
@@ -29,10 +21,7 @@ const AuthProvider: FC = ({ children }) => {
         setMessageToken,
         showAmount,
         setShowAmount,
-        userColor,
         allowBiometrics,
-        showTabs,
-        setShowTabs,
         setAllowBiometrics,
       }}
     >

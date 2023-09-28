@@ -33,6 +33,8 @@ import FTUserImage from "./FTUserImage";
 import FTOtherImage from "./FTOtherImage";
 import FTTransact from "./FTTransact";
 import FTUpgradetag from "./FTUpgradetag";
+import FTConversations from "./FTConversations";
+import FTQuickactions from "./FTQuickactions";
 
 
 export {
@@ -70,5 +72,7 @@ export {
   FTSuccessOrError,
   FTUserImage,
   FTOtherImage,
-  FTUpgradetag
+  FTUpgradetag,
+  FTConversations,
+  FTQuickactions
 };
