@@ -43,7 +43,6 @@ import LottieView from "lottie-react-native";
 import axiosCustom from "../httpRequests/axiosCustom";
 import formatData, { formatTime } from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
-import dayjs from 'dayjs';
 import Animated from "react-native-reanimated";
 
 

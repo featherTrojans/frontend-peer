@@ -6,7 +6,7 @@ import {
   TouchableNativeFeedback,
   Pressable,
 } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import amountFormatter from "../utils/formatMoney";
@@ -36,19 +36,11 @@ const { Eyecrossed, Balanceicon, Eyeopenicon } = icons;
 const Viewbalance = ({}) => {
   const navigation = useNavigation();
   const { authdata, showAmount, setShowAmount } = useContext(AuthContext);
-  const { errorAlert } = useAlert();
 
-  const onsubmit = (amount) => {
-    const action = async () => {
-      const response = await axiosCustom.post("/pay", { amount: amount });
-      navigation.navigate("customweb_screen", {
-        url: response.data.data.authorization_url,
-        reference: response.data.data.reference,
-        amount: amount,
-      });
-    };
-    navigation.navigate("walletfunding_screen", { action });
-  };
+  const toggleBalance = useCallback(() => {
+       setShowAmount(!showAmount)
+    }, [showAmount]);
+
   return (
     <>
       <View style={container}>
@@ -85,7 +77,7 @@ const Viewbalance = ({}) => {
               <Text style={balanceText}>Primary Wallet</Text>
               <Pressable
                 hitSlop={20}
-                onPress={() => setShowAmount(!showAmount)}
+                onPress={toggleBalance}
               >
                {showAmount ? <Eyeopenicon /> : <Eyecrossed />}
               </Pressable>

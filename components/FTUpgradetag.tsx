@@ -8,7 +8,7 @@ const { Odogwubirdicon, Odogwuarrowup } = icons;
 
 const FTUpgradetag = () => {
   const { authdata } = useContext(AuthContext);
-  const level = 2 || authdata.userDetails.userLevel;
+  const level = authdata.userDetails.userLevel || 1;
   const navigation = useNavigation();
 
   let redirectTo = (index) => {
