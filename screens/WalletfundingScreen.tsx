@@ -116,7 +116,7 @@ const WalletfundingScreen = ({ navigation }) => {
             info="Secured by Paystack."
             Icon={Debitcardicon}
             onPress={() =>
-              navigation.navigate("amounttosend_screen", { onsubmit: onsubmit })
+              navigation.navigate("amounttosend_screen", { onsubmit: onsubmit, toSendScreen: true })
             }
             bG={COLORS.Tblue3}
           />

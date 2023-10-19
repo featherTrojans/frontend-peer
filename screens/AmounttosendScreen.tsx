@@ -27,6 +27,7 @@ const AmounttosendScreen = ({ route }) => {
   const buttontext = route?.params?.buttontext || "Proceed";
   const headtext = route?.params?.headtext || "How Much?";
   const onsubmit = route?.params?.onsubmit;
+  const toFundScreen = route?.params?.toSendScreen || false;
   const { errorAlert, purpleAlert } = useAlert();
   const [loading, setLoading] = useState(false);
 
@@ -42,7 +43,8 @@ const AmounttosendScreen = ({ route }) => {
   };
 
   let typedAmount = Number(amount.join(""));
-  let typedAmountGreaterThanBal = typedAmount > authdata.walletBal;
+  let typedAmountGreaterThanBal = !toFundScreen && (typedAmount > authdata.walletBal);
+  let disableButton = (typedAmountGreaterThanBal || typedAmount <= 0)
 
   useEffect(() => {
     if (typedAmountGreaterThanBal) {
@@ -107,7 +109,7 @@ const AmounttosendScreen = ({ route }) => {
         btntext={buttontext}
         onpress={handlesubmit}
         bg={COLORS.blue9}
-        disable={typedAmountGreaterThanBal || typedAmount <= 0}
+        disable={disableButton}
       />
     </FTTitlepagewrapper>
   );

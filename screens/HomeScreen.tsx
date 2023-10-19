@@ -80,6 +80,7 @@ const {
   Banksetupicon,
   Documentsetupicon,
   Levelcheckicon,
+  Setuppinlockicon
 } = icons;
 
 
@@ -315,7 +316,9 @@ const SetupPin = ({ nav }) => {
   };
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}></View>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Setuppinlockicon />
+      </View>
       <View style={{ marginBottom: 30 }}>
         <Text style={{ textAlign: "center", marginBottom: 5 }}>
           *We take your security and privacy serious,

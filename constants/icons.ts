@@ -144,7 +144,7 @@ import Dashedlineicon from "../assets/icons/Dashedlineicon";
 import Activememojiicon from "../assets/icons/Activememojiicon";
 import Cameraicon from "../assets/icons/Cameraicon";
 import Recommendedcheckicon from "../assets/icons/Recommendedcheckicon";
-
+import Setuppinlockicon from "../assets/icons/Setuppinlockicon";
 
 
 
@@ -185,6 +185,7 @@ export default {
   Bonusicon,
   Transfersicon,
   Arrowin,
+  Setuppinlockicon,
   Arrowout,
   Hometabicon,
   Transacttabicon,
