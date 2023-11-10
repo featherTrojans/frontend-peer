@@ -92,6 +92,15 @@ export const REMARKS_VALIDATION = {
   },
 };
 
+export const DOB_VALIDATION = {
+  required: false,
+  minLength: {
+    value: 10,
+    message: "At least three letters",
+  },
+};
+
+
 export const ACCOUNT_NUMBER_INPUT_VALIDATION = {
   required: "Account numbers is required",
   minLength: {

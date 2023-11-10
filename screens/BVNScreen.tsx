@@ -136,6 +136,19 @@ function BVNScreen({ navigation }) {
             mB={20}
             mT={50}
           />
+           <FTInput
+            placeholderText="04 April 2004"
+            name="dob"
+            label="Enter DOB"
+            textInputProps={{
+              maxLength: 11,
+              keyboardType: "default",
+              returnKeyType: "done",
+            }}
+            control={control}
+            rules={VALIDATION.DOB_VALIDATION}
+            mB={20}
+          />
           <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
           {!token && (
             <TouchableOpacity

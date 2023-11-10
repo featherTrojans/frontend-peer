@@ -48,7 +48,8 @@ export const transactionBadge = (title, direction, from, to, size=31) => {
 
     case "Funds Transfer":
       const targetlogo = bankLogo.filter((logo) => logo.name === to);
-      return <FTIconwithbg imageUrl={targetlogo[0]["image"]} bG="" size={size} />;
+      console.log("yes", bankLogo.filter((logo) => logo.name === to)[0])
+      return <FTIconwithbg Icon={Arrow} bG={circleColor} size={size} />;
       break;
     case "Utility Payment":
       return (

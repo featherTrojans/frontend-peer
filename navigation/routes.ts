@@ -151,6 +151,23 @@ export const transactRoutes = [
 
     route: "transact_screen",
   },
+  // {
+  //   screen: BvnErrorScreen,
+
+  //   route: "bvn-error_screen",
+  // },
+  // {
+  //   screen: BVNSuccessScreen,
+
+  //   route: "bvn-success_screen",
+  // },
+  {
+    title: "",
+    screen: VerifybvnScreen,
+    showHeader: false,
+    hideHiderTitle: false,
+    route: "bvn-verify_screen",
+  },
   {
     screen: TransactionDetailsScreen,
 

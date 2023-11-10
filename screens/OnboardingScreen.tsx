@@ -46,7 +46,7 @@ const OnboardingScreen = ({ navigation }) => {
 
   return (
     <FTMainwrapper pH={0}>
-      <View style={dotAndSkipWrap}>
+      <View style={dotAndSkipWrap}> 
         {/* Animated Dots */}
         <View style={animatedDotsWrap}>
           {onboardingdatas.map((item, index) => {
@@ -102,6 +102,7 @@ const OnboardingScreen = ({ navigation }) => {
         pagingEnabled
         scrollEventThrottle={16}
         snapToAlignment="center"
+        
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewChangeRef.current}
         onScroll={Animated.event(
