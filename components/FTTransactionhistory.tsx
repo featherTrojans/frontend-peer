@@ -42,14 +42,13 @@ export const transactionBadge = (title, direction, from, to, size=31) => {
       break;
 
     case "withdrawal":
-      const targetLogo = bankLogo.filter((logo) => logo.name === to);
-      return <FTIconwithbg imageUrl={targetLogo[0]["image"]} bG="" size={size} />;
+      const targetLogo = bankLogo.filter((logo) => logo.name.includes(to))[0];
+      return targetLogo ? <FTIconwithbg imageUrl={targetLogo['image']} bG="" size={size} /> : <FTIconwithbg Icon={Arrow} bG={circleColor} size={size} />;
       break;
 
     case "Funds Transfer":
-      const targetlogo = bankLogo.filter((logo) => logo.name === to);
-      console.log("yes", bankLogo.filter((logo) => logo.name === to)[0])
-      return <FTIconwithbg Icon={Arrow} bG={circleColor} size={size} />;
+      const targetLogos = bankLogo.filter((logo) => logo.name.includes(to))[0];
+      return targetLogos ? <FTIconwithbg imageUrl={targetLogos['image']} bG="" size={size} /> : <FTIconwithbg Icon={Arrow} bG={circleColor} size={size} />;
       break;
     case "Utility Payment":
       return (

@@ -921,7 +921,7 @@ export const bankLogo = [
     updatedAt: "2020-08-10T15:07:44.000Z",
   },
   {
-    name: "Paycom",
+    name: "OPay Digital Services Limited (OPay)",
     image:
       "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FidW2zUwfi4.png?alt=media&token=06c3e6c8-6eaf-45ad-af32-edae6f00b27e",
     slug: "paycom",
