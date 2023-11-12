@@ -52,12 +52,11 @@ dayjs.updateLocale("en", {
 
 export const tofancyDate = (date: Date) => {
   if (dayjs(date).isToday()) {
-    return 'Today';
+    return "Today";
   }
   if (dayjs(date).isYesterday()) {
-    return 'Yesterday';
-  }
-  else {
+    return "Yesterday";
+  } else {
     return `${dayjs(date).format("Do")} ${dayjs(date).format("MMMM")}, ${dayjs(
       date
     ).format("YYYY")}`;
@@ -66,7 +65,7 @@ export const tofancyDate = (date: Date) => {
 
 export const formatTime = (time: Date) => {
   return `${dayjs(time).format("h:mm")} ${dayjs(time).format("a")}`;
-}
+};
 
 export const lastChatDate = (date: Date) => {
   if (dayjs(date).isToday() || dayjs(date).isYesterday()) {
@@ -74,6 +73,12 @@ export const lastChatDate = (date: Date) => {
   } else {
     return `${dayjs(date).format("DD/MM/YY")}`;
   }
+};
+
+export const differenceInMinutes = (futureDate: Date, pastDate: Date) => {
+  const date1 = dayjs(futureDate);
+  const date2 = dayjs(pastDate);
+  return date1.diff(date2, "minute");
 };
 
 const formatData = (data: any) => {

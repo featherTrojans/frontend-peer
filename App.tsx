@@ -13,9 +13,11 @@ import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { enableFreeze } from "react-native-screens";
+
 // enableFreeze(true);
 
 import { AWEEKAFTER, getDataFromStorage, setAuthorizationToken } from "./utils";
+import { useExpoUpdate } from "./hooks/useExpoUpdate";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -76,11 +78,19 @@ export const toastConfig = {
 
 LogBox.ignoreLogs(["Setting a timer"]);
 SplashScreen.preventAutoHideAsync();
+
+
 export default function App() {
   const [routeName, setRouteName] = useState("onboarding_screen");
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
   let alertOffset = 0;
 
+
+
+  // check for new updates as early as possible and update the app based on platform
+  useExpoUpdate()
+
+  
   const checkOnboarding = async () => {
     // await AsyncStorage.removeItem('@onboarded')
     try {
