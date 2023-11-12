@@ -71,6 +71,9 @@
       "favicon": "./assets/images/notification.png"
     },
     "description": "",
+    "expo": {
+      "userInterfaceStyle": "automatic"
+    },
     "extra": {
       "eas": {}
     },

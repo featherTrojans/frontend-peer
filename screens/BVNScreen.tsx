@@ -32,6 +32,8 @@ import Animated, {
   SlideOutUp,
 } from "react-native-reanimated";
 import { nameToShow } from "../utils/nameSplitter";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import dayjs from "dayjs";
 
 const {
   headerText,
@@ -63,14 +65,33 @@ function BVNScreen({ navigation }) {
   const { errorAlert } = useAlert();
   const [showModal, setShowModal] = useState(false);
   const [height, setHeight] = useState(56);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [defaultDate, setDefaultDate] = useState("mm/yy/dd");
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    const formattedDate = dayjs(date).format("DD MMMM YYYY").toString();
+    setDefaultDate(formattedDate);
+    console.warn("A date has been picked: ", date);
+    hideDatePicker();
+  };
 
   const onsubmit = async (data) => {
     try {
-      // setLoading(true);
-      // await axiosCustom.post("/user/upgrade", data);
-      WebBrowser.openBrowserAsync("http://google.com");
-      // Linking.openURL("http://google.com");
-      // Link
+      setLoading(true);
+      const response = await axiosCustom.post("/user/upgrade", {
+        bvn: data.bvn,
+        dob: defaultDate,
+      });
+      const url = response?.data?.data?.url;
+      await WebBrowser.openBrowserAsync(url);
     } catch (err) {
       errorAlert(err);
     } finally {
@@ -148,9 +169,11 @@ function BVNScreen({ navigation }) {
             mT={50}
           />
           <FTInput
-            placeholderText="04 April 2004"
+            placeholderText={defaultDate}
             name="dob"
             label="Enter DOB"
+            type="dropdown"
+            onPress={showDatePicker}
             textInputProps={{
               keyboardType: "default",
               returnKeyType: "done",
@@ -158,6 +181,13 @@ function BVNScreen({ navigation }) {
             control={control}
             rules={VALIDATION.DOB_VALIDATION}
             mB={20}
+          />
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+            maximumDate={new Date()}
           />
           <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
           {!token && (
