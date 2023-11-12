@@ -29,6 +29,8 @@ import Animated, {
   SlideOutUp,
 } from "react-native-reanimated";
 import { nameToShow } from "../utils/nameSplitter";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import dayjs from "dayjs";
 
 const {
   headerText,
@@ -51,12 +53,32 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 function BVNScreen({ navigation }) {
   const { token } = useContext(AuthContext);
-  const { setToken, authdata: {userDetails} } = useContext(AuthContext);
+  const {
+    setToken,
+    authdata: { userDetails },
+  } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();
   const [showModal, setShowModal] = useState(false);
   const [height, setHeight] = useState(56);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [defaultDate, setDefaultDate] = useState('mm/yy/dd')
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    const formattedDate = dayjs(date).format('DD MMMM YYYY').toString()
+    setDefaultDate(formattedDate)
+    console.warn("A date has been picked: ", date);
+    hideDatePicker();
+  };
 
   const onsubmit = async (data) => {
     try {
@@ -121,7 +143,10 @@ function BVNScreen({ navigation }) {
       <FTTitlepagewrapper title="Verify BVN">
         <FTLoader loading={loading} />
         <View style={flex}>
-          <Text style={headerText}>Hi {nameToShow(userDetails?.fullName)}{"\n"}Enter your BVN</Text>
+          <Text style={headerText}>
+            Hi {nameToShow(userDetails?.fullName)}
+            {"\n"}Enter your BVN
+          </Text>
           <FTInput
             placeholderText="Enter BVN"
             name="bvn"
@@ -136,10 +161,12 @@ function BVNScreen({ navigation }) {
             mB={20}
             mT={50}
           />
-           <FTInput
-            placeholderText="04 April 2004"
+          <FTInput
+            placeholderText={defaultDate}
             name="dob"
             label="Enter DOB"
+            type="dropdown"
+            onPress={showDatePicker}
             textInputProps={{
               maxLength: 11,
               keyboardType: "default",
@@ -148,6 +175,13 @@ function BVNScreen({ navigation }) {
             control={control}
             rules={VALIDATION.DOB_VALIDATION}
             mB={20}
+          />
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+            maximumDate={new Date()}
           />
           <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
           {!token && (
