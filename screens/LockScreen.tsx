@@ -6,7 +6,8 @@ import { FTKeyboard, FTLoader } from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
-import { getFirstName } from "../utils/nameSplitter";
+import { nameToShow } from "../utils/nameSplitter";
+
 import { LockScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 
@@ -103,7 +104,7 @@ const LockScreen = ({ modal, setModal }: any) => {
       animationOutTiming={400}
     >
       <SafeAreaView style={lockScreenContainer}>
-        {loading && <FTLoader />}
+        <FTLoader loading={loading} />
 
         {/* //Error Alert to be removed and changed to the new one */}
         <View style={lockScreenSubcontainer}>
@@ -111,7 +112,7 @@ const LockScreen = ({ modal, setModal }: any) => {
           <Text style={headerText}>
             Welcome Back,{" "}
             <Text style={headerNameText}>
-              {getFirstName(authdata?.userDetails?.fullName)}.
+              {nameToShow(authdata?.userDetails?.fullName)}.
             </Text>{" "}
           </Text>
           <Text style={subHeaderText}>

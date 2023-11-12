@@ -28,7 +28,7 @@ import Animated, {
   SlideOutDown,
   SlideOutUp,
 } from "react-native-reanimated";
-import { getFirstName } from "../utils/nameSplitter";
+import { nameToShow } from "../utils/nameSplitter";
 
 const {
   headerText,
@@ -121,7 +121,7 @@ function BVNScreen({ navigation }) {
       <FTTitlepagewrapper title="Verify BVN">
         <FTLoader loading={loading} />
         <View style={flex}>
-          <Text style={headerText}>Hi {getFirstName(userDetails?.fullName)}{"\n"}Enter your BVN</Text>
+          <Text style={headerText}>Hi {nameToShow(userDetails?.fullName)}{"\n"}Enter your BVN</Text>
           <FTInput
             placeholderText="Enter BVN"
             name="bvn"

@@ -8,7 +8,6 @@ import { PinScreenStyles } from "../assets/styles/screens";
 import { FTKeyboard, FTLoader, FTTitlepagewrapper } from "../components";
 import { RFValue } from "react-native-responsive-fontsize";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { getFirstName } from "../utils/nameSplitter";
 
 const {
   container,

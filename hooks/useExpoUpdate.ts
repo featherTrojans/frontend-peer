@@ -1,10 +1,6 @@
 import { useEffect, useCallback, useRef } from "react";
 import { Platform, Alert } from "react-native";
-
-// import { differenceInMinutes } from "date-fns";
 import * as Updates from "expo-updates";
-
-// import { captureException } from "app/lib/sentry";
 import { useIsForeground } from "./useIsForeground";
 import { differenceInMinutes } from "../utils/fomatTrans";
 

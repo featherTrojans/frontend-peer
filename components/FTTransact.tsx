@@ -99,6 +99,7 @@ const FTTransact = () => {
                 <FTEmptycomponent
                   size={135}
                   msg="Padi, you have not performed any transactions yet. "
+                  showTransact={false}
                 />
               }
             />

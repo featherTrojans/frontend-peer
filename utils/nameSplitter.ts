@@ -1,23 +1,27 @@
-
 export const nameSplitter = (name: string) => {
-  const splitName = name?.replace(/\s+/g, ' ').split(" ");
+  const splitName = name?.replace(/\s+/g, " ").split(" ");
   if (splitName.length >= 2) {
     return `${splitName[1][0]}`;
-  }else{
+  } else {
     return `${splitName[0][0]}`;
   }
 };
 
 export const nameCapitalize = (name: string) => {
-  const splitName = name?.replace(/\s+/g, ' ').split(" ");
-  // splitName.map(splitted => )
-  const firstAlpha = splitName[0].charAt(0).toUpperCase();
-  const firstRest = splitName[0].slice(1).toLowerCase();
-  const lastAlpha = splitName[1].charAt(0).toUpperCase();
-  const lastRest = splitName[1].slice(1).toLowerCase();
-    
+  const splitName = name?.replace(/\s+/g, " ").split(" ");
+
+  if (splitName.length >= 2) {
+    const firstAlpha = splitName[0].charAt(0).toUpperCase();
+    const firstRest = splitName[0].slice(1).toLowerCase();
+    const lastAlpha = splitName[1].charAt(0).toUpperCase();
+    const lastRest = splitName[1].slice(1).toLowerCase();
     return `${firstAlpha}${firstRest} ${lastAlpha}${lastRest}`;
-}
+  } else {
+    return `${name[0]}`;
+  }
+
+  
+};
 
 export const nameSplitterFirstName = (name: string) => {
   // return "";
