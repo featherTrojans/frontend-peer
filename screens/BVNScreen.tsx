@@ -66,7 +66,7 @@ function BVNScreen({ navigation }) {
   const [showModal, setShowModal] = useState(false);
   const [height, setHeight] = useState(56);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [defaultDate, setDefaultDate] = useState("mm/yy/dd");
+  const [defaultDate, setDefaultDate] = useState("04 April 2004");
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);

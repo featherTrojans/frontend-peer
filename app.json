@@ -2,14 +2,14 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.7",
+    "version": "2.0.8",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
       "icon": "./assets/images/notification.png",
       "iosDisplayInForeground": true
     },
-    "scheme": "myapp",
+    "scheme": "Feather",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/resplash.png",
