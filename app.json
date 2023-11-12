@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.2",
+    "version": "2.0.7",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -18,21 +18,26 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "enabled": true
+      "enabled": true,
+      "url": "https://u.expo.dev/93d5876e-2546-4e40-ad80-4fe20b9d48fa"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "africa.feathermobile.com",
+      "bundleIdentifier": "com.featherpeer.user",
       "buildNumber": "1.0.0",
       "infoPlist": {
-        "NSFaceIDUsageDescription": "Feather needs to use Face ID to authenticate"
+        "NSContactsUsageDescription": "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
+        "NSLocationUsageDescription": "Allow Feather access to your location to find the nearest agent close to you",
+        "NSUserTrackingUsageDescription": "We will use your data to provide a better and personalized ads to you.",
+        "NSLocationWhenInUseUsageDescription": "We use it to show you nearby users and a map showing some agent locations",
+        "NSLocationAlwaysUsageDescription": "We use it to show you nearby users and a map showing some agent locations",
+        "NSCameraUsageDescription": "We access your camera to let you customize your user display picture.",
+        "NSPhotoLibraryUsageDescription": "We access your photos to let you customize your user display picture."
       }
     },
     "android": {
-      "versionCode": 25,
+      "versionCode": 26,
       "package": "feather.peer",
       "googleServicesFile": "./google-services.json",
       "permissions": [
@@ -60,11 +65,6 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"
-      },
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyBzIYA7wqNVTxq0LTO88-cIue_X9mXd5-w"
-        }
       }
     },
     "web": {
@@ -72,9 +72,10 @@
     },
     "description": "",
     "extra": {
-      "eas": {
-        "projectId": "93d5876e-2546-4e40-ad80-4fe20b9d48fa"
-      }
+      "eas": {}
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

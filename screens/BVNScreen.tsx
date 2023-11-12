@@ -14,7 +14,10 @@ import {
   TouchableOpacity,
   Pressable,
   StyleSheet,
+  // Linking,
 } from "react-native";
+import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
 import { BVNScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -51,7 +54,10 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 function BVNScreen({ navigation }) {
   const { token } = useContext(AuthContext);
-  const { setToken, authdata: {userDetails} } = useContext(AuthContext);
+  const {
+    setToken,
+    authdata: { userDetails },
+  } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({ mode: "all" });
   const { errorAlert } = useAlert();
@@ -60,9 +66,11 @@ function BVNScreen({ navigation }) {
 
   const onsubmit = async (data) => {
     try {
-      setLoading(true);
-      await axiosCustom.post("/user/upgrade", data);
-      navigation.navigate("bvn-verify_screen");
+      // setLoading(true);
+      // await axiosCustom.post("/user/upgrade", data);
+      WebBrowser.openBrowserAsync("http://google.com");
+      // Linking.openURL("http://google.com");
+      // Link
     } catch (err) {
       errorAlert(err);
     } finally {
@@ -121,7 +129,10 @@ function BVNScreen({ navigation }) {
       <FTTitlepagewrapper title="Verify BVN">
         <FTLoader loading={loading} />
         <View style={flex}>
-          <Text style={headerText}>Hi {nameToShow(userDetails?.fullName)}{"\n"}Enter your BVN</Text>
+          <Text style={headerText}>
+            Hi {nameToShow(userDetails?.fullName)}
+            {"\n"}Enter your BVN
+          </Text>
           <FTInput
             placeholderText="Enter BVN"
             name="bvn"
@@ -136,12 +147,11 @@ function BVNScreen({ navigation }) {
             mB={20}
             mT={50}
           />
-           <FTInput
+          <FTInput
             placeholderText="04 April 2004"
             name="dob"
             label="Enter DOB"
             textInputProps={{
-              maxLength: 11,
               keyboardType: "default",
               returnKeyType: "done",
             }}
