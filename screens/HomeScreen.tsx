@@ -432,9 +432,9 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
             <Text style={profileName}>
               Hi, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
             </Text>
-            <Text style={profileUsername}>
+            {authdata?.userDetails?.username &&<Text style={profileUsername}>
               @{authdata?.userDetails?.username}
-            </Text>
+            </Text>}
           </View>
         </View>
 
@@ -484,6 +484,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
               size={110}
               msg="Padi, you have not performed any 
             transactions yet. Transact Now"
+
             />
           ) : (
             histories.map((history, index) => {

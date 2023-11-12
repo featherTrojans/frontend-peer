@@ -7,7 +7,6 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
 import { RFValue } from "react-native-responsive-fontsize";
 import { nameToShow } from "../utils/nameSplitter";
-
 import { LockScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 

@@ -19,8 +19,6 @@ export const nameCapitalize = (name: string) => {
   } else {
     return `${name[0]}`;
   }
-
-  
 };
 
 export const nameSplitterFirstName = (name: string) => {
@@ -45,6 +43,8 @@ export const nameSplitToTwo = (name: string) => {
 };
 
 export const getFirstName = (name: string) => {
+  if (!name) return "";
+
   const splitName = name.replace(/\s+/g, " ").split(" ");
 
   if (splitName.length >= 2) {

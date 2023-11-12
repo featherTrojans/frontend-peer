@@ -21,6 +21,8 @@ const FTConversations = () => {
 
   console.log("conversations rerendering");
 
+  if (allchatdata.length == 0) return null;
+
   return (
     <View style={[conversationWrap]}>
       <View style={conversationHeader}>

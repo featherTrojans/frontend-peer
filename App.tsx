@@ -108,15 +108,15 @@ export default function App() {
   };
 
   useEffect(() => {
-    getDataFromStorage("@token").then((response) => {
-      if (response !== null) {
-        if (Date.now() - response.time > AWEEKAFTER) {
-          return null;
-        }
-        setRouteName("welcome_screen");
-        setAuthorizationToken(response.token);
-      }
-    });
+    // getDataFromStorage("@token").then((response) => {
+    //   if (response !== null) {
+    //     if (Date.now() - response.time > AWEEKAFTER) {
+    //       return null;
+    //     }
+    //     setRouteName("welcome_screen");
+    //     setAuthorizationToken(response.token);
+    //   }
+    // });
   }, []);
 
   useEffect(() => {
