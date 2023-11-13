@@ -56,7 +56,7 @@ const ChatMessage = ({ chatinfo }) => {
           </Text>
         </View>
         <View style={SAlign}>
-          <Text style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
+          <Text numberOfLines={1} style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
         </View>
       </View>
     </TouchableOpacity>
