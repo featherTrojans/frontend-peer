@@ -273,6 +273,7 @@ const ChatsdmScreen = ({ route }) => {
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 200 });
   const navigation = useNavigation();
+  const [animHeight, setAnimHeight] = useState(0);
 
   const { CustomModal, openModal, closeModal } = useCustomModal();
 
@@ -665,11 +666,14 @@ const ChatsdmScreen = ({ route }) => {
        
           <TextInput
             placeholder="Enter Message..."
-            style={textinput}
+            style={[textinput,{minHeight: 40, maxHeight: 120}]}
             value={chattext}
+            multiline={true}
+            textAlignVertical="center"
+            underlineColorAndroid="transparent"
             onChangeText={handleTextChange}
             placeholderTextColor={COLORS.grey16}
-            returnKeyType="done"
+            enablesReturnKeyAutomatically={chattext.trim() == ""}
             onFocus={() =>
               scrollViewRef?.current?.scrollToEnd({ animated: true })
             }
