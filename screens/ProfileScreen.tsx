@@ -126,7 +126,7 @@ const ProfileScreen = ({ navigation }) => {
           <View style={profileNameWrap}>
             {authdata?.userDetails?.fullName && (
               <Text style={profileNameText}>
-                nameCapitalize(authdata?.userDetails?.fullName)
+                {nameCapitalize(authdata?.userDetails?.fullName)}
               </Text>
             )}
             {authdata?.userDetails?.username && (
