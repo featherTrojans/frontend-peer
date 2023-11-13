@@ -106,6 +106,7 @@ export const COLORS = {
   Tgreen2: "#E5FAF6",
   Tgreen3: "#E9F7EA",
   Tgreen4: "rgba(224, 237, 216, 0.3)",
+  Tgreen5: "#ECF7EB",
   Tpurple: "#F3EEFB",
   Tpurple2: "#F1E5FF",
 

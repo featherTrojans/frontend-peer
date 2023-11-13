@@ -107,7 +107,7 @@ export const ChatsdmScreenStyles = StyleSheet.create({
     // height: 40,
     backgroundColor: COLORS.white3,
     paddingHorizontal: 10,
-    // paddingVertical: 3,
+    paddingVertical: 3,
     ...FONTS.regular,
     ...fontsize.smallest,
     color: COLORS.grey7,

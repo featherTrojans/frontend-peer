@@ -666,7 +666,7 @@ const ChatsdmScreen = ({ route }) => {
        
           <TextInput
             placeholder="Enter Message..."
-            style={[textinput,{minHeight: 40, maxHeight: 120}]}
+            style={[textinput,{minHeight: 40, maxHeight: 120,}]}
             value={chattext}
             multiline={true}
             textAlignVertical="center"

@@ -34,6 +34,7 @@ import formatData from "../utils/fomatTrans";
 import { TransactionScreenStyles } from "../assets/styles/screens";
 import { AuthContext } from "../context/AuthContext";
 import amountFormatter from "../utils/formatMoney";
+import { useAlert } from "../hooks";
 
 const {
   listContainer,
@@ -61,16 +62,42 @@ const TransactionsScreen = ({ navigation }) => {
   const { setShowTabs, authdata } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 266 });
+  const [withdrawLoading, setWithdrawLoading] = useState(false);
+  const walletbalance = amountFormatter(authdata?.userDetails?.walletBal);
+  const { errorAlert } = useAlert();
+
+  const onsubmitfindmerchant = async (amount) => {
+    if (amount > authdata?.userDetails?.walletBal) {
+      return errorAlert(null, "amount is greater than wallet");
+    }
+    navigation.navigate("withdrawcash_screen", amount);
+  };
+
+  const findmerchant = async () => {
+    setWithdrawLoading(true);
+    const response = await axiosCustom.get("/request/accepted");
+    setWithdrawLoading(false);
+    if (response.data && response.data.data.length > 0) {
+      return navigation.navigate("withdrawcash_screen", {
+        agentinfo: response?.data?.data[0],
+        amount: 0,
+      });
+    }
+    return navigation.navigate("amounttosend_screen", {
+      buttontext: "Withdraw Cash",
+      headtext: `Balance : N${walletbalance}`,
+      onsubmit: onsubmitfindmerchant,
+    });
+  };
 
   const switchModals = (value) => {
     switch (value) {
       case 0:
-        setContent({ child: <FTTransfer />, height: 270 });
+        setContent({ child: <FTTransfer />, height: 360 });
         setShowModal((s) => !s);
         break;
       case 1:
-        setContent({ child: <FTWithdraw />, height: 270 });
-        setShowModal((s) => !s);
+        findmerchant();
         break;
       case 2:
         setContent({ child: <FTBillPayment />, height: 330 });
@@ -135,7 +162,12 @@ const TransactionsScreen = ({ navigation }) => {
         <View style={optionWrapper}>
           {options.map(({ title, color, Icon, action }, index) => {
             return (
-              <TouchableOpacity activeOpacity={0.8} onPress={action} style={optionBlock} key={index}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={action}
+                style={optionBlock}
+                key={index}
+              >
                 <FTIconwithbg onpress={action} Icon={Icon} bG={color} />
                 <Text style={eachOptionTitle}>{title}</Text>
               </TouchableOpacity>

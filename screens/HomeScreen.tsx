@@ -27,6 +27,7 @@ import {
   FTUserImage,
   FTConversations,
   FTQuickactions,
+  FTLoader,
 } from "../components";
 import { COLORS, FONTS, SIZES, fontsize, icons, images } from "../constants";
 
@@ -40,6 +41,8 @@ import { HomeScreenStyles } from "../assets/styles/screens";
 import { useNavigation } from "@react-navigation/native";
 
 import { FlatList as AnimatedFlatlist } from "react-native-gesture-handler";
+import { useAlert } from "../hooks";
+import amountFormatter from "../utils/formatMoney";
 
 const {
   headerContainer,
@@ -352,11 +355,14 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
   const scrollViewRef = useRef<any>();
+  const {errorAlert} = useAlert()
   const [showModal, setShowModal] = useState(false);
+  const walletbalance = amountFormatter(authdata?.userDetails?.walletBal);
   const [content, setContent] = useState<{
     child: React.ReactNode;
     height: number;
   }>({ child: null, height: 200 });
+  const [withdrawLoading, setWithdrawLoading] = useState(false)
 
   const histories: any[] = useMemo(
     () => formatData(authdata?.transactions),
@@ -390,6 +396,35 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     getDashboardData();
   }, []);
 
+
+
+
+  const onsubmitfindmerchant = async (amount) => {
+    if (amount > authdata?.userDetails?.walletBal) {
+      return errorAlert(null, "amount is greater than wallet");
+    }
+    navigation.navigate("withdrawcash_screen", amount);
+  };
+
+  const findmerchant = async () => {
+
+    setWithdrawLoading(true);
+    const response = await axiosCustom.get("/request/accepted");
+    setWithdrawLoading(false);
+    if (response.data && response.data.data.length > 0) {
+      return navigation.navigate("withdrawcash_screen", {
+        agentinfo: response?.data?.data[0],
+        amount: 0,
+      });
+    }
+    return navigation.navigate("amounttosend_screen", {
+      buttontext: "Withdraw Cash",
+      headtext: `Balance : N${walletbalance}`,
+      onsubmit: onsubmitfindmerchant,
+    });
+  };
+
+
   const switchModals = (value) => {
     switch (value) {
       case 0:
@@ -400,12 +435,11 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         setShowModal((s) => !s);
         break;
       case 2:
-        setContent({ child: <FTTransfer />, height: 270 });
+        setContent({ child: <FTTransfer />, height: 360 });
         setShowModal((s) => !s);
         break;
       case 3:
-        setContent({ child: <FTWithdraw />, height: 270 });
-        setShowModal((s) => !s);
+        findmerchant();
         break;
       case 4:
         setContent({ child: <FTBillPayment />, height: 330 });
@@ -426,6 +460,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       modalChildren={content.child}
       modalHeight={content.height}
     >
+      <FTLoader  loading={withdrawLoading}/>
       <View style={headerContainer}>
         <View style={profileContainer}>
           <FTUserImage size={45} />

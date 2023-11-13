@@ -150,7 +150,7 @@ const SetupmfaScreen = () => {
           name="answer2"
           label="Answer 2"
           control={control}
-          rules={VALIDATION.ANSWER_VALIDATION}
+          rules={VALIDATION.ANSWER_ONE_VALIDATION}
           mB={30}
         />
 

@@ -8,11 +8,12 @@ import { AuthContext } from "../context/AuthContext";
 import { useAlert } from "../hooks";
 import { useNavigation } from "@react-navigation/native";
 
-const { Walletblueicon, Bankblueicon } = icons;
+const { Walletblueicon, Bankblueicon, Paymerchanticon, Useravatarsmallicon } = icons;
 const FTTransfer = () => {
   const navigation = useNavigation();
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
+  const walletbalance = amountFormatter(authdata?.userDetails?.walletBal);
   const onsubmitToFeatherWallet = async (amount) => {
     if (amount > authdata?.userDetails?.walletBal) {
       return errorAlert(null, "amount is greater than wallet");
@@ -26,10 +27,17 @@ const FTTransfer = () => {
     navigation.navigate("sendtobank_screen", { amount });
   };
 
+  const onsubmitpaymerchant = (amount) => {
+    if (amount > authdata?.userDetails?.walletBal) {
+      return errorAlert(null, "amount is greater than wallet");
+    }
+    navigation.navigate("searchmerchantid_screen", { amount });
+  };
+
   return (
     <View>
       <View style={styles.transferTypeModalHeader}>
-        <Text style={styles.transferCashText}>Transfer Cash</Text>
+        <Text style={styles.transferCashText}>Fund Transfer</Text>
 
         <View style={{ alignItems: "flex-end" }}>
           <Text style={styles.primaryWalletText}>Primary Wallet Balance</Text>
@@ -43,9 +51,9 @@ const FTTransfer = () => {
 
       <View style={{ marginTop: 24 }}>
         <FTIconwithtitleandinfo
-          title="To Feather Wallet"
+          title="To Feather User"
           info="Send cash to other feather users."
-          Icon={Walletblueicon}
+          Icon={Useravatarsmallicon}
           onPress={() =>
             navigation.navigate("amounttosend_screen", {
               onsubmit: onsubmitToFeatherWallet,
@@ -56,6 +64,20 @@ const FTTransfer = () => {
 
         <FTHorizontaline marginV={15} />
         <FTIconwithtitleandinfo
+          title="To Feather Merchant"
+          info="Transfer money to feather merchants."
+          Icon={Paymerchanticon}
+          onPress={() =>
+            navigation.navigate("amounttosend_screen", {
+              buttontext: "Withdraw Cash",
+              headtext: `Balance :  N${walletbalance}`,
+              onsubmit: onsubmitpaymerchant,
+            })
+          }
+          bG={COLORS.Tyellow}
+        />
+        <FTHorizontaline marginV={15} />
+        <FTIconwithtitleandinfo
           title="To Bank Account"
           info="Transfer money to any bank in Nigeria."
           Icon={Bankblueicon}
@@ -64,7 +86,7 @@ const FTTransfer = () => {
               onsubmit: onsubmitToBankAccount,
             })
           }
-          bG={COLORS.Tyellow}
+          bG={COLORS.Tgreen5}
         />
       </View>
     </View>

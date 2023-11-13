@@ -145,6 +145,7 @@ import Activememojiicon from "../assets/icons/Activememojiicon";
 import Cameraicon from "../assets/icons/Cameraicon";
 import Recommendedcheckicon from "../assets/icons/Recommendedcheckicon";
 import Setuppinlockicon from "../assets/icons/Setuppinlockicon";
+import Useravatarsmallicon from "../assets/icons/Useravatarsmallicon";
 
 
 
@@ -236,6 +237,7 @@ export default {
   Leveloptioncancelicon,
   Leveloptioncheckicon,
   Editprofileicon,
+  Useravatarsmallicon,
   Airtimeicon,
   Electricityicon,
   Cableicon,

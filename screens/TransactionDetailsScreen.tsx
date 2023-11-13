@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import {
   FTHorizontaline,
   FTIconwithbg,
@@ -34,9 +34,15 @@ const {
   statusText,
 } = TransactiondetailsScreenStyles;
 
-type IStatusProps=  "success" | "failed" | "pending"
+type IStatusProps = "success" | "failed" | "pending";
 
-
+type IEachOptionProps = {
+  title: string;
+  value: string;
+  mT?: number;
+  mB?: number;
+  showIcon?: boolean;
+};
 
 const transactionStatus = (status: IStatusProps) => {
   switch (status.toLowerCase()) {
@@ -61,9 +67,7 @@ const transactionStatus = (status: IStatusProps) => {
             <Text style={statusThumbText}>✍🏽</Text>
           </View>
           <View style={[statusTextBg, { backgroundColor: COLORS.Tyellow }]}>
-            <Text style={[statusText, { color: COLORS.yellow1 }]}>
-              Pending
-            </Text>
+            <Text style={[statusText, { color: COLORS.yellow1 }]}>Pending</Text>
           </View>
         </View>
       );
@@ -75,18 +79,14 @@ const transactionStatus = (status: IStatusProps) => {
             <Text style={statusThumbText}>👎🏽</Text>
           </View>
           <View style={[statusTextBg, { backgroundColor: COLORS.Tred }]}>
-            <Text style={[statusText, { color: COLORS.red5 }]}>
-              Failed
-            </Text>
+            <Text style={[statusText, { color: COLORS.red5 }]}>Failed</Text>
           </View>
         </View>
       );
       break;
 
     default:
-      return (
-        null
-      );
+      return null;
       break;
   }
 };
@@ -103,7 +103,6 @@ const {
 const TransactionDetailsScreen = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
 
-
   const { data } = route.params;
 
   const {
@@ -119,12 +118,16 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     charges,
     direction,
     bankDetails,
-    status
+    status,
   } = data;
-  const total = Number(amount);
 
+  const isCredit = direction === "in";
+  const Arrow = isCredit ? Arrowin : Arrowout;
+  const total = Number(amount);
   const dt = dayjs(dateTime);
-  const formatDateTime = `${dt.format("ddd")}. ${dt.format( "MMM")}, ${dt.format("YYYY")}`;
+  const formatDateTime = `${dt.format("ddd")}. ${dt.format("MMM")}, ${dt.format(
+    "YYYY"
+  )}`;
 
   const saveFile = async (filePath: string) => {
     const albumName = "Feather";
@@ -429,11 +432,25 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
     }
   };
 
-  const Eachoption = ({ title, value, mT = 0, mB = 0 }) => {
+  const Eachoption = ({
+    title,
+    value,
+    mT = 0,
+    mB = 0,
+    showIcon,
+  }: IEachOptionProps) => {
     return (
       <View style={[eachDetailContainer, { marginTop: mT, marginBottom: mB }]}>
         <Text style={eachDetailTitle}>{title}</Text>
-        <Text style={eachDetailValue}>{value}</Text>
+
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          {showIcon && (
+            <View style={{ marginRight: 10 }}>
+              <Arrow />
+            </View>
+          )}
+          <Text style={eachDetailValue}>{value}</Text>
+        </View>
       </View>
     );
   };
@@ -505,28 +522,29 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
   };
 
   return (
-    <FTTitlepagewrapper title="Transaction Details" childBg={COLORS.white3} headerBg={COLORS.white3}>
-      <ScrollView
-        style={{ flex: 1 }}
-        showsVerticalScrollIndicator={false}
-      >
+    <FTTitlepagewrapper
+      title="Transaction Details"
+      childBg={COLORS.white3}
+      headerBg={COLORS.white3}
+    >
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View
           style={{
             justifyContent: "space-between",
-            flexDirection: "row",
+            // flexDirection: "row",
             alignItems: "center",
+            rowGap: 30
           }}
         >
           {transactionBadge(title, direction, sender, receiver, 50)}
 
           {transactionStatus("success")}
 
-
-          <FTIconwithbg
+          {/* <FTIconwithbg
             bG={COLORS.blue9}
             Icon={Sharereceipt}
             onpress={() => shareReceipt(htmlContent)}
-          />
+          /> */}
         </View>
 
         <View style={eachOptionWrapper}>
@@ -545,7 +563,13 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
           {FeatherTransferDetails()}
           {BankTransferDetails()}
           {AirtimePurchase()}
-          <Eachoption title="Payment Method" mB={18} mT={18} value={title} />
+          <Eachoption
+            showIcon
+            title="Payment Method"
+            mB={18}
+            mT={18}
+            value={title}
+          />
           <Eachoption title="Payment Time" value={formatDateTime} mB={24} />
           <Dashedlineicon />
           <Eachoption
