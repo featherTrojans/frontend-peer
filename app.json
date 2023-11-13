@@ -2,14 +2,14 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.7",
+    "version": "2.0.10",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
       "icon": "./assets/images/notification.png",
       "iosDisplayInForeground": true
     },
-    "scheme": "myapp",
+    "scheme": "Feather",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/resplash.png",
@@ -75,7 +75,9 @@
       "userInterfaceStyle": "automatic"
     },
     "extra": {
-      "eas": {}
+      "eas": {
+        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
+      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"

@@ -55,11 +55,11 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     transactionDatas: [
       {
         leftSide: "Merchant Name",
-        rightSide: nameCapitalize(userinfo.fullName),
+        rightSide: userinfo?.fullName && nameCapitalize(userinfo?.fullName),
       },
       {
         leftSide: "Feather Tag",
-        rightSide: `@${userinfo.username.toLowerCase()}`,
+        rightSide: `@${userinfo?.username?.toLowerCase()}`,
       },
       {
         leftSide: "Charges",
@@ -216,8 +216,7 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
-      
-        <FlatList
+      <FlatList
         data={beneficiaries}
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -242,13 +241,13 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
         ListHeaderComponent={
           <ListHeader amount={amount} switchModals={switchModals} />
         }
-        ListEmptyComponent={loading ?
-          <FTEmptycomponent
-            msg="Padi, you don't have any beneficiary"
-            showTransact={false}
-          />
-          :
-          null
+        ListEmptyComponent={
+          loading ? (
+            <FTEmptycomponent
+              msg="Padi, you don't have any beneficiary"
+              showTransact={false}
+            />
+          ) : null
         }
       />
 

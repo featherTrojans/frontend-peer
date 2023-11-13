@@ -85,7 +85,7 @@ export default function App() {
   let alertOffset = 0;
 
   // check for new updates as early as possible and update the app based on platform
-  useExpoUpdate();
+  // useExpoUpdate();
 
   const checkOnboarding = async () => {
     // await AsyncStorage.removeItem('@onboarded')

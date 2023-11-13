@@ -4,7 +4,7 @@ import {
   View,
   Pressable,
   TouchableOpacity,
-  FlatList
+  FlatList,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { EditprofileScreenStyles } from "../assets/styles/screens";
@@ -38,17 +38,20 @@ const {
 const EditprofileScreen = ({ navigation }) => {
   const { authdata, setAuthData } = useContext(AuthContext);
   const { errorAlert } = useAlert();
-  const name = authdata?.userDetails?.fullName.split(" ");
+  const name = authdata?.userDetails?.fullName
+    ? authdata?.userDetails?.fullName.split(" ")
+    : [" ", " "];
   const [userinfo, getuserinfo, loadbounce, error] = useDebounce();
   const [gender, setGender] = useState("Select");
   const [showModal, setShowModal] = useState(false);
+  const email = authdata?.userDetails?.email?.toLowerCase();
   const { control, handleSubmit, watch } = useForm({
     mode: "all",
     defaultValues: {
       featherTag: authdata?.userDetails?.username,
       firstName: name[1],
       lastName: name[0],
-      email: authdata?.userDetails?.email.toLowerCase(),
+      email: email,
       phoneNumber: authdata?.userDetails?.phoneNumber,
     },
   });
@@ -63,8 +66,6 @@ const EditprofileScreen = ({ navigation }) => {
   useEffect(() => {
     getuserinfo(usernamename);
   }, [usernamename]);
-
-
 
   const accountlevel = () => {
     switch (authdata?.userDetails?.userLevel) {
@@ -155,16 +156,15 @@ const EditprofileScreen = ({ navigation }) => {
     >
       <FTKeyboardwrapper>
         <View style={headerWrap}>
-          
-            <Text style={profileHeaderText}>My Profile</Text>
+          <Text style={profileHeaderText}>My Profile</Text>
 
-            {/* <Text
+          {/* <Text
               onPress={() => navigation.navigate("accountverification_screen")}
             >
               {upgradeDecision()}
             </Text> */}
           <View style={profileWrap}>
-              <Text>Account Level : {accountlevel()}</Text>
+            <Text>Account Level : {accountlevel()}</Text>
           </View>
         </View>
 
@@ -196,8 +196,7 @@ const EditprofileScreen = ({ navigation }) => {
                   color: COLORS.blue6,
                   marginLeft: 10,
                   ...fontsize.smaller,
-                  ...FONTS.regular
-
+                  ...FONTS.regular,
                 }}
               >
                 {usernamename} is taken
@@ -214,8 +213,7 @@ const EditprofileScreen = ({ navigation }) => {
                   color: COLORS.blue6,
                   marginLeft: 10,
                   ...fontsize.smaller,
-                  ...FONTS.regular
-
+                  ...FONTS.regular,
                 }}
               >
                 {usernamename}
@@ -247,7 +245,7 @@ const EditprofileScreen = ({ navigation }) => {
           name="email"
           control={control}
           mB={20}
-          editable={false}
+          editable={email ? false : true}
         />
         <FTInput
           label="Phone Number"

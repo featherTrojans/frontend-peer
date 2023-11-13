@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import { Text, View, TextInput, Pressable, TextInputProps } from "react-native";
 import { Controller } from "react-hook-form";
 import { icons, COLORS, fontsize, FONTS } from "../constants";
@@ -92,7 +92,7 @@ const FTInput = ({
   };
   const renderDropdownType = () => {
     let name = placeholderText?.toLowerCase();
-    let placeholders = ["enter", "upload", "select"];
+    let placeholders = ["enter", "upload", "select", "04 April 2004"];
     let isActive = () => {
       for (let sample of placeholders) {
         if (name?.includes(sample.toLowerCase())) {

@@ -66,7 +66,7 @@ function BVNScreen({ navigation }) {
   const [showModal, setShowModal] = useState(false);
   const [height, setHeight] = useState(56);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [defaultDate, setDefaultDate] = useState("02 April 2023");
+  const [defaultDate, setDefaultDate] = useState("04 April 2004");
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -150,10 +150,13 @@ function BVNScreen({ navigation }) {
       <FTTitlepagewrapper title="Verify BVN">
         <FTLoader loading={loading} />
         <View style={flex}>
-          <Text style={headerText}>
-            Hi {nameToShow(userDetails?.fullName)}
-            {"\n"}Enter your BVN
-          </Text>
+          {userDetails?.fullName && (
+            <Text style={headerText}>
+              Hi {nameToShow(userDetails?.fullName)}
+              {"\n"}Enter your BVN
+            </Text>
+          )}
+
           <FTInput
             placeholderText="Enter BVN"
             name="bvn"
