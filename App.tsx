@@ -88,7 +88,7 @@ export default function App() {
 
 
   // check for new updates as early as possible and update the app based on platform
-  useExpoUpdate()
+  // useExpoUpdate();
 
   
   const checkOnboarding = async () => {
@@ -146,7 +146,7 @@ export default function App() {
   if (!fontsLoaded || onboarded === null) {
     return null;
   }
-  
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <AuthProvider>

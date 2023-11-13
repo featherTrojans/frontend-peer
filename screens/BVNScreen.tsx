@@ -150,10 +150,13 @@ function BVNScreen({ navigation }) {
       <FTTitlepagewrapper title="Verify BVN">
         <FTLoader loading={loading} />
         <View style={flex}>
-          <Text style={headerText}>
-            Hi {nameToShow(userDetails?.fullName)}
-            {"\n"}Enter your BVN
-          </Text>
+          {userDetails?.fullName && (
+            <Text style={headerText}>
+              Hi {nameToShow(userDetails?.fullName)}
+              {"\n"}Enter your BVN
+            </Text>
+          )}
+
           <FTInput
             placeholderText="Enter BVN"
             name="bvn"

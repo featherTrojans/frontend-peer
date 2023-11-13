@@ -110,9 +110,11 @@ const LockScreen = ({ modal, setModal }: any) => {
           <Newlogo />
           <Text style={headerText}>
             Welcome Back,{" "}
-            <Text style={headerNameText}>
-              {nameToShow(authdata?.userDetails?.fullName)}.
-            </Text>{" "}
+            {authdata?.userDetails?.fullName && (
+              <Text style={headerNameText}>
+                {nameToShow(authdata?.userDetails?.fullName)}.
+              </Text>
+            )}
           </Text>
           <Text style={subHeaderText}>
             Lets get you back to where {`\n`} you left off.

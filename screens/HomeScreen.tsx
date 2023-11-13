@@ -80,9 +80,8 @@ const {
   Banksetupicon,
   Documentsetupicon,
   Levelcheckicon,
-  Setuppinlockicon
+  Setuppinlockicon,
 } = icons;
-
 
 const SetupProfile = ({ onPress }) => {
   const { authdata } = useContext(AuthContext);
@@ -265,9 +264,11 @@ const ProfileSetup = ({ nav }) => {
     <View style={profileSetupWrap}>
       <Text style={profileSetupHeader}>
         Hi{" "}
-        <Text style={{ textTransform: "capitalize" }}>
-          {nameToShow(authdata?.userDetails?.fullName)}
-        </Text>
+        {authdata?.userDetails?.fullName && (
+          <Text style={{ textTransform: "capitalize" }}>
+            {nameToShow(authdata?.userDetails?.fullName)}
+          </Text>
+        )}
         ,{`\n`}Complete your profile!
       </Text>
       <Text style={completedSetup}>Completed {completedProfileSetup} / 6</Text>
@@ -432,9 +433,11 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
             <Text style={profileName}>
               Hi, {nameToShow(authdata?.userDetails?.fullName)}✌🏽
             </Text>
-            {authdata?.userDetails?.username &&<Text style={profileUsername}>
-              @{authdata?.userDetails?.username}
-            </Text>}
+            {authdata?.userDetails?.username && (
+              <Text style={profileUsername}>
+                @{authdata?.userDetails?.username}
+              </Text>
+            )}
           </View>
         </View>
 
@@ -484,7 +487,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
               size={110}
               msg="Padi, you have not performed any 
             transactions yet. Transact Now"
-
             />
           ) : (
             histories.map((history, index) => {

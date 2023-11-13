@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.8",
+    "version": "2.0.10",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -75,7 +75,9 @@
       "userInterfaceStyle": "automatic"
     },
     "extra": {
-      "eas": {}
+      "eas": {
+        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
+      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"

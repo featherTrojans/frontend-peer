@@ -1,17 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { COLORS, FONTS, fontsize } from "../constants";
-import { nameSplitter } from "../utils/nameSplitter";
 
 interface InitialsBgProps {
   sideLength: number;
   name: string;
   bg?: string;
-};
+}
 
 const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
-  const [defaultColor, setDefaultColor] = useState("gray")
-  
+  const [defaultColor, setDefaultColor] = useState("gray");
 
   const colors = [
     "#F1E5FF",
@@ -22,40 +20,40 @@ const InitialsBg = ({ sideLength, name, bg }: InitialsBgProps) => {
     "#E6ECFF",
     "#FFE3E3",
     "#FFF5E5",
-    "#E5FAF6"
+    "#E5FAF6",
   ];
-  useEffect(()=>{
-    const color = bg? bg : colors[Math.floor(Math.random() * colors.length)];
-    setDefaultColor(color)
-  },[])
+  useEffect(() => {
+    const color = bg ? bg : colors[Math.floor(Math.random() * colors.length)];
+    setDefaultColor(color);
+  }, []);
 
   return (
     <View
-      style={[styles.initialTextBg,{
-        width:  sideLength,
-        height: sideLength,
-        backgroundColor: defaultColor,
-        borderRadius: sideLength /2 
-        
-      }]}
+      style={[
+        styles.initialTextBg,
+        {
+          width: sideLength,
+          height: sideLength,
+          backgroundColor: defaultColor,
+          borderRadius: sideLength / 2,
+        },
+      ]}
     >
       <Text style={styles.initialText}>{name.toUpperCase()}</Text>
-    </View> 
+    </View>
   );
 };
 
 export default InitialsBg;
 
-
 const styles = StyleSheet.create({
-  initialTextBg:{
+  initialTextBg: {
     justifyContent: "center",
     alignItems: "center",
   },
   initialText: {
-      ...fontsize.small, 
-      ...FONTS.medium,
-      color: COLORS.blue9
-  }
-})
-
+    ...fontsize.small,
+    ...FONTS.medium,
+    color: COLORS.blue9,
+  },
+});
