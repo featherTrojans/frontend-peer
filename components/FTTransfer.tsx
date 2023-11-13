@@ -8,12 +8,14 @@ import { AuthContext } from "../context/AuthContext";
 import { useAlert } from "../hooks";
 import { useNavigation } from "@react-navigation/native";
 
-const { Walletblueicon, Bankblueicon, Paymerchanticon, Useravatarsmallicon } = icons;
+const { Walletblueicon, Bankblueicon, Paymerchanticon, Useravatarsmallicon, Greaterthanicon } = icons;
 const FTTransfer = () => {
   const navigation = useNavigation();
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   const walletbalance = amountFormatter(authdata?.userDetails?.walletBal);
+
+
   const onsubmitToFeatherWallet = async (amount) => {
     if (amount > authdata?.userDetails?.walletBal) {
       return errorAlert(null, "amount is greater than wallet");
@@ -33,6 +35,17 @@ const FTTransfer = () => {
     }
     navigation.navigate("searchmerchantid_screen", { amount });
   };
+
+  const FreeComponent = () => {
+    return (
+      <View style={{flexDirection: "row", alignItems: "center", }}>
+        <View style={{height: 25, width: 46, backgroundColor: "#E9F9F6", marginRight: 18, justifyContent: "center", alignItems: "center", borderTopRightRadius: 10, borderBottomLeftRadius: 10}}>
+          <Text style={{...fontsize.smaller, ...FONTS.bold, color: "#00A38A"}}>Free</Text>
+        </View>
+        <Greaterthanicon />
+      </View>
+    )
+  }
 
   return (
     <View>
@@ -59,6 +72,7 @@ const FTTransfer = () => {
               onsubmit: onsubmitToFeatherWallet,
             })
           }
+          rightComponent={<FreeComponent />}
           bG={COLORS.Tblue}
         />
 
