@@ -72,7 +72,7 @@ const SecurityandprivacyScreen = ({ navigation }) => {
             title="Enable Multi Factor Authentication"
             info="Add a layer of security to your PIN"
             onPress={() => navigation.navigate("setupmfa_screen")}
-            rightComponent={<FTSwitchbtn action={multifactorAction} />}
+            // rightComponent={<FTSwitchbtn action={multifactorAction} />}
           />
         </View>
         {/* <View style={{ marginTop: 40 }}>

@@ -13,6 +13,7 @@ import { useAlert, useCopyclipboard } from "../hooks";
 import { AuthContext } from "../context/AuthContext";
 import amountFormatter from "../utils/formatMoney";
 import axiosCustom from "../httpRequests/axiosCustom";
+import { nameCapitalize } from "../utils/nameSplitter";
 const { Levelcheckicon, Copydetailsicon, Dashedlineicon } = icons;
 
 const {
@@ -179,9 +180,11 @@ const MywalletScreen = () => {
             <View style={BAlign}>
               <Text style={tableKey}>Account Name</Text>
               <View style={BAlign}>
-                <Text style={[tableValue, { marginRight: 0 }]}>
-                  {authdata?.userDetails?.fullName}
-                </Text>
+                {authdata?.userDetails?.fullName && (
+                  <Text style={[tableValue, { marginRight: 0 }]}>
+                    {nameCapitalize(authdata?.userDetails?.fullName)}
+                  </Text>
+                )}
               </View>
             </View>
           </View>

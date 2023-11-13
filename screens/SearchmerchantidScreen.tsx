@@ -131,6 +131,9 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
         name="merchantid"
         rules={VALIDATION.MERCHANTID_VALIDATION}
         control={control}
+        textInputProps={{
+          keyboardType:"number-pad"
+        }}
       />
       <View style={{ flex: 1 }}></View>
 

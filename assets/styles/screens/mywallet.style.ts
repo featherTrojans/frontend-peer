@@ -75,7 +75,7 @@ export const MywalletScreenStyles = StyleSheet.create({
     color: COLORS.grey16,
   },
   limitValueText: {
-    ...fontsize.smallest,
+    ...fontsize.xsmallest,
     ...FONTS.semibold,
     color: COLORS.blue9,
   },
