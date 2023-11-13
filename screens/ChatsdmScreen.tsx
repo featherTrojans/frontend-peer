@@ -9,6 +9,7 @@ import {
   Platform,
   Pressable,
   FlatList,
+  Keyboard,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -47,6 +48,7 @@ import Animated from "react-native-reanimated";
 
 
 import { useNavigation } from "@react-navigation/native";
+import amountFormatter from "../utils/formatMoney";
 
 const {
   chatTransferMsgWrap,
@@ -193,18 +195,21 @@ const TransactionPin = ({
       return;
     }
     setLoading(true);
+    Keyboard.dismiss()
     try {
-      await axiosCustom.post("/transfer", {
+     const response = await axiosCustom.post("/transfer", {
         amount: amount.value,
         transferTo: userInfo?.username,
         userPin: userPin,
       });
+      console.log(response, 'HEre is the failed transfer ')
       setchattext("");
       setSendSuccess(true);
       await sendFireBaseMessage("transfer", amount);
       // animationRef.current?.play()
     } catch (err) {
       errorAlert(err);
+      setUserPin("")
     } finally {
       setLoading(false);
     }
@@ -212,7 +217,7 @@ const TransactionPin = ({
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <Text style={chooseAmountHeader}>
-        Amount to send : <Text style={{ ...FONTS.bold }}>N{amount.name}</Text> +
+        Amount to send : <Text style={{ ...FONTS.bold }}>N{amountFormatter(amount.name)}</Text> +
         N0 Charges
       </Text>
 
@@ -232,7 +237,7 @@ const TransactionPin = ({
 
       <FTCustombutton
         disable={loading}
-        btntext="Transfer Cash"
+        btntext={loading ? "Sending..." : "Transfer Cash"}
         onpress={sendCash}
       />
     </View>
@@ -421,7 +426,7 @@ const ChatsdmScreen = ({ route }) => {
             <Text style={chatTransferText}>
               {" "}
               🎉 You sent <Text style={{ ...FONTS.bold }}>
-                N{mes.message}
+              N{amountFormatter(mes.message)}
               </Text>{" "}
               to this user
             </Text>
@@ -466,7 +471,7 @@ const ChatsdmScreen = ({ route }) => {
             <Text style={chatTransferText}>
               {" "}
               🎉 You just received{" "}
-              <Text style={{ ...FONTS.bold }}>N{mes.message}</Text> from this
+              <Text style={{ ...FONTS.bold }}>N{amountFormatter(mes.message)}</Text> from this
               user
             </Text>
           </View>
@@ -501,7 +506,7 @@ const ChatsdmScreen = ({ route }) => {
               userInfo={userInfo}
             />
           ),
-          height: 200,
+          height: 150,
         });
         setShowModal((s) => !s);
         break;
@@ -509,7 +514,7 @@ const ChatsdmScreen = ({ route }) => {
         openModal();
         setContent({
           child: <AmountToSend openTransactionPin={openTransactionPin} />,
-          height: 200,
+          height: 150,
         });
         setShowModal((s) => !s);
         break;
@@ -524,7 +529,7 @@ const ChatsdmScreen = ({ route }) => {
               userInfo={userInfo}
             />
           ),
-          height: 200,
+          height: 150,
         });
         setShowModal((s) => !s);
         break;
@@ -597,7 +602,8 @@ const ChatsdmScreen = ({ route }) => {
             </View>
 
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.7}
+              style={{backgroundColor: COLORS.white3, padding: 12, borderRadius: 30}}
               onPress={() => switchModals(0)}
             >
               <Blacksendicon />
