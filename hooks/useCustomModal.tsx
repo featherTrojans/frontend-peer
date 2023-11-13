@@ -4,7 +4,6 @@ import Modal from "react-native-modal";
 import Toast from "react-native-toast-message";
 import { COLORS } from "../constants";
 import { toastConfig } from "../App";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 type globalModalProps = {
   children: JSX.Element;

@@ -11,7 +11,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { getStatusBarHeight } from 'react-native-iphone-screen-helper'
 import { enableFreeze } from "react-native-screens";
 
 // enableFreeze(true);

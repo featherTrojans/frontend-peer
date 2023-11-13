@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Customstatusbar from "../screens/shared/Customstatusbar";
 import { useSwipemodal } from "../hooks";
 import { SIZES } from "../constants";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { getStatusBarHeight } from 'react-native-iphone-screen-helper'
 
 const FTTabWrapper = ({
   children,

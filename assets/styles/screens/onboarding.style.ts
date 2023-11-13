@@ -1,8 +1,5 @@
 import { StyleSheet } from "react-native";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
+
 import { COLORS, FONTS, SIZES, fontsize } from "../../../constants";
 
 export const OnboardingScreenStyles = StyleSheet.create({

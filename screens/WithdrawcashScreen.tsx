@@ -18,6 +18,7 @@ import {
   getCurrentLocation,
 } from "../utils/customLocation";
 import { WithdrawcashScreenStyles } from "../assets/styles/screens";
+import amountFormatter from "../utils/formatMoney";
 const {
   container,
   withdrawalInfoWrap,
@@ -157,11 +158,11 @@ const WithdrawcashScreen = ({ route, navigation }) => {
         },
         {
           leftSide: "Charges",
-          rightSide: `N${charge}`,
+          rightSide: `N${amountFormatter(charge)}`,
         },
         {
           leftSide: "Total to be sent",
-          rightSide: `N${amount + charge}`,
+          rightSide: `N${amountFormatter(amount + charge)}`,
         },
       ],
     };

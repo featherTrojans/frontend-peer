@@ -192,7 +192,7 @@ const AccountverificationScreen = ({ route }) => {
           color: "#11141A",
         }}
         activeFontStyle={{
-          color: "white",
+          color: "#ffffff",
         }}
         backgroundColor="#F0F0F0"
         onChange={(event) => {

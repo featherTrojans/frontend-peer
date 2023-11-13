@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { getStatusBarHeight } from 'react-native-iphone-screen-helper'
 
 const FTKeyboardwrapper = ({ children }) => {
   return (

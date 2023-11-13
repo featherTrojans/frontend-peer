@@ -9,10 +9,11 @@ import {
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
-import { icons } from "../constants";
+import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { VALIDATION } from "../utils";
 import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
+import amountFormatter from "../utils/formatMoney";
 const {} = SearchmerchantidScreenStyles;
 const { Bluecardicon } = icons;
 
@@ -43,11 +44,11 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
       transactionDatas: [
         {
           leftSide: "Merchant Name",
-          rightSide: "Lingo Dunkin Pepper",
+          rightSide: merchantinfo?.business_name,
         },
         {
           leftSide: "Merchant ID",
-          rightSide: "8033211658",
+          rightSide: merchantinfo?.merchantid,
         },
         {
           leftSide: "Charges",
@@ -55,7 +56,7 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
         },
         {
           leftSide: "Total to be sent",
-          rightSide: `N${amount}`,
+          rightSide: `N${amountFormatter(amount)}`,
         },
       ],
     };
@@ -66,11 +67,19 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
   const ModalContent = ({ merchantinfo }) => {
     return (
       <View style={{ backgroundColor: "#fff" }}>
-        <Text>Merchant Details</Text>
+        <Text
+          style={{
+            ...fontsize.xsmallest,
+            ...FONTS.semibold,
+            color: COLORS.blue9,
+          }}
+        >
+          Merchant Details
+        </Text>
         <View style={{ marginVertical: 35 }}>
           <FTIconwithtitleandinfo
-            title="Lingo Dunkin Pepper & Soups"
-            info="33 Transactions"
+            title={merchantinfo?.business_name}
+            info={`${merchantinfo?.freeWithdrawal} Transactions`}
             onPress={() => console.log("Yes")}
             Icon={Bluecardicon}
             bG="red"
@@ -86,7 +95,7 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
       case 0:
         setContent({
           child: <ModalContent merchantinfo={merchantinfo} />,
-          height: 255,
+          height: 270,
         });
         setShowModal((s) => !s);
         break;
@@ -102,6 +111,7 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
       const response = await axiosCustom.get(
         `/merchant/detail/${data.merchantid}`
       );
+      console.log(response.data.data, "Merchnat info");
       setmerchantinfo({ merchantid: data.merchantid, ...response.data.data });
       switchModals(0);
     } catch (err) {
@@ -132,7 +142,9 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
         rules={VALIDATION.MERCHANTID_VALIDATION}
         control={control}
         textInputProps={{
-          keyboardType:"number-pad"
+          keyboardType: "number-pad",
+          returnKeyType: "done",
+          maxLength: 11,
         }}
       />
       <View style={{ flex: 1 }}></View>

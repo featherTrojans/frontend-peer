@@ -12,6 +12,7 @@ import {
 import { COLORS, icons } from "../constants";
 import { useForm } from "react-hook-form";
 import { VALIDATION } from "../utils";
+import amountFormatter from "../utils/formatMoney";
 
 const { Bluecardicon } = icons;
 
@@ -69,7 +70,7 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
               />
             )}
             <Text style={amountText}>Amount</Text>
-            <Text style={amountValueText}>N{summaryinfo.amount}</Text>
+            <Text style={amountValueText}>N{amountFormatter(summaryinfo.amount)}</Text>
           </View>
 
           <View style={dashedLine} />
