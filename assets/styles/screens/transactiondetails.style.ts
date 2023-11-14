@@ -119,4 +119,19 @@ export const TransactiondetailsScreenStyles = StyleSheet.create({
     ...fontsize.xsmallest,
     ...FONTS.semibold,
   },
+  downloadBtnWrap: {
+    paddingVertical: 20.5,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: COLORS.blue6,
+    borderWidth: 1,
+    borderRadius: 10,
+    flexDirection: "row",
+  },
+  downloadPdfText: {
+    ...fontsize.smallest,
+    ...FONTS.semibold,
+    color: COLORS.blue6,
+    marginLeft: 10,
+  },
 });

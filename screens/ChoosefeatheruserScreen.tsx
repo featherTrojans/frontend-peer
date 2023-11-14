@@ -242,12 +242,12 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
           <ListHeader amount={amount} switchModals={switchModals} />
         }
         ListEmptyComponent={
-          loading ? (
+          !loading ? (
             <FTEmptycomponent
               msg="Padi, you don't have any beneficiary"
               showTransact={false}
             />
-          ) : null
+          ) : <ActivityIndicator size="small" color={COLORS.blue9} />
         }
       />
 

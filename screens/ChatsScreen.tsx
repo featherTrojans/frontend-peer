@@ -38,7 +38,7 @@ const ChatsScreen = () => {
 
       <FTLoader loading={loading} />
 
-      <FTChatList allchatdata={allchatdata} />
+      <FTChatList loading={loading} allchatdata={allchatdata} />
     </FTTabWrapper>
   );
 };

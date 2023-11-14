@@ -4,6 +4,7 @@ import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { FTIconwithtitleandinfoStyles } from "../assets/styles/components";
 import FTIconwithbg from "./FTIconwithbg";
 import FTOtherImage from "./FTOtherImage";
+import { nameCapitalize } from "../utils/nameSplitter";
 const { mainWrap, iconandinfoWrap, iconBg, titleText, infoText } =
   FTIconwithtitleandinfoStyles;
 
@@ -51,7 +52,7 @@ const FTIconwithtitleandinfo = ({
           <FTOtherImage
             imageurl={userInfo?.imageUrl}
             memojiImage={userInfo?.memoji}
-            fullname={userInfo?.fullName || title}
+            fullname={userInfo?.fullName  || title}
             size={size}
           />
         ) : (

@@ -2,7 +2,7 @@ import React from "react";
 import Svg, { G, Path } from "react-native-svg"
 function Profilesetupicon() {
   return (
-    <Svg xmlns="http://www.w3.org/2000/svg" width={15.797} height={15.797}>
+    <Svg xmlns="http://www.w3.org/2000/svg" width={16} height={16}>
       <G stroke="#12ad2b" strokeWidth={1.5} data-name="Group 11613">
         <Path
           fill="rgba(0,0,0,0)"

@@ -1,8 +1,15 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { StartnewchatScreenStyles } from "../assets/styles/screens";
 
 import {
+  FTEmptycomponent,
   FTIconwithtitleandinfo,
   FTLoader,
   FTSearchinput,
@@ -11,6 +18,7 @@ import {
 import { COLORS, icons } from "../constants";
 import useContact from "../hooks/useContact";
 import Emptycomponent from "../components/FTEmptycomponent";
+import { nameCapitalize } from "../utils/nameSplitter";
 
 const { Smallphoneicon } = icons;
 
@@ -62,7 +70,7 @@ const StartnewchatScreen = ({ navigation }) => {
         renderItem={({ item }) => {
           return (
             <FTIconwithtitleandinfo
-              title={item.fullName}
+              title={nameCapitalize(item.fullName)}
               info={`@${item.username}`}
               onPress={() =>
                 navigation.navigate("chatsdm_screen", { userInfo: item })
@@ -82,10 +90,14 @@ const StartnewchatScreen = ({ navigation }) => {
           <ListHeader value={searchval} onchange={handleSearch} />
         }
         ListEmptyComponent={
-          <Emptycomponent
-            msg="no Feather account in your contact list"
-            showTransact={false}
-          />
+          !loading ? (
+            <FTEmptycomponent
+              msg="Oops, No feather user on your contact list"
+              showTransact={false}
+            />
+          ) : (
+            <ActivityIndicator size="small" color={COLORS.blue9} />
+          )
         }
       />
     </FTTitlepagewrapper>
