@@ -25,6 +25,7 @@ const ChoosebillerScreen = ({ navigation }) => {
           Icon={Electricityicon}
           mB={40}
         />
+        
 
         <Text style={listHeaderText}>Pay recent bills</Text>
       </>

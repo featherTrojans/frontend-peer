@@ -146,6 +146,9 @@ import Cameraicon from "../assets/icons/Cameraicon";
 import Recommendedcheckicon from "../assets/icons/Recommendedcheckicon";
 import Setuppinlockicon from "../assets/icons/Setuppinlockicon";
 import Useravatarsmallicon from "../assets/icons/Useravatarsmallicon";
+import Whiteaddicon from "../assets/icons/Whiteaddicon";
+import Downloadreceipticon from "../assets/icons/Downloadreceipticon";
+
 
 
 
@@ -183,6 +186,7 @@ export default {
   Downloadreceipt,
   Reporttransactions,
   Featherdefault,
+  Downloadreceipticon,
   Bonusicon,
   Transfersicon,
   Arrowin,
@@ -223,6 +227,7 @@ export default {
   Bankblueicon,
   Walletblueicon,
   Bluecardicon,
+  Whiteaddicon,
   Usdcardicon,
   Detailcopyicon,
   Searchicon,

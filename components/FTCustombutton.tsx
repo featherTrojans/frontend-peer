@@ -9,11 +9,13 @@ const Custombutton = ({
   disable = false,
   btntext,
   bg = "#342AD5",
+  outline=false
 }: {
   onpress: () => void;
   disable?: boolean;
   btntext: string;
   bg?: string;
+  outline?: boolean
 }) => {
   return (
     <TouchableOpacity

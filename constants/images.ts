@@ -22,6 +22,10 @@ import joselectric from "../assets/images/jos_electric_logo.png";
 import gotvlogo from "../assets/images/gotv_logo.png";
 import startimeslogo from "../assets/images/startimes_logo.png";
 import dstvlogo from "../assets/images/dstv_logo.png";
+import abujalogo from "../assets/images/abuja_electric.png";
+import kadunalogo from "../assets/images/kaduna_electric.png";
+import kanologo from "../assets/images/kano_electric.png";
+import portharcourtlogo from "../assets/images/portharcourt_electric.png";
 
 export default {
   Notificationimage,
@@ -42,6 +46,10 @@ export default {
   ibadanelectric,
   ikejaelectric,
   joselectric,
+  abujalogo,
+  kadunalogo,
+  kanologo,
+  portharcourtlogo,
   gotvlogo,
   dstvlogo,
   startimeslogo,

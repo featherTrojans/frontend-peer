@@ -51,6 +51,7 @@ const useContact = () => {
       const response = await axiosCustom.post("/user/multiple", {
         numbers: allcontacts,
       });
+      console.log(response.data.data, 'here is the data from the contact')
       setContactResolved(response.data.data);
     } catch (err) {
     } finally {

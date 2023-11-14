@@ -11,6 +11,7 @@ import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
 import dayjs from "dayjs";
 import {
+  FTCustombutton,
   FTHorizontaline,
   FTIconwithbg,
   FTTitlepagewrapper,
@@ -32,6 +33,8 @@ const {
   statusThumbText,
   statusTextBg,
   statusText,
+  downloadBtnWrap,
+  downloadPdfText,
 } = TransactiondetailsScreenStyles;
 
 type IStatusProps = "success" | "failed" | "pending";
@@ -98,6 +101,7 @@ const {
   Arrowin,
   Arrowout,
   Dashedlineicon,
+  Downloadreceipticon,
 } = icons;
 
 const TransactionDetailsScreen = ({ navigation, route }) => {
@@ -533,7 +537,7 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
             justifyContent: "space-between",
             // flexDirection: "row",
             alignItems: "center",
-            rowGap: 30
+            rowGap: 30,
           }}
         >
           {transactionBadge(title, direction, sender, receiver, 50)}
@@ -584,6 +588,14 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
           />
         </View>
       </ScrollView>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => shareReceipt(htmlContent)}
+        style={downloadBtnWrap}
+      >
+        <Downloadreceipticon />
+        <Text style={downloadPdfText}>Get PDF Receipt</Text>
+      </TouchableOpacity>
     </FTTitlepagewrapper>
   );
 };

@@ -8,6 +8,7 @@ export const nameSplitter = (name: string) => {
 };
 
 export const nameCapitalize = (name: string) => {
+  if (!name) return "";
   const splitName = name?.replace(/\s+/g, " ").split(" ");
 
   if (splitName.length >= 2) {

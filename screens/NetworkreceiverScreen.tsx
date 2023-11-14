@@ -1,10 +1,17 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
   ChoosefeatheruserScreenStyles,
   NetworkreceiverScreenStyles,
 } from "../assets/styles/screens";
 import {
+  FTEmptycomponent,
   FTIconwithtitleandinfo,
   FTSearchinput,
   FTTitlepagewrapper,
@@ -13,8 +20,9 @@ import {
 import { COLORS, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 import useContact from "../hooks/useContact";
+import { nameCapitalize } from "../utils/nameSplitter";
 
-const { Sendtoselficon } = icons;
+const { Sendtoselficon, Whiteaddicon } = icons;
 
 const {} = NetworkreceiverScreenStyles;
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
@@ -46,7 +54,8 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     setFiltercontact(contactsResolved);
-  }, [contactsResolved]);
+  }, [contactsResolved, loadingcontacts]);
+
   const ListHeader = () => {
     return (
       <>
@@ -58,6 +67,16 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
             navigation.navigate("airtimeordata_screen", { userinfo })
           }
           Icon={Sendtoselficon}
+          mB={24}
+        />
+        <FTIconwithtitleandinfo
+          bG={COLORS.grey10}
+          title="Send to a new number"
+          // info={userinfo?.phoneNumber}
+          onPress={() =>
+            navigation.navigate("airtimeordata_screen", { userinfo })
+          }
+          Icon={Whiteaddicon}
           mB={40}
         />
         <Text style={listHeaderText}>My Contacts</Text>
@@ -88,7 +107,11 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
           return (
             <FTIconwithtitleandinfo
               bG={""}
-              title={feathercontacts?.fullName}
+              title={
+                feathercontacts?.fullName
+                  ? nameCapitalize(feathercontacts?.fullName)
+                  : feathercontacts?.fullName
+              }
               info={feathercontacts?.phoneNumber}
               profile={true}
               userInfo={{
@@ -100,6 +123,16 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
                 navigation.navigate("airtimeordata_screen", { userinfo })
               }
             />
+          );
+        }}
+        ListEmptyComponent={() => {
+          return !loadingcontacts ? (
+            <FTEmptycomponent
+              msg={`Oops, ${loadingcontacts ? "yes"  : "No"} feather user on your  contact list`}
+              showTransact={false}
+            />
+          ) : (
+            <ActivityIndicator size="small" color={COLORS.blue9} />
           );
         }}
         ListHeaderComponent={ListHeader}

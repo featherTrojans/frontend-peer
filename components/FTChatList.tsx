@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
@@ -10,7 +10,8 @@ import FTIconwithbg from "./FTIconwithbg";
 import FTUserImage from "./FTUserImage";
 import { lastChatDate } from "../utils/fomatTrans";
 import FTOtherImage from "./FTOtherImage";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import FTEmptycomponent from "./FTEmptycomponent";
 
 const { Blacksendicon } = icons;
 
@@ -56,7 +57,9 @@ const ChatMessage = ({ chatinfo }) => {
           </Text>
         </View>
         <View style={SAlign}>
-          <Text numberOfLines={1} style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
+          <Text numberOfLines={1} style={chatLastMessage}>
+            {chatinfo?.lastMessage}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -79,7 +82,7 @@ const ListHeader = ({ value, onchange }) => {
   );
 };
 
-const FTChatList = ({ allchatdata }) => {
+const FTChatList = ({ allchatdata, loading }) => {
   const [allChats, setAllChats] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -118,6 +121,16 @@ const FTChatList = ({ allchatdata }) => {
       ListHeaderComponent={() => (
         <ListHeader value={search} onchange={handleSearchChange} />
       )}
+      ListEmptyComponent={() => {
+        return !loading ? (
+          <FTEmptycomponent
+            msg="Oops, You don't have any recent chats."
+            showTransact={false}
+          />
+        ) : (
+          <ActivityIndicator size="small" color={COLORS.blue9} />
+        );
+      }}
     />
   );
 };

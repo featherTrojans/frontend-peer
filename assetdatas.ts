@@ -1,6 +1,16 @@
 import { images } from "./constants";
 
-const { ibadanelectric, ekoelectric, ikejaelectric, joselectric } = images;
+const {
+  ibadanelectric,
+  ekoelectric,
+  ikejaelectric,
+  joselectric,
+  abujalogo,
+  kadunalogo,
+  kanologo,
+  portharcourtlogo,
+} = images;
+
 export const assetsDB = {
   banks: {
     GTB: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGuaranty%20Trust%20Bank%20Logo%20(1).png?alt=media&token=d9a0af12-48d9-4ded-a612-543502ebc658",
@@ -99,7 +109,7 @@ export const electricityLogos = [
   {
     name: "Abuja Electric",
     service: "abuja-electric",
-    logo: ibadanelectric,
+    logo: abujalogo,
   },
   {
     name: "Eko Electric",
@@ -124,17 +134,17 @@ export const electricityLogos = [
   {
     name: "Kaduna Electric",
     service: "kaduna-electric",
-    logo: ibadanelectric,
+    logo: kadunalogo,
   },
   {
     name: "Kano Electricity",
     service: "kano-electric",
-    logo: ibadanelectric,
+    logo: kanologo,
   },
   {
     name: "Porthacourt Electric",
     service: "portharcourt-electric",
-    logo: ibadanelectric,
+    logo: portharcourtlogo,
   },
 ];
 
