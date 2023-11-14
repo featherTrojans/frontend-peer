@@ -26,11 +26,12 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
   const [loading, setLoading] = useState(false);
   const [merchantinfo, setmerchantinfo] = useState({});
 
-  const action = async (pin) => {
+  const action = async (pin, merchantinfo) => {
+    console.log(merchantinfo, "MERCHANT");
     try {
       await axiosCustom.post("/merchant/transfer", {
         amount: Number(amount),
-        transferTo: merchantinfo.merchantid,
+        transferTo: merchantinfo.agentId,
         userPin: pin,
       });
       navigation.navigate("transactionsuccess_screen");
@@ -38,7 +39,7 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
       throw err;
     }
   };
-  const closeModalAndRedirect = () => {
+  const closeModalAndRedirect = (merchantinfo) => {
     const summaryinfo = {
       amount: amount,
       transactionDatas: [
@@ -48,7 +49,7 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
         },
         {
           leftSide: "Merchant ID",
-          rightSide: merchantinfo?.merchantid,
+          rightSide: merchantinfo?.agentId,
         },
         {
           leftSide: "Charges",
@@ -61,7 +62,10 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
       ],
     };
     setShowModal(false);
-    navigation.navigate("transactionsummary_screen", { action, summaryinfo });
+    navigation.navigate("transactionsummary_screen", {
+      action: (pin) => action(pin, merchantinfo),
+      summaryinfo,
+    });
   };
 
   const ModalContent = ({ merchantinfo }) => {
@@ -85,12 +89,15 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
             bG="red"
           />
         </View>
-        <FTCustombutton btntext="Continue" onpress={closeModalAndRedirect} />
+        <FTCustombutton
+          btntext="Continue"
+          onpress={() => closeModalAndRedirect(merchantinfo)}
+        />
       </View>
     );
   };
 
-  const switchModals = (value) => {
+  const switchModals = (value, merchantinfo) => {
     switch (value) {
       case 0:
         setContent({
@@ -113,7 +120,7 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
       );
       console.log(response.data.data, "Merchnat info");
       setmerchantinfo({ merchantid: data.merchantid, ...response.data.data });
-      switchModals(0);
+      switchModals(0, response.data.data);
     } catch (err) {
       errorAlert(err);
     } finally {

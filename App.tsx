@@ -11,7 +11,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { getStatusBarHeight } from 'react-native-iphone-screen-helper'
+import { getStatusBarHeight } from "react-native-iphone-screen-helper";
 import { enableFreeze } from "react-native-screens";
 
 // enableFreeze(true);
@@ -79,18 +79,14 @@ export const toastConfig = {
 LogBox.ignoreLogs(["Setting a timer"]);
 SplashScreen.preventAutoHideAsync();
 
-
 export default function App() {
   const [routeName, setRouteName] = useState("onboarding_screen");
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
   let alertOffset = 0;
 
-
-
   // check for new updates as early as possible and update the app based on platform
   // useExpoUpdate();
 
-  
   const checkOnboarding = async () => {
     // await AsyncStorage.removeItem('@onboarded')
     try {
@@ -108,15 +104,15 @@ export default function App() {
   };
 
   useEffect(() => {
-    // getDataFromStorage("@token").then((response) => {
-    //   if (response !== null) {
-    //     if (Date.now() - response.time > AWEEKAFTER) {
-    //       return null;
-    //     }
-    //     setRouteName("welcome_screen");
-    //     setAuthorizationToken(response.token);
-    //   }
-    // });
+    getDataFromStorage("@token").then((response) => {
+      if (response !== null) {
+        if (Date.now() - response.time > AWEEKAFTER) {
+          return null;
+        }
+        setRouteName("welcome_screen");
+        setAuthorizationToken(response.token);
+      }
+    });
   }, []);
 
   useEffect(() => {

@@ -10,6 +10,7 @@ import {
 } from "../components";
 import { COLORS, icons } from "../constants";
 import useContact from "../hooks/useContact";
+import Emptycomponent from "../components/FTEmptycomponent";
 
 const { Smallphoneicon } = icons;
 
@@ -33,7 +34,6 @@ const StartnewchatScreen = ({ navigation }) => {
   const [searchval, setSearchval] = useState("");
   const { contactsResolved, loading } = useContact();
 
-  console.log(featherContacts);
   useEffect(() => {
     setFeatherContacts(contactsResolved);
   }, [contactsResolved]);
@@ -51,6 +51,9 @@ const StartnewchatScreen = ({ navigation }) => {
   return (
     <FTTitlepagewrapper title="Choose Feather User" childBg={COLORS.white}>
       <FTLoader loading={loading} />
+      {/* {!loading && featherContacts?.length == 0 && (
+        
+      )} */}
       <FlatList
         data={featherContacts}
         showsVerticalScrollIndicator={false}
@@ -77,6 +80,12 @@ const StartnewchatScreen = ({ navigation }) => {
         }}
         ListHeaderComponent={
           <ListHeader value={searchval} onchange={handleSearch} />
+        }
+        ListEmptyComponent={
+          <Emptycomponent
+            msg="no Feather account in your contact list"
+            showTransact={false}
+          />
         }
       />
     </FTTitlepagewrapper>

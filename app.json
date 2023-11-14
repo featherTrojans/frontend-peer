@@ -75,9 +75,7 @@
       "userInterfaceStyle": "automatic"
     },
     "extra": {
-      "eas": {
-        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
-      }
+      "eas": {}
     },
     "runtimeVersion": {
       "policy": "sdkVersion"

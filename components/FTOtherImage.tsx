@@ -102,7 +102,11 @@ const FTOtherImage = ({
   }
   return (
     <Pressable onPress={onpress} hitSlop={25}>
-      <FTInitialsBg sideLength={size} name={nameSplitter(fullname)} />
+      {fullname ? (
+        <FTInitialsBg sideLength={size} name={nameSplitter(fullname)} />
+      ) : (
+        " "
+      )}
     </Pressable>
   );
 };

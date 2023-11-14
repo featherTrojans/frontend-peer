@@ -33,8 +33,8 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
 
   const EachRow = ({ data }) => {
     const { leftSide, rightSide } = data;
-    let isFree = rightSide.toLowerCase() === "free";
-    let isTotal = leftSide.toLowerCase().includes("total");
+    let isFree = rightSide?.toLowerCase() === "free";
+    let isTotal = leftSide?.toLowerCase().includes("total");
     return (
       <View style={eachSummaryWrap}>
         <Text style={eachSummaryKey}>{leftSide}</Text>
@@ -51,7 +51,11 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
   };
 
   return (
-    <FTTitlepagewrapper headerBg={COLORS.white3} childBg={COLORS.white3} title="Transaction Summary">
+    <FTTitlepagewrapper
+      headerBg={COLORS.white3}
+      childBg={COLORS.white3}
+      title="Transaction Summary"
+    >
       <FTKeyboardwrapper>
         <View style={summaryWrap}>
           <View style={{ alignItems: "center" }}>
@@ -70,7 +74,9 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
               />
             )}
             <Text style={amountText}>Amount</Text>
-            <Text style={amountValueText}>N{amountFormatter(summaryinfo.amount)}</Text>
+            <Text style={amountValueText}>
+              N{amountFormatter(summaryinfo.amount)}
+            </Text>
           </View>
 
           <View style={dashedLine} />

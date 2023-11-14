@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
@@ -10,7 +10,7 @@ import FTIconwithbg from "./FTIconwithbg";
 import FTUserImage from "./FTUserImage";
 import { lastChatDate } from "../utils/fomatTrans";
 import FTOtherImage from "./FTOtherImage";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 const { Blacksendicon } = icons;
 
@@ -56,7 +56,9 @@ const ChatMessage = ({ chatinfo }) => {
           </Text>
         </View>
         <View style={SAlign}>
-          <Text numberOfLines={1} style={chatLastMessage}>{chatinfo?.lastMessage}</Text>
+          <Text numberOfLines={1} style={chatLastMessage}>
+            {chatinfo?.lastMessage}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -67,13 +69,14 @@ const ListHeader = ({ value, onchange }) => {
   return (
     <>
       <FTSearchinput
-        value={value}
-        onChange={onchange}
         placeholder="Type to search chat"
         bG={COLORS.blue20}
         mB={30}
         mT={30}
+        // value={value}
+        onChange={onchange}
       />
+
       <Text style={recentChatText}>Recent Chats</Text>
     </>
   );
@@ -116,7 +119,7 @@ const FTChatList = ({ allchatdata }) => {
         return <View style={{ height: 30 }} />;
       }}
       ListHeaderComponent={() => (
-        <ListHeader value={search} onchange={handleSearchChange} />
+        <ListHeader value={search} onchange={(val) => setSearch(val)} />
       )}
     />
   );

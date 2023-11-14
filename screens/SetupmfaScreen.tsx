@@ -1,4 +1,10 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import { SetupmfaScreenStyles } from "../assets/styles/screens";
 import {
@@ -7,22 +13,25 @@ import {
   FTHorizontaline,
   FTInput,
   FTKeyboardwrapper,
+  FTLoader,
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
 import { VALIDATION } from "../utils";
 import { SIZES } from "../constants";
+import axiosCustom from "../httpRequests/axiosCustom";
+import { useAlert } from "../hooks";
 
-const {pickQuestionText, questionText} = SetupmfaScreenStyles;
+const { pickQuestionText, questionText } = SetupmfaScreenStyles;
 
 const SetupmfaScreen = () => {
   const { control, handleSubmit } = useForm({ mode: "all" });
-  const [answer1, setAnswer1] = useState("Select Preferred Question 1");
-  const [answer2, setAnswer2] = useState("Select Preferred Question 2");
+  const [secQue1, setsecQue1] = useState("Select Preferred Question 1");
+  const [secQue2, setsecQue2] = useState("Select Preferred Question 2");
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState<any>({ child: null, height: 400 });
-
-
+  const [loading, setLoading] = useState(false);
+  const { errorAlert } = useAlert();
   const questions = [
     "What’s your mother’s maiden name ?",
     "Where did you have your first kiss ?",
@@ -30,62 +39,72 @@ const SetupmfaScreen = () => {
     "What’s the name of your favorite teacher?",
     "What’s the name of your dream car?",
     "What’s the name of your crush?",
-  ]
+  ];
 
   const closeAnswer1modal = (item) => {
-    setAnswer1(item)
-    setShowModal(false)
-  }
+    setsecQue1(item);
+    setShowModal(false);
+  };
   const closeAnswer2modal = (item) => {
-    setAnswer2(item)
-    setShowModal(false)
-  }
+    setsecQue2(item);
+    setShowModal(false);
+  };
   const SecurityQuestion1 = () => {
     return (
       <View>
         <Text style={pickQuestionText}>Pick a question</Text>
-        <FlatList 
-        data={questions}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity onPress={() => closeAnswer1modal(item)} activeOpacity={0.7}>
-              <Text style={questionText}>{item}</Text>
-            </TouchableOpacity>
-          )
-        }}
-        
+        <FlatList
+          data={questions.filter((ques) => ques != secQue2)}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() => closeAnswer1modal(item)}
+                activeOpacity={0.7}
+              >
+                <Text style={questionText}>{item}</Text>
+              </TouchableOpacity>
+            );
+          }}
         />
       </View>
-    )
-  }
+    );
+  };
 
   const SecurityQuestion2 = () => {
     return (
       <View>
         <Text style={pickQuestionText}>Pick a question</Text>
-        <FlatList 
-        data={questions}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity onPress={() => closeAnswer2modal(item)} activeOpacity={0.7}>
-              <Text style={questionText}>{item}</Text>
-            </TouchableOpacity>
-          )
-        }}
-        
+        <FlatList
+          data={questions.filter((ques) => ques != secQue1)}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() => closeAnswer2modal(item)}
+                activeOpacity={0.7}
+              >
+                <Text style={questionText}>{item}</Text>
+              </TouchableOpacity>
+            );
+          }}
         />
       </View>
-    )
-  }
+    );
+  };
 
   const switchModals = (value: number) => {
     switch (value) {
       case 0:
-        setContent({ child: <SecurityQuestion1 />, height: SIZES.height / 1.8 });
+        setContent({
+          child: <SecurityQuestion1 />,
+          height: SIZES.height / 1.8,
+        });
         setShowModal((s) => !s);
         break;
       case 1:
-        setContent({ child: <SecurityQuestion2 />, height: SIZES.height / 1.8 });
+        setContent({
+          child: <SecurityQuestion2 />,
+          height: SIZES.height / 1.8,
+        });
         setShowModal((s) => !s);
         break;
       default:
@@ -93,9 +112,21 @@ const SetupmfaScreen = () => {
     }
   };
 
-  const onsubmit = (data) => {
-      console.log(data, "Jsnsmm")
-  }
+  const onsubmit = async (data) => {
+    setLoading(true);
+    try {
+      await axiosCustom.post("/auth/security/question/set", {
+        secQue1: secQue1,
+        secQue2: secQue2,
+        secAns1: data.answer1,
+        secAns2: data.answer2,
+      });
+    } catch (err) {
+      errorAlert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <FTTitlepagewrapper
@@ -110,9 +141,9 @@ const SetupmfaScreen = () => {
           header="Setup your Security Questions and Answers"
           subHeader="Kindly choose from the questions above and provide appropriate answers to fully enable your MFA"
         />
-
+        <FTLoader loading={loading} />
         <FTInput
-          placeholderText={answer1}
+          placeholderText={secQue1}
           name="state"
           label="Question 1"
           control={control}
@@ -135,7 +166,7 @@ const SetupmfaScreen = () => {
         <FTHorizontaline marginV={30} />
 
         <FTInput
-          placeholderText={answer2}
+          placeholderText={secQue2}
           name="state"
           label="Question 2"
           control={control}
@@ -154,10 +185,7 @@ const SetupmfaScreen = () => {
           mB={30}
         />
 
-        <FTCustombutton
-          btntext="Setup MFA"
-          onpress={handleSubmit(onsubmit)}
-        />
+        <FTCustombutton btntext="Setup MFA" onpress={handleSubmit(onsubmit)} />
       </FTKeyboardwrapper>
     </FTTitlepagewrapper>
   );
