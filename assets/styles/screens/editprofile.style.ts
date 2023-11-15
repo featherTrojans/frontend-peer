@@ -8,8 +8,8 @@ export const EditprofileScreenStyles = StyleSheet.create({
     color: COLORS.blue9,
   },
   headerWrap: {
-    marginTop: 20,
-    marginBottom: 40,
+    marginTop: 15,
+    marginBottom: 30,
   },
   profileWrap: {
     flexDirection: "row",

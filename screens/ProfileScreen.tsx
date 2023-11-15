@@ -1,5 +1,6 @@
 import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
 import React, { useContext } from "react";
+import { Image as RNImage } from "expo-image";
 import { ProfileScreenStyles } from "../assets/styles/screens";
 import {
   FTIconwithtitleandinfo,
@@ -73,8 +74,11 @@ const ProfileScreen = ({ navigation }) => {
   ];
 
   const handlesignout = async () => {
+    // RNImage.clearDiskCache()
+    // RNImage.clearMemoryCache()
     await clearDataFromStorage("@token");
     setToken(null);
+
     setAuthData({});
   };
 
