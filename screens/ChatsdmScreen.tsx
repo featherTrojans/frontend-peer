@@ -370,7 +370,7 @@ const ChatsdmScreen = ({ route }) => {
   };
 
   const sendFireBaseMessage = async (action = "message", amount) => {
-    if (chattext === "" && action === "message") return;
+    if (chattext.trim() === "" && action === "message") return;
     if (fetchmessage) return;
     let chatId = chatid;
     if (!chatid) {
@@ -384,10 +384,10 @@ const ChatsdmScreen = ({ route }) => {
       setchatid(chatId);
       setFetchmessage(false);
     }
-    let message = chattext;
+    let message = chattext.trim();
     let createdAt = Date.now();
     const messageData = {
-      message: action === "message" ? chattext : amount.name,
+      message: action === "message" ? chattext.trim() : amount.name,
       sender: authId,
       createdAt: createdAt,
       action: action,
