@@ -46,7 +46,6 @@ const FeatherTagScreen = ({ navigation }) => {
     }
 
     try {
-      console.log(data.featherTag);
       setLoading(true);
       await axiosCustom.put("auth/username/set", {
         newUsername: data.featherTag,

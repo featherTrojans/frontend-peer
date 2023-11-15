@@ -26,6 +26,7 @@ import ChatsdmScreen from "./ChatsdmScreen";
 import ChatsprofileScreen from "./ChatsprofileScreen";
 import StartnewchatScreen from "./StartnewchatScreen";
 import AirtimeordataScreen from "./AirtimeordataScreen";
+import AirtimeordatanumberScreen from "./AirtimeordatanumberScreen";
 import BankaccountinformationScreen from "./BankaccountinformationScreen";
 import BillerstateScreen from "./BillerstateScreen";
 import CableiucnumberScreen from "./CableiucnumberScreen";
@@ -144,4 +145,5 @@ export {
   ChoosememojibgScreen,
   CreatecardScreen,
   JoinwaitlistScreen,
+  AirtimeordatanumberScreen,
 };

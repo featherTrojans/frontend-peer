@@ -5,13 +5,18 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
   ChatsScreenStyles,
   ProfileScreenStyles,
 } from "../assets/styles/screens";
-import { FTChatList, FTLoader, FTTabWrapper } from "../components";
-import { icons } from "../constants";
+import {
+  FTChatList,
+  FTLoader,
+  FTSearchinput,
+  FTTabWrapper,
+} from "../components";
+import { COLORS, icons } from "../constants";
 import useChats from "../hooks/useChats";
 import { useNavigation } from "@react-navigation/native";
 
@@ -22,6 +27,7 @@ const { profileHeaderWrap, profileHeaderText } = ProfileScreenStyles;
 const ChatsScreen = () => {
   const { allchatdata, loading } = useChats();
   const navigation = useNavigation();
+  const [search, setSearch] = useState("");
 
   return (
     <FTTabWrapper>
@@ -37,8 +43,15 @@ const ChatsScreen = () => {
       </View>
 
       <FTLoader loading={loading} />
-
-      <FTChatList loading={loading} allchatdata={allchatdata} />
+      <FTSearchinput
+        placeholder="Type to search chat"
+        bG={COLORS.blue20}
+        mB={30}
+        mT={30}
+        value={search}
+        onChange={(val) => setSearch(val)}
+      />
+      <FTChatList allchatdata={allchatdata} search={search} />
     </FTTabWrapper>
   );
 };

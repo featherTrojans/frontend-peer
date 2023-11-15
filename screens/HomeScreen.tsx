@@ -101,7 +101,6 @@ const SetupProfile = ({ onPress }) => {
   if (isProfileSetupCompleted) {
     return null;
   }
-  console.log("setup profile rerendering");
 
   return (
     <TouchableOpacity
@@ -355,14 +354,14 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
   const scrollViewRef = useRef<any>();
-  const {errorAlert} = useAlert()
+  const { errorAlert } = useAlert();
   const [showModal, setShowModal] = useState(false);
   const walletbalance = amountFormatter(authdata?.userDetails?.walletBal);
   const [content, setContent] = useState<{
     child: React.ReactNode;
     height: number;
   }>({ child: null, height: 200 });
-  const [withdrawLoading, setWithdrawLoading] = useState(false)
+  const [withdrawLoading, setWithdrawLoading] = useState(false);
 
   const histories: any[] = useMemo(
     () => formatData(authdata?.transactions),
@@ -396,9 +395,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     getDashboardData();
   }, []);
 
-
-
-
   const onsubmitfindmerchant = async (amount) => {
     if (amount > authdata?.userDetails?.walletBal) {
       return errorAlert(null, "amount is greater than wallet");
@@ -407,7 +403,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   };
 
   const findmerchant = async () => {
-
     setWithdrawLoading(true);
     const response = await axiosCustom.get("/request/accepted");
     setWithdrawLoading(false);
@@ -423,7 +418,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       onsubmit: onsubmitfindmerchant,
     });
   };
-
 
   const switchModals = (value) => {
     switch (value) {
@@ -460,7 +454,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       modalChildren={content.child}
       modalHeight={content.height}
     >
-      <FTLoader  loading={withdrawLoading}/>
+      <FTLoader loading={withdrawLoading} />
       <View style={headerContainer}>
         <View style={profileContainer}>
           <FTUserImage size={45} />

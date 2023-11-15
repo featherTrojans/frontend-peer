@@ -41,10 +41,6 @@ function useBeneficiary(BENEFICIARY_TYPE, property) {
 
     // set as beneficiary
     setbeneficiaries(uniquearr);
-    console.log(uniquearr, "unique");
-
-    // delete the rest
-    console.log(duplicate, "duplicate");
   };
   return { beneficiaries, loading };
 }

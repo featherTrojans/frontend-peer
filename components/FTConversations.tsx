@@ -19,8 +19,6 @@ const FTConversations = () => {
   const { allchatdata, loading } = useChats();
   const navigation = useNavigation();
 
-  console.log("conversations rerendering");
-
   if (allchatdata.length == 0) return null;
 
   return (

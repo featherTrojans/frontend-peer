@@ -33,9 +33,8 @@ const useContact = () => {
 
   useEffect(() => {
     // check if exist, get if it exist
-    console.log("CHECKING THE STORAGE");
+
     getDataFromStorage("contacts").then((savedcontact) => {
-      console.log(savedcontact, "SAVED CONTACTS");
       if (savedcontact) {
         setContactResolved(savedcontact);
         setLoading(false);
@@ -105,7 +104,6 @@ const useContact = () => {
         await setDataInstorage("contacts", result);
       }
     } catch (err) {
-      console.log(err?.response, "ERRRR");
       setLoading(false);
     } finally {
       setLoading(false);

@@ -82,7 +82,7 @@ const CableiucnumberScreen = ({ navigation, route }) => {
         package: biller,
         decoderNo: data.iucnumber,
       });
-      console.log(response);
+
       const acctinfo = response.data.data;
       if (!acctinfo?.firstName) {
         throw { response: { data: { message: "Account not available" } } };

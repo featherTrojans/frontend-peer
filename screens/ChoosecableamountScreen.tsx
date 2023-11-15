@@ -25,7 +25,7 @@ function isObject(value) {
 }
 
 const ChoosecableamountScreen = ({ route }) => {
-  const {biller, logo} = route?.params;
+  const { biller, logo } = route?.params;
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [billeramount, setbilleramount] = useState([]);
@@ -40,7 +40,7 @@ const ChoosecableamountScreen = ({ route }) => {
     setLoading(true);
     try {
       const response = await axiosCustom.get(`/bills/prices/${biller}`);
-      console.log(response.data);
+
       // if response.data.data is an object, make it an array
       let responseamount = [];
       if (isObject(response.data.data)) {

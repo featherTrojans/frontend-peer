@@ -108,7 +108,7 @@ const ChoosememojibgScreen = ({ route, navigation }) => {
       setLoading(false);
     }
   };
-  console.log(active);
+
   return (
     <FTTitlepagewrapper title="Background">
       <FTLoader loading={loading} />

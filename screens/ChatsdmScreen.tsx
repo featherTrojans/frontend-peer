@@ -46,7 +46,6 @@ import formatData, { formatTime } from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
 import Animated from "react-native-reanimated";
 
-
 import { useNavigation } from "@react-navigation/native";
 import amountFormatter from "../utils/formatMoney";
 
@@ -182,7 +181,6 @@ const TransactionPin = ({
   setSendSuccess,
   userInfo,
 }) => {
-  console.log(amount, "get");
   const [userPin, setUserPin] = useState("");
   const [loading, setLoading] = useState(false);
   const { errorAlert } = useAlert();
@@ -195,21 +193,21 @@ const TransactionPin = ({
       return;
     }
     setLoading(true);
-    Keyboard.dismiss()
+    Keyboard.dismiss();
     try {
-     const response = await axiosCustom.post("/transfer", {
+      const response = await axiosCustom.post("/transfer", {
         amount: amount.value,
         transferTo: userInfo?.username,
         userPin: userPin,
       });
-      console.log(response, 'HEre is the failed transfer ')
+
       setchattext("");
       setSendSuccess(true);
       await sendFireBaseMessage("transfer", amount);
       // animationRef.current?.play()
     } catch (err) {
       errorAlert(err);
-      setUserPin("")
+      setUserPin("");
     } finally {
       setLoading(false);
     }
@@ -217,7 +215,8 @@ const TransactionPin = ({
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <Text style={chooseAmountHeader}>
-        Amount to send : <Text style={{ ...FONTS.bold }}>N{amountFormatter(amount.name)}</Text> +
+        Amount to send :{" "}
+        <Text style={{ ...FONTS.bold }}>N{amountFormatter(amount.name)}</Text> +
         N0 Charges
       </Text>
 
@@ -276,9 +275,6 @@ const ChatsdmScreen = ({ route }) => {
   const [animHeight, setAnimHeight] = useState(0);
 
   const { CustomModal, openModal, closeModal } = useCustomModal();
-
-
-  
 
   const focus = () => {
     if (textInputRef.current !== null) {
@@ -410,8 +406,6 @@ const ChatsdmScreen = ({ route }) => {
     } catch (err) {}
   };
 
-
-
   const handleTextChange = (text) => {
     setchattext(text);
     if (text[text.length - 1] === "@") {
@@ -426,8 +420,9 @@ const ChatsdmScreen = ({ route }) => {
           <View style={chatTransferTextBg}>
             <Text style={chatTransferText}>
               {" "}
-              🎉 You sent <Text style={{ ...FONTS.bold }}>
-              N{amountFormatter(mes.message)}
+              🎉 You sent{" "}
+              <Text style={{ ...FONTS.bold }}>
+                N{amountFormatter(mes.message)}
               </Text>{" "}
               to this user
             </Text>
@@ -472,8 +467,10 @@ const ChatsdmScreen = ({ route }) => {
             <Text style={chatTransferText}>
               {" "}
               🎉 You just received{" "}
-              <Text style={{ ...FONTS.bold }}>N{amountFormatter(mes.message)}</Text> from this
-              user
+              <Text style={{ ...FONTS.bold }}>
+                N{amountFormatter(mes.message)}
+              </Text>{" "}
+              from this user
             </Text>
           </View>
         </View>
@@ -557,7 +554,6 @@ const ChatsdmScreen = ({ route }) => {
     setShowModal(false);
     switchModals(3);
   };
-  
 
   return (
     <FTMainwrapper pH={0} bgColor={COLORS.white} childBg={COLORS.white3}>
@@ -604,7 +600,11 @@ const ChatsdmScreen = ({ route }) => {
 
             <TouchableOpacity
               activeOpacity={0.7}
-              style={{backgroundColor: COLORS.white3, padding: 12, borderRadius: 30}}
+              style={{
+                backgroundColor: COLORS.white3,
+                padding: 12,
+                borderRadius: 30,
+              }}
               onPress={() => switchModals(0)}
             >
               <Blacksendicon />
@@ -622,8 +622,6 @@ const ChatsdmScreen = ({ route }) => {
             />
           </View>
         ) : (
-
-
           <Animated.ScrollView
             style={messageAreaContainer}
             ref={scrollViewRef}
@@ -638,8 +636,6 @@ const ChatsdmScreen = ({ route }) => {
               scrollViewRef?.current?.scrollToEnd({ animated: true })
             }
           >
-
-
             {messages.map(({ data, time }, index: number) => {
               return (
                 <View key={index}>
@@ -656,17 +652,13 @@ const ChatsdmScreen = ({ route }) => {
                 </View>
               );
             })}
-
-
           </Animated.ScrollView>
-  
         )}
 
         <View style={chatTextInput}>
-       
           <TextInput
             placeholder="Enter Message..."
-            style={[textinput,{minHeight: 40, maxHeight: 120,}]}
+            style={[textinput, { minHeight: 40, maxHeight: 120 }]}
             value={chattext}
             multiline={true}
             textAlignVertical="center"
@@ -688,8 +680,6 @@ const ChatsdmScreen = ({ route }) => {
           )}
         </View>
       </KeyboardAvoidingView>
-
-      
     </FTMainwrapper>
   );
 };

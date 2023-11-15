@@ -1,25 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import { COLORS, FONTS, fontsize, icons, images, SIZES } from "../constants";
+import React from "react";
+import { COLORS, icons, images } from "../constants";
 
-import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
+import { View, Text, TextInput, Image } from "react-native";
 
-import * as LocalAuthentication from "expo-local-authentication";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import {
-  FTCustombutton,
-  FTInput,
-  FTLoader,
-  FTMainwrapper,
-} from "../components";
+import { FTCustombutton, FTLoader, FTMainwrapper } from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { RFValue } from "react-native-responsive-fontsize";
-import {
-  getBiometricsAccess,
-  getCredentials,
-  saveCredentials,
-} from "../utils/biometrics";
+
 import { LoginScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
 import { VALIDATION } from "../utils";
@@ -37,8 +24,7 @@ const {
   errorMessageText,
 } = LoginScreenStyles;
 
-const { Newlogo, Nigerialogoicon } = icons;
-const {NigeriaflagImage} = images
+const { NigeriaflagImage } = images;
 
 const setAuthorizationToken = (token: string) => {
   if (token) {
@@ -53,7 +39,6 @@ const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const onsubmit = async (data) => {
-    console.log(data, "here is login data");
     try {
       setLoading(true);
       const response = await axiosCustom.post("/auth/signin/v2", data);
@@ -77,7 +62,6 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const onsignup = async (data) => {
-    console.log("now sign up", data);
     try {
       setLoading(true);
       const response = await axiosCustom.post("/auth/signup/v2", data);
@@ -94,8 +78,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <FTMainwrapper
-    >
+    <FTMainwrapper>
       <FTLoader loading={loading} />
       <Text style={center}>Enter Phone Number</Text>
 
@@ -121,7 +104,7 @@ const LoginScreen = ({ navigation }) => {
               ]}
             >
               <View style={logoAndInitialWrap}>
-                <Image source={NigeriaflagImage} style={logoStyle}/>
+                <Image source={NigeriaflagImage} style={logoStyle} />
                 <Text style={initialStyle}>+234</Text>
               </View>
               <View style={lineSeparator} />

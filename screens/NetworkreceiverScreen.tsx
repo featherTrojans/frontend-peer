@@ -74,7 +74,7 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
           title="Send to a new number"
           // info={userinfo?.phoneNumber}
           onPress={() =>
-            navigation.navigate("airtimeordata_screen", { userinfo })
+            navigation.navigate("airtimeordatanumber_screen", { network })
           }
           Icon={Whiteaddicon}
           mB={40}
@@ -128,7 +128,9 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
         ListEmptyComponent={() => {
           return !loadingcontacts ? (
             <FTEmptycomponent
-              msg={`Oops, ${loadingcontacts ? "yes"  : "No"} feather user on your  contact list`}
+              msg={`Oops, ${
+                loadingcontacts ? "yes" : "No"
+              } feather user on your  contact list`}
               showTransact={false}
             />
           ) : (

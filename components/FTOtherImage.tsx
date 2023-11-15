@@ -67,7 +67,6 @@ const FTOtherImage = ({
   }
 
   if (imageurl) {
-    console.log("from other image");
     return (
       <Pressable
         style={{

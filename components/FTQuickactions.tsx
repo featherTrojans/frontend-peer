@@ -36,10 +36,6 @@ const scrollactions = [
 ];
 
 const FTQuickactions = ({ onpress }) => {
-
-  
-  console.log("Quick action rerendeing");
-
   const renderEachScrollaction = useCallback(({ item, index }) => {
     let { bg, text, image, modal } = item;
     let isLast = index + 1 === scrollactions.length;

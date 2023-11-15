@@ -62,6 +62,7 @@ import {
   ChoosememojibgScreen,
   CreatecardScreen,
   JoinwaitlistScreen,
+  AirtimeordatanumberScreen,
 } from "../screens";
 
 // BVNSuccessScreen
@@ -203,6 +204,11 @@ export const transactRoutes = [
     screen: AirtimeordataScreen,
 
     route: "airtimeordata_screen",
+  },
+  {
+    screen: AirtimeordatanumberScreen,
+
+    route: "airtimeordatanumber_screen",
   },
 
   {

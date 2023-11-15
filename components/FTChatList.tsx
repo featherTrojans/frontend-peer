@@ -83,16 +83,18 @@ const ListHeader = ({ value, onchange }) => {
   );
 };
 
-const FTChatList = ({ allchatdata, loading }) => {
+const FTChatList = ({ allchatdata, loading, search }) => {
   const [allChats, setAllChats] = useState([]);
-  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setAllChats(allchatdata);
   }, [allchatdata]);
+  useEffect(() => {
+    handleSearchChange(search);
+  }, [search]);
   const handleSearchChange = (text) => {
     // allChats
-    setSearch(text);
+
     const filterchat = allchatdata.filter((item) => {
       const userInfo = item?.userInfo;
       let de = false;
@@ -119,9 +121,9 @@ const FTChatList = ({ allchatdata, loading }) => {
       ItemSeparatorComponent={() => {
         return <View style={{ height: 30 }} />;
       }}
-      ListHeaderComponent={() => (
-        <ListHeader value={search} onchange={(val) => setSearch(val)} />
-      )}
+      // ListHeaderComponent={() => (
+      //   <ListHeader value={search} onchange={(val) => setSearch(val)} />
+      // )}
       ListEmptyComponent={() => {
         return !loading ? (
           <FTEmptycomponent

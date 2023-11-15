@@ -97,7 +97,6 @@ const WithdrawcashScreen = ({ route, navigation }) => {
     }
   };
   const getAllAgents = async (address: string) => {
-    console.log("trying to get all agents");
     try {
       await axiosCustom.post("/status/find", {
         amount: Number(amount),

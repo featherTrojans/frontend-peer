@@ -90,7 +90,6 @@ function useChats() {
     }
   };
 
-  // console.log("FULL BIBLICAL", allchatdata, "FULL BIBLICAL");
   return { loading, chats, chattwos, allchatdata };
 }
 
