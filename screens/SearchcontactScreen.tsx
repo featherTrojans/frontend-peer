@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   ChoosefeatheruserScreenStyles,
@@ -6,6 +12,7 @@ import {
 } from "../assets/styles/screens";
 import {
   FTDetailsModal,
+  FTEmptycomponent,
   FTIconwithtitleandinfo,
   FTLoader,
   FTSearchinput,
@@ -18,6 +25,7 @@ import useContact from "../hooks/useContact";
 import amountFormatter from "../utils/formatMoney";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { useNavigation } from "@react-navigation/native";
+import { nameCapitalize } from "../utils/nameSplitter";
 
 const { listHeaderText, addBeneficiaryWrap, saveBeneficiaryText } =
   ChoosefeatheruserScreenStyles;
@@ -45,11 +53,11 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     transactionDatas: [
       {
         leftSide: "Name",
-        rightSide: userinfo.fullName,
+        rightSide: nameCapitalize(userinfo.fullName),
       },
       {
         leftSide: "Feather Tag",
-        rightSide: `${userinfo.username}`,
+        rightSide: `@${userinfo.username.toLowerCase()}`,
       },
       {
         leftSide: "Charges",
@@ -81,8 +89,8 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     <View style={{ backgroundColor: "#fff" }}>
       <FTDetailsModal
         modalTitle="User Details"
-        title={userinfo.fullName}
-        info={userinfo.username}
+        title={nameCapitalize(userinfo.fullName)}
+        info={`@${userinfo.username.toLowerCase()}`}
         onPress={onpress}
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
@@ -164,7 +172,6 @@ const SearchcontactScreen = ({ route }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
-      <FTLoader loading={loading} />
       <FlatList
         data={featherContacts}
         bounces={false}
@@ -173,8 +180,8 @@ const SearchcontactScreen = ({ route }) => {
         renderItem={({ item }) => {
           return (
             <FTIconwithtitleandinfo
-              title={item.fullName}
-              info={`@${item.username}`}
+              title={nameCapitalize(item.fullName)}
+              info={item?.username !== null ?`@${item?.username.toLowerCase()}` : `@${item?.username}`}
               onPress={() => switchModals(0, item, amount)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}
@@ -187,6 +194,16 @@ const SearchcontactScreen = ({ route }) => {
             />
           );
         }}
+        ListEmptyComponent={
+          !loading ? (
+            <FTEmptycomponent
+              msg="Oops, No feather user on your contact list"
+              showTransact={false}
+            />
+          ) : (
+            <ActivityIndicator size="small" color={COLORS.blue9} />
+          )
+        }
         ListHeaderComponent={
           <ListHeader value={searchval} onchange={handleSearch} />
         }

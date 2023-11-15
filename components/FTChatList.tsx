@@ -4,7 +4,6 @@ import { FlatList } from "react-native-gesture-handler";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import FTSearchinput from "./FTSearchinput";
 import axiosCustom from "../httpRequests/axiosCustom";
-// import { navigation } from "../utils";
 import { ChatsScreenStyles } from "../assets/styles/screens";
 import FTIconwithbg from "./FTIconwithbg";
 import FTUserImage from "./FTUserImage";
@@ -109,6 +108,7 @@ const FTChatList = ({ allchatdata, loading }) => {
 
     setAllChats(filterchat);
   };
+
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
@@ -122,16 +122,14 @@ const FTChatList = ({ allchatdata, loading }) => {
       ListHeaderComponent={() => (
         <ListHeader value={search} onchange={(val) => setSearch(val)} />
       )}
-      ListEmptyComponent={() => {
-        return !loading ? (
+      ListEmptyComponent={() => (
+        !loading ? (
           <FTEmptycomponent
-            msg="Oops, You don't have any recent chats."
+            msg="Padi, you don't have any beneficiary"
             showTransact={false}
           />
-        ) : (
-          <ActivityIndicator size="small" color={COLORS.blue9} />
-        );
-      }}
+        ) : <ActivityIndicator size="small" color={COLORS.blue9} />
+      )}
     />
   );
 };

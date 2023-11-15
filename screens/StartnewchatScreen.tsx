@@ -58,10 +58,6 @@ const StartnewchatScreen = ({ navigation }) => {
   };
   return (
     <FTTitlepagewrapper title="Choose Feather User" childBg={COLORS.white}>
-      <FTLoader loading={loading} />
-      {/* {!loading && featherContacts?.length == 0 && (
-        
-      )} */}
       <FlatList
         data={featherContacts}
         showsVerticalScrollIndicator={false}

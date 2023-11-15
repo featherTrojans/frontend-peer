@@ -36,7 +36,7 @@ const ChatsScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <FTLoader loading={loading} />
+      {/* <FTLoader loading={loading} /> */}
 
       <FTChatList loading={loading} allchatdata={allchatdata} />
     </FTTabWrapper>

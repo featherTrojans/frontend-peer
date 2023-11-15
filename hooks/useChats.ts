@@ -22,7 +22,7 @@ function useChats() {
   // userid = item.id1 !== authId ? item.id1 : item.id2;
   // snapshot1
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     const chatsRef = collection(db, "chatstwo");
     const chatQuery1 = query(
       chatsRef,
@@ -43,7 +43,7 @@ function useChats() {
       });
       setChattwos(newdata);
     });
-    setLoading(false);
+    // setLoading(false);
     return () => {
       unsub();
     };
@@ -51,7 +51,7 @@ function useChats() {
 
   // snapshot2
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     const chatsRef = collection(db, "chatstwo");
     const chatQuery1 = query(
       chatsRef,
@@ -70,13 +70,14 @@ function useChats() {
       });
       setChats(newdata);
     });
-    setLoading(false);
+    // setLoading(false);
     return () => {
       unsub();
     };
   }, []);
 
   const fetchandstorechat = async (userId, chatdata) => {
+    setLoading(true)
     try {
       const response = await axiosCustom.get(`/user/${userId}`);
       const userInfo = response.data.data;
@@ -87,6 +88,9 @@ function useChats() {
       const userInfo = response.data.data;
       chatdata.userInfo = userInfo;
       setallchatdata((oldchats) => [...oldchats, chatdata]);
+    }
+    finally{
+      setLoading(false)
     }
   };
 
