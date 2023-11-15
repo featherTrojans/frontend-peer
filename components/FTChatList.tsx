@@ -4,7 +4,6 @@ import { FlatList } from "react-native-gesture-handler";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import FTSearchinput from "./FTSearchinput";
 import axiosCustom from "../httpRequests/axiosCustom";
-// import { navigation } from "../utils";
 import { ChatsScreenStyles } from "../assets/styles/screens";
 import FTIconwithbg from "./FTIconwithbg";
 import FTUserImage from "./FTUserImage";
@@ -66,23 +65,6 @@ const ChatMessage = ({ chatinfo }) => {
   );
 };
 
-const ListHeader = ({ value, onchange }) => {
-  return (
-    <>
-      <FTSearchinput
-        placeholder="Type to search chat"
-        bG={COLORS.blue20}
-        mB={30}
-        mT={30}
-        // value={value}
-        onChange={onchange}
-      />
-
-      <Text style={recentChatText}>Recent Chats</Text>
-    </>
-  );
-};
-
 const FTChatList = ({ allchatdata, loading, search }) => {
   const [allChats, setAllChats] = useState([]);
 
@@ -111,6 +93,7 @@ const FTChatList = ({ allchatdata, loading, search }) => {
 
     setAllChats(filterchat);
   };
+
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
@@ -121,19 +104,19 @@ const FTChatList = ({ allchatdata, loading, search }) => {
       ItemSeparatorComponent={() => {
         return <View style={{ height: 30 }} />;
       }}
-      // ListHeaderComponent={() => (
-      //   <ListHeader value={search} onchange={(val) => setSearch(val)} />
-      // )}
-      ListEmptyComponent={() => {
-        return !loading ? (
+      ListHeaderComponent={() => (
+        <Text style={recentChatText}>Recent Chats</Text>
+      )}
+      ListEmptyComponent={() =>
+        !loading ? (
           <FTEmptycomponent
-            msg="Oops, You don't have any recent chats."
+            msg="Padi, you don't have any beneficiary"
             showTransact={false}
           />
         ) : (
           <ActivityIndicator size="small" color={COLORS.blue9} />
-        );
-      }}
+        )
+      }
     />
   );
 };

@@ -129,9 +129,7 @@ const TransactionDetailsScreen = ({ navigation, route }) => {
   const Arrow = isCredit ? Arrowin : Arrowout;
   const total = Number(amount);
   const dt = dayjs(dateTime);
-  const formatDateTime = `${dt.format("ddd")}. ${dt.format("MMM")}, ${dt.format(
-    "YYYY"
-  )}`;
+  const formatDateTime = `${dt.format("MMM D, YYYY - H:mm:ss")}`;
 
   const saveFile = async (filePath: string) => {
     const albumName = "Feather";

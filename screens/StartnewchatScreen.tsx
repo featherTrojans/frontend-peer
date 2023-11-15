@@ -58,10 +58,6 @@ const StartnewchatScreen = ({ navigation }) => {
   };
   return (
     <FTTitlepagewrapper title="Choose Feather User" childBg={COLORS.white}>
-      <FTLoader loading={loading} />
-      {/* {!loading && featherContacts?.length == 0 && (
-        
-      )} */}
       <FlatList
         data={featherContacts}
         showsVerticalScrollIndicator={false}
@@ -71,7 +67,7 @@ const StartnewchatScreen = ({ navigation }) => {
           return (
             <FTIconwithtitleandinfo
               title={nameCapitalize(item.fullName)}
-              info={`@${item.username}`}
+              info={`@${item?.username?.toLowerCase()}`}
               onPress={() =>
                 navigation.navigate("chatsdm_screen", { userInfo: item })
               }

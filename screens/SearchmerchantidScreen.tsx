@@ -15,7 +15,7 @@ import { useAlert } from "../hooks";
 import axiosCustom from "../httpRequests/axiosCustom";
 import amountFormatter from "../utils/formatMoney";
 const {} = SearchmerchantidScreenStyles;
-const { Bluecardicon } = icons;
+const { Bluecardicon, Useravatar } = icons;
 
 const SearchmerchantidScreen = ({ route, navigation }) => {
   const amount = route?.params?.amount;
@@ -40,6 +40,11 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
     }
   };
   const closeModalAndRedirect = (merchantinfo) => {
+    const userInfo = {
+      imageUrl: merchantinfo?.imageUrl,
+      memoji: {},
+      fullName: merchantinfo?.business_name,
+    };
     const summaryinfo = {
       amount: amount,
       transactionDatas: [
@@ -65,6 +70,7 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
     navigation.navigate("transactionsummary_screen", {
       action: (pin) => action(pin, merchantinfo),
       summaryinfo,
+      userInfo,
     });
   };
 
@@ -84,9 +90,15 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
           <FTIconwithtitleandinfo
             title={merchantinfo?.business_name}
             info={`${merchantinfo?.freeWithdrawal} Transactions`}
-            onPress={() => console.log("Yes")}
-            Icon={Bluecardicon}
-            bG="red"
+            profile={true}
+            userInfo={{
+              imageUrl: merchantinfo?.imageUrl,
+              memoji: {},
+              fullName: merchantinfo?.business_name,
+            }}
+            onPress={() => closeModalAndRedirect(merchantinfo)}
+            Icon={Useravatar}
+            bG=""
           />
         </View>
         <FTCustombutton

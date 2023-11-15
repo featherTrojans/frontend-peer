@@ -21,7 +21,7 @@ export const ChatsScreenStyles = StyleSheet.create({
     borderRadius: 20 / 2,
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
   },
   chatLastMessage: {
     ...fontsize.smallest,

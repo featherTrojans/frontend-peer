@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { VALIDATION } from "../utils";
 import amountFormatter from "../utils/formatMoney";
 
-const { Bluecardicon } = icons;
+const { Bluecardicon, Useravatar } = icons;
 
 const {
   amountText,
@@ -69,7 +69,7 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
             ) : (
               <FTIconwithbg
                 size={60}
-                Icon={Bluecardicon}
+                Icon={Useravatar}
                 bG={COLORS.Tpurple2}
               />
             )}
