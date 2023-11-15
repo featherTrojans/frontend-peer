@@ -67,7 +67,7 @@ const StartnewchatScreen = ({ navigation }) => {
           return (
             <FTIconwithtitleandinfo
               title={nameCapitalize(item.fullName)}
-              info={`@${item.username}`}
+              info={`@${item?.username?.toLowerCase()}`}
               onPress={() =>
                 navigation.navigate("chatsdm_screen", { userInfo: item })
               }

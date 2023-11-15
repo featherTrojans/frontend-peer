@@ -89,8 +89,8 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
     <View style={{ backgroundColor: "#fff" }}>
       <FTDetailsModal
         modalTitle="User Details"
-        title={nameCapitalize(userinfo.fullName)}
-        info={`@${userinfo.username.toLowerCase()}`}
+        title={nameCapitalize(userinfo?.fullName)}
+        info={`@${userinfo?.username?.toLowerCase()}`}
         onPress={onpress}
         bG={COLORS.Tblue4}
         Icon={Smallphoneicon}
