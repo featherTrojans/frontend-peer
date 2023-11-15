@@ -42,7 +42,6 @@ const ChatsScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <FTLoader loading={loading} />
       <FTSearchinput
         placeholder="Type to search chat"
         bG={COLORS.blue20}
@@ -51,7 +50,11 @@ const ChatsScreen = () => {
         value={search}
         onChange={(val) => setSearch(val)}
       />
-      <FTChatList allchatdata={allchatdata} search={search} />
+      {!loading ? (
+        <FTChatList allchatdata={allchatdata} search={search} />
+      ) : (
+        <ActivityIndicator size="small" color={COLORS.blue9} />
+      )}
     </FTTabWrapper>
   );
 };

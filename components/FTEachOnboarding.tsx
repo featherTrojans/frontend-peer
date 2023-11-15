@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
+import { Image as RNImage } from "expo-image";
 import { OnboardingScreenStyles } from "../assets/styles/screens";
 import { images } from "../constants";
 const { Splashimage1, Splashimage2 } = images;
@@ -38,10 +39,10 @@ const FTEachOnboarding = ({ item }: EachOnboardingTypes) => {
           },
         ]}
       >
-        <Image
+        <RNImage
           source={image}
           style={eachOnboardingImageStyle}
-          resizeMode="contain"
+          contentFit="contain"
         />
       </View>
 

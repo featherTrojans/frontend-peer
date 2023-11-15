@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import React, { useCallback } from "react";
+import { Image as RNImage } from "expo-image";
 import { images } from "../constants";
 import { HomeScreenStyles } from "../assets/styles/screens";
 
@@ -47,10 +48,9 @@ const FTQuickactions = ({ onpress }) => {
             { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
           ]}
         >
-          <Image
+          <RNImage
             style={scrollActionImage}
             source={image}
-            defaultSource={image}
           />
           <Text style={scrollactionText}>{text}</Text>
         </View>

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
+import { Image as RNImage } from "expo-image";
 import { COLORS, FONTS, fontsize, icons, images } from "../constants";
 import { assetsDB, bankLogo } from "../assetdatas";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -55,16 +56,14 @@ const showImage = (
             styles.typeContainer,
           ]}
         >
-          <Image
+          <RNImage
             style={{
               width: isVFD ? "100%" : "50%",
               height: isVFD ? "100%" : "50%",
             }}
-            source={{
-              uri: !isVFD
-                ? assetsDB["fund"]["paystack"]
-                : assetsDB["fund"]["VFD"],
-            }}
+            source={
+              !isVFD ? assetsDB["fund"]["paystack"] : assetsDB["fund"]["VFD"]
+            }
           />
         </View>
       );
@@ -111,11 +110,9 @@ const showImage = (
     case "TAJ":
       return (
         <View style={styles.typeContainer}>
-          <Image
+          <RNImage
             style={{ width: "50%", height: "50%", borderRadius: 50 / 2 }}
-            source={{
-              uri: assetsDB["banks"][title],
-            }}
+            source={assetsDB["banks"][title]}
           />
         </View>
       );
@@ -127,13 +124,10 @@ const showImage = (
       const isFcmb = value === "First City Monument Bank";
       return (
         <View style={styles.typeContainer}>
-          <Image
+          <RNImage
             style={{ width: "100%", height: "100%", borderRadius: 50 / 2 }}
-            source={{
-              uri: targetLogo[0]["image"],
-            }}
-            resizeMode={isGt || isFcmb ? "cover" : "contain"}
-            resizeMethod="scale"
+            source={targetLogo[0]["image"]}
+            contentFit={isGt || isFcmb ? "cover" : "contain"}
           />
         </View>
       );
@@ -144,13 +138,10 @@ const showImage = (
       const isFcmbc = value === "First City Monument Bank";
       return (
         <View style={styles.typeContainer}>
-          <Image
+          <RNImage
             style={{ width: "100%", height: "100%", borderRadius: 50 / 2 }}
-            source={{
-              uri: targetlogo[0]["image"],
-            }}
-            resizeMode={isGtb || isFcmbc ? "cover" : "contain"}
-            resizeMethod="scale"
+            source={targetlogo[0]["image"]}
+            contentFit={isGtb || isFcmbc ? "cover" : "contain"}
           />
         </View>
       );
@@ -163,13 +154,13 @@ const showImage = (
         <View
           style={[styles.typeContainer, { backgroundColor: "transparent" }]}
         >
-          <Image
+          <RNImage
             style={{ width: "100%", height: "100%", borderRadius: 50 / 2 }}
-            source={{
-              uri: isEtisalat
+            source={
+              isEtisalat
                 ? assetsDB["bills"]["ETISALAT"]
-                : assetsDB["bills"][networkType],
-            }}
+                : assetsDB["bills"][networkType]
+            }
           />
         </View>
       );
@@ -199,13 +190,10 @@ const Sendingandreceive = ({
       {(title == "Wallet Credit" || title == "Wallet Debit") && otherUser ? (
         <View>
           {otherUser.imageUrl !== null ? (
-            <Image
+            <RNImage
               style={{ width: 50, height: 50, borderRadius: 62 / 2 }}
-              resizeMethod="scale"
-              resizeMode="cover"
-              source={{
-                uri: otherUser.imageUrl,
-              }}
+              contentFit="cover"
+              source={otherUser.imageUrl}
             />
           ) : (
             showImage(senderName, receiverName, title, value, otherUser)

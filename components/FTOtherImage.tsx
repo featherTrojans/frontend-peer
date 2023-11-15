@@ -1,5 +1,6 @@
 import { StyleSheet, View, Image, Pressable } from "react-native";
 import React from "react";
+import { Image as RNImage } from "expo-image";
 import { COLORS, FONTS, fontsize, images } from "../constants";
 
 import { allMemojis } from "../assetdatas";
@@ -52,15 +53,14 @@ const FTOtherImage = ({
         }}
         onPress={onpress}
       >
-        <Image
+        <RNImage
           style={{
             width: "100%",
             height: "100%",
             borderRadius: size / 2,
           }}
-          resizeMode="contain"
-          resizeMethod="scale"
-          source={{ uri: memojiobj?.index }}
+          contentFit="contain"
+          source={memojiobj?.index}
         />
       </Pressable>
     );
@@ -78,15 +78,14 @@ const FTOtherImage = ({
         }}
         onPress={onpress}
       >
-        <Image
+        <RNImage
           style={{
             width: "100%",
             height: "100%",
             borderRadius: size / 2,
           }}
-          resizeMode="cover"
-          resizeMethod="scale"
-          source={{ uri: imageurl }}
+          contentFit="cover"
+          source={imageurl}
         />
       </Pressable>
     );

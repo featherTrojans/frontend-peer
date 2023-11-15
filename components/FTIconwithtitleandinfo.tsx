@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import React, { ReactElement, ReactNode } from "react";
+import { Image as RNImage } from "expo-image";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { FTIconwithtitleandinfoStyles } from "../assets/styles/components";
 import FTIconwithbg from "./FTIconwithbg";
@@ -52,7 +53,7 @@ const FTIconwithtitleandinfo = ({
           <FTOtherImage
             imageurl={userInfo?.imageUrl}
             memojiImage={userInfo?.memoji}
-            fullname={userInfo?.fullName  || title}
+            fullname={userInfo?.fullName || title}
             size={size}
           />
         ) : (
@@ -91,14 +92,13 @@ export const FTIconwithtitleandinfoCustom = ({
     >
       <View style={iconandinfoWrap}>
         <View>
-          <Image
+          <RNImage
             style={{
               width: 45,
               height: 45,
               borderRadius: size / 2,
             }}
-            resizeMode="contain"
-            resizeMethod="scale"
+            contentFit="contain"
             source={imageUrl}
           />
         </View>

@@ -65,7 +65,7 @@ const ChatMessage = ({ chatinfo }) => {
   );
 };
 
-const FTChatList = ({ allchatdata, loading, search }) => {
+const FTChatList = ({ allchatdata, search }) => {
   const [allChats, setAllChats] = useState([]);
 
   useEffect(() => {
@@ -107,16 +107,12 @@ const FTChatList = ({ allchatdata, loading, search }) => {
       ListHeaderComponent={() => (
         <Text style={recentChatText}>Recent Chats</Text>
       )}
-      ListEmptyComponent={() =>
-        !loading ? (
-          <FTEmptycomponent
-            msg="Padi, you don't have any beneficiary"
-            showTransact={false}
-          />
-        ) : (
-          <ActivityIndicator size="small" color={COLORS.blue9} />
-        )
-      }
+      ListEmptyComponent={() => (
+        <FTEmptycomponent
+          msg="Padi, you don't have any beneficiary"
+          showTransact={false}
+        />
+      )}
     />
   );
 };

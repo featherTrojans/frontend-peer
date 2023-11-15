@@ -1,7 +1,8 @@
 import React from "react";
-import { COLORS, icons, images } from "../constants";
 
 import { View, Text, TextInput, Image } from "react-native";
+import { Image as RNImage } from "expo-image";
+import { COLORS, icons, images } from "../constants";
 
 import { FTCustombutton, FTLoader, FTMainwrapper } from "../components";
 import axiosCustom from "../httpRequests/axiosCustom";
@@ -104,7 +105,7 @@ const LoginScreen = ({ navigation }) => {
               ]}
             >
               <View style={logoAndInitialWrap}>
-                <Image source={NigeriaflagImage} style={logoStyle} />
+                <RNImage source={NigeriaflagImage} style={logoStyle} />
                 <Text style={initialStyle}>+234</Text>
               </View>
               <View style={lineSeparator} />

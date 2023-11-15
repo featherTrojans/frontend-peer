@@ -6,6 +6,7 @@ import {
   FlatList,
   Image,
 } from "react-native";
+import { Image as RNImage } from "expo-image";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { CardScreenStyles } from "../assets/styles/screens";
 import {
@@ -268,15 +269,15 @@ const CardScreen = ({ navigation }) => {
       ) : (
         <>
           <Text style={myCardsText}>My Cards</Text>
-          <Image
+          <RNImage
             source={NetlifylogoImage}
             style={[logosStyle, { right: -50, top: -30 }]}
           />
-          <Image
+          <RNImage
             source={YoutubelogoImage}
             style={[logosStyle, { right: -50, top: height / 3 }]}
           />
-          <Image
+          <RNImage
             source={SpotifylogoImage}
             style={[logosStyle, { left: -50, top: height / 5 }]}
           />

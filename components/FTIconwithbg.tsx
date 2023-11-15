@@ -6,6 +6,7 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
+import { Image as RNImage } from "expo-image";
 import React, { ReactElement } from "react";
 import { images } from "../constants";
 
@@ -46,15 +47,14 @@ const FTIconwithbg = ({
       )}
       {imageUrl ? (
         <View style={{ width: "100%", height: "100%" }}>
-          <Image
+          <RNImage
             style={{
               width: "100%",
               height: "100%",
               borderRadius: size / 2,
             }}
-            resizeMode="contain"
-            resizeMethod="scale"
-            source={{ uri: imageUrl }}
+            contentFit="contain"
+            source={imageUrl}
           />
         </View>
       ) : (

@@ -6,6 +6,7 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
+import { Image as RNImage } from "expo-image";
 import React, { useContext } from "react";
 import { images } from "../constants";
 import { AuthContext } from "../context/AuthContext";
@@ -51,16 +52,14 @@ const FTUserImage = ({
         }}
         onPress={onpress}
       >
-        <Image
+        <RNImage
           style={{
             width: "100%",
             height: "100%",
             borderRadius: size / 2,
           }}
-          resizeMode="contain"
-          resizeMethod="scale"
-          source={{ uri: memojiobj?.index }}
-          // defaultSource={{ uri: memojiobj?.index }}
+          contentFit="contain"
+          source={memojiobj?.index}
         />
       </Pressable>
     );
@@ -78,20 +77,14 @@ const FTUserImage = ({
         }}
         onPress={onpress}
       >
-        <Image
+        <RNImage
           style={{
             width: "100%",
             height: "100%",
             borderRadius: size / 2,
           }}
-          resizeMode="cover"
-          resizeMethod="scale"
-          source={{
-            uri: imageurl,
-          }}
-          // defaultSource={{
-          //   uri: imageurl
-          // }}
+          contentFit="cover"
+          source={imageurl}
         />
       </Pressable>
     );
@@ -109,15 +102,15 @@ const FTUserImage = ({
       }}
       onPress={onpress}
     >
-      <Image
+      <RNImage
         style={{
           width: "100%",
           height: "100%",
           borderRadius: size / 2,
         }}
-        resizeMode="contain"
-        resizeMethod="scale"
-        source={{ uri: allMemojis[gender]["lightSkinned"][0] }}
+        contentFit="contain"
+        // resizeMethod="scale"
+        source={allMemojis[gender]["lightSkinned"][0]}
         // defaultSource={{ uri: allMemojis[gender]["lightSkinned"][0]}}
       />
     </Pressable>
