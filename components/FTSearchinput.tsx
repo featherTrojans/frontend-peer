@@ -14,6 +14,7 @@ const FTSearchinput = ({
   mT = 0,
   value,
   onChange,
+  icon = true,
 }) => {
   return (
     <View
@@ -29,7 +30,7 @@ const FTSearchinput = ({
         value={value}
         onChangeText={onChange}
       />
-      <Searchicon />
+      {icon && <Searchicon />}
     </View>
   );
 };

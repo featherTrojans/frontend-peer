@@ -10,26 +10,51 @@ import axiosCustom from "../httpRequests/axiosCustom";
 const FTTransact = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const [transactions, setTransations] = useState();
-
+  const [transactions, setTransations] = useState([]);
+  const [page, setPage] = useState(1);
   useEffect(() => {
-    getAllTransactions();
+    getAllTransactions(1);
   }, []);
 
   const handleRefresh = () => {
     setRefreshing(true);
-    getAllTransactions();
+    getAllTransactions(1);
   };
 
-  const getAllTransactions = async () => {
+  const getAllTransactions = async (page) => {
     try {
       setLoading(true);
-      const response = await axiosCustom.get("/transactions");
-      setTransations(response?.data?.data?.transactions);
+      const response = await axiosCustom.get(
+        `/transactions?page=${page}&data=2`
+      );
+      const tranc = response?.data?.data?.transactions;
+      console.log(tranc, "tranc");
+      if (tranc.length > 0) {
+        console.log("another once");
+        setTransations([...transactions, ...tranc]);
+        setPage(page + 1);
+      }
     } catch (err) {
     } finally {
       setLoading(false);
       setRefreshing(false);
+    }
+  };
+
+  const getAllTransactionsByPage = async (page) => {
+    try {
+      const response = await axiosCustom.get(
+        `/transactions?page=${page}&data=20`
+      );
+      const tranc = response?.data?.data?.transactions;
+      console.log(tranc, "tranc");
+      if (tranc.length > 0) {
+        console.log("another once");
+        setTransations([...transactions, ...tranc]);
+        setPage(page + 1);
+      }
+    } catch (err) {
+    } finally {
     }
   };
 
@@ -95,6 +120,8 @@ const FTTransact = () => {
               showsVerticalScrollIndicator={false}
               renderItem={renderEachTransaction}
               keyExtractor={(item: { time: string }) => item.time}
+              onEndReachedThreshold={0.5}
+              onEndReached={() => getAllTransactionsByPage(page)}
               ListEmptyComponent={
                 <FTEmptycomponent
                   size={135}

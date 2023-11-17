@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.10",
+    "version": "2.0.12",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -37,7 +37,7 @@
       }
     },
     "android": {
-      "versionCode": 26,
+      "versionCode": 27,
       "package": "feather.peer",
       "googleServicesFile": "./google-services.json",
       "permissions": [
@@ -75,7 +75,9 @@
       "userInterfaceStyle": "automatic"
     },
     "extra": {
-      "eas": {}
+      "eas": {
+        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
+      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"

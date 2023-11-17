@@ -142,6 +142,7 @@ const AirtimeordataScreen = ({ route }) => {
         value={amount}
         onChange={onamountchange}
         placeholder="Type in custom amount"
+        icon={false}
       />
 
       <FlatList

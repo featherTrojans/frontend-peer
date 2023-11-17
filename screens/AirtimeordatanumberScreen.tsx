@@ -83,14 +83,19 @@ const AirtimeordatanumberScreen = ({ route }) => {
         value={phoneNumber}
         onChange={setPhoneNumber}
         placeholder="Type in Phone Number"
+        icon={false}
         mB={20}
         mT={20}
       />
+
       <FTSearchinput
         value={amount}
         onChange={onamountchange}
         placeholder="Type in custom amount"
+        mB={20}
+        icon={false}
       />
+     
 
       <FlatList
         data={airtimeDatas}
