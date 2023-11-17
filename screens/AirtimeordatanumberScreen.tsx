@@ -116,7 +116,7 @@ const AirtimeordatanumberScreen = ({ route }) => {
         <FTCustombutton
           btntext="Proceed"
           bg={COLORS.blue9}
-          disable={phoneNumber.length != 11}
+          disable={phoneNumber.length != 11 || amount == ""}
           onpress={() =>
             navigation.navigate("transactionpin_screen", {
               action: actionairtime(amount),
