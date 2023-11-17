@@ -83,11 +83,13 @@ const AirtimeordatanumberScreen = ({ route }) => {
         onChange={onamountchange}
         placeholder="Type in custom amount"
         mB={20}
+        icon={false}
       />
       <FTSearchinput
         value={phoneNumber}
         onChange={setPhoneNumber}
         placeholder="Type in Phone Number"
+        icon={false}
       />
 
       <FlatList

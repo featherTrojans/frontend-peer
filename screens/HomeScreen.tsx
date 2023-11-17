@@ -89,14 +89,14 @@ const {
 const SetupProfile = ({ onPress }) => {
   const { authdata } = useContext(AuthContext);
   const level = authdata?.userDetails?.userLevel;
-
+  console.log(authdata?.userDetails, "HELEPELEPLEL");
   let isProfileSetupCompleted =
     !!authdata?.userDetails?.gender &&
     !!authdata?.userDetails?.username &&
     level >= 3 &&
     level >= 2 &&
     !!authdata?.userDetails?.pin &&
-    (authdata?.userDetails?.imageUrl || authdata?.userDetails?.isMemoji);
+    (authdata?.userDetails?.imageUrl || authdata?.userDetails?.memoji);
 
   if (isProfileSetupCompleted) {
     return null;
@@ -230,7 +230,7 @@ const ProfileSetup = ({ nav }) => {
       Icon: Profilesetupicon,
       bg: COLORS.Tgreen3,
       completed:
-        authdata?.userDetails?.imageUrl || authdata?.userDetails?.isMemoji,
+        authdata?.userDetails?.imageUrl || authdata?.userDetails?.memoji,
       onPress: () => nav.navigate("changeappearance_screen"),
     },
     {
