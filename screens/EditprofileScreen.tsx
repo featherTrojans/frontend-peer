@@ -163,8 +163,11 @@ const EditprofileScreen = ({ navigation }) => {
             >
               {upgradeDecision()}
             </Text> */}
-          <View style={[profileWrap, {marginTop: 10}]}>
-            <Text style={{...fontsize.smallest, ...FONTS.regular}}>Account Level : <Text style={{...FONTS.bold}}>{accountlevel()}</Text></Text>
+          <View style={[profileWrap, { marginTop: 10 }]}>
+            <Text style={{ ...fontsize.smallest, ...FONTS.regular }}>
+              Account Level :{" "}
+              <Text style={{ ...FONTS.bold }}>{accountlevel()}</Text>
+            </Text>
           </View>
         </View>
 
