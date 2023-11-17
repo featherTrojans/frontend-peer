@@ -13,6 +13,7 @@ import { COLORS, icons } from "../constants";
 import { useForm } from "react-hook-form";
 import { VALIDATION } from "../utils";
 import amountFormatter from "../utils/formatMoney";
+import { trucateText } from "../utils/truncateText";
 
 const { Bluecardicon, Useravatar } = icons;
 
@@ -39,12 +40,13 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
       <View style={eachSummaryWrap}>
         <Text style={eachSummaryKey}>{leftSide}</Text>
         <Text
+        numberOfLines={1}
           style={[
             eachSummaryValue,
             { color: isFree ? COLORS.green4 : COLORS.blue9 },
           ]}
         >
-          {rightSide}
+          {trucateText(rightSide, 18)}
         </Text>
       </View>
     );
