@@ -12,6 +12,7 @@ import { COLORS, icons } from "../constants";
 import { clearDataFromStorage, redirectTo } from "../utils";
 import { AuthContext } from "../context/AuthContext";
 import { nameCapitalize } from "../utils/nameSplitter";
+import { useLinking } from "../hooks";
 const {
   Editprofileicon,
   Mywalleticon,
@@ -35,6 +36,7 @@ const {
 
 const ProfileScreen = ({ navigation }) => {
   const { authdata, setAuthData, setToken } = useContext(AuthContext);
+  const {redirecToAbout} = useLinking()
 
   const memojiImage = authdata?.userDetails?.memoji;
   let memojiobj = {};
@@ -69,7 +71,7 @@ const ProfileScreen = ({ navigation }) => {
     {
       Icon: Abouticon,
       title: "About Feather App",
-      action: () => console.log("yes about"),
+      action: () => redirecToAbout(),
     },
   ];
 
