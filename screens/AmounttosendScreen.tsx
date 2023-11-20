@@ -37,14 +37,20 @@ const AmounttosendScreen = ({ route }) => {
   const formatted = amountFormatter(amount.join(""));
 
   const handleSetAmount = (value: string) => {
+    if (value === "." && amount.includes(".")){
+     return
+    }
     const newpin = [...amount, value];
-
+    if(newpin.join("").split(".")[1]?.length > 2){
+      return
+    }
     setAmount(newpin);
   };
 
   let typedAmount = Number(amount.join(""));
-  let typedAmountGreaterThanBal = !toFundScreen && (typedAmount > authdata.walletBal);
-  let disableButton = (typedAmountGreaterThanBal || typedAmount <= 0)
+  let typedAmountGreaterThanBal =
+    !toFundScreen && typedAmount > authdata.walletBal;
+  let disableButton = typedAmountGreaterThanBal || typedAmount <= 0;
 
   useEffect(() => {
     if (typedAmountGreaterThanBal) {
