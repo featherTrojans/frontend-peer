@@ -57,7 +57,7 @@
     "expo-sms": "~11.2.1",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
-    "expo-updates": "~0.16.4",
+    "expo-updates": "^0.18.17",
     "expo-web-browser": "~12.1.1",
     "firebase": "^9.4.1",
     "lottie-ios": "3.4.0",

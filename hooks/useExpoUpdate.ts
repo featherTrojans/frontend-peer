@@ -15,7 +15,7 @@ export function useExpoUpdate() {
         if (update.isAvailable) {
 
           await fetchUpdateAsync();
-          // await reloadAsync();
+          await reloadAsync();
         }
       } catch (error) {
         console.log(error);
