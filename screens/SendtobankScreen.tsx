@@ -120,22 +120,23 @@ const SendtobankScreen = ({ route, navigation }) => {
   };
 
   const handleSearch = (text) => {
+    console.log(text, "here is the search")
     // name and account no
-    const newbeneferiacy = beneficiaries.filter((item) => {
-      let lowitem = item.toLowerCase();
-      return (
-        item?.account_name?.toLowerCase().includes(lowitem) ||
-        item?.account_number?.toLowerCase().includes(lowitem)
-      );
-    });
-    setFilteredbeneficiaries(newbeneferiacy);
+    // const newbeneferiacy = beneficiaries.filter((item) => {
+    //   let lowitem = text.toLowerCase();
+    //   return (
+    //     item?.account_name?.toLowerCase().includes(lowitem) ||
+    //     item?.account_number?.toLowerCase().includes(lowitem)
+    //   );
+    // });
+    // setFilteredbeneficiaries(newbeneferiacy);
   };
 
   return (
     <FTTitlepagewrapper title="Send to bank account">
       <FTSearchinput
         value={search}
-        onChange={handleSearch}
+        onChange={() => console.log("yes")}
         placeholder="Search bank account"
       />
       <FTLoader loading={loading} />
