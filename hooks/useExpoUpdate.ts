@@ -32,6 +32,8 @@ export function useExpoUpdate() {
     }
   }, []);
 
+  
+
   useEffect(() => {
     // dont run on web or dev mode
     if (__DEV__) return;
@@ -56,6 +58,8 @@ export function useExpoUpdate() {
 
     lastUpdateCheck.current = new Date();
   }, [checkUpdate, isForeground]);
+
+
 }
 
 

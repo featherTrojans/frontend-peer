@@ -43,6 +43,7 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList as AnimatedFlatlist } from "react-native-gesture-handler";
 import { useAlert } from "../hooks";
 import amountFormatter from "../utils/formatMoney";
+import { useExpoUpdate } from "../hooks/useExpoUpdate";
 
 const {
   headerContainer,
@@ -349,7 +350,6 @@ const SetupPin = ({ nav }) => {
 };
 const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const { setAuthData, authdata } = useContext(AuthContext);
-
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
@@ -362,6 +362,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     height: number;
   }>({ child: null, height: 200 });
   const [withdrawLoading, setWithdrawLoading] = useState(false);
+  useExpoUpdate()
 
   const histories: any[] = useMemo(
     () => formatData(authdata?.transactions),

@@ -39,7 +39,7 @@ const ProfileScreen = ({ navigation }) => {
   const {redirecToAbout} = useLinking()
 
   const memojiImage = authdata?.userDetails?.memoji;
-  let memojiobj = {};
+  let memojiobj = {color: ""};
   if (memojiImage) {
     if (typeof memojiImage == "string") {
       memojiobj = JSON.parse(memojiImage);
