@@ -362,7 +362,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     height: number;
   }>({ child: null, height: 200 });
   const [withdrawLoading, setWithdrawLoading] = useState(false);
-  // useExpoUpdate()
+  useExpoUpdate()
 
   const histories: any[] = useMemo(
     () => formatData(authdata?.transactions),
