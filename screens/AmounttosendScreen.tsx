@@ -44,6 +44,11 @@ const AmounttosendScreen = ({ route }) => {
     if(newpin.join("").split(".")[1]?.length > 2){
       return
     }
+    if(value === "." && newpin.length === 1){
+
+      console.log(newpin.length, "yes")
+      return 
+    }
     setAmount(newpin);
   };
 

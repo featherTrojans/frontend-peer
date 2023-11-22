@@ -70,7 +70,7 @@ const TransactionsScreen = ({ navigation }) => {
     if (amount > authdata?.userDetails?.walletBal) {
       return errorAlert(null, "amount is greater than wallet");
     }
-    navigation.navigate("withdrawcash_screen", amount);
+    navigation.navigate("withdrawcash_screen", { amount });
   };
 
   const findmerchant = async () => {

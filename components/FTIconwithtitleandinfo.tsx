@@ -94,8 +94,8 @@ export const FTIconwithtitleandinfoCustom = ({
         <View>
           <RNImage
             style={{
-              width: 45,
-              height: 45,
+              width: size,
+              height: size,
               borderRadius: size / 2,
             }}
             contentFit="contain"

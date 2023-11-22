@@ -72,7 +72,7 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
               <FTIconwithbg
                 size={60}
                 Icon={Useravatar}
-                bG={COLORS.Tpurple2}
+                bG={COLORS.Tblue4}
               />
             )}
             <Text style={amountText}>Amount</Text>

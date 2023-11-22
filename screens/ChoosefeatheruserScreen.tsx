@@ -228,7 +228,7 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
               info={`@${item?.username?.toLowerCase()}`}
               onPress={() => switchModals(0, item, amount, true)}
               bG={COLORS.Tblue4}
-              Icon={Smallphoneicon}
+              // Icon={Smallphoneicon}
               profile={true}
               userInfo={{
                 imageUrl: item?.imageUrl,

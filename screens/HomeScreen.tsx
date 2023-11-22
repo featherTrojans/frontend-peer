@@ -45,6 +45,7 @@ import { useAlert } from "../hooks";
 import amountFormatter from "../utils/formatMoney";
 import { useExpoUpdate } from "../hooks/useExpoUpdate";
 
+
 const {
   headerContainer,
   profileContainer,
@@ -171,17 +172,23 @@ const ActiveCashWithdrawal = () => {
       </View>
 
       <FTIconwithtitleandinfo
-        title={info.agent}
-        info={`N${info.total}`}
-        bG="blue"
+        title={info?.agent}
+        info={`N${amountFormatter(info.total)}`}
+        bG={COLORS.Tblue4}
         mT={24}
+        profile={true}
         onPress={() =>
           navigation.navigate("withdrawcash_screen", {
             info: info,
             amount: 0,
           })
         }
-        Icon={Banksetupicon}
+        userInfo={{
+          imageUrl: "",
+          memoji: {},
+          fullName: info?.agent,
+        }}
+        // Icon={Banksetupicon}
       />
     </View>
   );
@@ -400,7 +407,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     if (amount > authdata?.userDetails?.walletBal) {
       return errorAlert(null, "amount is greater than wallet");
     }
-    navigation.navigate("withdrawcash_screen", amount);
+    navigation.navigate("withdrawcash_screen", { amount });
   };
 
   const findmerchant = async () => {

@@ -1,9 +1,19 @@
-import { Linking, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  Linking,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
   FTCustombutton,
   FTEmptycomponent,
   FTIconwithbg,
+  FTIconwithtitleandinfo,
+  FTLoader,
+  FTOtherImage,
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, icons } from "../constants";
@@ -34,6 +44,7 @@ const {
   withdrawalActionTitle,
   loadingWrapper,
   searchingNearbyText,
+  detailsBlock,
 } = WithdrawcashScreenStyles;
 
 const {
@@ -66,6 +77,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   const { setCoords, coords, setDestinationCoords } =
     useContext(LocationContext);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const [info, setInfo] = useState(agentinfo);
   const [noagent, setnoagent] = useState(false);
   const [latlong, setlatlong] = useState([]);
@@ -83,22 +95,22 @@ const WithdrawcashScreen = ({ route, navigation }) => {
     }
   }, [info]);
 
-
-
   const getAllAgents = async (address: string) => {
-    console.log("trying to fetch agent datats")
+    console.log("trying to fetch agent datats");
     try {
       const response2 = await axiosCustom.post("/status/find", {
         amount: Number(amount),
         location: address,
       });
-      console.log(response2, "here is the find response")
       const response = await axiosCustom.get("/request/accepted");
+      console.log(response?.data?.data, "Here is agent data");
+
       setInfo(response?.data?.data);
       if (response.data && response.data.data.length > 0) {
         setInfo(response?.data?.data[0]);
       }
     } catch (err) {
+      // console.log(err.response);
       setnoagent(true);
     } finally {
     }
@@ -110,11 +122,10 @@ const WithdrawcashScreen = ({ route, navigation }) => {
     try {
       setLoading(true);
       const { coordinates, address, locationObj } = await getCurrentLocation();
-      console.log(address, "here is the address")
+      console.log(address, "here is the address");
       setCoords({ ...coordinates, locationText: address });
       const agentResponse = await getAllAgents(address);
-      console.log(agentResponse, "here is the agents dara")
-
+      console.log(agentResponse, "here is the agents dara");
     } catch (err) {
       console.log("maybe this is where it is failing, acan't get address");
     } finally {
@@ -122,9 +133,8 @@ const WithdrawcashScreen = ({ route, navigation }) => {
     }
   };
 
-
   const handleCancelRequest = async () => {
-    setLoading(true);
+    setLoading2(true);
     try {
       await axiosCustom({
         method: "DELETE",
@@ -134,10 +144,11 @@ const WithdrawcashScreen = ({ route, navigation }) => {
           reasonForCancel: "Mistake cash request",
         },
       });
+      navigation.navigate("Home");
     } catch (err) {
       errorAlert(err);
     } finally {
-      setLoading(false);
+      setLoading2(false);
     }
   };
 
@@ -159,29 +170,32 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       transactionDatas: [
         {
           leftSide: "Merchant Name",
-          rightSide: info.agent,
+          rightSide: info?.agent,
         },
         {
           leftSide: "Merchant ID",
-          rightSide: `${info.agentUsername}`,
+          rightSide: `${info?.agentUsername}`,
         },
         {
           leftSide: "Charges",
-          rightSide: `N${amountFormatter(charge)}`,
+          rightSide: `N${amountFormatter(Number(charge).toString())}`,
         },
         {
           leftSide: "Total to be sent",
-          rightSide: `N${amountFormatter(amount + charge)}`,
+          rightSide: `N${amountFormatter(Number(amount + charge).toString())}`,
         },
       ],
     };
     navigation.navigate("transactionsummary_screen", {
       summaryinfo,
       action: action2,
+      userInfo: {
+        imageUrl: "",
+        memoji: {},
+        fullName: info?.agent
+      }
     });
   };
-
-
 
   const handlesubmit = async () => {
     try {
@@ -203,7 +217,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       bg: COLORS.Tyellow4,
       title: "Chat",
       action: () =>
-        navigation.navigate("Chatsdm", {
+        navigation.navigate("chatsdm_screen", {
           userInfo: {},
           chatwithid: info.agentUsername,
         }),
@@ -257,43 +271,57 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   }
 
   return (
-    <FTTitlepagewrapper title="Withdraw Cash">
-      <View style={container}>
+    <FTTitlepagewrapper
+      title="Withdraw Cash"
+      childBg={COLORS.white3}
+      headerBg={COLORS.white3}
+    >
+      <FTLoader loading={loading2} />
+      <ScrollView style={container} showsVerticalScrollIndicator={false}>
         <View style={withdrawalInfoWrap}>
           <View style={withdrawalProfileWrap}>
-            <FTIconwithbg Icon={Blacksendicon} bG={COLORS.Tblue} size={86} />
+            <FTOtherImage
+              size={86}
+              imageurl={""}
+              fullname={info?.agent}
+              memojiImage={{}}
+            />
 
             <Text style={withdrawalProfileName}>{info?.agent}</Text>
             <Text style={amountOfTransaction}>33 Transactions</Text>
           </View>
 
-          <View style={locationInfoWrap}>
-            <Text style={locationDistance}>15 Mins Away</Text>
-            <Text style={locationAddress}>{info.meetupPoint}</Text>
-            <View style={viewOnMapWrap}>
-              <Text
+          <View style={detailsBlock}>
+            <View style={locationInfoWrap}>
+              <TouchableOpacity
+                activeOpacity={0.7}
                 onPress={() => viewonmap(latlong?.lat, latlong?.long)}
-                style={viewOnMapText}
+                style={viewOnMapWrap}
               >
-                View on maps
-              </Text>
+                <Text style={viewOnMapText}>View on maps</Text>
+              </TouchableOpacity>
+
+              <View style={{ marginVertical: 48, alignItems: "center" }}>
+                <Text style={locationDistance}>15 Mins Away</Text>
+                <Text style={locationAddress}>{info.meetupPoint}</Text>
+              </View>
+            </View>
+
+            <View style={withdrawalActionWrap}>
+              {withdrawcashActions.map(({ Icon, bg, title, action }) => {
+                return (
+                  <TouchableOpacity activeOpacity={0.7} onPress={action}>
+                    <View style={{ alignItems: "center" }}>
+                      <FTIconwithbg Icon={Icon} bG={bg} />
+                      <Text style={withdrawalActionTitle}>{title}</Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
             </View>
           </View>
-
-          <View style={withdrawalActionWrap}>
-            {withdrawcashActions.map(({ Icon, bg, title, action }) => {
-              return (
-                <TouchableOpacity activeOpacity={0.7} onPress={action}>
-                  <View style={{ alignItems: "center" }}>
-                    <FTIconwithbg Icon={Icon} bG={bg} />
-                    <Text style={withdrawalActionTitle}>{title}</Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
         </View>
-      </View>
+      </ScrollView>
 
       <FTCustombutton
         onpress={handlesubmit}
