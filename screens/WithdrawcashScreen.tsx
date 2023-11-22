@@ -4,6 +4,7 @@ import {
   FTCustombutton,
   FTEmptycomponent,
   FTIconwithbg,
+  FTLoader,
   FTTitlepagewrapper,
 } from "../components";
 import { COLORS, icons } from "../constants";
@@ -66,6 +67,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   const { setCoords, coords, setDestinationCoords } =
     useContext(LocationContext);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const [info, setInfo] = useState(agentinfo);
   const [noagent, setnoagent] = useState(false);
   const [latlong, setlatlong] = useState([]);
@@ -102,19 +104,22 @@ const WithdrawcashScreen = ({ route, navigation }) => {
         amount: Number(amount),
         location: address,
       });
+
       const response = await axiosCustom.get("/request/accepted");
+
       setInfo(response?.data?.data);
       if (response.data && response.data.data.length > 0) {
         setInfo(response?.data?.data[0]);
       }
     } catch (err) {
+      // console.log(err.response);
       setnoagent(true);
     } finally {
     }
   };
 
   const handleCancelRequest = async () => {
-    setLoading(true);
+    setLoading2(true);
     try {
       await axiosCustom({
         method: "DELETE",
@@ -124,10 +129,11 @@ const WithdrawcashScreen = ({ route, navigation }) => {
           reasonForCancel: "Mistake cash request",
         },
       });
+      navigation.navigate("Home");
     } catch (err) {
       errorAlert(err);
     } finally {
-      setLoading(false);
+      setLoading2(false);
     }
   };
 
@@ -245,6 +251,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
 
   return (
     <FTTitlepagewrapper title="Withdraw Cash">
+      <FTLoader loading={loading2} />
       <View style={container}>
         <View style={withdrawalInfoWrap}>
           <View style={withdrawalProfileWrap}>
