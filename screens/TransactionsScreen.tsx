@@ -79,7 +79,7 @@ const TransactionsScreen = ({ navigation }) => {
     setWithdrawLoading(false);
     if (response.data && response.data.data.length > 0) {
       return navigation.navigate("withdrawcash_screen", {
-        agentinfo: response?.data?.data[0],
+        info: response?.data?.data[0],
         amount: 0,
       });
     }

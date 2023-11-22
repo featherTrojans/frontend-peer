@@ -1,22 +1,8 @@
-import {
-  Animated,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Pressable,
-  FlatList,
-} from "react-native";
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useContext,
-} from "react";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
 import { AccountverificationScreenStyles } from "../assets/styles/screens";
 import { FTCustombutton, FTTitlepagewrapper } from "../components";
-import { COLORS, FONTS, SIZES, fontsize, icons } from "../constants";
+import { COLORS, icons } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 
 import { useAlert } from "../hooks";
@@ -105,7 +91,7 @@ const AccountverificationScreen = ({ route }) => {
       upgradeLocation,
     } = accountLevelDatas[selectedIndex];
     return (
-      <View style={{ width: width - 30, }}>
+      <View style={{ width: width - 30 }}>
         <View style={levelInfoWrap}>
           <View style={BAlign}>
             <Text style={levelText}>{levelTitle} Level</Text>
@@ -179,7 +165,11 @@ const AccountverificationScreen = ({ route }) => {
   };
 
   return (
-    <FTTitlepagewrapper headerBg={COLORS.white3} childBg={COLORS.white3} title="Account Verification">
+    <FTTitlepagewrapper
+      headerBg={COLORS.white3}
+      childBg={COLORS.white3}
+      title="Account Verification"
+    >
       <SegmentedControl
         values={["Newbie", "Odogwu", "Veteran"]}
         selectedIndex={selectedIndex}
