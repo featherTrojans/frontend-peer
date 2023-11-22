@@ -82,26 +82,17 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       );
     }
   }, [info]);
-  const getLocationAndAgents = async () => {
-    setnoagent(false);
-    setDestinationCoords({});
-    try {
-      setLoading(true);
-      const { coordinates, address, locationObj } = await getCurrentLocation();
-      setCoords({ ...coordinates, locationText: address });
-      await getAllAgents(address);
-    } catch (err) {
-      console.log("maybe this is where it is failing, acan't get address");
-    } finally {
-      setLoading(false);
-    }
-  };
+
+
+
   const getAllAgents = async (address: string) => {
+    console.log("trying to fetch agent datats")
     try {
-      await axiosCustom.post("/status/find", {
+      const response2 = await axiosCustom.post("/status/find", {
         amount: Number(amount),
         location: address,
       });
+      console.log(response2, "here is the find response")
       const response = await axiosCustom.get("/request/accepted");
       setInfo(response?.data?.data);
       if (response.data && response.data.data.length > 0) {
@@ -112,6 +103,25 @@ const WithdrawcashScreen = ({ route, navigation }) => {
     } finally {
     }
   };
+
+  const getLocationAndAgents = async () => {
+    setnoagent(false);
+    setDestinationCoords({});
+    try {
+      setLoading(true);
+      const { coordinates, address, locationObj } = await getCurrentLocation();
+      console.log(address, "here is the address")
+      setCoords({ ...coordinates, locationText: address });
+      const agentResponse = await getAllAgents(address);
+      console.log(agentResponse, "here is the agents dara")
+
+    } catch (err) {
+      console.log("maybe this is where it is failing, acan't get address");
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   const handleCancelRequest = async () => {
     setLoading(true);
@@ -170,6 +180,9 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       action: action2,
     });
   };
+
+
+
   const handlesubmit = async () => {
     try {
       navigation.navigate("amounttosend_screen", {
