@@ -177,7 +177,7 @@ const ActiveCashWithdrawal = () => {
         mT={24}
         onPress={() =>
           navigation.navigate("withdrawcash_screen", {
-            agentinfo: info,
+            info: info,
             amount: 0,
           })
         }
@@ -362,7 +362,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     height: number;
   }>({ child: null, height: 200 });
   const [withdrawLoading, setWithdrawLoading] = useState(false);
-  useExpoUpdate()
+  useExpoUpdate();
 
   const histories: any[] = useMemo(
     () => formatData(authdata?.transactions),
@@ -407,9 +407,10 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     setWithdrawLoading(true);
     const response = await axiosCustom.get("/request/accepted");
     setWithdrawLoading(false);
+
     if (response.data && response.data.data.length > 0) {
       return navigation.navigate("withdrawcash_screen", {
-        agentinfo: response?.data?.data[0],
+        info: response?.data?.data[0],
         amount: 0,
       });
     }
