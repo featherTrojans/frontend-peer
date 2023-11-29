@@ -81,6 +81,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   const [info, setInfo] = useState(agentinfo);
   const [noagent, setnoagent] = useState(false);
   const [latlong, setlatlong] = useState([]);
+  console.log(info, "WHAT OKIKI IS REQUESTING");
   useEffect(() => {
     if (!agentinfo) {
       getLocationAndAgents();
@@ -192,8 +193,8 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       userInfo: {
         imageUrl: "",
         memoji: {},
-        fullName: info?.agent
-      }
+        fullName: info?.agent,
+      },
     });
   };
 
