@@ -282,7 +282,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
           <View style={withdrawalProfileWrap}>
             <FTOtherImage
               size={86}
-              imageurl={info?.agentImage}
+              imageurl={info?.agentImage || "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/avatar.svg?alt=media&token=771ef456-70f1-402c-9f1a-e67e1a6b8cfe"}
               fullname={info?.agent}
               memojiImage={{}}
             />
