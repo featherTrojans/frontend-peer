@@ -192,8 +192,8 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       userInfo: {
         imageUrl: "",
         memoji: {},
-        fullName: info?.agent
-      }
+        fullName: info?.agent,
+      },
     });
   };
 
@@ -282,13 +282,13 @@ const WithdrawcashScreen = ({ route, navigation }) => {
           <View style={withdrawalProfileWrap}>
             <FTOtherImage
               size={86}
-              imageurl={""}
+              imageurl={info?.agentImage}
               fullname={info?.agent}
               memojiImage={{}}
             />
 
-            <Text style={withdrawalProfileName}>{info?.agent}</Text>
-            <Text style={amountOfTransaction}>33 Transactions</Text>
+            <Text style={withdrawalProfileName}>{info?.businessName}</Text>
+            <Text style={amountOfTransaction}>{info?.businessCategory}</Text>
           </View>
 
           <View style={detailsBlock}>
@@ -302,7 +302,11 @@ const WithdrawcashScreen = ({ route, navigation }) => {
               </TouchableOpacity>
 
               <View style={{ marginVertical: 48, alignItems: "center" }}>
-                <Text style={locationDistance}>15 Mins Away</Text>
+                {info?.timeSpan && (
+                  <Text style={locationDistance}>
+                    {info?.timeSpan} Mins Away
+                  </Text>
+                )}
                 <Text style={locationAddress}>{info.meetupPoint}</Text>
               </View>
             </View>

@@ -188,7 +188,6 @@ const ActiveCashWithdrawal = () => {
           memoji: {},
           fullName: info?.agent,
         }}
-        // Icon={Banksetupicon}
       />
     </View>
   );
