@@ -283,13 +283,13 @@ const WithdrawcashScreen = ({ route, navigation }) => {
           <View style={withdrawalProfileWrap}>
             <FTOtherImage
               size={86}
-              imageurl={""}
+              imageurl={info?.agentImage || "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/avatar.svg?alt=media&token=771ef456-70f1-402c-9f1a-e67e1a6b8cfe"}
               fullname={info?.agent}
               memojiImage={{}}
             />
 
-            <Text style={withdrawalProfileName}>{info?.agent}</Text>
-            <Text style={amountOfTransaction}>33 Transactions</Text>
+            <Text style={withdrawalProfileName}>{info?.businessName}</Text>
+            <Text style={amountOfTransaction}>{info?.businessCategory}</Text>
           </View>
 
           <View style={detailsBlock}>
@@ -303,7 +303,11 @@ const WithdrawcashScreen = ({ route, navigation }) => {
               </TouchableOpacity>
 
               <View style={{ marginVertical: 48, alignItems: "center" }}>
-                <Text style={locationDistance}>15 Mins Away</Text>
+                {info?.timeSpan && (
+                  <Text style={locationDistance}>
+                    {info?.timeSpan} Mins Away
+                  </Text>
+                )}
                 <Text style={locationAddress}>{info.meetupPoint}</Text>
               </View>
             </View>
