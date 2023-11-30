@@ -1,14 +1,7 @@
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Modal from "react-native-modal";
-import { COLORS, icons } from "../constants";
-
-
+import { icons } from "../constants";
 
 const { Newlogowhite } = icons;
 

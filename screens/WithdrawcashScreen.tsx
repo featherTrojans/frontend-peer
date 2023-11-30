@@ -56,10 +56,10 @@ const {
   Withdrawsearchicon,
 } = icons;
 
-const viewonmap = (lat, lng) => {
+const viewonmap = (lat=0, lng=0) => {
   const scheme = Platform.select({
     ios: "maps://0,0?q=",
-    android: "geo:0,0?q=",
+    android: "geo:0,0?q=",\
   });
   const latLng = `${lat},${lng}`;
   const label = "Merchant Location";
@@ -81,6 +81,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   const [info, setInfo] = useState(agentinfo);
   const [noagent, setnoagent] = useState(false);
   const [latlong, setlatlong] = useState([]);
+  console.log(info, "WHAT OKIKI IS REQUESTING");
   useEffect(() => {
     if (!agentinfo) {
       getLocationAndAgents();
@@ -295,7 +296,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
             <View style={locationInfoWrap}>
               <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => viewonmap(latlong?.lat, latlong?.long)}
+                onPress={() => viewonmap(info?.latitude, info?.longitude)}
                 style={viewOnMapWrap}
               >
                 <Text style={viewOnMapText}>View on maps</Text>
@@ -304,7 +305,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
               <View style={{ marginVertical: 48, alignItems: "center" }}>
                 {info?.timeSpan && (
                   <Text style={locationDistance}>
-                    {info?.timeSpan} Mins Away
+                    {info?.timeSpan}Away
                   </Text>
                 )}
                 <Text style={locationAddress}>{info.meetupPoint}</Text>

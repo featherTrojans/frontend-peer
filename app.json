@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.14",
+    "version": "2.0.15",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -16,14 +16,8 @@
       "resizeMode": "contain",
       "backgroundColor": "#003AD6"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 10000,
-      "enabled": true,
-      "url": "https://u.expo.dev/5daafb00-ef60-44d8-92f2-a196e80c243c"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.featherpeer.user",
@@ -77,7 +71,9 @@
       "userInterfaceStyle": "automatic"
     },
     "extra": {
-      "eas": {}
+      "eas": {
+        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
+      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
