@@ -59,7 +59,7 @@ const {
 const viewonmap = (lat=0, lng=0) => {
   const scheme = Platform.select({
     ios: "maps://0,0?q=",
-    android: "geo:0,0?q=",\
+    android: "geo:0,0?q=",
   });
   const latLng = `${lat},${lng}`;
   const label = "Merchant Location";
@@ -88,13 +88,13 @@ const WithdrawcashScreen = ({ route, navigation }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (info?.meetupPoint) {
-      getCoordinateFromAddress(info?.meetupPoint).then((coords) =>
-        setlatlong({ lat: coords.latitude, long: coords.longitude })
-      );
-    }
-  }, [info]);
+  // useEffect(() => {
+  //   if (info?.meetupPoint) {
+  //     getCoordinateFromAddress(info?.meetupPoint).then((coords) =>
+  //       setlatlong({ lat: coords.latitude, long: coords.longitude })
+  //     );
+  //   }
+  // }, [info]);
 
   const getAllAgents = async (address: string) => {
     console.log("trying to fetch agent datats");
