@@ -29,6 +29,8 @@ import {
 } from "../utils/customLocation";
 import { WithdrawcashScreenStyles } from "../assets/styles/screens";
 import amountFormatter from "../utils/formatMoney";
+import { DEFAULT_AGENT_AVATAR } from "../assetdatas";
+
 const {
   container,
   withdrawalInfoWrap,
@@ -283,7 +285,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
           <View style={withdrawalProfileWrap}>
             <FTOtherImage
               size={86}
-              imageurl={info?.agentImage || "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/avatar.svg?alt=media&token=771ef456-70f1-402c-9f1a-e67e1a6b8cfe"}
+              imageurl={info?.agentImage || DEFAULT_AGENT_AVATAR}
               fullname={info?.agent}
               memojiImage={{}}
             />
@@ -305,7 +307,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
               <View style={{ marginVertical: 48, alignItems: "center" }}>
                 {info?.timeSpan && (
                   <Text style={locationDistance}>
-                    {info?.timeSpan}Away
+                    {info?.timeSpan} Away
                   </Text>
                 )}
                 <Text style={locationAddress}>{info.meetupPoint}</Text>

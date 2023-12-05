@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { Text, View, TextInput, Pressable, TextInputProps } from "react-native";
 import { Controller } from "react-hook-form";
 import { icons, COLORS, fontsize, FONTS } from "../constants";
@@ -10,8 +10,10 @@ const {
   inputLabel,
   dropdownPlaceholder,
   dropdownWrap,
+  passwordInputWrap,
+  passwordInput,
 } = FTInputStyles;
-const { Dropdownicon } = icons;
+const { Dropdownicon, Eyecrossed, Eyeopenicon } = icons;
 
 type inputProps = {
   label?: string;
@@ -21,7 +23,7 @@ type inputProps = {
   control: any;
   name: string;
   rules?: any;
-  type?: "input" | "dropdown";
+  type?: "input" | "dropdown" | "password";
   onPress?: () => void;
   rightComponent?: any;
   editable?: boolean;
@@ -42,6 +44,12 @@ const FTInput = ({
   editable = true,
   textInputProps,
 }: inputProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  let togglePassword = () => {
+    setShowPassword((s) => !s);
+  };
+
   const renderInputType = () => {
     const [isFocused, setIsFocused] = useState(false);
     return (
@@ -90,6 +98,62 @@ const FTInput = ({
       </View>
     );
   };
+
+  const renderPasswordType = () => {
+    const [isFocused, setIsFocused] = useState(false);
+    return (
+      <View
+        style={{
+          marginTop: mT,
+          marginBottom: mB,
+          borderColor: COLORS.inputBorderColorDark,
+        }}
+      >
+        <Text style={inputLabel}>{label}</Text>
+
+        <Controller
+          control={control}
+          name={name}
+          rules={rules}
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error },
+          }) => (
+            <View style={{ marginBottom: 20 }}>
+              <View
+                style={[
+                  passwordInputWrap,
+                  {
+                    borderColor: error
+                      ? COLORS.pink1
+                      : value && !error
+                      ? COLORS.blue16
+                      : COLORS.grey15,
+                  },
+                ]}
+              >
+                <TextInput
+                  onChangeText={onChange}
+                  editable
+                  onBlur={onBlur}
+                  returnKeyType="done"
+                  value={value}
+                  placeholderTextColor={COLORS.grey9}
+                  style={passwordInput}
+                  secureTextEntry={showPassword}
+                />
+                <Pressable hitSlop={30} onPress={togglePassword} style={{}}>
+                  {!showPassword ? <Eyeopenicon /> : <Eyecrossed />}
+                </Pressable>
+              </View>
+              {error && <Text style={errorMessageText}> {error.message}</Text>}
+            </View>
+          )}
+        />
+      </View>
+    );
+  };
+
   const renderDropdownType = () => {
     let name = placeholderText?.toLowerCase();
     let placeholders = ["enter", "upload", "select", "04 April 2004"];
@@ -135,6 +199,7 @@ const FTInput = ({
     <>
       {type === "dropdown" && renderDropdownType()}
       {type === "input" && renderInputType()}
+      {type === "password" && renderPasswordType()}
     </>
   );
 };

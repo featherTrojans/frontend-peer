@@ -3,12 +3,27 @@ import { COLORS, FONTS, fontsize } from "../../../constants";
 
 export const FTInputStyles = StyleSheet.create({
   inputContainer: {
-    height: 53,
+    height: 52,
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
     borderRadius: 5,
     borderColor: "transparent",
+  },
+  passwordInputWrap: {
+    height: 52,
+    borderWidth: 0.5,
+    borderRadius: 10,
+    alignItems: "center",
+    flexDirection: "row",
+    paddingHorizontal: 15,
+  },
+  passwordInput: {
+    flex: 1,
+    height: "100%",
+    ...fontsize.smallest,
+    ...FONTS.regular,
+    color: COLORS.blue9,
   },
   inputLabel: {
     ...fontsize.smallest,
@@ -19,6 +34,7 @@ export const FTInputStyles = StyleSheet.create({
   textInput: {
     borderWidth: 0.5,
     height: 52,
+    flex: 1,
     borderRadius: 10,
     borderColor: COLORS.grey15,
     paddingHorizontal: 15,

@@ -11,6 +11,8 @@ const {
   portharcourtlogo,
 } = images;
 
+export const DEFAULT_AGENT_AVATAR = "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/avatar.svg?alt=media&token=771ef456-70f1-402c-9f1a-e67e1a6b8cfe"
+
 export const assetsDB = {
   banks: {
     GTB: "https://firebasestorage.googleapis.com/v0/b/feather-340809.appspot.com/o/application_assets%2FGuaranty%20Trust%20Bank%20Logo%20(1).png?alt=media&token=d9a0af12-48d9-4ded-a612-543502ebc658",
