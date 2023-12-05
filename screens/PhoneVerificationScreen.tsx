@@ -49,13 +49,13 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
   }, [timecount]);
 
   const handlesubmit = async () => {
-    const url = from == "login" ? "auth/signin/confirm" : "auth/signup/confirm";
-    const navigateurl =
-      from == "login" ? "welcome_screen" : "personalregister_screen";
+    const url = from == "login" ? "auth/signin/confirm" : "/auth/verify/code";
+    const navigateurl = from == "login" ? "welcome_screen" : "bvn_screen";
     if (`${otpCode}`.length !== 6) {
       errorAlert(null, "please complete OTP field");
       return;
     }
+
     try {
       setLoading(true);
       const response = await axiosCustom.post(url, {
@@ -96,17 +96,14 @@ const PhoneVerificationScreen = ({ navigation, route }) => {
         <Text style={enterDigitSubText}>{phoneNumber}</Text>.
       </Text>
 
-
-        <OTPInputView
-          style={{ width: "100%", height: 52,}}
-          pinCount={6}
-          autoFocusOnLoad
-          codeInputFieldStyle={otpInputWrap}
-          codeInputHighlightStyle={otpHighlightInputWrap}
-          onCodeFilled={(code) => setOtpCode(code)}
-        />
-
-
+      <OTPInputView
+        style={{ width: "100%", height: 52 }}
+        pinCount={6}
+        autoFocusOnLoad
+        codeInputFieldStyle={otpInputWrap}
+        codeInputHighlightStyle={otpHighlightInputWrap}
+        onCodeFilled={(code) => setOtpCode(code)}
+      />
 
       <View style={buttonWrap}>
         <FTCustombutton btntext="VERIFY" onpress={handlesubmit} />

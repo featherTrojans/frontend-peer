@@ -22,7 +22,8 @@ import { useNavigation } from "@react-navigation/native";
 
 const { optionText } = PersonalRegisterScreenStyles;
 
-const Personal = ({}) => {
+const Personal = ({ route }) => {
+  const phoneNumber = route.params;
   const navigation = useNavigation();
   const { errorAlert } = useAlert();
   const [loading, setLoading] = useState(false);
@@ -34,11 +35,15 @@ const Personal = ({}) => {
   const onsubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axiosCustom.put("/auth/data/update", {
+      const response = await axiosCustom.put("/auth/signup", {
         ...data,
+        phoneNumber: phoneNumber,
         gender: gender,
       });
-      navigation.navigate("bvn_screen");
+      navigation.navigate("phone-verify_screen", {
+        phonenumber: phoneNumber,
+        from: "signup",
+      });
     } catch (err) {
       console.log(err.response);
       errorAlert(err);
@@ -122,7 +127,15 @@ const Personal = ({}) => {
           mB={55}
           onPress={() => setShowModal(true)}
         />
-
+        <FTInput
+          placeholderText="Enter A Password"
+          name="password"
+          label="Password"
+          control={control}
+          rules={VALIDATION.PASSWORD_VALIDATION}
+          type="password"
+          mB={15}
+        />
         {/* Proceed Btn */}
         <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
       </FTKeyboardwrapper>

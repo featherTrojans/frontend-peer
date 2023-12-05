@@ -66,7 +66,9 @@ const LoginScreen = ({ navigation }) => {
         "Aww padi! Incorrect feather tag/ phone number" ==
         err?.response?.data?.message
       ) {
-        await onsignup({ phoneNumber: data.username });
+        // PUSH TO SIGNUP PAGE
+        return navigation.navigate("personalregister_screen", data.username);
+        // await onsignup({ phoneNumber: data.username });
       } else {
         errorAlert(err);
       }
@@ -91,15 +93,81 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  const onsubmitpassword = async (data) => {
+    try {
+      setLoading(true);
+      const response = await axiosCustom.post("/auth/signin", data);
+      setAuthorizationToken(response.data.data.token);
+      navigation.navigate("welcome_screen");
+    } catch (err) {
+      if ("Incorrect feather tag/ username" == err?.response?.data?.message) {
+        // PUSH TO SIGNUP PAGE
+        return navigation.navigate("personalregister_screen", data.username);
+        // await onsignup({ phoneNumber: data.username });
+      } else {
+        errorAlert(err);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <FTMainwrapper>
       <FTLoader loading={loading} />
       <Text style={center}>Enter Phone Number</Text>
 
       {/* WITH OTP */}
-        {withOtp ? (
+      {withOtp ? (
+        <Controller
+          control={control}
+          name="username"
+          rules={VALIDATION.PHONE_NUMBER_VALIDATION}
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error },
+          }) => (
+            <View style={{ marginBottom: 20 }}>
+              <Text style={inputLabel}>Phone Number</Text>
+              <View
+                style={[
+                  loginInputWrap,
+                  {
+                    borderColor: error
+                      ? COLORS.pink1
+                      : value && !error
+                      ? COLORS.blue16
+                      : COLORS.grey15,
+                  },
+                ]}
+              >
+                <View style={logoAndInitialWrap}>
+                  <RNImage source={NigeriaflagImage} style={logoStyle} />
+                  <Text style={initialStyle}>+234</Text>
+                </View>
+                <View style={lineSeparator} />
+                <TextInput
+                  onChangeText={onChange}
+                  editable
+                  onBlur={onBlur}
+                  keyboardType="number-pad"
+                  returnKeyType="done"
+                  value={value}
+                  placeholder="Enter here..."
+                  placeholderTextColor={COLORS.grey9}
+                  style={textInputStyles}
+                  maxLength={11}
+                />
+              </View>
+              {error && <Text style={errorMessageText}> {error.message}</Text>}
+            </View>
+          )}
+        />
+      ) : (
+        <View>
+          {/* WITH PASSWORD */}
           <Controller
-            control={control}
+            control={control2}
             name="username"
             rules={VALIDATION.PHONE_NUMBER_VALIDATION}
             render={({
@@ -144,78 +212,29 @@ const LoginScreen = ({ navigation }) => {
               </View>
             )}
           />
-        ) : (
-          <View>
-            {/* WITH PASSWORD */}
-            <Controller
+          <View style={{ marginBottom: 20 }}>
+            <FTInput
+              placeholderText="****"
+              name="password"
+              label="Password"
               control={control2}
-              name="username"
-              rules={VALIDATION.PHONE_NUMBER_VALIDATION}
-              render={({
-                field: { onChange, onBlur, value },
-                fieldState: { error },
-              }) => (
-                <View style={{ marginBottom: 20 }}>
-                  <Text style={inputLabel}>Phone Number</Text>
-                  <View
-                    style={[
-                      loginInputWrap,
-                      {
-                        borderColor: error
-                          ? COLORS.pink1
-                          : value && !error
-                          ? COLORS.blue16
-                          : COLORS.grey15,
-                      },
-                    ]}
-                  >
-                    <View style={logoAndInitialWrap}>
-                      <RNImage source={NigeriaflagImage} style={logoStyle} />
-                      <Text style={initialStyle}>+234</Text>
-                    </View>
-                    <View style={lineSeparator} />
-                    <TextInput
-                      onChangeText={onChange}
-                      editable
-                      onBlur={onBlur}
-                      keyboardType="number-pad"
-                      returnKeyType="done"
-                      value={value}
-                      placeholder="Enter here..."
-                      placeholderTextColor={COLORS.grey9}
-                      style={textInputStyles}
-                      maxLength={11}
-                    />
-                  </View>
-                  {error && (
-                    <Text style={errorMessageText}> {error.message}</Text>
-                  )}
-                </View>
-              )}
+              rules={VALIDATION.PASSWORD_VALIDATION}
+              mB={15}
+              type="password"
+              textInputProps={{
+                returnKeyType: "done",
+              }}
             />
-            <View style={{ marginBottom: 20 }}>
-              <FTInput
-                placeholderText="****"
-                name="password"
-                label="Password"
-                control={control2}
-                rules={VALIDATION.PASSWORD_VALIDATION}
-                mB={15}
-                type="password"
-                textInputProps={{
-                  returnKeyType: "done",
-                }}
-              />
-            </View>
           </View>
-        )}
+        </View>
+      )}
 
-        <FTCustombutton
-          btntext="PROCEED"
-          onpress={withOtp ? handleSubmit(onsubmit) : handleSubmit2(onsubmit)}
-        />
-
-
+      <FTCustombutton
+        btntext="PROCEED"
+        onpress={
+          withOtp ? handleSubmit(onsubmit) : handleSubmit2(onsubmitpassword)
+        }
+      />
 
       <Text style={bottomtext}>
         Ensure you can reach this mobile number to get started as this number
@@ -223,20 +242,20 @@ const LoginScreen = ({ navigation }) => {
       </Text>
 
       <Pressable onPress={() => setWithOtp(!withOtp)}>
-          <Text
-            style={{
-              marginTop: 50,
-              textAlign: "center",
-              ...fontsize.small,
-              ...FONTS.semibold,
-              color: COLORS.green4,
-            }}
-          >
-            {!withOtp
-              ? "Login with One-Time Password (OTP)"
-              : "Login with password"}
-          </Text>
-        </Pressable>
+        <Text
+          style={{
+            marginTop: 50,
+            textAlign: "center",
+            ...fontsize.small,
+            ...FONTS.semibold,
+            color: COLORS.green4,
+          }}
+        >
+          {!withOtp
+            ? "Login with One-Time Password (OTP)"
+            : "Login with password"}
+        </Text>
+      </Pressable>
     </FTMainwrapper>
   );
 };
