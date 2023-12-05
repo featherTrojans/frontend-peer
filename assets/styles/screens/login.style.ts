@@ -16,6 +16,12 @@ export const LoginScreenStyles = StyleSheet.create({
     ...fontsize.smallest,
     lineHeight: 21,
   },
+  inputLabel: {
+    ...fontsize.smallest,
+    ...FONTS.medium,
+    color: COLORS.blue9,
+    marginBottom: 15,
+  },
   loginInputWrap: {
     height: 53,
     borderColor: COLORS.grey15,

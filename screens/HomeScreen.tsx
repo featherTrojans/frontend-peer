@@ -44,6 +44,7 @@ import { FlatList as AnimatedFlatlist } from "react-native-gesture-handler";
 import { useAlert } from "../hooks";
 import amountFormatter from "../utils/formatMoney";
 import { useExpoUpdate } from "../hooks/useExpoUpdate";
+import { DEFAULT_AGENT_AVATAR } from "../assetdatas";
 
 
 const {
@@ -146,6 +147,8 @@ const ActiveCashWithdrawal = () => {
     meetupPoint: "",
     createdAt: "",
     agentImage: null,
+    timeSpan: "",
+
   });
   const navigation = useNavigation();
 
@@ -156,6 +159,7 @@ const ActiveCashWithdrawal = () => {
         setInfo(response?.data?.data[0]);
       }
     });
+    
   }, []);
   if (!info.reference) {
     return null;
@@ -166,14 +170,14 @@ const ActiveCashWithdrawal = () => {
         <View style={recentIconWrap}>
           {/* icon */}
           <Recentconvicon />
-          <Text style={recentconvText}>Cash Withdrawal</Text>
+          <Text style={recentconvText}>Active Cash Withdrawal</Text>
         </View>
-        <Text style={numberOfUnread}>15 Mins Away</Text>
+        {info?.timeSpan && <Text style={numberOfUnread}>{info?.timeSpan} Away</Text>}
       </View>
 
       <FTIconwithtitleandinfo
         title={info?.agent}
-        info={`N${amountFormatter(info.total)}`}
+        info={`N${amountFormatter(info?.total)}`}
         bG={COLORS.Tblue4}
         mT={24}
         profile={true}
@@ -184,7 +188,7 @@ const ActiveCashWithdrawal = () => {
           })
         }
         userInfo={{
-          imageUrl: "",
+          imageUrl: info?.agentImage || DEFAULT_AGENT_AVATAR,
           memoji: {},
           fullName: info?.agent,
         }}

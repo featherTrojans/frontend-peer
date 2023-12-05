@@ -21,6 +21,8 @@ export const PHONE_NUMBER_VALIDATION = {
     message: "Phone number can only contain numbers",
   },
 };
+
+
 export const MERCHANTID_VALIDATION = {
   required: "merchand id is required",
   minLength: {
