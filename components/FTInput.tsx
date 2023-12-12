@@ -74,7 +74,6 @@ const FTInput = ({
               <TextInput
                 {...textInputProps}
                 style={[
-                  textInput,
                   {
                     borderColor: error
                       ? COLORS.pink1
@@ -82,6 +81,7 @@ const FTInput = ({
                       ? COLORS.blue16
                       : COLORS.grey15,
                   },
+                  textInput,
                 ]}
                 onChangeText={onChange}
                 editable={editable}
@@ -89,7 +89,7 @@ const FTInput = ({
                 onFocus={(e) => setIsFocused(true)}
                 value={value}
                 placeholder={placeholderText}
-                placeholderTextColor={COLORS.grey18}
+                placeholderTextColor={COLORS.grey9}
               />
               {error && <Text style={errorMessageText}> {error.message}</Text>}
             </>
@@ -138,6 +138,7 @@ const FTInput = ({
                   onBlur={onBlur}
                   returnKeyType="done"
                   value={value}
+                  placeholder="Enter here..."
                   placeholderTextColor={COLORS.grey9}
                   style={passwordInput}
                   secureTextEntry={showPassword}

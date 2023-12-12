@@ -5,6 +5,7 @@ import {
   FTCustombutton,
   FTDetailsModal,
   FTInput,
+  FTKeyboardwrapper,
   FTLoader,
   FTSwitchbtn,
   FTTitlepagewrapper,
@@ -152,20 +153,23 @@ const BankaccountinformationScreen = ({ route, navigation }) => {
       modalHeight={276}
     >
       <FTLoader loading={loading} />
-      <FTInput
-        placeholderText="Enter Number"
-        label="Enter destination bank account"
-        name="accountNumber"
-        control={control}
-        textInputProps={{
-          maxLength: 11,
-          keyboardType: "number-pad",
-          returnKeyType: "done",
-        }}
-        rules={VALIDATION.ACCOUNT_NUMBER_INPUT_VALIDATION}
-        mB={20}
-        mT={20}
-      />
+      <FTKeyboardwrapper>
+        <FTInput
+          placeholderText="Enter Number"
+          label="Enter destination bank account"
+          name="accountNumber"
+          control={control}
+          textInputProps={{
+            maxLength: 11,
+            keyboardType: "number-pad",
+            returnKeyType: "done",
+          }}
+          rules={VALIDATION.ACCOUNT_NUMBER_INPUT_VALIDATION}
+          mB={20}
+          mT={20}
+        />
+      </FTKeyboardwrapper>
+
       <FTCustombutton btntext="Continue" onpress={handleSubmit(onSubmit)} />
     </FTTitlepagewrapper>
   );

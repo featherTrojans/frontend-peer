@@ -83,7 +83,6 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   const [info, setInfo] = useState(agentinfo);
   const [noagent, setnoagent] = useState(false);
   const [latlong, setlatlong] = useState([]);
-  console.log(info, "WHAT OKIKI IS REQUESTING");
   useEffect(() => {
     if (!agentinfo) {
       getLocationAndAgents();
@@ -156,18 +155,22 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   };
 
   const action = (charge) => {
+
+
     const action2 = async (pin) => {
       const response = await axiosCustom.post("/request/approve", {
         reference: info.reference,
         user_pin: pin,
         agreedCharge: Number(charge + amount),
       });
+      console.log(response, "Here is the ")
       try {
         navigation.navigate("transactionsuccess_screen");
       } catch (err) {
         throw err;
       }
     };
+
     const summaryinfo = {
       amount: amount,
       transactionDatas: [
@@ -185,15 +188,16 @@ const WithdrawcashScreen = ({ route, navigation }) => {
         },
         {
           leftSide: "Total to be sent",
-          rightSide: `N${amountFormatter(Number(amount + charge).toString())}`,
+          rightSide: `N${amountFormatter(String(Number(charge)+ Number(amount)))}`,
         },
       ],
     };
+    
     navigation.navigate("transactionsummary_screen", {
       summaryinfo,
       action: action2,
       userInfo: {
-        imageUrl: "",
+        imageUrl: info?.agentImage || DEFAULT_AGENT_AVATAR,
         memoji: {},
         fullName: info?.agent,
       },

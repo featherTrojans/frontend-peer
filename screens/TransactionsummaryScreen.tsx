@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { TransactionsummaryScreenStyles } from "../assets/styles/screens";
 import {
   FTCustombutton,
@@ -31,6 +31,10 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
   const userInfo = route?.params?.userInfo;
   const summaryinfo = route?.params?.summaryinfo;
   const { control, handleSubmit } = useForm({ mode: "all" });
+
+  useEffect(() => {
+    console.log(summaryinfo.transactionDatas, "Here")
+  }, [])
 
   const EachRow = ({ data }) => {
     const { leftSide, rightSide } = data;

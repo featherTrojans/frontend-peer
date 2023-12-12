@@ -56,8 +56,8 @@ import Sittinganimate from "../assets/Lottie/animations/SplashScreen3.json";
 import Comingsoonagentanimate from "../assets/Lottie/animations/comingSoonAgent.json";
 import Ratingsuccessanimate from "../assets/Lottie/animations/feather-ratings-success-animations.json";
 import Feathecomingsoonchatanimate from "../assets/Lottie/animations/feather_comingsoon_chat.json";
-import Visacardanimated from "../assets/Lottie/animations/visa-card-feather.json"
-import Memojisuccessanimated from "../assets/Lottie/animations/animation_llcojtuk.json"
+import Visacardanimated from "../assets/Lottie/animations/visa-card-feather.json";
+import Memojisuccessanimated from "../assets/Lottie/animations/animation_llcojtuk.json";
 
 import Carddetailsicon from "../assets/icons/Cardactionicons/Carddetailsicon";
 import Cardfreezeicon from "../assets/icons/Cardactionicons/Cardfreezeicon";
@@ -148,13 +148,7 @@ import Setuppinlockicon from "../assets/icons/Setuppinlockicon";
 import Useravatarsmallicon from "../assets/icons/Useravatarsmallicon";
 import Whiteaddicon from "../assets/icons/Whiteaddicon";
 import Downloadreceipticon from "../assets/icons/Downloadreceipticon";
-
-
-
-
-
-
-
+import Activewithdrawicon from "../assets/icons/Activewithdrawicon";
 
 export default {
   Logo,
@@ -208,6 +202,7 @@ export default {
   Profilerighticon,
   Profilemanageicon,
   Securityprivicon,
+  Activewithdrawicon,
   Shareandearnicon,
   Supporticon,
   Mywalleticon,

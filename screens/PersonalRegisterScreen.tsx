@@ -124,7 +124,7 @@ const Personal = ({ route }) => {
           control={control}
           type="dropdown"
           // rules={VALIDATION.LAST_NAME_VALIDATION}
-          mB={55}
+          mB={15}
           onPress={() => setShowModal(true)}
         />
         <FTInput

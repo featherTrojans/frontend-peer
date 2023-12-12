@@ -87,12 +87,12 @@ const {
   Documentsetupicon,
   Levelcheckicon,
   Setuppinlockicon,
+  Activewithdrawicon
 } = icons;
 
 const SetupProfile = ({ onPress }) => {
   const { authdata } = useContext(AuthContext);
   const level = authdata?.userDetails?.userLevel;
-  console.log(authdata?.userDetails, "HELEPELEPLEL");
   let isProfileSetupCompleted =
     !!authdata?.userDetails?.gender &&
     !!authdata?.userDetails?.username &&
@@ -159,9 +159,10 @@ const ActiveCashWithdrawal = () => {
         setInfo(response?.data?.data[0]);
       }
     });
-    
+    console.log(info, "here is the withdrawal info poproorpro")
   }, []);
-  if (!info.reference) {
+
+  if (info?.length == 0) {
     return null;
   }
   return (
@@ -169,7 +170,7 @@ const ActiveCashWithdrawal = () => {
       <View style={conversationHeader}>
         <View style={recentIconWrap}>
           {/* icon */}
-          <Recentconvicon />
+          <Activewithdrawicon />
           <Text style={recentconvText}>Active Cash Withdrawal</Text>
         </View>
         {info?.timeSpan && <Text style={numberOfUnread}>{info?.timeSpan} Away</Text>}

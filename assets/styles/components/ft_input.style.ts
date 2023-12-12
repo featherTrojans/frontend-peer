@@ -32,11 +32,10 @@ export const FTInputStyles = StyleSheet.create({
     marginBottom: 15,
   },
   textInput: {
-    borderWidth: 0.5,
     height: 52,
     flex: 1,
+    borderWidth: 0.5,
     borderRadius: 10,
-    borderColor: COLORS.grey15,
     paddingHorizontal: 15,
     ...fontsize.smallest,
     ...FONTS.regular,
