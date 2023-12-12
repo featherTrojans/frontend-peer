@@ -28,9 +28,7 @@ const FTTransact = () => {
         `/transactions?page=${page}&data=2`
       );
       const tranc = response?.data?.data?.transactions;
-      console.log(tranc, "tranc");
       if (tranc.length > 0) {
-        console.log("another once");
         setTransations([...transactions, ...tranc]);
         setPage(page + 1);
       }
@@ -47,9 +45,7 @@ const FTTransact = () => {
         `/transactions?page=${page}&data=20`
       );
       const tranc = response?.data?.data?.transactions;
-      console.log(tranc, "tranc");
       if (tranc.length > 0) {
-        console.log("another once");
         setTransations([...transactions, ...tranc]);
         setPage(page + 1);
       }

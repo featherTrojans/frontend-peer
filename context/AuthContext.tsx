@@ -10,6 +10,7 @@ const AuthProvider: FC = ({ children }) => {
   const [token, setToken] = useState("");
   const [messageToken, setMessageToken] = useState("");
   const [showAmount, setShowAmount] = useState<boolean>(true);
+  const [agentInfo, setAgentInfo] = useState(null)
   return (
     <AuthContext.Provider
       value={{
@@ -23,6 +24,8 @@ const AuthProvider: FC = ({ children }) => {
         setShowAmount,
         allowBiometrics,
         setAllowBiometrics,
+        agentInfo,
+        setAgentInfo
       }}
     >
       {children}

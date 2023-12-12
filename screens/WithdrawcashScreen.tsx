@@ -30,6 +30,7 @@ import {
 import { WithdrawcashScreenStyles } from "../assets/styles/screens";
 import amountFormatter from "../utils/formatMoney";
 import { DEFAULT_AGENT_AVATAR } from "../assetdatas";
+import { AuthContext } from "../context/AuthContext";
 
 const {
   container,
@@ -58,7 +59,7 @@ const {
   Withdrawsearchicon,
 } = icons;
 
-const viewonmap = (lat=0, lng=0) => {
+const viewonmap = (lat = 0, lng = 0) => {
   const scheme = Platform.select({
     ios: "maps://0,0?q=",
     android: "geo:0,0?q=",
@@ -78,6 +79,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   const { errorAlert } = useAlert();
   const { setCoords, coords, setDestinationCoords } =
     useContext(LocationContext);
+  const { setAgentInfo, agentInfo } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [info, setInfo] = useState(agentinfo);
@@ -106,10 +108,11 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       });
       const response = await axiosCustom.get("/request/accepted");
       console.log(response?.data?.data, "Here is agent data");
-
+      setAgentInfo(response?.data?.data);
       setInfo(response?.data?.data);
       if (response.data && response.data.data.length > 0) {
         setInfo(response?.data?.data[0]);
+        setAgentInfo(response?.data?.data[0]);
       }
     } catch (err) {
       // console.log(err.response);
@@ -138,7 +141,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   const handleCancelRequest = async () => {
     setLoading2(true);
     try {
-      await axiosCustom({
+      const response = await axiosCustom({
         method: "DELETE",
         url: "/request/cancel",
         data: {
@@ -146,6 +149,8 @@ const WithdrawcashScreen = ({ route, navigation }) => {
           reasonForCancel: "Mistake cash request",
         },
       });
+      setAgentInfo(null);
+      console.log(response.data, "Here is the cancel request");
       navigation.navigate("Home");
     } catch (err) {
       errorAlert(err);
@@ -155,15 +160,13 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   };
 
   const action = (charge) => {
-
-
     const action2 = async (pin) => {
       const response = await axiosCustom.post("/request/approve", {
         reference: info.reference,
         user_pin: pin,
         agreedCharge: Number(charge + amount),
       });
-      console.log(response, "Here is the ")
+      console.log(response, "Here is the ");
       try {
         navigation.navigate("transactionsuccess_screen");
       } catch (err) {
@@ -188,11 +191,13 @@ const WithdrawcashScreen = ({ route, navigation }) => {
         },
         {
           leftSide: "Total to be sent",
-          rightSide: `N${amountFormatter(String(Number(charge)+ Number(amount)))}`,
+          rightSide: `N${amountFormatter(
+            String(Number(charge) + Number(amount))
+          )}`,
         },
       ],
     };
-    
+
     navigation.navigate("transactionsummary_screen", {
       summaryinfo,
       action: action2,
@@ -310,18 +315,20 @@ const WithdrawcashScreen = ({ route, navigation }) => {
 
               <View style={{ marginVertical: 48, alignItems: "center" }}>
                 {info?.timeSpan && (
-                  <Text style={locationDistance}>
-                    {info?.timeSpan} Away
-                  </Text>
+                  <Text style={locationDistance}>{info?.timeSpan} Away</Text>
                 )}
                 <Text style={locationAddress}>{info.meetupPoint}</Text>
               </View>
             </View>
 
             <View style={withdrawalActionWrap}>
-              {withdrawcashActions.map(({ Icon, bg, title, action }) => {
+              {withdrawcashActions.map(({ Icon, bg, title, action }, index) => {
                 return (
-                  <TouchableOpacity activeOpacity={0.7} onPress={action}>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    key={index + title}
+                    onPress={action}
+                  >
                     <View style={{ alignItems: "center" }}>
                       <FTIconwithbg Icon={Icon} bG={bg} />
                       <Text style={withdrawalActionTitle}>{title}</Text>

@@ -134,37 +134,11 @@ const SetupProfile = ({ onPress }) => {
 };
 
 const ActiveCashWithdrawal = () => {
-  const [info, setInfo] = useState({
-    reference: "",
-    amount: "",
-    charges: "",
-    total: "",
-    negotiatedFee: "",
-    agent: "",
-    agentUsername: "",
-    phoneNumber: "",
-    status: "",
-    meetupPoint: "",
-    createdAt: "",
-    agentImage: null,
-    timeSpan: "",
 
-  });
   const navigation = useNavigation();
+  const { agentInfo: info } = useContext(AuthContext)
 
-  useEffect(() => {
-    axiosCustom.get("/request/accepted").then((response) => {
-      setInfo(response?.data?.data);
-      if (response.data && response.data.data.length > 0) {
-        setInfo(response?.data?.data[0]);
-      }
-    });
-    console.log(info, "here is the withdrawal info poproorpro")
-  }, []);
 
-  if (info?.length == 0) {
-    return null;
-  }
   return (
     <View style={[setupProfile, { marginBottom: 0, marginTop: 15 }]}>
       <View style={conversationHeader}>
@@ -360,7 +334,7 @@ const SetupPin = ({ nav }) => {
   );
 };
 const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
-  const { setAuthData, authdata } = useContext(AuthContext);
+  const { setAuthData, authdata, agentInfo } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [extractedToken, setExtractedToken] = useState();
@@ -507,7 +481,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
         }
       >
         <FTViewbalance />
-        <ActiveCashWithdrawal />
+        {agentInfo && <ActiveCashWithdrawal />}
         <FTQuickactions onpress={switchModals} />
         <SetupProfile onPress={() => switchModals(0)} />
         <FTConversations />

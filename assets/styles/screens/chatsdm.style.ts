@@ -104,17 +104,13 @@ export const ChatsdmScreenStyles = StyleSheet.create({
   },
   textinput: {
     flex: 1,
-    // height: 40,
-    backgroundColor: COLORS.white3,
+
     paddingHorizontal: 10,
     paddingVertical: 3,
     ...FONTS.regular,
     ...fontsize.smallest,
     color: COLORS.grey7,
     borderRadius: 5
-
-    // borderLeftColor: "",
-    // borderLeftWidth: 1,
   },
   messagesDateWrap: {
     justifyContent: "center",

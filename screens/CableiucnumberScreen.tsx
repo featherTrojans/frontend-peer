@@ -5,6 +5,7 @@ import {
   FTCustombutton,
   FTDetailsModal,
   FTInput,
+  FTKeyboardwrapper,
   FTLoader,
   FTTitlepagewrapper,
 } from "../components";
@@ -106,14 +107,17 @@ const CableiucnumberScreen = ({ navigation, route }) => {
       title="IUC Number"
     >
       <FTLoader loading={loading} />
-      <FTInput
-        label="Enter IUC Number"
-        placeholderText="Enter Number"
-        name="iucnumber"
-        control={control}
-        mB={20}
-        mT={20}
-      />
+      <FTKeyboardwrapper>
+        <FTInput
+          label="Enter IUC Number"
+          placeholderText="Enter Number"
+          name="iucnumber"
+          control={control}
+          mB={20}
+          mT={20}
+        />
+      </FTKeyboardwrapper>
+
       <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
     </FTTitlepagewrapper>
   );

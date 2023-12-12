@@ -1,7 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MeternumberScreenStyles } from "../assets/styles/screens";
-import { FTCustombutton, FTInput, FTTitlepagewrapper } from "../components";
+import {
+  FTCustombutton,
+  FTInput,
+  FTKeyboardwrapper,
+  FTLoader,
+  FTTitlepagewrapper,
+} from "../components";
 import { useForm } from "react-hook-form";
 import axiosCustom from "../httpRequests/axiosCustom";
 import { AuthContext } from "../context/AuthContext";
@@ -14,9 +20,11 @@ const MeternumberScreen = ({ navigation, route }) => {
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
   const amount = route?.params?.amount;
+  const [loading, setLoading] = useState(false);
 
   const onsubmit = async (data) => {
     const action = async (pin) => {
+      setLoading(true);
       try {
         await axiosCustom.post("/bills/electricity", {
           service: "ibadan",
@@ -27,8 +35,9 @@ const MeternumberScreen = ({ navigation, route }) => {
           userPin: pin,
         });
       } catch (err) {
-        console.log(err.response);
         errorAlert(err);
+      } finally {
+        setLoading(false);
       }
     };
     navigation.navigate("transactionpin_screen", { action });
@@ -36,13 +45,16 @@ const MeternumberScreen = ({ navigation, route }) => {
 
   return (
     <FTTitlepagewrapper title="Meter Number">
-      <FTInput
-        label="Enter Meter Number"
-        placeholderText="Enter Number"
-        name="meternumber"
-        control={control}
-        mB={20}
-      />
+      <FTLoader loading={loading} />
+      <FTKeyboardwrapper>
+        <FTInput
+          label="Enter Meter Number"
+          placeholderText="Enter Number"
+          name="meternumber"
+          control={control}
+          mB={20}
+        />
+      </FTKeyboardwrapper>
       <FTCustombutton btntext="Continue" onpress={handleSubmit(onsubmit)} />
     </FTTitlepagewrapper>
   );
