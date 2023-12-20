@@ -6,6 +6,7 @@ import {
   FTHeaderandsubheader,
   FTIconwithtitleandinfo,
   FTInput,
+  FTKeyboardwrapper,
   FTTitlepagewrapper,
 } from "../components";
 import { useForm } from "react-hook-form";
@@ -148,6 +149,7 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
       setShowModal={setShowModal}
       modalHeight={content.height}
     >
+      <FTKeyboardwrapper>
       <FTHeaderandsubheader
         header="Enter Merchant ID"
         subHeader="The merchant ID, is the unique Identifier that is assigned to a merchant to receive payments"
@@ -166,7 +168,8 @@ const SearchmerchantidScreen = ({ route, navigation }) => {
           maxLength: 11,
         }}
       />
-      <View style={{ flex: 1 }}></View>
+      </FTKeyboardwrapper>
+      {/* <View style={{ flex: 1 }}></View> */}
 
       <FTCustombutton btntext="Continue" onpress={handleSubmit(onSubmit)} />
     </FTTitlepagewrapper>

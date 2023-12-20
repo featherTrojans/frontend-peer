@@ -80,6 +80,7 @@
     "react-native-maps-directions": "^1.8.0",
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^17.1.0",
+    "react-native-otp-inputs-expo": "^1.0.0",
     "react-native-phone-call": "^1.0.9",
     "react-native-reanimated": "~2.14.4",
     "react-native-responsive-fontsize": "^0.5.1",
