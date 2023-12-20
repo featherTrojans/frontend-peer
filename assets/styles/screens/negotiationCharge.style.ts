@@ -12,7 +12,7 @@ export const negotiationChargeScreenStyles = StyleSheet.create({
   },
   ngnText: {
     textTransform: "uppercase",
-    color: COLORS.white,
+    color: COLORS.black,
     ...fontsize.small,
     ...FONTS.regular,
     // marginRight: 0
@@ -20,6 +20,6 @@ export const negotiationChargeScreenStyles = StyleSheet.create({
   amountValueText: {
     ...fontsize.xbiggest,
     ...FONTS.bold,
-    color: COLORS.white,
+    color: COLORS.black,
   },
 });

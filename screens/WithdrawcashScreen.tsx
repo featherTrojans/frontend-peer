@@ -98,7 +98,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   //     );
   //   }
   // }, [info]);
-  console.log(amount, agentinfo?.amount, "HIHHIHIHIHIHIHIHH");
+  console.log(agentinfo, "HIHHIHIHIHIHIHIHH");
 
   const getAllAgents = async (address: string) => {
     console.log("trying to fetch agent datats");
@@ -214,7 +214,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   const handlesubmit = async () => {
     try {
       navigation.navigate("negotiationcharge_screen", {
-        nextScreen: "choosefeatheruser_screen",
+        businessname: info?.businessName,
         onsubmit: action,
       });
     } catch (err) {}

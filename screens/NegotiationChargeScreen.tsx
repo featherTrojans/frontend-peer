@@ -24,6 +24,7 @@ const { Nairaicon } = icons;
 
 const NegotiationChargeScreen = ({ route }) => {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
+  const businessname = route?.params?.businessname;
   const buttontext = route?.params?.buttontext || "Proceed";
   const headtext = route?.params?.headtext || "How Much?";
   const onsubmit = route?.params?.onsubmit;
@@ -86,12 +87,22 @@ const NegotiationChargeScreen = ({ route }) => {
   return (
     <FTTitlepagewrapper
       title={headtext}
-      headerBg={COLORS.blue16}
-      bg={COLORS.blue16}
-      childBg={COLORS.blue16}
-      invert
+      headerBg={COLORS.white}
+      bg={COLORS.white}
+      childBg={COLORS.white}
+      invert={false}
     >
       <FTLoader loading={loading} />
+
+      {/* <Animated.View layout={Layout.springify()} style={amountWrap}>
+        <Animated.Text layout={Layout.springify()} style={ngnText}>
+          NGN
+        </Animated.Text>
+
+        <Animated.View layout={Layout.springify()}>
+          <Text style={amountValueText}>{formatted}</Text>
+        </Animated.View>
+      </Animated.View> */}
 
       <Animated.View layout={Layout.springify()} style={amountWrap}>
         <Animated.Text layout={Layout.springify()} style={ngnText}>
@@ -103,16 +114,29 @@ const NegotiationChargeScreen = ({ route }) => {
         </Animated.View>
       </Animated.View>
 
-      <Text style={[enterPinText, { textAlign: "center" }]}>
-        Enter amount negotiated with the guy with the keypad
-      </Text>
-
+      <View style={{ justifyContent: "center", flexDirection: "row" }}>
+        <Text
+          style={[
+            enterPinText,
+            {
+              textAlign: "center",
+              color: "#000",
+              fontSize: 12,
+              width: "70%",
+              justifyContent: "center",
+            },
+          ]}
+        >
+          Please input the charge agreed between you and{" "}
+          <Text style={{ fontWeight: "700" }}>{businessname}</Text>
+        </Text>
+      </View>
       <View style={keyboardWrap}>
         <FTKeyboard
           array={[...numbers]}
           setDigit={typedAmountGreaterThanBal ? () => null : handleSetAmount}
           removeDigit={handleRemoveAmount}
-          textColor={COLORS.white}
+          textColor={COLORS.black}
         />
       </View>
       <FTCustombutton
