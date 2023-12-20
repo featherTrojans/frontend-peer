@@ -98,6 +98,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
   //     );
   //   }
   // }, [info]);
+  console.log(agentinfo, "HIHHIHIHIHIHIHIHH");
 
   const getAllAgents = async (address: string) => {
     console.log("trying to fetch agent datats");
@@ -111,6 +112,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       setAgentInfo(response?.data?.data);
       setInfo(response?.data?.data);
       if (response.data && response.data.data.length > 0) {
+        // console.log(response?.data?.data, "HELALALALALALLA");
         setInfo(response?.data?.data[0]);
         setAgentInfo(response?.data?.data[0]);
       }
@@ -130,7 +132,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       console.log(address, "here is the address");
       setCoords({ ...coordinates, locationText: address });
       const agentResponse = await getAllAgents(address);
-      console.log(agentResponse, "here is the agents dara");
+      // console.log(agentResponse, "here is the agents dara");
     } catch (err) {
       console.log("maybe this is where it is failing, acan't get address");
     } finally {
@@ -211,8 +213,8 @@ const WithdrawcashScreen = ({ route, navigation }) => {
 
   const handlesubmit = async () => {
     try {
-      navigation.navigate("amounttosend_screen", {
-        nextScreen: "choosefeatheruser_screen",
+      navigation.navigate("negotiationcharge_screen", {
+        businessname: info?.businessName,
         onsubmit: action,
       });
     } catch (err) {}

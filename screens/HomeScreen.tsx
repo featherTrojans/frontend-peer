@@ -46,7 +46,6 @@ import amountFormatter from "../utils/formatMoney";
 import { useExpoUpdate } from "../hooks/useExpoUpdate";
 import { DEFAULT_AGENT_AVATAR } from "../assetdatas";
 
-
 const {
   headerContainer,
   profileContainer,
@@ -87,7 +86,7 @@ const {
   Documentsetupicon,
   Levelcheckicon,
   Setuppinlockicon,
-  Activewithdrawicon
+  Activewithdrawicon,
 } = icons;
 
 const SetupProfile = ({ onPress }) => {
@@ -134,10 +133,8 @@ const SetupProfile = ({ onPress }) => {
 };
 
 const ActiveCashWithdrawal = () => {
-
   const navigation = useNavigation();
-  const { agentInfo: info } = useContext(AuthContext)
-
+  const { agentInfo: info } = useContext(AuthContext);
 
   return (
     <View style={[setupProfile, { marginBottom: 0, marginTop: 15 }]}>
@@ -147,7 +144,9 @@ const ActiveCashWithdrawal = () => {
           <Activewithdrawicon />
           <Text style={recentconvText}>Active Cash Withdrawal</Text>
         </View>
-        {info?.timeSpan && <Text style={numberOfUnread}>{info?.timeSpan} Away</Text>}
+        {info?.timeSpan && (
+          <Text style={numberOfUnread}>{info?.timeSpan} Away</Text>
+        )}
       </View>
 
       <FTIconwithtitleandinfo
@@ -395,7 +394,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     if (response.data && response.data.data.length > 0) {
       return navigation.navigate("withdrawcash_screen", {
         info: response?.data?.data[0],
-        amount: 0,
+        amount: response?.data?.data[0].amount,
       });
     }
     return navigation.navigate("amounttosend_screen", {

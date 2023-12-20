@@ -34,7 +34,7 @@
       }
     },
     "android": {
-      "versionCode": 27,
+      "versionCode": 28,
       "package": "feather.peer",
       "googleServicesFile": "./google-services.json",
       "permissions": [
