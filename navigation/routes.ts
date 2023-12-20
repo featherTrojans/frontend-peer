@@ -64,6 +64,7 @@ import {
   JoinwaitlistScreen,
   AirtimeordatanumberScreen,
 } from "../screens";
+import NegotiationChargeScreen from "../screens/NegotiationChargeScreen";
 
 // BVNSuccessScreen
 // BvnErrorScreen
@@ -290,6 +291,11 @@ export const transactRoutes = [
     screen: AmounttosendScreen,
 
     route: "amounttosend_screen",
+  },
+  {
+    screen: NegotiationChargeScreen,
+
+    route: "negotiationcharge_screen",
   },
   {
     screen: TransactionpinScreen,

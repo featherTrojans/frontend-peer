@@ -60,4 +60,5 @@ export * from "./amounttosend.style";
 export * from "./uploaddoc.style";
 export * from "./withdrawcash.style";
 export * from "./transactionsuccess.style";
-export * from "./walletfunding.style"
+export * from "./walletfunding.style";
+export * from "./negotiationCharge.style";

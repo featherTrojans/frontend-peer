@@ -15,7 +15,7 @@ import { useState } from "react";
 
 import { LoginScreenStyles } from "../assets/styles/screens";
 import { useAlert } from "../hooks";
-import { VALIDATION } from "../utils";
+import { VALIDATION, setDataInstorage } from "../utils";
 import { Controller, useForm } from "react-hook-form";
 import Animated, { Layout } from "react-native-reanimated";
 
@@ -97,6 +97,10 @@ const LoginScreen = ({ navigation }) => {
     try {
       setLoading(true);
       const response = await axiosCustom.post("/auth/signin", data);
+      await setDataInstorage("@token", {
+        token: response.data.data.token,
+        time: Date.now(),
+      });
       setAuthorizationToken(response.data.data.token);
       navigation.navigate("welcome_screen");
     } catch (err) {

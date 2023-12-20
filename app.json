@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.15",
+    "version": "2.0.16",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -16,8 +16,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#003AD6"
     },
-
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.featherpeer.user",
@@ -33,7 +34,7 @@
       }
     },
     "android": {
-      "versionCode": 27,
+      "versionCode": 28,
       "package": "feather.peer",
       "googleServicesFile": "./google-services.json",
       "permissions": [
