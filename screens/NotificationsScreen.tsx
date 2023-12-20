@@ -69,7 +69,7 @@ const messageicon = (type: string) => {
       return <FTIconwithbg size={29} Icon={Arrowin} bG={COLORS.green3} />;
       break;
     case "Cash Withdrawal":
-      return <FTIconwithbg size={29} Icon={Arrowin} bG={COLORS.grey1} />;
+      return <FTIconwithbg size={29} Icon={Withdrawalnotificationicon} bG={COLORS.grey1} />;
       break;
     case "Cash Deposit":
       return <Logoavatar />;
