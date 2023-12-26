@@ -401,6 +401,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       buttontext: "Withdraw Cash",
       headtext: `Balance : N${walletbalance}`,
       onsubmit: onsubmitfindmerchant,
+      fromWithdraw: true
     });
   };
 

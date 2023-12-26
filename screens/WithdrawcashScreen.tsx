@@ -166,7 +166,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       const response = await axiosCustom.post("/request/approve", {
         reference: info.reference,
         user_pin: pin,
-        agreedCharge: Number(charge + amount),
+        agreedCharge: Number(charge),
       });
       console.log(response, "Here is the ");
       try {
@@ -262,6 +262,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       </FTTitlepagewrapper>
     );
   }
+  
 
   if (!info || loading) {
     return (

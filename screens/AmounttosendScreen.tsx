@@ -28,6 +28,10 @@ const AmounttosendScreen = ({ route }) => {
   const headtext = route?.params?.headtext || "How Much?";
   const onsubmit = route?.params?.onsubmit;
   const toFundScreen = route?.params?.toSendScreen || false;
+  const fromWithdraw = route?.params?.fromWithdraw || false;
+
+
+
   const { errorAlert, purpleAlert } = useAlert();
   const [loading, setLoading] = useState(false);
 
@@ -55,7 +59,8 @@ const AmounttosendScreen = ({ route }) => {
   let typedAmount = Number(amount.join(""));
   let typedAmountGreaterThanBal =
     !toFundScreen && typedAmount > authdata.walletBal;
-  let disableButton = typedAmountGreaterThanBal || typedAmount <= 0;
+  let isWithdrawAmountLess = typedAmount > 0 && fromWithdraw && typedAmount < 500
+  let disableButton = typedAmountGreaterThanBal || typedAmount <= 0 || isWithdrawAmountLess;
 
   useEffect(() => {
     if (typedAmountGreaterThanBal) {
@@ -63,6 +68,11 @@ const AmounttosendScreen = ({ route }) => {
         `Sorry, Your current balance is ${amountFormatter(
           authdata.walletBal
         )}, Kindly enter a lesser amount.`
+      );
+    }
+    if(isWithdrawAmountLess){
+      purpleAlert(
+        `Withdrawal amount can't be less than 500.00`
       );
     }
   }, [typedAmount]);
