@@ -219,6 +219,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       });
     } catch (err) {}
   };
+  
   const withdrawcashActions = [
     {
       Icon: Phoneicon,
