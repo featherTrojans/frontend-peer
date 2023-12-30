@@ -168,7 +168,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
         user_pin: pin,
         agreedCharge: Number(charge),
       });
-      console.log(response, "Here is the ");
+
       try {
         navigation.navigate("transactionsuccess_screen");
       } catch (err) {
@@ -262,7 +262,6 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       </FTTitlepagewrapper>
     );
   }
-  
 
   if (!info || loading) {
     return (
