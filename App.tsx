@@ -13,6 +13,7 @@ import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { getStatusBarHeight } from "react-native-iphone-screen-helper";
 import { enableFreeze } from "react-native-screens";
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 
 // enableFreeze(true);
 
@@ -83,6 +84,15 @@ export default function App() {
   const [routeName, setRouteName] = useState("onboarding_screen");
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
   let alertOffset = 0;
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestTrackingPermissionsAsync();
+      if (status === 'granted') {
+        console.log('We can now track user');
+      }
+    })();
+  }, []);
 
   // check for new updates as early as possible and update the app based on platform
   // useExpoUpdate();
