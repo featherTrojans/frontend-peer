@@ -94,6 +94,9 @@ export default function App() {
     })();
   }, []);
 
+
+  
+
   // check for new updates as early as possible and update the app based on platform
   // useExpoUpdate();
 

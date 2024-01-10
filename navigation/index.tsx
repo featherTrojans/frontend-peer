@@ -29,6 +29,7 @@ const AuthStack = createStackNavigator();
 const DashboardTabs = createBottomTabNavigator();
 
 import { authRoutes, transactRoutes } from "./routes";
+import { useDeviceSize } from "../hooks";
 
 const {
   Hometabicon,
@@ -89,6 +90,7 @@ const NoAuthNavigator = ({ routeName }) => {
 };
 
 const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
+  const {deviceWidth, isLargeDevice } = useDeviceSize()
   return (
     <DashboardTabs.Navigator
       screenOptions={({ route }) => ({
@@ -100,6 +102,7 @@ const DashboardTabNavigator = ({ routeName }: { routeName: string }) => {
               ...FONTS.regular,
               color: COLORS.blue9,
               marginTop: 15,
+              marginLeft: isLargeDevice ? 16 : 0
             }}
           >
             {route.name}

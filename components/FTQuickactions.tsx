@@ -10,6 +10,7 @@ import React, { useCallback } from "react";
 import { Image as RNImage } from "expo-image";
 import { images } from "../constants";
 import { HomeScreenStyles } from "../assets/styles/screens";
+import { useDeviceSize } from "../hooks";
 
 const { scrollaction, scrollActionImage, scrollactionText } = HomeScreenStyles;
 
@@ -37,6 +38,7 @@ const scrollactions = [
 ];
 
 const FTQuickactions = ({ onpress }) => {
+  const { isLargeDevice } = useDeviceSize()
   const renderEachScrollaction = useCallback(({ item, index }) => {
     let { bg, text, image, modal } = item;
     let isLast = index + 1 === scrollactions.length;
@@ -45,7 +47,7 @@ const FTQuickactions = ({ onpress }) => {
         <View
           style={[
             scrollaction,
-            { backgroundColor: bg, marginRight: !isLast ? 16 : 0 },
+            { backgroundColor: bg, marginRight: !isLast ? 16 : 0, height: isLargeDevice ? 200 : 164 },
           ]}
         >
           <RNImage
