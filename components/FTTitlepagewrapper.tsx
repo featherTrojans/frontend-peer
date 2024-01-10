@@ -58,7 +58,7 @@ const FTTitlepagewrapper = ({
         style={{
           flex: 1,
           backgroundColor: bg,
-          paddingBottom: Platform.select({ android: pB }),
+          paddingBottom: pB,
         }}
       >
         <Customstatusbar bg={bg} />

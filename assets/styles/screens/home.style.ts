@@ -98,7 +98,6 @@ export const HomeScreenStyles = StyleSheet.create({
 
   scrollaction: {
     width: 148,
-    height: 164,
     borderRadius: 16,
     padding: 18,
     alignSelf: "flex-end",
@@ -115,7 +114,7 @@ export const HomeScreenStyles = StyleSheet.create({
   scrollactionText: {
     ...fontsize.xsmallest,
     ...FONTS.medium,
-    lineHeight: 14,
+    // lineHeight: 14,
     color: COLORS.blue9,
     position: "absolute",
     left: 18,
