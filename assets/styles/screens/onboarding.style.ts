@@ -28,7 +28,6 @@ export const OnboardingScreenStyles = StyleSheet.create({
   eachOnboardingHeader: {
     ...fontsize.bxmedium,
     ...FONTS.semibold,
-    lineHeight: 35,
     marginBottom: 35,
     color: COLORS.blue9,
     textAlign: "center",
