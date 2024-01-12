@@ -13,12 +13,12 @@ import { NavigatorSelector } from "./navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { getStatusBarHeight } from "react-native-iphone-screen-helper";
 import { enableFreeze } from "react-native-screens";
-import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 
 // enableFreeze(true);
 
 import { AWEEKAFTER, getDataFromStorage, setAuthorizationToken } from "./utils";
-import { useExpoUpdate } from "./hooks/useExpoUpdate";
+
+
 
 const MyTheme = {
   ...DefaultTheme,
@@ -85,14 +85,6 @@ export default function App() {
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
   let alertOffset = 0;
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await requestTrackingPermissionsAsync();
-      if (status === 'granted') {
-        console.log('We can now track user');
-      }
-    })();
-  }, []);
 
 
   
