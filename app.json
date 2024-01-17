@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.20",
+    "version": "2.0.21",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.featherpeer.user",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "infoPlist": {
         "NSContactsUsageDescription": "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
         "NSLocationUsageDescription": "Allow Feather access to your location to find the nearest agent close to you",
