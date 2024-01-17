@@ -45,6 +45,7 @@ import { useAlert } from "../hooks";
 import amountFormatter from "../utils/formatMoney";
 import { useExpoUpdate } from "../hooks/useExpoUpdate";
 import { DEFAULT_AGENT_AVATAR } from "../assetdatas";
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 
 const {
   headerContainer,
@@ -351,6 +352,15 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     () => formatData(authdata?.transactions),
     [authdata?.transactions]
   );
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestTrackingPermissionsAsync();
+      if (status === 'granted') {
+        console.log('Yay! I have user permission to track data');
+      }
+    })();
+  }, []);
 
   const getDashboardData = async () => {
     setLoading(true);
