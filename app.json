@@ -24,8 +24,9 @@
       "infoPlist": {
         "NSContactsUsageDescription": "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
         "NSLocationUsageDescription": "Allow Feather access to your location to find the nearest agent close to you",
+        "NSUserTrackingUsageDescription": "We will use your data to provide a better and personalized ads to you.",
         "NSLocationWhenInUseUsageDescription": "We use it to show you nearby users and a map showing some agent locations",
-        "NSLocationAlwaysUsageDescription": "We wiil use it to show you nearby users and a map showing some agent locations",
+        "NSLocationAlwaysUsageDescription": "We use it to show you nearby users and a map showing some agent locations",
         "NSCameraUsageDescription": "We access your camera to let you customize your user display picture.",
         "NSPhotoLibraryUsageDescription": "We access your photos to let you customize your user display picture."
       }
@@ -66,7 +67,15 @@
     },
     "description": "",
     "expo": {
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "plugins": [
+        [
+          "expo-tracking-transparency",
+          {
+            "userTrackingPermission": "Feather will use your data to provide a better and personalized ads to you."
+          }
+        ]
+      ]
     },
     "extra": {
       "eas": {
