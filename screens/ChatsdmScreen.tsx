@@ -354,17 +354,44 @@ const ChatsdmScreen = ({ route }) => {
 
       if (document.exists()) {
         setchatid(id1id2);
+        // check block column
+        const doc = document.data();
+        if (doc.blockedid && doc.blockedid !== "") {
+          if (doc.blockedid == authId) {
+            // show the you have been blocked page / modal
+          } else {
+            // show the you blocked someone, unblock this user
+          }
+        }
         return;
       }
       const id2id1 = `${userInfo?.userUid}-${authId}`;
       document = await getDoc(doc(db, "chatstwo", id2id1));
       if (document.exists()) {
         setchatid(id2id1);
+        const doc = document.data();
+        if (doc.blockedid && doc.blockedid !== "") {
+          if (doc.blockedid == authId) {
+            // show the you have been blocked page / modal
+          } else {
+            // show the you blocked someone, unblock this user
+          }
+        }
         return;
       }
     } catch (err) {}
   };
 
+  const blockUser = async () => {
+    await updateDoc(doc(db, "chatstwo", chatid), {
+      blockedid: userInfo?.userUid,
+    });
+  };
+  const unblockUser = async () => {
+    await updateDoc(doc(db, "chatstwo", chatid), {
+      blockedid: "",
+    });
+  };
   const sendFireBaseMessage = async (action = "message", amount) => {
     if (chattext.trim() === "" && action === "message") return;
     if (fetchmessage) return;
@@ -376,6 +403,7 @@ const ChatsdmScreen = ({ route }) => {
       await setDoc(doc(db, "chatstwo", chatId), {
         id1: authId,
         id2: userInfo?.userUid,
+        blockedid: "",
       });
       setchatid(chatId);
       setFetchmessage(false);
