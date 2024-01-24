@@ -7,26 +7,16 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
-  FlatList,
   Keyboard,
 } from "react-native";
 import React, { useContext, useRef, useState, useEffect } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ChatsdmScreenStyles } from "../assets/styles/screens";
-
 import {
-  FTAllChatsModal,
   FTCustombutton,
-  FTIconwithbg,
   FTMainwrapper,
   FTOtherImage,
   FTQuickActionBtn,
-  FTTabWrapper,
-  FTTitlepagewrapper,
-  FTUserImage,
 } from "../components";
-
 import { AuthContext } from "../context/AuthContext";
 import {
   addDoc,
@@ -46,9 +36,9 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import formatData, { formatTime } from "../utils/fomatTrans";
 import { db } from "../utils/firebase";
 import Animated from "react-native-reanimated";
-
 import { useNavigation } from "@react-navigation/native";
 import amountFormatter from "../utils/formatMoney";
+import Loader from "../components/FTLoader";
 
 const {
   chatTransferMsgWrap,
@@ -71,7 +61,6 @@ const {
   chatTextInput,
   textinput,
   backArrowWrap,
-
   sendCashHeader,
   sendCashWrapper,
   sendCashButton,
@@ -79,7 +68,6 @@ const {
   buttonText,
   chooseAmountHeader,
   transactionSuccessText,
-
   chooseAmountInputWrap,
   textInputStyle,
   emptyChatLoaderWrap,
@@ -90,11 +78,8 @@ const {
   Bluecardicon,
   Blacksendicon,
   Addchatsicon,
-  Startnewchaticon,
   Successtransfericon,
   Smalllockicon,
-  Smallbackarrow,
-  Sendcashicon,
   Chattransfericon,
   Keeptypingicon,
   Feathecomingsoonchatanimate,
@@ -260,55 +245,81 @@ const ActionSuccess = () => {
   );
 };
 
-const BlockedCard = ({ isBlockedByMe = false }) => {
+const BlockedCard = ({ isBlockedByMe = false, unblockUser }) => {
+  const { successAlert, errorAlert } = useAlert();
+  const [load, setload] = useState(false);
+
+  const handleunBlockUser = async () => {
+    try {
+      setload(true);
+      await unblockUser();
+      successAlert(
+        "User has been unblocked succesfully, you can unblock this user anytime"
+      );
+    } catch (err) {
+      errorAlert(null, "Unable to unblock this user, please try again");
+    } finally {
+      setload(false);
+    }
+  };
+
   return (
-    <View
-      style={{
-        backgroundColor: COLORS.white,
-        borderRadius: 28,
-        justifyContent: "center",
-        alignItems: "center",
-        paddingVertical: 40,
-      }}
-    >
+    <View style={{ flex: 1, justifyContent: "flex-end" }}>
+      <Loader loading={load} />
       <View
         style={{
-          width: 70,
-          height: 70,
-          borderRadius: 70 / 2,
-          backgroundColor: isBlockedByMe
-            ? "rgba(255, 227, 227, 0.4)"
-            : "rgba(119, 119, 119, 0.4)",
+          backgroundColor: COLORS.white,
+          borderRadius: 28,
           justifyContent: "center",
           alignItems: "center",
+          paddingVertical: 40,
         }}
       >
-        {/* Iocn here  */}
-        <Bigblockedusericon color={isBlockedByMe ? "#F50000" : "#777777"} />
+        <View
+          style={{
+            width: 70,
+            height: 70,
+            borderRadius: 70 / 2,
+            backgroundColor: isBlockedByMe
+              ? "rgba(255, 227, 227, 0.4)"
+              : "rgba(119, 119, 119, 0.4)",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {/* Iocn here  */}
+          <Bigblockedusericon color={isBlockedByMe ? "#F50000" : "#777777"} />
+        </View>
+
+        <Text
+          style={{
+            ...fontsize.small,
+            ...FONTS.medium,
+            color: COLORS.black,
+            width: "75%",
+            textAlign: "center",
+            paddingVertical: 35,
+          }}
+        >
+          {isBlockedByMe
+            ? "You blocked this user, unblock to continue sending chats to David."
+            : "This user has blocked all chats from you, you cannot send any chat until unblocked by user."}
+        </Text>
+
+        {isBlockedByMe && (
+          <FTQuickActionBtn
+            icon={
+              <Blockusericon
+                color={isBlockedByMe ? COLORS.black : COLORS.red6}
+              />
+            }
+            text={isBlockedByMe ? "Unblock User" : "Block User"}
+            action={handleunBlockUser}
+            bG={isBlockedByMe ? `rgba(206, 206, 206, .3)` : COLORS.Tred}
+            color={isBlockedByMe ? COLORS.black : COLORS.red6}
+          />
+        )}
       </View>
-
-      <Text
-        style={{
-          ...fontsize.small,
-          ...FONTS.medium,
-          color: COLORS.black,
-          width: "75%",
-          textAlign: "center",
-          paddingVertical: 35,
-        }}
-      >
-        {isBlockedByMe
-          ? "You blocked this user, unblock to continue sending chats to David."
-          : "This user has blocked all chats from you, you cannot send any chat until unblocked by user."}
-      </Text>
-
-      {isBlockedByMe && <FTQuickActionBtn
-        icon={<Blockusericon color={isBlockedByMe ? COLORS.black : COLORS.red6} />}
-        text={isBlockedByMe ? "Unblock User" : "Block User"}
-        action={() => console.log("Clear Chat")}
-        bG={isBlockedByMe ? `rgba(206, 206, 206, .3)` : COLORS.Tred}
-        color={isBlockedByMe ? COLORS.black : COLORS.red6}
-      />}
     </View>
   );
 };
@@ -321,6 +332,7 @@ const ChatsdmScreen = ({ route }) => {
   const [messages, setMessages] = useState<any>([]);
   const [chatid, setchatid] = useState("");
   const [chattext, setchattext] = useState("");
+  const [blockid, setblockid] = useState("");
   const [amount, setAmount] = useState({ name: "0", value: 0 });
   const [fetchmessage, setFetchmessage] = useState(false);
   const animationRef = useRef<LottieView>(null);
@@ -364,6 +376,7 @@ const ChatsdmScreen = ({ route }) => {
       getUserInfo();
     }
   }, [chatwithid]);
+
   useEffect(() => {
     getThisChats();
   }, [userInfo]);
@@ -413,11 +426,7 @@ const ChatsdmScreen = ({ route }) => {
         // check block column
         const doc = document.data();
         if (doc.blockedid && doc.blockedid !== "") {
-          if (doc.blockedid == authId) {
-            // show the you have been blocked page / modal
-          } else {
-            // show the you blocked someone, unblock this user
-          }
+          setblockid(doc.blockedid);
         }
         return;
       }
@@ -427,11 +436,7 @@ const ChatsdmScreen = ({ route }) => {
         setchatid(id2id1);
         const doc = document.data();
         if (doc.blockedid && doc.blockedid !== "") {
-          if (doc.blockedid == authId) {
-            // show the you have been blocked page / modal
-          } else {
-            // show the you blocked someone, unblock this user
-          }
+          setblockid(doc.blockedid);
         }
         return;
       }
@@ -439,15 +444,30 @@ const ChatsdmScreen = ({ route }) => {
   };
 
   const blockUser = async () => {
-    await updateDoc(doc(db, "chatstwo", chatid), {
-      blockedid: userInfo?.userUid,
-    });
+    try {
+      await updateDoc(doc(db, "chatstwo", chatid), {
+        blockedid: userInfo?.userUid,
+      });
+      setblockid(userInfo?.userUid);
+      return "good";
+    } catch (err) {
+      console.log(err, "ANOTHER ERROR");
+      throw err;
+    }
   };
+
   const unblockUser = async () => {
-    await updateDoc(doc(db, "chatstwo", chatid), {
-      blockedid: "",
-    });
+    try {
+      await updateDoc(doc(db, "chatstwo", chatid), {
+        blockedid: "",
+      });
+      setblockid("");
+      return "good";
+    } catch (err) {
+      throw err;
+    }
   };
+
   const sendFireBaseMessage = async (action = "message", amount) => {
     if (chattext.trim() === "" && action === "message") return;
     if (fetchmessage) return;
@@ -629,6 +649,7 @@ const ChatsdmScreen = ({ route }) => {
     setShowModal(false);
     switchModals(1);
   };
+
   const openTransactionPin = (amount) => {
     setShowModal(false);
     switchModals(2, amount);
@@ -649,7 +670,6 @@ const ChatsdmScreen = ({ route }) => {
         <CustomModal>
           <View style={{ height: content.height }}>{content.child}</View>
         </CustomModal>
-
         <View style={chatHeader}>
           <View style={[headerDetailsContainer]}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -666,6 +686,9 @@ const ChatsdmScreen = ({ route }) => {
                   navigation.navigate("chatsprofile_screen", {
                     userInfo,
                     switchModals,
+                    blockUser,
+                    unblockUser,
+                    blockid,
                   })
                 }
                 style={chatsDmProfileWrap}
@@ -695,76 +718,85 @@ const ChatsdmScreen = ({ route }) => {
             </TouchableOpacity>
           </View>
         </View>
-
-        {fetchmessage ? (
-          <View style={emptyChatLoaderWrap}>
-            <LottieView
-              source={Feathecomingsoonchatanimate}
-              autoPlay
-              loop
-              style={emptyChatAnimation}
-            />
-          </View>
-        ) : (
-          <Animated.ScrollView
-            style={messageAreaContainer}
-            ref={scrollViewRef}
-            contentContainerStyle={{
-              paddingVertical: 20,
-              justifyContent: "flex-end",
-            }}
-            showsVerticalScrollIndicator={false}
-            bounces={false}
-            snapToEnd={true}
-            onContentSizeChange={() =>
-              scrollViewRef?.current?.scrollToEnd({ animated: true })
-            }
-          >
-            {messages.map(({ data, time }, index: number) => {
-              return (
-                <View key={index}>
-                  <View style={messagesDateWrap}>
-                    <Text style={messageDateText}>{time}</Text>
-                  </View>
-
-                  {data.map((dat, index) => {
-                    if (dat.sender === userInfo?.userUid) {
-                      return <View key={index}>{renderSenderHTML(dat)}</View>;
-                    }
-                    return <View key={index}>{renderReceiverHTML(dat)}</View>;
-                  })}
-                </View>
-              );
-            })}
-
-            <BlockedCard />
-          </Animated.ScrollView>
-        )}
-
-        <View style={chatTextInput}>
-          <TextInput
-            placeholder="Enter Message..."
-            style={[textinput, { minHeight: 40, maxHeight: 120 }]}
-            value={chattext}
-            multiline={true}
-            textAlignVertical="center"
-            underlineColorAndroid="transparent"
-            onChangeText={handleTextChange}
-            placeholderTextColor={COLORS.grey16}
-            enablesReturnKeyAutomatically={chattext.trim() == ""}
-            onFocus={() =>
-              scrollViewRef?.current?.scrollToEnd({ animated: true })
-            }
+        {blockid != "" ? (
+          <BlockedCard
+            isBlockedByMe={blockid != authId}
+            unblockUser={unblockUser}
           />
-          {chattext.trim() !== "" && (
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => sendFireBaseMessage()}
-            >
-              <Addchatsicon />
-            </TouchableOpacity>
-          )}
-        </View>
+        ) : (
+          <>
+            {fetchmessage ? (
+              <View style={emptyChatLoaderWrap}>
+                <LottieView
+                  source={Feathecomingsoonchatanimate}
+                  autoPlay
+                  loop
+                  style={emptyChatAnimation}
+                />
+              </View>
+            ) : (
+              <Animated.ScrollView
+                style={messageAreaContainer}
+                ref={scrollViewRef}
+                contentContainerStyle={{
+                  paddingVertical: 20,
+                  justifyContent: "flex-end",
+                }}
+                showsVerticalScrollIndicator={false}
+                bounces={false}
+                snapToEnd={true}
+                onContentSizeChange={() =>
+                  scrollViewRef?.current?.scrollToEnd({ animated: true })
+                }
+              >
+                {messages.map(({ data, time }, index: number) => {
+                  return (
+                    <View key={index}>
+                      <View style={messagesDateWrap}>
+                        <Text style={messageDateText}>{time}</Text>
+                      </View>
+
+                      {data.map((dat, index) => {
+                        if (dat.sender === userInfo?.userUid) {
+                          return (
+                            <View key={index}>{renderSenderHTML(dat)}</View>
+                          );
+                        }
+                        return (
+                          <View key={index}>{renderReceiverHTML(dat)}</View>
+                        );
+                      })}
+                    </View>
+                  );
+                })}
+              </Animated.ScrollView>
+            )}
+            <View style={chatTextInput}>
+              <TextInput
+                placeholder="Enter Message..."
+                style={[textinput, { minHeight: 40, maxHeight: 120 }]}
+                value={chattext}
+                multiline={true}
+                textAlignVertical="center"
+                underlineColorAndroid="transparent"
+                onChangeText={handleTextChange}
+                placeholderTextColor={COLORS.grey16}
+                enablesReturnKeyAutomatically={chattext.trim() == ""}
+                onFocus={() =>
+                  scrollViewRef?.current?.scrollToEnd({ animated: true })
+                }
+              />
+              {chattext.trim() !== "" && (
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => sendFireBaseMessage()}
+                >
+                  <Addchatsicon />
+                </TouchableOpacity>
+              )}
+            </View>
+          </>
+        )}
       </KeyboardAvoidingView>
     </FTMainwrapper>
   );

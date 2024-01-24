@@ -1,13 +1,4 @@
-import {
-  Animated,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  RefreshControl,
-  ScrollView,
-} from "react-native";
+import { Animated, StyleSheet, Text, View, RefreshControl } from "react-native";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ChatsprofileScreenStyles,
@@ -16,8 +7,6 @@ import {
 import {
   FTCustombutton,
   FTEmptycomponent,
-  FTHorizontaline,
-  FTIconwithbg,
   FTOtherImage,
   FTQuickActionBtn,
   FTTitlepagewrapper,
@@ -25,40 +14,29 @@ import {
 } from "../components";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import axiosCustom from "../httpRequests/axiosCustom";
-
 import { ActivityIndicator } from "react-native";
 import formatData from "../utils/fomatTrans";
-import { useCustomModal } from "../hooks";
+import { useAlert, useCustomModal } from "../hooks";
+import Loader from "../components/FTLoader";
 
-const {
-  Bluecardicon,
-  Blacksendicon,
-  Clearchaticon,
-  Sendcashicon,
-  Blockusericon,
-  Bigblockedusericon,
-} = icons;
-const {
-  quickActionBtn,
-  quickActionBtnText,
-  profileInfoWrap,
-  alignWrap,
-  profileDetailWrap,
-  profileNameText,
-  profileDateJoined,
-  recentTransactText,
-} = ChatsprofileScreenStyles;
+const { Sendcashicon, Blockusericon, Bigblockedusericon } = icons;
+const { profileInfoWrap, alignWrap, profileDetailWrap, profileNameText } =
+  ChatsprofileScreenStyles;
 const { transactionWrap, transactionHeader, transactionText, viewAll } =
   HomeScreenStyles;
 
 const ChatsprofileScreen = ({ route, navigation }) => {
   const userInfo = route?.params?.userInfo;
   const switchModals = route?.params?.switchModals;
+  const blockUser = route?.params?.blockUser;
+  const unblockUser = route?.params?.unblockUser;
+  const blockid = route?.params?.blockid;
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [load, setload] = useState(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const isBlocked = false;
-
+  const isBlocked = blockid != "";
+  const { successAlert, errorAlert } = useAlert();
   const { CustomModal, openModal, closeModal } = useCustomModal();
 
   const histories: any[] = useMemo(
@@ -102,6 +80,35 @@ const ChatsprofileScreen = ({ route, navigation }) => {
     getUserTransactionWhenRefresh();
   };
 
+  const handleBlockUser = async () => {
+    try {
+      setload(true);
+      await blockUser();
+      successAlert(
+        "User has been blocked succesfully, you can unblock this user anytime"
+      );
+    } catch (err) {
+      console.log("IS THERE AN ERROR");
+      errorAlert(null, "Unable to block this user, please try again");
+    } finally {
+      setload(false);
+    }
+  };
+
+  const handleunBlockUser = async () => {
+    try {
+      setload(true);
+      await unblockUser();
+      successAlert(
+        "User has been unblocked succesfully, you can unblock this user anytime"
+      );
+    } catch (err) {
+      errorAlert(null, "Unable to unblock this user, please try again");
+    } finally {
+      setload(false);
+    }
+  };
+
   const ListHeader = () => {
     return (
       <View style={[profileInfoWrap, { marginBottom: 30 }]}>
@@ -136,7 +143,13 @@ const ChatsprofileScreen = ({ route, navigation }) => {
               <Blockusericon color={isBlocked ? COLORS.black : COLORS.red6} />
             }
             text={isBlocked ? "Unblock User" : "Block User"}
-            action={() => openModal()}
+            action={
+              blockid == ""
+                ? openModal
+                : blockid == userInfo.userUid
+                ? handleunBlockUser
+                : () => {}
+            }
             bG={isBlocked ? `rgba(206, 206, 206, .3)` : COLORS.Tred}
             color={isBlocked ? COLORS.black : COLORS.red6}
           />
@@ -171,6 +184,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
       childBg={COLORS.white3}
       headerBg={COLORS.white3}
     >
+      <Loader loading={load} />
       <CustomModal>
         <View style={{ height: 322, alignItems: "center" }}>
           <View
@@ -201,13 +215,13 @@ const ChatsprofileScreen = ({ route, navigation }) => {
             you unblock
           </Text>
 
-          <View style={{alignSelf: "stretch", gap: 12}}>
-            <FTCustombutton 
+          <View style={{ alignSelf: "stretch", gap: 12 }}>
+            <FTCustombutton
               btntext="Block user"
-              onpress={() => console.log("Blocker user function")}
+              onpress={handleBlockUser}
               bg="#E13121"
             />
-             <FTCustombutton 
+            <FTCustombutton
               outline
               btntext="Cancel"
               onpress={closeModal}

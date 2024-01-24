@@ -10,12 +10,7 @@ import {
   ChatsScreenStyles,
   ProfileScreenStyles,
 } from "../assets/styles/screens";
-import {
-  FTChatList,
-  FTLoader,
-  FTSearchinput,
-  FTTabWrapper,
-} from "../components";
+import { FTChatList, FTSearchinput, FTTabWrapper } from "../components";
 import { COLORS, icons } from "../constants";
 import useChats from "../hooks/useChats";
 import { useNavigation } from "@react-navigation/native";
