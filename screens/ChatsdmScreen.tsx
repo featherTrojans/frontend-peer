@@ -21,6 +21,7 @@ import {
   FTIconwithbg,
   FTMainwrapper,
   FTOtherImage,
+  FTQuickActionBtn,
   FTTabWrapper,
   FTTitlepagewrapper,
   FTUserImage,
@@ -98,6 +99,8 @@ const {
   Keeptypingicon,
   Feathecomingsoonchatanimate,
   Successcheckanimate,
+  Blockusericon,
+  Bigblockedusericon,
 } = icons;
 
 const PickOption = ({ userInfo, openAmount, closeModal }) => {
@@ -253,6 +256,59 @@ const ActionSuccess = () => {
         style={emptyChatAnimation}
       />
       <Text style={transactionSuccessText}>Transaction Successful</Text>
+    </View>
+  );
+};
+
+const BlockedCard = ({ isBlockedByMe = false }) => {
+  return (
+    <View
+      style={{
+        backgroundColor: COLORS.white,
+        borderRadius: 28,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingVertical: 40,
+      }}
+    >
+      <View
+        style={{
+          width: 70,
+          height: 70,
+          borderRadius: 70 / 2,
+          backgroundColor: isBlockedByMe
+            ? "rgba(255, 227, 227, 0.4)"
+            : "rgba(119, 119, 119, 0.4)",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {/* Iocn here  */}
+        <Bigblockedusericon color={isBlockedByMe ? "#F50000" : "#777777"} />
+      </View>
+
+      <Text
+        style={{
+          ...fontsize.small,
+          ...FONTS.medium,
+          color: COLORS.black,
+          width: "75%",
+          textAlign: "center",
+          paddingVertical: 35,
+        }}
+      >
+        {isBlockedByMe
+          ? "You blocked this user, unblock to continue sending chats to David."
+          : "This user has blocked all chats from you, you cannot send any chat until unblocked by user."}
+      </Text>
+
+      {isBlockedByMe && <FTQuickActionBtn
+        icon={<Blockusericon color={isBlockedByMe ? COLORS.black : COLORS.red6} />}
+        text={isBlockedByMe ? "Unblock User" : "Block User"}
+        action={() => console.log("Clear Chat")}
+        bG={isBlockedByMe ? `rgba(206, 206, 206, .3)` : COLORS.Tred}
+        color={isBlockedByMe ? COLORS.black : COLORS.red6}
+      />}
     </View>
   );
 };
@@ -523,7 +579,7 @@ const ChatsdmScreen = ({ route }) => {
   const switchModals = (value, amount) => {
     switch (value) {
       case 0:
-        openModal();
+        openMoxdal();
         setContent({
           child: (
             <PickOption
@@ -680,6 +736,8 @@ const ChatsdmScreen = ({ route }) => {
                 </View>
               );
             })}
+
+            <BlockedCard />
           </Animated.ScrollView>
         )}
 

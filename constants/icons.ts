@@ -149,6 +149,8 @@ import Useravatarsmallicon from "../assets/icons/Useravatarsmallicon";
 import Whiteaddicon from "../assets/icons/Whiteaddicon";
 import Downloadreceipticon from "../assets/icons/Downloadreceipticon";
 import Activewithdrawicon from "../assets/icons/Activewithdrawicon";
+import Blockusericon from "../assets/icons/Blockusericon";
+import Bigblockedusericon from "../assets/icons/Bigblockedusericon";
 
 export default {
   Logo,
@@ -195,6 +197,7 @@ export default {
   Carddetailsicon,
   Cardfreezeicon,
   Cardfundicon,
+  Bigblockedusericon,
   Cardlockicon,
   Cardwithdrawicon,
   Vcardicon,
@@ -208,6 +211,7 @@ export default {
   Mywalleticon,
   Abouticon,
   Activememojiicon,
+  Blockusericon,
   Accountcopyicon,
   Greaterthanicon,
   Addressediticon,

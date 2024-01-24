@@ -21,10 +21,10 @@ const Custombutton = ({
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={onpress}
-      style={[btnstyle, { backgroundColor: bg }]}
+      style={[btnstyle, { backgroundColor: outline ? "transparent" : bg, borderColor: outline ? bg : "transparent", borderWidth: 1 }]}
       disabled={disable}
     >
-      <Text style={btntextstyle}>{btntext}</Text>
+      <Text style={[btntextstyle, {color: outline ? bg : COLORS.white }]}>{btntext}</Text>
     </TouchableOpacity>
   );
 };

@@ -17,7 +17,9 @@ import FTEachonboarding from "./FTEachOnboarding";
 import FTTabWrapper from "./FTTabWrapper";
 import FTTitlepagewrapper from "./FTTitlepagewrapper";
 import FTSearchinput from "./FTSearchinput";
-import FTIconwithtitleandinfo, { FTIconwithtitleandinfoCustom } from "./FTIconwithtitleandinfo";
+import FTIconwithtitleandinfo, {
+  FTIconwithtitleandinfoCustom,
+} from "./FTIconwithtitleandinfo";
 import FTIconwithbg from "./FTIconwithbg";
 import FTKeyboardwrapper from "./FTKeyboardwrapper";
 import FTChatList from "./FTChatList";
@@ -35,8 +37,7 @@ import FTTransact from "./FTTransact";
 import FTUpgradetag from "./FTUpgradetag";
 import FTConversations from "./FTConversations";
 import FTQuickactions from "./FTQuickactions";
-
-
+import FTQuickActionBtn from "./FTQuickActionBtn";
 
 export {
   FTTransact,
@@ -76,5 +77,6 @@ export {
   FTUpgradetag,
   FTConversations,
   FTQuickactions,
-  FTIconwithtitleandinfoCustom
+  FTIconwithtitleandinfoCustom,
+  FTQuickActionBtn,
 };

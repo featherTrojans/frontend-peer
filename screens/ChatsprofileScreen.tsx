@@ -14,10 +14,12 @@ import {
   HomeScreenStyles,
 } from "../assets/styles/screens";
 import {
+  FTCustombutton,
   FTEmptycomponent,
   FTHorizontaline,
   FTIconwithbg,
   FTOtherImage,
+  FTQuickActionBtn,
   FTTitlepagewrapper,
   FTTransactionhistory,
 } from "../components";
@@ -26,8 +28,16 @@ import axiosCustom from "../httpRequests/axiosCustom";
 
 import { ActivityIndicator } from "react-native";
 import formatData from "../utils/fomatTrans";
+import { useCustomModal } from "../hooks";
 
-const { Bluecardicon, Blacksendicon, Clearchaticon, Sendcashicon } = icons;
+const {
+  Bluecardicon,
+  Blacksendicon,
+  Clearchaticon,
+  Sendcashicon,
+  Blockusericon,
+  Bigblockedusericon,
+} = icons;
 const {
   quickActionBtn,
   quickActionBtnText,
@@ -41,25 +51,15 @@ const {
 const { transactionWrap, transactionHeader, transactionText, viewAll } =
   HomeScreenStyles;
 
-const QuickActionBtn = ({ icon, text, action, bG, color }) => {
-  return (
-    <TouchableOpacity
-      activeOpacity={0.7}
-      style={[quickActionBtn, { backgroundColor: bG }]}
-      onPress={action}
-    >
-      {icon}
-      <Text style={[quickActionBtnText, { color: color }]}>{text}</Text>
-    </TouchableOpacity>
-  );
-};
-
 const ChatsprofileScreen = ({ route, navigation }) => {
   const userInfo = route?.params?.userInfo;
   const switchModals = route?.params?.switchModals;
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const isBlocked = false;
+
+  const { CustomModal, openModal, closeModal } = useCustomModal();
 
   const histories: any[] = useMemo(
     () => formatData(transactions),
@@ -119,7 +119,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
           </View>
         </View>
         <View style={alignWrap}>
-          <QuickActionBtn
+          <FTQuickActionBtn
             icon={<Sendcashicon />}
             text="Send Cash"
             action={() => {
@@ -130,12 +130,15 @@ const ChatsprofileScreen = ({ route, navigation }) => {
             color={COLORS.green1}
           />
           <View style={{ width: 15 }} />
-          <QuickActionBtn
-            icon={<Clearchaticon />}
-            text="Clear Chat"
-            action={() => console.log("Clear Chat")}
-            bG={COLORS.Tred3}
-            color={COLORS.red3}
+
+          <FTQuickActionBtn
+            icon={
+              <Blockusericon color={isBlocked ? COLORS.black : COLORS.red6} />
+            }
+            text={isBlocked ? "Unblock User" : "Block User"}
+            action={() => openModal()}
+            bG={isBlocked ? `rgba(206, 206, 206, .3)` : COLORS.Tred}
+            color={isBlocked ? COLORS.black : COLORS.red6}
           />
         </View>
       </View>
@@ -168,6 +171,51 @@ const ChatsprofileScreen = ({ route, navigation }) => {
       childBg={COLORS.white3}
       headerBg={COLORS.white3}
     >
+      <CustomModal>
+        <View style={{ height: 322, alignItems: "center" }}>
+          <View
+            style={{
+              width: 70,
+              height: 70,
+              borderRadius: 70 / 2,
+              backgroundColor: "rgba(255, 227, 227, 0.4)",
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "center",
+            }}
+          >
+            {/* Iocn here  */}
+            <Bigblockedusericon color={"#F50000"} />
+          </View>
+          <Text
+            style={{
+              ...fontsize.small,
+              ...FONTS.medium,
+              color: COLORS.black,
+              width: "85%",
+              textAlign: "center",
+              paddingVertical: 35,
+            }}
+          >
+            Blocking this user will mean this user cannot send you chats until
+            you unblock
+          </Text>
+
+          <View style={{alignSelf: "stretch", gap: 12}}>
+            <FTCustombutton 
+              btntext="Block user"
+              onpress={() => console.log("Blocker user function")}
+              bg="#E13121"
+            />
+             <FTCustombutton 
+              outline
+              btntext="Cancel"
+              onpress={closeModal}
+              bg="#000"
+            />
+          </View>
+        </View>
+      </CustomModal>
       <Animated.FlatList
         data={histories}
         ListHeaderComponent={ListHeader}
