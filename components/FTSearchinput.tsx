@@ -1,5 +1,11 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+} from "react-native";
+import React, { Dispatch, SetStateAction } from "react";
 import { COLORS, FONTS, fontsize, icons } from "../constants";
 import { FTSearchinputStyles } from "../assets/styles/components";
 
@@ -15,6 +21,16 @@ const FTSearchinput = ({
   value,
   onChange,
   icon = true,
+  textInputProps,
+}: {
+  placeholder: string;
+  bG?: string;
+  mB?: number;
+  mT?: number;
+  value: string;
+  onChange: any;
+  icon?: boolean;
+  textInputProps?: TextInputProps;
 }) => {
   return (
     <View
@@ -29,6 +45,7 @@ const FTSearchinput = ({
         style={searchTextInput}
         value={value}
         onChangeText={onChange}
+        {...textInputProps}
       />
       {icon && <Searchicon />}
     </View>

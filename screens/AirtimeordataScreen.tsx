@@ -143,6 +143,9 @@ const AirtimeordataScreen = ({ route }) => {
         onChange={onamountchange}
         placeholder="Type in custom amount"
         icon={false}
+        textInputProps={{
+          keyboardType: "numeric"
+        }}
       />
 
       <FlatList
