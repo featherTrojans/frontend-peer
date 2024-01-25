@@ -254,7 +254,7 @@ const BlockedCard = ({ isBlockedByMe = false, unblockUser }) => {
       setload(true);
       await unblockUser();
       successAlert(
-        "User has been unblocked succesfully, you can unblock this user anytime"
+        "User has been unblocked succesfully"
       );
     } catch (err) {
       errorAlert(null, "Unable to unblock this user, please try again");

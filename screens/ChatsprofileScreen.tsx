@@ -87,6 +87,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
       successAlert(
         "User has been blocked succesfully, you can unblock this user anytime"
       );
+      navigation.goBack()
     } catch (err) {
       console.log("IS THERE AN ERROR");
       errorAlert(null, "Unable to block this user, please try again");
@@ -100,7 +101,7 @@ const ChatsprofileScreen = ({ route, navigation }) => {
       setload(true);
       await unblockUser();
       successAlert(
-        "User has been unblocked succesfully, you can unblock this user anytime"
+        "User has been unblocked succesfully"
       );
     } catch (err) {
       errorAlert(null, "Unable to unblock this user, please try again");
