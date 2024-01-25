@@ -16,7 +16,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#003AD6"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.featherpeer.user",
@@ -78,7 +80,9 @@
       ]
     },
     "extra": {
-      "eas": {}
+      "eas": {
+        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
+      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
@@ -86,6 +90,8 @@
     "updates": {
       "url": "https://u.expo.dev/5daafb00-ef60-44d8-92f2-a196e80c243c"
     },
-    "plugins": ["expo-tracking-transparency"]
+    "plugins": [
+      "expo-tracking-transparency"
+    ]
   }
 }

@@ -46,6 +46,7 @@ import amountFormatter from "../utils/formatMoney";
 import { useExpoUpdate } from "../hooks/useExpoUpdate";
 import { DEFAULT_AGENT_AVATAR } from "../assetdatas";
 import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
+import { getCurrentLocation } from "../utils/customLocation";
 
 const {
   headerContainer,
@@ -353,8 +354,10 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     [authdata?.transactions]
   );
 
+
   useEffect(() => {
     (async () => {
+      await getCurrentLocation()
       const { status } = await requestTrackingPermissionsAsync();
       if (status === 'granted') {
         console.log('Yay! I have user permission to track data');
