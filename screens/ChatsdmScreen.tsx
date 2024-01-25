@@ -599,7 +599,7 @@ const ChatsdmScreen = ({ route }) => {
   const switchModals = (value, amount) => {
     switch (value) {
       case 0:
-        openMoxdal();
+        openModal();
         setContent({
           child: (
             <PickOption
