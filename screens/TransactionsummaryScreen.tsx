@@ -81,7 +81,8 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
             )}
             <Text style={amountText}>Amount</Text>
             <Text style={amountValueText}>
-              N{amountFormatter(summaryinfo.amount)}
+              N{(summaryinfo.amount)}
+              
             </Text>
           </View>
 

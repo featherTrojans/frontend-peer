@@ -90,6 +90,9 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
         value={search}
         onChange={handlesearch}
         placeholder="Search Phone Number"
+        textInputProps={{
+          keyboardType: "numeric"
+        }}
       />
       <FlatList
         data={filtercontact}

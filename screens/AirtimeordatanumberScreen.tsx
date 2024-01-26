@@ -86,6 +86,9 @@ const AirtimeordatanumberScreen = ({ route }) => {
         icon={false}
         mB={20}
         mT={20}
+        textInputProps={{
+          keyboardType: "numeric"
+        }}
       />
 
       <FTSearchinput
@@ -94,6 +97,9 @@ const AirtimeordatanumberScreen = ({ route }) => {
         placeholder="Type in custom amount"
         mB={20}
         icon={false}
+        textInputProps={{
+          keyboardType: "numeric"
+        }}
       />
      
 

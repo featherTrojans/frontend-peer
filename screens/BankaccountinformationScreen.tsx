@@ -66,11 +66,11 @@ const BankaccountinformationScreen = ({ route, navigation }) => {
         },
         {
           leftSide: "Charges",
-          rightSide: "25",
+          rightSide: `N${amountFormatter(String(25))}`,
         },
         {
           leftSide: "Total to be sent",
-          rightSide: `N${Number(amount) + 250}`,
+          rightSide: `N${amountFormatter(String(Number(amount) + 25))}`,
         },
       ],
     };

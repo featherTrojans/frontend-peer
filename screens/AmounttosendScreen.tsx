@@ -30,8 +30,6 @@ const AmounttosendScreen = ({ route }) => {
   const toFundScreen = route?.params?.toSendScreen || false;
   const fromWithdraw = route?.params?.fromWithdraw || false;
 
-
-
   const { errorAlert, purpleAlert } = useAlert();
   const [loading, setLoading] = useState(false);
 
@@ -41,17 +39,16 @@ const AmounttosendScreen = ({ route }) => {
   const formatted = amountFormatter(amount.join(""));
 
   const handleSetAmount = (value: string) => {
-    if (value === "." && amount.includes(".")){
-     return
+    if (value === "." && amount.includes(".")) {
+      return;
     }
     const newpin = [...amount, value];
-    if(newpin.join("").split(".")[1]?.length > 2){
-      return
+    if (newpin.join("").split(".")[1]?.length > 2) {
+      return;
     }
-    if(value === "." && newpin.length === 1){
-
-      console.log(newpin.length, "yes")
-      return 
+    if (value === "." && newpin.length === 1) {
+      console.log(newpin.length, "yes");
+      return;
     }
     setAmount(newpin);
   };
@@ -59,8 +56,10 @@ const AmounttosendScreen = ({ route }) => {
   let typedAmount = Number(amount.join(""));
   let typedAmountGreaterThanBal =
     !toFundScreen && typedAmount > authdata.walletBal;
-  let isWithdrawAmountLess = typedAmount > 0 && fromWithdraw && typedAmount < 500
-  let disableButton = typedAmountGreaterThanBal || typedAmount <= 0 || isWithdrawAmountLess;
+  let isWithdrawAmountLess =
+    typedAmount > 0 && fromWithdraw && typedAmount < 500;
+  let disableButton =
+    typedAmountGreaterThanBal || typedAmount <= 0 
 
   useEffect(() => {
     if (typedAmountGreaterThanBal) {
@@ -70,12 +69,16 @@ const AmounttosendScreen = ({ route }) => {
         )}, Kindly enter a lesser amount.`
       );
     }
-    if(isWithdrawAmountLess){
-      purpleAlert(
-        `Withdrawal amount can't be less than 500.00`
-      );
-    }
+    // if(isWithdrawAmountLess){
+    //   purpleAlert(
+    //     `Withdrawal amount can't be less than 500.00`
+    //   );
+    // }
   }, [typedAmount]);
+
+  const withdrawAmountWarning = () => {
+    return purpleAlert(`Withdrawal amount can't be less than 500.00`);
+  };
 
   const handleRemoveAmount = () => {
     if (amount.length > 0) {
@@ -128,7 +131,7 @@ const AmounttosendScreen = ({ route }) => {
       </View>
       <FTCustombutton
         btntext={buttontext}
-        onpress={handlesubmit}
+        onpress={isWithdrawAmountLess ? () => withdrawAmountWarning() : () =>  handlesubmit()}
         bg={COLORS.blue9}
         disable={disableButton}
       />
