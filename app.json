@@ -2,7 +2,7 @@
   "expo": {
     "name": "Feather",
     "slug": "Feather",
-    "version": "2.0.22",
+    "version": "2.0.23",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "notification": {
@@ -16,11 +16,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#003AD6"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.featherpeer.user",
-      "buildNumber": "1.0.2",
+      "buildNumber": "1.0.3",
       "infoPlist": {
         "NSContactsUsageDescription": "Allow Feather access to your contacts to enable you see which of your contacts also uses feather, so you can chat them and perform cash transactions with them",
         "NSLocationUsageDescription": "Allow Feather access to your location to find the nearest agent close to you",
@@ -78,7 +80,9 @@
       ]
     },
     "extra": {
-      "eas": {}
+      "eas": {
+        "projectId": "5daafb00-ef60-44d8-92f2-a196e80c243c"
+      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
@@ -86,6 +90,8 @@
     "updates": {
       "url": "https://u.expo.dev/5daafb00-ef60-44d8-92f2-a196e80c243c"
     },
-    "plugins": ["expo-tracking-transparency"]
+    "plugins": [
+      "expo-tracking-transparency"
+    ]
   }
 }
