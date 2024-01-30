@@ -7,7 +7,6 @@ import axiosCustom from "../httpRequests/axiosCustom";
 
 //Registers device for push Notifications
 export const registerForPushNotificationsAsync = async () => {
-  let token;
   const { status: existingStatus } = await Notifications.getPermissionsAsync();
   let finalStatus = existingStatus;
   if (existingStatus !== "granted") {
@@ -18,7 +17,10 @@ export const registerForPushNotificationsAsync = async () => {
     console.log("Failed to get push token for push notification!");
     return;
   }
-  token = (await Notifications.getExpoPushTokenAsync()).data;
+  const  devicePushToken = (await Notifications.getExpoPushTokenAsync()).data;
+  if (__DEV__) {
+    console.log(devicePushToken, "here");
+  }
 
 
 
@@ -31,7 +33,7 @@ export const registerForPushNotificationsAsync = async () => {
     });
   }
 
-  return token;
+  return devicePushToken;
 };
 
 
