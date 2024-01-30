@@ -18,7 +18,7 @@ import { enableFreeze } from "react-native-screens";
 
 import { AWEEKAFTER, getDataFromStorage, setAuthorizationToken } from "./utils";
 import { getCurrentLocation } from "./utils/customLocation";
-import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
+import { requestTrackingPermissionsAsync, getTrackingPermissionsAsync } from "expo-tracking-transparency";
 
 
 
@@ -91,10 +91,13 @@ export default function App() {
   useEffect(() => {
     (async () => {
       await getCurrentLocation()
-      const { status } = await requestTrackingPermissionsAsync();
-      if (status === 'granted') {
+
+      const { granted } = await getTrackingPermissionsAsync();
+      if (!granted) {
+        await requestTrackingPermissionsAsync()
         console.log('Yay! I have user permission to track data');
       }
+      
     })();
   }, []);
 
