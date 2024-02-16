@@ -102,7 +102,7 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
           label="Transaction Note"
           placeholderText="Enter Note (Optional)"
           name="remarks"
-          rules={VALIDATION.REMARKS_VALIDATION}
+          rules={{}}
           control={control}
           mB={26}
         />
