@@ -18,9 +18,10 @@ import { enableFreeze } from "react-native-screens";
 
 import { AWEEKAFTER, getDataFromStorage, setAuthorizationToken } from "./utils";
 import { getCurrentLocation } from "./utils/customLocation";
-import { requestTrackingPermissionsAsync, getTrackingPermissionsAsync } from "expo-tracking-transparency";
-
-
+import {
+  requestTrackingPermissionsAsync,
+  getTrackingPermissionsAsync,
+} from "expo-tracking-transparency";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -87,22 +88,25 @@ export default function App() {
   const [onboarded, setOnboarded] = useState<null | boolean>(null);
   let alertOffset = 0;
 
-
   useEffect(() => {
-    (async () => {
-      await getCurrentLocation()
+    const timeout = setTimeout(() => {
+      getCurrentLocationfunc();
+    }, 1000);
 
-      const { granted } = await getTrackingPermissionsAsync();
-      if (!granted) {
-        await requestTrackingPermissionsAsync()
-        console.log('Yay! I have user permission to track data');
-      }
-      
-    })();
+    return () => {
+      clearTimeout(timeout);
+    };
   }, []);
 
+  const getCurrentLocationfunc = async () => {
+    await getCurrentLocation();
 
-  
+    const { granted } = await getTrackingPermissionsAsync();
+    if (!granted) {
+      await requestTrackingPermissionsAsync();
+      console.log("Yay! I have user permission to track data");
+    }
+  };
 
   // check for new updates as early as possible and update the app based on platform
   // useExpoUpdate();

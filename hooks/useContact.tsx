@@ -70,7 +70,7 @@ const useContact = () => {
     let datacontact: any = [];
     const status = await getpermission(
       "Grant “Feather” access to your contacts",
-      "This will allow you to find friends and family using Feather with ease. The app uploads your contact list to the server but does not use the contact list sent to us for any other use than to provide you with users on your contact list using the app",
+      "Allow access to your phone contacts with Feather to unlock broader possibilities for finding other users via their contact and initiating cash transactions with them as well as in app conversations",
       Contacts
     );
 
