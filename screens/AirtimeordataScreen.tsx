@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   AirtimeordataScreenStyles,
   ChoosefeatheruserScreenStyles,
@@ -22,14 +22,20 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import Sendtoselficon from "../assets/icons/Sendtoselficon";
 import amountFormatter from "../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
+import { useAlert } from "../hooks";
 
 const {} = AirtimeordataScreenStyles;
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
 const AirtimeordataScreen = ({ route }) => {
   const navigation = useNavigation();
+  const { purpleAlert } = useAlert()
   const userinfo = route?.params?.userinfo;
   const [amount, setamount] = useState("");
+  const { authdata } = useContext(AuthContext)
+  let airtimeAmount = Number(amount)
+  let isAirtimeTooLow = airtimeAmount > authdata.walletBal
 
   const onamountchange = (val) => {
     if (isNaN(val)) {
@@ -136,6 +142,18 @@ const AirtimeordataScreen = ({ route }) => {
     );
   };
 
+  const proceedToPurchase = () => {
+    if(amount == ""){
+      return purpleAlert("Kindly enter airtime amount")
+    }
+    if(isAirtimeTooLow){
+      return purpleAlert("Your current balance is lower than the entered airtime amount")
+    }
+    navigation.navigate("transactionpin_screen", {
+      action: actionairtime(amount),
+    })
+  }
+
   return (
     <FTTitlepagewrapper title="Airtime">
       <FTSearchinput
@@ -175,11 +193,7 @@ const AirtimeordataScreen = ({ route }) => {
         <FTCustombutton
           btntext="Proceed"
           bg={COLORS.blue9}
-          onpress={() =>
-            navigation.navigate("transactionpin_screen", {
-              action: actionairtime(amount),
-            })
-          }
+          onpress={proceedToPurchase}
         />
       </View>
     </FTTitlepagewrapper>
