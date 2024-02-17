@@ -32,19 +32,21 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
   const summaryinfo = route?.params?.summaryinfo;
   const { control, handleSubmit } = useForm({ mode: "all" });
 
-  useEffect(() => {
-    console.log(summaryinfo.transactionDatas, "Here")
-  }, [])
-
   const EachRow = ({ data }) => {
     const { leftSide, rightSide } = data;
-    let isFree = rightSide?.toLowerCase() === "free";
+    console.log(data);
+    // return null;
+
+    let isFree = false;
+    if (typeof rightSide == "string") {
+      isFree = rightSide?.toLowerCase() === "free";
+    }
     let isTotal = leftSide?.toLowerCase().includes("total");
     return (
       <View style={eachSummaryWrap}>
         <Text style={eachSummaryKey}>{leftSide}</Text>
         <Text
-        numberOfLines={1}
+          numberOfLines={1}
           style={[
             eachSummaryValue,
             { color: isFree ? COLORS.green4 : COLORS.blue9 },
@@ -73,17 +75,10 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
                 size={60}
               />
             ) : (
-              <FTIconwithbg
-                size={60}
-                Icon={Useravatar}
-                bG={COLORS.Tblue4}
-              />
+              <FTIconwithbg size={60} Icon={Useravatar} bG={COLORS.Tblue4} />
             )}
             <Text style={amountText}>Amount</Text>
-            <Text style={amountValueText}>
-              N{(summaryinfo.amount)}
-              
-            </Text>
+            <Text style={amountValueText}>N{summaryinfo.amount}</Text>
           </View>
 
           <View style={dashedLine} />

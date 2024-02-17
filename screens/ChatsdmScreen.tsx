@@ -253,9 +253,7 @@ const BlockedCard = ({ isBlockedByMe = false, unblockUser }) => {
     try {
       setload(true);
       await unblockUser();
-      successAlert(
-        "User has been unblocked succesfully"
-      );
+      successAlert("User has been unblocked succesfully");
     } catch (err) {
       errorAlert(null, "Unable to unblock this user, please try again");
     } finally {
@@ -670,6 +668,7 @@ const ChatsdmScreen = ({ route }) => {
         <CustomModal>
           <View style={{ height: content.height }}>{content.child}</View>
         </CustomModal>
+
         <View style={chatHeader}>
           <View style={[headerDetailsContainer]}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -718,6 +717,7 @@ const ChatsdmScreen = ({ route }) => {
             </TouchableOpacity>
           </View>
         </View>
+
         {blockid != "" ? (
           <BlockedCard
             isBlockedByMe={blockid != authId}

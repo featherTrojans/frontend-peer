@@ -18,7 +18,6 @@ import { useAlert } from "../hooks";
 import { useNavigation } from "@react-navigation/native";
 import useBeneficiary from "../hooks/useBeneficiary";
 
-
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
 const { Smallphoneicon, Nigerialogoicon, Whitebankicon } = icons;
@@ -63,6 +62,7 @@ const SendtobankScreen = ({ route, navigation }) => {
   const handleToSendToBeneficiary = async (bank) => {
     try {
       setLoading(true);
+
       const response = await axiosCustom({
         method: "post",
         url: "/account/get",
@@ -71,7 +71,9 @@ const SendtobankScreen = ({ route, navigation }) => {
           bank_name: bank?.bank_name,
         },
       });
+
       const acctdata = response?.data?.data;
+
       const action = async (pin) => {
         console.log(Number(amount));
         try {
@@ -120,7 +122,7 @@ const SendtobankScreen = ({ route, navigation }) => {
   };
 
   const handleSearch = (text) => {
-    console.log(text, "here is the search")
+    console.log(text, "here is the search");
     // name and account no
     // const newbeneferiacy = beneficiaries.filter((item) => {
     //   let lowitem = text.toLowerCase();
