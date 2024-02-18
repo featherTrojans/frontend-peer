@@ -89,9 +89,9 @@ const NetworkreceiverScreen = ({ route, navigation }) => {
       <FTSearchinput
         value={search}
         onChange={handlesearch}
-        placeholder="Search Phone Number"
+        placeholder="Search contact via Name or Phone Number"
         textInputProps={{
-          keyboardType: "numeric"
+          returnKeyType: "done",
         }}
       />
       <FlatList

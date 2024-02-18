@@ -355,7 +355,6 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   );
 
   const getDashboardData = async () => {
-    console.log("getting dashboard data again");
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");

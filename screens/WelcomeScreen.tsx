@@ -106,7 +106,6 @@ const WelcomeScreen = ({ navigation, route }) => {
 
   const getDashboardData = async () => {
     try {
-      console.log("for some weird reason");
       const response = await axiosCustom.get("/dashboard");
       await sendTokenToDB(messageToken);
 

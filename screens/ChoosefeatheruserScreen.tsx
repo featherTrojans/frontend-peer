@@ -66,7 +66,7 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
         rightSide: "Free",
       },
       {
-        leftSide: "Total to be sent",
+        leftSide: "Total to be deducted",
         rightSide: `N${amountFormatter(amount)}`,
       },
     ],
@@ -247,7 +247,9 @@ const ChoosefeatheruserScreen = ({ route, navigation }) => {
               msg="Padi, you don't have any beneficiary"
               showTransact={false}
             />
-          ) : <ActivityIndicator size="small" color={COLORS.blue9} />
+          ) : (
+            <ActivityIndicator size="small" color={COLORS.blue9} />
+          )
         }
       />
 

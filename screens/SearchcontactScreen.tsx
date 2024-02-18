@@ -64,7 +64,7 @@ const ModalContent = ({ userinfo, amount, isBenficairy = false }) => {
         rightSide: "Free",
       },
       {
-        leftSide: "Total to be sent",
+        leftSide: "Total to be deducted",
         rightSide: `N${amountFormatter(amount)}`,
       },
     ],
@@ -181,7 +181,11 @@ const SearchcontactScreen = ({ route }) => {
           return (
             <FTIconwithtitleandinfo
               title={nameCapitalize(item.fullName)}
-              info={item?.username !== null ?`@${item?.username.toLowerCase()}` : `@${item?.username}`}
+              info={
+                item?.username !== null
+                  ? `@${item?.username.toLowerCase()}`
+                  : `@${item?.username}`
+              }
               onPress={() => switchModals(0, item, amount)}
               bG={COLORS.Tblue4}
               Icon={Smallphoneicon}

@@ -192,7 +192,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
           rightSide: `N${amountFormatter(Number(charge).toString())}`,
         },
         {
-          leftSide: "Total to be sent",
+          leftSide: "Total to be deducted",
           rightSide: `N${amountFormatter(
             String(Number(charge) + Number(amount))
           )}`,
@@ -219,7 +219,7 @@ const WithdrawcashScreen = ({ route, navigation }) => {
       });
     } catch (err) {}
   };
-  
+
   const withdrawcashActions = [
     {
       Icon: Phoneicon,

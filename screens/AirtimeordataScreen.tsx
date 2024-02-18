@@ -30,12 +30,12 @@ const { listHeaderText } = ChoosefeatheruserScreenStyles;
 
 const AirtimeordataScreen = ({ route }) => {
   const navigation = useNavigation();
-  const { purpleAlert } = useAlert()
+  const { purpleAlert } = useAlert();
   const userinfo = route?.params?.userinfo;
   const [amount, setamount] = useState("");
-  const { authdata } = useContext(AuthContext)
-  let airtimeAmount = Number(amount)
-  let isAirtimeTooLow = airtimeAmount > authdata.walletBal
+  const { authdata } = useContext(AuthContext);
+  let airtimeAmount = Number(amount);
+  let isAirtimeTooLow = airtimeAmount > authdata.walletBal;
 
   const onamountchange = (val) => {
     if (isNaN(val)) {
@@ -143,16 +143,18 @@ const AirtimeordataScreen = ({ route }) => {
   };
 
   const proceedToPurchase = () => {
-    if(amount == ""){
-      return purpleAlert("Kindly enter airtime amount")
+    if (amount == "") {
+      return purpleAlert("Kindly enter airtime amount");
     }
-    if(isAirtimeTooLow){
-      return purpleAlert("Your current balance is lower than the entered airtime amount")
+    if (isAirtimeTooLow) {
+      return purpleAlert(
+        "Your current balance is lower than the entered airtime amount"
+      );
     }
     navigation.navigate("transactionpin_screen", {
       action: actionairtime(amount),
-    })
-  }
+    });
+  };
 
   return (
     <FTTitlepagewrapper title="Airtime">
@@ -162,7 +164,8 @@ const AirtimeordataScreen = ({ route }) => {
         placeholder="Type in custom amount"
         icon={false}
         textInputProps={{
-          keyboardType: "numeric"
+          keyboardType: "numeric",
+          returnKeyType: "done",
         }}
       />
 

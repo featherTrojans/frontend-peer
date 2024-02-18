@@ -101,11 +101,11 @@ const SendtobankScreen = ({ route, navigation }) => {
           },
           {
             leftSide: "Charges",
-            rightSide: `N${amountFormatter("25")}`,
+            rightSide: `N${amountFormatter("50")}`,
           },
           {
-            leftSide: "Total to be sent",
-            rightSide: `N${amountFormatter(Number(amount) + 25)}`,
+            leftSide: "Total to be deducted",
+            rightSide: `N${amountFormatter(Number(amount) + 50)}`,
           },
         ],
       };

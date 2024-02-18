@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   AirtimeordataScreenStyles,
   ChoosefeatheruserScreenStyles,
@@ -23,6 +23,8 @@ import axiosCustom from "../httpRequests/axiosCustom";
 import Sendtoselficon from "../assets/icons/Sendtoselficon";
 import amountFormatter from "../utils/formatMoney";
 import { useNavigation } from "@react-navigation/native";
+import { useAlert } from "../hooks";
+import { AuthContext } from "../context/AuthContext";
 
 const {} = AirtimeordataScreenStyles;
 const { listHeaderText } = ChoosefeatheruserScreenStyles;
@@ -30,9 +32,10 @@ const { listHeaderText } = ChoosefeatheruserScreenStyles;
 const AirtimeordatanumberScreen = ({ route }) => {
   const navigation = useNavigation();
   const network = route?.params?.network;
+  const { authdata } = useContext(AuthContext);
   const [amount, setamount] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
+  const { errorAlert, purpleAlert } = useAlert();
   const onamountchange = (val) => {
     if (isNaN(val)) {
       return;
@@ -78,7 +81,6 @@ const AirtimeordatanumberScreen = ({ route }) => {
 
   return (
     <FTTitlepagewrapper title="Airtime">
-      
       <FTSearchinput
         value={phoneNumber}
         onChange={setPhoneNumber}
@@ -87,7 +89,7 @@ const AirtimeordatanumberScreen = ({ route }) => {
         mB={20}
         mT={20}
         textInputProps={{
-          keyboardType: "numeric"
+          keyboardType: "numeric",
         }}
       />
 
@@ -98,10 +100,9 @@ const AirtimeordatanumberScreen = ({ route }) => {
         mB={20}
         icon={false}
         textInputProps={{
-          keyboardType: "numeric"
+          keyboardType: "numeric",
         }}
       />
-     
 
       <FlatList
         data={airtimeDatas}
@@ -129,12 +130,27 @@ const AirtimeordatanumberScreen = ({ route }) => {
         <FTCustombutton
           btntext="Proceed"
           bg={COLORS.blue9}
-          disable={phoneNumber.length != 11 || amount == ""}
-          onpress={() =>
+          onpress={() => {
+            if (phoneNumber.length != 11) {
+              errorAlert(null, "Phone number should be 11 digits");
+              return;
+            }
+            if (amount == "" || Number(amount) < 50) {
+              errorAlert(null, "Please input an amount greater than N50.00 ");
+              return;
+            }
+
+            if (amount > authdata?.userDetails?.walletBal) {
+              errorAlert(
+                null,
+                "Sorry you don't have sufficient amount to perform this transaction "
+              );
+              return;
+            }
             navigation.navigate("transactionpin_screen", {
               action: actionairtime(amount),
-            })
-          }
+            });
+          }}
         />
       </View>
     </FTTitlepagewrapper>
