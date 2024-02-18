@@ -45,7 +45,7 @@ import { useAlert } from "../hooks";
 import amountFormatter from "../utils/formatMoney";
 import { useExpoUpdate } from "../hooks/useExpoUpdate";
 import { DEFAULT_AGENT_AVATAR } from "../assetdatas";
-import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import { getCurrentLocation } from "../utils/customLocation";
 
 const {
@@ -354,13 +354,12 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     [authdata?.transactions]
   );
 
-
-
-
   const getDashboardData = async () => {
+    console.log("getting dashboard data again");
     setLoading(true);
     try {
       const response = await axiosCustom.get("/dashboard");
+
       setAuthData(response?.data?.data);
     } catch (err) {
     } finally {
@@ -406,7 +405,7 @@ const HomeScreen = ({ navigation, route }: { navigation: any; route: any }) => {
       buttontext: "Withdraw Cash",
       headtext: `Balance : N${walletbalance}`,
       onsubmit: onsubmitfindmerchant,
-      fromWithdraw: true
+      fromWithdraw: true,
     });
   };
 

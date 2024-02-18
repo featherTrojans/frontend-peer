@@ -28,21 +28,30 @@ const AuthProvider: FC = ({ children }) => {
   const [showAmount, setShowAmount] = useState<boolean>(true);
   const [agentInfo, setAgentInfo] = useState(null);
 
-  // console.log(authdata?.userDetails?.userUid, "somwthing");
   useEffect(() => {
+    let unsub = () => {};
+
     if (authdata?.userDetails?.userUid) {
-      const unsub = onSnapshot(
+      unsub = onSnapshot(
         doc(db, "wallet", authdata?.userDetails?.userUid),
-        { includeMetadataChanges: true },
         (doc) => {
           if (doc.exists()) {
             const document = doc.data();
-            setAuthData({ ...authdata, walletBal: document?.walletBal });
-            console.log(document, "this document");
+            setAuthData({
+              ...authdata,
+              userDetails: {
+                ...authdata.userDetails,
+                walletBal: document?.walletBal,
+              },
+              walletBal: document?.walletBal,
+            });
           }
         }
       );
     }
+    return () => {
+      unsub();
+    };
   }, [authdata?.userDetails?.userUid]);
 
   return (

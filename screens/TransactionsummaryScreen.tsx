@@ -34,7 +34,7 @@ const TransactionsummaryScreen = ({ route, navigation }) => {
 
   const EachRow = ({ data }) => {
     const { leftSide, rightSide } = data;
-    console.log(data);
+
     // return null;
 
     let isFree = false;
