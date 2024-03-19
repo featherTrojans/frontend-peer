@@ -31,7 +31,7 @@ const AccountverificationScreen = ({ route }) => {
   const index = route?.params?.index || 0;
   const { authdata } = useContext(AuthContext);
   const { errorAlert } = useAlert();
-  const userlevel = authdata?.userDetails?.userLevel;
+  const userlevel = 1 || authdata?.userDetails?.userLevel;
   const [selectedIndex, setSelectedIndex] = useState(index);
 
   useEffect(() => {
