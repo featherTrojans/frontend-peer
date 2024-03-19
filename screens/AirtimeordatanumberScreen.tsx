@@ -90,6 +90,7 @@ const AirtimeordatanumberScreen = ({ route }) => {
         mT={20}
         textInputProps={{
           keyboardType: "numeric",
+          returnKeyType: "done"
         }}
       />
 
@@ -101,6 +102,7 @@ const AirtimeordatanumberScreen = ({ route }) => {
         icon={false}
         textInputProps={{
           keyboardType: "numeric",
+          returnKeyType: "done"
         }}
       />
 
