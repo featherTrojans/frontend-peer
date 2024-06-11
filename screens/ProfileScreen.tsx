@@ -36,7 +36,7 @@ const {
 
 const ProfileScreen = ({ navigation }) => {
   const { authdata, setAuthData, setToken } = useContext(AuthContext);
-  const {redirecToAbout} = useLinking()
+  const { redirecToAbout, redirectToSupport } = useLinking()
 
   const memojiImage = authdata?.userDetails?.memoji;
   let memojiobj = {color: ""};
@@ -61,7 +61,7 @@ const ProfileScreen = ({ navigation }) => {
     {
       Icon: Supporticon,
       title: "Support & Help Desk",
-      action: () => console.log("yes support"),
+      action: () => redirectToSupport(),
     },
     {
       Icon: Securityprivicon,

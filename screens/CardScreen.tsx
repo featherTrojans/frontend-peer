@@ -294,10 +294,11 @@ const CardScreen = ({ navigation }) => {
               Shop, Pay, Stream and Subscribe freely, Accepted Globally.
             </Text>
             <Pressable
-              onPress={() => navigation.navigate("createcard_screen")}
+              // onPress={() => navigation.navigate("createcard_screen")}
+              onPress={() => console.log("yes")}
               style={createVirtualCardWrap}
             >
-              <Text style={createVirtualCardText}>Create Virtual Card</Text>
+              <Text style={createVirtualCardText}>Coming soon</Text>
             </Pressable>
           </View>
         </>

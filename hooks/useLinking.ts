@@ -4,9 +4,9 @@ import * as Linking from "expo-linking";
 import * as WebBrowser from "expo-web-browser";
 
 const useLinking = () => {
-  const redirectToSupport = (name: string, email: string) => {
+  const redirectToSupport = () => {
     WebBrowser.openBrowserAsync(
-      `https://www.feather.africa/support/app/${name}/${email}`
+      `https://www.feather.africa/support/`
     );
   };
   const redirecToAbout = () => {

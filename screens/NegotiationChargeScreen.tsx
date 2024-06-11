@@ -121,7 +121,7 @@ const NegotiationChargeScreen = ({ route }) => {
             {
               textAlign: "center",
               color: "#000",
-              fontSize: 12,
+              fontSize: 14,
               width: "70%",
               justifyContent: "center",
             },
